@@ -11,6 +11,19 @@ export { roughGermanG2P } from './roughGermanG2p';
 export { germanIpaG2P, phonemizeGermanIpa } from './de/germanIpaG2p';
 export { normalizeGermanTtsText } from './germanTextNormalize';
 export {
+  applyGermanTtsProsodyRules,
+  applyEnumerationRhythm,
+  applySpokenContractions,
+} from './germanTtsProsodyRules';
+export {
+  GERMAN_TTS_PROSODY_LLM_PROMPT,
+  buildGermanTtsProsodyPrompt,
+} from './germanTtsProsodyPrompt';
+export {
+  polishGermanTtsWithLlm,
+  polishGermanTtsSync,
+} from './llmGermanTtsPolish';
+export {
   applyPhoneticTransformer,
   prepareSpokenText,
   prepareDisplayText,

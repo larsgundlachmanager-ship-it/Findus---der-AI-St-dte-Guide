@@ -15,6 +15,7 @@ import {
   getCombinedDictionary,
   onDictionaryCacheInvalidate,
 } from '../tts/dictionaryEngine';
+import { applyGermanTtsProsodyRules } from './germanTtsProsodyRules';
 import { stripArtificialBreathPauses } from './ttsProsody';
 
 /** IPA-typische Zeichen — Werte damit bleiben IPA-Marker, keine Ortho-Hints. */
@@ -522,6 +523,8 @@ export function prepareSpokenText(text: string): string {
 export function prepareAudioText(text: string): string {
   let s = prepareDisplayText(text);
   if (!s) return s;
+  // 0) Prosodie: Aufzählungs-Rhythmus, Kontraktionen, LLM-Marker bereinigen
+  s = applyGermanTtsProsodyRules(s);
   // 1) Künstliche Atemholen-Marker entfernen (…, ——, …)
   s = stripArtificialBreathPauses(s);
   // 2) Kombiniertes Wörterbuch (Base + Cloud-Updates + Local-Scan)

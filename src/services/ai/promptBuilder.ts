@@ -304,7 +304,15 @@ export const NATURAL_SPEECH_RATE_RULE = `## Gesprochener Text (verbindlich)
 - KEINE Ziffern (0–9), KEINE Bindestriche, KEINE Gedankenstriche, KEINE Auslassungspunkte (...), KEINE Sternchen.
 - Alle Zahlen, Jahre, Uhrzeiten, Preise und Ordinalzahlen DIREKT als Wörter ausschreiben.
 - Keine Meta-Einschübe, keine Regie-Anweisungen, keine unaufgeforderten Wetter-Erklärungen.
-- Redefluss wie eine gute Hörprobe: natürlich und zügig, nicht zäh, nicht geröchelt, keine künstlichen Atempausen.`;
+- Redefluss wie eine gute Hörprobe: natürlich und zügig, nicht zäh, nicht geröchelt, keine künstlichen Atempausen.
+
+## Prosodie für Kokoro-TTS (Aufzählungen & Rhythmus)
+- Aufzählungen NIEMALS hetzen! Statt Kommata zwischen Listenelementen setze PUNKTE:
+  FALSCH: „Apfel, Birne, Traube und Kirsche"
+  RICHTIG: „Apfel. Birne. Traube und Kirsche"
+- Bei reinen Listen ohne „und": „rot. grün. blau"
+- Gesprochene Formen bevorzugen: „hab'n wir", „gibt's", „geh'n wir" statt steifer Schriftsprache.
+- Nebensätze mit Komma trennen, aber Aufzählungs-Kommas durch Punkte ersetzen.`;
 
 /**
  * Absolutes Ziffern-Verbot + Clean-Text fürs LLM.
