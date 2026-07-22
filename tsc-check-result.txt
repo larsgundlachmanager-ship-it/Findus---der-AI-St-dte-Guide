@@ -1,0 +1,19 @@
+﻿node.exe : npm warn Unknown env config "devdir". This will stop working in the next major version of npm. See `npm 
+help npmrc` for supported config options.
+In Zeile:1 Zeichen:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm warn Unknow...config options.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+src/components/Header.tsx(34,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: ViewProps): View', gave the following error.
+    Type 'RefObject<View | null> | undefined' is not assignable to type 'LegacyRef<View> | undefined'.
+      Type 'RefObject<View | null>' is not assignable to type 'LegacyRef<View> | undefined'.
+        Type 'RefObject<View | null>' is not assignable to type 'RefObject<View>'.
+          Type 'View | null' is not assignable to type 'View'.
+            Type 'null' is not assignable to type 'NativeMethods & ViewComponent'.
+              Type 'null' is not assignable to type 'NativeMethods'.
+  Overload 2 of 2, '(props: ViewProps, context: any): View', gave the following error.
+    Type 'RefObject<View | null> | undefined' is not assignable to type 'LegacyRef<View> | undefined'.
+EXIT_CODE=2

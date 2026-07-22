@@ -1,0 +1,8 @@
+# Kokoro native assets (ONNX ~310 MB + Stimmen)
+# Befüllen mit: npm run fetch:kokoro
+# Hörproben/Intro: npm run bake:waves
+# Werden von plugins/withKokoroAssets.js in die APK kopiert.
+*
+!.gitignore
+!waves/
+!waves/**

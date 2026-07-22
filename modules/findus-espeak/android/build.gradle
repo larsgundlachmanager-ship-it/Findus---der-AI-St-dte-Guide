@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+
+group = 'com.finnus'
+version = '1.0.0'
+
+def expoModulesCorePlugin = new File(["node", "--print", "require.resolve('expo-modules-core/package.json')"].execute(null, rootDir).text.trim(), "../android/ExpoModulesCorePlugin.gradle")
+apply from: expoModulesCorePlugin
+applyKotlinExpoModulesCorePlugin()
+useCoreDependencies()
+useDefaultAndroidSdkVersions()
+
+def reactNativeArchitectures() {
+  def value = project.getProperties().get("reactNativeArchitectures")
+  return value ? value.split(",") : ["armeabi-v7a", "arm64-v8a", "x86", "x86_64"]
+}
+
+android {
+  namespace "expo.modules.findusespeak"
+  defaultConfig {
+    versionCode 1
+    versionName "1.0.0"
+    externalNativeBuild {
+      cmake {
+        cppFlags "-O2 -frtti -fexceptions -Wall"
+        abiFilters (*reactNativeArchitectures())
+        arguments "-DANDROID_STL=c++_shared",
+                  "-DFINDUS_ESPEAK_ROOT=${project.projectDir}"
+      }
+    }
+  }
+
+  externalNativeBuild {
+    cmake {
+      path "src/main/cpp/CMakeLists.txt"
+    }
+  }
+
+  packagingOptions {
+    pickFirst "**/libc++_shared.so"
+  }
+}

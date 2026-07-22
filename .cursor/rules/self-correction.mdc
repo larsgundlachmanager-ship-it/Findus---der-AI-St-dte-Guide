@@ -1,0 +1,33 @@
+---
+description: Self-Correction — Terminal prüfen und Fehler selbst beheben, bevor eine Aufgabe als fertig gilt
+alwaysApply: true
+---
+
+# Self-Correction-Modus
+
+Bevor du dem User sagst, dass eine Aufgabe fertig ist, prüfe **eigenständig im Hintergrund** Terminal und Laufzeitausgaben. Warte nicht darauf, dass der User Fehler meldet.
+
+## Pflicht vor „fertig“
+
+1. Lies relevante Terminal-Sessions (aktuelle Dev-Server, Builds, Tests, zuletzt ausgeführte Commands).
+2. Suche nach **Errors**, **Exceptions**, **Tracebacks**, fehlgeschlagenen Commands und relevanten **Warnings**.
+3. Wenn etwas rot/fehlgeschlagen ist: **sofort selbst beheben**, erneut prüfen, erst dann melden, dass es fertig ist.
+4. Wiederhole den Zyklus (fix → prüfen → korrigieren), bis Terminal und betroffene Checks sauber sind — oder bis ein externes Blocker (Credentials, manuelle UI, externe Services) klar dokumentiert ist.
+
+## Was zählt als zu beheben
+
+- Compile-/Type-/Lint-Fehler, die durch deine Änderungen entstanden oder sichtbar wurden
+- Runtime-Fehler und Crash-Stacks aus dem Dev-Server oder Tests
+- Fehlgeschlagene Scripts/Commands, die du gestartet hast
+- Warnings, die auf echte Probleme hinweisen (deprecated APIs, die du gerade anfasst, fehlende Env, broken imports)
+
+## Was nicht endlos zu „polieren“ ist
+
+- Vorgefundene, unzusammenhängende Warnings in Dependencies, die deine Änderung nicht betreffen
+- Noise von Watchern, die nach Reload verschwinden und nicht reproduzierbar sind
+- Externe Blocker: klar benennen und stoppen, statt im Kreis zu fixen
+
+## Kommunikation
+
+- Sage nicht „fertig“, solange bekannte Fehler aus dem Terminal noch offen sind.
+- Wenn du korrigiert hast: kurz erwähnen, was das Terminal zeigte und was du gefixt hast — ohne den User als Debugger zu brauchen.

@@ -1,0 +1,42 @@
+diff --git a/node_modules/metro-file-map/src/watchers/FallbackWatcher.js b/node_modules/metro-file-map/src/watchers/FallbackWatcher.js
+index 75ac8a0..437aa60 100644
+--- a/node_modules/metro-file-map/src/watchers/FallbackWatcher.js
++++ b/node_modules/metro-file-map/src/watchers/FallbackWatcher.js
+@@ -85,13 +85,30 @@ module.exports = class FallbackWatcher extends AbstractWatcher {
+     if (this.watched[dir]) {
+       return false;
+     }
+-    const watcher = fs.watch(
+-      dir,
+-      {
+-        persistent: true,
+-      },
+-      (event, filename) => this._normalizeChange(dir, event, filename)
+-    );
++    // Skip ignored paths (relative + absolute) before calling fs.watch.
++    // On Windows fs.watch throws ENOENT synchronously if the dir vanished.
++    const relativePath = path.relative(this.root, dir);
++    if (
++      this.doIgnore(dir) ||
++      (relativePath && this.doIgnore(relativePath))
++    ) {
++      return false;
++    }
++    let watcher;
++    try {
++      watcher = fs.watch(
++        dir,
++        {
++          persistent: true,
++        },
++        (event, filename) => this._normalizeChange(dir, event, filename)
++      );
++    } catch (error) {
++      if (!isIgnorableFileError(error)) {
++        this.emitError(error);
++      }
++      return false;
++    }
+     this.watched[dir] = watcher;
+     watcher.on("error", this._checkedEmitError);
+     if (this.root !== dir) {

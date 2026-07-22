@@ -1,0 +1,76 @@
+{
+  "expo": {
+    "name": "Findus",
+    "slug": "findus",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#18181B"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.finnus.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Findus nutzt deinen Standort, um Tour-Stops in der Nähe zu erkennen.",
+        "NSMicrophoneUsageDescription": "Findus braucht das Mikrofon für deine Rückfragen.",
+        "NSSpeechRecognitionUsageDescription": "Findus wandelt deine Sprache in Text um."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#18181B"
+      },
+      "package": "com.finnus.app",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "RECORD_AUDIO",
+        "MODIFY_AUDIO_SETTINGS",
+        "INTERNET"
+      ]
+    },
+    "plugins": [
+      "./plugins/withJetifier",
+      "./plugins/withKokoroAssets",
+      "./plugins/withFindusEspeak",
+      [
+        "expo-dev-client",
+        {
+          "launchMode": "most-recent"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Findus nutzt deinen Standort, um Tour-Stops in der Nähe zu erkennen."
+        }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Findus braucht das Mikrofon für deine Rückfragen."
+        }
+      ],
+      "expo-sqlite",
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "Findus braucht das Mikrofon für deine Rückfragen.",
+          "speechRecognitionPermission": "Findus wandelt deine Sprache in Text um.",
+          "androidSpeechServicePackages": [
+            "com.google.android.googlequicksearchbox"
+          ]
+        }
+      ],
+      "onnxruntime-react-native",
+      "expo-asset",
+      "expo-font"
+    ]
+  }
+}

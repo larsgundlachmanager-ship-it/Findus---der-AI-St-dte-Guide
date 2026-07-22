@@ -1,0 +1,1 @@
+const fs=require("fs");const s=fs.readFileSync("C:/Users/larsf/Findus 2.0/scripts/generatePronunciationMap.mjs","utf8");const re=/const (fill\w+) = words\(([\s\S]*?)\);/g;let m;while(m=re.exec(s)){const body=JSON.parse(m[2]);const pad=(body.match(/\w+extra\d{3}/g)||[]).length;console.log(m[1],pad);}
