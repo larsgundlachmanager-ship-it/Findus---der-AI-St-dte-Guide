@@ -1,8 +1,5 @@
 /**
- * Sprachpakete für Findus TTS.
- *
- * DE Multi-Speaker: Martin-ONNX (männlich) + Victoria-ONNX (weiblich, optional)
- * + 4 echte DE-Stimmpacks (thorsten/eva/karl/puck).
+ * Sprachpakete für Findus TTS — Piper DE (6 Stimmen).
  */
 export type LanguagePackId = 'de';
 
@@ -11,8 +8,9 @@ export type LanguagePack = {
   labelDe: string;
   flag: string;
   preferBundled: boolean;
-  kokoroLang: string;
   defaultVoiceId: string;
+  /** @deprecated Kokoro-Lang-Code — Piper nutzt espeak voice "de". */
+  kokoroLang?: string;
   modelUrl?: string;
   voiceUrl?: string;
   modelSizeMb?: number;
@@ -24,13 +22,9 @@ export const LANGUAGE_PACKS: LanguagePack[] = [
     labelDe: 'Deutsch',
     flag: '🇩🇪',
     preferBundled: true,
-    kokoroLang: 'd',
     defaultVoiceId: 'standard_m',
-    modelUrl:
-      'https://huggingface.co/Godelaune/Kokoro-82M-ONNX-German-Martin/resolve/main/kokoro-martin.onnx',
-    voiceUrl:
-      'https://huggingface.co/kikiri-tts/kikiri-german-martin/resolve/main/voices/martin.pt',
-    modelSizeMb: 310,
+    kokoroLang: 'de',
+    modelSizeMb: 63,
   },
 ];
 

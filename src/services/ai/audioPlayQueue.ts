@@ -1,11 +1,16 @@
 /**
- * AudioPlayQueue — Satz-für-Satz mit festem Vorlauf (Default: 2).
- * Produzent (LLM/Kokoro) füllt, Konsument spielt lückenlos ab.
+ * AudioPlayQueue — fertige Audio-Chunks im RAM.
+ *
+ * Producer synthesisiert voraus (Lookahead), Consumer spielt FIFO.
+ * targetLookahead=2: während Satz N spielt, liegen N+1 und N+2 schon bereit.
  */
 
 export type AudioPlayQueueItem = {
-  uri: string;
+  /** Fertige WAV-Bytes im RAM — wird erst abgespielt, wenn vollständig gerendert. */
+  wavBytes: Uint8Array;
   text: string;
+  /** OpenAI TTS: fertige MP3-Datei (statt wavBytes). */
+  openAiUri?: string;
 };
 
 export type AudioPlayQueue = {
@@ -13,7 +18,7 @@ export type AudioPlayQueue = {
   readonly targetLookahead: number;
   push(item: AudioPlayQueueItem): void;
   close(error?: unknown): void;
-  /** Wartet, bis Platz unter targetLookahead ist (für Producer-Throttle). */
+  /** Wartet, bis Platz unter targetLookahead ist (sequentieller Producer-Throttle). */
   waitForSlot(): Promise<void>;
   /** Nächstes fertiges Item (oder null wenn geschlossen & leer). */
   take(): Promise<AudioPlayQueueItem | null>;
@@ -22,7 +27,7 @@ export type AudioPlayQueue = {
 };
 
 export function createAudioPlayQueue(
-  targetLookahead: number = 2,
+  targetLookahead: number = 1,
 ): AudioPlayQueue {
   const pending: AudioPlayQueueItem[] = [];
   let wakeTake: (() => void) | null = null;
@@ -51,7 +56,9 @@ export function createAudioPlayQueue(
     },
     push(item: AudioPlayQueueItem) {
       if (closed) return;
-      if (!item.uri || !item.text.trim()) return;
+      const hasAudio =
+        Boolean(item.openAiUri) || Boolean(item.wavBytes?.length);
+      if (!hasAudio || !item.text.trim()) return;
       pending.push(item);
       notifyTake();
     },
@@ -64,7 +71,8 @@ export function createAudioPlayQueue(
     },
     waitForSlot() {
       return new Promise<void>((resolve) => {
-        if (closed || pending.length < targetLookahead) {
+        // Solange Platz in der Queue ist ODER die Queue leer ist (erste Sätze sofort), erlaube Push.
+        if (closed || pending.length < Math.max(1, targetLookahead)) {
           resolve();
           return;
         }
@@ -81,7 +89,7 @@ export function createAudioPlayQueue(
           continue;
         }
         const item = pending.shift()!;
-        notifySlot();
+        notifySlot(); // Platz freigeben, nachdem der Satz aus der Queue ENTNOMMEN wurde (wird jetzt abgespielt)
         return item;
       }
       if (fail) throw fail;

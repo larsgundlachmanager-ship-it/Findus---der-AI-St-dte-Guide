@@ -1,183 +1,147 @@
-/**
- * AudioVoiceService — dynamisches In-Memory Kokoro Multi-Speaker.
- *
- * Boot: Martin-ONNX + genau eine aktive DE-Stimme (de_thorsten|eva|karl) → RAM.
- * VoicePreloader hält Session + Style-Vektor keep-warm (0s Latenz).
- * Hörproben/Intro: Metro-gebündelte WAVs (src/assets/audio/) — 0s Play.
- * Live-Tour: AudioPlayQueue mit 2-Satz-Vorlauf, Tempo fest 1.0.
+﻿/**
+ * AudioVoiceService — Hybrid TTS:
+ * Provider-Switch: OpenAI Speech (nova) | lokal Piper/Kokoro
  */
-import { Audio } from 'expo-av';
+import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from 'expo-av';
 import { Asset } from 'expo-asset';
 import * as FileSystem from 'expo-file-system';
-import JSZip from 'jszip';
 import { useFinnusStore } from '../store/useFinnusStore';
-import { env } from '../config/env';
 import {
-  BASE_VOICE_PACK_IDS,
-  getKokoroVoicePack,
+  resolvePiperModelId,
+  getPiperModel,
+  type PiperVoiceModelId,
+  ALL_PIPER_MODEL_IDS,
+} from '../constants/piperVoices';
+import {
+  getVoice,
+  FIXED_SPEECH_RATE,
+  VOICES,
+  resolveTtsEngine,
+  pitchForVoice,
+} from '../constants/voices';
+import {
+  isKokoroVoice,
   resolveKokoroPackId,
-  resolveKokoroPackUrls,
-  type KokoroModelId,
-  type KokoroVoicePackId,
 } from '../constants/kokoroVoicePacks';
-import { getVoice, clampSpeechRate, FIXED_SPEECH_RATE, VOICES, EAGER_SAMPLE_VOICE_IDS } from '../constants/voices';
-import { VOICE_SAMPLE_MODULES, INTRO_WAV_MODULE } from '../constants/voiceSampleAssets';
+import {
+  VOICE_SAMPLE_MODULES,
+  INTRO_WAV_MODULE,
+} from '../constants/voiceSampleAssets';
 import type { VoiceId } from '../types/userProfile';
-import { getCachedUserProfile, getVoiceSettingsForTour } from './userProfileService';
-import { phonemizeGermanAsync, warmupGermanG2P } from './g2p';
-import { normalizeGermanTtsText } from './g2p/germanTextNormalize';
-import { prepareDisplayText, prepareAudioText, isOrthoPronunciation } from './g2p/phoneticTransformer';
-import { phonemizeWithPronunciationMap } from './g2p/pronunciationMap';
 import {
-  getCityPronunciationMap,
-} from './g2p/fusedPronunciation';
+  getCachedUserProfile,
+  getVoiceSettingsForTour,
+} from './userProfileService';
 import {
-  getPronunciationCache,
-  getGlobalPhraseKeys,
-  loadPronunciationDictionary,
-  lookupPronunciationTier,
-} from './tts/pronunciationMap';
-import { tokenIdForPhoneme } from '../constants/kokoroVocab';
+  sentenceEndPauseMs,
+  COMMA_PAUSE_MS,
+  COLON_PAUSE_MS,
+  DASH_PAUSE_MS,
+  stripLlmProsodyMarkers,
+  applyPiperProsody,
+} from './g2p/germanTtsProsodyRules';
 import {
-  KOKORO_DOWNLOAD_MSG,
+  applyEnglishOrthoPronunciations,
+} from './g2p/phoneticTransformer';
+import { sentencesFromFullText } from './ai/sentenceStream';
+import {
+  ensurePhoneticEngineSync,
+  initMultilingualPhoneticEngine,
+  transformMultilingualTerms,
+} from './ai/multilingualPhoneticEngine';
+import { scrubInventedVoiceNames } from './ai/spokenNameGuard';
+import { createAudioPlayQueue } from './ai/audioPlayQueue';
+import {
+  PIPER_DOWNLOAD_MSG,
+  PIPER_UNAVAILABLE_MSG,
   KOKORO_UNAVAILABLE_MSG,
 } from './ttsPolicy';
-import { getLanguagePack } from '../constants/languagePacks';
-import { sentencesFromFullText } from './ai/sentenceStream';
-import { createAudioPlayQueue } from './ai/audioPlayQueue';
-
-const BUNDLED_KOKORO_PREFER = getLanguagePack('de').preferBundled;
+import {
+  hasOpenAiTtsKey,
+  synthesizeOpenAiSpeechMp3,
+  deleteOpenAiTempAudio,
+} from './openaiTtsService';
+import type { TtsProvider } from '../store/useFinnusStore';
+import {
+  warmupPiper,
+  isPiperReady as engineReady,
+  isPiperLoading as engineLoading,
+  synthesizePiperPcm,
+  ensurePiperModel as engineEnsureModel,
+  unloadPiperModel,
+  unloadInactivePiperModels as engineUnloadInactive,
+  resetPiperEngine,
+  getActivePiperModelId,
+} from './piper/piperEngine';
+import {
+  warmupKokoroEngine,
+  isKokoroEngineReady,
+  synthesizeKokoroPcm,
+  ensureKokoroPack,
+  unloadKokoroEngine,
+  resetKokoroEngine,
+} from './kokoro/kokoroEngine';
 
 export type SpeakVoiceOptions = {
-  /** Ignoriert — systemweit immer FIXED_SPEECH_RATE (1.0). */
   speechRate?: number;
   voiceId?: VoiceId;
   pitch?: number;
 };
 
-/** Intro: Standard männlich (de_thorsten / Martin), Tempo 1.0. */
 export const INTRO_VOICE: SpeakVoiceOptions = {
   voiceId: 'standard_m',
   speechRate: FIXED_SPEECH_RATE,
   pitch: 1,
 };
 
-/** @deprecated Alias für Intro / Standard männlich. */
+/** @deprecated */
 export const MARTIN_PURE = INTRO_VOICE;
 
-const SAMPLE_RATE = 24000;
-const STYLE_DIM = 256;
-const STYLE_FRAMES = 510;
-/** Silence-Schwelle für Trim (PCM ~0). */
-const SILENCE_THRESHOLD = 0.01;
-/** Crossfade-Samples zwischen gemergten Chunks (klickfrei). */
-const MERGE_CROSSFADE = 96;
-/** Erster Streaming-Chunk: max. Zeichen für Instant-Start. */
-const FIRST_CHUNK_MAX_CHARS = 110;
-/** Stets 2 fertige Sätze Vorlauf in der AudioPlayQueue. */
-const AUDIO_QUEUE_LOOKAHEAD = 2;
-/** v4: einzigartige Stimmen-Packs + EN-ONNX + Aussprache-Map. */
-const VOICE_SYSTEM_VERSION = 'de-kokoro-studio-v4';
+const AUDIO_QUEUE_LOOKAHEAD = 1;
+const VOICE_SYSTEM_VERSION = 'de-hybrid-v5-personal-4thwall';
+const AUDIO_CACHE_DIR = `${FileSystem.cacheDirectory ?? FileSystem.documentDirectory}tts-audio/`;
+const SAMPLE_DIR = `${FileSystem.cacheDirectory ?? FileSystem.documentDirectory}tts/samples/`;
+const SAMPLE_CACHE_VER = 'v5-personal-historiker';
+const SYSTEM_VERSION_PATH = `${FileSystem.documentDirectory}tts/system.version`;
 
-const MODEL_DIR = `${FileSystem.documentDirectory}kokoro/`;
-const AUDIO_CACHE_DIR = `${FileSystem.cacheDirectory ?? FileSystem.documentDirectory}kokoro-audio/`;
-const VOICES_DIR = `${MODEL_DIR}voices/`;
-/** Hörproben: cacheDirectory → Instant-Play ohne documentDirectory-I/O. */
-const SAMPLE_DIR = `${FileSystem.cacheDirectory ?? FileSystem.documentDirectory}kokoro/samples/`;
-/** v2: feste speed=1.0 + neue Vorstellungstexte. */
-const SAMPLE_CACHE_VER = 'v2-instant-1x';
-const SYSTEM_VERSION_PATH = `${MODEL_DIR}system.version`;
-const MODEL_PATH_MARTIN = `${MODEL_DIR}kokoro-martin.onnx`;
-const MODEL_PATH_VICTORIA = `${MODEL_DIR}kokoro-victoria.onnx`;
-const MODEL_PATH_ENGLISH = `${MODEL_DIR}kokoro-english.onnx`;
-/** Legacy-Pfad (v1/v2) → nach martin migrieren. */
-const MODEL_PATH_LEGACY = `${MODEL_DIR}kokoro.onnx`;
-const MODEL_ID_PATH = `${MODEL_DIR}model.id`;
-
-/** Ungenutzte EN-/Legacy-Dateien — Purge beim Boot. */
-const LEGACY_PURGE_FILES = [
-  MODEL_PATH_ENGLISH,
-  MODEL_PATH_VICTORIA,
-  `${MODEL_DIR}kokoro-english.onnx`,
-  `${MODEL_DIR}kokoro-victoria.onnx`,
-] as const;
-
-const LEGACY_VOICE_PREFIXES = ['af_', 'am_', 'bm_', 'bf_'] as const;
-
-/** voiceId@rateKey → Sample bereit (Metro-WAVs sind gebündelt). */
 const sampleReadyKeys = new Set<string>();
 let samplePrefetchPromise: Promise<void> | null = null;
 let prepareOnboardingPromise: Promise<void> | null = null;
 let prepareOnboardingKey: string | null = null;
 
-async function resolveBundledAssetUri(
-  moduleId: number,
-): Promise<string | null> {
-  try {
-    const asset = Asset.fromModule(moduleId);
-    if (!asset.downloaded) await asset.downloadAsync();
-    return asset.localUri ?? asset.uri ?? null;
-  } catch (err) {
-    console.warn('[voice] Asset-URI:', err);
-    return null;
-  }
-}
-
-function sampleCacheKey(voiceId: VoiceId): string {
-  return `${SAMPLE_CACHE_VER}_${voiceId}@${Math.round(FIXED_SPEECH_RATE * 100)}`;
-}
-
-function markMetroBundledSamplesReady(): void {
-  for (const voice of VOICES) {
-    sampleReadyKeys.add(sampleCacheKey(voice.id));
-  }
-}
-
-markMetroBundledSamplesReady();
-
-const FALLBACK_MODEL_URL_MARTIN =
-  'https://huggingface.co/Godelaune/Kokoro-82M-ONNX-German-Martin/resolve/main/kokoro-martin.onnx';
-/** Victoria-ONNX optional — bis Export da ist: Martin-Session + Eva-Style. */
-const FALLBACK_MODEL_URL_VICTORIA = '';
-const FALLBACK_MODEL_URL_ENGLISH =
-  'https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/main/onnx/model_quantized.onnx';
-const FALLBACK_MODEL_URL_ENGLISH_ALT =
-  'https://huggingface.co/onnx-community/Kokoro-82M-ONNX/resolve/main/onnx/model_quantized.onnx';
-
-type OrtTensor = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  new (type: string, data: any, dims: number[]): any;
-};
-
-type OrtModule = {
-  Tensor: OrtTensor;
-  InferenceSession: {
-    create: (
-      path: string,
-      options?: object,
-    ) => Promise<{
-      run: (feeds: Record<string, unknown>) => Promise<Record<string, { data: Float32Array }>>;
-      inputNames: string[];
-      outputNames: string[];
-    }>;
-  };
-};
-
-type OrtSession = Awaited<ReturnType<OrtModule['InferenceSession']['create']>>;
-
-/** Dual-ONNX: männlich (Martin) + weiblich (Victoria, optional). */
-const ortSessions: Partial<Record<KokoroModelId, OrtSession>> = {};
-/** Style-Vektoren im RAM — Key = Pack-ID. */
-const voiceRam = new Map<KokoroVoicePackId, Float32Array>();
 let sound: Audio.Sound | null = null;
 let warmedUp = false;
 let warmupPromise: Promise<void> | null = null;
 let playbackGeneration = 0;
-let inferChain: Promise<unknown> = Promise.resolve();
-/** Temp-WAVs dieser Session — nach Play / Stop löschen. */
+let activeTtsSessions = 0;
 const tempAudioUris = new Set<string>();
 
-/** Optionaler Hook vom VoicePreloader (vermeidet Circular Import). */
+async function applyTtsExclusiveAudioMode(): Promise<void> {
+  await Audio.setAudioModeAsync({
+    playsInSilentModeIOS: true,
+    staysActiveInBackground: true,
+    shouldDuckAndroid: true,
+    interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
+    interruptionModeIOS: InterruptionModeIOS.DoNotMix,
+  });
+}
+
+/** Musik/Spotify wieder freigeben, wenn Findus fertig spricht. */
+async function restoreAmbientAudioMode(): Promise<void> {
+  if (activeTtsSessions > 0) return;
+  try {
+    await Audio.setAudioModeAsync({
+      playsInSilentModeIOS: true,
+      staysActiveInBackground: true,
+      shouldDuckAndroid: true,
+      interruptionModeAndroid: InterruptionModeAndroid.MixWithOthers,
+      interruptionModeIOS: InterruptionModeIOS.MixWithOthers,
+    });
+  } catch {
+    /* ignore */
+  }
+}
+
 type ActiveVoiceWarmer = (voiceId?: VoiceId) => Promise<void>;
 let activeVoiceWarmer: ActiveVoiceWarmer | null = null;
 let activeVoiceReset: (() => void) | null = null;
@@ -195,839 +159,123 @@ async function warmActiveVoiceInternal(voiceId?: VoiceId): Promise<void> {
     await activeVoiceWarmer(voiceId);
     return;
   }
-  // Fallback ohne Preloader: Session + eine Pack-ID
-  const persona = voiceId ?? getCachedUserProfile()?.voiceId ?? 'standard_m';
-  const pack = resolveKokoroPackId(persona);
-  await ensureKokoroAssets();
-  await getSession('martin');
-  unloadInactiveVoicePacks(pack);
-  await loadVoiceIntoRam(pack);
-  markKokoroWarmedUp();
-  void synthesizeWav('Start', { voiceId: persona, speechRate: 1 }).catch(
-    () => undefined,
-  );
+  const persona =
+    voiceId ?? getCachedUserProfile()?.voiceId ?? 'standard_m';
+  if (isKokoroVoice(persona)) {
+    await ensureKokoroPack(resolveKokoroPackId(persona));
+    unloadInactivePiperModels(resolvePiperModelId('standard_m'));
+  } else {
+    await engineEnsureModel(resolvePiperModelId(persona));
+    unloadKokoroEngine();
+  }
+  markPiperWarmedUp();
 }
 
-function enqueueInfer<T>(fn: () => Promise<T>): Promise<T> {
-  const next = inferChain.then(fn, fn);
-  inferChain = next.then(
-    () => undefined,
-    () => undefined,
-  );
-  return next;
+function sampleCacheKey(voiceId: VoiceId): string {
+  return `${SAMPLE_CACHE_VER}_${voiceId}@${Math.round(FIXED_SPEECH_RATE * 100)}`;
 }
 
-async function getOrt(): Promise<OrtModule | null> {
+function markMetroBundledSamplesReady(): void {
+  for (const voice of VOICES) {
+    sampleReadyKeys.add(sampleCacheKey(voice.id));
+  }
+}
+markMetroBundledSamplesReady();
+
+async function resolveBundledAssetUri(
+  moduleId: number,
+): Promise<string | null> {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    return require('onnxruntime-react-native') as OrtModule;
-  } catch {
+    const asset = Asset.fromModule(moduleId);
+    if (!asset.downloaded) await asset.downloadAsync();
+    return asset.localUri ?? asset.uri ?? null;
+  } catch (err) {
+    console.warn('[voice] Asset-URI:', err);
     return null;
   }
 }
 
-function voicePackFilePath(packId: KokoroVoicePackId): string {
-  return `${VOICES_DIR}${getKokoroVoicePack(packId).fileName}`;
+function markUnavailable(engine: 'piper' | 'kokoro' | 'any' = 'any'): void {
+  const msg =
+    engine === 'kokoro' ? KOKORO_UNAVAILABLE_MSG : PIPER_UNAVAILABLE_MSG;
+  useFinnusStore.getState().setKokoroStatusMessage(msg);
+  useFinnusStore.getState().setKokoroReady(false);
 }
 
-async function ensureDir(): Promise<void> {
-  const info = await FileSystem.getInfoAsync(MODEL_DIR);
-  if (!info.exists) {
-    await FileSystem.makeDirectoryAsync(MODEL_DIR, { intermediates: true });
-  }
-  const voicesInfo = await FileSystem.getInfoAsync(VOICES_DIR);
-  if (!voicesInfo.exists) {
-    await FileSystem.makeDirectoryAsync(VOICES_DIR, { intermediates: true });
-  }
-  const cacheInfo = await FileSystem.getInfoAsync(AUDIO_CACHE_DIR);
-  if (!cacheInfo.exists) {
-    await FileSystem.makeDirectoryAsync(AUDIO_CACHE_DIR, {
-      intermediates: true,
-    });
-  }
-  const sampleInfo = await FileSystem.getInfoAsync(SAMPLE_DIR);
-  if (!sampleInfo.exists) {
-    await FileSystem.makeDirectoryAsync(SAMPLE_DIR, { intermediates: true });
-  }
-}
-
-function trackTempAudio(uri: string): string {
-  tempAudioUris.add(uri);
-  return uri;
-}
-
-async function cleanupTempAudio(uris?: Iterable<string>): Promise<void> {
-  const list = uris ? [...uris] : [...tempAudioUris];
-  for (const uri of list) {
-    tempAudioUris.delete(uri);
-    try {
-      await FileSystem.deleteAsync(uri, { idempotent: true });
-    } catch {
-      // ignore
-    }
-  }
-}
-
-function markUnavailable(): void {
-  useFinnusStore.getState().setKokoroStatusMessage(KOKORO_UNAVAILABLE_MSG);
-}
-
-function base64ToBytes(b64: string): Uint8Array {
-  const atobFn =
-    globalThis.atob ??
-    ((data: string) => {
-      const chars =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-      let str = data.replace(/=+$/, '');
-      let output = '';
-      for (let bc = 0, bs = 0, buffer, i = 0; (buffer = str.charAt(i++)); ) {
-        const idx = chars.indexOf(buffer);
-        if (idx === -1) continue;
-        bs = bc % 4 ? bs * 64 + idx : idx;
-        if (bc++ % 4) {
-          output += String.fromCharCode(255 & (bs >> ((-2 * bc) & 6)));
-        }
-      }
-      return output;
-    });
-  const binary = atobFn(b64);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-  return bytes;
-}
-
-function bytesToBase64(bytes: Uint8Array): string {
-  let binary = '';
-  const chunk = 0x8000;
-  for (let i = 0; i < bytes.length; i += chunk) {
-    binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
-  }
-  const btoaFn =
-    globalThis.btoa ??
-    ((data: string) => {
-      const chars =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-      let output = '';
-      for (let i = 0; i < data.length; i += 3) {
-        const a = data.charCodeAt(i);
-        const b = data.charCodeAt(i + 1);
-        const c = data.charCodeAt(i + 2);
-        const bitmap = (a << 16) | ((b || 0) << 8) | (c || 0);
-        output +=
-          chars.charAt((bitmap >> 18) & 63) +
-          chars.charAt((bitmap >> 12) & 63) +
-          (Number.isNaN(b) ? '=' : chars.charAt((bitmap >> 6) & 63)) +
-          (Number.isNaN(c) ? '=' : chars.charAt(bitmap & 63));
-      }
-      return output;
-    });
-  return btoaFn(binary);
-}
-
-function parseNpyFloat32(buf: ArrayBuffer): Float32Array {
-  const u8 = new Uint8Array(buf);
-  if (u8.length < 10 || u8[0] !== 0x93) {
-    throw new Error('[voice] Ungültiges NPY');
-  }
-  const view = new DataView(buf);
-  const headerLen = view.getUint16(8, true);
-  const offset = 10 + headerLen;
-  const count = Math.floor((buf.byteLength - offset) / 4);
-  if (offset % 4 === 0) {
-    return new Float32Array(buf, offset, count);
-  }
-  const copy = u8.slice(offset);
-  return new Float32Array(
-    copy.buffer,
-    copy.byteOffset,
-    Math.floor(copy.byteLength / 4),
+function isModelUnavailableError(error: unknown): boolean {
+  const msg = error instanceof Error ? error.message : String(error);
+  return /onnxruntime|Piper|piper|Kokoro|kokoro|Phonemize|Modell fehlt|Pack fehlt/i.test(
+    msg,
   );
-}
-
-async function ensureVoiceSystemVersion(): Promise<void> {
-  await ensureDir();
-  let current = '';
-  try {
-    const info = await FileSystem.getInfoAsync(SYSTEM_VERSION_PATH);
-    if (info.exists) {
-      current = (await FileSystem.readAsStringAsync(SYSTEM_VERSION_PATH)).trim();
-    }
-  } catch {
-    current = '';
-  }
-  if (current === VOICE_SYSTEM_VERSION) return;
-
-  // Alte inkompatible Stimmen (de_thorsten/bm_lewis o.ä.) verwerfen — Modell behalten.
-  console.log(
-    `[voice] Stimmen-Upgrade "${current || '(keine)'}" → "${VOICE_SYSTEM_VERSION}"`,
-  );
-  voiceRam.clear();
-  try {
-    const voicesInfo = await FileSystem.getInfoAsync(VOICES_DIR);
-    if (voicesInfo.exists) {
-      await FileSystem.deleteAsync(VOICES_DIR, { idempotent: true });
-    }
-  } catch (err) {
-    console.warn('[voice] Alte Stimmen löschen:', err);
-  }
-  await ensureDir();
-  await FileSystem.writeAsStringAsync(
-    SYSTEM_VERSION_PATH,
-    VOICE_SYSTEM_VERSION,
-    { encoding: FileSystem.EncodingType.UTF8 },
-  );
-}
-
-function resolveModelUrl(): string {
-  return env.kokoroModelUrl() || FALLBACK_MODEL_URL_MARTIN;
-}
-
-function modelPathFor(id: KokoroModelId): string {
-  if (id === 'victoria') return MODEL_PATH_VICTORIA;
-  if (id === 'english') return MODEL_PATH_ENGLISH;
-  return MODEL_PATH_MARTIN;
-}
-
-/** Deutsche Inferenz: immer langCode `d` (kein EN/US). */
-function germanLangCode(): string {
-  return 'd';
-}
-
-async function migrateLegacyModel(): Promise<void> {
-  try {
-    const legacy = await FileSystem.getInfoAsync(MODEL_PATH_LEGACY);
-    const martin = await FileSystem.getInfoAsync(MODEL_PATH_MARTIN);
-    if (legacy.exists && (legacy.size ?? 0) > 1_000_000 && !martin.exists) {
-      await FileSystem.moveAsync({
-        from: MODEL_PATH_LEGACY,
-        to: MODEL_PATH_MARTIN,
-      });
-      console.log('[voice] Legacy kokoro.onnx → kokoro-martin.onnx');
-    }
-  } catch {
-    // ignore
-  }
-}
-
-async function tryInstallBundledModel(
-  modelId: KokoroModelId,
-  expectedId: string,
-): Promise<boolean> {
-  const dest = modelPathFor(modelId);
-  const bundleRoot = FileSystem.bundleDirectory ?? '';
-  const candidates =
-    modelId === 'victoria'
-      ? [
-          `${bundleRoot}kokoro/kokoro-victoria.onnx`,
-          `${bundleRoot}assets/kokoro/kokoro-victoria.onnx`,
-          'file:///android_asset/kokoro/kokoro-victoria.onnx',
-        ]
-      : modelId === 'english'
-        ? [
-            `${bundleRoot}kokoro/kokoro-english.onnx`,
-            `${bundleRoot}assets/kokoro/kokoro-english.onnx`,
-            'file:///android_asset/kokoro/kokoro-english.onnx',
-          ]
-        : [
-            `${bundleRoot}kokoro/kokoro-martin.onnx`,
-            `${bundleRoot}kokoro/kokoro.onnx`,
-            `${bundleRoot}assets/kokoro/kokoro-martin.onnx`,
-            'file:///android_asset/kokoro/kokoro-martin.onnx',
-            'file:///android_asset/kokoro/kokoro.onnx',
-          ];
-  for (const from of candidates) {
-    try {
-      const info = await FileSystem.getInfoAsync(from);
-      if (!info.exists || (info.size ?? 0) < 1_000_000) continue;
-      await ensureDir();
-      const existing = await FileSystem.getInfoAsync(dest);
-      if (existing.exists) {
-        await FileSystem.deleteAsync(dest, { idempotent: true });
-      }
-      await FileSystem.copyAsync({ from, to: dest });
-      await FileSystem.writeAsStringAsync(MODEL_ID_PATH, expectedId, {
-        encoding: FileSystem.EncodingType.UTF8,
-      });
-      delete ortSessions[modelId];
-      console.log(`[voice] Bundle-Modell ${modelId} installiert`);
-      return true;
-    } catch {
-      // next
-    }
-  }
-  return false;
-}
-
-async function downloadModelTo(
-  dest: string,
-  url: string,
-  modelId: KokoroModelId,
-): Promise<boolean> {
-  if (!url) return false;
-  const tmp = `${dest}.tmp`;
-  try {
-    await ensureDir();
-    await FileSystem.deleteAsync(tmp, { idempotent: true }).catch(() => {});
-    const store = useFinnusStore.getState();
-    store.setKokoroDownloadLabel(KOKORO_DOWNLOAD_MSG);
-    store.setKokoroDownloadProgress(0.15);
-    const result = await FileSystem.downloadAsync(url, tmp);
-    if (result.status < 200 || result.status >= 300) {
-      await FileSystem.deleteAsync(tmp, { idempotent: true }).catch(() => {});
-      return false;
-    }
-    const tmpInfo = await FileSystem.getInfoAsync(tmp);
-    if (!tmpInfo.exists || (tmpInfo.size ?? 0) < 1_000_000) {
-      await FileSystem.deleteAsync(tmp, { idempotent: true }).catch(() => {});
-      return false;
-    }
-    store.setKokoroDownloadProgress(0.9);
-    const existing = await FileSystem.getInfoAsync(dest);
-    if (existing.exists) {
-      await FileSystem.deleteAsync(dest, { idempotent: true });
-    }
-    await FileSystem.moveAsync({ from: tmp, to: dest });
-    delete ortSessions[modelId];
-    store.setKokoroDownloadProgress(1);
-    return true;
-  } catch (err) {
-    console.warn(`[voice] Modell-Download ${modelId}:`, err);
-    await FileSystem.deleteAsync(tmp, { idempotent: true }).catch(() => {});
-    return false;
-  }
-}
-
-async function ensureModel(modelId: KokoroModelId = 'martin'): Promise<boolean> {
-  await migrateLegacyModel();
-  const store = useFinnusStore.getState();
-  const dest = modelPathFor(modelId);
-
-  const info = await FileSystem.getInfoAsync(dest);
-  if (info.exists && (info.size ?? 0) > 1_000_000) {
-    store.setKokoroDownloadProgress(null);
-    store.setKokoroDownloadLabel(null);
-    return true;
-  }
-
-  if (modelId === 'victoria') {
-    if (BUNDLED_KOKORO_PREFER) {
-      if (await tryInstallBundledModel('victoria', 'kokoro-victoria.onnx')) {
-        return true;
-      }
-    }
-    if (FALLBACK_MODEL_URL_VICTORIA) {
-      const ok = await downloadModelTo(
-        dest,
-        FALLBACK_MODEL_URL_VICTORIA,
-        'victoria',
-      );
-      if (ok) return true;
-    }
-    console.log('[voice] Victoria-ONNX fehlt — nutze Martin-Session + Eva-Style');
-    return ensureModel('martin');
-  }
-
-  if (modelId === 'english') {
-    if (BUNDLED_KOKORO_PREFER) {
-      if (await tryInstallBundledModel('english', 'kokoro-english.onnx')) {
-        return true;
-      }
-    }
-    for (const url of [
-      FALLBACK_MODEL_URL_ENGLISH,
-      FALLBACK_MODEL_URL_ENGLISH_ALT,
-    ]) {
-      const ok = await downloadModelTo(dest, url, 'english');
-      if (ok) {
-        store.setKokoroDownloadProgress(null);
-        store.setKokoroDownloadLabel(null);
-        return true;
-      }
-    }
-    console.warn('[voice] English-ONNX fehlt — EN-Packs nicht verfügbar');
-    store.setKokoroDownloadProgress(null);
-    store.setKokoroDownloadLabel(null);
-    return false;
-  }
-
-  if (BUNDLED_KOKORO_PREFER) {
-    if (await tryInstallBundledModel('martin', 'kokoro-martin.onnx')) {
-      store.setKokoroDownloadProgress(null);
-      store.setKokoroDownloadLabel(null);
-      return true;
-    }
-  }
-
-  const ok = await downloadModelTo(dest, resolveModelUrl(), 'martin');
-  store.setKokoroDownloadProgress(null);
-  store.setKokoroDownloadLabel(null);
-  if (!ok) markUnavailable();
-  return ok;
-}
-
-async function installVoiceFromNpz(
-  npzPath: string,
-  destPath: string,
-): Promise<boolean> {
-  try {
-    const b64 = await FileSystem.readAsStringAsync(npzPath, {
-      encoding: FileSystem.EncodingType.Base64,
-    });
-    const zip = await JSZip.loadAsync(base64ToBytes(b64));
-    const npyName = Object.keys(zip.files).find(
-      (n) => n.toLowerCase().endsWith('.npy') && !zip.files[n].dir,
-    );
-    if (!npyName) return false;
-    const ab = await zip.files[npyName].async('arraybuffer');
-    const floats = parseNpyFloat32(ab);
-    if (floats.length < STYLE_DIM) return false;
-    const raw = new Uint8Array(
-      floats.buffer,
-      floats.byteOffset,
-      floats.byteLength,
-    );
-    await FileSystem.writeAsStringAsync(destPath, bytesToBase64(raw), {
-      encoding: FileSystem.EncodingType.Base64,
-    });
-    return true;
-  } catch (err) {
-    console.warn('[voice] NPZ-Install:', err);
-    return false;
-  }
-}
-
-async function tryInstallBundledVoice(packId: KokoroVoicePackId): Promise<boolean> {
-  const pack = getKokoroVoicePack(packId);
-  const dest = voicePackFilePath(packId);
-  const binCandidates = [
-    `${FileSystem.bundleDirectory}kokoro/voices/${pack.fileName}`,
-    `${FileSystem.bundleDirectory}assets/kokoro/voices/${pack.fileName}`,
-  ];
-  for (const from of binCandidates) {
-    try {
-      const info = await FileSystem.getInfoAsync(from);
-      if (!info.exists || (info.size ?? 0) < 1000) continue;
-      await ensureDir();
-      await FileSystem.copyAsync({ from, to: dest });
-      voiceRam.delete(packId);
-      return true;
-    } catch {
-      // next
-    }
-  }
-  if (pack.npzKey === 'martin') {
-    for (const npzFrom of [
-      `${FileSystem.bundleDirectory}kokoro/voices-martin.npz`,
-      `${FileSystem.bundleDirectory}assets/kokoro/voices-martin.npz`,
-    ]) {
-      try {
-        const info = await FileSystem.getInfoAsync(npzFrom);
-        if (!info.exists || (info.size ?? 0) < 1000) continue;
-        await ensureDir();
-        if (await installVoiceFromNpz(npzFrom, dest)) {
-          voiceRam.delete(packId);
-          return true;
-        }
-      } catch {
-        // next
-      }
-    }
-  }
-  return false;
-}
-
-async function downloadVoicePack(
-  packId: KokoroVoicePackId,
-  url: string,
-): Promise<boolean> {
-  const dest = voicePackFilePath(packId);
-  const tmp = `${dest}.tmp`;
-  const isNpz = /\.npz(\?|$)/i.test(url);
-  const isPt = /\.pt(\?|$)/i.test(url);
-  const isGguf = /\.gguf(\?|$)/i.test(url);
-  try {
-    // .pt / .gguf brauchen Offline-Konvertierung (prepare:voices) — runtime skip
-    if (isPt || isGguf) {
-      console.warn(
-        `[voice] ${packId}: ${isPt ? '.pt' : '.gguf'} nicht runtime-konvertierbar — Bundle/.bin nötig`,
-      );
-      return false;
-    }
-    if (isNpz) {
-      const npzTmp = `${MODEL_DIR}pack-${packId}.npz`;
-      const result = await FileSystem.downloadAsync(url, npzTmp);
-      if (result.status < 200 || result.status >= 300) return false;
-      const ok = await installVoiceFromNpz(npzTmp, dest);
-      await FileSystem.deleteAsync(npzTmp, { idempotent: true }).catch(() => {});
-      if (ok) voiceRam.delete(packId);
-      return ok;
-    }
-    const result = await FileSystem.downloadAsync(url, tmp);
-    if (result.status < 200 || result.status >= 300) return false;
-    const tmpInfo = await FileSystem.getInfoAsync(tmp);
-    if (!tmpInfo.exists || (tmpInfo.size ?? 0) < 1000) return false;
-    // Roh-.bin (float32)
-    await FileSystem.deleteAsync(dest, { idempotent: true }).catch(() => {});
-    await FileSystem.moveAsync({ from: tmp, to: dest });
-    voiceRam.delete(packId);
-    return true;
-  } catch (err) {
-    console.warn(`[voice] Pack ${packId}:`, err);
-    await FileSystem.deleteAsync(tmp, { idempotent: true }).catch(() => {});
-    return false;
-  }
-}
-
-export async function ensureVoicePack(
-  packId: KokoroVoicePackId,
-): Promise<KokoroVoicePackId> {
-  await ensureDir();
-  const path = voicePackFilePath(packId);
-  const info = await FileSystem.getInfoAsync(path);
-  if (info.exists && (info.size ?? 0) > 1000) return packId;
-
-  if (await tryInstallBundledVoice(packId)) return packId;
-
-  for (const url of resolveKokoroPackUrls(getKokoroVoicePack(packId))) {
-    if (await downloadVoicePack(packId, url)) return packId;
-  }
-
-  // Fallback: Thorsten/Martin-NPZ für männliche Packs
-  if (packId !== 'de_thorsten') {
-    try {
-      await ensureVoicePack('de_thorsten');
-      const thor = voicePackFilePath('de_thorsten');
-      const thorInfo = await FileSystem.getInfoAsync(thor);
-      if (thorInfo.exists) {
-        await FileSystem.copyAsync({ from: thor, to: path });
-        voiceRam.delete(packId);
-        console.warn(`[voice] Fallback ${packId} ← de_thorsten`);
-        return packId;
-      }
-    } catch {
-      // ignore
-    }
-  }
-
-  throw new Error(`[voice] Pack ${packId} nicht verfügbar`);
 }
 
 /**
- * Lädt Style-Vektoren von Disk → RAM (einmalig pro Pack).
- * Öffentlich für VoicePreloader (aktive Stimme keep-warm).
+ * Untertitel / Anzeige: Originalorthografie.
+ * Keine Aussprache-Umschreibungen (vibe bleibt vibe, guide bleibt guide).
+ * Nur Whitespace + LLM-Regie-Marker entfernen.
  */
-export async function loadVoiceIntoRam(
-  packId: KokoroVoicePackId,
-): Promise<Float32Array> {
-  const cached = voiceRam.get(packId);
-  if (cached) return cached;
-
-  const resolved = await ensureVoicePack(packId);
-  const path = voicePackFilePath(resolved);
-  const b64 = await FileSystem.readAsStringAsync(path, {
-    encoding: FileSystem.EncodingType.Base64,
-  });
-  const bytes = base64ToBytes(b64);
-  const floatCount = Math.floor(bytes.byteLength / 4);
-  const floats = new Float32Array(bytes.buffer, bytes.byteOffset, floatCount);
-  const needed = STYLE_FRAMES * STYLE_DIM;
-
-  let styles: Float32Array;
-  if (floats.length >= needed) {
-    styles = floats.subarray(0, needed);
-  } else if (floats.length >= STYLE_DIM) {
-    const expanded = new Float32Array(needed);
-    for (let i = 0; i < STYLE_FRAMES; i++) {
-      expanded.set(floats.subarray(0, STYLE_DIM), i * STYLE_DIM);
-    }
-    styles = expanded;
-  } else {
-    throw new Error(`[voice] Pack ${resolved} ungültig`);
-  }
-
-  voiceRam.set(resolved, styles);
-  if (packId !== resolved) voiceRam.set(packId, styles);
-  return styles;
-}
-
-/** Entlädt einen Stimmen-Vektor aus dem RAM. */
-export function unloadVoiceFromRam(packId: KokoroVoicePackId): void {
-  voiceRam.delete(packId);
+export function prepareDisplayText(text: string): string {
+  return stripLlmProsodyMarkers(
+    text
+      .replace(/\s+/g, ' ')
+      .replace(/\u00a0/g, ' ')
+      // Leere Klammern aus Truncation / LLM-Müll (z. B. „klassischer ()“)
+      .replace(/\(\s*\)/g, '')
+      .replace(/\[\s*\]/g, '')
+      .replace(/\s{2,}/g, ' ')
+      .trim(),
+  );
 }
 
 /**
- * Behält nur die aktive Pack-ID im RAM — alle anderen Style-Vektoren freigeben.
- * ONNX-Session bleibt offen (Keep-Warm).
+ * Stufe A (Audio-only, kurz vor der Stimme):
+ * Nur Wörter anpassen, die deutsches Piper/espeak falsch lesen würde
+ * (Anglizismen, EU-Orte, User-Scan). Untertitel bleiben unberührt.
  */
-export function unloadInactiveVoicePacks(keep: KokoroVoicePackId): void {
-  for (const id of [...voiceRam.keys()]) {
-    if (id !== keep) voiceRam.delete(id);
-  }
-}
-
-export function isVoicePackInRam(packId: KokoroVoicePackId): boolean {
-  return voiceRam.has(packId);
-}
-
-/** Martin-ONNX-Session öffnen/halten (Assets + InferenceSession). */
-export async function ensureMartinOrtSession(): Promise<void> {
-  await ensureKokoroAssets();
-  await getSession('martin');
-}
-
-/** Markiert Engine bereit, nachdem aktive Stimme im RAM liegt. */
-export function markKokoroWarmedUp(): void {
-  warmedUp = true;
-  useFinnusStore.getState().setKokoroReady(true);
-  useFinnusStore.getState().setKokoroStatusMessage(null);
-  useFinnusStore.getState().setKokoroDownloadLabel(null);
-}
-
-/** Disk-Prefetch aller Basis-Packs (ohne RAM) — für spätere Stimmwechsel. */
-async function ensureAllBaseVoicePacksOnDisk(): Promise<void> {
-  await Promise.all(
-    BASE_VOICE_PACK_IDS.map(async (id) => {
-      try {
-        await ensureVoicePack(id);
-      } catch (err) {
-        console.warn(`[voice] Disk-ensure ${id}:`, err);
-      }
-    }),
-  );
-}
-
-async function getSession(modelId: KokoroModelId = 'martin'): Promise<OrtSession> {
-  let resolvedId: KokoroModelId = modelId;
-  if (modelId === 'victoria' && !(await modelFileReady('victoria'))) {
-    resolvedId = 'martin';
-  }
-  if (modelId === 'english') {
-    const okEn = await ensureModel('english');
-    if (!okEn) throw new Error('[voice] English Kokoro-ONNX nicht verfügbar');
-    resolvedId = 'english';
-  }
-
-  const cached = ortSessions[resolvedId];
-  if (cached) return cached;
-
-  const ort = await getOrt();
-  if (!ort) throw new Error('[voice] onnxruntime-react-native nicht verfügbar');
-  const ok = await ensureModel(resolvedId);
-  if (!ok) throw new Error(`[voice] Modell ${resolvedId} nicht verfügbar`);
-
-  const path = modelPathFor(resolvedId);
-  const info = await FileSystem.getInfoAsync(path);
-  const usePath =
-    info.exists && (info.size ?? 0) > 1_000_000
-      ? path
-      : resolvedId === 'english'
-        ? path
-        : MODEL_PATH_MARTIN;
-
-  const session = await ort.InferenceSession.create(usePath, {
-    executionProviders: ['cpu'],
-  });
-  ortSessions[resolvedId] = session;
-  return session;
-}
-
-async function modelFileReady(modelId: KokoroModelId): Promise<boolean> {
-  const info = await FileSystem.getInfoAsync(modelPathFor(modelId));
-  return Boolean(info.exists && (info.size ?? 0) > 1_000_000);
-}
-
-function pickStyle(styles: Float32Array, tokenLen: number): Float32Array {
-  const index = Math.min(Math.max(tokenLen, 0), STYLE_FRAMES - 1);
-  return styles.subarray(index * STYLE_DIM, index * STYLE_DIM + STYLE_DIM);
-}
-
-const IPA_G = '\u0261'; // Kokoro ɡ
-
-/** Deutsche Wörter auf -ing — nicht anglisieren. */
-const EN_ING_DENY = new Set([
-  'ding',
-  'ring',
-  'spring',
-  'hing',
-  'ging',
-  'fing',
-  'bring',
-  'kling',
-  'schwing',
-  'zwing',
-  'dring',
-  'sing', // dt. Imperativ / EN-Homograph — lieber espeak
-]);
-
-function escapePronunciationRegExp(s: string): string {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-/** Grobe EN-Stamm-IPA für Suffix-Heuristik (nicht Dictionary). */
-function roughEnglishStemIpa(stem: string): string {
-  let s = stem.toLowerCase();
-  for (const [re, rep] of [
-    [/tion$/g, 'ʃən'],
-    [/sion$/g, 'ʒən'],
-    [/ture$/g, 'tʃə'],
-    [/igh/g, 'aɪ'],
-    [/ee|ea/g, 'iː'],
-    [/oo/g, 'uː'],
-    [/ou|ow/g, 'aʊ'],
-    [/ai|ay/g, 'eɪ'],
-    [/oi|oy/g, 'ɔɪ'],
-    [/ch/g, 'tʃ'],
-    [/sh/g, 'ʃ'],
-    [/th/g, 'θ'],
-    [/ph/g, 'f'],
-    [/ck/g, 'k'],
-    [/qu/g, 'kw'],
-    [/x/g, 'ks'],
-    [/c(?=[eiy])/g, 's'],
-    [/c/g, 'k'],
-    [/g(?=[eiy])/g, 'dʒ'],
-    [/j/g, 'dʒ'],
-  ] as Array<[RegExp, string]>) {
-    s = s.replace(re, rep);
-  }
-  return s.replace(/g/g, IPA_G);
+export function applyVoicePronunciation(text: string): string {
+  let t = text.normalize('NFKC');
+  if (!t) return '';
+  ensurePhoneticEngineSync();
+  // 1) Orte / User-Custom
+  t = transformMultilingualTerms(t);
+  // 2) Kuratiertes EN-Ortho (vibe→Vaib, guide→Geid, Bus→Buss …) gewinnt
+  t = applyEnglishOrthoPronunciations(t);
+  return t;
 }
 
 /**
- * Pre-Processing vor der Inferenz (3-Tier-bewusst):
- * 1) Englische Suffix-Heuristik (-ing/-guide/-check/-point) wenn nicht in Stadt/JSON
- * 2) Stadt-Map (Stufe 1) + pronunciations.json (Stufe 2) → IPA-Marker `⟦...⟧`
- * Stufe 3 (espeak) folgt in phonemizeWithPronunciationMap für Rest-Text.
+ * Audio für Piper — zwei Stufen nach Display-Basis:
+ * A) Aussprache nur für problematische Fremdwörter
+ * B) Prosodie: Emotion, Pausen, Spannung (Satzzeichen)
  */
-export function applyPronunciationFixes(
-  text: string,
-  cityMap: Map<string, string> = new Map(),
-): string {
-  let working = text.normalize('NFKC');
-  const global = getPronunciationCache();
-
-  const preserved: string[] = [];
-  working = working.replace(/⟦([^⟧]+)⟧/g, (_, ipa: string) => {
-    const idx = preserved.length;
-    preserved.push(String(ipa).trim());
-    return `\uE000${idx}\uE001`;
-  });
-
-  const known = (word: string) =>
-    cityMap.has(word.toLowerCase()) || global.has(word.toLowerCase());
-
-  // Suffixe nur wenn weder Stadt noch JSON greifen
-  working = working.replace(
-    /\b([A-Za-z][A-Za-z'-]*?)(guide|check|point)\b/gi,
-    (match, stem: string, suffix: string) => {
-      if (known(match)) return match;
-      const suf = suffix.toLowerCase();
-      const suffixIpa =
-        suf === 'guide' ? `${IPA_G}aɪd` : suf === 'check' ? 'tʃɛk' : 'pɔɪnt';
-      const stemPart = stem.replace(/[-']+$/g, '');
-      const stemIpa = stemPart ? roughEnglishStemIpa(stemPart) : '';
-      return `⟦${stemIpa}${stemIpa ? ' ' : ''}${suffixIpa}⟧`;
-    },
-  );
-
-  working = working.replace(/\b([A-Za-z]{2,}?)ing\b/gi, (match, stem: string) => {
-    const lower = match.toLowerCase();
-    if (EN_ING_DENY.has(lower) || known(lower)) return match;
-    if (/[äöüß]/i.test(match)) return match;
-    return `⟦${roughEnglishStemIpa(stem)}ɪŋ⟧`;
-  });
-
-  // Stufe 1+2: Phrasen (Stadt, dann Global), längste zuerst
-  const cityPhrases = [...cityMap.keys()]
-    .filter((k) => k.includes(' '))
-    .sort((a, b) => b.length - a.length);
-  const globalPhrases = getGlobalPhraseKeys().filter((k) => !cityMap.has(k));
-
-  for (const phrase of cityPhrases) {
-    if (!working.toLowerCase().includes(phrase)) continue;
-    const ipa = cityMap.get(phrase);
-    if (!ipa) continue;
-    const re = new RegExp(`\\b${escapePronunciationRegExp(phrase)}\\b`, 'gi');
-    working = working.replace(
-      re,
-      isOrthoPronunciation(ipa) ? ipa : `⟦${ipa}⟧`,
-    );
-  }
-  for (const phrase of globalPhrases) {
-    if (!working.toLowerCase().includes(phrase)) continue;
-    const ipa = global.get(phrase);
-    if (!ipa) continue;
-    const re = new RegExp(`\\b${escapePronunciationRegExp(phrase)}\\b`, 'gi');
-    working = working.replace(
-      re,
-      isOrthoPronunciation(ipa) ? ipa : `⟦${ipa}⟧`,
-    );
-  }
-
-  // Einzelwörter O(1) Map-Lookup
-  working = working.replace(
-    /[A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß''-]*/g,
-    (word) => {
-      const hit = lookupPronunciationTier(word, cityMap);
-      if (!hit) return word;
-      // Ortho-Hints (Feerwäy, Hoff) → Text für eSpeak, kein IPA-Marker
-      if (isOrthoPronunciation(hit.ipa)) {
-        if (word[0] === word[0].toUpperCase()) {
-          return hit.ipa.charAt(0).toUpperCase() + hit.ipa.slice(1);
-        }
-        return hit.ipa.charAt(0).toLowerCase() + hit.ipa.slice(1);
-      }
-      return `⟦${hit.ipa}⟧`;
-    },
-  );
-
-  working = working.replace(/\uE000(\d+)\uE001/g, (_, n: string) => {
-    return `⟦${preserved[Number(n)] ?? ''}⟧`;
-  });
-
-  return working;
+export function prepareAudioText(text: string): string {
+  let t = prepareDisplayText(text);
+  if (!t) return '';
+  t = applyVoicePronunciation(t);
+  t = applyPiperProsody(t);
+  return t;
 }
 
-async function textToTokens(text: string): Promise<BigInt64Array> {
-  const normalized = text.normalize('NFKC').replace(/\s+/g, ' ').trim();
-  const cityId = getCachedUserProfile()?.cityId ?? null;
-
-  // Boot-Cache sicherstellen, dann strikt 3-Tier
-  await loadPronunciationDictionary();
-  const cityMap = await getCityPronunciationMap(cityId);
-
-  const preprocessed = applyPronunciationFixes(
-    normalizeGermanTtsText(normalized),
-    cityMap,
-  );
-  // phonemize: Stufe 1+2 bereits markiert; Rest → espeak (Stufe 3)
-  const phonemes = await phonemizeWithPronunciationMap(
-    preprocessed,
-    (segment) => phonemizeGermanAsync(segment),
-    cityMap,
-  );
-  if (__DEV__) {
-    console.log(
-      `[tts/g2p] 3-tier city=${cityId ?? '—'} json=${getPronunciationCache().size} cityEntries=${cityMap.size} (${phonemes.length}): ${phonemes.slice(0, 120)}`,
-    );
-  }
-  const capped = phonemes.slice(0, 480);
-  const ids: number[] = [0];
-  for (const ch of capped) {
-    const id = tokenIdForPhoneme(ch);
-    if (id !== undefined) ids.push(id);
-    else if (ch === ' ') ids.push(16);
-  }
-  ids.push(0);
-  return BigInt64Array.from(ids.map((n) => BigInt(n)));
+/** @deprecated Alias */
+export function applyPronunciationFixes(text: string): string {
+  return prepareAudioText(text);
 }
 
-function encodeWav(pcm: Float32Array, sampleRate: number): Uint8Array {
-  const numChannels = 1;
-  const bitsPerSample = 16;
-  const blockAlign = (numChannels * bitsPerSample) / 8;
-  const byteRate = sampleRate * blockAlign;
-  const dataSize = pcm.length * 2;
+function floatTo16BitPCM(float32: Float32Array): Int16Array {
+  const out = new Int16Array(float32.length);
+  for (let i = 0; i < float32.length; i++) {
+    const s = Math.max(-1, Math.min(1, float32[i]));
+    out[i] = s < 0 ? s * 0x8000 : s * 0x7fff;
+  }
+  return out;
+}
+
+function pcmToWavBytes(
+  pcm: Float32Array,
+  sampleRate: number,
+): Uint8Array {
+  const samples = floatTo16BitPCM(pcm);
+  const dataSize = samples.length * 2;
   const buffer = new ArrayBuffer(44 + dataSize);
   const view = new DataView(buffer);
   const writeStr = (offset: number, str: string) => {
@@ -1039,128 +287,369 @@ function encodeWav(pcm: Float32Array, sampleRate: number): Uint8Array {
   writeStr(12, 'fmt ');
   view.setUint32(16, 16, true);
   view.setUint16(20, 1, true);
-  view.setUint16(22, numChannels, true);
+  view.setUint16(22, 1, true);
   view.setUint32(24, sampleRate, true);
-  view.setUint32(28, byteRate, true);
-  view.setUint16(32, blockAlign, true);
-  view.setUint16(34, bitsPerSample, true);
+  view.setUint32(28, sampleRate * 2, true);
+  view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true);
   writeStr(36, 'data');
   view.setUint32(40, dataSize, true);
-  let offset = 44;
-  for (let i = 0; i < pcm.length; i++) {
-    const s = Math.max(-1, Math.min(1, pcm[i]));
-    view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7fff, true);
-    offset += 2;
+  const bytes = new Uint8Array(buffer);
+  bytes.set(new Uint8Array(samples.buffer), 44);
+  return bytes;
+}
+
+async function ensureAudioCacheDir(): Promise<void> {
+  const info = await FileSystem.getInfoAsync(AUDIO_CACHE_DIR);
+  if (!info.exists) {
+    await FileSystem.makeDirectoryAsync(AUDIO_CACHE_DIR, { intermediates: true });
   }
-  return new Uint8Array(buffer);
+}
+
+async function writeWavBytesToTemp(wavBytes: Uint8Array): Promise<string> {
+  await ensureAudioCacheDir();
+  const uri = `${AUDIO_CACHE_DIR}t_${Date.now()}_${Math.random().toString(36).slice(2, 8)}.wav`;
+  // expo-file-system expects base64 for binary
+  let binary = '';
+  const chunk = 0x8000;
+  for (let i = 0; i < wavBytes.length; i += chunk) {
+    binary += String.fromCharCode(...wavBytes.subarray(i, i + chunk));
+  }
+  const base64 = globalThis.btoa(binary);
+  await FileSystem.writeAsStringAsync(uri, base64, {
+    encoding: FileSystem.EncodingType.Base64,
+  });
+  tempAudioUris.add(uri);
+  return uri;
+}
+
+async function writeTempWav(
+  pcm: Float32Array,
+  sampleRate: number,
+): Promise<string> {
+  return writeWavBytesToTemp(pcmToWavBytes(pcm, sampleRate));
+}
+
+async function cleanupTempAudio(uris?: string[]): Promise<void> {
+  const list = uris ?? [...tempAudioUris];
+  for (const uri of list) {
+    tempAudioUris.delete(uri);
+    try {
+      await FileSystem.deleteAsync(uri, { idempotent: true });
+    } catch {
+      // ignore
+    }
+  }
+}
+
+function appendSilence(
+  pcm: Float32Array,
+  sampleRate: number,
+  ms: number,
+): Float32Array {
+  const n = Math.round((sampleRate * ms) / 1000);
+  if (n <= 0) return pcm;
+  const out = new Float32Array(pcm.length + n);
+  out.set(pcm, 0);
+  return out;
+}
+
+function concatPcmParts(parts: Float32Array[]): Float32Array {
+  const total = parts.reduce((n, p) => n + p.length, 0);
+  const out = new Float32Array(total);
+  let o = 0;
+  for (const p of parts) {
+    out.set(p, o);
+    o += p.length;
+  }
+  return out;
 }
 
 /**
- * Speed systemweit unveränderbar 1.0 (kein Slider).
- * Pitch nur Playback; Prosodie über Satzzeichen / G2P-Silence.
- * Deutsche Pipeline: immer Martin-ONNX + langCode `d`.
+ * Einfacher Pitch-Shift (Resample): >1 = höher/jünger.
+ * Tempo wird etwas knackiger — passt zu Gen-Z.
  */
-function resolveSpeakOptions(options?: SpeakVoiceOptions): {
-  speed: number;
-  pitch: number;
-  voiceId: VoiceId;
-  packId: KokoroVoicePackId;
-  modelId: KokoroModelId;
-} {
-  const profile = getCachedUserProfile();
-  const voiceId = options?.voiceId ?? profile?.voiceId ?? 'standard_m';
-  const voice = getVoice(voiceId);
-  // Identisch zu Hörproben: speed/pitch fest 1.0 — nie drosseln (kein 0.88x).
-  const speed = FIXED_SPEECH_RATE;
-  const pitch = 1;
-  const packId = voice.kokoroPackId ?? resolveKokoroPackId(voiceId);
-  return {
-    speed,
-    pitch,
-    voiceId,
-    packId,
-    modelId: 'martin',
+function applyPcmPitch(pcm: Float32Array, pitch: number): Float32Array {
+  if (!Number.isFinite(pitch) || Math.abs(pitch - 1) < 0.02) return pcm;
+  const factor = Math.max(0.85, Math.min(1.35, pitch));
+  const outLen = Math.max(1, Math.floor(pcm.length / factor));
+  const out = new Float32Array(outLen);
+  for (let i = 0; i < outLen; i++) {
+    const src = i * factor;
+    const i0 = Math.floor(src);
+    const f = src - i0;
+    const a = pcm[i0] ?? 0;
+    const b = pcm[Math.min(i0 + 1, pcm.length - 1)] ?? a;
+    out[i] = a + (b - a) * f;
+  }
+  return out;
+}
+
+/** Klauseln an Komma / Doppelpunkt / Gedankenstrich — inkl. Pause-Länge danach. */
+function splitClausesForProsody(
+  text: string,
+): Array<{ clause: string; pauseAfterMs: number }> {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (!clean) return [];
+
+  const segments: Array<{ clause: string; pauseAfterMs: number }> = [];
+  let buf = '';
+
+  const flush = (pauseAfterMs: number) => {
+    const clause = buf.replace(/\s+/g, ' ').trim();
+    if (clause) segments.push({ clause, pauseAfterMs });
+    buf = '';
   };
+
+  for (let i = 0; i < clean.length; i++) {
+    const ch = clean[i];
+    const next = clean[i + 1] ?? '';
+
+    if (ch === ':' ) {
+      buf += ch;
+      flush(COLON_PAUSE_MS);
+      while (clean[i + 1] === ' ') i += 1;
+      continue;
+    }
+
+    if (ch === '–' || ch === '—') {
+      buf += ch;
+      flush(DASH_PAUSE_MS);
+      while (clean[i + 1] === ' ') i += 1;
+      continue;
+    }
+
+    // ASCII " - " als Gedankenstrich (bereits normalisiert zu –, Fallback)
+    if (ch === '-' && /\s/.test(buf.slice(-1)) && (next === ' ' || next === '')) {
+      buf = buf.trimEnd() + ' –';
+      flush(DASH_PAUSE_MS);
+      while (clean[i + 1] === ' ') i += 1;
+      continue;
+    }
+
+    if (ch === ',') {
+      buf += ch;
+      // Keine Komma-Splits unter 40 Zeichen — sonst Name/Floskeln mit Pausen
+      if (buf.trim().length >= 40) {
+        flush(COMMA_PAUSE_MS);
+        while (clean[i + 1] === ' ') i += 1;
+      }
+      continue;
+    }
+
+    buf += ch;
+  }
+
+  flush(0);
+
+  if (segments.length === 0) return [{ clause: clean, pauseAfterMs: 0 }];
+
+  // Winzige Fragmente an Nachbarn kleben (außer Pause-Träger :/–)
+  const merged: Array<{ clause: string; pauseAfterMs: number }> = [];
+  for (const seg of segments) {
+    const prev = merged[merged.length - 1];
+    if (prev && seg.clause.length < 8 && !/[:–—]$/.test(prev.clause)) {
+      prev.clause = `${prev.clause} ${seg.clause}`.replace(/\s+/g, ' ').trim();
+      prev.pauseAfterMs = Math.max(prev.pauseAfterMs, seg.pauseAfterMs);
+    } else {
+      merged.push({ ...seg });
+    }
+  }
+  return merged;
+}
+
+async function synthesizeCompleteSentencePcm(
+  text: string,
+  options?: SpeakVoiceOptions,
+): Promise<{ pcm: Float32Array; sampleRate: number }> {
+  const audio = prepareAudioText(text);
+  if (!audio) return { pcm: new Float32Array(0), sampleRate: 22050 };
+
+  const voiceId = options?.voiceId ?? getCachedUserProfile()?.voiceId;
+  const useKokoro = resolveTtsEngine(voiceId) === 'kokoro';
+  const clauses = splitClausesForProsody(audio);
+  const parts: Float32Array[] = [];
+  let sampleRate = useKokoro ? 24000 : 22050;
+  const piperLengthScale =
+    !useKokoro && voiceId
+      ? getPiperModel(resolvePiperModelId(voiceId)).lengthScale ?? 1.05
+      : 1.05;
+
+  for (let i = 0; i < clauses.length; i++) {
+    const { clause, pauseAfterMs } = clauses[i];
+    if (!clause) continue;
+    const syn = useKokoro
+      ? await synthesizeKokoroPcm(clause, {
+          voiceId: voiceId ?? 'standard_w',
+        })
+      : await synthesizePiperPcm(clause, {
+          voiceId,
+          lengthScale: piperLengthScale,
+        });
+    sampleRate = syn.sampleRate;
+    parts.push(syn.pcm);
+    if (pauseAfterMs > 0 && i < clauses.length - 1) {
+      parts.push(
+        new Float32Array(Math.round((sampleRate * pauseAfterMs) / 1000)),
+      );
+    }
+  }
+
+  let pcm = concatPcmParts(parts);
+  if (!useKokoro) {
+    const pitch = options?.pitch ?? pitchForVoice(voiceId);
+    pcm = applyPcmPitch(pcm, pitch);
+  }
+  pcm = appendSilence(
+    pcm,
+    sampleRate,
+    sentenceEndPauseMs(audio, voiceId),
+  );
+  return { pcm, sampleRate };
+}
+
+export async function ensurePiperModel(
+  modelId: PiperVoiceModelId,
+): Promise<void> {
+  await engineEnsureModel(modelId);
+}
+
+/** @deprecated */
+export async function ensureVoicePack(
+  packId: PiperVoiceModelId,
+): Promise<PiperVoiceModelId> {
+  await ensurePiperModel(packId);
+  return packId;
+}
+
+export async function loadVoiceIntoRam(
+  modelId: PiperVoiceModelId,
+): Promise<void> {
+  await ensurePiperModel(modelId);
+}
+
+export function unloadVoiceFromRam(modelId: PiperVoiceModelId): void {
+  unloadPiperModel(modelId);
+}
+
+export function unloadInactiveVoicePacks(keep: PiperVoiceModelId): void {
+  unloadInactivePiperModels(keep);
+}
+
+export function unloadInactivePiperModels(keep: PiperVoiceModelId): void {
+  engineUnloadInactive(keep);
+}
+
+export function isVoicePackInRam(modelId: PiperVoiceModelId): boolean {
+  return getActivePiperModelId() === modelId && engineReady();
+}
+
+export async function ensureMartinOrtSession(): Promise<void> {
+  await ensurePiperModel(resolvePiperModelId('standard_m'));
+}
+
+export function markPiperWarmedUp(): void {
+  warmedUp = true;
+  useFinnusStore.getState().setKokoroReady(true);
+  useFinnusStore.getState().setKokoroStatusMessage(null);
+  useFinnusStore.getState().setKokoroDownloadLabel(null);
+}
+
+/** @deprecated */
+export function markKokoroWarmedUp(): void {
+  markPiperWarmedUp();
 }
 
 export async function ensureKokoroAssets(
-  onProgress?: (msg: string) => void,
+  _onProgress?: (label: string) => void,
 ): Promise<void> {
-  onProgress?.('Stimmen-System prüfen');
-  await ensureVoiceSystemVersion();
-  onProgress?.('Modell laden');
-  await ensureModel('martin');
-  onProgress?.('Deutsche Basisstimmen laden');
-  for (const id of BASE_VOICE_PACK_IDS) {
-    try {
-      await ensureVoicePack(id);
-    } catch (err) {
-      console.warn(`[voice] ensure ${id}:`, err);
-    }
-  }
+  await warmupKokoroEngine({ voiceId: 'standard_w' });
 }
 
+export async function ensurePiperAssets(
+  onProgress?: (label: string) => void,
+): Promise<void> {
+  await warmupPiperEngine(onProgress);
+}
+
+export function isPiperReady(): boolean {
+  return warmedUp && (engineReady() || isKokoroEngineReady());
+}
+
+/** @deprecated */
 export function isKokoroReady(): boolean {
-  return warmedUp && ortSessions.martin != null && voiceRam.size > 0;
+  return isPiperReady();
 }
 
+export function isPiperLoading(): boolean {
+  return engineLoading() || warmupPromise != null;
+}
+
+/** @deprecated */
 export function isKokoroLoading(): boolean {
-  return warmupPromise != null && !warmedUp;
+  return isPiperLoading();
 }
 
-/**
- * Boot: Martin-ONNX-Session + genau eine aktive Stimme im RAM (via VoicePreloader).
- */
-export async function warmupKokoro(
-  onProgress?: (msg: string) => void,
-  options?: { voiceId?: VoiceId },
+export async function warmupPiperEngine(
+  onProgressOrOptions?:
+    | ((label: string) => void)
+    | { voiceId?: VoiceId },
+  maybeOnProgress?: (label: string) => void,
 ): Promise<void> {
-  if (warmedUp && ortSessions.martin && voiceRam.size > 0) {
+  const onProgress =
+    typeof onProgressOrOptions === 'function'
+      ? onProgressOrOptions
+      : maybeOnProgress;
+  const options =
+    typeof onProgressOrOptions === 'object' && onProgressOrOptions
+      ? onProgressOrOptions
+      : undefined;
+
+  const voiceId =
+    options?.voiceId ?? getCachedUserProfile()?.voiceId ?? 'standard_m';
+  const useKokoro = isKokoroVoice(voiceId);
+
+  if (
+    warmedUp &&
+    (useKokoro ? isKokoroEngineReady() : engineReady())
+  ) {
     useFinnusStore.getState().setKokoroReady(true);
-    if (options?.voiceId) {
-      await warmActiveVoiceInternal(options.voiceId);
-    }
+    useFinnusStore.getState().setKokoroStatusMessage(null);
+    await warmActiveVoiceInternal(voiceId);
     return;
   }
 
   if (!warmupPromise) {
     warmupPromise = (async () => {
-      onProgress?.('Deutsche Sprachausgabe vorbereiten');
-      // Kein UI-Banner — Warmup läuft unsichtbar im Hintergrund
-      useFinnusStore.getState().setKokoroDownloadLabel(null);
-      useFinnusStore.getState().setKokoroDownloadProgress(null);
-      void purgeLegacyVoiceAssets().catch(() => undefined);
-      void warmupGermanG2P();
-      void loadPronunciationDictionary().catch((err) =>
-        console.warn('[voice] Pronunciation-JSON Load:', err),
-      );
-      await ensureKokoroAssets(onProgress);
-
       try {
-        onProgress?.('Kokoro Martin + aktive Stimme in RAM laden');
-        await getSession('martin');
-        await warmActiveVoiceInternal(
-          options?.voiceId ?? getCachedUserProfile()?.voiceId ?? 'standard_m',
-        );
+        useFinnusStore.getState().setKokoroDownloadLabel(PIPER_DOWNLOAD_MSG);
+        useFinnusStore.getState().setKokoroDownloadProgress(0.2);
+        await applyTtsExclusiveAudioMode();
 
-        if (voiceRam.size === 0) {
-          throw new Error('Keine Stimme im RAM');
+        if (useKokoro) {
+          onProgress?.('Kokoro Frauenstimme laden');
+          await warmupKokoroEngine({ voiceId, onProgress });
+        } else {
+          onProgress?.('Piper DE-Stimmen laden');
+          await warmupPiper({ voiceId, onProgress });
         }
 
-        markKokoroWarmedUp();
+        await warmActiveVoiceInternal(voiceId);
+        markPiperWarmedUp();
+        useFinnusStore.getState().setKokoroDownloadProgress(1);
+        useFinnusStore.getState().setKokoroDownloadLabel(null);
+        void prefetchVoiceSamples(voiceId);
         console.log(
-          `[voice] Bereit — Martin-DE, aktive Stimme im RAM (${[...voiceRam.keys()].join(', ')})`,
-        );
-
-        // Hörproben als WAVs in cacheDirectory (Instant-Preview)
-        void prefetchVoiceSamples(
-          options?.voiceId ?? getCachedUserProfile()?.voiceId ?? 'standard_m',
+          `[voice] ${useKokoro ? 'Kokoro' : 'Piper'} bereit — ${voiceId}`,
         );
       } catch (err) {
         console.warn('[voice] Warmup fehlgeschlagen:', err);
         warmedUp = false;
+        warmupPromise = null;
         useFinnusStore.getState().setKokoroReady(false);
-        markUnavailable();
+        markUnavailable(useKokoro ? 'kokoro' : 'piper');
+      } finally {
+        useFinnusStore.getState().setKokoroDownloadProgress(null);
       }
     })().catch((err) => {
       warmupPromise = null;
@@ -1174,249 +663,50 @@ export async function warmupKokoro(
   await warmupPromise;
 }
 
+/** @deprecated */
+export async function warmupKokoro(
+  onProgressOrOptions?:
+    | ((label: string) => void)
+    | { voiceId?: VoiceId },
+  maybeOnProgress?: (label: string) => void,
+): Promise<void> {
+  return warmupPiperEngine(onProgressOrOptions, maybeOnProgress);
+}
+
 async function waitReady(timeoutMs = 60_000): Promise<boolean> {
-  if (isKokoroReady()) return true;
+  if (isPiperReady()) return true;
   const started = Date.now();
-  while (!isKokoroReady() && Date.now() - started < timeoutMs) {
-    await warmupKokoro();
-    if (isKokoroReady()) return true;
+  while (!isPiperReady() && Date.now() - started < timeoutMs) {
+    await warmupPiperEngine();
+    if (isPiperReady()) return true;
     await new Promise((r) => setTimeout(r, 300));
   }
-  return isKokoroReady();
+  return isPiperReady();
 }
 
 export async function synthesizeWav(
   text: string,
   options?: SpeakVoiceOptions,
 ): Promise<string> {
-  const pcm = await synthesizePcm(text, options);
-  return writeTempWav(pcm);
-}
+  const display = prepareDisplayText(text);
+  if (!display) throw new Error('[voice] Leerer Text');
 
-/** ONNX → Float32 PCM (ohne WAV-Header, für Queue-WAV-Schreiben). */
-async function synthesizePcm(
-  text: string,
-  options?: SpeakVoiceOptions,
-): Promise<Float32Array> {
-  const clean = text.trim();
-  if (!clean) throw new Error('[voice] Leerer Text');
-
-  const { speed, packId } = resolveSpeakOptions(options);
-  // Strikt: alle deutschen Inferenz-Aufrufe → Martin + lang `d`
-  const modelId: KokoroModelId = 'martin';
-  const langCode = germanLangCode();
-
-  return enqueueInfer(async () => {
-    const ort = await getOrt();
-    if (!ort) throw new Error('[voice] onnxruntime nicht verfügbar');
-
-    const session = await getSession(modelId);
-    const styles = await loadVoiceIntoRam(packId);
-    const tokens = await textToTokens(clean);
-    const style = pickStyle(styles, Number(tokens.length));
-
-    console.log(
-      `[voice] synth pack=${packId} model=${modelId} lang=${langCode} tokens=${tokens.length}`,
-    );
-    const feeds: Record<string, unknown> = {};
-    const inputNames = session.inputNames;
-    const tokenName =
-      inputNames.find((n) => /token/i.test(n)) ?? inputNames[0] ?? 'tokens';
-    const styleName =
-      inputNames.find((n) => /style|voice|ref/i.test(n)) ??
-      inputNames[1] ??
-      'style';
-    const speedName = inputNames.find((n) => /speed/i.test(n));
-    const langName = inputNames.find((n) => /lang/i.test(n));
-
-    feeds[tokenName] = new ort.Tensor('int64', tokens, [1, tokens.length]);
-    feeds[styleName] = new ort.Tensor('float32', style, [1, STYLE_DIM]);
-    if (speedName) {
-      feeds[speedName] = new ort.Tensor(
-        'float32',
-        Float32Array.from([speed]),
-        [1],
-      );
-    }
-    if (langName) {
-      feeds[langName] = new ort.Tensor(
-        'int64',
-        BigInt64Array.from([BigInt(langCode.charCodeAt(0))]),
-        [1],
-      );
-    }
-
-    const results = await session.run(feeds);
-    const outName =
-      session.outputNames.find((n) => /audio|waveform|output/i.test(n)) ??
-      session.outputNames[0];
-    const audioData = results[outName]?.data;
-    if (!audioData || audioData.length === 0) {
-      throw new Error('[voice] Kein Audio');
-    }
-
-    return audioData instanceof Float32Array
-      ? audioData
-      : Float32Array.from(audioData as ArrayLike<number>);
-  });
-}
-
-/**
- * Satz-Chunking (Fließband): Trennung an . ! ? ;
- * Erster Chunk kurz halten → Instant-Start.
- */
-function splitIntoInferenceChunks(text: string): string[] {
-  const normalized = text.replace(/\s+/g, ' ').trim();
-  if (!normalized) return [];
-
-  const raw = normalized
-    .split(/(?<=[.!?;])\s+/)
-    .map((p) => p.trim())
-    .filter(Boolean);
-  if (raw.length === 0) return [normalized];
-
-  // Kurze Fragmente an Vorgänger hängen (außer beim allerersten, wenn der schon lang ist)
-  const sentences: string[] = [];
-  for (const p of raw) {
-    if (
-      sentences.length > 0 &&
-      p.length < 28 &&
-      sentences[sentences.length - 1].length + p.length < 160
-    ) {
-      sentences[sentences.length - 1] = `${sentences[sentences.length - 1]} ${p}`;
-    } else {
-      sentences.push(p);
-    }
+  const parts: { pcm: Float32Array; sampleRate: number }[] = [];
+  for await (const sentence of sentencesFromFullText(display)) {
+    const audio = prepareAudioText(sentence);
+    if (!audio) continue;
+    parts.push(await synthesizeCompleteSentencePcm(audio, options));
   }
-
-  // Ersten Chunk ggf. weiter splitten an Kommas für <100ms-Feel
-  if (sentences.length > 0 && sentences[0].length > FIRST_CHUNK_MAX_CHARS) {
-    const first = sentences[0];
-    const comma = first.lastIndexOf(',', FIRST_CHUNK_MAX_CHARS);
-    const space = first.lastIndexOf(' ', FIRST_CHUNK_MAX_CHARS);
-    const cut = comma >= 40 ? comma + 1 : space >= 40 ? space : -1;
-    if (cut > 0) {
-      const head = first.slice(0, cut).trim();
-      const tail = first.slice(cut).trim();
-      if (head && tail) {
-        sentences[0] = head;
-        sentences.splice(1, 0, tail);
-      }
-    }
+  if (parts.length === 0) throw new Error('[voice] Leerer Text');
+  const sampleRate = parts[0].sampleRate;
+  const total = parts.reduce((n, p) => n + p.pcm.length, 0);
+  const merged = new Float32Array(total);
+  let o = 0;
+  for (const p of parts) {
+    merged.set(p.pcm, o);
+    o += p.pcm.length;
   }
-
-  return sentences;
-}
-
-function trimTrailingSilence(
-  pcm: Float32Array,
-  threshold = SILENCE_THRESHOLD,
-): Float32Array {
-  let end = pcm.length - 1;
-  while (end > 0 && Math.abs(pcm[end]) < threshold) end -= 1;
-  end = Math.min(pcm.length, end + 32);
-  return pcm.subarray(0, Math.max(1, end));
-}
-
-function trimLeadingSilence(
-  pcm: Float32Array,
-  threshold = SILENCE_THRESHOLD,
-): Float32Array {
-  let start = 0;
-  while (start < pcm.length && Math.abs(pcm[start]) < threshold) start += 1;
-  start = Math.max(0, start - 16);
-  return pcm.subarray(start);
-}
-
-/** Leading + trailing Silence weg (PCM ~0). */
-function trimSilence(pcm: Float32Array): Float32Array {
-  return trimTrailingSilence(trimLeadingSilence(pcm));
-}
-
-/**
- * WAV-Bytes → reine PCM-Samples (44-Byte-/fmt-Header strippen).
- * Für den Fall, dass Chunks als WAV vorliegen; Streaming-Pfad nutzt PCM direkt.
- */
-function stripWavHeaderToPcm(bytes: Uint8Array): Float32Array {
-  if (bytes.length < 44) return new Float32Array(0);
-  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
-  let offset = 12;
-  let dataOffset = 44;
-  let dataSize = bytes.length - 44;
-  while (offset + 8 <= bytes.length) {
-    const id = String.fromCharCode(
-      bytes[offset],
-      bytes[offset + 1],
-      bytes[offset + 2],
-      bytes[offset + 3],
-    );
-    const size = view.getUint32(offset + 4, true);
-    if (id === 'data') {
-      dataOffset = offset + 8;
-      dataSize = size;
-      break;
-    }
-    offset += 8 + size + (size % 2); // word-align
-  }
-  const sampleCount = Math.floor(dataSize / 2);
-  const pcm = new Float32Array(sampleCount);
-  for (let i = 0; i < sampleCount; i++) {
-    pcm[i] = view.getInt16(dataOffset + i * 2, true) / 32768;
-  }
-  return pcm;
-}
-
-/** Nahtloses PCM-Merging mit Mini-Crossfade (kein Knacken). */
-function mergePcmBuffers(parts: Float32Array[]): Float32Array {
-  const cleaned = parts
-    .map((p, i) => {
-      let x = p;
-      if (i > 0) x = trimLeadingSilence(x);
-      if (i < parts.length - 1) x = trimTrailingSilence(x);
-      return x;
-    })
-    .filter((p) => p.length > 0);
-  if (cleaned.length === 0) return new Float32Array(0);
-  if (cleaned.length === 1) return cleaned[0];
-
-  let acc = cleaned[0];
-  for (let i = 1; i < cleaned.length; i++) {
-    acc = crossfadeJoin(acc, cleaned[i], MERGE_CROSSFADE);
-  }
-  return acc;
-}
-
-function crossfadeJoin(
-  a: Float32Array,
-  b: Float32Array,
-  fade: number,
-): Float32Array {
-  const fadeN = Math.min(fade, a.length, b.length);
-  if (fadeN <= 0) {
-    const out = new Float32Array(a.length + b.length);
-    out.set(a, 0);
-    out.set(b, a.length);
-    return out;
-  }
-  const out = new Float32Array(a.length + b.length - fadeN);
-  out.set(a.subarray(0, a.length - fadeN), 0);
-  for (let i = 0; i < fadeN; i++) {
-    const t = i / fadeN;
-    out[a.length - fadeN + i] =
-      a[a.length - fadeN + i] * (1 - t) + b[i] * t;
-  }
-  out.set(b.subarray(fadeN), a.length);
-  return out;
-}
-
-async function writeTempWav(pcm: Float32Array): Promise<string> {
-  await ensureDir();
-  const wavBytes = encodeWav(pcm, SAMPLE_RATE);
-  const wavPath = `${AUDIO_CACHE_DIR}gapless-${Date.now()}-${Math.random().toString(36).slice(2, 8)}.wav`;
-  await FileSystem.writeAsStringAsync(wavPath, bytesToBase64(wavBytes), {
-    encoding: FileSystem.EncodingType.Base64,
-  });
-  return trackTempAudio(wavPath);
+  return writeTempWav(merged, sampleRate);
 }
 
 async function playWav(
@@ -1428,44 +718,28 @@ async function playWav(
   },
 ): Promise<void> {
   const gen = playbackGeneration;
-  await Audio.setAudioModeAsync({
-    playsInSilentModeIOS: true,
-    allowsRecordingIOS: false,
-    staysActiveInBackground: false,
-  });
-
-  if (sound) {
-    try {
-      await sound.stopAsync();
-      await sound.unloadAsync();
-    } catch {
-      // ignore
-    }
-    sound = null;
-  }
-
-  if (gen !== playbackGeneration) return;
-
-  const playbackRate = clampSpeechRate(options.playbackRate ?? 1);
-  const { sound: created } = await Audio.Sound.createAsync(
-    { uri },
-    {
-      shouldPlay: true,
-      rate: playbackRate,
-      shouldCorrectPitch: false,
-    },
-  );
-  sound = created;
-
   try {
+    if (sound) {
+      try {
+        await sound.stopAsync();
+        await sound.unloadAsync();
+      } catch {
+        // ignore
+      }
+      sound = null;
+    }
+    const { sound: created } = await Audio.Sound.createAsync(
+      { uri },
+      { shouldPlay: true, rate: options.playbackRate ?? 1, shouldCorrectPitch: true },
+    );
+    sound = created;
     await new Promise<void>((resolve, reject) => {
       const tick = setInterval(() => {
         if (gen !== playbackGeneration) {
           clearInterval(tick);
           resolve();
         }
-      }, 80);
-
+      }, 200);
       created.setOnPlaybackStatusUpdate((status) => {
         if (!status.isLoaded) {
           if ('error' in status && status.error) {
@@ -1491,7 +765,7 @@ async function playWav(
   }
 }
 
-export async function stopKokoroPlayback(): Promise<void> {
+export async function stopPiperPlayback(): Promise<void> {
   playbackGeneration += 1;
   if (sound) {
     try {
@@ -1504,17 +778,27 @@ export async function stopKokoroPlayback(): Promise<void> {
   }
   useFinnusStore.getState().setIsPlayingAudio(false);
   useFinnusStore.getState().setSubtitleText(null);
+  activeTtsSessions = Math.max(0, activeTtsSessions - 1);
   void cleanupTempAudio();
+  void restoreAmbientAudioMode();
+}
+
+/** @deprecated */
+export async function stopKokoroPlayback(): Promise<void> {
+  return stopPiperPlayback();
 }
 
 export async function stopSpeaking(): Promise<void> {
-  return stopKokoroPlayback();
+  return stopPiperPlayback();
 }
 
-/**
- * Producer-Consumer: Chunks aus AsyncIterable/Array → Queue → Playback.
- * Erster Satz startet Audio sofort, Rest läuft parallel nach.
- */
+function resolveActiveTtsProvider(): TtsProvider {
+  const fromStore = useFinnusStore.getState().ttsProvider;
+  if (fromStore === 'kokoro' || fromStore === 'openai') return fromStore;
+  const fromProfile = getCachedUserProfile()?.ttsProvider;
+  return fromProfile === 'kokoro' ? 'kokoro' : 'openai';
+}
+
 async function speakChunkSource(
   source: AsyncIterable<string> | string[],
   voiceOptions?: SpeakVoiceOptions,
@@ -1534,20 +818,35 @@ async function speakChunkSource(
   }
 
   const store = useFinnusStore.getState();
-  if (!isKokoroReady()) {
-    const ready = await waitReady();
-    if (!ready) {
-      markUnavailable();
-      throw new Error(KOKORO_UNAVAILABLE_MSG);
-    }
+  const ttsProvider = resolveActiveTtsProvider();
+  const useOpenAi = ttsProvider === 'openai' && hasOpenAiTtsKey();
+  if (ttsProvider === 'openai' && !hasOpenAiTtsKey()) {
+    console.warn(
+      '[voice] ttsProvider=openai, aber kein OpenAI-Key — Fallback auf lokale TTS',
+    );
   }
 
-  await stopKokoroPlayback();
-  const gen = playbackGeneration;
-  const { pitch } = resolveSpeakOptions(effective);
-  const sessionTemps: string[] = [];
+  if (!useOpenAi) {
+    if (!isPiperReady()) {
+      const ready = await waitReady();
+      if (!ready) {
+        markUnavailable();
+        throw new Error(PIPER_UNAVAILABLE_MSG);
+      }
+    } else {
+      store.setKokoroStatusMessage(null);
+    }
+  } else {
+    store.setKokoroStatusMessage(null);
+    store.setKokoroReady(true);
+  }
 
-  const audioQueue = createAudioPlayQueue(AUDIO_QUEUE_LOOKAHEAD);
+  await stopPiperPlayback();
+  const gen = playbackGeneration;
+  const sessionTemps: string[] = [];
+  // Vorlauf: während Satz N spielt, TTS für N+1 und N+2 schon fertig machen
+  const LOOKAHEAD = useOpenAi ? 2 : 2;
+  const audioQueue = createAudioPlayQueue(LOOKAHEAD);
   let firstSubtitleSet = false;
 
   const iterate: AsyncIterable<string> = Array.isArray(source)
@@ -1556,32 +855,87 @@ async function speakChunkSource(
       })()
     : source;
 
+  /**
+   * Kurze Sätze mergen (nicht die ganze Story) → schneller Start,
+   * weniger API-Gaps als Einzelsätze.
+   */
+  async function* mergedChunks(): AsyncGenerator<string, void, unknown> {
+    const TARGET = useOpenAi ? 280 : 220;
+    const FIRST_TARGET = useOpenAi ? 120 : 90;
+    let buf = '';
+    let isFirst = true;
+    for await (const raw of iterate) {
+      const t = prepareDisplayText(raw);
+      if (!t) continue;
+      const limit = isFirst ? FIRST_TARGET : TARGET;
+      if (!buf) {
+        buf = t;
+        continue;
+      }
+      if (`${buf} ${t}`.length <= limit) {
+        buf = `${buf} ${t}`;
+      } else {
+        yield buf;
+        buf = t;
+        isFirst = false;
+      }
+    }
+    if (buf) yield buf;
+  }
+
   store.setIsPlayingAudio(true);
+  activeTtsSessions += 1;
+  await applyTtsExclusiveAudioMode();
 
   const producer = (async () => {
     try {
       let i = 0;
-      for await (const rawChunk of iterate) {
+      for await (const display of mergedChunks()) {
         if (gen !== playbackGeneration) return;
-        // UI: Original-Wörter (Fairway, Hof). Audio: Ortho/Hints für eSpeak.
-        const display = prepareDisplayText(rawChunk);
-        if (!display) continue;
-        const audio = prepareAudioText(rawChunk);
+        const audio = prepareAudioText(display);
+        if (!audio) continue;
         if (!firstSubtitleSet) {
           store.setSubtitleText(display);
           firstSubtitleSet = true;
         }
+
+        // Slot frei? Sonst warten — Consumer spielt und gibt Platz frei
         await audioQueue.waitForSlot();
         if (gen !== playbackGeneration) return;
+
         const t0 = Date.now();
-        const pcm = await synthesizePcm(audio, effective);
-        if (gen !== playbackGeneration) return;
-        const uri = await writeTempWav(trimSilence(pcm));
-        sessionTemps.push(uri);
-        if (gen !== playbackGeneration) return;
-        audioQueue.push({ uri, text: display });
-        if (__DEV__) {
-          console.log(`[voice] queue+ sentence ${++i} ${Date.now() - t0}ms`);
+
+        if (useOpenAi) {
+          const mp3Uri = await synthesizeOpenAiSpeechMp3(audio);
+          if (gen !== playbackGeneration) {
+            await deleteOpenAiTempAudio(mp3Uri);
+            return;
+          }
+          audioQueue.push({
+            wavBytes: new Uint8Array(0),
+            text: display,
+            openAiUri: mp3Uri,
+          });
+          if (__DEV__) {
+            console.log(
+              `[voice] openai queue-ready #${++i} ${Date.now() - t0}ms (${display.length}c) q=${audioQueue.size}`,
+            );
+          }
+        } else {
+          const { pcm, sampleRate } = await synthesizeCompleteSentencePcm(
+            audio,
+            effective,
+          );
+          const wavBytes = pcmToWavBytes(pcm, sampleRate);
+          if (gen !== playbackGeneration) return;
+
+          audioQueue.push({ wavBytes, text: display });
+
+          if (__DEV__) {
+            console.log(
+              `[voice] piper queue-ready #${++i} ${Date.now() - t0}ms (${wavBytes.length}B) q=${audioQueue.size}`,
+            );
+          }
         }
       }
     } catch (err) {
@@ -1595,64 +949,85 @@ async function speakChunkSource(
     while (gen === playbackGeneration) {
       const item = await audioQueue.take();
       if (!item) break;
-
       store.setSubtitleText(item.text);
-      await playWav(item.uri, {
+      let uri: string;
+      if (item.openAiUri) {
+        uri = item.openAiUri;
+      } else {
+        uri = await writeWavBytesToTemp(item.wavBytes);
+      }
+      sessionTemps.push(uri);
+      await playWav(uri, {
         clearPlayingOnEnd: false,
-        playbackRate: pitch,
+        playbackRate: 1,
         deleteAfter: false,
       });
     }
   } finally {
     await producer.catch(() => undefined);
+    activeTtsSessions = Math.max(0, activeTtsSessions - 1);
+    if (gen === playbackGeneration) {
+      store.setIsPlayingAudio(false);
+      store.setSubtitleText(null);
+      await restoreAmbientAudioMode();
+    }
   }
 
-  if (gen === playbackGeneration) {
-    store.setIsPlayingAudio(false);
-    store.setSubtitleText(null);
-  }
   await cleanupTempAudio(sessionTemps);
 }
 
-export async function speakWithKokoro(
+export async function speakWithPiper(
   text: string,
   voiceOptions?: SpeakVoiceOptions,
 ): Promise<void> {
   const display = prepareDisplayText(text);
   if (!display) return;
-
-  void warmupKokoro();
-
+  const useOpenAi =
+    resolveActiveTtsProvider() === 'openai' && hasOpenAiTtsKey();
+  if (!useOpenAi) {
+    void warmupPiperEngine({ voiceId: voiceOptions?.voiceId });
+  }
   try {
-    // Chunks am Display-Text; speakChunkSource macht Audio-Ortho separat
-    const chunks = splitIntoInferenceChunks(display);
-    if (chunks.length === 0) return;
-    await speakChunkSource(chunks, voiceOptions);
+    await speakChunkSource(sentencesFromFullText(display), voiceOptions);
   } catch (error) {
-    console.warn('[voice] Inferenz fehlgeschlagen:', error);
+    console.warn('[voice] TTS-Inferenz fehlgeschlagen:', error);
     useFinnusStore.getState().setIsPlayingAudio(false);
     useFinnusStore.getState().setSubtitleText(null);
-    markUnavailable();
+    if (!useOpenAi && (isModelUnavailableError(error) || !isPiperReady())) {
+      markUnavailable(
+        isKokoroVoice(voiceOptions?.voiceId) ? 'kokoro' : 'piper',
+      );
+    }
     throw error;
   }
 }
 
-/**
- * LLM→TTS: Sätze aus AsyncIterable sofort in die Producer-Queue.
- * Satz 1 startet Audio, während weitere Sätze noch generiert werden.
- */
+/** @deprecated */
+export async function speakWithKokoro(
+  text: string,
+  voiceOptions?: SpeakVoiceOptions,
+): Promise<void> {
+  return speakWithPiper(text, voiceOptions);
+}
+
 export async function speakSentenceStream(
   sentences: AsyncIterable<string>,
   voiceOptions?: SpeakVoiceOptions,
 ): Promise<void> {
-  void warmupKokoro();
+  const useOpenAi =
+    resolveActiveTtsProvider() === 'openai' && hasOpenAiTtsKey();
+  if (!useOpenAi) {
+    void warmupPiperEngine();
+  }
   try {
     await speakChunkSource(sentences, voiceOptions);
   } catch (error) {
     console.warn('[voice] Sentence-Stream fehlgeschlagen:', error);
     useFinnusStore.getState().setIsPlayingAudio(false);
     useFinnusStore.getState().setSubtitleText(null);
-    markUnavailable();
+    if (!useOpenAi && (isModelUnavailableError(error) || !isPiperReady())) {
+      markUnavailable();
+    }
     throw error;
   }
 }
@@ -1661,36 +1036,56 @@ export async function speakAssistantText(
   text: string,
   voiceOptions?: SpeakVoiceOptions,
 ): Promise<void> {
-  await speakWithKokoro(text.trim(), voiceOptions);
+  await speakWithPiper(text.trim(), voiceOptions);
 }
 
+/**
+ * Fast-Hook Two-Phase: Intro sofort via Piper, Body als Satz-Queue parallel.
+ */
 export async function speakTwoPhase(options: {
   introText: string;
-  /** Volltext wenn fertig (Legacy). */
   bodyTextPromise?: Promise<string>;
-  /** Bevorzugt: Satz-Stream vom LLM — Start bei erstem ., ! oder ?. */
   bodySentenceStream?: AsyncIterable<string>;
   voice?: SpeakVoiceOptions;
 }): Promise<void> {
-  const intro = options.introText.trim();
+  let intro = options.introText.trim();
   let genAfterIntro = playbackGeneration;
 
+  // Intro endet auf Initiale („… C.“) → ersten Body-Satz ankleben, sonst Name-Riss
+  let bodyStream = options.bodySentenceStream;
+  if (bodyStream && /(?:^|[\s(])[A-ZÄÖÜ]\.$/.test(intro)) {
+    const iter = bodyStream[Symbol.asyncIterator]();
+    const first = await iter.next();
+    if (!first.done && first.value) {
+      intro = `${intro} ${String(first.value).trim()}`.replace(/\s+/g, ' ');
+    }
+    async function* rest(): AsyncGenerator<string, void, unknown> {
+      while (true) {
+        const n = await iter.next();
+        if (n.done) break;
+        const t = String(n.value ?? '').trim();
+        if (t) yield t;
+      }
+    }
+    bodyStream = rest();
+  }
+
   if (intro) {
-    await speakWithKokoro(intro, options.voice);
+    await speakWithPiper(intro, options.voice);
     genAfterIntro = playbackGeneration;
   }
 
   if (playbackGeneration !== genAfterIntro) return;
 
-  if (options.bodySentenceStream) {
-    await speakSentenceStream(options.bodySentenceStream, options.voice);
+  if (bodyStream) {
+    await speakSentenceStream(bodyStream, options.voice);
     return;
   }
 
   if (options.bodyTextPromise) {
     const body = (await options.bodyTextPromise).trim();
     if (playbackGeneration !== genAfterIntro) return;
-    if (body) await speakWithKokoro(body, options.voice);
+    if (body) await speakWithPiper(body, options.voice);
   }
 }
 
@@ -1701,331 +1096,212 @@ export async function playVoiceSample(options: {
   const voiceId = options.voiceId;
   const voice = getVoice(voiceId);
 
-  await stopKokoroPlayback();
+  await stopPiperPlayback();
   const gen = playbackGeneration;
   const store = useFinnusStore.getState();
 
   const moduleId = VOICE_SAMPLE_MODULES[voiceId];
-  if (moduleId) {
+  if (moduleId != null) {
     const uri = await resolveBundledAssetUri(moduleId);
     if (uri && gen === playbackGeneration) {
       store.setIsPlayingAudio(true);
       store.setSubtitleText(voice.sample);
-      await playWav(uri, {
-        clearPlayingOnEnd: true,
-        playbackRate: 1,
-        deleteAfter: false,
-      });
+      try {
+        await playWav(uri, {
+          clearPlayingOnEnd: true,
+          playbackRate: 1,
+          deleteAfter: false,
+        });
+      } finally {
+        if (gen === playbackGeneration) {
+          store.setIsPlayingAudio(false);
+          store.setSubtitleText(null);
+        }
+      }
       return;
     }
   }
 
-  const speechRate = FIXED_SPEECH_RATE;
-  const { pitch } = resolveSpeakOptions({ voiceId, speechRate });
-
-  await warmupKokoro();
-  if (!isKokoroReady()) {
-    const ready = await waitReady(60_000);
-    if (!ready) {
-      markUnavailable();
-      throw new Error(KOKORO_UNAVAILABLE_MSG);
-    }
+  // Fallback: live Synth (Piper oder Kokoro)
+  await warmupPiperEngine({ voiceId });
+  if (!isPiperReady()) {
+    markUnavailable(isKokoroVoice(voiceId) ? 'kokoro' : 'piper');
+    return;
   }
-  if (gen !== playbackGeneration) return;
-
-  store.setIsPlayingAudio(true);
-  store.setSubtitleText(voice.sample);
-
-  try {
-    const uri = await synthesizeWav(voice.sample, { voiceId, speechRate });
-    if (gen !== playbackGeneration) return;
-    await playWav(uri, { clearPlayingOnEnd: true, playbackRate: pitch });
-  } catch (error) {
-    console.warn('[voice] Hörprobe fehlgeschlagen:', error);
-    if (gen === playbackGeneration) {
-      store.setIsPlayingAudio(false);
-      store.setSubtitleText(null);
-    }
-    throw error;
-  }
-}
-
-function sampleCachePath(voiceId: VoiceId): string {
-  return `${SAMPLE_DIR}${sampleCacheKey(voiceId)}.wav`;
-}
-
-async function persistSampleWav(
-  voiceId: VoiceId,
-  fromUri: string,
-): Promise<void> {
-  try {
-    await ensureDir();
-    const dest = sampleCachePath(voiceId);
-    const existing = await FileSystem.getInfoAsync(dest);
-    if (existing.exists) {
-      await FileSystem.deleteAsync(dest, { idempotent: true });
-    }
-    await FileSystem.copyAsync({ from: fromUri, to: dest });
-    sampleReadyKeys.add(sampleCacheKey(voiceId));
-  } catch (err) {
-    console.warn('[voice] Sample speichern:', err);
-  }
-}
-
-async function tryPlayCachedSample(
-  voiceId: VoiceId,
-  pitch: number,
-  gen: number,
-): Promise<boolean> {
-  const path = sampleCachePath(voiceId);
-  try {
-    const info = await FileSystem.getInfoAsync(path);
-    if (!info.exists || (info.size ?? 0) < 1000) return false;
-    if (gen !== playbackGeneration) return true;
-    const store = useFinnusStore.getState();
-    store.setIsPlayingAudio(true);
-    store.setSubtitleText(getVoice(voiceId).sample);
-    sampleReadyKeys.add(sampleCacheKey(voiceId));
-    await playWav(path, {
-      clearPlayingOnEnd: true,
-      playbackRate: pitch,
-      deleteAfter: false,
-    });
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-async function ensureSampleCached(voiceId: VoiceId): Promise<void> {
-  const key = sampleCacheKey(voiceId);
-  if (sampleReadyKeys.has(key)) return;
-  const path = sampleCachePath(voiceId);
-  try {
-    const info = await FileSystem.getInfoAsync(path);
-    if (info.exists && (info.size ?? 0) > 1000) {
-      sampleReadyKeys.add(key);
-      return;
-    }
-  } catch {
-    // synth below
-  }
-  if (!isKokoroReady()) return;
-  try {
-    const voice = getVoice(voiceId);
-    const uri = await synthesizeWav(voice.sample, {
-      voiceId,
-      speechRate: FIXED_SPEECH_RATE,
-    });
-    await persistSampleWav(voiceId, uri);
-  } catch (err) {
-    console.warn(`[voice] Sample-Prefetch ${key}:`, err);
-  }
-}
-
-async function tryPlayBundledIntro(fullText: string): Promise<boolean> {
-  try {
-    const uri = await resolveBundledAssetUri(INTRO_WAV_MODULE);
-    if (!uri) return false;
-    await stopKokoroPlayback();
-    const store = useFinnusStore.getState();
-    store.setIsPlayingAudio(true);
-    store.setSubtitleText(fullText);
-    await playWav(uri, { clearPlayingOnEnd: true, deleteAfter: false });
-    return true;
-  } catch (err) {
-    console.warn('[voice] Bundled Intro abspielen:', err);
-    return false;
-  }
+  await speakWithPiper(voice.sample, { voiceId });
 }
 
 export async function speakOnboardingIntro(options: {
-  fullText: string;
+  fullText?: string;
+  fullWelcomeDe?: string;
 }): Promise<void> {
-  const fullText = options.fullText.trim();
-  if (!fullText) return;
-  if (await tryPlayBundledIntro(fullText)) return;
-  void warmupKokoro();
-  await speakWithKokoro(fullText, INTRO_VOICE);
+  await stopPiperPlayback();
+  const store = useFinnusStore.getState();
+
+  // Metro-Intro-WAV hat Vorrang (vorgerendert mit Piper)
+  const uri = await resolveBundledAssetUri(INTRO_WAV_MODULE);
+  if (uri) {
+    store.setIsPlayingAudio(true);
+    try {
+      await playWav(uri, {
+        clearPlayingOnEnd: true,
+        playbackRate: 1,
+      });
+    } finally {
+      store.setIsPlayingAudio(false);
+    }
+    return;
+  }
+
+  const text = (
+    options.fullText ??
+    options.fullWelcomeDe ??
+    'Hallo und herzlich willkommen. Ich bin Findus.'
+  ).trim();
+  void warmupPiperEngine();
+  await speakWithPiper(text, INTRO_VOICE);
 }
 
-/**
- * Löscht ungenutzte EN-ONNX-Modelle und af_/am_/bm_-Voice-Dateien vom Gerät.
- */
 export async function purgeLegacyVoiceAssets(): Promise<void> {
-  console.log('[voice] Purge Legacy EN/Victoria Assets…');
-  await ensureDir();
-
-  for (const path of LEGACY_PURGE_FILES) {
+  // Kokoro-Assets NICHT löschen — Frauenstimmen brauchen Martin + de_eva.
+  const legacyFiles = [
+    `${FileSystem.documentDirectory}kokoro/kokoro-english.onnx`,
+    `${FileSystem.documentDirectory}kokoro/kokoro-victoria.onnx`,
+  ];
+  for (const file of legacyFiles) {
     try {
-      const info = await FileSystem.getInfoAsync(path);
+      const info = await FileSystem.getInfoAsync(file);
       if (info.exists) {
-        await FileSystem.deleteAsync(path, { idempotent: true });
-        console.log(`[voice] gelöscht: ${path}`);
+        await FileSystem.deleteAsync(file, { idempotent: true });
       }
     } catch {
       // ignore
     }
   }
-
   try {
-    const listing = await FileSystem.readDirectoryAsync(VOICES_DIR);
-    for (const file of listing) {
-      const lower = file.toLowerCase();
-      if (
-        LEGACY_VOICE_PREFIXES.some((p) => lower.startsWith(p)) ||
-        /^(af_|am_|bm_|bf_)/i.test(file) ||
-        lower === 'de_puck.bin'
-      ) {
-        try {
-          await FileSystem.deleteAsync(`${VOICES_DIR}${file}`, {
-            idempotent: true,
-          });
-          console.log(`[voice] Voice-Leiche gelöscht: ${file}`);
-        } catch {
-          // ignore
-        }
-      }
-    }
-  } catch {
-    // voices dir missing
-  }
-
-  // RAM: EN-Session verwerfen
-  ortSessions.english = undefined;
-  ortSessions.victoria = undefined;
-}
-
-export async function resetVoiceSystem(): Promise<void> {
-  console.log('[voice] System-Reset');
-  try {
-    await stopKokoroPlayback();
+    await FileSystem.writeAsStringAsync(
+      SYSTEM_VERSION_PATH,
+      VOICE_SYSTEM_VERSION,
+    );
   } catch {
     // ignore
   }
-  ortSessions.martin = undefined;
-  ortSessions.victoria = undefined;
-  ortSessions.english = undefined;
-  voiceRam.clear();
-  warmedUp = false;
-  warmupPromise = null;
-  sampleReadyKeys.clear();
-  samplePrefetchPromise = null;
-  prepareOnboardingPromise = null;
-  prepareOnboardingKey = null;
-  useFinnusStore.getState().setKokoroReady(false);
-  activeVoiceReset?.();
-
-  try {
-    const info = await FileSystem.getInfoAsync(MODEL_DIR);
-    if (info.exists) {
-      await FileSystem.deleteAsync(MODEL_DIR, { idempotent: true });
-    }
-  } catch (err) {
-    console.warn('[voice] Cache löschen:', err);
-  }
-  await ensureDir();
-  await FileSystem.writeAsStringAsync(
-    SYSTEM_VERSION_PATH,
-    VOICE_SYSTEM_VERSION,
-    { encoding: FileSystem.EncodingType.UTF8 },
-  );
 }
 
-/** Boot: Purge → Martin-Session + aktive Stimme keep-warm im RAM. */
+export async function resetVoiceSystem(): Promise<void> {
+  await stopPiperPlayback();
+  resetPiperEngine();
+  resetKokoroEngine();
+  warmedUp = false;
+  warmupPromise = null;
+  activeVoiceReset?.();
+  useFinnusStore.getState().setKokoroReady(false);
+}
+
 export function startVoiceBuffer(options?: {
   speechRate?: number;
   priorityVoiceId?: VoiceId;
 }): void {
-  void purgeLegacyVoiceAssets()
-    .catch(() => undefined)
-    .then(async () => {
-      await warmActiveVoiceInternal(options?.priorityVoiceId);
-      void prefetchVoiceSamples(options?.priorityVoiceId);
-    });
+  void warmupPiperEngine({ voiceId: options?.priorityVoiceId });
+  void warmActiveVoiceInternal(options?.priorityVoiceId);
 }
 
 export function prefetchOnboardingIntro(_fullWelcomeDe: string): Promise<void> {
-  markMetroBundledSamplesReady();
-  void warmupKokoro();
   return Promise.resolve();
 }
 
 export function prefetchOnboardingAudioBundle(
-  _fullWelcomeDe: string,
+  _fullWelcomeDe?: string,
   _speechRate?: number,
 ): Promise<void> {
   markMetroBundledSamplesReady();
-  void warmupKokoro();
+  void warmupPiperEngine();
   return Promise.resolve();
 }
 
-/**
- * Eager: zuerst die 6 Kern-Hörproben, dann Rest — Instant-Preview.
- * Läuft parallel zum Intro (Infer-Queue hinter Intro).
- */
 export function prefetchVoiceSamples(
-  _priorityVoiceId: VoiceId = 'standard_m',
+  _priorityVoiceId?: VoiceId,
 ): Promise<void> {
-  markMetroBundledSamplesReady();
-  void warmupKokoro();
-  return Promise.resolve();
+  if (samplePrefetchPromise) return samplePrefetchPromise;
+  samplePrefetchPromise = (async () => {
+    markMetroBundledSamplesReady();
+  })();
+  return samplePrefetchPromise;
 }
 
-function allEagerSamplesReady(): boolean {
-  return EAGER_SAMPLE_VOICE_IDS.every((id) =>
-    sampleReadyKeys.has(sampleCacheKey(id)),
-  );
-}
-
-/**
- * Ab App-Start / Sprachwahl: Warmup + 6 Kern-Hörproben vorbereiten.
- * Ziel: nach dem Intro sind Samples mit 0s Latenz spielbar.
- */
-export function prepareOnboardingVoiceSamples(_options?: {
+export function prepareOnboardingVoiceSamples(options?: {
   speechRate?: number;
   priorityVoiceId?: VoiceId;
+  voiceIds?: VoiceId[];
 }): Promise<void> {
+  const key = (options?.voiceIds ?? EAGER_IDS).join(',');
+  if (prepareOnboardingPromise && prepareOnboardingKey === key) {
+    return prepareOnboardingPromise;
+  }
+  prepareOnboardingKey = key;
   markMetroBundledSamplesReady();
-  void warmupKokoro();
-  return Promise.resolve();
+  void warmupPiperEngine({ voiceId: options?.priorityVoiceId });
+  void warmActiveVoiceInternal(options?.priorityVoiceId);
+  prepareOnboardingPromise = prefetchVoiceSamples(options?.priorityVoiceId);
+  return prepareOnboardingPromise;
 }
 
-/** Stellt Basis-Packs auf Disk bereit — RAM bleibt bei der aktiven Stimme. */
+const EAGER_IDS = VOICES.map((v) => v.id);
+
+export async function prefetchAllPiperModels(): Promise<void> {
+  for (const id of ALL_PIPER_MODEL_IDS) {
+    try {
+      await ensurePiperModel(id);
+    } catch (err) {
+      console.warn('[voice] Prefetch Modell:', id, err);
+    }
+  }
+}
+
+/** @deprecated */
 export async function prefetchAllKokoroVoicePacks(): Promise<void> {
-  await ensureAllBaseVoicePacksOnDisk();
+  // Nur aktives Modell im RAM — Rest auf Disk via Assets
+  return Promise.resolve();
 }
 
 export async function prefetchSingleVoiceSample(
-  _voiceId: VoiceId,
-  _speechRate: number = FIXED_SPEECH_RATE,
+  voiceId: VoiceId,
 ): Promise<void> {
-  markMetroBundledSamplesReady();
-  void warmupKokoro();
+  sampleReadyKeys.add(sampleCacheKey(voiceId));
 }
 
 export async function hydrateSampleCacheFromDisk(): Promise<void> {
   markMetroBundledSamplesReady();
+  try {
+    const info = await FileSystem.getInfoAsync(SAMPLE_DIR);
+    if (!info.exists) {
+      await FileSystem.makeDirectoryAsync(SAMPLE_DIR, { intermediates: true });
+    }
+  } catch {
+    // ignore
+  }
 }
 
-export function isVoiceSampleReady(
-  voiceId: VoiceId,
-  _speechRate: number = FIXED_SPEECH_RATE,
-): boolean {
-  markMetroBundledSamplesReady();
+export function isVoiceSampleReady(voiceId?: VoiceId): boolean {
+  if (!voiceId) return sampleReadyKeys.size > 0;
   return sampleReadyKeys.has(sampleCacheKey(voiceId));
 }
 
 export function isOnboardingIntroHeadReady(): boolean {
-  return isKokoroReady();
+  return INTRO_WAV_MODULE != null;
 }
 
+export function isUsingGermanPiper(): boolean {
+  return true;
+}
+
+/** @deprecated */
 export function isUsingGermanKokoro(): boolean {
-  return isKokoroReady();
+  return isUsingGermanPiper();
 }
 
 export function prefetchSystemTtsVoice(_voiceId?: VoiceId): void {
-  // absichtlich leer — kein System-TTS
+  // no-op — Piper only
 }
 
 export { ONBOARDING_INTRO_HEAD_DE } from '../i18n';

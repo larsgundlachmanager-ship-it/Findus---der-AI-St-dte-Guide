@@ -13,7 +13,15 @@ import { env } from '../config/env';
 import { getCachedUserProfile } from './userProfileService';
 import { parseAndCacheCityPronunciations } from './tts/cityPronunciationParser';
 import { scanCityDatasetSafe } from './scanner/cityScanner';
+import { scanPoiDatasetSafe } from './ai/poiDatasetScanner';
 import { syncDictionaryAfterCityDownload } from './sync/dictionarySyncService';
+
+/** Verhindert parallele Syncs → SQLite „transaction within a transaction“. */
+let syncInFlight: Promise<{
+  synced: boolean;
+  poiCount: number;
+  reason?: string;
+}> | null = null;
 
 /**
  * Offline-First: lädt Stadt-Pack aus Storage-Bucket `staedte`
@@ -24,6 +32,26 @@ import { syncDictionaryAfterCityDownload } from './sync/dictionarySyncService';
 export async function syncPOIsFromSupabase(
   cityIdOverride?: string,
 ): Promise<{
+  synced: boolean;
+  poiCount: number;
+  reason?: string;
+}> {
+  if (syncInFlight) {
+    return syncInFlight;
+  }
+
+  syncInFlight = (async () => {
+    try {
+      return await runPoiSync(cityIdOverride);
+    } finally {
+      syncInFlight = null;
+    }
+  })();
+
+  return syncInFlight;
+}
+
+async function runPoiSync(cityIdOverride?: string): Promise<{
   synced: boolean;
   poiCount: number;
   reason?: string;
@@ -84,6 +112,7 @@ export async function syncPOIsFromSupabase(
     }
     try {
       await scanCityDatasetSafe(packForPronunciation);
+      await scanPoiDatasetSafe(packForPronunciation);
     } catch (err) {
       console.warn('[sync] Dictionary-Scanner:', err);
     }

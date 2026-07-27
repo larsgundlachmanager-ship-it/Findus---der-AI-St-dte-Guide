@@ -9,7 +9,6 @@ export const VOICE_SAMPLE_MODULES: Record<VoiceId, number> = {
   dorfaeltester: require('../assets/audio/samples/dorfaeltester.wav'),
   historiker: require('../assets/audio/samples/historiker.wav'),
   gen_z: require('../assets/audio/samples/gen_z.wav'),
-  energisch: require('../assets/audio/samples/energisch.wav'),
 };
 
 /** Vorgerendertes Onboarding-Intro (de_thorsten / Standard-Männlich). */

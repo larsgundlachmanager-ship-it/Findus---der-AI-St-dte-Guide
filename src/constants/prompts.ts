@@ -1,19 +1,25 @@
 import { uiLang } from '../types/userProfile';
+import type { MasterPromptContext } from '../types/userProfile';
 import { getCachedUserProfile } from '../services/userProfileService';
-import {
-  CHARACTER_CATEGORIES,
-  EXPERIENCE_CARDS,
-} from './onboardingOptions';
-import { getVoice } from './voices';
 import type { Fact, PoiWithFacts } from '../db/types';
 import {
-  buildDynamicSystemPrompt,
-  buildPersonalityStyleBlock,
-  resolvePromptStyleSettings,
-} from '../services/ai/promptBuilder';
+  AUDIO_GUIDE_SPEECH_RULES_DE,
+  FOLLOW_UP_ANSWER_RULES_DE,
+} from '../services/audioGuideScript';
+import {
+  buildMasterSystemInstruction,
+  resolveMasterPromptContext,
+} from '../services/personaEngine';
 
 export const OPENAI_MODEL = 'gpt-4o-mini';
 export const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
+
+/** @deprecated Re-export — Text-Engine ist Gemini. */
+export {
+  GEMINI_MODEL,
+  GEMINI_TEMPERATURE,
+  FINDUS_GEMINI_SYSTEM_INSTRUCTION,
+} from './gemini';
 
 /**
  * Wissens- & Rechercheprotokoll: damit Findus viele Fakten sortiert,
@@ -28,7 +34,7 @@ Für JEDEN mitgelieferten Fakt merke dir still:
 - ORT (aktueller Spot / Name)
 - TYP: [Kurzfakt] | [Erzählung] | [Detail] | [Thema:<tag>]
 - THEMEN (z. B. Geschichte, Verkehr, Vereine, Natur, Einkaufen, Zeiten, Personen, Zahlen)
-- ANKER: Jahre, Namen, Adressen, Entfernungen, Öffnungszeiten, Institutionen
+- ANKER: Jahre, Namen, Institutionen (keine Adressen vorlesen)
 - BEZUG: gehört dieser Fakt nur hierher oder verbindet er Orte/Themen?
 
 ### 2) Recherche bei jeder Frage (Reihenfolge)
@@ -38,13 +44,14 @@ Für JEDEN mitgelieferten Fakt merke dir still:
 4. Erzählung nur als Einstieg/Ton – nicht als alleinige Quelle für harte Daten.
 5. Details ([Detail]/[Thema:]) für Tiefenfragen („warum“, „wie lange“, „wie komme ich…“).
 6. Wenn mehrere passen: priorisiere aktuellen Ort → gleiche Themen-Tags → klarste Zahlen/Daten.
-7. Fehlt etwas: sag klar, was in den Fakten nicht steht. ERFINDE NICHTS.
+7. POI-Story: Fehlt etwas → sag klar, was in den Fakten nicht steht. ERFINDE NICHTS.
+8. RÜCKFRAGEN des Users: Wenn lokale Fakten nicht reichen, darfst und sollst du OpenAI-Wissen nutzen, um kurz und hilfreich zu antworten — der User fragt oft genau das, was Findus noch nicht gesagt hat.
 
 ### 3) Kombinieren
 - Verbinde 2–4 passende Fakten zu einer schlüssigen Antwort (Ursache→Wirkung, Damals→Heute, Ort→Nutzen).
 - Keine Widersprüche vermischen; bei Konflikt den präziseren Fakt wählen und den anderen weglassen.
-- Zahlen, Jahre, Telefonnummern, Öffnungszeiten wörtlich aus den Fakten übernehmen.
-- Keine Fakten „aufblasen“ oder ausschmücken über den Beleg hinaus.
+- Zahlen und Jahre wörtlich aus den Fakten übernehmen; Adressen/Telefon nie vorlesen.
+- Keine Fakten „aufblasen“ über den Beleg hinaus (außer bei Rückfragen mit klarer Online-Ergänzung).
 
 ### 4) Differenzierung (was wofür)
 - [Kurzfakt]: harte Kernaussagen → Fragen & Faktenantworten.
@@ -52,8 +59,9 @@ Für JEDEN mitgelieferten Fakt merke dir still:
 - [Detail] / [Thema:…]: Tiefenwissen, Spezialfragen, Vergleiche.
 
 ### 5) Antwortstil (Audio)
-3–6 Sätze, klar zum Zuhören. Erst Treffer nennen, dann optional 1 verwandten Fakt.
-Bei Unsicherheit: „Dazu habe ich hier keinen Beleg“ statt spekulieren.`;
+3–6 Sätze, klar zum Zuhören. Fließtext ohne Rubriken.
+Bei Rückfragen: DIREKT antworten — Frage nicht wiederholen; kein „weiter radeln“-Outro.`;
+
 
 export const FINDUS_RESEARCH_PROTOCOL_EN = `## Knowledge & research protocol (mandatory)
 
@@ -91,80 +99,39 @@ For EVERY provided fact note:
 3–6 sentences. Lead with the hit, optionally one related fact.
 If unsure: say you have no evidence here — do not speculate.`;
 
-function labelForOption(id: string, lang: 'de' | 'en'): string {
-  for (const cat of CHARACTER_CATEGORIES) {
-    const opt = cat.options.find((o) => o.id === id);
-    if (opt) return lang === 'de' ? opt.labelDe : opt.labelEn;
-  }
-  return id;
-}
-
-function experienceHints(
-  prefs: Record<string, string>,
-  lang: 'de' | 'en',
-): { like: string[]; avoid: string[] } {
-  const like: string[] = [];
-  const avoid: string[] = [];
-  for (const card of EXPERIENCE_CARDS) {
-    const v = prefs[card.id];
-    const label = lang === 'de' ? card.labelDe : card.labelEn;
-    if (v === 'yes') like.push(label);
-    if (v === 'no') avoid.push(label);
-  }
-  return { like, avoid };
-}
-
 /**
- * Dynamischer System-Prompt aus dem lokalen User-Profil + Rechercheprotokoll
- * + Persönlichkeit/Tonfall (promptBuilder).
+ * Q&A / Voice-System-Prompt = Master Engine + knappes Rechercheprotokoll.
+ * Legacy-Persona-/Forbidden-Blöcke sind entfernt.
  */
-export function buildFindusSystemPrompt(): string {
+export function buildFindusSystemPrompt(
+  context?: MasterPromptContext,
+): string {
   const profile = getCachedUserProfile();
-  const lang = uiLang(profile?.language ?? 'de');
-  const research = FINDUS_RESEARCH_PROTOCOL_DE;
+  const master = buildMasterSystemInstruction(
+    profile,
+    context ?? resolveMasterPromptContext(),
+  );
+  const city = profile?.cityName ?? 'der Stadt';
 
-  if (!profile?.setupComplete) {
-    const style = buildPersonalityStyleBlock(resolvePromptStyleSettings(profile));
-    const base = `Du bist Findus, ein lockerer, freundlicher Audio-Tourguide. Sprich warm, klar und kurz (ca. 3–6 Sätze). Antworte auf Deutsch.`;
-    return `${base}
+  return `${master}
 
-${style}
+Aktuelle Stadt: ${city}. Antworte auf Deutsch, fließend zum Vorlesen.
+${AUDIO_GUIDE_SPEECH_RULES_DE}
 
-${research}`;
-  }
+${FOLLOW_UP_ANSWER_RULES_DE}
 
-  const voice = getVoice(profile.voiceId);
-  const styleSettings = resolvePromptStyleSettings(profile);
-  const chars = [
-    ...profile.characters,
-    ...profile.tonalities,
-    ...profile.motives,
-    ...profile.socialDynamics,
-    ...profile.extraTraits,
-  ].map((id) => labelForOption(id, lang));
-
-  const access = profile.accessibility.map((id) => labelForOption(id, lang));
-  const { like, avoid } = experienceHints(profile.experiencePrefs, lang);
-  const city = profile.cityName ?? 'der Stadt';
-
-  return `${buildDynamicSystemPrompt({ profile, cityName: city })}
-
-Stimm-Persona (Audio / studio-v4): ${voice.id} — Charakter rein über Text & Interpunktion; FIXED_SPEECH_RATE 1.0 bleibt unberührt (kein Pitch/Speed).
-Nur ~20% spannende Fakten, Strict Bridging nur bei echter Schnittmenge.
-Gewählte Optionen: ${chars.join(', ') || styleSettings.personalityLabel}.
-Bevorzuge: ${like.slice(0, 8).join(', ') || 'allgemeine Highlights'}.
-Vermeide oder halte knapp: ${avoid.slice(0, 8).join(', ') || 'nichts Besonderes'}.
-Barrierefreiheit/Bedürfnisse: ${access.join(', ') || 'keine'}.
-Zusätzlich erleben: ${profile.wantToExperience || '—'}. Nicht erleben: ${profile.avoidExperience || '—'}.
-
-${research}`;
+${FINDUS_RESEARCH_PROTOCOL_DE}`;
 }
 
 /** Statischer Fallback (Tests / Boot ohne Profil). */
-export const FINDUS_SYSTEM_PROMPT = `Du bist Findus, ein lockerer, freundlicher Audio-Tourguide.
-Sprich warm, klar und kurz – ideal fürs Zuhören unterwegs (ca. 3–6 Sätze).
-Nutze die mitgelieferten Fakten als Grundlage, erfinde keine erfundenen Daten.
-Antworte auf Deutsch.
+export const FINDUS_SYSTEM_PROMPT = `Du BIST Findus — lebendiger Kumpel neben dem Nutzer, kein Roboter.
+Sprich warm, klar und flüssig – ideal fürs Zuhören unterwegs (ca. 3–6 Sätze).
+Nutze die mitgelieferten Fakten als Grundlage, erfinde keine Daten.
+Antworte auf Deutsch. Keine Rubriken, keine Adressen vorlesen.
+
+${AUDIO_GUIDE_SPEECH_RULES_DE}
+
+${FOLLOW_UP_ANSWER_RULES_DE}
 
 ${FINDUS_RESEARCH_PROTOCOL_DE}`;
 

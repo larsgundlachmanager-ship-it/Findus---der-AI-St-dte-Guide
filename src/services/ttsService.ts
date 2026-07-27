@@ -1,9 +1,10 @@
 /**
- * Öffentliche TTS-API – Instant Samples + Sentence-Streaming + Eager Boot.
+ * Öffentliche TTS-API – Instant Samples + Sentence-Streaming + Eager Boot (Piper).
  */
 export {
   speakAssistantText,
   speakTwoPhase,
+  speakWithPiper,
   speakWithKokoro,
   speakSentenceStream,
   speakOnboardingIntro,
@@ -12,6 +13,7 @@ export {
   prefetchVoiceSamples,
   prepareOnboardingVoiceSamples,
   prefetchAllKokoroVoicePacks,
+  prefetchAllPiperModels,
   prefetchSingleVoiceSample,
   playVoiceSample,
   hydrateSampleCacheFromDisk,
@@ -20,27 +22,42 @@ export {
   isOnboardingIntroHeadReady,
   synthesizeWav,
   stopSpeaking,
+  resetTtsOnInterruption,
   ensureKokoroAssets,
+  ensurePiperAssets,
   ensureVoicePack,
+  ensurePiperModel,
   warmupKokoro,
+  warmupPiperEngine,
   stopKokoroPlayback,
+  stopPiperPlayback,
   resetVoiceSystem,
   purgeLegacyVoiceAssets,
   isKokoroReady,
+  isPiperReady,
   isKokoroLoading,
+  isPiperLoading,
   INTRO_VOICE,
   MARTIN_PURE,
   ONBOARDING_INTRO_HEAD_DE,
+  applyPronunciationFixes,
 } from './AudioVoiceService';
 
 export {
   setKokoroProductInferenceEnabled,
+  setPiperProductInferenceEnabled,
   isKokoroProductInferenceEnabled,
+  isPiperProductInferenceEnabled,
   shouldUseKokoroInference,
+  shouldUsePiperInference,
   enableKokoroProductMode,
+  enablePiperProductMode,
   KOKORO_LOADING_MSG,
   KOKORO_DOWNLOAD_MSG,
   KOKORO_UNAVAILABLE_MSG,
+  PIPER_LOADING_MSG,
+  PIPER_DOWNLOAD_MSG,
+  PIPER_UNAVAILABLE_MSG,
 } from './ttsPolicy';
 
 export {
@@ -77,41 +94,31 @@ import {
   purgeLegacyVoiceAssets,
   hydrateSampleCacheFromDisk,
   prefetchVoiceSamples,
-  prefetchAllKokoroVoicePacks,
-  applyPronunciationFixes,
 } from './AudioVoiceService';
-import { enableKokoroProductMode } from './ttsPolicy';
-import {
-  enableGermanG2PForProduct,
-  warmupGermanG2P,
-  warmupPronunciationPipeline,
-} from './g2p';
+import { enablePiperProductMode } from './ttsPolicy';
 import { loadUserProfile } from './userProfileService';
-// Side-effect: registriert Active-Voice-Warmer am AudioVoiceService
 import { voicePreloader } from './tts/voicePreloader';
 
-export { applyPronunciationFixes };
 export { voicePreloader };
 export type { WarmVoiceResult } from './tts/voicePreloader';
 
 /**
- * Sofort beim App-Start: Purge → Martin-ONNX + aktive Stimme keep-warm im RAM.
- * Weitere Packs nur auf Disk (für späteren Wechsel), nicht alle im RAM.
+ * Sofort beim App-Start: Purge Kokoro-Legacy → Piper-Modell keep-warm.
  */
-export function preloadKokoroAtBoot(): void {
-  enableKokoroProductMode();
-  enableGermanG2PForProduct();
-  void warmupPronunciationPipeline();
-  void warmupGermanG2P();
+export function preloadPiperAtBoot(): void {
+  enablePiperProductMode();
   void hydrateSampleCacheFromDisk();
   void purgeLegacyVoiceAssets().catch(() => undefined);
 
   void loadUserProfile().then((profile) => {
     const voiceId = profile?.voiceId ?? 'standard_m';
     startVoiceBuffer({ speechRate: 1, priorityVoiceId: voiceId });
-    // Disk-Prefetch anderer Packs parallel — RAM bleibt single-active
-    void prefetchAllKokoroVoicePacks();
     void prefetchVoiceSamples(voiceId);
     void voicePreloader.warmActiveVoice(voiceId);
   });
+}
+
+/** @deprecated */
+export function preloadKokoroAtBoot(): void {
+  preloadPiperAtBoot();
 }

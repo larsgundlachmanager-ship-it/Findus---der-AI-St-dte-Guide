@@ -9,6 +9,7 @@ import {
   ExpoSpeechRecognitionModule,
   type ExpoSpeechRecognitionErrorEvent,
 } from 'expo-speech-recognition';
+import { showPermissionMissingAlert } from '../utils/permissionAlerts';
 
 export type SttStartFailureReason = 'unavailable' | 'permission' | 'error';
 
@@ -19,6 +20,8 @@ export type SttStartResult =
 let isStarting = false;
 let isActive = false;
 let latestTranscript = '';
+/** Längster Zwischenstand — fängt verzögerte End-Silben ab. */
+let longestTranscript = '';
 let partialHandler: ((text: string) => void) | null = null;
 let listenersWired = false;
 let stopWaiters: Array<(text: string) => void> = [];
@@ -40,10 +43,18 @@ function wireListeners(): void {
   });
 
   ExpoSpeechRecognitionModule.addListener('result', (event) => {
-    const top = event.results?.[0]?.transcript?.trim() ?? '';
-    if (!top) return;
-    latestTranscript = top;
-    partialHandler?.(top);
+    const results = event.results ?? [];
+    let best = '';
+    for (const r of results) {
+      const t = r?.transcript?.trim() ?? '';
+      if (t.length > best.length) best = t;
+    }
+    if (!best) return;
+    latestTranscript = best;
+    if (best.length >= longestTranscript.length) {
+      longestTranscript = best;
+    }
+    partialHandler?.(longestTranscript);
   });
 
   ExpoSpeechRecognitionModule.addListener('error', (event: ExpoSpeechRecognitionErrorEvent) => {
@@ -52,17 +63,38 @@ function wireListeners(): void {
     isStarting = false;
     // "no-speech" / aborted beim Loslassen sind ok – Transkript behalten
     if (event.error === 'aborted' || event.error === 'no-speech') {
-      resolveStopWaiters(latestTranscript.trim());
+      resolveStopWaiters(pickBestTranscript(latestTranscript, longestTranscript));
       return;
     }
-    resolveStopWaiters(latestTranscript.trim());
+    resolveStopWaiters(pickBestTranscript(latestTranscript, longestTranscript));
   });
 
   ExpoSpeechRecognitionModule.addListener('end', () => {
     isActive = false;
     isStarting = false;
-    resolveStopWaiters(latestTranscript.trim());
+    resolveStopWaiters(pickBestTranscript(latestTranscript, longestTranscript));
   });
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+/**
+ * Finales Transkript mit Zwischenstand mergen — STT hinkt oft 1–2 Wörter hinterher.
+ */
+export function pickBestTranscript(finalText: string, partialText: string): string {
+  const f = finalText.trim();
+  const p = partialText.trim();
+  if (!p) return f;
+  if (!f) return p;
+  if (f === p) return f;
+  if (p.length > f.length && (p.startsWith(f) || f.startsWith(p.slice(0, Math.min(12, p.length))))) {
+    return p;
+  }
+  if (f.length > p.length && f.includes(p)) return f;
+  if (p.includes(f)) return p;
+  return f.length >= p.length ? f : p;
 }
 
 async function requestSpeechPermissions(): Promise<boolean> {
@@ -148,6 +180,7 @@ export async function startListening(
   const granted = await requestSpeechPermissions();
   if (!granted) {
     console.warn('[stt] microphone/speech permission denied');
+    showPermissionMissingAlert('microphone');
     return { ok: false, reason: 'permission' };
   }
 
@@ -157,6 +190,7 @@ export async function startListening(
     console.warn(
       '[stt] recognition unavailable – Google App / Speech Services fehlen oder Package-Visibility',
     );
+    showPermissionMissingAlert('speechUnavailable');
     return { ok: false, reason: 'unavailable' };
   }
 
@@ -171,6 +205,7 @@ export async function startListening(
 
   partialHandler = onPartial ?? null;
   latestTranscript = '';
+  longestTranscript = '';
   isStarting = true;
 
   try {
@@ -190,13 +225,35 @@ export async function startListening(
   }
 }
 
+/** Nach Loslassen kurz weiterhören, dann auf finales Ergebnis warten. */
+const DEFAULT_TAIL_MS = 450;
+const DEFAULT_FINALIZE_MS = 1_300;
+
+export type StopListeningOptions = {
+  /** Mikro bleibt noch kurz offen (letzte Silben). */
+  tailMs?: number;
+  /** Max. Wartezeit auf finales STT nach stop(). */
+  finalizeMs?: number;
+};
+
 /** stop() und finales Transkript zurückgeben */
-export async function stopListening(): Promise<string> {
+export async function stopListening(
+  opts?: StopListeningOptions,
+): Promise<string> {
+  const tailMs = opts?.tailMs ?? 0;
+  const finalizeMs = opts?.finalizeMs ?? DEFAULT_FINALIZE_MS;
+  const partialSnapshot = longestTranscript.trim();
+
+  if (tailMs > 0 && (isActive || isStarting)) {
+    await sleep(tailMs);
+  }
+
   partialHandler = null;
 
   if (!isActive && !isStarting) {
-    const text = latestTranscript.trim();
+    const text = pickBestTranscript(latestTranscript.trim(), partialSnapshot);
     latestTranscript = '';
+    longestTranscript = '';
     return text;
   }
 
@@ -205,8 +262,10 @@ export async function stopListening(): Promise<string> {
   });
 
   const timeout = setTimeout(() => {
-    resolveStopWaiters(latestTranscript.trim());
-  }, 800);
+    resolveStopWaiters(
+      pickBestTranscript(latestTranscript.trim(), partialSnapshot),
+    );
+  }, finalizeMs);
 
   try {
     ExpoSpeechRecognitionModule.stop();
@@ -214,14 +273,20 @@ export async function stopListening(): Promise<string> {
     console.warn('[stt] stop failed:', err);
     isActive = false;
     isStarting = false;
-    resolveStopWaiters(latestTranscript.trim());
+    resolveStopWaiters(
+      pickBestTranscript(latestTranscript.trim(), partialSnapshot),
+    );
   }
 
-  const text = (await textPromise).trim();
+  const text = pickBestTranscript(
+    (await textPromise).trim(),
+    partialSnapshot,
+  );
   clearTimeout(timeout);
   isActive = false;
   isStarting = false;
   latestTranscript = '';
+  longestTranscript = '';
   return text;
 }
 
@@ -238,6 +303,7 @@ export async function destroyStt(): Promise<void> {
   isActive = false;
   isStarting = false;
   latestTranscript = '';
+  longestTranscript = '';
   partialHandler = null;
   resolveStopWaiters('');
 }

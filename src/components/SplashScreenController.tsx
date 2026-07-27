@@ -9,10 +9,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { startVoiceBuffer } from '../services/AudioVoiceService';
-import {
-  enableKokoroProductMode,
-  enableGermanG2PForProduct,
-} from '../services/ttsService';
+import { enablePiperProductMode } from '../services/ttsService';
 import { voicePreloader } from '../services/tts/voicePreloader';
 import type { VoiceId } from '../types/userProfile';
 
@@ -57,8 +54,7 @@ export function SplashScreenController({
   };
 
   useEffect(() => {
-    enableKokoroProductMode();
-    enableGermanG2PForProduct();
+    enablePiperProductMode();
     startVoiceBuffer({ speechRate: 1, priorityVoiceId });
 
     logoOpacity.value = withTiming(1, {

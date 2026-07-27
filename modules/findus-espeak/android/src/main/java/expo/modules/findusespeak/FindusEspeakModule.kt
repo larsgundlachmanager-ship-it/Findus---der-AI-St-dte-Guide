@@ -50,6 +50,67 @@ class FindusEspeakModule : Module() {
     Function("getVoice") {
       if (nativeIsReady()) nativeGetVoice() else currentVoice
     }
+
+    /**
+     * Kopiert eine Datei aus APK-assets/ nach filesDir (zuverlässiger als
+     * expo-file-system copyAsync von file:///android_asset/…).
+     * assetRelPath z.B. "kokoro/kokoro-martin.onnx" oder "kokoro/voices/de_eva.bin"
+     * destAbsPath: absoluter Zielpfad unter filesDir.
+     * Gibt die Byte-Größe zurück, oder -1 bei Fehler.
+     */
+    AsyncFunction("copyAssetFile") { assetRelPath: String, destAbsPath: String ->
+      val ctx = appContext.reactContext ?: throw Exception("Kein React Context")
+      val clean = assetRelPath.trim().trimStart('/')
+      // file:// URI absichern (falls JS den Prefix durchreicht)
+      val destPath = destAbsPath
+        .trim()
+        .removePrefix("file://")
+      val dest = File(destPath)
+      dest.parentFile?.mkdirs()
+      try {
+        ctx.assets.open(clean).use { input ->
+          FileOutputStream(dest).use { output -> input.copyTo(output, 1024 * 256) }
+        }
+        if (!dest.exists() || dest.length() < 1000L) {
+          android.util.Log.e("FindusEspeak", "copyAssetFile zu klein: $clean → $destPath")
+          dest.delete()
+          return@AsyncFunction -1L
+        }
+        android.util.Log.i("FindusEspeak", "copyAssetFile OK: $clean (${dest.length()} B)")
+        dest.length()
+      } catch (e: Exception) {
+        android.util.Log.e("FindusEspeak", "copyAssetFile FAIL: $clean → $destPath", e)
+        dest.delete()
+        -1L
+      }
+    }
+
+    /** true wenn Asset in der APK existiert und > minBytes groß ist. */
+    AsyncFunction("assetFileSize") { assetRelPath: String ->
+      val ctx = appContext.reactContext ?: return@AsyncFunction -1L
+      val clean = assetRelPath.trim().trimStart('/')
+      try {
+        ctx.assets.openFd(clean).use { fd ->
+          fd.length
+        }
+      } catch (_: Exception) {
+        // Komprimierte Assets haben kein openFd — open + skip
+        try {
+          ctx.assets.open(clean).use { input ->
+            var total = 0L
+            val buf = ByteArray(64 * 1024)
+            while (true) {
+              val n = input.read(buf)
+              if (n <= 0) break
+              total += n
+            }
+            total
+          }
+        } catch (_: Exception) {
+          -1L
+        }
+      }
+    }
   }
 
   /**

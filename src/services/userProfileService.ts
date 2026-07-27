@@ -3,6 +3,7 @@ import {
   createDefaultProfile,
   normalizeLanguage,
   normalizeVoiceId,
+  type TtsProvider,
   type UserProfile,
 } from '../types/userProfile';
 import { getDatabase } from '../db/database';
@@ -10,6 +11,7 @@ import {
   loadUserVoiceSettings,
   saveUserVoiceSettings,
 } from '../db/userSettings';
+import { useFinnusStore } from '../store/useFinnusStore';
 
 /** Lokale Datei „über den User“ */
 const PROFILE_PATH = `${FileSystem.documentDirectory}ueber-den-user.json`;
@@ -21,16 +23,113 @@ function notify(profile: UserProfile | null): void {
   for (const fn of listeners) fn(profile);
 }
 
+function normalizeTtsProvider(raw: unknown): TtsProvider {
+  return raw === 'kokoro' ? 'kokoro' : 'openai';
+}
+
+function syncTtsProviderToStore(provider: TtsProvider): void {
+  try {
+    useFinnusStore.getState().setTtsProvider(provider);
+  } catch {
+    // Store ggf. noch nicht bereit
+  }
+}
+
 function normalizeProfile(parsed: Partial<UserProfile>): UserProfile {
   const base = createDefaultProfile();
   const merged: UserProfile = { ...base, ...parsed, version: 1 };
   merged.language = normalizeLanguage(merged.language as string);
   merged.voiceId = normalizeVoiceId(merged.voiceId as string);
   merged.speechRate = 1; // Systemweit fest — kein Slider
+  merged.ttsProvider = normalizeTtsProvider(merged.ttsProvider);
+  merged.phoneNumber =
+    typeof parsed.phoneNumber === 'string'
+      ? parsed.phoneNumber
+      : base.phoneNumber ?? '';
   merged.storytelling = {
     ...(base.storytelling ?? {}),
     ...(parsed.storytelling ?? {}),
   };
+  merged.learnedFacts = Array.isArray(parsed.learnedFacts)
+    ? parsed.learnedFacts.map(String).filter(Boolean).slice(-40)
+    : base.learnedFacts ?? [];
+  merged.personaEngine = {
+    ...(base.personaEngine ?? {}),
+    ...(parsed.personaEngine ?? {}),
+    preferences: {
+      ...(base.personaEngine?.preferences ?? {}),
+      ...(parsed.personaEngine?.preferences ?? {}),
+    },
+  };
+  merged.onboardingMode =
+    parsed.onboardingMode === 'express' || parsed.onboardingMode === 'standard'
+      ? parsed.onboardingMode
+      : base.onboardingMode ?? null;
+  merged.travelPeriod =
+    typeof parsed.travelPeriod === 'string'
+      ? parsed.travelPeriod
+      : base.travelPeriod ?? '';
+  merged.budgetCategory =
+    parsed.budgetCategory === 'sparsam' ||
+    parsed.budgetCategory === 'mittel' ||
+    parsed.budgetCategory === 'komfort'
+      ? parsed.budgetCategory
+      : base.budgetCategory ?? null;
+  merged.micListenMode =
+    parsed.micListenMode === 'hear' || parsed.micListenMode === 'dont_hear'
+      ? parsed.micListenMode
+      : base.micListenMode ?? null;
+  merged.hasAcceptedPrivacyPolicy = !!parsed.hasAcceptedPrivacyPolicy;
+  merged.privacyAcceptedAt =
+    typeof parsed.privacyAcceptedAt === 'string'
+      ? parsed.privacyAcceptedAt
+      : null;
+  merged.hasAcceptedAudioConsent = !!parsed.hasAcceptedAudioConsent;
+  merged.audioConsentAt =
+    typeof parsed.audioConsentAt === 'string' ? parsed.audioConsentAt : null;
+  merged.travelParty =
+    parsed.travelParty === 'solo' ||
+    parsed.travelParty === 'couple' ||
+    parsed.travelParty === 'date' ||
+    parsed.travelParty === 'family' ||
+    parsed.travelParty === 'friends'
+      ? parsed.travelParty
+      : base.travelParty ?? null;
+  merged.mobilityMode =
+    parsed.mobilityMode === 'foot' ||
+    parsed.mobilityMode === 'bike' ||
+    parsed.mobilityMode === 'public_transit' ||
+    parsed.mobilityMode === 'car'
+      ? parsed.mobilityMode
+      : base.mobilityMode ?? null;
+  merged.energyLevel =
+    parsed.energyLevel === 'low' ||
+    parsed.energyLevel === 'medium' ||
+    parsed.energyLevel === 'high'
+      ? parsed.energyLevel
+      : base.energyLevel ?? null;
+  merged.dietaryTags = Array.isArray(parsed.dietaryTags)
+    ? parsed.dietaryTags.map(String).filter(Boolean)
+    : base.dietaryTags ?? [];
+  merged.allergies =
+    typeof parsed.allergies === 'string'
+      ? parsed.allergies
+      : base.allergies ?? '';
+  merged.answerStyle =
+    parsed.answerStyle === 'short' || parsed.answerStyle === 'detailed'
+      ? parsed.answerStyle
+      : base.answerStyle ?? null;
+  merged.touristMode =
+    parsed.touristMode === 'tourist' ||
+    parsed.touristMode === 'insider' ||
+    parsed.touristMode === 'mix'
+      ? parsed.touristMode
+      : base.touristMode ?? null;
+  merged.notificationsEnabled =
+    parsed.notificationsEnabled === undefined
+      ? true
+      : !!parsed.notificationsEnabled;
+  merged.dataSaverMode = !!parsed.dataSaverMode;
   return merged;
 }
 
@@ -88,6 +187,7 @@ export async function loadUserProfile(): Promise<UserProfile | null> {
     const parsed = JSON.parse(raw) as Partial<UserProfile>;
     cached = normalizeProfile(parsed);
     void syncVoiceSettingsToSqlite(cached);
+    syncTtsProviderToStore(cached.ttsProvider ?? 'openai');
     notify(cached);
     return cached;
   } catch (err) {
@@ -109,6 +209,7 @@ export async function saveUserProfile(
   );
   cached = next;
   await syncVoiceSettingsToSqlite(next);
+  syncTtsProviderToStore(next.ttsProvider ?? 'openai');
   notify(next);
   return next;
 }

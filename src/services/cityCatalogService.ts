@@ -1,11 +1,12 @@
 import * as FileSystem from 'expo-file-system';
 import { env } from '../config/env';
 import { getSupabase, isSupabaseConfigured } from './supabase';
-import { mapCityPackToRemote, type CityPack } from './cityPack';
+import { mapCityPackToRemote, type CityPack, type CityPackLink } from './cityPack';
 import { replacePoisAndFacts, getAllPois } from '../db/database';
 import { useFinnusStore } from '../store/useFinnusStore';
 import { parseAndCacheCityPronunciations } from './tts/cityPronunciationParser';
 import { scanCityDatasetSafe } from './scanner/cityScanner';
+import { scanPoiDatasetSafe } from './ai/poiDatasetScanner';
 import { syncDictionaryAfterCityDownload } from './sync/dictionarySyncService';
 
 const STAEDTE_BUCKET = 'staedte';
@@ -24,12 +25,25 @@ export type CityIndexEntry = {
 
 export type CityCatalogItem = CityIndexEntry & {
   distanceKm: number | null;
-  /** Anzahl GPS-Triggerpunkte */
-  gpsCount: number;
-  /** Anzahl Orte / Spots */
-  placeCount: number;
+  /** Summe aller GPS-Trigger (Zonen + Wegpunkte + Unterpunkte) */
+  triggerCount: number;
+  /** Area-/Legacy-Zonen */
+  zoneCount: number;
+  /** Approach-Wegpunkte */
+  approachCount: number;
+  /** Sub-POI-Unterpunkte */
+  subCount: number;
   /** Anzahl Fakten (Bullets + Erzählungen + Deep-Data) */
   factCount: number;
+  /** Alle GPS-Trigger mit Typ (für Auflistung in der Städteauswahl) */
+  triggers: Array<{
+    name: string;
+    kind: 'zone' | 'approach' | 'sub';
+  }>;
+  /** @deprecated Alias für zoneCount (UI-Kompat) */
+  gpsCount: number;
+  /** @deprecated Alias für triggerCount */
+  placeCount: number;
 };
 
 type CityIndexFile = {
@@ -293,6 +307,13 @@ export async function fetchCityIndex(): Promise<CityIndexEntry[]> {
         lng: 9.6979598,
         symbol: '🌳',
       },
+      {
+        id: 'wangerooge',
+        name: 'Wangerooge',
+        lat: 53.7902,
+        lng: 7.8995,
+        symbol: '🏝️',
+      },
     ];
   }
 
@@ -328,6 +349,13 @@ export async function fetchCityIndex(): Promise<CityIndexEntry[]> {
         lat: 53.7278939,
         lng: 9.6979598,
         symbol: '🌳',
+      },
+      {
+        id: 'wangerooge',
+        name: 'Wangerooge',
+        lat: 53.7902,
+        lng: 7.8995,
+        symbol: '🏝️',
       },
     ];
   }
@@ -381,28 +409,81 @@ export async function loadCityPackCachedOrRemote(
   return fetchCityPackById(cityId);
 }
 
-export function summarizePack(pack: CityPack): {
-  gpsCount: number;
-  placeCount: number;
+export type PackTriggerSummary = {
+  /** Alle GPS-Trigger, die nach Mapping feuern können */
+  triggerCount: number;
+  /** Area + Legacy */
+  zoneCount: number;
+  /** Approach-Wegpunkte */
+  approachCount: number;
+  /** Sub-POI-Unterpunkte */
+  subCount: number;
   factCount: number;
-} {
-  const spots = pack.spots ?? [];
-  const triggers = pack.trigger_points ?? [];
+  /** Einzelne Trigger für die Städteauswahl */
+  triggers: Array<{
+    name: string;
+    kind: 'zone' | 'approach' | 'sub';
+  }>;
+  /** @deprecated = zoneCount */
+  gpsCount: number;
+  /** @deprecated = triggerCount */
+  placeCount: number;
+};
 
-  let factCount = 0;
-  for (const spot of spots) {
-    factCount += spot.bullets?.length ?? 0;
+/**
+ * Zählt echte GPS-Trigger wie nach `mapCityPackToRemote`:
+ * Zonen (area/legacy), Wegpunkte (approach), Unterpunkte (sub).
+ */
+export function summarizePack(pack: CityPack): PackTriggerSummary {
+  const mapped = mapCityPackToRemote(pack);
+  let zoneCount = 0;
+  let approachCount = 0;
+  let subCount = 0;
+  const triggers: PackTriggerSummary['triggers'] = [];
+
+  for (const poi of mapped.pois) {
+    if (poi.kind === 'approach') {
+      approachCount += 1;
+      triggers.push({ name: poi.name, kind: 'approach' });
+    } else if (poi.kind === 'sub') {
+      subCount += 1;
+      triggers.push({ name: poi.name, kind: 'sub' });
+    } else {
+      zoneCount += 1;
+      triggers.push({ name: poi.name, kind: 'zone' });
+    }
   }
-  for (const tp of triggers) {
-    if (tp.general_info?.trim()) factCount += 1;
-    factCount += tp.deep_data_pool?.length ?? 0;
-  }
+
+  const triggerCount = mapped.pois.length;
 
   return {
-    gpsCount: triggers.length,
-    placeCount: spots.length > 0 ? spots.length : triggers.length,
-    factCount,
+    triggerCount,
+    zoneCount,
+    approachCount,
+    subCount,
+    factCount: mapped.facts.length,
+    triggers,
+    gpsCount: zoneCount,
+    placeCount: triggerCount,
   };
+}
+
+/** Einzeiler: „162 Trigger · 56 Orte · 320 Fakten“ */
+export function formatTriggerStats(stats: {
+  triggerCount: number;
+  zoneCount: number;
+  approachCount?: number;
+  subCount?: number;
+  factCount?: number;
+}): string {
+  const parts = [
+    `${stats.triggerCount} Trigger`,
+    `${stats.zoneCount} Orte`,
+  ];
+  if (typeof stats.factCount === 'number') {
+    parts.push(`${stats.factCount} Fakten`);
+  }
+  return parts.join(' · ');
 }
 
 /**
@@ -432,6 +513,7 @@ export async function installCityPack(cityId: string): Promise<{
   }
   try {
     await scanCityDatasetSafe(pack);
+    await scanPoiDatasetSafe(pack);
     void syncDictionaryAfterCityDownload().catch(() => undefined);
   } catch (err) {
     console.warn('[cityCatalog] Dictionary-Scanner:', err);
@@ -479,9 +561,12 @@ export async function loadCityCatalog(userCoords: {
 
   const settled = await Promise.allSettled(
     entries.map(async (entry): Promise<CityCatalogItem> => {
-      let gpsCount = 0;
-      let placeCount = 0;
+      let triggerCount = 0;
+      let zoneCount = 0;
+      let approachCount = 0;
+      let subCount = 0;
       let factCount = 0;
+      let triggers: CityCatalogItem['triggers'] = [];
       let lat = entry.lat;
       let lng = entry.lng;
       let name = entry.name || titleCaseId(entry.id);
@@ -490,15 +575,18 @@ export async function loadCityCatalog(userCoords: {
       try {
         const pack = await fetchCityPackById(entry.id);
         const stats = summarizePack(pack);
-        gpsCount = stats.gpsCount;
-        placeCount = stats.placeCount;
+        triggerCount = stats.triggerCount;
+        zoneCount = stats.zoneCount;
+        approachCount = stats.approachCount;
+        subCount = stats.subCount;
         factCount = stats.factCount;
+        triggers = stats.triggers;
         if (typeof pack.lat === 'number') lat = pack.lat;
         if (typeof pack.lng === 'number') lng = pack.lng;
         if (pack.name) name = pack.name;
         if (pack.symbol) symbol = pack.symbol;
         console.log(
-          `[cityCatalog] ${entry.id}: GPS=${gpsCount} Orte=${placeCount} Fakten=${factCount}`,
+          `[cityCatalog] ${entry.id}: ${formatTriggerStats(stats)}`,
         );
       } catch (err) {
         console.warn(`[cityCatalog] Pack ${entry.id} fehlgeschlagen:`, err);
@@ -516,9 +604,14 @@ export async function loadCityCatalog(userCoords: {
         lat,
         lng,
         distanceKm,
-        gpsCount,
-        placeCount,
+        triggerCount,
+        zoneCount,
+        approachCount,
+        subCount,
         factCount,
+        triggers,
+        gpsCount: zoneCount,
+        placeCount: triggerCount,
       };
     }),
   );
@@ -565,3 +658,63 @@ export function packToRemote(pack: CityPack) {
 export function getCityPackPublicUrl(cityId: string): string {
   return cityPackPublicUrl(cityId);
 }
+
+const WANGEROOGE_ORTSPLAN: CityPackLink = {
+  id: 'ortsplan_interaktiv',
+  title: 'Interaktiver Orts- & Inselplan',
+  url: 'https://www.wangerooge.de/ortsplan-inselplan-der-nordseeinsel',
+  provider: 'wangerooge.de / Kurverwaltung',
+  description:
+    'Offizielle Karte mit Filtern für Unterkünfte, Genuss, Touren und Inselziele.',
+  tags: ['karte', 'orientierung', 'must_have', 'official'],
+};
+
+function normalizePackLinks(raw: unknown): CityPackLink[] {
+  if (!Array.isArray(raw)) return [];
+  const out: CityPackLink[] = [];
+  for (const item of raw) {
+    if (!item || typeof item !== 'object') continue;
+    const row = item as Record<string, unknown>;
+    const url = typeof row.url === 'string' ? row.url.trim() : '';
+    const title = typeof row.title === 'string' ? row.title.trim() : '';
+    if (!url.startsWith('http') || !title) continue;
+    out.push({
+      id: typeof row.id === 'string' ? row.id : title,
+      title,
+      url,
+      provider: typeof row.provider === 'string' ? row.provider : undefined,
+      description:
+        typeof row.description === 'string' ? row.description : undefined,
+      tags: Array.isArray(row.tags)
+        ? row.tags.map(String).filter(Boolean)
+        : undefined,
+    });
+  }
+  return out;
+}
+
+/**
+ * Offizielle Stadt-Links aus lokalem Cache / Remote-Pack.
+ * Fallback: bekannte Must-have-Links (z. B. Wangerooge Ortsplan), bis Cloud-Pack nachzieht.
+ */
+export async function getCityPackLinks(
+  cityId: string | null | undefined,
+): Promise<CityPackLink[]> {
+  const id = (cityId ?? '').trim().toLowerCase();
+  if (!id) return [];
+
+  let links: CityPackLink[] = [];
+  try {
+    const pack = await loadCityPackCachedOrRemote(id);
+    links = normalizePackLinks(pack._links);
+  } catch (err) {
+    console.warn('[cityCatalog] Links laden fehlgeschlagen:', err);
+  }
+
+  if (id === 'wangerooge' && !links.some((l) => l.id === WANGEROOGE_ORTSPLAN.id)) {
+    links = [WANGEROOGE_ORTSPLAN, ...links];
+  }
+  return links;
+}
+
+export type { CityPackLink };

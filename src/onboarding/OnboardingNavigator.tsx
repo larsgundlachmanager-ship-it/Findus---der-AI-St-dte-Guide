@@ -36,7 +36,7 @@ import {
 } from '../constants/onboardingOptions';
 import {
   INTRO_WELCOME_DE,
-  buildExplanationSegments,
+  buildExplanationParts,
   t,
   voiceLabel,
   type ExplanationHint,
@@ -50,6 +50,7 @@ import type {
 import { uiLang } from '../types/userProfile';
 import {
   speakWithKokoro,
+  speakSentenceStream,
   stopSpeaking,
   speakOnboardingIntro,
   prefetchOnboardingAudioBundle,
@@ -58,10 +59,13 @@ import {
   playVoiceSample,
   isVoiceSampleReady,
   warmupKokoro,
+  warmupPiperEngine,
+  startVoiceBuffer,
   voicePreloader,
 } from '../services/ttsService';
 import { useFinnusStore } from '../store/useFinnusStore';
 import {
+  formatTriggerStats,
   installCityPack,
   loadCityCatalog,
   resortCatalogByCoords,
@@ -75,11 +79,57 @@ import {
 } from '../services/sttService';
 import { saveUserProfile } from '../services/userProfileService';
 import { appendSpeechSegment } from '../utils/speechText';
+import { showPermissionMissingAlert } from '../utils/permissionAlerts';
 import { SwipeBackView } from '../components/SwipeBackView';
 import { PlayPauseIcon } from '../components/PlayPauseIcon';
 import { Header } from '../components/Header';
 import { MicButton } from '../components/MicButton';
-import { SimulationPicker } from '../components/SimulationPicker';
+import { PathChoiceStep } from './PathChoiceStep';
+import { ExpressSetupStep } from './ExpressSetupStep';
+import { MicConsentStep } from './MicConsentStep';
+import type { OnboardingMode, TravelParty } from '../types/userProfile';
+import { BUDGET_OPTIONS, ENERGY_OPTIONS, TOURIST_MODE_OPTIONS } from '../constants/conciergePrefs';
+import type { BudgetCategory, EnergyLevel, TouristVsInsider } from '../types/userProfile';
+
+type FlowStep =
+  | 'path'
+  | 'express'
+  | 'intro'
+  | 'voice'
+  | 'about'
+  | 'character'
+  | 'city'
+  | 'experience'
+  | 'mic'
+  | 'summary';
+
+const EXPRESS_FLOW: FlowStep[] = ['path', 'city', 'express', 'summary'];
+const STANDARD_FLOW: FlowStep[] = [
+  'path',
+  'intro',
+  'voice',
+  'about',
+  'character',
+  'city',
+  'experience',
+  'mic',
+  'summary',
+];
+
+function socialToTravelParty(id: string | undefined): TravelParty {
+  switch (id) {
+    case 'familie':
+      return 'family';
+    case 'date':
+      return 'date';
+    case 'zu_zweit':
+      return 'couple';
+    case 'freundesgruppe':
+      return 'friends';
+    default:
+      return 'solo';
+  }
+}
 
 type Props = {
   draft: UserProfile;
@@ -92,9 +142,14 @@ export function OnboardingNavigator({
   draft,
   setDraft,
   onComplete,
-  initialStep = 0,
 }: Props) {
-  const [step, setStep] = useState(initialStep);
+  const [mode, setMode] = useState<OnboardingMode | null>(
+    draft.onboardingMode ?? null,
+  );
+  const [flowIndex, setFlowIndex] = useState(0);
+
+  const flow = mode === 'express' ? EXPRESS_FLOW : STANDARD_FLOW;
+  const step = flow[Math.min(flowIndex, flow.length - 1)] ?? 'path';
 
   const patch = (p: Partial<UserProfile>) =>
     setDraft((d) => ({ ...d, ...p }));
@@ -115,58 +170,98 @@ export function OnboardingNavigator({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const finish = (override?: Partial<UserProfile>) => {
+    void stopSpeaking();
+    onComplete({
+      ...draft,
+      ...override,
+      language: 'de',
+      setupComplete: true,
+      completedAt: new Date().toISOString(),
+      onboardingMode: mode ?? override?.onboardingMode ?? 'standard',
+    });
+  };
+
   const goNext = (override?: Partial<UserProfile>) => {
     void stopSpeaking();
     const next = { ...draft, ...override, language: 'de' as const };
     if (override) setDraft(next);
     void persist(next);
-    setStep((s) => s + 1);
+    const nextIndex = Math.min(flowIndex + 1, flow.length - 1);
+    const nextStep = flow[nextIndex];
+    // Erklärung: Opener + Engine schon warm, bevor der Screen mountet
+    if (nextStep === 'summary') {
+      const voiceId = next.voiceId;
+      void warmupPiperEngine({ voiceId });
+      void startVoiceBuffer({ speechRate: 1, priorityVoiceId: voiceId });
+      void prepareOnboardingVoiceSamples({ priorityVoiceId: voiceId });
+    }
+    setFlowIndex(nextIndex);
   };
 
   const goBack = () => {
-    if (step <= 0) return;
     void stopSpeaking();
-    setStep((s) => Math.max(0, s - 1));
+    if (flowIndex <= 0) return;
+    if (flowIndex === 1) {
+      setMode(null);
+      setFlowIndex(0);
+      return;
+    }
+    setFlowIndex((i) => Math.max(0, i - 1));
+  };
+
+  const choosePath = (nextMode: OnboardingMode) => {
+    void prefetchOnboardingAudioBundle(INTRO_WELCOME_DE);
+    void prepareOnboardingVoiceSamples({
+      priorityVoiceId: 'standard_m',
+    });
+    setMode(nextMode);
+    const next = {
+      ...draft,
+      onboardingMode: nextMode,
+      language: 'de' as const,
+      voiceId: draft.voiceId || defaultVoiceForLanguage('de'),
+      speechRate: 1 as const,
+    };
+    setDraft(next);
+    void persist(next);
+    setFlowIndex(1);
   };
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
-      <SwipeBackView enabled={step > 0} onBack={goBack}>
-        {step === 0 && (
-          <LanguageStep
+      <SwipeBackView enabled={flowIndex > 0} onBack={goBack}>
+        {step === 'path' && <PathChoiceStep onChoose={choosePath} />}
+
+        {step === 'express' && (
+          <ExpressSetupStep
+            draft={draft}
+            onChange={patch}
+            onNext={(override) => goNext(override)}
+          />
+        )}
+
+        {step === 'intro' && (
+          <IntroStep lang={lang} onNext={goNext} onSkip={goNext} />
+        )}
+
+        {step === 'voice' && (
+          <VoiceStep
             lang={lang}
-            onSelect={() => {
-              goNext({
-                language: 'de',
-                voiceId: defaultVoiceForLanguage('de'),
-                speechRate: 1,
+            voiceId={draft.voiceId}
+            onChangeVoice={(voiceId) => {
+              setDraft((d) => {
+                const next = { ...d, voiceId, speechRate: 1 };
+                void persist(next);
+                return next;
               });
+              void voicePreloader.switchActiveVoice(voiceId);
             }}
-          />
-        )}
-        {step === 1 && (
-          <IntroStep
-            lang={lang}
             onNext={goNext}
-            onSkip={goNext}
           />
         )}
-        {step === 2 && (
-        <VoiceStep
-          lang={lang}
-          voiceId={draft.voiceId}
-          onChangeVoice={(voiceId) => {
-            setDraft((d) => {
-              const next = { ...d, voiceId, speechRate: 1 };
-              void persist(next);
-              return next;
-            });
-            void voicePreloader.switchActiveVoice(voiceId);
-          }}
-          onNext={goNext}
-        />
-        )}
-        {step === 3 && (
+
+        {step === 'about' && (
           <AboutYouStep
             lang={lang}
             draft={draft}
@@ -174,7 +269,8 @@ export function OnboardingNavigator({
             onNext={goNext}
           />
         )}
-        {step === 4 && (
+
+        {step === 'character' && (
           <CharacterStep
             lang={lang}
             draft={draft}
@@ -182,7 +278,8 @@ export function OnboardingNavigator({
             onNext={goNext}
           />
         )}
-        {step === 5 && (
+
+        {step === 'city' && (
           <CityStep
             lang={lang}
             selectedId={draft.cityId}
@@ -195,7 +292,8 @@ export function OnboardingNavigator({
             }
           />
         )}
-        {step === 6 && (
+
+        {step === 'experience' && (
           <ExperienceStep
             lang={lang}
             draft={draft}
@@ -203,57 +301,23 @@ export function OnboardingNavigator({
             onNext={goNext}
           />
         )}
-        {step === 7 && (
+
+        {step === 'mic' && (
+          <MicConsentStep
+            draft={draft}
+            onChange={patch}
+            onNext={goNext}
+          />
+        )}
+
+        {step === 'summary' && (
           <SummaryIntroStep
             draft={draft}
-            onFinished={() =>
-              onComplete({
-                ...draft,
-                language: 'de',
-                setupComplete: true,
-                completedAt: new Date().toISOString(),
-              })
-            }
+            onFinished={() => finish()}
           />
         )}
       </SwipeBackView>
     </SafeAreaView>
-  );
-}
-
-function LanguageStep({
-  lang,
-  onSelect,
-}: {
-  lang: AppLanguage;
-  onSelect: () => void;
-}) {
-  // Schon auf dem Sprach-Screen: Warmup + 6 Hörproben starten
-  useEffect(() => {
-    void prefetchOnboardingAudioBundle(INTRO_WELCOME_DE);
-    void prepareOnboardingVoiceSamples({
-      priorityVoiceId: 'standard_m',
-    });
-  }, []);
-
-  return (
-    <OnboardingShell>
-      <StepTitle>{t(lang, 'langTitle')}</StepTitle>
-      <View style={styles.langRow}>
-        <Pressable
-          onPress={() => {
-            void prepareOnboardingVoiceSamples({
-              priorityVoiceId: 'standard_m',
-            });
-            onSelect();
-          }}
-          style={[styles.langCard, styles.langCardRecommended]}
-        >
-          <Text style={styles.langFlag}>🇩🇪</Text>
-          <Text style={styles.langName}>{t(lang, 'deutsch')}</Text>
-        </Pressable>
-      </View>
-    </OnboardingShell>
   );
 }
 
@@ -314,6 +378,9 @@ function IntroStep({
 
   return (
     <OnboardingShell style={styles.introShell}>
+      <Text style={styles.durationBadge}>
+        Dauer: ca. 2–3 Minuten für perfekte Personalisierung
+      </Text>
       <View style={styles.introMain}>
         <AudioWave mood={isPlaying ? 'speaking' : 'idle'} />
         <SubtitleOverlay text={subtitle} />
@@ -467,6 +534,16 @@ function AboutYouStep({
           onChangeText={(email) => onChange({ email })}
           keyboardType="email-address"
         />
+        <Text style={styles.rateLabel}>{t(lang, 'aboutMe')}</Text>
+        <TextInput
+          value={draft.aboutMe ?? ''}
+          onChangeText={(aboutMe) => onChange({ aboutMe })}
+          style={[styles.input, styles.aboutMeInput]}
+          placeholder={t(lang, 'aboutMeHint')}
+          placeholderTextColor={colors.textMuted}
+          multiline
+          textAlignVertical="top"
+        />
         <Text style={styles.rateLabel}>{t(lang, 'age')}</Text>
         <AgeLifeSlider
           age={draft.age}
@@ -556,7 +633,10 @@ function CharacterStep({
         onChange({ accessibility: ids });
         break;
       case 'socialDynamics':
-        onChange({ socialDynamics: ids });
+        onChange({
+          socialDynamics: ids,
+          travelParty: socialToTravelParty(ids[0]),
+        });
         break;
       default: {
         const otherCatIds = new Set(
@@ -829,8 +909,11 @@ function CityCard({
         </Text>
       ) : null}
       <Text style={styles.cityStats}>
-        {city.gpsCount} {t(lang, 'zones')} · {city.placeCount}{' '}
-        {t(lang, 'places')} · {city.factCount} {t(lang, 'facts')}
+        {formatTriggerStats({
+          triggerCount: city.triggerCount,
+          zoneCount: city.zoneCount,
+          factCount: city.factCount,
+        })}
       </Text>
     </Pressable>
   );
@@ -845,20 +928,32 @@ function ExperienceStep({
   lang: AppLanguage;
   draft: UserProfile;
   onChange: (p: Partial<UserProfile>) => void;
-  onNext: () => void;
+  onNext: (override?: Partial<UserProfile>) => void;
 }) {
   const categories = (
-    ['wissen', 'vibes', 'mobilitaet', 'tempo', 'essen'] as const
+    ['wissen', 'vibes', 'mobilitaet', 'tempo', 'essen', 'stil'] as const
   ).map((id) => ({
     id,
     title: EXPERIENCE_CATEGORY_TITLES[id][uiLang(lang)],
-    cards: EXPERIENCE_CARDS.filter((c) => c.category === id),
+    cards: EXPERIENCE_CARDS.filter(
+      (c) => c.category === id && c.id !== 'budget',
+    ),
   }));
 
   const setPref = (id: string, value: SwipePreference) => {
-    onChange({
-      experiencePrefs: { ...draft.experiencePrefs, [id]: value },
-    });
+    const nextPrefs = { ...draft.experiencePrefs, [id]: value };
+    const patch: Partial<UserProfile> = { experiencePrefs: nextPrefs };
+    if (id === 'budget') {
+      patch.budgetCategory =
+        value === 'no' ? 'sparsam' : value === 'yes' ? 'komfort' : 'mittel';
+    }
+    if (id === 'weg_vom_trubel' && value === 'yes') {
+      patch.touristMode = 'insider';
+    }
+    if (id === 'typisch_touri' && value === 'yes') {
+      patch.touristMode = 'tourist';
+    }
+    onChange(patch);
   };
 
   const ensureDefaults = () => {
@@ -931,7 +1026,7 @@ function ExperienceStep({
     }
 
     if (!(await isSttAvailable())) {
-      Alert.alert('Mic', 'Spracherkennung nicht verfügbar');
+      showPermissionMissingAlert('speechUnavailable', { force: true });
       return;
     }
 
@@ -954,7 +1049,7 @@ function ExperienceStep({
     if (!result.ok) {
       micTargetRef.current = null;
       setMicTarget(null);
-      Alert.alert('Mic', result.reason);
+      // Popup bereits über sttService
       return;
     }
 
@@ -972,6 +1067,74 @@ function ExperienceStep({
     <OnboardingShell>
       <StepTitle>{t(lang, 'experienceTitle')}</StepTitle>
       <ScrollView contentContainerStyle={{ paddingBottom: 24 }}>
+        <Text style={styles.fieldLabel}>Energielevel</Text>
+        <View style={styles.chipRow}>
+          {ENERGY_OPTIONS.map((o) => {
+            const on = draft.energyLevel === o.id;
+            return (
+              <Pressable
+                key={o.id}
+                onPress={() =>
+                  onChange({ energyLevel: o.id as EnergyLevel })
+                }
+                style={[styles.prefChip, on && styles.prefChipOn]}
+              >
+                <Text style={styles.prefChipLabel}>{o.label}</Text>
+                <Text style={styles.prefChipHint}>{o.hint}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+
+        <Text style={styles.fieldLabel}>Budget — ungefähr wie viel?</Text>
+        <View style={styles.chipRow}>
+          {BUDGET_OPTIONS.map((o) => {
+            const on = draft.budgetCategory === o.id;
+            return (
+              <Pressable
+                key={o.id}
+                onPress={() =>
+                  onChange({
+                    budgetCategory: o.id as BudgetCategory,
+                    experiencePrefs: {
+                      ...draft.experiencePrefs,
+                      budget:
+                        o.id === 'sparsam'
+                          ? 'no'
+                          : o.id === 'komfort'
+                            ? 'yes'
+                            : 'neutral',
+                    },
+                  })
+                }
+                style={[styles.prefChip, on && styles.prefChipOn]}
+              >
+                <Text style={styles.prefChipLabel}>{o.label}</Text>
+                <Text style={styles.prefChipHint}>{o.hint}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+
+        <Text style={styles.fieldLabel}>Must-sees oder Geheimtipps?</Text>
+        <View style={styles.chipRow}>
+          {TOURIST_MODE_OPTIONS.map((o) => {
+            const on = draft.touristMode === o.id;
+            return (
+              <Pressable
+                key={o.id}
+                onPress={() =>
+                  onChange({ touristMode: o.id as TouristVsInsider })
+                }
+                style={[styles.prefChip, on && styles.prefChipOn]}
+              >
+                <Text style={styles.prefChipLabel}>{o.label}</Text>
+                <Text style={styles.prefChipHint}>{o.hint}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+
         {categories.map((cat) => (
           <View key={cat.id} style={styles.catBlock}>
             <Text style={styles.catTitle}>{cat.title}</Text>
@@ -1017,7 +1180,20 @@ function ExperienceStep({
           />
         </View>
       </ScrollView>
-      <PrimaryButton label={t(lang, 'continue')} onPress={onNext} />
+      <PrimaryButton
+        label={t(lang, 'continue')}
+        onPress={() =>
+          onNext({
+            energyLevel: draft.energyLevel ?? 'medium',
+            budgetCategory: draft.budgetCategory ?? 'mittel',
+            touristMode: draft.touristMode ?? 'mix',
+            mobilityMode: draft.mobilityMode ?? 'foot',
+            answerStyle: draft.answerStyle ?? 'detailed',
+            notificationsEnabled: draft.notificationsEnabled !== false,
+            dataSaverMode: false,
+          })
+        }
+      />
     </OnboardingShell>
   );
 }
@@ -1088,8 +1264,6 @@ function SummaryIntroStep({
 }) {
   const isPlaying = useFinnusStore((s) => s.isPlayingAudio);
   const subtitle = useFinnusStore((s) => s.subtitleText);
-  const isSimulationMode = useFinnusStore((s) => s.isSimulationMode);
-  const pois = useFinnusStore((s) => s.pois);
 
   const [canSkip, setCanSkip] = useState(true);
   const [fingerVisible, setFingerVisible] = useState(false);
@@ -1099,8 +1273,14 @@ function SummaryIntroStep({
   const micRef = useRef<View>(null);
   const settingsRef = useRef<View>(null);
   const finishedRef = useRef(false);
+  const segmentsRef = useRef(buildExplanationParts(draft).segments);
   const fingerOpacity = useRef(new Animated.Value(0)).current;
   const pulse = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    const { opener, segments } = buildExplanationParts(draft);
+    segmentsRef.current = [{ hint: 'none', text: opener }, ...segments];
+  }, [draft]);
 
   useEffect(() => {
     const pulseLoop = Animated.loop(
@@ -1150,7 +1330,7 @@ function SummaryIntroStep({
         await new Promise<void>((resolve) => {
           Animated.timing(fingerOpacity, {
             toValue: 0,
-            duration: 220,
+            duration: 180,
             useNativeDriver: true,
           }).start(() => {
             setFingerVisible(false);
@@ -1167,13 +1347,25 @@ function SummaryIntroStep({
       await new Promise<void>((resolve) => {
         Animated.timing(fingerOpacity, {
           toValue: 1,
-          duration: 280,
+          duration: 220,
           useNativeDriver: true,
         }).start(() => resolve());
       });
     },
     [fingerOpacity, measureTarget],
   );
+
+  // Finger-Hinweis anhand Untertitel an aktuelles Segment koppeln
+  useEffect(() => {
+    if (!subtitle) {
+      void showFinger('none');
+      return;
+    }
+    const hit = segmentsRef.current.find((s) =>
+      subtitle.startsWith(s.text.slice(0, Math.min(28, s.text.length))),
+    );
+    if (hit) void showFinger(hit.hint);
+  }, [subtitle, showFinger]);
 
   useEffect(() => {
     let cancelled = false;
@@ -1183,41 +1375,59 @@ function SummaryIntroStep({
       new Promise<void>((resolve) => setTimeout(resolve, ms));
 
     (async () => {
-      // Layout kurz setzen lassen, damit measureInWindow stimmt
-      await pause(350);
-      if (cancelled) return;
-
-      const segments = buildExplanationSegments(draft);
+      const { opener, segments } = buildExplanationParts(draft);
+      segmentsRef.current = [{ hint: 'none', text: opener }, ...segments];
       const voiceOpts = {
         voiceId: draft.voiceId,
         speechRate: 1 as const,
       };
 
-      for (let i = 0; i < segments.length; i++) {
-        if (cancelled || finishedRef.current) return;
-        const segment = segments[i];
+      // Engine + Buffer schon warm — Opener ist kurz → schneller First-Audio
+      void warmupPiperEngine({ voiceId: draft.voiceId });
+      void startVoiceBuffer({
+        speechRate: 1,
+        priorityVoiceId: draft.voiceId,
+      });
 
-        await showFinger(segment.hint);
-        if (cancelled || finishedRef.current) return;
+      await pause(60);
+      if (cancelled || finishedRef.current) return;
 
-        try {
-          await speakWithKokoro(segment.text, voiceOpts);
-        } catch (err) {
-          console.warn('[explanation] speak failed:', err);
+      /**
+       * Eine Stream-Session: 1) kurzer Opener als erstes Chunk (schnell fertig),
+       * 2) Rest läuft parallel in die LOOKAHEAD-Warteschlange, während Opener spielt.
+       */
+      async function* explanationStream(): AsyncGenerator<
+        string,
+        void,
+        unknown
+      > {
+        yield opener;
+        for (const segment of segments) {
+          if (cancelled || finishedRef.current) return;
+          yield segment.text;
         }
-        if (cancelled || finishedRef.current) return;
+      }
 
-        await showFinger('none');
-        if (cancelled || finishedRef.current) return;
-
-        if (i < segments.length - 1) {
-          await pause(SEGMENT_PAUSE_MS);
+      try {
+        await speakSentenceStream(explanationStream(), voiceOpts);
+      } catch (err) {
+        console.warn('[explanation] stream failed:', err);
+        const all = [{ text: opener }, ...segments];
+        for (let i = 0; i < all.length; i++) {
+          if (cancelled || finishedRef.current) return;
+          try {
+            await speakWithKokoro(all[i].text, voiceOpts);
+          } catch (e) {
+            console.warn('[explanation] speak failed:', e);
+          }
+          if (i < all.length - 1) await pause(SEGMENT_PAUSE_MS);
         }
       }
 
       if (cancelled || finishedRef.current) return;
       setCanSkip(false);
-      await pause(600);
+      await showFinger('none');
+      await pause(300);
       if (!cancelled && !finishedRef.current) {
         finishedRef.current = true;
         onFinished();
@@ -1234,16 +1444,23 @@ function SummaryIntroStep({
     <View ref={rootRef} style={styles.homeLike} collapsable={false}>
       <Header settingsRef={settingsRef} settingsDisabled />
 
+      {canSkip ? (
+        <View style={styles.skipWrap}>
+          <SecondaryButton
+            label={t(draft.language, 'skipExplanation')}
+            onPress={() => {
+              finishedRef.current = true;
+              void stopSpeaking();
+              onFinished();
+            }}
+          />
+        </View>
+      ) : null}
+
       <View style={styles.introMain}>
         <AudioWave mood={isPlaying ? 'speaking' : 'idle'} />
         <SubtitleOverlay text={subtitle} />
       </View>
-
-      <SimulationPicker
-        pois={pois}
-        visible={isSimulationMode}
-        disabled
-      />
 
       <View ref={micRef} collapsable={false}>
         <MicButton
@@ -1269,19 +1486,6 @@ function SummaryIntroStep({
         >
           <Text style={styles.fingerEmoji}>👆</Text>
         </Animated.View>
-      ) : null}
-
-      {canSkip ? (
-        <View style={styles.skipWrap}>
-          <SecondaryButton
-            label={t(draft.language, 'skipExplanation')}
-            onPress={() => {
-              finishedRef.current = true;
-              void stopSpeaking();
-              onFinished();
-            }}
-          />
-        </View>
       ) : null}
     </View>
   );
@@ -1320,6 +1524,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   introShell: { justifyContent: 'space-between' },
+  durationBadge: {
+    alignSelf: 'center',
+    color: colors.accent,
+    fontSize: 13,
+    fontWeight: '700',
+    marginBottom: spacing.sm,
+    textAlign: 'center',
+  },
   homeLike: {
     flex: 1,
     backgroundColor: colors.bg,
@@ -1331,13 +1543,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
   },
   skipWrap: {
-    position: 'absolute',
-    top: spacing.sm,
-    alignSelf: 'center',
-    left: spacing.md,
-    right: spacing.md,
-    zIndex: 30,
     alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
+    zIndex: 30,
   },
   finger: {
     position: 'absolute',
@@ -1399,6 +1609,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     minHeight: 48,
   },
+  aboutMeInput: {
+    minHeight: 96,
+    marginBottom: spacing.md,
+  },
   catBlock: { marginBottom: spacing.lg },
   catTitle: {
     color: colors.text,
@@ -1406,7 +1620,24 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginBottom: spacing.sm,
   },
-  chipRow: { flexDirection: 'row', flexWrap: 'wrap' },
+  chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  prefChip: {
+    minWidth: '46%',
+    flexGrow: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.12)',
+    backgroundColor: 'rgba(0,0,0,0.18)',
+    marginBottom: 4,
+  },
+  prefChipOn: {
+    borderColor: colors.accent,
+    backgroundColor: 'rgba(196, 163, 90, 0.15)',
+  },
+  prefChipLabel: { color: colors.text, fontWeight: '700', fontSize: 13 },
+  prefChipHint: { color: colors.textMuted, fontSize: 11, marginTop: 2 },
   sectionLabel: {
     color: colors.textMuted,
     textTransform: 'uppercase',

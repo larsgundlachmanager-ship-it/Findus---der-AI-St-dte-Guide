@@ -32,11 +32,11 @@ export function formatSessionMemoryForPrompt(memory?: SessionMemory | null): str
     return 'Noch keine vorherigen Stopps in dieser Tour.';
   }
   const list = memory.entries
-    .slice(-5)
+    .slice(-8)
     .map((e) => {
       const facts =
         e.keyFacts.length > 0
-          ? ` — Kernfakten: ${e.keyFacts.slice(0, 2).join('; ')}`
+          ? ` — Kernfakten: ${e.keyFacts.slice(0, 4).join('; ')}`
           : ' — (keine Kernfakten)';
       return `- ${e.name} (${e.kind})${facts}`;
     })
@@ -45,5 +45,6 @@ export function formatSessionMemoryForPrompt(memory?: SessionMemory | null): str
   return `Frühere Stopps (NUR als optionale Recherche — NICHT erwähnen ohne echte inhaltliche Schnittmenge!):
 ${list}
 
+Bereits gesagte Fakten NIEMALS wiederholen — der User soll nichts zweimal hören.
 Default: KEIN Wort über frühere Orte. Nur bei Aha-Bezug (gleiche Person, Baumeister, Motiv, Handwerk, klarer Fakt-Link) eine Brücke. Reine Routen-Sätze sind verboten.`;
 }

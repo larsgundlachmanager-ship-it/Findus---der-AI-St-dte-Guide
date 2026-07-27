@@ -17,6 +17,8 @@ import { colors } from './src/constants/theme';
 import { syncPOIsInBackground } from './src/services/syncService';
 import { syncDictionaryInBackground } from './src/services/sync/dictionarySyncService';
 import { initDictionaryEngine } from './src/services/tts/dictionaryEngine';
+import { loadFeatureTipState } from './src/services/ai/featureTips';
+import { initMultilingualPhoneticEngine } from './src/services/ai/multilingualPhoneticEngine';
 import {
   startVoiceBuffer,
   prefetchOnboardingAudioBundle,
@@ -31,12 +33,20 @@ import {
 import {
   loadUserProfile,
   saveUserProfile,
+  subscribeUserProfile,
 } from './src/services/userProfileService';
+import { useUserMemoryStore } from './src/store/useUserMemoryStore';
+import { ensureUserProfileStoreSync } from './src/store/useUserProfileStore';
 import { INTRO_WELCOME_DE } from './src/i18n';
+import { hydrateAffiliateRedirectAck } from './src/services/affiliate/affiliateDisclosure';
+import { startFindusHealthMonitor } from './src/services/findusHealthService';
+import { startWeatherMonitor } from './src/services/weatherService';
 import {
   SplashScreenController,
   SPLASH_BG,
 } from './src/components/SplashScreenController';
+/** Background-GPS-Task muss global beim Start definiert sein. */
+import './src/services/backgroundLocationTask';
 
 type AppPhase = 'booting' | 'onboarding' | 'ready' | 'error';
 
@@ -104,6 +114,11 @@ export default function App() {
     try {
       await initDatabase();
       await initDictionaryEngine();
+      await initMultilingualPhoneticEngine();
+      await useUserMemoryStore.getState().hydrate();
+      await loadFeatureTipState();
+      await hydrateAffiliateRedirectAck();
+      ensureUserProfileStoreSync();
       syncDictionaryInBackground();
       const pois = await getAllPois();
       setPois(pois);
@@ -145,6 +160,21 @@ export default function App() {
   useEffect(() => {
     void boot();
   }, [boot]);
+
+  useEffect(() => {
+    return startFindusHealthMonitor(12_000);
+  }, []);
+
+  useEffect(() => {
+    return startWeatherMonitor();
+  }, []);
+
+  useEffect(() => {
+    const unsub = subscribeUserProfile((next) => {
+      if (next?.setupComplete) setProfile(next);
+    });
+    return unsub;
+  }, []);
 
   useEffect(() => {
     if (!bootReady || !splashDone) return;

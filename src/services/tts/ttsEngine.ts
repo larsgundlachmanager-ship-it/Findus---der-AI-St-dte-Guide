@@ -1,29 +1,28 @@
 /**
- * TTS Engine facade — Active-Voice Keep-Warm API.
- *
- * Die Synthese selbst liegt in AudioVoiceService; dieser Einstieg bündelt
- * den Singleton-VoicePreloader für Boot und Persona-Wechsel.
+ * TTS Engine facade — Active-Voice Keep-Warm API (Piper).
  */
 export {
   voicePreloader,
-  VoicePreloaderService,
   type WarmVoiceResult,
 } from './voicePreloader';
 
-/** Alias: Engine-Einstieg für Active-Voice Keep-Warm. */
 export { voicePreloader as ttsEngine } from './voicePreloader';
 
 export {
   warmupKokoro,
+  warmupPiperEngine,
   startVoiceBuffer,
   synthesizeWav,
   speakWithKokoro,
+  speakWithPiper,
   speakAssistantText,
   stopSpeaking,
   isKokoroReady,
+  isPiperReady,
   loadVoiceIntoRam,
   unloadVoiceFromRam,
   unloadInactiveVoicePacks,
   ensureMartinOrtSession,
   markKokoroWarmedUp,
+  markPiperWarmedUp,
 } from '../AudioVoiceService';

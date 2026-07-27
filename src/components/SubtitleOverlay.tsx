@@ -5,13 +5,23 @@ import { colors, spacing } from '../constants/theme';
 /**
  * Untertitel am unteren Bildschirmrand – zeigt den gerade gesprochenen Kokoro-Text.
  */
-export function SubtitleOverlay({ text }: { text: string | null }) {
+export function SubtitleOverlay({
+  text,
+  liftForCard,
+}: {
+  text: string | null;
+  /** Wenn Spickzettel unter Findus liegt: Untertitel etwas anheben. */
+  liftForCard?: boolean;
+}) {
   if (!text?.trim()) {
     return null;
   }
 
   return (
-    <View style={styles.wrap} pointerEvents="none">
+    <View
+      style={[styles.wrap, liftForCard ? styles.wrapLifted : null]}
+      pointerEvents="none"
+    >
       <View style={styles.box}>
         <Text style={styles.text}>{text.trim()}</Text>
       </View>
@@ -24,8 +34,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: spacing.md,
     right: spacing.md,
-    bottom: spacing.md,
+    bottom: spacing.md + 8,
     zIndex: 2,
+  },
+  wrapLifted: {
+    bottom: 200,
   },
   box: {
     backgroundColor: 'rgba(8, 18, 14, 0.82)',

@@ -1,7 +1,8 @@
 {
-  "bus": "Buss",
-  "busse": "Busse",
-  "busses": "Busses",
+  "bus": "bˈʊs",
+  "buss": "bˈʊs",
+  "busse": "ˈbʊsə",
+  "busses": "ˈbʊsəs",
   "hof": "Hoff",
   "höfe": "Höffe",
   "hoefe": "Höffe",
@@ -18,5 +19,9 @@
   "hofseite": "Hoffseite",
   "dom": "Dohm",
   "pier": "Piir",
-  "rathaus": "Rathaus"
+  "rathaus": "Rathaus",
+  "holstein": "hˈɔlʃtaɪn",
+  "schleswig-holstein": "ˈʃleːsvɪç hˈɔlʃtaɪn",
+  "schleswig holstein": "ˈʃleːsvɪç hˈɔlʃtaɪn",
+  "schleswigholstein": "ˈʃleːsvɪç hˈɔlʃtaɪn"
 }

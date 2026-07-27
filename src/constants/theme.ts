@@ -8,6 +8,10 @@ export const colors = {
   textMuted: '#A8B5AE',
   danger: '#D96B5C',
   wave: '#7EC8A3',
+  /** Findus online & bereit */
+  online: '#3DCF7A',
+  /** Findus offline / Diagnose nötig */
+  offline: '#E8913A',
   border: 'rgba(244, 239, 230, 0.12)',
 };
 

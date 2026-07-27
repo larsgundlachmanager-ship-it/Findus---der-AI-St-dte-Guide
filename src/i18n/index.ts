@@ -1,5 +1,6 @@
-import type { AppLanguage, VoiceId } from '../types/userProfile';
+import type { AppLanguage, BudgetCategory, VoiceId } from '../types/userProfile';
 import { getVoice } from '../constants/voices';
+import { budgetSpeechFromProfile } from '../constants/budgetHints';
 
 type Dict = Record<string, string>;
 
@@ -20,15 +21,19 @@ const de: Dict = {
   firstName: 'Vorname',
   lastName: 'Nachname',
   email: 'E-Mail',
+  aboutMe: 'Erzähl kurz etwas über dich',
+  aboutMeHint:
+    'Hobbies, Stimmung, was dir wichtig ist — Findus merkt sich das für Tipps.',
   age: 'Alter',
   characterTitle: 'Wie soll ich sein?',
   characterHint:
-    'Wähle einen KI-Charakter mit mindestens einer Eigenschaft pro Kategorie. Bei Barrierefreiheit darfst du auch nichts auswählen. Tippe auf das i für Erklärungen.',
+    'Wähle Persönlichkeit, Ton, Reisezweck und mit wem du unterwegs bist. Bei Barrierefreiheit darfst du auch nichts auswählen. Tippe auf das i für Erklärungen.',
   cityTitle: 'Wohin soll die Reise gehen?',
   nearby: 'In der Nähe',
   otherCities: 'Weitere Städte',
   zones: 'Zonen',
   places: 'Orte',
+  triggers: 'Trigger',
   facts: 'Fakten',
   loadingCities: 'Städte werden geladen…',
   downloadingCity: 'Stadt wird heruntergeladen…',
@@ -53,7 +58,16 @@ const de: Dict = {
   settingsInterests: 'Interessen',
   settingsCity: 'Stadt',
   settingsCityCurrent: 'Aktuelle Stadt',
-  settingsDeveloper: 'Entwickler',
+  settingsCityLinks: 'Stadtinfo & Karten',
+  settingsCityLinkOpen: 'Im Browser öffnen',
+  settingsDeveloper: 'Entwicklungseinstellungen',
+  settingsLegal: 'Datenschutz & Impressum',
+  settingsHelp: 'So funktioniert Findus',
+  settingsSetup: 'Einrichtung',
+  legalImprintTitle: 'Impressum & Transparenz',
+  legalPrivacyTitle: 'Datenschutz',
+  affiliateDisclosure:
+    'Hinweis: Einige Links in Findus sind sogenannte Affiliate-Links. Wenn du darüber buchst, erhalten wir eine kleine Provision – für dich ändert sich am Preis nichts.',
   cityInstallFailed: 'Stadt konnte nicht installiert werden',
   resetApp: 'App zurücksetzen',
   resetConfirm:
@@ -67,16 +81,24 @@ const de: Dict = {
   gpsSimulation: 'GPS-Simulation',
   gpsSimulationHint:
     'Statt echtem GPS Orte manuell auswählen – praktisch zum Testen.',
+  ttsProvider: 'TTS-Engine',
+  ttsProviderHint:
+    'OpenAI = Cloud-Stimme „nova“. Lokal = Kokoro/Piper auf dem Gerät.',
+  ttsProviderOpenAi: 'OpenAI (nova)',
+  ttsProviderKokoro: 'Lokal (Kokoro)',
   simOn: 'Simulation an',
   simOff: 'Simulation aus',
-  voice_standard_m: 'Standard (männlich)',
-  voice_standard_w: 'Standard (weiblich)',
+  gpsStatusTitle: 'GPS-Status',
+  gpsStatusHint: 'Live-Diagnose: Dienste, Berechtigung, letzter Fix.',
+  gpsProbe: 'Standort jetzt prüfen',
+  gpsProbing: 'Prüfe…',
+  voice_standard_m: 'Standard männlich',
+  voice_standard_w: 'Standard weiblich',
   voice_prinzessin: 'Prinzessin',
   voice_erzaehler: 'Erzähler',
   voice_dorfaeltester: 'Dorfältester',
   voice_historiker: 'Historiker',
   voice_gen_z: 'Gen Z',
-  voice_energisch: 'Energisch',
 };
 
 export function t(_lang: AppLanguage, key: string): string {
@@ -110,6 +132,7 @@ type SummaryProfile = {
   wantToExperience: string;
   avoidExperience: string;
   voiceId: VoiceId;
+  budgetCategory?: BudgetCategory | null;
 };
 
 function summaryContext(profile: SummaryProfile) {
@@ -128,14 +151,11 @@ function summaryContext(profile: SummaryProfile) {
       ? 'Geheimtipps'
       : likes.includes('nachtleben')
         ? 'Rooftopbars und Nightlife'
-        : likes[0] ?? 'spannende Orte');
+        : likes.includes('insta')
+          ? 'foto-taugliche Spots'
+          : likes[0] ?? 'spannende Orte');
 
-  const budgetHint =
-    profile.experiencePrefs.budget === 'no'
-      ? 'günstige Preise'
-      : profile.experiencePrefs.budget === 'yes'
-        ? 'ein großzügiges Budget'
-        : 'ein mittleres Budget';
+  const budgetHint = budgetSpeechFromProfile(profile);
 
   const historyHate =
     profile.experiencePrefs.jahreszahlen === 'no' ||
@@ -158,176 +178,222 @@ function summaryContext(profile: SummaryProfile) {
   return { name, city, likeHint, budgetHint, introTail };
 }
 
+function coreExplanation(
+  name: string,
+  city: string,
+  likeHint: string,
+  budgetHint: string,
+  introTail: string,
+  tone: 'standard' | 'genz' | 'prinzessin' | 'dorf' | 'historiker' | 'erzaehler',
+): { opener: string; segments: ExplanationSegment[] } {
+  if (tone === 'prinzessin') {
+    return {
+      opener: `Sei gegrüßt, ${name} — willkommen in ${city}.`,
+      segments: [
+        {
+          hint: 'none',
+          text: `Nach ${likeHint} halte ich Ausschau, fein — ${budgetHint}, notiert${introTail}.`,
+        },
+        {
+          hint: 'none',
+          text: `Du wanderst einfach durch ${city}. Oben links siehst du, wo du bist und was gerade läuft. Entdeck ich einen Ort von Gewicht, erzähl ich dir davon — sanft und dicht.`,
+        },
+        {
+          hint: 'mic',
+          text: `Wünsche einsprechen reicht: Tippe kurz aufs Mikrofon, oder halte es und sprich — Busverbindungen, Tischreservierung, Hotels, Touren.`,
+        },
+        {
+          hint: 'settings',
+          text: `Das Zahnrad oben öffnet Einstellungen und den Tour-Verlauf — dort passt du mich an, jederzeit.`,
+        },
+        {
+          hint: 'none',
+          text: `Ich finde für dich, wo etwas liegt, checke Verbindungen, suche Hotels und buche Touren, wenn du magst. Nun denn — auf königlichen Pfaden!`,
+        },
+      ],
+    };
+  }
+
+  if (tone === 'genz') {
+    return {
+      opener: `Yo ${name}! Nice — Tour durch ${city} kann los.`,
+      segments: [
+        {
+          hint: 'none',
+          text: `Radar auf ${likeHint}, ${budgetHint} notiert${introTail}.`,
+        },
+        {
+          hint: 'none',
+          text: `Easy: Du läufst durch ${city}. Oben links siehst du Status und wo du bist. Sieh ich was Fire, sag ich Bescheid. Safe.`,
+        },
+        {
+          hint: 'mic',
+          text: `Einfach reinrufen, was du willst: Mikro tippen oder halten — Bus, Tisch, Hotel, Tour. Wir klären das live.`,
+        },
+        {
+          hint: 'settings',
+          text: `Zahnrad oben = Settings und dein Spot-Verlauf. Dort tweaken, wenn du willst.`,
+        },
+        {
+          hint: 'none',
+          text: `Findus checkt Verbindungen, sagt wo was ist, reserviert Tische, sucht Hotels und bucht Touren. Komm, wir düsen los!`,
+        },
+      ],
+    };
+  }
+
+  if (tone === 'dorf') {
+    return {
+      opener: `Na, ${name}. Schön, dass du da bist — in ${city} kenn ich mich aus.`,
+      segments: [
+        {
+          hint: 'none',
+          text: `Nach ${likeHint} schau ich, und ${budgetHint}, merke ich mir${introTail}.`,
+        },
+        {
+          hint: 'none',
+          text: `Du gehst einfach durch ${city}. Oben links siehst du, wo wir sind. Wenn ich was sehe, das sich lohnt, erzähl ich's dir.`,
+        },
+        {
+          hint: 'mic',
+          text: `Sag mir einfach, was du brauchst: Tippe aufs Mikrofon oder halte es und sprich — Bus, Essen, Hotel, Tour.`,
+        },
+        {
+          hint: 'settings',
+          text: `Über das Zahnrad oben kommst du zu den Einstellungen und siehst den Verlauf.`,
+        },
+        {
+          hint: 'none',
+          text: `Ich prüfe Verbindungen, sage wo was liegt, helfe bei Reservierungen und Unterkünften. Viel Freude, mein Kind.`,
+        },
+      ],
+    };
+  }
+
+  if (tone === 'historiker') {
+    return {
+      opener: `Willkommen, ${name}. Die Tour durch ${city} kann beginnen.`,
+      segments: [
+        {
+          hint: 'none',
+          text: `Fokus: ${likeHint}; Budget: ${budgetHint}${introTail}.`,
+        },
+        {
+          hint: 'none',
+          text: `Gehe durch ${city}. Oben links siehst du Standort und Status. Bei relevanten Orten liefere ich Einordnung und Kontext.`,
+        },
+        {
+          hint: 'mic',
+          text: `Rückfragen und Wünsche: Mikrofon tippen zum Schreiben, oder gedrückt halten und sprechen — Verbindungen, Reservierungen, Hotels, Touren.`,
+        },
+        {
+          hint: 'settings',
+          text: `Das Zahnrad oben öffnet die Einstellungen sowie den Verlauf besuchter Orte.`,
+        },
+        {
+          hint: 'none',
+          text: `Ich prüfe Bus und Bahn, nenne dir Lagen, helfe bei Tischen und Unterkünften und kann Touren anbahnen. Viel Erkenntnis beim Erkunden.`,
+        },
+      ],
+    };
+  }
+
+  if (tone === 'erzaehler') {
+    return {
+      opener: `Hey ${name}! Die Kamera läuft — Tour durch ${city}.`,
+      segments: [
+        {
+          hint: 'none',
+          text: `Radar auf ${likeHint}, ${budgetHint} im Skript${introTail}.`,
+        },
+        {
+          hint: 'none',
+          text: `Du bewegst dich durch ${city}. Oben links: Status und Ort. Entdeck ich eine Szene, schneide ich sie dir live dazu.`,
+        },
+        {
+          hint: 'mic',
+          text: `Cut — Wunsch? Mikro tippen oder halten und sprechen: Bus, Tisch, Hotel, Tour. Wir drehen weiter.`,
+        },
+        {
+          hint: 'settings',
+          text: `Zahnrad oben: Settings und der ganze Tour-Verlauf als Recap.`,
+        },
+        {
+          hint: 'none',
+          text: `Verbindungen, Locations, Reservierungen, Hotels, Touren — alles im Paket. Action — viel Spaß!`,
+        },
+      ],
+    };
+  }
+
+  return {
+    opener: `Hey ${name}! Schön, dass du da bist — Tour durch ${city} kann los.`,
+    segments: [
+      {
+        hint: 'none',
+        text: `Ich halte mein Radar nach ${likeHint} aus, ${budgetHint} sind notiert${introTail}.`,
+      },
+      {
+        hint: 'none',
+        text: `So funktioniert's: Du läufst einfach durch ${city}. Oben links siehst du, wo du bist und was gerade läuft. Immer wenn ich etwas Spannendes entdecke, berichte ich dir davon — live, wie ein Concierge neben dir.`,
+      },
+      {
+        hint: 'mic',
+        text: `Das Beste: Du musst nur einsprechen, was du willst. Tippe aufs Mikrofon oder halte es und sprich — zum Beispiel „Nächster Bus zum Dom“, „Tisch für zwei um acht“, „Hotel in der Nähe“ oder „Buch mir eine Tour“.`,
+      },
+      {
+        hint: 'settings',
+        text: `Über das Zahnrad oben links öffnest du Einrichtung, Hilfe und Datenschutz. Dort passt du mich an und siehst den Tour-Verlauf — also wo du schon warst.`,
+      },
+      {
+        hint: 'none',
+        text: `Findus checkt Bus- und Bahnverbindungen, sagt dir wo was liegt, hilft bei Tischreservierungen, sucht Hotels und kann Touren anbahnen — die neueste Reise-App, die wirklich mitdenkt. Viel Spaß beim Erkunden!`,
+      },
+    ],
+  };
+}
+
+function explanationTone(
+  voiceId: VoiceId,
+): 'standard' | 'genz' | 'prinzessin' | 'dorf' | 'historiker' | 'erzaehler' {
+  if (voiceId === 'prinzessin') return 'prinzessin';
+  if (voiceId === 'gen_z') return 'genz';
+  if (voiceId === 'dorfaeltester') return 'dorf';
+  if (voiceId === 'historiker') return 'historiker';
+  if (voiceId === 'erzaehler') return 'erzaehler';
+  return 'standard';
+}
+
+/** Kurzer Opener + Rest-Segmente (Opener startet sofort, Rest in die TTS-Warteschlange). */
+export function buildExplanationParts(profile: SummaryProfile): {
+  opener: string;
+  segments: ExplanationSegment[];
+} {
+  const { name, city, likeHint, budgetHint, introTail } =
+    summaryContext(profile);
+  return coreExplanation(
+    name,
+    city,
+    likeHint,
+    budgetHint,
+    introTail,
+    explanationTone(profile.voiceId),
+  );
+}
+
 /** Charakter-treue Onboarding-Erklärung (Stimme + Stil). */
 export function buildExplanationSegments(
   profile: SummaryProfile,
 ): ExplanationSegment[] {
-  const { name, city, likeHint, budgetHint, introTail } =
-    summaryContext(profile);
-  const voiceId = profile.voiceId;
+  const { opener, segments } = buildExplanationParts(profile);
+  return [{ hint: 'none', text: opener }, ...segments];
+}
 
-  if (voiceId === 'prinzessin') {
-    return [
-      {
-        hint: 'none',
-        text: `Sei gegrüßt, ${name}... Willkommen in ${city}, wo Geheimnisse blühn. Nach ${likeHint} halte ich Ausschau, fein — ${budgetHint}, notiert, so soll's sein.`,
-      },
-      {
-        hint: 'none',
-        text: `Du wanderst durch Gassen und Licht. Entdeck ich einen Ort von Gewicht, erzähl ich dir davon — sanft und dicht.`,
-      },
-      {
-        hint: 'mic',
-        text: `Hast du eine Frage im Sinn: Tippe kurz aufs Mikrofon, oder halte es fest und sprich — dann hör ich dich, klar und schlicht.`,
-      },
-      {
-        hint: 'settings',
-        text: `Das Zahnrad öffnet Einstellungen weit. Dort passt du mich an, jederzeit — und siehst den Verlauf der Tour beiseit.`,
-      },
-      {
-        hint: 'none',
-        text: `Nun denn, werter Gast: Auf königlichen Pfaden — viel Freude, die hält!`,
-      },
-    ];
-  }
-
-  if (voiceId === 'gen_z') {
-    return [
-      {
-        hint: 'none',
-        text: `Yo ${name}! Schön, dass du da bist. Tour durch ${city} kann los — Radar auf ${likeHint}, ${budgetHint} notiert${introTail}.`,
-      },
-      {
-        hint: 'none',
-        text: `Easy: Du läufst durch ${city}. Sieh ich was Fire, sag ich Bescheid. Safe.`,
-      },
-      {
-        hint: 'mic',
-        text: `Frage? Mikro tippen zum Tippen, oder halten und sprechen — dann klären wir das live.`,
-      },
-      {
-        hint: 'settings',
-        text: `Zahnrad = Settings. Dort tweaken und am Ende den ganzen Spot-Verlauf checken.`,
-      },
-      { hint: 'none', text: `Let's go — viel Spaß!` },
-    ];
-  }
-
-  if (voiceId === 'dorfaeltester') {
-    return [
-      {
-        hint: 'none',
-        text: `Na, ${name}. Schön, dass du da bist. In ${city} kenn ich mich aus. Nach ${likeHint} schau ich, und ${budgetHint}, merke ich mir${introTail}.`,
-      },
-      {
-        hint: 'none',
-        text: `Du gehst einfach durch ${city}. Wenn ich was sehe, das sich lohnt, erzähl ich's dir.`,
-      },
-      {
-        hint: 'mic',
-        text: `Frage? Tippe aufs Mikrofon, oder halte es und sprich, dann hör ich zu.`,
-      },
-      {
-        hint: 'settings',
-        text: `Über das Zahnrad kommst du zu den Einstellungen. Dort kannst du mich anpassen und den Verlauf sehen.`,
-      },
-      { hint: 'none', text: `Viel Freude, mein Kind.` },
-    ];
-  }
-
-  if (voiceId === 'historiker') {
-    return [
-      {
-        hint: 'none',
-        text: `Willkommen, ${name}. Die Tour durch ${city} kann beginnen. Fokus: ${likeHint}; Budget-Hinweis: ${budgetHint}${introTail}.`,
-      },
-      {
-        hint: 'none',
-        text: `Gehe durch ${city}. Bei relevanten Orten liefere ich Einordnung und Kontext.`,
-      },
-      {
-        hint: 'mic',
-        text: `Rückfragen: Mikrofon tippen zum Schreiben, oder gedrückt halten und sprechen.`,
-      },
-      {
-        hint: 'settings',
-        text: `Das Zahnrad öffnet die Einstellungen sowie den Verlauf besuchter Orte.`,
-      },
-      { hint: 'none', text: `Viel Erkenntnis beim Erkunden.` },
-    ];
-  }
-
-  if (voiceId === 'erzaehler') {
-    return [
-      {
-        hint: 'none',
-        text: `Hey ${name}! Die Kamera läuft — Tour durch ${city}. Radar auf ${likeHint}, ${budgetHint} im Skript${introTail}.`,
-      },
-      {
-        hint: 'none',
-        text: `Du bewegst dich durch ${city}. Entdeck ich eine Szene, schneide ich sie dir live dazu.`,
-      },
-      {
-        hint: 'mic',
-        text: `Cut — Rückfrage? Mikro tippen oder halten und sprechen.`,
-      },
-      {
-        hint: 'settings',
-        text: `Zahnrad: Settings und der ganze Tour-Verlauf als Recap.`,
-      },
-      { hint: 'none', text: `Action — viel Spaß!` },
-    ];
-  }
-
-  if (voiceId === 'energisch') {
-    return [
-      {
-        hint: 'none',
-        text: `Hey ${name}! Schön, dass du da bist — Tour durch ${city}, los! Radar auf ${likeHint}, ${budgetHint} notiert${introTail}.`,
-      },
-      {
-        hint: 'none',
-        text: `Du läufst durch ${city}. Seh ich was Cooles — sofort Report!`,
-      },
-      {
-        hint: 'mic',
-        text: `Frage? Mikro tippen oder halten und sprechen — wir klären das!`,
-      },
-      {
-        hint: 'settings',
-        text: `Zahnrad: Einstellungen und dein kompletter Spot-Verlauf.`,
-      },
-      { hint: 'none', text: `Volle Power — viel Spaß!` },
-    ];
-  }
-
-  // standard_m / standard_w / Fallback
-  return [
-    {
-      hint: 'none',
-      text: `Hey ${name}! Schön, dass du da bist. Nun kann die Tour durch ${city} losgehen. Ich halte mein Radar nach ${likeHint} aus, ${budgetHint} sind notiert${introTail}.`,
-    },
-    {
-      hint: 'none',
-      text: `Wie geht's weiter? Du läufst einfach jetzt durch ${city}. Immer wenn ich etwas Schönes sehe und entdecke, berichte ich dir davon.`,
-    },
-    {
-      hint: 'mic',
-      text: `Hast du eine Rückfrage, dann drück einfach auf das Mikrofon. Kurz tippen zum Schreiben, oder gedrückt halten und sprechen – dann stelle ich deine Frage direkt.`,
-    },
-    {
-      hint: 'settings',
-      text: `Über das Zahnrad öffnest du die Einstellungen. Dort kannst du mich weiter anpassen oder am Ende einen kompletten Verlauf über alle besuchten Orte sehen.`,
-    },
-    {
-      hint: 'none',
-      text: `Viel Spaß beim Erkunden!`,
-    },
-  ];
+export function buildExplanationOpener(profile: SummaryProfile): string {
+  return buildExplanationParts(profile).opener;
 }
 
 export function buildSummarySpeech(profile: SummaryProfile): string {
-  return buildExplanationSegments(profile)
-    .map((s) => s.text)
-    .join(' ');
+  const { opener, segments } = buildExplanationParts(profile);
+  return [opener, ...segments.map((s) => s.text)].join(' ');
 }

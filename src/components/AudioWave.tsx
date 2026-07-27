@@ -1,6 +1,18 @@
 import React, { useEffect, useMemo, useRef } from 'react';
-import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
+import { Animated, Easing, Pressable, StyleSheet, Text, View } from 'react-native';
+import Reanimated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import { colors, spacing } from '../constants/theme';
+import { useFinnusStore } from '../store/useFinnusStore';
+import { fadeAndStopNavigation } from '../services/navigation/navigationService';
+import {
+  formatRemainingStations,
+  isTransitMode,
+} from '../services/navigation/transportMode';
+import type { TransportMode } from '../services/navigation/navigationTypes';
 
 export type FindusMood = 'idle' | 'listening' | 'thinking' | 'speaking';
 
@@ -11,15 +23,62 @@ const MOOD_LINE: Record<FindusMood, string> = {
   speaking: 'Ich erzähle…',
 };
 
-/**
- * Eine durchgängige Findus-Präsenz.
- * Beim Sprechen bleibt dasselbe Design – nur Tempo, Glow und Ringe werden „redend“.
- */
-export function AudioWave({ mood }: { mood: FindusMood }) {
-  return <LivingPresence mood={mood} />;
+const ARROW_SPRING = { damping: 22, stiffness: 95, mass: 0.85 };
+
+function formatDistance(m: number | null): string {
+  if (m == null || !Number.isFinite(m)) return '—';
+  if (m < 1000) return `${Math.max(0, Math.round(m))} m`;
+  return `${(m / 1000).toFixed(1)} km`;
 }
 
-function LivingPresence({ mood }: { mood: FindusMood }) {
+function formatNavProgress(
+  distanceM: number | null,
+  transportMode: TransportMode | null,
+  remainingStations: number | null,
+): string {
+  if (transportMode && isTransitMode(transportMode)) {
+    return formatRemainingStations(remainingStations);
+  }
+  return formatDistance(distanceM);
+}
+
+function unwrapToward(current: number, target: number): number {
+  const delta = ((((target - current) % 360) + 540) % 360) - 180;
+  return current + delta;
+}
+
+/**
+ * Eine durchgängige Findus-Präsenz.
+ * Bei aktiver Navigation morph’t der Kreis zum Kompass-Pfeil.
+ */
+export function AudioWave({
+  mood,
+  compact,
+}: {
+  mood: FindusMood;
+  /** Weniger Vertikalraum – Findus sitzt oben, Platz für Spickzettel darunter. */
+  compact?: boolean;
+}) {
+  return <LivingPresence mood={mood} compact={compact} />;
+}
+
+function LivingPresence({
+  mood,
+  compact,
+}: {
+  mood: FindusMood;
+  compact?: boolean;
+}) {
+  const navActive = useFinnusStore((s) => s.navActive);
+  const navVisible = useFinnusStore((s) => s.navVisible);
+  const navBearingRel = useFinnusStore((s) => s.navBearingRel);
+  const navDistanceM = useFinnusStore((s) => s.navDistanceM);
+  const transportMode = useFinnusStore((s) => s.transportMode);
+  const remainingStations = useFinnusStore((s) => s.remainingStations);
+  const attentionCue = useFinnusStore((s) => s.attentionCue);
+  const findusPresence = useFinnusStore((s) => s.findusPresence);
+  const navigating = navActive && navVisible;
+
   const float = useRef(new Animated.Value(0)).current;
   const breath = useRef(new Animated.Value(0)).current;
   const spin = useRef(new Animated.Value(0)).current;
@@ -28,6 +87,9 @@ function LivingPresence({ mood }: { mood: FindusMood }) {
   const talk = useRef(new Animated.Value(0)).current;
   const ringA = useRef(new Animated.Value(0)).current;
   const ringB = useRef(new Animated.Value(0)).current;
+
+  const rotation = useSharedValue(0);
+  const rotationAbsRef = useRef(0);
 
   const speaking = mood === 'speaking';
   const tempo =
@@ -39,16 +101,39 @@ function LivingPresence({ mood }: { mood: FindusMood }) {
           ? 0.85
           : 1;
 
-  const accent =
-    mood === 'listening'
+  const presenceColor =
+    findusPresence === 'ok' ? colors.online : colors.offline;
+
+  const accent = navigating
+    ? colors.accent
+    : mood === 'listening'
       ? colors.danger
       : mood === 'thinking'
-        ? colors.wave
+        ? presenceColor
         : mood === 'speaking'
-          ? colors.wave
-          : colors.accent;
+          ? presenceColor
+          : presenceColor;
 
   useEffect(() => {
+    let deg = navBearingRel ?? 0;
+    if (attentionCue === 'left') deg = -90;
+    else if (attentionCue === 'right') deg = 90;
+    else if (attentionCue === 'behind') deg = 180;
+    const unwrapped = unwrapToward(rotationAbsRef.current, deg);
+    rotationAbsRef.current = unwrapped;
+    rotation.value = withSpring(unwrapped, ARROW_SPRING);
+  }, [navBearingRel, attentionCue, rotation]);
+
+  useEffect(() => {
+    if (navigating && !speaking) {
+      float.setValue(0.5);
+      breath.setValue(0.5);
+      glow.setValue(0.6);
+      spin.setValue(0);
+      spinBack.setValue(0);
+      return;
+    }
+
     const floatLoop = Animated.loop(
       Animated.sequence([
         Animated.timing(float, {
@@ -131,9 +216,8 @@ function LivingPresence({ mood }: { mood: FindusMood }) {
       spinLoop.stop();
       spinBackLoop.stop();
     };
-  }, [breath, float, glow, speaking, spin, spinBack, tempo]);
+  }, [breath, float, glow, navigating, speaking, spin, spinBack, tempo]);
 
-  // Unregelmäßiger „Sprech“-Rhythmus – wirkt wie Silben, bleibt aber im gleichen Design.
   useEffect(() => {
     if (!speaking) {
       talk.setValue(0);
@@ -216,7 +300,7 @@ function LivingPresence({ mood }: { mood: FindusMood }) {
       ringA.setValue(0);
       ringB.setValue(0);
     };
-  }, [ringA, ringB, speaking, talk]);
+  }, [navigating, ringA, ringB, speaking, talk]);
 
   const translateY = float.interpolate({
     inputRange: [0, 1],
@@ -256,11 +340,19 @@ function LivingPresence({ mood }: { mood: FindusMood }) {
 
   const haloScale = breath.interpolate({
     inputRange: [0, 1],
-    outputRange: speaking ? [1.02, 1.22] : [0.96, 1.12],
+    outputRange: (navigating && !speaking)
+      ? [1.08, 1.08]
+      : speaking
+        ? [1.02, 1.22]
+        : [0.96, 1.12],
   });
   const haloOpacity = glow.interpolate({
     inputRange: [0, 1],
-    outputRange: speaking ? [0.28, 0.55] : [0.18, 0.42],
+    outputRange: (navigating && !speaking)
+      ? [0.35, 0.35]
+      : speaking
+        ? [0.28, 0.55]
+        : [0.18, 0.42],
   });
 
   const rotate = spin.interpolate({
@@ -298,12 +390,37 @@ function LivingPresence({ mood }: { mood: FindusMood }) {
     [],
   );
 
+  const arrowStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${rotation.value}deg` }],
+  }));
+
+  const navProgress = formatNavProgress(
+    navDistanceM,
+    transportMode,
+    remainingStations,
+  );
+
+  const moodLine = navigating
+    ? attentionCue
+      ? `Schau ${attentionCue === 'behind' ? 'zurück' : attentionCue === 'left' ? 'links' : 'rechts'}`
+      : navProgress.startsWith('Noch')
+        ? navProgress
+        : `Noch ${navProgress}`
+    : MOOD_LINE[mood];
+
   return (
-    <View style={styles.wrap} accessibilityLabel={`Findus – ${MOOD_LINE[mood]}`}>
+    <View
+      style={[styles.wrap, compact ? styles.wrapCompact : null]}
+      accessibilityLabel={
+        navigating
+          ? `Kompass – ${navProgress}`
+          : `Findus – ${MOOD_LINE[mood]}`
+      }
+    >
       <Animated.View
         style={[styles.presenceBlock, { transform: [{ translateY }] }]}
       >
-        <View style={styles.stage}>
+        <View style={[styles.stage, compact ? styles.stageCompact : null]}>
           {speaking ? (
             <>
               <Animated.View
@@ -340,88 +457,139 @@ function LivingPresence({ mood }: { mood: FindusMood }) {
             ]}
           />
 
-          <Animated.View style={[styles.orbit, { transform: [{ rotate }] }]}>
-            {sparks.map((spark, i) => (
-              <View
-                key={i}
+          {!navigating ? (
+            <>
+              <Animated.View style={[styles.orbit, { transform: [{ rotate }] }]}>
+                {sparks.map((spark, i) => (
+                  <View
+                    key={i}
+                    style={[
+                      styles.sparkAnchor,
+                      { transform: [{ rotate: `${spark.offset}deg` }] },
+                    ]}
+                  >
+                    <View
+                      style={[
+                        styles.spark,
+                        {
+                          width: speaking ? spark.size + 2 : spark.size,
+                          height: speaking ? spark.size + 2 : spark.size,
+                          borderRadius:
+                            (speaking ? spark.size + 2 : spark.size) / 2,
+                          backgroundColor: accent,
+                          marginTop: -78,
+                          opacity: speaking ? 1 : 0.85,
+                        },
+                      ]}
+                    />
+                  </View>
+                ))}
+              </Animated.View>
+
+              <Animated.View
                 style={[
-                  styles.sparkAnchor,
-                  { transform: [{ rotate: `${spark.offset}deg` }] },
+                  styles.orbitInner,
+                  { transform: [{ rotate: rotateBack }] },
                 ]}
               >
                 <View
                   style={[
-                    styles.spark,
-                    {
-                      width: speaking ? spark.size + 2 : spark.size,
-                      height: speaking ? spark.size + 2 : spark.size,
-                      borderRadius: (speaking ? spark.size + 2 : spark.size) / 2,
-                      backgroundColor: accent,
-                      marginTop: -78,
-                      opacity: speaking ? 1 : 0.85,
-                    },
+                    styles.sparkAnchor,
+                    { transform: [{ rotate: '90deg' }] },
                   ]}
-                />
-              </View>
-            ))}
-          </Animated.View>
-
-          <Animated.View
-            style={[styles.orbitInner, { transform: [{ rotate: rotateBack }] }]}
-          >
-            <View
-              style={[styles.sparkAnchor, { transform: [{ rotate: '90deg' }] }]}
-            >
-              <View
-                style={[
-                  styles.sparkDim,
-                  { backgroundColor: colors.wave, marginTop: -52 },
-                ]}
-              />
-            </View>
-            <View
-              style={[styles.sparkAnchor, { transform: [{ rotate: '270deg' }] }]}
-            >
-              <View
-                style={[
-                  styles.sparkDim,
-                  { backgroundColor: colors.wave, marginTop: -52 },
-                ]}
-              />
-            </View>
-          </Animated.View>
+                >
+                  <View
+                    style={[
+                      styles.sparkDim,
+                      { backgroundColor: colors.wave, marginTop: -52 },
+                    ]}
+                  />
+                </View>
+                <View
+                  style={[
+                    styles.sparkAnchor,
+                    { transform: [{ rotate: '270deg' }] },
+                  ]}
+                >
+                  <View
+                    style={[
+                      styles.sparkDim,
+                      { backgroundColor: colors.wave, marginTop: -52 },
+                    ]}
+                  />
+                </View>
+              </Animated.View>
+            </>
+          ) : (
+            <Animated.View style={[styles.compassRing, { transform: [{ rotate }] }]} />
+          )}
 
           <Animated.View
             style={[
               styles.core,
+              navigating && styles.coreCompass,
               {
                 backgroundColor: accent,
                 shadowColor: accent,
-                transform: [
-                  { scale: coreScale },
-                  { scaleX: coreSquashX },
-                  { scaleY: coreSquashY },
-                ],
+                transform: navigating
+                  ? [{ scale: speaking ? coreScale : 1.08 }]
+                  : [
+                      { scale: coreScale },
+                      { scaleX: coreSquashX },
+                      { scaleY: coreSquashY },
+                    ],
               },
             ]}
           >
-            <View style={styles.coreHighlight} />
-            {speaking ? (
-              <Animated.View
-                style={[
-                  styles.mouth,
-                  {
-                    opacity: mouthOpacity,
-                    transform: [{ scaleY: mouthScaleY }],
-                  },
-                ]}
-              />
-            ) : null}
+            {navigating ? (
+              <Pressable
+                onLongPress={fadeAndStopNavigation}
+                delayLongPress={3000}
+                style={StyleSheet.absoluteFill}
+              >
+                <Reanimated.View style={[styles.arrowWrap, arrowStyle, StyleSheet.absoluteFill]}>
+                  <Text style={styles.arrowGlyph}>↑</Text>
+                </Reanimated.View>
+              </Pressable>
+            ) : (
+              <>
+                <View style={styles.coreHighlight} />
+                {speaking ? (
+                  <Animated.View
+                    style={[
+                      styles.mouth,
+                      {
+                        opacity: mouthOpacity,
+                        transform: [{ scaleY: mouthScaleY }],
+                      },
+                    ]}
+                  />
+                ) : null}
+              </>
+            )}
           </Animated.View>
         </View>
 
-        <Text style={styles.name}>Findus</Text>
-        <Text style={styles.moodLine}>{MOOD_LINE[mood]}</Text>
+        <Text style={styles.name}>{navigating ? 'Kompass' : 'Findus'}</Text>
+        {!navigating && findusPresence !== 'ok' ? (
+          <View
+            style={[
+              styles.presenceBadge,
+              { backgroundColor: colors.offline },
+            ]}
+          >
+            <Text style={styles.presenceBadgeText}>
+              {findusPresence === 'offline' ? 'Offline' : 'Eingeschränkt'}
+            </Text>
+          </View>
+        ) : !navigating && findusPresence === 'ok' ? (
+          <View
+            style={[styles.presenceBadge, { backgroundColor: colors.online }]}
+          >
+            <Text style={styles.presenceBadgeText}>Online</Text>
+          </View>
+        ) : null}
+        <Text style={styles.moodLine}>{moodLine}</Text>
       </Animated.View>
     </View>
   );
@@ -433,6 +601,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  wrapCompact: {
+    flex: 0,
+    justifyContent: 'flex-start',
+  },
   presenceBlock: {
     alignItems: 'center',
   },
@@ -442,6 +614,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing.md,
+  },
+  stageCompact: {
+    width: 168,
+    height: 168,
+    marginBottom: spacing.sm,
   },
   halo: {
     position: 'absolute',
@@ -455,6 +632,15 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 60,
     borderWidth: 2,
+  },
+  compassRing: {
+    position: 'absolute',
+    width: 118,
+    height: 118,
+    borderRadius: 59,
+    borderWidth: 3,
+    borderColor: 'rgba(196, 163, 90, 0.45)',
+    borderStyle: 'dashed',
   },
   orbit: {
     position: 'absolute',
@@ -496,6 +682,23 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     elevation: 10,
   },
+  coreCompass: {
+    justifyContent: 'center',
+    paddingTop: 0,
+    width: 88,
+    height: 88,
+    borderRadius: 44,
+  },
+  arrowWrap: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  arrowGlyph: {
+    fontSize: 44,
+    fontWeight: '700',
+    color: colors.bg,
+    marginTop: -4,
+  },
   coreHighlight: {
     width: 22,
     height: 10,
@@ -514,6 +717,19 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '700',
     letterSpacing: 0.8,
+  },
+  presenceBadge: {
+    marginTop: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    borderRadius: 999,
+    alignSelf: 'center',
+  },
+  presenceBadgeText: {
+    color: colors.bg,
+    fontSize: 11,
+    fontWeight: '800',
+    letterSpacing: 0.3,
   },
   moodLine: {
     marginTop: 6,

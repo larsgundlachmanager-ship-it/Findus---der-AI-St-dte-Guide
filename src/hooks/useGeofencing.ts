@@ -1,13 +1,15 @@
 import { useEffect, useRef } from 'react';
 import { useFinnusStore } from '../store/useFinnusStore';
 import {
+  refreshLocationDiagnostics,
   startWatchingLocation,
   stopWatchingLocation,
 } from '../services/locationService';
 import { handleLocationUpdate } from '../services/poiTriggerService';
+import { checkCityProximity } from '../services/cityProximityService';
 
 /**
- * Real-GPS Geofencing – nur aktiv, wenn Simulation aus ist.
+ * Real-GPS Geofencing – still Orte suchen, sobald Simulation aus ist.
  */
 export function useGeofencing(): void {
   const isSimulationMode = useFinnusStore((s) => s.isSimulationMode);
@@ -22,22 +24,34 @@ export function useGeofencing(): void {
           await stopWatchingLocation();
           watchingRef.current = false;
         }
+        useFinnusStore.getState().setGpsWatching(false);
+        useFinnusStore.getState().setGpsStatus('idle', null);
+        void refreshLocationDiagnostics();
         return;
       }
 
-      const ok = await startWatchingLocation(async ({ lat, lng }) => {
-        if (!cancelled) {
-          await handleLocationUpdate(lat, lng);
-        }
-      });
+      useFinnusStore.getState().setGpsStatus('searching', null);
+      const ok = await startWatchingLocation(
+        ({ lat, lng, accuracy, speedMs, headingDeg }) => {
+          if (!cancelled) {
+            // Nicht awaiten — sonst stauen sich Fixes hinter langen Story/TTS-Läufen
+            void handleLocationUpdate(lat, lng, { speedMs, headingDeg });
+            void checkCityProximity(lat, lng);
+          }
+          void accuracy;
+        },
+      );
       watchingRef.current = ok;
+      if (!ok && !cancelled) {
+        await refreshLocationDiagnostics();
+      }
     }
 
-    start();
+    void start();
 
     return () => {
       cancelled = true;
-      stopWatchingLocation();
+      void stopWatchingLocation();
       watchingRef.current = false;
     };
   }, [isSimulationMode]);

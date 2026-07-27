@@ -5,6 +5,10 @@ export type FindusEspeakNative = {
   isReady(): boolean;
   textToPhonemes(text: string, voice?: string): Promise<string>;
   getVoice(): string;
+  /** APK-Asset → Dateisystem. Bytes geschrieben, oder -1. */
+  copyAssetFile?(assetRelPath: string, destAbsPath: string): Promise<number>;
+  /** Asset-Größe in Bytes, oder -1. */
+  assetFileSize?(assetRelPath: string): Promise<number>;
 };
 
 let native: FindusEspeakNative | null = null;
@@ -62,9 +66,58 @@ export async function nativeEspeakTextToPhonemes(
   return mod.textToPhonemes(text, voice);
 }
 
+/**
+ * Kopiert eine APK-Asset-Datei nach destAbsPath via AssetManager.
+ * Zuverlässiger als FileSystem.copyAsync(file:///android_asset/…).
+ */
+export async function nativeCopyAssetFile(
+  assetRelPath: string,
+  destAbsPath: string,
+): Promise<boolean> {
+  const mod = getNative();
+  if (!mod?.copyAssetFile) {
+    console.warn('[findus-espeak] copyAssetFile fehlt im Native-Modul');
+    return false;
+  }
+  try {
+    // file:// abstreifen — Kotlin File() braucht echten FS-Pfad
+    let dest = destAbsPath.trim();
+    if (dest.startsWith('file://')) {
+      dest = dest.slice('file://'.length);
+    }
+    const size = await mod.copyAssetFile(assetRelPath, dest);
+    const n = typeof size === 'number' ? size : Number(size);
+    if (!Number.isFinite(n) || n <= 1000) {
+      console.warn(
+        `[findus-espeak] copyAssetFile fehlgeschlagen: ${assetRelPath} → ${dest} (size=${String(size)})`,
+      );
+      return false;
+    }
+    return true;
+  } catch (e) {
+    console.warn('[findus-espeak] copyAssetFile:', e);
+    return false;
+  }
+}
+
+export async function nativeAssetFileSize(
+  assetRelPath: string,
+): Promise<number> {
+  const mod = getNative();
+  if (!mod?.assetFileSize) return -1;
+  try {
+    const size = await mod.assetFileSize(assetRelPath);
+    return typeof size === 'number' ? size : -1;
+  } catch {
+    return -1;
+  }
+}
+
 export default {
   isNativeEspeakAvailable,
   nativeEspeakInitialize,
   nativeEspeakIsReady,
   nativeEspeakTextToPhonemes,
+  nativeCopyAssetFile,
+  nativeAssetFileSize,
 };

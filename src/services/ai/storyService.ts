@@ -1,285 +1,146 @@
 /**
- * Story-Engine: kontextbezogener Fast Hook + sofortige Auflösung.
- * Erster LLM-Satz = Hook; Folgesätze lösen das Versprechen ein.
+ * Story-Engine: Single-Shot Gemini (Master-Prompt) → TTS-Sätze.
+ * Legacy chain-v1 / FastHook-Stitching entfernt.
  */
 
 import type { PoiWithFacts } from '../../db/types';
 import type { UserProfile } from '../../types/userProfile';
 import { createDefaultProfile } from '../../types/userProfile';
 import { getCachedUserProfile } from '../userProfileService';
-import { filterDeepStoryFacts } from './deepStoryFilter';
+import type { SessionMemory } from './sessionMemory';
+import type { FindusStoryBrief } from './findusTourDirector';
 import {
-  buildContextAwareOfflineNarration,
-  buildDeepStoryPrompt,
-  extractKeyFactsFromNarrationFacts,
-  resolvePromptStyleSettings,
-} from './promptBuilder';
-import { buildFastHook, classifyPoiHookKind } from './fastHook';
-import { sentencesFromFullText } from './sentenceStream';
-import type { SessionMemory, VisitedPlaceMemory } from './sessionMemory';
-import { streamPromptSentences } from '../localAiService';
+  beginSingleShotStoryStream,
+  extractOfflineGeneralInfo,
+  streamFindusStorySentences,
+} from './singleShotStory';
+import { classifyPoiHookKind } from './fastHook';
 
 export type StoryStreamInput = {
   poi: PoiWithFacts;
-  /** Bereits gesprochener Hook — Deep Story muss ihn auflösen. */
-  fastHook: string;
+  /** @deprecated Ignoriert — Single-Shot schreibt die ganze Story. */
+  fastHook?: string;
   profile?: UserProfile | null;
   sessionMemory?: SessionMemory | null;
+  tourBrief?: FindusStoryBrief | null;
 };
 
 export type HookThenStoryResult = {
-  /** Erster Satz (Hook) — sofort sprechen. */
   hook: string;
-  /** Restliche Sätze (Auflösung + Story). */
   body: AsyncGenerator<string, void, unknown>;
 };
 
-function filteredPoiFromDeep(
-  poi: PoiWithFacts,
-  deep: ReturnType<typeof filterDeepStoryFacts>,
-): PoiWithFacts {
-  return {
-    ...poi,
-    facts: deep.facts.map((f) => ({
-      id: f.id,
-      poi_id: poi.id,
-      fact_text: f.text,
-    })),
-  };
-}
-
 /**
- * Streamt nur den Hauptteil — Fast Hook wurde bereits gesprochen.
- * Erster Satz MUSS das Hook-Versprechen einlösen.
- */
-export async function* streamDeepStory(
-  input: StoryStreamInput,
-): AsyncGenerator<string, void, unknown> {
-  const profile =
-    input.profile ?? getCachedUserProfile() ?? createDefaultProfile();
-  const deep = filterDeepStoryFacts(input.poi, {
-    profile,
-    sessionMemory: input.sessionMemory,
-  });
-  const filteredPoi = filteredPoiFromDeep(input.poi, deep);
-
-  const prompt = buildDeepStoryPrompt({
-    poi: filteredPoi,
-    profile,
-    fastHook: input.fastHook,
-    sessionMemory: input.sessionMemory,
-    yearsPreference: deep.yearsPreference,
-    hoursHint: deep.hoursHint,
-    includeHook: false,
-  });
-
-  try {
-    let yielded = false;
-    for await (const sentence of streamPromptSentences(prompt)) {
-      const clean = sentence.replace(/\s+/g, ' ').trim();
-      if (!clean) continue;
-      if (
-        !yielded &&
-        input.fastHook &&
-        clean
-          .toLowerCase()
-          .startsWith(input.fastHook.slice(0, 16).toLowerCase())
-      ) {
-        continue;
-      }
-      yielded = true;
-      yield clean;
-    }
-    if (yielded) return;
-  } catch (error) {
-    console.warn('[storyService] LLM stream failed, offline:', error);
-  }
-
-  const offline = buildOfflineDeepStory(input, filteredPoi, profile);
-  yield* sentencesFromFullText(offline);
-}
-
-/**
- * Ein Stream: Satz 1 = kontextbezogener Hook, Satz 2+ = Auflösung + Story.
- */
-export async function* streamHookResolvingNarration(input: {
-  poi: PoiWithFacts;
-  profile?: UserProfile | null;
-  sessionMemory?: SessionMemory | null;
-}): AsyncGenerator<string, void, unknown> {
-  const profile =
-    input.profile ?? getCachedUserProfile() ?? createDefaultProfile();
-  const deep = filterDeepStoryFacts(input.poi, {
-    profile,
-    sessionMemory: input.sessionMemory,
-  });
-  const filteredPoi = filteredPoiFromDeep(input.poi, deep);
-
-  const prompt = buildDeepStoryPrompt({
-    poi: filteredPoi,
-    profile,
-    fastHook: '',
-    sessionMemory: input.sessionMemory,
-    yearsPreference: deep.yearsPreference,
-    hoursHint: deep.hoursHint,
-    includeHook: true,
-  });
-
-  try {
-    let count = 0;
-    for await (const sentence of streamPromptSentences(prompt)) {
-      const clean = sentence.replace(/\s+/g, ' ').trim();
-      if (!clean) continue;
-      count += 1;
-      yield clean;
-    }
-    if (count > 0) return;
-  } catch (error) {
-    console.warn('[storyService] hook+story stream failed, offline:', error);
-  }
-
-  const fallbackHook = buildFastHook(
-    input.poi,
-    profile,
-    input.sessionMemory,
-  );
-  yield fallbackHook;
-  const offline = buildContextAwareOfflineNarration(
-    filteredPoi,
-    profile,
-    input.sessionMemory,
-  );
-  yield* sentencesFromFullText(offline);
-}
-
-/**
- * Ein LLM-Stream: Satz 1 = kontextbezogener Fast Hook, Rest = Auflösung + Story.
- * Timeout: fakt-basierter Template-Hook + neuer Deep-Story-Stream, der genau
- * diesen Hook auflöst (kein Clickbait-Mismatch).
+ * Primärer Einstieg für POI-Trigger / speakTwoPhase.
+ * Ein Gemini-Call; Satz 1 = Hook, Rest = Body. Offline = general_info.
  */
 export async function beginHookResolvingStream(
   input: {
     poi: PoiWithFacts;
     profile?: UserProfile | null;
     sessionMemory?: SessionMemory | null;
+    tourBrief?: FindusStoryBrief | null;
+    approachAlreadyHeard?: boolean;
   },
-  options?: { hookTimeoutMs?: number },
+  _options?: { hookTimeoutMs?: number; factTimeoutMs?: number },
 ): Promise<{
   hook: string;
   bodySentenceStream: AsyncIterable<string>;
   usedLlmHook: boolean;
+  pipeline: 'single-shot-v1';
 }> {
-  const timeoutMs = options?.hookTimeoutMs ?? 1100;
   const profile =
     input.profile ?? getCachedUserProfile() ?? createDefaultProfile();
-  const fallbackHook = buildFastHook(
-    input.poi,
+
+  const started = await beginSingleShotStoryStream({
+    poi: input.poi,
     profile,
-    input.sessionMemory,
-  );
-
-  const iterator = streamHookResolvingNarration(input)[Symbol.asyncIterator]();
-
-  type Race =
-    | { kind: 'llm'; sentence: string }
-    | { kind: 'timeout' }
-    | { kind: 'empty' };
-
-  const first = await Promise.race<Race>([
-    iterator.next().then((r) =>
-      r.done || !r.value?.trim()
-        ? ({ kind: 'empty' } as const)
-        : ({ kind: 'llm', sentence: r.value.trim() } as const),
-    ),
-    new Promise<Race>((resolve) =>
-      setTimeout(() => resolve({ kind: 'timeout' }), timeoutMs),
-    ),
-  ]);
-
-  if (first.kind === 'llm') {
-    async function* bodyFromLlm(): AsyncGenerator<string, void, unknown> {
-      while (true) {
-        const next = await iterator.next();
-        if (next.done) break;
-        const s = next.value?.trim();
-        if (s) yield s;
-      }
-    }
-    return {
-      hook: first.sentence,
-      bodySentenceStream: bodyFromLlm(),
-      usedLlmHook: true,
-    };
-  }
-
-  // Timeout/leer: Template-Hook + neuer Stream, der GENAU diesen Hook auflöst.
-  // Iterator nicht weiter lesen (kein paralleles next() — sonst Doppel-Konsum).
-  async function* bodyFromDeep(): AsyncGenerator<string, void, unknown> {
-    for await (const sentence of streamDeepStory({
-      poi: input.poi,
-      profile,
-      sessionMemory: input.sessionMemory,
-      fastHook: fallbackHook,
-    })) {
-      yield sentence;
-    }
-  }
+    sessionMemory: input.sessionMemory,
+    mode: 'arrival',
+    approachAlreadyHeard: input.approachAlreadyHeard,
+    // Ein Call braucht Luft — keine 2.5s-Kette mehr
+    timeoutMs: 22000,
+  });
 
   return {
-    hook: fallbackHook,
-    bodySentenceStream: bodyFromDeep(),
-    usedLlmHook: false,
+    hook: started.hook,
+    bodySentenceStream: started.bodySentenceStream,
+    usedLlmHook: started.usedLlm,
+    pipeline: 'single-shot-v1',
   };
 }
 
-function buildOfflineDeepStory(
+/** Volle Story satzweise (ohne Hook/Body-Split). */
+export async function* streamDeepStory(
   input: StoryStreamInput,
-  filteredPoi: PoiWithFacts,
-  profile: UserProfile,
-): string {
-  const full = buildContextAwareOfflineNarration(
-    filteredPoi,
+): AsyncGenerator<string, void, unknown> {
+  const profile =
+    input.profile ?? getCachedUserProfile() ?? createDefaultProfile();
+  yield* streamFindusStorySentences({
+    poi: input.poi,
     profile,
-    input.sessionMemory,
-  );
-  const hook = input.fastHook.trim();
-  const resolution = hook
-    ? `Genau deshalb: ${hook.replace(/\?$/, '.')} Die Fakten dazu stecken in dem, was du hier siehst.`
-    : null;
-  const hookNorm = hook.toLowerCase();
-  const parts = full
-    .split(/(?<=[.!?])\s+/)
-    .map((s) => s.trim())
-    .filter((s) => s && !hookNorm.includes(s.toLowerCase().slice(0, 18)));
-
-  return [resolution, ...parts].filter(Boolean).join(' ');
+    sessionMemory: input.sessionMemory,
+    mode: 'arrival',
+    timeoutMs: 22000,
+  });
 }
 
-export async function collectDeepStory(
-  input: StoryStreamInput,
-): Promise<string> {
-  const parts: string[] = [];
-  for await (const s of streamDeepStory(input)) {
-    parts.push(s);
+export async function* streamHookResolvingNarration(input: {
+  poi: PoiWithFacts;
+  profile?: UserProfile | null;
+  sessionMemory?: SessionMemory | null;
+  tourBrief?: FindusStoryBrief | null;
+}): AsyncGenerator<string, void, unknown> {
+  const started = await beginHookResolvingStream(input);
+  if (started.hook) yield started.hook;
+  for await (const s of started.bodySentenceStream) {
+    yield s;
   }
-  return parts.join(' ').trim();
 }
 
-/** Memory-Eintrag nach erfolgreicher Station. */
+/** Offline-Notiz: nur general_info / Erzählung. */
+export function buildOfflineDeepStory(
+  input: StoryStreamInput,
+  _filteredPoi?: PoiWithFacts,
+  _profile?: UserProfile | null,
+): string {
+  return (
+    extractOfflineGeneralInfo(input.poi) ||
+    'Offline liegt für diesen Ort keine fertige Erzählung vor.'
+  );
+}
+
+export function toStampBullets(texts: string[], max = 3): string[] {
+  return texts
+    .map((t) => t.replace(/\s+/g, ' ').trim())
+    .filter(Boolean)
+    .slice(0, max);
+}
+
 export function buildVisitedMemoryEntry(
   poi: PoiWithFacts,
-  spokenFacts?: string[],
-): VisitedPlaceMemory {
-  const deep = filterDeepStoryFacts(poi);
+  keyFacts: string[],
+): {
+  poiId: number;
+  name: string;
+  kind: ReturnType<typeof classifyPoiHookKind>;
+  keyFacts: string[];
+  visitedAt: number;
+} {
   return {
     poiId: poi.id,
     name: poi.name,
     kind: classifyPoiHookKind(poi),
-    keyFacts:
-      spokenFacts?.slice(0, 3) ??
-      extractKeyFactsFromNarrationFacts(deep.facts.map((f) => f.text)),
+    keyFacts,
     visitedAt: Date.now(),
   };
 }
 
-export { resolvePromptStyleSettings };
+/** @deprecated Alias — Single-Shot. */
+export const beginChainedStoryStream = beginHookResolvingStream;
+
+export {
+  extractOfflineGeneralInfo,
+  streamFindusStorySentences,
+  beginSingleShotStoryStream,
+};

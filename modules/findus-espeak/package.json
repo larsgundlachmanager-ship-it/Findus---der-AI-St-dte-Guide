@@ -1,11 +1,11 @@
 {
   "name": "findus-espeak",
   "version": "1.0.0",
-  "description": "Native espeak-ng G2P (de-DE IPA) for Findus Kokoro TTS",
+  "description": "Internes Piper-Phonemize (espeak-ng G2P) + AssetManager-Kopie für Findus Piper TTS",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {},
-  "keywords": ["espeak-ng", "g2p", "ipa", "kokoro", "expo"],
+  "keywords": ["espeak-ng", "piper", "phonemize", "expo"],
   "license": "GPL-3.0-or-later",
   "peerDependencies": {
     "expo": "*",

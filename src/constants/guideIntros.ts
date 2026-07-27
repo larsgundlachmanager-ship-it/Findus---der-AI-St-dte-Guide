@@ -1,4 +1,4 @@
-/** Kurze Sofort-Reaktionen für Phase-1-Audio (Kokoro). */
+/** Kurze Sofort-Reaktionen für Phase-1-Audio (Piper Fast-Hook). */
 export const POI_INTROS = [
   'Alles klar, ich schaue mir den Ort an.',
   'Moment, ich hole die Fakten heraus.',

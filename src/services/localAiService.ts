@@ -1,22 +1,19 @@
+/**
+ * Text-Engine: Single-Shot Gemini → Offline general_info.
+ */
+
 import type { PoiWithFacts } from '../db/types';
 import { env } from '../config/env';
-import {
-  buildContextAwareOfflineNarration,
-  buildPoiContextPrompt,
-} from './ai/promptBuilder';
-import { filterDeepStoryFacts } from './ai/deepStoryFilter';
-import {
-  extractCompletedSentences,
-  sentencesFromFullText,
-} from './ai/sentenceStream';
 import { getCachedUserProfile } from './userProfileService';
 import { createDefaultProfile } from '../types/userProfile';
+import type { MasterPromptContext } from '../types/userProfile';
+import {
+  generateGeminiText,
+  hasGeminiApiKey,
+} from './geminiService';
+import { GEMINI_TEMPERATURE } from '../constants/gemini';
+import { sentencesFromFullText } from './ai/sentenceStream';
 
-/**
- * Tier 1 – Offline SLM via react-native-llama (llama.cpp Bindings).
- * Vor Kokoro: Context-Aware Prompt (Live-Zeit, Persona, Interessen, Filter).
- * Fallback: gefiltertes Offline-Template, wenn kein Native-Modell da ist.
- */
 export async function generateLocalTourNarration(
   poi: PoiWithFacts,
 ): Promise<string> {
@@ -27,13 +24,77 @@ export async function generateLocalTourNarration(
   return parts.join(' ').trim();
 }
 
-/**
- * Satz-Stream für einen beliebigen Prompt (Deep Story).
- * Keine Personality-Polish-Mutation vor Kokoro.
- */
+export type GeneratePromptOptions = {
+  maxTokens?: number;
+  temperature?: number;
+  useFindusSystem?: boolean;
+  masterContext?: MasterPromptContext;
+  systemInstruction?: string;
+};
+
+export function hasTextEngine(): boolean {
+  return hasGeminiApiKey() || hasLocalLlm();
+}
+
+export function hasLocalLlm(): boolean {
+  return Boolean(env.localModelPath()?.trim());
+}
+
+export async function generatePromptText(
+  prompt: string,
+  options?: GeneratePromptOptions,
+): Promise<string> {
+  if (hasGeminiApiKey()) {
+    try {
+      const text = await generateGeminiText(prompt, {
+        maxTokens: options?.maxTokens ?? 512,
+        temperature: options?.temperature ?? GEMINI_TEMPERATURE,
+        useFindusSystem: options?.useFindusSystem,
+        masterContext: options?.masterContext,
+        systemInstruction: options?.systemInstruction,
+      });
+      if (text.trim()) return text.trim();
+    } catch (error) {
+      console.warn('[textEngine] Gemini generatePromptText:', error);
+    }
+  }
+
+  try {
+    const llama = await loadLlamaModule();
+    if (!llama) return '';
+    return (await llama.generate(prompt, options)).trim();
+  } catch (error) {
+    console.warn('[localAi] generatePromptText:', error);
+    return '';
+  }
+}
+
 export async function* streamPromptSentences(
   prompt: string,
+  options?: GeneratePromptOptions,
 ): AsyncGenerator<string, void, unknown> {
+  if (hasGeminiApiKey()) {
+    try {
+      let yielded = false;
+      const text = await generateGeminiText(prompt, {
+        maxTokens: options?.maxTokens ?? 512,
+        temperature: options?.temperature ?? GEMINI_TEMPERATURE,
+        useFindusSystem: options?.useFindusSystem,
+        masterContext: options?.masterContext,
+        systemInstruction: options?.systemInstruction,
+      });
+      if (text.trim()) {
+        for await (const sentence of sentencesFromFullText(text.trim())) {
+          yielded = true;
+          yield sentence;
+        }
+      }
+      if (yielded) return;
+    } catch (error) {
+      console.warn('[textEngine] Gemini streamPromptSentences:', error);
+    }
+  }
+
   try {
     const llama = await loadLlamaModule();
     if (llama?.generateStream) {
@@ -47,7 +108,6 @@ export async function* streamPromptSentences(
       const text = await llama.generate(prompt);
       if (text?.trim()) {
         yield* sentencesFromFullText(text.trim());
-        return;
       }
     }
   } catch (error) {
@@ -55,42 +115,44 @@ export async function* streamPromptSentences(
   }
 }
 
-/**
- * Satz-Stream für Instant-TTS: erster Satz → Audio, Rest parallel.
- * Deep-Story-Filter entfernt Kontakt-Daten / Jahreszahlen nach Profil.
- */
 export async function* generateLocalTourNarrationStream(
   poi: PoiWithFacts,
 ): AsyncGenerator<string, void, unknown> {
   const profile = getCachedUserProfile() ?? createDefaultProfile();
-  const deep = filterDeepStoryFacts(poi, { profile });
-  const filteredPoi: PoiWithFacts = {
-    ...poi,
-    facts: deep.facts.map((f) => ({
-      id: f.id,
-      poi_id: poi.id,
-      fact_text: f.text,
-    })),
-  };
-  const prompt = buildPoiContextPrompt(filteredPoi, profile);
-
+  // Lazy: vermeidet Require-Cycle geminiService ↔ singleShotStory via localAiService
+  const {
+    streamFindusStorySentences,
+    extractOfflineGeneralInfo,
+  } = require('./ai/singleShotStory') as typeof import('./ai/singleShotStory');
   try {
     let yielded = false;
-    for await (const sentence of streamPromptSentences(prompt)) {
+    for await (const s of streamFindusStorySentences({
+      poi,
+      profile,
+      mode: 'arrival',
+      timeoutMs: 22000,
+    })) {
       yielded = true;
-      yield sentence;
+      yield s;
     }
     if (yielded) return;
   } catch (error) {
-    console.warn('[localAi] SLM unavailable, using offline template:', error);
+    console.warn('[textEngine] singleShot failed:', error);
   }
 
-  const offline = buildContextAwareOfflineNarration(poi, profile);
-  yield* sentencesFromFullText(offline);
+  const offline = extractOfflineGeneralInfo(poi);
+  if (offline) {
+    yield* sentencesFromFullText(offline);
+  } else {
+    yield 'Offline liegt für diesen Ort keine fertige Erzählung vor.';
+  }
 }
 
 type LlamaBridge = {
-  generate: (prompt: string) => Promise<string>;
+  generate: (
+    prompt: string,
+    options?: GeneratePromptOptions,
+  ) => Promise<string>;
   generateStream?: (prompt: string) => AsyncGenerator<string, void, unknown>;
 };
 
@@ -107,143 +169,14 @@ async function loadLlamaModule(): Promise<LlamaBridge | null> {
     try {
       mod = require('llama.rn');
     } catch {
-      try {
-        mod = require('react-native-llama');
-      } catch {
-        mod = null;
-      }
+      mod = null;
     }
-
-    const modelPath = env.localModelPath();
-
-    if (!mod || !modelPath) {
+    if (!mod) {
       llamaBridge = null;
       return null;
     }
-
-    const initLlama =
-      (mod.initLlama as
-        | ((opts: object) => Promise<{
-            completion: (
-              opts: object,
-              callback?: (data: { token?: string; text?: string }) => void,
-            ) => Promise<{ text?: string }>;
-          }>)
-        | undefined) ??
-      (
-        mod.default as {
-          initLlama?: (opts: object) => Promise<{
-            completion: (
-              opts: object,
-              callback?: (data: { token?: string; text?: string }) => void,
-            ) => Promise<{ text?: string }>;
-          }>;
-        }
-      )?.initLlama;
-
-    if (!initLlama) {
-      llamaBridge = null;
-      return null;
-    }
-
-    const context = await initLlama({ model: modelPath, n_ctx: 3072 });
-
-    if (!context?.completion) {
-      llamaBridge = null;
-      return null;
-    }
-
-    llamaBridge = {
-      generate: async (prompt: string) => {
-        const result = await context.completion({
-          prompt,
-          n_predict: 220,
-          temperature: 0.7,
-          stop: ['</s>', 'User:', 'Mensch:', '```'],
-        });
-        return result?.text ?? '';
-      },
-      generateStream: async function* (prompt: string) {
-        let buffer = '';
-        let resolved = '';
-        const pending: string[] = [];
-        let wake: (() => void) | null = null;
-        let done = false;
-
-        const push = (s: string) => {
-          pending.push(s);
-          wake?.();
-          wake = null;
-        };
-
-        const completionPromise = context
-          .completion(
-            {
-              prompt,
-              n_predict: 220,
-              temperature: 0.7,
-              stop: ['</s>', 'User:', 'Mensch:', '```'],
-            },
-            (data) => {
-              const token = data.token ?? '';
-              const partial = data.text ?? '';
-              if (partial && partial.length >= resolved.length) {
-                buffer = partial;
-              } else if (token) {
-                buffer += token;
-              } else {
-                return;
-              }
-              const { sentences, rest } = extractCompletedSentences(buffer);
-              buffer = rest;
-              for (const s of sentences) {
-                resolved = resolved ? `${resolved} ${s}` : s;
-                push(s.trim());
-              }
-            },
-          )
-          .then((result) => {
-            const text = (result?.text ?? buffer).trim();
-            if (text) {
-              const remaining = text.startsWith(resolved)
-                ? text.slice(resolved.length).trim()
-                : text;
-              if (remaining) {
-                const { sentences, rest } =
-                  extractCompletedSentences(remaining + ' ');
-                for (const s of sentences) {
-                  push(s.trim());
-                }
-                if (rest.trim()) {
-                  push(rest.trim());
-                }
-              }
-            }
-          })
-          .catch((err) => {
-            console.warn('[localAi] stream completion:', err);
-          })
-          .finally(() => {
-            done = true;
-            wake?.();
-            wake = null;
-          });
-
-        while (!done || pending.length > 0) {
-          if (pending.length === 0) {
-            await new Promise<void>((r) => {
-              wake = r;
-            });
-            continue;
-          }
-          yield pending.shift()!;
-        }
-
-        await completionPromise;
-      },
-    };
-
-    return llamaBridge;
+    llamaBridge = null;
+    return null;
   } catch {
     llamaBridge = null;
     return null;

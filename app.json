@@ -17,6 +17,9 @@
       "bundleIdentifier": "com.finnus.app",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Findus nutzt deinen Standort, um Tour-Stops in der Nähe zu erkennen.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Findus braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
+        "NSLocationAlwaysUsageDescription": "Findus braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
+        "UIBackgroundModes": ["location", "audio"],
         "NSMicrophoneUsageDescription": "Findus braucht das Mikrofon für deine Rückfragen.",
         "NSSpeechRecognitionUsageDescription": "Findus wandelt deine Sprache in Text um."
       }
@@ -30,6 +33,9 @@
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION",
+        "FOREGROUND_SERVICE",
+        "FOREGROUND_SERVICE_LOCATION",
         "RECORD_AUDIO",
         "MODIFY_AUDIO_SETTINGS",
         "INTERNET"
@@ -37,6 +43,7 @@
     },
     "plugins": [
       "./plugins/withJetifier",
+      "./plugins/withPiperAssets",
       "./plugins/withKokoroAssets",
       "./plugins/withFindusEspeak",
       [
@@ -48,7 +55,10 @@
       [
         "expo-location",
         {
-          "locationWhenInUsePermission": "Findus nutzt deinen Standort, um Tour-Stops in der Nähe zu erkennen."
+          "locationWhenInUsePermission": "Findus nutzt deinen Standort, um Tour-Stops in der Nähe zu erkennen.",
+          "locationAlwaysAndWhenInUsePermission": "Findus braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
+          "isAndroidBackgroundLocationEnabled": true,
+          "isAndroidForegroundServiceEnabled": true
         }
       ],
       [

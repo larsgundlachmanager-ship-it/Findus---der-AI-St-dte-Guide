@@ -13,6 +13,7 @@ interface Props {
   onPressIn: () => void;
   onPressOut: () => void;
   isListening: boolean;
+  isFinalizing?: boolean;
   isGenerating: boolean;
   partialText?: string;
 }
@@ -21,6 +22,7 @@ export function MicButton({
   onPressIn,
   onPressOut,
   isListening,
+  isFinalizing = false,
   isGenerating,
   partialText,
 }: Props) {
@@ -52,10 +54,11 @@ export function MicButton({
 
   return (
     <View style={styles.wrap}>
-      {(isListening || partialText) && (
+      {(isListening || isFinalizing || partialText) && (
         <View style={styles.chatBubble}>
           <Text style={styles.partial} numberOfLines={4}>
-            {partialText || 'Ich höre zu…'}
+            {partialText ||
+              (isFinalizing ? 'Letzte Wörter…' : 'Ich höre zu…')}
           </Text>
         </View>
       )}
@@ -84,9 +87,11 @@ export function MicButton({
       <Text style={styles.hint}>
         {isGenerating
           ? 'Findus denkt nach…'
-          : isListening
-            ? 'Loslassen zum Senden'
-            : 'Kurz tippen zum Schreiben · Halten zum Sprechen'}
+          : isFinalizing
+            ? 'Letzte Wörter werden erkannt…'
+            : isListening
+              ? 'Loslassen zum Senden'
+              : 'Kurz tippen zum Schreiben · Halten zum Sprechen'}
       </Text>
     </View>
   );

@@ -1,13 +1,17 @@
 import type { ChatMessage } from '../db/types';
-import { OPENAI_API_URL, OPENAI_MODEL } from '../constants/prompts';
 import { env } from '../config/env';
 import {
   extractCompletedSentences,
   sentencesFromFullText,
 } from './ai/sentenceStream';
+import {
+  askGeminiSentenceStream,
+  hasGeminiApiKey,
+} from './geminiService';
+import { OPENAI_API_URL, OPENAI_MODEL } from '../constants/prompts';
 
 /**
- * Tier 2 – Online OpenAI Fallback für User-Rückfragen.
+ * Text-Rückfragen: Gemini 1.5 Flash (primär), OpenAI nur als Notfall-Fallback.
  */
 export async function askOpenAi(
   chatHistory: ChatMessage[],
@@ -20,25 +24,39 @@ export async function askOpenAi(
 }
 
 /**
- * OpenAI → Satz-Stream (erster Satz sofort an TTS).
- * React Native: XHR onprogress; Fallback: einmaliger Non-Stream-Call.
+ * Satz-Stream für User-Rückfragen → Gemini, sonst OpenAI.
  */
 export async function* askOpenAiSentenceStream(
   chatHistory: ChatMessage[],
+  options?: { enableGoogleSearch?: boolean },
 ): AsyncGenerator<string, void, unknown> {
-  const apiKey = env.openAiApiKey();
-
-  if (!apiKey || apiKey.includes('your-key-here')) {
-    yield* sentencesFromFullText(buildDevFallbackAnswer(chatHistory));
-    return;
-  }
-
   const messages = chatHistory
     .filter((m) => m.content.trim().length > 0)
     .map((m) => ({
       role: m.role,
       content: m.content,
     }));
+
+  if (hasGeminiApiKey()) {
+    try {
+      let yielded = false;
+      for await (const s of askGeminiSentenceStream(messages, {
+        enableGoogleSearch: options?.enableGoogleSearch,
+      })) {
+        yielded = true;
+        yield s;
+      }
+      if (yielded) return;
+    } catch (err) {
+      console.warn('[textEngine] Gemini Follow-up fehlgeschlagen:', err);
+    }
+  }
+
+  const apiKey = env.openAiApiKey();
+  if (!apiKey || apiKey.includes('your-key-here')) {
+    yield* sentencesFromFullText(buildDevFallbackAnswer(chatHistory));
+    return;
+  }
 
   try {
     yield* streamOpenAiViaXhr(apiKey, messages);
@@ -187,7 +205,7 @@ function buildDevFallbackAnswer(chatHistory: ChatMessage[]): string {
   return (
     `Gute Frage${lastUser ? ` zu „${lastUser.content.slice(0, 60)}“` : ''}! ` +
     `Aus dem, was ich zu ${locationHint} weiß: Schau dir die Fakten in meiner letzten Erzählung an – ` +
-    `für eine vollständige Online-Antwort hinterlege bitte deinen OpenAI-API-Key in .env ` +
-    `(EXPO_PUBLIC_OPENAI_API_KEY).`
+    `für eine vollständige Online-Antwort hinterlege bitte deinen Gemini-API-Key in .env ` +
+    `(EXPO_PUBLIC_GEMINI_API_KEY).`
   );
 }

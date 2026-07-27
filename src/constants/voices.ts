@@ -1,117 +1,132 @@
-import type { AppLanguage, VoiceId } from '../types/userProfile';
+﻿import type { AppLanguage, VoiceId } from '../types/userProfile';
 import {
-  resolveKokoroPackId,
-  type KokoroVoicePackId,
-} from './kokoroVoicePacks';
+  resolvePiperModelId,
+  type PiperVoiceModelId,
+} from './piperVoices';
+import type { KokoroVoicePackId } from './kokoroVoicePacks';
+import { isKokoroVoice } from './kokoroVoicePacks';
+
+export type TtsEngineId = 'piper' | 'kokoro';
 
 export type VoiceDefinition = {
   id: VoiceId;
   emoji: string;
-  kokoroPackId: KokoroVoicePackId;
+  /** Piper-ONNX (Männer) oder ungenutzt bei Kokoro-Frauen. */
+  piperModelId?: PiperVoiceModelId;
+  /** Kokoro Style-Pack (Frauen). */
+  kokoroPackId?: KokoroVoicePackId;
+  ttsEngine: TtsEngineId;
   pitch: number;
-  /** Systemweit unveränderbar 1.0 — kein Slider, keine Verzerrung. */
   baseSpeed: number;
   sample: string;
+  isPrimaryColor?: boolean;
 };
 
 export const DEFAULT_VOICE_ID: VoiceId = 'standard_m';
 
-/** Inferenz-/Playback-Tempo: systemweit fest (kein Sprechtempo-Slider). */
 export const FIXED_SPEECH_RATE = 1.0;
-
-/** @deprecated Früher Minimum — Tempo ist jetzt immer FIXED_SPEECH_RATE. */
 export const MIN_SPEECH_RATE = FIXED_SPEECH_RATE;
 
-/** Alle 8 Hörproben — vorgerendert unter src/assets/audio/samples/. */
+export const PRIMARY_VOICE_COLOR_IDS: readonly VoiceId[] = [
+  'standard_m',
+  'standard_w',
+  'dorfaeltester',
+  'prinzessin',
+  'gen_z',
+  'historiker',
+] as const;
+
 export const EAGER_SAMPLE_VOICE_IDS: readonly VoiceId[] = [
   'standard_m',
   'standard_w',
-  'prinzessin',
-  'erzaehler',
   'dorfaeltester',
-  'historiker',
+  'prinzessin',
   'gen_z',
-  'energisch',
+  'historiker',
+  'erzaehler',
 ] as const;
 
 /**
- * 8 UI-Rollen → 3 native deutsche Kokoro-Packs (de_thorsten / de_eva / de_karl).
- * Charakter nur über LLM-Textstil — nie Pitch/Speed-Manipulation.
- * Tempo ausnahmslos FIXED_SPEECH_RATE (1.0).
+ * Hybrid: Frauen → zwei Kokoro-Packs (eva / nova), Männer → Piper.
  */
 export const VOICES: VoiceDefinition[] = [
   {
     id: 'standard_m',
-    emoji: '👨',
-    kokoroPackId: 'de_thorsten',
+    emoji: '🎙️',
+    ttsEngine: 'piper',
+    piperModelId: 'de_DE-thorsten-medium',
     pitch: 1.0,
     baseSpeed: FIXED_SPEECH_RATE,
+    isPrimaryColor: true,
     sample:
-      'Moin! Ich bin Findus. Mit mir erlebst du jeden Ort ganz entspannt und auf den Punkt gebracht. Ein ehrlicher, verlässlicher Begleiter für deine Tour.',
+      'Moin! Schön, dass du da bist. Ich bin dein Begleiter für unterwegs und bringe die Geschichten direkt auf den Punkt – ganz ohne Schnickschnack. Egal ob Altstadt, Bahnhof oder historische Orte: Wenn du Bock auf eine entspannte, lebendige Tour hast, wähl mich einfach aus und wir düsen gemeinsam los!',
   },
   {
     id: 'standard_w',
-    emoji: '👩',
-    kokoroPackId: 'de_eva',
+    emoji: '🌸',
+    ttsEngine: 'kokoro',
+    kokoroPackId: 'de_nova',
     pitch: 1.0,
     baseSpeed: FIXED_SPEECH_RATE,
+    isPrimaryColor: true,
     sample:
-      'Hallo! Ich freue mich darauf, gemeinsam mit dir die schönsten Ecken und Geheimnisse dieser Gegend zu entdecken. Lass uns einfach losgehen!',
-  },
-  {
-    id: 'prinzessin',
-    emoji: '👑',
-    kokoroPackId: 'de_eva',
-    pitch: 1.0,
-    baseSpeed: FIXED_SPEECH_RATE,
-    sample:
-      'Trete näher, werter Gast. Lass dich von mir in eine Welt voller Zauber und verborgener Geschichten entführen. Wir wandeln gemeinsam auf königlichen Pfaden.',
-  },
-  {
-    id: 'erzaehler',
-    emoji: '📖',
-    kokoroPackId: 'de_thorsten',
-    pitch: 1.0,
-    baseSpeed: FIXED_SPEECH_RATE,
-    sample:
-      'Lehn dich zurück. Wenn du diese Gegend erleben willst wie in einem epischen Blockbuster-Film, dann bist du bei mir genau richtig. Geschichte wird lebendig.',
+      'Hallo. Ich freue mich, dich auf deiner Tour zu begleiten. Mit mir entdeckst du ganz entspannt die schönsten Ecken. Mit Liebe zum Detail, und einem warmen Vibe. Lass uns einfach zusammen durch die Straßen schlendern. Und die Geschichten genießen. Hast du Lust?',
   },
   {
     id: 'dorfaeltester',
     emoji: '🧓',
-    kokoroPackId: 'de_karl',
+    ttsEngine: 'piper',
+    piperModelId: 'de_DE-karl-medium',
     pitch: 1.0,
-    /** Exakt wie Hörprobe: 1.0 — keine Drosselung. */
     baseSpeed: FIXED_SPEECH_RATE,
+    isPrimaryColor: true,
     sample:
-      'Na, mein Kind. Über achtzig Jahre lebe ich schon hier. Ich kenne jeden Winkel und all die alten Geschichten aus der guten alten Zeit. Setz dich kurz zu mir.',
+      'Na, mein Lieber! Weißt du, ich kenne hier wirklich jeden einzelnen Stein und jede alte Gasse. Aber keine Sorge, ich schlafe beim Erzählen nicht ein! Ich hab immer noch ordentlich Humor und die besten Anekdoten von früher auf Lager. Schnapp dir deinen Krückstock und lass uns einfach losgehen!',
   },
   {
-    id: 'historiker',
-    emoji: '📜',
-    kokoroPackId: 'de_karl',
+    id: 'prinzessin',
+    emoji: '👑',
+    ttsEngine: 'kokoro',
+    kokoroPackId: 'de_bella',
     pitch: 1.0,
     baseSpeed: FIXED_SPEECH_RATE,
+    isPrimaryColor: true,
     sample:
-      'Willkommen. Präzise Fakten, historische Zusammenhänge und fundiertes Wissen – wenn du die Geschichte tiefgründig verstehen willst, bin ich dein perfekter Guide.',
+      'Pst. Schau mal da drüben. Schön, dass du hier bist. Ich liebe verzauberte Orte, alte Schlösser, und geheimnisvolle Rätsel. Lass uns auf leisen Sohlen durch die Straßen wandeln. Und die magischen Geschichten entdecken. Kommst du mit mir?',
   },
   {
     id: 'gen_z',
     emoji: '✌️',
-    kokoroPackId: 'de_thorsten',
-    pitch: 1.0,
+    ttsEngine: 'piper',
+    piperModelId: 'de_DE-thorsten_emotional',
+    /** ~16: höhere Stimmlage (Pitch-Shift nach Piper). */
+    pitch: 1.2,
     baseSpeed: FIXED_SPEECH_RATE,
+    isPrimaryColor: true,
     sample:
-      "Yo Bro! Wenn dir der ganze alte Kram zu langweilig ist und du Bock auf 'nen richtig freshen Vibe hast – safe, dann bin ich dein Mann! Let's go!",
+      'Yo, real talk: trockenes Museumsgelaber? Absolut kein Bock. Wir checken die coolsten Spots, haben richtig guten Vibe, und ich baller dir die besten Fun Facts und Insider raus. Safe, wähl mich – und ab geht’s!',
   },
   {
-    id: 'energisch',
-    emoji: '⚡',
-    kokoroPackId: 'de_eva',
+    id: 'historiker',
+    emoji: '📜',
+    ttsEngine: 'piper',
+    piperModelId: 'de_DE-m_aishel-medium',
     pitch: 1.0,
     baseSpeed: FIXED_SPEECH_RATE,
+    isPrimaryColor: true,
     sample:
-      'Hey! Bist du bereit für ein richtiges Abenteuer? Pack die Sachen ein, wir erkunden diesen Ort mit voller Power und bester Laune!',
+      'Schau mal! Vor dir liegt die Geschichte zum Anfassen. Kein staubiges Buch, sondern echte Orte, echte Menschen, echte Geheimnisse. Geh einfach drauf zu, und ich erzähl dir, was dahintersteckt — präzise, spannend, und nur für dich!',
+  },
+  {
+    id: 'erzaehler',
+    emoji: '📖',
+    ttsEngine: 'piper',
+    piperModelId: 'de_DE-thorsten-high',
+    pitch: 1.0,
+    baseSpeed: FIXED_SPEECH_RATE,
+    isPrimaryColor: false,
+    sample:
+      'Tritt näher... Und mach dich bereit. Wenn du deine Tour wie in einem epischen Blockbuster-Film erleben willst, dann bin ich deine Stimme.',
   },
 ];
 
@@ -121,11 +136,29 @@ export function getVoice(id: VoiceId): VoiceDefinition {
   return VOICES.find((v) => v.id === id) ?? VOICES[0];
 }
 
-export function kokoroPackForVoice(id: VoiceId): KokoroVoicePackId {
-  return getVoice(id).kokoroPackId ?? resolveKokoroPackId(id);
+export function resolveTtsEngine(voiceId?: VoiceId | null): TtsEngineId {
+  if (!voiceId) return 'piper';
+  if (isKokoroVoice(voiceId)) return 'kokoro';
+  return getVoice(voiceId).ttsEngine ?? 'piper';
+}
+
+export function piperModelForVoice(id: VoiceId): PiperVoiceModelId {
+  const v = getVoice(id);
+  return v.piperModelId ?? resolvePiperModelId(id);
+}
+
+/** @deprecated */
+export function kokoroPackForVoice(id: VoiceId): KokoroVoicePackId | PiperVoiceModelId {
+  const v = getVoice(id);
+  if (v.kokoroPackId) return v.kokoroPackId;
+  return piperModelForVoice(id);
 }
 
 export function voicesForLanguage(_lang?: AppLanguage): VoiceDefinition[] {
+  return VOICES.filter((v) => v.isPrimaryColor);
+}
+
+export function allVoices(): VoiceDefinition[] {
   return VOICES;
 }
 
@@ -137,7 +170,17 @@ export function speechLocaleForLanguage(_lang?: AppLanguage): string {
   return 'de-DE';
 }
 
-/** Systemweit fest 1.0 — Argumente werden ignoriert. */
 export function clampSpeechRate(_rate?: number): number {
   return FIXED_SPEECH_RATE;
+}
+
+export function clampPlaybackPitch(rate?: number): number {
+  if (rate == null || !Number.isFinite(rate)) return 1;
+  return Math.max(0.85, Math.min(1.35, rate));
+}
+
+/** Stimmlage der Persona (1 = original; >1 = jünger/höher). */
+export function pitchForVoice(voiceId?: VoiceId | null): number {
+  if (!voiceId) return 1;
+  return clampPlaybackPitch(getVoice(voiceId).pitch);
 }

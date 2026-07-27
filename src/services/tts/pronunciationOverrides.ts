@@ -214,8 +214,13 @@ export const PRONUNCIATION_OVERRIDES: Record<string, string> = {
   begleiter: 'bəˈɡlaɪtɐ',
   anlegen: 'ˈanleːɡən',
 
-  // Verkehr / Alltag
-  bus: 'bʊs',
+  // Verkehr / Alltag / Ortsnamen (DE — nie engl. Bus/Holstein)
+  bus: 'bˈʊs',
+  buss: 'bˈʊs',
   busse: 'ˈbʊsə',
   bussen: 'ˈbʊsn̩',
+  holstein: 'hˈɔlʃtaɪn',
+  'schleswig-holstein': 'ˈʃleːsvɪç hˈɔlʃtaɪn',
+  'schleswig holstein': 'ˈʃleːsvɪç hˈɔlʃtaɪn',
+  schleswigholstein: 'ˈʃleːsvɪç hˈɔlʃtaɪn',
 };

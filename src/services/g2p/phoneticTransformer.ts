@@ -1,13 +1,18 @@
 /**
  * Phonetic Pre-Filter vor eSpeak/Kokoro.
  * - Alle Ziffern → ausgeschriebene deutsche Wörter
- * - Clean-Text: keine Bindestriche, Ellipsen, Sternchen, Sonderzeichen
+ * - Clean-Text: keine Bindestriche (außer Lautmalerei), Ellipsen, Sternchen, Sonderzeichen
  * - Uhrzeiten, Ordinal-Daten, Buchstaben-Codes
+ * - Liniennummern: RB61 → Regionalbahn 61
+ * - Lautmalerei: Tüt-tüt! → Tüt-tüt (Bindestrich bleibt)
+ * - Buchstabier-Fallen & Markdown-Müll entfernen
+ * - Prisdorf → Prissdorf (kurzes i)
  * - Audio-only: Englisch-Ortho + Kurzwort-Hints (Hof→Hoff); UI bleibt Original
  * - Scan: pronunciations.json + englishOrthoPronunciations.json vor G2P
  */
 
 import englishOrthoJson from '../../assets/data/englishOrthoPronunciations.json';
+import deOrthoJson from '../../assets/data/deOrthoPronunciations.json';
 import deProblemWordJson from '../../assets/data/deProblemWordPronunciations.json';
 import pronunciationsJson from '../../assets/data/pronunciations.json';
 import {
@@ -239,8 +244,9 @@ export function transformBareOrdinals(text: string): string {
 }
 
 /**
- * Buchstaben-Codes: "FDK 61" → "F D K sechs eins"
+ * Buchstaben-Codes: KEINE Einzelbuchstaben-Spelling-Fallen mehr.
  * Kurze deutsche Substantive (Hof, Dom, …) NIEMALS buchstabieren.
+ * Unbekannte Akronyme → Title Case als Wort; Ziffern als ganze Zahl (nicht Ziffer für Ziffer).
  */
 export function transformLetterCodes(text: string): string {
   return text.replace(
@@ -262,13 +268,10 @@ export function transformLetterCodes(text: string): string {
       if (letters.length <= 3 && /[AEIOUÄÖÜ]/i.test(letters) && !digits) {
         return toTitleCaseDe(letters);
       }
-      const spelled = letters.split('').join(' ');
-      if (!digits) return spelled;
-      const digitWords = digits
-        .split('')
-        .map((d) => numberToGermanWords(Number(d)))
-        .join(' ');
-      return `${spelled} ${digitWords}`;
+      // Kein Buchstabieren: als Wort belassen (Kokoro stolpert sonst über „V I N")
+      const word = toTitleCaseDe(letters);
+      if (!digits) return word;
+      return `${word} ${numberToGermanWords(Number(digits))}`;
     },
   );
 }
@@ -317,6 +320,7 @@ const SHORT_NOUN_AUDIO: Record<string, string> = {
   zug: 'Zuug',
   bus: 'Buss',
   busse: 'Busse',
+  bussen: 'Bussen',
   bar: 'Baar',
   bad: 'Baad',
   see: 'Seh',
@@ -324,9 +328,46 @@ const SHORT_NOUN_AUDIO: Record<string, string> = {
   weg: 'Weeg',
   kai: 'Kai',
   pier: 'Piir',
-  // Dedizierte JSON-Overrides (Bus/Hof/Bahnhof/…) gewinnen
-  ...(deProblemWordJson as Record<string, string>),
+  bürger: 'Büürger',
+  buerger: 'Büürger',
+  bürgersteig: 'Büürgersteig',
+  budget: 'Büüdschett',
+  budgets: 'Büüdschetts',
+  budgat: 'Büüdschett',
+  geschichte: 'Ge-schich-te',
+  geschichten: 'Ge-schich-ten',
+  gesichte: 'Ge-schich-te',
+  herzstück: 'Herz-stück',
+  herzstueck: 'Herz-stück',
+  lütte: 'Lüh-tte',
+  luette: 'Lüh-tte',
+  prisdörper: 'Pris-dör-per',
+  prisdorper: 'Pris-dör-per',
+  kulissen: 'Kuh-liss-en',
+  kulisse: 'Kuh-liss-e',
+  schule: 'Schuhle',
+  schulen: 'Schuhlen',
+  bericht: 'Be-richt',
+  berichte: 'Be-rich-te',
+  berichten: 'Be-rich-ten',
+  berichtet: 'Be-rich-tet',
+  sprechen: 'Schpre-chen',
+  spricht: 'Schpricht',
+  gesprochen: 'Ge-schpro-chen',
+  ensemble: 'Angsangbel',
+  ensembles: 'Angsangbels',
+  enembles: 'Angsangbels',
+  'mich jetzt': 'mich – jetzt',
 };
+
+// Nur Ortho-Hints aus JSON (kein IPA in den Fließtext!)
+for (const [k, v] of Object.entries(
+  deProblemWordJson as Record<string, string>,
+)) {
+  if (isOrthoPronunciation(String(v ?? ''))) {
+    SHORT_NOUN_AUDIO[k.toLowerCase()] = String(v);
+  }
+}
 
 /** Längste zuerst — Komposita vor Stammwort (Bahnhof vor Hof). */
 const DE_PROBLEM_AUDIO_KEYS = Object.keys(SHORT_NOUN_AUDIO).sort(
@@ -458,8 +499,95 @@ export function expandAllDigitsToWords(text: string): string {
   return s;
 }
 
+/** Placeholder für Lautmalerei-Bindestriche während sanitize (ASCII, Strip-sicher). */
+const ONO_HYPHEN_TOKEN = 'XXONOHYPHENXX';
+
 /**
- * Clean-Text: Bindestriche, Ellipsen, Sternchen, Sonderzeichen weg.
+ * Lautmalerei sauber halten: „Tüt-tüt!" → „Tüt-tüt" (Bindestrich bleibt für sanitize).
+ */
+export function normalizeOnomatopoeia(text: string): string {
+  let s = text;
+  // Bekannte Sound-Hooks mit optionalem !
+  s = s.replace(
+    /\b(Tüt|Tut|Klack|Klirr|Peng|Bumm|Zack|Tadaa|Hoppla|Huch|Hui|Pst)([-\s])(\1|[Tt]üt|[Tt]ut|[Kk]lack)\b[!]?/gi,
+    (_m, a: string, _sep: string, b: string) => `${a}-${b}`,
+  );
+  // Generisch: Wort-Wort!!!! → Wort-Wort
+  s = s.replace(
+    /\b([\p{L}]{2,8})-([\p{L}]{2,8})[!]+/gu,
+    (_m, a: string, b: string) => `${a}-${b}`,
+  );
+  return s;
+}
+
+/**
+ * Liniennummern → flüssige Sprache: RB61 / RB 61 → Regionalbahn 61.
+ */
+export function expandTransitLineCodes(text: string): string {
+  const map: Record<string, string> = {
+    rb: 'Regionalbahn',
+    re: 'Regionalexpress',
+    ic: 'Intercity',
+    ice: 'Intercityexpress',
+    ire: 'Interregioexpress',
+    s: 'S-Bahn',
+    u: 'U-Bahn',
+    bus: 'Bus',
+  };
+  return text.replace(
+    /\b(ICE|IRE|IC|RB|RE|S|U|Bus)\s*[-/]?\s*(\d{1,3})\b/gi,
+    (_m, code: string, num: string) => {
+      const key = code.toLowerCase();
+      const label = map[key] ?? code;
+      return `${label} ${num}`;
+    },
+  );
+}
+
+/**
+ * Ortsnamen-Phonetik: Prisdorf → Prissdorf (kurzes, knackiges i).
+ */
+export function applyPlaceNamePhonetics(text: string): string {
+  return text.replace(/\bPrisdorf\b/gi, (m) =>
+    m[0] === m[0].toUpperCase() ? 'Prissdorf' : 'prissdorf',
+  );
+}
+
+/**
+ * Entfernt Buchstabier-Fallen und Formatierungs-Müll:
+ * „V I N", „2 6 1", „Small Cup"/„Small Caps", Markdown-Spuren.
+ */
+export function stripSpellTrapsAndMarkdownJunk(text: string): string {
+  let s = text;
+
+  // Markdown / Formatierungs-Artefakte
+  s = s.replace(/\bSmall\s+(Cup|Caps|Cap)\b/gi, ' ');
+  s = s.replace(/[*#_~`]+/g, ' ');
+  s = s.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1'); // [text](url) → text
+  s = s.replace(/!\[[^\]]*\]\([^)]*\)/g, ' '); // images
+
+  // Einzelbuchstaben-Ketten: „V I N" / „A B C D" (≥3 mit Leerzeichen)
+  s = s.replace(
+    /\b(?:[A-ZÄÖÜ]\s+){2,}[A-ZÄÖÜ]\b/g,
+    (m) => {
+      const letters = m.replace(/\s+/g, '');
+      // Kurze sinnvolle Wörter (VIN etc.) als Wort belassen; längere Ketten killen
+      if (letters.length <= 4 && /[AEIOUÄÖÜ]/i.test(letters)) {
+        return toTitleCaseDe(letters);
+      }
+      return ' ';
+    },
+  );
+
+  // Einzelziffern-Ketten: „2 6 1" / „1 2 3 4" → entfernen (Buchstabier-Falle)
+  s = s.replace(/\b(?:\d\s+){2,}\d\b/g, ' ');
+
+  return s.replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * Clean-Text: Ellipsen, Sternchen, Sonderzeichen weg.
+ * Bindestriche in Lautmalerei (Tüt-tüt) bleiben erhalten.
  * Nur Buchstaben, Ziffern (danach expandiert), einfache Satzzeichen.
  * Keine künstlichen Atempausen für Kokoro.
  */
@@ -483,8 +611,10 @@ export function sanitizeSpokenText(text: string): string {
   s = s.replace(/\.{2,}/g, '.');
   s = s.replace(/([.!?])\s*([.!?])+/g, '$1');
 
-  // Nur erlaubte Zeichen behalten
+  // Buchstaben-Bindestriche schützen (ASCII-Token überlebt den Strip)
+  s = s.replace(/(\p{L})-(\p{L})/gu, `$1${ONO_HYPHEN_TOKEN}$2`);
   s = s.replace(/[^\p{L}\p{N}\s,.!?]/gu, ' ');
+  s = s.replace(new RegExp(ONO_HYPHEN_TOKEN, 'g'), '-');
 
   return s.replace(/\s+/g, ' ').trim();
 }
@@ -496,6 +626,10 @@ export function sanitizeSpokenText(text: string): string {
 export function prepareDisplayText(text: string): string {
   let s = text.normalize('NFKC').replace(/\s+/g, ' ').trim();
   if (!s) return s;
+  s = stripSpellTrapsAndMarkdownJunk(s);
+  s = expandTransitLineCodes(s);
+  s = applyPlaceNamePhonetics(s);
+  s = normalizeOnomatopoeia(s);
   s = transformClockTimes(s);
   s = transformOrdinalDates(s);
   s = transformBareOrdinals(s);
@@ -516,28 +650,22 @@ export function prepareSpokenText(text: string): string {
 }
 
 /**
- * Audio-Pfad: Display-Basis + Lexikon-Scan + Pause-Cleanup (wie Sample-WAVs).
+ * Audio-Pfad: Display-Basis → Aussprache (Ortho auf Originalwörtern) → Prosodie.
  * UI behält prepareDisplayText (Fairway, Hof). Tempo systemweit 1.0.
  * Dictionary-Engine (Base + Cloud + User) ersetzt vor Ortho per `\bWort\b`.
  */
 export function prepareAudioText(text: string): string {
   let s = prepareDisplayText(text);
   if (!s) return s;
-  // 0) Prosodie: Aufzählungs-Rhythmus, Kontraktionen, LLM-Marker bereinigen
-  s = applyGermanTtsProsodyRules(s);
-  // 1) Künstliche Atemholen-Marker entfernen (…, ——, …)
+  // A) Aussprache zuerst (Ortho auf Originalwörtern — IPA/Ortho greifen)
   s = stripArtificialBreathPauses(s);
-  // 2) Kombiniertes Wörterbuch (Base + Cloud-Updates + Local-Scan)
   s = applyDictionaryToAudioText(s);
-  // 3) Englisch/Fremdwörter + Ortho-Hints
   s = applyEnglishOrthoPronunciations(s);
-  // 4) Bus/Hof/Bahnhof explizit mit \b (Audio-only)
   s = applyShortNounAudioHints(s);
-  // 5) Title-Case für reine HOF/BUS-CAPS-Reste
   s = normalizeShortGermanNounCasing(s);
-  // 6) Finale Bus/Hof-Sicherung (nach Title-Case)
   s = applyShortNounAudioHints(s);
-  // 7) Pause-Cleanup
+  // B) Prosodie danach: Emotion, Pausen, Spannung
+  s = applyGermanTtsProsodyRules(s);
   s = stripArtificialBreathPauses(s);
   return s.replace(/\s+/g, ' ').trim();
 }
@@ -585,8 +713,10 @@ function getEnglishOrthoMap(): Map<string, string> {
 
   // Basis: dediziertes Englisch-Ortho-Lexikon
   ingest(englishOrthoJson as Record<string, string>, false);
-  // DE Problemwörter (Bus→Buss, Hof→Hoff, Bahnhof→Bahnoff)
-  ingest(deProblemWordJson as Record<string, string>, false);
+  // DE Problemwörter (Geschichte, Schule, Lütte, …) — Audio-only Ortho
+  ingest(deOrthoJson as Record<string, string>, false);
+  // DE Problemwörter IPA/Ortho-Mix: nur Ortho (Hoff/Bahnoff)
+  ingest(deProblemWordJson as Record<string, string>, true);
   // Overlay: Ortho-Hints aus pronunciations.json
   ingest(pronunciationsJson as Record<string, string>, true);
 

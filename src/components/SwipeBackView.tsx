@@ -50,7 +50,8 @@ export function SwipeBackView({
   const pan = useMemo(
     () =>
       PanResponder.create({
-        onStartShouldSetPanResponder: () => enabledRef.current,
+        // Nur bei Bewegung greifen — sonst blockiert die Edge Settings/Buttons
+        onStartShouldSetPanResponder: () => false,
         onMoveShouldSetPanResponder: (_e, g) => {
           if (!enabledRef.current) return false;
           return (
@@ -58,7 +59,7 @@ export function SwipeBackView({
             Math.abs(g.dx) > Math.abs(g.dy) * 1.15
           );
         },
-        onPanResponderTerminationRequest: () => false,
+        onPanResponderTerminationRequest: () => true,
         onPanResponderRelease: (_e, g) => {
           if (!enabledRef.current) return;
           if (g.dx >= DX_THRESHOLD || g.vx >= VX_THRESHOLD) {

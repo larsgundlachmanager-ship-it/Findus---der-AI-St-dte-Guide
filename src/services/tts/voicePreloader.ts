@@ -1,77 +1,86 @@
 /**
- * VoicePreloaderService — Singleton Keep-Warm für genau eine aktive Stimme.
- *
- * Hält Martin-ONNX-Session + Style-Vektor der gewählten Persona (voiceId)
- * dauerhaft im RAM. Bei Stimmwechsel: alte Pack-ID entladen, neue warm laden.
- * Aktive Stimme wird nie invalidiert, außer Persona-Wechsel oder App-Exit.
- *
- * Hinweis: Profil-Feld ist `voiceId` (8 UI-Rollen → 3 Packs de_thorsten/eva/karl).
+ * VoicePreloader — hält die aktive Engine keep-warm (Piper ODER Kokoro).
  */
-import { resolveKokoroPackId, type KokoroVoicePackId } from '../../constants/kokoroVoicePacks';
+import {
+  resolvePiperModelId,
+  type PiperVoiceModelId,
+} from '../../constants/piperVoices';
+import {
+  isKokoroVoice,
+  resolveKokoroPackId,
+  type KokoroVoicePackId,
+} from '../../constants/kokoroVoicePacks';
 import type { VoiceId } from '../../types/userProfile';
 import { getCachedUserProfile } from '../userProfileService';
 import {
-  ensureMartinOrtSession,
-  isKokoroReady,
-  isVoicePackInRam,
-  loadVoiceIntoRam,
-  markKokoroWarmedUp,
+  ensurePiperModel,
+  isPiperReady,
   registerActiveVoiceWarmer,
-  synthesizeWav,
-  unloadInactiveVoicePacks,
-  unloadVoiceFromRam,
+  markPiperWarmedUp,
+  unloadInactivePiperModels,
 } from '../AudioVoiceService';
+import {
+  ensureKokoroPack,
+  isKokoroEngineReady,
+  unloadKokoroEngine,
+} from '../kokoro/kokoroEngine';
 
 export type WarmVoiceResult = {
   activePersona: VoiceId;
-  activePack: KokoroVoicePackId;
+  activePack: PiperVoiceModelId | KokoroVoicePackId;
+  activeModel: PiperVoiceModelId | KokoroVoicePackId;
+  engine: 'piper' | 'kokoro';
 };
 
 class VoicePreloaderService {
   private activePersona: VoiceId | null = null;
-  private activePack: KokoroVoicePackId | null = null;
+  private activeModel: PiperVoiceModelId | KokoroVoicePackId | null = null;
+  private activeEngine: 'piper' | 'kokoro' | null = null;
   private chain: Promise<void> = Promise.resolve();
 
   getActivePersona(): VoiceId | null {
     return this.activePersona;
   }
 
-  getActivePack(): KokoroVoicePackId | null {
-    return this.activePack;
+  getActivePack(): PiperVoiceModelId | KokoroVoicePackId | null {
+    return this.activeModel;
+  }
+
+  getActiveModel(): PiperVoiceModelId | KokoroVoicePackId | null {
+    return this.activeModel;
   }
 
   isZeroLatencyReady(voiceId?: VoiceId): boolean {
     const persona =
       voiceId ?? this.activePersona ?? getCachedUserProfile()?.voiceId ?? null;
     if (!persona) return false;
-    const pack = resolveKokoroPackId(persona);
+    if (isKokoroVoice(persona)) {
+      return (
+        this.activeEngine === 'kokoro' &&
+        this.activeModel === resolveKokoroPackId(persona) &&
+        isKokoroEngineReady()
+      );
+    }
+    const model = resolvePiperModelId(persona);
     return (
-      this.activePack === pack &&
-      isVoicePackInRam(pack) &&
-      isKokoroReady()
+      this.activeEngine === 'piper' &&
+      this.activeModel === model &&
+      isPiperReady()
     );
   }
 
-  /**
-   * App-Start / Keep-Warm: liest User-Persona (voiceId) und lädt den
-   * zugehörigen Pack (de_thorsten | de_eva | de_karl) vollständig in den RAM.
-   * ONNX-Session bleibt offen → 0,0s Start-Latenz bei GPS/Chat-TTS.
-   */
   warmActiveVoice(voiceId?: VoiceId): Promise<WarmVoiceResult> {
     return this.enqueue(async () => this.doWarm(voiceId));
   }
 
-  /**
-   * Settings/Onboarding: alte Stimme aus RAM entladen, neue unverzüglich warm laden.
-   */
   switchActiveVoice(voiceId: VoiceId): Promise<WarmVoiceResult> {
     return this.enqueue(async () => this.doWarm(voiceId, { forceSwitch: true }));
   }
 
-  /** Nach System-Reset: interne Keep-Warm-Marker löschen (Session/RAM separat). */
   resetTracking(): void {
     this.activePersona = null;
-    this.activePack = null;
+    this.activeModel = null;
+    this.activeEngine = null;
   }
 
   private enqueue<T>(task: () => Promise<T>): Promise<T> {
@@ -88,56 +97,75 @@ class VoicePreloaderService {
     opts?: { forceSwitch?: boolean },
   ): Promise<WarmVoiceResult> {
     const activePersona =
-      voiceId ?? getCachedUserProfile()?.voiceId ?? 'standard_m';
-    const activePack = resolveKokoroPackId(activePersona);
+      voiceId ??
+      this.activePersona ??
+      getCachedUserProfile()?.voiceId ??
+      'standard_m';
 
+    if (isKokoroVoice(activePersona)) {
+      const pack = resolveKokoroPackId(activePersona);
+      if (
+        !opts?.forceSwitch &&
+        this.activeEngine === 'kokoro' &&
+        this.activeModel === pack &&
+        isKokoroEngineReady()
+      ) {
+        return {
+          activePersona,
+          activePack: pack,
+          activeModel: pack,
+          engine: 'kokoro',
+        };
+      }
+      await ensureKokoroPack(pack);
+      // Piper-Modelle freigeben wenn Frauenstimme aktiv
+      unloadInactivePiperModels(resolvePiperModelId('standard_m'));
+      this.activePersona = activePersona;
+      this.activeModel = pack;
+      this.activeEngine = 'kokoro';
+      markPiperWarmedUp();
+      return {
+        activePersona,
+        activePack: pack,
+        activeModel: pack,
+        engine: 'kokoro',
+      };
+    }
+
+    const activeModel = resolvePiperModelId(activePersona);
     if (
       !opts?.forceSwitch &&
-      this.activePersona === activePersona &&
-      this.activePack === activePack &&
-      isVoicePackInRam(activePack) &&
-      isKokoroReady()
+      this.activeEngine === 'piper' &&
+      this.activeModel === activeModel &&
+      isPiperReady()
     ) {
-      return { activePersona, activePack };
+      return {
+        activePersona,
+        activePack: activeModel,
+        activeModel,
+        engine: 'piper',
+      };
     }
 
-    // Session zuerst warm halten — nie die aktive Session schließen
-    await ensureMartinOrtSession();
-
-    if (this.activePack && this.activePack !== activePack) {
-      unloadVoiceFromRam(this.activePack);
-    }
-    unloadInactiveVoicePacks(activePack);
-
-    await loadVoiceIntoRam(activePack);
-    markKokoroWarmedUp();
-
-    // Keep-warm pulse: Graph/Allocator einmal anstoßen (Fehler ignorieren)
-    await synthesizeWav('Start', {
-      voiceId: activePersona,
-      speechRate: 1,
-    }).catch(() => undefined);
-
+    await ensurePiperModel(activeModel);
+    unloadInactivePiperModels(activeModel);
+    unloadKokoroEngine();
     this.activePersona = activePersona;
-    this.activePack = activePack;
-
-    console.log(
-      `[VoicePreloader] Active voice '${activePersona}' successfully warmed up in RAM. Zero-latency ready.`,
-    );
-
-    return { activePersona, activePack };
+    this.activeModel = activeModel;
+    this.activeEngine = 'piper';
+    markPiperWarmedUp();
+    return {
+      activePersona,
+      activePack: activeModel,
+      activeModel,
+      engine: 'piper',
+    };
   }
 }
 
-/** Singleton — eine aktive Stimme, dauerhaft keep-warm. */
 export const voicePreloader = new VoicePreloaderService();
 
-export { VoicePreloaderService };
-
-// Engine-Hooks: Boot/Warmup/Reset ohne Circular Import / Dynamic Import
 registerActiveVoiceWarmer(
-  async (voiceId) => {
-    await voicePreloader.warmActiveVoice(voiceId);
-  },
+  (voiceId) => voicePreloader.warmActiveVoice(voiceId).then(() => undefined),
   () => voicePreloader.resetTracking(),
 );

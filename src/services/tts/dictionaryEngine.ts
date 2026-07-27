@@ -13,6 +13,17 @@
  */
 import * as FileSystem from 'expo-file-system';
 import pronunciationsJson from '../../assets/data/pronunciations.json';
+import { PRONUNCIATION_OVERRIDES } from './pronunciationOverrides';
+
+/** IPA-Zeichen → kein Ortho-Hint für den Fließtext. */
+const IPA_HINT_RE =
+  /[ˈˌːɪʊəɛɔɑɒæθðʃʒŋɡɟçʁβɸχʏøœʌɒɟɲʎʋɹɾʈɖɤɘɵɨʉɶ]/u;
+
+function isOrthoPronunciation(value: string): boolean {
+  const v = value.trim();
+  if (!v || IPA_HINT_RE.test(v)) return false;
+  return /^[A-Za-zÄÖÜäöüß\s'-]+$/.test(v);
+}
 
 export type PronunciationDict = Record<string, string>;
 
@@ -101,8 +112,14 @@ function mapToRecord(map: Map<string, string>): PronunciationDict {
 
 function rebuildCombined(): void {
   const map = new Map<string, string>();
-  // Master ist die Offline-Wahrheit; User-Overlay gewinnt zuletzt.
+  // Master = Offline-Wahrheit; harte IPA-Overrides gewinnen darüber;
+  // User/Scanner-Korrekturen gewinnen zuletzt.
   for (const [k, v] of masterCache) map.set(k, v);
+  for (const [k, v] of Object.entries(PRONUNCIATION_OVERRIDES)) {
+    const key = normalizeKey(k);
+    const val = String(v ?? '').trim();
+    if (key && val) map.set(key, val);
+  }
   for (const [k, v] of userCache) map.set(k, v);
   combinedCache = map;
   phraseKeys = [...map.keys()]
@@ -295,6 +312,7 @@ export function applyHeuristicPhonetics(word: string): string | null {
 
 /**
  * Audio-only: ersetzt Wörter per Exact-Word-Boundary (`\bWort\b`).
+ * Nur Orthografie-Hints (Buss, Hoff) — IPA kommt später als ⟦…⟧-Marker.
  * Display-Untertitel dürfen diese Funktion nie nutzen.
  */
 export function applyDictionaryToAudioText(text: string): string {
@@ -304,7 +322,8 @@ export function applyDictionaryToAudioText(text: string): string {
 
   for (const phrase of phraseKeys) {
     const repl = map.get(phrase);
-    if (!repl || !s.toLowerCase().includes(phrase)) continue;
+    if (!repl || !isOrthoPronunciation(repl)) continue;
+    if (!s.toLowerCase().includes(phrase)) continue;
     const re = new RegExp(`\\b${escapeRe(phrase)}\\b`, 'gi');
     s = s.replace(re, (match) => matchWordCase(match, repl));
   }
@@ -312,7 +331,7 @@ export function applyDictionaryToAudioText(text: string): string {
   s = s.replace(/[\p{L}][\p{L}'’-]*/gu, (word) => {
     const key = normalizeKey(word.replace(/’/g, "'"));
     const hit = map.get(key) ?? map.get(key.replace(/-/g, ''));
-    if (!hit) return word;
+    if (!hit || !isOrthoPronunciation(hit)) return word;
     return matchWordCase(word, hit);
   });
 

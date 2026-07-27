@@ -40,6 +40,9 @@ PROSODIE-REGELN (als Interpunktion umsetzen):
 - Schreibe flüssige gesprochene Formen: „hab'n wir" statt „haben wir", „gibt's" statt „gibt es".
 - Vermeide steife Schriftsprache. Schreibe wie ein Mensch spricht.
 - Abkürzungen ausschreiben: „zum Beispiel" statt „z.B."
+- Kontrastive Fokusbetonung: Wenn die Betonung auf wie/was/warum liegt, neuer Satz mit dem Fokuswort:
+  „Ich kann erklären. Wie es am besten passt." (nicht: „erklären, wie …")
+  Komparativ „so … wie" / „genauso wie" unverändert lassen.
 
 5. PHONETISCHE BESONDERHEITEN
 - Komposita: Hauptakzent liegt auf dem ersten Teilwort — schreibe sie als ein Wort (Dampfschiff, Autobahn).

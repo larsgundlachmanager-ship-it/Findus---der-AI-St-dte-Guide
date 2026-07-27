@@ -13,6 +13,7 @@ function copyRecursive(src, dest) {
   if (stat.isDirectory()) {
     fs.mkdirSync(dest, { recursive: true });
     for (const name of fs.readdirSync(src)) {
+      if (name === '.gitignore') continue;
       copyRecursive(path.join(src, name), path.join(dest, name));
     }
     return true;
@@ -23,8 +24,8 @@ function copyRecursive(src, dest) {
 }
 
 /**
- * Kopiert native-assets/kokoro → android/app/src/main/assets/kokoro
- * und iOS Resources/kokoro, damit FileSystem.bundleDirectory die Dateien findet.
+ * native-assets/kokoro → android/app/src/main/assets/kokoro
+ * (Martin-ONNX + voices/de_eva.bin für Frauenstimmen)
  */
 function withKokoroAssets(config) {
   config = withDangerousMod(config, [
@@ -42,58 +43,23 @@ function withKokoroAssets(config) {
         'kokoro',
       );
 
-      const model = path.join(src, 'kokoro-martin.onnx');
-      if (!fs.existsSync(model)) {
+      const onnx = path.join(src, 'kokoro-martin.onnx');
+      const nova = path.join(src, 'voices', 'de_nova.bin');
+      const bella = path.join(src, 'voices', 'de_bella.bin');
+      if (!fs.existsSync(onnx) || !fs.existsSync(nova) || !fs.existsSync(bella)) {
+        console.warn('[withKokoroAssets] FEHLT: native-assets/kokoro/');
         console.warn(
-          '[withKokoroAssets] FEHLT: native-assets/kokoro/kokoro-martin.onnx',
-        );
-        console.warn(
-          '[withKokoroAssets] Bitte zuerst: npm run fetch:kokoro',
+          '[withKokoroAssets] Erwartet: kokoro-martin.onnx + de_nova.bin + de_bella.bin',
         );
         return config;
       }
 
       fs.mkdirSync(dest, { recursive: true });
       copyRecursive(src, dest);
-      const size = fs.statSync(path.join(dest, 'kokoro-martin.onnx')).size;
-      const wavesDir = path.join(dest, 'waves');
-      let waveCount = 0;
-      if (fs.existsSync(wavesDir)) {
-        const countWavs = (dir) => {
-          for (const name of fs.readdirSync(dir)) {
-            const p = path.join(dir, name);
-            if (fs.statSync(p).isDirectory()) countWavs(p);
-            else if (name.endsWith('.wav')) waveCount += 1;
-          }
-        };
-        countWavs(wavesDir);
-      }
+      const mb = Math.round(fs.statSync(path.join(dest, 'kokoro-martin.onnx')).size / 1e6);
       console.log(
-        `[withKokoroAssets] Android: kokoro gebündelt (${Math.round(size / 1e6)} MB, ${waveCount} WAVs)`,
+        `[withKokoroAssets] Android: kokoro gebündelt (martin ${mb} MB + de_nova + de_bella)`,
       );
-      return config;
-    },
-  ]);
-
-  config = withDangerousMod(config, [
-    'ios',
-    async (config) => {
-      const projectRoot = config.modRequest.projectRoot;
-      const src = path.join(projectRoot, 'native-assets', 'kokoro');
-      const dest = path.join(
-        projectRoot,
-        'ios',
-        'Findus',
-        'Supporting',
-        'kokoro',
-      );
-      if (!fs.existsSync(path.join(src, 'kokoro-martin.onnx'))) {
-        return config;
-      }
-      // iOS: optional – Ordner anlegen; Xcode-Link ggf. manuell
-      fs.mkdirSync(path.dirname(dest), { recursive: true });
-      copyRecursive(src, dest);
-      console.log('[withKokoroAssets] iOS: kokoro nach Supporting/kokoro kopiert');
       return config;
     },
   ]);

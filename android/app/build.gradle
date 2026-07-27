@@ -87,16 +87,12 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
 
     namespace 'com.finnus.app'
-    // Große TTS-Binaries nicht in ZIP komprimieren → weniger Heap bei compressReleaseAssets
-    androidResources {
-        noCompress += ["onnx", "bin", "npz", "wav", "pt"]
-    }
     defaultConfig {
         applicationId 'com.finnus.app'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0.0"
+        versionCode 3
+        versionName "1.0.2"
     }
     signingConfigs {
         debug {
