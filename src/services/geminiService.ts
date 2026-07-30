@@ -1,12 +1,12 @@
 /**
- * Gemini 2.5 Flash Text-Engine — Unified Master Prompt + RN-sicheres REST.
+ * Gemini Flash-Lite Text-Engine — Unified Master Prompt + RN-sicheres REST.
+ * Cost Control: lite ~98%, Pro nur via modelRouter (Premium / history fail / multi-stop>5).
  */
 
 import {
   FINDUS_GEMINI_SYSTEM_INSTRUCTION,
   GEMINI_API_BASE,
   GEMINI_MODEL,
-  GEMINI_MODEL_FALLBACKS,
   GEMINI_STORY_MAX_OUTPUT_TOKENS,
   GEMINI_TEMPERATURE,
 } from '../constants/gemini';
@@ -20,26 +20,53 @@ import {
   resolveMasterPromptContext,
 } from './personaEngine';
 import { getCachedUserProfile } from './userProfileService';
+import { useFinnusStore } from '../store/useFinnusStore';
 import {
   parseConciergeResponse,
   wrapPlainAsConcierge,
   CONCIERGE_JSON_INSTRUCTION,
 } from './concierge/parseConciergeResponse';
+import {
+  resolveGeminiModels,
+  shouldEscalateHistoryToPro,
+  type GeminiModelTier,
+  type GeminiTaskKind,
+  type ResolveGeminiTierInput,
+} from './llm/modelRouter';
+import {
+  clearGeminiCreditsExhausted,
+  isGeminiCreditsExhaustedError,
+  isGeminiSoftRateLimitError,
+  noteGeminiCreditsExhausted,
+} from './llm/geminiBillingGuard';
+import { NATURAL_SPEECH_RATE_RULE } from './ai/promptBuilder';
 
-/** Aktive Findus-System-Instruction = Master Engine. */
+export { consumeGeminiCreditsWarning } from './llm/geminiBillingGuard';
+
+/** Cartesia sonic-3.5: Emotion/Atem/Dynamik nur über natürlichen Text. */
+const CARTESIA_EMOTION_ENGINE_RULE = `## Cartesia Emotion & Naturalness Engine
+Deine Texte werden von Cartesia sonic-3.5 gesprochen — nicht von einem Vorleser.
+Emotion, Flüstern, Begeisterung und Atempausen entstehen NUR durch Kontext und Interpunktion.
+Schreibe menschlich: Kommas für Atem, Ausrufezeichen für Energie, „..." für Flüstern/Spannung, Gedankenstriche für Pausen.
+Keine SSML, keine Regie-Anweisungen, keine phonetischen Umschreibungen.`;
+
+/** Aktive Findus-System-Instruction = Master Engine + Cartesia Speech Rules. */
 export function resolveFindusSystemInstruction(
   override?: string,
   context?: MasterPromptContext,
 ): string {
-  if (override?.trim()) return override.trim();
-  try {
-    return buildMasterSystemInstruction(
-      getCachedUserProfile(),
-      context ?? resolveMasterPromptContext(),
-    );
-  } catch {
-    return FINDUS_GEMINI_SYSTEM_INSTRUCTION;
-  }
+  const base = (() => {
+    if (override?.trim()) return override.trim();
+    try {
+      return buildMasterSystemInstruction(
+        getCachedUserProfile(),
+        context ?? resolveMasterPromptContext(),
+      );
+    } catch {
+      return FINDUS_GEMINI_SYSTEM_INSTRUCTION;
+    }
+  })();
+  return `${base}\n\n${CARTESIA_EMOTION_ENGINE_RULE}\n\n${NATURAL_SPEECH_RATE_RULE}`;
 }
 
 export {
@@ -104,6 +131,14 @@ export type GeminiGenerateOptions = {
   enableGoogleSearch?: boolean;
   /** Erzwingt application/json (+ optionales Schema). */
   responseJson?: boolean;
+  /** Cost Control: lite (default) | pro (gated). */
+  tier?: GeminiModelTier;
+  forcePro?: boolean;
+  task?: GeminiTaskKind;
+  stopCount?: number;
+  flashFailed?: boolean;
+  /** Hard abort (z. B. Judge-Timeout) — bricht fetch ab, keine weiterlaufenden Kosten. */
+  signal?: AbortSignal;
 };
 
 type GeminiClient = {
@@ -199,11 +234,13 @@ function extractTextFromRest(data: unknown): string {
 async function postGenerate(
   url: string,
   body: Record<string, unknown>,
+  signal?: AbortSignal,
 ): Promise<unknown> {
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
+    signal,
   });
   if (!response.ok) {
     const errBody = await response.text();
@@ -247,7 +284,9 @@ async function generateViaRest(
   const wantSearch = options?.enableGoogleSearch === true && !wantJson;
 
   // Nur Modelle, die thinkingBudget:0 wirklich akzeptieren — sonst 400 + Extra-Roundtrip.
-  const canDisableThinking = /^gemini-3(\.5)?-flash(?!-lite)/i.test(model);
+  const canDisableThinking =
+    /^gemini-3(\.5)?-flash(?!-lite)/i.test(model) ||
+    /^gemini-2\.5-flash(?!-lite)/i.test(model);
   const generationConfig: Record<string, unknown> = canDisableThinking
     ? { ...baseGen, thinkingConfig: { thinkingBudget: 0 } }
     : {
@@ -275,10 +314,12 @@ async function generateViaRest(
   }
 
   const url = `${GEMINI_API_BASE}/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const signal = options?.signal;
 
   try {
-    return extractTextFromRest(await postGenerate(url, body));
+    return extractTextFromRest(await postGenerate(url, body, signal));
   } catch (err) {
+    if (signal?.aborted) throw err;
     const msg = err instanceof Error ? err.message : String(err);
     // Grounding-Tool nicht unterstützt → ohne Search retry
     if (
@@ -292,7 +333,7 @@ async function generateViaRest(
           `[gemini] ${model}: google_search nicht unterstützt — Retry ohne Grounding`,
         );
       }
-      return extractTextFromRest(await postGenerate(url, body));
+      return extractTextFromRest(await postGenerate(url, body, signal));
     }
     // responseSchema nicht unterstützt → nur MIME json
     if (
@@ -308,10 +349,10 @@ async function generateViaRest(
         );
       }
       try {
-        return extractTextFromRest(await postGenerate(url, body));
+        return extractTextFromRest(await postGenerate(url, body, signal));
       } catch {
         delete (body.generationConfig as Record<string, unknown>).responseMimeType;
-        return extractTextFromRest(await postGenerate(url, body));
+        return extractTextFromRest(await postGenerate(url, body, signal));
       }
     }
     // thinkingConfig ungültig / unbekannt → ohne Thinking, aber mit hohem Cap
@@ -333,7 +374,7 @@ async function generateViaRest(
           `[gemini] ${model}: thinkingBudget nicht unterstützt — Retry mit maxOutputTokens=${gc.maxOutputTokens}`,
         );
       }
-      return extractTextFromRest(await postGenerate(url, body));
+      return extractTextFromRest(await postGenerate(url, body, signal));
     }
     throw new Error(`Gemini (${model}): ${msg}`);
   }
@@ -375,13 +416,17 @@ async function generateViaSdk(
 function isModelNotFoundError(err: unknown): boolean {
   const msg = err instanceof Error ? err.message : String(err);
   return (
-    /404/.test(msg) &&
-    (/not found/i.test(msg) || /is not found/i.test(msg) || /NOT_FOUND/i.test(msg))
+    (/404/.test(msg) || /NOT_FOUND/i.test(msg)) &&
+    (/not found/i.test(msg) ||
+      /is not found/i.test(msg) ||
+      /no longer available/i.test(msg) ||
+      /NOT_FOUND/i.test(msg))
   );
 }
 
 /**
- * Einmalige Gemini-Antwort. Primär gemini-3.5-flash, dann Fallback-Kette.
+ * Einmalige Gemini-Antwort.
+ * Primär Flash-Lite (~99%); Pro nur wenn Flash dünn/leer/überfordert ist.
  */
 export async function generateGeminiText(
   prompt: string,
@@ -389,59 +434,147 @@ export async function generateGeminiText(
 ): Promise<string> {
   if (!hasGeminiApiKey()) return '';
 
-  const models = [GEMINI_MODEL, ...GEMINI_MODEL_FALLBACKS];
+  const tierInput: ResolveGeminiTierInput = {
+    tier: options?.tier,
+    forcePro: options?.forcePro,
+    task: options?.task,
+    stopCount: options?.stopCount,
+    flashFailed: options?.flashFailed,
+  };
+  // Always Flash first; Pro list only if caller already escalated
+  const flashFirst =
+    options?.forcePro === true ||
+    options?.flashFailed === true ||
+    options?.tier === 'pro'
+      ? resolveGeminiModels({ ...tierInput, tier: 'pro', forcePro: true })
+      : resolveGeminiModels({ ...tierInput, tier: 'lite' });
+
+  const primary = flashFirst[0] ?? GEMINI_MODEL;
   let lastError: unknown;
+  let sawCreditsExhausted = false;
+  let flashHardFailed = false;
 
-  const sdk = await tryLoadSdkClient();
+  const sdk = options?.signal ? null : await tryLoadSdkClient();
 
-  for (const model of models) {
-    // 1) Optional SDK (nur wenn ReadableStream verfügbar — sonst RN/Hermes-Crash)
-    if (sdk) {
+  const isAbortError = (err: unknown): boolean =>
+    options?.signal?.aborted === true ||
+    (err instanceof Error &&
+      (err.name === 'AbortError' || /aborted|AbortError/i.test(err.message)));
+
+  const tryModels = async (modelList: string[]): Promise<string> => {
+    for (const model of modelList) {
+      if (options?.signal?.aborted) {
+        throw new DOMException('Aborted', 'AbortError');
+      }
+      if (sdk) {
+        try {
+          const viaSdk = await generateViaSdk(model, prompt, options);
+          if (viaSdk) {
+            if (model !== primary) {
+              console.warn(`[gemini] nutze Fallback-Modell ${model}`);
+            }
+            void clearGeminiCreditsExhausted();
+            return viaSdk;
+          }
+        } catch (sdkErr) {
+          lastError = sdkErr;
+          if (isAbortError(sdkErr)) throw sdkErr;
+          if (isGeminiCreditsExhaustedError(sdkErr)) {
+            sawCreditsExhausted = true;
+            void noteGeminiCreditsExhausted(sdkErr);
+          }
+          if (isModelNotFoundError(sdkErr)) {
+            console.warn(`[gemini] ${model} nicht verfügbar, nächstes Modell…`);
+            continue;
+          }
+        }
+      }
+
       try {
-        const viaSdk = await generateViaSdk(model, prompt, options);
-        if (viaSdk) {
-          if (model !== GEMINI_MODEL) {
+        const viaRest = await generateViaRest(model, prompt, options);
+        if (viaRest) {
+          if (model !== primary) {
             console.warn(`[gemini] nutze Fallback-Modell ${model}`);
           }
-          return viaSdk;
+          void clearGeminiCreditsExhausted();
+          return viaRest;
         }
-      } catch (sdkErr) {
-        lastError = sdkErr;
-        if (isModelNotFoundError(sdkErr)) {
+      } catch (err) {
+        lastError = err;
+        // Hard abort: kein Modell-Fallback, keine Pro-Eskalation (Kostenfalle)
+        if (isAbortError(err)) throw err;
+        if (isGeminiCreditsExhaustedError(err)) {
+          sawCreditsExhausted = true;
+          void noteGeminiCreditsExhausted(err);
+          console.warn(`[gemini] Guthaben leer bei ${model}`);
+          // No point cycling models — same billing account
+          break;
+        }
+        if (isModelNotFoundError(err)) {
           console.warn(`[gemini] ${model} nicht verfügbar, nächstes Modell…`);
           continue;
         }
-      }
-    }
-
-    // 2) REST (RN-sicher, kein ReadableStream)
-    try {
-      const viaRest = await generateViaRest(model, prompt, options);
-      if (viaRest) {
-        if (model !== GEMINI_MODEL) {
-          console.warn(`[gemini] nutze Fallback-Modell ${model}`);
+        if (isGeminiSoftRateLimitError(err)) {
+          console.warn(`[gemini] Rate-Limit bei ${model}, nächstes Modell…`);
+          flashHardFailed = true;
+          continue;
         }
-        return viaRest;
+        console.warn(`[gemini] generate fehlgeschlagen (${model}):`, err);
+        flashHardFailed = true;
       }
-    } catch (err) {
-      lastError = err;
-      if (isModelNotFoundError(err)) {
-        console.warn(`[gemini] ${model} nicht verfügbar, nächstes Modell…`);
-        continue;
-      }
-      // 429: kurz warten und nächstes Modell versuchen
-      if (/429|Too Many Requests|RESOURCE_EXHAUSTED/i.test(String(err))) {
-        console.warn(`[gemini] Rate-Limit bei ${model}, nächstes Modell…`);
-        continue;
-      }
-      console.warn(`[gemini] generate fehlgeschlagen (${model}):`, err);
     }
+    return '';
+  };
+
+  let text = await tryModels(flashFirst);
+  if (!text.trim()) flashHardFailed = true;
+
+  try {
+    const { trackGeminiUsage } = await import('./llm/apiUsageTracker');
+    trackGeminiUsage(prompt.length, text.length);
+    const { recordLlmPrompt, recordLlmResponse } = await import(
+      './feedback/telemetryBuffer'
+    );
+    recordLlmPrompt(prompt);
+    if (text.trim()) recordLlmResponse(text);
+  } catch {
+    /* ignore */
   }
 
-  if (lastError) {
-    console.warn('[gemini] alle Modelle fehlgeschlagen:', lastError);
+  const thinFlash = shouldEscalateHistoryToPro(text, options?.task);
+
+  // Flash thin/empty/failed → einmal Pro als Unterstützung (nicht bei leerem Guthaben / Abort)
+  if (
+    (thinFlash || flashHardFailed) &&
+    !sawCreditsExhausted &&
+    !options?.signal?.aborted &&
+    options?.flashFailed !== true &&
+    options?.forcePro !== true &&
+    options?.tier !== 'pro'
+  ) {
+    if (__DEV__) {
+      console.warn(
+        `[gemini] Flash überfordert (${options?.task ?? 'generic'}) — Pro-Unterstützung`,
+      );
+    }
+    const proText = await tryModels(
+      resolveGeminiModels({
+        ...tierInput,
+        flashFailed: true,
+        forcePro: true,
+        tier: 'pro',
+      }),
+    );
+    if (proText.trim()) text = proText;
   }
-  return '';
+
+  if (!text.trim() && lastError) {
+    console.warn('[gemini] alle Modelle fehlgeschlagen:', lastError);
+    if (isGeminiCreditsExhaustedError(lastError) || sawCreditsExhausted) {
+      void noteGeminiCreditsExhausted(lastError);
+    }
+  }
+  return text;
 }
 
 /**
@@ -543,15 +676,49 @@ export async function askGeminiConciergeResponse(
     temperature: GEMINI_TEMPERATURE,
     useFindusSystem: false,
     responseJson: true,
+    task: 'concierge',
   });
 
   const parsed = parseConciergeResponse(raw);
-  if (parsed) return parsed;
+  if (parsed && parsed.speechText.trim().length >= 12) return parsed;
 
-  // Modell hat Plaintext geliefert
-  const plain = raw.trim();
-  if (plain) return wrapPlainAsConcierge(plain);
+  const plain = (parsed?.speechText ?? raw).trim();
+  if (plain.length >= 12) return parsed ?? wrapPlainAsConcierge(plain);
+
+  const { generateUniversalFallbackReply } = await import(
+    '../runtime/approachVisualCue'
+  );
+  const lastUser = [...messages].reverse().find((m) => m.role === 'user');
+  const fallback = await generateUniversalFallbackReply({
+    userQuestion: lastUser?.content ?? '',
+    placeName: useFinnusStore.getState().currentLocationName,
+    intentKind: 'concierge',
+  });
+  if (fallback) return wrapPlainAsConcierge(fallback);
+
+  // Last resort: still Gemini-parameterized, never a frozen template string
+  try {
+    const live = await generateGeminiText(
+      [
+        'Du bist Findus. Die letzte Antwort war unbrauchbar.',
+        `User wollte: „${(lastUser?.content ?? '').slice(0, 200)}“.`,
+        'Formuliere GENAU EINEN kurzen deutschen Satz (du-Form): nachfragen, wobei du helfen sollst — natürlich, kein Template.',
+      ].join('\n'),
+      {
+        task: 'generic',
+        useFindusSystem: false,
+        maxTokens: 80,
+        temperature: 0.6,
+      },
+    );
+    const t = live.trim();
+    if (t.length >= 10) return wrapPlainAsConcierge(t);
+  } catch {
+    /* ignore */
+  }
+
   return wrapPlainAsConcierge(
-    'Dazu hab ich gerade keinen frischen Beleg — versuch es gleich noch einmal.',
+    plain ||
+      'Ich hab dich nicht ganz mitbekommen — worum geht’s genau?',
   );
 }

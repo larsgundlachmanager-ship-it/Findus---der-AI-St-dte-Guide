@@ -21,14 +21,15 @@ import { getCachedUserProfile } from '../userProfileService';
 import { sentencesFromFullText } from './sentenceStream';
 import type { SessionMemory } from './sessionMemory';
 import {
-  detectSpokenTipsInText,
-  formatFeatureTipsForPrompt,
   loadFeatureTipState,
-  markFeatureTipSpoken,
-  planFeatureTips,
-  type FeatureTipId,
   type FeatureTipPlan,
 } from './featureTips';
+import {
+  prepareNarrationFeatureTips,
+  formatNarrationFeatureTipsBlock,
+  commitNarrationFeatureTips,
+  getLastNarrationFeatureTipPlan,
+} from '../../runtime/featureTipsModule';
 import {
   findRelatedPlaceBridge,
   formatRelatedBridgeForPrompt,
@@ -49,6 +50,11 @@ export type StreamFindusStoryInput = {
   timeoutMs?: number;
   /** Sub/Punkt liegt in größerem Kontext (für Nav-Reminder). */
   parentIsMajor?: boolean;
+  /**
+   * Beat-Brief aus findusTourDirector (Historie/Heute/Fun).
+   * Bei arrival: Pflicht-Dramaturgie erzwingen.
+   */
+  storyBriefBlock?: string | null;
 };
 
 /** Nur vorgefertigte Erzählung / general_info — kein Satz-Basteln. */
@@ -86,6 +92,7 @@ function buildUserPrompt(input: {
   mode: FindusStoryMode;
   approachAlreadyHeard: boolean;
   profile: UserProfile;
+  storyBriefBlock?: string | null;
 }): string {
   const payload = buildPoiPayload(input.poi);
   const engine = resolvePersonaEngine(input.profile);
@@ -93,16 +100,38 @@ function buildUserPrompt(input: {
     input.mode === 'approach'
       ? 'MODUS: Approach / Soft-Pitch (Annäherung). Kurz anteasern (1–3 Sätze), Interesse wecken, einladen näherzukommen. Noch nicht die volle Story.'
       : input.approachAlreadyHeard
-        ? 'MODUS: Ankunft am Ort. Approach wurde schon gehört — KEINE zweite Begrüßungs-Intro. Direkt in Atmosphäre + Story + EIN Outro.'
-        : 'MODUS: Ankunft am Ort. Live-Story (Hook → Inhalt → optional Onboarding → EIN Outro).';
+        ? 'MODUS: Ankunft am Ort. Approach wurde schon gehört — KEINE zweite Begrüßungs-Intro. Direkt in die 3-Phasen-Dramaturgie.'
+        : 'MODUS: Ankunft am Ort. Live-Story mit HARTER 3-Phasen-Dramaturgie.';
+
+  const dramaturgyBlock =
+    input.mode === 'arrival'
+      ? `
+=== PFLICHT-DRAMATURGIE (STRENG — Modul 1 Ortstrigger) ===
+Schreibe GENAU in dieser Reihenfolge als fließendes Audio (OHNE die Wörter „Historie“, „Heute“, „Fun Fact“ als Labels auszusprechen):
+
+1) HISTORIE — Wer/was war hier früher? Herkunft, Bau, Geschichte (nur belegte Fakten).
+2) HEUTE — Was ist der Ort JETZT? Nutzen, Alltag, was der User sieht.
+3) FUN FACT — Ein neugieriger, witziger oder überraschender Moment (kein Quiz-Label).
+
+Weiche Übergänge zwischen den Phasen („Und heute?“, „Das Lustige daran:“).
+Kein Single-Shot-Mischmasch ohne diese drei Bögen.
+Keine Markdown-Überschriften, keine Aufzählungszeichen.
+`
+      : '';
+
+  const brief =
+    input.storyBriefBlock?.trim()
+      ? `\nBeat-Fakten (Pflicht nutzen, nichts erfinden):\n${input.storyBriefBlock.trim()}\n`
+      : '';
 
   return `${modeLine}
-
+${dramaturgyBlock}${brief}
 Erstelle das gesprochene Live-Audio-Skript für Findus aus diesen Ort-Daten.
 LÄNGE: proportional zu den Fakten — kleine Orte (wenige Fakten): 3–5 Sätze. Highlights: bis ca. 8 Sätze. NIEMALS künstlich aufblasen.
 Schluss: variieren oder weglassen — kein Standard-„ganz entspannt / weiterrollen“. Wenn ein verwandter Ort passt: Wahl anbieten (mehr Geschichte vs. hin).
 Nur Fließtext zum Vorlesen. Kein Markdown, keine Labels, keine Aufzählungen, keine leeren Klammern.
 Kein „Wenn du keine Fragen mehr hast…“. Keine Adressen/PLZ/Telefon.
+HOOK-REGEL: Der erste Satz MUSS zum Ort passen (Funktion/Thema aus den Daten). Kein Essens-Humor (Franzbrötchen, Bäcker, Kaffee) an Geldautomaten, Apotheken, Behörden o.ä. Jeder Opener frisch aus den Ort-Daten — keine vorgefertigten Floskeln von anderen Städten.
 Namen vollständig aussprechen (nie mitten im Wort abbrechen).
 
 Nutzer-Kurzprofil (zusätzlich zur System-Instruction):
@@ -125,24 +154,13 @@ export function lastSingleShotUsedLlm(): boolean {
 }
 
 export function getLastFeatureTipPlan(): FeatureTipPlan | null {
-  return lastFeatureTipPlan;
+  return getLastNarrationFeatureTipPlan();
 }
 
 export async function commitFeatureTipsAfterStory(
   spokenText: string,
 ): Promise<void> {
-  const plan = lastFeatureTipPlan;
-  const detected = detectSpokenTipsInText(spokenText);
-  const toMark = new Set<FeatureTipId>(detected);
-  if (plan?.tip) toMark.add(plan.tip);
-  // Surplus mit Beispiel-Frage = Rückfragen-Potenzial ist bekannt
-  if (plan?.surplusExampleQuestion) toMark.add('ask_followups');
-  if (plan?.allowNavReminder && detected.includes('navigation')) {
-    toMark.add('navigation');
-  }
-  for (const id of toMark) {
-    await markFeatureTipSpoken(id);
-  }
+  return commitNarrationFeatureTips(spokenText);
 }
 
 /**
@@ -164,21 +182,14 @@ export async function* streamFindusStorySentences(
   const importance = resolvePoiImportance(input.poi);
 
   await loadFeatureTipState();
-  const planned = planFeatureTips({
+  const planned = await prepareNarrationFeatureTips({
     poi: input.poi,
     importance,
     isFirstPoi,
     kind: input.poi.kind,
     parentIsMajor: Boolean(input.parentIsMajor),
   });
-  // Surplus deckt „frag mich“ ab → keinen zweiten Meta-Tip
-  const tipPlan: FeatureTipPlan = {
-    ...planned,
-    tip:
-      planned.surplusExampleQuestion && planned.tip === 'ask_followups'
-        ? null
-        : planned.tip,
-  };
+  const tipPlan: FeatureTipPlan = planned;
   lastFeatureTipPlan = tipPlan;
 
   const allPois = useFinnusStore.getState().pois ?? [];
@@ -195,7 +206,7 @@ export async function* streamFindusStorySentences(
     featureTipId: tipPlanForPrompt.tip,
     surplusExampleQuestion: tipPlanForPrompt.surplusExampleQuestion,
     allowNavReminder: tipPlanForPrompt.allowNavReminder,
-    featureTipsBlock: formatFeatureTipsForPrompt(tipPlanForPrompt),
+    featureTipsBlock: formatNarrationFeatureTipsBlock(tipPlanForPrompt),
     relatedBridgeBlock,
   });
 
@@ -220,6 +231,7 @@ export async function* streamFindusStorySentences(
     mode,
     approachAlreadyHeard,
     profile,
+    storyBriefBlock: input.storyBriefBlock,
   });
 
   if (__DEV__) {
@@ -238,6 +250,7 @@ export async function* streamFindusStorySentences(
         useFindusSystem: false,
         systemInstruction,
         masterContext,
+        task: mode === 'approach' ? 'teaser' : 'history_deep',
       }),
       new Promise<string>((resolve) =>
         setTimeout(() => resolve(''), timeoutMs),

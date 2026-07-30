@@ -9,26 +9,24 @@ import type { GeminiConciergeResponse } from '../../types/concierge';
 import type { ConciergeCardState } from '../../types/concierge';
 import type { QuickAction } from '../../types/concierge';
 import { useFinnusStore } from '../../store/useFinnusStore';
-import {
-  speakAssistantText,
-  getVoiceSettingsForTour,
-} from '../ttsService';
+import { getVoiceSettingsForTour } from '../ttsService';
+import { speakRuntimeText } from '../../runtime/speechModule';
 import type { ConciergeContext } from './conciergeContext';
 import {
   clampVisualBullets,
 } from './parseConciergeResponse';
 import type { TransitAdvice } from '../transit/transitAdvisor';
 import { formatDelayStatus } from '../transit/transitAdvisor';
-import { startNavigation } from '../navigation';
-import { resolvePoiId } from '../actionHandlerService';
-import { getActiveNavDestination } from '../navigation/navigationService';
-import { getAllPois } from '../../db/database';
+import { getAllPois, getPoiWithFacts } from '../../db/database';
+import {
+  normalizeNavActionsAndOffer,
+  resolveAndStartNavigation,
+} from '../navigation/resolveNavTarget';
 import {
   buildBounceLuggageAction,
   buildCarRentalAction,
   buildStay22AccommodationAction,
   buildTourBookingAction,
-  buildUberRideAction,
   looksLikeFakeTourSlug,
   buildGetYourGuideSearchUrl,
   normalizeAffiliateUrl,
@@ -36,6 +34,7 @@ import {
 } from '../affiliate/affiliateService';
 import {
   MAX_QUICK_ACTIONS,
+  MAX_EVENT_QUICK_ACTIONS,
   prioritizeQuickActions,
 } from '../affiliate/prioritizeActions';
 import { pickPendingAffiliateOffer } from '../affiliate/pendingAffiliateOffer';
@@ -51,6 +50,24 @@ import {
   speechCommitsToMap,
   speechMentionsMap,
 } from '../cityMapService';
+import {
+  buildPlaceChoiceActions,
+  shouldForcePlaceChoiceChips,
+  wantsMusicExplicitly,
+  wantsUberExplicitly,
+} from './quickActionPolicy';
+import { namesAlign } from './canonicalDestination';
+import {
+  buildReservationQuickActions,
+  evaluateReservationIntel,
+} from '../../runtime/reservationIntel';
+import {
+  speechAdmitsNoActionableData,
+  stripUnbackedActions,
+} from './zeroFakeActions';
+import { recordFindusActionsTriggered } from '../feedback/executionTracking';
+import { applyHardGuardrails } from '../agi/speechGuardrails';
+import { applyActionButtonJudge } from '../agi/actionButtonJudge';
 
 function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
@@ -110,26 +127,20 @@ async function attachCityMapAction(
   return [...actions, buildCityMapAction(link)];
 }
 
-async function resolveAutoNavPoiId(
-  response: GeminiConciergeResponse,
-): Promise<number | null> {
-  for (const a of response.quickActions) {
-    if (a.type !== 'START_NAVIGATION') continue;
-    const id = await resolvePoiId(a.payload.targetPoiId);
-    if (id != null) return id;
-  }
-  const offer = useFinnusStore.getState().pendingNavOffer;
-  if (offer?.poiId != null) return offer.poiId;
-  return null;
-}
-
 /**
  * Kompass sofort aktivieren, wenn Speech das zusagt.
  * Blockiert die Stimme nicht länger als nötig.
  */
 export async function autoStartNavigationIfCommitted(
   response: GeminiConciergeResponse,
+  opts?: { skipAutoNav?: boolean; userText?: string },
 ): Promise<boolean> {
+  if (opts?.skipAutoNav) return false;
+  // Tagesplan-Fragen dürfen nie den Kompass starten
+  if (opts?.userText && /\b(plan|ablauf|wie\s+sieht)\b/iu.test(opts.userText)) {
+    const { isDayPlanQuery } = await import('../intent/poiInfoVsNav');
+    if (isDayPlanQuery(opts.userText)) return false;
+  }
   const store = useFinnusStore.getState();
   const navActions = response.quickActions.filter(
     (a) => a.type === 'START_NAVIGATION',
@@ -152,125 +163,375 @@ export async function autoStartNavigationIfCommitted(
   // Laufende Navigation nicht durch Rückfragen neu starten
   if (store.navActive && !commits) return false;
 
-  const poiId = await resolveAutoNavPoiId(response);
-  if (poiId == null) {
+  const navAction = navActions[0];
+  const offer = store.pendingNavOffer;
+  const started = await resolveAndStartNavigation({
+    poiId: navAction?.payload.targetPoiId ?? offer?.poiId,
+    name:
+      navAction?.payload.destName ||
+      navAction?.label ||
+      offer?.name ||
+      null,
+    lat: navAction?.payload.destLat ?? offer?.lat ?? null,
+    lng: navAction?.payload.destLng ?? offer?.lng ?? null,
+  });
+
+  if (!started.ok) {
     console.warn(
-      '[concierge] Speech sagt Navigation zu, aber kein targetPoiId/Offer',
+      '[concierge] Speech sagt Navigation zu, aber Ziel nicht auflösbar',
+      started.message,
     );
     return false;
   }
 
-  if (store.navActive && getActiveNavDestination()?.poiId === poiId) {
-    return true;
-  }
-
-  const ok = await startNavigation(poiId);
   if (__DEV__) {
     console.log(
-      `[concierge] auto-start nav poi=#${poiId} ok=${ok} (Kompass vor/parallel zur Stimme)`,
+      `[concierge] auto-start nav via=${started.via} name=${started.name} ok=true`,
     );
   }
-  return ok;
+  return true;
 }
 
-/** Ergänzt Nav-, Uber- und Mietwagen-Actions aus lokalem Concierge-Kontext. */
+/** Event-Turns: bis 4 Buttons; sonst Default-Cap. */
+function actionCap(ctx: ConciergeContext | null): number {
+  return (
+    ctx?.maxQuickActions ??
+    (ctx?.eventResearch?.events?.length ? MAX_EVENT_QUICK_ACTIONS : MAX_QUICK_ACTIONS)
+  );
+}
+
+function navCap(ctx: ConciergeContext | null): number {
+  return ctx?.eventResearch?.events?.length ? 3 : 2;
+}
+
+/** Ergänzt Nav-/Partner-Actions — progressive disclosure, voice-first. */
 export async function enrichWithConciergeOffers(
   response: GeminiConciergeResponse,
   ctx: ConciergeContext | null,
 ): Promise<GeminiConciergeResponse> {
-  const actions = [...response.quickActions];
+  // Event-Recherche: Buttons aus Research (Route + PDF + Tickets), Speech sync
+  if (ctx?.eventResearch?.events?.length) {
+    const { eventResearchToActions, synthesizeEventSpeech } = await import(
+      './eventResearchService'
+    );
+    let speechText = response.speechText.trim();
+    const research = ctx.eventResearch;
+    const mentionsAny = research.events.some(
+      (e) => namesAlign(speechText, e.venue) || namesAlign(speechText, e.title),
+    );
+    if (!speechText || !mentionsAny) {
+      speechText = synthesizeEventSpeech(research);
+    }
+    const fromResearch = eventResearchToActions(research);
+    const geminiAligned = response.quickActions.filter((a) => {
+      if (a.type === 'START_NAVIGATION') {
+        return research.events.some((e) =>
+          namesAlign(a.payload.destName || a.label, e.venue),
+        );
+      }
+      if (a.type === 'OPEN_URL') {
+        return research.events.some(
+          (e) =>
+            (e.infoUrl && a.payload.url === e.infoUrl) ||
+            (e.ticketUrl && a.payload.url === e.ticketUrl),
+        );
+      }
+      return false;
+    });
+    const merged: QuickAction[] = [];
+    const seen = new Set<string>();
+    for (const a of [...fromResearch, ...geminiAligned]) {
+      const key = `${a.type}:${a.payload.url ?? ''}:${a.payload.destName ?? a.label}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      merged.push(a);
+    }
+    const cap = actionCap(ctx);
+    const ranked = prioritizeQuickActions(merged, {
+      maxActions: cap,
+      maxNavActions: navCap(ctx),
+      primaryIntentTypes: ['START_NAVIGATION', 'OPEN_URL'],
+    });
+    const normalized = await normalizeNavActionsAndOffer({
+      actions: ranked,
+      fallbackOffer: ctx.primaryOffer,
+    });
+    if (ctx.primaryOffer) {
+      useFinnusStore.getState().setPendingNavOffer(
+        normalized.offer ?? ctx.primaryOffer,
+      );
+      useFinnusStore
+        .getState()
+        .setPendingNavAlternatives(ctx.alternatives.slice(0, 2));
+    }
+    return {
+      ...response,
+      speechText,
+      cardTitle: response.cardTitle || 'Heute vor Ort',
+      visualBullets: clampVisualBullets(
+        response.visualBullets.length > 0
+          ? response.visualBullets
+          : ctx.fallbackBullets ?? [],
+      ),
+      quickActions: normalized.actions.slice(0, cap) as QuickAction[],
+    };
+  }
+
+  // Wahl-Turn: Spickzettel = genau die 2 gesprochenen Orte (Tap = Auswahl)
+  if (shouldForcePlaceChoiceChips(response.speechText, ctx) && ctx?.primaryOffer) {
+    const choiceActions = buildPlaceChoiceActions(
+      ctx.primaryOffer,
+      ctx.alternatives,
+    ).map((action) =>
+      ctx.kind === 'food'
+        ? {
+            ...action,
+            payload: {
+              ...action.payload,
+              autoFollowUp: 'reservation' as const,
+            },
+          }
+        : action,
+    );
+    const normalized = await normalizeNavActionsAndOffer({
+      actions: choiceActions,
+      fallbackOffer: ctx.primaryOffer,
+    });
+    let speechText = response.speechText.trim();
+    if (!speechText && ctx.fallbackSpeech?.trim()) {
+      speechText = ctx.fallbackSpeech.trim();
+    }
+    return {
+      ...response,
+      speechText,
+      visualBullets: clampVisualBullets(
+        response.visualBullets.length > 0
+          ? response.visualBullets
+          : ctx.fallbackBullets ?? [],
+      ),
+      cardTitle:
+        response.cardTitle ||
+        (ctx.kind === 'general' ? 'Was heute geht' : titleForKind(ctx.kind)),
+      quickActions: normalized.actions.slice(0, 2) as QuickAction[],
+    };
+  }
+
+  let actions = [...response.quickActions];
+
+  if (ctx?.namedDestination && ctx.primaryOffer) {
+    // SSOT: strip foreign nav chips, bind Route starten + Tisch/Speisekarte to named place
+    const offer = ctx.primaryOffer;
+    actions = actions.filter(
+      (a) =>
+        a.type !== 'START_NAVIGATION' &&
+        a.type !== 'BOOK_STAY22', // open Stay22 only via hotel pack if needed
+    );
+    actions.unshift({
+      type: 'START_NAVIGATION',
+      label: '📍 Route starten',
+      payload: {
+        targetPoiId: offer.poiId,
+        destName: offer.name,
+        destLat: offer.lat,
+        destLng: offer.lng,
+      },
+    });
+
+    // Named hotel: why + availability check + booking button
+    const looksHotel =
+      ctx.kind === 'accommodation' ||
+      /\b(hotel|pension|hostel|apartment|ferienwohnung|unterkunft)\b/iu.test(
+        offer.name,
+      );
+    if (looksHotel) {
+      try {
+        const { buildHotelBookingPack } = await import('./hotelBookingPack');
+        const pack = await buildHotelBookingPack(offer, {
+          userText: response.speechText,
+          suggestWhy: true,
+        });
+        // Only researched booking actions — never static Stay22-without-check
+        for (const a of pack.actions) {
+          if (!actions.some((x) => x.type === a.type && x.label === a.label)) {
+            actions.push(a);
+          }
+        }
+        if (pack.speechExtra) {
+          (response as { _hotelSpeech?: string })._hotelSpeech =
+            pack.available === false
+              ? pack.speechExtra
+              : pack.speechExtra;
+        }
+      } catch (err) {
+        if (__DEV__) console.warn('[concierge] hotel booking pack', err);
+      }
+    }
+
+    if (
+      (ctx.kind === 'food' || ctx.kind === 'reservation') &&
+      offer.poiId > 0
+    ) {
+      try {
+        const poi = await getPoiWithFacts(offer.poiId);
+        if (poi) {
+          const intel = await evaluateReservationIntel(poi, '');
+          const resActions = buildReservationQuickActions(intel, null, {
+            lat: offer.lat ?? poi.lat,
+            lng: offer.lng ?? poi.lng,
+          }).filter((a) => a.type !== 'START_NAVIGATION');
+          for (const a of resActions) {
+            const exists = actions.some(
+              (x) =>
+                x.type === a.type ||
+                (x.type === 'OPEN_URL' &&
+                  a.type === 'OPEN_URL' &&
+                  /speisekarte|karte|menu/i.test(x.label)),
+            );
+            if (!exists) actions.push(a);
+          }
+          // Ensure Speisekarte / Reservieren labels are clear
+          actions = actions.map((a) => {
+            if (a.type === 'OPEN_URL' && /speisekarte|menu|karte/i.test(a.label)) {
+              return { ...a, label: '🍽 Speisekarte' };
+            }
+            if (a.type === 'CONFIRM_API_RESERVATION') {
+              return { ...a, label: '🍽 Tisch reservieren' };
+            }
+            if (a.type === 'SEND_RESERVATION_EMAIL') {
+              return { ...a, label: '🍽 Tisch anfragen' };
+            }
+            return a;
+          });
+        }
+      } catch (err) {
+        if (__DEV__) console.warn('[concierge] named dest reservation pack', err);
+      }
+    }
+
+    // Speech must mention the named place — else use fallback
+    let speechText = response.speechText.trim();
+    if (
+      !namesAlign(speechText, offer.name) &&
+      ctx.fallbackSpeech?.trim()
+    ) {
+      speechText = ctx.fallbackSpeech.trim();
+    } else if (!speechText && ctx.fallbackSpeech?.trim()) {
+      speechText = ctx.fallbackSpeech.trim();
+    }
+    const hotelExtra = (response as { _hotelSpeech?: string })._hotelSpeech;
+    if (hotelExtra?.trim()) {
+      speechText = `${speechText} ${hotelExtra.trim()}`.trim();
+    }
+
+    const normalized = await normalizeNavActionsAndOffer({
+      actions,
+      fallbackOffer: offer,
+    });
+    useFinnusStore.getState().setPendingNavOffer(
+      normalized.offer ?? offer,
+    );
+    useFinnusStore.getState().setPendingNavAlternatives([]);
+
+    return {
+      ...response,
+      speechText,
+      cardTitle: response.cardTitle || offer.name,
+      visualBullets: clampVisualBullets(
+        response.visualBullets.length > 0
+          ? response.visualBullets
+          : ctx.fallbackBullets ?? [offer.name],
+      ),
+      quickActions: prioritizeQuickActions(
+        normalized.actions as QuickAction[],
+        {
+          maxActions: actionCap(ctx),
+          maxNavActions: navCap(ctx),
+        },
+      ).slice(0, actionCap(ctx)),
+    };
+  }
 
   if (ctx?.primaryOffer) {
     const hasNav = actions.some((a) => a.type === 'START_NAVIGATION');
     if (!hasNav) {
       actions.unshift({
         type: 'START_NAVIGATION',
-        label: `📍 Route: ${ctx.primaryOffer.name}`,
-        payload: { targetPoiId: ctx.primaryOffer.poiId },
+        label: ctx.primaryOffer.name,
+        payload: {
+          targetPoiId: ctx.primaryOffer.poiId,
+          destName: ctx.primaryOffer.name,
+          destLat: ctx.primaryOffer.lat,
+          destLng: ctx.primaryOffer.lng,
+        },
+      });
+    } else {
+      // Retarget mismatched nav chips toward primary when speech aligns with primary
+      actions = actions.map((a) => {
+        if (a.type !== 'START_NAVIGATION') return a;
+        const id = String(a.payload.targetPoiId ?? '');
+        if (id === String(ctx.primaryOffer!.poiId)) {
+          return {
+            ...a,
+            label: `📍 Route: ${ctx.primaryOffer!.name}`,
+            payload: {
+              ...a.payload,
+              targetPoiId: ctx.primaryOffer!.poiId,
+              destName: ctx.primaryOffer!.name,
+              destLat: ctx.primaryOffer!.lat,
+              destLng: ctx.primaryOffer!.lng,
+            },
+          };
+        }
+        const alt = ctx.alternatives.find((x) => String(x.poiId) === id);
+        if (alt) return { ...a, label: alt.name };
+        // Speech names primary but chip names something else → force primary
+        const chipName = String(a.payload.destName || a.label || '');
+        if (
+          namesAlign(response.speechText, ctx.primaryOffer!.name) &&
+          !namesAlign(chipName, ctx.primaryOffer!.name)
+        ) {
+          return {
+            ...a,
+            label: `📍 Route starten`,
+            payload: {
+              targetPoiId: ctx.primaryOffer!.poiId,
+              destName: ctx.primaryOffer!.name,
+              destLat: ctx.primaryOffer!.lat,
+              destLng: ctx.primaryOffer!.lng,
+            },
+          };
+        }
+        return a;
       });
     }
-    for (const alt of ctx.alternatives.slice(0, 2)) {
-      const exists = actions.some(
-        (a) =>
-          a.type === 'START_NAVIGATION' &&
-          String(a.payload.targetPoiId) === String(alt.poiId),
-      );
-      if (!exists) {
-        actions.push({
-          type: 'START_NAVIGATION',
-          label: `📍 Route: ${alt.name}`,
-          payload: { targetPoiId: alt.poiId },
-        });
-      }
-    }
 
+    // Sekundär: Uber erst nach Zusagen / explizitem Fahrt-Wunsch
     const offerUber =
-      ctx.kind === 'food' ||
-      ctx.kind === 'reservation' ||
-      ctx.kind === 'infra' ||
-      ctx.kind === 'general';
+      wantsUberExplicitly(response.speechText) ||
+      ((ctx.kind === 'food' || ctx.kind === 'reservation') &&
+        speechCommitsToNavigation(response.speechText));
 
     if (offerUber) {
-      let destLat: number | undefined;
-      let destLng: number | undefined;
-      try {
-        const pois = await getAllPois();
-        const poi = pois.find((p) => p.id === ctx.primaryOffer!.poiId);
-        if (poi) {
-          destLat = poi.lat;
-          destLng = poi.lng;
-        }
-      } catch {
-        /* coords optional — Handler löst über targetPoiId */
+      let destLat: number | undefined = ctx.primaryOffer.lat;
+      let destLng: number | undefined = ctx.primaryOffer.lng;
+      let destName = ctx.primaryOffer.name;
+      const pois = await getAllPois();
+      const poi = pois.find((p) => p.id === ctx.primaryOffer!.poiId);
+      if (poi) {
+        destLat = poi.lat;
+        destLng = poi.lng;
+        destName = poi.name;
       }
-
-      const uberIdx = actions.findIndex((a) => a.type === 'BOOK_UBER');
-      if (uberIdx >= 0) {
-        const existing = actions[uberIdx];
-        const needCoords =
-          existing.payload.destLat == null || existing.payload.destLng == null;
-        if (needCoords && destLat != null && destLng != null) {
-          actions[uberIdx] = {
-            ...existing,
-            payload: {
-              ...existing.payload,
-              ...buildUberRideAction(
-                destLat,
-                destLng,
-                existing.payload.destName || ctx.primaryOffer.name,
-                ctx.primaryOffer.poiId,
-              ).payload,
-            },
-          };
-        } else if (!existing.payload.targetPoiId) {
-          actions[uberIdx] = {
-            ...existing,
-            payload: {
-              ...existing.payload,
-              targetPoiId: ctx.primaryOffer.poiId,
-              destName: existing.payload.destName || ctx.primaryOffer.name,
-            },
-          };
-        }
-      } else if (destLat != null && destLng != null) {
-        actions.push(
-          buildUberRideAction(
-            destLat,
-            destLng,
-            ctx.primaryOffer.name,
-            ctx.primaryOffer.poiId,
-          ),
-        );
-      } else {
+      const hasUber = actions.some((a) => a.type === 'BOOK_UBER');
+      if (!hasUber && destLat != null && destLng != null) {
         actions.push({
           type: 'BOOK_UBER',
-          label: '🚗 Fahrt mit Uber buchen',
-          payload: {
-            targetPoiId: ctx.primaryOffer.poiId,
-            destName: ctx.primaryOffer.name,
-          },
+          label: 'Uber',
+          payload: { destLat, destLng, destName },
         });
       }
+    } else {
+      actions = actions.filter((a) => a.type !== 'BOOK_UBER');
     }
   }
 
@@ -314,17 +575,19 @@ export async function enrichWithConciergeOffers(
   if (offerBounce) {
     const bounceIdx = actions.findIndex((a) => a.type === 'BOOK_BOUNCE_LUGGAGE');
     const bounceAction = buildBounceLuggageAction();
-    if (bounceIdx >= 0) {
-      actions[bounceIdx] = {
-        ...actions[bounceIdx],
-        label: actions[bounceIdx].label || bounceAction.label,
-        payload: {
-          ...actions[bounceIdx].payload,
-          url: bounceAction.payload.url,
-        },
-      };
-    } else {
-      actions.push(bounceAction);
+    if (bounceAction) {
+      if (bounceIdx >= 0) {
+        actions[bounceIdx] = {
+          ...actions[bounceIdx],
+          label: actions[bounceIdx].label || bounceAction.label,
+          payload: {
+            ...actions[bounceIdx].payload,
+            url: bounceAction.payload.url,
+          },
+        };
+      } else {
+        actions.push(bounceAction);
+      }
     }
   } else {
     // Kein Bounce vor Ort — Partner-Button entfernen
@@ -334,36 +597,44 @@ export async function enrichWithConciergeOffers(
   }
 
   const offerStay22 =
-    ctx?.wantsStay22 === true ||
-    actions.some((a) => a.type === 'BOOK_STAY22') ||
-    /\b(hotel|ferienwohnung|apartment|unterkunft|übernacht|uebernacht|stay22)\b/iu.test(
-      response.speechText,
-    );
+    !ctx?.namedDestination &&
+    (ctx?.wantsStay22 === true ||
+      actions.some((a) => a.type === 'BOOK_STAY22') ||
+      (/\b(hotel|ferienwohnung|apartment|unterkunft|übernacht|uebernacht|stay22)\b/iu.test(
+        response.speechText,
+      ) &&
+        !/\b(führ|fuehr|bring|navigier|route\s+zu)\b/iu.test(response.speechText)));
 
   if (offerStay22) {
     const existing = actions.find((a) => a.type === 'BOOK_STAY22');
     const dest =
-      existing?.payload.destination?.trim() ||
       ctx?.stay22Destination?.trim() ||
+      existing?.payload.destination?.trim() ||
       getCachedUserProfile()?.cityName?.trim() ||
       'Germany';
-    const stayAction = buildStay22AccommodationAction(dest);
+    // Never use a single hotel proper name as Stay22 address
+    const safeDest =
+      /\bhotel\b/i.test(dest) && !/\b(in|umgebung|nähe|naehe)\b/i.test(dest)
+        ? getCachedUserProfile()?.cityName?.trim() || dest
+        : dest;
+    const stayAction = buildStay22AccommodationAction(safeDest);
     stayAction.label = '🏨 Mehr Unterkünfte';
     const stayIdx = actions.findIndex((a) => a.type === 'BOOK_STAY22');
     if (stayIdx >= 0) {
       actions[stayIdx] = {
         ...actions[stayIdx],
-        label: actions[stayIdx].label.includes('Unterkunft')
-          ? '🏨 Mehr Unterkünfte'
-          : actions[stayIdx].label || stayAction.label,
+        label: '🏨 Mehr Unterkünfte',
         payload: {
           ...actions[stayIdx].payload,
           ...stayAction.payload,
+          destination: safeDest,
         },
       };
     } else {
       actions.push(stayAction);
     }
+  } else {
+    actions = actions.filter((a) => a.type !== 'BOOK_STAY22');
   }
 
   // Konkrete Hotel-Stichpunkte nur wenn die KI gar keine geliefert hat
@@ -482,32 +753,107 @@ export async function enrichWithConciergeOffers(
     primaryIntent.push('OPEN_URL', 'OPEN_GYG_WIDGET');
   }
 
+  // Allgemeine „was geht“-Tipps: nur Nav-Chips — Partner/Playlist nicht mitfluten.
+  // Event-Recherche: OPEN_URL (PDF/Flyer/Tickets) behalten.
+  if (ctx?.kind === 'general' && !offerCar && !offerBounce && !offerStay22 && !offerTours) {
+    const keepEventUrls = Boolean(ctx.eventResearch?.events?.length);
+    actions = actions.filter(
+      (a) =>
+        a.type === 'START_NAVIGATION' ||
+        a.type === 'SHOW_MORE' ||
+        a.type === 'DIAL_PHONE' ||
+        (keepEventUrls &&
+          a.type === 'OPEN_URL' &&
+          Boolean(a.payload.url?.trim())),
+    );
+  }
+
+  const cap = actionCap(ctx);
   const ranked = prioritizeQuickActions(actions, {
     primaryIntentTypes: primaryIntent,
+    maxActions: cap,
+    maxNavActions: navCap(ctx),
   });
+
+  // Gemini-IDs prüfen / unbekannte Orte geocoden → pendingNavOffer setzen
+  const normalized = await normalizeNavActionsAndOffer({
+    actions: ranked,
+    fallbackOffer:
+      ctx?.primaryOffer ?? useFinnusStore.getState().pendingNavOffer,
+  });
+  actions = normalized.actions as typeof actions;
 
   if (
     !ctx?.primaryOffer &&
     !offerCar &&
     !offerBounce &&
     !offerStay22 &&
-    !offerTours
+    !offerTours &&
+    !actions.some((a) => a.type === 'START_NAVIGATION')
   ) {
     const withMap = await attachCityMapAction(response, response.quickActions);
-    return enrichPlaylistOffers({
+    const base = {
       ...response,
       quickActions: withMap,
-    });
+    };
+    const enriched =
+      ctx?.kind === 'general' || !wantsMusicExplicitly(response.speechText)
+        ? base
+        : enrichPlaylistOffers(base);
+    return {
+      ...enriched,
+      speechText:
+        enriched.speechText.trim() ||
+        ctx?.fallbackSpeech?.trim() ||
+        response.speechText,
+      quickActions: prioritizeQuickActions(enriched.quickActions, {
+        maxActions: cap,
+        maxNavActions: navCap(ctx),
+      }),
+    };
   }
 
-  const withMap = await attachCityMapAction(response, ranked.slice(0, MAX_QUICK_ACTIONS));
-  return enrichPlaylistOffers({
+  const withMap = await attachCityMapAction(
+    response,
+    actions.slice(0, cap),
+  );
+  const base = {
     ...response,
-    visualBullets: clampVisualBullets(bullets),
+    visualBullets: clampVisualBullets(
+      bullets.length > 0
+        ? bullets
+        : ctx?.fallbackBullets?.length
+          ? ctx.fallbackBullets
+          : bullets,
+    ),
     quickActions: withMap,
     cardTitle:
       response.cardTitle || (ctx ? titleForKind(ctx.kind) : undefined),
-  });
+  };
+  const enriched =
+    ctx?.kind === 'general' || !wantsMusicExplicitly(response.speechText)
+      ? base
+      : enrichPlaylistOffers(base);
+
+  let speechText = enriched.speechText.trim();
+  if (!speechText && ctx?.fallbackSpeech?.trim()) {
+    speechText = ctx.fallbackSpeech.trim();
+  }
+
+  return {
+    ...enriched,
+    speechText,
+    visualBullets: clampVisualBullets(
+      enriched.visualBullets.length > 0
+        ? enriched.visualBullets
+        : ctx?.fallbackBullets ?? [],
+    ),
+    quickActions: prioritizeQuickActions(enriched.quickActions, {
+      primaryIntentTypes: primaryIntent,
+      maxActions: cap,
+      maxNavActions: navCap(ctx),
+    }),
+  };
 }
 
 function titleForKind(kind: ConciergeContext['kind']): string {
@@ -529,6 +875,8 @@ function titleForKind(kind: ConciergeContext['kind']): string {
       return 'Unterkunft & Stay22';
     case 'tours':
       return 'Touren & Tickets';
+    case 'general':
+      return 'Heute vor Ort';
     default:
       return 'Findus Spickzettel';
   }
@@ -572,6 +920,10 @@ export function transitAdviceToConcierge(
   // Dritter Punkt nur wenn sinnvoll (kein Live / langer Fußweg)
   if (advice.source === 'takt') {
     bullets.push('Live-Verspätung gerade nicht verfügbar');
+  } else if (advice.pacing?.scenario === 'relaxed' && bullets.length < 3) {
+    bullets.push(`Entwarnung · +${advice.pacing.delayMin ?? '?'} Min Verspätung`);
+  } else if (advice.pacing?.scenario === 'tight' && bullets.length < 3) {
+    bullets.push('Knapp — lieber Tempo machen');
   } else if (advice.walkMinutes >= 8 && bullets.length < 3) {
     bullets.push(`Fußweg ca. ${advice.walkMinutes} Min`);
   }
@@ -595,16 +947,103 @@ export function transitAdviceToConcierge(
 }
 
 /**
+ * Zero Dead-Ends: nur wenn ein echter nächster Klick existiert.
+ * Kein Placebo-Chip, wenn Speech zugibt dass keine Daten da sind.
+ */
+function ensureZeroDeadEndActions(
+  response: GeminiConciergeResponse,
+  skipNav: boolean,
+): GeminiConciergeResponse {
+  if (response.quickActions.length > 0) return response;
+
+  if (speechAdmitsNoActionableData(response.speechText)) {
+    return response;
+  }
+
+  const offer = useFinnusStore.getState().pendingNavOffer;
+  if (!skipNav && offer) {
+    return {
+      ...response,
+      quickActions: [
+        {
+          type: 'START_NAVIGATION',
+          label: `📍 Route zu ${offer.name}`,
+          payload: {
+            targetPoiId: offer.poiId,
+            destName: offer.name,
+            destLat: offer.lat,
+            destLng: offer.lng,
+          },
+        },
+      ],
+    };
+  }
+
+  // Info-only / Mitdenken ohne Tool → kein erzwungener „Weiterhelfen“-Chip
+  return response;
+}
+
+/**
  * Kompass zuerst (wenn zugesagt) → Stimme parallel → Card wenn Audio läuft.
  */
 export async function presentConciergeResponse(
   response: GeminiConciergeResponse,
+  opts?: { skipAutoNav?: boolean; userText?: string },
 ): Promise<void> {
   const store = useFinnusStore.getState();
 
+  // Pipeline-Ende: NUR sync Code-Judge + Guardrails (kein LLM — LLM-Judge nur 1× in twoPass)
+  {
+    const judged = applyActionButtonJudge(response, {
+      userText: opts?.userText ?? response.speechText,
+    });
+    response = judged.response;
+    if (__DEV__ && judged.changed) {
+      console.log(
+        '[present] action-button-judge (sync-only)',
+        judged.notes
+          .filter((n) => n.action !== 'kept')
+          .map((n) => `${n.action}:${n.reason}`)
+          .join(' | '),
+      );
+    }
+  }
+
+  {
+    const guarded = applyHardGuardrails(response, { userText: opts?.userText });
+    response = guarded.response;
+  }
+
+  // Context Action Policy: keine proaktive Nav im Hotel nachts
+  try {
+    const { filterActionsForContext } = await import(
+      '../ui/contextTriggerMatrix'
+    );
+    const explicitNav = /\b(bring\s+mich|navigier|führ\s+mich|fuehr\s+mich|route)\b/iu.test(
+      response.speechText,
+    );
+    response = {
+      ...response,
+      quickActions: filterActionsForContext(response.quickActions, {
+        explicitNav,
+      }),
+    };
+  } catch {
+    /* ignore */
+  }
+
+  // Zero-Fake: Turnierplan-Chips ohne URL etc. weg
+  response = {
+    ...response,
+    quickActions: stripUnbackedActions(response.quickActions),
+  };
+
+  // Zero Dead-Ends: nur echte nächste Klicks
+  response = ensureZeroDeadEndActions(response, opts?.skipAutoNav === true);
+
   // 1) Navigation SOFORT — Kompass sichtbar, User kann losgehen
   //    Stimme startet danach und läuft parallel weiter (kein Warten auf TTS-Ende).
-  const navStarted = await autoStartNavigationIfCommitted(response);
+  const navStarted = await autoStartNavigationIfCommitted(response, opts);
   if (navStarted) {
     useFinnusStore.getState().patchNavigation({
       navActive: true,
@@ -629,21 +1068,55 @@ export async function presentConciergeResponse(
 
   const voiceSettings = await getVoiceSettingsForTour();
 
-  // 2) Stimme — Navigation bleibt aktiv
-  const speakPromise = speakAssistantText(response.speechText, {
+  let speech = response.speechText.trim();
+  if (speech.length < 8) {
+    const { generateUniversalFallbackReply } = await import(
+      '../../runtime/approachVisualCue'
+    );
+    speech =
+      (await generateUniversalFallbackReply({
+        userQuestion: speech || store.chatHistory.slice(-1)[0]?.content || '',
+        placeName: store.currentLocationName,
+        intentKind: 'concierge',
+      })) ??
+      'Kurz nochmal: wobei kann ich dir gerade helfen?';
+  }
+
+  useFinnusStore.getState().setIsGenerating(false);
+
+  const speakPromise = speakRuntimeText(speech, {
     voiceId: voiceSettings.voiceId,
     speechRate: voiceSettings.speechRate,
   });
 
-  // 3) Spickzettel, sobald die Stimme läuft
+  // 3) Spickzettel sobald Stimme startet — nicht auf TTS-Ende warten
   if (card) {
-    await waitUntilVoicePlaying(4500);
+    // Deep Exec Telemetry: generated action buttons (what Findus put into the UI).
+    recordFindusActionsTriggered(card.quickActions, Date.now());
+    await waitUntilVoicePlaying(2500);
     useFinnusStore.getState().setActiveConciergeCard(card);
+  } else {
+    useFinnusStore.getState().setActiveConciergeCard(null);
   }
 
-  await speakPromise;
-
-  if (!card) {
-    useFinnusStore.getState().setActiveConciergeCard(null);
+  try {
+    await speakPromise;
+  } catch (err: unknown) {
+    console.warn('[concierge] TTS failed:', err);
+  } finally {
+    try {
+      const {
+        releaseSpeakingUiIfIdle,
+        getActiveTtsSessionCount,
+        forceClearSpeakingUi,
+      } = await import('../AudioVoiceService');
+      if (getActiveTtsSessionCount() === 0) {
+        releaseSpeakingUiIfIdle();
+        forceClearSpeakingUi();
+      }
+    } catch {
+      useFinnusStore.getState().setIsPlayingAudio(false);
+      useFinnusStore.getState().setSubtitleText(null);
+    }
   }
 }
