@@ -3,7 +3,9 @@ import {
   Alert,
   ActivityIndicator,
   Animated,
+  Dimensions,
   Pressable,
+  PanResponder,
   ScrollView,
   StyleSheet,
   Text,
@@ -28,6 +30,7 @@ import {
   defaultVoiceForLanguage,
   voicesForLanguage,
 } from '../constants/voices';
+import { VoiceSelectorList } from '../components/VoiceSelectorList';
 import {
   CHARACTER_CATEGORIES,
   EXPERIENCE_CARDS,
@@ -36,11 +39,14 @@ import {
 } from '../constants/onboardingOptions';
 import {
   INTRO_WELCOME_DE,
-  buildExplanationParts,
   t,
   voiceLabel,
+  buildExplanationOpener,
   type ExplanationHint,
 } from '../i18n';
+import { markFirstMapWelcomeDone } from '../services/onboarding/firstMapWelcomeService';
+import { buildGuidedFeatureTourSegments } from '../services/onboarding/guidedFeatureTour';
+import { GuidedFeatureTourOverlays } from './GuidedFeatureTourOverlays';
 import type {
   AppLanguage,
   SwipePreference,
@@ -49,7 +55,7 @@ import type {
 } from '../types/userProfile';
 import { uiLang } from '../types/userProfile';
 import {
-  speakWithKokoro,
+  speakText,
   speakSentenceStream,
   stopSpeaking,
   speakOnboardingIntro,
@@ -58,8 +64,7 @@ import {
   prepareOnboardingVoiceSamples,
   playVoiceSample,
   isVoiceSampleReady,
-  warmupKokoro,
-  warmupPiperEngine,
+  warmupTtsEngine,
   startVoiceBuffer,
   voicePreloader,
 } from '../services/ttsService';
@@ -103,16 +108,16 @@ type FlowStep =
   | 'mic'
   | 'summary';
 
-const EXPRESS_FLOW: FlowStep[] = ['path', 'city', 'express', 'summary'];
+const EXPRESS_FLOW: FlowStep[] = ['path', 'mic', 'city', 'express', 'summary'];
 const STANDARD_FLOW: FlowStep[] = [
   'path',
   'intro',
+  'mic',
   'voice',
   'about',
   'character',
   'city',
   'experience',
-  'mic',
   'summary',
 ];
 
@@ -192,7 +197,7 @@ export function OnboardingNavigator({
     // Erklärung: Opener + Engine schon warm, bevor der Screen mountet
     if (nextStep === 'summary') {
       const voiceId = next.voiceId;
-      void warmupPiperEngine({ voiceId });
+      void warmupTtsEngine({ voiceId });
       void startVoiceBuffer({ speechRate: 1, priorityVoiceId: voiceId });
       void prepareOnboardingVoiceSamples({ priorityVoiceId: voiceId });
     }
@@ -213,7 +218,7 @@ export function OnboardingNavigator({
   const choosePath = (nextMode: OnboardingMode) => {
     void prefetchOnboardingAudioBundle(INTRO_WELCOME_DE);
     void prepareOnboardingVoiceSamples({
-      priorityVoiceId: 'standard_m',
+      priorityVoiceId: 'sebastian',
     });
     setMode(nextMode);
     const next = {
@@ -314,6 +319,17 @@ export function OnboardingNavigator({
           <SummaryIntroStep
             draft={draft}
             onFinished={() => finish()}
+            onSetVoiceId={(voiceId) => {
+              const next: UserProfile = {
+                ...draft,
+                language: 'de',
+                voiceId,
+                speechRate: 1 as const,
+              };
+              patch({ voiceId, speechRate: 1 as const, language: 'de' });
+              void persist(next);
+              void voicePreloader.switchActiveVoice(voiceId);
+            }}
           />
         )}
       </SwipeBackView>
@@ -330,7 +346,7 @@ function IntroStep({
   onNext: () => void;
   onSkip: () => void;
 }) {
-  const isPlaying = useFinnusStore((s) => s.isPlayingAudio);
+  const isPlaying = useFinnusStore((s) => s.isAudiblySpeaking);
   const subtitle = useFinnusStore((s) => s.subtitleText);
   const doneRef = useRef(false);
   const onNextRef = useRef(onNext);
@@ -341,7 +357,7 @@ function IntroStep({
   useEffect(() => {
     // Während Intro: Hörproben weiter cachen (Infer-Queue)
     void prepareOnboardingVoiceSamples({
-      priorityVoiceId: 'standard_m',
+      priorityVoiceId: 'sebastian',
     });
   }, []);
 
@@ -358,7 +374,7 @@ function IntroStep({
       // Nach Intro: Samples fertigstellen, bevor Stimmen-Schritt kommt
       try {
         await prepareOnboardingVoiceSamples({
-          priorityVoiceId: 'standard_m',
+          priorityVoiceId: 'sebastian',
         });
       } catch {
         // trotzdem weiter
@@ -390,7 +406,7 @@ function IntroStep({
         onPress={() => {
           doneRef.current = true;
           void prepareOnboardingVoiceSamples({
-            priorityVoiceId: 'standard_m',
+            priorityVoiceId: 'sebastian',
           });
           void stopSpeaking().then(() => onSkipRef.current());
         }}
@@ -410,8 +426,6 @@ function VoiceStep({
   onChangeVoice: (id: VoiceId) => void;
   onNext: () => void;
 }) {
-  const [previewing, setPreviewing] = useState<VoiceId | null>(null);
-  const isPlayingAudio = useFinnusStore((s) => s.isPlayingAudio);
   const voices = voicesForLanguage(lang);
 
   useEffect(() => {
@@ -420,83 +434,88 @@ function VoiceStep({
     }
   }, [lang, voiceId, voices, onChangeVoice]);
 
-  const playPreview = async (id: VoiceId) => {
-    // Pause-Toggle: gleiche Stimme erneut → stoppen, Play-Icon
-    if (previewing === id && isPlayingAudio) {
-      setPreviewing(null);
-      await stopSpeaking();
-      return;
-    }
-    const voice = voices.find((v) => v.id === id);
-    if (!voice) return;
-    // Sofort UI auf Pause; alte Wiedergabe stoppt in playVoiceSample
-    setPreviewing(id);
-    onChangeVoice(id);
-    try {
-      await playVoiceSample({ voiceId: id });
-    } catch (err) {
-      console.warn('[onboarding] Hörprobe:', err);
-    } finally {
-      // Audio zu Ende oder gestoppt → zurück zu Play
-      setPreviewing((cur) => (cur === id ? null : cur));
-    }
-  };
-
-  useEffect(() => {
-    void prepareOnboardingVoiceSamples({
-      priorityVoiceId: voiceId,
-    });
-    const handle = setTimeout(() => {
-      void prefetchVoiceSamples(voiceId);
-    }, 350);
-    return () => clearTimeout(handle);
-  }, [voiceId]);
-
   return (
     <OnboardingShell>
       <StepTitle>{t(lang, 'voiceTitle')}</StepTitle>
+      <Text style={{ color: colors.textMuted, marginBottom: 12, fontSize: 13 }}>
+        Play = Offline-Hörprobe. Tippen auf den Namen wählt deine Stimme.
+      </Text>
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: 24 }}
       >
-        {voices.map((v) => {
-          const selected = voiceId === v.id;
-          const busy = previewing === v.id;
-          const showWarmupSpinner = busy && !isPlayingAudio;
-          return (
-            <Pressable
-              key={v.id}
-              onPress={() => onChangeVoice(v.id)}
-              style={[styles.voiceRow, selected && styles.voiceRowSelected]}
-            >
-              <View style={{ flex: 1 }}>
-                <Text style={styles.voiceName}>
-                  {v.emoji} {voiceLabel(lang, v.id)}
-                </Text>
-              </View>
-              <Pressable
-                onPress={() => void playPreview(v.id)}
-                style={[styles.playBtn, busy && styles.playBtnActive]}
-                accessibilityLabel={
-                  showWarmupSpinner
-                    ? 'Wird vorbereitet'
-                    : busy
-                      ? 'Pause'
-                      : 'Play'
-                }
-              >
-                {showWarmupSpinner ? (
-                  <ActivityIndicator size="small" color={colors.accent} />
-                ) : (
-                  <PlayPauseIcon paused={busy} size={16} />
-                )}
-              </Pressable>
-            </Pressable>
-          );
-        })}
+        <VoiceSelectorList
+          selectedVoiceId={voiceId}
+          onSelectVoice={onChangeVoice}
+          onAfterSelect={(id) => {
+            void voicePreloader.switchActiveVoice(id);
+          }}
+        />
       </ScrollView>
       <PrimaryButton label={t(lang, 'continue')} onPress={onNext} />
     </OnboardingShell>
+  );
+}
+
+function AboutMeVoiceField({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const [listening, setListening] = useState(false);
+  const [partial, setPartial] = useState('');
+  const baseRef = useRef(value);
+
+  useEffect(() => {
+    if (!listening) baseRef.current = value;
+  }, [value, listening]);
+
+  const toggle = async () => {
+    if (listening) {
+      setListening(false);
+      const final = await stopListening({ finalizeMs: 400 });
+      const next = appendSpeechSegment(baseRef.current, final || partial);
+      onChange(next.trim());
+      setPartial('');
+      return;
+    }
+    if (!(await isSttAvailable())) {
+      showPermissionMissingAlert('microphone');
+      return;
+    }
+    baseRef.current = value;
+    setListening(true);
+    setPartial('');
+    const result = await startListening(
+      (p) => {
+        setPartial(p);
+        onChange(appendSpeechSegment(baseRef.current, p));
+      },
+      { replaceActive: true },
+    );
+    if (!result.ok) {
+      setListening(false);
+      showPermissionMissingAlert('microphone');
+    }
+  };
+
+  return (
+    <View style={{ marginBottom: spacing.md, gap: spacing.sm }}>
+      <Text style={styles.muted}>
+        Tippe aufs Mikro und erzähl — Hobbies, Beruf, mit wem du unterwegs bist.
+      </Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }}>
+        <SpeechMicButton
+          active={listening}
+          onPress={() => void toggle()}
+        />
+        <Text style={styles.muted}>
+          {listening ? 'Ich höre zu…' : 'Spracheingabe für „Über mich“'}
+        </Text>
+      </View>
+    </View>
   );
 }
 
@@ -534,6 +553,40 @@ function AboutYouStep({
           onChangeText={(email) => onChange({ email })}
           keyboardType="email-address"
         />
+        <Field
+          label="Telefon"
+          value={draft.phoneNumber ?? ''}
+          onChangeText={(phoneNumber) => onChange({ phoneNumber })}
+          keyboardType="phone-pad"
+        />
+        <Text style={styles.rateLabel}>Geschlecht</Text>
+        <View style={styles.chipRow}>
+          {(
+            [
+              { id: 'female' as const, label: 'Weiblich' },
+              { id: 'male' as const, label: 'Männlich' },
+              { id: 'diverse' as const, label: 'Divers' },
+              { id: 'unspecified' as const, label: 'Keine Angabe' },
+            ] as const
+          ).map((o) => {
+            const on = (draft.gender ?? null) === o.id;
+            return (
+              <Pressable
+                key={o.id}
+                onPress={() => onChange({ gender: o.id })}
+                style={[styles.prefChip, on && styles.prefChipOn]}
+              >
+                <Text style={styles.prefChipLabel}>{o.label}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+        <Text style={styles.rateLabel}>{t(lang, 'age')}</Text>
+        <AgeLifeSlider
+          age={draft.age}
+          yearsLabel={t(lang, 'years')}
+          onChange={(age) => onChange({ age })}
+        />
         <Text style={styles.rateLabel}>{t(lang, 'aboutMe')}</Text>
         <TextInput
           value={draft.aboutMe ?? ''}
@@ -544,11 +597,9 @@ function AboutYouStep({
           multiline
           textAlignVertical="top"
         />
-        <Text style={styles.rateLabel}>{t(lang, 'age')}</Text>
-        <AgeLifeSlider
-          age={draft.age}
-          yearsLabel={t(lang, 'years')}
-          onChange={(age) => onChange({ age })}
+        <AboutMeVoiceField
+          value={draft.aboutMe ?? ''}
+          onChange={(aboutMe) => onChange({ aboutMe })}
         />
       </ScrollView>
       <PrimaryButton
@@ -569,7 +620,7 @@ function Field({
   label: string;
   value: string;
   onChangeText: (v: string) => void;
-  keyboardType?: 'default' | 'email-address';
+  keyboardType?: 'default' | 'email-address' | 'phone-pad';
 }) {
   return (
     <View style={styles.field}>
@@ -580,7 +631,11 @@ function Field({
         style={styles.input}
         placeholderTextColor={colors.textMuted}
         keyboardType={keyboardType}
-        autoCapitalize={keyboardType === 'email-address' ? 'none' : 'words'}
+        autoCapitalize={
+          keyboardType === 'email-address' || keyboardType === 'phone-pad'
+            ? 'none'
+            : 'words'
+        }
       />
     </View>
   );
@@ -675,6 +730,13 @@ function CharacterStep({
     return true;
   });
 
+  useEffect(() => {
+    if (draft.characters.length === 0) {
+      onChange({ characters: ['standard_char'] });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <OnboardingShell>
       <StepTitle>{t(lang, 'characterTitle')}</StepTitle>
@@ -730,8 +792,6 @@ function CityStep({
 }) {
   const [cities, setCities] = useState<CityCatalogItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [downloading, setDownloading] = useState(false);
-  const [downloadMsg, setDownloadMsg] = useState<string | null>(null);
   const [gpsStatus, setGpsStatus] = useState<
     'pending' | 'ready' | 'unavailable'
   >('pending');
@@ -786,30 +846,23 @@ function CityStep({
 
   const handleContinue = async () => {
     if (!selected) return;
-    setDownloading(true);
-    setDownloadMsg(t(lang, 'downloadingCity'));
-    try {
-      onSelect(selected.id, selected.name);
-      const result = await installCityPack(selected.id);
-      setDownloadMsg(
-        `${result.poiCount} Orte · ${result.factCount} Fakten gespeichert`,
-      );
-      onNext({
-        cityId: selected.id,
-        cityName: result.cityName || selected.name,
+    onSelect(selected.id, selected.name);
+    // Download im Hintergrund — User wartet nicht im City-Step
+    void installCityPack(selected.id)
+      .then((result) => {
+        if (__DEV__) {
+          console.log(
+            `[CityStep] background pack ${result.poiCount} POIs / ${result.factCount} facts`,
+          );
+        }
+      })
+      .catch((err) => {
+        console.warn('[CityStep] Hintergrund-Download:', err);
       });
-    } catch (err) {
-      console.error('[CityStep] Download fehlgeschlagen:', err);
-      Alert.alert(
-        'Download fehlgeschlagen',
-        err instanceof Error
-          ? err.message
-          : 'Stadt-Datensatz konnte nicht geladen werden. Bitte Internet prüfen und erneut versuchen.',
-      );
-    } finally {
-      setDownloading(false);
-      setDownloadMsg(null);
-    }
+    onNext({
+      cityId: selected.id,
+      cityName: selected.name,
+    });
   };
 
   return (
@@ -865,17 +918,15 @@ function CityStep({
           ) : null}
         </ScrollView>
       )}
-      {downloadMsg ? (
-        <Text style={styles.gpsStatus}>{downloadMsg}</Text>
+      {selected ? (
+        <Text style={styles.muted}>
+          Stadt-Daten laden im Hintergrund — du kannst gleich weiter.
+        </Text>
       ) : null}
       <PrimaryButton
-        label={
-          downloading
-            ? t(lang, 'downloadingCity')
-            : `${t(lang, 'continueWith')} ${selected?.name ?? ''}`.trim()
-        }
+        label={`${t(lang, 'continueWith')} ${selected?.name ?? ''}`.trim()}
         onPress={() => void handleContinue()}
-        disabled={!selected || downloading}
+        disabled={!selected}
       />
     </OnboardingShell>
   );
@@ -1209,6 +1260,26 @@ function SwipeCard({
   value: SwipePreference;
   onChange: (v: SwipePreference) => void;
 }) {
+  // Tempo/Länge: kleiner/langsamer links, größer/schneller rechts
+  // (Pref-Semantik bleibt: yes=entspannt/kompakt, no=schneller/viel Zeit)
+  const flipSides = card.category === 'tempo';
+  const leftValue: SwipePreference = flipSides ? 'yes' : 'no';
+  const rightValue: SwipePreference = flipSides ? 'no' : 'yes';
+  const leftLabel = flipSides
+    ? uiLang(lang) === 'de'
+      ? card.yesLabelDe
+      : card.yesLabelEn
+    : uiLang(lang) === 'de'
+      ? card.noLabelDe
+      : card.noLabelEn;
+  const rightLabel = flipSides
+    ? uiLang(lang) === 'de'
+      ? card.noLabelDe
+      : card.noLabelEn
+    : uiLang(lang) === 'de'
+      ? card.yesLabelDe
+      : card.yesLabelEn;
+
   return (
     <View style={styles.swipeCard}>
       <Text style={styles.swipeTitle}>
@@ -1216,16 +1287,15 @@ function SwipeCard({
       </Text>
       <View style={styles.swipeRow}>
         <Pressable
-          onPress={() => onChange('no')}
+          onPress={() => onChange(leftValue)}
           style={[
             styles.swipeSide,
-            styles.swipeNo,
-            value === 'no' && styles.swipeNoOn,
+            flipSides ? styles.swipeYes : styles.swipeNo,
+            value === leftValue &&
+              (flipSides ? styles.swipeYesOn : styles.swipeNoOn),
           ]}
         >
-          <Text style={styles.swipeSideText}>
-            {uiLang(lang) === 'de' ? card.noLabelDe : card.noLabelEn}
-          </Text>
+          <Text style={styles.swipeSideText}>{leftLabel}</Text>
         </Pressable>
         <Pressable
           onPress={() => onChange('neutral')}
@@ -1237,16 +1307,15 @@ function SwipeCard({
           <Text style={styles.swipeMidText}>{t(lang, 'neutral')}</Text>
         </Pressable>
         <Pressable
-          onPress={() => onChange('yes')}
+          onPress={() => onChange(rightValue)}
           style={[
             styles.swipeSide,
-            styles.swipeYes,
-            value === 'yes' && styles.swipeYesOn,
+            flipSides ? styles.swipeNo : styles.swipeYes,
+            value === rightValue &&
+              (flipSides ? styles.swipeNoOn : styles.swipeYesOn),
           ]}
         >
-          <Text style={styles.swipeSideText}>
-            {uiLang(lang) === 'de' ? card.yesLabelDe : card.yesLabelEn}
-          </Text>
+          <Text style={styles.swipeSideText}>{rightLabel}</Text>
         </Pressable>
       </View>
     </View>
@@ -1258,29 +1327,43 @@ const SEGMENT_PAUSE_MS = 1000;
 function SummaryIntroStep({
   draft,
   onFinished,
+  onSetVoiceId,
 }: {
   draft: UserProfile;
   onFinished: () => void;
+  onSetVoiceId: (voiceId: VoiceId) => void;
 }) {
-  const isPlaying = useFinnusStore((s) => s.isPlayingAudio);
+  void onSetVoiceId;
+  const isPlaying = useFinnusStore((s) => s.isAudiblySpeaking);
   const subtitle = useFinnusStore((s) => s.subtitleText);
 
   const [canSkip, setCanSkip] = useState(true);
   const [fingerVisible, setFingerVisible] = useState(false);
   const [fingerPos, setFingerPos] = useState({ x: 0, y: 0 });
+  const [activeHint, setActiveHint] = useState<ExplanationHint>('none');
+  const [settingsDemoOpen, setSettingsDemoOpen] = useState(false);
+  const [settingsAccordion, setSettingsAccordion] = useState<string | null>(
+    'setup',
+  );
 
   const rootRef = useRef<View>(null);
+  const locationRef = useRef<View>(null);
   const micRef = useRef<View>(null);
+  const planningRef = useRef<View>(null);
   const settingsRef = useRef<View>(null);
+  const module1Ref = useRef<View>(null);
+  const bulletsRef = useRef<View>(null);
+  const actionsRef = useRef<View>(null);
+  const planDemoRef = useRef<View>(null);
+  const settingsDemoRef = useRef<View>(null);
+  const queueDemoRef = useRef<View>(null);
+  const lastHintRef = useRef<ExplanationHint | null>(null);
+
   const finishedRef = useRef(false);
-  const segmentsRef = useRef(buildExplanationParts(draft).segments);
+  const segmentsRef = useRef<{ hint: ExplanationHint; text: string }[]>([]);
   const fingerOpacity = useRef(new Animated.Value(0)).current;
   const pulse = useRef(new Animated.Value(1)).current;
-
-  useEffect(() => {
-    const { opener, segments } = buildExplanationParts(draft);
-    segmentsRef.current = [{ hint: 'none', text: opener }, ...segments];
-  }, [draft]);
+  const tapBoost = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     const pulseLoop = Animated.loop(
@@ -1301,14 +1384,42 @@ function SummaryIntroStep({
     return () => pulseLoop.stop();
   }, [pulse]);
 
+  const bumpFinger = useCallback(() => {
+    tapBoost.setValue(1);
+    Animated.sequence([
+      Animated.timing(tapBoost, {
+        toValue: 1.18,
+        duration: 120,
+        useNativeDriver: true,
+      }),
+      Animated.timing(tapBoost, {
+        toValue: 1,
+        duration: 170,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [tapBoost]);
+
   const measureTarget = useCallback((hint: ExplanationHint) => {
     return new Promise<{ x: number; y: number } | null>((resolve) => {
       const target =
         hint === 'mic'
           ? micRef.current
-          : hint === 'settings'
-            ? settingsRef.current
-            : null;
+          : hint === 'live_hud' || hint === 'passport' || hint === 'location'
+            ? locationRef.current
+            : hint === 'planning'
+              ? planningRef.current ?? planDemoRef.current
+              : hint === 'settings'
+                ? settingsRef.current
+                : hint === 'module1'
+                  ? module1Ref.current
+                  : hint === 'bullets'
+                    ? bulletsRef.current
+                    : hint === 'actions'
+                      ? actionsRef.current
+                      : hint === 'nav_queue'
+                        ? queueDemoRef.current
+                        : null;
       if (!target || !rootRef.current) {
         resolve(null);
         return;
@@ -1326,7 +1437,10 @@ function SummaryIntroStep({
 
   const showFinger = useCallback(
     async (hint: ExplanationHint) => {
+      setActiveHint(hint);
+
       if (hint === 'none') {
+        setSettingsDemoOpen(false);
         await new Promise<void>((resolve) => {
           Animated.timing(fingerOpacity, {
             toValue: 0,
@@ -1340,8 +1454,22 @@ function SummaryIntroStep({
         return;
       }
 
+      if (hint === 'settings') {
+        setSettingsDemoOpen(true);
+        setSettingsAccordion('setup');
+      } else {
+        setSettingsDemoOpen(false);
+      }
+
+      // Kurz warten bis Overlay layoutet
+      await new Promise<void>((r) => setTimeout(r, hint === 'module1' || hint === 'planning' || hint === 'settings' ? 280 : 80));
+
       const pos = await measureTarget(hint);
-      if (!pos) return;
+      if (!pos) {
+        // Fallback: Mitte
+        setFingerVisible(false);
+        return;
+      }
       setFingerPos(pos);
       setFingerVisible(true);
       await new Promise<void>((resolve) => {
@@ -1351,20 +1479,34 @@ function SummaryIntroStep({
           useNativeDriver: true,
         }).start(() => resolve());
       });
+      bumpFinger();
+
+      if (hint === 'settings') {
+        await new Promise<void>((r) => setTimeout(r, 700));
+        setSettingsAccordion('voice');
+        await new Promise<void>((r) => setTimeout(r, 900));
+        setSettingsAccordion('help');
+        await new Promise<void>((r) => setTimeout(r, 800));
+        setSettingsAccordion('feedback');
+      }
     },
-    [fingerOpacity, measureTarget],
+    [bumpFinger, fingerOpacity, measureTarget],
   );
 
-  // Finger-Hinweis anhand Untertitel an aktuelles Segment koppeln
+  // Finger anhand Untertitel an Segment koppeln
   useEffect(() => {
     if (!subtitle) {
+      lastHintRef.current = null;
       void showFinger('none');
       return;
     }
     const hit = segmentsRef.current.find((s) =>
       subtitle.startsWith(s.text.slice(0, Math.min(28, s.text.length))),
     );
-    if (hit) void showFinger(hit.hint);
+    if (!hit) return;
+    if (hit.hint === lastHintRef.current) return;
+    lastHintRef.current = hit.hint;
+    void showFinger(hit.hint);
   }, [subtitle, showFinger]);
 
   useEffect(() => {
@@ -1375,33 +1517,36 @@ function SummaryIntroStep({
       new Promise<void>((resolve) => setTimeout(resolve, ms));
 
     (async () => {
-      const { opener, segments } = buildExplanationParts(draft);
-      segmentsRef.current = [{ hint: 'none', text: opener }, ...segments];
       const voiceOpts = {
         voiceId: draft.voiceId,
         speechRate: 1 as const,
       };
 
-      // Engine + Buffer schon warm — Opener ist kurz → schneller First-Audio
-      void warmupPiperEngine({ voiceId: draft.voiceId });
+      void warmupTtsEngine({ voiceId: draft.voiceId });
       void startVoiceBuffer({
         speechRate: 1,
         priorityVoiceId: draft.voiceId,
       });
 
-      await pause(60);
+      await pause(80);
       if (cancelled || finishedRef.current) return;
 
-      /**
-       * Eine Stream-Session: 1) kurzer Opener als erstes Chunk (schnell fertig),
-       * 2) Rest läuft parallel in die LOOKAHEAD-Warteschlange, während Opener spielt.
-       */
+      // PHASE 1: persönliche Begrüßung (wie bisher) — PHASE 2: geführte Tour
+      const opener = buildExplanationOpener(draft);
+      const tour = buildGuidedFeatureTourSegments({
+        cityName: draft.cityName ?? draft.cityId ?? 'deiner Stadt',
+      });
+      const segments = [
+        { hint: 'none' as const, text: opener },
+        ...tour,
+      ];
+      segmentsRef.current = segments;
+
       async function* explanationStream(): AsyncGenerator<
         string,
         void,
         unknown
       > {
-        yield opener;
         for (const segment of segments) {
           if (cancelled || finishedRef.current) return;
           yield segment.text;
@@ -1412,22 +1557,22 @@ function SummaryIntroStep({
         await speakSentenceStream(explanationStream(), voiceOpts);
       } catch (err) {
         console.warn('[explanation] stream failed:', err);
-        const all = [{ text: opener }, ...segments];
-        for (let i = 0; i < all.length; i++) {
+        for (let i = 0; i < segments.length; i++) {
           if (cancelled || finishedRef.current) return;
           try {
-            await speakWithKokoro(all[i].text, voiceOpts);
+            await speakText(segments[i]!.text, voiceOpts);
           } catch (e) {
             console.warn('[explanation] speak failed:', e);
           }
-          if (i < all.length - 1) await pause(SEGMENT_PAUSE_MS);
+          if (i < segments.length - 1) await pause(SEGMENT_PAUSE_MS);
         }
       }
 
       if (cancelled || finishedRef.current) return;
+      await markFirstMapWelcomeDone(draft);
       setCanSkip(false);
       await showFinger('none');
-      await pause(300);
+      await pause(200);
       if (!cancelled && !finishedRef.current) {
         finishedRef.current = true;
         onFinished();
@@ -1440,9 +1585,28 @@ function SummaryIntroStep({
     };
   }, [draft, onFinished, showFinger]);
 
+  const cityLabel = draft.cityName ?? draft.cityId ?? 'dein Ort';
+
   return (
     <View ref={rootRef} style={styles.homeLike} collapsable={false}>
-      <Header settingsRef={settingsRef} settingsDisabled />
+      <Header
+        locationRef={locationRef}
+        settingsRef={settingsRef}
+        planningRef={planningRef}
+        settingsDisabled={false}
+        onOpenPlanning={() => {
+          bumpFinger();
+          setActiveHint('planning');
+        }}
+        onOpenPassport={() => {
+          bumpFinger();
+        }}
+        onOpenSettings={() => {
+          setSettingsDemoOpen(true);
+          setSettingsAccordion('setup');
+          bumpFinger();
+        }}
+      />
 
       {canSkip ? (
         <View style={styles.skipWrap}>
@@ -1450,6 +1614,10 @@ function SummaryIntroStep({
             label={t(draft.language, 'skipExplanation')}
             onPress={() => {
               finishedRef.current = true;
+              setSettingsDemoOpen(false);
+              setActiveHint('none');
+              lastHintRef.current = null;
+              void markFirstMapWelcomeDone(draft);
               void stopSpeaking();
               onFinished();
             }}
@@ -1462,9 +1630,25 @@ function SummaryIntroStep({
         <SubtitleOverlay text={subtitle} />
       </View>
 
+      <GuidedFeatureTourOverlays
+        hint={activeHint}
+        cityName={cityLabel}
+        settingsOpen={settingsDemoOpen}
+        settingsAccordion={settingsAccordion}
+        onToggleAccordion={(id) =>
+          setSettingsAccordion((prev) => (prev === id ? null : id))
+        }
+        module1Ref={module1Ref}
+        bulletsRef={bulletsRef}
+        actionsRef={actionsRef}
+        planDemoRef={planDemoRef}
+        settingsDemoRef={settingsDemoRef}
+        queueDemoRef={queueDemoRef}
+      />
+
       <View ref={micRef} collapsable={false}>
         <MicButton
-          onPressIn={() => undefined}
+          onPressIn={() => bumpFinger()}
           onPressOut={() => undefined}
           isListening={false}
           isGenerating={false}
@@ -1480,7 +1664,7 @@ function SummaryIntroStep({
               left: fingerPos.x,
               top: fingerPos.y,
               opacity: fingerOpacity,
-              transform: [{ scale: pulse }],
+              transform: [{ scale: Animated.multiply(pulse, tapBoost) }],
             },
           ]}
         >
@@ -1490,6 +1674,7 @@ function SummaryIntroStep({
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
@@ -1555,6 +1740,130 @@ const styles = StyleSheet.create({
   },
   fingerEmoji: {
     fontSize: 36,
+  },
+  swipeDemoWrap: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: spacing.md,
+  },
+  swipeDemo: {
+    width: 220,
+    height: 58,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.18)',
+    backgroundColor: 'rgba(0,0,0,0.20)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
+  },
+  swipeDemoIcon: {
+    fontSize: 22,
+  },
+  swipeDemoText: {
+    color: colors.textMuted,
+    fontSize: 12,
+    fontWeight: '700',
+  },
+
+  settingsDemoOverlay: {
+    position: 'absolute',
+    zIndex: 35,
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.55)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: spacing.lg,
+  },
+  settingsDemoCard: {
+    width: '100%',
+    maxWidth: 520,
+    backgroundColor: colors.bgElevated,
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: colors.border,
+    padding: spacing.md,
+    gap: spacing.md,
+  },
+  settingsDemoTitle: {
+    color: colors.text,
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  settingsVoiceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: colors.border,
+    backgroundColor: colors.surface,
+  },
+  settingsVoiceRowText: {
+    color: colors.text,
+    fontSize: 15,
+    fontWeight: '700',
+  },
+  settingsChevron: {
+    color: colors.textMuted,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  settingsVoicePanel: {
+    paddingTop: spacing.sm,
+  },
+  followUpDemoOverlay: {
+    position: 'absolute',
+    zIndex: 30,
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.35)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: spacing.lg,
+  },
+  followUpDemoCard: {
+    width: '100%',
+    maxWidth: 520,
+    backgroundColor: colors.bgElevated,
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: colors.border,
+    padding: spacing.md,
+    gap: spacing.sm,
+  },
+  followUpDemoTitle: {
+    color: colors.text,
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  followUpDemoBody: {
+    color: colors.textMuted,
+    fontSize: 13,
+    lineHeight: 20,
+  },
+  followUpVideoPlaceholder: {
+    height: 130,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.15)',
+    backgroundColor: 'rgba(0,0,0,0.25)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: spacing.md,
+  },
+  followUpVideoText: {
+    color: colors.textMuted,
+    fontSize: 13,
+    fontWeight: '700',
+    textAlign: 'center',
   },
   voiceRow: {
     flexDirection: 'row',
