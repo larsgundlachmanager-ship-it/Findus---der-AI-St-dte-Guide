@@ -5,6 +5,7 @@ import {
   View,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { getNetworkStateAsync } from 'expo-network';
 import {
   SafeAreaProvider,
   SafeAreaView,
@@ -22,10 +23,13 @@ import { initMultilingualPhoneticEngine } from './src/services/ai/multilingualPh
 import {
   startVoiceBuffer,
   prefetchOnboardingAudioBundle,
-  prefetchAllKokoroVoicePacks,
   prefetchVoiceSamples,
   purgeLegacyVoiceAssets,
 } from './src/services/ttsService';
+import { bootstrapCartesiaCostTracker } from './src/services/cartesiaCostTracker';
+import { startResourceUsageMonitor } from './src/services/diagnostics/resourceUsageTracker';
+import { bootstrapApiCostLedger } from './src/services/diagnostics/apiCostLedger';
+import { initFeedbackTelemetry } from './src/services/feedback/telemetryBuffer';
 import {
   createDefaultProfile,
   type UserProfile,
@@ -36,15 +40,36 @@ import {
   subscribeUserProfile,
 } from './src/services/userProfileService';
 import { useUserMemoryStore } from './src/store/useUserMemoryStore';
+import { useShoppingTaskStore } from './src/store/useShoppingTaskStore';
+import { useSessionPlanStore } from './src/store/useSessionPlanStore';
+import { useLogisticsTriggerStore } from './src/store/useLogisticsTriggerStore';
 import { ensureUserProfileStoreSync } from './src/store/useUserProfileStore';
 import { INTRO_WELCOME_DE } from './src/i18n';
 import { hydrateAffiliateRedirectAck } from './src/services/affiliate/affiliateDisclosure';
 import { startFindusHealthMonitor } from './src/services/findusHealthService';
 import { startWeatherMonitor } from './src/services/weatherService';
+import { startSurvivalModeMonitor } from './src/services/battery/survivalMode';
+import { startGrowthMonitor } from './src/runtime/growthModule';
+import { loadPoiTeaserLocks } from './src/services/poi/poiTeaserLocks';
+import { loadWalkTrack } from './src/services/discovery/walkTrackService';
+import { loadStampPassport } from './src/services/navigation/stampPassportPersistence';
+import { loadMicHintPrefs } from './src/services/ui/micHintPrefs';
+import { loadHudHintPrefs } from './src/services/ui/hudHintPrefs';
+import { useOpenQuestionStore } from './src/store/useOpenQuestionStore';
+import { loadNavSearchHistory } from './src/services/navigation/navSearchHistory';
+import {
+  configureNotificationHandler,
+  ensureNotificationPermissionForProfile,
+} from './src/services/notifications/notificationService';
 import {
   SplashScreenController,
   SPLASH_BG,
 } from './src/components/SplashScreenController';
+import {
+  maybeSpeakWelcomeBack,
+  touchActiveDay,
+  bootstrapWelcomeBackAppState,
+} from './src/services/memory/welcomeBackService';
 /** Background-GPS-Task muss global beim Start definiert sein. */
 import './src/services/backgroundLocationTask';
 
@@ -96,7 +121,7 @@ export default function App() {
   const [bootReady, setBootReady] = useState(false);
   const [splashDone, setSplashDone] = useState(false);
   const [bootVoiceId, setBootVoiceId] = useState<UserProfile['voiceId']>(
-    'standard_m',
+    'alina',
   );
   const [targetPhase, setTargetPhase] = useState<Exclude<AppPhase, 'booting'>>(
     'onboarding',
@@ -116,6 +141,38 @@ export default function App() {
       await initDictionaryEngine();
       await initMultilingualPhoneticEngine();
       await useUserMemoryStore.getState().hydrate();
+      await useShoppingTaskStore.getState().hydrate();
+      await useSessionPlanStore.getState().hydrate();
+      await useLogisticsTriggerStore.getState().hydrate();
+      try {
+        const { useDayPlanStore } = await import('./src/store/useDayPlanStore');
+        await useDayPlanStore.getState().hydrate();
+        const mod5 = await import('./src/services/module5');
+        await mod5.hydratePaceProfile();
+        mod5.setPaceChangeListener((mode, kmh) => {
+          mod5.refreshDayPlanTravelTimes(mode, kmh);
+        });
+        mod5.bootstrapModule5Today();
+      } catch {
+        /* soft */
+      }
+      const { hydrateMuteSession } = await import(
+        './src/services/audio/muteSessionService'
+      );
+      await hydrateMuteSession();
+      const stampEntries = await loadStampPassport();
+      if (stampEntries.length > 0) {
+        useFinnusStore.setState({ visitedHistory: stampEntries });
+      }
+      try {
+        const { hydrateVisitLog, importStampsIntoVisitLog } = await import(
+          './src/services/timeline/visitLog'
+        );
+        await hydrateVisitLog();
+        importStampsIntoVisitLog(stampEntries, () => null);
+      } catch {
+        /* soft */
+      }
       await loadFeatureTipState();
       await hydrateAffiliateRedirectAck();
       ensureUserProfileStoreSync();
@@ -124,7 +181,7 @@ export default function App() {
       setPois(pois);
 
       const existing = await loadUserProfile();
-      const resolvedVoice = existing?.voiceId ?? 'standard_m';
+      const resolvedVoice = existing?.voiceId ?? 'alina';
       setBootVoiceId(resolvedVoice);
 
       if (existing?.setupComplete) {
@@ -136,11 +193,11 @@ export default function App() {
         const nextDraft: UserProfile = {
           ...base,
           language: 'de',
-          voiceId: base.voiceId || 'standard_m',
+          voiceId: base.voiceId || 'alina',
         };
         if (!existing) {
           nextDraft.language = 'de';
-          nextDraft.voiceId = 'standard_m';
+          nextDraft.voiceId = 'alina';
         }
         setBootVoiceId(nextDraft.voiceId);
         setDraft(nextDraft);
@@ -158,8 +215,20 @@ export default function App() {
   }, [setPois]);
 
   useEffect(() => {
+    bootstrapCartesiaCostTracker();
     void boot();
   }, [boot]);
+
+  useEffect(() => {
+    const stopTelemetry = initFeedbackTelemetry();
+    const stopResources = startResourceUsageMonitor();
+    const stopCostLedger = bootstrapApiCostLedger();
+    return () => {
+      stopTelemetry();
+      stopResources();
+      stopCostLedger();
+    };
+  }, []);
 
   useEffect(() => {
     return startFindusHealthMonitor(12_000);
@@ -167,6 +236,27 @@ export default function App() {
 
   useEffect(() => {
     return startWeatherMonitor();
+  }, []);
+
+  useEffect(() => {
+    return startSurvivalModeMonitor();
+  }, []);
+
+  useEffect(() => {
+    return startGrowthMonitor();
+  }, []);
+
+  useEffect(() => {
+    void loadWalkTrack();
+    void loadMicHintPrefs();
+    void loadHudHintPrefs();
+    void loadNavSearchHistory();
+    void loadPoiTeaserLocks();
+    void useOpenQuestionStore.getState().hydrate();
+  }, []);
+
+  useEffect(() => {
+    void configureNotificationHandler();
   }, []);
 
   useEffect(() => {
@@ -181,6 +271,21 @@ export default function App() {
     setPhase(targetPhase);
   }, [bootReady, splashDone, targetPhase]);
 
+  useEffect(() => {
+    if (phase !== 'ready' || !profile?.setupComplete) return;
+    bootstrapWelcomeBackAppState();
+    void (async () => {
+      await touchActiveDay();
+      const { maybeSpeakFirstMapWelcome } = await import(
+        './src/services/onboarding/firstMapWelcomeService'
+      );
+      const didFirst = await maybeSpeakFirstMapWelcome(profile);
+      if (!didFirst) {
+        await maybeSpeakWelcomeBack();
+      }
+    })();
+  }, [phase, profile]);
+
   const handleOnboardingComplete = async (next: UserProfile) => {
     const saved = await saveUserProfile(next);
     setProfile(saved);
@@ -188,22 +293,33 @@ export default function App() {
     if (saved.cityId) {
       syncPOIsInBackground(saved.cityId);
     }
+    // Push-Permission beim Abschluss der Einrichtung (ÖPNV-/Flug-Erinnerungen)
+    void ensureNotificationPermissionForProfile(
+      saved.notificationsEnabled !== false,
+    ).then((perm) => {
+      if (perm && !perm.granted) {
+        // Still — User kann später bei der ersten Erinnerung erneut gefragt werden
+        console.log('[notifications] permission after onboarding:', perm.status);
+      }
+    });
   };
 
   const handleReset = () => {
     setDraft(createDefaultProfile());
     setProfile(null);
-    setBootVoiceId('standard_m');
+    setBootVoiceId('alina');
     setPhase('onboarding');
-    startVoiceBuffer({ speechRate: 1, priorityVoiceId: 'standard_m' });
+    startVoiceBuffer({ speechRate: 1, priorityVoiceId: 'alina' });
     void prefetchOnboardingAudioBundle(INTRO_WELCOME_DE, 1);
   };
 
   const handleSplashFinish = useCallback(() => {
     setSplashDone(true);
-    // Disk-Prefetch anderer Packs — RAM bleibt bei der aktiven Stimme
-    void prefetchAllKokoroVoicePacks();
-    void prefetchVoiceSamples(bootVoiceId);
+    void getNetworkStateAsync().then((state) => {
+      if (state.type === 'WIFI') {
+        void prefetchVoiceSamples(bootVoiceId);
+      }
+    });
   }, [bootVoiceId]);
 
   let content: React.ReactNode;
@@ -253,7 +369,7 @@ export default function App() {
     content = (
       <SplashScreenController
         onFinish={handleSplashFinish}
-        priorityVoiceId="standard_m"
+        priorityVoiceId="alina"
       />
     );
   }

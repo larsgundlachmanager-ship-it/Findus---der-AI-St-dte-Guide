@@ -26,12 +26,29 @@ export type UserEntity = {
   notes?: string;
   /** Optionaler Link zu Stadt-POI */
   poiId?: number;
+  /**
+   * Stadt-Scope (Masterbook Location Isolation).
+   * Hotels ohne cityId oder mit anderer cityId gelten in der aktiven Stadt als ungültig.
+   */
+  cityId?: string;
 };
 
 export type TravelItinerary = {
   rawText?: string;
   summary?: string;
   uploadedAt?: string;
+  /** Strukturierter Extrakt aus Sprachnachrichten-Planmodus */
+  structured?: {
+    city?: string | null;
+    hotelName?: string | null;
+    checkInLocal?: string | null;
+    checkOutLocal?: string | null;
+    deadlines?: unknown[];
+    stops?: unknown[];
+    blocks?: unknown[];
+    todos?: unknown[];
+    preferences?: unknown[];
+  };
 };
 
 type UserMemoryState = {
@@ -41,6 +58,8 @@ type UserMemoryState = {
   pendingHotelConfirmId: string | null;
   /** User soll Hotel-Namen nennen */
   awaitingHotelName: boolean;
+  /** Nebenbei „fliegen“ → warte auf Wann / Flugnummer */
+  awaitingFlightDetails: boolean;
   hydrated: boolean;
 
   hydrate: () => Promise<void>;
@@ -48,18 +67,51 @@ type UserMemoryState = {
   addOrUpdateEntity: (partial: Partial<UserEntity> & { name: string }) => UserEntity;
   confirmEntity: (id: string) => void;
   removeEntity: (id: string) => void;
-  getConfirmedHotel: () => UserEntity | undefined;
-  getHotelCandidate: () => UserEntity | undefined;
+  getConfirmedHotel: (cityId?: string | null) => UserEntity | undefined;
+  getHotelCandidate: (cityId?: string | null) => UserEntity | undefined;
   findEntities: (opts: {
     type?: UserEntityType;
     nameQuery?: string;
     sinceIso?: string;
+    cityId?: string | null;
   }) => UserEntity[];
   setPendingHotelConfirm: (id: string | null) => void;
   setAwaitingHotelName: (awaiting: boolean) => void;
+  setAwaitingFlightDetails: (awaiting: boolean) => void;
   setTravelItinerary: (plan: TravelItinerary | undefined) => void;
+  /** Drop hotels that don't belong to activeCityId (incl. legacy unscoped). */
+  clearHotelsOutsideCity: (activeCityId: string | null | undefined) => void;
   clearMemory: () => Promise<void>;
 };
+
+function resolveActiveCityId(explicit?: string | null): string | null {
+  if (explicit != null && String(explicit).trim()) {
+    return String(explicit).trim().toLowerCase();
+  }
+  try {
+    // Lazy import — avoids circular boot deps with userProfileService
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { getCachedUserProfile } = require('../services/userProfileService') as {
+      getCachedUserProfile: () => { cityId?: string | null } | null;
+    };
+    const id = getCachedUserProfile()?.cityId;
+    return id?.trim() ? id.trim().toLowerCase() : null;
+  } catch {
+    return null;
+  }
+}
+
+function hotelBelongsToCity(
+  entity: UserEntity,
+  activeCityId: string | null,
+): boolean {
+  if (entity.type !== 'hotel') return true;
+  if (!activeCityId) return false;
+  const scoped = entity.cityId?.trim().toLowerCase();
+  // Legacy hotels without cityId are unsafe across cities → reject
+  if (!scoped) return false;
+  return scoped === activeCityId;
+}
 
 const MEMORY_PATH = `${FileSystem.documentDirectory}findus-user-memory.json`;
 
@@ -105,6 +157,7 @@ export const useUserMemoryStore = create<UserMemoryState>((set, get) => ({
   travelItinerary: undefined,
   pendingHotelConfirmId: null,
   awaitingHotelName: false,
+  awaitingFlightDetails: false,
   hydrated: false,
 
   hydrate: async () => {
@@ -141,13 +194,27 @@ export const useUserMemoryStore = create<UserMemoryState>((set, get) => ({
       throw new Error('UserEntity needs a name');
     }
 
+    const type = partial.type ?? 'custom';
+    const activeCity = resolveActiveCityId(partial.cityId);
+    const stampedCityId =
+      partial.cityId?.trim().toLowerCase() ||
+      (type === 'hotel' ? activeCity ?? undefined : partial.cityId);
+
     const entities = [...get().entities];
     const existingIdx = entities.findIndex((e) => {
       if (partial.id && e.id === partial.id) return true;
       if (partial.poiId != null && e.poiId === partial.poiId) return true;
-      return (
-        e.type === (partial.type ?? e.type) && namesMatch(e.name, name)
-      );
+      const sameType = e.type === (partial.type ?? e.type);
+      const sameName = namesMatch(e.name, name);
+      if (!sameType || !sameName) return false;
+      // Hotels: only match within same city scope
+      if (type === 'hotel' || e.type === 'hotel') {
+        const eCity = e.cityId?.trim().toLowerCase() ?? null;
+        const pCity = stampedCityId ?? null;
+        if (eCity && pCity) return eCity === pCity;
+        if (eCity || pCity) return false;
+      }
+      return true;
     });
 
     let entity: UserEntity;
@@ -158,6 +225,8 @@ export const useUserMemoryStore = create<UserMemoryState>((set, get) => ({
         ...partial,
         id: prev.id,
         name: name || prev.name,
+        type,
+        cityId: stampedCityId ?? prev.cityId,
         isConfirmed: partial.isConfirmed ?? prev.isConfirmed,
         dwellTimeMinutes:
           partial.dwellTimeMinutes != null
@@ -168,7 +237,7 @@ export const useUserMemoryStore = create<UserMemoryState>((set, get) => ({
     } else {
       entity = {
         id: partial.id ?? newId(),
-        type: partial.type ?? 'custom',
+        type,
         name,
         isConfirmed: partial.isConfirmed ?? false,
         lat: partial.lat,
@@ -177,6 +246,7 @@ export const useUserMemoryStore = create<UserMemoryState>((set, get) => ({
         dwellTimeMinutes: partial.dwellTimeMinutes,
         notes: partial.notes,
         poiId: partial.poiId,
+        cityId: stampedCityId,
       };
       entities.push(entity);
     }
@@ -205,20 +275,37 @@ export const useUserMemoryStore = create<UserMemoryState>((set, get) => ({
     void get().persist();
   },
 
-  getConfirmedHotel: () =>
-    get().entities.find((e) => e.type === 'hotel' && e.isConfirmed),
+  getConfirmedHotel: (cityId) => {
+    const active = resolveActiveCityId(cityId);
+    return get().entities.find(
+      (e) =>
+        e.type === 'hotel' &&
+        e.isConfirmed &&
+        hotelBelongsToCity(e, active),
+    );
+  },
 
-  getHotelCandidate: () => {
-    const hotels = get().entities.filter((e) => e.type === 'hotel');
+  getHotelCandidate: (cityId) => {
+    const active = resolveActiveCityId(cityId);
+    const hotels = get().entities.filter(
+      (e) => e.type === 'hotel' && hotelBelongsToCity(e, active),
+    );
     return (
       hotels.find((e) => !e.isConfirmed) ??
       hotels[hotels.length - 1]
     );
   },
 
-  findEntities: ({ type, nameQuery, sinceIso }) => {
+  findEntities: ({ type, nameQuery, sinceIso, cityId }) => {
     let list = get().entities;
     if (type) list = list.filter((e) => e.type === type);
+    const active = cityId !== undefined ? resolveActiveCityId(cityId) : null;
+    if (type === 'hotel' || cityId !== undefined) {
+      const scope = active ?? resolveActiveCityId(null);
+      list = list.filter((e) =>
+        e.type === 'hotel' ? hotelBelongsToCity(e, scope) : true,
+      );
+    }
     if (sinceIso) {
       const since = Date.parse(sinceIso);
       if (Number.isFinite(since)) {
@@ -244,9 +331,37 @@ export const useUserMemoryStore = create<UserMemoryState>((set, get) => ({
 
   setPendingHotelConfirm: (id) => set({ pendingHotelConfirmId: id }),
   setAwaitingHotelName: (awaiting) => set({ awaitingHotelName: awaiting }),
+  setAwaitingFlightDetails: (awaiting) => set({ awaitingFlightDetails: awaiting }),
   setTravelItinerary: (plan) => {
     set({ travelItinerary: plan });
     void get().persist();
+  },
+
+  clearHotelsOutsideCity: (activeCityId) => {
+    const active = resolveActiveCityId(activeCityId);
+    const prev = get().entities;
+    const next = prev.filter((e) => {
+      if (e.type !== 'hotel') return true;
+      return hotelBelongsToCity(e, active);
+    });
+    const removedIds = new Set(
+      prev.filter((e) => e.type === 'hotel' && !next.includes(e)).map((e) => e.id),
+    );
+    if (removedIds.size === 0 && next.length === prev.length) return;
+
+    const pending = get().pendingHotelConfirmId;
+    set({
+      entities: next,
+      pendingHotelConfirmId:
+        pending && removedIds.has(pending) ? null : pending,
+      awaitingHotelName: false,
+    });
+    void get().persist();
+    if (__DEV__) {
+      console.log(
+        `[userMemory] cleared ${removedIds.size} foreign/legacy hotel(s) for city=${active ?? 'none'}`,
+      );
+    }
   },
 
   clearMemory: async () => {
@@ -255,6 +370,7 @@ export const useUserMemoryStore = create<UserMemoryState>((set, get) => ({
       travelItinerary: undefined,
       pendingHotelConfirmId: null,
       awaitingHotelName: false,
+      awaitingFlightDetails: false,
     });
     try {
       await FileSystem.deleteAsync(MEMORY_PATH, { idempotent: true });
@@ -267,11 +383,15 @@ export const useUserMemoryStore = create<UserMemoryState>((set, get) => ({
 /** Prompt-Block für Gemini / Follow-ups */
 export function formatUserMemoryForPrompt(): string {
   const { entities, travelItinerary } = useUserMemoryStore.getState();
-  if (!entities.length && !travelItinerary?.rawText) {
+  const activeCity = resolveActiveCityId(null);
+  const scoped = entities.filter((e) =>
+    e.type === 'hotel' ? hotelBelongsToCity(e, activeCity) : true,
+  );
+  if (!scoped.length && !travelItinerary?.rawText) {
     return 'Noch keine gespeicherten Orte im Langzeitgedächtnis.';
   }
 
-  const lines = entities.slice(-24).map((e) => {
+  const lines = scoped.slice(-24).map((e) => {
     const conf = e.isConfirmed ? 'bestätigt' : 'Kandidat';
     const when = e.visitedAt
       ? ` · besucht ${e.visitedAt.slice(0, 16).replace('T', ' ')}`
@@ -283,17 +403,39 @@ export function formatUserMemoryForPrompt(): string {
       e.lat != null && e.lng != null
         ? ` · GPS ${e.lat.toFixed(5)},${e.lng.toFixed(5)}`
         : '';
-    return `- [${e.type}/${conf}] ${e.name}${when}${dwell}${note}${coords}`;
+    const city =
+      e.type === 'hotel' && e.cityId ? ` · Stadt ${e.cityId}` : '';
+    return `- [${e.type}/${conf}] ${e.name}${when}${dwell}${note}${coords}${city}`;
   });
 
-  const hotel = useUserMemoryStore.getState().getConfirmedHotel();
+  const hotel = useUserMemoryStore.getState().getConfirmedHotel(activeCity);
   const hotelLine = hotel
-    ? `\nBestätigtes Hotel: ${hotel.name}`
-    : '';
+    ? `\nBestätigtes Hotel (nur aktuelle Stadt): ${hotel.name}${
+        hotel.cityId ? ` [${hotel.cityId}]` : ''
+      }`
+    : '\nKein bestätigtes Hotel in der aktuellen Stadt.';
 
   const itinerary = travelItinerary?.summary || travelItinerary?.rawText;
+  const structuredBits = travelItinerary?.structured
+    ? [
+        travelItinerary.structured.city
+          ? `Stadt ${travelItinerary.structured.city}`
+          : null,
+        travelItinerary.structured.hotelName
+          ? `Hotel ${travelItinerary.structured.hotelName}`
+          : null,
+        Array.isArray(travelItinerary.structured.preferences) &&
+        travelItinerary.structured.preferences.length
+          ? `Prefs ${travelItinerary.structured.preferences.length}`
+          : null,
+      ]
+        .filter(Boolean)
+        .join(' · ')
+    : '';
   const tripLine = itinerary
-    ? `\nReiseplan-Auszug: ${itinerary.slice(0, 400)}`
+    ? `\nReiseplan-Auszug: ${itinerary.slice(0, 400)}${
+        structuredBits ? ` (${structuredBits})` : ''
+      }`
     : '';
 
   return `Langzeitgedächtnis (implizit gelernt — nutzen bei Navigation/Erinnerung):

@@ -1,0 +1,25 @@
+---
+description: Findus V5 Masterbook — Persistent Memory, Welcome-Back, Location Isolation
+alwaysApply: true
+---
+
+# Findus V5 — Memory & Profiling
+
+## Global Context
+
+Herkunft, aktueller Ort, Variablen merken (z. B. „Freundin ist vegetarisch“, Prisdorf).
+
+## Welcome-Back Protocol
+
+- Volle Willkommensnachricht höchstens **1× / 72 h**.
+- Nach App-Schließen: **Guten Morgen / Tag / Abend** nur wenn der User die App **≥ 4,5 h** nicht benutzt hat.
+- Gesagtes merken — keine identische Begrüßung bei jedem Neustart.
+- Volle Begrüßung referenziert Kontext (Ort, Plan, Absicht).
+
+## Contextual Recall
+
+In neuer Stadt gezielt nachfragen („Ist deine Freundin wieder dabei? Vegetarisch suchen?“).
+
+## Location Isolation
+
+Aktuelle Unterkunft nahtlos updaten. Hotel-Koordinaten **nie** zwischen Städten vermischen.
