@@ -1,0 +1,66 @@
+# Findus V5 — Booking Deep-Research Flow (Master Template)
+
+## Pipeline (mandatory)
+
+```
+Deep-Search (live API/HTTP)
+  → Parse inventory (times / prices / seats / tariffs)
+  → Conversational upsell (time choice → baggage → exact total)
+  → Action buttons = deep links scoped to the researched slots
+```
+
+Never invent “ca. 50–60 €”, “je nach Tide/Wetter” when a live source exists.
+
+---
+
+## Inselflieger — what works 1:1
+
+| Step | Source | Status |
+|------|--------|--------|
+| Date + direction | Speech parse | ✅ |
+| Live times/prices/seats | `GET https://www.inselflieger.de/api/flights?date=YYYY-MM-DD` | ✅ |
+| Sold-out narrative | Compare `availability=sold` vs free slots | ✅ |
+| Tariff explanation | Basic/Flex/Plus + kg allowances + Übergepäck 1,20 €/kg | ✅ |
+| Time follow-up | Pending session + nearest free slots | ✅ |
+| Deep link date/route | Frisonaut `assistent?destination=…&start=…` from API | ✅ |
+
+### What does NOT work 1:1 (honest)
+
+| Wish | Gap | Why | How to make it possible |
+|------|-----|-----|-------------------------|
+| Prefill First/Last/Email/Gender into Frisonaut checkout | Portal ignores extra query params | No public passenger deep-link API; SPA checkout | Partner deal with Frisia/Frisonaut for `guest=` tokens, OR in-app WebView with injected form fill (fragile), OR official booking API |
+| Gender in URL | Not in `UserProfile` | Field never collected | Add optional `gender` in settings IF partner supports it |
+| One-tap payment done | Impossible without their checkout API | Payment stays on Frisonaut | Deep link is best available |
+
+Code: `src/services/flights/inselfliegerAdvisor.ts`
+
+---
+
+## Hotels — what works 1:1
+
+| Step | Source | Status |
+|------|--------|--------|
+| Live price for dates | Stay22 Direct Travel `GET /v2/accommodations?checkin&checkout` | ✅ |
+| Primary only if priced | `price.total` present → book button | ✅ |
+| Sold out / unpriced → alternatives | City search with prices only | ✅ |
+| Affiliate deep link with dates | Stay22 Allez `aid` + checkin/checkout | ✅ |
+
+### What does NOT work 1:1
+
+| Wish | Gap | Why | How |
+|------|-----|-----|-----|
+| Guaranteed Hotel-Hanken match every time | Fuzzy name search | Stay22 geocode sometimes returns nearby only | Prefer `lat/lng` + `hotelname`; store Booking property IDs on POIs |
+| High rate limits | Demo mode 5 req/min | No Stay22 API key in app yet | Set `EXPO_PUBLIC_STAY22_API_KEY` from Stay22 Hub |
+| Scrape booking.com HTML | Blocked / ToS | Not allowed | Stay22 / Booking Demand API only |
+
+Code: `src/services/concierge/hotelAvailabilityService.ts` + `hotelBookingPack.ts`
+
+---
+
+## Apply same template to Ferry / Taxi / Tours
+
+1. Find official live endpoint (or partner API).
+2. Gate recommendations on live inventory.
+3. Conversational refine.
+4. Buttons = researched deep links only.
+5. Document gaps in this rule file when partner APIs are missing.

@@ -1,0 +1,25 @@
+---
+description: Findus V5 Masterbook — tagesaktuelle Event-Recherche, PDF/Flyer, Action-Button Sync
+alwaysApply: true
+---
+
+# Findus V5 — Event Research & Action Buttons
+
+## Tagesaktuelle Events
+
+- „Was geht heute Abend?“ / Events → echte heutige Programme recherchieren (Kalender, Flyer, PDF, Venue-Sites).
+- Keine generischen Platzhalter (Kulturverwaltung, Tourist-Info ohne Programm).
+- Extra-Mile: PDF/Wochenprogramm parsen → Uhrzeit, was passiert, Eintritt.
+
+## Action-Button Sync
+
+- Buttons müssen 1:1 zu gesprochenen Orten/Links passen.
+- Event-Turns: bis 3–4 Buttons (Route(n) + PDF/Flyer + Tickets).
+- Vor dem Client-Payload: Relevance + Button-Sync + Extra-Mile Reflection.
+
+## Just-Do-It (keine Permission-Fragen)
+
+- SSOT: `src/services/concierge/findusResponsePolicy.ts` (JUST-DO-IT + Compound-Pläne).
+- Nie „Soll ich die Nummer / Party / Orte heraussuchen?“ — Ergebnis + Buttons in derselben Antwort.
+- Party/Nightlife → 2 Locations + Nav; Telefon → `DIAL_PHONE`.
+- Rückfrage nur bei echter Blockade.

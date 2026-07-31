@@ -1,0 +1,34 @@
+---
+description: Modul 2 Agent-Pipeline — Decompose, Spezialisten, Judge, Speech-first
+globs: ["src/services/module2/**/*.ts", "src/runtime/questionsModule.ts", "src/services/concierge/conciergeTwoPass.ts"]
+---
+
+# Findus Modul 2 — Agent-Pipeline (Reboot)
+
+## Flow
+
+1. **TurnContext**: letzte 3 GPS + Tempo/Richtung/Modus + Orts-Constraints
+2. **Decompose** (parallel gedacht): Ziel/Aufgabenliste + Zerlegung (Ziele, Fragen, Fakten, Nebeninfos)
+3. **Fakten sofort speichern** (Memory-Agent)
+4. **Router** → nur benötigte Agenten
+5. **Agenten parallel** (eigene Regeln/Richter) → max. 1 Hilfe-Runde
+6. **Combiner** → Speech
+7. **Final Judge** → Absichten / 600 Zeichen / Drift-Fixes
+8. **Speech sofort** (TTS) — nicht auf UI warten
+9. **Action-Auditor** → Buttons/Bullets → Card von oben nach unten
+
+## Harte Constraints (Code > LLM)
+
+- Autofreie Insel → kein `BOOK_CAR_RENTAL`
+- Flugplatz-Intent → nie Kultur-/Kurverwaltung als Ziel
+- Mic → Modul 1 abbrechen; Modul 3 in `deferredModule3` queue, vorne in Kontext
+
+## Agenten
+
+navigation, places, stay, mobility, research, weather, planning, transit, safety, meta, memory, explore, booking, shopping
+
+Idle-Agenten werden **nicht** gestartet (kein Fake-„fertig“-Call).
+
+## Leave-by Trigger
+
+`buildCheckSchedule`: 3h / 1h / 35m / 30m / 10m / leave — plus Guardian „schon unterwegs?“

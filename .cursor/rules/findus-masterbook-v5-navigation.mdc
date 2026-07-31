@@ -1,0 +1,70 @@
+# Findus V5 — Navigation & Routing
+
+## Micro-Waypoint Spline (Compass Fix)
+
+- Route in unsichtbare Micro-Waypoints alle **20 m** interpolieren.
+- Compass zeigt strikt auf den **nächsten** Micro-WP.
+- Snap bei **~7 m** ODER Pass-by: Distanz zum aktuellen WP wächst, zum nächsten schrumpft → Punkt gilt als passiert (kein Hängen bei GPS-Sprüngen).
+
+## Predictive Triggering & Pre-Fetching
+
+- Ansage **vor** dem Maneuver, nie erst drauf:
+  - Fuß: **12 m** vorher
+  - Rad: **40 m** vorher
+- Warm: LLM/TTS weiter davor (Fuß ~55 m, Rad ~120 m) → bei Trigger 0 ms Synth-Latenz.
+
+## Echte Turn-by-Turn & Smart Rerouting
+
+- Kreuzungen erkennen → „Schau nach links. In 50 Metern … abbiegen.“
+- Off-Route (GPS only, >20 m für >8 s): **genau eine** freundliche Warnung („Du bist falsch abgebogen“).
+- Nach weiterer **~7 s** ohne Korrektur: stumm neu routen vom aktuellen Standpunkt → Endziel (kein Nagging).
+
+## Visuelles Verankern (Modul 1 & 3)
+
+- Jede Orts-/Nav-Ansage startet mit Blickrichtung, dann visuelle Details.
+- Bewegt → GPS-Vektor; steht → Compass.
+- Muster: „Schau nach rechts. Siehst du das runde, weiße Gebäude…?“
+
+## Zero-Latency POI Prefetch
+
+- **100 m:** LLM-Text + TTS im Hintergrund vorbereiten.
+- **20 m:** Pre-buffered Audio sofort abspielen (0 ms Synth-Latenz).
+
+## GPS-Only Deviation
+
+„Falsche Richtung“ **nie** aus Compass/Gerätedrehung. Nur GPS: >20 m off-route für >8 s → Warn; +7 s → silent reroute.
+
+## Battery Saver GPS + 50-Meter-Regel
+
+- >500 m zum nächsten WP → GPS alle **15 s**.
+- <100 m → GPS alle **1 s** (Bike) / ~3.5 s (Fuß).
+- Speed 0 + keine Steps **2 Min** → GPS deep sleep; Wake bei Schritten.
+- Audio-Throttle (5 s) nur wenn **kein** Abbiegehinweis in den nächsten **50 m** (Modul 1 bleibt sonst stumm).
+
+## Time-vs-Distance (No Closed Doors)
+
+Vor Nav: ETA vs. ClosingTime. Wenn ETA > Closing → warnen + Alternative (Scooter / anderer POI).
+
+## Vector-Aware Suggestions
+
+Letzte 3 GPS-Punkte: nur POIs **voraus** vorschlagen, nie hinter dem User.
+
+## Smart Queueing & Hard Overrides
+
+- „Ich brauche einen Bäcker“ → Stop 1, Originalziel → Stop 2.
+- „Ich will zum [Ziel]“ → Multi-Stop-Queue sofort leeren.
+
+## Canonical Destination (Speech ↔ Buttons)
+
+Named go-to („Ich möchte zu Restaurant Kreta“) is **one destination SSOT**:
+
+1. Resolve the named place **before** open food-discovery / nearest-gastro ranking.
+2. `speechText`, `pendingNavOffer`, and every `START_NAVIGATION` chip MUST bind to that place only.
+3. Quick confirm speech (“Na klar … Route starten?”) + buttons: **📍 Route starten**, and when gastro: **Tisch reservieren** and/or **Speisekarte**.
+4. Never attach a different nearby place (e.g. “Bistro am Strand”) as the nav chip while talking about the named place.
+5. Code: `canonicalDestination.ts` → `namedDestination` in `prepareConciergeContext` → early bind in `enrichWithConciergeOffers`.
+
+## Landmark Guidance & ÖPNV
+
+- Visuelle Anker („grüner Briefkasten“, „Sparkasse“).
+- ÖPNV: nur aktive Fuß-Steps; Turn-by-Turn im Bus muten; „In X Stationen aussteigen“.

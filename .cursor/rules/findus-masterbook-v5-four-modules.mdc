@@ -1,0 +1,53 @@
+---
+description: Findus 4 Module — Gates, Priorität, Flows (Stand Spec Jul 2026)
+globs: ["src/runtime/**/*.ts", "src/services/module2/**/*.ts", "src/services/navigation/**/*.ts", "src/services/logistics/**/*.ts"]
+---
+
+# Findus — 4 Module (verbindlich)
+
+## Priorität nach Mic / Modul 2
+
+1. Mic → Modul 1 abbrechen, Modul 3/4 Pause
+2. Modul 2 fertig gesprochen → Modul 3 darf sofort (Ansagen)
+3. Modul 4 erst nach **30 s**
+4. Modul 1 erst nach **35 s**
+5. Während Modul 2 spricht: Modul 3 in Queue
+
+Policy: `modulePriorityPolicy.ts`
+
+## Modul 1 Gates (vor Auslösen)
+
+1. Stempel / schon berichtet → **skip**
+2. Nav aktiv + Knoten ≤30 m Fuß / ≤70 m Rad → **skip**
+3. Modul 2/3 spricht → warten, dann neu prüfen
+4. Wegweiser: weg vom Hauptort → **skip**; Richtung Hauptort → fire
+
+### Flows
+
+- **Wegweiser:** Richtung (GPS×3) → Anker → Hook (nur echte Hooks) → sanfte Einladung → Schweigen
+- **Haupt (mit Approach):** cool Historie → Heute → Nutzen → Nähe (Neben immer; Haupt ≤50 m)
+- **Haupt (ohne Approach):** Visuell (wie sieht's aus) → optional Hook → Historie…
+- **Neben:** wie Haupt, Visuell zuerst; Story-Kombis erlaubt
+
+## Modul 2
+
+- Chunk bei ≥4 Tasks; max 2–3 Vorschläge
+- „Wo bin ich?“: OSM→Google→Pack→OSM/Google weiter
+- Wetter: 30-Min-Memory, keine Wiederholung; präzise Uhrzeiten
+- GPS immer im TurnContext
+- Buttons: einfache Labels (`simplifyActionLabel`)
+- Nav-Befehl → sofort starten
+
+## Modul 3
+
+- Mute-Radii für M1: 30/70 m
+- Wrong-way Warn ab ~10 m
+- Announce-Lead: `navAnnounceDistance.ts` (speed-adaptive)
+- Fuß→Rad auto ab ~10 km/h
+
+## Modul 4
+
+- Gruppen: live / geo / time / free (`module4TriggerGroups.ts`)
+- Geo-Radius 150 m
+- Leave-by Checks: 3h/1h/35/30/10/leave
+- Spricht nur wenn `canModule4Speak`

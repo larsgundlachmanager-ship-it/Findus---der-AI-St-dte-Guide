@@ -1,0 +1,35 @@
+# Findus V7.0 — Output & UI (SSOT)
+
+## Chat UI
+
+- Max 3 Bullet Points, max 2 Zeilen pro Punkt.
+- Währung immer als **Euro (€)**.
+
+## Top-Left Live HUD
+
+- Minimaler State + Reminder-Ticker.
+- Tap öffnet Modal **sofort** (0 ms, entkoppelt von Audio).
+- **Tab A:** Fog of War (20–30 m) + Stempelkarte + Kategorie-Stats (≥1 Besuch) + **Nerd Facts**.
+- **Tab B:** Multi-Stop Drag & Drop + Top-2 Quick Search + Suchhistorie.
+
+## Strict LiveStage Layering (document flow, no absolute overlays)
+
+1. PresenceCluster (Avatar)  
+2. BulletsSlot (max 3 Stichpunkte)  
+3. ActionsSlot (Quick Actions)  
+4. SubtitlesSlot (1–2 Zeilen, freigestellter Text — keine Box)  
+5. MicButton (fixer Anker unter der Stage)
+
+## Action Buttons & Audio Multitasking
+
+- Web-Link: Voice weiterlaufen lassen.
+- Navi-Abbiegung: Story pausieren → Hinweis → fortsetzen.
+
+## Onboarding Mic Hint
+
+„Tippen zum Schreiben, Halten zum Sprechen“ permanent ausblenden, sobald Tap **und** Hold je einmal genutzt wurden.
+
+## Stempelkarte
+
+- Orte auto-add nach Besuch / Verweilen ≥ 30 Min.
+- Dynamische Fließtext-Summary — **keine** Bullet Points.

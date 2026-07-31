@@ -1,0 +1,23 @@
+---
+description: Findus V5 Masterbook — Latenz, Multi-Intent, aufgeräumte Response-Policy
+alwaysApply: true
+---
+
+# Findus V5 — Latency, Multi-Intent & Policy SSOT
+
+## Frühes Feedback
+
+- Lange Recherche (Web/Events/Dining): sofort kurzes Ack-Audio („ich guck kurz nach“), dann Ergebnis.
+- Finale Antwort nutzt Satz-Streaming (erster Satz startet TTS, Rest folgt).
+
+## Mehrteilige Fragen
+
+- Teilfragen parallel recherchieren (Essen / Aussicht / Uhrzeit), dann zu einem Plan kombinieren.
+- To-go + Sunset = Imbiss/Bistro + echte Aussicht (Plattform/Düne) — nie Bahnhof/Haltestelle.
+- Buttons: Route Essen, Route Aussicht, optional Multi-Stop „Essen → Aussicht“, Speisekarte nur mit URL.
+
+## Policy SSOT
+
+- Concierge-Just-Do-It / Compound-Regeln leben in `src/services/concierge/findusResponsePolicy.ts`.
+- Nicht dieselben JUST-DO-IT-Absätze in 5 Prompt-Dateien duplizieren — importieren.
+- Event-/Party-Buttons: siehe `findus-masterbook-v5-event-research.mdc`.

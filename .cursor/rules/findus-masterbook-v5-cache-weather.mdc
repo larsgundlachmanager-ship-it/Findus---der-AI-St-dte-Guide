@@ -1,0 +1,37 @@
+# Findus V7.0 — Cache, Kosten & Wetter (SSOT)
+
+## LLM Cost Control
+
+- Primary (~98%): Gemini 2.5 Flash-Lite.
+- Pro ONLY: History-Fail auf Flash, Multi-Stop >5, Premium-Subscriber.
+
+## TTS
+
+Lokal Kokoro/Piper primary (€0). Cloud nur wenn lokal unreachable.
+
+## OSM First (POI)
+
+Allgemeine POI-Suchen → Overpass/OSM zuerst. Google Places nur wenn OSM leer.
+
+## Cache First + Immediate Community Push
+
+Unmapped area → live fetch → lokal speichern → **sofort** in Community-DB (nicht erst Mitternacht). Nightly Sync bleibt Backup.
+
+## Street View — Lazy Display + OSM TTS
+
+- TTS an komplexen Kreuzungen: **OSM Overpass** (sichtbare Landmarken), nicht Gemini-Vision auf Street-View-Bildern.
+- Street View nur Availability prüfen; Button „Street View zeigen“ vorbereiten.
+- Bild/API erst bei Tap (`SHOW_STREET_VIEW`) — kein Prefetch der Pixel.
+
+## Server Monthly Cron („City Clean-Up“)
+
+1×/Monat: Edge Function `city-cleanup` prüft Google Street-View-Metadata. Nur bei neuerem Dataset → `needs_rebuild` + neues City Package (Wi-Fi/Background).
+
+## Smart Weather Engine (OpenWeather One Call 3.0 + Modul 4)
+
+- App-Start: einmal Tageslage prüfen.
+- Stabil trocken → nächster Check nach **6 h**.
+- Regen geplant → ab **2 h** vorher watchen, dann alle **30 Min**.
+- Warnungen: **30 Min** vorher (Café/Indoor-Wahl) + **5 Min** vorher.
+- HUD oben links: Regen-Countdown („Regen in X Min“).
+- Modul 5 nutzt Regenfenster für aktive Indoor-Regenpausen.

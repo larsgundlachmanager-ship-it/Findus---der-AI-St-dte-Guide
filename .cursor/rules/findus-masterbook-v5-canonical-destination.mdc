@@ -1,0 +1,52 @@
+# Findus V5 — Canonical Destination (Speech ↔ Actions)
+
+## Problem this prevents
+
+User: „Ich möchte zu Restaurant Kreta.“  
+Speech: „Na klar, Kreta ist nicht weit — Route starten?“  
+Button: **Bistro am Strand** ← forbidden mismatch.
+
+## Invariant (never break)
+
+If the user **names** a place, that place is the single source of truth for:
+
+1. `speechText` (and fallback speech)
+2. `pendingNavOffer`
+3. every `START_NAVIGATION` chip
+4. reservation / Speisekarte actions (`targetPoiId`)
+
+Open discovery (nearest gastro, ranking, alternatives) must **not** override a named go-to.
+
+## Flow (named go-to)
+
+```
+User speech
+  → extractNamedDestinationLabel / resolveCanonicalDestination
+  → prepareConciergeContext: namedDestination=true, primaryOffer=that place
+     (skip open food ranking)
+  → Gemini: short confirm only about that place
+  → enrichWithConciergeOffers named branch:
+       📍 Route starten
+       + Tisch reservieren / Speisekarte (gastro, if available)
+  → present: speech + buttons always same place
+```
+
+## Desired UX (restaurant example)
+
+- Fast reply: confirm + ask to start route
+- Buttons: **📍 Route starten**, **Tisch reservieren** and/or **🍽 Speisekarte**
+- No private/partner nav chips that point elsewhere
+- No choice chips between unrelated nearby places
+
+## Code map
+
+- `src/services/concierge/canonicalDestination.ts`
+- `prepareConciergeContext` → `namedDestination`
+- `enrichWithConciergeOffers` early named branch
+- `quickActionPolicy.shouldForcePlaceChoiceChips` → false when named
+- `namesAlign` guard if speech drifts off the named place
+
+## Discovery (open search) stays separate
+
+„Wo kann ich gut essen?“ → ranking + 1–2 choice chips is OK.  
+„Zu Restaurant Kreta“ → never that path.
