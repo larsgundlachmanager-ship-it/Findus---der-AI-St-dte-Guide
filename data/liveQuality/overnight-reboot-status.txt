@@ -1,0 +1,31 @@
+Findus Overnight Reboot — Status (2026-08-09 ~02:20–03:00 lokal)
+
+AUTOMATED GATES
+- npm run test:reboot-scenarios → REBOOT GATE GRÜN (33/33 classify + lane + intent)
+- npm run test:laboe-battery → Laboe 15/15 Classifier grün
+
+REBOOT PIPELINE (Live-Pfad)
+- Entry: runModule2Pipeline → runRebootPipeline only
+- Manager → Fact-Lanes (max 2 parallel, z. B. Party+Outfit) → Synthese
+- CompletenessJudge + pending Buttons + runJobDeepFill (Slow-Lane)
+- Gastro Speisekarte Deep nachpoppen
+- ActionBoard Entities aus Fact-meta
+
+FACT-LANES
+- amenity_nav (Aldi/Lidl) + force Auto-Nav + HUD seed meters
+- combo_cluster (Parken×Pizza×Förde)
+- pack_match + more_history depth (kein fact_number/Punkte-Diebstahl mehr)
+- parking_care (Ticket bis HH:MM + Leave-by)
+- hour_tour (1h unbesuchte Pack-Sights, Prefs/Hafen)
+- agent_fallback → gastro/knowledge/booking/umwelt/emergency/…
+
+SPEECH / LINKS
+- scrubRebootSpeech (Doppel-Bridge / Pack-Leak)
+- umweltAgent: Plan heute Abend + Dresscode + Wetter
+- knowledge: Punkte 1. Runde → 110; Activity meta concrete_place/alternative
+
+DEVICE NOCH OFFEN (manuell morgens)
+- Laboe: was-ist-das → Follow-up · Aldi-Nav HUD · Parkticket · Kiel-Kombi
+- Fail-Format: id · Speech|Button|Nav|Thread · Kurztext
+
+Legacy Override-Stack bleibt in src/_legacy_quarantine (nicht im Live-Pfad).

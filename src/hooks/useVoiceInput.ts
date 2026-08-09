@@ -1,21 +1,7 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useFinnusStore } from '../store/useFinnusStore';
 import { getCachedUserProfile } from '../services/userProfileService';
 import { showPermissionMissingAlert } from '../utils/permissionAlerts';
-import {
-  askGeminiConciergeResponse,
-  hasGeminiApiKey,
-} from '../services/geminiService';
-import { askOpenAiSentenceStream } from '../services/openAiService';
-import {
-  buildFindusSystemPrompt,
-  buildPoiResearchContext,
-} from '../constants/prompts';
-import { FOLLOW_UP_ANSWER_RULES_DE } from '../services/audioGuideScript';
-import {
-  observeUserQuestionStyle,
-  questionStylePromptHint,
-} from '../services/questionStyleService';
 import {
   speakAssistantText,
   stopSpeaking,
@@ -23,15 +9,10 @@ import {
 } from '../services/ttsService';
 import {
   isCurrentlyListening,
+  peekListeningTranscript,
   startListening,
   stopListening,
 } from '../services/sttService';
-
-/** Kurz nach Loslassen weiterhören — fängt End-Silben ab, ohne spürbar zu warten. */
-const STT_TAIL_MS = 450;
-const STT_FINALIZE_MS = 1_300;
-import { getPoiWithFacts } from '../db/database';
-import { formatSessionMemoryForPrompt } from '../services/ai/sessionMemory';
 import {
   isStopNavigationIntent,
   resolveNavOfferFromReply,
@@ -40,10 +21,7 @@ import {
   stopNavigation,
 } from '../services/navigation';
 import { handleMemoryIntent } from '../services/intentService';
-import {
-  formatUserMemoryForPrompt,
-  useUserMemoryStore,
-} from '../store/useUserMemoryStore';
+import { useUserMemoryStore } from '../store/useUserMemoryStore';
 import {
   isTransitQueryWithLocation,
   prepareTransitFollowUp,
@@ -54,12 +32,6 @@ import {
   ferryAdviceToConcierge,
 } from '../services/transit/ferryAdvisor';
 import {
-  applyConciergeNavOffers,
-  isConciergeQuery,
-  prepareConciergeContext,
-} from '../services/concierge/conciergeContext';
-import {
-  enrichWithConciergeOffers,
   presentConciergeResponse,
   transitAdviceToConcierge,
 } from '../services/concierge/presentConcierge';
@@ -68,21 +40,71 @@ import {
   alertActionError,
   handleQuickAction,
 } from '../services/actionHandlerService';
+import { wrapPlainAsConcierge } from '../services/concierge/parseConciergeResponse';
 import {
-  CONCIERGE_JSON_INSTRUCTION,
-  wrapPlainAsConcierge,
-} from '../services/concierge/parseConciergeResponse';
+  markMicHoldUsed,
+  markMicLockUsed,
+  markMicTapUsed,
+} from '../services/ui/micHintPrefs';
+import { markFeatureTipCompleted } from '../services/ai/featureTips';
+import { observeUserQuestionStyle } from '../services/questionStyleService';
+import {
+  onUserInputEnd,
+  onUserInputStart,
+} from '../runtime/orchestrator';
+import { interruptAudioPipeline } from '../runtime/audioPipeline';
+import {
+  bargeInFlush,
+  runModule2Pipeline,
+} from '../module2';
+import {
+  appendSideChannelAsk,
+  captureSideChannelHints,
+} from '../services/memory/sideChannelMemory';
+import {
+  extractFlightCode,
+  isFlightQuery,
+  prepareFlightFollowUp,
+} from '../services/flights/flightAdvisor';
+import { isInselfliegerQuery } from '../services/flights/inselfliegerAdvisor';
+import {
+  isStepStatsQuery,
+  prepareStepStatsFollowUp,
+  wantsDisableStepStats,
+  wantsEnableStepStats,
+} from '../services/battery/stepStatsService';
+import {
+  rememberFlightPlanForAlarm,
+  wakeOfferForFlightPlan,
+} from '../services/alarms/wakeAlarmAdvisor';
+import {
+  isClockIntent,
+  prepareClockIntentFollowUp,
+} from '../services/alarms/clockIntents';
+import { recordUserSpeechExact } from '../services/feedback/executionTracking';
+import { runPreferenceCaptureMiddleware } from '../services/memory/preferenceCaptureMiddleware';
+import { noteUserTextForSituation } from '../services/persona/situationGate';
+
+/** Kurz nach Loslassen weiterhören — fängt End-Silben ab, ohne spürbar zu warten. */
+const STT_TAIL_MS = 450;
+/** Ab hier gilt Long-Press: Voice an + Findus sofort soft-unterbrechen. */
+const HOLD_THRESHOLD_MS = 450;
+/** Hold ≥ 2 s → Frage gilt; darunter = nie passiert (Resume, kein Denken). */
+const MIN_VOICE_MS = 2_000;
+const STT_FINALIZE_MS = 1_300;
 
 export type VoiceFallbackReason = 'unavailable' | 'permission' | 'error';
 
-/** Ab dieser Dauer zählt der Druck als Halten (Walkie-Talkie), darunter als kurzer Tipp. */
-const HOLD_THRESHOLD_MS = 320;
-
-type PressMode = 'idle' | 'pending' | 'voice';
+type PressMode = 'idle' | 'pending' | 'voice' | 'locked';
 
 /**
- * Kurz tippen → Tippfeld öffnen.
- * Gedrückt halten → Voice.start('de-DE'), Live-Text, Loslassen → Frage senden.
+ * Kurz tippen (< Hold-Schwelle) → Tippfeld (wenn onShortPress); Findus redet weiter.
+ * Long-Press (≥ Hold-Schwelle) → Findus soft-stumm; STT an.
+ * Nach rechts wischen während Hold → Mikro fixieren (Hände frei, weiter aufnehmen).
+ * Tippen bei Fixierung → senden.
+ * Loslassen < 2 s während Findus spricht → Abbruch (Resume), außer Timeline.
+ * Timeline / Findus still: nach Aufnahme-Start auch bei kürzerem Hold senden.
+ * Loslassen ≥ 2 s (ohne Lock) → Frage abschicken (Interrupt committed).
  */
 export function useVoiceInput(options?: {
   onShortPress?: () => void;
@@ -93,9 +115,21 @@ export function useVoiceInput(options?: {
 
   const [partialText, setPartialText] = useState('');
   const [isFinalizing, setIsFinalizing] = useState(false);
+  const [isMicLocked, setIsMicLocked] = useState(false);
   const partialTextRef = useRef('');
   const pressModeRef = useRef<PressMode>('idle');
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const commitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  /** Bumped on every committed mic interrupt — abandons in-flight answers. */
+  const questionEpochRef = useRef(0);
+  const voiceStartedAtRef = useRef(0);
+  const pressStartedAtRef = useRef(0);
+  /** Soft-Pause aktiv (Resume möglich solange nicht committed). */
+  const provisionalPausedRef = useRef(false);
+  /** Volle Unterbrechung committed (≥ 2 s Hold). */
+  const interruptCommittedRef = useRef(false);
+  /** Nach Tippen-auf-Fixiert: PressOut nicht als Kurz-Tipp werten. */
+  const skipNextPressOutRef = useRef(false);
 
   const addChatMessage = useFinnusStore((s) => s.addChatMessage);
   const setIsListening = useFinnusStore((s) => s.setIsListening);
@@ -110,17 +144,145 @@ export function useVoiceInput(options?: {
     }
   }, []);
 
+  const clearCommitTimer = useCallback(() => {
+    if (commitTimerRef.current) {
+      clearTimeout(commitTimerRef.current);
+      commitTimerRef.current = null;
+    }
+  }, []);
+
+  const stillCurrent = useCallback((epoch: number) => {
+    return questionEpochRef.current === epoch;
+  }, []);
+
+  /** Soft: TTS pausieren — kein Denken, kein Epoch-Bump (Abbrechen → Resume). */
+  const softMuteFindusForMic = useCallback(async () => {
+    provisionalPausedRef.current = false;
+    try {
+      const { pauseSpeakingForNav } = await import('../services/AudioVoiceService');
+      provisionalPausedRef.current = await pauseSpeakingForNav();
+    } catch {
+      provisionalPausedRef.current = false;
+    }
+    if (provisionalPausedRef.current) {
+      useFinnusStore.getState().setIsPlayingAudio(false);
+      useFinnusStore.getState().setIsAudiblySpeaking(false);
+      return;
+    }
+    // Kein pausierbarer Sound → hart stoppen (Resume dann nicht möglich)
+    try {
+      await stopSpeaking();
+    } catch {
+      /* ignore */
+    }
+    try {
+      const { forceClearSpeakingUi } = await import('../services/AudioVoiceService');
+      forceClearSpeakingUi();
+    } catch {
+      useFinnusStore.getState().setIsPlayingAudio(false);
+    }
+  }, []);
+
+  /** Mic = echte Barge-in: TTS weg, Generation abbrechen (nach ≥ 2 s Hold). */
+  const interruptFindusForMic = useCallback(async () => {
+    interruptCommittedRef.current = true;
+    try {
+      const { discardPausedSpeaking } = await import('../services/AudioVoiceService');
+      await discardPausedSpeaking();
+    } catch {
+      /* soft */
+    }
+    provisionalPausedRef.current = false;
+    questionEpochRef.current += 1;
+    try {
+      await onUserInputStart('user_voice');
+    } catch {
+      setIsGenerating(false);
+      try {
+        const { interruptNarrationForForce } = await import(
+          '../runtime/narrationPipeline'
+        );
+        await interruptNarrationForForce();
+      } catch {
+        /* ignore */
+      }
+    }
+    try {
+      const { forceClearSpeakingUi } = await import('../services/AudioVoiceService');
+      forceClearSpeakingUi();
+    } catch {
+      useFinnusStore.getState().setIsPlayingAudio(false);
+    }
+    try {
+      await bargeInFlush();
+    } catch {
+      try {
+        await interruptAudioPipeline();
+      } catch {
+        try {
+          await stopSpeaking();
+        } catch {
+          /* ignore */
+        }
+      }
+    }
+  }, [setIsGenerating]);
+
+  /** Unter 2 s Loslassen: STT weg, Findus weiter — als nie passiert. */
+  const abortProvisionalMic = useCallback(async () => {
+    clearCommitTimer();
+    pressModeRef.current = 'idle';
+    setIsMicLocked(false);
+    try {
+      if (isCurrentlyListening() || isListening) {
+        await stopListening({ tailMs: 0, finalizeMs: 0 });
+      }
+    } catch {
+      /* soft */
+    }
+    setIsListening(false);
+    setIsFinalizing(false);
+    setIsGenerating(false);
+    setPartialText('');
+    partialTextRef.current = '';
+    voiceStartedAtRef.current = 0;
+    pressStartedAtRef.current = 0;
+
+    const canResume =
+      provisionalPausedRef.current && !interruptCommittedRef.current;
+    provisionalPausedRef.current = false;
+    interruptCommittedRef.current = false;
+
+    if (canResume) {
+      try {
+        const { resumeSpeakingAfterNav } = await import(
+          '../services/AudioVoiceService'
+        );
+        void resumeSpeakingAfterNav();
+      } catch {
+        /* soft */
+      }
+    }
+  }, [clearCommitTimer, isListening, setIsGenerating, setIsListening]);
+
   const beginVoiceSession = useCallback(async () => {
-    if (pressModeRef.current !== 'voice') return;
+    if (
+      pressModeRef.current !== 'voice' &&
+      pressModeRef.current !== 'locked'
+    ) {
+      return;
+    }
 
     const profile = getCachedUserProfile();
     if (profile?.micListenMode === 'dont_hear') {
       pressModeRef.current = 'idle';
+      setIsMicLocked(false);
       onNeedTextFallback?.('permission');
       return;
     }
     if (!profile?.hasAcceptedAudioConsent || profile?.micListenMode !== 'hear') {
       pressModeRef.current = 'idle';
+      setIsMicLocked(false);
       showPermissionMissingAlert('audioConsent', { force: true });
       onNeedTextFallback?.('permission');
       return;
@@ -129,15 +291,37 @@ export function useVoiceInput(options?: {
     setPartialText('');
     partialTextRef.current = '';
     setIsListening(true);
-    await stopSpeaking();
+    voiceStartedAtRef.current = Date.now();
+    void markMicHoldUsed();
+    void markFeatureTipCompleted('voice_mic');
+    void import('../services/onboarding/uiCoachMarks').then((m) =>
+      m.onUserUsedMicHold(),
+    );
+
+    // Sofort soft-unterbrechen (kein Denken) — Commit erst nach MIN_VOICE_MS
+    await softMuteFindusForMic();
+    if (
+      pressModeRef.current !== 'voice' &&
+      pressModeRef.current !== 'locked'
+    ) {
+      await abortProvisionalMic();
+      return;
+    }
 
     const result = await startListening((partial) => {
       partialTextRef.current = partial;
       setPartialText(partial);
-    });
+    }, { keepAlive: true });
 
-    if (pressModeRef.current !== 'voice') {
-      await stopListening();
+    if (
+      pressModeRef.current !== 'voice' &&
+      pressModeRef.current !== 'locked'
+    ) {
+      try {
+        await stopListening({ tailMs: 0, finalizeMs: 0 });
+      } catch {
+        /* soft */
+      }
       setIsListening(false);
       setPartialText('');
       return;
@@ -145,336 +329,1044 @@ export function useVoiceInput(options?: {
 
     if (!result.ok) {
       pressModeRef.current = 'idle';
+      setIsMicLocked(false);
       setIsListening(false);
-      // Popup kommt bereits aus sttService (microphone / speechUnavailable)
+      await abortProvisionalMic();
       onNeedTextFallback?.(result.reason);
     }
-  }, [onNeedTextFallback, setIsListening]);
+  }, [
+    abortProvisionalMic,
+    onNeedTextFallback,
+    setIsListening,
+    softMuteFindusForMic,
+  ]);
+
+  const speakPlain = useCallback(
+    async (reply: string, epoch: number) => {
+      if (!stillCurrent(epoch) || !reply.trim()) return;
+      addChatMessage({ role: 'assistant', content: reply });
+      const voiceSettings = await getVoiceSettingsForTour();
+      if (!stillCurrent(epoch)) return;
+      await speakAssistantText(reply, {
+        voiceId: voiceSettings.voiceId,
+        speechRate: voiceSettings.speechRate,
+      });
+    },
+    [addChatMessage, stillCurrent],
+  );
 
   const submitUserQuestion = useCallback(
     async (text: string) => {
-      addChatMessage({ role: 'user', content: text });
-      void observeUserQuestionStyle(text);
-      // Karte bleibt sichtbar bis die neue Antwort kommt — weniger Layout-Sprünge
+      const epoch = ++questionEpochRef.current;
+      const corrected = (globalThis as { __findusCorrectedQ?: string })
+        .__findusCorrectedQ;
+      if (corrected) {
+        (globalThis as { __findusCorrectedQ?: string }).__findusCorrectedQ =
+          undefined;
+        text = corrected;
+      }
 
-      const state = useFinnusStore.getState();
+      // Korrektur → strukturierte Regel speichern + Frage für denselben Turn umschreiben
+      // (vor Chat-Append, damit lastAssistant noch der vorherige Turn ist)
+      const spokenUserText = text;
+      try {
+        const { runCorrectionLearningCapture } = await import(
+          '../services/memory/correctionLearning'
+        );
+        const correction = await runCorrectionLearningCapture(spokenUserText);
+        if (correction.isCorrection && correction.effectiveQuestion) {
+          text = correction.effectiveQuestion;
+        }
+      } catch {
+        /* soft */
+      }
 
-      if (isStopNavigationIntent(text) && state.navActive) {
+      addChatMessage({ role: 'user', content: spokenUserText });
+      void runPreferenceCaptureMiddleware(spokenUserText).catch(() => {});
+      noteUserTextForSituation(text);
+      void observeUserQuestionStyle(spokenUserText);
+      if (useFinnusStore.getState().currentPoiId != null) {
+        void markFeatureTipCompleted('ask_followups');
+      }
+
+      // Neuer Turn mit echtem Text → alte Karte erst jetzt tauschen
+      useFinnusStore.getState().setActiveConciergeCard(null);
+
+      await onUserInputStart('user_text');
+      const sideAsk = await captureSideChannelHints(text).catch(() => null);
+
+      // Sofort-Ack bei langer Recherche — bevor Modul5/Intent/Modul2 denken
+      try {
+        const { speakLatencyFloskelFireAndForget } = require('../services/speech/floskelEngine') as {
+          speakLatencyFloskelFireAndForget: (t: string) => void;
+        };
+        speakLatencyFloskelFireAndForget(text);
+      } catch {
+        /* soft */
+      }
+
+      const withSide = (reply: string) =>
+        appendSideChannelAsk(reply, sideAsk ?? undefined);
+
+      // Parkplatz speichern — Just-Do-It, kurze Bestätigung
+      if (sideAsk?.parkingAck) {
         setIsGenerating(true);
         try {
-          await stopNavigation();
-          await stopSpeaking();
-          const voiceSettings = await getVoiceSettingsForTour();
-          const reply = 'Alles klar — Navigation ist aus.';
-          addChatMessage({ role: 'assistant', content: reply });
-          await speakAssistantText(reply, {
-            voiceId: voiceSettings.voiceId,
-            speechRate: voiceSettings.speechRate,
-          });
+          if (!stillCurrent(epoch)) return;
+          await speakPlain(sideAsk.parkingAck, epoch);
         } finally {
-          setIsGenerating(false);
+          if (stillCurrent(epoch)) setIsGenerating(false);
         }
         return;
       }
 
-      // Hotel-Confirm / Namensfrage hat Vorrang vor generischem Nav-Offer
-      {
-        const s = useUserMemoryStore.getState();
-        const prioritizeMemory =
-          s.pendingHotelConfirmId != null || s.awaitingHotelName;
-        if (prioritizeMemory) {
-          const intent = await handleMemoryIntent(text);
-          if (intent.handled && intent.reply) {
+      try {
+        if (!stillCurrent(epoch)) return;
+
+        const state = useFinnusStore.getState();
+
+        if (isStopNavigationIntent(text) && state.navActive) {
+          setIsGenerating(true);
+          try {
+            const { clearNavigationHard } = await import(
+              '../services/navigation'
+            );
+            await clearNavigationHard({ silent: true });
+            await stopNavigation({ silent: true, reason: 'manual' });
+            useFinnusStore.getState().patchNavigation({
+              navActive: false,
+              navVisible: false,
+              navMode: null,
+              navTargetName: null,
+            });
+            if (!stillCurrent(epoch)) return;
+            await speakPlain(withSide('Navigation ist gestoppt.'), epoch);
+          } finally {
+            if (stillCurrent(epoch)) setIsGenerating(false);
+          }
+          return;
+        }
+
+        // Auch wenn Store noch „aktiv“ klebt: Stop-Intent hart räumen
+        if (isStopNavigationIntent(text)) {
+          setIsGenerating(true);
+          try {
+            const { clearNavigationHard } = await import(
+              '../services/navigation'
+            );
+            await clearNavigationHard({ silent: true });
+            await stopNavigation({ silent: true, reason: 'manual' }).catch(
+              () => undefined,
+            );
+            useFinnusStore.getState().patchNavigation({
+              navActive: false,
+              navVisible: false,
+              navMode: null,
+              navTargetName: null,
+            });
+            if (!stillCurrent(epoch)) return;
+            await speakPlain(withSide('Navigation ist gestoppt.'), epoch);
+          } finally {
+            if (stillCurrent(epoch)) setIsGenerating(false);
+          }
+          return;
+        }
+
+        // Falscher Auto-Start: „Nein / nicht mein Wille / ich wollte wissen…“
+        {
+          const { isNavCorrectionIntent, extractCorrectedQuestion } =
+            await import('../services/intent/poiInfoVsNav');
+          if (
+            state.navActive &&
+            (isNavCorrectionIntent(text) ||
+              /^(nein|nö|noe|doch\s+nicht|falsch)\b/iu.test(text.trim()))
+          ) {
+            const { clearNavigationHard } = await import(
+              '../services/navigation'
+            );
+            await clearNavigationHard({ silent: true });
+            useFinnusStore.getState().setPendingNavOffer(null);
+            useFinnusStore.getState().setPendingNavAlternatives([]);
+            if (isNavCorrectionIntent(text)) {
+              text = extractCorrectedQuestion(text);
+            } else if (/^(nein|nö|noe|doch\s+nicht|falsch)\b/iu.test(text.trim())) {
+              // Bare nein während Nav → stoppen und kurz bestätigen
+              setIsGenerating(true);
+              try {
+                await speakPlain(
+                  withSide('Okay — Navigation gestoppt.'),
+                  epoch,
+                );
+              } finally {
+                if (stillCurrent(epoch)) setIsGenerating(false);
+              }
+              return;
+            }
+          }
+        }
+
+        // Pending hotel Yes/No / name has priority (also covered in intent, but keep snappy)
+        {
+          const s = useUserMemoryStore.getState();
+          const prioritizeMemory =
+            s.pendingHotelConfirmId != null || s.awaitingHotelName;
+          if (prioritizeMemory) {
+            const intent = await handleMemoryIntent(text);
+            if (!stillCurrent(epoch)) return;
+            if (intent.handled && (intent.reply || intent.concierge)) {
+              setIsGenerating(true);
+              try {
+                if (intent.concierge) {
+                  addChatMessage({
+                    role: 'assistant',
+                    content: intent.concierge.speechText,
+                  });
+                  if (!stillCurrent(epoch)) return;
+                  await presentConciergeResponse({
+                    ...intent.concierge,
+                    speechText: withSide(intent.concierge.speechText),
+                  }, { userText: text });
+                } else if (intent.reply) {
+                  await speakPlain(withSide(intent.reply), epoch);
+                }
+              } finally {
+                if (stillCurrent(epoch)) setIsGenerating(false);
+              }
+              return;
+            }
+          }
+        }
+
+        if (
+          shouldStartNavFromOffer(
+            text,
+            state.pendingNavOffer,
+            state.pendingNavAlternatives,
+          )
+        ) {
+          const offer = resolveNavOfferFromReply(
+            text,
+            state.pendingNavOffer,
+            state.pendingNavAlternatives,
+          )!;
+          setIsGenerating(true);
+          try {
+            const ok = await startNavigation(offer.poiId);
+            if (!stillCurrent(epoch)) return;
+            useFinnusStore.getState().setActiveConciergeCard(null);
+            const reply = ok
+              ? `Okay, ich führ dich zu ${offer.name}. Du musst nicht aufs Handy schauen — ich sag dir an Häusern und Abzweigungen, wo's langgeht.`
+              : 'Dazu krieg ich gerade keine Route hin — versuch es gleich nochmal.';
+            await speakPlain(withSide(reply), epoch);
+          } finally {
+            if (stillCurrent(epoch)) setIsGenerating(false);
+          }
+          return;
+        }
+
+        // Affiliate Voice-Follow-up
+        {
+          const aff = state.pendingAffiliateOffer;
+          const hasNav =
+            state.pendingNavOffer != null ||
+            (state.pendingNavAlternatives?.length ?? 0) > 0;
+          if (shouldAcceptPendingAffiliateOffer(text, aff, hasNav)) {
             setIsGenerating(true);
             try {
-              await stopSpeaking();
-              const voiceSettings = await getVoiceSettingsForTour();
-              addChatMessage({ role: 'assistant', content: intent.reply });
-              await speakAssistantText(intent.reply, {
-                voiceId: voiceSettings.voiceId,
-                speechRate: voiceSettings.speechRate,
-              });
+              useFinnusStore.getState().setPendingAffiliateOffer(null);
+              const result = await handleQuickAction(aff!);
+              if (!stillCurrent(epoch)) return;
+              const reply = result.ok
+                ? result.message ||
+                  'Alles klar — ich öffne dir die Buchungsoption.'
+                : result.message ||
+                  'Das lässt sich gerade nicht öffnen — tipp einfach auf den Button.';
+              if (!result.ok) alertActionError(reply);
+              await speakPlain(withSide(reply), epoch);
             } finally {
-              setIsGenerating(false);
+              if (stillCurrent(epoch)) setIsGenerating(false);
             }
             return;
           }
         }
-      }
 
-      if (
-        shouldStartNavFromOffer(
-          text,
-          state.pendingNavOffer,
-          state.pendingNavAlternatives,
-        )
-      ) {
-        const offer = resolveNavOfferFromReply(
-          text,
-          state.pendingNavOffer,
-          state.pendingNavAlternatives,
-        )!;
-        setIsGenerating(true);
-        try {
-          // Kompass ZUERST — User sieht Pfeil sofort, Stimme danach parallel
-          const ok = await startNavigation(offer.poiId);
-          useFinnusStore.getState().setActiveConciergeCard(null);
-          await stopSpeaking();
-          const voiceSettings = await getVoiceSettingsForTour();
-          const reply = ok
-            ? `Okay, ich führ dich zu ${offer.name}. Du musst nicht aufs Handy schauen — ich sag dir an Häusern und Abzweigungen, wo's langgeht.`
-            : 'Dazu krieg ich gerade keine Route hin — versuch es gleich nochmal.';
-          addChatMessage({ role: 'assistant', content: reply });
-          await speakAssistantText(reply, {
-            voiceId: voiceSettings.voiceId,
-            speechRate: voiceSettings.speechRate,
-          });
-        } finally {
-          setIsGenerating(false);
-        }
-        return;
-      }
-
-      // Affiliate Voice-Follow-up: „Ja, buchen“ / „Zeig mir das“
-      {
-        const aff = state.pendingAffiliateOffer;
-        const hasNav =
-          state.pendingNavOffer != null ||
-          (state.pendingNavAlternatives?.length ?? 0) > 0;
-        if (shouldAcceptPendingAffiliateOffer(text, aff, hasNav)) {
-          setIsGenerating(true);
-          try {
-            useFinnusStore.getState().setPendingAffiliateOffer(null);
-            const result = await handleQuickAction(aff!);
-            await stopSpeaking();
-            const voiceSettings = await getVoiceSettingsForTour();
-            const reply = result.ok
-              ? result.message ||
-                'Alles klar — ich öffne dir die Buchungsoption.'
-              : result.message ||
-                'Das lässt sich gerade nicht öffnen — tipp einfach auf den Button.';
-            if (!result.ok) alertActionError(reply);
-            addChatMessage({ role: 'assistant', content: reply });
-            await speakAssistantText(reply, {
-              voiceId: voiceSettings.voiceId,
-              speechRate: voiceSettings.speechRate,
-            });
-            if (result.followUpPrompt) {
-              // SHOW_MORE o.ä. — als neue Frage weiterreichen
+        // Strict flight follow-up only while awaiting details (pure code e.g. LH400)
+        {
+          const mem = useUserMemoryStore.getState();
+          if (mem.awaitingFlightDetails) {
+            const code = extractFlightCode(text, { requireContext: false });
+            const pure =
+              /^[A-Za-z]{1,3}\s?\d{1,4}[A-Za-z]?$/i.test(text.trim()) && code;
+            if (pure) {
+              setIsGenerating(true);
+              try {
+                const flight = await prepareFlightFollowUp(text, {
+                  flightNumber: code,
+                });
+                if (!stillCurrent(epoch)) return;
+                mem.setAwaitingFlightDetails(false);
+                if (flight) {
+                  if (flight.plan) rememberFlightPlanForAlarm(flight.plan);
+                  let reply = flight.reply;
+                  let concierge = wrapPlainAsConcierge(reply, {
+                    cardTitle: `Flug ${code}`,
+                    visualBullets: flight.plan
+                      ? [
+                          flight.plan.flight.ident,
+                          flight.plan.speechPreFlight.slice(0, 80),
+                        ]
+                      : [],
+                    quickActions: [],
+                  });
+                  if (flight.plan && flight.offerReminder) {
+                    const wake = await wakeOfferForFlightPlan(flight.plan);
+                    if (wake?.speech) {
+                      reply = `${reply} ${wake.speech}`;
+                      concierge = {
+                        ...concierge,
+                        speechText: reply,
+                        visualBullets: [
+                          ...concierge.visualBullets,
+                          ...(wake.bullets ?? []),
+                        ].slice(0, 3),
+                        quickActions: [
+                          ...concierge.quickActions,
+                          ...(wake.quickActions ?? []),
+                        ].slice(0, 4),
+                      };
+                    }
+                  }
+                  addChatMessage({ role: 'assistant', content: reply });
+                  if (!stillCurrent(epoch)) return;
+                  await presentConciergeResponse({
+                    ...concierge,
+                    speechText: withSide(reply),
+                  }, { userText: text });
+                  return;
+                }
+              } finally {
+                if (stillCurrent(epoch)) setIsGenerating(false);
+              }
             }
-          } finally {
-            setIsGenerating(false);
           }
-          return;
         }
-      }
 
-      // Hotel-Resolver / History-Recall / Memory-Nav (vor Gemini)
-      {
-        const intent = await handleMemoryIntent(text);
-        if (intent.handled && intent.reply) {
+        // Schritt-Statistik (auf Wunsch)
+        if (
+          isStepStatsQuery(text) ||
+          wantsEnableStepStats(text) ||
+          wantsDisableStepStats(text)
+        ) {
           setIsGenerating(true);
           try {
-            await stopSpeaking();
-            addChatMessage({ role: 'assistant', content: intent.reply });
-            if (intent.startedNav) {
-              // Kompass ist schon an (intent) — sichtbar halten, Stimme parallel
-              useFinnusStore.getState().patchNavigation({
-                navActive: true,
-                navVisible: true,
-              });
-              const voiceSettings = await getVoiceSettingsForTour();
-              await speakAssistantText(intent.reply, {
-                voiceId: voiceSettings.voiceId,
-                speechRate: voiceSettings.speechRate,
-              });
-            } else {
-              // Speech sagt evtl. trotzdem Navigation zu → auto-start in present
+            const steps = await prepareStepStatsFollowUp(text);
+            if (!stillCurrent(epoch)) return;
+            if (steps) {
+              // „Schritte aus“: HUD/ActiveCard sofort bereinigen.
+              if (wantsDisableStepStats(text)) {
+                const store = useFinnusStore.getState();
+                store.setActiveConciergeCard(null);
+                store.setPendingAffiliateOffer(null);
+              }
+              addChatMessage({ role: 'assistant', content: steps.reply });
               await presentConciergeResponse(
-                wrapPlainAsConcierge(intent.reply, {
-                  cardTitle: 'Navigation',
+                wrapPlainAsConcierge(withSide(steps.reply), {
+                  cardTitle: 'Schritte',
                   visualBullets: [],
                   quickActions: [],
                 }),
+                { userText: text },
               );
+              return;
             }
           } finally {
-            setIsGenerating(false);
+            if (stillCurrent(epoch), { userText: text }) setIsGenerating(false);
           }
-          return;
         }
-      }
 
-      // Fähre: tideabhängiger Fahrplan (GPS + Wortlaut)
-      if (await isFerryQueryWithLocation(text)) {
-        const ferry = await prepareFerryFollowUp(text);
-        if (ferry) {
+        // Inselflieger — Live-Zeiten/Preise ohne Flugnummer
+        if (isInselfliegerQuery(text) || (isFlightQuery(text) && isInselfliegerQuery(text))) {
           setIsGenerating(true);
           try {
-            await stopSpeaking();
-            const structured = ferryAdviceToConcierge(ferry.advice, ferry.reply);
-            addChatMessage({ role: 'assistant', content: ferry.reply });
-            await presentConciergeResponse(structured);
+            const flight = await prepareFlightFollowUp(text);
+            if (!stillCurrent(epoch)) return;
+            if (flight) {
+              addChatMessage({ role: 'assistant', content: flight.reply });
+              await presentConciergeResponse(
+                {
+                  ...(flight.concierge ??
+                    wrapPlainAsConcierge(flight.reply, {
+                      cardTitle: 'Inselflieger',
+                      visualBullets: [],
+                      quickActions: [],
+                    })),
+                  speechText: withSide(flight.reply),
+                },
+                { userText: text },
+              );
+              return;
+            }
           } finally {
-            setIsGenerating(false);
-          }
-          return;
-        }
-      }
-
-      // ÖPNV: Speech + Visual Card (Stimme zuerst)
-      if (await isTransitQueryWithLocation(text)) {
-        const transit = await prepareTransitFollowUp(text);
-        if (transit) {
-          setIsGenerating(true);
-          try {
-            await stopSpeaking();
-            const structured = transitAdviceToConcierge(
-              transit.advice,
-              transit.reply,
-              transit.offerNavigation,
-            );
-            addChatMessage({ role: 'assistant', content: transit.reply });
-            await presentConciergeResponse(structured);
-          } finally {
-            setIsGenerating(false);
-          }
-          return;
-        }
-      }
-
-      // Concierge / allgemeine Rückfrage → strukturiertes JSON
-      setIsGenerating(true);
-      const navSnapshot = useFinnusStore.getState().navActive
-        ? {
-            navActive: true,
-            navVisible: useFinnusStore.getState().navVisible,
-          }
-        : null;
-      try {
-        await stopSpeaking();
-
-        const live = useFinnusStore.getState();
-        const history = live.chatHistory;
-        const memory = formatSessionMemoryForPrompt({
-          entries: live.visitedHistory,
-        });
-        const longTerm = formatUserMemoryForPrompt();
-        const told = live.toldFactKeys.slice(-40).join(' | ');
-
-        let poiBlock = '';
-        if (live.currentPoiId != null) {
-          const poi = await getPoiWithFacts(live.currentPoiId);
-          if (poi) {
-            poiBlock = `\n\n${buildPoiResearchContext(poi)}`;
+            if (stillCurrent(epoch)) setIsGenerating(false);
           }
         }
 
-        let conciergeCtx = null as Awaited<
-          ReturnType<typeof prepareConciergeContext>
-        >;
-        let conciergeBlock = '';
-        if (isConciergeQuery(text)) {
-          conciergeCtx = await prepareConciergeContext(text);
-          if (conciergeCtx) {
-            conciergeBlock = `\n\n${conciergeCtx.promptBlock}`;
-            applyConciergeNavOffers(conciergeCtx);
+        // Wecker + Timer (Just-Do-It)
+        if (isClockIntent(text)) {
+          const clock = await prepareClockIntentFollowUp(text);
+          if (!stillCurrent(epoch)) return;
+          if (clock) {
+            setIsGenerating(true);
+            try {
+              const card = wrapPlainAsConcierge(clock.speech, {
+                cardTitle: clock.cardTitle,
+                visualBullets: clock.bullets ?? [],
+                quickActions: clock.quickActions ?? [],
+              });
+              addChatMessage({ role: 'assistant', content: clock.speech });
+              await presentConciergeResponse({
+                ...card,
+                speechText: withSide(clock.speech),
+              }, { userText: text });
+            } finally {
+              if (stillCurrent(epoch)) setIsGenerating(false);
+            }
+            return;
           }
         }
 
-        const system = `${buildFindusSystemPrompt()}
+        if (!stillCurrent(epoch)) return;
 
-${FOLLOW_UP_ANSWER_RULES_DE}
-
-${questionStylePromptHint()}
-
-## Session-Memory
-${memory}
-
-## Langzeitgedächtnis (Hotels, Restaurants, Dwell-Stops)
-${longTerm}
-
-Bereits gesagte Fakt-Keys (nicht wiederholen): ${told || '—'}
-${poiBlock}
-${conciergeBlock}
-
-${CONCIERGE_JSON_INSTRUCTION}
-
-Der User stellt eine Rückfrage. Fülle speechText für die Stimme — visualBullets/quickActions nur fürs Display.`;
-
-        const withPersona = [
-          { role: 'system' as const, content: system },
-          ...history,
-        ];
-
-        let response = hasGeminiApiKey()
-          ? await askGeminiConciergeResponse(withPersona)
-          : null;
-
-        if (!response) {
-          const parts: string[] = [];
-          for await (const sentence of askOpenAiSentenceStream(withPersona)) {
-            parts.push(sentence);
+        // Modul 5 ZUERST — bevor Memory/LLM-Intent den Tagesplan stiehlt
+        try {
+          const {
+            isPlanningModuleActive,
+            runPlanningModule,
+          } = require('../module2/planning/runPlanningModule') as {
+            isPlanningModuleActive: () => boolean;
+            runPlanningModule: (o: {
+              userText: string;
+              turnId?: string;
+            }) => Promise<{ ok: boolean }>;
+          };
+          const { looksLikeModul5PlanUtterance, looksLikeOutfitOrWeatherUtterance, looksLikeSingleJustDoItRequest } = require('../module2/planning/planUtteranceGate') as {
+            looksLikeModul5PlanUtterance: (t: string) => boolean;
+            looksLikeOutfitOrWeatherUtterance: (t: string) => boolean;
+            looksLikeSingleJustDoItRequest: (t: string) => boolean;
+          };
+          const {
+            usePlanCalendarUiStore,
+          } = require('../module2/timeline/planCalendarUiStore') as {
+            usePlanCalendarUiStore: {
+              getState: () => { calendarVisible: boolean };
+            };
+          };
+          const calOpen =
+            usePlanCalendarUiStore.getState().calendarVisible ||
+            isPlanningModuleActive();
+          // Outfit/Wetter nie in Modul 5 — auch wenn Kalender schon offen
+          const forceUmwelt =
+            looksLikeOutfitOrWeatherUtterance(text) && !isPlanningModuleActive();
+          // Einzelauftrag (Hotel/Restaurant/…) → Just-Do-It, auch bei offenem Kalender
+          const forceJustDoIt =
+            looksLikeSingleJustDoItRequest(text) &&
+            !looksLikeModul5PlanUtterance(text);
+          if (
+            !forceUmwelt &&
+            !forceJustDoIt &&
+            (calOpen || looksLikeModul5PlanUtterance(text))
+          ) {
+            setIsGenerating(true);
+            try {
+              const result = await runPlanningModule({
+                userText: text,
+                turnId: `m5_${epoch}_${Date.now()}`,
+              });
+              if (!result?.ok && stillCurrent(epoch)) {
+                try {
+                  const { enqueueSpeech } = require('../module2/speech/speechQueue') as {
+                    enqueueSpeech: (o: {
+                      kind: string;
+                      text: string;
+                      turnId: string;
+                    }) => void;
+                  };
+                  enqueueSpeech({
+                    kind: 'main',
+                    text: 'Das hab ich gehört — einen Moment, ich sortier den Plan.',
+                    turnId: `m5_retry_${Date.now()}`,
+                  });
+                } catch {
+                  /* soft */
+                }
+              }
+            } finally {
+              if (stillCurrent(epoch)) setIsGenerating(false);
+            }
+            return;
           }
-          response = wrapPlainAsConcierge(
-            parts.join(' ').trim() ||
-              'Dazu hab ich gerade keinen frischen Beleg — versuch es gleich noch einmal.',
-          );
+        } catch (err) {
+          console.warn('[module5] gate failed, fallback module2', err);
         }
 
-        response = await enrichWithConciergeOffers(response, conciergeCtx);
-        addChatMessage({
-          role: 'assistant',
-          content: response.speechText,
-        });
-        useFinnusStore
-          .getState()
-          .addToldFactKeys([response.speechText.slice(0, 120)]);
-
-        // Stimme zuerst, dann Spickzettel-Karte
-        await presentConciergeResponse(response);
-
-        if (navSnapshot && !isStopNavigationIntent(text)) {
-          useFinnusStore.getState().patchNavigation(navSnapshot);
+        // LLM / memory / multi-intent router (intentService)
+        {
+          const intent = await handleMemoryIntent(text);
+          if (!stillCurrent(epoch)) return;
+          if (intent.handled && (intent.reply || intent.concierge)) {
+            setIsGenerating(true);
+            try {
+              if (intent.concierge) {
+                addChatMessage({
+                  role: 'assistant',
+                  content: intent.concierge.speechText,
+                });
+                if (!stillCurrent(epoch)) return;
+                await presentConciergeResponse({
+                  ...intent.concierge,
+                  speechText: withSide(intent.concierge.speechText),
+                }, { userText: text });
+              } else if (intent.reply) {
+                if (intent.startedNav) {
+                  useFinnusStore.getState().patchNavigation({
+                    navActive: true,
+                    navVisible: true,
+                  });
+                  await speakPlain(withSide(intent.reply), epoch);
+                } else {
+                  await presentConciergeResponse(
+                    wrapPlainAsConcierge(withSide(intent.reply), {
+                      cardTitle: 'Findus',
+                      visualBullets: [],
+                      quickActions: [],
+                    }),
+                    { userText: text },
+                  );
+                }
+              }
+            } finally {
+              if (stillCurrent(epoch), { userText: text }) setIsGenerating(false);
+            }
+            return;
+          }
         }
-      } catch (error) {
-        console.error('[voice] Concierge follow-up failed:', error);
-        const fallback =
-          'Dazu hab ich gerade keinen frischen Beleg — versuch es gleich noch einmal.';
-        addChatMessage({ role: 'assistant', content: fallback });
-        const voiceSettings = await getVoiceSettingsForTour();
-        await speakAssistantText(fallback, {
-          voiceId: voiceSettings.voiceId,
-          speechRate: voiceSettings.speechRate,
-        });
+
+        // Fähre
+        if (await isFerryQueryWithLocation(text)) {
+          const ferry = await prepareFerryFollowUp(text);
+          if (!stillCurrent(epoch)) return;
+          if (ferry) {
+            setIsGenerating(true);
+            try {
+              const structured = ferryAdviceToConcierge(ferry.advice, ferry.reply);
+              addChatMessage({ role: 'assistant', content: ferry.reply });
+              await presentConciergeResponse({
+                ...structured,
+                speechText: withSide(ferry.reply),
+              }, { userText: text });
+            } finally {
+              if (stillCurrent(epoch)) setIsGenerating(false);
+            }
+            return;
+          }
+        }
+
+        // ÖPNV
+        if (await isTransitQueryWithLocation(text)) {
+          const transit = await prepareTransitFollowUp(text);
+          if (!stillCurrent(epoch)) return;
+          if (transit) {
+            setIsGenerating(true);
+            try {
+              const structured = transitAdviceToConcierge(
+                transit.advice,
+                transit.reply,
+                transit.offerNavigation,
+              );
+              addChatMessage({ role: 'assistant', content: transit.reply });
+              await presentConciergeResponse({
+                ...structured,
+                speechText: withSide(transit.reply),
+              }, { userText: text });
+            } finally {
+              if (stillCurrent(epoch)) setIsGenerating(false);
+            }
+            return;
+          }
+        }
+
+        if (!stillCurrent(epoch)) return;
+
+        // Modul 2 Greenfield Pipeline (nur Main Board)
+        setIsGenerating(true);
+        try {
+          const turnId = `m2_${epoch}_${Date.now()}`;
+          const ac = new AbortController();
+          const result = await runModule2Pipeline({
+            userText: text,
+            turnId,
+            signal: ac.signal,
+          });
+          if (!stillCurrent(epoch)) {
+            ac.abort();
+            return;
+          }
+          if (result.logic.spokenDraft) {
+            void withSide(result.logic.spokenDraft);
+          }
+        } catch (err) {
+          console.warn('[module2] pipeline failed', err);
+          const fallback =
+            'Da ist kurz etwas schiefgelaufen. Versuch es noch einmal — ich bleibe dran.';
+          addChatMessage({ role: 'assistant', content: fallback });
+          await speakPlain(withSide(fallback), epoch);
+        } finally {
+          if (stillCurrent(epoch)) setIsGenerating(false);
+        }
       } finally {
-        setIsGenerating(false);
+        onUserInputEnd();
       }
     },
-    [addChatMessage, setIsGenerating],
+    [addChatMessage, setIsGenerating, speakPlain, stillCurrent],
   );
 
-  const onPressIn = useCallback(() => {
-    if (isGenerating || pressModeRef.current !== 'idle') return;
+  const finalizeVoiceCapture = useCallback(() => {
+    const mode = pressModeRef.current;
+    if (mode !== 'voice' && mode !== 'locked') {
+      if (!isCurrentlyListening() && !isListening) {
+        pressModeRef.current = 'idle';
+        setIsMicLocked(false);
+        return;
+      }
+    }
 
+    let calendarOpen = false;
+    try {
+      const {
+        usePlanCalendarUiStore,
+      } = require('../module2/timeline/planCalendarUiStore') as {
+        usePlanCalendarUiStore: {
+          getState: () => { calendarVisible: boolean };
+        };
+      };
+      calendarOpen = usePlanCalendarUiStore.getState().calendarVisible;
+    } catch {
+      calendarOpen = false;
+    }
+
+    pressModeRef.current = 'idle';
+    setIsMicLocked(false);
+    setIsListening(false);
+    setIsFinalizing(true);
+
+    try {
+      const { latencyStartTurn } = require('../services/debug/latencyTiming') as {
+        latencyStartTurn: (meta?: string) => string | null;
+      };
+      latencyStartTurn('mic_off');
+    } catch {
+      /* soft */
+    }
+
+    void (async () => {
+      try {
+        if (!interruptCommittedRef.current) {
+          await interruptFindusForMic();
+        }
+
+        const peekedBeforeStop = peekListeningTranscript();
+        const fromPartial = partialTextRef.current.trim();
+        const transcript = await stopListening({
+          tailMs: STT_TAIL_MS,
+          finalizeMs: STT_FINALIZE_MS,
+        });
+        const text = (
+          transcript.trim() ||
+          fromPartial ||
+          peekedBeforeStop
+        ).trim();
+        recordUserSpeechExact(text || transcript, Date.now());
+        if (!text) {
+          try {
+            const { latencyAbortTurn } = require('../services/debug/latencyTiming') as {
+              latencyAbortTurn: () => void;
+            };
+            latencyAbortTurn();
+          } catch {
+            /* soft */
+          }
+          setIsGenerating(false);
+          if (calendarOpen) {
+            try {
+              const { enqueueSpeech } = require('../module2/speech/speechQueue') as {
+                enqueueSpeech: (o: {
+                  kind: string;
+                  text: string;
+                  turnId: string;
+                }) => void;
+              };
+              enqueueSpeech({
+                kind: 'main',
+                text: 'Hab dich nicht verstanden — nochmal kurz halten und sprechen.',
+                turnId: `mic_empty_${Date.now()}`,
+              });
+            } catch {
+              /* soft */
+            }
+          }
+          return;
+        }
+        console.log(
+          `[voice] submit (${calendarOpen ? 'timeline' : 'main'}):`,
+          text.slice(0, 120),
+        );
+        await submitUserQuestion(text);
+      } finally {
+        setIsFinalizing(false);
+        setIsListening(false);
+        setIsMicLocked(false);
+        setPartialText('');
+        partialTextRef.current = '';
+        voiceStartedAtRef.current = 0;
+        pressStartedAtRef.current = 0;
+        provisionalPausedRef.current = false;
+        interruptCommittedRef.current = false;
+      }
+    })();
+  }, [
+    interruptFindusForMic,
+    isListening,
+    setIsGenerating,
+    setIsListening,
+    submitUserQuestion,
+  ]);
+
+  const onPressIn = useCallback(() => {
+    try {
+      const live = require('../services/handsFree/liveChatSession') as {
+        isLiveChatActive: () => boolean;
+        stopLiveChatSession: (r?: string) => Promise<void>;
+      };
+      if (live.isLiveChatActive()) {
+        skipNextPressOutRef.current = true;
+        void live.stopLiveChatSession('mic_tap');
+        setIsMicLocked(false);
+        setIsListening(false);
+        return;
+      }
+    } catch {
+      /* soft */
+    }
+    // Fixiert: Tippen = Aufnahme beenden & senden
+    if (pressModeRef.current === 'locked') {
+      skipNextPressOutRef.current = true;
+      finalizeVoiceCapture();
+      return;
+    }
+    if (pressModeRef.current !== 'idle') return;
+
+    const profile = getCachedUserProfile();
+    if (profile?.micListenMode === 'dont_hear') {
+      onShortPress?.();
+      return;
+    }
+
+    // Warmup schon beim Tippen (TTS/Aussprache) — auch bei Kurz-Tipp ok
+    try {
+      const { warmupAiOnMicPress } = require('../services/speech/micWarmup') as {
+        warmupAiOnMicPress: () => void;
+      };
+      warmupAiOnMicPress();
+    } catch {
+      /* soft */
+    }
+
+    provisionalPausedRef.current = false;
+    interruptCommittedRef.current = false;
+    pressStartedAtRef.current = Date.now();
     pressModeRef.current = 'pending';
+    setIsMicLocked(false);
     setPartialText('');
 
     clearHoldTimer();
+    clearCommitTimer();
     holdTimerRef.current = setTimeout(() => {
       holdTimerRef.current = null;
       if (pressModeRef.current !== 'pending') return;
       pressModeRef.current = 'voice';
       void beginVoiceSession();
+      // Nach 2 s Hold: Interrupt fest committen (Denken/Pipeline ok)
+      const remaining = Math.max(
+        0,
+        MIN_VOICE_MS - (Date.now() - pressStartedAtRef.current),
+      );
+      commitTimerRef.current = setTimeout(() => {
+        commitTimerRef.current = null;
+        if (
+          pressModeRef.current !== 'voice' &&
+          pressModeRef.current !== 'locked'
+        ) {
+          return;
+        }
+        void interruptFindusForMic();
+      }, remaining);
     }, HOLD_THRESHOLD_MS);
-  }, [beginVoiceSession, clearHoldTimer, isGenerating]);
+  }, [
+    beginVoiceSession,
+    clearCommitTimer,
+    clearHoldTimer,
+    finalizeVoiceCapture,
+    interruptFindusForMic,
+    onShortPress,
+  ]);
+
+  /** Nach rechts wischen während Hold → Hände frei, Mikro bleibt an. */
+  const onSwipeLock = useCallback(() => {
+    const mode = pressModeRef.current;
+    if (mode !== 'voice' && mode !== 'pending') return;
+    // Falls Hold-Timer noch nicht gefeuert: sofort Voice starten
+    if (mode === 'pending') {
+      clearHoldTimer();
+      pressModeRef.current = 'voice';
+      void beginVoiceSession();
+    }
+    pressModeRef.current = 'locked';
+    setIsMicLocked(true);
+    clearCommitTimer();
+    void markMicLockUsed();
+    void interruptFindusForMic();
+  }, [
+    beginVoiceSession,
+    clearCommitTimer,
+    clearHoldTimer,
+    interruptFindusForMic,
+  ]);
+
+  /** Nach links wischen → Live-Chat (Mikro bleibt an, Gesprächsfenster). */
+  const onSwipeLiveChat = useCallback(() => {
+    const profile = getCachedUserProfile();
+    if (profile?.micListenMode === 'dont_hear') return;
+
+    skipNextPressOutRef.current = true;
+    clearHoldTimer();
+    clearCommitTimer();
+    pressModeRef.current = 'idle';
+    setIsMicLocked(false);
+    setIsListening(false);
+    setPartialText('');
+
+    void (async () => {
+      try {
+        await stopListening({ tailMs: 0, finalizeMs: 200 });
+      } catch {
+        /* soft */
+      }
+      try {
+        const { startLiveChatSession } = await import(
+          '../services/handsFree/liveChatSession'
+        );
+        const r = await startLiveChatSession('swipe_left');
+        if (!r.ok && __DEV__) {
+          console.warn('[liveChat] swipe start failed:', r.message);
+        }
+      } catch (err) {
+        console.warn('[liveChat] swipe start error:', err);
+      }
+    })();
+  }, [clearCommitTimer, clearHoldTimer]);
+
+  /**
+   * Hands-free: Notification / Deep-Link / Assistent → Mikro locked starten + Cue.
+   */
+  const startHandsFreeListen = useCallback(() => {
+    const profile = getCachedUserProfile();
+    if (profile?.micListenMode === 'dont_hear') return;
+
+    try {
+      const {
+        isLiveChatActive,
+      } = require('../services/handsFree/liveChatSession') as {
+        isLiveChatActive: () => boolean;
+      };
+      if (isLiveChatActive()) return;
+    } catch {
+      /* soft */
+    }
+
+    // Schon am Sprechen / fixiert → nichts doppelt starten
+    if (
+      pressModeRef.current === 'voice' ||
+      pressModeRef.current === 'locked' ||
+      pressModeRef.current === 'pending'
+    ) {
+      if (pressModeRef.current === 'voice') {
+        pressModeRef.current = 'locked';
+        setIsMicLocked(true);
+      }
+      return;
+    }
+
+    void (async () => {
+      try {
+        const { playMicStartCue } = await import(
+          '../services/handsFree/micStartCue'
+        );
+        await playMicStartCue();
+      } catch {
+        /* soft */
+      }
+      try {
+        const { warmupAiOnMicPress } = require('../services/speech/micWarmup') as {
+          warmupAiOnMicPress: () => void;
+        };
+        warmupAiOnMicPress();
+      } catch {
+        /* soft */
+      }
+
+      provisionalPausedRef.current = false;
+      interruptCommittedRef.current = false;
+      pressStartedAtRef.current = Date.now();
+      clearHoldTimer();
+      clearCommitTimer();
+      // locked: wie Swipe-Lock — Finger/PressOut beendet die Aufnahme nicht
+      pressModeRef.current = 'locked';
+      setIsMicLocked(true);
+      setPartialText('');
+      void beginVoiceSession();
+      void markMicLockUsed();
+      void interruptFindusForMic();
+    })();
+  }, [
+    beginVoiceSession,
+    clearCommitTimer,
+    clearHoldTimer,
+    interruptFindusForMic,
+  ]);
+
+  useEffect(() => {
+    let unsubBus: (() => void) | undefined;
+    void import('../services/handsFree/handsFreeBus').then((m) => {
+      m.registerHandsFreeListenHandler(() => {
+        void (async () => {
+          try {
+            const live = await import('../services/handsFree/liveChatSession');
+            const entered = await live.maybeStartLiveChatFromHandsFree();
+            if (entered) return;
+          } catch {
+            /* soft */
+          }
+          startHandsFreeListen();
+        })();
+      });
+      unsubBus = () => m.registerHandsFreeListenHandler(null);
+    });
+    return () => {
+      unsubBus?.();
+    };
+  }, [startHandsFreeListen]);
+
+  // Live-Chat: Submit-Handler + Phase → Mic-Lock UI
+  useEffect(() => {
+    let unsub: (() => void) | undefined;
+    void import('../services/handsFree/liveChatSession').then((live) => {
+      live.registerLiveChatHandlers({
+        submitUserQuestion: (text) => submitUserQuestion(text),
+        onPhaseChange: (phase) => {
+          if (phase === 'idle') {
+            setIsMicLocked(false);
+            setIsListening(false);
+            return;
+          }
+          setIsMicLocked(true);
+          setIsListening(phase === 'listening' || phase === 'processing');
+        },
+        onWakeOnly: () => {
+          try {
+            const { playMicStartCue } = require('../services/handsFree/micStartCue') as {
+              playMicStartCue: () => Promise<void>;
+            };
+            void playMicStartCue();
+          } catch {
+            /* soft */
+          }
+        },
+      });
+      unsub = live.subscribeLiveChat((on, phase) => {
+        if (!on || phase === 'idle') {
+          setIsMicLocked(false);
+          return;
+        }
+        setIsMicLocked(true);
+      });
+    });
+    return () => {
+      unsub?.();
+      void import('../services/handsFree/liveChatSession').then((live) => {
+        live.registerLiveChatHandlers(null);
+      });
+    };
+  }, [submitUserQuestion]);
 
   const onPressOut = useCallback(() => {
+    if (skipNextPressOutRef.current) {
+      skipNextPressOutRef.current = false;
+      return;
+    }
     const mode = pressModeRef.current;
+    const totalHeldMs = Date.now() - (pressStartedAtRef.current || Date.now());
     clearHoldTimer();
+    clearCommitTimer();
+
+    // Fixiert: Finger loslassen ändert nichts — Mikro läuft weiter
+    if (mode === 'locked') {
+      return;
+    }
+
+    let calendarOpen = false;
+    try {
+      const {
+        usePlanCalendarUiStore,
+      } = require('../module2/timeline/planCalendarUiStore') as {
+        usePlanCalendarUiStore: {
+          getState: () => { calendarVisible: boolean };
+        };
+      };
+      calendarOpen = usePlanCalendarUiStore.getState().calendarVisible;
+    } catch {
+      calendarOpen = false;
+    }
+
+    const store = useFinnusStore.getState();
+    const findusBusy =
+      store.isAudiblySpeaking || store.isPlayingAudio || store.isGenerating;
+
+    // Unter 2 s: Kurz-Tipp / Abbruch — außer Aufnahme läuft schon und
+    // (Timeline offen ODER Findus war still) → dann trotzdem finalisieren.
+    if (totalHeldMs < MIN_VOICE_MS) {
+      if (mode === 'pending') {
+        // Kurz-Tipp — Findus wurde nie unterbrochen
+        pressModeRef.current = 'idle';
+        pressStartedAtRef.current = 0;
+        void markMicTapUsed();
+        onShortPress?.();
+        return;
+      }
+      const voiceReady =
+        mode === 'voice' || isCurrentlyListening() || isListening;
+      const allowEarlySubmit = voiceReady && (calendarOpen || !findusBusy);
+      if (!allowEarlySubmit) {
+        // Halblanger Press während Findus spricht: soft-Mute rückgängig
+        void abortProvisionalMic();
+        return;
+      }
+      // fall through → STT finalisieren & senden
+    }
 
     if (mode === 'pending') {
+      // Theoretisch ≥2 s aber noch pending (Timer lag) — als Kurz-Tipp
       pressModeRef.current = 'idle';
+      void markMicTapUsed();
       onShortPress?.();
       return;
     }
@@ -484,38 +1376,26 @@ Der User stellt eine Rückfrage. Fülle speechText für die Stimme — visualBul
       return;
     }
 
-    pressModeRef.current = 'idle';
-
-    void (async () => {
-      setIsFinalizing(true);
-      try {
-        const transcript = await stopListening({
-          tailMs: STT_TAIL_MS,
-          finalizeMs: STT_FINALIZE_MS,
-        });
-        const text = transcript.trim();
-        if (!text) return;
-        await submitUserQuestion(text);
-      } finally {
-        setIsFinalizing(false);
-        setIsListening(false);
-        setPartialText('');
-        partialTextRef.current = '';
-      }
-    })();
+    finalizeVoiceCapture();
   }, [
+    abortProvisionalMic,
+    clearCommitTimer,
     clearHoldTimer,
+    finalizeVoiceCapture,
     isListening,
     onShortPress,
-    setIsListening,
-    submitUserQuestion,
   ]);
 
   return {
     onPressIn,
     onPressOut,
+    onSwipeLock,
+    onSwipeLiveChat,
+    startHandsFreeListen,
     partialText,
-    isListening: isListening || isFinalizing,
+    /** Nur echte Aufnahme — Finalizing ist Blau (thinking), nicht Rot. */
+    isListening,
+    isMicLocked,
     isFinalizing,
     isGenerating,
     submitUserQuestion,

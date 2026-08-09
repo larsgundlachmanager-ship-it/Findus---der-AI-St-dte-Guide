@@ -23,15 +23,26 @@ import {
   resolveAndStartNavigation,
 } from '../navigation/resolveNavTarget';
 import {
+  isExplicitNavIntent,
+  shouldBlockAutoNavigation,
+} from '../intent/poiInfoVsNav';
+import {
   buildBounceLuggageAction,
   buildCarRentalAction,
+  buildEsimAction,
   buildStay22AccommodationAction,
+  buildExpediaAccommodationAction,
   buildTourBookingAction,
+  buildTravelInsuranceAction,
+  buildTravelpayoutsCategoryAction,
   looksLikeFakeTourSlug,
   buildGetYourGuideSearchUrl,
   normalizeAffiliateUrl,
   isBounceAvailableForCity,
 } from '../affiliate/affiliateService';
+
+const TOUR_PARTNER_URL_RE =
+  /getyourguide|musement|viator|tripadvisor|klook|tiqets|kkday|wegotrip|gocity/i;
 import {
   MAX_QUICK_ACTIONS,
   MAX_EVENT_QUICK_ACTIONS,
@@ -63,11 +74,14 @@ import {
 } from '../../runtime/reservationIntel';
 import {
   speechAdmitsNoActionableData,
+  stripFakeReservationClaims,
   stripUnbackedActions,
 } from './zeroFakeActions';
 import { recordFindusActionsTriggered } from '../feedback/executionTracking';
 import { applyHardGuardrails } from '../agi/speechGuardrails';
 import { applyActionButtonJudge } from '../agi/actionButtonJudge';
+import { shortenActionLabel } from './actionLabelShorten';
+import { buildNamedBookingPortalActions } from './bookingPlatformActions';
 
 function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
@@ -84,10 +98,13 @@ async function waitUntilVoicePlaying(timeoutMs = 4000): Promise<boolean> {
 
 export function toConciergeCardState(
   response: GeminiConciergeResponse,
+  opts?: { id?: string },
 ): ConciergeCardState {
   return {
     ...response,
-    id: `cc_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
+    id:
+      opts?.id ??
+      `cc_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     createdAtMs: Date.now(),
   };
 }
@@ -104,7 +121,7 @@ export function speechCommitsToNavigation(speech: string): boolean {
     /\b(kompass|navigation|route|führ|fuehr|hinnavig|anmachen)\b/iu.test(t);
 
   const commits =
-    /\b(ich\s+(führ|fuehr|bring|schalt|mach|start)(?:e|en)?|folge(?:\s+\w+){0,3}\s+dem\s+pfeil|kompass\s+(?:ist\s+)?(?:an|aktiv)|navigation\s+(?:startet|läuft|laeuft|ist\s+an)|schalt(?:e|)\s+(?:dir\s+)?(?:sofort\s+)?den\s+kompass|mach(?:e|)\s+(?:dir\s+)?(?:sofort\s+)?den\s+kompass|route\s+(?:startet|läuft|laeuft)|gleich\s+los|direkt\s+los)\b/iu.test(
+    /\b(ich\s+starte\s+die\s+navigation|ich\s+(führ|fuehr|bring|schalt|mach|start)(?:e|en)?|folge(?:\s+\w+){0,3}\s+dem\s+pfeil|kompass\s+(?:ist\s+)?(?:an|aktiv)|navigation\s+(?:startet|läuft|laeuft|ist\s+an)|schalt(?:e|)\s+(?:dir\s+)?(?:sofort\s+)?den\s+kompass|mach(?:e|)\s+(?:dir\s+)?(?:sofort\s+)?den\s+kompass|route\s+(?:startet|läuft|laeuft)|gleich\s+los|direkt\s+los)\b/iu.test(
       t,
     );
 
@@ -133,15 +150,40 @@ async function attachCityMapAction(
  */
 export async function autoStartNavigationIfCommitted(
   response: GeminiConciergeResponse,
-  opts?: { skipAutoNav?: boolean; userText?: string },
+  opts?: {
+    skipAutoNav?: boolean;
+    userText?: string;
+    /** Reboot Fact-Lane: Unique-Amenity / Just-Do-It — Speech-Heuristik überspringen */
+    forceAutoNav?: boolean;
+  },
 ): Promise<boolean> {
   if (opts?.skipAutoNav) return false;
-  // Tagesplan-Fragen dürfen nie den Kompass starten
-  if (opts?.userText && /\b(plan|ablauf|wie\s+sieht)\b/iu.test(opts.userText)) {
-    const { isDayPlanQuery } = await import('../intent/poiInfoVsNav');
-    if (isDayPlanQuery(opts.userText)) return false;
-  }
   const store = useFinnusStore.getState();
+  const userText = (opts?.userText ?? '').replace(/\s+/g, ' ').trim();
+  const force = opts?.forceAutoNav === true;
+
+  // Reine Faktenfragen nie auto-nav — außer Fact-Lane erzwingt Unique-Ziel
+  if (userText && shouldBlockAutoNavigation(userText) && !force) return false;
+
+  // Kalender offen / pending choice: nie auto-nav — außer User sagt „jetzt sofort los“
+  try {
+    const { usePlanCalendarUiStore } = require('../../module2/timeline/planCalendarUiStore') as {
+      usePlanCalendarUiStore: {
+        getState: () => { openRequestAtMs: number | null; pendingChoice: unknown };
+      };
+    };
+    const planUi = usePlanCalendarUiStore.getState();
+    const planningOn = planUi.pendingChoice != null;
+    const userNow =
+      userText &&
+      /\b(jetzt\s+sofort\s+los|jetzt\s+navigier|sofort\s+navigier|jetzt\s+starten)\b/i.test(
+        userText,
+      );
+    if (planningOn && !userNow) return false;
+  } catch {
+    /* soft */
+  }
+
   const navActions = response.quickActions.filter(
     (a) => a.type === 'START_NAVIGATION',
   );
@@ -151,17 +193,55 @@ export async function autoStartNavigationIfCommitted(
       response.speechText,
     );
   const onlyAsking =
-    /\b(soll\s+ich|darf\s+ich|wollen\s+wir|möchtest\s+du)\b/iu.test(
+    /\b(soll\s+ich|darf\s+ich|sollen\s+wir|wollen\s+wir|möchtest\s+du|moechtest\s+du|willst\s+du)\b/iu.test(
       response.speechText,
     ) && !commits;
 
   const singleTargetGo =
     navActions.length === 1 && mentionsNav && !onlyAsking;
 
-  if (!commits && !singleTargetGo) return false;
+  // Einziger Amenity-Treffer (Aldi etc.): Speech sagt „nur einen / Route startet“
+  const uniqueAmenityGo =
+    navActions.length === 1 &&
+    !onlyAsking &&
+    /\b(nur\s+einen|einzige[rn]?|führ\s+dich\s+hin|route\s+startet|ich\s+führ\s+dich)\b/iu.test(
+      response.speechText,
+    );
 
-  // Laufende Navigation nicht durch Rückfragen neu starten
-  if (store.navActive && !commits) return false;
+  // Explizites „navigiere mich…“ → Just-Do-It, auch wenn Speech noch fragt
+  const userExplicit = userText.length > 0 && isExplicitNavIntent(userText);
+
+  if (
+    !force &&
+    !commits &&
+    !singleTargetGo &&
+    !uniqueAmenityGo &&
+    !userExplicit
+  ) {
+    return false;
+  }
+  if (
+    !force &&
+    userExplicit &&
+    navActions.length === 0 &&
+    !store.pendingNavOffer
+  ) {
+    return false;
+  }
+  if (force && navActions.length === 0 && !store.pendingNavOffer) {
+    return false;
+  }
+
+  // Laufende Nav: keine Rückfragen neu starten — Unique-Amenity/Force darf einweben
+  if (
+    store.navActive &&
+    !commits &&
+    !userExplicit &&
+    !uniqueAmenityGo &&
+    !force
+  ) {
+    return false;
+  }
 
   const navAction = navActions[0];
   const offer = store.pendingNavOffer;
@@ -186,7 +266,7 @@ export async function autoStartNavigationIfCommitted(
 
   if (__DEV__) {
     console.log(
-      `[concierge] auto-start nav via=${started.via} name=${started.name} ok=true`,
+      `[concierge] auto-start nav via=${started.via} name=${started.name} ok=true explicit=${userExplicit}`,
     );
   }
   return true;
@@ -389,16 +469,23 @@ export async function enrichWithConciergeOffers(
             );
             if (!exists) actions.push(a);
           }
-          // Ensure Speisekarte / Reservieren labels are clear
+          // Speisekarte / Reservieren: Emoji + Kurzlabel (max 20)
           actions = actions.map((a) => {
-            if (a.type === 'OPEN_URL' && /speisekarte|menu|karte/i.test(a.label)) {
-              return { ...a, label: '🍽 Speisekarte' };
+            if (a.type === 'OPEN_URL' && /speisekarte|menu|karte|🍽/i.test(a.label)) {
+              const name =
+                a.payload.destName?.trim() ||
+                offer.name ||
+                a.label.replace(/^🍽\s*|Speisekarte\s*/iu, '').trim();
+              const label = shortenActionLabel(
+                name ? `🍽 ${name}` : '🍽 Karte',
+              );
+              return { ...a, label };
             }
             if (a.type === 'CONFIRM_API_RESERVATION') {
-              return { ...a, label: '🍽 Tisch reservieren' };
+              return { ...a, label: shortenActionLabel('🍽 Tisch') };
             }
             if (a.type === 'SEND_RESERVATION_EMAIL') {
-              return { ...a, label: '🍽 Tisch anfragen' };
+              return { ...a, label: shortenActionLabel('🍽 Anfragen') };
             }
             return a;
           });
@@ -590,20 +677,182 @@ export async function enrichWithConciergeOffers(
       }
     }
   } else {
-    // Kein Bounce vor Ort — Partner-Button entfernen
+    // Kein Bounce vor Ort — Radical Storage (Travelpayouts) als Fallback
     for (let i = actions.length - 1; i >= 0; i--) {
       if (actions[i]?.type === 'BOOK_BOUNCE_LUGGAGE') actions.splice(i, 1);
+    }
+    if (
+      /\b(gepäck|gepaeck|kofferfrei|aufbewahrung|früheincheck|frueheincheck|spätabflug|spaetabflug)\b/iu.test(
+        response.speechText,
+      )
+    ) {
+      const hasLuggageUrl = actions.some(
+        (a) =>
+          a.type === 'OPEN_URL' &&
+          /radicalstorage|bounce/i.test(a.payload.url ?? ''),
+      );
+      if (!hasLuggageUrl) {
+        actions.push(buildTravelpayoutsCategoryAction('luggage'));
+      }
+    }
+  }
+
+  // eSIM (Airalo via Travelpayouts)
+  const offerEsim =
+    actions.some((a) => a.type === 'BOOK_ESIM') ||
+    /\b(esim|e-sim|roaming|daten\s*ausland|internet\s*ausland|sim\s*karte)\b/iu.test(
+      response.speechText,
+    );
+  if (offerEsim) {
+    const esimIdx = actions.findIndex((a) => a.type === 'BOOK_ESIM');
+    const esimAction = buildEsimAction();
+    if (esimAction) {
+      if (esimIdx >= 0) {
+        actions[esimIdx] = {
+          ...actions[esimIdx],
+          label: actions[esimIdx].label || esimAction.label,
+          payload: {
+            ...actions[esimIdx].payload,
+            url: esimAction.payload.url,
+          },
+        };
+      } else {
+        actions.push(esimAction);
+      }
+    }
+  }
+
+  // Flughafen-Transfer
+  const offerTransfer =
+    /\b(flughafen[\s-]?transfer|airport\s*transfer|abholung\s*(am\s*)?flughafen|welcome\s*pickups?|kiwitaxi|gettransfer|shuttle\s*flughafen)\b/iu.test(
+      response.speechText,
+    ) ||
+    actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /welcomepickups|gettransfer|kiwitaxi|intui\.travel/i.test(
+          a.payload.url ?? '',
+        ),
+    );
+  if (offerTransfer) {
+    const hasTransfer = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /welcomepickups|gettransfer|kiwitaxi|intui|tpx\.li\/Ex0uoBGe/i.test(
+          a.payload.url ?? '',
+        ),
+    );
+    if (!hasTransfer) {
+      actions.push(buildTravelpayoutsCategoryAction('transfer'));
+    }
+  }
+
+  // Flüge (Kiwi.com via Travelpayouts — Primär)
+  const offerFlights =
+    /\b(flug\s*suchen|flüge\s*suchen|flug\s*buchen|flugticket|billigflug|kiwi\.com|\bkiwi\b|aviasales|hin[\s-]?und[\s-]?rückflug|flug\s+nach)\b/iu.test(
+      response.speechText,
+    );
+  if (offerFlights) {
+    const hasFlight = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /kiwi\.com|c111\.travelpayouts\.com|aviasales|tpx\.li\/zk7udfoO/i.test(
+          a.payload.url ?? '',
+        ),
+    );
+    if (!hasFlight) {
+      actions.push(buildTravelpayoutsCategoryAction('flights'));
+    }
+  }
+
+  // Flug-Entschädigung
+  const offerCompensation =
+    /\b(flugentschädigung|fluggastrecht|annulliert|annullierung|überbuchung|ueberbuchung|airhelp|compensair|verspätung.{0,40}entschädig)\b/iu.test(
+      response.speechText,
+    );
+  if (offerCompensation) {
+    const hasComp = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /airhelp|compensair/i.test(a.payload.url ?? ''),
+    );
+    if (!hasComp) {
+      actions.push(buildTravelpayoutsCategoryAction('compensation'));
+    }
+  }
+
+  // Bike / Scooter mieten — genannte Portale (Mietrad) vor generischem BikesBooking
+  for (const a of buildNamedBookingPortalActions({
+    speech: response.speechText,
+    webResearch: ctx?.webResearch,
+    existing: actions,
+  })) {
+    actions.push(a);
+  }
+
+  const offerBike =
+    /\b(motorrad\s*mieten|roller\s*mieten|scooter\s*mieten|fahrrad\s*mieten|bikesbooking|vespa\s*mieten|fahrradverleih|radverleih|e-?bike\s*mieten)\b/iu.test(
+      response.speechText,
+    );
+  const hasNamedBikePortal = actions.some(
+    (a) =>
+      a.type === 'OPEN_URL' && /mietrad\.de/i.test(a.payload.url ?? ''),
+  );
+  if (offerBike && !hasNamedBikePortal) {
+    const hasBike = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' && /bikesbooking/i.test(a.payload.url ?? ''),
+    );
+    if (!hasBike) {
+      actions.push(buildTravelpayoutsCategoryAction('bike'));
+    }
+  }
+
+  // City Pass
+  const offerCityPass =
+    /\b(city\s*pass|stadtkarte|sightseeing\s*pass|go\s*city)\b/iu.test(
+      response.speechText,
+    );
+  if (offerCityPass) {
+    const hasPass = actions.some(
+      (a) => a.type === 'OPEN_URL' && /gocity/i.test(a.payload.url ?? ''),
+    );
+    if (!hasPass) {
+      actions.push(buildTravelpayoutsCategoryAction('city_pass'));
+    }
+  }
+
+  // Reiseversicherung — TravelSecure (AWIN)
+  const offerInsurance =
+    /\b(reiseversicherung|travel\s*insurance|auslandsversicherung|travelsecure)\b/iu.test(
+      response.speechText,
+    );
+  if (offerInsurance) {
+    const hasIns = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /travelsecure|awin1\.com.*106517|ektatraveling/i.test(
+          a.payload.url ?? '',
+        ),
+    );
+    if (!hasIns) {
+      actions.push(buildTravelInsuranceAction());
     }
   }
 
   const offerStay22 =
     !ctx?.namedDestination &&
+    ctx?.kind !== 'food' &&
+    ctx?.kind !== 'reservation' &&
+    !actions.some((a) => a.type === 'DIAL_PHONE') &&
     (ctx?.wantsStay22 === true ||
       actions.some((a) => a.type === 'BOOK_STAY22') ||
       (/\b(hotel|ferienwohnung|apartment|unterkunft|übernacht|uebernacht|stay22)\b/iu.test(
         response.speechText,
       ) &&
-        !/\b(führ|fuehr|bring|navigier|route\s+zu)\b/iu.test(response.speechText)));
+        !/\b(führ|fuehr|bring|navigier|route\s+zu|burger|restaurant|essen|frühstück|fruehstueck|reservier|anrufen|telefon)\b/iu.test(
+          response.speechText,
+        )));
 
   if (offerStay22) {
     const existing = actions.find((a) => a.type === 'BOOK_STAY22');
@@ -620,6 +869,16 @@ export async function enrichWithConciergeOffers(
     const stayAction = buildStay22AccommodationAction(safeDest);
     stayAction.label = '🏨 Mehr Unterkünfte';
     const stayIdx = actions.findIndex((a) => a.type === 'BOOK_STAY22');
+    // Primär Expedia (Partnerize) — höhere Hotel-Marge als Stay22
+    const expediaAction = buildExpediaAccommodationAction(safeDest);
+    const hasExpedia = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /expedia\.(com|de)\b/i.test(a.payload.url ?? ''),
+    );
+    if (!hasExpedia) {
+      actions.unshift(expediaAction);
+    }
     if (stayIdx >= 0) {
       actions[stayIdx] = {
         ...actions[stayIdx],
@@ -630,9 +889,8 @@ export async function enrichWithConciergeOffers(
           destination: safeDest,
         },
       };
-    } else {
-      actions.push(stayAction);
     }
+    // Stay22 nur behalten wenn LLM ihn schon gesetzt hat — sonst Expedia reicht
   } else {
     actions = actions.filter((a) => a.type !== 'BOOK_STAY22');
   }
@@ -658,20 +916,21 @@ export async function enrichWithConciergeOffers(
     });
   }
 
-  // Tour-Partner: Fake-Slugs → Suche; Intent → preferTicketSource / OPEN_URL
-  const offerTours =
-    ctx?.wantsTours === true ||
-    actions.some(
-      (a) =>
-        a.type === 'OPEN_GYG_WIDGET' ||
-        (a.type === 'OPEN_URL' &&
-          /getyourguide|musement|viator|tripadvisor/i.test(
-            a.payload.url ?? a.payload.gygTourSlug ?? '',
-          )),
-    ) ||
-    /\b(tour|museum|ausflug|stadtführung|stadtfuehrung|getyourguide|musement|viator)\b/iu.test(
+  // Tour-Partner nur bei klarem Ticket-/Tour-Intent — nicht bei reiner Geschichts-Rede
+  const speechWantsTickets =
+    /\b(ticket|tickets|eintritt|buchen|tour(?:en)?|getyourguide|musement|viator|klook|tiqets|kkday|wegotrip)\b/iu.test(
       response.speechText,
     );
+  const hasExistingTourLink = actions.some(
+    (a) =>
+      a.type === 'OPEN_GYG_WIDGET' ||
+      (a.type === 'OPEN_URL' &&
+        TOUR_PARTNER_URL_RE.test(
+          a.payload.url ?? a.payload.gygTourSlug ?? '',
+        )),
+  );
+  const offerTours =
+    ctx?.wantsTours === true || hasExistingTourLink || speechWantsTickets;
 
   const city =
     ctx?.tourDestination?.trim() ||
@@ -728,9 +987,10 @@ export async function enrichWithConciergeOffers(
       (a) =>
         a.type === 'OPEN_GYG_WIDGET' ||
         (a.type === 'OPEN_URL' &&
-          /getyourguide|musement|viator|tripadvisor/i.test(a.payload.url ?? '')),
+          TOUR_PARTNER_URL_RE.test(a.payload.url ?? '')),
     );
-    if (!hasTourLink) {
+    // Keine leeren AWIN/Tiqets-/Musement-Such-Buttons ohne echten Buchungspfad
+    if (!hasTourLink && (ctx?.wantsTours === true || speechWantsTickets)) {
       const tourAction = buildTourBookingAction({
         kind:
           ctx?.tourKind === 'museum'
@@ -741,7 +1001,14 @@ export async function enrichWithConciergeOffers(
         city: city || undefined,
         query: city || undefined,
       });
-      actions.push(tourAction);
+      const tourUrl = tourAction.payload.url ?? '';
+      const isBareSearch =
+        /\/search\/?\?/i.test(tourUrl) ||
+        (/awin1\.com\/cread\.php/i.test(tourUrl) &&
+          /tiqets\.com.*(search|%2Fsearch)/i.test(tourUrl));
+      if (!isBareSearch) {
+        actions.push(tourAction);
+      }
     }
   }
 
@@ -749,13 +1016,35 @@ export async function enrichWithConciergeOffers(
   if (offerStay22) primaryIntent.push('BOOK_STAY22');
   if (offerBounce) primaryIntent.push('BOOK_BOUNCE_LUGGAGE');
   if (offerCar) primaryIntent.push('BOOK_CAR_RENTAL');
-  if (offerTours) {
+  if (offerEsim) primaryIntent.push('BOOK_ESIM');
+  if (
+    offerTours ||
+    offerTransfer ||
+    offerFlights ||
+    offerCompensation ||
+    offerBike ||
+    offerCityPass ||
+    offerInsurance
+  ) {
     primaryIntent.push('OPEN_URL', 'OPEN_GYG_WIDGET');
   }
 
   // Allgemeine „was geht“-Tipps: nur Nav-Chips — Partner/Playlist nicht mitfluten.
   // Event-Recherche: OPEN_URL (PDF/Flyer/Tickets) behalten.
-  if (ctx?.kind === 'general' && !offerCar && !offerBounce && !offerStay22 && !offerTours) {
+  if (
+    ctx?.kind === 'general' &&
+    !offerCar &&
+    !offerBounce &&
+    !offerStay22 &&
+    !offerTours &&
+    !offerEsim &&
+    !offerTransfer &&
+    !offerFlights &&
+    !offerCompensation &&
+    !offerBike &&
+    !offerCityPass &&
+    !offerInsurance
+  ) {
     const keepEventUrls = Boolean(ctx.eventResearch?.events?.length);
     actions = actions.filter(
       (a) =>
@@ -898,17 +1187,31 @@ export function transitAdviceToConcierge(
     const h = first.when.getHours().toString().padStart(2, '0');
     const m = first.when.getMinutes().toString().padStart(2, '0');
     const status = formatDelayStatus(first);
-    // Ein kompakter Stichpunkt reicht oft: Zug + Zeit + Status + Richtung
     bullets.push(
       `${first.line} ${h}:${m} · ${status} → ${first.direction}`,
     );
+  }
+
+  if (advice.arrivalWhen && advice.arrivalLabel) {
+    const ah = advice.arrivalWhen.getHours().toString().padStart(2, '0');
+    const am = advice.arrivalWhen.getMinutes().toString().padStart(2, '0');
+    bullets.push(`Ankunft ${advice.arrivalLabel} ${ah}:${am}`);
+  } else if (first) {
+    bullets.push(`Haltestelle ${advice.stationName}`);
+  }
+
+  if (advice.walkMinutes >= 1 && bullets.length < 3) {
+    const mode =
+      advice.accessMode === 'bike' ? 'Rad' : 'Gehen';
+    bullets.push(`${mode} ~${advice.walkMinutes} Min → Bahnhof`);
   }
 
   // Zweite Abfahrt nur, wenn sie wirklich eine Alternative ist
   if (
     second &&
     first &&
-    second.when.getTime() !== first.when.getTime()
+    second.when.getTime() !== first.when.getTime() &&
+    bullets.length < 3
   ) {
     const h = second.when.getHours().toString().padStart(2, '0');
     const m = second.when.getMinutes().toString().padStart(2, '0');
@@ -917,23 +1220,29 @@ export function transitAdviceToConcierge(
     );
   }
 
-  // Dritter Punkt nur wenn sinnvoll (kein Live / langer Fußweg)
-  if (advice.source === 'takt') {
+  if (advice.source === 'takt' && bullets.length < 3) {
     bullets.push('Live-Verspätung gerade nicht verfügbar');
-  } else if (advice.pacing?.scenario === 'relaxed' && bullets.length < 3) {
-    bullets.push(`Entwarnung · +${advice.pacing.delayMin ?? '?'} Min Verspätung`);
-  } else if (advice.pacing?.scenario === 'tight' && bullets.length < 3) {
-    bullets.push('Knapp — lieber Tempo machen');
-  } else if (advice.walkMinutes >= 8 && bullets.length < 3) {
-    bullets.push(`Fußweg ca. ${advice.walkMinutes} Min`);
   }
 
   const actions: QuickAction[] = offerNavigation
     ? [
         {
           type: 'START_NAVIGATION',
-          label: '📍 Kompass zum Bahnhof',
-          payload: { targetPoiId: advice.stationPoi.id },
+          label: advice.hasJourneyNav
+            ? '🚌 ÖPNV starten'
+            : '🚌 Zum Bahnhof',
+          payload: {
+            targetPoiId: advice.stationPoi.id,
+            destName: advice.arrivalLabel ?? advice.stationName,
+            destLat: advice.hasJourneyNav
+              ? undefined
+              : advice.stationPoi.lat,
+            destLng: advice.hasJourneyNav
+              ? undefined
+              : advice.stationPoi.lng,
+            skipClosingGate: Boolean(advice.hasJourneyNav),
+            keepCard: true,
+          },
         },
       ]
     : [];
@@ -960,7 +1269,57 @@ function ensureZeroDeadEndActions(
     return response;
   }
 
+  const speech = response.speechText;
+  const asksReserve =
+    /\b(soll\s+ich|darf\s+ich)\b/iu.test(speech) &&
+    /\b(reservier|buch|vorbereiten|tisch)\b/iu.test(speech);
+  const mentionsReserve =
+    /\b(reservier|tisch\s+anfrag|buchung\s+vorbereiten)\b/iu.test(speech);
   const offer = useFinnusStore.getState().pendingNavOffer;
+
+  if ((asksReserve || mentionsReserve) && offer?.poiId) {
+    return {
+      ...response,
+      speechText: speech
+        .replace(
+          /[^.?!]*\bsoll\s+ich\b[^.?!]*(vorbereiten|reservier|buch|tisch)[^.?!]*[.?!]?\s*/giu,
+          '',
+        )
+        .trim() ||
+        `Tisch bei ${offer.name} liegt bereit — tipp Reservieren oder wähl eine Alternative.`,
+      quickActions: [
+        {
+          type: 'SHOW_MORE',
+          label: '🍽 Tisch reservieren',
+          payload: {
+            textPrompt: `Reserviere einen Tisch bei ${offer.name}`,
+            targetPoiId: offer.poiId,
+            destName: offer.name,
+          },
+        },
+        {
+          type: 'SHOW_MORE',
+          label: 'Andere Uhrzeit',
+          payload: {
+            textPrompt: `Andere Uhrzeit für Tisch bei ${offer.name}`,
+          },
+        },
+        {
+          type: 'SHOW_MORE',
+          label: 'Neuer Termin',
+          payload: {
+            textPrompt: `Neuer Termin bei ${offer.name} eintragen`,
+          },
+        },
+        {
+          type: 'SHOW_MORE',
+          label: 'Später',
+          payload: { textPrompt: 'Reservierung später' },
+        },
+      ],
+    };
+  }
+
   if (!skipNav && offer) {
     return {
       ...response,
@@ -988,12 +1347,17 @@ function ensureZeroDeadEndActions(
  */
 export async function presentConciergeResponse(
   response: GeminiConciergeResponse,
-  opts?: { skipAutoNav?: boolean; userText?: string },
+  opts?: {
+    skipAutoNav?: boolean;
+    userText?: string;
+    /** Guardrails / Judge bereits angewendet */
+    alreadyGuarded?: boolean;
+  },
 ): Promise<void> {
   const store = useFinnusStore.getState();
 
-  // Pipeline-Ende: NUR sync Code-Judge + Guardrails (kein LLM — LLM-Judge nur 1× in twoPass)
-  {
+  // Pipeline-Ende: sync Code-Judge + Guardrails (überspringbar wenn questions schon gelaufen)
+  if (!opts?.alreadyGuarded) {
     const judged = applyActionButtonJudge(response, {
       userText: opts?.userText ?? response.speechText,
     });
@@ -1007,11 +1371,17 @@ export async function presentConciergeResponse(
           .join(' | '),
       );
     }
-  }
 
-  {
     const guarded = applyHardGuardrails(response, { userText: opts?.userText });
     response = guarded.response;
+  }
+
+  // P1: Research-Ack hart ablösen bevor Final spricht
+  try {
+    const { stopSpeaking } = await import('../ttsService');
+    await stopSpeaking();
+  } catch {
+    /* ignore */
   }
 
   // Context Action Policy: keine proaktive Nav im Hotel nachts
@@ -1019,9 +1389,13 @@ export async function presentConciergeResponse(
     const { filterActionsForContext } = await import(
       '../ui/contextTriggerMatrix'
     );
-    const explicitNav = /\b(bring\s+mich|navigier|führ\s+mich|fuehr\s+mich|route)\b/iu.test(
-      response.speechText,
-    );
+    const explicitNav =
+      (opts?.userText
+        ? isExplicitNavIntent(opts.userText)
+        : false) ||
+      /\b(bring\s+mich|navigier|führ\s+mich|fuehr\s+mich|route)\b/iu.test(
+        opts?.userText || response.speechText,
+      );
     response = {
       ...response,
       quickActions: filterActionsForContext(response.quickActions, {
@@ -1032,11 +1406,46 @@ export async function presentConciergeResponse(
     /* ignore */
   }
 
+  // ActionBoard SSOT — Fastline + Pending; Deep startet nach Card-Mount
+  const cardId = `ab_${Date.now()}`;
+  let deepJobs: import('../actionBoard').DeepJob[] = [];
+  try {
+    const { applyActionBoardToResponse } = await import('../actionBoard');
+    const boarded = applyActionBoardToResponse(response, {
+      userText: opts?.userText,
+      cardId,
+      startDeep: false,
+    });
+    response = boarded.response;
+    deepJobs = boarded.deepJobs;
+  } catch (err) {
+    if (__DEV__) console.warn('[present] actionBoard failed:', err);
+  }
+
   // Zero-Fake: Turnierplan-Chips ohne URL etc. weg
   response = {
     ...response,
+    speechText: stripFakeReservationClaims(
+      response.speechText,
+      response.quickActions,
+    ),
     quickActions: stripUnbackedActions(response.quickActions),
   };
+
+  // Native Background-Tasks (Wecker) VOR der Stimme — Speech an echtes Ergebnis koppeln
+  try {
+    const { applyBackgroundTasks } = await import('./backgroundTasks');
+    const bg = await applyBackgroundTasks(response);
+    response = bg.response;
+    if (__DEV__ && bg.changed) {
+      console.log(
+        '[present] background-tasks',
+        bg.alarmResults.map((r) => `${r.ok}:${r.tier ?? r.reason}`).join(' | '),
+      );
+    }
+  } catch (err) {
+    console.warn('[present] background-tasks failed:', err);
+  }
 
   // Zero Dead-Ends: nur echte nächste Klicks
   response = ensureZeroDeadEndActions(response, opts?.skipAutoNav === true);
@@ -1049,6 +1458,14 @@ export async function presentConciergeResponse(
       navActive: true,
       navVisible: true,
     });
+  } else if (speechCommitsToNavigation(response.speechText)) {
+    // Say–Do: nie „ich starte Navigation“ ohne echten Start
+    response = {
+      ...response,
+      speechText: stripFakeReservationClaims(response.speechText, [
+        ...response.quickActions.filter((a) => a.type !== 'START_NAVIGATION'),
+      ]),
+    };
   }
 
   if (speechCommitsToMap(response.speechText)) {
@@ -1059,7 +1476,9 @@ export async function presentConciergeResponse(
     response.visualBullets.length > 0 ||
     response.quickActions.length > 0 ||
     speechAsksForConfirmation(response.speechText);
-  const card = hasVisual ? toConciergeCardState(response) : null;
+  const card = hasVisual
+    ? toConciergeCardState(response, { id: cardId })
+    : null;
 
   // Voice-Follow-up: letztes Partner-Angebot merken („Ja, buchen“)
   useFinnusStore
@@ -1095,6 +1514,15 @@ export async function presentConciergeResponse(
     recordFindusActionsTriggered(card.quickActions, Date.now());
     await waitUntilVoicePlaying(2500);
     useFinnusStore.getState().setActiveConciergeCard(card);
+    // Deep Recharge parallel zum Audio (Pending-Chips → echte Links)
+    if (deepJobs.length > 0) {
+      try {
+        const { startActionBoardDeep } = await import('../actionBoard');
+        startActionBoardDeep({ jobs: deepJobs, cardId: card.id });
+      } catch {
+        /* soft */
+      }
+    }
   } else {
     useFinnusStore.getState().setActiveConciergeCard(null);
   }
@@ -1104,19 +1532,23 @@ export async function presentConciergeResponse(
   } catch (err: unknown) {
     console.warn('[concierge] TTS failed:', err);
   } finally {
+    // Immer UI-Standby nach Concierge-Speech — sonst klebt „Ich erzähle“
+    // Speech-Ende — kein UI-Clear nötig
     try {
       const {
+        markAudiblePlayback,
         releaseSpeakingUiIfIdle,
         getActiveTtsSessionCount,
-        forceClearSpeakingUi,
       } = await import('../AudioVoiceService');
+      markAudiblePlayback(false);
       if (getActiveTtsSessionCount() === 0) {
         releaseSpeakingUiIfIdle();
-        forceClearSpeakingUi();
+      } else {
+        useFinnusStore.getState().setIsAudiblySpeaking(false);
       }
     } catch {
       useFinnusStore.getState().setIsPlayingAudio(false);
-      useFinnusStore.getState().setSubtitleText(null);
+      useFinnusStore.getState().setIsAudiblySpeaking(false);
     }
   }
 }

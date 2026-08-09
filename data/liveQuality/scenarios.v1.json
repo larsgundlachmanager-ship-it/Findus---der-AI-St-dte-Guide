@@ -1,0 +1,406 @@
+{
+  "version": 1,
+  "title": "Findus Live-Qualität — echte User-Fragen",
+  "gpsHint": "Ideal: Hamburg oder aktuelle Reise-Stadt mit GPS an",
+  "passThreshold": 0.85,
+  "devicePlaybook": [
+    "App starten, GPS an, Mikro bereit",
+    "Jede Frage laut stellen (oder tippen)",
+    "Bewerten: Bridge menschlich? Lead in 5s? Pflicht-Fakten? Richtige Buttons?",
+    "Fails hier notieren — Correction Learning / Bug"
+  ],
+  "scenarios": [
+    {
+      "id": "lq_cinema_tonight",
+      "tier": "device_must",
+      "question": "Ich möchte heute Abend ins Kino, welche Filme laufen in der Nähe?",
+      "expectJob": "tonight_live",
+      "expectCommitment": ["exploring", "committed"],
+      "expectMustHaves": [],
+      "requireContractFacts": ["showtimes_future", "venue_options"],
+      "requireActions": ["OPEN_URL"],
+      "deviceChecks": [
+        "Nur zukünftige Spielzeiten",
+        "Preis wenn belegt genannt",
+        "Ticket- und/oder Trailer-Button"
+      ]
+    },
+    {
+      "id": "lq_cinema_spiderman",
+      "tier": "device_must",
+      "question": "Ich will Spider-Man heute im Kino sehen",
+      "expectJob": "tonight_live",
+      "expectMustHaves": ["Spider-Man"],
+      "requireContractFacts": ["showtimes_future"],
+      "requireActions": ["OPEN_URL"],
+      "deviceChecks": [
+        "Nur Kinos mit Spider-Man heute/morgen",
+        "Ticket-Button wenn URL da"
+      ]
+    },
+    {
+      "id": "lq_pannfisch_elb",
+      "tier": "device_must",
+      "question": "Welches Restaurant bietet Hamburger Pannfisch mit direktem Elbblick?",
+      "expectJob": "dining_hard_match",
+      "expectMustHaves": ["Pannfisch", "Elbblick"],
+      "requireContractFacts": ["venue_options", "hard_match_evidence"],
+      "requireActions": ["OPEN_URL"],
+      "deviceChecks": [
+        "Nur Orte mit belegtem Match",
+        "Speisekarte/Web-Button",
+        "Kein Fake-Preis"
+      ]
+    },
+    {
+      "id": "lq_hotel_weekend",
+      "tier": "device_must",
+      "question": "Hotel fürs Wochenende von Freitag bis Sonntag mit Pool und Sauna unter 500 Euro",
+      "expectJob": "stay_search",
+      "expectMustHaves": ["Pool", "Sauna", "Budget 500€"],
+      "requireContractFacts": ["venue_options", "hard_match_evidence"],
+      "requireActions": ["BOOK_STAY22", "OPEN_URL"],
+      "deviceChecks": [
+        "Zwei Hotel-Optionen",
+        "Stay22/Buchungs-Link mit Datum vorausgefüllt",
+        "Pool/Sauna nur wenn belegt"
+      ]
+    },
+    {
+      "id": "lq_foot_emergency",
+      "tier": "device_must",
+      "question": "Mein Freund hat den Fuß gebrochen, wo können wir hin?",
+      "expectJob": "emergency_care",
+      "expectCommitment": ["urgent"],
+      "requireContractFacts": ["emergency_right_facility", "phone_or_nav"],
+      "requireActions": ["START_NAVIGATION", "DIAL_PHONE"],
+      "deviceChecks": [
+        "Nicht zum Zahnarzt",
+        "Unfall/Notaufnahme/Orthopädie",
+        "Route + Anrufen"
+      ]
+    },
+    {
+      "id": "lq_tooth",
+      "tier": "device_must",
+      "question": "Ich habe akute Zahnschmerzen, welcher Zahnarzt hat jetzt Notdienst?",
+      "expectJob": "emergency_care",
+      "expectCommitment": ["urgent"],
+      "requireContractFacts": ["emergency_right_facility"],
+      "requireActions": ["START_NAVIGATION", "DIAL_PHONE"],
+      "deviceChecks": ["Zahnarzt/Notdienst", "Website-Urlaub übersprungen wenn erkannt"]
+    },
+    {
+      "id": "lq_spikeball",
+      "tier": "device_must",
+      "question": "Wir wollen in Laboe Spikeball spielen, möglichst mit kostenlosem Parkplatz",
+      "expectJob": "activity_sport",
+      "expectMustHaves": ["kostenlos parken"],
+      "requireContractFacts": ["concrete_place", "activity_fit"],
+      "requireActions": ["START_NAVIGATION"],
+      "deviceChecks": [
+        "Strandfläche / Alternative wenn eng",
+        "Parken mitgedacht",
+        "Bridge motivierend, nicht doppeltes Intro"
+      ]
+    },
+    {
+      "id": "lq_transit_hbf",
+      "tier": "device_must",
+      "question": "Wie komme ich am schnellsten mit öffentlichen Verkehrsmitteln zum Hauptbahnhof?",
+      "expectJob": "transit_live",
+      "requireContractFacts": ["transit_connection", "concrete_place"],
+      "requireActions": ["START_NAVIGATION", "SHOW_MORE"],
+      "deviceChecks": [
+        "Konkrete Verbindung oder ehrliche Störung",
+        "Alternative bei Bau/Ausfall"
+      ]
+    },
+    {
+      "id": "lq_rooftop_outfit",
+      "tier": "device_must",
+      "question": "Ich möchte heute Abend auf eine Rooftop-Party — welche gibt es und was soll ich anziehen?",
+      "expectJob": "nightlife_vibe",
+      "expectSecondary": ["weather_outfit"],
+      "requireContractFacts": ["venue_options"],
+      "deviceChecks": [
+        "Party/Orte + Outfit in einer Antwort",
+        "Keine Permission-Frage ohne Ergebnis"
+      ]
+    },
+    {
+      "id": "lq_points_cheer",
+      "tier": "device_must",
+      "question": "Ich habe die erste Runde gewonnen, wie viele Punkte bekomme ich dann?",
+      "expectJob": "fact_number",
+      "requireContractFacts": ["number_answer"],
+      "deviceChecks": [
+        "Bridge = Glückwunsch, nicht Recherche-Meta",
+        "Zahl/Regel zuerst in der Hauptantwort"
+      ]
+    },
+    {
+      "id": "lq_museum_trex",
+      "tier": "device_should",
+      "question": "Wo kann ich einen Tyrannosaurus Rex sehen und welches Museum lohnt sich mehr?",
+      "expectJob": "museum_theme",
+      "expectMustHaves": ["Dinosaurier"],
+      "requireContractFacts": ["venue_options", "hard_match_evidence"],
+      "deviceChecks": ["Vergleich zweier Optionen", "Preis/Ticket wenn belegt"]
+    },
+    {
+      "id": "lq_day_budget",
+      "tier": "device_should",
+      "question": "Mein Budget für heute ist 50 Euro — plane mir Mittagessen, eine Aktivität und einen Snack am Abend",
+      "expectJob": "day_plan_budget",
+      "requireContractFacts": ["venue_options", "concrete_place"],
+      "deviceChecks": ["Drei Teile beantwortet", "Buttons zu genannten Stops"]
+    },
+    {
+      "id": "lq_weather_outfit",
+      "tier": "device_should",
+      "question": "Was soll ich heute Abend anziehen, es wird windig am Wasser?",
+      "expectJob": "weather_outfit",
+      "requireContractFacts": ["weather_or_outfit"],
+      "deviceChecks": ["Konkrete Kleidung zuerst"]
+    },
+    {
+      "id": "lq_elbe_width",
+      "tier": "device_should",
+      "question": "Wie breit ist die Elbe hier ungefähr?",
+      "expectJob": "fact_number",
+      "requireContractFacts": ["number_answer"],
+      "deviceChecks": ["Zahl zuerst", "Stichpunkte mit Ziffern"]
+    },
+    {
+      "id": "lq_scooter",
+      "tier": "device_should",
+      "question": "Wo kann ich mir für heute einen E-Scooter leihen?",
+      "expectJob": "mobility_rent",
+      "requireContractFacts": ["venue_options"],
+      "requireActions": ["OPEN_URL"],
+      "deviceChecks": ["Anbieter + Link/App-Hinweis"]
+    },
+    {
+      "id": "lq_pharmacy_night",
+      "tier": "device_should",
+      "question": "Wo ist die nächste Apotheke, die auch nachts geöffnet hat?",
+      "expectJob": "emergency_care",
+      "requireContractFacts": ["concrete_place"],
+      "requireActions": ["START_NAVIGATION"],
+      "deviceChecks": ["Nacht/Notdienst bevorzugt"]
+    },
+    {
+      "id": "lq_pass_lost",
+      "tier": "device_should",
+      "question": "Ich habe meinen Reisepass verloren, wo ist mein Konsulat?",
+      "expectJob": "safety_lost",
+      "requireContractFacts": ["concrete_place", "phone_or_nav"],
+      "deviceChecks": ["Nächster Schritt klar", "kein Gelaber"]
+    },
+    {
+      "id": "lq_toilet",
+      "tier": "device_should",
+      "question": "Wo gibt es hier saubere öffentliche Toiletten?",
+      "expectJob": "friction_now",
+      "requireContractFacts": ["concrete_place", "route_or_nav"],
+      "requireActions": ["START_NAVIGATION"],
+      "deviceChecks": ["Kurz + Nav-Button"]
+    },
+    {
+      "id": "lq_poi_building",
+      "tier": "device_should",
+      "question": "Was ist das für ein großes Gebäude mit der goldenen Kuppel dort drüben?",
+      "expectJob": "poi_identify",
+      "requireContractFacts": ["concrete_place"],
+      "deviceChecks": ["Visuell vor Name wenn sinnvoll", "dichte Fakten"]
+    },
+    {
+      "id": "lq_nav_fast",
+      "tier": "device_should",
+      "question": "Bring mich schnell zum Hauptbahnhof",
+      "expectJob": "nav_route",
+      "expectCommitment": ["committed", "urgent"],
+      "requireContractFacts": ["concrete_place", "route_or_nav"],
+      "requireActions": ["START_NAVIGATION"],
+      "deviceChecks": ["Route startklar", "wenig Geschwafel"]
+    },
+    {
+      "id": "lq_laboe_fischbroetchen",
+      "tier": "device_must",
+      "question": "Wo kriege ich das günstigste Fischbrötchen in der Nähe und wie teuer ist es?",
+      "expectJob": "dining_hard_match",
+      "expectMustHaves": ["Fischbrötchen"],
+      "requireContractFacts": ["venue_options", "concrete_place"],
+      "requireActions": ["START_NAVIGATION"],
+      "deviceChecks": [
+        "1–2 konkrete Buden",
+        "Preis nur wenn belegt",
+        "Nav-Button oben / startklar",
+        "Keine Taxi/Airbnb-Drift"
+      ]
+    },
+    {
+      "id": "lq_laboe_what_is_this",
+      "tier": "device_must",
+      "question": "Was ist das hier eigentlich?",
+      "expectJob": "poi_identify",
+      "requireContractFacts": ["concrete_place"],
+      "deviceChecks": [
+        "Pack-GPS-Match / Kandidaten",
+        "Gleicher Topic-Thread für Rückfragen",
+        "Keine Bridge bei Follow-up",
+        "Kein Wechsel zum Ort von vor einer Stunde"
+      ]
+    },
+    {
+      "id": "lq_laboe_story_followup",
+      "tier": "device_must",
+      "question": "Warum wurde das alte Schwimmbad geschlossen?",
+      "expectJob": "poi_identify",
+      "requireContractFacts": ["number_answer"],
+      "deviceChecks": [
+        "Beantwortet die Warum-Frage direkt",
+        "alreadySaid nicht wiederholen",
+        "Pack-Gap → Research erlaubt",
+        "Keine neue Bridge"
+      ]
+    },
+    {
+      "id": "lq_laboe_aldi_unique_nav",
+      "tier": "device_must",
+      "question": "Wo ist der nächste Aldi oder Lidl?",
+      "expectJob": "shopping_errand",
+      "requireContractFacts": ["concrete_place", "route_or_nav"],
+      "requireActions": ["START_NAVIGATION"],
+      "deviceChecks": [
+        "1 Treffer im Radius → Nav sofort / klarer Start-CTA",
+        "2+ Treffer → kurz wählen",
+        "Meter/ETA aus aktiver Route",
+        "Laufende Tour: Aldi einweben, Queue nicht löschen; on-route Stop vorher",
+        "Kein Swap zurück zu stale Discovery/Offer",
+        "Max 1 kurze Bridge"
+      ]
+    },
+    {
+      "id": "lq_kiel_combo_park_pizza_foerde",
+      "tier": "device_must",
+      "question": "Wir wollen nach Kiel: kostenlos parken, Pizza Takeaway mitnehmen und an der Förde den Sonnenuntergang sehen — beste Kombi?",
+      "expectJob": "day_plan_budget",
+      "expectMustHaves": ["kostenlos parken", "Pizza", "Förde"],
+      "requireContractFacts": ["venue_options", "concrete_place"],
+      "requireActions": ["START_NAVIGATION"],
+      "deviceChecks": [
+        "Eine Cluster-Empfehlung (Parken + Pizza + Förde)",
+        "Kurze Wege begründet",
+        "2–3 Optionen wenn sinnvoll",
+        "Budget/Diet-Filter wenn im Profil"
+      ]
+    },
+    {
+      "id": "lq_ostsee_spikeball_compare",
+      "tier": "device_must",
+      "question": "Wir wollen an die Ostsee Spikeball spielen, nicht ultra weit fahren — welche Strände passen und wo ist Platz?",
+      "expectJob": "activity_sport",
+      "expectMustHaves": ["Spikeball"],
+      "requireContractFacts": ["concrete_place", "activity_fit", "alternative_offered"],
+      "requireActions": ["START_NAVIGATION"],
+      "deviceChecks": [
+        "Strände vergleichen nicht nur Ortskern",
+        "Sand/Platz/Crowding mitdenken",
+        "1 Empfehlung + Alternative"
+      ]
+    },
+    {
+      "id": "lq_parking_ticket_statement",
+      "tier": "device_must",
+      "question": "Das ist mein Parkplatz, Parkticket gilt bis 17:42 Uhr",
+      "expectJob": "parking_ev",
+      "requireContractFacts": ["concrete_place"],
+      "deviceChecks": [
+        "Spot + Expiry speichern ohne Rückfrage",
+        "Leave-by / Reminder Care",
+        "Auto weg → Reminder irrelevant",
+        "Keine Bridge-Schleife"
+      ]
+    },
+    {
+      "id": "lq_outfit_plan_weather",
+      "tier": "device_must",
+      "question": "Was soll ich heute Abend anziehen?",
+      "expectJob": "weather_outfit",
+      "expectSecondary": ["nightlife_vibe"],
+      "requireContractFacts": ["weather_or_outfit"],
+      "deviceChecks": [
+        "Plan heute Abend (z. B. 5★) + Wetter kombinieren",
+        "Konkrete Kleidung zuerst",
+        "Kein reines Wetter-Gelaber ohne Dresscode-Hint"
+      ]
+    },
+    {
+      "id": "lq_hotel_pool_stay22_prefill",
+      "tier": "device_must",
+      "question": "Hotel Freitag bis Sonntag mit Pool unter 500 Euro zu zweit",
+      "expectJob": "stay_search",
+      "expectMustHaves": ["Pool", "Budget 500€"],
+      "requireContractFacts": ["venue_options", "hard_match_evidence", "booking_deep_link"],
+      "requireActions": ["BOOK_STAY22"],
+      "deviceChecks": [
+        "Pool-Hard-Filter",
+        "2 Optionen + Auswahl",
+        "Stay22 mit Daten/Zimmer vorausgefüllt",
+        "Slow-Lane Deep-Link darf nachpoppen"
+      ]
+    },
+    {
+      "id": "lq_kiel_party_tonight_links",
+      "tier": "device_must",
+      "question": "Was geht heute Abend noch in Kiel — Party oder Konzert?",
+      "expectJob": "nightlife_vibe",
+      "requireContractFacts": ["venue_options"],
+      "requireActions": ["OPEN_URL"],
+      "deviceChecks": [
+        "Live-Quellen (Stadt/rausgegangen o. ä.)",
+        "Alters-/Pref-Filter",
+        "Ticket/Web-Links — Slow-Lane pending ok",
+        "3–4 konkrete Vorschläge"
+      ]
+    },
+    {
+      "id": "lq_tour_hour_prefs",
+      "tier": "device_must",
+      "question": "Wir haben eine Stunde — was haben wir in Laboe noch nicht gesehen? Am Ende gerne am Hafen mit Parkplatz",
+      "expectJob": "sight_recommend",
+      "requireContractFacts": ["venue_options", "concrete_place", "route_or_nav"],
+      "requireActions": ["START_NAVIGATION"],
+      "deviceChecks": [
+        "Prefs filtern (Museen raus wenn skip)",
+        "Mehrere Orte nicht nur einer",
+        "Zeitbudget / Laufweite",
+        "Multi-Stop Richtung Hafen"
+      ]
+    },
+    {
+      "id": "lq_veg_no_steakhouse",
+      "tier": "device_should",
+      "question": "Ich bin Vegetarier — wo essen wir gut zu Abend?",
+      "expectJob": "dining_open",
+      "expectMustHaves": ["vegetarisch"],
+      "requireContractFacts": ["venue_options"],
+      "requireActions": ["OPEN_URL", "START_NAVIGATION"],
+      "deviceChecks": ["Kein Steakhaus", "Speisekarte wenn URL"]
+    },
+    {
+      "id": "lq_menu_links_required",
+      "tier": "device_should",
+      "question": "Welches Fischrestaurant lohnt sich und zeig mir die Speisekarte",
+      "expectJob": "dining_hard_match",
+      "requireContractFacts": ["venue_options", "ticket_or_info_url"],
+      "requireActions": ["OPEN_URL"],
+      "deviceChecks": [
+        "Speisekarte als Action",
+        "Fast-Antwort zuerst, Link darf nachladen"
+      ]
+    }
+  ]
+}
