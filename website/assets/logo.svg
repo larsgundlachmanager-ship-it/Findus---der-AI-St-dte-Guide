@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" role="img" aria-label="Findus">
+  <defs>
+    <linearGradient id="gold" x1="20" y1="10" x2="100" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E2C57A"/>
+      <stop offset="1" stop-color="#B8923E"/>
+    </linearGradient>
+  </defs>
+  <!-- Pin + compass, no square background -->
+  <path
+    d="M60 128c0 0-42-48-42-78a42 42 0 1 1 84 0c0 30-42 78-42 78z"
+    fill="#0F4D58"
+  />
+  <circle cx="60" cy="50" r="28" fill="none" stroke="url(#gold)" stroke-width="4"/>
+  <circle cx="60" cy="22" r="3.2" fill="url(#gold)"/>
+  <circle cx="60" cy="78" r="3.2" fill="url(#gold)"/>
+  <circle cx="32" cy="50" r="3.2" fill="url(#gold)"/>
+  <circle cx="88" cy="50" r="3.2" fill="url(#gold)"/>
+  <path d="M60 30 L68 50 L60 70 L52 50 Z" fill="url(#gold)"/>
+  <circle cx="60" cy="50" r="5" fill="#F7F1E4"/>
+  <circle cx="60" cy="50" r="2.4" fill="#0F4D58"/>
+</svg>
