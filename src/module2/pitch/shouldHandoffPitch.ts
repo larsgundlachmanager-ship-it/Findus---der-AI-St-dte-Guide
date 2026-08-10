@@ -5,7 +5,7 @@
 import { detectCityBestIntent, detectPitchKind } from './parentBrief';
 
 const CHOICE_RE =
-  /\b(empfehl|empfiehl|wo\s+(kann|soll)|was\s+ess|restaurant|italiener|grieche|pizza|essen\s+gehen|zwei\s+option|alternativ|bester|beste[rn]?|hotel\s+mit|kino|biergarten)\b/iu;
+  /\b(empfehl|empfiehl|wo\s+(kann|soll)|was\s+ess|restaurant|italiener|grieche|pizza|essen\s+gehen|zwei\s+option|alternativ|bester|beste[rn]?|hotel\s+mit|kino|biergarten|hunger|süßhunger|sueßhunger|brunch|sushi|burger)\b/iu;
 
 /** Explizite Tagesplanung → M5, nicht Pitch allein. */
 const PLAN_DAY_RE =

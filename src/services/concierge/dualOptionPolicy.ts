@@ -1,5 +1,7 @@
 /**
- * Dual-Option SSOT — Ranking mit 🥇🥈🥉 (max 3), kontextuelle Buttons.
+ * Dual-Option / Auswahl — SSOT.
+ * Offene 2er-Auswahl (Essen, Sight, Bar, Kino, Hotel-Choice) läuft nur über
+ * `src/module2/pitch` (Auswahl-Pitch v4). Kein Legacy-Agent-Dual-Pitch.
  */
 
 import type { QuickAction } from '../../types/concierge';
@@ -40,32 +42,20 @@ export function clampDualLabel(label: string, max = ACTION_LABEL_MAX_DUAL): stri
 }
 
 /**
- * Buttons 1:1 zu den gesprochenen Optionen — Intent bestimmt Priorität.
+ * Buttons 1:1 zu den gesprochenen Optionen — nur noch Infra/Toilette/Tour-Hilfen.
+ * Food/Sight/Hotel-Choice → Pitch-Modul (nicht diese Helper).
  */
 export function buildDualOptionActions(
   kind: DualOptionKind,
   places: DualOptionPlace[],
 ): QuickAction[] {
+  if (kind === 'food' || kind === 'hotel' || kind === 'sight') {
+    return [];
+  }
   const top = places.filter((p) => p.name?.trim()).slice(0, DUAL_OPTION_MAX);
   const actions: QuickAction[] = [];
 
   for (const p of top) {
-    if (kind === 'food' && p.menuUrl) {
-      actions.push({
-        type: 'OPEN_URL',
-        label: clampDualLabel(`🍽 ${p.name}`),
-        payload: { url: p.menuUrl, destName: p.name },
-      });
-      continue;
-    }
-    if (kind === 'hotel' && p.bookingUrl) {
-      actions.push({
-        type: 'OPEN_URL',
-        label: clampDualLabel(`🏨 ${p.name}`),
-        payload: { url: p.bookingUrl, destName: p.name },
-      });
-      continue;
-    }
     if (kind === 'tour' && p.tourUrl) {
       actions.push({
         type: 'OPEN_URL',
@@ -74,7 +64,6 @@ export function buildDualOptionActions(
       });
       continue;
     }
-    // Sight / Toilette / Fallback → Route
     if (p.lat != null && p.lng != null) {
       actions.push({
         type: 'START_NAVIGATION',
@@ -92,11 +81,10 @@ export function buildDualOptionActions(
   return actions.slice(0, DUAL_OPTION_MAX);
 }
 
-/** Prompt-Block für Dual-Option + Confirm-Gates. */
-export const FINDUS_DUAL_OPTION_BLOCK = `DUAL-OPTION (SSOT):
-- Ranking mit 🥇🥈🥉 (selten 3, nie mehr). Nie „Favorit“ / „Alternative“ sagen — Medaillen.
-- Bei Essen/Food: pro Ort immer Top-2 Gerichte + eine Spezialität nennen; Schließzeit vs. Aufenthaltsdauer (~75 Min) prüfen.
-- Buttons 1:1: Restaurant→Speisekarte, Tour→Ticket/Link, Hotel→beide Buchungslinks, Sight/ungesehen→2 Routen, Toilette→2 Routen + Differenzgrund. Labels mit 🥇🥈🥉 wenn Ranking.
-- Labels max 30 Zeichen (Emoji + Kurzform: Route, Karte, Web, Buch, Termin, Wahl). User bestätigt Bindendes (Tisch/Buchung/Nav-Start) — nie vortäuschen.
-- Ort + Uhrzeit prüfen und gegen Venue (offen, Schließung, Verweildauer) validieren bevor Reservierung.
-- Nav jetzt vs. später: Zukunftstermine → Leave-by-Reminder, nicht sofort Navigation starten.`;
+/** Prompt-Block — Auswahl-Pitch ist Modul-SSOT, nicht LLM-Dual-Inventur. */
+export const FINDUS_DUAL_OPTION_BLOCK = `AUSWAHL / DUAL-OPTION (SSOT):
+- Offene 2er-Auswahl (Essen, Bar, Kino, Sight, Hotel-Choice) kommt NUR vom Auswahl-Pitch-Modul — niemals selbst zwei Orte erfinden oder Medaillen-Ranking im Speech improvisieren.
+- Infra/Toilette/ATM: weiterhin kurz 2 konkrete Optionen + START_NAVIGATION mit Differenzgrund (näher/sauberer) — ohne „Favorit“/„Alternative“-Wortlaut.
+- Nach Pitch: User wählt in der UI (A|B oder Timeline). Speisekarte/Deep erst nach Wahl oder als Pitch-Append.
+- Labels max 30 Zeichen. Bindendes (Tisch/Buchung/Nav-Start) nur mit Confirm — nie vortäuschen.
+- Nav jetzt vs. später: Zukunftstermine → Leave-by-Reminder, nicht sofort Navigation.`;

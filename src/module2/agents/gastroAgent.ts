@@ -5,9 +5,7 @@ import { anchorCoords } from '../rucksack/rucksackStore';
 import { getShortTerm, setLastPlaceName } from '../context/shortTermContext';
 import { resolveWorkingPlace } from '../context/placeContext';
 import {
-  detectMealSlot,
   extractNamedVenueMealIntent,
-  isFoodDiningPlace,
 } from './localDiningCatalog';
 import { searchPlacesByText } from '../../services/navigation/googleMapsNav';
 import { shortenActionLabel } from '../../services/concierge/actionLabelShorten';
@@ -30,32 +28,6 @@ import {
 } from '../planning/offerActionUtils';
 import { shouldHandoffToPitchModule } from '../pitch/shouldHandoffPitch';
 import { researchPitchAsAgentResult } from '../pitch/pitchFactLane';
-
-function assessNamedVenueFit(
-  name: string,
-  openNow: boolean | undefined,
-  mealSlot: ReturnType<typeof detectMealSlot>,
-  types?: string[],
-): 'good' | 'weak' | 'closed' | 'unknown' {
-  if (openNow === false) return 'closed';
-  if (!isFoodDiningPlace(name, types)) return 'weak';
-  const blob = `${name} ${(types ?? []).join(' ')}`.toLowerCase();
-  const kind = /bakery|bäck|baeck/.test(blob)
-    ? 'bakery'
-    : /cafe|café|coffee/.test(blob)
-      ? 'cafe'
-      : /restaurant|gasthof|bistro/.test(blob)
-        ? 'restaurant'
-        : 'other';
-  if (mealSlot === 'breakfast') {
-    if (/steakhouse|nachtclub|disco|bar\b(?!ista)/.test(blob)) return 'weak';
-    if (kind === 'bakery' || kind === 'cafe' || kind === 'restaurant') {
-      return 'good';
-    }
-    return 'weak';
-  }
-  return openNow === true ? 'good' : 'unknown';
-}
 
 /** Kurzer Button-Name — lange Zusätze strippen, Stadt/Rechtsform egal. */
 function shortVenueLabel(name: string, max = 24): string {
@@ -112,10 +84,6 @@ export const gastroAgent: Module2Agent = {
       rucksack.cityHint,
       task.city,
     );
-    const harborBias =
-      /hafen/i.test(task.rewrittenText) ||
-      /hafen/i.test(getShortTerm().lastTopic ?? '');
-    const mealSlot = detectMealSlot(task.rewrittenText);
     const namedVenue = extractNamedVenueMealIntent(
       task.rewrittenText,
       getShortTerm().lastPlaceName,
@@ -505,213 +473,32 @@ export const gastroAgent: Module2Agent = {
       }
     }
 
-    const attempt = await withHardApiFail(
-      'places',
-      () =>
-        findDiningPicks({
-          anchor: a,
-          city: place.city,
-          query: task.rewrittenText,
-          harborBias,
-          preferCityCenter: place.biasMode === 'named_city',
-        }),
-      8000,
-    );
-
-    if (!attempt.ok) {
-      return agentResultFromApiFail('gastro', 'places');
-    }
-
-    const { primary, alts, mealSlot: slot, searchMeta } = attempt.value;
-    let namedVenueFit: 'good' | 'weak' | 'closed' | 'unknown' | null = null;
-
-    // Named-Venue-Check ebenfalls am Stadt-Anker (nicht am GPS, wenn Stadt genannt)
-    const checkAt =
-      place.biasMode === 'named_city' && place.city
-        ? (
-            await import('./localDiningCatalog').then((m) =>
-              m.resolveDiningSearchAnchor({
-                city: place.city,
-                userAnchor: a,
-                preferCityCenter: true,
-              }),
-            )
-          ).anchor
-        : a;
-
-    if (namedVenue) {
-      try {
-        const hits = await searchPlacesByText({
-          query: `${namedVenue} ${place.city ?? ''}`.trim(),
-          lat: checkAt.lat,
-          lng: checkAt.lng,
-          radiusM: 8_000,
-        });
-        const hit =
-          hits.find((h) =>
-            h.name.toLowerCase().includes(namedVenue.toLowerCase().slice(0, 8)),
-          ) ?? hits[0];
-        namedVenueFit = hit
-          ? assessNamedVenueFit(hit.name, hit.openNow, slot, hit.types)
-          : 'unknown';
-      } catch {
-        namedVenueFit = 'unknown';
-      }
-    }
-
-    // Immer offene Optionen für Buttons — max 2 Orte
-    let ranked: DiningPick[] = [primary, ...alts]
-      .filter((p) => p.openNow && p.name !== place.speechPlace)
-      .slice(0, 2);
-
-    if (namedVenue && (namedVenueFit === 'weak' || namedVenueFit === 'closed')) {
-      ranked = ranked.filter(
-        (p) =>
-          !p.name.toLowerCase().includes(namedVenue.toLowerCase().slice(0, 6)),
-      );
-    }
-
-    if (ranked.length < 2) {
-      ranked = [primary, ...alts].filter((p) => p.openNow).slice(0, 2);
-    }
-
-    const companions =
-      getShortTerm().lastCompanionsNote ||
-      (/\b(mit\s+freunden|zu\s+zweit|gruppe)\b/i.test(task.rewrittenText)
-        ? 'mit Freunden'
-        : null);
-    const occasion = parseReservationOccasion(task.rewrittenText);
-
-    const draft = formatDiningGuideSpeech(
-      ranked[0] ?? primary,
-      ranked.slice(1),
-      place.speechPlace,
-      slot || mealSlot,
-      {
-        namedVenue,
-        namedVenueFit,
-        companions,
-        occasion,
-        suggestOvernight: searchMeta.suggestOvernight,
-        distanceFromUserKm: searchMeta.distanceFromUserKm,
-      },
-    );
-
-    const buttonPicks =
-      ranked.length >= 1 ? ranked.slice(0, 2) : [primary, ...alts].slice(0, 2);
-
-    if (buttonPicks[0]?.name) {
-      setLastPlaceName(buttonPicks[0].name);
-    }
-
-    // Bis 4 Buttons: Wahl + Karte (+ optional Übernachtung ab 100 km)
-    const buttons: Module2ActionButton[] = [];
-    for (let i = 0; i < buttonPicks.length; i++) {
-      const p = buttonPicks[i]!;
-      buttons.push({
-        id: `pick_${i}`,
-        label: shortenActionLabel(
-          `${medalForRank(i)} ${p.name}`,
-        ),
-        payload: {
-          kind: 'ui',
-          action: 'choose_venue',
-          data: {
-            dest: p.name,
-            destName: p.name,
-          },
-        },
-      });
-    }
-    const menuCount = searchMeta.suggestOvernight
-      ? 1
-      : Math.min(2, buttonPicks.length);
-    for (let i = 0; i < menuCount; i++) {
-      const p = buttonPicks[i]!;
-      const menuUrl = [p.menuUrl, p.websiteUrl].find(
-        (u) => u && isSafeOfferUrl(u),
-      );
-      if (!menuUrl) continue;
-      const kind = detectOfferKind(`${task.rewrittenText} ${p.name}`);
-      const labels = offerLabel(
-        kind === 'drinks' ? 'drinks' : kind === 'ticket' ? 'ticket' : kind === 'web' ? 'web' : 'menu',
-      );
-      const menuLabel = shortenActionLabel(
-        `${shortVenueLabel(p.name, 14)} → ${labels.shortLabel}`,
-      );
-      buttons.push({
-        id: `menu_${i}`,
-        label: menuLabel,
-        payload: { kind: 'deep_link', url: menuUrl },
-      });
-    }
-
-    if (searchMeta.suggestOvernight && place.city) {
-      const stay = buildStay22AccommodationAction(place.city);
-      buttons.push({
-        id: 'overnight',
-        label: shortenActionLabel('🏨 Übernachtung?'),
-        payload: {
-          kind: 'ui',
-          action: 'book_stay22',
-          data: {
-            destination: place.city,
-            url: stay.payload.url,
-          },
-        },
+    // Offene 2er-Auswahl → Pitch-Modul (nie Legacy Medaillen-Guide)
+    if (
+      shouldHandoffToPitchModule(task.rewrittenText) ||
+      task.jobId === 'dining_open' ||
+      task.jobId === 'dining_hard_match' ||
+      /\b(hunger|restaurant|essen\s+gehen|empfehl|wo\s+(kann|soll)\s+(man\s+)?essen)\b/i.test(
+        task.rewrittenText,
+      )
+    ) {
+      return researchPitchAsAgentResult({
+        userText: task.rewrittenText,
+        requestId: `gastro_${task.id ?? Date.now()}`,
       });
     }
 
     return {
       agent: 'gastro',
       ok: true,
-      draftText: draft,
-      bullets: (() => {
-        const hard = parseDiningHardNeeds(task.rewrittenText)
-          .map((n) => n.label)
-          .join(' + ');
-        const rows = buttonPicks.map((p, i) => {
-          const dishes = `${p.topDishes[0]} · ${p.topDishes[1]}`;
-          const tip =
-            p.specialty && /belegt|Terrasse|Pannfisch|Elb|fehlt/i.test(p.specialty)
-              ? p.specialty.slice(0, 40)
-              : dishes;
-          return `${medalForRank(i)} ${p.name}: ${tip}`;
-        });
-        if (hard && rows.length < 3) rows.push(hard);
-        return rows.slice(0, 3);
-      })(),
-      buttons: buttons.slice(0, 4),
-      money: [], // Keine Fantasie-Euro — Preise nur aus Deep-Research/Speisekarte
-      meta: {
-        city: place.city,
-        speechPlace: place.speechPlace,
-        biasMode: place.biasMode,
-        mealSlot: slot || mealSlot,
-        namedVenue,
-        namedVenueFit,
-        filters: GASTRO_API_FILTERS,
-        companions,
-        searchMeta,
-        hardMatch: parseDiningHardNeeds(task.rewrittenText).length > 0,
-        mustHaves: [
-          ...(task.mustHaves ?? []),
-          ...parseDiningHardNeeds(task.rewrittenText).map((n) => n.label),
-        ],
-        venues: buttonPicks.map((p) => ({
-          name: p.name,
-          lat: p.lat,
-          lng: p.lng,
-          websiteUrl: p.websiteUrl,
-          menuUrl: p.menuUrl,
-        })),
-        menu_links_required:
-          /\b(speisekarte|menü|menu|karte\s+zeig|zeig.{0,12}speise)/i.test(
-            task.rewrittenText,
-          ) ||
-          buttonPicks.some((p) => !p.menuUrl && Boolean(p.websiteUrl || p.name)),
-        needsMenuUrl: buttonPicks.some((p) => !p.menuUrl),
-      },
+      draftText: [
+        'FAKTEN Gastro (nicht wörtlich vorlesen):',
+        'Keine klare Auswahl-Anfrage — kurz nach Ort/Küche/Slot fragen oder Pitch-Modul nutzen.',
+        'FLOW: eine gezielte Rückfrage ODER Auswahl-Pitch.',
+      ].join('\n'),
+      bullets: [],
+      buttons: [],
+      meta: { needsClarify: true },
     };
   },
 };

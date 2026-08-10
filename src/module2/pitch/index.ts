@@ -45,3 +45,8 @@ export {
 export { buildPitchActions } from './pitchActions';
 export { filterAndRank } from './wishFilterRank';
 export { shouldHandoffToPitchModule } from './shouldHandoffPitch';
+export { researchPitchAsAgentResult } from './pitchFactLane';
+export {
+  buildPitchRequestFromText,
+  buildPitchRequestFromWish,
+} from './buildPitchRequest';

@@ -295,6 +295,12 @@ export async function runConciergeTurn(
       '../pitch/shouldHandoffPitch'
     );
     if (handoff === 'none' && shouldHandoffToPitchModule(rewritten)) {
+      try {
+        const { useLivePitchStore } = await import('../pitch/publishPitchUi');
+        useLivePitchStore.getState().clear();
+      } catch {
+        /* soft */
+      }
       const { buildPitchRequestFromText } = await import(
         '../pitch/buildPitchRequest'
       );
@@ -551,10 +557,20 @@ export async function runConciergeTurn(
   const skipLlm =
     fact.meta?.amenityNav === true ||
     fact.meta?.parkingCare === true ||
+    fact.meta?.pitchModule === true ||
     fact.agent === 'system';
 
   let synthesis: SynthesisPayload;
-  if (skipLlm) {
+  if (fact.meta?.pitchModule === true) {
+    const spoken = logic.spokenDraft || fact.draftText || '';
+    const { chunkTextForTts } = await import('../speech/ttsChunker');
+    synthesis = {
+      spokenChunks: chunkTextForTts(spoken),
+      bullets: (fact.bullets ?? logic.bullets ?? []).slice(0, 6),
+      buttons: [],
+      fullDraftForUi: spoken,
+    };
+  } else if (skipLlm) {
     synthesis = synthesizeOutput(logic);
   } else {
     synthesis = await synthesizeRebootTurn({
