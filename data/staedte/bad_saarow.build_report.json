@@ -1,0 +1,997 @@
+{
+  "city_id": "bad_saarow",
+  "center": {
+    "lat": 52.27429619999999,
+    "lng": 14.0546568
+  },
+  "added": [
+    "bad_saarow_bad_saarow_strand",
+    "bad_saarow_bad_saarow"
+  ],
+  "skipped": [
+    {
+      "name": "Bad Saarow",
+      "near": "bad_saarow_bad_saarow"
+    },
+    {
+      "name": "Bad Saarow Klinikum",
+      "near": "bad_saarow_bad_saarow_klinikum"
+    },
+    {
+      "name": "Pieskow",
+      "near": "bad_saarow_pieskow"
+    },
+    {
+      "name": "Bahnhof Bad Saarow",
+      "near": "bad_saarow_bad_saarow"
+    },
+    {
+      "name": "Bahnhofsplatz Bad Saarow",
+      "near": "bad_saarow_bad_saarow"
+    },
+    {
+      "name": "Parkplatz am Bahnhof Bad Saarow",
+      "near": "bad_saarow_bad_saarow"
+    },
+    {
+      "name": "Bad Saarow",
+      "near": "bad_saarow_bad_saarow"
+    },
+    {
+      "name": "Bahnhofspl. 4/Bad Saarow, Bahnhof",
+      "near": "bad_saarow_bad_saarow"
+    },
+    {
+      "name": "Bad Saarow, Bahnhof",
+      "near": "bad_saarow_bad_saarow"
+    },
+    {
+      "name": "Bad Saarow, Bahnhof",
+      "near": "bad_saarow_bad_saarow_bahnhof"
+    },
+    {
+      "name": "Bad Saarow, Pieskow Bahnhof",
+      "near": "bad_saarow_pieskow"
+    },
+    {
+      "name": "Bad Saarow, Hafen",
+      "near": "bad_saarow_bad_saarow_hafen"
+    },
+    {
+      "name": "Bad Saarow",
+      "near": "bad_saarow_bad_saarow"
+    },
+    {
+      "name": "Bad Saarow Hafen",
+      "near": "bad_saarow_bad_saarow_schifffahrts_gmbh"
+    },
+    {
+      "name": "Bad Saarow Schifffahrts GmbH",
+      "near": "bad_saarow_bad_saarow_schifffahrts_gmbh"
+    },
+    {
+      "name": "Scharmützelsee „Am Hafen“",
+      "near": "bad_saarow_bad_saarow_hafen"
+    },
+    {
+      "name": "Sportboothafen Freilichtbühne",
+      "near": "bad_saarow_bad_saarow_schifffahrts_gmbh"
+    },
+    {
+      "name": "Fontanepark",
+      "near": "bad_saarow_fontanepark"
+    },
+    {
+      "name": "SaarowMarina",
+      "near": "bad_saarow_bad_saarow_schifffahrts_gmbh"
+    },
+    {
+      "name": "Scharmützelsee Schifffahrtsgesellschaft mbH",
+      "near": "bad_saarow_bad_saarow_schifffahrts_gmbh"
+    },
+    {
+      "name": "Bad Saarow, Hafen",
+      "near": "bad_saarow_bad_saarow_hafen"
+    },
+    {
+      "name": "Marina Hafen Freilichtbühne",
+      "near": "bad_saarow_marina_hafen_freilichtbuhne"
+    },
+    {
+      "name": "Scharwenka Kulturforum",
+      "near": "bad_saarow_scharwenka_kulturforum"
+    },
+    {
+      "name": "Scharwenka Stiftung",
+      "near": "bad_saarow_scharwenka_kulturforum"
+    },
+    {
+      "name": "Saarowcentrum",
+      "near": "bad_saarow_saarowcentrum"
+    },
+    {
+      "name": "KinderKunst Galerie",
+      "near": "bad_saarow_kinderkunst_galerie"
+    },
+    {
+      "name": "Evangelische Kirche",
+      "near": "bad_saarow_evangelische_kirche"
+    },
+    {
+      "name": "Dorfkirche Pieskow",
+      "near": "bad_saarow_dorfkirche_pieskow"
+    },
+    {
+      "name": "Brunnen Lebensfreude",
+      "near": "bad_saarow_bad_saarow"
+    },
+    {
+      "name": "Denkmal (Titel unbekannt)",
+      "near": "bad_saarow_denkmal_titel_unbekannt"
+    },
+    {
+      "name": "Steinbach-Brunnen",
+      "near": "bad_saarow_steinbach_brunnen"
+    },
+    {
+      "name": "Skulptur \"schwebender Findling\"",
+      "near": "bad_saarow_skulptur_schwebender_findling"
+    },
+    {
+      "name": "Neptun Statue",
+      "near": "bad_saarow_bad_saarow_schifffahrts_gmbh"
+    },
+    {
+      "name": "Die Statue von Johannes R.Becher",
+      "near": "bad_saarow_die_statue_von_johannes_r_becher"
+    },
+    {
+      "name": "Skulptur Uhu",
+      "near": "bad_saarow_bad_saarow_schifffahrts_gmbh"
+    },
+    {
+      "name": "Bad Saarow Strand",
+      "near": "bad_saarow_bad_saarow_strand"
+    },
+    {
+      "name": "Badestelle Bad Saarow Pieskow",
+      "near": "bad_saarow_badestelle_bad_saarow_pieskow"
+    },
+    {
+      "name": "Kurpark",
+      "near": "bad_saarow_kurpark"
+    },
+    {
+      "name": "Park Kurpark Kolonnaden",
+      "near": "bad_saarow_park_kurpark_kolonnaden"
+    },
+    {
+      "name": "Cecilienpark",
+      "near": "bad_saarow_cecilienpark"
+    },
+    {
+      "name": "Kleistpark",
+      "near": "bad_saarow_kleistpark"
+    },
+    {
+      "name": "Badestelle Westufer Scharmützelsee",
+      "near": "bad_saarow_badestelle_westufer_scharmutzelsee"
+    },
+    {
+      "name": "SeeBadSaarow by Esplanade",
+      "near": "bad_saarow_bad_saarow_strand"
+    },
+    {
+      "name": "Regattaplatz",
+      "near": "bad_saarow_regattaplatz"
+    },
+    {
+      "name": "Schlosspark Bad Saarow",
+      "near": "bad_saarow_schlosspark_bad_saarow"
+    },
+    {
+      "name": "Anlegestelle Bad Saarow Strand",
+      "near": "bad_saarow_anlegestelle_bad_saarow_strand"
+    },
+    {
+      "name": "Badestelle Diensdorf-Radlow",
+      "near": "bad_saarow_badestelle_diensdorf_radlow"
+    },
+    {
+      "name": "Falster XL inkl. Nebenkosten im Ferienpark Bad Saarow - Ferienpark Bad Saarow (Scharmützelsee)",
+      "near": "bad_saarow_schlosspark_bad_saarow"
+    },
+    {
+      "name": "Beach House • Bad Saarow",
+      "near": "bad_saarow_bad_saarow_strand"
+    },
+    {
+      "name": "Markgrafenplatz",
+      "near": "bad_saarow_markgrafenplatz"
+    },
+    {
+      "name": "Platz am Stein",
+      "near": "bad_saarow_platz_am_stein"
+    },
+    {
+      "name": "Freilich am See",
+      "near": "bad_saarow_freilich_am_see"
+    },
+    {
+      "name": "Scharmützelseegebiet",
+      "near": "bad_saarow_scharmutzelseegebiet"
+    },
+    {
+      "name": "Aussichtspunkt Scharmützelsee",
+      "near": "bad_saarow_aussichtspunkt_scharmutzelsee"
+    },
+    {
+      "name": "Wasserwerk Bad Saarow GbR",
+      "near": "bad_saarow_wasserwerk_bad_saarow_gbr"
+    },
+    {
+      "name": "Seebalkon am Kurpark",
+      "near": "bad_saarow_seebalkon_am_kurpark"
+    },
+    {
+      "name": "Golf Club Bad Saarow",
+      "near": "bad_saarow_golf_club_bad_saarow"
+    },
+    {
+      "name": "Stan Eby Golfplatz",
+      "near": "bad_saarow_stan_eby_golfplatz"
+    },
+    {
+      "name": "Tennis Center Bad Saarow",
+      "near": "bad_saarow_tennis_center_bad_saarow"
+    },
+    {
+      "name": "Amt-Scharmützelsee",
+      "near": "bad_saarow_amt_scharmutzelsee"
+    },
+    {
+      "name": "Tourist-Information Bad Saarow - Tourismusverein Scharmützelsee e.V. -",
+      "near": "bad_saarow_bad_saarow"
+    },
+    {
+      "name": "Lieblingsblick Scharmützelsee",
+      "near": "bad_saarow_lieblingsblick_scharmutzelsee"
+    },
+    {
+      "name": "Theater am See | Restaurant",
+      "near": "bad_saarow_theater_am_see_restaurant"
+    },
+    {
+      "name": "Eibenhof - Kultur- und Eventlocation",
+      "near": "bad_saarow_eibenhof_kultur_und_eventlocation"
+    },
+    {
+      "name": "Cinema by Velotel",
+      "near": "bad_saarow_cinema_by_velotel"
+    },
+    {
+      "name": "Seenland Oder-Spree e. V.",
+      "near": "bad_saarow_saarowcentrum"
+    },
+    {
+      "name": "AS am See",
+      "near": "bad_saarow_as_am_see"
+    },
+    {
+      "name": "Hotel Esplanade Resort & Spa",
+      "near": "bad_saarow_hotel_esplanade_resort_spa"
+    },
+    {
+      "name": "Wierich-Wiesen",
+      "near": "bad_saarow_wierich_wiesen"
+    },
+    {
+      "name": "Liegewiese",
+      "near": "bad_saarow_liegewiese"
+    },
+    {
+      "name": "Moorhexe",
+      "near": "bad_saarow_seebalkon_am_kurpark"
+    },
+    {
+      "name": "Bank mit Aussicht",
+      "near": "bad_saarow_bank_mit_aussicht"
+    },
+    {
+      "name": "Fahrradverleih Ernest Scheffler \"home of bikes\"",
+      "near": "bad_saarow_fahrradverleih_ernest_scheffler_home_of_bikes"
+    },
+    {
+      "name": "Märchenwald Bad Saarow Pieskow",
+      "near": "bad_saarow_marchenwald_bad_saarow_pieskow"
+    },
+    {
+      "name": "zur Alten Gärtnerei",
+      "near": "bad_saarow_zur_alten_gartnerei"
+    },
+    {
+      "name": "Ferienhaus direkt am Scharmützelsee Bad-Saarow Halbinsel Alte Eichen",
+      "near": "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen"
+    },
+    {
+      "name": "Scharmützelsee",
+      "near": "bad_saarow_scharmutzelsee"
+    },
+    {
+      "name": "Der Fitness Treff, Hajo Schrobitz",
+      "near": "bad_saarow_der_fitness_treff_hajo_schrobitz"
+    },
+    {
+      "name": "Kletterwald Bad Saarow",
+      "near": "bad_saarow_kletterwald_bad_saarow"
+    },
+    {
+      "name": "Altes Moorbad Bad Saarow",
+      "near": "bad_saarow_saarowcentrum"
+    },
+    {
+      "name": "Lychee's",
+      "near": "bad_saarow_park_kurpark_kolonnaden"
+    },
+    {
+      "name": "Spiegelbild - Wolfgang Krüger Mode GmbH",
+      "near": "bad_saarow_cinema_by_velotel"
+    },
+    {
+      "name": "Lounge Catwalk",
+      "near": "bad_saarow_lounge_catwalk"
+    },
+    {
+      "name": "KaffeeRösterei Bad Saarow",
+      "near": "bad_saarow_lounge_catwalk"
+    },
+    {
+      "name": "Helios Klinikum Bad Saarow",
+      "near": "bad_saarow_helios_klinikum_bad_saarow"
+    },
+    {
+      "name": "Apotheke am Klinikum",
+      "near": "bad_saarow_apotheke_am_klinikum"
+    },
+    {
+      "name": "Zentrale Notaufnahme und Rettungsmedizin | Helios Klinikum Bad Saarow",
+      "near": "bad_saarow_zentrale_notaufnahme_und_rettungsmedizin_helios_klinikum_bad_saarow"
+    },
+    {
+      "name": "Apotheke am Kurpark",
+      "near": "bad_saarow_apotheke_am_kurpark"
+    },
+    {
+      "name": "Stolperstein Philippi",
+      "near": "bad_saarow_stolperstein_philippi"
+    },
+    {
+      "name": "Scharmützelsee & Umgebung",
+      "near": "bad_saarow_scharmutzelsee_umgebung"
+    },
+    {
+      "name": "Stolperstein Goldstein",
+      "near": "bad_saarow_stolperstein_goldstein"
+    },
+    {
+      "name": "Stolperstein Behrens",
+      "near": "bad_saarow_stolperstein_behrens"
+    },
+    {
+      "name": "Nagetiere im Schilf",
+      "near": "bad_saarow_seebalkon_am_kurpark"
+    },
+    {
+      "name": "Stolperstein Herrnstadt",
+      "near": "bad_saarow_stolperstein_herrnstadt"
+    },
+    {
+      "name": "Picknickhütten",
+      "near": "bad_saarow_badestelle_diensdorf_radlow"
+    },
+    {
+      "name": "Kunstwerkstatt",
+      "near": "bad_saarow_saarowcentrum"
+    },
+    {
+      "name": "Bad Saarow, Theresienhof",
+      "near": "bad_saarow_bad_saarow_theresienhof"
+    },
+    {
+      "name": "Bad Saarow, Silberberg",
+      "near": "bad_saarow_bad_saarow_silberberg"
+    },
+    {
+      "name": "Erich-Weinert-Platz",
+      "near": "bad_saarow_erich_weinert_platz"
+    },
+    {
+      "name": "Bad Saarow Ferienhaus am Hafen",
+      "near": "bad_saarow_bad_saarow_ferienhaus_am_hafen"
+    },
+    {
+      "name": "Business Bad Saarow by Esplanade",
+      "near": "bad_saarow_bad_saarow_schifffahrts_gmbh"
+    },
+    {
+      "name": "Spielplatz Klinikum Bad Saarow",
+      "near": "bad_saarow_spielplatz_klinikum_bad_saarow"
+    },
+    {
+      "name": "Waldfriedhof Bad Saarow",
+      "near": "bad_saarow_waldfriedhof_bad_saarow"
+    },
+    {
+      "name": "BAD SAAROW CLASSICS",
+      "near": "bad_saarow_bad_saarow_classics"
+    },
+    {
+      "name": "Die Neue Bühne",
+      "near": "bad_saarow_die_neue_buhne"
+    },
+    {
+      "name": "Ulmenhaus",
+      "near": "bad_saarow_ulmenhaus"
+    },
+    {
+      "name": "Bootsverleih Ab-auf-den-See, O-NASS.IS & der Vagabund",
+      "near": "bad_saarow_marina_hafen_freilichtbuhne"
+    },
+    {
+      "name": "Surf & Fun",
+      "near": "bad_saarow_surf_fun"
+    },
+    {
+      "name": "Scharmützelsee Classics",
+      "near": "bad_saarow_bad_saarow_schifffahrts_gmbh"
+    },
+    {
+      "name": "AHOI - Mitsegeln Saarow - Axel Henschke & Ute Berger GbR",
+      "near": "bad_saarow_ahoi_mitsegeln_saarow_axel_henschke_ute_berger_gbr"
+    },
+    {
+      "name": "Wohlfühlboot Hausboot mieten in Berlin & Brandenburg ( Bad Saarow am Scharmützelsee )",
+      "near": "bad_saarow_wohlfuhlboot_hausboot_mieten_in_berlin_brandenburg_bad_saarow_am_scha"
+    },
+    {
+      "name": "Sonne3000 - Clubschiff3000",
+      "near": "bad_saarow_sonne3000_clubschiff3000"
+    },
+    {
+      "name": "Sonne3000 - Events & Erlebnisse",
+      "near": "bad_saarow_sonne3000_events_erlebnisse"
+    },
+    {
+      "name": "Kutsch- und Kremserfahrten Fred Peter",
+      "near": "bad_saarow_kutsch_und_kremserfahrten_fred_peter"
+    },
+    {
+      "name": "Traumzeitboot Hausboote & Yachten",
+      "near": "bad_saarow_traumzeitboot_hausboote_yachten"
+    },
+    {
+      "name": "YAAS - Yacht Akademie Axel Schmidt Station Nord",
+      "near": "bad_saarow_erich_weinert_platz"
+    },
+    {
+      "name": "Stefanie Kudella Floristik & Dekoration AUFTRAGSFLORISTIK",
+      "near": "bad_saarow_as_am_see"
+    },
+    {
+      "name": "Boutique Royal",
+      "near": "bad_saarow_as_am_see"
+    },
+    {
+      "name": "24/7 Kiosk Mini-Markt Snackautomat Späti",
+      "near": "bad_saarow_bad_saarow_bahnhof"
+    },
+    {
+      "name": "EDEKA Bad Saarow",
+      "near": "bad_saarow_edeka_bad_saarow"
+    },
+    {
+      "name": "Boutique Vived",
+      "near": "bad_saarow_boutique_vived"
+    },
+    {
+      "name": "Einfach-Tele-Mobil Stefan von Collrepp",
+      "near": "bad_saarow_einfach_tele_mobil_stefan_von_collrepp"
+    },
+    {
+      "name": "Wriezener Backstube",
+      "near": "bad_saarow_wriezener_backstube"
+    },
+    {
+      "name": "aja SPA Bad Saarow",
+      "near": "bad_saarow_aja_bad_saarow"
+    },
+    {
+      "name": "Küchen Haus Bad Saarow",
+      "near": "bad_saarow_park_kurpark_kolonnaden"
+    },
+    {
+      "name": "CHD-Networks GmbH",
+      "near": "bad_saarow_park_kurpark_kolonnaden"
+    },
+    {
+      "name": "HörPartner - DEIN HÖRGERÄT - Bad Saarow - Audibene Partner",
+      "near": "bad_saarow_apotheke_am_klinikum"
+    },
+    {
+      "name": "KUTINO",
+      "near": "bad_saarow_cinema_by_velotel"
+    },
+    {
+      "name": "Bäckerei Dreißig",
+      "near": "bad_saarow_cinema_by_velotel"
+    },
+    {
+      "name": "Hofgemeinschaft Marienhöhe GbR",
+      "near": "bad_saarow_hofgemeinschaft_marienhohe_gbr"
+    }
+  ],
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [
+      "bad_saarow_bad_saarow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_bad_saarow_klinikum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_pieskow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_bad_saarow_bahnhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_bad_saarow_hafen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_bad_saarow_schifffahrts_gmbh: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_fontanepark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_marina_hafen_freilichtbuhne: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_scharwenka_kulturforum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_saarowcentrum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_kinderkunst_galerie: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_evangelische_kirche: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_dorfkirche_pieskow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_denkmal_titel_unbekannt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_steinbach_brunnen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_skulptur_schwebender_findling: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_die_statue_von_johannes_r_becher: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_bad_saarow_strand: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_badestelle_bad_saarow_pieskow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_kurpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_park_kurpark_kolonnaden: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_cecilienpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_kleistpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_badestelle_westufer_scharmutzelsee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_schlosspark_bad_saarow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_regattaplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_anlegestelle_bad_saarow_strand: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_badestelle_diensdorf_radlow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_markgrafenplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_platz_am_stein: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_freilich_am_see: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_scharmutzelseegebiet: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_aussichtspunkt_scharmutzelsee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_wasserwerk_bad_saarow_gbr: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_seebalkon_am_kurpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_golf_club_bad_saarow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_stan_eby_golfplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_tennis_center_bad_saarow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_amt_scharmutzelsee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_lieblingsblick_scharmutzelsee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_theater_am_see_restaurant: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_eibenhof_kultur_und_eventlocation: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_cinema_by_velotel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_as_am_see: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_hotel_esplanade_resort_spa: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_wierich_wiesen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_liegewiese: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_bank_mit_aussicht: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_fahrradverleih_ernest_scheffler_home_of_bikes: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_marchenwald_bad_saarow_pieskow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_zur_alten_gartnerei: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_scharmutzelsee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_der_fitness_treff_hajo_schrobitz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_kletterwald_bad_saarow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_lounge_catwalk: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_helios_klinikum_bad_saarow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_zentrale_notaufnahme_und_rettungsmedizin_helios_klinikum_bad_saarow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_apotheke_am_klinikum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_apotheke_am_kurpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_stolperstein_philippi: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_scharmutzelsee_umgebung: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_stolperstein_goldstein: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_stolperstein_behrens: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_stolperstein_herrnstadt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_bad_saarow_theresienhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_bad_saarow_silberberg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_erich_weinert_platz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_bad_saarow_ferienhaus_am_hafen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_spielplatz_klinikum_bad_saarow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_waldfriedhof_bad_saarow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_aja_bad_saarow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_die_neue_buhne: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_ulmenhaus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_surf_fun: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_ahoi_mitsegeln_saarow_axel_henschke_ute_berger_gbr: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_wohlfuhlboot_hausboot_mieten_in_berlin_brandenburg_bad_saarow_am_scha: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_sonne3000_clubschiff3000: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_sonne3000_events_erlebnisse: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_kutsch_und_kremserfahrten_fred_peter: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_traumzeitboot_hausboote_yachten: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_edeka_bad_saarow: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_boutique_vived: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_einfach_tele_mobil_stefan_von_collrepp: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_wriezener_backstube: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_hofgemeinschaft_marienhohe_gbr: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bad_saarow_bad_saarow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_bad_saarow: deep_data_pool thin (1<4)",
+      "bad_saarow_bad_saarow_klinikum: general_info/Erzählung too short (0<80)",
+      "bad_saarow_bad_saarow_klinikum: deep_data_pool thin (1<4)",
+      "bad_saarow_pieskow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_pieskow: deep_data_pool thin (1<4)",
+      "bad_saarow_bad_saarow_bahnhof: general_info/Erzählung too short (0<80)",
+      "bad_saarow_bad_saarow_bahnhof: deep_data_pool thin (1<4)",
+      "bad_saarow_bad_saarow_hafen: general_info/Erzählung too short (0<80)",
+      "bad_saarow_bad_saarow_hafen: deep_data_pool thin (1<4)",
+      "bad_saarow_bad_saarow_schifffahrts_gmbh: general_info/Erzählung too short (0<80)",
+      "bad_saarow_bad_saarow_schifffahrts_gmbh: deep_data_pool thin (1<4)",
+      "bad_saarow_fontanepark: general_info/Erzählung too short (0<80)",
+      "bad_saarow_fontanepark: deep_data_pool thin (1<4)",
+      "bad_saarow_marina_hafen_freilichtbuhne: general_info/Erzählung too short (0<80)",
+      "bad_saarow_marina_hafen_freilichtbuhne: deep_data_pool thin (1<4)",
+      "bad_saarow_scharwenka_kulturforum: general_info/Erzählung too short (0<80)",
+      "bad_saarow_scharwenka_kulturforum: deep_data_pool thin (1<4)",
+      "bad_saarow_saarowcentrum: general_info/Erzählung too short (0<80)",
+      "bad_saarow_saarowcentrum: deep_data_pool thin (1<4)",
+      "bad_saarow_kinderkunst_galerie: general_info/Erzählung too short (0<80)",
+      "bad_saarow_kinderkunst_galerie: deep_data_pool thin (1<4)",
+      "bad_saarow_evangelische_kirche: general_info/Erzählung too short (0<80)",
+      "bad_saarow_evangelische_kirche: deep_data_pool thin (1<4)",
+      "bad_saarow_dorfkirche_pieskow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_dorfkirche_pieskow: deep_data_pool thin (1<4)",
+      "bad_saarow_denkmal_titel_unbekannt: general_info/Erzählung too short (0<80)",
+      "bad_saarow_denkmal_titel_unbekannt: deep_data_pool thin (1<4)",
+      "bad_saarow_steinbach_brunnen: general_info/Erzählung too short (0<80)",
+      "bad_saarow_steinbach_brunnen: deep_data_pool thin (1<4)",
+      "bad_saarow_skulptur_schwebender_findling: general_info/Erzählung too short (0<80)",
+      "bad_saarow_skulptur_schwebender_findling: deep_data_pool thin (1<4)",
+      "bad_saarow_die_statue_von_johannes_r_becher: general_info/Erzählung too short (0<80)",
+      "bad_saarow_die_statue_von_johannes_r_becher: deep_data_pool thin (1<4)",
+      "bad_saarow_bad_saarow_strand: general_info/Erzählung too short (0<80)",
+      "bad_saarow_bad_saarow_strand: deep_data_pool thin (1<4)",
+      "bad_saarow_badestelle_bad_saarow_pieskow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_badestelle_bad_saarow_pieskow: deep_data_pool thin (1<4)",
+      "bad_saarow_kurpark: general_info/Erzählung too short (0<80)",
+      "bad_saarow_kurpark: deep_data_pool thin (1<4)",
+      "bad_saarow_park_kurpark_kolonnaden: general_info/Erzählung too short (0<80)",
+      "bad_saarow_park_kurpark_kolonnaden: deep_data_pool thin (1<4)",
+      "bad_saarow_cecilienpark: general_info/Erzählung too short (0<80)",
+      "bad_saarow_cecilienpark: deep_data_pool thin (1<4)",
+      "bad_saarow_kleistpark: general_info/Erzählung too short (0<80)",
+      "bad_saarow_kleistpark: deep_data_pool thin (1<4)",
+      "bad_saarow_badestelle_westufer_scharmutzelsee: general_info/Erzählung too short (0<80)",
+      "bad_saarow_badestelle_westufer_scharmutzelsee: deep_data_pool thin (1<4)",
+      "bad_saarow_schlosspark_bad_saarow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_schlosspark_bad_saarow: deep_data_pool thin (1<4)",
+      "bad_saarow_regattaplatz: general_info/Erzählung too short (0<80)",
+      "bad_saarow_regattaplatz: deep_data_pool thin (1<4)",
+      "bad_saarow_anlegestelle_bad_saarow_strand: general_info/Erzählung too short (0<80)",
+      "bad_saarow_anlegestelle_bad_saarow_strand: deep_data_pool thin (1<4)",
+      "bad_saarow_badestelle_diensdorf_radlow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_badestelle_diensdorf_radlow: deep_data_pool thin (1<4)",
+      "bad_saarow_markgrafenplatz: general_info/Erzählung too short (0<80)",
+      "bad_saarow_markgrafenplatz: deep_data_pool thin (1<4)",
+      "bad_saarow_platz_am_stein: general_info/Erzählung too short (0<80)",
+      "bad_saarow_platz_am_stein: deep_data_pool thin (1<4)",
+      "bad_saarow_freilich_am_see: general_info/Erzählung too short (0<80)",
+      "bad_saarow_freilich_am_see: deep_data_pool thin (1<4)",
+      "bad_saarow_scharmutzelseegebiet: general_info/Erzählung too short (0<80)",
+      "bad_saarow_scharmutzelseegebiet: deep_data_pool thin (1<4)",
+      "bad_saarow_aussichtspunkt_scharmutzelsee: general_info/Erzählung too short (0<80)",
+      "bad_saarow_aussichtspunkt_scharmutzelsee: deep_data_pool thin (1<4)",
+      "bad_saarow_wasserwerk_bad_saarow_gbr: general_info/Erzählung too short (0<80)",
+      "bad_saarow_wasserwerk_bad_saarow_gbr: deep_data_pool thin (1<4)",
+      "bad_saarow_seebalkon_am_kurpark: general_info/Erzählung too short (0<80)",
+      "bad_saarow_seebalkon_am_kurpark: deep_data_pool thin (1<4)",
+      "bad_saarow_golf_club_bad_saarow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_golf_club_bad_saarow: deep_data_pool thin (1<4)",
+      "bad_saarow_stan_eby_golfplatz: general_info/Erzählung too short (0<80)",
+      "bad_saarow_stan_eby_golfplatz: deep_data_pool thin (1<4)",
+      "bad_saarow_tennis_center_bad_saarow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_tennis_center_bad_saarow: deep_data_pool thin (1<4)",
+      "bad_saarow_amt_scharmutzelsee: general_info/Erzählung too short (0<80)",
+      "bad_saarow_amt_scharmutzelsee: deep_data_pool thin (1<4)",
+      "bad_saarow_lieblingsblick_scharmutzelsee: general_info/Erzählung too short (0<80)",
+      "bad_saarow_lieblingsblick_scharmutzelsee: deep_data_pool thin (1<4)",
+      "bad_saarow_wierich_wiesen: general_info/Erzählung too short (0<80)",
+      "bad_saarow_wierich_wiesen: deep_data_pool thin (1<4)",
+      "bad_saarow_liegewiese: general_info/Erzählung too short (0<80)",
+      "bad_saarow_liegewiese: deep_data_pool thin (1<4)",
+      "bad_saarow_bank_mit_aussicht: general_info/Erzählung too short (0<80)",
+      "bad_saarow_bank_mit_aussicht: deep_data_pool thin (1<4)",
+      "bad_saarow_fahrradverleih_ernest_scheffler_home_of_bikes: general_info/Erzählung too short (0<80)",
+      "bad_saarow_fahrradverleih_ernest_scheffler_home_of_bikes: deep_data_pool thin (1<4)",
+      "bad_saarow_marchenwald_bad_saarow_pieskow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_marchenwald_bad_saarow_pieskow: deep_data_pool thin (1<4)",
+      "bad_saarow_zur_alten_gartnerei: general_info/Erzählung too short (0<80)",
+      "bad_saarow_zur_alten_gartnerei: deep_data_pool thin (1<4)",
+      "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen: general_info/Erzählung too short (0<80)",
+      "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen: deep_data_pool thin (1<4)",
+      "bad_saarow_scharmutzelsee: general_info/Erzählung too short (0<80)",
+      "bad_saarow_scharmutzelsee: deep_data_pool thin (1<4)",
+      "bad_saarow_der_fitness_treff_hajo_schrobitz: general_info/Erzählung too short (0<80)",
+      "bad_saarow_der_fitness_treff_hajo_schrobitz: deep_data_pool thin (1<4)",
+      "bad_saarow_kletterwald_bad_saarow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_kletterwald_bad_saarow: deep_data_pool thin (1<4)",
+      "bad_saarow_lounge_catwalk: general_info/Erzählung too short (0<80)",
+      "bad_saarow_lounge_catwalk: deep_data_pool thin (1<4)",
+      "bad_saarow_stolperstein_philippi: general_info/Erzählung too short (0<80)",
+      "bad_saarow_stolperstein_philippi: deep_data_pool thin (1<4)",
+      "bad_saarow_scharmutzelsee_umgebung: general_info/Erzählung too short (0<80)",
+      "bad_saarow_scharmutzelsee_umgebung: deep_data_pool thin (1<4)",
+      "bad_saarow_stolperstein_goldstein: general_info/Erzählung too short (0<80)",
+      "bad_saarow_stolperstein_goldstein: deep_data_pool thin (1<4)",
+      "bad_saarow_stolperstein_behrens: general_info/Erzählung too short (0<80)",
+      "bad_saarow_stolperstein_behrens: deep_data_pool thin (1<4)",
+      "bad_saarow_stolperstein_herrnstadt: general_info/Erzählung too short (0<80)",
+      "bad_saarow_stolperstein_herrnstadt: deep_data_pool thin (1<4)",
+      "bad_saarow_bad_saarow_theresienhof: general_info/Erzählung too short (0<80)",
+      "bad_saarow_bad_saarow_theresienhof: deep_data_pool thin (1<4)",
+      "bad_saarow_bad_saarow_silberberg: general_info/Erzählung too short (0<80)",
+      "bad_saarow_bad_saarow_silberberg: deep_data_pool thin (1<4)",
+      "bad_saarow_erich_weinert_platz: general_info/Erzählung too short (0<80)",
+      "bad_saarow_erich_weinert_platz: deep_data_pool thin (1<4)",
+      "bad_saarow_bad_saarow_ferienhaus_am_hafen: general_info/Erzählung too short (0<80)",
+      "bad_saarow_bad_saarow_ferienhaus_am_hafen: deep_data_pool thin (1<4)",
+      "bad_saarow_spielplatz_klinikum_bad_saarow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_spielplatz_klinikum_bad_saarow: deep_data_pool thin (1<4)",
+      "bad_saarow_waldfriedhof_bad_saarow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_waldfriedhof_bad_saarow: deep_data_pool thin (1<4)",
+      "bad_saarow_aja_bad_saarow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_aja_bad_saarow: deep_data_pool thin (1<4)",
+      "bad_saarow_surf_fun: general_info/Erzählung too short (0<80)",
+      "bad_saarow_surf_fun: deep_data_pool thin (1<4)",
+      "bad_saarow_ahoi_mitsegeln_saarow_axel_henschke_ute_berger_gbr: general_info/Erzählung too short (0<80)",
+      "bad_saarow_ahoi_mitsegeln_saarow_axel_henschke_ute_berger_gbr: deep_data_pool thin (1<4)",
+      "bad_saarow_wohlfuhlboot_hausboot_mieten_in_berlin_brandenburg_bad_saarow_am_scha: general_info/Erzählung too short (0<80)",
+      "bad_saarow_wohlfuhlboot_hausboot_mieten_in_berlin_brandenburg_bad_saarow_am_scha: deep_data_pool thin (1<4)",
+      "bad_saarow_sonne3000_clubschiff3000: general_info/Erzählung too short (0<80)",
+      "bad_saarow_sonne3000_clubschiff3000: deep_data_pool thin (1<4)",
+      "bad_saarow_sonne3000_events_erlebnisse: general_info/Erzählung too short (0<80)",
+      "bad_saarow_sonne3000_events_erlebnisse: deep_data_pool thin (1<4)",
+      "bad_saarow_kutsch_und_kremserfahrten_fred_peter: general_info/Erzählung too short (0<80)",
+      "bad_saarow_kutsch_und_kremserfahrten_fred_peter: deep_data_pool thin (1<4)",
+      "bad_saarow_traumzeitboot_hausboote_yachten: general_info/Erzählung too short (0<80)",
+      "bad_saarow_traumzeitboot_hausboote_yachten: deep_data_pool thin (1<4)",
+      "bad_saarow_edeka_bad_saarow: general_info/Erzählung too short (0<80)",
+      "bad_saarow_edeka_bad_saarow: deep_data_pool thin (1<4)",
+      "bad_saarow_boutique_vived: general_info/Erzählung too short (0<80)",
+      "bad_saarow_boutique_vived: deep_data_pool thin (1<4)",
+      "bad_saarow_einfach_tele_mobil_stefan_von_collrepp: general_info/Erzählung too short (0<80)",
+      "bad_saarow_einfach_tele_mobil_stefan_von_collrepp: deep_data_pool thin (1<4)",
+      "bad_saarow_wriezener_backstube: general_info/Erzählung too short (0<80)",
+      "bad_saarow_wriezener_backstube: deep_data_pool thin (1<4)",
+      "bad_saarow_hofgemeinschaft_marienhohe_gbr: general_info/Erzählung too short (0<80)",
+      "bad_saarow_hofgemeinschaft_marienhohe_gbr: deep_data_pool thin (1<4)"
+    ],
+    "stats": {
+      "spots": 151,
+      "storySpots": 108,
+      "directorySpots": 43,
+      "triggers": 151,
+      "missingTrigger": 0,
+      "missingNarration": 75,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 75,
+      "orphanTriggers": 0,
+      "categories": [
+        "altstadt",
+        "aussicht",
+        "bahnhof",
+        "cafe",
+        "denkmal",
+        "einkaufen",
+        "freizeit",
+        "freizeitpark",
+        "gepaeck",
+        "gesundheit",
+        "hafen",
+        "hotel",
+        "kirche",
+        "markt",
+        "museum",
+        "natur",
+        "radweg",
+        "restaurant",
+        "service",
+        "souvenir",
+        "spielplatz",
+        "sport",
+        "supermarket",
+        "tankstelle",
+        "theater",
+        "toilette",
+        "tour",
+        "tourist_info",
+        "verwaltung",
+        "wanderung"
+      ],
+      "missingMustHave": [],
+      "nicePresent": [
+        "cafe",
+        "restaurant",
+        "hotel",
+        "einkaufen",
+        "service",
+        "gesundheit",
+        "sport",
+        "hafen",
+        "bahnhof"
+      ],
+      "liveResearch": 4,
+      "offlineQa": 50,
+      "hasCoverage": true,
+      "hasTransit": false,
+      "hasMobility": false,
+      "links": 0
+    },
+    "gaps": {
+      "needsNarration": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_pieskow",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_bad_saarow_schifffahrts_gmbh",
+        "bad_saarow_fontanepark",
+        "bad_saarow_marina_hafen_freilichtbuhne",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_saarowcentrum",
+        "bad_saarow_kinderkunst_galerie",
+        "bad_saarow_evangelische_kirche",
+        "bad_saarow_dorfkirche_pieskow",
+        "bad_saarow_denkmal_titel_unbekannt",
+        "bad_saarow_steinbach_brunnen",
+        "bad_saarow_skulptur_schwebender_findling",
+        "bad_saarow_die_statue_von_johannes_r_becher",
+        "bad_saarow_bad_saarow_strand",
+        "bad_saarow_badestelle_bad_saarow_pieskow",
+        "bad_saarow_kurpark",
+        "bad_saarow_park_kurpark_kolonnaden",
+        "bad_saarow_cecilienpark",
+        "bad_saarow_kleistpark",
+        "bad_saarow_badestelle_westufer_scharmutzelsee",
+        "bad_saarow_schlosspark_bad_saarow",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_markgrafenplatz",
+        "bad_saarow_platz_am_stein",
+        "bad_saarow_freilich_am_see",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_seebalkon_am_kurpark",
+        "bad_saarow_golf_club_bad_saarow",
+        "bad_saarow_stan_eby_golfplatz",
+        "bad_saarow_tennis_center_bad_saarow",
+        "bad_saarow_amt_scharmutzelsee",
+        "bad_saarow_lieblingsblick_scharmutzelsee",
+        "bad_saarow_wierich_wiesen",
+        "bad_saarow_liegewiese",
+        "bad_saarow_bank_mit_aussicht",
+        "bad_saarow_fahrradverleih_ernest_scheffler_home_of_bikes",
+        "bad_saarow_marchenwald_bad_saarow_pieskow",
+        "bad_saarow_zur_alten_gartnerei",
+        "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen",
+        "bad_saarow_scharmutzelsee",
+        "bad_saarow_der_fitness_treff_hajo_schrobitz",
+        "bad_saarow_kletterwald_bad_saarow",
+        "bad_saarow_lounge_catwalk",
+        "bad_saarow_stolperstein_philippi",
+        "bad_saarow_scharmutzelsee_umgebung",
+        "bad_saarow_stolperstein_goldstein",
+        "bad_saarow_stolperstein_behrens",
+        "bad_saarow_stolperstein_herrnstadt",
+        "bad_saarow_bad_saarow_theresienhof",
+        "bad_saarow_bad_saarow_silberberg",
+        "bad_saarow_erich_weinert_platz",
+        "bad_saarow_bad_saarow_ferienhaus_am_hafen",
+        "bad_saarow_spielplatz_klinikum_bad_saarow",
+        "bad_saarow_waldfriedhof_bad_saarow",
+        "bad_saarow_aja_bad_saarow",
+        "bad_saarow_surf_fun",
+        "bad_saarow_ahoi_mitsegeln_saarow_axel_henschke_ute_berger_gbr",
+        "bad_saarow_wohlfuhlboot_hausboot_mieten_in_berlin_brandenburg_bad_saarow_am_scha",
+        "bad_saarow_sonne3000_clubschiff3000",
+        "bad_saarow_sonne3000_events_erlebnisse",
+        "bad_saarow_kutsch_und_kremserfahrten_fred_peter",
+        "bad_saarow_traumzeitboot_hausboote_yachten",
+        "bad_saarow_edeka_bad_saarow",
+        "bad_saarow_boutique_vived",
+        "bad_saarow_einfach_tele_mobil_stefan_von_collrepp",
+        "bad_saarow_wriezener_backstube",
+        "bad_saarow_hofgemeinschaft_marienhohe_gbr"
+      ],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_pieskow",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_bad_saarow_schifffahrts_gmbh",
+        "bad_saarow_fontanepark",
+        "bad_saarow_marina_hafen_freilichtbuhne",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_saarowcentrum",
+        "bad_saarow_kinderkunst_galerie",
+        "bad_saarow_evangelische_kirche",
+        "bad_saarow_dorfkirche_pieskow",
+        "bad_saarow_denkmal_titel_unbekannt",
+        "bad_saarow_steinbach_brunnen",
+        "bad_saarow_skulptur_schwebender_findling",
+        "bad_saarow_die_statue_von_johannes_r_becher",
+        "bad_saarow_bad_saarow_strand",
+        "bad_saarow_badestelle_bad_saarow_pieskow",
+        "bad_saarow_kurpark",
+        "bad_saarow_park_kurpark_kolonnaden",
+        "bad_saarow_cecilienpark",
+        "bad_saarow_kleistpark",
+        "bad_saarow_badestelle_westufer_scharmutzelsee",
+        "bad_saarow_schlosspark_bad_saarow",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_markgrafenplatz",
+        "bad_saarow_platz_am_stein",
+        "bad_saarow_freilich_am_see",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_seebalkon_am_kurpark",
+        "bad_saarow_golf_club_bad_saarow",
+        "bad_saarow_stan_eby_golfplatz",
+        "bad_saarow_tennis_center_bad_saarow",
+        "bad_saarow_amt_scharmutzelsee",
+        "bad_saarow_lieblingsblick_scharmutzelsee",
+        "bad_saarow_wierich_wiesen",
+        "bad_saarow_liegewiese",
+        "bad_saarow_bank_mit_aussicht",
+        "bad_saarow_fahrradverleih_ernest_scheffler_home_of_bikes",
+        "bad_saarow_marchenwald_bad_saarow_pieskow",
+        "bad_saarow_zur_alten_gartnerei",
+        "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen",
+        "bad_saarow_scharmutzelsee",
+        "bad_saarow_der_fitness_treff_hajo_schrobitz",
+        "bad_saarow_kletterwald_bad_saarow",
+        "bad_saarow_lounge_catwalk",
+        "bad_saarow_stolperstein_philippi",
+        "bad_saarow_scharmutzelsee_umgebung",
+        "bad_saarow_stolperstein_goldstein",
+        "bad_saarow_stolperstein_behrens",
+        "bad_saarow_stolperstein_herrnstadt",
+        "bad_saarow_bad_saarow_theresienhof",
+        "bad_saarow_bad_saarow_silberberg",
+        "bad_saarow_erich_weinert_platz",
+        "bad_saarow_bad_saarow_ferienhaus_am_hafen",
+        "bad_saarow_spielplatz_klinikum_bad_saarow",
+        "bad_saarow_waldfriedhof_bad_saarow",
+        "bad_saarow_aja_bad_saarow",
+        "bad_saarow_surf_fun",
+        "bad_saarow_ahoi_mitsegeln_saarow_axel_henschke_ute_berger_gbr",
+        "bad_saarow_wohlfuhlboot_hausboot_mieten_in_berlin_brandenburg_bad_saarow_am_scha",
+        "bad_saarow_sonne3000_clubschiff3000",
+        "bad_saarow_sonne3000_events_erlebnisse",
+        "bad_saarow_kutsch_und_kremserfahrten_fred_peter",
+        "bad_saarow_traumzeitboot_hausboote_yachten",
+        "bad_saarow_edeka_bad_saarow",
+        "bad_saarow_boutique_vived",
+        "bad_saarow_einfach_tele_mobil_stefan_von_collrepp",
+        "bad_saarow_wriezener_backstube",
+        "bad_saarow_hofgemeinschaft_marienhohe_gbr"
+      ],
+      "missingCategories": []
+    }
+  },
+  "file": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\bad_saarow.json"
+}

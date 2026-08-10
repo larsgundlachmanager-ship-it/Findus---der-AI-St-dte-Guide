@@ -7,8 +7,17 @@ alwaysApply: true
 
 ## Frühes Feedback
 
-- Lange Recherche (Web/Events/Dining): sofort kurzes Ack-Audio („ich guck kurz nach“), dann Ergebnis.
-- Finale Antwort nutzt Satz-Streaming (erster Satz startet TTS, Rest folgt).
+- Lange Recherche (Web/Events/Dining): sofort intent-passendes Ack/Bridge-Audio — das ist das **einzige** Vorgeplänkel (Motivation, Bezug zu Bekanntem, „mega Plan“).
+- Ack vor Context/Decompose feuern (`researchAck.ts` / Floskel-Engine); Phrasen variieren.
+- Decompose: Heuristik-Agents starten parallel zum LLM-Decompose; fehlende Agenten danach nachziehen.
+- Finale Antwort nutzt Satz-Streaming (erster Satz startet TTS, Rest folgt) — erster Satz = klare Antwort/Lead.
+
+## Antwort-First (Haupt-Speech)
+
+- Nach der Bridge: **sofort** die Frage beantworten (optional 1–2 Sätze Zusammenfassung vorne, dann ausführen).
+- Tipps, Alternativen, Warnungen **hinten** — nicht vor der Lösung.
+- Kein zweites Lob-/Meta-Vorgeplänkel in `speechText` („gute Frage“, „ich schau mal“, doppelte Bridge).
+- SSOT: `FINDUS_ANSWER_FIRST_BLOCK` + `FINDUS_BRIDGE_CONTINUITY_BLOCK` in `findusResponsePolicy.ts`.
 
 ## Mehrteilige Fragen
 
@@ -18,6 +27,6 @@ alwaysApply: true
 
 ## Policy SSOT
 
-- Concierge-Just-Do-It / Compound-Regeln leben in `src/services/concierge/findusResponsePolicy.ts`.
+- Concierge-Just-Do-It / Compound- / Answer-First-Regeln leben in `src/services/concierge/findusResponsePolicy.ts`.
 - Nicht dieselben JUST-DO-IT-Absätze in 5 Prompt-Dateien duplizieren — importieren.
 - Event-/Party-Buttons: siehe `findus-masterbook-v5-event-research.mdc`.

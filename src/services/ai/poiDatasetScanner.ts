@@ -100,7 +100,7 @@ function classifyForeign(token: string): boolean {
   return false;
 }
 
-/** Regel-Engine: Fremdwort → deutsche Lautschrift für Piper. */
+/** Regel-Engine: Fremdwort → deutsche Lautschrift für TTS. */
 export function applyPhoneticRules(word: string): string | null {
   const w = word.normalize('NFKC').trim();
   if (w.length < 3) return null;

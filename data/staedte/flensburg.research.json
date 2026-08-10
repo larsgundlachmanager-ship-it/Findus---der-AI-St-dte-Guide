@@ -1,0 +1,73 @@
+{
+  "city_history_addons": [],
+  "spots": [
+    {
+      "id": "flensburg_st_nikolai_kirche_zu_flensburg_der_ev_luth_st_nikolai_kirchengemeinde_",
+      "name": "St. Nikolai-Kirche",
+      "lat": 54.7831,
+      "lng": 9.4357,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Die größte Kirche der Stadt thront direkt am Südermarkt. Sie ist ein herausragendes Beispiel der Backsteingotik und besticht durch ihren markanten, weit sichtbaren Turmhelm.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Eine mächtige gotische Stufenhalle. Im Inneren dominieren backsteinsichtige Rundpfeiler und der kunstvolle Renaissance-Orgelprospekt im westlichen Teil.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: Die Kirche wurde zwischen 1390 und 1480 in zwei Bauabschnitten errichtet. Der ursprüngliche Kirchturm fiel 1877 einem Blitzschlag zum Opfer. Bereits 1878 wurde er durch den Berliner Architekten Johannes Otzen in seiner heutigen Form als 90 Meter hoher, neogotischer Turmhelm neu aufgebaut.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Die Gemeinde versteht St. Nikolai als 'Offene Kirche für die Stadt'. Sie ist in der Regel täglich von 9:00 bis 18:00 Uhr zur Besichtigung und Einkehr geöffnet. Spezielle Termine wie konzertante Orgelführungen oder Turmbesteigungen (z.B. am Tag des offenen Denkmals) müssen tagesaktuell geprüft werden.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Direkt vor den Toren der Kirche tobt an Markttagen das laute Treiben des Südermarkts, während im Inneren absolute Stille herrscht.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Von wem stammt der historische Orgelprospekt?",
+          "a": "Der prächtige Renaissance-Prospekt wurde zwischen 1604 und 1609 von dem Flensburger Bildhauer Heinrich Ringerink geschnitzt, das ursprüngliche Orgelwerk baute der Kopenhagener Hoforgelbaumeister Nicolas Maaß."
+        }
+      ]
+    },
+    {
+      "id": "flensburg_braasch_rum_rum_manufaktur_museum",
+      "name": "Braasch Rum & Rum Manufaktur Museum",
+      "lat": 54.7812,
+      "lng": 9.4362,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Ein lebendiges Zeugnis der Flensburger Rum-Tradition. Hier wird die jahrhundertealte wirtschaftliche Verbindung zwischen der Karibik und der Fördestadt erlebbar.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Das Museum befindet sich gut versteckt in den historischen Räumen des Braasch-Hofes. Im Vorderhaus direkt an der Straße liegt das dazugehörige Wein- und Rumgeschäft.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: Das sogenannte 'Gold der Karibik' machte die damals dänische Handelsstadt reich. Zucker, Rum und weitere Kolonialwaren gelangten auf Segelschiffen aus Dänisch-Westindien direkt an die Flensburger Häfen.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Der Eintritt in das Museum ist frei. Es hat zu den Geschäftszeiten des Ladens geöffnet (regulär Mo-Fr 10:00–18:30 Uhr, Sa 10:00–16:00 Uhr, im Advent bis 18:00 Uhr). Im Geschäft wird erwachsenen Besuchern oft ein kostenloser Probeschluck angeboten.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Im Museum wird genau die Epoche dokumentiert, in der die Flensburger Kaufmannsfamilien ihren Reichtum begründeten – jener Reichtum, aus dem unter anderem auch der Christiansenpark finanziert wurde.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Muss man für das Rum-Museum vorab Tickets buchen?",
+          "a": "Nein, das privat geführte Museum kann während der regulären Öffnungszeiten spontan und kostenlos besichtigt werden."
+        }
+      ]
+    }
+  ],
+  "new_places": [],
+  "offline_qa": []
+}

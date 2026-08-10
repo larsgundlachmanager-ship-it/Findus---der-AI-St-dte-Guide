@@ -1,0 +1,656 @@
+{
+  "notes": [
+    "Depth Wave D1: Berlin Ikonen — additive deep_data_pool für Trigger-Textpool ≥3000 Zeichen.",
+    "Quellen: de.wikipedia.org, berlin.de, visitberlin.de, Bundestag, Dom Berlin, SPK/SPSG, Stiftung Denkmal, Topographie des Terrors, Humboldt Forum. Preise/Zeiten nur LIVE.",
+    "Kein general_info — bestehende Trigger-Kurztexte bleiben erhalten."
+  ],
+  "spots": [
+    {
+      "id": "berlin_brandenburger_tor",
+      "name": "Brandenburger Tor",
+      "lat": 52.516389,
+      "lng": 13.377778,
+      "deep_data_pool": [
+        {
+          "text": "Pariser Platz: nach dem Siebenjährigen Krieg benannte Friedrich II. den Platz 1770 zu Ehren des Friedens von Paris; das Tor schloss ab 1791 die westliche Achse von Unter den Linden. Heute steht der Platz unter Ensembleschutz; seit den 1990er-Jahren wieder repräsentativer Repräsentationsort (Botschaften, Adlon).",
+          "tags": [
+            "geschichte",
+            "quer"
+          ]
+        },
+        {
+          "text": "Quadriga-Geschichte: Johann Gottfried Schadows Bronze (1793) zeigt die Friedensgöttin Eirene auf Viergespann; 1806 nach Paris gebracht, 1814 als Kriegstrophäe zurück; Lorbeerkranz und Eisernes Kreuz ergänzten später die Deutung als Siegeszeichen — nach 1945 entfernt, 1990/91 wiederhergestellt (Stiftung Denkmalschutz Berlin / Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Teilung: 1961 stand die Mauer unmittelbar westlich des Tors; der Pariser Platz lag im Sperrgebiet. Am 22. Dezember 1989 öffnete sich die Grenze am Brandenburger Tor — Symbol der Wiedervereinigung (chronik-der-mauer.de / Berlin.de).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Visuell von Westen: sechs dorische Säulenpaare, Attika mit „Dem deutschen Volke“ (1916), breite Durchfahrt; von Osten Unter-den-Linden-Perspektive bis zum Schlossplatz/Humboldt Forum.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "LIVE: Tourist-Info im Tor, Führungen und Veranstaltungen auf visitberlin.de / stiftung-denkmalschutz.de prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum steht auf dem Brandenburger Tor „Dem deutschen Volke“?",
+          "a": "Die Inschrift wurde 1916 während des Ersten Weltkriegs angebracht — politische Umdeutung vom klassizistischen Triumphtor zum Volksdenkmal."
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_reichstagsgebaude",
+      "name": "Reichstagsgebäude",
+      "lat": 52.518639,
+      "lng": 13.376111,
+      "deep_data_pool": [
+        {
+          "text": "Architekt Paul Wallot (1884–1894): Neo-Renaissance mit markanter Glaskuppel; Kaiser Wilhelm II. lehnte den Bau ab, die erste Sitzung fand dennoch 1894 statt. Die Fassadeninschrift „Dem deutschen Volke“ (1916) und der Britzschlag 1945 prägen die Erinnerungsgeschichte (Deutscher Bundestag / Wikipedia).",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Reichstagsbrand 27. Februar 1933: Das Gebäude brannte schwer; politische Folgen (Reichstagsbrandverordnung) sind zentral für die NS-Machtfestigung. Der Wiederaufbau als Bundestag nach 1990 folgte auf den Beschluss zur Hauptstadt Berlin.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kuppel Norman Foster (1999): Die walkable Glaskuppel auf dem rekonstruierten Kuppelring symbolisiert Transparenz; Spirale führt Besucher nach oben, Blick auf Plenarsaal und Stadt. Registrierung für Dome-Besuch über Bundestag-Website (LIVE).",
+          "tags": [
+            "architektur",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Kunst am Bau: Die von Christo und Jeanne-Claude 1995 verhüllte Reichstagsfassade („Wrapped Reichstag“) zog Millionen an — kurzzeitige künstlerische Transformation eines politischen Symbols.",
+          "tags": [
+            "geschichte",
+            "kultur"
+          ]
+        },
+        {
+          "text": "LIVE: Kuppelbesuch, Plenarsitzungen, Sicherheitscheck — Termine und Freischaltung auf bundestag.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_berliner_fernsehturm",
+      "name": "Berliner Fernsehturm",
+      "lat": 52.520833,
+      "lng": 13.409444,
+      "deep_data_pool": [
+        {
+          "text": "Höhe 368 m (mit Antenne), eröffnet 3. Oktober 1969: höchstes Bauwerk Deutschlands; Entwurf Hermann Henselmann u. a. für die DDR-Staatssymbolik am Alexanderplatz. Stahlbeton-Schaft und Kugel (ca. 203 m) mit Aussichtsetage und drehender Restaurant-Etage „Tele-Café“ (Wikipedia / visitBerlin).",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Visuell: silbrige Kugel mit roten Streifen (seit 1990er), schlanker Turmschaft; von vielen Berliner Kiezen als Orientierungspunkt sichtbar — „Walter Ulbrichts Finger“ in Umgangssprache der Wendezeit.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Technik: Sendeanlage für DVB-T/DAB+ und UKW; touristische Plattform in 203 m Höhe mit Panoramablick bis zur Mark Brandenburg bei klarer Sicht.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Städtebaulicher Kontext: Herzstück des sozialistisch umgestalteten Alexanderplatzes der 1960er/70er (Weltzeituhr, Park Inn, Neubauten).",
+          "tags": [
+            "quer",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Tickets, Wartezeiten und Öffnung auf tv-turm.de prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_museumsinsel",
+      "name": "Museumsinsel",
+      "lat": 52.52066,
+      "lng": 13.39748,
+      "deep_data_pool": [
+        {
+          "text": "UNESCO-Welterbe seit 1999: Ensemble aus Altes Museum (Schinkel, 1830), Neues Museum (Stüler, 1859), Alte Nationalgalerie, Bode-Museum und Pergamonmuseum auf der Spreeinsel — „Athen an der Spree“ (Stiftung Preußischer Kulturbesitz).",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "James-Simon-Galerie (David Chipperfield, 2019): zentraler Besuchereingang und Sammelpunkt zwischen Kolonnaden; barrierefreie Erschließung der Inselmuseen.",
+          "tags": [
+            "architektur",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Pergamonmuseum: wegen Teil-Sanierung langfristige Baustelle; Altäre (Pergamonaltar, Ischtar-Tor) teils in anderen Häusern oder eingeschränkt — SPK-Mitteilungen beachten (LIVE).",
+          "tags": [
+            "leben_jetzt",
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Lustgarten vor dem Dom: historischer Fest- und Paradeplatz; heute Freifläche zwischen Dom, Altes Museum und Spreeufer.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Kombi-Tickets, Zeitslots und Baustellenrouting auf smb.museum / visitberlin.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_berliner_dom",
+      "name": "Berliner Dom",
+      "lat": 52.51916667,
+      "lng": 13.40111111,
+      "deep_data_pool": [
+        {
+          "text": "Vorgängerbauten: Mittelalterliche Domkirche, barocker Dom unter Johann Boumann d. Ä. (1747); der heutige Neorenaissancebau 1894–1905 sollte als Hofkirche Wilhelms II. der protestantischen Hauptstadt Prestige verleihen (Dom Berlin / Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Hohenzollerngruft: etwa 94 Särge von Hohenzollern von Friedrich I. bis zur frühen Bundesrepublik; zentrale dynastische Erinnerungsstätte — Führungen durch die Gruft möglich (LIVE Dom Berlin).",
+          "tags": [
+            "geschichte",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Orgel: Sauer-Orgel von 1905, nach Kriegsschäden mehrfach erweitert; internationale Konzerte im Domkalender (domberlin.de).",
+          "tags": [
+            "kultur",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Kuppelaufstieg: Aussichtsplattform in der Laterne mit Blick auf Lustgarten, Museumsinsel und Fernsehturm — Aufstieg über Wendeltreppe (LIVE Öffnung).",
+          "tags": [
+            "leben_jetzt",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Stiftung Dom Berlin: Evangelische Kirche; Gottesdienste öffentlich, touristischer Besuch getrennt ticketpflichtig — domberlin.de.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Eintritt Kuppel/Gruft, Gottesdienst-Zeiten auf domberlin.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_east_side_gallery",
+      "name": "East Side Gallery",
+      "lat": 52.505113,
+      "lng": 13.439424,
+      "deep_data_pool": [
+        {
+          "text": "Länge ca. 1,3 km entlang der Mühlenstraße: größte erhaltene Open-Air-Galerie der Welt auf original Hinterlandmauer (1990 von Künstlern aus 21 Ländern bemalt). Denkmalschutz seit 1991 (visitBerlin / Berlin.de).",
+          "tags": [
+            "geschichte",
+            "kultur"
+          ]
+        },
+        {
+          "text": "Ikonisches Motiv „Bruderkuss“ (Dmitri Wrubel nach dem Foto von Régis Bossu): Leonid Breschnew und Erich Honecker — oft als Galerie-Symbol fotografiert; Restaurierungen nach Vandalismus dokumentiert.",
+          "tags": [
+            "kultur",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Ostbahnhof-Nähe: Spreeufer promenade; gegenüber Mediaspree-Entwicklung — Kontrast zwischen Wende-Kunst und Neubau-Skyline.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Mauer typologisch: Hinterlandmauer (beton, keine Grenzanlage mit Todesstreifen an dieser Stelle); Teil der Berliner Mauer-Überreste laut Berliner Mauerstiftung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Führungen, temporäre Absperrungen bei Events auf eastsidegallery-berlin.de / visitberlin.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_denkmal_fur_die_ermordeten_juden_europas",
+      "name": "Denkmal für die ermordeten Juden Europas",
+      "lat": 52.51388889,
+      "lng": 13.37888889,
+      "deep_data_pool": [
+        {
+          "text": "Entwurf Peter Eisenman (2005): 2711 rechteckige Betonstelen auf wellig modelliertem Gelände (4,7 ha) südlich des Brandenburger Tors; Ort der ehemaligen Ministergärten. Stiftung Denkmal für die ermordeten Juden Europas (stiftung-denkmal.de).",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Ort der Information: unterirdische Ausstellung mit Tagebüchern, Briefen und Opferbiografien; kein klassisches Museum, sondern Erinnerungs- und Bildungsort.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Entstehungsdebatten 1980er–1990er: Lea Rosh und Eberhard Jäckel initiierten die Diskussion; Bundestagsbeschluss 1999; feierliche Eröffnung 10. Mai 2005.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Visuell: Stelenhöhen variieren; Gänge zwischen monolithischen Blöcken erzeugen Enge und Desorientierung — bewusstes räumliches Erlebnis ohne zentrale Skulptur.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "LIVE: Eintritt Ort der Information, Führungen auf stiftung-denkmal.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_rotes_rathaus",
+      "name": "Rotes Rathaus",
+      "lat": 52.51861111,
+      "lng": 13.40833333,
+      "deep_data_pool": [
+        {
+          "text": "Neogotischer Ziegelbau (1861–1869, Hermann Friedrich Waesemann): Sitz des Berliner Senats und des Regierenden Bürgermeisters; Name vom roten Klinker. Wiederaufbau nach WWII, heute Symbol der wiedervereinigten Stadtverwaltung (Berlin.de).",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Rathausmann: Wiederhergestellte Roland-Figur auf der Spitze (Original im Rathaus-Labyrinth ausgestellt) — Wahrzeichen der Berliner Selbstverwaltung.",
+          "tags": [
+            "geschichte",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Lage: zwischen Alexanderplatz und Nikolaiviertel, Spreeufer-Nähe; vor dem Rathaus oft Veranstaltungen (Weihnachtsmarkt, Bürgerfeste).",
+          "tags": [
+            "quer",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "GDR-Zeit: Sitz des Magistrats von Groß-Berlin; nach 1990 Zusammenführung der Verwaltungen Ost und West im Roten Rathaus.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Rathausführungen, Termine Bürgerservice auf berlin.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_alexanderplatz",
+      "name": "Alexanderplatz",
+      "lat": 52.52194444,
+      "lng": 13.41305556,
+      "deep_data_pool": [
+        {
+          "text": "Name nach russischem Zar Alexander I. (1805); im 20. Jahrhundert Verkehrs- und Geschäftsknoten. DDR-Neuplanung ab 1960er: Prägend Weltzeituhr (1969, Erich John), Fernsehturm, Centrum-Warenhaus, sozialistische Wohnhochhäuser (Berlin.de / Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Weltzeituhr: Ring mit 24 Metallen-Städtenamen; beliebter Treffpunkt; UNESCO nicht, aber ikonisches Ost-Berlin-Motiv.",
+          "tags": [
+            "visuell",
+            "kultur"
+          ]
+        },
+        {
+          "text": "November 1989: Massendemonstrationen und Montagsgespräche prägten den Platz als Wende-Schauplatz; heute Umbau- und Verkehrsprojekte (Bahnhof, Fußgängerzonen) — stadtplanerische Debatten laufend.",
+          "tags": [
+            "geschichte",
+            "quer"
+          ]
+        },
+        {
+          "text": "Verkehr: S- und U-Bahn, Tram, Regionalzüge; einer der meist frequentierten Umsteigepunkte Berlins.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Baustellenführung, Events auf visitberlin.de / BVG.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_checkpoint_charlie",
+      "name": "Checkpoint Charlie",
+      "lat": 52.5074463,
+      "lng": 13.390391,
+      "deep_data_pool": [
+        {
+          "text": "Alliierter Grenzübergang Friedrichstraße/Zimmerstraße (Symbolname „Charlie“): einer von drei West-Berliner Kontrollpunkten für Ausländer und DDR-Bürger; 1961 Schauplatz der Panzerkrise USA/Sowjetunion (Berliner Mauerstiftung).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Mauermuseum Haus am Checkpoint Charlie (1963, R. C. Hirschel): dokumentiert Fluchtgeschichten und Alltagsleben der Teilung — unabhängige Privatinitiative neben dem historischen Übergang.",
+          "tags": [
+            "kultur",
+            "quer"
+          ]
+        },
+        {
+          "text": "Heute: Rekonstruktion der Kontrollhütte und Schild als Gedenk- und Touristenort; historischer Straßenzug stark verändert — authentische Grenzanlage hier nicht erhalten.",
+          "tags": [
+            "geschichte",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Asphaltierung der früheren Grenzlinie und Stelen in der Zimmerstraße ergänzen die Erinnerung im Stadtgebiet.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Museumspreise und Öffnung Mauermuseum; Straßenfest-Infos auf mauermuseum.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_siegessaule",
+      "name": "Siegessäule",
+      "lat": 52.5145229,
+      "lng": 13.3501085,
+      "deep_data_pool": [
+        {
+          "text": "Errichtet 1864–1873 nach Entwurf Heinrich Strack: gedacht als Siegesdenkmal der Einigungskriege (1864, 1866, 1870/71); goldene Victoria (Goldelse) von Friedrich Drake auf der Spitze. Ursprünglich vor dem Reichstag, 1938–39 auf den Großen Stern im Tiergarten versetzt (Wikipedia / Berlin.de).",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Höhe mit Victoria ca. 67 m; Innen Wendeltreppe mit 285 Stufen zur Aussichtsplattform — Blickachse Unter den Linden bis Fernsehturm.",
+          "tags": [
+            "visuell",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Reliefs und Geschützrohr-Friese am Sockel: militärhistorische Darstellungen, kontrovers diskutiert; Denkmal bleibt Ort der Repräsentation (Love Parade, Demonstrationen, Silvester).",
+          "tags": [
+            "geschichte",
+            "kultur"
+          ]
+        },
+        {
+          "text": "Großer Stern: fünf Straßen kreuzen sich sternförmig im Tiergarten; stark frequentierter Verkehrsknoten, Fußgänger-Tunnel zur Säule.",
+          "tags": [
+            "quer",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Aussichtsplattform auf visitberlin.de / Berlin.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_schloss_charlottenburg",
+      "name": "Schloss Charlottenburg",
+      "lat": 52.5209319,
+      "lng": 13.2956165,
+      "deep_data_pool": [
+        {
+          "text": "Sommerresidenz Sophie Charlottes (Ehefrau Friedrichs I.): Ursprung 1695–1699 als Lietzenburg, nach ihrem Tod Charlottenburg benannt. Barocker Kern von Johann Arnold Nering, Erweiterungen unter Friedrich dem Großen (Neuer Flügel, Eosander von Göthe).",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Bernsteinzimmer: berühmtes Raumensemble mit hochwertigen Bernstein-Applikationen — wiederaufgebautes Highlight der Schlossführung (Stiftung Preußische Schlösser und Gärten).",
+          "tags": [
+            "kultur",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Schlosspark Charlottenburg: barocke und landschaftliche Teile, Mausoleum der Kaiser Wilhelm I./Auguste Victoria, Belvedere mit Porzellansammlung, Neuer Pavillon (Schinkel) am Spreeufer.",
+          "tags": [
+            "quer",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Kriegsschäden 1943 und Wiederaufbau: Zerstörung des Hauptbaus, Rekonstruktion der Prunkräume ab 1950er; heute Museum und Konzertort (spsg.de).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Schloss Charlottenburg vs. City-West: Zentrum des historischen Dorfes Lietzow, heute Bezirk Charlottenburg-Wilmersdorf — kontrastiert mit Mitte-Ensemble.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Schlosstickets, Parkregeln, Sonderausstellungen auf spsg.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Für wen wurde Schloss Charlottenburg gebaut?",
+          "a": "Als Sommerpalais König Friedrichs I. und seiner Gemahlin Sophie Charlotte — später namensgebend für Ort und Bezirk."
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_topographie_des_terrors",
+      "name": "Topographie des Terrors",
+      "lat": 52.50639,
+      "lng": 13.38361,
+      "deep_data_pool": [
+        {
+          "text": "Historischer Ort: Zentrale des Terrors — Gestapo-Hauptquartier, SS-Führung und Reichssicherheitshauptamt in der Niederkirchnerstraße; heute Dokumentation und Freiluftausstellung auf freigelegten Kellerresten (Topographie des Terrors Stiftung).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Ausstellung „Topographie des Terrors“: chronologische Panels zu Machtergreifung, Verfolgung, Krieg und Holocaust; dauerhaft open-air entlang der Mauerreste an der Niederkirchnerstraße.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Dokumentationszentrum (Peter Zumthor-Umbau-Umfeld, Ursula Wilms Innenausstellung 2010): Sonderausstellungen und vertiefende Archive; Eingang Varian-Fry-Straße.",
+          "tags": [
+            "architektur",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Nachbarschaft: An gleicher Straße Berliner Mauerrest mit Topographie der innerdeutschen Grenze; Abgrenzung zu Martin-Gropius-Bau und Checkpoint Charlie fußläufig.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Stiftung Topographie des Terrors: Bildungsangebote, App, mehrsprachige Panels — Eintritt Dokumentationszentrum frei (Spenden willkommen).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Sonderausstellungen, Führungstermine auf topographie.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    },
+    {
+      "id": "berlin_humboldt_forum",
+      "name": "Humboldt Forum",
+      "lat": 52.5175,
+      "lng": 13.402,
+      "deep_data_pool": [
+        {
+          "text": "Neubau mit barocken Fassadenformen des Berliner Schlosses (Stadtschloss): Wiederaufbau-Debatte 1990er–2010er; Eröffnung phasenweise ab 2020/21. Sitz von Ethnologischem Museum und Museum für Asiatische Kunst (SMB) sowie Humboldt-Universität-Bereichen.",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Kritische Debatten: Provenienz kolonialer Sammlungen, Rekonstruktion vs. moderne Erinnerungspolitik — Ausstellungen thematisieren teils Herkunft und Restitution (humboldtforum.org).",
+          "tags": [
+            "geschichte",
+            "kultur"
+          ]
+        },
+        {
+          "text": "Schlossplatz-Lage: zwischen Dom, Lustgarten und Spree; barocke Achse Unter den Linden; Eosanderportal als zentraler Fassadenakzent.",
+          "tags": [
+            "quer",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Dachterrasse und Agora: öffentliche Innenhöfe mit Veranstaltungen, Blick auf Museumsinsel — teils frei zugänglich (LIVE Programm).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Humboldt Lab und digitale Formate: Vermittlung, VR/AR-Projekte zu Sammlungsobjekten — ergänzen klassische Galerien.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Ausstellungswechsel, Tickets, Schlossplatz-Events auf humboldtforum.org.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "place_tier": 1,
+      "pack_role": "story"
+    }
+  ]
+}

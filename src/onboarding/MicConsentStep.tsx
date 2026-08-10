@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { Audio } from 'expo-av';
 import {
   OnboardingShell,
   PrimaryButton,
@@ -21,33 +22,52 @@ type Props = {
 };
 
 /**
- * Standard-Onboarding: Mikrofon-Optionen + DSGVO-Opt-in (immer am Ende).
+ * Mikrofon & Datenschutz nach „Über dich“ — mit sofortiger Freigabe.
  */
 export function MicConsentStep({ draft, onChange, onNext }: Props) {
-  const [consentChecked, setConsentChecked] = useState(
+  const [audioConsentChecked, setAudioConsentChecked] = useState(
     !!draft.hasAcceptedAudioConsent,
+  );
+  const [privacyConsentChecked, setPrivacyConsentChecked] = useState(
+    !!draft.hasAcceptedPrivacyPolicy,
   );
   const [showLegal, setShowLegal] = useState(false);
 
-  const valid = micConsentIsValid(draft.micListenMode ?? null, consentChecked);
+  const valid = micConsentIsValid(
+    draft.micListenMode ?? null,
+    audioConsentChecked,
+    privacyConsentChecked,
+  );
+
+  const requestMicIfNeeded = async (mode: MicListenMode) => {
+    if (mode !== 'hear') return;
+    try {
+      await Audio.requestPermissionsAsync();
+    } catch {
+      /* soft — STT fragt später erneut */
+    }
+  };
 
   return (
     <OnboardingShell style={styles.shell}>
       <ScrollView contentContainerStyle={styles.scroll}>
         <StepTitle>Mikrofon & Datenschutz</StepTitle>
         <StepSubtitle>
-          Kurz wählen, wie du mitmachen willst. Wie Fragen stellen funktioniert,
-          erklärt Findus dir gleich in der Tour.
+          Direkt nach dem Konto: wähle sichtbar, wie du mitmachen willst.
+          Bei Spracheingabe fragen wir die Freigabe sofort an.
         </StepSubtitle>
 
         <MicConsentBlock
           compact
           mode={draft.micListenMode ?? null}
-          consentChecked={consentChecked}
-          onChangeMode={(micListenMode: MicListenMode) =>
-            onChange({ micListenMode })
-          }
-          onChangeConsent={setConsentChecked}
+          audioConsentChecked={audioConsentChecked}
+          privacyConsentChecked={privacyConsentChecked}
+          onChangeMode={(micListenMode: MicListenMode) => {
+            onChange({ micListenMode });
+            void requestMicIfNeeded(micListenMode);
+          }}
+          onChangeAudioConsent={setAudioConsentChecked}
+          onChangePrivacyConsent={setPrivacyConsentChecked}
           onOpenPrivacy={() => setShowLegal(true)}
         />
 
@@ -59,11 +79,14 @@ export function MicConsentStep({ draft, onChange, onNext }: Props) {
               if (!valid || !draft.micListenMode) return;
               const now = new Date().toISOString();
               const voiceOn = draft.micListenMode === 'hear';
+              if (voiceOn) void requestMicIfNeeded('hear');
               onNext({
-                hasAcceptedAudioConsent: voiceOn,
-                audioConsentAt: voiceOn ? now : null,
-                hasAcceptedPrivacyPolicy: true,
-                privacyAcceptedAt: draft.privacyAcceptedAt ?? now,
+                hasAcceptedAudioConsent: voiceOn && audioConsentChecked,
+                audioConsentAt: voiceOn && audioConsentChecked ? now : null,
+                hasAcceptedPrivacyPolicy: privacyConsentChecked,
+                privacyAcceptedAt: privacyConsentChecked
+                  ? draft.privacyAcceptedAt ?? now
+                  : null,
                 micListenMode: draft.micListenMode,
               });
             }}

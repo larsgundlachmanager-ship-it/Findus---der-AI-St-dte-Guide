@@ -70,16 +70,27 @@ export function buildRebootBoardHints(fact: AgentResult): RebootBoardHints {
   }
 
   const venues = asVenues(meta);
+  const checkin =
+    typeof meta.checkin === 'string' ? meta.checkin : undefined;
+  const checkout =
+    typeof meta.checkout === 'string' ? meta.checkout : undefined;
+  const adults =
+    typeof meta.adults === 'number' ? meta.adults : undefined;
   for (let i = 0; i < Math.min(2, venues.length); i++) {
     const v = venues[i]!;
     if (!v.name?.trim()) continue;
-    const url = v.menuUrl || v.websiteUrl || v.bookUrl || null;
+    const book = v.bookUrl || null;
+    const url = v.menuUrl || v.websiteUrl || book || null;
     entities.push({
       name: v.name.trim(),
       rank: i === 0 ? 1 : 2,
       lat: typeof v.lat === 'number' ? v.lat : undefined,
       lng: typeof v.lng === 'number' ? v.lng : undefined,
       websiteUrl: url,
+      bookUrl: book,
+      checkin,
+      checkout,
+      adults,
       category:
         meta.affiliate === 'stay22' || meta.booking_deep_link === true
           ? 'hotel'

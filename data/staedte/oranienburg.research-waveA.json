@@ -1,0 +1,443 @@
+{
+  "city_history": "Oranienburg: baroches Schloss der Oranier-Nassauer und Gedenkstätte Sachsenhausen — Erinnerung und Residenzgeschichte an der Havel.",
+  "notes": [
+    "Wave A — verified facts, LIVE ephemeral, no dialog scripts."
+  ],
+  "offline_qa": [],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "oranienburg_gedenkstatte_und_museum_sachsenhausen",
+      "name": "Gedenkstätte und Museum Sachsenhausen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Gedenkstätte und Museum Sachsenhausen: ehemaliges Konzentrationslager (1936–1945) und sowjetisches Speziallager — zentraler Ort der Erinnerung.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: lagertypische Baracken, Wachtürme, Appellplatz und Gedenkstätten — weitläufige, nüchterne Anlage nördlich Oranienburg.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Das KZ Sachsenhausen wurde 1936 von der SS errichtet — Modellager nahe der Reichshauptstadt (Stiftung Brandenburgische Gedenkstätten).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Zehntausende Häftlinge starben durch Hunger, Krankheit, Misshandlung und Erschießungen; Todesmarsch 1945.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach 1945 bis 1950 sowjetisches Speziallager Nr. 7 auf Teilen des Geländes — tausende weitere Tote.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: Stiftung Brandenburgische Gedenkstätten; Dauerausstellung, Archive und Bildungsarbeit.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Appellplatz, Schutzhaftlager, Station Z und sowjetisches Ehrenmal gehören zu den zentralen Stationen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Internationale Häftlinge aus vielen Ländern; Sachsenhausen als Ausbildungs- und Verwaltungszentrum der SS.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Gedenkveranstaltungen am 27. Januar und am Jahrestag der Befreiung 1945.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Oranienburg Schloss und Havel in der Nähe — Kontrast barocker Residenz und NS-Verbrechensort.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "Besucherzentrum und Führungen in mehreren Sprachen; Respektvolle Kleidung und Verhalten erwartet.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Opfergruppen: politische Gefangene, Juden, Sinti und Roma, Homosexuelle, „Asoziale“ u. a. — differenzierte Ausstellungen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Lagermauer und Wachtürme zeigen die ursprüngliche Geometrie; Teile rekonstruiert, Teile original.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Bildungsreisen, Archive für Nachfahren, digitale Gedenkprojekte der Stiftung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Gedenkstätte kooperiert mit Schulen und internationalen Partnern — Bildungsprogramme ganzjährig.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Stiftung Brandenburgische Gedenkstätten betreut mehrere NS- und Sowjetzeit-Orte in Brandenburg.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Häftlinge mussten Zwangsarbeit in Klinkerziegelei und Außenkommandos leisten — Ausstellungen dokumentieren Wirtschaft des Terrors.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Medizinische Versuche und Euthanasie-Verbrechen werden in Sonderausstellungen behandelt — Stiftung Sachsenhausen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Gedenkstätte unterhält Beziehungen zu Überlebendenverbänden international — Gedenktage mit Delegationen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Bibliothek und Archiv für Forscher — Voranmeldung für Spezialnutzung üblich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Außenlager und Todesmärsche werden in Medienstationen kartografisch dargestellt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Besucherdienst leistet Orientierung für Schulklassen — pädagogische Materialien online.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Trigonometrie des Lagers: dreieckige Anordnung mit Appellplatz, Barackenfeldern und Umfassungsmauer.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Todeszone am inneren Zaun — historische Strafzone, heute Gedenkstätte mit Erklärungstafeln.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "International Memorial mit Gedenktafeln vieler Nationen am Ehrenhain.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Museum erweitert Dauerausstellung regelmäßig — neue Forschungserkenntnisse zu Außenlagern.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Besucherzentrum liefert Orientierung, Audioguides und pädagogische Materialien in mehreren Sprachen — Stiftung Sachsenhausen.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "oranienburg_schlossmuseum_oranienburg",
+      "name": "Schlossmuseum Oranienburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Schloss Oranienburg: erste barocke Hohenzollern-Residenz in Brandenburg — Schlossmuseum zu Oranien-Nassau und preußischer Frühgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: heller Putzbau mit rotem Ziegeldach am Schlosshafen der Havel; Schlosspark und Orangerie im Umfeld.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Erbaut ab 1651 für die Große Kurfürstin Luise Henriette von Oranien — Namensgeberin der Stadt (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Johann Gregor Memling: „Luise-Altar“ und bedeutende Kunstsammlung im Museum (SPSG/Museum Oranienburg).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Barockgarten und Schlosspark mit Skulpturen; Havelufer mit Schlosshafen für Boote.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schlossmuseum zeigt Oranier-Geschichte, preußische Frühzeit und lokale Ausstellungen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach Kriegsschäden und DDR-Nutzung restauriert; heute museumspädagogische Programme.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Gedenkstätte Sachsenhausen in derselben Stadt — historischer Kontrast 17. vs. 20. Jahrhundert.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "Orangerie im Schlosspark für Veranstaltungen; Spielplatz und Café im Park.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Architektur: niederländisch beeinflusstes Barock — Fensterachsen und Giebel betont.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Schlossmuseum mit wechselnden Sonderausstellungen; Schlosspark frei zugänglich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Großer Kurfürst Friedrich Wilhelm nutzte Oranienburg als Residenz vor Berliner Expansion — politische Bedeutung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Havel-Schifffahrt verbindet Schlosshafen mit Berlin und Fürstenberg — Wasserstraße historisch.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Das Schloss entstand aus Ausbau einer älteren Anlage für die Oranier — niederländische Einflüsse in Garten und Architektur.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Sammlung umfasst Möbel, Portraits und Oranier-Geschichte — Schwerpunkt 17. Jahrhundert.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schlosskapelle und Festsaal für Konzerte nutzbar — Veranstaltungskalender Oranienburg.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Havel-Schifffahrt macht Schlosshafen zu Anlegestelle für Ausflugsboote aus Berlin.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Luise Henriette brachte calvinistische und niederländische Kultur an die Havel — Schloss als Residenz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schlosskapelle und Festsaal für Konzerte — Veranstaltungskalender der Stadt Oranienburg.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Ausstellungen zu Oranier-Nassau und preußischer Frühgeschichte im Museum.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schlosshafen mit Liegeplätzen für Hausboot-Urlauber — Havel als Fernwanderweg Wasser.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Schlossmuseum präsentiert den Luise-Altar und Werke niederländischer Meister — Höhepunkt der Sammlung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Barockgarten mit Orangerie und Skulpturen ergänzt den Museumsbesuch — Park frei zugänglich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Stadt Oranienburg vermarktet Schloss und Gedenkstätte als Gegensatzpaar barocker Glanz und NS-Verbrechen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Führungen durch Schlossräume nach Zeitplan — Gruppenanmeldung über Museum.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schloss und Museum liegen unmittelbar am Schlosshafen der Havel — Bootsanleger für Tagesausflügler aus Berlin.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Schloss Oranienburg begründete die barocke Hohenzollern-Tradition außerhalb Berlins — Vorgänger späterer Berliner Residenzen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Museumsshop und Schlossparkcafé im Umfeld — kombinierter Halbtagesausflug mit Havel-Rundfahrt üblich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Sonderausstellungen wechseln saisonal — Kombination mit Schlosspark-Spaziergang üblich.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "oranienburg_schlosspark_oranienburg",
+      "name": "Schlosspark Oranienburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Schlosspark Oranienburg: barocke Parkanlage am Havelufer mit Orangerie — grüner Rahmen des Schlosses und Schlosshafens.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Wiesen, Alleen, Havelblick und Orangerie — offene Parklandschaft hinter dem Schloss.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Entstand parallel zum Schossbau im 17. Jahrhundert; spätere Umgestaltungen im Landschaftsstil.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schlosshafen und Caravan-Stellplatz am Wasser; Bootsanleger für Havel-Touren.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Schlossmuseum und Gedenkstätte Sachsenhausen — unterschiedliche Erinnerungsorte in Oranienburg.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Skulpturen und historische Wegeachsen strukturieren den Park — Teile barock, Teile landschaftlich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Spielplatz und Café machen den Park familienfreundlich — Schloss im Hintergrund.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Haveluferweg durch den Park — Blick auf Schloss und Boote.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Picknickwiesen und Schatten unter Altbäumen — kostenfreier Zugang zum Park.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    }
+  ],
+  "new_places": []
+}

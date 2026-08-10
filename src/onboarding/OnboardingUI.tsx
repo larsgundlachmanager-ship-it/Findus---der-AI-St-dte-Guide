@@ -1,13 +1,53 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import {
+  Platform,
   Pressable,
+  StatusBar,
   StyleSheet,
   Text,
   View,
   type StyleProp,
   type ViewStyle,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, spacing } from '../constants/theme';
+import {
+  ONBOARDING_METRICS,
+  onboardingDensityForAge,
+  type OnboardingDensity,
+} from './onboardingDensity';
+
+const DensityCtx = createContext<OnboardingDensity>('compact');
+
+export function OnboardingDensityProvider({
+  age,
+  density,
+  children,
+}: {
+  age?: number | null;
+  density?: OnboardingDensity;
+  children: React.ReactNode;
+}) {
+  const value = density ?? onboardingDensityForAge(age);
+  return <DensityCtx.Provider value={value}>{children}</DensityCtx.Provider>;
+}
+
+export function useOnboardingDensity(): OnboardingDensity {
+  return useContext(DensityCtx);
+}
+
+/** Top-Inset inkl. Android-Fallback (Uhr/Statusleiste), wenn SafeArea 0 meldet. */
+export function useOnboardingSafePad(): { top: number; bottom: number } {
+  const insets = useSafeAreaInsets();
+  const androidStatus =
+    Platform.OS === 'android' ? StatusBar.currentHeight ?? 0 : 0;
+  // Nothing Phone / edge-to-edge: oft insets.top === 0 → harte Untergrenze unter der Uhr
+  const floor = Platform.OS === 'android' ? 52 : 28;
+  return {
+    top: Math.max(insets.top, androidStatus, floor),
+    bottom: Math.max(insets.bottom, Platform.OS === 'android' ? 16 : 0),
+  };
+}
 
 export function OnboardingShell({
   children,
@@ -16,18 +56,76 @@ export function OnboardingShell({
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
 }) {
-  return <View style={[styles.shell, style]}>{children}</View>;
+  const { top, bottom } = useOnboardingSafePad();
+  return (
+    <View
+      style={[
+        styles.shell,
+        {
+          paddingTop: top + spacing.md,
+          paddingBottom: bottom + spacing.sm,
+        },
+        style,
+      ]}
+    >
+      {children}
+    </View>
+  );
 }
 
 export function StepTitle({ children }: { children: string }) {
-  return <Text style={styles.title}>{children}</Text>;
+  const d = useOnboardingDensity();
+  const m = ONBOARDING_METRICS[d];
+  return (
+    <Text style={[styles.title, { fontSize: m.title }]}>{children}</Text>
+  );
 }
 
 export function StepSubtitle({ children }: { children: string }) {
-  return <Text style={styles.subtitle}>{children}</Text>;
+  const d = useOnboardingDensity();
+  const m = ONBOARDING_METRICS[d];
+  return (
+    <Text
+      style={[
+        styles.subtitle,
+        { fontSize: m.subtitle, lineHeight: m.subtitleLine },
+      ]}
+    >
+      {children}
+    </Text>
+  );
 }
 
 export function PrimaryButton({
+  label,
+  onPress,
+  disabled,
+}: {
+  label: string;
+  onPress: () => void;
+  disabled?: boolean;
+}) {
+  const d = useOnboardingDensity();
+  const m = ONBOARDING_METRICS[d];
+  return (
+    <Pressable
+      onPress={onPress}
+      disabled={disabled}
+      style={[
+        styles.primaryBtn,
+        { paddingVertical: m.primaryPadV },
+        disabled && styles.primaryBtnDisabled,
+      ]}
+      accessibilityRole="button"
+    >
+      <Text style={[styles.primaryBtnText, { fontSize: m.primaryFont }]}>
+        {label}
+      </Text>
+    </Pressable>
+  );
+}
+
+export function SecondaryButton({
   label,
   onPress,
   disabled,
@@ -40,25 +138,7 @@ export function PrimaryButton({
     <Pressable
       onPress={onPress}
       disabled={disabled}
-      style={[styles.primaryBtn, disabled && styles.primaryBtnDisabled]}
-      accessibilityRole="button"
-    >
-      <Text style={styles.primaryBtnText}>{label}</Text>
-    </Pressable>
-  );
-}
-
-export function SecondaryButton({
-  label,
-  onPress,
-}: {
-  label: string;
-  onPress: () => void;
-}) {
-  return (
-    <Pressable
-      onPress={onPress}
-      style={styles.secondaryBtn}
+      style={[styles.secondaryBtn, disabled && { opacity: 0.45 }]}
       accessibilityRole="button"
     >
       <Text style={styles.secondaryBtnText}>{label}</Text>
@@ -79,11 +159,30 @@ export function Chip({
   onPress: () => void;
   onInfo?: () => void;
 }) {
+  const d = useOnboardingDensity();
+  const m = ONBOARDING_METRICS[d];
   return (
-    <View style={[styles.chipWrap, selected && styles.chipSelected]}>
+    <View
+      style={[
+        styles.chipWrap,
+        {
+          paddingVertical: m.chipPadV,
+          paddingLeft: m.chipPadH,
+        },
+        selected && styles.chipSelected,
+      ]}
+    >
       <Pressable onPress={onPress} style={styles.chipMain}>
-        <Text style={styles.chipEmoji}>{emoji}</Text>
-        <Text style={[styles.chipLabel, selected && styles.chipLabelSelected]}>
+        <Text style={[styles.chipEmoji, { fontSize: m.chipEmoji }]}>
+          {emoji}
+        </Text>
+        <Text
+          style={[
+            styles.chipLabel,
+            { fontSize: m.chipFont },
+            selected && styles.chipLabelSelected,
+          ]}
+        >
           {label}
         </Text>
       </Pressable>
@@ -106,24 +205,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.bg,
     paddingHorizontal: spacing.md,
-    paddingTop: spacing.md,
   },
   title: {
     color: colors.text,
-    fontSize: 28,
     fontWeight: '700',
     marginBottom: spacing.sm,
   },
   subtitle: {
     color: colors.textMuted,
-    fontSize: 15,
-    lineHeight: 22,
     marginBottom: spacing.lg,
   },
   primaryBtn: {
     backgroundColor: colors.accent,
     borderRadius: 14,
-    paddingVertical: 16,
     alignItems: 'center',
     marginTop: spacing.md,
     marginBottom: spacing.sm,
@@ -133,12 +227,11 @@ const styles = StyleSheet.create({
   },
   primaryBtnText: {
     color: colors.bg,
-    fontSize: 17,
     fontWeight: '700',
   },
   secondaryBtn: {
     borderRadius: 14,
-    paddingVertical: 14,
+    paddingVertical: 12,
     alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.border,
@@ -146,7 +239,7 @@ const styles = StyleSheet.create({
   },
   secondaryBtnText: {
     color: colors.text,
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: '600',
   },
   chipWrap: {
@@ -156,9 +249,7 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     borderWidth: 1,
     borderColor: colors.border,
-    paddingLeft: 12,
     paddingRight: 6,
-    paddingVertical: 8,
     marginRight: 8,
     marginBottom: 8,
   },
@@ -172,21 +263,18 @@ const styles = StyleSheet.create({
     gap: 6,
     maxWidth: 180,
   },
-  chipEmoji: {
-    fontSize: 16,
-  },
+  chipEmoji: {},
   chipLabel: {
     color: colors.text,
-    fontSize: 14,
     fontWeight: '600',
   },
   chipLabelSelected: {
     color: colors.accent,
   },
   infoBtn: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
     backgroundColor: colors.bgElevated,
     alignItems: 'center',
     justifyContent: 'center',
@@ -194,7 +282,7 @@ const styles = StyleSheet.create({
   },
   infoText: {
     color: colors.textMuted,
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: '700',
     fontStyle: 'italic',
   },

@@ -9,6 +9,7 @@ import {
   buildPrimaryAccommodationAction,
   buildStay22AccommodationAction,
   getExpediaCamref,
+  normalizeAffiliateUrl,
 } from '../affiliate/affiliateService';
 import {
   pickAffiliateOffer,
@@ -128,30 +129,70 @@ export function rankHotelPartner(): RegistryPartner | null {
   return active.find((p) => p.id === pick?.id) ?? active[0] ?? null;
 }
 
-/** Hotel-Buchungs-Action — Affiliate zuerst, Label ehrlich mit *. */
+function looksLikeHotelBookUrl(url: string): boolean {
+  return /expedia|stay22|booking\.com|hotels\.com|vrbo|hoteis\.com|affiliate/i.test(
+    url,
+  );
+}
+
+/** Hotel-Buchungs-Action — Research-Deeplink zuerst, sonst Suche mit Daten. */
 export function buildHotelBookAction(
   entity: ActionEntity,
-  opts?: { multiChoice?: boolean },
+  opts?: {
+    multiChoice?: boolean;
+    checkin?: string;
+    checkout?: string;
+    adults?: number;
+  },
 ): QuickAction {
-  const winner = rankHotelPartner();
   const dest = entity.name.trim();
-  let action: QuickAction;
-  if (winner?.id === 'expedia' || (!winner && getExpediaCamref())) {
-    action = buildExpediaAccommodationAction(dest);
-  } else if (winner?.id === 'stay22') {
-    action = buildStay22AccommodationAction(dest);
-  } else {
-    action = buildPrimaryAccommodationAction(dest);
-  }
+  const checkin = opts?.checkin ?? entity.checkin;
+  const checkout = opts?.checkout ?? entity.checkout;
+  const adults = opts?.adults ?? entity.adults;
+  const dateOpts = {
+    ...(checkin ? { checkin } : {}),
+    ...(checkout ? { checkout } : {}),
+    ...(adults != null ? { adults } : {}),
+  };
+  const direct = (entity.bookUrl || entity.websiteUrl || '').trim();
   const label = labelForOpportunity('hotel_book', entity, {
     multiChoice: opts?.multiChoice,
     affiliate: true,
   });
+
+  if (direct && /^https?:\/\//i.test(direct) && looksLikeHotelBookUrl(direct)) {
+    return {
+      type: 'OPEN_URL',
+      label,
+      payload: {
+        url: normalizeAffiliateUrl(direct),
+        destination: dest,
+        destName: dest,
+        entityName: dest,
+        entityRank: entity.rank,
+        affiliateMarked: true,
+        actionBoardId: `hotel:${entity.rank}:${dest}`,
+        ...dateOpts,
+      },
+    };
+  }
+
+  const winner = rankHotelPartner();
+  // Hotelname + Stadt-Daten vorausfüllen — nicht nur generische Stadt-Suche
+  let action: QuickAction;
+  if (winner?.id === 'expedia' || (!winner && getExpediaCamref())) {
+    action = buildExpediaAccommodationAction(dest, dateOpts);
+  } else if (winner?.id === 'stay22') {
+    action = buildStay22AccommodationAction(dest, dateOpts);
+  } else {
+    action = buildPrimaryAccommodationAction(dest);
+  }
   return {
     ...action,
     label,
     payload: {
       ...action.payload,
+      ...dateOpts,
       destination: dest,
       destName: dest,
       entityName: dest,

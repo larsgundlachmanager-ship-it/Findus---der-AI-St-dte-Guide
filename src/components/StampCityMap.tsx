@@ -15,6 +15,12 @@ import {
   type StampMapCategory,
 } from '../services/navigation/stampMapCategories';
 import {
+  colorForModul1MapTone,
+  isModul1AutoTriggerMapPoi,
+  MODUL1_MAP_CATEGORY,
+  resolveModul1MapTone,
+} from '../services/navigation/stampMapModul1';
+import {
   sampleWalkTrackForMap,
   sampleWalkTrackForDay,
   WALK_REVEAL_RADIUS_M,
@@ -56,6 +62,11 @@ type Props = {
   visitedPoiIds: Set<number>;
   /** Visited pins (default true). */
   showVisited?: boolean;
+  /**
+   * Stempel mit eigenen Koordinaten (Pack-POI fehlt / ID gewechselt).
+   * Werden zusätzlich zu visitedPoiIds gemalt.
+   */
+  orphanVisited?: StampMapMarker[];
   /** Unvisited categories to show as pins (default none). */
   enabledCategories?: ReadonlySet<StampMapCategory>;
   /** Map frame height. */
@@ -80,21 +91,31 @@ function isAreaPoi(p: Poi): boolean {
   return k === 'area' || k === 'legacy' || !k;
 }
 
-function toMarker(p: Poi, visited: boolean): StampMapMarker {
+function toMarker(
+  p: Poi,
+  visited: boolean,
+  opts?: { modul1ColorMode?: boolean },
+): StampMapMarker {
   const category = resolveStampMapCategory({
     category: p.category,
     name: p.name,
     kind: p.kind,
     tags: p.tags_json,
   });
+  const profile = getCachedUserProfile();
+  const modul1 =
+    opts?.modul1ColorMode === true && isModul1AutoTriggerMapPoi(p, profile);
+  const color = modul1
+    ? colorForModul1MapTone(resolveModul1MapTone(p, profile, visited))
+    : colorForStampCategory(category);
   return {
     id: p.id,
     name: p.name.replace(/\s*[·•|]\s*Wegweiser\s*$/i, '').trim(),
     lat: p.lat,
     lng: p.lng,
     visited,
-    category,
-    color: colorForStampCategory(category),
+    category: modul1 ? MODUL1_MAP_CATEGORY : category,
+    color,
   };
 }
 
@@ -514,6 +535,7 @@ export const StampCityMap = React.memo(function StampCityMap({
   pois,
   visitedPoiIds,
   showVisited = true,
+  orphanVisited = [],
   enabledCategories,
   height = 460,
   onMapInteracted,
@@ -555,24 +577,47 @@ export const StampCityMap = React.memo(function StampCityMap({
 
   const visibleMarkers = useMemo(() => {
     const out: StampMapMarker[] = [];
+    const placed = new Set<number>();
+    const modul1On = cats.has(MODUL1_MAP_CATEGORY);
+    const profile = getCachedUserProfile();
     for (const p of pois) {
       if (!isAreaPoi(p)) continue;
       if (!Number.isFinite(p.lat) || !Number.isFinite(p.lng)) continue;
       const visited = visitedPoiIds.has(p.id);
-      if (visited) {
-        if (showVisited) out.push(toMarker(p, true));
-        continue;
-      }
-      const cat = resolveStampMapCategory({
+      const mapCat = resolveStampMapCategory({
         category: p.category,
         name: p.name,
         kind: p.kind,
         tags: p.tags_json,
       });
-      if (cats.has(cat)) out.push(toMarker(p, false));
+      const isModul1 = isModul1AutoTriggerMapPoi(p, profile);
+      if (visited) {
+        if (showVisited) {
+          // Interest-Farben nur für echte Modul-1-Kandidaten, wenn Filter an
+          out.push(toMarker(p, true, { modul1ColorMode: modul1On && isModul1 }));
+          placed.add(p.id);
+        }
+        continue;
+      }
+      const byMapCat = cats.has(mapCat);
+      const byModul1 = modul1On && isModul1;
+      if (!byMapCat && !byModul1) continue;
+      // Farbwahl gelb/blau/grün nur wenn Modul-1-Filter aktiv und Ort triggerbar
+      out.push(
+        toMarker(p, false, { modul1ColorMode: modul1On && isModul1 }),
+      );
+    }
+    if (showVisited) {
+      for (const m of orphanVisited) {
+        if (placed.has(m.id)) continue;
+        if (!Number.isFinite(m.lat) || !Number.isFinite(m.lng)) continue;
+        // Ohne Pack-POI keine Modul-1-Prüfung — Map-Kategorie-Farbe behalten
+        out.push(m);
+        placed.add(m.id);
+      }
     }
     return out;
-  }, [pois, visitedPoiIds, showVisited, cats]);
+  }, [pois, visitedPoiIds, showVisited, cats, orphanVisited]);
 
   const cityBounds = useMemo(() => {
     const id = getCachedUserProfile()?.cityId ?? null;

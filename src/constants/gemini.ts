@@ -1,27 +1,41 @@
 /**
  * Gemini Text-Engine — Findus Audioguide.
+ * Cost Control SSOT: Flash-Lite ~98%, Pro nur gated.
  * Master-Prompt: buildMasterSystemInstruction (personaEngine).
  */
 
 /**
- * Primär: gemini-3.5-flash — akzeptiert thinkingBudget:0 (volle Stories).
- * Ältere 2.5/2.0-IDs sind für neue Keys oft 404.
+ * Primär (~99%): Flash-Lite Alias — stabile Availability für neue Keys.
+ * (gemini-2.5-flash-lite liefert für neue Projekte oft 404 „no longer available“.)
  */
-export const GEMINI_MODEL = 'gemini-3.5-flash';
+export const GEMINI_MODEL = 'gemini-flash-lite-latest';
 
 /**
- * Fallback-Kette (Reihenfolge = Latenz/Stabilität).
- * flash-lite-latest: oft ohne Thinking → schnell + volle Länge.
- * flash-latest: Thinking an, braucht hohe maxOutputTokens.
+ * Availability-Fallback (Reihenfolge = Latenz/Stabilität).
+ * Kein Pro hier — Pro nur über modelTier / resolveGeminiModels.
  */
 export const GEMINI_MODEL_FALLBACKS = [
-  'gemini-flash-lite-latest',
-  'gemini-3-flash-preview',
-  'gemini-flash-latest',
+  'gemini-3.5-flash-lite',
+  'gemini-2.0-flash-lite',
+  'gemini-2.5-flash-lite',
+  'gemini-2.5-flash',
 ] as const;
 
 /** @deprecated alias — erster Fallback */
 export const GEMINI_MODEL_FALLBACK = GEMINI_MODEL_FALLBACKS[0];
+
+/**
+ * Strict Pro — NUR bei:
+ * - Deep-History Multi-Hop fail auf Flash
+ * - Multi-Stop-Itinerary > 5 Stops (komplexe Optimierung)
+ * - Authentifizierter Premium-Subscriber
+ */
+export const GEMINI_MODEL_PRO = 'gemini-2.5-pro';
+
+export const GEMINI_MODEL_PRO_FALLBACKS = [
+  'gemini-pro-latest',
+  'gemini-2.5-flash',
+] as const;
 
 /** Höhere Kreativität = weniger robotische Wiederholungen. */
 export const GEMINI_TEMPERATURE = 0.85;

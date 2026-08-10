@@ -124,12 +124,25 @@ export async function runMapsPitchDeepResearch(
           v.stay?.priceTotal != null
             ? ` ab ${Math.round(v.stay.priceTotal)}€`
             : '';
+        let tracked = bookUrl;
+        try {
+          const { normalizeAffiliateUrl } = require('../../services/affiliate/affiliateService') as {
+            normalizeAffiliateUrl: (u: string) => string;
+          };
+          tracked = normalizeAffiliateUrl(bookUrl);
+        } catch {
+          /* soft */
+        }
         buttons.push({
           id: `pitch_book_${i}`,
           label: shortenActionLabel(
             `🏨 ${v.name.split(/[|,]/)[0]!.trim().slice(0, 12)}${price}`,
           ),
-          payload: { kind: 'deep_link', url: bookUrl },
+          payload: {
+            kind: 'deep_link',
+            url: tracked,
+            destName: v.name.split(/[|,]/)[0]!.trim(),
+          },
         });
       }
       const web = pitch.place?.websiteUri || v.websiteUrl;

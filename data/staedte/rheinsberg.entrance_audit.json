@@ -1,0 +1,1970 @@
+{
+  "city_id": "rheinsberg",
+  "apply": true,
+  "maxDelta": 80,
+  "summary": {
+    "ok": 108,
+    "check": 0,
+    "bad": 7,
+    "errors": 0,
+    "applied": 1
+  },
+  "rows": [
+    {
+      "id": "rheinsberg_rheinsberg",
+      "name": "Rheinsberg",
+      "before": {
+        "lat": 53.093016539999994,
+        "lng": 12.89993532
+      },
+      "google": {
+        "lat": 53.0983691,
+        "lng": 12.8974874,
+        "place_id": "ChIJzeXkjTdBqUcRYHRjW0YgIQQ",
+        "address": "Rheinsberg"
+      },
+      "delta_m": 617,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_eisenbahnmuseum",
+      "name": "Eisenbahnmuseum",
+      "before": {
+        "lat": 53.09328393999999,
+        "lng": 12.898901419999998
+      },
+      "google": {
+        "lat": 53.0933558,
+        "lng": 12.8990211,
+        "place_id": "ChIJ1x7o1LtBqUcRpj8yUEGSzvA",
+        "address": "Damaschkeweg 14, 16831 Rheinsberg"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_yachthafen_und_bootsverleih_rheinsberg",
+      "name": "Yachthafen und Bootsverleih Rheinsberg",
+      "before": {
+        "lat": 53.10185098000001,
+        "lng": 12.88981806
+      },
+      "google": {
+        "lat": 53.1018905,
+        "lng": 12.8898839,
+        "place_id": "ChIJF7PZCKJBqUcRVwRxod3ZUyw",
+        "address": "Am Bollwerk 1, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_anlegestelle_fahrgastschifffahrt",
+      "name": "Anlegestelle Fahrgastschifffahrt",
+      "before": {
+        "lat": 53.10056978,
+        "lng": 12.889102159999998
+      },
+      "google": {
+        "lat": 53.1006093,
+        "lng": 12.889168,
+        "place_id": "ChIJScU3J7dBqUcRyvY8Qsl9MYw",
+        "address": "Seestraße / Uferpromenade, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_boat_city_hafendorf_rheinsberg_gmbh",
+      "name": "Boat-City Hafendorf Rheinsberg GmbH",
+      "before": {
+        "lat": 53.11575708,
+        "lng": 12.886229140000001
+      },
+      "google": {
+        "lat": 53.1157966,
+        "lng": 12.886295,
+        "place_id": "ChIJXZsdx4JBqUcRXT9KpIALaEM",
+        "address": "Kaistraße 3, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_fussgangerbrucke_marina",
+      "name": "Fußgängerbrücke Marina",
+      "before": {
+        "lat": 53.11642268000001,
+        "lng": 12.886674039999999
+      },
+      "google": {
+        "lat": 53.11646220000001,
+        "lng": 12.8867399,
+        "place_id": "ChIJTddSdNtBqUcR-AFN-dIKTGI",
+        "address": "Uferstraße 77, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_reederei_halbeck",
+      "name": "Reederei Halbeck",
+      "before": {
+        "lat": 53.09978058,
+        "lng": 12.89035248
+      },
+      "google": {
+        "lat": 53.0998201,
+        "lng": 12.8904183,
+        "place_id": "ChIJU038LaNBqUcR0CNe9qa2oMc",
+        "address": "Markt 11, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_ferienhauser_hafendorf_rheinsberg",
+      "name": "Ferienhäuser Hafendorf Rheinsberg",
+      "before": {
+        "lat": 53.11474128,
+        "lng": 12.88922364
+      },
+      "google": {
+        "lat": 53.11559099999999,
+        "lng": 12.887135,
+        "place_id": "ChIJkY4Yn4JBqUcRTCWIq68OMYA",
+        "address": "Am Leuchtturm 10, 16831 Rheinsberg"
+      },
+      "delta_m": 168,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_kurt_tucholsky_literaturmuseum",
+      "name": "Kurt Tucholsky Literaturmuseum",
+      "before": {
+        "lat": 53.09858938,
+        "lng": 12.88960008
+      },
+      "google": {
+        "lat": 53.09862889999999,
+        "lng": 12.8896659,
+        "place_id": "ChIJ6Tu8oqNBqUcRCKqoHh_weRM",
+        "address": "Schloss 1, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_keramikmuseum_rheinsberg",
+      "name": "Keramikmuseum Rheinsberg",
+      "before": {
+        "lat": 53.099524280000004,
+        "lng": 12.89310678
+      },
+      "google": {
+        "lat": 53.0995638,
+        "lng": 12.8931726,
+        "place_id": "ChIJbWDM2KJBqUcRZTLzKqtukyQ",
+        "address": "Kirchpl. 1, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_haus_der_stadtgeschichte",
+      "name": "Haus der Stadtgeschichte",
+      "before": {
+        "lat": 53.10009368,
+        "lng": 12.892279859999999
+      },
+      "google": {
+        "lat": 53.1001332,
+        "lng": 12.8923457,
+        "place_id": "ChIJm4VOaFhBqUcRTq8A-fjUzeU",
+        "address": "Seestraße 22, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_kasse_schloss",
+      "name": "Kasse Schloss",
+      "before": {
+        "lat": 53.09825318000001,
+        "lng": 12.89085098
+      },
+      "google": {
+        "lat": 53.0982927,
+        "lng": 12.8909168,
+        "place_id": "ChIJSZwz8t1BqUcRJgDqEWHSh14",
+        "address": "Schloß Rheinsberg 1, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_musikbrennerei_konzerte_ausstellungen_kabarett_rheinsberg",
+      "name": "Musikbrennerei - Konzerte/ Ausstellungen/ Kabarett Rheinsberg",
+      "before": {
+        "lat": 53.10232567999999,
+        "lng": 12.89218456
+      },
+      "google": {
+        "lat": 53.10236519999999,
+        "lng": 12.8922504,
+        "place_id": "ChIJ__8bf5hBqUcRH7e1kyNMsvc",
+        "address": "Königstraße 14, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_schlosspark_rheinsberg",
+      "name": "Schlosspark Rheinsberg",
+      "before": {
+        "lat": 53.09627118000001,
+        "lng": 12.889939279999998
+      },
+      "google": {
+        "lat": 53.09839600000001,
+        "lng": 12.8898406,
+        "place_id": "ChIJ205ZoKNBqUcRuAHtaS_MAPg",
+        "address": "Schloß Rheinsberg 2, 16831 Rheinsberg"
+      },
+      "delta_m": 236,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_rheinsberg_ddr_geschichte_brennelemente_transporter_kkw_rheinsber",
+      "name": "Rheinsberg DDR-Geschichte Brennelemente-Transporter KKW Rheinsber",
+      "before": {
+        "lat": 53.092610979999996,
+        "lng": 12.89931958
+      },
+      "google": {
+        "lat": 53.0926505,
+        "lng": 12.8993854,
+        "place_id": "ChIJYbZIUQBBqUcRWErdE40QzSA",
+        "address": "Damaschkeweg 15, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_neuapostolische_kirche_rheinsberg",
+      "name": "Neuapostolische Kirche Rheinsberg",
+      "before": {
+        "lat": 53.09909988,
+        "lng": 12.89530238
+      },
+      "google": {
+        "lat": 53.0991394,
+        "lng": 12.8953682,
+        "place_id": "ChIJUby3NHFBqUcRKo-z-DXkSH4",
+        "address": "Poststraße 15, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_pater_wichmann_kapelle",
+      "name": "Pater Wichmann Kapelle",
+      "before": {
+        "lat": 53.10158738,
+        "lng": 12.89695796
+      },
+      "google": {
+        "lat": 53.1016269,
+        "lng": 12.8970238,
+        "place_id": "ChIJOR8QPgBBqUcRsGN25ZL-WDU",
+        "address": "Poststraße 9, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_kirchlicher_friedhof_rheinsberg",
+      "name": "Kirchlicher Friedhof Rheinsberg",
+      "before": {
+        "lat": 53.09938128,
+        "lng": 12.89656218
+      },
+      "google": {
+        "lat": 53.0994208,
+        "lng": 12.896628,
+        "place_id": "ChIJRxp_ZHpBqUcRqS_f5DJ9DiQ",
+        "address": "Poststraße, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_evangelisches_pfarramt",
+      "name": "Evangelisches Pfarramt",
+      "before": {
+        "lat": 53.10003497999999,
+        "lng": 12.89331726
+      },
+      "google": {
+        "lat": 53.1000745,
+        "lng": 12.8933831,
+        "place_id": "ChIJETe0xKJBqUcR2wOMW9cLDMg",
+        "address": "Seestraße 25, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_denkmal_kronprinz_friedrich",
+      "name": "Denkmal Kronprinz Friedrich",
+      "before": {
+        "lat": 53.09905148,
+        "lng": 12.891022179999998
+      },
+      "google": {
+        "lat": 53.099091,
+        "lng": 12.891088,
+        "place_id": "ChIJo3QABaNBqUcRkZgvdXN4Vuw",
+        "address": "Markt 1, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_rheinsberger_obelisk",
+      "name": "Rheinsberger Obelisk",
+      "before": {
+        "lat": 53.099154580000004,
+        "lng": 12.88042658
+      },
+      "google": {
+        "lat": 53.0991941,
+        "lng": 12.8804924,
+        "place_id": "ChIJS-wgEaNBqUcR9UoNX8CvBOU",
+        "address": "16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_badebrunnen_rheinsberg_gunter_kaden_2001",
+      "name": "Badebrunnen, Rheinsberg - Günter Kaden (2001)",
+      "before": {
+        "lat": 53.100252579999996,
+        "lng": 12.89094446
+      },
+      "google": {
+        "lat": 53.1002921,
+        "lng": 12.8910103,
+        "place_id": "ChIJ83EHXydBqUcRF0-lvHdrfXc",
+        "address": "Markt 6, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_denkmal_fur_teure_verstorbene",
+      "name": "Denkmal für teure Verstorbene",
+      "before": {
+        "lat": 53.10007668000001,
+        "lng": 12.87581346
+      },
+      "google": {
+        "lat": 53.1001162,
+        "lng": 12.8758793,
+        "place_id": "ChIJhQ1jC1BBqUcRoZoI59Susng",
+        "address": "Rheinsberger Birkenweg, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_sowjetischer_ehrenfriedhof",
+      "name": "Sowjetischer Ehrenfriedhof",
+      "before": {
+        "lat": 53.10303898000001,
+        "lng": 12.892346459999999
+      },
+      "google": {
+        "lat": 53.1030785,
+        "lng": 12.8924123,
+        "place_id": "ChIJ4ZrZZkVBqUcRC8Kzp-HsnP8",
+        "address": "16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_parasol",
+      "name": "Parasol",
+      "before": {
+        "lat": 53.109353680000005,
+        "lng": 12.86999646
+      },
+      "google": {
+        "lat": 53.1093932,
+        "lng": 12.8700623,
+        "place_id": "ChIJqSxop5dBqUcRqEOwa77WiEI",
+        "address": "Unnamed Road, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_ehemalige_eremitage",
+      "name": "Ehemalige Eremitage",
+      "before": {
+        "lat": 53.11306348000001,
+        "lng": 12.87750514
+      },
+      "google": {
+        "lat": 53.113103,
+        "lng": 12.877571,
+        "place_id": "ChIJ87DPvEdBqUcRBbvx6m9T3kU",
+        "address": "Forsthaus Boberow 1, 16831 Rheinsberg-Linow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_uferpromenade",
+      "name": "Uferpromenade",
+      "before": {
+        "lat": 53.10528338,
+        "lng": 12.892106860000002
+      },
+      "google": {
+        "lat": 53.103516,
+        "lng": 12.8907796,
+        "place_id": "ChIJC2fM7JhBqUcRDpfgGktQAyo",
+        "address": "Uferpromenade, 16831 Rheinsberg"
+      },
+      "delta_m": 216,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_lustgarten_rheinsberg",
+      "name": "Lustgarten Rheinsberg",
+      "before": {
+        "lat": 53.09598758,
+        "lng": 12.887846880000001
+      },
+      "google": {
+        "lat": 53.0960271,
+        "lng": 12.8879127,
+        "place_id": "ChIJH-jcWqNBqUcRn8fOC9UZWlo",
+        "address": "Schloß Rheinsberg 2, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_hafendorf_rheinsberg",
+      "name": "Hafendorf Rheinsberg",
+      "before": {
+        "lat": 53.11587378,
+        "lng": 12.88815664
+      },
+      "google": {
+        "lat": 53.1159133,
+        "lng": 12.8882225,
+        "place_id": "ChIJna1eRoJBqUcRaL3ciOJramM",
+        "address": "Uferstraße 1, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_badesee_sehr_schon",
+      "name": "Badesee sehr schön",
+      "before": {
+        "lat": 53.12169378,
+        "lng": 12.924308540000002
+      },
+      "google": {
+        "lat": 53.1217333,
+        "lng": 12.9243744,
+        "place_id": "ChIJV7F8XEVDqUcRAuUQD9xiEOE",
+        "address": "16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_parkplatz_an_der_rhin_passage",
+      "name": "Parkplatz an der Rhin Passage",
+      "before": {
+        "lat": 53.09686938,
+        "lng": 12.892511979999998
+      },
+      "google": {
+        "lat": 53.0969089,
+        "lng": 12.8925778,
+        "place_id": "ChIJtwb0GjBBqUcRhEsQwLfIi4o",
+        "address": "16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_schlossgarten_rheinsberg_gartenportal",
+      "name": "Schlossgarten Rheinsberg (Gartenportal)",
+      "before": {
+        "lat": 53.09536008,
+        "lng": 12.88886878
+      },
+      "google": {
+        "lat": 53.0953996,
+        "lng": 12.8889346,
+        "place_id": "ChIJ5cMjRllBqUcRxS33amlo4J8",
+        "address": "16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_badestelle",
+      "name": "Badestelle",
+      "before": {
+        "lat": 53.12663248,
+        "lng": 12.933405619999998
+      },
+      "google": {
+        "lat": 53.126672,
+        "lng": 12.9334715,
+        "place_id": "ChIJv7FvvBtCqUcRbO8RWAbRjg4",
+        "address": "Badestelle, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_naturpark_stechlin_ruppiner_land",
+      "name": "Naturpark Stechlin-Ruppiner Land",
+      "before": {
+        "lat": 53.101095480000005,
+        "lng": 12.89261376
+      },
+      "google": {
+        "lat": 53.101135,
+        "lng": 12.8926796,
+        "place_id": "ChIJxVzgk6JBqUcRck20g4LfV1k",
+        "address": "Kirchstraße 7, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_steg",
+      "name": "Steg",
+      "before": {
+        "lat": 53.103031380000004,
+        "lng": 12.88966306
+      },
+      "google": {
+        "lat": 53.1799127,
+        "lng": 12.8858112,
+        "place_id": "ChIJc0Dt3wtDqUcRDA5jrMm9bTs",
+        "address": "5VHP+X8, 16831 Rheinsberg"
+      },
+      "delta_m": 8553,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_schlossgarten_rheinsberg_feldsteingrotte",
+      "name": "Schlossgarten Rheinsberg (Feldsteingrotte)",
+      "before": {
+        "lat": 53.09794198000001,
+        "lng": 12.885080180000003
+      },
+      "google": {
+        "lat": 53.0979815,
+        "lng": 12.885146,
+        "place_id": "ChIJtfkHlpZBqUcRybtNW8VkXU8",
+        "address": "16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_rheinsberg_maisonette_mit_blick_auf_schloss_park_see_apartment_split_",
+      "name": "Rheinsberg Maisonette mit Blick auf Schloss-Park-See - Apartment - Split Level",
+      "before": {
+        "lat": 53.09805918000001,
+        "lng": 12.891843780000002
+      },
+      "google": {
+        "lat": 53.09809869999999,
+        "lng": 12.8919096,
+        "place_id": "ChIJTVUQQKNBqUcRXvCyzWFlMHM",
+        "address": "16831 Rheinsberg, Deutschland"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_ehem_schlossmauer",
+      "name": "Ehem. Schlossmauer",
+      "before": {
+        "lat": 53.09760258,
+        "lng": 12.891107480000002
+      },
+      "google": {
+        "lat": 53.0976421,
+        "lng": 12.8911733,
+        "place_id": "ChIJI8O5yCJBqUcRMaQCgwIeu8s",
+        "address": "Schloß Rheinsberg, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_pension_am_rheinsberger_schlosspark",
+      "name": "Pension Am Rheinsberger Schlosspark",
+      "before": {
+        "lat": 53.094595479999995,
+        "lng": 12.89019288
+      },
+      "google": {
+        "lat": 53.094635,
+        "lng": 12.8902587,
+        "place_id": "ChIJ463Kw6RBqUcRpo3bX4yC8wc",
+        "address": "Fontanepl. 2, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_schlossgarten_rheinsberg_sphinxtreppe",
+      "name": "Schlossgarten Rheinsberg (Sphinxtreppe)",
+      "before": {
+        "lat": 53.09684638,
+        "lng": 12.88928328
+      },
+      "google": {
+        "lat": 53.0968859,
+        "lng": 12.8893491,
+        "place_id": "ChIJkx95rXNBqUcRT9HYufTLyqI",
+        "address": "16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_wartturm",
+      "name": "Wartturm",
+      "before": {
+        "lat": 53.08067688,
+        "lng": 12.884836799999999
+      },
+      "google": {
+        "lat": 53.0807164,
+        "lng": 12.8849026,
+        "place_id": "ChIJhU7ArlJAqUcRHgSaRUUHtm8",
+        "address": "16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_pension_zum_rheinsberger_leuchtturm",
+      "name": "Pension Zum Rheinsberger Leuchtturm",
+      "before": {
+        "lat": 53.085583480000004,
+        "lng": 12.8886191
+      },
+      "google": {
+        "lat": 53.085623,
+        "lng": 12.8886849,
+        "place_id": "ChIJf8R_VqVBqUcRzZ0WyXgK2BI",
+        "address": "Schwanower Str. 33, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_seebad_rheinsberg",
+      "name": "Seebad Rheinsberg",
+      "before": {
+        "lat": 53.10915048,
+        "lng": 12.89278416
+      },
+      "google": {
+        "lat": 53.10919,
+        "lng": 12.89285,
+        "place_id": "ChIJ431dlJtBqUcRHpS2V6BU_Ww",
+        "address": "Seebad, Reuterpromenade 7, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_sportplatz_fussballplatz_und_sportsbar_pension_elfmeter",
+      "name": "Sportplatz / Fußballplatz und Sportsbar & Pension Elfmeter",
+      "before": {
+        "lat": 53.099334580000004,
+        "lng": 12.905982080000001
+      },
+      "google": {
+        "lat": 53.0993741,
+        "lng": 12.9060479,
+        "place_id": "ChIJE4b3SL5BqUcRrSmgTf25vSk",
+        "address": "Menzer Str. 20, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_badestelle_hafendorf_rheinsberg",
+      "name": "Badestelle Hafendorf Rheinsberg",
+      "before": {
+        "lat": 53.11638138000001,
+        "lng": 12.88536784
+      },
+      "google": {
+        "lat": 53.11642089999999,
+        "lng": 12.8854337,
+        "place_id": "ChIJS4ZYXkhBqUcRaGuHPsmfzYo",
+        "address": "Uferstraße 84, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_pension_hollander_muhle_rheinsberg",
+      "name": "Pension Holländer Mühle Rheinsberg",
+      "before": {
+        "lat": 53.08951408,
+        "lng": 12.890792880000001
+      },
+      "google": {
+        "lat": 53.0895536,
+        "lng": 12.8908587,
+        "place_id": "ChIJ_wd_CItBqUcRBJGxLm2TF8c",
+        "address": "Holländer Mühle 1, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_fitnessclub_bodyline_rheinsberg",
+      "name": "Fitnessclub Bodyline Rheinsberg",
+      "before": {
+        "lat": 53.10332478,
+        "lng": 12.894168959999998
+      },
+      "google": {
+        "lat": 53.1033643,
+        "lng": 12.8942348,
+        "place_id": "ChIJy8j9O5hBqUcRFHPfwZvLCtA",
+        "address": "Friedrichszentrum 3, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_vr_action",
+      "name": "VR-Action",
+      "before": {
+        "lat": 53.09658658000001,
+        "lng": 12.89480328
+      },
+      "google": {
+        "lat": 53.09662609999999,
+        "lng": 12.8948691,
+        "place_id": "ChIJ_w7y9lZBqUcRZcjuH5EnkjI",
+        "address": "Rhinpassage 11, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_schlossgarten_rheinsberg_salon",
+      "name": "Schlossgarten Rheinsberg (Salon)",
+      "before": {
+        "lat": 53.09646588,
+        "lng": 12.88708748
+      },
+      "google": {
+        "lat": 53.0965054,
+        "lng": 12.8871533,
+        "place_id": "ChIJG6KUN15BqUcRwAgfcq8qgzE",
+        "address": "Unnamed Road, 16831, Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_fussballplatz",
+      "name": "Fußballplatz",
+      "before": {
+        "lat": 53.11385348,
+        "lng": 12.88930014
+      },
+      "google": {
+        "lat": 53.113893,
+        "lng": 12.889366,
+        "place_id": "ChIJJ2ixsbdBqUcRMtuy8VPIYJE",
+        "address": "Zechlinerhütter Landstraße 10, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_stadtverwaltung_rheinsberg",
+      "name": "Stadtverwaltung Rheinsberg",
+      "before": {
+        "lat": 53.10034948,
+        "lng": 12.88986666
+      },
+      "google": {
+        "lat": 53.10038900000001,
+        "lng": 12.8899325,
+        "place_id": "ChIJdzW7UKJBqUcRZ6737LBAH9A",
+        "address": "Seestraße 9-10, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_alte_meierei",
+      "name": "Alte Meierei",
+      "before": {
+        "lat": 53.10164178,
+        "lng": 12.883921760000002
+      },
+      "google": {
+        "lat": 53.1016813,
+        "lng": 12.8839876,
+        "place_id": "ChIJ2d80f-NBqUcRKoW3iLczF-k",
+        "address": "16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_prinzenstadt_rheinsberg",
+      "name": "Prinzenstadt Rheinsberg",
+      "before": {
+        "lat": 53.09652118,
+        "lng": 12.896794279999998
+      },
+      "google": {
+        "lat": 53.0965607,
+        "lng": 12.8968601,
+        "place_id": "ChIJ8ZGqx7YWf4cRr6pb_NnGFWU",
+        "address": "Berliner Str. 21b, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_aussichtspunkt_schloss_rheinsberg",
+      "name": "Aussichtspunkt Schloss Rheinsberg",
+      "before": {
+        "lat": 53.097545679999996,
+        "lng": 12.88593128
+      },
+      "google": {
+        "lat": 53.0975852,
+        "lng": 12.8859971,
+        "place_id": "ChIJnTJh_cpBqUcRp-os7fL28nc",
+        "address": "3VXP+29, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_schlosstheater_rheinsberg",
+      "name": "Schlosstheater Rheinsberg",
+      "before": {
+        "lat": 53.099207680000006,
+        "lng": 12.889296680000001
+      },
+      "google": {
+        "lat": 53.0992472,
+        "lng": 12.8893625,
+        "place_id": "ChIJuQenCqNBqUcRPCuBeHO2cWc",
+        "address": "Kavalierhaus der Schlossanlage, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_angeln_jagen_wandern",
+      "name": "Angeln-Jagen-Wandern",
+      "before": {
+        "lat": 53.09865048,
+        "lng": 12.893313179999998
+      },
+      "google": {
+        "lat": 53.09869,
+        "lng": 12.893379,
+        "place_id": "ChIJuRgpLqNBqUcRcZCuwQU9k_Y",
+        "address": "Schloßstraße 5, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_arboretum",
+      "name": "Arboretum",
+      "before": {
+        "lat": 53.10565948,
+        "lng": 12.875432159999999
+      },
+      "google": {
+        "lat": 53.10569899999999,
+        "lng": 12.875498,
+        "place_id": "ChIJR7cyXyhBqUcRg5WVkoqRilY",
+        "address": "Unnamed Road, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_wittwesee",
+      "name": "Wittwesee",
+      "before": {
+        "lat": 53.12602628,
+        "lng": 12.93638454
+      },
+      "google": {
+        "lat": 53.1260658,
+        "lng": 12.9364504,
+        "place_id": "ChIJn1hzewRCqUcRGItgdirfYRI",
+        "address": "Wittwesee, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_ruppiner_wald_und_seengebiet",
+      "name": "Ruppiner Wald- und Seengebiet",
+      "before": {
+        "lat": 53.07389238,
+        "lng": 12.851005899999999
+      },
+      "google": {
+        "lat": 53.0739319,
+        "lng": 12.8510717,
+        "place_id": "ChIJPWhwF4ZAqUcRqBInPw1OvIs",
+        "address": "Deutschland"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_egeria_grotte",
+      "name": "Egeria-Grotte",
+      "before": {
+        "lat": 53.096991779999996,
+        "lng": 12.88167138
+      },
+      "google": {
+        "lat": 53.0970313,
+        "lng": 12.8817372,
+        "place_id": "ChIJOQj_BDpBqUcRQwjIoOpUUTg",
+        "address": "Parkstraße, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_rheinsberger_adventure_tours",
+      "name": "Rheinsberger Adventure Tours",
+      "before": {
+        "lat": 53.096183180000004,
+        "lng": 12.89229808
+      },
+      "google": {
+        "lat": 53.0962227,
+        "lng": 12.8923639,
+        "place_id": "ChIJcebQSR9AqUcRdfPOJ_-Do9Y",
+        "address": "Parkstraße 1, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_rheinsberger_see",
+      "name": "Rheinsberger See",
+      "before": {
+        "lat": 53.12440488,
+        "lng": 12.87048974
+      },
+      "google": {
+        "lat": 53.12444439999999,
+        "lng": 12.8705556,
+        "place_id": "ChIJoYpzWmJBqUcRaJQb54MHBto",
+        "address": "Rheinsberger See, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_grienericksee",
+      "name": "Grienericksee",
+      "before": {
+        "lat": 53.106727479999996,
+        "lng": 12.888089559999997
+      },
+      "google": {
+        "lat": 53.106767,
+        "lng": 12.8881554,
+        "place_id": "ChIJOWReFp9BqUcR6p6DRiiaCN8",
+        "address": "Grienericksee, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_rehaklinik_hohenelse",
+      "name": "Rehaklinik Hohenelse",
+      "before": {
+        "lat": 53.12389718000001,
+        "lng": 12.883153340000002
+      },
+      "google": {
+        "lat": 53.12393669999999,
+        "lng": 12.8832192,
+        "place_id": "ChIJtSnP531BqUcRYQ6Ts8xCDhU",
+        "address": "Hohenelse 1, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_dipl_med_silke_klauss",
+      "name": "Dipl. Med. Silke Klauß",
+      "before": {
+        "lat": 53.102250479999995,
+        "lng": 12.891254159999999
+      },
+      "google": {
+        "lat": 53.10229,
+        "lng": 12.89132,
+        "place_id": "ChIJW7mleKJBqUcRMGX8nBLvZgo",
+        "address": "Donnersmarckweg 3, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_herr_nico_gerecke",
+      "name": "Herr Nico Gerecke",
+      "before": {
+        "lat": 53.095552080000004,
+        "lng": 12.90414398
+      },
+      "google": {
+        "lat": 53.0955916,
+        "lng": 12.9042098,
+        "place_id": "ChIJ62He3r1BqUcRySIW3SdZy3I",
+        "address": "Ringstraße 37, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_herr_dr_med_lars_uwe_rau",
+      "name": "Herr Dr. med. Lars-Uwe Rau",
+      "before": {
+        "lat": 53.09679148,
+        "lng": 12.895601880000001
+      },
+      "google": {
+        "lat": 53.09683099999999,
+        "lng": 12.8956677,
+        "place_id": "ChIJjdWTm7xBqUcRhX1Fiiw1uPk",
+        "address": "Rhinstraße 10, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_konigreichssaal_jehovas_zeugen",
+      "name": "Königreichssaal Jehovas Zeugen",
+      "before": {
+        "lat": 53.08729408000001,
+        "lng": 12.90979948
+      },
+      "google": {
+        "lat": 53.0873336,
+        "lng": 12.9098653,
+        "place_id": "ChIJwbkS9MhBqUcRHWc5H9u4XHM",
+        "address": "Berliner Str. 112, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_gast_und_logierhaus_am_rheinsberger_see",
+      "name": "Gast- und Logierhaus \"Am Rheinsberger See\"",
+      "before": {
+        "lat": 53.11555498,
+        "lng": 12.859528740000002
+      },
+      "google": {
+        "lat": 53.1155945,
+        "lng": 12.8595946,
+        "place_id": "ChIJHZsyY2hBqUcRW9SVGMmwjgY",
+        "address": "Seestraße 7, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_rheinsberger_carneval_club_e_v",
+      "name": "Rheinsberger Carneval Club e.V.",
+      "before": {
+        "lat": 53.09100588,
+        "lng": 12.89917158
+      },
+      "google": {
+        "lat": 53.0910454,
+        "lng": 12.8992374,
+        "place_id": "ChIJk-BxzblBqUcRHaWULzT6qyI",
+        "address": "Uferweg 6, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_rheinsberger_preussenquelle_gmbh",
+      "name": "Rheinsberger Preussenquelle GmbH",
+      "before": {
+        "lat": 53.09057748,
+        "lng": 12.911498980000001
+      },
+      "google": {
+        "lat": 53.09061699999999,
+        "lng": 12.9115648,
+        "place_id": "ChIJX1eAP8ZBqUcRIsrvxpY2BCU",
+        "address": "Zur Preußenquelle 5, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_pension_hofgarten",
+      "name": "Pension Hofgarten",
+      "before": {
+        "lat": 53.098654280000005,
+        "lng": 12.90076818
+      },
+      "google": {
+        "lat": 53.0986938,
+        "lng": 12.900834,
+        "place_id": "ChIJDc3pLLxBqUcRlTpEAfwV1YA",
+        "address": "Menzer Str. 6, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_bergertours_kanutouristik",
+      "name": "Bergertours Kanutouristik",
+      "before": {
+        "lat": 53.08182308000001,
+        "lng": 12.904315700000001
+      },
+      "google": {
+        "lat": 53.0818626,
+        "lng": 12.9043815,
+        "place_id": "ChIJ_a6E8cpBqUcRmngPNJdPfWc",
+        "address": "Am Hellsee 2, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_hausboot_rheinsberg_flossvermietung_mirko_fost",
+      "name": "Hausboot Rheinsberg - Flossvermietung Mirko Föst",
+      "before": {
+        "lat": 53.094822279999995,
+        "lng": 12.89560778
+      },
+      "google": {
+        "lat": 53.0948618,
+        "lng": 12.8956736,
+        "place_id": "ChIJR2XArKRBqUcR_zLOFgAHDFQ",
+        "address": "Rhinhöher Weg 2, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_dit_atelier_kunsterbunt",
+      "name": "dit Atelier KUNSTerBUNT",
+      "before": {
+        "lat": 53.09684127999999,
+        "lng": 12.893716180000002
+      },
+      "google": {
+        "lat": 53.0968808,
+        "lng": 12.893782,
+        "place_id": "ChIJNdY0d8RBqUcRXp5LadtZY0g",
+        "address": "Rhinpassage 19-21, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_eiskonigin",
+      "name": "Eiskönigin",
+      "before": {
+        "lat": 53.097790579999995,
+        "lng": 12.89616488
+      },
+      "google": {
+        "lat": 53.0978301,
+        "lng": 12.8962307,
+        "place_id": "ChIJPZV6BwBDqUcRpFLzxzFnF_I",
+        "address": "Berliner Str. 12, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_gartenbau_hofladen_wimmer",
+      "name": "Gartenbau + Hofladen Wimmer",
+      "before": {
+        "lat": 53.11003097999999,
+        "lng": 12.89380816
+      },
+      "google": {
+        "lat": 53.11007050000001,
+        "lng": 12.893874,
+        "place_id": "ChIJwTPd0LqGZEERL_bZkqXLj9k",
+        "address": "Reuterpromenade 10, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_lidl",
+      "name": "Lidl",
+      "before": {
+        "lat": 53.09385126000001,
+        "lng": 12.899672140000002
+      },
+      "google": {
+        "lat": 53.09388,
+        "lng": 12.89972,
+        "place_id": "ChIJpek92rtBqUcREzTEB2AK9fY",
+        "address": "Berliner Str. 41, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_aldi_nord",
+      "name": "ALDI Nord",
+      "before": {
+        "lat": 53.09997026,
+        "lng": 12.89915812
+      },
+      "google": {
+        "lat": 53.099999,
+        "lng": 12.899206,
+        "place_id": "ChIJ7-2ior1BqUcRvp7O1Z002JU",
+        "address": "Paulshorster Str. 18, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_edeka_brehme",
+      "name": "EDEKA Brehme",
+      "before": {
+        "lat": 53.099467860000004,
+        "lng": 12.89920472
+      },
+      "google": {
+        "lat": 53.09949659999999,
+        "lng": 12.8992526,
+        "place_id": "ChIJo6aepb1BqUcRdelThKDlH4M",
+        "address": "Paulshorster Str. 18B, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_norma_filiale",
+      "name": "NORMA Filiale",
+      "before": {
+        "lat": 53.102853360000005,
+        "lng": 12.89487282
+      },
+      "google": {
+        "lat": 53.1028821,
+        "lng": 12.8949207,
+        "place_id": "ChIJhZJaa5hBqUcR-gV3-zYex4I",
+        "address": "Friedrichszentrum 14, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_spielplatz",
+      "name": "Spielplatz",
+      "before": {
+        "lat": 53.09826716,
+        "lng": 12.904588819999997
+      },
+      "google": {
+        "lat": 53.0982959,
+        "lng": 12.9046367,
+        "place_id": "ChIJq2EgKv9BqUcRnhA0hYZVx2Y",
+        "address": "Joliot-Curie-Straße 3, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_spielplatz_in_zuhlen",
+      "name": "Spielplatz in Zühlen",
+      "before": {
+        "lat": 53.07644806,
+        "lng": 12.81378224
+      },
+      "google": {
+        "lat": 53.0764768,
+        "lng": 12.8138301,
+        "place_id": "ChIJBfB4c85AqUcRZQRu-UBXsw8",
+        "address": "16831 Rheinsberg-Zühlen"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_bolzplatz_rheinsberg",
+      "name": "Bolzplatz Rheinsberg",
+      "before": {
+        "lat": 53.10177876,
+        "lng": 12.908074720000002
+      },
+      "google": {
+        "lat": 53.1018075,
+        "lng": 12.9081226,
+        "place_id": "ChIJUbfInS5BqUcRGjRbU_SgxUE",
+        "address": "16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_badestelle_zechlinerhutte",
+      "name": "Badestelle Zechlinerhütte",
+      "before": {
+        "lat": 53.15191086000001,
+        "lng": 12.877064859999999
+      },
+      "google": {
+        "lat": 53.1519396,
+        "lng": 12.8771128,
+        "place_id": "ChIJ7dITSORDqUcRA_p8JcmMZ_o",
+        "address": "Rheinsberger Str. 18, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_parkplatz_an_der_alten_post",
+      "name": "Parkplatz an der alten Post",
+      "before": {
+        "lat": 53.15139716000001,
+        "lng": 12.87910736
+      },
+      "google": {
+        "lat": 53.1514259,
+        "lng": 12.8791553,
+        "place_id": "ChIJV3SvQXpDqUcR0R4TMWZlU90",
+        "address": "Rheinsberger Str. 15, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_naturdenkmal_alte_eiche_naturschutzeule",
+      "name": "Naturdenkmal alte Eiche (Naturschutzeule)",
+      "before": {
+        "lat": 53.15626406,
+        "lng": 12.870716460000002
+      },
+      "google": {
+        "lat": 53.1562928,
+        "lng": 12.8707644,
+        "place_id": "ChIJl8olQQBDqUcRBYeqkzfwRAE",
+        "address": "Zechliner Str. 8, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_athletic_field",
+      "name": "Athletic Field",
+      "before": {
+        "lat": 53.10032366,
+        "lng": 12.906039719999999
+      },
+      "google": {
+        "lat": 53.1003524,
+        "lng": 12.9060876,
+        "place_id": "ChIJ____K75BqUcRi1txawfecbo",
+        "address": "Menzer Str. 20, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_tankstelle_vater_gmbh",
+      "name": "Tankstelle Vater GmbH",
+      "before": {
+        "lat": 53.089161260000004,
+        "lng": 12.906942140000002
+      },
+      "google": {
+        "lat": 53.08918999999999,
+        "lng": 12.90699,
+        "place_id": "ChIJBbTCDMhBqUcRYe1kYpliGOw",
+        "address": "Berliner Str. 94, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_landbackerei_janke_gmbh",
+      "name": "Landbäckerei Janke GmbH",
+      "before": {
+        "lat": 53.098632959999996,
+        "lng": 12.89246052
+      },
+      "google": {
+        "lat": 53.0986617,
+        "lng": 12.8925084,
+        "place_id": "ChIJL4-HPKNBqUcRKVG-plI8FAE",
+        "address": "Mühlenstraße 13, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_backer_kadatz",
+      "name": "Bäcker Kadatz",
+      "before": {
+        "lat": 53.09598086,
+        "lng": 12.89675312
+      },
+      "google": {
+        "lat": 53.0960096,
+        "lng": 12.896801,
+        "place_id": "ChIJ6XvGf7xBqUcRXxGPqalvvc0",
+        "address": "Berliner Str. 21, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_ruppiner_feingeback",
+      "name": "Ruppiner Feingebäck",
+      "before": {
+        "lat": 53.09958126,
+        "lng": 12.89220112
+      },
+      "google": {
+        "lat": 53.09961000000001,
+        "lng": 12.892249,
+        "place_id": "ChIJMbw7ldVBqUcRK_73o3OBADU",
+        "address": "Kirchstraße 16, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_restaurant_zum_alten_fritz",
+      "name": "Restaurant Zum alten Fritz",
+      "before": {
+        "lat": 53.09856026,
+        "lng": 12.894398120000002
+      },
+      "google": {
+        "lat": 53.098589,
+        "lng": 12.894446,
+        "place_id": "ChIJDd9V0LxBqUcRtFzsiXS0AT4",
+        "address": "Schloßstraße 11, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_gaststatte_zum_fischerhof",
+      "name": "Gaststätte Zum Fischerhof",
+      "before": {
+        "lat": 53.10101056,
+        "lng": 12.88955322
+      },
+      "google": {
+        "lat": 53.1010393,
+        "lng": 12.8896011,
+        "place_id": "ChIJ-TbHIl1BqUcRg20MG33gS6c",
+        "address": "Seestraße 19A, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_landhotel_lindengarten_restaurant",
+      "name": "Landhotel lindengarten Restaurant",
+      "before": {
+        "lat": 53.18711106000001,
+        "lng": 12.916784920000001
+      },
+      "google": {
+        "lat": 53.1871398,
+        "lng": 12.9168329,
+        "place_id": "ChIJoXTkTwBDqUcRiNOBmwAKzm0",
+        "address": "Dorfstraße 33, 16831 Rheinsberg-Kleinzerlang"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_cafe_im_amtshaus",
+      "name": "Café im Amtshaus",
+      "before": {
+        "lat": 53.15955996,
+        "lng": 12.77153886
+      },
+      "google": {
+        "lat": 53.15958870000001,
+        "lng": 12.7715868,
+        "place_id": "ChIJfc3rXgBFqUcR10JYxLE6X90",
+        "address": "Amtstraße 1, 16837 Rheinsberg-Flecken Zechlin"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_zur_rasenden_rakete",
+      "name": "Zur rasenden Rakete",
+      "before": {
+        "lat": 53.19666256000001,
+        "lng": 12.94874892
+      },
+      "google": {
+        "lat": 53.1966913,
+        "lng": 12.9487969,
+        "place_id": "ChIJ1Td7fQBDqUcR6WkNPAuFlU8",
+        "address": "Birkenweg 16, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_eis_zauberei_wolfgang_brasch_e_k",
+      "name": "EIS-Zauberei Wolfgang Brasch e.K.",
+      "before": {
+        "lat": 53.10136016,
+        "lng": 12.891063220000001
+      },
+      "google": {
+        "lat": 53.1013889,
+        "lng": 12.8911111,
+        "place_id": "ChIJydqDYqJBqUcRVF8D3Ut_-_k",
+        "address": "Kurt-Tucholsky-Straße 36, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_precise_resort_hafendorf_rheinsberg",
+      "name": "Precise Resort Hafendorf Rheinsberg",
+      "before": {
+        "lat": 53.11576126,
+        "lng": 12.8911721
+      },
+      "google": {
+        "lat": 53.1154853,
+        "lng": 12.889989,
+        "place_id": "ChIJgxN55IJBqUcRqF1IlWxUCMg",
+        "address": "Hafendorfstraße 1, 16831 Rheinsberg"
+      },
+      "delta_m": 85,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "rheinsberg_sunday_resort_hafendorf_rheinsberg_hotel",
+      "name": "Sunday Resort Hafendorf Rheinsberg Hotel",
+      "before": {
+        "lat": 53.115456560000005,
+        "lng": 12.889941099999998
+      },
+      "google": {
+        "lat": 53.1154853,
+        "lng": 12.889989,
+        "place_id": "ChIJgxN55IJBqUcRqF1IlWxUCMg",
+        "address": "Hafendorfstraße 1, 16831 Rheinsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_hotel_restaurant_am_alten_rhin",
+      "name": "Hotel & Restaurant Am Alten Rhin",
+      "before": {
+        "lat": 52.95019156000001,
+        "lng": 12.84237168
+      },
+      "google": {
+        "lat": 52.9502203,
+        "lng": 12.8424194,
+        "place_id": "ChIJGRe12-A9qUcRD8P0XJCu_tM",
+        "address": "Friedrich-Engels-Straße 12, 16827 Neuruppin-Alt Ruppin"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_schlabornbrucke_mauseloch",
+      "name": "Schlabornbrücke (Mauseloch)",
+      "before": {
+        "lat": 53.141996459999994,
+        "lng": 12.874066899999999
+      },
+      "google": {
+        "lat": 53.1420324,
+        "lng": 12.8741268,
+        "place_id": "ChIJofaiZABDqUcRxXwXlIuOYeA",
+        "address": "Zur Schlabornbrücke, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_kriegerdenkmal_heinrichsdorf",
+      "name": "Kriegerdenkmal Heinrichsdorf",
+      "before": {
+        "lat": 53.04625546,
+        "lng": 12.957311420000002
+      },
+      "google": {
+        "lat": 53.04629139999999,
+        "lng": 12.9573712,
+        "place_id": "ChIJczb77P9rqUcRMaaDwn3iE2k",
+        "address": "16831 Rheinsberg-Heinrichsdorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_kriegerdenkmal_braunsberg",
+      "name": "Kriegerdenkmal Braunsberg",
+      "before": {
+        "lat": 53.05037566000001,
+        "lng": 12.83702642
+      },
+      "google": {
+        "lat": 53.0504116,
+        "lng": 12.8370862,
+        "place_id": "ChIJZZZuMgBBqUcRURzfxP6rN7s",
+        "address": "Rheinsberger Str. 9, 16818 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_denkmal_joppich",
+      "name": "Denkmal Joppich",
+      "before": {
+        "lat": 53.12824306,
+        "lng": 12.985308519999998
+      },
+      "google": {
+        "lat": 53.128279,
+        "lng": 12.9853684,
+        "place_id": "ChIJx1kGJS9pqUcRh_jOVNwT-4Q",
+        "address": "4XHP+84, 16775 Stechlin"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_dorfkirche_zechlinerhutte",
+      "name": "Dorfkirche Zechlinerhütte",
+      "before": {
+        "lat": 53.15699286,
+        "lng": 12.877075880000001
+      },
+      "google": {
+        "lat": 53.1570288,
+        "lng": 12.8771358,
+        "place_id": "ChIJuVP8FL1DqUcRi6JLP0eyb1M",
+        "address": "B122 42, 16831 Rheinsberg-Zechlinerhütte"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_dorfkirche_linow",
+      "name": "Dorfkirche Linow",
+      "before": {
+        "lat": 53.09768986,
+        "lng": 12.83049776
+      },
+      "google": {
+        "lat": 53.0977258,
+        "lng": 12.8305576,
+        "place_id": "ChIJF05z_C9BqUcR5eER1Hxdmss",
+        "address": "Dorfstraße 33, 16831 Rheinsberg-Linow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_dorfkirche_zechow",
+      "name": "Dorfkirche Zechow",
+      "before": {
+        "lat": 53.05498926,
+        "lng": 12.91239152
+      },
+      "google": {
+        "lat": 53.0550252,
+        "lng": 12.9124513,
+        "place_id": "ChIJ_VzwSh9AqUcRQatcb1KhO3s",
+        "address": "Dorfstraße, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_dorfkirche_kagar",
+      "name": "Dorfkirche Kagar",
+      "before": {
+        "lat": 53.12794126,
+        "lng": 12.80983882
+      },
+      "google": {
+        "lat": 53.1279772,
+        "lng": 12.8098987,
+        "place_id": "ChIJ2b3_g6ZGqUcRjxrumkQT8bg",
+        "address": "Dorfstraße 8, 16837 Rheinsberg-Wallitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_badestelle_wittwesee_feldgrieben",
+      "name": "Badestelle Wittwesee Feldgrieben",
+      "before": {
+        "lat": 53.12846406,
+        "lng": 12.94460942
+      },
+      "google": {
+        "lat": 53.1285,
+        "lng": 12.9446693,
+        "place_id": "ChIJ8ZjdlTRDqUcRXH3N3zWVex4",
+        "address": "Feldgrieben 1, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_haus_bikowsee",
+      "name": "Haus Bikowsee",
+      "before": {
+        "lat": 53.14512046,
+        "lng": 12.8887374
+      },
+      "google": {
+        "lat": 53.1451564,
+        "lng": 12.8887973,
+        "place_id": "ChIJNXlrcpNDqUcRVBqI0fr-bZA",
+        "address": "An d. Junkerheide 1, 16831 Rheinsberg-Zechlinerhütte"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_braminsee",
+      "name": "Braminsee",
+      "before": {
+        "lat": 53.13727886,
+        "lng": 12.808904799999999
+      },
+      "google": {
+        "lat": 53.1373148,
+        "lng": 12.8089647,
+        "place_id": "ChIJv7266CFEqUcRTON_r4bYk3U",
+        "address": "Braminsee, 16837 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_schlabornsee",
+      "name": "Schlabornsee",
+      "before": {
+        "lat": 53.14897936,
+        "lng": 12.87696718
+      },
+      "google": {
+        "lat": 53.14901529999999,
+        "lng": 12.8770271,
+        "place_id": "ChIJnddS0r9DqUcROhVkkpOvExU",
+        "address": "Schlabornsee, 16831 Rheinsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "rheinsberg_bootsvermietung_rheinsberg",
+      "name": "Bootsvermietung Rheinsberg",
+      "before": {
+        "lat": 53.154330560000005,
+        "lng": 12.873362780000003
+      },
+      "google": {
+        "lat": 53.1157966,
+        "lng": 12.886295,
+        "place_id": "ChIJXZsdx4JBqUcRXT9KpIALaEM",
+        "address": "Kaistraße 3, 16831 Rheinsberg"
+      },
+      "delta_m": 4371,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "rheinsberg_kanuverleih_und_imbiss_am_tietzowsee",
+      "name": "Kanuverleih und Imbiss am Tietzowsee",
+      "before": {
+        "lat": 53.16268905999999,
+        "lng": 12.86998306
+      },
+      "google": {
+        "lat": 53.16272499999999,
+        "lng": 12.870043,
+        "place_id": "ChIJ1_w6fZlDqUcR6mmyil0bfY8",
+        "address": "Zur Tietzowsiedlung 7, 16831 Rheinsberg-Zechlinerhütte"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    }
+  ]
+}

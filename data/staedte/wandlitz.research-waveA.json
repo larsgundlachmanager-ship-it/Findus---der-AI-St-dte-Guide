@@ -1,0 +1,166 @@
+{
+  "city_history": "Wandlitz: Barnim-Waldseen mit Liepnitzsee und historischer Waldsiedlung — Naherholung und DDR-Geschichte nördlich von Berlin.",
+  "notes": [
+    "Wave A — verified facts, LIVE ephemeral, no dialog scripts."
+  ],
+  "offline_qa": [],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "wandlitz_liepnitzsee",
+      "name": "Liepnitzsee",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Liepnitzsee: klarer Waldsee im Barnim nahe Wandlitz — Badestellen, Fähren und Wanderwege in Naturschutzgebiet.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Waldufer, Sandstrände und glitzerndes Wasser zwischen Kiefern — beliebtes Berliner Naherholungsziel.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Naturschutzgebiet Liepnitzsee und Lüder-Luch; Bade- und Bootsnutzung reguliert (Wikipedia, Untere Naturschutzbehörde).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Fähren verbinden Nord- und Südufer; Wanderweg am Ufer.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Wandlitzsee und Waldsiedlung Wandlitz in der Gemeinde — unterschiedliche Erholungs- und Geschichtesebenen.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Strandbad und Bootsverleih saisonal; Regeln zu Hunden und Feuerstellen beachten.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Strandbad und Bootsverleih am Südufer — Naturschutzregeln zu Lärmschutz und Feuern.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Fähren über den See verbinden Wanderwege im Barnim — Fahrplan saisonal.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Waldumbau und Trockenheit beeinflussen Wasserstand — Uferwege können gesperrt sein.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Klarwassersee mit Waldufern — beliebt zum Schwimmen nach warmen Tagen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Wanderweg „Rund um den Liepnitzsee“ ausgeschildert — mehrere Einstiege.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "wandlitz_waldsiedlung_wandlitz",
+      "name": "Waldsiedlung Wandlitz",
+      "lat": 52.7597,
+      "lng": 13.4578,
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Waldsiedlung Wandlitz: Siedlung der DDR-Führung im Wald — historisch abgeschirmter Wohnkomplex, heute Wohngebiet.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: eingestreute Einfamilienhäuser in dichtem Wald — abgeschirmte Straßenführung.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Entstand ab 1950 als Wohnsiedlung für SED-Politbüro und Staatsratsmitglieder (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach 1989 Öffnung und Umwandlung in normalen Wohnort; Denkmal- und Erinnerungsdebatten.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Liepnitzsee und Wandlitzer See für Naherholung — geografisch nahe, historisch kontrastreich.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Wohngebiet ohne touristische Großführungen; öffentliche Wege respektvoll nutzen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Die Siedlung wurde ab 1950 für DDR-Spitzenfunktionäre errichtet — abgeschirmte Waldlage.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach 1989 normaler Wohnort; historische Führungen nur vereinzelt — Privatsphäre beachten.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Architektur einfacher Einfamilienhäuser — kein Repräsentationsbau wie Potsdam-Babelsberg.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Geschichtliche Führungen nur vereinzelt — Wohngebiet respektvoll befahren.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_places": []
+}

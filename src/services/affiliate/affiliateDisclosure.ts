@@ -1,8 +1,8 @@
 /**
  * Affiliate-Transparenz ohne störenden Karten-Footer:
- * - Button-Kennzeichnung „Anzeige“
- * - einmalige Soft-Bestätigung (persistent) — kein blockierendes Popup bei jedem Tap
- * - voller Text bleibt in Einstellungen → Impressum & Datenschutz
+ * - Button-Kennzeichnung mit Sternchen (★), kein „Anzeige“-Wort
+ * - einmalige Soft-Bestätigung (persistent)
+ * - voller Text in Einstellungen
  */
 
 import * as FileSystem from 'expo-file-system';
@@ -12,16 +12,21 @@ import { useFinnusStore } from '../../store/useFinnusStore';
 
 const ACK_PATH = `${FileSystem.documentDirectory}findus-affiliate-ack.json`;
 
-/** Kennzeichnet Partner-Buttons dezent (UWG-übliche Kennzeichnung). */
+/** Partner-Buttons dezent mit ★ (Settings erklären das Sternchen). */
 export function withAnzeigeLabel(label: string): string {
   const t = label.trim();
-  if (!t) return 'Anzeige';
-  if (/\banzeige\b/i.test(t)) return t;
-  return t;
+  if (!t) return '★';
+  if (/★/.test(t) || /\banzeige\b/i.test(t)) {
+    return t.replace(/\banzeige\b/gi, '★').trim();
+  }
+  return `${t} ★`.slice(0, 20);
 }
 
 export function partnerActionShowsAnzeige(action: QuickAction): boolean {
-  return isPartnerAffiliateAction(action);
+  return (
+    isPartnerAffiliateAction(action) ||
+    action.payload?.affiliateMarked === true
+  );
 }
 
 async function persistAck(): Promise<void> {
@@ -35,7 +40,6 @@ async function persistAck(): Promise<void> {
   }
 }
 
-/** Beim Boot: gespeicherte Zustimmung laden. */
 export async function hydrateAffiliateRedirectAck(): Promise<void> {
   try {
     const info = await FileSystem.getInfoAsync(ACK_PATH);
@@ -51,8 +55,7 @@ export async function hydrateAffiliateRedirectAck(): Promise<void> {
 }
 
 /**
- * Vor Partner-Link: wenn schon bestätigt (Sitzung oder persistent) → sofort weiter.
- * Sonst soft-ack ohne blockierenden Alert („Anzeige“-Label am Button reicht).
+ * Vor Partner-Link: soft-ack; Sternchen am Button reicht als Kennzeichnung.
  */
 export function confirmAffiliateRedirectIfNeeded(): Promise<boolean> {
   const store = useFinnusStore.getState();

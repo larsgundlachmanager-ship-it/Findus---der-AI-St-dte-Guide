@@ -1,0 +1,22 @@
+---
+description: Stadt-Cover Agent — Soft-Photo, reale Orte; neues Bild stylizen, zur Stadt hinzufügen und aktualisieren (apply+upload).
+alwaysApply: true
+---
+
+# Findus — City Cover Agent
+
+## Stil + Auslieferung
+
+- Soft-Photo (`findus_soft_photo_v1`) — nicht stark gemalt
+- **Fix:** Gebäude, Bäume, echte Geografie — keine Fantasie-Flüsse/Seen
+- **Ändern:** Menschen, Autos, Boote, Stühle
+- Cover **nicht** in die APK bündeln — JPEG auf Supabase, App lädt on-demand (`cover_url`)
+- Prefetch nur für vorgeschlagene/nahe Städte
+
+## Neues Bild → passende Stadt
+
+1. `city:cover:queue`
+2. GenerateImage (realitätsnah)
+3. `npm run city:cover:apply -- --id <slug> --from <png> --upload`
+
+SSOT: `.cursor/skills/findus-city-cover/SKILL.md` · `scripts/cityPack/coverStyle.mjs`

@@ -718,10 +718,6 @@ a {
     text-align: center;
   }
 
-  .hero-visual {
-    order: -1;
-  }
-
   .phone {
     width: min(100%, 210px);
   }

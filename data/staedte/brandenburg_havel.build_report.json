@@ -1,0 +1,1585 @@
+{
+  "city_id": "brandenburg_havel",
+  "center": {
+    "lat": 52.4125287,
+    "lng": 12.5316444
+  },
+  "added": [
+    "brandenburg_havel_brandenburg_hauptbahnhof",
+    "brandenburg_havel_brandenburg_hauptbahnhof",
+    "brandenburg_havel_verkehrsbetriebe_brandenburg_an_der_havel",
+    "brandenburg_havel_frau_dr_med_birgit_didczuneit_sandhop",
+    "brandenburg_havel_waldmops_denkmal_erinnerung_an_loriot"
+  ],
+  "skipped": [
+    {
+      "name": "Brandenburg Hauptbahnhof",
+      "near": "brandenburg_havel_brandenburg_hauptbahnhof"
+    },
+    {
+      "name": "Brandenburg-Altstadt",
+      "near": "brandenburg_havel_brandenburg_altstadt"
+    },
+    {
+      "name": "Parkplatz am Hauptbahnhof",
+      "near": "brandenburg_havel_parkplatz_am_hauptbahnhof"
+    },
+    {
+      "name": "Schotterparkplatz 1",
+      "near": "brandenburg_havel_schotterparkplatz_1"
+    },
+    {
+      "name": "Bäcker Thonke Brandenburg, Hauptbahnhof",
+      "near": "brandenburg_havel_brandenburg_hauptbahnhof"
+    },
+    {
+      "name": "Gesundheitszentrum Brandenburg an der Havel GmbH",
+      "near": "brandenburg_havel_gesundheitszentrum_brandenburg_an_der_havel_gmbh"
+    },
+    {
+      "name": "Brandenburg, Hohenstücken Nord",
+      "near": "brandenburg_havel_brandenburg_hohenstucken_nord"
+    },
+    {
+      "name": "Brandenburg, Nicolaiplatz",
+      "near": "brandenburg_havel_brandenburg_nicolaiplatz"
+    },
+    {
+      "name": "Fouquéstr./Fachhochschule",
+      "near": "brandenburg_havel_fouquestr_fachhochschule"
+    },
+    {
+      "name": "Brandenburg, Fontanestr.",
+      "near": "brandenburg_havel_brandenburg_fontanestr"
+    },
+    {
+      "name": "Brandenburg, Altstadt Bhf",
+      "near": "brandenburg_havel_brandenburg_altstadt"
+    },
+    {
+      "name": "Görden",
+      "near": "brandenburg_havel_gorden"
+    },
+    {
+      "name": "Schiffsanleger Am Wiesenweg",
+      "near": "brandenburg_havel_schiffsanleger_am_wiesenweg"
+    },
+    {
+      "name": "Seilfähre Neuendorf",
+      "near": "brandenburg_havel_seilfahre_neuendorf"
+    },
+    {
+      "name": "Rewe Anleger für Sportboote",
+      "near": "brandenburg_havel_rewe_anleger_fur_sportboote"
+    },
+    {
+      "name": "Historischer Hafen Brandenburg an der Havel e.V.",
+      "near": "brandenburg_havel_historischer_hafen_brandenburg_an_der_havel_e_v"
+    },
+    {
+      "name": "Anleger Alfred Messelplatz",
+      "near": "brandenburg_havel_anleger_alfred_messelplatz"
+    },
+    {
+      "name": "Anleger Buhnenhaus",
+      "near": "brandenburg_havel_anleger_buhnenhaus"
+    },
+    {
+      "name": "Nordstern Reederei e. K. (Büro)",
+      "near": "brandenburg_havel_nordstern_reederei_e_k_buro"
+    },
+    {
+      "name": "HAVEL MARIN GmbH",
+      "near": "brandenburg_havel_havel_marin_gmbh"
+    },
+    {
+      "name": "Wasserwanderrastplatz Salzhofufer",
+      "near": "brandenburg_havel_wasserwanderrastplatz_salzhofufer"
+    },
+    {
+      "name": "Stadtmarina Brandenburg Boote & Camping",
+      "near": "brandenburg_havel_stadtmarina_brandenburg_boote_camping"
+    },
+    {
+      "name": "Wasserwanderrastplatz am Slawendorf",
+      "near": "brandenburg_havel_wasserwanderrastplatz_am_slawendorf"
+    },
+    {
+      "name": "Bootshaus Radicke",
+      "near": "brandenburg_havel_bootshaus_radicke"
+    },
+    {
+      "name": "Slawendorf Brandenburg an der Havel",
+      "near": "brandenburg_havel_slawendorf_brandenburg_an_der_havel"
+    },
+    {
+      "name": "Hausfloss-Hafen CAASMANN",
+      "near": "brandenburg_havel_hausfloss_hafen_caasmann"
+    },
+    {
+      "name": "Anleger am Regattaring",
+      "near": "brandenburg_havel_anleger_am_regattaring"
+    },
+    {
+      "name": "Nordstern Reederei",
+      "near": "brandenburg_havel_nordstern_reederei"
+    },
+    {
+      "name": "Yachtcharter Marina Schoners Wehr",
+      "near": "brandenburg_havel_yachtcharter_marina_schoners_wehr"
+    },
+    {
+      "name": "Marina Niederhavel",
+      "near": "brandenburg_havel_marina_niederhavel"
+    },
+    {
+      "name": "Brandenburger Hafen",
+      "near": "brandenburg_havel_brandenburger_hafen"
+    },
+    {
+      "name": "Archäologisches Landesmuseum Brandenburg",
+      "near": "brandenburg_havel_archaologisches_landesmuseum_brandenburg"
+    },
+    {
+      "name": "Industriemuseum Brandenburg an der Havel",
+      "near": "brandenburg_havel_industriemuseum_brandenburg_an_der_havel"
+    },
+    {
+      "name": "Stadtmuseum im Frey-Haus",
+      "near": "brandenburg_havel_stadtmuseum_im_frey_haus"
+    },
+    {
+      "name": "Psychiatriemuseum",
+      "near": "brandenburg_havel_psychiatriemuseum"
+    },
+    {
+      "name": "Fahrradmuseum Brandenburg",
+      "near": "brandenburg_havel_fahrradmuseum_brandenburg"
+    },
+    {
+      "name": "Museum Steintorturm",
+      "near": "brandenburg_havel_museum_steintorturm"
+    },
+    {
+      "name": "Brennabor Kunsthalle",
+      "near": "brandenburg_havel_brennabor_kunsthalle"
+    },
+    {
+      "name": "Straßenbahnmuseum",
+      "near": "brandenburg_havel_strassenbahnmuseum"
+    },
+    {
+      "name": "Gedenkstätte für die Opfer der Euthanasie-Morde",
+      "near": "brandenburg_havel_gedenkstatte_fur_die_opfer_der_euthanasie_morde"
+    },
+    {
+      "name": "Steintorturm",
+      "near": "brandenburg_havel_museum_steintorturm"
+    },
+    {
+      "name": "Paulikloster",
+      "near": "brandenburg_havel_archaologisches_landesmuseum_brandenburg"
+    },
+    {
+      "name": "Gotisches Haus",
+      "near": "brandenburg_havel_gotisches_haus"
+    },
+    {
+      "name": "Jakobskapelle (Brandenburg an der Havel)",
+      "near": "brandenburg_havel_jakobskapelle_brandenburg_an_der_havel"
+    },
+    {
+      "name": "St.-Katharinen-Kirche zu Brandenburg an der Havel",
+      "near": "brandenburg_havel_st_katharinen_kirche_zu_brandenburg_an_der_havel"
+    },
+    {
+      "name": "Petrikapelle",
+      "near": "brandenburg_havel_petrikapelle"
+    },
+    {
+      "name": "St. Johannis",
+      "near": "brandenburg_havel_st_johannis"
+    },
+    {
+      "name": "St. Gotthardt",
+      "near": "brandenburg_havel_st_gotthardt"
+    },
+    {
+      "name": "Heilige Dreifaltigkeit",
+      "near": "brandenburg_havel_heilige_dreifaltigkeit"
+    },
+    {
+      "name": "Hofkirche am Jakobsgraben",
+      "near": "brandenburg_havel_hofkirche_am_jakobsgraben"
+    },
+    {
+      "name": "St. Nikolai",
+      "near": "brandenburg_havel_st_nikolai"
+    },
+    {
+      "name": "Neuapostolische Kirche Brandenburg",
+      "near": "brandenburg_havel_neuapostolische_kirche_brandenburg"
+    },
+    {
+      "name": "Dom St. Peter und Paul",
+      "near": "brandenburg_havel_dom_st_peter_und_paul"
+    },
+    {
+      "name": "St. Bernhard Gemeinschaftskirche",
+      "near": "brandenburg_havel_st_bernhard_gemeinschaftskirche"
+    },
+    {
+      "name": "Auferstehungskirche - Auferstehungskirchengemeinde Brandenburg",
+      "near": "brandenburg_havel_auferstehungskirche_auferstehungskirchengemeinde_brandenburg"
+    },
+    {
+      "name": "Hope Brandenburg - Gemeinsam Gott erleben.",
+      "near": "brandenburg_havel_hope_brandenburg_gemeinsam_gott_erleben"
+    },
+    {
+      "name": "Kirche Jesu Christi der Heiligen der Letzten Tage",
+      "near": "brandenburg_havel_kirche_jesu_christi_der_heiligen_der_letzten_tage"
+    },
+    {
+      "name": "Russisch orthodoxe Gemeinde Brandenburg an der Havel",
+      "near": "brandenburg_havel_auferstehungskirche_auferstehungskirchengemeinde_brandenburg"
+    },
+    {
+      "name": "Kirche",
+      "near": "brandenburg_havel_kirche"
+    },
+    {
+      "name": "Christ Embassy Brandenburg an der Havel",
+      "near": "brandenburg_havel_christ_embassy_brandenburg_an_der_havel"
+    },
+    {
+      "name": "St. Elisabeth",
+      "near": "brandenburg_havel_gorden"
+    },
+    {
+      "name": "Fritze Bollmann Brunnen",
+      "near": "brandenburg_havel_fritze_bollmann_brunnen"
+    },
+    {
+      "name": "Bernini-Skulpturen vom Galateabrunnen",
+      "near": "brandenburg_havel_bernini_skulpturen_vom_galateabrunnen"
+    },
+    {
+      "name": "Brunnen",
+      "near": "brandenburg_havel_brunnen"
+    },
+    {
+      "name": "Springbrunnen Marienberg",
+      "near": "brandenburg_havel_springbrunnen_marienberg"
+    },
+    {
+      "name": "Waldmops (Denkmal)",
+      "near": "brandenburg_havel_waldmops_denkmal"
+    },
+    {
+      "name": "Undine Skulptur",
+      "near": "brandenburg_havel_historischer_hafen_brandenburg_an_der_havel_e_v"
+    },
+    {
+      "name": "Waldmops (Denkmal) - Homage an Loriot",
+      "near": "brandenburg_havel_waldmops_denkmal_homage_an_loriot"
+    },
+    {
+      "name": "Waldmops (Denkmal) - Erinnerung an Loriot",
+      "near": "brandenburg_havel_waldmops_denkmal_erinnerung_an_loriot"
+    },
+    {
+      "name": "Waldmops am Brunnen",
+      "near": "brandenburg_havel_waldmops_am_brunnen"
+    },
+    {
+      "name": "Alexander von Humboldt-Denkmal",
+      "near": "brandenburg_havel_alexander_von_humboldt_denkmal"
+    },
+    {
+      "name": "Sitzender Waldmops",
+      "near": "brandenburg_havel_sitzender_waldmops"
+    },
+    {
+      "name": "Loriotdenkmal",
+      "near": "brandenburg_havel_nordstern_reederei"
+    },
+    {
+      "name": "Sowjetisches Ehrenmal",
+      "near": "brandenburg_havel_museum_steintorturm"
+    },
+    {
+      "name": "Friedrich-Schiller-Denkmal",
+      "near": "brandenburg_havel_friedrich_schiller_denkmal"
+    },
+    {
+      "name": "Waldmops (Paar) im Humboldthain",
+      "near": "brandenburg_havel_wasserwanderrastplatz_salzhofufer"
+    },
+    {
+      "name": "Frosch Springbrunnen",
+      "near": "brandenburg_havel_sitzender_waldmops"
+    },
+    {
+      "name": "Waldmops am Brunnen/Dom",
+      "near": "brandenburg_havel_bernini_skulpturen_vom_galateabrunnen"
+    },
+    {
+      "name": "Waldmops (Denkmal) - Erinnerung an Loriot",
+      "near": "brandenburg_havel_st_katharinen_kirche_zu_brandenburg_an_der_havel"
+    },
+    {
+      "name": "Strand An der Regattastrecke",
+      "near": "brandenburg_havel_strand_an_der_regattastrecke"
+    },
+    {
+      "name": "Strand am Grillendamm",
+      "near": "brandenburg_havel_strand_am_grillendamm"
+    },
+    {
+      "name": "Theaterpark",
+      "near": "brandenburg_havel_theaterpark"
+    },
+    {
+      "name": "Packhofgelände Park",
+      "near": "brandenburg_havel_packhofgelande_park"
+    },
+    {
+      "name": "Uferpromenade",
+      "near": "brandenburg_havel_uferpromenade"
+    },
+    {
+      "name": "Bürgerpark und Gartendenkmal Marienberg",
+      "near": "brandenburg_havel_burgerpark_und_gartendenkmal_marienberg"
+    },
+    {
+      "name": "Humboldthain",
+      "near": "brandenburg_havel_alexander_von_humboldt_denkmal"
+    },
+    {
+      "name": "Brandenburg an der Havel",
+      "near": "brandenburg_havel_brandenburg_an_der_havel"
+    },
+    {
+      "name": "Marienberg",
+      "near": "brandenburg_havel_marienberg"
+    },
+    {
+      "name": "Aussichtsplattform Stadtkanal",
+      "near": "brandenburg_havel_aussichtsplattform_stadtkanal"
+    },
+    {
+      "name": "Strandbad Massowburg",
+      "near": "brandenburg_havel_strand_an_der_regattastrecke"
+    },
+    {
+      "name": "Heinrich-Heine-Ufer",
+      "near": "brandenburg_havel_heinrich_heine_ufer"
+    },
+    {
+      "name": "Yachtanleger Am Jungfernsteig",
+      "near": "brandenburg_havel_yachtanleger_am_jungfernsteig"
+    },
+    {
+      "name": "Friedenswarte auf dem Marienberg",
+      "near": "brandenburg_havel_burgerpark_und_gartendenkmal_marienberg"
+    },
+    {
+      "name": "Parkplatz Grillendamm 4, 14776 Brandenburg an der Havel",
+      "near": "brandenburg_havel_parkplatz_grillendamm_4_14776_brandenburg_an_der_havel"
+    },
+    {
+      "name": "Kanal am kleinen Beetzsee",
+      "near": "brandenburg_havel_kanal_am_kleinen_beetzsee"
+    },
+    {
+      "name": "Wallpromenade",
+      "near": "brandenburg_havel_wallpromenade"
+    },
+    {
+      "name": "Leuchtturm Breitlingsee",
+      "near": "brandenburg_havel_leuchtturm_breitlingsee"
+    },
+    {
+      "name": "Plauer Torturm",
+      "near": "brandenburg_havel_plauer_torturm"
+    },
+    {
+      "name": "Rathenower Torturm",
+      "near": "brandenburg_havel_rathenower_torturm"
+    },
+    {
+      "name": "Neustädtischer Mühlentorturm",
+      "near": "brandenburg_havel_neustadtischer_muhlentorturm"
+    },
+    {
+      "name": "Marienbad Brandenburg",
+      "near": "brandenburg_havel_marienbad_brandenburg"
+    },
+    {
+      "name": "Dreifelderhalle Am Wiesenweg",
+      "near": "brandenburg_havel_dreifelderhalle_am_wiesenweg"
+    },
+    {
+      "name": "Dreifelderhalle Marienberg",
+      "near": "brandenburg_havel_dreifelderhalle_marienberg"
+    },
+    {
+      "name": "ASC Brandenburg 03 e.V.",
+      "near": "brandenburg_havel_asc_brandenburg_03_e_v"
+    },
+    {
+      "name": "Wassersportzentrum Alte Feuerwache",
+      "near": "brandenburg_havel_wassersportzentrum_alte_feuerwache"
+    },
+    {
+      "name": "Regattastrecke Brandenburg an der Havel",
+      "near": "brandenburg_havel_regattastrecke_brandenburg_an_der_havel"
+    },
+    {
+      "name": "Jugendkulturfabrik Brandenburg e.V.",
+      "near": "brandenburg_havel_fouquestr_fachhochschule"
+    },
+    {
+      "name": "Sportplatz",
+      "near": "brandenburg_havel_sportplatz"
+    },
+    {
+      "name": "Sportplatz am Packhof",
+      "near": "brandenburg_havel_sportplatz_am_packhof"
+    },
+    {
+      "name": "Haus der Offiziere (HdO Club)",
+      "near": "brandenburg_havel_fouquestr_fachhochschule"
+    },
+    {
+      "name": "Altstädtisches Rathaus mit Roland",
+      "near": "brandenburg_havel_waldmops_am_brunnen"
+    },
+    {
+      "name": "Brandenburger Stadtbefestigung",
+      "near": "brandenburg_havel_brandenburger_stadtbefestigung"
+    },
+    {
+      "name": "Die Altstädter e.V.",
+      "near": "brandenburg_havel_die_altstadter_e_v"
+    },
+    {
+      "name": "Altstadt Pub",
+      "near": "brandenburg_havel_stadtmuseum_im_frey_haus"
+    },
+    {
+      "name": "Altstadtpension Brandenburg",
+      "near": "brandenburg_havel_fahrradmuseum_brandenburg"
+    },
+    {
+      "name": "Touristinformation Stadt Brandenburg an der Havel",
+      "near": "brandenburg_havel_waldmops_denkmal_erinnerung_an_loriot"
+    },
+    {
+      "name": "Panorama Service GmbH",
+      "near": "brandenburg_havel_panorama_service_gmbh"
+    },
+    {
+      "name": "Das Panoramaboot",
+      "near": "brandenburg_havel_parkplatz_grillendamm_4_14776_brandenburg_an_der_havel"
+    },
+    {
+      "name": "Steg am Mühlendamm",
+      "near": "brandenburg_havel_steg_am_muhlendamm"
+    },
+    {
+      "name": "Brandenburger Theater GmbH",
+      "near": "brandenburg_havel_brandenburger_theater_gmbh"
+    },
+    {
+      "name": "Postalisch Freilichtbühne",
+      "near": "brandenburg_havel_postalisch_freilichtbuhne"
+    },
+    {
+      "name": "event-theater",
+      "near": "brandenburg_havel_nordstern_reederei"
+    },
+    {
+      "name": "Concerthaus Kino Brandenburg",
+      "near": "brandenburg_havel_concerthaus_kino_brandenburg"
+    },
+    {
+      "name": "Badestelle Gördensee",
+      "near": "brandenburg_havel_badestelle_gordensee"
+    },
+    {
+      "name": "ZIEGELEI AM QUENZSEE",
+      "near": "brandenburg_havel_ziegelei_am_quenzsee"
+    },
+    {
+      "name": "ALTE SILOBRÜCKE",
+      "near": "brandenburg_havel_alte_silobrucke"
+    },
+    {
+      "name": "NANU-NANA",
+      "near": "brandenburg_havel_nanu_nana"
+    },
+    {
+      "name": "Sankt-Annen-Galerie",
+      "near": "brandenburg_havel_nanu_nana"
+    },
+    {
+      "name": "Dürerhaus Hans-Peter Zahn",
+      "near": "brandenburg_havel_durerhaus_hans_peter_zahn"
+    },
+    {
+      "name": "Weltladen Brandenburg an der Havel",
+      "near": "brandenburg_havel_weltladen_brandenburg_an_der_havel"
+    },
+    {
+      "name": "Fliedners Domladen Brandenburg / Havel",
+      "near": "brandenburg_havel_dom_st_peter_und_paul"
+    },
+    {
+      "name": "Thalia Brandenburg - Sankt-Annen-Galerie",
+      "near": "brandenburg_havel_nanu_nana"
+    },
+    {
+      "name": "Waldmops am Pfaffeufer",
+      "near": "brandenburg_havel_waldmops_am_pfaffeufer"
+    },
+    {
+      "name": "Caritas-Klinik St. Marien Brandenburg",
+      "near": "brandenburg_havel_caritas_klinik_st_marien_brandenburg"
+    },
+    {
+      "name": "Universitätsklinikum Brandenburg an der Havel",
+      "near": "brandenburg_havel_universitatsklinikum_brandenburg_an_der_havel"
+    },
+    {
+      "name": "Universitätsklinikum Brandenburg an der Havel GmbH - HNO",
+      "near": "brandenburg_havel_universitatsklinikum_brandenburg_an_der_havel_gmbh_hno"
+    },
+    {
+      "name": "Institut für diagnostische und interventionelle Radiologie | Universitätsklinikum Brandenburg an der Havel",
+      "near": "brandenburg_havel_universitatsklinikum_brandenburg_an_der_havel_gmbh_hno"
+    },
+    {
+      "name": "Apotheke am Stahlwerk",
+      "near": "brandenburg_havel_apotheke_am_stahlwerk"
+    },
+    {
+      "name": "Gesundheitszentrum am Hauptbahnhof",
+      "near": "brandenburg_havel_gesundheitszentrum_brandenburg_an_der_havel_gmbh"
+    },
+    {
+      "name": "Dr. Zerbaum & Kollegen MVZ",
+      "near": "brandenburg_havel_dr_zerbaum_kollegen_mvz"
+    },
+    {
+      "name": "Apotheke im Gesundheitszentrum",
+      "near": "brandenburg_havel_gesundheitszentrum_brandenburg_an_der_havel_gmbh"
+    },
+    {
+      "name": "Asklepios Fachklinikum Brandenburg",
+      "near": "brandenburg_havel_asklepios_fachklinikum_brandenburg"
+    },
+    {
+      "name": "Fontane Apotheke Inh. Sibylle Schröder",
+      "near": "brandenburg_havel_fontane_apotheke_inh_sibylle_schroder"
+    },
+    {
+      "name": "easyApotheke Brandenburg",
+      "near": "brandenburg_havel_easyapotheke_brandenburg"
+    },
+    {
+      "name": "Hausärztin Dr. Mariana Stojanova",
+      "near": "brandenburg_havel_hausarztin_dr_mariana_stojanova"
+    },
+    {
+      "name": "Goethe-Apotheke Inh. Silke Pfeiffer",
+      "near": "brandenburg_havel_brandenburg_nicolaiplatz"
+    },
+    {
+      "name": "Praxis Dr. med. Anne Mantke",
+      "near": "brandenburg_havel_praxis_dr_med_anne_mantke"
+    },
+    {
+      "name": "Klinik für Anästhesiologie und Intensivtherapie | Universitätsklinikum Brandenburg an der Havel",
+      "near": "brandenburg_havel_universitatsklinikum_brandenburg_an_der_havel"
+    },
+    {
+      "name": "Klinik für Gynäkologie und Geburtshilfe | Universitätsklinikum Brandenburg an der Havel",
+      "near": "brandenburg_havel_universitatsklinikum_brandenburg_an_der_havel_gmbh_hno"
+    },
+    {
+      "name": "Dr. med. Lutz Fochtmann",
+      "near": "brandenburg_havel_apotheke_am_stahlwerk"
+    },
+    {
+      "name": "Apotheke im Beetzsee Center",
+      "near": "brandenburg_havel_apotheke_im_beetzsee_center"
+    },
+    {
+      "name": "Nord Apotheke",
+      "near": "brandenburg_havel_nord_apotheke"
+    },
+    {
+      "name": "Am Salzhofufer",
+      "near": "brandenburg_havel_wasserwanderrastplatz_salzhofufer"
+    },
+    {
+      "name": "Waldmops hebt Bein am Stein",
+      "near": "brandenburg_havel_st_johannis"
+    },
+    {
+      "name": "Märchen Wandbild",
+      "near": "brandenburg_havel_marchen_wandbild"
+    },
+    {
+      "name": "Sitzender Waldmops bei Loriot",
+      "near": "brandenburg_havel_nordstern_reederei"
+    },
+    {
+      "name": "Waldmops am Salzhof",
+      "near": "brandenburg_havel_waldmops_am_salzhof"
+    },
+    {
+      "name": "Waldmops auf der Treppe",
+      "near": "brandenburg_havel_nordstern_reederei"
+    },
+    {
+      "name": "Paris, August Wredow Statue",
+      "near": "brandenburg_havel_brunnen"
+    },
+    {
+      "name": "Havelpegel",
+      "near": "brandenburg_havel_havelpegel"
+    },
+    {
+      "name": "Domstift Brandenburg",
+      "near": "brandenburg_havel_petrikapelle"
+    },
+    {
+      "name": "Havelgarten",
+      "near": "brandenburg_havel_havelgarten"
+    },
+    {
+      "name": "DL Garten - & Landschaftsbewässerung",
+      "near": "brandenburg_havel_dl_garten_landschaftsbewasserung"
+    },
+    {
+      "name": "Garten Landheim",
+      "near": "brandenburg_havel_garten_landheim"
+    },
+    {
+      "name": "Gartensparte Buchenweg e.V.",
+      "near": "brandenburg_havel_gartensparte_buchenweg_e_v"
+    },
+    {
+      "name": "Märchengarten",
+      "near": "brandenburg_havel_marchengarten"
+    },
+    {
+      "name": "Kleingartenverein \"Am Jakobsgraben\"e.V",
+      "near": "brandenburg_havel_kleingartenverein_am_jakobsgraben_e_v"
+    },
+    {
+      "name": "Kleingartensparte Helgoland",
+      "near": "brandenburg_havel_kleingartensparte_helgoland"
+    },
+    {
+      "name": "KGV Einheit e.V.",
+      "near": "brandenburg_havel_kgv_einheit_e_v"
+    },
+    {
+      "name": "Neustädtischer Markt Parkgebühren",
+      "near": "brandenburg_havel_waldmops_denkmal_erinnerung_an_loriot"
+    },
+    {
+      "name": "Theodor Fontane 2.0",
+      "near": "brandenburg_havel_havelpegel"
+    },
+    {
+      "name": "Restaurant Theaterklause",
+      "near": "brandenburg_havel_brandenburger_theater_gmbh"
+    },
+    {
+      "name": "Fontane-Klub",
+      "near": "brandenburg_havel_nordstern_reederei"
+    },
+    {
+      "name": "Festplatz Wiesenweg",
+      "near": "brandenburg_havel_festplatz_wiesenweg"
+    },
+    {
+      "name": "Brandenburger Karnevals-Club BKC 1964 e.V.",
+      "near": "brandenburg_havel_brandenburger_karnevals_club_bkc_1964_e_v"
+    },
+    {
+      "name": "Musiksteine Theater Brandenburg",
+      "near": "brandenburg_havel_theaterpark"
+    },
+    {
+      "name": "Marina Quenzsee",
+      "near": "brandenburg_havel_marina_quenzsee"
+    },
+    {
+      "name": "Boot Mieten Brandenburg",
+      "near": "brandenburg_havel_boot_mieten_brandenburg"
+    },
+    {
+      "name": "Charterpoint Havelland",
+      "near": "brandenburg_havel_charterpoint_havelland"
+    },
+    {
+      "name": "Wassersport Geisler",
+      "near": "brandenburg_havel_neustadtischer_muhlentorturm"
+    },
+    {
+      "name": "Brandenburg Charter",
+      "near": "brandenburg_havel_wassersportzentrum_alte_feuerwache"
+    },
+    {
+      "name": "Altes Bootshaus",
+      "near": "brandenburg_havel_altes_bootshaus"
+    },
+    {
+      "name": "Floßverleih TreibGuT",
+      "near": "brandenburg_havel_flossverleih_treibgut"
+    },
+    {
+      "name": "Stand Up Paddle Touren/ Verleih SUP Safari Brandenburg l Brandenburg an der Havel",
+      "near": "brandenburg_havel_strand_am_grillendamm"
+    },
+    {
+      "name": "Hausboot-Captain",
+      "near": "brandenburg_havel_nordstern_reederei"
+    },
+    {
+      "name": "Wassersport Geisler Gmbh",
+      "near": "brandenburg_havel_wassersport_geisler_gmbh"
+    },
+    {
+      "name": "Happy Hausboot",
+      "near": "brandenburg_havel_happy_hausboot"
+    },
+    {
+      "name": "genussmanufaktur brandenburg UG",
+      "near": "brandenburg_havel_easyapotheke_brandenburg"
+    },
+    {
+      "name": "Tortenliebe by genussmanufaktur",
+      "near": "brandenburg_havel_bernini_skulpturen_vom_galateabrunnen"
+    },
+    {
+      "name": "Action Brandenburg an Havel",
+      "near": "brandenburg_havel_action_brandenburg_an_havel"
+    },
+    {
+      "name": "Underground",
+      "near": "brandenburg_havel_fritze_bollmann_brunnen"
+    },
+    {
+      "name": "Wedekind Angel, Sport-, Spiel- u. Schreibwaren & freie Waffen",
+      "near": "brandenburg_havel_wedekind_angel_sport_spiel_u_schreibwaren_freie_waffen"
+    },
+    {
+      "name": "Shirt Instyle",
+      "near": "brandenburg_havel_shirt_instyle"
+    },
+    {
+      "name": "CardCastle-Brandenburg",
+      "near": "brandenburg_havel_cardcastle_brandenburg"
+    },
+    {
+      "name": "Thomas Philipps Brandenburg an der Havel",
+      "near": "brandenburg_havel_thomas_philipps_brandenburg_an_der_havel"
+    },
+    {
+      "name": "AM to PM Späti",
+      "near": "brandenburg_havel_museum_steintorturm"
+    },
+    {
+      "name": "ATTiTUDE AFFAiR c/o Thiess & Schmidt GbR",
+      "near": "brandenburg_havel_concerthaus_kino_brandenburg"
+    },
+    {
+      "name": "Nobunto Deutschland UG (haftungsbeschränkt)",
+      "near": "brandenburg_havel_nobunto_deutschland_ug_haftungsbeschrankt"
+    },
+    {
+      "name": "Artimesia",
+      "near": "brandenburg_havel_christ_embassy_brandenburg_an_der_havel"
+    },
+    {
+      "name": "MÄC-GEIZ",
+      "near": "brandenburg_havel_mac_geiz"
+    },
+    {
+      "name": "Lidl",
+      "near": "brandenburg_havel_lidl"
+    },
+    {
+      "name": "Grüner Wochenmarkt am Katharinenkirchplatz",
+      "near": "brandenburg_havel_st_katharinen_kirche_zu_brandenburg_an_der_havel"
+    },
+    {
+      "name": "Grüner Wochenmarkt am Molkenmarkt",
+      "near": "brandenburg_havel_easyapotheke_brandenburg"
+    },
+    {
+      "name": "Marktschwärmer Brandenburg",
+      "near": "brandenburg_havel_waldmops_am_brunnen"
+    }
+  ],
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [
+      "brandenburg_havel_brandenburg_hauptbahnhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_brandenburg_altstadt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_parkplatz_am_hauptbahnhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_schotterparkplatz_1: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_gesundheitszentrum_brandenburg_an_der_havel_gmbh: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_brandenburg_hohenstucken_nord: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_brandenburg_nicolaiplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_fouquestr_fachhochschule: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_gordenbrucke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_brandenburg_fontanestr: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_gorden: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_schiffsanleger_am_wiesenweg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_seilfahre_neuendorf: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_rewe_anleger_fur_sportboote: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_historischer_hafen_brandenburg_an_der_havel_e_v: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_anleger_alfred_messelplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_anleger_buhnenhaus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_nordstern_reederei_e_k_buro: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_havel_marin_gmbh: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_wasserwanderrastplatz_salzhofufer: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_stadtmarina_brandenburg_boote_camping: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_wasserwanderrastplatz_am_slawendorf: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_bootshaus_radicke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_slawendorf_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_hausfloss_hafen_caasmann: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_anleger_am_regattaring: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_yachtcharter_marina_schoners_wehr: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_nordstern_reederei: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_marina_niederhavel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_brandenburger_hafen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_archaologisches_landesmuseum_brandenburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_industriemuseum_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_stadtmuseum_im_frey_haus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_psychiatriemuseum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_fahrradmuseum_brandenburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_museum_steintorturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_brennabor_kunsthalle: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_strassenbahnmuseum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_gedenkstatte_fur_die_opfer_der_euthanasie_morde: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_gotisches_haus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_jakobskapelle_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_st_katharinen_kirche_zu_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_petrikapelle: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_st_johannis: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_st_gotthardt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_heilige_dreifaltigkeit: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_hofkirche_am_jakobsgraben: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_st_nikolai: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_neuapostolische_kirche_brandenburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_dom_st_peter_und_paul: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_st_bernhard_gemeinschaftskirche: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_auferstehungskirche_auferstehungskirchengemeinde_brandenburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_hope_brandenburg_gemeinsam_gott_erleben: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_kirche_jesu_christi_der_heiligen_der_letzten_tage: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_kirche: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_christ_embassy_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_fritze_bollmann_brunnen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_bernini_skulpturen_vom_galateabrunnen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_brunnen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_springbrunnen_marienberg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_waldmops_denkmal: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_waldmops_denkmal_homage_an_loriot: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_waldmops_denkmal_erinnerung_an_loriot: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_waldmops_am_brunnen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_alexander_von_humboldt_denkmal: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_sitzender_waldmops: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_friedrich_schiller_denkmal: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_strand_an_der_regattastrecke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_strand_am_grillendamm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_theaterpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_packhofgelande_park: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_uferpromenade: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_burgerpark_und_gartendenkmal_marienberg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_marienberg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_aussichtsplattform_stadtkanal: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_heinrich_heine_ufer: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_yachtanleger_am_jungfernsteig: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_parkplatz_grillendamm_4_14776_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_kanal_am_kleinen_beetzsee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_wallpromenade: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_leuchtturm_breitlingsee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_plauer_torturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_rathenower_torturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_neustadtischer_muhlentorturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_marienbad_brandenburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_dreifelderhalle_marienberg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_dreifelderhalle_am_wiesenweg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_asc_brandenburg_03_e_v: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_wassersportzentrum_alte_feuerwache: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_regattastrecke_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_sportplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_sportplatz_am_packhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_brandenburger_stadtbefestigung: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_die_altstadter_e_v: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_panorama_service_gmbh: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_steg_am_muhlendamm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_brandenburger_theater_gmbh: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_postalisch_freilichtbuhne: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_concerthaus_kino_brandenburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_badestelle_gordensee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_ziegelei_am_quenzsee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_alte_silobrucke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_nanu_nana: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_durerhaus_hans_peter_zahn: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_weltladen_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_waldmops_am_pfaffeufer: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_universitatsklinikum_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_caritas_klinik_st_marien_brandenburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_universitatsklinikum_brandenburg_an_der_havel_gmbh_hno: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_apotheke_am_stahlwerk: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_easyapotheke_brandenburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_fontane_apotheke_inh_sibylle_schroder: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_dr_zerbaum_kollegen_mvz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_asklepios_fachklinikum_brandenburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_hausarztin_dr_mariana_stojanova: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_nord_apotheke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_praxis_dr_med_anne_mantke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_apotheke_im_beetzsee_center: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_vitrea_klinik_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_marchen_wandbild: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_waldmops_am_salzhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_havelpegel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_havelgarten: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_dl_garten_landschaftsbewasserung: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_garten_landheim: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_gartensparte_buchenweg_e_v: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_marchengarten: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_kleingartenverein_am_jakobsgraben_e_v: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_kleingartensparte_helgoland: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_kgv_einheit_e_v: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_festplatz_wiesenweg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_brandenburger_karnevals_club_bkc_1964_e_v: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_freilichtbuhne_marienberg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_marina_quenzsee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_boot_mieten_brandenburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_charterpoint_havelland: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_altes_bootshaus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_flossverleih_treibgut: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_wassersport_geisler_gmbh: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_happy_hausboot: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_action_brandenburg_an_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_wedekind_angel_sport_spiel_u_schreibwaren_freie_waffen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_shirt_instyle: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_cardcastle_brandenburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_thomas_philipps_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_nobunto_deutschland_ug_haftungsbeschrankt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_mac_geiz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_lidl: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_verkehrsbetriebe_brandenburg_an_der_havel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_frau_dr_med_birgit_didczuneit_sandhop: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "brandenburg_havel_brandenburg_hauptbahnhof: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_brandenburg_hauptbahnhof: deep_data_pool thin (1<4)",
+      "brandenburg_havel_brandenburg_altstadt: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_brandenburg_altstadt: deep_data_pool thin (1<4)",
+      "brandenburg_havel_parkplatz_am_hauptbahnhof: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_parkplatz_am_hauptbahnhof: deep_data_pool thin (1<4)",
+      "brandenburg_havel_schotterparkplatz_1: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_schotterparkplatz_1: deep_data_pool thin (1<4)",
+      "brandenburg_havel_gesundheitszentrum_brandenburg_an_der_havel_gmbh: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_gesundheitszentrum_brandenburg_an_der_havel_gmbh: deep_data_pool thin (1<4)",
+      "brandenburg_havel_brandenburg_hohenstucken_nord: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_brandenburg_hohenstucken_nord: deep_data_pool thin (1<4)",
+      "brandenburg_havel_brandenburg_nicolaiplatz: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_brandenburg_nicolaiplatz: deep_data_pool thin (1<4)",
+      "brandenburg_havel_fouquestr_fachhochschule: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_fouquestr_fachhochschule: deep_data_pool thin (1<4)",
+      "brandenburg_havel_gordenbrucke: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_gordenbrucke: deep_data_pool thin (1<4)",
+      "brandenburg_havel_brandenburg_fontanestr: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_brandenburg_fontanestr: deep_data_pool thin (1<4)",
+      "brandenburg_havel_gorden: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_gorden: deep_data_pool thin (1<4)",
+      "brandenburg_havel_schiffsanleger_am_wiesenweg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_schiffsanleger_am_wiesenweg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_seilfahre_neuendorf: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_seilfahre_neuendorf: deep_data_pool thin (1<4)",
+      "brandenburg_havel_rewe_anleger_fur_sportboote: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_rewe_anleger_fur_sportboote: deep_data_pool thin (1<4)",
+      "brandenburg_havel_historischer_hafen_brandenburg_an_der_havel_e_v: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_historischer_hafen_brandenburg_an_der_havel_e_v: deep_data_pool thin (1<4)",
+      "brandenburg_havel_anleger_alfred_messelplatz: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_anleger_alfred_messelplatz: deep_data_pool thin (1<4)",
+      "brandenburg_havel_anleger_buhnenhaus: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_anleger_buhnenhaus: deep_data_pool thin (1<4)",
+      "brandenburg_havel_nordstern_reederei_e_k_buro: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_nordstern_reederei_e_k_buro: deep_data_pool thin (1<4)",
+      "brandenburg_havel_havel_marin_gmbh: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_havel_marin_gmbh: deep_data_pool thin (1<4)",
+      "brandenburg_havel_wasserwanderrastplatz_salzhofufer: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_wasserwanderrastplatz_salzhofufer: deep_data_pool thin (1<4)",
+      "brandenburg_havel_stadtmarina_brandenburg_boote_camping: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_stadtmarina_brandenburg_boote_camping: deep_data_pool thin (1<4)",
+      "brandenburg_havel_wasserwanderrastplatz_am_slawendorf: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_wasserwanderrastplatz_am_slawendorf: deep_data_pool thin (1<4)",
+      "brandenburg_havel_bootshaus_radicke: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_bootshaus_radicke: deep_data_pool thin (1<4)",
+      "brandenburg_havel_slawendorf_brandenburg_an_der_havel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_slawendorf_brandenburg_an_der_havel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_hausfloss_hafen_caasmann: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_hausfloss_hafen_caasmann: deep_data_pool thin (1<4)",
+      "brandenburg_havel_anleger_am_regattaring: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_anleger_am_regattaring: deep_data_pool thin (1<4)",
+      "brandenburg_havel_yachtcharter_marina_schoners_wehr: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_yachtcharter_marina_schoners_wehr: deep_data_pool thin (1<4)",
+      "brandenburg_havel_nordstern_reederei: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_nordstern_reederei: deep_data_pool thin (1<4)",
+      "brandenburg_havel_marina_niederhavel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_marina_niederhavel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_brandenburger_hafen: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_brandenburger_hafen: deep_data_pool thin (1<4)",
+      "brandenburg_havel_archaologisches_landesmuseum_brandenburg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_archaologisches_landesmuseum_brandenburg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_industriemuseum_brandenburg_an_der_havel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_industriemuseum_brandenburg_an_der_havel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_stadtmuseum_im_frey_haus: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_stadtmuseum_im_frey_haus: deep_data_pool thin (1<4)",
+      "brandenburg_havel_psychiatriemuseum: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_psychiatriemuseum: deep_data_pool thin (1<4)",
+      "brandenburg_havel_fahrradmuseum_brandenburg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_fahrradmuseum_brandenburg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_museum_steintorturm: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_museum_steintorturm: deep_data_pool thin (1<4)",
+      "brandenburg_havel_brennabor_kunsthalle: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_brennabor_kunsthalle: deep_data_pool thin (1<4)",
+      "brandenburg_havel_strassenbahnmuseum: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_strassenbahnmuseum: deep_data_pool thin (1<4)",
+      "brandenburg_havel_gedenkstatte_fur_die_opfer_der_euthanasie_morde: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_gedenkstatte_fur_die_opfer_der_euthanasie_morde: deep_data_pool thin (1<4)",
+      "brandenburg_havel_gotisches_haus: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_gotisches_haus: deep_data_pool thin (1<4)",
+      "brandenburg_havel_jakobskapelle_brandenburg_an_der_havel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_jakobskapelle_brandenburg_an_der_havel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_st_katharinen_kirche_zu_brandenburg_an_der_havel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_st_katharinen_kirche_zu_brandenburg_an_der_havel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_petrikapelle: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_petrikapelle: deep_data_pool thin (1<4)",
+      "brandenburg_havel_st_johannis: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_st_johannis: deep_data_pool thin (1<4)",
+      "brandenburg_havel_st_gotthardt: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_st_gotthardt: deep_data_pool thin (1<4)",
+      "brandenburg_havel_heilige_dreifaltigkeit: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_heilige_dreifaltigkeit: deep_data_pool thin (1<4)",
+      "brandenburg_havel_hofkirche_am_jakobsgraben: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_hofkirche_am_jakobsgraben: deep_data_pool thin (1<4)",
+      "brandenburg_havel_st_nikolai: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_st_nikolai: deep_data_pool thin (1<4)",
+      "brandenburg_havel_neuapostolische_kirche_brandenburg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_neuapostolische_kirche_brandenburg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_dom_st_peter_und_paul: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_dom_st_peter_und_paul: deep_data_pool thin (1<4)",
+      "brandenburg_havel_st_bernhard_gemeinschaftskirche: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_st_bernhard_gemeinschaftskirche: deep_data_pool thin (1<4)",
+      "brandenburg_havel_auferstehungskirche_auferstehungskirchengemeinde_brandenburg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_auferstehungskirche_auferstehungskirchengemeinde_brandenburg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_hope_brandenburg_gemeinsam_gott_erleben: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_hope_brandenburg_gemeinsam_gott_erleben: deep_data_pool thin (1<4)",
+      "brandenburg_havel_kirche_jesu_christi_der_heiligen_der_letzten_tage: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_kirche_jesu_christi_der_heiligen_der_letzten_tage: deep_data_pool thin (1<4)",
+      "brandenburg_havel_kirche: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_kirche: deep_data_pool thin (1<4)",
+      "brandenburg_havel_christ_embassy_brandenburg_an_der_havel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_christ_embassy_brandenburg_an_der_havel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_fritze_bollmann_brunnen: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_fritze_bollmann_brunnen: deep_data_pool thin (1<4)",
+      "brandenburg_havel_bernini_skulpturen_vom_galateabrunnen: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_bernini_skulpturen_vom_galateabrunnen: deep_data_pool thin (1<4)",
+      "brandenburg_havel_brunnen: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_brunnen: deep_data_pool thin (1<4)",
+      "brandenburg_havel_springbrunnen_marienberg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_springbrunnen_marienberg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_waldmops_denkmal: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_waldmops_denkmal: deep_data_pool thin (1<4)",
+      "brandenburg_havel_waldmops_denkmal_homage_an_loriot: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_waldmops_denkmal_homage_an_loriot: deep_data_pool thin (1<4)",
+      "brandenburg_havel_waldmops_denkmal_erinnerung_an_loriot: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_waldmops_denkmal_erinnerung_an_loriot: deep_data_pool thin (1<4)",
+      "brandenburg_havel_waldmops_am_brunnen: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_waldmops_am_brunnen: deep_data_pool thin (1<4)",
+      "brandenburg_havel_alexander_von_humboldt_denkmal: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_alexander_von_humboldt_denkmal: deep_data_pool thin (1<4)",
+      "brandenburg_havel_sitzender_waldmops: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_sitzender_waldmops: deep_data_pool thin (1<4)",
+      "brandenburg_havel_friedrich_schiller_denkmal: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_friedrich_schiller_denkmal: deep_data_pool thin (1<4)",
+      "brandenburg_havel_strand_an_der_regattastrecke: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_strand_an_der_regattastrecke: deep_data_pool thin (1<4)",
+      "brandenburg_havel_strand_am_grillendamm: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_strand_am_grillendamm: deep_data_pool thin (1<4)",
+      "brandenburg_havel_theaterpark: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_theaterpark: deep_data_pool thin (1<4)",
+      "brandenburg_havel_packhofgelande_park: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_packhofgelande_park: deep_data_pool thin (1<4)",
+      "brandenburg_havel_uferpromenade: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_uferpromenade: deep_data_pool thin (1<4)",
+      "brandenburg_havel_burgerpark_und_gartendenkmal_marienberg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_burgerpark_und_gartendenkmal_marienberg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_brandenburg_an_der_havel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_brandenburg_an_der_havel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_marienberg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_marienberg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_aussichtsplattform_stadtkanal: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_aussichtsplattform_stadtkanal: deep_data_pool thin (1<4)",
+      "brandenburg_havel_heinrich_heine_ufer: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_heinrich_heine_ufer: deep_data_pool thin (1<4)",
+      "brandenburg_havel_yachtanleger_am_jungfernsteig: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_yachtanleger_am_jungfernsteig: deep_data_pool thin (1<4)",
+      "brandenburg_havel_parkplatz_grillendamm_4_14776_brandenburg_an_der_havel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_parkplatz_grillendamm_4_14776_brandenburg_an_der_havel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_kanal_am_kleinen_beetzsee: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_kanal_am_kleinen_beetzsee: deep_data_pool thin (1<4)",
+      "brandenburg_havel_wallpromenade: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_wallpromenade: deep_data_pool thin (1<4)",
+      "brandenburg_havel_leuchtturm_breitlingsee: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_leuchtturm_breitlingsee: deep_data_pool thin (1<4)",
+      "brandenburg_havel_plauer_torturm: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_plauer_torturm: deep_data_pool thin (1<4)",
+      "brandenburg_havel_rathenower_torturm: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_rathenower_torturm: deep_data_pool thin (1<4)",
+      "brandenburg_havel_neustadtischer_muhlentorturm: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_neustadtischer_muhlentorturm: deep_data_pool thin (1<4)",
+      "brandenburg_havel_marienbad_brandenburg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_marienbad_brandenburg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_dreifelderhalle_marienberg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_dreifelderhalle_marienberg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_dreifelderhalle_am_wiesenweg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_dreifelderhalle_am_wiesenweg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_asc_brandenburg_03_e_v: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_asc_brandenburg_03_e_v: deep_data_pool thin (1<4)",
+      "brandenburg_havel_wassersportzentrum_alte_feuerwache: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_wassersportzentrum_alte_feuerwache: deep_data_pool thin (1<4)",
+      "brandenburg_havel_regattastrecke_brandenburg_an_der_havel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_regattastrecke_brandenburg_an_der_havel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_sportplatz: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_sportplatz: deep_data_pool thin (1<4)",
+      "brandenburg_havel_sportplatz_am_packhof: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_sportplatz_am_packhof: deep_data_pool thin (1<4)",
+      "brandenburg_havel_brandenburger_stadtbefestigung: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_brandenburger_stadtbefestigung: deep_data_pool thin (1<4)",
+      "brandenburg_havel_die_altstadter_e_v: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_die_altstadter_e_v: deep_data_pool thin (1<4)",
+      "brandenburg_havel_panorama_service_gmbh: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_panorama_service_gmbh: deep_data_pool thin (1<4)",
+      "brandenburg_havel_steg_am_muhlendamm: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_steg_am_muhlendamm: deep_data_pool thin (1<4)",
+      "brandenburg_havel_badestelle_gordensee: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_badestelle_gordensee: deep_data_pool thin (1<4)",
+      "brandenburg_havel_ziegelei_am_quenzsee: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_ziegelei_am_quenzsee: deep_data_pool thin (1<4)",
+      "brandenburg_havel_alte_silobrucke: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_alte_silobrucke: deep_data_pool thin (1<4)",
+      "brandenburg_havel_nanu_nana: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_nanu_nana: deep_data_pool thin (1<4)",
+      "brandenburg_havel_durerhaus_hans_peter_zahn: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_durerhaus_hans_peter_zahn: deep_data_pool thin (1<4)",
+      "brandenburg_havel_weltladen_brandenburg_an_der_havel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_weltladen_brandenburg_an_der_havel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_waldmops_am_pfaffeufer: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_waldmops_am_pfaffeufer: deep_data_pool thin (1<4)",
+      "brandenburg_havel_marchen_wandbild: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_marchen_wandbild: deep_data_pool thin (1<4)",
+      "brandenburg_havel_waldmops_am_salzhof: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_waldmops_am_salzhof: deep_data_pool thin (1<4)",
+      "brandenburg_havel_havelpegel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_havelpegel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_havelgarten: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_havelgarten: deep_data_pool thin (1<4)",
+      "brandenburg_havel_dl_garten_landschaftsbewasserung: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_dl_garten_landschaftsbewasserung: deep_data_pool thin (1<4)",
+      "brandenburg_havel_garten_landheim: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_garten_landheim: deep_data_pool thin (1<4)",
+      "brandenburg_havel_gartensparte_buchenweg_e_v: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_gartensparte_buchenweg_e_v: deep_data_pool thin (1<4)",
+      "brandenburg_havel_marchengarten: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_marchengarten: deep_data_pool thin (1<4)",
+      "brandenburg_havel_kleingartenverein_am_jakobsgraben_e_v: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_kleingartenverein_am_jakobsgraben_e_v: deep_data_pool thin (1<4)",
+      "brandenburg_havel_kleingartensparte_helgoland: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_kleingartensparte_helgoland: deep_data_pool thin (1<4)",
+      "brandenburg_havel_kgv_einheit_e_v: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_kgv_einheit_e_v: deep_data_pool thin (1<4)",
+      "brandenburg_havel_marina_quenzsee: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_marina_quenzsee: deep_data_pool thin (1<4)",
+      "brandenburg_havel_boot_mieten_brandenburg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_boot_mieten_brandenburg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_charterpoint_havelland: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_charterpoint_havelland: deep_data_pool thin (1<4)",
+      "brandenburg_havel_altes_bootshaus: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_altes_bootshaus: deep_data_pool thin (1<4)",
+      "brandenburg_havel_flossverleih_treibgut: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_flossverleih_treibgut: deep_data_pool thin (1<4)",
+      "brandenburg_havel_wassersport_geisler_gmbh: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_wassersport_geisler_gmbh: deep_data_pool thin (1<4)",
+      "brandenburg_havel_happy_hausboot: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_happy_hausboot: deep_data_pool thin (1<4)",
+      "brandenburg_havel_action_brandenburg_an_havel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_action_brandenburg_an_havel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_wedekind_angel_sport_spiel_u_schreibwaren_freie_waffen: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_wedekind_angel_sport_spiel_u_schreibwaren_freie_waffen: deep_data_pool thin (1<4)",
+      "brandenburg_havel_shirt_instyle: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_shirt_instyle: deep_data_pool thin (1<4)",
+      "brandenburg_havel_cardcastle_brandenburg: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_cardcastle_brandenburg: deep_data_pool thin (1<4)",
+      "brandenburg_havel_thomas_philipps_brandenburg_an_der_havel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_thomas_philipps_brandenburg_an_der_havel: deep_data_pool thin (1<4)",
+      "brandenburg_havel_nobunto_deutschland_ug_haftungsbeschrankt: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_nobunto_deutschland_ug_haftungsbeschrankt: deep_data_pool thin (1<4)",
+      "brandenburg_havel_mac_geiz: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_mac_geiz: deep_data_pool thin (1<4)",
+      "brandenburg_havel_lidl: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_lidl: deep_data_pool thin (1<4)",
+      "brandenburg_havel_verkehrsbetriebe_brandenburg_an_der_havel: general_info/Erzählung too short (0<80)",
+      "brandenburg_havel_verkehrsbetriebe_brandenburg_an_der_havel: deep_data_pool thin (1<4)"
+    ],
+    "stats": {
+      "spots": 255,
+      "storySpots": 166,
+      "directorySpots": 89,
+      "triggers": 255,
+      "missingTrigger": 0,
+      "missingNarration": 131,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 131,
+      "orphanTriggers": 0,
+      "categories": [
+        "altstadt",
+        "apotheke",
+        "aussicht",
+        "bahnhof",
+        "bakerei",
+        "cafe",
+        "denkmal",
+        "einkaufen",
+        "freizeit",
+        "gepaeck",
+        "gesundheit",
+        "hafen",
+        "hotel",
+        "kino",
+        "kirche",
+        "museum",
+        "natur",
+        "radweg",
+        "restaurant",
+        "service",
+        "souvenir",
+        "spielplatz",
+        "sport",
+        "supermarket",
+        "tankstelle",
+        "theater",
+        "toilette",
+        "tour",
+        "wanderung",
+        "wasser"
+      ],
+      "missingMustHave": [],
+      "nicePresent": [
+        "cafe",
+        "restaurant",
+        "hotel",
+        "einkaufen",
+        "service",
+        "gesundheit",
+        "sport",
+        "hafen",
+        "bahnhof"
+      ],
+      "liveResearch": 4,
+      "offlineQa": 87,
+      "hasCoverage": true,
+      "hasTransit": false,
+      "hasMobility": false,
+      "links": 0
+    },
+    "gaps": {
+      "needsNarration": [
+        "brandenburg_havel_brandenburg_hauptbahnhof",
+        "brandenburg_havel_brandenburg_altstadt",
+        "brandenburg_havel_parkplatz_am_hauptbahnhof",
+        "brandenburg_havel_schotterparkplatz_1",
+        "brandenburg_havel_gesundheitszentrum_brandenburg_an_der_havel_gmbh",
+        "brandenburg_havel_brandenburg_hohenstucken_nord",
+        "brandenburg_havel_brandenburg_nicolaiplatz",
+        "brandenburg_havel_fouquestr_fachhochschule",
+        "brandenburg_havel_gordenbrucke",
+        "brandenburg_havel_brandenburg_fontanestr",
+        "brandenburg_havel_gorden",
+        "brandenburg_havel_schiffsanleger_am_wiesenweg",
+        "brandenburg_havel_seilfahre_neuendorf",
+        "brandenburg_havel_rewe_anleger_fur_sportboote",
+        "brandenburg_havel_historischer_hafen_brandenburg_an_der_havel_e_v",
+        "brandenburg_havel_anleger_alfred_messelplatz",
+        "brandenburg_havel_anleger_buhnenhaus",
+        "brandenburg_havel_nordstern_reederei_e_k_buro",
+        "brandenburg_havel_havel_marin_gmbh",
+        "brandenburg_havel_wasserwanderrastplatz_salzhofufer",
+        "brandenburg_havel_stadtmarina_brandenburg_boote_camping",
+        "brandenburg_havel_wasserwanderrastplatz_am_slawendorf",
+        "brandenburg_havel_bootshaus_radicke",
+        "brandenburg_havel_slawendorf_brandenburg_an_der_havel",
+        "brandenburg_havel_hausfloss_hafen_caasmann",
+        "brandenburg_havel_anleger_am_regattaring",
+        "brandenburg_havel_yachtcharter_marina_schoners_wehr",
+        "brandenburg_havel_nordstern_reederei",
+        "brandenburg_havel_marina_niederhavel",
+        "brandenburg_havel_brandenburger_hafen",
+        "brandenburg_havel_archaologisches_landesmuseum_brandenburg",
+        "brandenburg_havel_industriemuseum_brandenburg_an_der_havel",
+        "brandenburg_havel_stadtmuseum_im_frey_haus",
+        "brandenburg_havel_psychiatriemuseum",
+        "brandenburg_havel_fahrradmuseum_brandenburg",
+        "brandenburg_havel_museum_steintorturm",
+        "brandenburg_havel_brennabor_kunsthalle",
+        "brandenburg_havel_strassenbahnmuseum",
+        "brandenburg_havel_gedenkstatte_fur_die_opfer_der_euthanasie_morde",
+        "brandenburg_havel_gotisches_haus",
+        "brandenburg_havel_jakobskapelle_brandenburg_an_der_havel",
+        "brandenburg_havel_st_katharinen_kirche_zu_brandenburg_an_der_havel",
+        "brandenburg_havel_petrikapelle",
+        "brandenburg_havel_st_johannis",
+        "brandenburg_havel_st_gotthardt",
+        "brandenburg_havel_heilige_dreifaltigkeit",
+        "brandenburg_havel_hofkirche_am_jakobsgraben",
+        "brandenburg_havel_st_nikolai",
+        "brandenburg_havel_neuapostolische_kirche_brandenburg",
+        "brandenburg_havel_dom_st_peter_und_paul",
+        "brandenburg_havel_st_bernhard_gemeinschaftskirche",
+        "brandenburg_havel_auferstehungskirche_auferstehungskirchengemeinde_brandenburg",
+        "brandenburg_havel_hope_brandenburg_gemeinsam_gott_erleben",
+        "brandenburg_havel_kirche_jesu_christi_der_heiligen_der_letzten_tage",
+        "brandenburg_havel_kirche",
+        "brandenburg_havel_christ_embassy_brandenburg_an_der_havel",
+        "brandenburg_havel_fritze_bollmann_brunnen",
+        "brandenburg_havel_bernini_skulpturen_vom_galateabrunnen",
+        "brandenburg_havel_brunnen",
+        "brandenburg_havel_springbrunnen_marienberg",
+        "brandenburg_havel_waldmops_denkmal",
+        "brandenburg_havel_waldmops_denkmal_homage_an_loriot",
+        "brandenburg_havel_waldmops_denkmal_erinnerung_an_loriot",
+        "brandenburg_havel_waldmops_am_brunnen",
+        "brandenburg_havel_alexander_von_humboldt_denkmal",
+        "brandenburg_havel_sitzender_waldmops",
+        "brandenburg_havel_friedrich_schiller_denkmal",
+        "brandenburg_havel_strand_an_der_regattastrecke",
+        "brandenburg_havel_strand_am_grillendamm",
+        "brandenburg_havel_theaterpark",
+        "brandenburg_havel_packhofgelande_park",
+        "brandenburg_havel_uferpromenade",
+        "brandenburg_havel_burgerpark_und_gartendenkmal_marienberg",
+        "brandenburg_havel_brandenburg_an_der_havel",
+        "brandenburg_havel_marienberg",
+        "brandenburg_havel_aussichtsplattform_stadtkanal",
+        "brandenburg_havel_heinrich_heine_ufer",
+        "brandenburg_havel_yachtanleger_am_jungfernsteig",
+        "brandenburg_havel_parkplatz_grillendamm_4_14776_brandenburg_an_der_havel",
+        "brandenburg_havel_kanal_am_kleinen_beetzsee",
+        "brandenburg_havel_wallpromenade",
+        "brandenburg_havel_leuchtturm_breitlingsee",
+        "brandenburg_havel_plauer_torturm",
+        "brandenburg_havel_rathenower_torturm",
+        "brandenburg_havel_neustadtischer_muhlentorturm",
+        "brandenburg_havel_marienbad_brandenburg",
+        "brandenburg_havel_dreifelderhalle_marienberg",
+        "brandenburg_havel_dreifelderhalle_am_wiesenweg",
+        "brandenburg_havel_asc_brandenburg_03_e_v",
+        "brandenburg_havel_wassersportzentrum_alte_feuerwache",
+        "brandenburg_havel_regattastrecke_brandenburg_an_der_havel",
+        "brandenburg_havel_sportplatz",
+        "brandenburg_havel_sportplatz_am_packhof",
+        "brandenburg_havel_brandenburger_stadtbefestigung",
+        "brandenburg_havel_die_altstadter_e_v",
+        "brandenburg_havel_panorama_service_gmbh",
+        "brandenburg_havel_steg_am_muhlendamm",
+        "brandenburg_havel_badestelle_gordensee",
+        "brandenburg_havel_ziegelei_am_quenzsee",
+        "brandenburg_havel_alte_silobrucke",
+        "brandenburg_havel_nanu_nana",
+        "brandenburg_havel_durerhaus_hans_peter_zahn",
+        "brandenburg_havel_weltladen_brandenburg_an_der_havel",
+        "brandenburg_havel_waldmops_am_pfaffeufer",
+        "brandenburg_havel_marchen_wandbild",
+        "brandenburg_havel_waldmops_am_salzhof",
+        "brandenburg_havel_havelpegel",
+        "brandenburg_havel_havelgarten",
+        "brandenburg_havel_dl_garten_landschaftsbewasserung",
+        "brandenburg_havel_garten_landheim",
+        "brandenburg_havel_gartensparte_buchenweg_e_v",
+        "brandenburg_havel_marchengarten",
+        "brandenburg_havel_kleingartenverein_am_jakobsgraben_e_v",
+        "brandenburg_havel_kleingartensparte_helgoland",
+        "brandenburg_havel_kgv_einheit_e_v",
+        "brandenburg_havel_marina_quenzsee",
+        "brandenburg_havel_boot_mieten_brandenburg",
+        "brandenburg_havel_charterpoint_havelland",
+        "brandenburg_havel_altes_bootshaus",
+        "brandenburg_havel_flossverleih_treibgut",
+        "brandenburg_havel_wassersport_geisler_gmbh",
+        "brandenburg_havel_happy_hausboot",
+        "brandenburg_havel_action_brandenburg_an_havel",
+        "brandenburg_havel_wedekind_angel_sport_spiel_u_schreibwaren_freie_waffen",
+        "brandenburg_havel_shirt_instyle",
+        "brandenburg_havel_cardcastle_brandenburg",
+        "brandenburg_havel_thomas_philipps_brandenburg_an_der_havel",
+        "brandenburg_havel_nobunto_deutschland_ug_haftungsbeschrankt",
+        "brandenburg_havel_mac_geiz",
+        "brandenburg_havel_lidl",
+        "brandenburg_havel_verkehrsbetriebe_brandenburg_an_der_havel"
+      ],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [
+        "brandenburg_havel_brandenburg_hauptbahnhof",
+        "brandenburg_havel_brandenburg_altstadt",
+        "brandenburg_havel_parkplatz_am_hauptbahnhof",
+        "brandenburg_havel_schotterparkplatz_1",
+        "brandenburg_havel_gesundheitszentrum_brandenburg_an_der_havel_gmbh",
+        "brandenburg_havel_brandenburg_hohenstucken_nord",
+        "brandenburg_havel_brandenburg_nicolaiplatz",
+        "brandenburg_havel_fouquestr_fachhochschule",
+        "brandenburg_havel_gordenbrucke",
+        "brandenburg_havel_brandenburg_fontanestr",
+        "brandenburg_havel_gorden",
+        "brandenburg_havel_schiffsanleger_am_wiesenweg",
+        "brandenburg_havel_seilfahre_neuendorf",
+        "brandenburg_havel_rewe_anleger_fur_sportboote",
+        "brandenburg_havel_historischer_hafen_brandenburg_an_der_havel_e_v",
+        "brandenburg_havel_anleger_alfred_messelplatz",
+        "brandenburg_havel_anleger_buhnenhaus",
+        "brandenburg_havel_nordstern_reederei_e_k_buro",
+        "brandenburg_havel_havel_marin_gmbh",
+        "brandenburg_havel_wasserwanderrastplatz_salzhofufer",
+        "brandenburg_havel_stadtmarina_brandenburg_boote_camping",
+        "brandenburg_havel_wasserwanderrastplatz_am_slawendorf",
+        "brandenburg_havel_bootshaus_radicke",
+        "brandenburg_havel_slawendorf_brandenburg_an_der_havel",
+        "brandenburg_havel_hausfloss_hafen_caasmann",
+        "brandenburg_havel_anleger_am_regattaring",
+        "brandenburg_havel_yachtcharter_marina_schoners_wehr",
+        "brandenburg_havel_nordstern_reederei",
+        "brandenburg_havel_marina_niederhavel",
+        "brandenburg_havel_brandenburger_hafen",
+        "brandenburg_havel_archaologisches_landesmuseum_brandenburg",
+        "brandenburg_havel_industriemuseum_brandenburg_an_der_havel",
+        "brandenburg_havel_stadtmuseum_im_frey_haus",
+        "brandenburg_havel_psychiatriemuseum",
+        "brandenburg_havel_fahrradmuseum_brandenburg",
+        "brandenburg_havel_museum_steintorturm",
+        "brandenburg_havel_brennabor_kunsthalle",
+        "brandenburg_havel_strassenbahnmuseum",
+        "brandenburg_havel_gedenkstatte_fur_die_opfer_der_euthanasie_morde",
+        "brandenburg_havel_gotisches_haus",
+        "brandenburg_havel_jakobskapelle_brandenburg_an_der_havel",
+        "brandenburg_havel_st_katharinen_kirche_zu_brandenburg_an_der_havel",
+        "brandenburg_havel_petrikapelle",
+        "brandenburg_havel_st_johannis",
+        "brandenburg_havel_st_gotthardt",
+        "brandenburg_havel_heilige_dreifaltigkeit",
+        "brandenburg_havel_hofkirche_am_jakobsgraben",
+        "brandenburg_havel_st_nikolai",
+        "brandenburg_havel_neuapostolische_kirche_brandenburg",
+        "brandenburg_havel_dom_st_peter_und_paul",
+        "brandenburg_havel_st_bernhard_gemeinschaftskirche",
+        "brandenburg_havel_auferstehungskirche_auferstehungskirchengemeinde_brandenburg",
+        "brandenburg_havel_hope_brandenburg_gemeinsam_gott_erleben",
+        "brandenburg_havel_kirche_jesu_christi_der_heiligen_der_letzten_tage",
+        "brandenburg_havel_kirche",
+        "brandenburg_havel_christ_embassy_brandenburg_an_der_havel",
+        "brandenburg_havel_fritze_bollmann_brunnen",
+        "brandenburg_havel_bernini_skulpturen_vom_galateabrunnen",
+        "brandenburg_havel_brunnen",
+        "brandenburg_havel_springbrunnen_marienberg",
+        "brandenburg_havel_waldmops_denkmal",
+        "brandenburg_havel_waldmops_denkmal_homage_an_loriot",
+        "brandenburg_havel_waldmops_denkmal_erinnerung_an_loriot",
+        "brandenburg_havel_waldmops_am_brunnen",
+        "brandenburg_havel_alexander_von_humboldt_denkmal",
+        "brandenburg_havel_sitzender_waldmops",
+        "brandenburg_havel_friedrich_schiller_denkmal",
+        "brandenburg_havel_strand_an_der_regattastrecke",
+        "brandenburg_havel_strand_am_grillendamm",
+        "brandenburg_havel_theaterpark",
+        "brandenburg_havel_packhofgelande_park",
+        "brandenburg_havel_uferpromenade",
+        "brandenburg_havel_burgerpark_und_gartendenkmal_marienberg",
+        "brandenburg_havel_brandenburg_an_der_havel",
+        "brandenburg_havel_marienberg",
+        "brandenburg_havel_aussichtsplattform_stadtkanal",
+        "brandenburg_havel_heinrich_heine_ufer",
+        "brandenburg_havel_yachtanleger_am_jungfernsteig",
+        "brandenburg_havel_parkplatz_grillendamm_4_14776_brandenburg_an_der_havel",
+        "brandenburg_havel_kanal_am_kleinen_beetzsee",
+        "brandenburg_havel_wallpromenade",
+        "brandenburg_havel_leuchtturm_breitlingsee",
+        "brandenburg_havel_plauer_torturm",
+        "brandenburg_havel_rathenower_torturm",
+        "brandenburg_havel_neustadtischer_muhlentorturm",
+        "brandenburg_havel_marienbad_brandenburg",
+        "brandenburg_havel_dreifelderhalle_marienberg",
+        "brandenburg_havel_dreifelderhalle_am_wiesenweg",
+        "brandenburg_havel_asc_brandenburg_03_e_v",
+        "brandenburg_havel_wassersportzentrum_alte_feuerwache",
+        "brandenburg_havel_regattastrecke_brandenburg_an_der_havel",
+        "brandenburg_havel_sportplatz",
+        "brandenburg_havel_sportplatz_am_packhof",
+        "brandenburg_havel_brandenburger_stadtbefestigung",
+        "brandenburg_havel_die_altstadter_e_v",
+        "brandenburg_havel_panorama_service_gmbh",
+        "brandenburg_havel_steg_am_muhlendamm",
+        "brandenburg_havel_badestelle_gordensee",
+        "brandenburg_havel_ziegelei_am_quenzsee",
+        "brandenburg_havel_alte_silobrucke",
+        "brandenburg_havel_nanu_nana",
+        "brandenburg_havel_durerhaus_hans_peter_zahn",
+        "brandenburg_havel_weltladen_brandenburg_an_der_havel",
+        "brandenburg_havel_waldmops_am_pfaffeufer",
+        "brandenburg_havel_marchen_wandbild",
+        "brandenburg_havel_waldmops_am_salzhof",
+        "brandenburg_havel_havelpegel",
+        "brandenburg_havel_havelgarten",
+        "brandenburg_havel_dl_garten_landschaftsbewasserung",
+        "brandenburg_havel_garten_landheim",
+        "brandenburg_havel_gartensparte_buchenweg_e_v",
+        "brandenburg_havel_marchengarten",
+        "brandenburg_havel_kleingartenverein_am_jakobsgraben_e_v",
+        "brandenburg_havel_kleingartensparte_helgoland",
+        "brandenburg_havel_kgv_einheit_e_v",
+        "brandenburg_havel_marina_quenzsee",
+        "brandenburg_havel_boot_mieten_brandenburg",
+        "brandenburg_havel_charterpoint_havelland",
+        "brandenburg_havel_altes_bootshaus",
+        "brandenburg_havel_flossverleih_treibgut",
+        "brandenburg_havel_wassersport_geisler_gmbh",
+        "brandenburg_havel_happy_hausboot",
+        "brandenburg_havel_action_brandenburg_an_havel",
+        "brandenburg_havel_wedekind_angel_sport_spiel_u_schreibwaren_freie_waffen",
+        "brandenburg_havel_shirt_instyle",
+        "brandenburg_havel_cardcastle_brandenburg",
+        "brandenburg_havel_thomas_philipps_brandenburg_an_der_havel",
+        "brandenburg_havel_nobunto_deutschland_ug_haftungsbeschrankt",
+        "brandenburg_havel_mac_geiz",
+        "brandenburg_havel_lidl",
+        "brandenburg_havel_verkehrsbetriebe_brandenburg_an_der_havel"
+      ],
+      "missingCategories": []
+    }
+  },
+  "file": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\brandenburg_havel.json"
+}

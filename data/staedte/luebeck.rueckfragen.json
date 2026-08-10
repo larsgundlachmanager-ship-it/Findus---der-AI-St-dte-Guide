@@ -1,0 +1,506 @@
+{
+  "city_id": "luebeck",
+  "story": 97,
+  "minStory": 45,
+  "thin": [
+    {
+      "id": "luebeck_guenter_grass_haus",
+      "name": "Günter-Grass-Haus",
+      "tier": 1,
+      "category": "museum"
+    },
+    {
+      "id": "luebeck_kolk17_figurentheater",
+      "name": "KOLK 17 Figurentheater & Museum",
+      "tier": 1,
+      "category": "theater"
+    },
+    {
+      "id": "luebeck_lubeck_hauptbahnhof",
+      "name": "Lübeck Hauptbahnhof",
+      "tier": 1,
+      "category": "bahnhof"
+    },
+    {
+      "id": "luebeck_historische_altstadt_lubeck",
+      "name": "Lübecker Altstadt · UNESCO",
+      "tier": 1,
+      "category": "altstadt"
+    },
+    {
+      "id": "luebeck_museumshafen_lubeck",
+      "name": "Museumshafen Lübeck",
+      "tier": 1,
+      "category": "hafen"
+    },
+    {
+      "id": "luebeck_museumsquartier",
+      "name": "Museumsquartier St. Annen",
+      "tier": 1,
+      "category": "museum"
+    },
+    {
+      "id": "luebeck_st_petri_zu_lubeck",
+      "name": "Petrikirche Lübeck",
+      "tier": 1,
+      "category": "kirche"
+    },
+    {
+      "id": "luebeck_rathaus",
+      "name": "Rathaus Lübeck",
+      "tier": 1,
+      "category": "verwaltung"
+    },
+    {
+      "id": "luebeck_rathaustreppe",
+      "name": "Rathaustreppe am Markt",
+      "tier": 1,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_schiffergesellschaft",
+      "name": "Schiffergesellschaft",
+      "tier": 1,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_st_aegidien_kirche_lubeck_ev_luth_kirchengemeinde_st_aegidien_zu_lubeck",
+      "name": "St. Aegidien zu Lübeck",
+      "tier": 1,
+      "category": "kirche"
+    },
+    {
+      "id": "luebeck_st_katharinen",
+      "name": "St. Katharinen zu Lübeck",
+      "tier": 1,
+      "category": "kirche"
+    },
+    {
+      "id": "luebeck_willy_brandt_haus_lubeck",
+      "name": "Willy-Brandt-Haus Lübeck",
+      "tier": 1,
+      "category": "museum"
+    },
+    {
+      "id": "luebeck_850_jahre_lubeck_gedenkstein",
+      "name": "850 Jahre Lübeck - Gedenkstein",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_alter_hafen_gothmund",
+      "name": "Alter Hafen Gothmund",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "luebeck_alter_leuchtturm_travemuende",
+      "name": "Alter Leuchtturm Travemünde",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "luebeck_an_der_obertrave",
+      "name": "An der Obertrave",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "luebeck_brunnen_sod",
+      "name": "Brunnen Sod",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_burgergarten",
+      "name": "Bürgergärten",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "luebeck_burgerpark",
+      "name": "Bürgerpark",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "luebeck_burgtor",
+      "name": "Burgtor Lübeck",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_ein_archaologisch_naturkundlicher_wanderweg_im_waldhusener_forst",
+      "name": "Ein Archäologisch - Naturkundlicher Wanderweg im Waldhusener Forst",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "luebeck_ev_luth_kirchengemeinde_in_st_jurgen_kreuzkirche",
+      "name": "Ev.-luth. Kirchengemeinde in St. Jürgen / Kreuzkirche",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "luebeck_ev_luth_laurentius_kirchengemeinde_lubeck_st_lorenz_kirche",
+      "name": "Ev.-Luth. Laurentius-Kirchengemeinde Lübeck / St. Lorenz-Kirche",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "luebeck_filmhaus",
+      "name": "Filmhaus",
+      "tier": 2,
+      "category": "kino"
+    },
+    {
+      "id": "luebeck_fritz_reuter_denkmal",
+      "name": "Fritz Reuter Denkmal",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_ganghaus_museum_fur_magische_mechanik",
+      "name": "Ganghaus-Museum für magische Mechanik",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "luebeck_hafenrundfahrt",
+      "name": "Hafenrundfahrt",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "luebeck_heinrich_der_lowe_denkmal",
+      "name": "Heinrich-der-Löwe-Denkmal",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_hoftheater_lubeck",
+      "name": "Hoftheater Lübeck",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "luebeck_holstentorplatz",
+      "name": "Holstentorplatz",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_industriemuseum_herrenwyk",
+      "name": "Industriemuseum Herrenwyk",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "luebeck_johannes_brahms_statue",
+      "name": "Johannes Brahms Statue",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_kaiser_wilhelm_i_denkmal",
+      "name": "Kaiser-Wilhelm I.-Denkmal",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_kath_kirche_st_vicelin",
+      "name": "Kath. Kirche St. Vicelin",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "luebeck_kleverschusskreuz",
+      "name": "Kleverschusskreuz",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_kolosseum_festsaal",
+      "name": "Kolosseum Festsaal",
+      "tier": 2,
+      "category": "kino"
+    },
+    {
+      "id": "luebeck_kommunales_kino_lubeck",
+      "name": "Kommunales Kino Lübeck",
+      "tier": 2,
+      "category": "kino"
+    },
+    {
+      "id": "luebeck_kultourpunkt_treidelpfad_stecknitz",
+      "name": "Kultourpunkt Treidelpfad Stecknitz",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "luebeck_lubecker_lowen",
+      "name": "Lübecker Löwen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_lunapark",
+      "name": "Lunapark (Hanseplatz)",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "luebeck_muhlenteich",
+      "name": "Mühlenteich",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "luebeck_museum_behnhaus_dragerhaus",
+      "name": "Museum Behnhaus Drägerhaus",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "luebeck_museum_fur_natur_und_umwelt",
+      "name": "Museum für Natur und Umwelt",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "luebeck_musik_und_kongresshalle_lubeck",
+      "name": "Musik- und Kongresshalle Lübeck",
+      "tier": 2,
+      "category": "kino"
+    },
+    {
+      "id": "luebeck_naturschutzgebiet_schellbruch",
+      "name": "Naturschutzgebiet Schellbruch",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "luebeck_naturschutzgebiet_wakenitz_gartnergasse",
+      "name": "Naturschutzgebiet Wakenitz/Gärtnergasse",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "luebeck_naturschutzgebiet_wakenitz_muggenbusch",
+      "name": "Naturschutzgebiet Wakenitz/Müggenbusch",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "luebeck_nord_ost_marina_service_und_handelsgesellschaft_mbh_co_kg",
+      "name": "Nord-Ost Marina Service- und Handelsgesellschaft mbH&Co.KG",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "luebeck_nsg_schellbruch",
+      "name": "NSG Schellbruch",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "luebeck_palais_rantzau_ein_haus_der_deutschen_stiftung_denkmalschutz",
+      "name": "Palais Rantzau - ein Haus der Deutschen Stiftung Denkmalschutz",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_panoramagang",
+      "name": "Panoramagang",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "luebeck_pastorat_des_dom_zu_lubeck_pastor_martin_klatt",
+      "name": "Pastorat des Dom zu Lübeck (Pastor Martin Klatt)",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "luebeck_princess_yachthafen_logo",
+      "name": "Princess Yachthafen Logo",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "luebeck_propsteikirche_herz_jesu_lubeck",
+      "name": "Propsteikirche Herz Jesu, Lübeck",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "luebeck_quandt_linie_lubeck_buro_muk_busparkplatz",
+      "name": "Quandt-Linie-Lübeck Büro/MuK/Busparkplatz",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "luebeck_reiterweg",
+      "name": "Reiterweg",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "luebeck_sea_site_gmbh",
+      "name": "SEA-SITE GmbH",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "luebeck_sitzgelegenheit_am_wasser",
+      "name": "Sitzgelegenheit am Wasser",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "luebeck_spielplatz_kleiner_park_knud_rasmussen_strasse",
+      "name": "Spielplatz Kleiner Park Knud-Rasmussen Straße",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "luebeck_sportbootshafen",
+      "name": "Sportbootshafen",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "luebeck_st_gertrud_kirche_lubeck_ev_luth_kirchengemeinde_st_gertrud_lubeck",
+      "name": "St.-Gertrud-Kirche Lübeck - Ev.-Luth. Kirchengemeinde St. Gertrud Lübeck",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "luebeck_st_matthai_gemeinde_lubeck",
+      "name": "St.Matthäi Gemeinde Lübeck",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "luebeck_stadtpark",
+      "name": "Stadtpark",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "luebeck_stuhff_lubecker_barkassenfahrt",
+      "name": "Stühff - Lübecker Barkassenfahrt",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "luebeck_sutsche_tour_e_bike_verleih_gefuhrte_e_bike_touren_in_lubeck",
+      "name": "sutsche tour | E-Bike-Verleih + geführte E-Bike-Touren in Lübeck",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "luebeck_the_newport_restaurant_marina_lubeck",
+      "name": "The Newport Restaurant & Marina - Lübeck",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "luebeck_theater_combinale_lubeck",
+      "name": "Theater Combinale Lübeck",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "luebeck_theaterschiff_lubeck",
+      "name": "Theaterschiff Lübeck",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "luebeck_thomas_mann_stein",
+      "name": "Thomas-Mann-Stein",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_thorweg",
+      "name": "Thorweg",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_travemarina",
+      "name": "Travemarina",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "luebeck_wakenitz",
+      "name": "Wakenitz",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "luebeck_wakenitzufer",
+      "name": "Wakenitzufer",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "luebeck_wanderweg",
+      "name": "Wanderweg",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "luebeck_wanderweg_an_der_trave",
+      "name": "Wanderweg an der Trave",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "luebeck_wanderweg_dragerweg",
+      "name": "Wanderweg Drägerweg",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "luebeck_wasserkunst",
+      "name": "Wasserkunst",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "luebeck_wesloer_wald",
+      "name": "Wesloer Wald",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "luebeck_wesloer_wald_see",
+      "name": "Wesloer Wald See",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "luebeck_wiese_an_der_wallstreet",
+      "name": "Wiese an der 'Wallstreet'",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "luebeck_zaubertheater_lubeck",
+      "name": "Zaubertheater Lübeck",
+      "tier": 2,
+      "category": "theater"
+    }
+  ],
+  "google_missing": []
+}

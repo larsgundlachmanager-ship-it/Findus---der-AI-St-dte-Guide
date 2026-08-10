@@ -1,0 +1,89 @@
+---
+description: Stadt-Pack / CityPack erzeugen, anreichern, validieren und nach Supabase (Bucket staedte) hochladen. Trigger bei „Erstell Datensatz“, neue Stadt, Pack-Builder, Deep-Research-Merge, upload:city, GPS-Eingang, Modul 1, live_hint.
+alwaysApply: false
+---
+
+# Findus — City-Pack Builder (Modul 1)
+
+## Produkt-Regeln (verbindlich)
+
+1. **Ein Datensatz pro Stadt** = eine Datei `staedte/<city_id>.json`. User lädt genau dieses Pack → SQLite (POIs, Fakten, Transit, Mobility, Live-Prompts, Aussprache-Scan) **plus** `_coverage` Stadt-Fläche für Stempelkarte.
+2. **Stadtauswahl-Cover**: User-Bild → Queue (`city:cover:queue`) → Cover-Agent stylisiert im **Kernrollen-Stil** (andere Perspektive, bewegliche Elemente, Himmel) → `city:cover:apply` nach `assets/onboarding/city-<id>.png` + `cityCovers.ts`. Fallback: Wikipedia-Thumbnail (`city:cover` / bei `city:skeleton`). Lokales Asset schlägt URL.
+3. **`_coverage` ≠ POI-Polygone**: BBox (`latMin/latMax/lngMin/lngMax`) + optional Stadt-Polygon steuert „% der Stadt erkundet“ und „in dieser Stadt“. Muss im Pack mitgeliefert werden (nicht nur App-Builtin).
+4. **Pack = stabil (~5 Jahre)**: Geschichte, Architektur, Orientierung, was man am Ort typischerweise machen kann, feste Besonderheiten. Keine Preise, keine Speisekarten-Inhalte, keine „heute Abend“-Termine, keine Hotelpreise.
+5. **Live nur als Hinweis + Prompt**: Pro Ort Deep-Einträge mit Tags `live_hint` / Text `LIVE: …`. Stadtweit zusätzlich `_live_research[]`.
+6. **Modul 1** liest Pack für Story/Teaser/Polygon. **Modul 2** nutzt Pack zuerst (`packFactLookup`); fehlt etwas oder ist live → selbst recherchieren.
+7. **GPS**: Trigger-Zentrum = Google-Maps-Navigationspin / Haupteingang. **Jedes Main-Gebäude: Polygon**. `city:audit-entrances` + Gate.
+8. **Aussprache**: Pack-Scan → Stadt-SQLite + Dictionary; TTS Modul 1+2 dieselbe Pipeline.
+9. **Breite vor Knappheit**: Lieber zu viele Orte (Story + Directory) als ein mageres Pack. Kleine Orte ≈12–25 Stories, Mittelstädte ≈25–45, große Städte (Lübeck-Klasse) ≈45+, Metropolen (Hamburg-Klasse) ≈80+ Stories — **nie** bei ~20 Stories für eine große Stadt stehen bleiben. Google Places Discovery mit Pagination (`placesTextAll`), erweiterten `STORY_DISCOVERY_QUERIES`, skalierendem Radius.
+9b. **Tiefe skaliert mit Stadtgröße (Depth Balance)**: Kleine Insel/Dorf darf **nicht** ähnlich viele Offline-FAQs oder gleichmäßige Deep-Dichte wie eine Millionenstadt haben. Messlatte = `deepAvg` der Story-Orte + sinnvolle `_offline_qa` (Infrastruktur + max. wenige spezifische Spot-FAQs), **nicht** Template-`spot_faq`-Spam. Zielband: Kleinort Stories ~12–18 deepAvg; Mittel ~8–12; Metro Kern-T1 ~8–15, Gesamt-Story-deepAvg Richtung ≥6–8 (dünne Mikro-Aussichten demoten, nicht 200×1-Fakt). Tool: `npm run city:prune-depth -- --cities … --apply [--demote-thin]`.
+10. **Kultur/Top-Sehenswürdigkeiten = Story**: Museum, Theater, Kirche, Denkmal, Altstadt, Aussicht, Hafen-Museum, Rathaus-Ensemble — nicht auf Directory prune’n. Gastro/Hotel/Supermarkt bleiben Directory. Micro-Aussichtspunkte / Tour-Operator / Illusion-Museen ohne Substanz → Directory wenn dünn.
+11. **Rückfragen sofort**: Fehlen nach Research neue Google-Orte oder bleiben Stories dünn → `city:research-gaps` / `*.rueckfragen.md` erzeugen und dem User schicken — nicht stillschweigend weglassen.
+
+## One-Command Workflow
+
+**Standard (User nennt nur Stadtname):** Agent führt aus — siehe `findus-city-auto.mdc`.
+
+```text
+npm run city:auto -- --city "Laboe" --id laboe
+→ Agent-Webresearch (T1 / dünne Stories, Wangerooge-Tiefe)
+→ merge → gate → upload:city
+```
+
+Legacy / manuell:
+
+```text
+city:skeleton → city:directory → city:classify
+→ city:research-gaps --google → Deep Research
+→ city:merge-research → city:audit-entrances --apply
+→ city:gate --strict → upload:city
+```
+
+Legacy (Pinneberg `_t1/_t2`): `node scripts/cityPack/normalizeLegacyPack.mjs --city pinneberg --apply`
+
+## Live-Hint Format (im deep_data_pool)
+
+```json
+{
+  "text": "LIVE: Speisekarte — aktuell im Web suchen und gültigen Link finden, Preise nie aus dem Pack vorlesen.",
+  "tags": ["live_hint", "gastro", "ephemeral"]
+}
+```
+
+## Zwei Schichten im Pack
+
+1. **Story / Trigger** (`pack_role: "story"`): tiefe Orte mit Polygon, Approaches, FAQ „Woran erkenne ich…?“, Querverbindungen.
+2. **Directory / Offline-Katalog** (`pack_role: "directory"`): Restaurants, Hotels, Supermärkte, Apotheken, Spielplätze, Golf, Multiplex-Kino, Aktivitäten, Wasserspender … — GPS + Kategorie + knappe Fakten + `LIVE:` für Zeiten/Preise. **Kein proaktives Wegweiser-Spam**; Modul 2 / Offline-Fragen nutzen sie trotzdem.
+
+UI-Zahl = Story + Directory (z. B. „160 Orte im Pack“), Trigger nur Story Tier 1–2 (+ selektiv Tier 3).
+
+## Place-Tiers (Relevanz für Annäherung)
+
+Jedes Spot: `place_tier` + `relevance[]` + `pack_role`.
+
+| Tier | Bedeutung | Trigger-Verhalten |
+|------|-----------|-------------------|
+| **1** | Must-See Kern | aktive Annäherung / Stadtstory |
+| **2** | starke Detours | wenn Zeit/Interesse (Museen, Denkmäler, Aussicht, Parks, Wanderwege, Theater, Zoo/Action, Souvenirs bei Touri) |
+| **3** | weich (Märkte, Café …) | nur bei klarem Interesse — nie aufdrängen |
+| **4** | reiner Katalog | nie proaktiv; Toilette, Gepäck, Transit, Tourist-Info, Supermarkt … |
+
+SSOT Scripts: `placeCategoryPolicy.mjs` + `city:classify` (jede neue Stadt nach Skeleton/Directory).  
+Tourist-Info = Katalog, **kein** Trigger. Onboarding-Prefs (`museen`, `theater_kultur`, `aussichten`, `wandern`, …) steuern Spezialisierung.
+
+Stadtweit: `_offline_qa[]` (Frage/Antwort) für Infrastruktur-Q&A ohne Ortsbezug. Ephemeres bleibt `LIVE:`.
+
+## Anti-Patterns
+
+- Ephemeral Daten als harte Fakten
+- Modul 2 ohne Pack-Lookup / ohne Live-Fallback
+- Punkt-Trigger ohne Polygon an Main-POIs
+- Mehrere Datensätze pro Stadt für denselben User-Download
+- Directory-Spots mit voller Story-Pflicht (Ansätze/80-Wort-Erzählung) — Gate lockert Directory
+- Nur ~20 Story-Orte in einer großen Stadt / Metropole
+- Research-Lücken verschweigen statt Rückfragen zu schicken
+- Kultur (Museum/Theater/Kirche) aggressiv auf Directory prune’n
+
+## Dynamische Struktur
+
+Dies sind nur abstrakte Beispiele für den logischen Ablauf. Übernimm niemals den genauen Wortlaut. Passe Antwort und Pack-Texte immer dynamisch und organisch an den aktuellen Kontext und die aktuelle Stadt an.

@@ -26,7 +26,9 @@ export {
   applyGenZRunOnProsody,
   applyPunctuationSpacing,
   applyEmotionalEmphasis,
-  applyPiperProsody,
+  applyTtsProsody,
+  stripLlmProsodyMarkers,
+  stripStageDirections,
 } from './germanTtsProsodyRules';
 export {
   GERMAN_TTS_PROSODY_LLM_PROMPT,
@@ -78,7 +80,7 @@ export {
   nativeEspeakGermanG2P,
   phonemizeGermanNativeEspeak,
   warmupNativeEspeakG2P,
-  mapEspeakIpaToKokoro,
+  mapEspeakIpaToTts,
   validateGermanIpaSample,
 } from './nativeEspeakG2p';
 
@@ -125,7 +127,7 @@ export function phonemizeGerman(text: string): string {
   return activeProvider.phonemize(text);
 }
 
-/** Async-Pfad: natives espeak-ng → Kokoro-IPA. */
+/** Async-Pfad: natives espeak-ng → TTS-IPA. */
 export async function phonemizeGermanAsync(text: string): Promise<string> {
   return phonemizeGermanNativeEspeak(text);
 }

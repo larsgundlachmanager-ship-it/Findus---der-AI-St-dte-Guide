@@ -1,6 +1,6 @@
 /**
- * Piper-kompatible deutsche TTS-Prosodie (regelbasiert, ohne Latenz).
- * Piper ist satzzeichen-sensitiv: Punkt/Komma/! /… /– steuern Pausen & Emotion.
+ * TTS-kompatible deutsche TTS-Prosodie (regelbasiert, ohne Latenz).
+ * TTS ist satzzeichen-sensitiv: Punkt/Komma/! /… /– steuern Pausen & Emotion.
  */
 
 /** Gesprochene Kontraktionen für flüssigeren Redefluss. */
@@ -18,7 +18,7 @@ const SPOKEN_CONTRACTIONS: [RegExp, string][] = [
   [/\b([Ee]inen)\s+([A-ZÄÖÜ])/g, "ein'n $2"],
 ];
 
-/** LLM-Prosodie-Marker → Piper-Interpunktion. */
+/** LLM-Prosodie-Marker → TTS-Interpunktion. */
 const LLM_MARKER_REPLACEMENTS: [RegExp, string][] = [
   [/\[Pause:\s*800\s*ms\]/gi, '. '],
   [/\[Pause:\s*500\s*ms\]/gi, '. '],
@@ -29,6 +29,84 @@ const LLM_MARKER_REPLACEMENTS: [RegExp, string][] = [
   [/[↓↑→↗↘]/g, ''],
   [/\*{2,}([^*]+)\*{2,}/g, '$1'],
 ];
+
+/**
+ * Regie in Sternchen/Klammern — nie vorlesen.
+ * `*flüstert*: mit` sonst → Sternchen weg, „flüstert“ bleibt und wird gesprochen.
+ */
+const STAGE_DIRECTION_INNER =
+  /^(?:flüster(?:t|nd)?|fluester(?:t|nd)?|whisper(?:s|ing)?|lacht?|kichert|grinst|seufzt?|stöhnt?|hustet?|räuspert(?:\s+sich)?|stockt|pause|pausiert|leise|laut|betont|ironisch|sarkastisch|aufgeregt|traurig|freudig|geheimnisvoll|psst|aside|zu\s+sich|stimme\s+senkt|stimme\s+hebt|tiefer|leiser|lauter)(?:[\s,:-]+[\p{L}'’-]{1,20}){0,4}$/iu;
+
+/**
+ * Gesprochene TTS-/Cartesia-Regie im Fließtext (nie vorlesen).
+ * z. B. „Die Stimme senkt sich noch ein bisschen tiefer.“
+ */
+const SPOKEN_VOICE_DIRECTION_RES: RegExp[] = [
+  /\b(?:die\s+)?Stimme\s+senkt\s+sich(?:\s+noch)?(?:\s+ein\s+bisschen)?(?:\s+(?:tiefer|leiser|lauter|höher))?\b[,.:;–—]?\s*/giu,
+  /\b(?:die\s+)?Stimme\s+hebt\s+sich(?:\s+noch)?(?:\s+ein\s+bisschen)?(?:\s+(?:höher|lauter|tiefer|leiser))?\b[,.:;–—]?\s*/giu,
+  /\b(?:die\s+)?Stimme\s+(?:wird|klingt)\s+(?:jetzt\s+)?(?:etwas\s+|noch\s+(?:ein\s+bisschen\s+)?)?(?:tiefer|höher|leiser|lauter|ruhiger|sanfter)\b[,.:;–—]?\s*/giu,
+  /\b(?:mit\s+)?(?:etwas\s+|noch\s+(?:ein\s+bisschen\s+)?)?(?:tieferer|höherer|leiserer|lauterer)\s+Stimme\b[,:]?\s*/giu,
+  /\b(?:sprich|spreche|rede)\s+(?:jetzt\s+)?(?:bitte\s+)?(?:leiser|lauter|tiefer|höher|langsamer|schneller)\b[,.:;–—]?\s*/giu,
+  /\b(?:Tonlage|Pitch|Volume|Lautstärke|Sprechtempo)\s*[:=]\s*[\wÄÖÜäöüß\- ]{1,40}\b[,.:;–—]?\s*/giu,
+  /\b(?:für\s+)?Cartesia\s*[:：]\s*[^.!?\n]{1,80}[.!…]?\s*/giu,
+  /\b(?:Regie|SSML|Prosodie-Anweisung)\s*[:：]\s*[^.!?\n]{1,80}[.!…]?\s*/giu,
+];
+
+/** Entfernt `*flüstert*`, `(lacht)`, Stimme-senkt-sich-Regie — nie vorlesen. */
+export function stripStageDirections(text: string): string {
+  let s = text.normalize('NFKC');
+
+  const dropOrUnwrap = (_full: string, inner: string): string => {
+    const t = String(inner ?? '').trim();
+    if (!t) return ' ';
+    if (STAGE_DIRECTION_INNER.test(t)) return ' ';
+    if (
+      /stimme\s+(senkt|hebt|wird|klingt)|tieferer\s+stimme|leiser\s+sprechen/iu.test(
+        t,
+      )
+    ) {
+      return ' ';
+    }
+    return ` ${t} `;
+  };
+
+  // Nur einfache *Regie* — nicht **bold** mittendrin anfassen
+  s = s.replace(
+    /(?<!\*)\*\s*([^*\n]{1,60}?)\s*\*(?!\*)\s*:?/g,
+    dropOrUnwrap,
+  );
+  // (flüstert) / (lacht leise)
+  s = s.replace(/\(\s*([^)\n]{1,60}?)\s*\)\s*:?/g, (full, inner: string) => {
+    const t = String(inner ?? '').trim();
+    if (STAGE_DIRECTION_INNER.test(t)) return ' ';
+    if (/stimme\s+(senkt|hebt|wird)|tieferer\s+stimme/iu.test(t)) return ' ';
+    return full;
+  });
+  // [flüstert] / [leise]
+  s = s.replace(/\[\s*([^\]\n]{1,60}?)\s*\]\s*:?/g, (full, inner: string) => {
+    const t = String(inner ?? '').trim();
+    if (STAGE_DIRECTION_INNER.test(t)) return ' ';
+    if (/^Pause:/i.test(t)) return full;
+    if (/stimme\s+(senkt|hebt|wird)|tieferer\s+stimme/iu.test(t)) return ' ';
+    return full;
+  });
+
+  // Nach Asterisk-Strip oft übrig: „flüstert: …“
+  s = s.replace(
+    /\b(?:flüster(?:t|nd)?|fluester(?:t|nd)?|whisper(?:s|ing)?)\s*:\s*/giu,
+    ' ',
+  );
+
+  // Gesprochene Cartesia-/Stimm-Regie im Fließtext
+  for (const re of SPOKEN_VOICE_DIRECTION_RES) {
+    s = s.replace(re, ' ');
+  }
+
+  s = s.replace(/\(\s*\)/g, ' ');
+  s = s.replace(/\[\s*\]/g, ' ');
+  s = s.replace(/(?:\s*[–—]\s*){2,}/g, ' – ');
+  return s.replace(/\s+/g, ' ').trim();
+}
 
 const FOCUS_CONTENT_VERBS =
   'erkl[aä]ren|zeigen|sagen|wissen|verstehen|beschreiben|erz[aä]hlen|merken|sehen|h[oö]ren|lernen|sp[uü]ren|f[uü]hlen|verdeutlichen|klarstellen|darlegen';
@@ -106,7 +184,7 @@ export function applySpokenContractions(text: string): string {
 }
 
 export function stripLlmProsodyMarkers(text: string): string {
-  let s = text;
+  let s = stripStageDirections(text);
   for (const [pattern, replacement] of LLM_MARKER_REPLACEMENTS) {
     s = s.replace(pattern, replacement);
   }
@@ -114,7 +192,7 @@ export function stripLlmProsodyMarkers(text: string): string {
 }
 
 /**
- * Satzzeichen-Spacing für Piper — Komma/Punkt/! klar,
+ * Satzzeichen-Spacing für TTS — Komma/Punkt/! klar,
  * damit Pausen und Betonung greifen.
  */
 export function applyPunctuationSpacing(text: string): string {
@@ -260,7 +338,7 @@ export function isGreetingOrWelcomeSentence(sentence: string): boolean {
 export const SENTENCE_END_PAUSE_MS = 320;
 /** Begrüßung / Ausruf (ms). */
 export const GREETING_PAUSE_MS = 520;
-/** Komma-Klausel (ms) — etwas länger, damit Kokoro nicht durchrauscht. */
+/** Komma-Klausel (ms) — etwas länger, damit TTS nicht durchrauscht. */
 export const COMMA_PAUSE_MS = 200;
 /** Doppelpunkt (ms) — Aufzählung / Ansage. */
 export const COLON_PAUSE_MS = 260;
@@ -286,7 +364,7 @@ export function applyGenZRunOnProsody(text: string): string {
   return applyPunctuationSpacing(text);
 }
 
-/** Vollständige Prosodie-Pipeline für Piper-Audio (nach Aussprache-Fixes). */
+/** Vollständige Prosodie-Pipeline für TTS-Audio (nach Aussprache-Fixes). */
 export function applyGermanTtsProsodyRules(text: string): string {
   let s = text.normalize('NFKC').replace(/\s+/g, ' ').trim();
   if (!s) return s;
@@ -303,6 +381,10 @@ export function applyGermanTtsProsodyRules(text: string): string {
   return s.replace(/\s+/g, ' ').trim();
 }
 
-export function applyPiperProsody(text: string): string {
+export function applyTtsProsody(text: string): string {
   return applyGermanTtsProsodyRules(text);
 }
+
+/** Kurzer Reminder für LLM → Cartesia sonic-3.5 (Master-Prompt-Anhang). */
+export const GERMAN_TTS_PROSODY_REMINDER = `Deutsch für TTS: Kommas = Atem, „…“ = Spannung/Flüstern, ! = Energie, Gedankenstriche = Pause.
+Keine SSML/Regie — Emotion nur über Interpunktion und Wortwahl.`;

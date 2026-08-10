@@ -1,0 +1,241 @@
+{
+  "city_id": "chorin",
+  "center": {
+    "lat": 52.9038,
+    "lng": 13.87274
+  },
+  "added": [
+    "chorin_chorin_bahnhof",
+    "chorin_chorin_bahnhof",
+    "chorin_kloster_chorin",
+    "chorin_touristinformation_kloster_chorin",
+    "chorin_hotel_haus_chorin",
+    "chorin_choriner_dorfkirche",
+    "chorin_ehemalige_ragoser_muhle",
+    "chorin_lehrpfad_chorin",
+    "chorin_privatparkplatz_kloster_chorin",
+    "chorin_waldlehrgarten_weinberg",
+    "chorin_parkplatz_kloster_chorin",
+    "chorin_amtssee",
+    "chorin_fettseemoor",
+    "chorin_listnride_fahrradverleih_in_chorin",
+    "chorin_sports_field",
+    "chorin_gleis_9_n_e_v",
+    "chorin_alpakas_vom_serwester_hof",
+    "chorin_ruine_der_klostermuhle_chorin",
+    "chorin_stele_senftenhutte",
+    "chorin_kriegsgraberstatte_erster_und_zweiter_weltkrieg",
+    "chorin_neuehutte_denkmal",
+    "chorin_rapp_keramik_chorin",
+    "chorin_futterhandel_kornscheune_ronald_kuter",
+    "chorin_hof_langanke"
+  ],
+  "skipped": [
+    {
+      "name": "Evangelische Kapelle im ehemaligen Kloster Chorin",
+      "near": "chorin_kloster_chorin"
+    },
+    {
+      "name": "Chorin, Kloster",
+      "near": "chorin_parkplatz_kloster_chorin"
+    },
+    {
+      "name": "LandRad Fahrradverleih Chorin",
+      "near": "chorin_chorin_bahnhof"
+    },
+    {
+      "name": "Gästehaus Chorin - Single Room",
+      "near": "chorin_hotel_haus_chorin"
+    },
+    {
+      "name": "Bistro Lindenblatt am Historischen Bahnhof Chorin",
+      "near": "chorin_chorin_bahnhof"
+    },
+    {
+      "name": "Naturwacht Brandenburg Stützpunkt Chorin",
+      "near": "chorin_chorin_bahnhof"
+    },
+    {
+      "name": "Chorin, Dorf",
+      "near": "chorin_listnride_fahrradverleih_in_chorin"
+    },
+    {
+      "name": "BarumTours",
+      "near": "chorin_chorin_bahnhof"
+    },
+    {
+      "name": "Demeter-Hof Langanke",
+      "near": "chorin_hof_langanke"
+    }
+  ],
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [
+      "chorin_chorin_bahnhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_kloster_chorin: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_touristinformation_kloster_chorin: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_hotel_haus_chorin: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_choriner_dorfkirche: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_ehemalige_ragoser_muhle: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_lehrpfad_chorin: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_privatparkplatz_kloster_chorin: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_waldlehrgarten_weinberg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_parkplatz_kloster_chorin: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_amtssee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_fettseemoor: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_listnride_fahrradverleih_in_chorin: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_sports_field: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_gleis_9_n_e_v: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_alpakas_vom_serwester_hof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_ruine_der_klostermuhle_chorin: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_stele_senftenhutte: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_kriegsgraberstatte_erster_und_zweiter_weltkrieg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_neuehutte_denkmal: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_rapp_keramik_chorin: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_futterhandel_kornscheune_ronald_kuter: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_hof_langanke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "chorin_chorin_bahnhof: general_info/Erzählung too short (0<80)",
+      "chorin_chorin_bahnhof: deep_data_pool thin (1<4)",
+      "chorin_kloster_chorin: general_info/Erzählung too short (0<80)",
+      "chorin_kloster_chorin: deep_data_pool thin (1<4)",
+      "chorin_touristinformation_kloster_chorin: general_info/Erzählung too short (0<80)",
+      "chorin_touristinformation_kloster_chorin: deep_data_pool thin (1<4)",
+      "chorin_hotel_haus_chorin: general_info/Erzählung too short (0<80)",
+      "chorin_hotel_haus_chorin: deep_data_pool thin (1<4)",
+      "chorin_choriner_dorfkirche: general_info/Erzählung too short (0<80)",
+      "chorin_choriner_dorfkirche: deep_data_pool thin (1<4)",
+      "chorin_ehemalige_ragoser_muhle: general_info/Erzählung too short (0<80)",
+      "chorin_ehemalige_ragoser_muhle: deep_data_pool thin (1<4)",
+      "chorin_lehrpfad_chorin: general_info/Erzählung too short (0<80)",
+      "chorin_lehrpfad_chorin: deep_data_pool thin (1<4)",
+      "chorin_privatparkplatz_kloster_chorin: general_info/Erzählung too short (0<80)",
+      "chorin_privatparkplatz_kloster_chorin: deep_data_pool thin (1<4)",
+      "chorin_waldlehrgarten_weinberg: general_info/Erzählung too short (0<80)",
+      "chorin_waldlehrgarten_weinberg: deep_data_pool thin (1<4)",
+      "chorin_parkplatz_kloster_chorin: general_info/Erzählung too short (0<80)",
+      "chorin_parkplatz_kloster_chorin: deep_data_pool thin (1<4)",
+      "chorin_amtssee: general_info/Erzählung too short (0<80)",
+      "chorin_amtssee: deep_data_pool thin (1<4)",
+      "chorin_fettseemoor: general_info/Erzählung too short (0<80)",
+      "chorin_fettseemoor: deep_data_pool thin (1<4)",
+      "chorin_listnride_fahrradverleih_in_chorin: general_info/Erzählung too short (0<80)",
+      "chorin_listnride_fahrradverleih_in_chorin: deep_data_pool thin (1<4)",
+      "chorin_sports_field: general_info/Erzählung too short (0<80)",
+      "chorin_sports_field: deep_data_pool thin (1<4)",
+      "chorin_gleis_9_n_e_v: general_info/Erzählung too short (0<80)",
+      "chorin_gleis_9_n_e_v: deep_data_pool thin (1<4)",
+      "chorin_alpakas_vom_serwester_hof: general_info/Erzählung too short (0<80)",
+      "chorin_alpakas_vom_serwester_hof: deep_data_pool thin (1<4)",
+      "chorin_ruine_der_klostermuhle_chorin: general_info/Erzählung too short (0<80)",
+      "chorin_ruine_der_klostermuhle_chorin: deep_data_pool thin (1<4)",
+      "chorin_stele_senftenhutte: general_info/Erzählung too short (0<80)",
+      "chorin_stele_senftenhutte: deep_data_pool thin (1<4)",
+      "chorin_kriegsgraberstatte_erster_und_zweiter_weltkrieg: general_info/Erzählung too short (0<80)",
+      "chorin_kriegsgraberstatte_erster_und_zweiter_weltkrieg: deep_data_pool thin (1<4)",
+      "chorin_neuehutte_denkmal: general_info/Erzählung too short (0<80)",
+      "chorin_neuehutte_denkmal: deep_data_pool thin (1<4)",
+      "chorin_rapp_keramik_chorin: general_info/Erzählung too short (0<80)",
+      "chorin_rapp_keramik_chorin: deep_data_pool thin (1<4)",
+      "chorin_futterhandel_kornscheune_ronald_kuter: general_info/Erzählung too short (0<80)",
+      "chorin_futterhandel_kornscheune_ronald_kuter: deep_data_pool thin (1<4)",
+      "chorin_hof_langanke: general_info/Erzählung too short (0<80)",
+      "chorin_hof_langanke: deep_data_pool thin (1<4)",
+      "coverage: missing must-have category 'aussicht'"
+    ],
+    "stats": {
+      "spots": 23,
+      "storySpots": 23,
+      "directorySpots": 0,
+      "triggers": 23,
+      "missingTrigger": 0,
+      "missingNarration": 23,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 23,
+      "orphanTriggers": 0,
+      "categories": [
+        "altstadt",
+        "bahnhof",
+        "denkmal",
+        "freizeit",
+        "hafen",
+        "kirche",
+        "museum",
+        "natur",
+        "souvenir"
+      ],
+      "missingMustHave": [
+        "aussicht"
+      ],
+      "nicePresent": [
+        "hafen",
+        "bahnhof"
+      ],
+      "liveResearch": 4,
+      "offlineQa": 0,
+      "hasCoverage": true,
+      "hasTransit": false,
+      "hasMobility": false,
+      "links": 0
+    },
+    "gaps": {
+      "needsNarration": [
+        "chorin_chorin_bahnhof",
+        "chorin_kloster_chorin",
+        "chorin_touristinformation_kloster_chorin",
+        "chorin_hotel_haus_chorin",
+        "chorin_choriner_dorfkirche",
+        "chorin_ehemalige_ragoser_muhle",
+        "chorin_lehrpfad_chorin",
+        "chorin_privatparkplatz_kloster_chorin",
+        "chorin_waldlehrgarten_weinberg",
+        "chorin_parkplatz_kloster_chorin",
+        "chorin_amtssee",
+        "chorin_fettseemoor",
+        "chorin_listnride_fahrradverleih_in_chorin",
+        "chorin_sports_field",
+        "chorin_gleis_9_n_e_v",
+        "chorin_alpakas_vom_serwester_hof",
+        "chorin_ruine_der_klostermuhle_chorin",
+        "chorin_stele_senftenhutte",
+        "chorin_kriegsgraberstatte_erster_und_zweiter_weltkrieg",
+        "chorin_neuehutte_denkmal",
+        "chorin_rapp_keramik_chorin",
+        "chorin_futterhandel_kornscheune_ronald_kuter",
+        "chorin_hof_langanke"
+      ],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [
+        "chorin_chorin_bahnhof",
+        "chorin_kloster_chorin",
+        "chorin_touristinformation_kloster_chorin",
+        "chorin_hotel_haus_chorin",
+        "chorin_choriner_dorfkirche",
+        "chorin_ehemalige_ragoser_muhle",
+        "chorin_lehrpfad_chorin",
+        "chorin_privatparkplatz_kloster_chorin",
+        "chorin_waldlehrgarten_weinberg",
+        "chorin_parkplatz_kloster_chorin",
+        "chorin_amtssee",
+        "chorin_fettseemoor",
+        "chorin_listnride_fahrradverleih_in_chorin",
+        "chorin_sports_field",
+        "chorin_gleis_9_n_e_v",
+        "chorin_alpakas_vom_serwester_hof",
+        "chorin_ruine_der_klostermuhle_chorin",
+        "chorin_stele_senftenhutte",
+        "chorin_kriegsgraberstatte_erster_und_zweiter_weltkrieg",
+        "chorin_neuehutte_denkmal",
+        "chorin_rapp_keramik_chorin",
+        "chorin_futterhandel_kornscheune_ronald_kuter",
+        "chorin_hof_langanke"
+      ],
+      "missingCategories": [
+        "aussicht"
+      ]
+    }
+  },
+  "file": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\chorin.json"
+}

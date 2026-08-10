@@ -1,0 +1,432 @@
+{
+  "city_history": "Beelitz: Lungenheilanstalten-Architektur in Kiefernwald und moderne Baumkronen-Erlebnispfade — Medizin- und Industriekultur südwestlich von Berlin.",
+  "notes": [
+    "Wave A — verified facts, LIVE ephemeral, no dialog scripts."
+  ],
+  "offline_qa": [],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "beelitz_mannersanatorium_beelitz_heilstatten",
+      "name": "Männersanatorium Beelitz-Heilstätten",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Männersanatorium der Beelitz-Heilstätten: monumentaler Backsteinbau des frühen 20. Jahrhunderts — prägendes Gebäude der ehemaligen Lungenheilanstalt.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: lange Fassaden aus rotem Klinker, Erker und Türme, von Baumalleen umrahmt — ikonisch für Beelitz-Heilstätten-Fotografien.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Die Heilstätten entstanden 1898–1930 als Lungenheilanstalten der Berliner Lebensversicherungsanstalt — einer der größten Heilanlagen Europas (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Architekt Heino Schmieden und weitere planeten Pavillon-Anlagen in Parklandschaft — Luftkur und Sonnenlicht als Therapie.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Männer- und Frauensanatorien getrennt; Wirtschaftsgebäude, Kochküche und Alpenhaus ergänzen das Ensemble.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach 1945 sowjetische Militärkrankenhaus-Nutzung; später zivilmedizinische Nutzung und teilweise Leerstand.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Seit den 1990ern Teile als Reha-Kliniken, Baumwipfelpfad und Baumkronenpfad-Tourismus — Denkmalschutz für Backsteinbauten.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Beelitz-Heilstätten sind Kulisse für Film und Fotografie; verfallene Flügel nur geführt zugänglich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Historie: Tuberkulose-Bekämpfung prägte Medizingeschichte; frische Waldluft und Ruhe als Behandlungskonzept.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Baumkronenpfad Beelitz in den Kiefern nördlich der Anlagen; Führungen durch ausgewählte Flügel (Anbieter variieren).",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "Parkartige Alleen zwischen Pavillons — Rehe und alte Baumalleen in der Heilstätten-Landschaft.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Frauenpavillon und Kochküche als weitere markante Bauten im Gesamtensemble Beelitz-Heilstätten.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Bahnhof Beelitz-Heilstätten verbindet mit Berlin; viele Besucher kommen für Baumkronenpfad und Architektur.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Denkmalpflege und Investorprojekte versuchen Erhalt und Nutzung in Balance — nicht alle Gebäude öffentlich zugänglich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Leben jetzt: geführte Touren, Baumkronenpfad-Tickets, Reha-Patienten in aktiven Klinikflügeln.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Backsteinformate und Gesimsbänder unterscheiden Männer- von Frauensanatorium — architekturhistorische Details.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Alpenhaus und Wirtschaftshof illustrieren autarke Versorgung der Lungenheilanstalt vor Antibiotika-Zeit.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Die Heilstätten wurden in mehreren Bauphasen erweitert — Pavillonsystem zur Trennung von Krankenhausflügeln und frischer Luft.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach dem Ersten Weltkrieg weiterer Ausbau; wirtschaftliche Krisen und zwei Weltkriege prägten Nutzung und Unterhalt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Sowjetische Nutzung hinterließ militärische Spuren; einige Flügel blieben Jahrzehnte ungenutzt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Investoren und Denkmalschutz entwickeln schrittweise Nutzungskonzepte — nicht alle Bereiche öffentlich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Architekturführungen erklären Backsteinornamentik, Erker und Klinkerbänder des Männersanatoriums.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Naturpark und Baumkronenpfad monetarisieren Besucherströme — wichtige Einnahmequelle neben Klinikbetrieb.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Führungen durch ausgewählte Flügel erklären Lüftungsarchitektur und „Lichtbad“-Therapien der Lungenheilkur.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten",
+      "name": "Beelitz Heilstätten",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Beelitz-Heilstätten: weitläufiges Sanatoriumsensemble aus Backsteinpavillons in Waldlage — Medizin-, Architektur- und Erlebnisgeschichte südwestlich von Berlin.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Dutzende Pavillons, Verbindungsgänge und Wirtschaftsgebäude zwischen Kiefern — verfallene und sanierte Flügel nebeneinander.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Entwicklung ab 1898 als Lungenheilanstalt der Berliner Versicherung; Erweiterungen bis in die 1930er (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach 1945 bis 1994 sowjetisches Militärkrankenhaus; danach gemischte zivile Nutzung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: Reha-Kliniken, Natur-Park, Baumkronenpfad, Baum & Zeit mit Barfußpark und Baumwipfelpfad in der Region.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Männersanatorium und Frauenpavillon als fotogene Hauptbauten; Alpenhaus als markantes Nebengebäude.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Frauen- und Männersanatorien waren räumlich getrennt — typisch für moralische und medizinische Konzepte der Zeit.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Kochküche und Wirtschaftshof versorgten tausende Patienten — Logistikdenkmal der Lungenheilkur.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Alpenhaus und Fachwerkhäuser bilden Kontrast zum massiven Klinker der Hauptpavillons.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Geführte Fototouren in verlassenen Flügeln nur mit Anbieter — Sicherheitsvorschriften.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "beelitz_baumkronenpfad_beelitz",
+      "name": "Baumkronenpfad Beelitz",
+      "lat": 52.2594,
+      "lng": 12.9247,
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Baumkronenpfad Beelitz: hölzerner Hängebrücken- und Aussichtspfad in den Kiefern bei den Beelitz-Heilstätten — Erlebnisweg in ca. 40 m Höhe.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: gelbe und rote Holzbrücken zwischen Kiefernwipfeln, Aussichtsplattformen und Spiral-Treppe — weithin sichtbar aus dem Wald.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Eröffnet 2015 als Erlebnispfad der Baumkronenpfad Beelitz GmbH in der Nähe der historischen Heilstätten (Wikipedia, Betreiber).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Rundweg mit Hängebrücken, Seilrutsche optional und Aussicht auf Heilstätten-Architektur und Wald.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Pfad ergänzt ältere Baumwipfelpfade in Brandenburg; Tickets und Zeiten am Eingang bzw. online.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Architektur-Touren in Heilstätten-Flügeln oft kombinierbar; Bahnhof Beelitz-Heilstätten fußläufig erreichbar.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "Leben jetzt: familienfreundlicher Waldparcours; wetterabhängige Öffnung — Windeinschränkungen möglich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Pfad liegt in Kiefern des Naturparks — barrierefreie Teile und WC am Eingang (Betreiberangaben).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Länge und Höhe machen ihn zum längsten Baumkronenpfad der Region — Architektur aus Holz und Stahlseilen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Der Pfad nutzt bestehende Kiefernbestände der Heilstätten-Landschaft — minimaler Eingriff in Wurzeln durch Pfahlgründung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Aussichtsplattformen erklären per Tafeln Heilstätten-Geschichte und Waldökologie.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Ticketkombinationen mit Architekturführungen werden angeboten — Anbieterwebsites prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Sicherheitsvorschriften bei Gewitter und Sturm — Betrieb kann pausieren.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Baumkronenpfad Beelitz ist eines der bekanntesten Waldattraktionen Brandenburgs neben Tropical Islands-Umfeld.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Höhe ca. 40 Meter über dem Waldboden — Angaben des Betreibers; geeignet für schwindelfreie Besucher.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Holzbrücken mit Geländer und Netz-Sicherung — Kinderwagen und Rollstuhl nur eingeschränkt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Parkplatz und Ticketshop am Eingang; Anreise auch per Bahnhof Beelitz-Heilstätten.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Kombination mit Barfußpark Baum & Zeit in der Region möglich — separate Tickets.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Winter- und Sturmsperrungen werden online kommuniziert — vor Anreise prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Kiefernforst der Heilstätten wurde für Erholung der Patienten angelegt — heute Erlebnispfad.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Pfad führt über mehrere Hängebrücken und eine Aussichtsplattform — Gesamtlänge im Kilometerbereich (Betreiberangaben).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Architektur aus Holz und Stahlseilen fügt sich in den Kiefernwald der ehemaligen Heilstätten-Landschaft ein.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Besucherzentrum und Souvenirshop am Eingang; Garderobe und WC vor Ort.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Regeln: festes Schuhwerk, keine Glasflaschen auf den Brücken — Hausordnung des Betreibers.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Anreise mit Regionalbahn nach Beelitz-Heilstätten und Fußweg durch den Wald — ausgeschildert.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Medien berichten über Eröffnung 2015 als neues Waldattraktion-Angebot bei Beelitz — ergänzt Heilstätten-Tourismus.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Erlebnispfad ist wetterabhängig; bei Sturm oder Eis bleibt er geschlossen — Sicherheit der Hängebrücken.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Mehrere Ebenen in den Baumkronen, Spiral-Treppe und Aussicht auf Klinker-Pavillons — Betreiber bezeichnet den Pfad als längsten Baumkronenpfad der Region.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Familien mit Kindern ab Mindestgröße laut Hausordnung; Hunde nur wenn ausdrücklich erlaubt — vor Ticketkauf prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_places": []
+}

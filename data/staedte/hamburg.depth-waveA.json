@@ -1,0 +1,1210 @@
+{
+  "notes": [
+    "Depth Wave A: Museen / Ikonen / Hafen — 20 thin story targets from hamburg.depth-targets.md.",
+    "Sources: Wikipedia, hamburg.de, official museum/harbour sites, HafenCity GmbH, Stiftung Hamburg Maritim, NDR. Preise/Zeiten nur LIVE. Keine Dialog-Skripte. Prisdorf nie.",
+    "Do NOT run city:merge-research on this file until explicitly requested."
+  ],
+  "spots": [
+    {
+      "id": "hamburg_automuseum_prototyp",
+      "name": "Automuseum Prototyp",
+      "lat": 53.543236,
+      "lng": 10.002519,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Privates Automuseum in der HafenCity (Shanghaiallee 7): eröffnet 12. April 2008 von Thomas König und Oliver Schmidt. Schwerpunkt frühe Porsche-Konstruktionen sowie Sport-/Rennwagen der deutschen Nachkriegszeit — Motto „Personen. Kraft. Wagen.“ Denkmalgeschütztes Fabrikgebäude der Harburger Gummi-Kamm-Compagnie (ca. 1902–1907).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: mehrgeschossiges Backstein-Fabrikgebäude an der Shanghaiallee in der HafenCity; innen Fahrzeuge ohne Trennglas, nah und freistehend — Nähe Internationales Maritimes Museum.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Gründer Thomas König und Oliver Schmidt bauten jahrelang eine Privatsammlung auf; Motto Personen.Kraft.Wagen. lädt das Kürzel PKW mit Bedeutung auf — Mensch, Technik und Wagen gleichgewichtet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Eröffnung 12. April 2008. Gebäude: ehemalige Fabrik der Harburger Gummi-Kamm-Compagnie / Kautschukwerke Dr. Heinr. Traun & Söhne, errichtet ca. 1902–1907; am Ort seit 1855 Hartgummi-Produktion berichtet; Denkmalschutz seit 2004.",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Dauerausstellung u. a. frühe Porsche-Typen (berichten: Berlin-Rom-Wagen Typ 64), Sport-/Rennwagen der Nachkriegszeit; Sonderausstellungen wechseln. Fahrzeuge dürfen nicht berührt werden, sind aber ohne Barrieren sichtbar.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: HafenCity / Nähe Maritimes Museum und Speicherstadt-Kontorhaus-UNESCO-Zone.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten und Ticketpreise ephemer — Website prototyp-hamburg.de / hamburg.de prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Quer: Shanghaiallee als HafenCity-Magistrale — Verbindung Überseeboulevard und Marco-Polo-Terrassen in Laufweite.",
+          "tags": [
+            "quer"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Automuseum Prototyp?",
+          "a": "Am denkmalgeschützten Fabrikgebäude Shanghaiallee 7 in der HafenCity — innen freistehende Sport- und Rennwagen ohne Trennglas."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_chocoversum_hamburgs_schokoladenmuseum",
+      "name": "CHOCOVERSUM - Hamburgs Schokoladenmuseum",
+      "lat": 53.547882,
+      "lng": 10.002479,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Interaktives Schokoladenmuseum am Meßberg 1 im Kontorhausviertel (UNESCO): eröffnet 3. Dezember 2011 von Hachez. Rund 1.200 m², geführte Tour mit Verkostung und eigener Schokoladentafel in der Werkstatt. Seit 2023 markenunabhängig (Chocoversum GmbH, Kooperation Lindt & Sprüngli berichtet).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Eingang am Meßberg im historischen Kontorhausviertel, Nähe Chilehaus und Speicherstadt — Indoor-Erlebniswelt, wetterunabhängig.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Idee vom Bremer Premium-Hersteller Hachez (Marke seit 1890 berichtet); Eröffnung 3. Dezember 2011 als Hachez Chocoversum GmbH. Gesellschafter zunächst Hachez, Bärbel Dahms und Frank Thie berichtet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "2012–2018 Betrieb durch Wissenswelten Management GmbH; April 2018 Rückübernahme durch Hachez Chocoversum GmbH. Anfang 2023 Umfirmierung zu Chocoversum GmbH, markenunabhängiger Betrieb mit Lindt-&-Sprüngli-Kooperation berichtet. Ausstellung 2016 umfassend überarbeitet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Heute: geführte Tour in mehreren Stationen vom Kakaoanbau bis zur Tafel; Schokowerkstatt zum Selbstgestalten; Shop. Quer: UNESCO Kontorhausviertel / Chilehaus / Speicherstadt.",
+          "tags": [
+            "leben_jetzt",
+            "quer"
+          ]
+        },
+        {
+          "text": "Besucherzahlen (Hausangaben): bis 2016 über 500.000; später über 2,5 Mio. kumuliert berichtet — LIVE nicht als hartes Pack-Fakt vorlesen.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Tourzeiten, Eintrittspreise und Buchung ephemer — chocoversum.de prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Geschichte: UNESCO-Welterbe Kontorhausviertel seit 2015 — Museum liegt im geschützten Ensembles der Speicherstadt-Nachbarschaft.",
+          "tags": [
+            "geschichte",
+            "quer"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das CHOCOVERSUM?",
+          "a": "Am Meßberg 1 im Kontorhausviertel, nahe Chilehaus — Schilder und Eingang zur interaktiven Schokoladen-Tour."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_u_bootmuseum_hamburg_gmbh",
+      "name": "U-Bootmuseum Hamburg GmbH",
+      "lat": 53.545153,
+      "lng": 9.955347,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Schwimmendes Museum: sowjetisches Tango-Klasse-U-Boot B-515 („U-434“), gebaut 1976 in Krasnoje Sormowo (Gorki/Nischni Nowgorod), bis 2002 Nordmeerflotte. Seit 2002 Museumsboot in Hamburg; seit April/Mai 2010 Liegeplatz St. Pauli Fischmarkt 10. Länge ca. 90–92 m berichtet.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: knapp 100 m langes schwarzes U-Boot direkt am St. Pauli Fischmarkt — weithin sichtbar, Nähe Landungsbrücken und Fischauktionshalle.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Bau 1975/76 in Krasnoje Sormowo; Stapellauf April 1976, Indienststellung Dezember 1976 berichtet. Bezeichnung B-515 der sowjetischen/russischen Nordmeerflotte bis April 2002. Tango-Klasse; demilitarisiert nach Verkauf an U-Bootmuseum Hamburg GmbH.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "August 2002 Schlepp von der Kola-Bucht Richtung Hamburg (kurzzeitig vom russischen Geheimdienst gestoppt berichtet). Umbau/Restaurierung bei Blohm + Voss. Museumsöffnung 9. November 2002 zunächst im Baakenhafen; 2007 Verlegung innerhalb Baakenhafen wegen U4-Bau; 15. April 2010 Verlegung an den Fischmarkt, Wiedereröffnung 7. Mai 2010.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Maße (Museum/hamburg.de): Länge ca. 90,16 m, Breite ca. 8,72 m, Höhe ca. 14,72 m; Besatzung ausgelegt ca. 62 Mann (NDR). Technik an Bord weitgehend erhalten, Waffen entfernt.",
+          "tags": [
+            "technik"
+          ]
+        },
+        {
+          "text": "Heute: Innenbesichtigung eng und spartanisch — Einblick Kalte-Kriegs-Alltag unter Wasser. Quer: Fischmarkt, Landungsbrücken, Elbufer.",
+          "tags": [
+            "leben_jetzt",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Einlasszeiten und Tickets ephemer — u-434.de prüfen; Tide/Zugang am Kai beachten.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Audio-Guide und mehrsprachige Führungen laut Betreiber — LIVE Sprachen und Zeiten prüfen.",
+          "tags": [
+            "leben_jetzt",
+            "live_hint"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das U-Bootmuseum?",
+          "a": "Am großen schwarzen U-Boot direkt am St. Pauli Fischmarkt 10 — vom Elbufer und von den Landungsbrücken her gut sichtbar."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_museum_der_natur_hamburg_zoologie",
+      "name": "Museum der Natur Hamburg - Zoologie",
+      "lat": 53.566987,
+      "lng": 9.97799,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Zoologische Ausstellung des Museum der Natur Hamburg (LIB) am Campus Uni Hamburg / Martin-Luther-King-Platz: Nachfolge des 1843 gegründeten Naturhistorischen Museums. Gebäude am Steintorwall 1943 zerstört; Sammlungen teils gerettet. Öffentliche Zoologie-Ausstellung seit 1983/84; 2014 CeNak, seit 2021 LIB / Museum der Natur Hamburg. Neues Evolutioneum in der HafenCity geplant.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Campus-Ausstellung am Martin-Luther-King-Platz (Rotherbaum) mit modernisiertem Eingangsbereich; innen Dioramen und Präparate zu Lebensräumen und Artenvielfalt.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "1843: Naturhistorisches Museum aus Sammlungen des Naturwissenschaftlichen Vereins (bürgerlich, nicht fürstlich). 1891 Prachtbau am Steintorwall/Hauptbahnhof — Publikumsmagnet. 1943 Operation Gomorrha: Gebäude zerstört; Alkoholsammlung u. a. in U-Bahn-Schächten gerettet berichtet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nachkrieg: Zoologisches Staatsinstitut, 1969 Eingliederung in die Universität Hamburg. Ab 1983/84 wieder öffentliche Zoologie-Ausstellung (~2.000 m² berichtet). 2014 Centrum für Naturkunde (CeNak) mit Geologie und Mineralogie; 2021 Fusion mit Museum Koenig Bonn zum LIB — Umbenennung Museum der Natur Hamburg.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Sammlung: geschätzt Millionen zoologischer Objekte (Hausangaben bis ~10 Mio.); Schwerpunkte u. a. Meereswirbellose, Fische, Insekten. Ankauf historisch u. a. Teile Museum Godeffroy und Röding berichtet.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: geplante Zusammenführung im Evolutioneum HafenCity; Schwesterstandorte Mineralogie/Geologie am Campus; Uni Hamburg.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt und Sonderausstellungen ephemer — hamburg.leibniz-lib.de prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Quer: CeNaK-Fusion 2021 mit ZFM Bonn zum LIB — Forschungssammlungen deutlich größer als Schauausstellung.",
+          "tags": [
+            "quer",
+            "geschichte"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Zoologie des Museums der Natur?",
+          "a": "Am Uni-Campus Rotherbaum / Martin-Luther-King-Platz — Beschilderung Museum der Natur Hamburg, Zoologie."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_heinrich_hertz_turm",
+      "name": "Heinrich-Hertz-Turm",
+      "lat": 53.563097,
+      "lng": 9.975755,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Fernmeldeturm in St. Pauli („Telemichel“): Bau ca. 1965/66–1968, Architekten Fritz Trautwein, Rafael Behn und Fritz Leonhardt. Offizielle Eröffnung 1. Mai 1968; Besucherzutritt ab 12. April 1968. Gesamthöhe je nach Quelle ca. 276,5–279,2 m. Seit 1. Januar 2001 Aussicht/Gastronomie geschlossen; Denkmal, weiter Sendebetrieb.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: schlanker weißer Beton-Fernsehturm mit zwei getrennten Turmkörben und rot-weißem Antennenmast — Landmarke über Planten un Blomen / Messe / Karolinenviertel.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Benannt nach dem in Hamburg geborenen Physiker Heinrich Hertz (Nachweis elektromagnetischer Wellen). Volksname Telemichel in Anlehnung an den Michel (St. Michaelis).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Bau als Sonderturm der Deutschen Bundespost; Betonshaft ca. 204 m, darüber Stahlgittermast. Zwei Kanzeln (Aussicht/Restaurant und Technik). Früher drehte sich die Gastronomieplattform einmal pro Stunde berichtet.",
+          "tags": [
+            "technik",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Seit 2001 öffentlich geschlossen (u. a. Asbestsanierung/Investorenlage berichtet); Sendeturm weiter in Betrieb (Deutsche Funkturm). Sanierungen nach Betonablösungen 2004/05 berichtet. Unter Denkmalschutz.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Planten un Blomen gegenüber; Nähe Messehallen, Heiligengeistfeld, Karo-/Schanzenviertel — Orientierungspunkt der Skyline.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Turm für Publikum nicht besteigbar; ggf. Sonderaktionen der Stiftung Fernsehturm ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Quer: Lagerstraße-Standort zwischen Planten un Blomen und Karo-Viertel — Orientierung von weitem bei Nacht durch Beleuchtung.",
+          "tags": [
+            "quer",
+            "visuell"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Heinrich-Hertz-Turm?",
+          "a": "Am hohen weißen Fernsehturm mit doppeltem Turmkorb und Antennenmast über St. Pauli — weithin sichtbar von Planten un Blomen und der Innenstadt."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_leuchtturm_blankenese",
+      "name": "Leuchtturm Blankenese",
+      "lat": 53.555573,
+      "lng": 9.807102,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Richtfeuerlinie Blankenese für elbaufwärts fahrende Schiffe: erste Anlage Betrieb ab 29. November 1984 (Unterfeuer 42 m am Ufer, Oberfeuer 40 m in Baurs Park). Wegen Elbvertiefung/Begegnungsbox 2020 um ca. 125 m nach Süden verlegt; neue Türme Betrieb ab 26. Oktober 2020 (Unterfeuer 32 m östlich Fähranleger, Oberfeuer 62 m am Mühlenberger Jollenhafen). Alte Türme abgerissen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: rot-weiß gestreifte Leuchttürme an der Unterelbe bei Blankenese — Unterfeuer im Wasser nahe Fähranleger (mit Aussichtsplattform am Fuß berichtet), Oberfeuer höher landeinwärts Richtung Nienstedten/Mühlenberger Jollenhafen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Erste Richtfeuerlinie: Bau 1983/84, Inbetriebnahme 29. November 1984. Oberfeuer stand in Baurs Park auf dem Kanonenberg, ca. 1.340 m vom Unterfeuer entfernt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Elbvertiefung: Fahrrinne/Begegnungsbox westlich Blankenese → Verlegung der Linie. Neue Türme Herbst 2019–Herbst 2020; Betrieb 26. Oktober 2020. Alte Türme abgerissen, um Verwechslungen zu vermeiden.",
+          "tags": [
+            "geschichte",
+            "technik"
+          ]
+        },
+        {
+          "text": "Neues Oberfeuer ca. 62 m (berichtet vierthöchster Leuchtturm Deutschlands); neues Unterfeuer 32 m. Funktion: Richtfeuer — beide Lichter in einer Linie halten die Fahrrinne für einlaufende Schiffe.",
+          "tags": [
+            "technik",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Fähranleger Blankenese, Treppenviertel, Elbstrand, Süllberg-Silhouette.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Türme sind Navigationsanlagen — Besteigung/Zugang nur soweit öffentlich ausgewiesen (Aussicht am Unterfeuer-Fuß berichtet); keine Touristenöffnung der Feuer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Geschichte: Denkmalschutz seit 2004; alte Gürteloptik in Laterne als Anschauungsobjekt erhalten.",
+          "tags": [
+            "geschichte"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Blankenese-Leuchttürme?",
+          "a": "An den rot-weiß gestreiften Richtfeuertürmen an der Elbe bei Blankenese — Unterfeuer nahe dem Fähranleger, Oberfeuer höher und weiter elbaufwärts."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_neumuhlen_ovelgonne_fahre",
+      "name": "Neumühlen/Övelgönne (Fähre)",
+      "lat": 53.543488,
+      "lng": 9.914006,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "HADAG-Fähranleger Neumühlen/Oevelgönne an der Norderelbe: Zugang zum Museumshafen Oevelgönne und Elbstrand. Museumshafen-Verein gegründet 8. Januar 1976, Hafeneröffnung 21. Mai 1977 — ältester deutscher Museumshafen in privater Trägerschaft. Flotte historischer Arbeits-/Traditionsschiffe (Schwerpunkt ca. 1880–1930), u. a. Feuerschiff Elbe 3.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Schiffsanleger mit Pontonanlage und historischen Schiffen vor dem Geesthang; auf Neumühlen-Seite markantes Augustinum-Gebäude (Anklang an ehemaliges Union-Kühlhaus); gegenüber Containerterminal Burchardkai.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Museumshafen Oevelgönne e.V. gegründet 8. Januar 1976 (u. a. Volkwin Marg); Eröffnung des Hafens 21. Mai 1977. Ziel: außer Dienst gestellte Berufswasserfahrzeuge erwerben, restaurieren und in Fahrt halten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Flotte u. a. Feuerschiff Elbe 3, Dampf-/Schleppfahrzeuge, Kutter, Zoll-/Polizeiboote, Barkassen — Bestand wechselt durch Fahrten und Werftzeiten. Brücke und Anleger frei zugänglich; Innenbesuche oft nach Absprache.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Lage: Nordufer Norderelbe an der Grenze Ottensen/Othmarschen (Övelgönne); westlich Fußweg zum Elbstrand und Lotsenhäusern, östlich Richtung Dockland/Fischmarkt per Fähre.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: HADAG-Linie 62; Elbstrand Övelgönne; Strandperle; Dockland eine Station berichtet.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Fährfahrplan HVV/HADAG und Schiffspräsenz im Hafen ephemer; Eintritt Anleger frei, Schiffsinnenräume ggf. gegen Gebühr/Vereinbarung.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Geschichte: Museumshafen Övelgönne e.V. gegründet 1976 — Anleger seit Jahrzehnten maritimer Einstiegspunkt.",
+          "tags": [
+            "geschichte",
+            "quer"
+          ]
+        },
+        {
+          "text": "Quer: Elbchaussee-Villen und Kapitänshäuser oberhalb des Strandwegs — typisches Övelgönner Bild.",
+          "tags": [
+            "quer"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Neumühlen/Övelgönne?",
+          "a": "Am HADAG-Anleger mit Ponton und Museumsschiffen unter dem Geesthang — Schilder Museumshafen Oevelgönne und Fähre Linie 62."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_boberger_strand",
+      "name": "Boberger Strand",
+      "lat": 53.514482,
+      "lng": 10.136221,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Offizielle Badestelle am Boberger See im Naturschutzgebiet Boberger Niederung (Bergedorf): See entstand in den 1950er Jahren als Baggersee durch Sandgewinnung für den Bau der B5, grundwassergespeist. Badestelle am nordöstlichen Ufer mit kurzem Sandstrand und Liegewiese; keine Badeaufsicht, Abbruchkanten schon in Ufernähe.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Sandstrand und Liegewiese am klaren Baggersee, eingebettet in Dünen-/Heidelandschaft der Boberger Niederung — urbanes Naturbad, kein Beckenbad.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Entstehung 1950er Jahre durch Sandabbau für die Bundesstraße 5; Lage im NSG Boberger Niederung im Südosten Hamburgs. Nähe zu Hamburgs letzter Wanderdüne (Boberger Dünen).",
+          "tags": [
+            "geschichte",
+            "natur"
+          ]
+        },
+        {
+          "text": "hamburg.de: Badestelle NE-Ufer, ca. 16 m Sandstrand, Liegewiese, Toiletten; kein gekennzeichneter Nichtschwimmerbereich; Warnung vor steilen Abbruchkanten und plötzlich tiefem Wasser.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Boberger Dünen / NSG-Wege; Anfahrt u. a. Billwerder Billdeich / Boberger Furt — ÖPNV längerer Fußweg berichtet.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Natur: Naturschutzregeln beachten (Wege, Hunde anleinen) — Trittschäden in Dünen sensibel.",
+          "tags": [
+            "leben_jetzt",
+            "natur"
+          ]
+        },
+        {
+          "text": "LIVE: Badesaison, Wasserqualität, Blaualgen-/Zerkarien-Hinweise und Baden-erlaubt-Status jährlich auf hamburg.de prüfen — nie aus dem Pack vorlesen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Quer: Billwerder Billdeich und Billebrücke als alternative Zugangswege zum NSG.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Geschichte: Bergedorfer Anglerverein pachtet See — Angeln nur mit Genehmigung.",
+          "tags": [
+            "geschichte",
+            "leben_jetzt"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Boberger Strand?",
+          "a": "Am Sandstrand und der Liegewiese am nordöstlichen Ufer des Boberger Sees im Naturschutzgebiet — ausgeschilderte Badestelle, kein Schwimmbad."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_kriegerdenkmal_am_dammtordamm",
+      "name": "Kriegerdenkmal am Dammtordamm",
+      "lat": 53.559104,
+      "lng": 9.989197,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "76er-Denkmal („Kriegsklotz“) am Dammtordamm/Stephansplatz: 1936 eingeweiht, Entwurf Richard Kuöhl, Muschelkalk-Quader mit umlaufendem Relief marschierender Soldaten für Infanterie-Regiment Hamburg Nr. 76. Umstrittene Kriegspropaganda-Inschrift. Seit 1980ern Kontext durch Hrdlicka-Gegendenkmal; 2015 Deserteurdenkmal dazwischen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: massiver rechteckiger Muschelkalkblock am Dammtordamm nahe Stephansplatz/Planten un Blomen; Relief lebensgroßer Soldaten in Viererreihen rundum; daneben Skulpturengruppe Hrdlicka und Deserteurdenkmal.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Initiiert von Traditionsvereinen des IR 76; nach 1933 vom NS-Senat vorangetrieben, Wettbewerb 1934, Einweihung 15. März 1936. Bewusst Gegendenkmal zu Barlachs Gefallenenmahnmal am Rathausmarkt (1931) — Verherrlichung des Kampfes statt Opfergedenken.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Inschriften u. a. „Deutschland muss leben und wenn wir sterben müssen“ (nach Heinrich Lersch) und Widmung an IR Hamburg 2. Hanseat. Nr. 76 sowie Reserve-IR 76. 1958 ergänzte Kuöhl eine Platte für Gefallene des Zweiten Weltkriegs berichtet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1982 Kulturbehörde: Gegendenkmal; Alfred Hrdlicka realisierte 1983–86 zwei von vier Teilen: „Hamburger Feuersturm“ und „Fluchtgruppe Cap Arcona“. November 2015: Denkmal für Deserteure der Wehrmacht und Opfer der NS-Militärjustiz zwischen den Anlagen.",
+          "tags": [
+            "geschichte",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Dammtor-Bahnhof, Planten un Blomen, Stephansplatz — Ensemble als Lernort Krieg/Erinnerungskultur, nicht als Heldendenkmal lesen.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Frei zugänglich; Führungen/Gedenkveranstaltungen ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Geschichte: Schlachtort-Tafeln am dt.-franz. Krieg und Ergänzungstafeln für WK2-Gefallene des Regimentes.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Planten un Blomen und Congress Center über Dammtor in kurzer Entfernung.",
+          "tags": [
+            "quer"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Kriegerdenkmal am Dammtor?",
+          "a": "Am großen Muschelkalkblock mit Soldatenrelief am Dammtordamm — daneben die Hrdlicka-Skulpturen und das Deserteurdenkmal."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hafencity_uberblick",
+      "name": "HafenCity Überblick",
+      "lat": 53.541757,
+      "lng": 9.993427,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Europas großes Innenstadt-Hafenrevitalisierungsprojekt südlich der Speicherstadt: Bürgerschaftsbeschluss 1997, Masterplan vom Senat 29. Februar 2000 (Wettbewerbssieger Kees Christiaanse/ASTOC, Team Hamburgplan). Zehn Quartiere von Westen nach Osten bis Elbbrücken; Masterplan-Überarbeitung 2008–2010 für die Ostquartiere. Mix aus Wohnen, Büro, Kultur, Uferpromenaden; Hochwasserschutz über Warften.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: neue Stadt am Wasser mit Kais, Brücken, Magellan-Terrassen, Elbphilharmonie als Landmarke, Mix aus Speicherstadt-Backstein und zeitgenössischer Architektur — von Westen (Am Sandtorkai) Richtung Elbbrücken lesen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Ausgangslage: ehemalige Hafen-/Freihafenflächen auf dem Großen Grasbrook, stadteigen. Formeller Start Bürgerschaft August 1997; Masterplan Senat 29. Februar 2000 nach internationalem Wettbewerb 1999.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leitideen: feinkörnige Nutzungsmischung, Bezug zur Innenstadt, flexible Quartiersentwicklung, öffentliche Erdgeschosse, Wasserbezug, Warften als Hochwasserschutz. Einnahmen u. a. mitfinanzierten CTA Altenwerder (2005) berichtet.",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Masterplanüberarbeitung 2010: Ostquartiere Oberhafen, Baakenhafen, Elbbrücken urbaner/dichter nach U-Bahn-Anbindung und geänderter Lagebewertung. U4-Erschließung zentral für die Ostentwicklung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Heute: teilweise fertig, teilweise im Bau — Wohnen, Büros, Uni HafenCity, Parks (Lohsepark, Baakenpark), Traditionsschiffhafen, Elbphilharmonie. Quer: UNESCO Speicherstadt/Kontorhausviertel unmittelbar nördlich.",
+          "tags": [
+            "leben_jetzt",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Baustellen, InfoCenter und Führungen der HafenCity Hamburg GmbH ephemer — hafencity.com.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die HafenCity?",
+          "a": "Am neuen Stadtteil südlich der Speicherstadt mit modernen Kais, der Elbphilharmonie und Uferpromenaden — vom Sandtorkai ostwärts bis zu den Elbbrücken."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_planetarium_hamburg",
+      "name": "Planetarium Hamburg",
+      "lat": 53.597157,
+      "lng": 10.019627,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Planetarium im ehemaligen Winterhuder Wasserturm im Stadtpark (Linnering 1): Turm 1912–1915/16 von Oscar Menzel unter Bauleitung Fritz Schumacher, ca. 64,5 m. Wasserversorgung nur bis 1924 regulär. Planetariumseröffnung 17. April 1930. Großumbau 2015–2017, Wiedereröffnung 4. Februar 2017; Shows plus Aussichtsterrasse.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: wuchtiger Backstein-Wasserturm als Abschluss der Stadtpark-Hauptachse gegenüber dem Stadtparksee — Landmarke Winterhude/Hamburg-Nord.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Wasserturm: Wettbewerb gewonnen von Oscar Menzel; Bau unter Schumacher für Hochdrucknetz; Behälter ca. 3.000 m³ / Durchmesser ca. 23 m berichtet. 1924 aus dem Versorgungsnetz genommen.",
+          "tags": [
+            "geschichte",
+            "technik"
+          ]
+        },
+        {
+          "text": "Initiative u. a. Hans Hagge; Zeiss-Projektor Modell 2 vertraglich 1925; Bürgerschaft 1929 für Standort Wasserturm. Erste Vorführung 15. April 1930, öffentliche Eröffnung 17. April 1930. Umbau-Architektur Hans Loop berichtet; Schumacher-Entwürfe zum Umbau dokumentiert.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "2015–2017 Umbau: erweitertes Foyer, mehr Fläche, Fahrstühle zur Aussichtsplattform (ca. 40–45 m); Deckengemälde von 1930 erhalten berichtet. Landesbetrieb der Freien und Hansestadt Hamburg.",
+          "tags": [
+            "architektur",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Stadtpark, Stadtparksee, Jahnkampfbahn/Parkplätze berichtet; eines der dienstältesten Planetarien weltweit am selben Ort seit 1930.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Showprogramm, Tickets und Terrassen-Zugang ephemer — planetarium-hamburg.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Planetarium?",
+          "a": "Am hohen Backstein-Wasserturm im Stadtpark Winterhude — Abschluss der großen Sichtachse zum Stadtparksee."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_dockland",
+      "name": "Dockland",
+      "lat": 53.54376,
+      "lng": 9.936433,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Schiffsförmiges Bürogebäude am Edgar-Engelhard-Kai in Altona (Van-der-Smissen-Straße): Entwurf BRT Architekten Bothe Richter Teherani. Grundstücksaufschüttung Ende 2002, Fertigstellung 2005, Einweihung 31. Januar 2006. Parallelogramm-Querschnitt, Bug kragt weit über die Elbe; öffentliche Freitreppen zur Dachterrasse (~136 Stufen).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: glas-stählernes Parallelogramm wie ein Schiffsbug über der Elbe zwischen Fischereihafen und Kreuzfahrtterminal Altona — Silhouette von Fähre und Elbufer her eindeutig.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Name in Anlehnung an umgenutzte Londoner Docks. Entwurf/Planung ab den 1990ern; Bauherr u. a. Robert Vogel GmbH & Co. KG berichtet. Auszeichnungen u. a. Bauwerk des Jahres 2005 (AIV), Leaf Award Best Structural Design 2005, Deutscher Stahlbaupreis 2006.",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Maße (Wikipedia/Berichte): Höhe ca. 25 m, Länge Gesamtordnung ca. 130–143 m, Auskragung des Bugs über 40 m berichtet; Dachterrasse ca. 500 m² öffentlich über Freitreppen. Diagonal verkehrende Schrägaufzüge für Mieter.",
+          "tags": [
+            "technik",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Heute: Bürohaus (u. a. Nordakademie Graduate School berichtet); Aussichtsplattform beliebter Fotopunkt auf Elbe, Hafen und Elbphilharmonie-Fernblick.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Cruise Center Altona, Fischmarkt, Museumshafen Oevelgönne per Fähre, Altonaer Balkon oberhalb.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Dachterrassen-Zugang öffentlich über Treppen (Aufzüge primär Mieter); Öffnungs-/Sicherheitsregeln und Pressedrehgenehmigungen ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Dockland?",
+          "a": "Am schrägen Glas-Stahl-Gebäude, das wie ein Schiffsbug über die Elbe ragt — am Kai in Altona nahe dem Kreuzfahrtterminal."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_traditionsschiffhafen_hafencity",
+      "name": "Traditionsschiffhafen HafenCity",
+      "lat": 53.54276,
+      "lng": 9.986433,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Traditionsschiffhafen im historischen Sandtorhafen vor den Magellan-Terrassen: Sandtorhafen 1863–1866 unter Johannes Dalmann als erstes künstliches Hafenbecken Hamburgs — Keimzelle des modernen Kaischumschlags. Als Traditionsschiffhafen der Stiftung Hamburg Maritim 2008 wiedereröffnet; ca. 380 m Pontonanlage für ~20–25 Traditionsschiffe.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Hafenbecken zwischen Speicherstadt/Elbphilharmonie-Nähe und HafenCity-Neubauten; geschwungene Ponton-Flaniermeile mit historischen Schiffen vor den Magellan-Terrassen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Sandtorhafen: erstes künstlich angelegtes Hafenbecken, eröffnet 1866. Erstmals längsseits am Kai löschen statt im Strom auf Schuten; Brownsche Dampfkrane, Kaischuppen, Bahnanschluss — Vorbild für weitere Grasbrook-Becken.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "20. Jahrhundert: Bedeutungsverlust durch größere Schiffe und Container; 1980er Freihafen-Niedergang, 1984 Abriss letzter hölzerner Kaischuppen berichtet. Konzept Traditionsschiffhafen mit Stiftung Hamburg Maritim; Gestaltung Ponton EMBT Barcelona; Eröffnung September 2008.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Heute: Liegeplätze für Traditionsschiffe (Bestand wechselt); bei Events bis 40–50 Schiffe berichtet. Ponton frei begehbar; Hafenmeisterei vor Ort.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Elbphilharmonie/Kaispeicher A, Magellan-Terrassen, Speicherstadt, Maritimes Museum — Kontrast modern/historisch.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: welche Schiffe liegen und wann geöffnet sind ephemer — stiftung-hamburg-maritim.de / sandtorhafen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Traditionsschiffhafen?",
+          "a": "Am Hafenbecken mit Ponton und Traditionsschiffen vor den Magellan-Terrassen in der HafenCity — zwischen Speicherstadt und Neubauten."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_elbstrand",
+      "name": "Elbstrand",
+      "lat": 53.544296,
+      "lng": 9.902053,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Elbstrand und Fußweg Övelgönne westlich des Museumshafens Neumühlen: historisches Lotsen- und Fischerquartier (Erwähnung 1674), schmale Bebauung am Geesthangfuß. Beliebter Stadtstrand zum Spazieren und Schiffe-Gucken; Strandperle als Kultlokal (Vorgänger Milchhalle 1911, Name Strandperle nach Sturmflut 1976). Findling „Alter Schwede“ 1999 geborgen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: sandiger Elbstrand mit Containerriesen gegenüber, gesäumt von alten Lotsenhäusern und dem Fußweg Övelgönne unter dem Geesthang — urbanes Flussufer, kein Nordseebad.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Övelgönne: 1674 erstmals im Ottenser Kirchenbuch; bis 1890 Landgemeinde, dann Altona, seit 1938 Teil Othmarschens. Name volksetymologisch mit Missgunst/Strandgut verbunden berichtet. „Himmelsleiter“: 126 Stufen vom Strand zur Elbchaussee.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Seit Mitte 19. Jh. Ausflugsziel; Lotsenbrüderschaft/Altes Lotsenhaus Övelgönne 13 (Wurzeln 18. Jh. berichtet). Strandperle: Milchhalle 1911 (Robert Hirte), nach 1976 Capella-Sturmflut Neuaufbau als Strandperle.",
+          "tags": [
+            "geschichte",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Findling „Der alte Schwede“: bei Elbausbaggerung gefunden, Bergung 23. Oktober 1999; Gewicht ca. 217 t, Umfang ca. 19,7 m, Höhe ca. 4,5 m berichtet.",
+          "tags": [
+            "natur",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Museumshafen Neumühlen, Fähre 62, Süllberg/Treppenviertel weiter westlich, Dockland östlich.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Baden in der Tideelbe riskant/oft untersagt oder unüblich — Regeln und Grillverbote prüfen; Strandperle-Öffnung ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Elbstrand Övelgönne?",
+          "a": "Am sandigen Elbufer westlich des Museumshafen-Anlegers Neumühlen — Fußweg zwischen Strand und alten Lotsenhäusern, oft mit Strandperle und Hafenblick."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_isemarkt",
+      "name": "Isemarkt",
+      "lat": 53.582357,
+      "lng": 9.977327,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Wochenmarkt unter dem U3-Hochbahn-Viadukt der Isestraße (Harvestehude/Eppendorf) zwischen Hoheluftbrücke und Eppendorfer Baum: Probebetrieb 8. Mai 1949, Eröffnung August 1949. Einer der größten/längsten überdachten Freiluft-Wochenmärkte Europas (Länge oft mit ca. 600–900 m und ~200 Ständen berichtet). Markttage Di/Fr.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: lange Reihe von Marktständen unter den gusseisernen Hochbahnbögen der Isestraße, gerahmt von großbürgerlichen Altbauten — bei Markttagen voll, sonst leere Fahrbahn unter der U3.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Nachkriegsgründung: erster Probelauf 8. Mai 1949 mit ca. 40 Ständen; Abendblatt-Bericht zur Eröffnung Mitte August 1949 unter dem „trockenen Regenschirm“ der Hochbahn. Teil der neuen Wochenmarkt-Welle ab 1948/49.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Isestraße selbst ca. 1,4 km; Marktabschnitt unter dem Viadukt der Linie U3. Bebauung überwiegend 1900–1914, teils denkmalgeschützt. Stolpersteine erinnern an jüdisches Leben im Viertel.",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Heute: Obst, Gemüse, Käse, Fleisch, Fisch, Blumen, Spezialitäten — Treffpunkt und Einkaufsritual, nicht nur Versorgungsmarkt. 75-Jahr-Jubiläum 2024 berichtet.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: U3-Stationen Hoheluftbrücke und Eppendorfer Baum; Isebekkanal parallel hinter der Bebauung.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Markttage typisch Di/Fr vormittags (oft 8:30–14:00 berichtet) — aktuelle Zeiten und Feiertagsausfälle auf hamburg.de prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Isemarkt?",
+          "a": "An den Marktständen unter der Hochbahnbrücke entlang der Isestraße zwischen Hoheluftbrücke und Eppendorfer Baum — nur an den Markttagen."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_altonaer_balkon",
+      "name": "Altonaer Balkon",
+      "lat": 53.545254,
+      "lng": 9.935032,
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Grünanlage und Aussichtsplateau am Altonaer Geesthang (ca. 27 m über der Elbe) zwischen Palmaille und Großer Elbstraße: Panorama über Hafen, Köhlbrandbrücke und Schiffsverkehr. Namensgeber ist die balkonartige Plattform. Palmaille-Geschichte ab 1638 (Pallamaglio-Allee). Parkfläche ca. 4,8–5+ ha berichtet.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: erhöhte Parkplattform mit Bänken am abgezäunten Geesthang — freier Blick auf Elbe, Containerhafen und Köhlbrandbrücke; Wege auf mehreren Höhenniveaus mit Treppen zur Großen Elbstraße.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Palmaille: 1638 Allee für das Ballspiel Pallamaglio (italienisch) — Namensursprung der Straße. Später öffentliche Grünanlage und Logenplatz Altonas über dem Hafen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kunst: Bronzegruppe „Fischer“ von Gerhard Brandes (Angaben 1966/1968); Helgoland-Denkmal 1864 in der Umgebung berichtet. Nähe Altonaer Rathaus/Standesamt — häufiges Hochzeitsfoto-Motiv.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Anlage: Spielplatz, Kiosk/Café in Saison berichtet, Spazierwege parallel zur Elbe; Verbindung Elbuferwanderweg / Fischmarkt / Neu-Altona-Grünzug.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Dockland und Cruise Center unten am Kai; Fischmarkt; Museumshafen per Fähre.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Park frei zugänglich; Kiosk-Saison und Camera-obscura-Aktion ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Altonaer Balkon?",
+          "a": "An der Aussichtsplattform mit Bänken hoch über der Elbe an der Palmaille — Panorama Richtung Hafen und Köhlbrandbrücke."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_sullberg",
+      "name": "Süllberg",
+      "lat": 53.55946,
+      "lng": 9.811433,
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Blankeneser „Hausberg“ mit ca. 74,6 m ü. NHN: im 11. und 13. Jh. Burgen zur Sicherung der Elbfähre (Erzbischof Adalbert bzw. Schauenburger). Seit 1837 Ausflugsgastronomie (Milchausschank Peter Georg Carl Hansen); steinerner Aussichtsturm und Terrassen ab 1887. Heute Hotel/Restaurant-Ensemble auf dem Gipfelplateau; Abrisspläne 1990er durch Bürgerinitiative verhindert, Wiedereröffnung Hotelbetrieb 2002.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: markante Kuppe über dem Treppenviertel mit Turm und Gastronomie-Silhouette — von der Elbe und aus Blankenese als Hausberg lesbar.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Burggeschichte: Propstei/Burg Adalberts ab ca. 1059/60, zerstört 1063/64 durch Billunger. 1258 neue Burg der Schauenburger Grafen; bald aufgegeben. Wallreste erst 1838 beim Gaststättenbau abgetragen berichtet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Gastronomie: 1837 Milchausschank/Gastwirtschaft Hansen; 1850 hölzerner Aussichtsturm; ab 1887 heutiger ca. 20 m steinerner Turm und Terrassen; um 1900 Hotel. Familie Rohr über Generationen; HADAG-Landungsbrücke „Süllbergbrücke“ Ende 19. Jh. berichtet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1990er: Investor Roland Ernst, Schließung 1994, Abriss-/Wohnungspläne — Bürgerinitiative mit >25.000 Unterschriften verhinderte den Abriss. Sanierung, Hotel-/Restaurant-Wiedereröffnung 2002; Eigentümerwechsel u. a. Peter Möhrle 2010, später weitere berichtet.",
+          "tags": [
+            "geschichte",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Treppenviertel, Elbstrand, Leuchttürme Blankenese — Gipfel als Aussicht über Unterelbe.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Hotel-/Restaurant-Öffnung, Terrassen und Events ephemer — nicht als feste Pack-Zeiten vorlesen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Süllberg?",
+          "a": "An der höchsten Kuppe in Blankenese mit Turm und Hotel-/Restaurantgebäuden über dem Treppenviertel — Silhouette von der Elbe her."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_blankenese_treppenviertel",
+      "name": "Blankenese Treppenviertel",
+      "lat": 53.557157,
+      "lng": 9.808427,
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Steiles Hangquartier in Blankenese zwischen Süllberg/Baurs Park und Elbe: ehemaliges Fischer- und Lotsendorf (Ort 1301 urkundlich), erschlossen über ca. 5.000 Stufen statt Straßen. Viele Häuser nur zu Fuß erreichbar; Sackabfuhr statt Müllwagen. Wandel vom Fischerdorf über Lotsenquartier zum Villen-/Hangwohngebiet.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: verwinkelte Treppen, enge Wege und gestaffelte Häuser am Geesthang mit Elbblick — mediterran wirkendes Hangdorf ohne Autodurchfahrt.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Blankenese 1301 urkundlich („Blancke Neeß“); Fischer, Fährleute, später Lotsen und Kapitäne. Unter dänischer Herrschaft lange Zeit; Bahnhof Blankenese 19. Mai 1867 (ältestes Bahnhofsgebäude Hamburgs berichtet). Groß-Altona 1927, Hamburg 1938.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Bausubstanz: erhaltene Fischerhäuser u. a. Op’n Kamp 9 (1786), Am Hang / Bremers Weg um 1850 berichtet. Elbterrasse 6: Kernbau um 1570 berichtet — eines der ältesten Häuser Altonas/Hamburgs, zeitweise Museum/Förderkreis.",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Alltag: ca. 5.000 Stufen auf diverse Treppen verteilt; Müll als Sackabfuhr, weil Fahrzeuge nicht durchkommen. Nach 1945 teils Abriss historischer Tweehüser und moderne Ersatzbauten — Charakter gemischt.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Süllberg oben, Elbstrand und Fähre unten, Baurs Park / Hessepark als Begrenzung.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: steile Wege, Wetter und Kondition beachten; Museum Elbterrasse 6 nur eingeschränkt geöffnet (Förderkreis-Termine).",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Treppenviertel?",
+          "a": "An den endlosen Treppen und eng gestaffelten Häusern am Blankeneser Elbhang — kaum Straßen, dafür Stufen bis zum Strand."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_jungfernstieg",
+      "name": "Jungfernstieg",
+      "lat": 53.55254,
+      "lng": 9.993152,
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Zentrale Alsterpromenade am Südufer der Binnenalster: Ursprung 1235 als Reesendamm/Mühlendamm unter Graf Adolf IV.; im 17. Jh. zur Lindenpromenade ausgebaut. Name vom Flanieren unverheirateter „Jungfern“; offizielle Straßenbenennung Jungfernstieg 1931 (hamburg.de). 1838 erste asphaltierte Straße Deutschlands. Neugestaltung eingeweiht 20. Mai 2006; Alsteranleger und Einkaufsmeile.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: breite Flaniermeile zwischen Binnenalster und Geschäftshäusern (u. a. Alsterhaus); Alsterfontäne auf dem Wasser (Saison), Alsterpavillon und Schiffsanleger.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "1235: Staudamm für Alstermühle → Binnenalster als Mühlenteich. Mittelalterlich auch Festungsfunktion; 1488 Geschützturm „Isern Hinnerk“ am Dammende berichtet. Volksname Jungfernstieg durch Promenadenkultur; amtlich Reesendamm, seit 1931 offiziell Jungfernstieg (hamburg.de).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1665 Lindenpflanzung berichtet; 1799 erster Alsterpavillon (mehrfach ersetzt). 1838 Asphaltierung — erste Straße Deutschlands. Nach Brand 1842 Alsterregulierung mit Abfluss über Kleine Alster/Alsterarkaden.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Umbau 2005/06 (WES + Partner / André Poitiers; Förderverein Lebendiger Jungfernstieg): breitere Gehwege, Neugestaltung Wasserseite, Einweihung 20. Mai 2006. Heute Fußgänger-/Flanierschwerpunkt, U-Bahn-Zugang, Startpunkt Alsterschiffe.",
+          "tags": [
+            "architektur",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Binnenalster, Alsterfontäne, Rathausmarkt/Alsterarkaden, Neuer Jungfernstieg, Ballindamm.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Alsterfontäne-Saison, Schiffsfahrpläne und Ladenöffnungen ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Jungfernstieg?",
+          "a": "An der großen Promenade direkt an der Binnenalster mit Alsteranleger und Blick auf die Fontäne — zwischen Alsterhaus-Seite und Wasser."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_spielbudenplatz",
+      "name": "Spielbudenplatz",
+      "lat": 53.549157,
+      "lng": 9.964027,
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Ca. 300 m lange Platzaufweitung an der Südseite der Reeperbahn (Beim Trichter bis Davidstraße): Name seit 1795 von Schausteller-„Spielbuden“. Zentrum St. Pauli mit Theatern (Operettenhaus, Schmidt, St. Pauli Theater) und Clubs. Davidwache am Westende (heutiger Bau 1914, Fritz Schumacher). Unter dem Platz 1940–42 großer LS-Bunker, später Tiefgarage.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: breite Freifläche zwischen Reeperbahn-Nordzeile und Theater-/Neonfassaden im Süden; westlich die markante Davidwache an der Davidstraße, östlich Richtung Tanzende Türme/Beim Trichter.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "17. Jh.: Reepschläger und hafennahes Gewerbe vor den Toren; ab 18. Jh. Gaukler und hölzerne Schaubuden. Name Spielbudenplatz erstmals 1795. 1813 französische Zeit: Abriss für Schussfeld; danach feste Vergnügungsbauten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Ab ca. 1840 Randbebauung mit Theatern (u. a. Vorläufer St. Pauli Theater / später Operettenhaus). Glanzfassaden Ende 19. Jh.; Ostteil im Zweiten Weltkrieg stark zerstört, Nachkriegsneubauten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Bunker 1940–42 unter dem Platz: nominell 5.000 Plätze, in Bombennächten bis ~20.000 Menschen berichtet; Nachnutzung als Tiefgarage (~430 Pkw). Platzumbau mit beweglichen Bühnen, Einweihung 2. Juni 2006 berichtet.",
+          "tags": [
+            "geschichte",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Davidwache: Polizeipräsenz seit 1840; heutiges Gebäude 10. Dezember 1914 übergeben (Entwurf Fritz Schumacher); offizieller Name Davidwache ab 1970. Quer: Seeleute von den Landungsbrücken → Amüsement hier; Reeperbahn.",
+          "tags": [
+            "quer",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Veranstaltungen auf dem Platz, Theaterprogramme und Nachtleben ephemer — Lautstärke/Publikum abends hoch.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Spielbudenplatz?",
+          "a": "An der breiten Platzfläche südlich der Reeperbahn mit Theatern und Neon — am Westende steht die Davidwache."
+        }
+      ]
+    }
+  ]
+}

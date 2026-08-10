@@ -1,0 +1,82 @@
+{
+  "stats": {
+    "added": 15,
+    "skippedNear": 77,
+    "skippedDup": 0,
+    "extras": 0
+  },
+  "pack_index": {
+    "total": 122,
+    "story": 70,
+    "directory": 52,
+    "offline_qa": 979,
+    "note": "UI: Gesamtzahl zeigen; Trigger nur Story Tier 1–2 (+ selektiv 3)."
+  },
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+      "spots": 122,
+      "storySpots": 70,
+      "directorySpots": 52,
+      "triggers": 122,
+      "missingTrigger": 0,
+      "missingNarration": 0,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 0,
+      "orphanTriggers": 0,
+      "categories": [
+        "aussicht",
+        "bahnhof",
+        "cafe",
+        "denkmal",
+        "einkaufen",
+        "fischrestaurant",
+        "freizeit",
+        "gesundheit",
+        "hafen",
+        "hotel",
+        "kirche",
+        "museum",
+        "natur",
+        "ort",
+        "restaurant",
+        "service",
+        "sicherheit",
+        "spielplatz",
+        "sport",
+        "tankstelle",
+        "transport",
+        "verwaltung",
+        "wasser"
+      ],
+      "missingMustHave": [],
+      "nicePresent": [
+        "cafe",
+        "restaurant",
+        "hotel",
+        "einkaufen",
+        "service",
+        "gesundheit",
+        "sport",
+        "hafen",
+        "bahnhof"
+      ],
+      "liveResearch": 4,
+      "offlineQa": 979,
+      "hasCoverage": true,
+      "hasTransit": false,
+      "hasMobility": false,
+      "links": 1
+    },
+    "gaps": {
+      "needsNarration": [],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [],
+      "missingCategories": []
+    }
+  }
+}

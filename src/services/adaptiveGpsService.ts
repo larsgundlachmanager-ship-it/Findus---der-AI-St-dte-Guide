@@ -1,6 +1,8 @@
 /**
- * Adaptive GPS-Frequenz: Akku sparen im Free-Roam zu Fuß,
- * hochschalten wenn Trigger nah oder Tempo hoch / Navigation aktiv.
+ * Adaptive GPS-Frequenz — Battery Saver Engine:
+ * - >500 m from next WP → far (15 s)
+ * - <100 m from next WP → realtime (1 s)
+ * - Pedometer sleep handled separately (2 min stillness)
  */
 
 import {
@@ -10,10 +12,12 @@ import {
 } from './locationService';
 import { getAllPois } from '../db/database';
 import { useFinnusStore } from '../store/useFinnusStore';
+import { isGpsDeepSleeping } from './battery/pedometerSleep';
 
-const WALK_MAX_MS = 2.2; // ~8 km/h
-const NEAR_TRIGGER_M = 90;
-const APPROACH_TRIGGER_M = 220;
+/** Spec: <100 m → 1 s polling */
+const NEAR_TRIGGER_M = 100;
+/** Spec: >500 m → 15 s throttle */
+const FAR_TRIGGER_M = 500;
 
 function haversineM(
   lat1: number,
@@ -36,7 +40,7 @@ let lastNearestM: number | null = null;
 let lastComputeAt = 0;
 const COMPUTE_EVERY_MS = 4_000;
 
-/** Distanz zum nächsten ungesprochenen POI (Cache ~4s). */
+/** Distanz zum nächsten ungesprochenen POI / Nav-Ziel (Cache ~4s). */
 export async function distanceToNearestTriggerM(
   lat: number,
   lng: number,
@@ -47,8 +51,26 @@ export async function distanceToNearestTriggerM(
   }
   lastComputeAt = now;
   try {
-    const pois = await getAllPois();
+    const store = useFinnusStore.getState();
     let best = Infinity;
+
+    // Active nav target distance takes priority
+    if (
+      store.navActive &&
+      typeof store.navDistanceM === 'number' &&
+      Number.isFinite(store.navDistanceM)
+    ) {
+      best = Math.min(best, store.navDistanceM);
+    }
+    if (
+      store.navActive &&
+      typeof store.navLegDistanceM === 'number' &&
+      Number.isFinite(store.navLegDistanceM)
+    ) {
+      best = Math.min(best, store.navLegDistanceM);
+    }
+
+    const pois = await getAllPois();
     for (const p of pois) {
       if (p.kind === 'approach') continue;
       const d = haversineM(lat, lng, p.lat, p.lng);
@@ -62,9 +84,8 @@ export async function distanceToNearestTriggerM(
 }
 
 /**
- * Wählt realtime / economy / throttled.
- * Fuß + weit vom nächsten Punkt → economy (~4s).
- * Nah / schnell / Nav → sofort realtime.
+ * Wählt realtime / far / economy / throttled.
+ * Respects pedometer deep-sleep (does not override while sleeping).
  */
 export async function updateAdaptiveGpsProfile(opts: {
   lat: number;
@@ -72,30 +93,36 @@ export async function updateAdaptiveGpsProfile(opts: {
   speedMs?: number | null;
   audioBusy?: boolean;
 }): Promise<GpsStreamProfile> {
-  const store = useFinnusStore.getState();
-  const speed =
-    typeof opts.speedMs === 'number' && Number.isFinite(opts.speedMs)
-      ? opts.speedMs
-      : null;
+  if (isGpsDeepSleeping()) {
+    return 'sleep';
+  }
 
-  let next: GpsStreamProfile = 'realtime';
+  const store = useFinnusStore.getState();
+
+  let next: GpsStreamProfile = 'economy';
 
   if (opts.audioBusy || store.isPlayingAudio) {
+    // Während Story: GPS drosseln
     next = 'throttled';
   } else if (store.navActive) {
-    next = 'realtime';
-  } else if (speed != null && speed > WALK_MAX_MS) {
-    next = 'realtime';
+    // Nur Navigation: scharfe Profile (BestForNavigation im locationService)
+    const dist = await distanceToNearestTriggerM(opts.lat, opts.lng);
+    if (dist != null && dist > FAR_TRIGGER_M) {
+      next = 'far';
+    } else if (dist != null && dist <= NEAR_TRIGGER_M) {
+      next = 'realtime';
+    } else {
+      next = 'economy';
+    }
   } else {
+    // Free-Roam: sparsam — realtime nur nahe am nächsten POI (Geofence)
     const dist = await distanceToNearestTriggerM(opts.lat, opts.lng);
     if (dist != null && dist <= NEAR_TRIGGER_M) {
       next = 'realtime';
-    } else if (dist != null && dist <= APPROACH_TRIGGER_M) {
-      next = 'realtime';
-    } else if (speed == null || speed <= WALK_MAX_MS) {
-      next = 'economy';
+    } else if (dist != null && dist > FAR_TRIGGER_M) {
+      next = 'far';
     } else {
-      next = 'realtime';
+      next = 'economy';
     }
   }
 

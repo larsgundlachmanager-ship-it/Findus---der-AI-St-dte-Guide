@@ -96,7 +96,7 @@ function cleanLlmOutput(raw: string, original: string): string {
 }
 
 /**
- * Poliert Text per LLM für Kokoro-TTS.
+ * Poliert Text per LLM für TTS-TTS.
  * Fallback: regelbasierte Prosodie. Cache verhindert Doppelaufrufe.
  */
 export async function polishGermanTtsWithLlm(text: string): Promise<string> {

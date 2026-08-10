@@ -1,0 +1,20 @@
+{
+  "city_id": "wangerooge",
+  "demoted": 0,
+  "history_source": "kept",
+  "pack_index": {
+    "total": 129,
+    "story": 49,
+    "directory": 80,
+    "offline_qa": 982,
+    "note": "UI: Gesamtzahl; Trigger Story Tier 1–2 (+ Interesse)."
+  },
+  "gemini_prompt": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\wangerooge.gemini-master.md",
+  "thin_story": 36,
+  "gate": {
+    "ok": true,
+    "errors": 0,
+    "warnings": 0
+  },
+  "applied": true
+}

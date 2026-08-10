@@ -1,0 +1,659 @@
+{
+  "version": 1,
+  "meta": {
+    "minCategories": 40,
+    "categoryCount": 45,
+    "researchPhraseCount": 267,
+    "actionPhraseCount": 95,
+    "totalPhrases": 362,
+    "antiRepeatMinutes": 45,
+    "slowThresholdMs": 2500
+  },
+  "categories": {
+    "weather": {
+      "label": "Wetter",
+      "phrases": [
+        "Ich check kurz das Wetter für dich.",
+        "Moment — kurzer Blick auf Regen und Sonne.",
+        "Alles klar, ich schau, ob du einen Schirm brauchst.",
+        "Jo, Wetterlage kommt gleich.",
+        "Ich hole mir kurz die aktuellen Werte.",
+        "Kurz Wetter checken — bin gleich wieder da.",
+        "Mal sehen, was der Himmel macht.",
+        "Ich prüfe Temperatur und Niederschlag."
+      ]
+    },
+    "dining": {
+      "label": "Restaurants",
+      "phrases": [
+        "Ich schau kurz, was zum Essen passt.",
+        "Alles klar — passende Orte zum Essen kommen gleich.",
+        "Jo, ich finde kurz was Leckeres für dich.",
+        "Moment, ich filter Restaurants in der Nähe.",
+        "Ich guck, wo es jetzt gut zu essen gibt.",
+        "Kurze Gastro-Suche — hang tight.",
+        "Ich prüfe Öffnung und Entfernung parallel.",
+        "Lass mich kurz die besten Optionen sortieren."
+      ]
+    },
+    "cafe": {
+      "label": "Café",
+      "phrases": [
+        "Ich such dir kurz ein gutes Café.",
+        "Kaffee kommt — ich check die Nähe.",
+        "Moment, Café-Optionen für dich.",
+        "Ich schau, wo der Kaffee stimmt.",
+        "Kurzer Café-Check in der Umgebung.",
+        "Alles klar, ich finde einen gemütlichen Spot."
+      ]
+    },
+    "nav": {
+      "label": "Navigation",
+      "phrases": [
+        "Klar, ich setz die Route kurz auf.",
+        "Navigation kommt gleich — einen Moment.",
+        "Jo, ich führ dich gleich hin.",
+        "Ich berechne kurz den Weg.",
+        "Route wird vorbereitet.",
+        "Alles klar — Kompass und Weg, Moment.",
+        "Ich richte die Navigation für dich ein."
+      ]
+    },
+    "events": {
+      "label": "Event-Suche",
+      "phrases": [
+        "Ich schaue mal nach aktuellen Veranstaltungen.",
+        "Lass mich prüfen, was heute Abend los ist.",
+        "Jo, ich guck kurz, wo heute was geht.",
+        "Alles klar — ich such dir die Termine raus.",
+        "Check, ich schau kurz ins Abendprogramm.",
+        "Okay, ich wühle kurz in den Events für dich.",
+        "Moment — ich check Flyer und heutige Programme.",
+        "Ich recherchiere kurz, was heute wirklich stattfindet.",
+        "Kurzer Event-Scan für heute."
+      ]
+    },
+    "complex_plan": {
+      "label": "Komplexe Planung",
+      "phrases": [
+        "Das ist mehrteilig — ich plane das kurz sauber für dich.",
+        "Alles klar, ich sortier Zeiten und Stopps.",
+        "Moment, ich bau dir den Ablauf zusammen.",
+        "Ich rechne Puffer und Reihenfolge kurz durch.",
+        "Komplexer Plan — ich nehme mir die Teile parallel vor.",
+        "Jo, ich orchestriere das kurz.",
+        "Ich prüfe alle Teilfragen und kombiniere sie dann.",
+        "Hang on — guter Plan braucht einen Moment."
+      ]
+    },
+    "menu": {
+      "label": "Speisekarte",
+      "phrases": [
+        "Klar, ich such kurz die Speisekarte raus.",
+        "Alles klar — ich check die Karte für dich.",
+        "Jo, Speisekarte kommt gleich.",
+        "Moment, ich hol die Menü-Infos.",
+        "Ich schau online nach der aktuellen Karte.",
+        "Kurzer Blick auf Gerichte und Preise."
+      ]
+    },
+    "hours": {
+      "label": "Öffnungszeiten",
+      "phrases": [
+        "Ich prüfe kurz die Öffnungszeiten.",
+        "Moment — ob heute geöffnet ist, check ich gleich.",
+        "Alles klar, Öffnungszeiten kommen.",
+        "Jo, ich schau nach bis wann auf ist.",
+        "Kurzer Öffnungs-Check, keinen Fake.",
+        "Ich hole verlässliche Zeiten online nach."
+      ]
+    },
+    "phone": {
+      "label": "Telefon",
+      "phrases": [
+        "Klar, ich such dir die Nummer kurz raus.",
+        "Alles klar — ich check kurz die Telefonnummer.",
+        "Jo, Nummer kommt gleich.",
+        "Moment, ich hole die Durchwahl.",
+        "Ich finde die Telefonnummer für dich.",
+        "Kurzer Nummern-Check."
+      ]
+    },
+    "hotel": {
+      "label": "Hotel",
+      "phrases": [
+        "Alles klar, ich schau kurz Unterkünfte.",
+        "Jo, Hotel-Optionen — Moment.",
+        "Okay, ich check kurz, was noch frei wirkt.",
+        "Ich suche passende Hotels in der Nähe.",
+        "Kurzer Unterkunfts-Scan für dich.",
+        "Moment — Lage und Verfügbarkeit prüfe ich.",
+        "Ich filter Hotels nach deinen Prefs."
+      ]
+    },
+    "transit": {
+      "label": "ÖPNV",
+      "phrases": [
+        "Klar, ich check kurz die Verbindung.",
+        "Alles klar — Zug und Bus Status kommt gleich.",
+        "Jo, ich schau kurz, wie pünktlich das läuft.",
+        "Moment, Fahrplan-Check.",
+        "Ich prüfe die nächste Verbindung.",
+        "Kurzer ÖPNV-Blick für dich."
+      ]
+    },
+    "flight": {
+      "label": "Flug",
+      "phrases": [
+        "Alles klar, ich check kurz deinen Flug.",
+        "Jo, Gate und Abflug — Moment.",
+        "Okay, ich schau kurz den Flugstatus.",
+        "Ich hole die Flugdaten für dich.",
+        "Kurzer Flug-Check, gleich fertig.",
+        "Moment — Abflug und Puffer rechne ich mit."
+      ]
+    },
+    "cinema": {
+      "label": "Kino",
+      "phrases": [
+        "Kino-Abend — nice Idee.",
+        "Filmabend klingt stark.",
+        "Jo, Abendprogramm — ich bin dabei.",
+        "Gute Wahl, raus und Leinwand.",
+        "Kino — mag ich.",
+        "Filmplan, ohne Gelaber."
+      ]
+    },
+    "activity_sport": {
+      "label": "Sport / Outdoor",
+      "phrases": [
+        "Spikeball-Energie — ich wär gern dabei.",
+        "Bewegung draußen — stark.",
+        "Sport-Idee — mag ich.",
+        "Frischluft-Plan — top.",
+        "Outdoor — gute Energie."
+      ]
+    },
+    "history": {
+      "label": "Geschichte",
+      "phrases": [
+        "Alles klar — ich guck kurz in die Geschichtsbücher.",
+        "Jo, ich wühl kurz in der Geschichte zu dem Ort.",
+        "Check, ich hol mir kurz den Hintergrund.",
+        "Okay, kurze Recherche zur Geschichte — Moment.",
+        "Ich sammle die spannenden Fakten für dich.",
+        "Moment, historische Notizen kommen.",
+        "Ich hole den Story-Hintergrund."
+      ]
+    },
+    "location": {
+      "label": "Ort / Lage",
+      "phrases": [
+        "Alles klar, ich schau kurz, wo der Ort liegt.",
+        "Check — ich check kurz die Lage.",
+        "Okay, ich guck kurz, wo das ist.",
+        "Jo, Ort kommt gleich auf die Karte.",
+        "Moment, Position und Weg prüfe ich.",
+        "Ich oriente dich gleich."
+      ]
+    },
+    "sunset": {
+      "label": "Sunset / Aussicht",
+      "phrases": [
+        "Okay, ich check kurz den besten Spot und die Uhrzeit.",
+        "Klar — ich schau, wo die Aussicht sitzt.",
+        "Jo, ich find kurz den Sunset-Spot.",
+        "Moment, Sunset und Timing.",
+        "Ich suche die beste Aussicht für dich.",
+        "Kurzer Blick auf Plattform und Uhrzeit."
+      ]
+    },
+    "compound_togo_sunset": {
+      "label": "To-go + Sunset",
+      "phrases": [
+        "Klingt gut — To-go und Sunset-Spot, ich check beides kurz.",
+        "Check: Essen zum Mitnehmen und Aussicht — ich plane beides.",
+        "Alles klar, ich such Imbiss und Sunset-Spot parallel.",
+        "Zwei Ziele — ich nehme Essen und Aussicht zusammen.",
+        "Moment, To-go plus Aussicht in einem Plan.",
+        "Ich kombiniere Mitnehmen und Sunset für dich."
+      ]
+    },
+    "booking": {
+      "label": "Buchung",
+      "phrases": [
+        "Klar, ich bereite die Reservierung kurz vor.",
+        "Alles klar — ich check Tisch und Zeiten.",
+        "Jo, Buchung vorbereiten, Moment.",
+        "Ich setze die Buchungsschritte auf.",
+        "Moment, Reservierung wird vorbereitet.",
+        "Ich kümmere mich um den Tisch für dich."
+      ]
+    },
+    "park": {
+      "label": "Park / Grün",
+      "phrases": [
+        "Ich schau kurz nach einem schönen Park.",
+        "Alles klar — Grünfläche in der Nähe kommt.",
+        "Jo, ich find einen guten Outdoor-Spot.",
+        "Moment, Parks und Wege checke ich.",
+        "Kurzer Scan nach Park und Ruhe.",
+        "Ich suche dir etwas Grünes."
+      ]
+    },
+    "bar": {
+      "label": "Bar / Nightlife",
+      "phrases": [
+        "Ich schau kurz, wo es abends gut hingeht.",
+        "Alles klar — Bars und Spots kommen gleich.",
+        "Jo, Nightlife-Optionen, Moment.",
+        "Ich filter Bars in Reichweite.",
+        "Kurzer Check auf Drinks und Stimmung.",
+        "Moment, ich finde zwei gute Locations."
+      ]
+    },
+    "research_web": {
+      "label": "Web-Recherche",
+      "phrases": [
+        "Ich recherchiere das kurz online für dich.",
+        "Moment — ich check verlässliche Quellen.",
+        "Alles klar, Web-Recherche läuft.",
+        "Jo, ich hol die Fakten aus dem Netz.",
+        "Kurzer Deep-Dive online, keinen Fake.",
+        "Ich schaue auf offizielle Seiten und PDFs.",
+        "Hang on — ich lese das kurz nach."
+      ]
+    },
+    "shopping": {
+      "label": "Einkaufen",
+      "phrases": [
+        "Ich schau kurz, wo du das besorgen kannst.",
+        "Alles klar — Einkaufsoptionen kommen.",
+        "Jo, ich find den nächsten Laden.",
+        "Moment, Shopping-Spot für dich.",
+        "Kurzer Check auf Öffnung und Lage.",
+        "Ich suche, wo du das schnell kriegst."
+      ]
+    },
+    "safety": {
+      "label": "Sicherheit",
+      "phrases": [
+        "Alles klar — ich check kurz die nächste Hilfe.",
+        "Moment, Sicherheitshinweise hole ich.",
+        "Jo, ich schau nach Apotheke oder Hilfe vor Ort.",
+        "Ich priorisiere das — einen Augenblick.",
+        "Kurzer Safety-Check für dich."
+      ]
+    },
+    "knowledge": {
+      "label": "Wissensfrage",
+      "phrases": [
+        "Gute Frage — ich hol das kurz sauber.",
+        "Moment, ich sortier die Antwort.",
+        "Alles klar, Wissen kommt gleich.",
+        "Jo, ich check das für dich.",
+        "Kurzer Faktencheck, gleich fertig."
+      ]
+    },
+    "cheer": {
+      "label": "Glückwunsch / gute News",
+      "phrases": [
+        "Mega, Glückwunsch — stark.",
+        "Nice, erste Runde — Respekt.",
+        "Krass, Glückwunsch!",
+        "Super, das freut mich.",
+        "Starke Nummer."
+      ]
+    },
+    "luggage": {
+      "label": "Gepäck",
+      "phrases": [
+        "Ich schau kurz nach Gepäck-Optionen.",
+        "Alles klar — Luggage-Spot kommt.",
+        "Jo, ich check Aufbewahrung in der Nähe.",
+        "Moment, Gepäck-Service für dich.",
+        "Kurzer Bounce- und Depot-Check."
+      ]
+    },
+    "tours": {
+      "label": "Touren",
+      "phrases": [
+        "Ich schau kurz nach Touren und Tickets.",
+        "Alles klar — Aktivitäten in der Nähe.",
+        "Jo, Tour-Optionen kommen gleich.",
+        "Moment, ich filter passende Erlebnisse.",
+        "Kurzer Tour-Scan für dich.",
+        "Ich check Bewertungen und Zeiten."
+      ]
+    },
+    "uber_taxi": {
+      "label": "Uber / Taxi",
+      "phrases": [
+        "Ich bereite die Fahrt kurz vor.",
+        "Alles klar — Ride-Option kommt.",
+        "Jo, ich setz den Drop-off auf.",
+        "Moment, Taxi oder Uber für dich.",
+        "Kurzer Check auf die Fahrt."
+      ]
+    },
+    "car_rental": {
+      "label": "Mietwagen",
+      "phrases": [
+        "Ich schau kurz Mietwagen-Optionen.",
+        "Alles klar — Car-Rental Check.",
+        "Jo, ich filter passende Angebote.",
+        "Moment, ob Auto hier überhaupt Sinn macht.",
+        "Kurzer Mobility-Check für dich."
+      ]
+    },
+    "weather_outfit": {
+      "label": "Outfit / Wetter",
+      "phrases": [
+        "Gute Idee — ich check kurz Wetter und was du anziehen solltest.",
+        "Alles klar, noch raus: kurz Temperatur und Outfit.",
+        "Jo, Abendwetter plus Kleidungstipp, Moment.",
+        "Kurzer Outfit-Check mit Wetterlage.",
+        "Ich schau, ob Jacke oder leicht reicht."
+      ]
+    },
+    "leave_by": {
+      "label": "Leave-by",
+      "phrases": [
+        "Ich rechne kurz aus, wann du losmusst.",
+        "Alles klar — Leave-by kommt gleich.",
+        "Jo, Puffer und Wegzeit checke ich.",
+        "Moment, Abreisezeit wird berechnet.",
+        "Kurzer Countdown bis zum Losgehen."
+      ]
+    },
+    "wake_alarm": {
+      "label": "Wecker",
+      "phrases": [
+        "Ich stelle den Wecker kurz für dich ein.",
+        "Alles klar — Aufstehzeit kommt.",
+        "Jo, Alarm wird vorbereitet.",
+        "Moment, ich rechne die ideale Weckzeit.",
+        "Kurzer Wecker-Setup."
+      ]
+    },
+    "reservation": {
+      "label": "Tisch reservieren",
+      "phrases": [
+        "Ich bereite die Buchung für dich vor.",
+        "Alles klar — Reservierung läuft an.",
+        "Jo, Tisch und Zeit setze ich auf.",
+        "Moment, ich kümmere mich um den Tisch.",
+        "Kurzer Buchungsstart für dich.",
+        "Ich bereite Anruf oder Formular vor."
+      ]
+    },
+    "map_orient": {
+      "label": "Karten-Orientierung",
+      "phrases": [
+        "Ich oriente dich kurz auf der Karte.",
+        "Alles klar — Lage-Check.",
+        "Jo, ich zeig dir gleich die Richtung.",
+        "Moment, Orientierung kommt.",
+        "Kurzer Blick, was vor dir liegt."
+      ]
+    },
+    "where_am_i": {
+      "label": "Wo bin ich",
+      "phrases": [
+        "Ich check kurz, wo du gerade stehst.",
+        "Alles klar — Standort kommt.",
+        "Jo, Position und Umgebung, Moment.",
+        "Kurzer Where-am-I Lookup.",
+        "Ich ordne den Ort für dich ein."
+      ]
+    },
+    "multi_intent": {
+      "label": "Mehrere Absichten",
+      "phrases": [
+        "Da steckt mehr drin — ich nehme die Teile parallel.",
+        "Alles klar, mehrere Fragen, ein Plan.",
+        "Jo, ich zerlege das kurz sauber.",
+        "Moment, ich arbeite die Teilziele ab.",
+        "Komplex — ich priorisiere und kombiniere.",
+        "Hang on, ich hole alle Teile zusammen."
+      ]
+    },
+    "pdf_flyer": {
+      "label": "PDF / Flyer",
+      "phrases": [
+        "Ich schau kurz in Flyer und PDFs.",
+        "Alles klar — Dokumenten-Check.",
+        "Jo, ich parse das Programm für dich.",
+        "Moment, offizielle Unterlagen kommen.",
+        "Kurzer PDF-Scan, verlässliche Zeiten."
+      ]
+    },
+    "ticket": {
+      "label": "Tickets",
+      "phrases": [
+        "Ich check kurz Tickets und Eintritt.",
+        "Alles klar — Ticket-Infos kommen.",
+        "Jo, Preise und Buchungslinks, Moment.",
+        "Kurzer Ticket-Check für dich.",
+        "Ich schau, ob noch was frei wirkt."
+      ]
+    },
+    "beach_island": {
+      "label": "Strand / Insel",
+      "phrases": [
+        "Ich schau kurz Strand und Insel-Optionen.",
+        "Alles klar — Küsten-Spot kommt.",
+        "Jo, ich check Lage und Zugang.",
+        "Moment, Inseltipp für dich.",
+        "Kurzer Beach-Check."
+      ]
+    },
+    "museum": {
+      "label": "Museum",
+      "phrases": [
+        "Ich schau kurz Museen und Ausstellungen.",
+        "Alles klar — Kultur-Spot kommt.",
+        "Jo, Öffnung und Highlights, Moment.",
+        "Kurzer Museum-Check für dich.",
+        "Ich hole die spannenden Infos."
+      ]
+    },
+    "nightlife": {
+      "label": "Nachtleben",
+      "phrases": [
+        "Ich check kurz, was heute Nacht geht.",
+        "Alles klar — Nightlife-Recherche.",
+        "Jo, zwei Locations kommen gleich.",
+        "Moment, ich filter Stimmung und Nähe.",
+        "Kurzer Abend-Scan für dich."
+      ]
+    },
+    "rain_shelter": {
+      "label": "Regen / Unterstand",
+      "phrases": [
+        "Regen? Ich such kurz was Trockenes.",
+        "Alles klar — Indoor-Alternative kommt.",
+        "Jo, Unterstand oder Café, Moment.",
+        "Kurzer Regen-Plan für dich.",
+        "Ich check, wohin bei Schauer."
+      ]
+    },
+    "food_allergy": {
+      "label": "Ernährung / Allergie",
+      "phrases": [
+        "Ich filter kurz nach deinen Essensprefs.",
+        "Alles klar — passende Küche kommt.",
+        "Jo, ich respektiere Allergien und Diät.",
+        "Moment, sichere Optionen für dich.",
+        "Kurzer Check auf passende Gerichte."
+      ]
+    },
+    "follow_up": {
+      "label": "Nachfrage",
+      "phrases": [
+        "Klar, ich hake das kurz nach.",
+        "Alles klar — Folgefrage, Moment.",
+        "Jo, ich ergänze die Infos.",
+        "Kurzer Nachschlag für dich.",
+        "Ich hole den fehlenden Detailpunkt."
+      ]
+    },
+    "generic": {
+      "label": "Allgemein",
+      "phrases": [
+        "Alles klar — ich guck kurz nach.",
+        "Check, ich kümmere mich drum.",
+        "Okay, ich recherchiere kurz.",
+        "Jo, Moment — ich hol das für dich.",
+        "Ah okay, ich bin dran.",
+        "Einen Augenblick, ich kümmere mich.",
+        "Kurz nachschauen — gleich zurück.",
+        "Ich bin dabei, hang tight."
+      ]
+    },
+    "accommodation_search": {
+      "label": "Unterkunftssuche",
+      "phrases": [
+        "Ich durchsuche kurz passende Unterkünfte.",
+        "Alles klar — Stay-Optionen kommen.",
+        "Jo, Lage und Preis filtere ich.",
+        "Moment, Hotel- und Apartment-Check.",
+        "Kurzer Scan nach Übernachtung.",
+        "Ich schau, was in Reichweite liegt."
+      ]
+    }
+  },
+  "actionButtons": {
+    "START_NAVIGATION": [
+      "Klar, Route startet.",
+      "Alles klar — ich führ dich hin.",
+      "Jo, Navigation geht los.",
+      "Route wird gestartet.",
+      "Komm mit, ich navigiere dich."
+    ],
+    "DIAL_PHONE": [
+      "Alles klar — ich wähle die Nummer.",
+      "Jo, Anruf wird vorbereitet.",
+      "Moment, Telefon öffnet sich.",
+      "Ich starte den Anruf für dich.",
+      "Nummer kommt — Anruf bereit."
+    ],
+    "OPEN_URL": [
+      "Google Maps wird geöffnet.",
+      "Die hier ist die Speisekarte.",
+      "Alles klar — ich öffne den Link."
+    ],
+    "SHOW_MORE": [
+      "Klar, ich hol mehr Details.",
+      "Alles klar — Nachschlag kommt.",
+      "Jo, ich ergänze das kurz.",
+      "Moment, mehr Infos für dich.",
+      "Ich gehe tiefer in die Frage."
+    ],
+    "CONFIRM_API_RESERVATION": [
+      "Ich bereite die Buchung für dich vor.",
+      "Alles klar — Reservierung startet.",
+      "Jo, Tisch wird vorbereitet.",
+      "Moment, ich setze die Buchung auf.",
+      "Ich kümmere mich um deine Reservierung."
+    ],
+    "SEND_RESERVATION_EMAIL": [
+      "Ich bereite die Reservierungsmail vor.",
+      "Alles klar — E-Mail Entwurf kommt.",
+      "Jo, Mail für den Tisch, Moment.",
+      "Ich formuliere die Anfrage für dich.",
+      "Reservierungsmail wird vorbereitet."
+    ],
+    "TRIGGER_AI_CALL": [
+      "Ich bereite den Anruf für dich vor.",
+      "Alles klar — Anruf-Assistent startet.",
+      "Jo, ich kümmere mich um den Call.",
+      "Moment, Telefon-Assistent wird vorbereitet.",
+      "Anruf läuft gleich an."
+    ],
+    "OPEN_GYG_WIDGET": [
+      "Alles klar — Tour-Optionen kommen.",
+      "Jo, ich öffne die Touren für dich.",
+      "Moment, GetYourGuide wird geladen.",
+      "Ich zeig dir passende Erlebnisse.",
+      "Tour-Auswahl öffnet sich."
+    ],
+    "BOOK_UBER": [
+      "Alles klar — ich setze die Fahrt auf.",
+      "Jo, Uber wird vorbereitet.",
+      "Moment, Ride-Request kommt.",
+      "Ich öffne die Fahrt für dich.",
+      "Drop-off wird gesetzt."
+    ],
+    "BOOK_CAR_RENTAL": [
+      "Alles klar — Mietwagen-Optionen kommen.",
+      "Jo, ich öffne die Angebote.",
+      "Moment, Car-Rental Check.",
+      "Ich zeig dir passende Autos.",
+      "Mietwagen-Suche startet."
+    ],
+    "BOOK_BOUNCE_LUGGAGE": [
+      "Alles klar — Gepäck-Spot kommt.",
+      "Jo, ich öffne die Aufbewahrung.",
+      "Moment, Luggage-Option für dich.",
+      "Ich zeig dir den Depot-Link.",
+      "Gepäck-Service wird geöffnet."
+    ],
+    "BOOK_STAY22": [
+      "Alles klar — Unterkünfte kommen.",
+      "Jo, ich öffne die Hotel-Suche.",
+      "Moment, Stay-Optionen für dich.",
+      "Ich zeig dir passende Übernachtungen.",
+      "Hotel-Suche startet."
+    ],
+    "BOOK_ESIM": [
+      "Alles klar — eSIM-Option kommt.",
+      "Jo, ich öffne den Daten-Tarif.",
+      "Moment, Airalo für dich.",
+      "Ich zeig dir die eSIM-Auswahl.",
+      "Mobile Daten werden vorbereitet."
+    ],
+    "SET_WAKE_ALARM": [
+      "Alles klar — Wecker wird gesetzt.",
+      "Jo, Aufstehzeit kommt rein.",
+      "Moment, Alarm wird eingerichtet.",
+      "Ich stelle den Wecker für dich.",
+      "Weckzeit wird gespeichert."
+    ],
+    "SET_TIMER": [
+      "Alles klar — Timer läuft gleich.",
+      "Jo, Countdown wird gesetzt.",
+      "Moment, ich stelle die Zeit.",
+      "Timer kommt für dich rein.",
+      "Eieruhr startet."
+    ],
+    "SET_DEPARTURE_REMINDER": [
+      "Alles klar — Abreise-Erinnerung kommt.",
+      "Jo, Leave-by Reminder wird gesetzt.",
+      "Moment, ich merke mir den Start.",
+      "Erinnerung fürs Losgehen ist drin.",
+      "Ich setze den Abreise-Hinweis."
+    ],
+    "SHOW_STREET_VIEW": [
+      "Alles klar — Street View kommt.",
+      "Jo, ich zeig dir den Blick.",
+      "Moment, Bild wird geladen.",
+      "Ich hol die Straßenansicht.",
+      "Street View öffnet sich."
+    ],
+    "COMPLETE_SHOPPING_TASK": [
+      "Alles klar — erledigt abgehakt.",
+      "Jo, Aufgabe ist durch.",
+      "Moment, ich markiere das fertig.",
+      "Einkaufspunkt abgehakt.",
+      "Erledigt — gut gemacht."
+    ],
+    "SNOOZE_SHOPPING_TASK": [
+      "Alles klar — später nochmal.",
+      "Jo, ich schiebe das kurz.",
+      "Moment, Erinnerung snoozen.",
+      "Kommt später wieder.",
+      "Aufgeschoben — ich melde mich erneut."
+    ]
+  }
+}

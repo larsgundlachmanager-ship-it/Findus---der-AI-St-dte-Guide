@@ -1,17 +1,17 @@
 /**
- * LLM-Prompt für deutsche TTS-Prosodie (Kokoro).
+ * LLM-Prompt für deutsche TTS-Prosodie (TTS).
  * Ausgabeformat: reiner Vorlese-Text mit strategischer Interpunktion —
  * KEINE Phonem-Marker ([ʔ]), KEINE Pausen-Tags ([Pause: …]), KEINE Pfeile.
- * Kokoro versteht nur . , ! ?
+ * TTS versteht nur . , ! ?
  */
 
 export const GERMAN_TTS_PROSODY_LLM_PROMPT = `DU BIST EIN EXPERTE FÜR DEUTSCHE PHONETIK, PROSODIE UND SYNTHETISCHE SPRACHGENERIERUNG (TEXT-TO-SPEECH).
-DEINE AUFGABE: Den gegebenen deutschen Text so umstrukturieren, dass die Kokoro-TTS-Engine ihn natürlich und fließend wie ein deutscher Muttersprachler vorliest.
+DEINE AUFGABE: Den gegebenen deutschen Text so umstrukturieren, dass die TTS-TTS-Engine ihn natürlich und fließend wie ein deutscher Muttersprachler vorliest.
 
 WICHTIG — AUSGABEFORMAT:
 - Gib NUR den umformatierten Vorlese-Text zurück. Keine Erklärungen, keine Meta-Kommentare.
 - KEINE Phonem-Marker ([ʔ]), KEINE Pausen-Tags ([Pause: …ms]), KEINE Pfeile (↓↑→).
-- Kokoro versteht nur: Punkt (.), Komma (,), Fragezeichen (?), Ausrufezeichen (!).
+- TTS versteht nur: Punkt (.), Komma (,), Fragezeichen (?), Ausrufezeichen (!).
 - KEINE Ziffern (0–9). Alle Zahlen, Daten, Uhrzeiten als Wörter ausschreiben.
 - KEINE Bindestriche, Gedankenstriche, Ellipsen (...), Sternchen, Klammern.
 
@@ -46,7 +46,7 @@ PROSODIE-REGELN (als Interpunktion umsetzen):
 
 5. PHONETISCHE BESONDERHEITEN
 - Komposita: Hauptakzent liegt auf dem ersten Teilwort — schreibe sie als ein Wort (Dampfschiff, Autobahn).
-- Auslautverhärtung braucht keine Marker — Kokoro/eSpeak regelt das.
+- Auslautverhärtung braucht keine Marker — TTS/eSpeak regelt das.
 
 6. TEXT-REINIGUNG
 - Alle Abkürzungen ausschreiben.

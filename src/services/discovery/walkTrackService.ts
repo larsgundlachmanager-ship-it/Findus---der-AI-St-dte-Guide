@@ -13,7 +13,7 @@ const PATH = `${FileSystem.documentDirectory}findus-walk-track.json`;
 const MIN_STEP_M = 6;
 const MAX_POINTS = 5_000;
 /** Reveal-Radius auf der Karte (Meter) — Fog-of-War heller Bereich. */
-export const WALK_REVEAL_RADIUS_M = 20;
+export const WALK_REVEAL_RADIUS_M = 60;
 /**
  * Zwischen zwei Fixes Lücke füllen — nur wenn ≤ 5 Minuten.
  * Längere Pausen (Auto, Zug, Flug) erzeugen KEINE Linie.

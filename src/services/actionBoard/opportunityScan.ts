@@ -15,6 +15,11 @@ function blobOf(speech: string, user: string): string {
   return `${speech} ${user}`.replace(/\s+/g, ' ');
 }
 
+function looksHotelUrl(url?: string | null): boolean {
+  if (!url) return false;
+  return /expedia|stay22|booking\.com|hotels\.com|vrbo|affiliate/i.test(url);
+}
+
 function push(
   out: ActionOpportunity[],
   kind: ActionOpportunityKind,
@@ -98,8 +103,11 @@ export function scanOpportunities(opts: {
       blob,
     ) && !foodish;
 
-  // Route / Maps für genannte Orte
+  // Route / Maps für genannte Orte — bei Hotel mit Book-URL nicht (Buchen ist Produkt)
   for (const ent of opts.entities) {
+    if (hotelish && (ent.bookUrl || looksHotelUrl(ent.websiteUrl))) {
+      continue;
+    }
     if (wantsNav || foodish || hotelish || culture || opts.module1) {
       push(
         out,

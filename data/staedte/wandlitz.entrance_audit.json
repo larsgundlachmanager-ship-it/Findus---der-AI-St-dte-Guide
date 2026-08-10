@@ -1,0 +1,2721 @@
+{
+  "city_id": "wandlitz",
+  "apply": true,
+  "maxDelta": 80,
+  "summary": {
+    "ok": 140,
+    "check": 3,
+    "bad": 16,
+    "errors": 0,
+    "applied": 4
+  },
+  "rows": [
+    {
+      "id": "wandlitz_wandlitz",
+      "name": "Wandlitz",
+      "before": {
+        "lat": 52.74478794,
+        "lng": 13.46587658
+      },
+      "google": {
+        "lat": 52.7500683,
+        "lng": 13.4502626,
+        "place_id": "ChIJ5X1LKfyuqUcRrt4HWuV1WcA",
+        "address": "Wandlitz"
+      },
+      "delta_m": 1204,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_wandlitzsee",
+      "name": "Wandlitzsee",
+      "before": {
+        "lat": 52.75595054,
+        "lng": 13.47364626
+      },
+      "google": {
+        "lat": 52.7593028,
+        "lng": 13.4528967,
+        "place_id": "ChIJQV9GHwKvqUcRGGUaMkO67-c",
+        "address": "Wandlitzer See, 16348 Wandlitz"
+      },
+      "delta_m": 1445,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_wandlitz_wandlitzsee_bhf",
+      "name": "Wandlitz, Wandlitzsee Bhf",
+      "before": {
+        "lat": 52.75668814000001,
+        "lng": 13.47278126
+      },
+      "google": {
+        "lat": 52.7560224,
+        "lng": 13.473765,
+        "place_id": "ChIJy7xepK2vqUcRkaLczhv4qDY",
+        "address": "16348 Wandlitz, Deutschland"
+      },
+      "delta_m": 99,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "wandlitz_wandlitz_bahnhof",
+      "name": "Wandlitz, Bahnhof",
+      "before": {
+        "lat": 52.74532813999999,
+        "lng": 13.466361280000001
+      },
+      "google": {
+        "lat": 52.7448598,
+        "lng": 13.4659953,
+        "place_id": "ChIJfewT_VCuqUcROAbLUQe2aHg",
+        "address": "16348 Wandlitz, Deutschland"
+      },
+      "delta_m": 58,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "wandlitz_klosterfelde",
+      "name": "Klosterfelde",
+      "before": {
+        "lat": 52.79113814,
+        "lng": 13.488029160000002
+      },
+      "google": {
+        "lat": 52.7970364,
+        "lng": 13.4793648,
+        "place_id": "ChIJr79ScX-lqUcRsEWC1kggIQo",
+        "address": "16348 Wandlitz-Klosterfelde"
+      },
+      "delta_m": 877,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_fahre_liepnitzsee_nord",
+      "name": "Fähre Liepnitzsee Nord",
+      "before": {
+        "lat": 52.74987238,
+        "lng": 13.514461399999998
+      },
+      "google": {
+        "lat": 52.7499119,
+        "lng": 13.5145267,
+        "place_id": "ChIJHwDQ_dSvqUcRKL-wGgq6hFw",
+        "address": "Am Liepnitzsee 8, 16348 Wandlitz-Lanke"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_fahre_liepnitzsee_sudufer",
+      "name": "Fähre Liepnitzsee Südufer",
+      "before": {
+        "lat": 52.747121979999996,
+        "lng": 13.5191348
+      },
+      "google": {
+        "lat": 52.7471615,
+        "lng": 13.5192001,
+        "place_id": "ChIJTTo7-L-xqUcRg2MrZ2-uoNc",
+        "address": "Unnamed Road, 16359 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_barnim_panorama_naturparkzentrum_agrarmuseum_wandlitz",
+      "name": "BARNIM PANORAMA Naturparkzentrum - Agrarmuseum Wandlitz",
+      "before": {
+        "lat": 52.75171308,
+        "lng": 13.4546887
+      },
+      "google": {
+        "lat": 52.7517526,
+        "lng": 13.454754,
+        "place_id": "ChIJV_389P6uqUcRzIxs2Y58uL8",
+        "address": "Breitscheidstraße 8-9, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_dorfkirche_wandlitz",
+      "name": "Dorfkirche Wandlitz",
+      "before": {
+        "lat": 52.75351408,
+        "lng": 13.451823000000001
+      },
+      "google": {
+        "lat": 52.7535536,
+        "lng": 13.4518883,
+        "place_id": "ChIJu_i-2P2uqUcRqMfLy6BREns",
+        "address": "Kirchstraße 21, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_st_konrad",
+      "name": "St. Konrad",
+      "before": {
+        "lat": 52.75905818,
+        "lng": 13.472259380000002
+      },
+      "google": {
+        "lat": 52.7590977,
+        "lng": 13.4723247,
+        "place_id": "ChIJW63zl66vqUcRKNNuLOVEd24",
+        "address": "Thälmannstraße 2, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_dorfkirche_basdorf_wandlitz",
+      "name": "Dorfkirche Basdorf (Wandlitz)",
+      "before": {
+        "lat": 52.72667568000001,
+        "lng": 13.43935144
+      },
+      "google": {
+        "lat": 52.72671520000001,
+        "lng": 13.4394167,
+        "place_id": "ChIJ35nK14iuqUcRp5EPQB25ytM",
+        "address": "Prenzlauer Str. 14, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_dorfkirche_stolzenhagen_wandlitz",
+      "name": "Dorfkirche Stolzenhagen (Wandlitz)",
+      "before": {
+        "lat": 52.777492280000004,
+        "lng": 13.438472960000002
+      },
+      "google": {
+        "lat": 52.7775318,
+        "lng": 13.4385383,
+        "place_id": "ChIJXdwy6z-vqUcRA-Jf0qcZcsA",
+        "address": "16348 Wandlitz-Stolzenhagen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_kantorei_wandlitz_e_v",
+      "name": "KANTOREI WANDLITZ e.V.",
+      "before": {
+        "lat": 52.76320058,
+        "lng": 13.43799468
+      },
+      "google": {
+        "lat": 52.7632401,
+        "lng": 13.43806,
+        "place_id": "ChIJOST8JBmvqUcRRBt8TeihNjs",
+        "address": "Str. a. See 79, 16348 Wandlitz-Stolzenhagen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_cafe_stall",
+      "name": "Café Stall",
+      "before": {
+        "lat": 52.75285748,
+        "lng": 13.4521302
+      },
+      "google": {
+        "lat": 52.752897,
+        "lng": 13.4521955,
+        "place_id": "ChIJnZk6HACvqUcR_no2RQ54wVI",
+        "address": "Breitscheidstraße 20, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_kirche_klosterfelde_pfarrsprengel_klosterfelde",
+      "name": "Kirche Klosterfelde - Pfarrsprengel Klosterfelde",
+      "before": {
+        "lat": 52.791585180000006,
+        "lng": 13.48002434
+      },
+      "google": {
+        "lat": 52.7916247,
+        "lng": 13.4800897,
+        "place_id": "ChIJ4zB3gayvqUcRVie_A6TKUVU",
+        "address": "Klosterfelder Hauptstraße 44, 16348 Wandlitz-Klosterfelde"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_stolzenhagen_bei_wandlitz_kirche",
+      "name": "Stolzenhagen (bei Wandlitz), Kirche",
+      "before": {
+        "lat": 52.77792047999999,
+        "lng": 13.438924660000001
+      },
+      "google": {
+        "lat": 52.7775318,
+        "lng": 13.4385383,
+        "place_id": "ChIJXdwy6z-vqUcRA-Jf0qcZcsA",
+        "address": "16348 Wandlitz-Stolzenhagen"
+      },
+      "delta_m": 50,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "wandlitz_fischerbrunnen",
+      "name": "Fischerbrunnen",
+      "before": {
+        "lat": 52.756151980000006,
+        "lng": 13.4719628
+      },
+      "google": {
+        "lat": 52.7561915,
+        "lng": 13.4720281,
+        "place_id": "ChIJhRYrGwCvqUcRIwBhdD-gSdQ",
+        "address": "Prenzlauer Ch 154A, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_see_wandlitz",
+      "name": "See Wandlitz",
+      "before": {
+        "lat": 52.75951578,
+        "lng": 13.44304868
+      },
+      "google": {
+        "lat": 52.7593028,
+        "lng": 13.4528967,
+        "place_id": "ChIJQV9GHwKvqUcRGGUaMkO67-c",
+        "address": "Wandlitzer See, 16348 Wandlitz"
+      },
+      "delta_m": 663,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_naturpark_barnim",
+      "name": "Naturpark Barnim",
+      "before": {
+        "lat": 52.75128348,
+        "lng": 13.4551999
+      },
+      "google": {
+        "lat": 52.751323,
+        "lng": 13.4552652,
+        "place_id": "ChIJT8auBhuxqUcR8LJrNBwLg4A",
+        "address": "Breitscheidstraße 8, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_strandbad_stolzenhagen_parkplatz_und_eingang",
+      "name": "Strandbad Stolzenhagen, Parkplatz und Eingang",
+      "before": {
+        "lat": 52.76214838,
+        "lng": 13.44162098
+      },
+      "google": {
+        "lat": 52.7621879,
+        "lng": 13.4416863,
+        "place_id": "ChIJ9Un6cX-vqUcR2x1WxSRs7ms",
+        "address": "Str. a. See 93, 16348 Wandlitz-Stolzenhagen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_waldspielplatz_wandlitz",
+      "name": "Waldspielplatz Wandlitz",
+      "before": {
+        "lat": 52.76565168,
+        "lng": 13.468307579999998
+      },
+      "google": {
+        "lat": 52.7656912,
+        "lng": 13.4683729,
+        "place_id": "ChIJL7sNq_ivqUcRdCtSf6xzZMo",
+        "address": "Rheinallee 11, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_parkplatz_zweijahreszeiten",
+      "name": "Parkplatz Zweijahreszeiten",
+      "before": {
+        "lat": 52.73892217999999,
+        "lng": 13.48688292
+      },
+      "google": {
+        "lat": 52.7389617,
+        "lng": 13.4869482,
+        "place_id": "ChIJhR-roGKvqUcRu4rcpsBt010",
+        "address": "B273 50, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_strandbad_stolzenhagen",
+      "name": "Strandbad Stolzenhagen",
+      "before": {
+        "lat": 52.760407380000004,
+        "lng": 13.44060048
+      },
+      "google": {
+        "lat": 52.76044690000001,
+        "lng": 13.4406658,
+        "place_id": "ChIJhdT7BByvqUcRl0jQGFJ5hvs",
+        "address": "Str. a. See 94, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_neuart",
+      "name": "NEUART",
+      "before": {
+        "lat": 52.74961538,
+        "lng": 13.4424211
+      },
+      "google": {
+        "lat": 52.7496549,
+        "lng": 13.4424864,
+        "place_id": "ChIJu3hbSvuuqUcRW7OFfjKA5ws",
+        "address": "Oranienburger Str. 20, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_forsthaus_am_liepnitzsee",
+      "name": "Forsthaus am Liepnitzsee",
+      "before": {
+        "lat": 52.73740318,
+        "lng": 13.48931302
+      },
+      "google": {
+        "lat": 52.7374427,
+        "lng": 13.4893783,
+        "place_id": "ChIJydXlnTmuqUcRFVqSpvisnkM",
+        "address": "16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_offentliche_badestelle_wandlitzsee",
+      "name": "Öffentliche Badestelle Wandlitzsee",
+      "before": {
+        "lat": 52.75493838,
+        "lng": 13.470729700000001
+      },
+      "google": {
+        "lat": 52.7549779,
+        "lng": 13.470795,
+        "place_id": "ChIJtQfr7qyvqUcRQw4gtYMijjw",
+        "address": "16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_parkplatz_prenzlauer_chaussee_179_16348_wandlitz",
+      "name": "Parkplatz Prenzlauer Chaussee 179, 16348 Wandlitz",
+      "before": {
+        "lat": 52.75788268,
+        "lng": 13.47347068
+      },
+      "google": {
+        "lat": 52.7579222,
+        "lng": 13.473536,
+        "place_id": "ChIJqb2tdcB_qEcR7d_e6ZVu4ig",
+        "address": "Prenzlauer Ch 179, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_kunstrasenplatz_wandlitz",
+      "name": "Kunstrasenplatz Wandlitz",
+      "before": {
+        "lat": 52.748106480000004,
+        "lng": 13.466814500000002
+      },
+      "google": {
+        "lat": 52.748146,
+        "lng": 13.4668798,
+        "place_id": "ChIJe48JY1GuqUcR6yQhniqYalM",
+        "address": "16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_minigolf_rahmersee_uwe_daul",
+      "name": "Minigolf Rahmersee - Uwe Daul",
+      "before": {
+        "lat": 52.753571580000006,
+        "lng": 13.416323599999998
+      },
+      "google": {
+        "lat": 52.7536111,
+        "lng": 13.4163889,
+        "place_id": "ChIJo7o8L9quqUcRSuj9byoDqqk",
+        "address": "Sieglindeweg 1, 16348 Wandlitz-Stolzenhagen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_1_fv_eintracht_wandlitz_e_v",
+      "name": "1. FV Eintracht Wandlitz e.V.",
+      "before": {
+        "lat": 52.75010048,
+        "lng": 13.4470847
+      },
+      "google": {
+        "lat": 52.75013999999999,
+        "lng": 13.44715,
+        "place_id": "ChIJ6ZAGa_uuqUcREj_VN81-gNM",
+        "address": "Oranienburger Str. 34, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_badestelle_mit_sand",
+      "name": "Badestelle mit Sand",
+      "before": {
+        "lat": 52.74992737999999,
+        "lng": 13.5134109
+      },
+      "google": {
+        "lat": 52.7499669,
+        "lng": 13.5134762,
+        "place_id": "ChIJhwPklLCvqUcR4p_sq6gKqn8",
+        "address": "Unnamed Road, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_liepnitzsee",
+      "name": "Liepnitzsee",
+      "before": {
+        "lat": 52.74617038,
+        "lng": 13.496418599999998
+      },
+      "google": {
+        "lat": 52.748293,
+        "lng": 13.5069313,
+        "place_id": "ChIJQ0eUqtSvqUcR8nYdrIfE640",
+        "address": "Liepnitzsee, Wandlitz"
+      },
+      "delta_m": 746,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_whirlpool_living_gmbh_wandlitz_bei_berlin",
+      "name": "Whirlpool & Living GmbH Wandlitz bei Berlin",
+      "before": {
+        "lat": 52.73404998000001,
+        "lng": 13.44921192
+      },
+      "google": {
+        "lat": 52.7340895,
+        "lng": 13.4492772,
+        "place_id": "ChIJfWVkOViuqUcRMo07BGtuHJY",
+        "address": "Prenzlauer Ch 5, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_kinderspielplatz_wandlitzsee",
+      "name": "Kinderspielplatz Wandlitzsee",
+      "before": {
+        "lat": 52.75789307999999,
+        "lng": 13.472273580000001
+      },
+      "google": {
+        "lat": 52.7579326,
+        "lng": 13.4723389,
+        "place_id": "ChIJded-bEuvqUcRHDCsIfmKyOA",
+        "address": "16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_rathaus_gemeinde_wandlitz",
+      "name": "Rathaus gemeinde Wandlitz",
+      "before": {
+        "lat": 52.75477998,
+        "lng": 13.4729524
+      },
+      "google": {
+        "lat": 52.7548195,
+        "lng": 13.4730177,
+        "place_id": "ChIJk0ZZF62vqUcR0LOrSC95QsQ",
+        "address": "Rathaus gemeinde Wandlitz, Prenzlauer Ch 157, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_haus_von_erich_honecker",
+      "name": "Haus von Erich Honecker",
+      "before": {
+        "lat": 52.734368180000004,
+        "lng": 13.486815619999998
+      },
+      "google": {
+        "lat": 52.73440770000001,
+        "lng": 13.4868809,
+        "place_id": "ChIJ0fv0LQCvqUcRRWy-xvInpGw",
+        "address": "Habichtweg 5, 16321 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_wanderweg_am_liepnitzsee",
+      "name": "Wanderweg am Liepnitzsee",
+      "before": {
+        "lat": 52.74097938,
+        "lng": 13.50685422
+      },
+      "google": {
+        "lat": 52.7410189,
+        "lng": 13.5069195,
+        "place_id": "ChIJX2q9ds2vqUcRo3y-esT7QoM",
+        "address": "Unnamed Road am Liepnitzsee, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_la_finca_de_don_quijote",
+      "name": "La Finca de Don Quijote",
+      "before": {
+        "lat": 52.77859728,
+        "lng": 13.440007659999997
+      },
+      "google": {
+        "lat": 52.7786368,
+        "lng": 13.440073,
+        "place_id": "ChIJ80v6BUCvqUcRg1XuUP5bexQ",
+        "address": "Dorfstraße 49, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_fischerstube_stolzenhagen",
+      "name": "Fischerstube Stolzenhagen",
+      "before": {
+        "lat": 52.77211878000001,
+        "lng": 13.433480460000002
+      },
+      "google": {
+        "lat": 52.7721583,
+        "lng": 13.4335458,
+        "place_id": "ChIJ73C29zyvqUcR7bj4xnkGvx4",
+        "address": "Basdorfer Straße 1a OT, Basdorfer Str. 1a, 16348 Wandlitz-Stolzenhagen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_kulturbuhne_goldener_lowe",
+      "name": "Kulturbühne \"Goldener Löwe\"",
+      "before": {
+        "lat": 52.75289018000001,
+        "lng": 13.451145700000001
+      },
+      "google": {
+        "lat": 52.7529297,
+        "lng": 13.451211,
+        "place_id": "ChIJ9wGD1P2uqUcR1eqR8TwF1hw",
+        "address": "Breitscheidstraße 18, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_wandlitzer_see",
+      "name": "Wandlitzer See",
+      "before": {
+        "lat": 52.759263280000006,
+        "lng": 13.452831380000001
+      },
+      "google": {
+        "lat": 52.7593028,
+        "lng": 13.4528967,
+        "place_id": "ChIJQV9GHwKvqUcRGGUaMkO67-c",
+        "address": "Wandlitzer See, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_zweijahreszeiten",
+      "name": "Zweijahreszeiten",
+      "before": {
+        "lat": 52.739932280000005,
+        "lng": 13.48539692
+      },
+      "google": {
+        "lat": 52.7399718,
+        "lng": 13.4854622,
+        "place_id": "ChIJ9zDzRiuvqUcRg7Q3zaKwV8E",
+        "address": "B273 50, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_pura_natura",
+      "name": "pura natura",
+      "before": {
+        "lat": 52.757174080000006,
+        "lng": 13.473345079999998
+      },
+      "google": {
+        "lat": 52.7572136,
+        "lng": 13.4734104,
+        "place_id": "ChIJxxh20UuvqUcRC5lTzjzXNig",
+        "address": "Prenzlauer Ch 173, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_linden_apotheke",
+      "name": "Linden Apotheke",
+      "before": {
+        "lat": 52.75117058000001,
+        "lng": 13.4684055
+      },
+      "google": {
+        "lat": 52.75121009999999,
+        "lng": 13.4684708,
+        "place_id": "ChIJcR08F1OuqUcRGAnRqQQZSPo",
+        "address": "Prenzlauer Ch 132, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_medpunkt_wandlitz",
+      "name": "Medpunkt Wandlitz",
+      "before": {
+        "lat": 52.76161408,
+        "lng": 13.47325358
+      },
+      "google": {
+        "lat": 52.7616536,
+        "lng": 13.4733189,
+        "place_id": "ChIJRYOFfbyvqUcRVQSs3wsEOqE",
+        "address": "Prenzlauer Ch 176 A, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_dr_med_simone_kirschner",
+      "name": "Dr.med. Simone Kirschner",
+      "before": {
+        "lat": 52.74080778,
+        "lng": 13.456542719999998
+      },
+      "google": {
+        "lat": 52.7408473,
+        "lng": 13.456608,
+        "place_id": "ChIJX1rfxP2uqUcRvykr8j7HEg8",
+        "address": "Prenzlauer Ch 61, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_apotheke_im_postamt",
+      "name": "Apotheke im Postamt",
+      "before": {
+        "lat": 52.74586338,
+        "lng": 13.4619075
+      },
+      "google": {
+        "lat": 52.7459029,
+        "lng": 13.4619728,
+        "place_id": "ChIJ6WhhanevqUcR1LNWpUA1cvE",
+        "address": "Prenzlauer Ch 106, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_brandenburgklinik_haus_barnim",
+      "name": "Brandenburgklinik - Haus Barnim",
+      "before": {
+        "lat": 52.73221828,
+        "lng": 13.48898752
+      },
+      "google": {
+        "lat": 52.7322578,
+        "lng": 13.4890528,
+        "place_id": "ChIJVePCLTyuqUcRg_pQ136bCR4",
+        "address": "Kurallee 25, 16321 Bernau bei Berlin-Waldsiedlung"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_privatpraxis_fur_orthopadie_in_wandlitz_dr_med_franziska_freynik_dr_med",
+      "name": "Privatpraxis für Orthopädie in Wandlitz - Dr. med. Franziska Freynik & Dr. med. Sebastian Freynik",
+      "before": {
+        "lat": 52.74624278,
+        "lng": 13.463278299999999
+      },
+      "google": {
+        "lat": 52.7462823,
+        "lng": 13.4633436,
+        "place_id": "ChIJB4TVSgKvqUcR9mqb1voBMKc",
+        "address": "Prenzlauer Ch 121, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_dr_med_anne_friedrich",
+      "name": "Dr. med. Anne Friedrich",
+      "before": {
+        "lat": 52.75841898,
+        "lng": 13.47381168
+      },
+      "google": {
+        "lat": 52.7584585,
+        "lng": 13.473877,
+        "place_id": "ChIJrxmxyjKvqUcR8xcUb7gXebE",
+        "address": "Prenzlauer Ch 183A, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_frau_katrin_firlej",
+      "name": "Frau Katrin Firlej",
+      "before": {
+        "lat": 52.78263688,
+        "lng": 13.439324959999999
+      },
+      "google": {
+        "lat": 52.7826764,
+        "lng": 13.4393903,
+        "place_id": "ChIJk7KecSzvZEER0BABjg6qDrg",
+        "address": "Liebenwalder Ende 21, 16348 Wandlitz-Stolzenhagen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_brandenburgklinik_haus_potsdam",
+      "name": "Brandenburgklinik, Haus Potsdam",
+      "before": {
+        "lat": 52.72891048,
+        "lng": 13.49173074
+      },
+      "google": {
+        "lat": 52.72895,
+        "lng": 13.491796,
+        "place_id": "ChIJqXpzYj2uqUcRwssizdZAYA8",
+        "address": "16321 Bernau bei Berlin-Waldsiedlung"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_priv_doz_dr_med_m_johannsen_und_dr_med_a_johannsen",
+      "name": "Priv.-Doz. Dr. med. M. Johannsen und Dr. med. A. Johannsen",
+      "before": {
+        "lat": 52.74608678,
+        "lng": 13.464165
+      },
+      "google": {
+        "lat": 52.7461263,
+        "lng": 13.4642303,
+        "place_id": "ChIJd7RAIvivqUcRrLpHrqAkQW4",
+        "address": "Bernauer Ch 2, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_dr_med_petra_nolting",
+      "name": "Dr. med. Petra Nolting",
+      "before": {
+        "lat": 52.745394280000006,
+        "lng": 13.464478
+      },
+      "google": {
+        "lat": 52.74543380000001,
+        "lng": 13.4645433,
+        "place_id": "ChIJGbapJ1GuqUcR9LYyauDfVpI",
+        "address": "Bernauer Ch 5, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_michels_kliniken_gmbh_co_kg",
+      "name": "Michels Kliniken Gmbh & Co. Kg",
+      "before": {
+        "lat": 52.73286788,
+        "lng": 13.49137282
+      },
+      "google": {
+        "lat": 52.73290739999999,
+        "lng": 13.4914381,
+        "place_id": "ChIJ-fLTQjyuqUcR8P8mn1JvUII",
+        "address": "Brandenburgallee 1, 16321 Bernau bei Berlin-Waldsiedlung"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_haus_havelland_2",
+      "name": "Haus Havelland 2",
+      "before": {
+        "lat": 52.73024858,
+        "lng": 13.48924552
+      },
+      "google": {
+        "lat": 52.7302881,
+        "lng": 13.4893108,
+        "place_id": "ChIJew0sIgCvqUcRhhVl1Gm1E7k",
+        "address": "Kurallee 41, 16321 Bernau bei Berlin"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_",
+      "name": "Остров Штельмака",
+      "before": {
+        "lat": 52.744837180000005,
+        "lng": 13.5072449
+      },
+      "google": {
+        "lat": 52.7448767,
+        "lng": 13.5073102,
+        "place_id": "ChIJSX6xGwCvqUcRVHewos1x-w4",
+        "address": "PGV4+XW, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_ruheplatz_am_liepnitzsee",
+      "name": "Ruheplatz am Liepnitzsee",
+      "before": {
+        "lat": 52.74931388,
+        "lng": 13.5039324
+      },
+      "google": {
+        "lat": 52.7493534,
+        "lng": 13.5039977,
+        "place_id": "ChIJ_x23CJSvqUcRBaPLQy8h5k8",
+        "address": "16321 Wandlitz-Lanke"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_kleiner_bach",
+      "name": "Kleiner Bach",
+      "before": {
+        "lat": 52.73444148,
+        "lng": 13.42421822
+      },
+      "google": {
+        "lat": 52.734481,
+        "lng": 13.4242835,
+        "place_id": "ChIJA-9OawCvqUcRya-OD3q5gGo",
+        "address": "PCMF+QP, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+      "name": "Gefallenendenkmal 1. und 2. Weltkrieg Klosterfelde",
+      "before": {
+        "lat": 52.78973308,
+        "lng": 13.47995204
+      },
+      "google": {
+        "lat": 52.7897726,
+        "lng": 13.4800174,
+        "place_id": "ChIJq5g7QACvqUcR9xIF3n7QKck",
+        "address": "Klosterfelder Hauptstraße, 16348 Wandlitz-Klosterfelde"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_waldhof_am_bogensee",
+      "name": "Waldhof am Bogensee",
+      "before": {
+        "lat": 52.77416678000001,
+        "lng": 13.52607366
+      },
+      "google": {
+        "lat": 52.7742063,
+        "lng": 13.526139,
+        "place_id": "ChIJJ6twLACvqUcRtIEvoAss5JY",
+        "address": "Platz d. Freundschaft 1A, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_ingo_struntz",
+      "name": "Ingo Struntz",
+      "before": {
+        "lat": 52.74277658,
+        "lng": 13.466718420000001
+      },
+      "google": {
+        "lat": 52.7428161,
+        "lng": 13.4667837,
+        "place_id": "ChIJgX7peFCuqUcRzFCfF4hPNkk",
+        "address": "Hagenstraße 7, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_studio_wandlitz",
+      "name": "STUDIO WANDLITZ",
+      "before": {
+        "lat": 52.74268968,
+        "lng": 13.45634642
+      },
+      "google": {
+        "lat": 52.7427292,
+        "lng": 13.4564117,
+        "place_id": "ChIJC7CTVTSvqUcRkdviABKm6-o",
+        "address": "Wensickendorfer Ch 2, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_ferienhaus_am_waldrand_von_wandlitz",
+      "name": "Ferienhaus am Waldrand von Wandlitz",
+      "before": {
+        "lat": 52.75858548,
+        "lng": 13.48581748
+      },
+      "google": {
+        "lat": 52.75862499999999,
+        "lng": 13.4858828,
+        "place_id": "ChIJZ1ORzLavqUcRUkg4OtFJuf0",
+        "address": "16348 Wandlitz, Deutschland"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_evangel_pfarramt",
+      "name": "Evangel. Pfarramt",
+      "before": {
+        "lat": 52.79220358,
+        "lng": 13.48028754
+      },
+      "google": {
+        "lat": 52.7535536,
+        "lng": 13.4518883,
+        "place_id": "ChIJu_i-2P2uqUcRqMfLy6BREns",
+        "address": "Kirchstraße 21, 16348 Wandlitz"
+      },
+      "delta_m": 4703,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_tor13",
+      "name": "Tor13",
+      "before": {
+        "lat": 52.737568780000004,
+        "lng": 13.439878520000002
+      },
+      "google": {
+        "lat": 52.7376083,
+        "lng": 13.4399438,
+        "place_id": "ChIJ0WoQSeKvqUcREO9mWogqZNg",
+        "address": "Basdorfer Weg 1a, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_bootsverleih_strandbad_liepnitzsee",
+      "name": "Bootsverleih Strandbad Liepnitzsee",
+      "before": {
+        "lat": 52.74737408,
+        "lng": 13.494772399999999
+      },
+      "google": {
+        "lat": 52.74741359999999,
+        "lng": 13.4948377,
+        "place_id": "ChIJ6QHpejSuqUcRPAbXHxUtBaI",
+        "address": "Liepnitzsee, 16321 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_geschenkideen",
+      "name": "Geschenkideen",
+      "before": {
+        "lat": 52.752071279999996,
+        "lng": 13.4762337
+      },
+      "google": {
+        "lat": 52.7521108,
+        "lng": 13.476299,
+        "place_id": "ChIJcQbJ0gGvqUcRTwyuCjfCCtE",
+        "address": "Platanenstraße 18, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_aldi_nord",
+      "name": "ALDI Nord",
+      "before": {
+        "lat": 52.74319126,
+        "lng": 13.45481252
+      },
+      "google": {
+        "lat": 52.74322,
+        "lng": 13.45486,
+        "place_id": "ChIJycsT4veuqUcRPTNVr2ibsxU",
+        "address": "Berliner Weg 7, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_rewe_to_go_bei_aral",
+      "name": "REWE To Go bei Aral",
+      "before": {
+        "lat": 52.74297596,
+        "lng": 13.45826892
+      },
+      "google": {
+        "lat": 52.7430047,
+        "lng": 13.4583164,
+        "place_id": "ChIJu0ZoA86vqUcR3sq9DklpKw0",
+        "address": "Aral, Prenzlauer Ch 76, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_rewe_markt_michael_siebert_ohg",
+      "name": "REWE Markt Michael Siebert oHG",
+      "before": {
+        "lat": 52.71032366000001,
+        "lng": 13.43993956
+      },
+      "google": {
+        "lat": 52.7103524,
+        "lng": 13.439987,
+        "place_id": "ChIJb43eK9WtqUcRA_NvqRIZ1JY",
+        "address": "Prenzlauer Str. 71, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_lidl",
+      "name": "Lidl",
+      "before": {
+        "lat": 52.68607936000001,
+        "lng": 13.44128788
+      },
+      "google": {
+        "lat": 52.74634,
+        "lng": 13.46453,
+        "place_id": "ChIJiZshM1GuqUcR7sbbYfc4ADg",
+        "address": "Bernauer Ch 70, 16348 Wandlitz"
+      },
+      "delta_m": 6881,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_edeka_maske",
+      "name": "EDEKA Maske",
+      "before": {
+        "lat": 52.79052296,
+        "lng": 13.48075926
+      },
+      "google": {
+        "lat": 52.79055169999999,
+        "lng": 13.4808068,
+        "place_id": "ChIJTYt20YGvqUcRpSHzzqyTeOM",
+        "address": "Klosterfelder Hauptstraße 46, 16348 Wandlitz-Klosterfelde"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_basdorf_apotheke",
+      "name": "Basdorf Apotheke",
+      "before": {
+        "lat": 52.71666565999999,
+        "lng": 13.437489840000001
+      },
+      "google": {
+        "lat": 52.71669439999999,
+        "lng": 13.4375373,
+        "place_id": "ChIJNaWLPYGuqUcRANS1DXaaGUo",
+        "address": "Fontanestraße 5, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_brandenburgklinik_haus_berlin",
+      "name": "Brandenburgklinik - Haus Berlin",
+      "before": {
+        "lat": 52.73415356,
+        "lng": 13.490838120000001
+      },
+      "google": {
+        "lat": 52.7341823,
+        "lng": 13.4908856,
+        "place_id": "ChIJPV_iCDyuqUcRYMpGK8Yd24I",
+        "address": "16321 Bernau bei Berlin-Waldsiedlung"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_haus_havelland",
+      "name": "Haus Havelland",
+      "before": {
+        "lat": 52.729340560000004,
+        "lng": 13.489493140000002
+      },
+      "google": {
+        "lat": 52.72936929999999,
+        "lng": 13.4895406,
+        "place_id": "ChIJY4_ERTyuqUcRoU7OyVxJaAU",
+        "address": "Brandenburgallee, 16321 Bernau bei Berlin"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_bernau_brandenburg_klinik",
+      "name": "Bernau, Brandenburg-Klinik",
+      "before": {
+        "lat": 52.73100296,
+        "lng": 13.494539320000001
+      },
+      "google": {
+        "lat": 52.7302384,
+        "lng": 13.4895519,
+        "place_id": "ChIJCZVa_ZCzqUcRYvtID3FQaoQ",
+        "address": "Brandenburgallee 1, 16321 Bernau bei Berlin-Waldsiedlung"
+      },
+      "delta_m": 346,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_polizeirevier_bab",
+      "name": "Polizeirevier (BAB)",
+      "before": {
+        "lat": 52.70570026,
+        "lng": 13.54115306
+      },
+      "google": {
+        "lat": 52.705729,
+        "lng": 13.5412005,
+        "place_id": "ChIJwYHW3oixqUcRz9x0-q_7Rgk",
+        "address": "Hans-Wittwer-Straße 10, 16321 Bernau bei Berlin-Waldfrieden"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_spielplatz",
+      "name": "Spielplatz",
+      "before": {
+        "lat": 52.747621360000004,
+        "lng": 13.456533619999998
+      },
+      "google": {
+        "lat": 52.7656912,
+        "lng": 13.4683729,
+        "place_id": "ChIJL7sNq_ivqUcRdCtSf6xzZMo",
+        "address": "Rheinallee 11, 16348 Wandlitz"
+      },
+      "delta_m": 2161,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_spielplatz_seepromenade_stolzenhagen",
+      "name": "Spielplatz Seepromenade Stolzenhagen",
+      "before": {
+        "lat": 52.764268660000006,
+        "lng": 13.4314128
+      },
+      "google": {
+        "lat": 52.7642974,
+        "lng": 13.4314603,
+        "place_id": "ChIJz7527ievqUcRNjtC0aVyvjM",
+        "address": "Basdorfer Str. 40, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_holzspielplatz_stolzenhagen_ottopark",
+      "name": "Holzspielplatz Stolzenhagen (Ottopark)",
+      "before": {
+        "lat": 52.767541959999996,
+        "lng": 13.44930288
+      },
+      "google": {
+        "lat": 52.7675707,
+        "lng": 13.4493504,
+        "place_id": "ChIJ02BcSVGvqUcR8OOJK0htCpU",
+        "address": "Wildgatter 5, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_spielplatz_anemonenweg_basdorf",
+      "name": "Spielplatz Anemonenweg Basdorf",
+      "before": {
+        "lat": 52.70556266,
+        "lng": 13.44525146
+      },
+      "google": {
+        "lat": 52.7055914,
+        "lng": 13.4452989,
+        "place_id": "ChIJ85ZQUCatqUcRxdWe4LfEM_Y",
+        "address": "16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_spielplatz_lanke_obersee",
+      "name": "Spielplatz Lanke Obersee",
+      "before": {
+        "lat": 52.761233360000006,
+        "lng": 13.5544296
+      },
+      "google": {
+        "lat": 52.7612621,
+        "lng": 13.5544771,
+        "place_id": "ChIJ6ZbmY3yxqUcR9YwALMTFY1c",
+        "address": "Am Obersee 8B, 16348 Wandlitz-Lanke"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_golfclub_prenden",
+      "name": "Golfclub Prenden",
+      "before": {
+        "lat": 52.791005860000006,
+        "lng": 13.56786646
+      },
+      "google": {
+        "lat": 52.7910346,
+        "lng": 13.567914,
+        "place_id": "ChIJXUtDpAqwqUcRuwJGEEy-VQQ",
+        "address": "Waldweg 3, 16348 Wandlitz-Prenden"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_start2golf_fernmitgliedschaft",
+      "name": "Start2Golf - Fernmitgliedschaft",
+      "before": {
+        "lat": 52.78975676,
+        "lng": 13.559555459999999
+      },
+      "google": {
+        "lat": 52.7897855,
+        "lng": 13.559603,
+        "place_id": "ChIJhxMOV6a6qUcRBn5XnmH0Uj8",
+        "address": "Waldweg 3, 16348 Wandlitz-Prenden"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_offentlicher_parkplatz_am_strandbad_wandlitzsee",
+      "name": "Öffentlicher Parkplatz am Strandbad Wandlitzsee",
+      "before": {
+        "lat": 52.75547346,
+        "lng": 13.472299000000001
+      },
+      "google": {
+        "lat": 52.7555022,
+        "lng": 13.4723465,
+        "place_id": "ChIJsX4JAa2vqUcRrJ0beC1cBm0",
+        "address": "16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_schonower_heide",
+      "name": "Schönower Heide",
+      "before": {
+        "lat": 52.69129866000001,
+        "lng": 13.51066628
+      },
+      "google": {
+        "lat": 52.6913274,
+        "lng": 13.5107137,
+        "place_id": "ChIJ9cd3uhayqUcRMLfC2Uk0baQ",
+        "address": "Schönwalder Chaussee, 16321 Bernau bei Berlin"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_schotterparkplatz_obersee",
+      "name": "Schotterparkplatz Obersee",
+      "before": {
+        "lat": 52.75993716000001,
+        "lng": 13.5567958
+      },
+      "google": {
+        "lat": 52.7599659,
+        "lng": 13.5568433,
+        "place_id": "ChIJl3QbUm2xqUcRgfyk_KOHrDQ",
+        "address": "Am Obersee 6, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_rundwanderweg_hellsee",
+      "name": "Rundwanderweg Hellsee",
+      "before": {
+        "lat": 52.75077226,
+        "lng": 13.5868033
+      },
+      "google": {
+        "lat": 52.750801,
+        "lng": 13.5868508,
+        "place_id": "ChIJodZZndSxqUcRRcs1Hf8XH-o",
+        "address": "QH2P+8P, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_caravan_parkplatz_wandlitz_wemolo",
+      "name": "Caravan Parkplatz Wandlitz - Wemolo",
+      "before": {
+        "lat": 52.79138656,
+        "lng": 13.54565916
+      },
+      "google": {
+        "lat": 52.7914153,
+        "lng": 13.5457067,
+        "place_id": "ChIJ5xUoj6K7qUcR1QNBhamJmBM",
+        "address": "Am Krummen Pfuhl, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_sportanlage_waldsiedlung",
+      "name": "Sportanlage Waldsiedlung",
+      "before": {
+        "lat": 52.72814546000001,
+        "lng": 13.489903739999999
+      },
+      "google": {
+        "lat": 52.7281742,
+        "lng": 13.4899512,
+        "place_id": "ChIJ5V4F1BeuqUcRv69ZaAXycj4",
+        "address": "Niederbarnimallee 116, 16321 Bernau bei Berlin-Waldsiedlung"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_wintersportverein_wandlitz_e_v_wsv_wandlitz_e_v",
+      "name": "Wintersportverein Wandlitz e. V. (WSV Wandlitz e.V.)",
+      "before": {
+        "lat": 52.76115126,
+        "lng": 13.478882500000001
+      },
+      "google": {
+        "lat": 52.76118,
+        "lng": 13.47893,
+        "place_id": "ChIJkZaz2a-vqUcRbutZ2LaISeQ",
+        "address": "Wacholderstraße 9, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_sg_union_1919_klosterfelde_e_v",
+      "name": "SG Union 1919 Klosterfelde e.V.",
+      "before": {
+        "lat": 52.79212866,
+        "lng": 13.48997356
+      },
+      "google": {
+        "lat": 52.7921574,
+        "lng": 13.4900211,
+        "place_id": "ChIJcUVtQ4ivqUcRWin9NQVEnsY",
+        "address": "Mühlenstraße, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_sportplatz",
+      "name": "Sportplatz",
+      "before": {
+        "lat": 52.79458666000001,
+        "lng": 13.487335259999998
+      },
+      "google": {
+        "lat": 52.748146,
+        "lng": 13.4668798,
+        "place_id": "ChIJe48JY1GuqUcR6yQhniqYalM",
+        "address": "16348 Wandlitz"
+      },
+      "delta_m": 5344,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_fsv_basdorf_e_v",
+      "name": "FSV Basdorf e.V.",
+      "before": {
+        "lat": 52.71454886,
+        "lng": 13.442929340000001
+      },
+      "google": {
+        "lat": 52.7145776,
+        "lng": 13.4429768,
+        "place_id": "ChIJOTHEu3-uqUcRLE9ncVlt2BE",
+        "address": "Primelstraße 11 b, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_bolzplatz",
+      "name": "Bolzplatz",
+      "before": {
+        "lat": 52.70996256000001,
+        "lng": 13.430097660000001
+      },
+      "google": {
+        "lat": 52.7099913,
+        "lng": 13.4301451,
+        "place_id": "ChIJAQAAXymsqUcRqu0nLk-reMw",
+        "address": "Mühlenbecker Damm 20, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_niederbarnimer_wasser_u_abwasserzweckverband",
+      "name": "Niederbarnimer Wasser- u. Abwasserzweckverband",
+      "before": {
+        "lat": 52.78522286,
+        "lng": 13.396037179999999
+      },
+      "google": {
+        "lat": 52.71585409999999,
+        "lng": 13.4409455,
+        "place_id": "ChIJL2BBgICuqUcROi2rRYuY5Wk",
+        "address": "Dahlienweg 3, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 8285,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_elektrotankstelle",
+      "name": "Elektrotankstelle",
+      "before": {
+        "lat": 52.75378656,
+        "lng": 13.471726499999999
+      },
+      "google": {
+        "lat": 52.75405,
+        "lng": 13.4720975,
+        "place_id": "ChIJ7cMwIa2vqUcRzy6-H1BEC5g",
+        "address": "Prenzlauer Ch, 16348 Wandlitz"
+      },
+      "delta_m": 38,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "wandlitz_og_clean_fuels_cng_tankstelle",
+      "name": "OG Clean Fuels CNG Tankstelle",
+      "before": {
+        "lat": 52.704610159999994,
+        "lng": 13.44025446
+      },
+      "google": {
+        "lat": 52.7046389,
+        "lng": 13.4403019,
+        "place_id": "ChIJGzEiLWCtqUcRfO_DqzRfIeM",
+        "address": "Prenzlauer Str. 65, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_markisch_edel",
+      "name": "Märkisch Edel",
+      "before": {
+        "lat": 52.747251059999996,
+        "lng": 13.46325032
+      },
+      "google": {
+        "lat": 52.7472798,
+        "lng": 13.4632978,
+        "place_id": "ChIJLf83uFauqUcRvtz2Itg3FQ4",
+        "address": "Prenzlauer Ch 116, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_markisch_edel_basdorf",
+      "name": "Märkisch Edel Basdorf",
+      "before": {
+        "lat": 52.71367246,
+        "lng": 13.438812440000001
+      },
+      "google": {
+        "lat": 52.7137012,
+        "lng": 13.4388599,
+        "place_id": "ChIJY9UPG4CuqUcRlIJD721LYts",
+        "address": "Am Markt 4, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_heaven_s_cake_willkommen_bei_andre",
+      "name": "Heaven's Cake - Willkommen bei André",
+      "before": {
+        "lat": 52.78920196,
+        "lng": 13.48057906
+      },
+      "google": {
+        "lat": 52.7892307,
+        "lng": 13.4806266,
+        "place_id": "ChIJzQWWKQCvqUcRwO-OgYRDKSM",
+        "address": "Klosterfelder Hauptstraße 60, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_cafe_bistro_21",
+      "name": "Café &Bistro 21",
+      "before": {
+        "lat": 52.71594936,
+        "lng": 13.43799254
+      },
+      "google": {
+        "lat": 52.7159781,
+        "lng": 13.43804,
+        "place_id": "ChIJr8c2ObavqUcR5Tk93nGr27E",
+        "address": "Fontanestraße 3, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_rossmann_drogeriemarkt",
+      "name": "ROSSMANN Drogeriemarkt",
+      "before": {
+        "lat": 52.74765486,
+        "lng": 13.463941420000001
+      },
+      "google": {
+        "lat": 52.74768359999999,
+        "lng": 13.4639889,
+        "place_id": "ChIJcwSxrVauqUcRtJ5uK7w9Zgw",
+        "address": "Prenzlauer Ch 118, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_dm_drogerie_markt",
+      "name": "dm-drogerie markt",
+      "before": {
+        "lat": 52.70944446000001,
+        "lng": 13.44086726
+      },
+      "google": {
+        "lat": 52.7094732,
+        "lng": 13.4409147,
+        "place_id": "ChIJg7zajK-tqUcRgpNtoQCdEIM",
+        "address": "Bei REWE, Prenzlauer Str. 70, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_heidekrautbahnmuseum_basdorf",
+      "name": "Heidekrautbahnmuseum Basdorf",
+      "before": {
+        "lat": 52.71291606,
+        "lng": 13.433370640000001
+      },
+      "google": {
+        "lat": 52.7129448,
+        "lng": 13.4334181,
+        "place_id": "ChIJodLHPiqsqUcR-rDIjWn-OUw",
+        "address": "An d. Wildbahn 2A, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_action_wandlitz",
+      "name": "Action Wandlitz",
+      "before": {
+        "lat": 52.71428126000001,
+        "lng": 13.438620539999999
+      },
+      "google": {
+        "lat": 52.71431,
+        "lng": 13.438668,
+        "place_id": "ChIJjatzFYCuqUcR9Qidr3lOd4Q",
+        "address": "Am Markt 1, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_villa_belvedere",
+      "name": "Villa Belvedere",
+      "before": {
+        "lat": 52.68429295999999,
+        "lng": 13.470264779999999
+      },
+      "google": {
+        "lat": 52.6843217,
+        "lng": 13.4703122,
+        "place_id": "ChIJJwmwocutqUcRTnJb6PnqUWo",
+        "address": "Bernauer Damm 11, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_restaurant_im_seepark_kurhotel_am_wandlitzsee",
+      "name": "Restaurant Im Seepark Kurhotel Am Wandlitzsee",
+      "before": {
+        "lat": 52.75484976,
+        "lng": 13.4512934
+      },
+      "google": {
+        "lat": 52.7548785,
+        "lng": 13.4513409,
+        "place_id": "ChIJq6p66_2uqUcRzsIXgSFLYmw",
+        "address": "Kirchstraße 9, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_hotel_seeterrassen_das_lounge_hotel_am_wandlitzsee",
+      "name": "Hotel Seeterrassen | Das Lounge-Hotel am Wandlitzsee",
+      "before": {
+        "lat": 52.76136296000001,
+        "lng": 13.4674025
+      },
+      "google": {
+        "lat": 52.7613917,
+        "lng": 13.46745,
+        "place_id": "ChIJxbd6B6mvqUcRt6I6sUGjQf0",
+        "address": "Thälmannstraße 93, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_akropolis_taverna",
+      "name": "Akropolis Taverna",
+      "before": {
+        "lat": 52.73355876000001,
+        "lng": 13.491818219999999
+      },
+      "google": {
+        "lat": 52.7335875,
+        "lng": 13.4918657,
+        "place_id": "ChIJT-rNDQCvqUcRfa3KmO5QXdk",
+        "address": "Robert-Stolz-Allee 16321, 16321 Bernau bei Berlin-Lanke"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_restaurant_olympia_wandlitz",
+      "name": "Restaurant Olympia Wandlitz",
+      "before": {
+        "lat": 52.73207126,
+        "lng": 13.44724802
+      },
+      "google": {
+        "lat": 52.7321,
+        "lng": 13.4472955,
+        "place_id": "ChIJE9QYjYquqUcRk1JXjB4NfrM",
+        "address": "Prenzlauer Str. 129, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_trattoria_punto_uno",
+      "name": "Trattoria Punto Uno",
+      "before": {
+        "lat": 52.853987659999994,
+        "lng": 13.528836799999999
+      },
+      "google": {
+        "lat": 52.8540164,
+        "lng": 13.5288844,
+        "place_id": "ChIJ1zjWFJOlqUcRXn2l8T19sZo",
+        "address": "Schorfheidestraße 59, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_kaffeerosterei_112",
+      "name": "Kaffeerösterei 112",
+      "before": {
+        "lat": 52.76055126,
+        "lng": 13.5654858
+      },
+      "google": {
+        "lat": 52.76058,
+        "lng": 13.5655333,
+        "place_id": "ChIJx1nlHQCxqUcR7DAMmgKgJy0",
+        "address": "Lanke, Stadtgut, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_torsten",
+      "name": "Torsten",
+      "before": {
+        "lat": 52.67952136,
+        "lng": 13.42643258
+      },
+      "google": {
+        "lat": 52.6795501,
+        "lng": 13.42648,
+        "place_id": "ChIJXX7OoU9LqEcRVhY8En1rbi0",
+        "address": "Mühlenbecker Ch 17, 16348 Wandlitz-Schönwalde"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_hof_cafe_im_antiquarium",
+      "name": "Hof Café im Antiquarium",
+      "before": {
+        "lat": 52.68104306,
+        "lng": 13.440558579999998
+      },
+      "google": {
+        "lat": 52.6810718,
+        "lng": 13.440606,
+        "place_id": "ChIJ9faEQjGtqUcRU4XKNv9tWbs",
+        "address": "Hauptstraße 52, 16348 Wandlitz-Schönwalde"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_bummeltime_lutz_hahn",
+      "name": "Bummeltime - Lutz Hahn",
+      "before": {
+        "lat": 52.75845656,
+        "lng": 13.474888799999999
+      },
+      "google": {
+        "lat": 52.7584853,
+        "lng": 13.4749363,
+        "place_id": "ChIJ500Deq6vqUcRY2mDjYpyGhU",
+        "address": "Jasminstraße 39, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_hotel_restaurant_jagerheim_utzdorf_am_liepnitzsee",
+      "name": "Hotel & Restaurant Jägerheim Ützdorf am Liepnitzsee",
+      "before": {
+        "lat": 52.75664535999999,
+        "lng": 13.529276300000001
+      },
+      "google": {
+        "lat": 52.7566741,
+        "lng": 13.5293238,
+        "place_id": "ChIJnWYSkCiwqUcRwjK0hxUy4d4",
+        "address": "Wandlitzer Str. 12, 16348 Wandlitz-Lanke"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_waldhotel_wandlitz",
+      "name": "Waldhotel Wandlitz",
+      "before": {
+        "lat": 52.74314676,
+        "lng": 13.476482619999999
+      },
+      "google": {
+        "lat": 52.7431755,
+        "lng": 13.4765301,
+        "place_id": "ChIJPRjXck-uqUcRUwFj0FIkuEk",
+        "address": "Bernauer Ch 28, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_landgasthof_zur_krummen_linde",
+      "name": "Landgasthof Zur krummen Linde",
+      "before": {
+        "lat": 52.660129559999994,
+        "lng": 13.259324800000002
+      },
+      "google": {
+        "lat": 52.6601583,
+        "lng": 13.2593722,
+        "place_id": "ChIJG509eseqqUcRLwspMc4-WhU",
+        "address": "Dorfstraße (Stolpe) 5, 16540 Hohen Neuendorf-Stolpe"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_landhotel_classic_hochzeitshaus",
+      "name": "Landhotel Classic HOCHZEITSHAUS",
+      "before": {
+        "lat": 52.75547126,
+        "lng": 13.3723825
+      },
+      "google": {
+        "lat": 52.7555,
+        "lng": 13.37243,
+        "place_id": "ChIJRS2ZEyOpqUcRqconA1E9FKM",
+        "address": "Hauptstraße 66, 16515 Oranienburg-Wensickendorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_restaurant_und_pension_bellevue",
+      "name": "Restaurant und Pension Bellevue",
+      "before": {
+        "lat": 52.758797460000004,
+        "lng": 13.5633168
+      },
+      "google": {
+        "lat": 52.75882619999999,
+        "lng": 13.5633643,
+        "place_id": "ChIJ_WEPU0GwqUcR8bnYFRbKSvk",
+        "address": "Lanker Dorfstraße 17, 16348 Wandlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_hotel_my_schildow",
+      "name": "Hotel My Schildow",
+      "before": {
+        "lat": 52.63938316,
+        "lng": 13.376598620000001
+      },
+      "google": {
+        "lat": 52.6394119,
+        "lng": 13.376646,
+        "place_id": "ChIJMRDyd8msqUcRjYhGb4q2WRY",
+        "address": "Mühlenbecker Str. 2, 16552 Mühlenbecker Land-Schildow"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_hotel_pension_odin",
+      "name": "Hotel-Pension Odin",
+      "before": {
+        "lat": 52.551418160000004,
+        "lng": 13.442718719999998
+      },
+      "google": {
+        "lat": 52.55144689999999,
+        "lng": 13.442766,
+        "place_id": "ChIJyX0pF-9NqEcRVJuKjrk7Ln4",
+        "address": "Roelckestraße 167, 13086 Berlin"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_hotel_normandie",
+      "name": "Hotel Normandie",
+      "before": {
+        "lat": 52.629018359999996,
+        "lng": 13.36459884
+      },
+      "google": {
+        "lat": 52.6290471,
+        "lng": 13.3646462,
+        "place_id": "ChIJn3hUiUlTqEcREfs5I0YwaLk",
+        "address": "Hermsdorfer Str. 10, 16552 Mühlenbecker Land-Schildow"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_stadtmauer_bernau",
+      "name": "Stadtmauer Bernau",
+      "before": {
+        "lat": 52.67740189999999,
+        "lng": 13.585553899999999
+      },
+      "google": {
+        "lat": 52.6774558,
+        "lng": 13.5856428,
+        "place_id": "ChIJ7bdRHduzqUcRhPRDPRSFibc",
+        "address": "An d. Stadtmauer, 16321 Bernau bei Berlin"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_stadtbrunnen_bernau",
+      "name": "Stadtbrunnen Bernau",
+      "before": {
+        "lat": 52.6789663,
+        "lng": 13.587427400000001
+      },
+      "google": {
+        "lat": 52.6790202,
+        "lng": 13.5875163,
+        "place_id": "ChIJn9hDA-yzqUcRVRoBkobCkeU",
+        "address": "Marktpl., 16321 Bernau bei Berlin-Bernau"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_schlosspark_lanke_lenne_park",
+      "name": "Schlosspark Lanke (Lenne Park)",
+      "before": {
+        "lat": 52.75927586,
+        "lng": 13.567553720000001
+      },
+      "google": {
+        "lat": 52.7593118,
+        "lng": 13.5676131,
+        "place_id": "ChIJ30KQlUOwqUcRshE63CtAmag",
+        "address": "Prenzlauer Straße 15, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_biesenthaler_becken",
+      "name": "Biesenthaler Becken",
+      "before": {
+        "lat": 52.75352435999999,
+        "lng": 13.608165439999999
+      },
+      "google": {
+        "lat": 52.7535603,
+        "lng": 13.6082248,
+        "place_id": "ChIJGfkMce-wqUcRvBj_KILcgOk",
+        "address": "Prenzlauer Straße 15, 16348 Wandlitz-Basdorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_holzpagode",
+      "name": "Holzpagode",
+      "before": {
+        "lat": 52.69546236,
+        "lng": 13.40885882
+      },
+      "google": {
+        "lat": 52.6954983,
+        "lng": 13.4089181,
+        "place_id": "ChIJAfrnpDisqUcRQLwBJM8lk-E",
+        "address": "16348 Wandlitz-Schönwalde"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_bunkeranlage_qualle",
+      "name": "Bunkeranlage Qualle",
+      "before": {
+        "lat": 52.738763559999995,
+        "lng": 13.57411406
+      },
+      "google": {
+        "lat": 52.7387995,
+        "lng": 13.5741734,
+        "place_id": "ChIJ25eHWgCxqUcRCgC1Y6kBiMk",
+        "address": "PHQG+V6, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_aussichtsplattform",
+      "name": "Aussichtsplattform",
+      "before": {
+        "lat": 52.69173976,
+        "lng": 13.49994182
+      },
+      "google": {
+        "lat": 52.69177570000001,
+        "lng": 13.5000011,
+        "place_id": "ChIJf4qm4byzqUcRYzL3xeyItV4",
+        "address": "16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_alte_fremd_und_zwangsarbeiterlager_h_bauten",
+      "name": "Alte Fremd-und Zwangsarbeiterlager H-Bauten",
+      "before": {
+        "lat": 52.70738256,
+        "lng": 13.443388500000001
+      },
+      "google": {
+        "lat": 52.7074185,
+        "lng": 13.4434478,
+        "place_id": "ChIJZ-0ldQCtqUcRAwobA_dc7Y8",
+        "address": "Rene-Iskin-Ring 4, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_alte_eiche",
+      "name": "Alte Eiche",
+      "before": {
+        "lat": 52.73182756,
+        "lng": 13.419048459999999
+      },
+      "google": {
+        "lat": 52.7318635,
+        "lng": 13.4191078,
+        "place_id": "ChIJnxukOQCvqUcR5DNcnpItDFo",
+        "address": "PCJ9+PJ, 16515 Mühlenbecker Land"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_kriegerdenkmal_zerpenschleuse",
+      "name": "Kriegerdenkmal Zerpenschleuse",
+      "before": {
+        "lat": 52.84700616,
+        "lng": 13.5216307
+      },
+      "google": {
+        "lat": 52.8470421,
+        "lng": 13.5216902,
+        "place_id": "ChIJx5Ihlz-lqUcRLBwVKkspTd4",
+        "address": "16348 Wandlitz-Zerpenschleuse"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_kriegerdenkmal",
+      "name": "Kriegerdenkmal",
+      "before": {
+        "lat": 52.68028105999999,
+        "lng": 13.58542344
+      },
+      "google": {
+        "lat": 52.7532995,
+        "lng": 13.4524991,
+        "place_id": "ChIJG1Tf-RmvqUcRG2tqdVZFlCM",
+        "address": "16348 Wandlitz"
+      },
+      "delta_m": 12087,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_der_prinzenstein_im_lanker_forst",
+      "name": "Der Prinzenstein im Lanker Forst",
+      "before": {
+        "lat": 52.74327705999999,
+        "lng": 13.55620184
+      },
+      "google": {
+        "lat": 52.743313,
+        "lng": 13.5562612,
+        "place_id": "ChIJF8slvMmxqUcRoZXklXXdJwI",
+        "address": "16348 Wandlitz-Lanke"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_gedenksaule",
+      "name": "Gedenksäule",
+      "before": {
+        "lat": 52.766383960000006,
+        "lng": 13.62493142
+      },
+      "google": {
+        "lat": 52.6790538,
+        "lng": 13.5844586,
+        "place_id": "ChIJT7p4U8ezqUcRWJJxTYCFkY0",
+        "address": "16321 Bernau bei Berlin-Bernau"
+      },
+      "delta_m": 10086,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_denkmal_fur_die_opfer_der_hexenverfolgung",
+      "name": "Denkmal für die Opfer der Hexenverfolgung",
+      "before": {
+        "lat": 52.67970955999999,
+        "lng": 13.58501454
+      },
+      "google": {
+        "lat": 52.6797455,
+        "lng": 13.5850738,
+        "place_id": "ChIJoUUUWjWzqUcRfIcIwt_TSNA",
+        "address": "Berliner Str. 46, 16321 Bernau bei Berlin"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_dorfkirche_schonerlinde",
+      "name": "Dorfkirche Schönerlinde",
+      "before": {
+        "lat": 52.65395976,
+        "lng": 13.447054560000002
+      },
+      "google": {
+        "lat": 52.6539957,
+        "lng": 13.4471138,
+        "place_id": "ChIJoQ_PamytqUcR2gb-8gRX1To",
+        "address": "Berliner Allee 2, 16348 Wandlitz-Schönerlinde"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_fachwerkkirche_prenden_mit_heimatmuseum",
+      "name": "Fachwerkkirche Prenden mit Heimatmuseum",
+      "before": {
+        "lat": 52.790366860000006,
+        "lng": 13.55005118
+      },
+      "google": {
+        "lat": 52.7904028,
+        "lng": 13.5501106,
+        "place_id": "ChIJkXrmdam6qUcREQMcllTztn8",
+        "address": "Prendener Dorfstraße 38, 16348 Wandlitz-Prenden"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_dorfkirche_schonwalde_barnim",
+      "name": "Dorfkirche Schönwalde (Barnim)",
+      "before": {
+        "lat": 52.67903946,
+        "lng": 13.440083040000001
+      },
+      "google": {
+        "lat": 52.67907539999999,
+        "lng": 13.4401423,
+        "place_id": "ChIJDQorQKWtqUcRRDUcbOUDxk0",
+        "address": "Hauptstraße 41, 16348 Wandlitz-Schönwalde"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_dorfkirche_lanke",
+      "name": "Dorfkirche Lanke",
+      "before": {
+        "lat": 52.76143486000001,
+        "lng": 13.56482062
+      },
+      "google": {
+        "lat": 52.7614708,
+        "lng": 13.56488,
+        "place_id": "ChIJn4OZgUGwqUcR96iakXjn-JA",
+        "address": "Baggerberg 5, 16348 Wandlitz-Lanke"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_schloss_dammsmuhle",
+      "name": "Schloss Dammsmühle",
+      "before": {
+        "lat": 52.69378525999999,
+        "lng": 13.407546919999998
+      },
+      "google": {
+        "lat": 52.6938212,
+        "lng": 13.4076062,
+        "place_id": "ChIJL96JaKOtqUcRsEgXFqnwtRs",
+        "address": "MCV5+G2, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_grosses_schloss_lanke",
+      "name": "Großes Schloss Lanke",
+      "before": {
+        "lat": 52.75973025999999,
+        "lng": 13.56542592
+      },
+      "google": {
+        "lat": 52.75976619999999,
+        "lng": 13.5654853,
+        "place_id": "ChIJQ-vWHQCxqUcR7e9j_mgFQGA",
+        "address": "Lanker Dorfstraße 10, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_kleines_schloss_lanke",
+      "name": "Kleines Schloß Lanke",
+      "before": {
+        "lat": 52.75985185999999,
+        "lng": 13.56442782
+      },
+      "google": {
+        "lat": 52.75988779999999,
+        "lng": 13.5644872,
+        "place_id": "ChIJ4fRcB1ixqUcRC-cKD4VVTQM",
+        "address": "Lanker Dorfstraße 9, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_basdorfer_garten",
+      "name": "Basdorfer Gärten",
+      "before": {
+        "lat": 52.70636256,
+        "lng": 13.4402658
+      },
+      "google": {
+        "lat": 52.7063985,
+        "lng": 13.4403251,
+        "place_id": "ChIJ_c93mVitqUcRxgzac8ith1U",
+        "address": "René-Iskin-Ring, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_uferrundweg_am_summter_see",
+      "name": "Uferrundweg am Summter See",
+      "before": {
+        "lat": 52.691068859999994,
+        "lng": 13.37019312
+      },
+      "google": {
+        "lat": 52.69110480000001,
+        "lng": 13.3702524,
+        "place_id": "ChIJ4UgHu-KtqUcRSX6cNPG6OnM",
+        "address": "Seepromenade, 16567 Mühlenbecker Land"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_rundwanderweg_wildgehege",
+      "name": "Rundwanderweg Wildgehege",
+      "before": {
+        "lat": 52.68193386,
+        "lng": 13.512843720000001
+      },
+      "google": {
+        "lat": 52.6819698,
+        "lng": 13.512903,
+        "place_id": "ChIJY_-2QM2zqUcR-Y2g5Je6sLQ",
+        "address": "16348 Bernau bei Berlin-Schönow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_hobrechtswald",
+      "name": "Hobrechtswald",
+      "before": {
+        "lat": 52.66243486,
+        "lng": 13.47265386
+      },
+      "google": {
+        "lat": 52.6624708,
+        "lng": 13.4727131,
+        "place_id": "ChIJLZXFUwCtqUcRRLzTE8ctCmU",
+        "address": "Buch, 13125 Berlin"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_schonerlinde",
+      "name": "Schönerlinde",
+      "before": {
+        "lat": 52.65616666,
+        "lng": 13.43306376
+      },
+      "google": {
+        "lat": 52.6539413,
+        "lng": 13.4337514,
+        "place_id": "ChIJ5YTLlmytqUcRIDeC1kggIQo",
+        "address": "Wandlitz-Schönerlinde"
+      },
+      "delta_m": 252,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_nordlichster_punkt_berlins",
+      "name": "Nördlichster Punkt Berlins",
+      "before": {
+        "lat": 52.675471159999994,
+        "lng": 13.479428039999998
+      },
+      "google": {
+        "lat": 52.6755071,
+        "lng": 13.4794873,
+        "place_id": "ChIJQ0m_fQ-tqUcRGMp2yVhk3O4",
+        "address": "Hobrechtsfelder Str. 8A, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_privathafen_zerpenschleuse",
+      "name": "Privathafen Zerpenschleuse",
+      "before": {
+        "lat": 52.84838325999999,
+        "lng": 13.538967500000002
+      },
+      "google": {
+        "lat": 52.8484192,
+        "lng": 13.539027,
+        "place_id": "ChIJQ_pfsRalqUcREMKsklJaYHI",
+        "address": "Zum Wasserkreuz 46, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_schildipark_panketal",
+      "name": "Schildipark Panketal",
+      "before": {
+        "lat": 52.66510175999999,
+        "lng": 13.48821716
+      },
+      "google": {
+        "lat": 52.6651377,
+        "lng": 13.4882764,
+        "place_id": "ChIJEaFFCRSzqUcR7mCIhBavnx4",
+        "address": "Gut Hobrechtsfelde, Hobrechtsfelder Dorfstraße, 16341 Panketal"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_bootsverleih_am_obersee",
+      "name": "Bootsverleih am Obersee",
+      "before": {
+        "lat": 52.75944306,
+        "lng": 13.55744052
+      },
+      "google": {
+        "lat": 52.74741359999999,
+        "lng": 13.4948377,
+        "place_id": "ChIJ6QHpejSuqUcRPAbXHxUtBaI",
+        "address": "Liepnitzsee, 16321 Wandlitz"
+      },
+      "delta_m": 4420,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_sup_verleih_shuttle_wandlitz",
+      "name": "SUP Verleih/Shuttle Wandlitz",
+      "before": {
+        "lat": 52.80871186,
+        "lng": 13.50118056
+      },
+      "google": {
+        "lat": 52.8087478,
+        "lng": 13.50124,
+        "place_id": "ChIJ8bKdP96lqUcR8sk2isrkDNs",
+        "address": "Eichenweg 1, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_berliner_bootschaft",
+      "name": "Berliner Bootschaft",
+      "before": {
+        "lat": 52.65874166,
+        "lng": 13.42084106
+      },
+      "google": {
+        "lat": 52.6587776,
+        "lng": 13.4209003,
+        "place_id": "ChIJq8j3ZYRNqEcRR5Hqr2rNr0E",
+        "address": "Mühlenbecker Str. 8b, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wandlitz_mein_rotes_boot",
+      "name": "Mein rotes Boot",
+      "before": {
+        "lat": 52.84689936000001,
+        "lng": 13.5389267
+      },
+      "google": {
+        "lat": 52.8469353,
+        "lng": 13.5389862,
+        "place_id": "ChIJ0QErVM5TqUcRlpgNIklBdS8",
+        "address": "Zum Wasserkreuz, 16348 Wandlitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wandlitz_lagerraum_berlin_self_storage_meine_lagerbox",
+      "name": "Lagerraum Berlin - Self Storage meine lagerbox",
+      "before": {
+        "lat": 52.67995234,
+        "lng": 13.42492292
+      },
+      "google": {
+        "lat": 52.6799775,
+        "lng": 13.4249644,
+        "place_id": "ChIJkQKIGK2tqUcRJxyMARTZs44",
+        "address": "Mühlenbecker Ch 16, 16348 Wandlitz-Schönwalde"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    }
+  ]
+}

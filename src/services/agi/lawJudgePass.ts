@@ -17,6 +17,7 @@ import {
   applyActionButtonJudge,
   type ActionJudgeNote,
 } from './actionButtonJudge';
+import { shortenActionLabel } from '../concierge/actionLabelShorten';
 import { recordJudgePass } from '../feedback/telemetryBuffer';
 import type {
   JudgeOutputSnapshot,
@@ -255,7 +256,7 @@ export async function runLawJudgePass(opts: {
     visualBullets: (current.visualBullets ?? []).slice(0, 3),
     quickActions: current.quickActions.slice(0, 4).map((a) => ({
       type: a.type,
-      label: a.label.slice(0, 30),
+      label: shortenActionLabel(a.label),
       payload: a.payload,
     })),
   };

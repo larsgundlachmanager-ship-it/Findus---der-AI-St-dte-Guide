@@ -26,6 +26,19 @@ export type NavWaypoint = {
   isStation?: boolean;
   /** Anzeigename der Haltestelle. */
   stationName?: string | null;
+  /** Distanz entlang der densifizierten Spline (m). */
+  splineAlongM?: number;
+  /** Landmarke sichtbar vom vorherigen Micro-WP. */
+  visibleLandmark?: string | null;
+  /** Hybrid guidance: POI-only vs. Street-View vision required. */
+  turnComplexity?: 'simple' | 'complex' | 'unknown';
+  /** Complexity score 0–100 from turnComplexityClassifier. */
+  complexityScore?: number;
+  /** Approach bearing for Street View prefetch (deg). */
+  turnHeadingDeg?: number;
+  /** Sidewalk-aligned arrow target (may differ from path lat/lng). */
+  arrowLat?: number;
+  arrowLng?: number;
 };
 
 export type NavDestination = {
@@ -43,7 +56,18 @@ export type NavDestination = {
 export type PendingNavOffer = {
   poiId: number;
   name: string;
+  /** Optional: für Orte außerhalb der Pack-DB (Geocode). */
+  lat?: number;
+  lng?: number;
 };
+
+/** Walk ↔ ÖPNV phase for seamless guidance switching. */
+export type NavPhase =
+  | 'idle'
+  | 'walk'
+  | 'walk_to_stop'
+  | 'in_transit'
+  | 'post_transit_walk';
 
 export type NavigationTick = {
   mode: NavMode;
@@ -62,6 +86,12 @@ export type NavigationTick = {
   speedMs: number;
   /** Verbleibende Haltestellen inkl. Ziel (nur Transit). */
   remainingStations?: number | null;
+  /** Walk / board / ride / alight phase. */
+  navPhase?: NavPhase;
+  /** Absolute path bearing at current spline point (for wrong-way). */
+  pathBearingDeg?: number | null;
+  /** Distance off the densified route polyline (m). */
+  distanceToPathM?: number | null;
 };
 
 /** Defaults (Fuß) — dynamisch überschrieben via transportMode thresholds. */
@@ -69,12 +99,16 @@ export const CLOSE_RANGE_M = 30;
 /** Exit close-range only above this — avoids mode flicker from GPS drift. */
 export const CLOSE_RANGE_EXIT_M = 38;
 export const WAYPOINT_ADVANCE_M = 12;
-export const ARRIVAL_FALLBACK_M = 10;
-export const TURN_IMMINENT_M = 20;
+export const ARRIVAL_FALLBACK_M = 18;
+export const TURN_IMMINENT_M = 15;
 export const TURN_IMMINENT_DEG = 45;
 export const ATTENTION_CUE_MS = 1200;
-/** Heading EMA alpha (0–1); lower = smoother arrow. */
-export const HEADING_LOWPASS_ALPHA = 0.18;
+/**
+ * Heading EMA base alpha (0–1).
+ * Adaptive filter in HeadingLowPass snaps higher on large turns (~0.75–0.9)
+ * and lightly damps micro-jitter — 0.55 keeps the needle snappy while walking.
+ */
+export const HEADING_LOWPASS_ALPHA = 0.55;
 
 /** High-frequency GPS while navigating / free-roam. */
 export const GPS_REALTIME_INTERVAL_MS = 1000;

@@ -1,4 +1,4 @@
-import { filterPhonemesToVocab } from '../../constants/kokoroVocab';
+import { filterPhonemesToVocab } from '../../constants/phonemeSanitize';
 import type { GermanG2PProvider } from './types';
 import { phonemizeGermanIpa } from './de/germanIpaG2p';
 import { normalizeGermanTtsText } from './germanTextNormalize';

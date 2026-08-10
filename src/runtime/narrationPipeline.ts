@@ -1,9 +1,9 @@
 /**
- * Modul 1 Narration Pipeline (Phase 4) — Flows A/B/C.
+ * Modul 1 Narration Pipeline — Flows A/B/C (Reboot: nur POI-Chat).
  *
- * Flow A — Wegweiser: visual orientierung (offline-first) → teaser + hook
- * Flow B — Hauptort: full story, skip intro if approach heard, LOCK
- * Flow C — Nebenort: same story path as B, parentIsMajor hint
+ * Flow A — Wegweiser: Code-lookPhrase + 2-Satz-Teaser (module1PoiChat)
+ * Flow B — Hauptort: Multi-Turn Chat, Hook mittendrin, LOCK
+ * Flow C — Nebenort: gleicher Story-Pfad wie B
  */
 
 import {
@@ -12,24 +12,20 @@ import {
   getAllPois,
   haversineMeters,
 } from '../db/database';
-import type { Poi, PoiWithFacts } from '../db/types';
+import type { Poi, PoiKind, PoiWithFacts } from '../db/types';
 import type { UserProfile } from '../types/userProfile';
 import { buildPoiResearchContext } from '../constants/prompts';
 import { filterDeepStoryFacts } from '../services/ai/deepStoryFilter';
 import {
   buildVisitedMemoryEntry,
   extractOfflineGeneralInfo,
-  streamFindusStorySentences,
 } from '../services/ai/storyService';
 import { commitNarrationFeatureTips } from './featureTipsModule';
-import { resolvePoiImportance } from '../services/personaEngine';
 import {
   buildFastHook,
   buildWegweiserHook,
   extractWegweiserDestination,
-  isBoringApproachTeaser,
 } from '../services/ai/fastHook';
-import { buildRichApproachTeaser } from '../services/ai/approachTeaser';
 import { lockPoiTeaser } from '../services/poi/poiTeaserLocks';
 import { sentencesFromFullText } from '../services/ai/sentenceStream';
 import { getVoiceSettingsForTour, stopSpeaking } from '../services/ttsService';
@@ -50,6 +46,7 @@ import {
   getMovementBearingDeg,
 } from '../services/navigation';
 import { toStampSummary } from '../services/navigation/stampBullets';
+import { presentModule1LiveCard } from '../services/poi/module1LiveCard';
 import {
   buildBicycleContextPitch,
   buildTransitDriveByPitch,
@@ -67,16 +64,23 @@ import { hapticAttentionCue } from '../services/navigation/haptics';
 import {
   clearInterestWatch,
   getPendingInterestWatch,
-  interestAckLine,
   noteApproachSpoken,
   startInterestWatch,
+  softLockSiblingApproaches,
+  unlockSiblingApproaches,
   wasApproachSpokenRecently,
 } from '../services/interestPatternDetector';
 import {
-  onApproachInterestPatternUsed,
-  resolveApproachExtraInstruction,
-  shouldExplainInterestPattern,
-} from './featureTipsModule';
+  noteMainPoiSpoken,
+  noteWegweiserSpoken,
+} from '../services/navigation/modulePriorityPolicy';
+import {
+  recordApproachFire,
+  clearApproachFiresForSpot,
+} from '../services/poi/approachFireTracker';
+import {
+  formatApproachBundleSpeech,
+} from '../services/navigation/wegweiserBundlePolicy';
 import { getCachedUserProfile } from '../services/userProfileService';
 import { useUserMemoryStore } from '../store/useUserMemoryStore';
 import { bearingDegrees } from '../services/navigation/bearing';
@@ -96,6 +100,7 @@ import { fetchNearbyPlaceLandmarks } from '../services/navigation/googleMapsNav'
 import {
   getLastUserPosition,
   getTriggerSession,
+  hasVisitedSpot,
   markSpotVisited,
   markTriggerSpoken,
   sessionSetForKind,
@@ -120,6 +125,9 @@ export type NarrationContext = {
   tideSoftPitch: boolean;
   opts?: NarrationRunOpts;
   onQueuedPoi: (poiId: number) => void;
+  /** Max 1 Peer (zusammen mit Primary = 2 Audio-Orte). */
+  bundlePeerPois?: Poi[];
+  silentBundlePois?: Poi[];
 };
 
 let narrationBusy = false;
@@ -150,6 +158,49 @@ export function releaseNarrationLock(epoch: number): void {
 
 export function displayPoiName(poi: Poi): string {
   return shortPoiDisplayName(poi.name);
+}
+
+/** 50-m Bundle: max 2 Namen im Audio; Rest bleibt stumm (UI). */
+function applyApproachBundleTeaser(
+  ctx: NarrationContext,
+  teaser: string,
+  visualCue: string | null,
+): string {
+  const peers = (ctx.bundlePeerPois ?? []).slice(0, 1);
+  if (!peers.length) return teaser;
+  const names = [displayPoiName(ctx.poi), ...peers.map(displayPoiName)];
+  const bundled = formatApproachBundleSpeech({
+    names,
+    visualCue: visualCue || null,
+  });
+  // Bundle ersetzt Schachtelsätze — kurzer Hook hinten optional
+  const hookTail = teaser
+    .replace(visualCue ?? '', '')
+    .trim()
+    .slice(0, 90);
+  if (hookTail && hookTail.length > 20 && !bundled.includes(names[1]!)) {
+    return `${bundled} ${hookTail}`.trim();
+  }
+  return bundled || teaser;
+}
+
+function markBundlePeersSpoken(ctx: NarrationContext): void {
+  const store = useFinnusStore.getState();
+  for (const peer of ctx.bundlePeerPois ?? []) {
+    markTriggerSpoken(peer.id, (peer.kind as PoiKind) ?? 'approach');
+    if (peer.spot_key) {
+      store.addHeardApproachSpotKey(peer.spot_key);
+      markSpotVisited(`${peer.spot_key}__approach`);
+      noteApproachSpoken(peer.spot_key);
+      softLockSiblingApproaches(peer.parent_poi_id ?? peer.id);
+    }
+  }
+  // Silent UI peers: optional live card only — not spoken, still soft-lock siblings
+  for (const peer of ctx.silentBundlePois ?? []) {
+    if (peer.spot_key) {
+      softLockSiblingApproaches(peer.parent_poi_id ?? peer.id);
+    }
+  }
 }
 
 function isFoodish(poi: Poi): boolean {
@@ -199,17 +250,41 @@ export async function speakTeaserOnly(
   // Kein stopSpeaking — Modul 1 darf Fragen/Navi nicht killen (Priority-Queue).
   const voiceSettings = await getVoiceSettingsForTour();
   try {
-    await speakRuntimeText(
-      text,
-      {
-        voiceId: voiceSettings.voiceId,
-        speechRate: voiceSettings.speechRate,
-      },
-      { priority: 'explore' },
-    );
+    const poiId = store.currentPoiId;
+    if (poiId != null) {
+      const { beginNarrationResume, completeNarrationResume } = await import(
+        '../services/session/narrationResumeState'
+      );
+      beginNarrationResume({
+        poiId,
+        poiName: store.currentLocationName || `Ort #${poiId}`,
+        kind: 'teaser',
+        fullText: text,
+      });
+      try {
+        await speakRuntimeText(
+          text,
+          {
+            voiceId: voiceSettings.voiceId,
+            speechRate: voiceSettings.speechRate,
+          },
+          { priority: 'explore' },
+        );
+      } finally {
+        completeNarrationResume();
+      }
+    } else {
+      await speakRuntimeText(
+        text,
+        {
+          voiceId: voiceSettings.voiceId,
+          speechRate: voiceSettings.speechRate,
+        },
+        { priority: 'explore' },
+      );
+    }
   } finally {
     store.setIsPlayingAudio(false);
-    store.setSubtitleText(null);
     /* GPS queue flush via AudioVoiceService → notifyRuntimeSpeechEnded */
   }
 }
@@ -221,11 +296,38 @@ async function buildSubHintLine(areaPoiId: number): Promise<string | null> {
     (c) => c.kind === 'sub' && !spokenSubIds.has(c.id),
   );
   if (openSubs.length === 0) return null;
-  const names = openSubs.slice(0, 2).map((s) => s.name);
+  const names = openSubs.slice(0, 2).map((s) => shortPoiDisplayName(s.name));
   if (names.length === 1) {
-    return `Wenn du schon mal hier bist: Schau dir noch ${names[0]} genauer an — dort erzähl ich dir mehr.`;
+    return `Wenn du magst, können wir noch zu ${names[0]} — liegt direkt hier in der Nähe.`;
   }
-  return `Hier in der Nähe lohnen noch ${names[0]} und ${names[1]} — magst du einen davon ansteuern?`;
+  return `Wenn du magst, liegen ${names[0]} und ${names[1]} auch nah — sag Bescheid.`;
+}
+
+/** Nähe ≤50 m: Sub oder anderer ungesprochener Anker. */
+async function buildNearbyInviteLine(
+  poi: PoiWithFacts,
+): Promise<string | null> {
+  const sub = await buildSubHintLine(poi.id);
+  if (sub) return sub;
+  const { lastLat, lastLng, spokenAreaIds, spokenSubIds } = getTriggerSession();
+  if (lastLat == null || lastLng == null) return null;
+  const all = await getAllPois();
+  const nearby = all
+    .filter((p) => {
+      if (p.id === poi.id) return false;
+      if (spokenAreaIds.has(p.id) || spokenSubIds.has(p.id)) return false;
+      const kind = p.kind ?? 'legacy';
+      if (kind === 'approach') return false;
+      return haversineMeters(lastLat, lastLng, p.lat, p.lng) <= 50;
+    })
+    .sort(
+      (a, b) =>
+        haversineMeters(lastLat, lastLng, a.lat, a.lng) -
+        haversineMeters(lastLat, lastLng, b.lat, b.lng),
+    );
+  const hit = nearby[0];
+  if (!hit) return null;
+  return `Wenn du magst, ist ${shortPoiDisplayName(hit.name)} auch nur einen Steinwurf entfernt.`;
 }
 
 /** Flow A step 1 — offline landmark visual cue before teaser. */
@@ -409,48 +511,57 @@ export async function runTeaserWithInterestWatch(
 
   store.setIsGenerating(true);
   try {
-    const packTeaser =
-      (poi.teaser_text ?? '').trim() ||
-      poi.facts
-        .find((f) => f.fact_text.startsWith('[Teaser]'))
-        ?.fact_text.replace(/^\[Teaser\]\s*/u, '')
-        .trim() ||
-      '';
-
+    // Nur neuer POI-Chat — kein Legacy-Teaser, kein Bike-Kürzer, kein Gemini-Facing-Raten
+    const { generateModule1ApproachSpeech } = await import(
+      '../services/ai/module1PoiChat'
+    );
+    const pos = getLastUserPosition();
     let teaser = takePrefetchedTeaserText(poi.id) || '';
     if (!teaser) {
-      try {
-        teaser = await buildRichApproachTeaser(poi, profile, packTeaser, null);
-      } catch {
-        teaser =
-          !isBoringApproachTeaser(packTeaser) && packTeaser
-            ? packTeaser
-            : buildWegweiserHook(poi, profile);
+      const out = await generateModule1ApproachSpeech({
+        poi,
+        profile,
+        userLat: pos.lat,
+        userLng: pos.lng,
+        speedMs: getSmoothedSpeedMs(),
+        deviceHeadingDeg: getDeviceHeadingDeg(),
+      });
+      if (out.skipped) {
+        if (__DEV__) {
+          console.log(
+            `[narration] teaser+watch skip #${poi.id} facing behind`,
+          );
+        }
+        return;
       }
+      teaser = out.text;
     }
-
-    const visualCue = await buildApproachVisualCue(poi);
-    if (visualCue) {
-      teaser = `${visualCue.trim()} ${teaser.trim()}`.trim();
+    if (!teaser.trim()) {
+      teaser = buildWegweiserHook(poi, profile);
     }
-
-    if (isActiveBicycleMode(motionMode)) {
-      const parkHint = await resolveBikeParkHintNear(poi.lat, poi.lng);
-      teaser = condenseForBikeMode(
-        `${teaser} ${buildBicycleContextPitch(poi, { parkHint })}`.trim(),
-        160,
-      );
-    }
+    teaser = applyApproachBundleTeaser(ctx, teaser, null);
 
     if (__DEV__) {
-      console.log(`[narration] teaser+watch @ ${poi.name}`);
+      console.log(`[narration] teaser+watch(module1) @ ${poi.name}`);
     }
 
     if (poi.spot_key) {
       store.addHeardApproachSpotKey(poi.spot_key);
       markSpotVisited(`${poi.spot_key}__approach`);
       noteApproachSpoken(poi.spot_key);
+      noteWegweiserSpoken(poi.spot_key);
+      softLockSiblingApproaches(poi.parent_poi_id ?? poi.id);
     }
+    markBundlePeersSpoken(ctx);
+    const parentId = poi.parent_poi_id ?? poi.id;
+    const mainVisited =
+      sessionSetForKind('area').has(parentId) ||
+      (poi.spot_key ? hasVisitedSpot(poi.spot_key) : false);
+    void recordApproachFire({
+      spotKey: poi.spot_key,
+      poiId: poi.id,
+      mainVisited,
+    });
 
     await speakTeaserOnly(teaser, onQueuedPoi);
     setPendingOfferFromPoi(poi);
@@ -469,7 +580,7 @@ export async function runAwaitInterestNarration(
 }
 
 export async function runFlowA_Approach(ctx: NarrationContext): Promise<void> {
-  const { poi, profile, motionMode, onQueuedPoi } = ctx;
+  const { poi, profile, onQueuedPoi } = ctx;
   const store = useFinnusStore.getState();
   store.setIsGenerating(true);
 
@@ -480,6 +591,8 @@ export async function runFlowA_Approach(ctx: NarrationContext): Promise<void> {
         store.addHeardApproachSpotKey(poi.spot_key);
         markSpotVisited(`${poi.spot_key}__approach`);
         noteApproachSpoken(poi.spot_key);
+      noteWegweiserSpoken(poi.spot_key);
+      softLockSiblingApproaches(poi.parent_poi_id ?? poi.id);
       }
       startInterestWatch({
         poiId: poi.id,
@@ -491,45 +604,37 @@ export async function runFlowA_Approach(ctx: NarrationContext): Promise<void> {
       return;
     }
 
-    const packTeaser =
-      (poi.teaser_text ?? '').trim() ||
-      poi.facts
-        .find((f) => f.fact_text.startsWith('[Teaser]'))
-        ?.fact_text.replace(/^\[Teaser\]\s*/u, '')
-        .trim() ||
-      '';
-
+    // Nur neuer POI-Chat (Prefetch muss denselben Chat geseedet haben)
+    const { generateModule1ApproachSpeech } = await import(
+      '../services/ai/module1PoiChat'
+    );
+    const pos = getLastUserPosition();
     let teaser = takePrefetchedTeaserText(poi.id) || '';
-    const extraInstruction = await resolveApproachExtraInstruction();
     if (!teaser) {
       try {
-        teaser = await buildRichApproachTeaser(
+        const out = await generateModule1ApproachSpeech({
           poi,
           profile,
-          packTeaser,
-          extraInstruction,
-        );
+          userLat: pos.lat,
+          userLng: pos.lng,
+          speedMs: getSmoothedSpeedMs(),
+          deviceHeadingDeg: getDeviceHeadingDeg(),
+        });
+        if (out.skipped) {
+          if (__DEV__) {
+            console.log(
+              `[narration] flowA skip #${poi.id} — facing behind (${out.lookCue.lookPhrase})`,
+            );
+          }
+          return;
+        }
+        teaser = out.text;
       } catch (teaserErr) {
-        console.warn('[narration] Approach-Teaser fehlgeschlagen:', teaserErr);
-        teaser =
-          !isBoringApproachTeaser(packTeaser) && packTeaser
-            ? packTeaser
-            : buildWegweiserHook(poi, profile);
+        console.warn('[narration] Approach-Chat fehlgeschlagen:', teaserErr);
+        teaser = buildWegweiserHook(poi, profile);
       }
     }
-
-    const visualCue = await buildApproachVisualCue(poi);
-    if (visualCue) {
-      teaser = `${visualCue.trim()} ${teaser.trim()}`.trim();
-    }
-
-    if (isActiveBicycleMode(motionMode)) {
-      const parkHint = await resolveBikeParkHintNear(poi.lat, poi.lng);
-      teaser = condenseForBikeMode(
-        `${teaser} ${buildBicycleContextPitch(poi, { parkHint })}`.trim(),
-        180,
-      );
-    }
+    teaser = applyApproachBundleTeaser(ctx, teaser, null);
 
     if (__DEV__) {
       console.log(`[narration] flowA teaser="${teaser.slice(0, 72)}"`);
@@ -542,9 +647,21 @@ export async function runFlowA_Approach(ctx: NarrationContext): Promise<void> {
       store.addHeardApproachSpotKey(poi.spot_key);
       markSpotVisited(`${poi.spot_key}__approach`);
       noteApproachSpoken(poi.spot_key);
+      noteWegweiserSpoken(poi.spot_key);
+      softLockSiblingApproaches(poi.parent_poi_id ?? poi.id);
     }
-
-    if (extraInstruction) await onApproachInterestPatternUsed();
+    markBundlePeersSpoken(ctx);
+    {
+      const parentId = poi.parent_poi_id ?? poi.id;
+      const mainVisited =
+        sessionSetForKind('area').has(parentId) ||
+        (poi.spot_key ? hasVisitedSpot(poi.spot_key) : false);
+      void recordApproachFire({
+        spotKey: poi.spot_key,
+        poiId: poi.id,
+        mainVisited,
+      });
+    }
 
     await speakTeaserOnly(teaser, onQueuedPoi);
     setPendingOfferFromPoi(poi);
@@ -584,10 +701,9 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
   const sessionMemory = { entries: store.visitedHistory };
 
   let deep;
-  let storyBriefBlock: string | null = null;
   try {
-    const brief = buildFindusStoryBrief({ poi, profile, sessionMemory });
-    storyBriefBlock = brief.promptBlock;
+    // Brief/Facts für Stempel & Told-Keys; Speech kommt aus POI-Chat
+    buildFindusStoryBrief({ poi, profile, sessionMemory });
     deep = filterDeepStoryFacts(poi, { profile, sessionMemory });
     store.addChatMessage({
       role: 'system',
@@ -604,19 +720,27 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
     return;
   }
 
+  const interestOverride =
+    plan.action === 'interest_override'
+      ? { hookText: plan.hookText, matched: plan.matched }
+      : null;
+
   const skipIntro =
-    plan.action === 'full_story' &&
+    (plan.action === 'full_story' || plan.action === 'interest_override') &&
     (plan.reason === 'approach_already_heard' ||
       heardApproach ||
-      wasApproachSpokenRecently(poi.spot_key));
+      wasApproachSpokenRecently(poi.spot_key) ||
+      Boolean(interestOverride));
 
   const skipTeaserHook =
     skipIntro ||
     wasApproachSpokenRecently(poi.spot_key) ||
-    Boolean(opts?.interestDeepDive);
+    Boolean(opts?.interestDeepDive) ||
+    Boolean(interestOverride);
 
-  const localHook = opts?.interestDeepDive
-    ? interestAckLine(poi.name)
+  // Deep-Dive / Override / nach Approach: kein Extra-Ack
+  const localHook = opts?.interestDeepDive || interestOverride
+    ? ''
     : skipTeaserHook
       ? ''
       : buildFastHook(poi, profile, sessionMemory).trim();
@@ -628,32 +752,25 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
     await stopSpeaking();
     const voiceSettings = await getVoiceSettingsForTour();
 
-    let parentIsMajor = false;
-    if (poi.parent_poi_id != null) {
-      try {
-        const parent = await getPoiWithFacts(poi.parent_poi_id);
-        if (parent) {
-          parentIsMajor = resolvePoiImportance(parent) === 'major';
-        }
-      } catch {
-        parentIsMajor = false;
-      }
-    }
-
-    const geminiIter = streamFindusStorySentences({
+    const deepDive = Boolean(opts?.interestDeepDive);
+    // Reboot: Multi-Turn POI-Chat (Seed einmal, dann nur Instruction)
+    const { streamModule1ChatSentences } = await import(
+      '../services/ai/module1PoiChat'
+    );
+    const geminiIter = streamModule1ChatSentences({
       poi,
       profile,
-      sessionMemory,
-      mode: 'arrival',
-      approachAlreadyHeard: skipTeaserHook || Boolean(opts?.interestDeepDive),
-      timeoutMs: 22000,
-      parentIsMajor,
-      storyBriefBlock,
+      mode: deepDive ? 'deep' : 'arrival',
+      approachAlreadyHeard: skipTeaserHook || deepDive,
+      timeoutMs: deepDive || interestOverride ? 40000 : 28000,
     })[Symbol.asyncIterator]();
     const firstGeminiPromise = geminiIter.next();
 
+    // Deep-Dive bleibt am Ort — Nähe-Hinweis ≤50 m nur bei normalem Main
     const subHintPromise =
-      flowKind === 'main' ? buildSubHintLine(poi.id) : Promise.resolve(null);
+      deepDive || interestOverride || flowKind !== 'main'
+        ? Promise.resolve(null)
+        : buildNearbyInviteLine(poi);
 
     async function* storySentences(): AsyncGenerator<string, void, unknown> {
       if (localHook) {
@@ -670,8 +787,22 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
               skipGeminiGreeting = false;
               const looksLikeHook =
                 t.length < 180 ||
-                /^(hey|schau|na |hier |willkommen|guck|oh |wow)/i.test(t);
-              if (!looksLikeHook) {
+                /^(hey|schau|na |hier |willkommen|guck|oh |wow|pst|hörst|hoerst|siehst|riechst|spürst|spuerst|tüt)/i.test(
+                  t,
+                );
+              const nameCore = displayPoiName(poi)
+                .toLowerCase()
+                .replace(/[^a-zäöüß0-9]+/giu, ' ')
+                .trim()
+                .slice(0, 24);
+              const repeatsNameOnly =
+                Boolean(nameCore) &&
+                t.length < 90 &&
+                t.toLowerCase().includes(nameCore) &&
+                !/(plätscher|plaetscher|rauschen|duft|fachwerk|gleis|ufer|wiese)/i.test(
+                  t,
+                );
+              if (!looksLikeHook && !repeatsNameOnly) {
                 if (!fastHook) fastHook = t;
                 collected.push(t);
                 yield t;
@@ -716,21 +847,62 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
     }
 
     store.setIsGenerating(false);
+    // Actions früh; Stichpunkte erst nach Speech
+    void presentModule1LiveCard({
+      poi,
+      spokenText: '',
+      actionsOnly: true,
+    }).catch((err) =>
+      console.warn('[module1LiveCard] actions-first failed:', err),
+    );
     try {
-      await speakRuntimeSentences(storySentences(), {
-        voiceId: voiceSettings.voiceId,
-        speechRate: voiceSettings.speechRate,
+      const {
+        beginNarrationResume,
+        appendNarrationResumeText,
+        completeNarrationResume,
+      } = await import('../services/session/narrationResumeState');
+      beginNarrationResume({
+        poiId: poi.id,
+        poiName: displayPoiName(poi),
+        kind: deepDive ? 'deep' : 'main',
+        fullText: '',
       });
+      async function* trackedSentences(): AsyncGenerator<string, void, unknown> {
+        for await (const s of storySentences()) {
+          appendNarrationResumeText(s);
+          yield s;
+        }
+      }
+      try {
+        await speakRuntimeSentences(trackedSentences(), {
+          voiceId: voiceSettings.voiceId,
+          speechRate: voiceSettings.speechRate,
+        });
+        completeNarrationResume();
+      } catch (speakErr) {
+        // Unterbruch — State behalten für Session-Resume
+        if (__DEV__) console.warn('[narration] speak interrupted', speakErr);
+        throw speakErr;
+      }
     } finally {
       // Standby sofort — unabhängig von TTS-Generation-Races
       store.setIsPlayingAudio(false);
-      store.setSubtitleText(null);
+      // Speech-Ende — kein UI-Clear nötig
       onPoiNarrationComplete();
+      noteMainPoiSpoken();
+      unlockSiblingApproaches(poi.parent_poi_id ?? poi.id);
+      void clearApproachFiresForSpot(poi.spot_key, poi.id);
+      if (poi.parent_poi_id != null) {
+        void clearApproachFiresForSpot(null, poi.parent_poi_id);
+      }
       const fullText = [fastHook, ...collected.filter((s) => s !== fastHook)]
         .join(' ')
         .trim();
       if (fullText) {
         store.addChatMessage({ role: 'assistant', content: fullText });
+        void presentModule1LiveCard({ poi, spokenText: fullText }).catch(
+          (err) => console.warn('[module1LiveCard] failed:', err),
+        );
         void commitNarrationFeatureTips(fullText).catch((err) =>
           console.warn('[featureTips] commit failed:', err),
         );
@@ -739,13 +911,30 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
           ...deep.facts.map((f) => factKey(f.text)),
         ]);
         store.addVisitedPlace(
-          buildVisitedMemoryEntry(poi, [
-            toStampSummary(
-              collected.length > 0 ? collected : deep.facts.map((f) => f.text),
-              { teaser: poi.teaser_text, name: poi.name },
-            ),
-          ]),
+          buildVisitedMemoryEntry(
+            poi,
+            [
+              'Modul-1-Hauptpunkt',
+              toStampSummary(
+                collected.length > 0 ? collected : deep.facts.map((f) => f.text),
+                { teaser: poi.teaser_text, name: poi.name },
+              ),
+            ],
+            { onTimeline: true },
+          ),
         );
+        try {
+          const { stampModule1Visit } = await import(
+            '../module2/background/triggerEngine'
+          );
+          stampModule1Visit({
+            title: displayPoiName(poi),
+            lat: poi.lat,
+            lng: poi.lng,
+          });
+        } catch {
+          /* soft */
+        }
         void lockPoiTeaser({ spotKey: poi.spot_key, poiId: poi.id });
         try {
           const tags = parseTagsJson(poi.tags_json).join(' ').toLowerCase();
@@ -774,7 +963,6 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
   } catch (error) {
     console.error('[narration] Hook/Audio fehlgeschlagen:', error);
     store.setIsGenerating(false);
-    store.setSubtitleText(null);
     store.setIsPlayingAudio(false);
   }
 }
@@ -801,6 +989,26 @@ export async function executeNarrationPlan(ctx: NarrationContext): Promise<void>
   const { poi, plan, kind, tideSoftPitch, opts } = ctx;
   const store = useFinnusStore.getState();
   const poiId = poi.id;
+
+  // Hintergrund-/Sperr-Pref: nur App offen → still überspringen
+  if (!opts?.force) {
+    try {
+      const { canStartModule1Narration } = await import(
+        '../services/speech/deviceAudioRoute'
+      );
+      const ok = await canStartModule1Narration();
+      if (!ok) {
+        if (__DEV__) {
+          console.log(
+            `[narration] skip Modul 1 #${poiId} — Hintergrund-Speech-Pref`,
+          );
+        }
+        return;
+      }
+    } catch {
+      /* soft — weiter wie bisher */
+    }
+  }
 
   // 50 m coexistence: Modul 1 stays silent when a turn cue is imminent
   if (shouldPauseExploreStoryForNavTurn() && !opts?.force) {
@@ -839,12 +1047,25 @@ export async function executeNarrationPlan(ctx: NarrationContext): Promise<void>
       return;
     }
 
+    // full_story | interest_override | redirect handled upstream
     await runFlowBC_FullStory(ctx);
   } finally {
     releaseNarrationLock(epoch);
     // Nach Modul 1 immer Standby — verhindert hängendes „Ich erzähle“
+    try {
+      const { markAudiblePlayback, getActiveTtsSessionCount } =
+        await import('../services/AudioVoiceService');
+      markAudiblePlayback(false);
+      if (getActiveTtsSessionCount() === 0) {
+        useFinnusStore.getState().setIsPlayingAudio(false);
+        useFinnusStore.getState().setIsAudiblySpeaking(false);
+        // Speech-Ende — kein forceClear
+      }
+    } catch {
+      /* ignore */
+    }
     useFinnusStore.getState().setIsPlayingAudio(false);
-    useFinnusStore.getState().setSubtitleText(null);
+    useFinnusStore.getState().setIsAudiblySpeaking(false);
     useFinnusStore.getState().setIsGenerating(false);
     notifyDestinationAudioEnded();
     const lastPos = getLastUserPosition();

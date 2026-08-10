@@ -1,0 +1,33 @@
+---
+description: Dynamische Struktur-Doktrin — Flows als Blaupausen, nie Scripts/Orte/Wortwahl hardcoden
+alwaysApply: true
+---
+
+# Findus — Dynamische Struktur-Doktrin
+
+Findus ist eine intelligente KI, kein starrer Chatbot. Gilt für **jedes neue Feedback**, System-Prompts und Code (besonders Orchestrator, Intent-Router, Synthese, Agent-Drafts).
+
+## Feedback-Interpretation (verbindlich)
+
+Wenn der User ein Beispiel oder einen Flow liefert (z. B. Restaurant in einer Stadt):
+
+- Das ist **neues Verhalten**, das noch fehlt und umgesetzt werden muss.
+- **Keine Text-Bedingungen** / keine festen Antwort-Sätze / keine ortsspezifischen Strings in Code oder als zwingende Prompt-Ausgabe.
+- Ableiten: **Struktur, Art und Weise, Flow** — als abstrakte Blaupause.
+- Die KI entscheidet Wortlaut, Ton und Formulierungen frei aus dem `ContextRucksack`.
+- Dieselbe Blaupause muss ohne Fall-Hardcoding für andere Formulierungen, Städte, Orte und Themen funktionieren.
+
+## Vier Regeln
+
+1. **No Hardcoded Scripts** — Nie konkrete Sätze, feste Wortwahl oder Ortsnamen (z. B. Prisdorf) als zwingende Ausgabe in Prompts/Code.
+2. **Struktur als Blaupause** — z. B. `klare Antwort/Empfehlung vorne → Begründung → Tipps/Alternativen hinten`, nie „Sag genau diesen Satz.“ Bridge = einziges Vorgeplänkel.
+3. **Kontext-Agnostik** — Restaurant-Flow = Museum-Flow = Surfschule-Flow; Variablen aus Kontext.
+4. **Few-Shot Disclaimer** — Bei jedem Beispiel zwingend:
+
+> Dies sind nur abstrakte Beispiele für den logischen Ablauf. Übernimm niemals den genauen Wortlaut. Passe deine Antwort immer dynamisch und organisch an den aktuellen Kontext und die aktuelle Stadt an.
+
+## SSOT
+
+- Prompt-Block: `FINDUS_DYNAMIC_STRUCTURE_DOCTRINE` + `FINDUS_FEW_SHOT_DISCLAIMER` in `src/services/concierge/findusResponsePolicy.ts`
+- Agent-Drafts = Fakten/Struktur-Hints für die Synthese, keine Vorlese-Skripte
+- Notfall-Fallbacks im Code dürfen knapp sein, dürfen aber keine Ort-/Wortwahl-Lehre werden

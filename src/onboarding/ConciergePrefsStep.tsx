@@ -25,7 +25,7 @@ export function ConciergePrefsStep({ draft, onChange, onNext }: Props) {
     !!draft.mobilityMode &&
     !!draft.energyLevel &&
     !!draft.budgetCategory &&
-    !!draft.touristMode &&
+    ((draft.mustHaveStyles?.length ?? 0) > 0 || !!draft.touristMode) &&
     !!draft.answerStyle;
 
   return (

@@ -1,0 +1,18 @@
+{
+  "source_spots": 523,
+  "zentrum_spots": 429,
+  "zentrum_story": 258,
+  "umland_seed_spots": 94,
+  "umland_seed_story": 29,
+  "overlap": 0,
+  "zentrum_bbox": {
+    "latMin": 52.478,
+    "latMax": 52.555,
+    "lngMin": 13.29,
+    "lngMax": 13.51
+  },
+  "next": [
+    "npm run city:auto -- --city \"Berlin\" --id berlin-umland --skip-wiki  (then prune zentrum)",
+    "or: expand umland with radius 28000 and strip BERLIN_ZENTRUM_BBOX"
+  ]
+}

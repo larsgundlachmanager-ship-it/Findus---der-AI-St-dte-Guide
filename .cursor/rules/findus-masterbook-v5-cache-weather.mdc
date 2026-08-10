@@ -7,7 +7,7 @@
 
 ## TTS
 
-Lokal Kokoro/Piper primary (€0). Cloud nur wenn lokal unreachable.
+Cloud-Voice primary (Cartesia / Cloud-Endpunkte). Lokal (Kokoro/Piper) nur Fallback wenn Cloud unreachable.
 
 ## OSM First (POI)
 
@@ -34,4 +34,4 @@ Unmapped area → live fetch → lokal speichern → **sofort** in Community-DB 
 - Regen geplant → ab **2 h** vorher watchen, dann alle **30 Min**.
 - Warnungen: **30 Min** vorher (Café/Indoor-Wahl) + **5 Min** vorher.
 - HUD oben links: Regen-Countdown („Regen in X Min“).
-- Modul 5 nutzt Regenfenster für aktive Indoor-Regenpausen.
+- Modul 4 spricht Warnungen direkt (Café/Indoor-Vorschlag) — kein Tagesplan-Umbau.

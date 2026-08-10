@@ -1,0 +1,85 @@
+{
+  "stats": {
+    "added": 93,
+    "skippedNear": 35,
+    "skippedDup": 4,
+    "extras": 0
+  },
+  "pack_index": {
+    "total": 120,
+    "story": 27,
+    "directory": 93,
+    "offline_qa": 189,
+    "note": "UI: Gesamtzahl zeigen; Trigger nur Story Tier 1–2 (+ selektiv 3)."
+  },
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [
+      "centers almost identical: pinneberg_bahnhof_pr & pinneberg_pr_bahnhof_rockville"
+    ],
+    "stats": {
+      "spots": 120,
+      "storySpots": 27,
+      "directorySpots": 93,
+      "triggers": 120,
+      "missingTrigger": 0,
+      "missingNarration": 0,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 0,
+      "orphanTriggers": 0,
+      "categories": [
+        "activity",
+        "apotheke",
+        "aussicht",
+        "bahnhof",
+        "cafe",
+        "denkmal",
+        "einkaufen",
+        "freizeit",
+        "geschichte",
+        "gesundheit",
+        "golf",
+        "hotel",
+        "kino",
+        "kirche",
+        "museum",
+        "natur",
+        "restaurant",
+        "service",
+        "spielplatz",
+        "sport",
+        "supermarket",
+        "tankstelle",
+        "transport",
+        "verwaltung",
+        "wasser"
+      ],
+      "missingMustHave": [],
+      "nicePresent": [
+        "cafe",
+        "restaurant",
+        "hotel",
+        "einkaufen",
+        "service",
+        "gesundheit",
+        "sport",
+        "bahnhof"
+      ],
+      "liveResearch": 5,
+      "offlineQa": 189,
+      "hasCoverage": true,
+      "hasTransit": true,
+      "hasMobility": true,
+      "links": 1
+    },
+    "gaps": {
+      "needsNarration": [],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [],
+      "missingCategories": []
+    }
+  }
+}

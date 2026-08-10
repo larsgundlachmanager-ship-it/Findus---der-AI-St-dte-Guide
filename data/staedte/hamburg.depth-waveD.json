@@ -1,0 +1,68 @@
+{
+  "notes": [
+    "Depth top-up wave D: last stories below 12 deep. DOCK 1 demoted separately (Freikirche, kein Kultur-Landmark)."
+  ],
+  "spots": [
+    {
+      "id": "hamburg_alsterpark",
+      "name": "Alsterpark",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Grünband rund um die Außenalster: Schwanenwik, Eduard-Rhein-Ufer und Alstervorland durch St. Georg, Hohenfelde, Uhlenhorst, Winterhude, Harvestehude und Rotherbaum bis zur Kennedybrücke. Ab 1875 Ufergestaltung unter Franz Andreas Meyer bewusst landschaftlich gegen die städtische Binnenalster; Alstervorland 1953 von Gustav Lüttge zur IGA als öffentlicher Park mit Skulpturen („Plastik im Freien“).",
+      "deep_data_pool": [
+        { "text": "Visuell: durchgehende Uferwiesen und Promenaden um den großen Alstersee mit Blick auf Villen, Segelboote und Innenstadt-Silhouette.", "tags": ["visuell", "wegweiser"] },
+        { "text": "1875: Oberingenieur Franz Andreas Meyer plant landschaftliche Uferanlagen und öffentlichen Zugang — Gegensatz zur bebauten Binnenalster.", "tags": ["geschichte"] },
+        { "text": "Stadt kauft ab ca. 1870 Uferflächen von Privatbesitzern; bis Ende 19. Jh. mehrere kleine Parkanlagen rund um die Alster.", "tags": ["geschichte"] },
+        { "text": "Alstervorland Harvestehude: früher Weide-/Privatgärten bis ans Wasser; zur IGA 1953 öffentlicher Park durch Gustav Lüttge (Wege, Teich, Brücke, Skulpturenstandorte).", "tags": ["geschichte", "architektur"] },
+        { "text": "Leben jetzt: Spazieren, Joggen, Picknick, Rad; Skulpturen im Freien ohne Museumseintritt. Quer: Binnenalster, Jungfernstieg, Alsterfontäne, Krugkoppelbrücke.", "tags": ["leben_jetzt", "quer"] },
+        { "text": "Geschütztes Gartendenkmal-Ensemble aus Grün, Denkmälern und Wegen berichtet.", "tags": ["leben_jetzt"] },
+        { "text": "LIVE: Veranstaltungen, Sperrungen und Anleger-Fahrpläne ephemer prüfen.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "hamburg_boberger_niederung",
+      "name": "Boberger Niederung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Naturschutzgebiet in Billwerder/Lohbrügge (Bergedorf): eines der artenreichsten NSG Hamburgs. Seit 1991 unter Schutz; 2025 von 355 auf 464 ha erweitert (u. a. Billebogen). Umfasst Geest, Moor, Marsch, Boberger Dünen (letzte Wanderdünen), Bagger-/Badesee und Achtermoor; Naturdenkmäler Düne und Achtermoor seit 1968.",
+      "deep_data_pool": [
+        { "text": "Visuell: Sanddünen und Heide neben Feuchtwiesen, Moor und Bille-Aue — ungewöhnlicher Kontrast so nah an der Großstadt.", "tags": ["visuell", "wegweiser"] },
+        { "text": "NSG seit 1991; Erweiterung Feb. 2025 auf 464 ha. Kern FFH: Boberger Düne und Hangterrassen.", "tags": ["geschichte", "natur"] },
+        { "text": "Dünen: Weichseleiszeit-Sande des Elbe-Urstromtals; historisch beackert/beweidet, später Sandabbau (u. a. Billwerder/Hammerbrook-Aufhöhung 1903–07); heute letzte Wanderdünen Hamburgs.", "tags": ["geschichte"] },
+        { "text": "Leben jetzt: Wandern, Dünenhaus, Baden am Boberger See (Stellen beachten), Segelflugplatz-Kontext; Kreuzkröte als seltenes Hamburger Vorkommen berichtet.", "tags": ["leben_jetzt"] },
+        { "text": "Quer: Boberger Dünenhaus, Boberger Strand; Regeln des NSG beachten (keine Dünenzerstörung).", "tags": ["quer"] },
+        { "text": "Haarteich im Dünensand: nährstoffarm, nach Sanierung wieder Kreuzkröten-Lebensraum berichtet.", "tags": ["natur"] },
+        { "text": "LIVE: Wege, Badequalität und Dünenhaus-Öffnung ephemer prüfen.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "hamburg_stadtgeschichte",
+      "name": "Geschichte von Hamburg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Stadtweite Geschichts-Anker im Pack: von Hammaburg/Domplatz über Hanse, Großen Brand 1842, Hafenboom und Speicherstadt bis HafenCity. Dient als Quer-Kontext für Modul-1-Stories — keine Ortsadresse, sondern narrative Klammer.",
+      "deep_data_pool": [
+        { "text": "Visuell/Kontext: Hamburg erzählt sich über Wasser — Alster, Elbe, Fleete, Hafenbecken — und Backstein/Kontor-Architektur.", "tags": ["visuell"] },
+        { "text": "Mittelalter: Hammaburg/Bischofsburg-Kontext am Domplatz; Aufstieg als Handelsstadt und Hansemitglied.", "tags": ["geschichte"] },
+        { "text": "1615–26 Befestigung teilt Alster in Binnen- und Außenalster (Lombards-/Kennedybrücke-Zone).", "tags": ["geschichte"] },
+        { "text": "1842 Großer Brand verändert Innenstadt und Binnenalster-Umfeld; Neuordnung und Uferbau folgen.", "tags": ["geschichte"] },
+        { "text": "1885–1927 Speicherstadt; 20. Jh. Kontorhausviertel; ab 2000er HafenCity auf ehemaligen Hafenflächen.", "tags": ["geschichte", "quer"] },
+        { "text": "Leben jetzt: Geschichte erlebbar an UNESCO-Speicherstadt/Kontorhaus, Michel, Rathaus, Landungsbrücken und Museum für Hamburgische Geschichte.", "tags": ["leben_jetzt", "quer"] },
+        { "text": "LIVE: Sonderausstellungen und Stadtführungen ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "hamburg_museum_fur_hamburgische_geschichte",
+      "name": "Museum für Hamburgische Geschichte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Stadtgeschichtliches Museum am Holstenwall / im Wallanlagen-Kontext: Modelle, Hafen-, Handels- und Alltagsgeschichte Hamburgs. Wichtiger Vertiefungsort nach Speichern, Kirchspielen und HafenCity — Fakten zu Stadtwerdung und Katastrophen (Brand, Sturmflut) gebündelt.",
+      "deep_data_pool": [
+        { "text": "Visuell: Museumsbau im Grüngürtel der Wallanlagen / Nähe Planten un Blomen — Einstieg in Stadtmodelle und maritime Exponate.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Fokus: Hamburg von der Hammaburg bis zur modernen Hafenmetropole — Handel, Hafen, Kirchspiele, Katastrophen.", "tags": ["geschichte"] },
+        { "text": "Leben jetzt: Dauer- und Sonderausstellungen; Quer zu Domplatz/Hammaburg, Speicherstadt, Michel, Sturmflut-Mahnmale.", "tags": ["leben_jetzt", "quer"] },
+        { "text": "LIVE: Öffnungszeiten, Tickets und Sonderausstellungen ephemer prüfen.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    }
+  ]
+}

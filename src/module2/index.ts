@@ -74,6 +74,30 @@ export {
   buildManagerTurn,
   shouldSuppressBridge,
 } from './reboot';
+export { analyzeManagerTurn } from './router/analyzeTurn';
+export { runConciergeTurn } from './router/runConciergeTurn';
+export { listBlueprints, getBlueprintContract } from './blueprints/registry';
+export {
+  weeklyDigestText,
+  listPendingBlueprintReviews,
+  enqueueBlueprintDraft,
+} from './blueprints/staging';
+export {
+  runPitchModule,
+  buildPitchParentBridge,
+  clampBridgeWords,
+  detectCityBestIntent,
+  resolveSearchMode,
+  resolveVisitAtMs,
+  scoreDetourOnRoute,
+  hereNowPrio,
+  useLivePitchStore,
+} from './pitch';
+export { shouldHandoffToPitchModule } from './pitch/shouldHandoffPitch';
+export {
+  buildPitchRequestFromText,
+  buildPitchRequestFromWish,
+} from './pitch/buildPitchRequest';
 export type {
   ManagerModule,
   RebootRouterOut,

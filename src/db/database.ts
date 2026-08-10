@@ -5,6 +5,7 @@ import type { RemoteFact, RemotePoi } from '../services/supabase';
 import { ensureUserSettingsTable } from './userSettings';
 import { ensureCityPronunciationsTable } from './cityPronunciations';
 import { ensureUserCustomPhoneticsTable } from './userCustomPhonetics';
+import { ensureFeedbackEntriesTable } from './feedbackEntries';
 import {
   approxPolygonAreaM2,
   parsePolygonJson,
@@ -81,6 +82,7 @@ export async function initDatabase(): Promise<void> {
   await ensureUserSettingsTable(db);
   await ensureCityPronunciationsTable(db);
   await ensureUserCustomPhoneticsTable(db);
+  await ensureFeedbackEntriesTable(db);
 
   const row = await db.getFirstAsync<{ count: number }>(
     'SELECT COUNT(*) as count FROM pois',
@@ -218,23 +220,17 @@ export type GeoMatch = {
 };
 
 /**
- * Nächster gültiger Trigger gewinnt.
- * Schon gesprochene IDs / Spot-Keys (Wegweiser nach Besuch) werden übersprungen.
+ * Alle Geo-Treffer am Standort (noch unsortiert / ungefiltert außer exclude/visited).
  */
-export async function matchGeoTriggers(
+export async function collectGeoHits(
   lat: number,
   lng: number,
   opts?: {
     excludePoiIds?: Set<number>;
-    /** Spot-Keys, deren Area schon besucht → weitere Approaches ignorieren */
     visitedSpotKeys?: Set<string>;
-    /**
-     * Skaliert Pack-Radien (Free-Roam: Fuß 1×, Rad ~2.4×, Bus ~6×).
-     * Default 1.
-     */
     radiusScale?: number;
   },
-): Promise<GeoMatch | null> {
+): Promise<GeoMatch[]> {
   const pois = await getAllPois();
   const hits: GeoMatch[] = [];
   const exclude = opts?.excludePoiIds;
@@ -252,7 +248,6 @@ export async function matchGeoTriggers(
     const kind = (poi.kind ?? 'legacy') as PoiKind;
     const spotKey = poi.spot_key ?? null;
 
-    // Andere Wegweiser zum selben Ort sind irrelevant, wenn Hauptort schon gehört
     if (
       kind === 'approach' &&
       spotKey &&
@@ -278,7 +273,6 @@ export async function matchGeoTriggers(
       continue;
     }
 
-    // area | legacy
     const polygon = parsePolygonJson(poi.polygon_json);
     if (polygon && pointInPolygon(lat, lng, polygon)) {
       hits.push({ poi, distanceM: distance, via: 'polygon' });
@@ -293,10 +287,11 @@ export async function matchGeoTriggers(
     }
   }
 
-  if (hits.length === 0) return null;
+  return hits;
+}
 
-  // Primär: geringste Distanz. Bei Gleichstand: kleinerer Trigger (Sub/Approach/kleine Fläche).
-  hits.sort((a, b) => {
+function sortGeoHitsNearest(hits: GeoMatch[]): GeoMatch[] {
+  return [...hits].sort((a, b) => {
     const distDiff = a.distanceM - b.distanceM;
     if (Math.abs(distDiff) > 2) return distDiff;
 
@@ -314,8 +309,60 @@ export async function matchGeoTriggers(
     if (sa !== sb) return sa - sb;
     return a.distanceM - b.distanceM;
   });
+}
 
-  return hits[0];
+/**
+ * Nächster gültiger Trigger gewinnt.
+ * Schon gesprochene IDs / Spot-Keys (Wegweiser nach Besuch) werden übersprungen.
+ */
+export async function matchGeoTriggers(
+  lat: number,
+  lng: number,
+  opts?: {
+    excludePoiIds?: Set<number>;
+    /** Spot-Keys, deren Area schon besucht → weitere Approaches ignorieren */
+    visitedSpotKeys?: Set<string>;
+    /**
+     * Skaliert Pack-Radien (Free-Roam: Fuß 1×, Rad ~2.4×, Bus ~6×).
+     * Default 1.
+     */
+    radiusScale?: number;
+  },
+): Promise<GeoMatch | null> {
+  const hits = await collectGeoHits(lat, lng, opts);
+  if (hits.length === 0) return null;
+  return sortGeoHitsNearest(hits)[0] ?? null;
+}
+
+/**
+ * Primärer Treffer + Nachbarn im Bundle-Radius (für 50-m Audio-Bundling).
+ */
+export async function matchGeoTriggerCluster(
+  lat: number,
+  lng: number,
+  opts?: {
+    excludePoiIds?: Set<number>;
+    visitedSpotKeys?: Set<string>;
+    radiusScale?: number;
+    bundleRadiusM?: number;
+  },
+): Promise<{ primary: GeoMatch; nearby: GeoMatch[] } | null> {
+  const hits = await collectGeoHits(lat, lng, opts);
+  if (hits.length === 0) return null;
+  const sorted = sortGeoHitsNearest(hits);
+  const primary = sorted[0]!;
+  const bundleR = opts?.bundleRadiusM ?? 50;
+  const nearby = sorted.filter((h) => {
+    const dToPrimary = haversineMeters(
+      primary.poi.lat,
+      primary.poi.lng,
+      h.poi.lat,
+      h.poi.lng,
+    );
+    // Im 50-m-Cluster um den Primary (nicht nur User-Radius)
+    return dToPrimary <= bundleR || h.poi.id === primary.poi.id;
+  });
+  return { primary, nearby };
 }
 
 export async function findPoiAtLocation(

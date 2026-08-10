@@ -1,8 +1,10 @@
 import React from 'react';
 import {
   ActivityIndicator,
+  Image,
   Modal,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -18,16 +20,23 @@ export type CityMapModalProps = {
   title?: string;
 };
 
+function isInlineImage(url: string): boolean {
+  return /^data:image\//i.test(url) || /\.(jpe?g|png|webp)(\?|$)/i.test(url);
+}
+
 /**
- * Interaktive Stadt-/Inselkarte im Vollbild (WebView).
+ * Interaktive Stadt-/Inselkarte (WebView) oder Street-View-Bild (Image).
  */
-export function CityMapModal({
+export const CityMapModal = React.memo(function CityMapModal({
   visible,
   onClose,
   url,
   title = 'Inselkarte',
 }: CityMapModalProps) {
   if (!url) return null;
+
+  const imageMode = isInlineImage(url);
+  const isStreetView = imageMode || /street.?view/i.test(title);
 
   return (
     <Modal visible={visible} animationType="slide" onRequestClose={onClose}>
@@ -37,30 +46,54 @@ export function CityMapModal({
             <Text style={styles.title} numberOfLines={1}>
               {title}
             </Text>
-            <Text style={styles.sub}>Offizielle Karte · Pinch zum Zoomen</Text>
+            <Text style={styles.sub}>
+              {isStreetView
+                ? 'Street View · Zur Orientierung'
+                : 'Offizielle Karte · Pinch zum Zoomen'}
+            </Text>
           </View>
-          <Pressable onPress={onClose} hitSlop={12} accessibilityLabel="Karte schließen">
+          <Pressable
+            onPress={onClose}
+            hitSlop={12}
+            accessibilityLabel="Schließen"
+          >
             <Text style={styles.close}>Schließen</Text>
           </Pressable>
         </View>
 
-        <WebView
-          source={{ uri: url }}
-          style={styles.web}
-          startInLoadingState
-          renderLoading={() => (
-            <View style={styles.loading}>
-              <ActivityIndicator color={colors.accent} size="large" />
-              <Text style={styles.loadingText}>Karte wird geladen…</Text>
-            </View>
-          )}
-          allowsInlineMediaPlayback
-          setSupportMultipleWindows={false}
-        />
+        {imageMode ? (
+          <ScrollView
+            style={styles.web}
+            contentContainerStyle={styles.imageWrap}
+            maximumZoomScale={3}
+            minimumZoomScale={1}
+          >
+            <Image
+              source={{ uri: url }}
+              style={styles.image}
+              resizeMode="contain"
+              accessibilityLabel={title}
+            />
+          </ScrollView>
+        ) : (
+          <WebView
+            source={{ uri: url }}
+            style={styles.web}
+            startInLoadingState
+            renderLoading={() => (
+              <View style={styles.loading}>
+                <ActivityIndicator color={colors.accent} size="large" />
+                <Text style={styles.loadingText}>Karte wird geladen…</Text>
+              </View>
+            )}
+            allowsInlineMediaPlayback
+            setSupportMultipleWindows={false}
+          />
+        )}
       </SafeAreaView>
     </Modal>
   );
-}
+});
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
@@ -86,6 +119,18 @@ const styles = StyleSheet.create({
   },
   close: { color: colors.accent, fontWeight: '700', fontSize: 15 },
   web: { flex: 1, backgroundColor: colors.bg },
+  imageWrap: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: spacing.md,
+  },
+  image: {
+    width: '100%',
+    aspectRatio: 4 / 3,
+    borderRadius: 8,
+    backgroundColor: '#111',
+  },
   loading: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',

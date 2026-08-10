@@ -1,0 +1,1215 @@
+{
+  "city_history": "Stuttgart: Herzogtum Württemberg; Automobilstadt Mercedes und Porsche; Wein auf den Rebenhängen (Wikipedia).",
+  "notes": [
+    "Wave A — Wikipedia DE + manual visuell; LIVE ephemeral; no dialog scripts."
+  ],
+  "offline_qa": [],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "stuttgart_neues_schloss_stuttgart",
+      "name": "Neues Schloss Stuttgart",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Barock-Residenzschloss am Schlossplatz — Zentrum der Innenstadt.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Drei Flügel um Schlossplatz; Jubiläumssäule mittig.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Neue Schloss Stuttgart, auch Residenzschloss Stuttgart, ist die ehemalige Residenz der Herzöge und Könige von Württemberg am Schlossplatz in Stuttgart.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die barocke Dreiflügelanlage wurde 1746 durch Herzog Carl Eugen von Leopoldo Retti begonnen und 1807 durch Friedrich I. von Nikolaus Friedrich Thouret vollendet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Hervorzuheben sind das Treppenhaus, der Marmorsaal und der Weiße Saal.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach der Beschädigung 1944 wurde das Schloss 1957 bis 1964 wiederaufgebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Heute ist es Sitz des Finanzministeriums, des Wirtschaftsministeriums und von Teilen des Landesmuseums Württemberg.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Vorgeschichte und Planung Mit neun Jahren wurde Carl Eugen 1737 neuer Herzog von Württemberg.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Da er beim Amtsantritt noch minderjährig war, wurde er zur Erziehung an den Hof des preußischen Königs Friedrich II. geschickt, während Administratoren die Regierungsgeschäfte übernahmen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit 16 Jahren konnte Carl Eugen die Nachfolge seines Vaters Carl Alexander antreten und nach Württemberg zurückkehren.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sein Vor-Vorgänger, Herzog Eberhard Ludwig, hatte die herzogliche Residenz in das 12 km von Stuttgart entfernte Ludwigsburg verlegt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Stadt Stuttgart versuchte nun, mit Unterstützung der württembergischen Ständeversammlung den Herzog wieder zu einer Rückkehr nach Stuttgart zu bewegen, da die Residenz des Herzogs wirtschaftliche und politische Macht bedeutete.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Carl Eugen stellte als Bedingung den Bau einer angemessenen Unterkunft, die das Alte Schloss aus der Zeit der Renaissance ablösen sollte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In dieser Zeit reichten viele Architekten ihre Vorschläge und Entwürfe beim Herzog ein, darunter auch Johann Balthasar Neumann, dessen Vorschlag aber abgelehnt wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Architekturhistoriker behaupten, wenn Neumanns Idee damals realisiert worden wäre, so wäre der großartigste Palastbau des 18.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der württembergische Oberbaudirektor Johann Christoph David von Leger wiederum schlug vor, das Alte Schloss nur auszubauen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der ansbachische Baudirektor Leopoldo Retti, dessen Onkel Donato Giuseppe Frisoni für Herzog Eberhard Ludwig Schloss Favorite in Ludwigsburg gebaut hatte, wählte für seinen Entwurf die Stelle eines ehemaligen Armbrusthauses im Lustgarten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Des Weiteren reichten noch Alessandro Galli da Bibiena und Maurizio Pedetti Vorschläge ein.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mai 1746 wurde Rettis Vorschlag von Carl Eugen ausgewählt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dieser sah einen Ehrenhof vor, der nicht zur Stadt, sondern auf noch nicht erschlossenes Gelände nach Norden zeigte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dadurch konnte eine Sicht auf die 1745 fertiggestellte Militärakademie im Süden des Schlosses, die spätere Hohe Karlsschule, vermieden werden und diese ebenso wie das Neue Lusthaus erhalten werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seiner Planung nach sollten sich in dem zum Garten gewandten Flügel die Gemächer der herzoglichen Familie befinden, im Corps de Logis die Repräsentationsräume und im zur Stadt gewandten Flügel Gästeräume untergebracht werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "September 1746 konnte am Gartenflügel der Grundstein gelegt werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Anlage wurde nach Plänen von Leopoldo Retti und unter der Leitung von Johann Christoph David Leger begonnen, da Retti bis 1748 noch in Ansbach beschäftigt war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bis 1749 waren das Corps de Logis und der Gartenflügel äußerlich fertig, so dass 1750 mit der Innenausstattung des Gartenflügels begonnen werden konnte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dabei zog Retti auch diverse Gutachten und Vorschläge anderer Architekten hinzu.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Frühjahr 1751 wurde mit dem Fundament des Stadtflügels begonnen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "September 1751 verstarb Retti an einer unbekannten Krankheit in Stuttgart.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von 1748 bis 1753 schuf der italienische Bildhauer Domenico Ferretti nach dem Figurenprogramm von Georg Bernhard Bilfinger und Leopoldo Retti den Hauptgiebel, den Gartengiebel und über 60 Dachfiguren.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zweite Bauphase unter Philippe de La Guêpière Nach dem Tod Rettis übernahm der Pariser Baumeister Philippe de La Guêpière, ein Freund von Retti, die weiteren Arbeiten und vollendete 1752 den Stadtflügel.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er war ein Kenner der modernen Architekturtheorie, die ganz von Frankreich und vom Schloss Versailles kopiert wurde, und kannte die Ansprüche des modernen Schloss- und Palastbaus, nach denen er auch in Stuttgart baute.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er entwarf außerdem die Inneneinrichtung des Gartenflügels und zum Teil die des Corps de Logis. 1758 bis 1760 wurden unter seiner Leitung die Portikus und die Kuppel auf dem Marmorsaal nach Plänen Rettis fertiggestellt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Stopp der Bauarbeiten 1764 In der Nacht vom 13. auf den 14.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "November 1762 brach im hinteren Teil des Gartenflügels ein Brand aus, der den Flügel völlig vernichtete.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stuttgart_mittlerer_schlossgarten",
+      "name": "Mittlerer Schlossgarten",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Park zwischen Schlossplatz, Staatsoper und Hauptbahnhof.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Alleen, Teich und Oper im Hintergrund.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Stuttgarter Schlossgarten ist eine 600 Jahre alte und 64 Hektar große Parkanlage in Stuttgart.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er beginnt am Neuen Schloss im Stadtzentrum und folgt dem früheren Lauf des heute verrohrten Nesenbachs bis zum Neckar.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das heutige Aussehen geht zurück auf die Bundesgartenschau 1961, wofür die historisch gewachsenen Strukturen im Oberen und Mittleren Schlossgarten weitgehend zerstört wurden, und die Bundesgartenschau 1977, wofür sie im Unteren Schlossgarten behutsam saniert wurden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit 1987 gibt es Bestrebungen, die klassizistische Gartenarchitektur mit dem Ovalsee und der Parkallee wiederherzustellen, die der württembergische Hofbaumeister Nikolaus Friedrich Thouret geschaffen hatte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Rahmen von Stuttgart 21 sind größere Umgestaltungen durch die Bauarbeiten und den darauf folgenden Zuschlag eines Teils der jetzigen Bahnanlagen geplant.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Gliederung Das Gesamtareal des Schlossgartens wird offiziell in drei Teile unterteilt, die durch mit Fußgängerstegen überbrückte Straßen getrennt sind: Der Obere Schlossgarten erstreckt sich vom Neuen Schloss am Schloßplatz bis zur Schillerstraße, die vom Ferdinand-Leitner-Steg überbrückt wird.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zentral gelegen finden sich dort am Eckensee Opern- und Schauspielhaus der Staatstheater Stuttgart, die Kunsthalle, die Eberhardsgruppe und das Haus des Landtags.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Oberen Schlossgarten ist auch der Schicksalsbrunnen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Mittlere Schlossgarten erstreckt sich von der Schillerstraße bis zur Cannstatter Straße, die mit der Grünen Brücke überquert werden kann.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dort befindet sich das Carl-Zeiss-Planetarium, die Ruine des Neuen Lusthauses, der Anlagensee mit dem Café am See und ein großer Biergarten sowie ein Teil der Baustelle des neuen Hauptbahnhofs.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Untere Schlossgarten schließt sich an bis zu den Mineralbädern in Berg nahe dem Bad Cannstatter Neckarufer.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Durch ihn verläuft die schnurgerade Felix-Mendelssohn-Bartholdy-Allee und ein dem Nesenbach nachempfundener Bachlauf, der in Nymphensee, Eissee und Inselsee übergeht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "An seinem östlichen Ende – nahe dem zoologisch-botanischen Garten Wilhelma – geht der Schlossgarten direkt in den Rosensteinpark über.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Beide sind Bestandteil des Stuttgarter „Grünen U“.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte 1350 wurde erstmals ein „gräflicher Garten“ direkt an der „Stuttgarter Burg“ (Altes Schloss) erwähnt. 1469 wurde ein Teil des Schlossgrabens als „Thiergartten“ benutzt. 1474 wurde der „Gräfliche Garten“ um zwei Morgen erweitert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhunderts ließ Herzog Christoph mit dem Umbau des Alten Schlosses einen Renaissance-Lustgarten erstellen, der bis ins 18.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ab 1740 wurde nach den Plänen des Hofbaumeisters Johann Christoph David Leger am Rande des Lustgartens die Militärakademie gebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit Baubeginn des Neuen Schlosses 1746 wurde der ehemalige „Lustgarten“ komplett überbaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "November 1775 wurde die Hohe Karlsschule von Schloss Solitude in die Militärakademie verlegt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von 1824 bis 1840 wurde der Rosensteinpark unter König Wilhelm I. angelegt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert wurden auf dem Gelände des Oberen Schlossgartens die beiden Theater gebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ab 1908 wurden Umbauten für den neuen Hauptbahnhof vorgenommen und im Zuge dessen der Mittlere Schlossgarten um 8 Hektar verkleinert. 1961 wurde der Obere Schlossgarten gegen Widerstand aus der Bevölkerung wegen der Bundesgartenschau komplett umgebaut. 1962 wurde das Hotel am Schlossgarten zwischen Bahnhof und Schlossgarten gebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Wegen der zweiten Bundesgartenschau 1977 wurden auch die Unteren Anlagen umgestaltet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Oktober 2010 wurden – gegen massiven Protest der Gegner von Stuttgart 21, die am Vortag mit Wasserwerfern und Tränengas verdrängt worden waren – Bäume im Bereich des Mittleren Schlossgartens gefällt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stuttgart_mercedes_benz_museum",
+      "name": "Mercedes-Benz Museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Automobilmuseum in Doppelhelix-Gebäude — Geschichte Mercedes-Benz.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Glas-Doppelhelix nahe Untertürkheim.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: mercedes-benz-museum.de Tickets.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Mercedes-Benz Welt ist ein Kundenzentrum des Unternehmens Mercedes-Benz Group in Stuttgart-Bad Cannstatt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mai 2006 eröffnet und besteht aus dem neuen Mercedes-Benz Museum und dem Mercedes-Benz Center.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Areal liegt direkt vor dem Haupttor des Mercedes-Benz-Werks Untertürkheim an der B 14 auf einem künstlich aufgeschütteten Hügel gegenüber der MHPArena im Neckarpark.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Museum ist das mit Abstand meistbesuchte in Stuttgart; bis April 2018 besuchten es mehr als neun Millionen Menschen aus über 190 Nationen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mercedes-Benz Museum Das Mercedes-Benz Museum befand sich bis zum 18.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "März 2006 auf dem Gelände des Mercedes-Benz-Werkes Untertürkheim und wurde im Mai 2006 in der Mercedes-Benz-Welt wiedereröffnet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Museum nimmt etwa 3.500 m² Grundfläche ein und bietet über neun Geschosse verteilt rund 17.000 m² Ausstellungsfläche.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Gebäude ist 47½ m hoch und hat einen umbauten Raum von 210.000 m³.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Neben dem Haupteingang befindet sich eine Open-Air-Arena für 900 Zuschauer.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Architektur Das Museumsgebäude wurde vom niederländischen Architekten Ben van Berkel und seinem Architekturbüro UNStudio entworfen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Grundriss hat die Form eines abgerundeten Reuleaux-Dreiecks mit einheitlicher Breite von 80 m.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Innenhof wird kongruent zur äußeren Form des Gebäudes durch ein Atrium gebildet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Um das Atrium winden sich zwei schräge Ebenen in einer an die Doppelhelix der DNA angelehnten Form (Trefoil) von oben nach unten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die dadurch entstehenden zwei Rundgänge beginnen oben und winden sich über insgesamt neun Ebenen zum Ausgang.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In den Fensterbändern sind 1800 dreieckige Scheiben verbaut, von denen keine der anderen gleicht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Konzept für den musealen Ausbau wurde vom Stuttgarter Büro HG Merz entwickelt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Auf ihrem Weg durch das Museum erleben die Besucher eine Zeitreise durch mehr als 130 Jahre Automobilgeschichte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von der obersten Ebene aus führen zwei Wege in weiten Kurven durch die umfangreiche Sammlung.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Mythosrundgang folgt chronologisch der Geschichte der Marke von der Erfindung des Automobils bis heute.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Auf dem zweiten Rundgang setzen fünf Sammlungssäle zeitübergreifende Schwerpunkte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jederzeit kann der Besucher zwischen den verschiedenen Sphären wechseln.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Erstmals präsentiert dabei das Museum nun auch die mehr als 100-jährige Nutzfahrzeuggeschichte des Unternehmens.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Beide Rundgänge enden in der Steilkurve des Raums „Silberpfeile – Rennen und Rekorde“.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von dort aus führt der Weg durch die „Faszination Technik“ weiter zur neuen Mercedes-Benz Niederlassung.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die chronologisch orientierten Mythosräume erzählen die Geschichte der Marke Mercedes-Benz und gliedern sie in Themen und Epochen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Hier entdeckt man Exponate wie einen Linienbus Mercedes-Benz O 305, den berühmten „Tausendfüßler“ – den Schwerlastwagen LP 333, ein Feuerwehrfahrzeug LF 3500 mit Drehleiter oder das Papamobil von Papst Johannes Paul II.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Räume bieten über große Fassaden einen weiten Blick über Stuttgart und das nähere Umland.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Collection 1: Galerie der Reisen Collection 2: Galerie der Lasten Collection 3: Galerie der Helfer Collection 4: Galerie der Namen Collection 5: Galerie der Helden Eine Sonderrolle kommt der Faszination Technik auf der untersten Ebene zu.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie ist nicht Teil des Rundgangs, sondern ist als in sich geschlossene Ausstellung frei zugänglich.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit Hilfe einer aufwendigen Inszenierung ermöglicht sie einen Blick in den Arbeitsalltag der Daimler-Entwickler und -Ingenieure und damit auch einen Ausblick in die Zukunft des Automobils.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ein Café, ein Restaurant und verschiedene Shops runden das Angebot für den Besucher ab.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Seit 1923 besitzt das Unternehmen eine Fahrzeugsammlung.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stuttgart_porsche_museum",
+      "name": "Porsche Museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Museum der Porsche AG in Zuffenhausen — Renn- und Serienfahrzeuge.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Dynamisch schwebender Stahlbetonbau an Porsche-Platz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: porsche.com/museum.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Porsche Museum ist ein Automuseum in Stuttgart.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Porsche AG befindet sich am Porscheplatz im Stadtbezirk Zuffenhausen, genauer gesagt in dessen Stadtteil Zuffenhausen-Schützenbühl.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Januar 2009 wurde der Museumsneubau für das Publikum eröffnet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Es belegt hinter dem Mercedes-Benz-Museum den zweiten Platz der meistbesuchten Museen in Stuttgart; 2015 besuchten es etwa 450.000 Menschen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das alte Porsche Museum 1976 wurde das Museum für die Allgemeinheit geöffnet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Es war auf dem Werksgelände in einer ehemaligen Motorenfertigungshalle angesiedelt und wies eine Fläche von 620 Quadratmeter auf.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zwischen 70.000 und 80.000 Besucher besichtigten jährlich die etwa 20 ständig wechselnden Exponate.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Werksmuseum verfügte aber über eine erheblich größere Anzahl von Ausstellungsfahrzeugen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die vorhandenen Rennwagen, Prototypen und die Serienfahrzeuge boten nur einen kleinen Einblick in die Geschichte des Herstellers, daher wurde die Ausstellung durch Filme über die Automobilentwicklung bei Porsche ergänzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dem Museum schloss sich ein dazugehöriger Shop an.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Porsche verfolgte das Konzept des „rollenden Museums“, was zum einen bedeutet, dass die Exponate ständig wechselten und zum anderen, dass die gezeigten Fahrzeuge oftmals noch fahrbereit und zum Teil sogar straßenzugelassen waren.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Je nach Ausstellungsvariante konnte der Besucher vom Porsche aus dem Jahr 1948 auch Modelle der am Nürburgring, in Le Mans oder bei der Targa Florio eingesetzten Sieger- und Markenweltmeister-Fahrzeuge ebenso besichtigen, wie Siegerautos der Rallye Monte Carlo, wo Porsche-Fabrikate mehrfach Erfolge erzielten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In den Dokumentationen begegnet der Besucher Siegernamen wie beispielsweise dem Rennbaron Huschke von Hanstein.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das neue Porsche Museum Nachdem ein zunächst diskutiertes Museumsprojekt zusammen mit Mercedes-Benz auf dem ehemaligen Messegelände Killesberg nicht zustande gekommen war, begann Porsche mit den Planungen für ein neues Museum am Hauptsitz in Stuttgart-Zuffenhausen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Absicht war, dem Porsche-Platz mit dem Unternehmenssitz und den Porsche-Werkshallen eine markante Gestalt zu geben.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die architektonische Gestaltung stammt vom Wiener Architektenbüro Delugan Meissl Associated Architects, welches sich im Wettbewerb gegen 170 Konkurrenten durchsetzen konnte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Konzept für den musealen Ausbau wurde vom Stuttgarter Büro hg merz architekten museumsgestalter entwickelt, das bereits für das Mercedes-Benz-Museum verantwortlich war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Um der umfangreichen Unternehmensgeschichte gerecht werden zu können und Wünschen nach einem adäquaten Museumsstandort nachzukommen, gab die Porsche-Unternehmensleitung im Jahr 2004 den Entwurf der Architekten Delugan Meissl nach der Lösung der Planungsfragen zur Ausführung frei.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Oktober 2005 war offizieller Start des Bauprojekts.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Oktober 2008 wurden die ersten Kleinexponate und Vitrinen auf der Ausstellungsebene installiert und aufgebaut und einen Monat später kamen die ersten zwölf Ausstellungsfahrzeuge in das zweite Obergeschoss.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die offizielle Übergabe an den Bauherren erfolgte am 8.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Für die Allgemeinheit ist das Museum seit dem 31.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Baukosten für das neue Museum haben sich auf zirka 100 Millionen Euro verdoppelt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bis Juni 2011 wurden eine Million Besucher und bis dato 5100 Führungen gezählt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Knapp 35 % der Besucher sind Gäste aus dem Ausland.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Frühjahr 2011 wurde eine Sonderausstellung zum Thema Ferdinand Porsche – Pionier des Hybridantriebs gezeigt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Architektur Das Bauwerk steht in leichter Hanglage.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Sockelbau, der als Tiefgarage genutzt wird, weist zwei Untergeschosse auf.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Darauf folgen stufenartig das Erdgeschoss und ein Obergeschoss.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Erdgeschoss befindet sich hinter einer Glasfront der Eingang mit einem schmalen Foyer, wo Kassentresen, Café und Museumsshop angeordnet sind.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Außerdem ist dort die durch eine Glaswand abgetrennte Museumswerkstatt sowie das Firmenarchiv zu finden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Oberhalb des Sockelbaus liegt der sogenannte Flieger mit dem Ausstellungsbereich.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stuttgart_fernsehturm_stuttgart",
+      "name": "Fernsehturm Stuttgart",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Erster Fernsehturm der Welt (1956) auf dem Hohen Bopser — Aussicht über Weinberge.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Betonschaft mit Kugel und Sendeantenne über Stadt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: fernsehturm-stuttgart.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Stuttgarter Fernsehturm ist ein 216,6 Meter hoher Fernseh- und Aussichtsturm auf dem Gipfel des Hohen Bopsers in der baden-württembergischen Landeshauptstadt Stuttgart.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der 1956 eröffnete Turm wurde zum Wahrzeichen der Stadt und stellt baulich wie architektonisch den Beginn einer neuen Ära im Turmbau dar, da er als erster seiner Art aus Stahlbeton besteht, einen vom Schaft auskragenden Turmkorb unterhalb der Antenne besitzt und in vertikaler Kragarmbauweise errichtet wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Neben der baulichen Innovation war die erfolgreiche wirtschaftliche Nutzung eines Restaurantbetriebes und einer Aussichtsplattform Wegbereiter für eine weltweite Turmbauwelle.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er wurde zum Symbol des Süddeutschen Rundfunks, der sich als Betreiber und Eigentümer verantwortlich zeigte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Aufgrund seiner herausragenden baulichen Bedeutung erhielt er bereits 1959 einen Architekturpreis und 2009 den von der Bundesingenieurkammer verliehenen Titel Historisches Wahrzeichen der Ingenieurbaukunst in Deutschland.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zudem ist er 1986 in die Liste der Kulturdenkmäler aufgenommen worden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der für die Öffentlichkeit nicht zugängliche Stuttgarter Fernmeldeturm steht etwa 1,5 Kilometer nordöstlich des Fernsehturms auf dem 462,2 m ü.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Hintergrund Zu Beginn des regelmäßigen Fernseh-Sendebetriebs an Weihnachten 1952 (siehe auch: Geschichte des Fernsehens in Deutschland) war die fernsehtechnische Versorgung im Südwesten Deutschlands noch sehr unzureichend.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Raum Stuttgart konnten die wenigen Fernsehteilnehmer seinerzeit nur den rund 100 km entfernt in Rheinland-Pfalz stehenden und erst 1953 errichteten Sender Weinbiet des Südwestfunks (SWF) empfangen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Wenn überhaupt möglich, war dies speziell außerhalb der Höhenlagen des Stuttgarter Talkessels oft nur mit aufwändigen Spezialantennen zu erreichen, was sich insbesondere bei der ersten internationalen Direktübertragung der Fernsehgeschichte, der Krönung von Elisabeth II. am 2.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "August 1953 fragte das Heidelberger Tagblatt daher ironisch: „Ist Fernsehen Glückssache?“ Auch der Empfang des auf UKW vom Sender Degerloch ausgestrahlten Hörfunks war in der Umgebung der Landeshauptstadt nicht überall zufriedenstellend.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dieser Missstände war sich der Süddeutsche Rundfunk (SDR) von Anfang an bewusst und stellte daher bereits am 5.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Januar 1953 beim Innenministerium Baden-Württembergs einen Antrag, für einen Fernseh-Grundnetzsender auf dem 485,2 m ü.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "NHN hohen Bopser einen rund 200 m hohen Stahlgittermast errichten zu dürfen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der 200.000 Mark teure Mast sollte dreiseitig mit Pardunen gesichert werden und bis zur Fußball-WM 1954 fertiggestellt sein.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Durch den hohen Standort sollte die breite Abdeckung des Stuttgarter Talkessels gewährleistet werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stuttgart_wilhelma",
+      "name": "Wilhelma",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Zoologisch-botanischer Garten in historischem maurischem Schlossensemble.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Gewölbte Fassaden und Gewächshäuser im Neckar-Kessel.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: wilhelma.de Öffnungszeiten.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Wilhelma ist ein zoologisch-botanischer Garten im Stuttgarter Stadtbezirk Bad Cannstatt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie zählt mit jährlich rund 1,8 Millionen Besuchern zu den meistbesuchten zoologischen Gärten in Deutschland.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Wilhelma zeigt auf etwa 30 Hektar rund 11.000 Tiere aus aller Welt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit fast 1200 Arten ist sie zusammen mit dem Zoologischen Garten Berlin der artenreichste Zoo Deutschlands.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der botanische Bereich präsentiert über 8500 Pflanzenarten aus allen Klimazonen der Erde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zusätzlich zum öffentlich zugänglichen Garten verfügt die Wilhelma über eine Außenstelle, den in Fellbach gelegenen Tennhof, auf dem unter anderem Zuchthengste und -bullen verschiedener Tierarten gehalten werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der zoologisch-botanische Garten ist in eine zwischen 1846 und 1866 erbaute historistische Schlossanlage eingebettet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In den 1950er-Jahren wurde damit begonnen, den zuvor nur botanisch-historischen Garten um einen wissenschaftlich geführten Zoo zu ergänzen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Eine Besonderheit stellt die Haltung der Menschenaffen in der Wilhelma dar: Es gab zahlreiche Zuchterfolge in den jeweiligen Gruppen; die Menschenaffenhäuser galten zum Zeitpunkt ihrer Eröffnung (1973, 2013) als herausragend.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Gorillakindergarten war europaweit einzigartig.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit diesem war die Wilhelma Anlaufstelle für viele europäische Zoos, wenn dort Jungtiere von ihren Müttern verstoßen wurden und eine Handaufzucht erforderlich war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Eigentümer der Wilhelma ist das Land Baden-Württemberg als Rechtsnachfolger der württembergischen Könige.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie ist der einzige Landeszoo in Deutschland und dem Finanzministerium unterstellt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Frühere Zooanlagen in Stuttgart Der Wilhelma, die erst seit der Nachkriegszeit zoologische Elemente beinhaltet, gingen mehrere zoologische Einrichtungen voraus.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Darunter befand sich die 1812 von Friedrich I., dem damaligen König von Württemberg, gegründete Menagerie auf dem Gelände eines königlichen Landschlösschens beim heutigen Neckartor.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Besonderheiten waren Tafeln mit Erläuterungen zu den Tieren in den Gehegen und die Öffnung für das „normale“ Volk.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_places": []
+}

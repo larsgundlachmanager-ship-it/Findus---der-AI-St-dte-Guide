@@ -102,7 +102,7 @@ async function vibrateForAttention(kind: SpeechDeliveryKind): Promise<void> {
 /**
  * If speaking aloud is OK → return true (caller speaks).
  * Else queue + vibrate + notify → return false.
- * mute / text_only → skip TTS (no queue); still set subtitle when possible.
+ * mute / text_only → skip TTS; Untertitel 1:1 setzen.
  */
 export async function requestSpeechDelivery(opts: {
   text: string;
@@ -114,7 +114,7 @@ export async function requestSpeechDelivery(opts: {
 
   const kind = opts.kind ?? 'assistant';
 
-  // Profile: Stumm / Nur Text — kein TTS, Untertitel trotzdem setzen
+  // Profile: Stumm / Nur Text — kein TTS; Untertitel = derselbe Text
   if (!wantsSpokenAudio()) {
     try {
       useFinnusStore.getState().setSubtitleText(text);

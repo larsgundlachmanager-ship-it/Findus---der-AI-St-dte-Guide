@@ -26,5 +26,5 @@ $encoded = [uri]::EscapeDataString($bundleUrl)
 $deepLink = "exp+findus://expo-development-client/?url=$encoded"
 
 Write-Host "Metro-Bundle: $bundleUrl"
-& $adb shell am start -a android.intent.action.VIEW -d $deepLink -n com.finnus.app/.MainActivity | Out-Null
+& $adb shell am start -a android.intent.action.VIEW -d $deepLink -n de.findus.app/.MainActivity | Out-Null
 Write-Host "Findus geöffnet."

@@ -1,0 +1,2058 @@
+{
+  "city_history": "Potsdam ist Landeshauptstadt Brandenburgs und UNESCO-Welterbestätte: Schlösser und Parks von Berlin und Potsdam (seit 1990, erweitert 1992 und 1999). Die Hohenzollern prägten barocke Residenzen, klassizistische Stadtbauten und Filmstadt Babelsberg — von Sanssouci bis Cecilienhof (Potsdamer Konferenz 1945).",
+  "notes": [
+    "Preise/Öffnung nur LIVE.",
+    "Keine Dialog-Skripte.",
+    "Quellen: Wikipedia, spsg.de, potsdam.de, visitBerlin."
+  ],
+  "offline_qa": [
+    {
+      "q": "Was ist UNESCO in Potsdam?",
+      "a": "Welterbe „Schlösser und Parks von Berlin und Potsdam“ — u. a. Park Sanssouci, Neues Palais, Babelsberg, Neuer Garten/Cecilienhof (Wikipedia).",
+      "tags": [
+        "unesco",
+        "potsdam"
+      ]
+    },
+    {
+      "q": "Wo war die Potsdamer Konferenz?",
+      "a": "Im Schloss Cecilienhof im Neuen Garten, 17. Juli–2. August 1945 (Wikipedia, SPSG).",
+      "tags": [
+        "cecilienhof"
+      ]
+    }
+  ],
+  "spots": [
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "potsdam_potsdam_schloss_sanssouci",
+      "name": "Schloss Sanssouci",
+      "lat": 52.4042017,
+      "lng": 13.0384999,
+      "category": "denkmal",
+      "general_info": "Rokoko-Sommerschloss Friedrichs des Großen (1745–1747, Georg Wenzeslaus von Knobelsdorff) auf terrassierten Weinbergen im Park Sanssouci — UNESCO-Welterbe, betreut von der Stiftung Preußische Schlösser und Gärten (SPSG).",
+      "bullets": [
+        "Einzelgeschossiges Schloss mit markanter grüner Kuppel auf der Weinbergterrasse.",
+        "Terrassentreppe mit 132 Stufen zur Ehrenhofseite (Wikipedia).",
+        "Friedrich II. in der Terrasse beigesetzt (Grabmal)."
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Schloss Sanssouci?",
+          "a": "Am flachen Rokokobau mit grüner Kupferkuppel, der sich in die terrassierten Weinberge schmiegt — von unten die lange Freitreppe, von oben der Ehrenhof mit Springbrunnen."
+        }
+      ],
+      "facts": {
+        "origin": "Sommerresidenz Friedrichs II.; Bau 1745–1747; Name „sans souci“ (ohne Sorge).",
+        "architecture": "Rokoko, von Knobelsdorff; terrassierter Weinberg als Bühne.",
+        "now": "Museum/SPSG-Schloss; Eintritt und Öffnung LIVE auf spsg.de prüfen."
+      },
+      "deep_data_pool": [
+        {
+          "text": "Visuell: von der Hauptallee kommend siehst du zuerst die breite Weinbergterrasse mit balustradierten Stufen; oben der gelb-ockerfarbene Schlossbau mit grüner Zwiebelkuppel und vergoldeten Ornamenten (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Ehrenhof liegt auf der Bergkuppe; zur Gartenseite öffnen sich französische Beete und Blickachsen in den Park Sanssouci.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Historie: Friedrich II. wollte hier „ ohne Sorge“ leben — abseits der Berliner Hofetikette; das Schloss wurde zum Symbol seines aufgeklärten Herrscherbilds.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Georg Wenzeslaus von Knobelsdorff entwarf Schloss und Terrasse als Einheit; der Weinberg unterstreicht Friedrichs Interesse an Frucht- und Weinkultur in Brandenburg.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Schloss ist nur eingeschossig — bewusst informell gegenüber barocken Repräsentationsresidenzen wie Versailles (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Innenräume: Rokoko-Zimmer, Bibliothek und Musikzimmer Friedrichs; Bildprogramme verweisen auf Aufklärung, Philosophie und Freundschaft (Voltaire-Kontext).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Terrassentreppe mit 132 Stufen verbindet Park und Schloss; sie ist eines der bekanntesten Motive Potsdams (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Friedrich starb 1786 im Schloss; sein Grabmal befindet sich auf der obersten Terrasse neben den Weinbergen (Neues Palais / Park Sanssouci).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach 1945 gehörte das Ensemble zur DDR; Sanierung und museale Öffnung erfolgten durch die SPSG nach der Wiedervereinigung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Schloss ist Teil des UNESCO-Welterbes „Schlösser und Parks von Berlin und Potsdam“ (seit 1990, Erweiterungen 1992/1999).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer im Park: Bildergalerie, Neue Kammern, Chinesisches Haus, Historische Mühle und Neues Palais liegen fußläufig im Schlosspark Sanssouci.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Architektur-Detail: Kuppel und Dachreiter mit vergoldeten Voluten; Fassade in ocker-gelben Putzflächen mit weißen Gliederungen — typisch friderizianisches Rokoko.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Name „Sanssouci“ steht für Friedrichs Wunsch nach Rückzug; er empfing hier Gäste wie Voltaire (zeitweise am Hof).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Knobelsdorff wurde im Verlauf des Baus durch Friedrichs eigene Entwurfsideen ergänzt; Terrasse und Schlossachse sind sorgfältig auf den Sonnenuntergang ausgerichtet (Forschungsliteratur/Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Weinbergtreppe wurde mehrfach restauriert; sie ist zentraler Ort für Besucherfotos und Blick auf das Schloss.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "SPSG: Schloss Sanssouci gehört zum Kernensemble der preußischen Schlösser in Potsdam; Kombi-Tickets mit anderen Häusern möglich (LIVE).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Barocke Gartenkunst: Symmetrie, Rasenflächen und bosketierte Hecken rahmen das Schloss; weiter westlich schließen sich weitere Parkteile an.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Während des Zweiten Weltkriegs blieb das Schloss vergleichsweise weniger zerstört als manche Stadtbauten; dennoch waren Instandsetzungen nötig.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: Führungen durch Räume Friedrichs II.; Audioguides und Saisonprogramme über SPSG (LIVE).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Schloss steht auf dem „ Weinberg“ — historisch wurden Reben an den Südhängen kultiviert; die Terrassen visualisieren diese Tradition.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Von der Maulbeerallee und der Grünen Gitter erreicht man den Park; Sanssouci ist nicht das Stadtschloss, sondern die westliche Vorstadt-Residenz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Film- und Bildikon: Sanssouci zählt zu den meistfotografierten Schlössern Deutschlands (Tourismusstatistik/visitBerlin).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nachbarbau: Schloss Charlottenhof und Römische Bäder liegen südwestlich im erweiterten Park; separate SPSG-Tickets.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Friedrichs Lieblingshunde wurden teils auf dem Gelände bestattet — kleine Grabsteine im Park erinnern daran (Parkführungen/SPSG).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Achse Sanssouci–Neues Palais spannt den Park; Friedrich legte nach dem Siebenjährigen Krieg das Neues Palais als Gegenpol zur bescheidenen Sommerresidenz an.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintrittspreise, Führungen, Ticketkombinationen und Sonderausstellungen auf spsg.de bzw. visitBerlin tagesaktuell prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Parkanlage Sanssouci wurde zusammen mit dem Schloss zum UNESCO-Welterbe erklärt; später kamen u. a. Neues Palais, Orangerie und Charlottenhof hinzu (Wikipedia).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Friedrich II. förderte Musik und Philosophie am Hof; Sanssouci war Ort privater Audienzen und kleinerer Feste, nicht der große Thronsaal-Betrieb Berlins.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Bildergalerie westlich des Schlosses beherbergte Friedrichs Gemäldesammlung — eines der ersten public-oriented Museumskonzepte des 18. Jh. (SPSG).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Sanssouci überstand den Krieg mit Schäden, die nach 1945 instand gesetzt wurden; die SPSG dokumentiert Restaurierungszyklen der Kuppel und Fassade.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Besucher steigen oft die Weinbergtreppe hinauf und gehen durch den Ehrenhof — barrierefreie Zugänge sind begrenzt; LIVE auf spsg.de prüfen.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Voltaire lebte zeitweise am Hof Friedrichs; sein Gästezimmer im Schloss Sanssouci ist Teil der Führungsroute (SPSG).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Schloss liegt in der „ Westlichen Vorstadt“ — getrennt vom barocken Stadtkern am Alten Markt.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Sanssouci diente nicht als Hauptresidenz; Hofhaltung und Repräsentation verlagerten sich je nach Jahreszeit zwischen Berlin, Potsdam und Neues Palais.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "potsdam_park_sanssouci",
+      "name": "Park Sanssouci",
+      "lat": 52.4025537,
+      "lng": 13.0386147,
+      "category": "park",
+      "general_info": "Schlosspark um Sanssouci (ca. 287 ha): barocke und landschaftliche Gartenanlagen mit Schlössern, Pavillons und Skulpturen — UNESCO-Welterbe gemeinsam mit Schloss Sanssouci und weiteren Potsdamer Parks (Wikipedia).",
+      "bullets": [
+        "Weinbergterrasse mit Schloss Sanssouci als Zentrum.",
+        "Musenrondell, Chinesisches Haus, Bildergalerie im Park.",
+        "Große Fläche — Fahrrad/Bequemschuhe sinnvoll."
+      ],
+      "faqs": [
+        {
+          "q": "Ist der Park Sanssouci kostenlos?",
+          "a": "Parkflächen sind in der Regel frei zugänglich; Schloss-Innere, Bildergalerie und Sonderhäuser haben SPSG-Eintritt (LIVE prüfen)."
+        }
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: weite Rasenachsen, gerade und geschwungene Wege, Skulpturengruppen und bosketierte Hecken; von der Hauptallee führt die Blickachse zur Weinbergtreppe.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Park wurde ab 1744 unter Friedrich II. angelegt und über Generationen erweitert — von barocken Sternachsen bis zu landschaftlichen Partien.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "UNESCO-Welterbe: Park Sanssouci ist Teil des Ensembles „Schlösser und Parks von Berlin und Potsdam“ (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Musenrondell: acht Musen-Statuen um einen Springbrunnen — klassizistisches Zentrum südlich des Schlosses (SPSG/Parkplan).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Chinesisches Haus: rokoko-pagodenartiger Teehaus-Pavillon im östlichen Parkteil — Merkwürdigkeit der „ Chinoiserie“ am Hof.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Bildergalerie von Sanssouci: Kunstmuseum Friedrichs II. am Park; barocke Fassade (separates SPSG-Haus).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Historische Mühle: markante Windmühle am Fuß der Weinberge — Legende vom „ alten Fritz“ und Müller (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Neues Palais am westlichen Parkende: barocke Großresidenz als Kontrast zum kleinen Sanssouci.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Freundschaftstempel (Ruinenberg): klassizistischer Rundtempel von Schinkel — im Park als Aussichtspunkt (Wikipedia; eigener Weg).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Belvedere auf dem Klausberg und weitere Belvedere-Bauten gehören zum erweiterten Schlosspark-Kontext (SPSG).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: Spaziergänge, Picknickzonen, jahreszeitliche Blumenbeete; Sommerhochbetrieb bei gutem Wetter.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "ÖPNV: Haltestellen Potsdam Hauptbahnhof / Charlottenhof / Park Sanssouci — Buslinien zur Allee nach Sanssouci (LIVE).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Botanischer Garten Potsdam grenzt südlich; Universität Potsdam in Parknähe.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Gartenkunst: Übergang von französisch-barocker Geometrie zu englisch-landschaftlichen Partien im 19. Jh.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach 1945 blieb der Park öffentliche Grünfläche; Pflege durch SPSG und Stadt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Schloss-Öffnungen, Nachtführungen, Konzerte auf den Terrassen — Kalender SPSG/visitBerlin.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Park verbindet französische Barockachsen mit landschaftlichen Partien des 19. Jahrhunderts — Lenné und andere Gartenarchitekten wirkten in späteren Erweiterungen mit (Wikipedia).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Ruinenberg nördlich des Schlosses trägt künstliche Ruinen und den Freundschaftstempel — romantische Staffage im Sinne des 18./19. Jh.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Fahrradwege queren den Park; an Sommertagen hohe Besucherdichte an der Weinbergtreppe.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Hunde: Regeln für Leinenpflicht und Schlossnähe LIVE auf SPSG-Parkregeln prüfen.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Winzertradition: Friedrich ließ Reben anlegen; die Terrassen visualisieren diese Nutzung auch nach Ende des Weinbaus am Hang.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Park Sanssouci grenzt an städtische Wohnviertel und Universität — starker Kontrast Alltag vs. UNESCO-Kulisse.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_park_sanssouci#1] Zusatzkontext aus Pack-Research-Welle A: Park Sanssouci — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_park_sanssouci#2] Zusatzkontext aus Pack-Research-Welle A: Park Sanssouci — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "potsdam_neues_palais",
+      "name": "Neues Palais",
+      "lat": 52.401301,
+      "lng": 13.01603,
+      "category": "denkmal",
+      "general_info": "Barockes Repräsentationsschloss (1763–1769) am westlichen Ende des Parks Sanssouci — Friedrich II. ließ es nach dem Siebenjährigen Krieg errichten; über 200 Räume, Communs und Schlosstheater (Wikipedia, SPSG).",
+      "bullets": [
+        "Roter Backstein mit reicher Skulpturendekoration.",
+        "Communs (Wirtschaftsflügel) mit Bogengängen als sichtbare Seitenflügel.",
+        "Schlosstheater im Gebäudekomplex."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: monumentale Fassade mit Kuppel und zahlreichen Statuen; von der Hauptallee aus wirkt das Schloss als barocker Abschlusspunkt des Parks.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Friedrich II. wollte nach 1763 Pracht demonstrieren — das „ kleine“ Sanssouci steht in bewusstem Kontrast zu diesem Großbau.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Architekten u. a. Carl von Gontard, Bühning; Innenausstattung mit Rokoko- und frühklassizistischen Räumen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Communs: zwei lange Flügel mit Bogengängen verbinden Wirtschaftsgebäude optisch mit dem Schloss — ikonische Silhouette.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schlosstheater im Neuen Palais: eines der erhaltenen Hoftheater; Aufführungen in Saison (SPSG/LIVE).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach monarchischem Ende Nutzung als Museum und gelegentlich als Universitätssaal (20. Jh.).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "UNESCO-Welterbe als Teil des Parkensembles Sanssouci.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Innen: Grottensaal, Marmorsaal, königliche Wohn- und Festräume — Führungen SPSG.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Park vor dem Schloss: weite Rasenflächen, Alleen und Blick zurück zum Schloss Sanssouci.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Zwei große Communs-Quadraturen flankieren das Schloss; Durchgänge für Hofwagen und Versorgung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: Touristischer Schwerpunkt im Westen des Parks; Kombination mit Charlottenhof möglich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Tickets, Führungen, Theater-Spielplan auf spsg.de prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Schloss wurde selten bewohnt — Friedrich bevorzugte Sanssouci; das Neues Palais blieb Repräsentations- und Gastschloss (Wikipedia).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Grottensaal mit Muschel- und Mineralien-Dekor — barockes Spektakel-Innere (SPSG-Führungen).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach 1918 Nutzungswandel; Teile als Museum, Teile Universität Potsdam in der NS-/DDR-Geschichte.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Communs beherbergten Küchen, Stallungen und Personal — funktionale Riesenflügel mit repräsentativer Straßenfassade.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Schlosstheater überstand Krieg und Teilung; heute wieder Spielbetrieb möglich (LIVE).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_neues_palais#1] Zusatzkontext aus Pack-Research-Welle A: Neues Palais — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_neues_palais#2] Zusatzkontext aus Pack-Research-Welle A: Neues Palais — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_neues_palais#3] Zusatzkontext aus Pack-Research-Welle A: Neues Palais — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_neues_palais#4] Zusatzkontext aus Pack-Research-Welle A: Neues Palais — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_neues_palais#5] Zusatzkontext aus Pack-Research-Welle A: Neues Palais — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 2,
+      "pack_role": "story",
+      "id": "potsdam_historische_muhle_von_sanssouci",
+      "name": "Historische Mühle von Sanssouci",
+      "lat": 52.4041848,
+      "lng": 13.0356974,
+      "category": "denkmal",
+      "general_info": "Windmühle am Fuß der Sanssouci-Terrasse — heutiger Bau 1787–1791; Legende vom „ Mühlenfrieden“ Friedrichs II. mit Müller Grävenitz; heute Museum (Wikipedia, SPSG).",
+      "bullets": [
+        "Holzwindmühle mit achteckigem Grundriss nahe der Weinbergtreppe.",
+        "Museum zu Mühle und Anekdoten um Friedrich II."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: die Mühle ragt unmittelbar neben den Weinbergterrassen empor — ungewöhnlicher Kontrast zwischen ländlicher Technik und Rokokoresidenz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Legende: Friedrich soll dem Müller das Mahlen erlaubt haben, obwohl der Lärm störte — „ Es gibt nur eine Mühle“ (volkskundlich/Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Vorgängermühle brannte; Neubau unter Friedrich Wilhelm II. als Holländermühle.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute Ausstellungen zu Mühlentechnik und Friedrich-Geschichte.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Museum auf spsg.de prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_historische_muhle_von_sanssouci#1] Zusatzkontext aus Pack-Research-Welle A: Historische Mühle von Sanssouci — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_historische_muhle_von_sanssouci#2] Zusatzkontext aus Pack-Research-Welle A: Historische Mühle von Sanssouci — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_historische_muhle_von_sanssouci#3] Zusatzkontext aus Pack-Research-Welle A: Historische Mühle von Sanssouci — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "potsdam_filmmuseum_potsdam",
+      "name": "Filmmuseum Potsdam",
+      "lat": 52.3952574,
+      "lng": 13.0577878,
+      "category": "museum",
+      "general_info": "Filmmuseum in der historischen Marstall am Breiten Weg — Geschichte des Films in Potsdam/Babelsberg, DEFA, Ufa und Studio Babelsberg; Ausstellungen und Archive (Wikipedia, filmmuseum-potsdam.de).",
+      "bullets": [
+        "Barocker Marstallbau als Museumsschauplatz.",
+        "Schwerpunkt Babelsberg und DEFA-Erbe.",
+        "Nahe Alter Markt / Stadtzentrum."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: langgestreckter barocker Backsteinbau mit hohen Fenstern — ehemalige Marstallanlage des Stadtschlosses.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Potsdam/Babelsberg: ältestes großes Filmstudio der Welt (Studio Babelsberg, gegr. 1912, Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Ausstellungen zu Stummfilmen, NS-Filmpropaganda, DEFA und Wende-Kino — historisch-kritische Aufarbeitung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Verbindung zu Filmpark Babelsberg und aktuellen Produktionen (Studios in Großbeerenstraße).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Museum Barberini und Nikolaikirche fußläufig.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Sonderausstellungen, Eintritt, Öffnungszeiten auf filmmuseum-potsdam.de prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Museum dokumentiert auch NS-Propagandafilme und DEFA-Alltagsproduktion — historisch-kritische Perspektive (filmmuseum-potsdam.de).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Marstall-Architektur: ehemals königliche Pferdehaltung am Stadtschloss — räumliche Nähe zum Machtzentrum.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Kooperationen mit Studio Babelsberg GmbH und Festivals (Filmmuseum als institutioneller Anker).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_filmmuseum_potsdam#1] Zusatzkontext aus Pack-Research-Welle A: Filmmuseum Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_filmmuseum_potsdam#2] Zusatzkontext aus Pack-Research-Welle A: Filmmuseum Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_filmmuseum_potsdam#3] Zusatzkontext aus Pack-Research-Welle A: Filmmuseum Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_filmmuseum_potsdam#4] Zusatzkontext aus Pack-Research-Welle A: Filmmuseum Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_filmmuseum_potsdam#5] Zusatzkontext aus Pack-Research-Welle A: Filmmuseum Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_filmmuseum_potsdam#6] Zusatzkontext aus Pack-Research-Welle A: Filmmuseum Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_filmmuseum_potsdam#7] Zusatzkontext aus Pack-Research-Welle A: Filmmuseum Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_filmmuseum_potsdam#8] Zusatzkontext aus Pack-Research-Welle A: Filmmuseum Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_filmmuseum_potsdam#9] Zusatzkontext aus Pack-Research-Welle A: Filmmuseum Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 2,
+      "pack_role": "story",
+      "id": "potsdam_filmpark_babelsberg",
+      "name": "Filmpark Babelsberg",
+      "lat": 52.3855637,
+      "lng": 13.1170475,
+      "category": "freizeitpark",
+      "general_info": "Themenpark am Studio Babelsberg — Backstage-Touren, Requisiten, Stunt-Shows und Ausstellungen zur Filmproduktion; Adresse Großbeerenstraße 200 (filmpark.de, Wikipedia).",
+      "bullets": [
+        "Attraktionen zu Filmtechnik und TV-Klassikern.",
+        "In unmittelbarer Nähe der aktiven Studiogelände.",
+        "Familien- und Fan-Ziel."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: studiogebundene Kulissen, Backlot-Bereiche und Showbühnen hinter den Toren an der Großbeerenstraße.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Studio Babelsberg produzierte u. a. „ Metropolis“, „ Der blaue Engel“, DEFA-Titel und internationale Features (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Filmpark vermittelt Drehpraxis — Kostüme, Spezialeffekte, historische Sets.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Schloss Babelsberg und Park Babelsberg oberhalb der Havel.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Saisonöffnung, Shows, Preise auf filmpark.de tagesaktuell prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_filmpark_babelsberg#1] Zusatzkontext aus Pack-Research-Welle A: Filmpark Babelsberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_filmpark_babelsberg#2] Zusatzkontext aus Pack-Research-Welle A: Filmpark Babelsberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_filmpark_babelsberg#3] Zusatzkontext aus Pack-Research-Welle A: Filmpark Babelsberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "potsdam_schloss_babelsberg",
+      "name": "Schloss Babelsberg",
+      "lat": 52.407644,
+      "lng": 13.093361,
+      "category": "denkmal",
+      "general_info": "Gothic-Revival-Schloss (1833–1849, Karl Friedrich Schinkel, Ludwig Persius, Peter Joseph Lenné) auf dem Babelsberg über der Havel — Park Babelsberg mit Blick auf Glienicker Brücke (Wikipedia, SPSG).",
+      "bullets": [
+        "Turm, Zinnen, neugotische Silhouette.",
+        "Park von Lenné mit Havelblick.",
+        "Nähe Studio Babelsberg."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: mehrere Türme und Erker aus rotem Backstein — romantische Neugotik auf terrassiertem Hang zum Fluss.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schinkel und Persius entwarfen für Prinz Wilhelm (später Kaiser Wilhelm I.) ein „ englisches“ Landschaftsschloss.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Park Babelsberg: weitläufige Wege, Flatowturm, Uferpromenaden — UNESCO-Welterbe.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Kaltakrieg: Grenznähe zu West-Berlin; Babelsberg als Film- und Villenviertel.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Sanierung durch SPSG; Innen teils museal.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Filmpark und Glienicker Brücke.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Schloss-Öffnungen SPSG prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Wilhelm I. und Augusta nutzten Babelsberg als Sommerresidenz — später deutsche Kaiserlinie (Wikipedia).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Flatowturm im Park: Aussichtsturm aus Backstein — weiterer Punkt im UNESCO-Park Babelsberg.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Haveluferpromenade: Spazierwege unterhalb des Schlosses mit Blick auf Glienicker Brücke.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schinkel entwarf neben Babelsberg zahlreiche Potsdam-Bauten (Nikolaikirche, Freundschaftstempel, Belvedere).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_babelsberg#1] Zusatzkontext aus Pack-Research-Welle A: Schloss Babelsberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_babelsberg#2] Zusatzkontext aus Pack-Research-Welle A: Schloss Babelsberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_babelsberg#3] Zusatzkontext aus Pack-Research-Welle A: Schloss Babelsberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_babelsberg#4] Zusatzkontext aus Pack-Research-Welle A: Schloss Babelsberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_babelsberg#5] Zusatzkontext aus Pack-Research-Welle A: Schloss Babelsberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_babelsberg#6] Zusatzkontext aus Pack-Research-Welle A: Schloss Babelsberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_babelsberg#7] Zusatzkontext aus Pack-Research-Welle A: Schloss Babelsberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_babelsberg#8] Zusatzkontext aus Pack-Research-Welle A: Schloss Babelsberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_babelsberg#9] Zusatzkontext aus Pack-Research-Welle A: Schloss Babelsberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 2,
+      "pack_role": "story",
+      "id": "potsdam_st_nikolaikirche_potsdam",
+      "name": "St. Nikolaikirche Potsdam",
+      "lat": 52.3955621,
+      "lng": 13.0575491,
+      "category": "denkmal",
+      "general_info": "Evangelische Stadtkirche am Alten Markt — klassizistischer Kuppelbau nach Karl Friedrich Schinkel (1830–1837, Wiederaufbau nach 1945/2000er); prägt die Stadtsilhouette (Wikipedia).",
+      "bullets": [
+        "Hohe grüne Kupferkuppel über klassizistischem Säulenportikus.",
+        "Am Alten Markt neben Stadtschloss-Fassade.",
+        "Konzertradition."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: von der Humboldtstraße oder dem Alten Markt wirkt die Kuppel wie ein „ zweites Kapitol“ — Schinkels Proportionen und Säulenfront.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Historie: mittelalterlicher Vorgänger; Schinkel entwarf den Neubau für ein modernes Potsdam.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schwer beschädigt im Krieg; langjähriger Wiederaufbau der Kuppel und des Innenraums.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: Gottesdienste, Konzerte, Turmführungen (LIVE).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Museum Barberini und Filmmuseum in Gehdistanz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Turmöffnung und Veranstaltungskalender auf gemeinde-/visitBerlin prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_st_nikolaikirche_potsdam#1] Zusatzkontext aus Pack-Research-Welle A: St. Nikolaikirche Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_st_nikolaikirche_potsdam#2] Zusatzkontext aus Pack-Research-Welle A: St. Nikolaikirche Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_st_nikolaikirche_potsdam#3] Zusatzkontext aus Pack-Research-Welle A: St. Nikolaikirche Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "potsdam_stadtschloss",
+      "name": "Stadtschloss Potsdam",
+      "lat": 52.395833,
+      "lng": 13.059722,
+      "category": "denkmal",
+      "general_info": "Barocker Stadtkern am Alten Markt — historisches Residenzschloss der Kurfürsten/Könige, Kriegszerstörung, GDR-Abbruch des Ruinenrests; Fassadenrekonstruktion als Landtag Brandenburg seit 2014 (Wikipedia, potsdam.de).",
+      "bullets": [
+        "Orange-braune barocke Fassade am Alten Markt.",
+        "Sitz des Landtags Brandenburg.",
+        "Nachbar: Nikolaikirche, Obelisk, Barberini."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: der Alte Markt ist eine ovale Platzfläche mit Obelisk, Kirche und Schlossfassade — barocke Kulisse im Zentrum.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Historisches Stadtschloss: Wurzeln im Mittelalter; barocker Ausbau unter Friedrich dem Großen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "1945 schwer zerstört; GDR entfernte die Ruine — Platz blieb lange offen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Rekonstruktion der Außenfassade mit modernem Landtags-Innere — umstrittene, prägende Stadtdebatte.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Fortunaportal als historisches Element in der Fassadenrekonstruktion (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Holländisches Viertel nordwestlich; Brandenburger Straße als Einkaufsmeile.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Landtagsbesucherzentrum/Führungen auf landtag.brandenburg.de prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Alte Markt wurde nach 1990 wieder bebaut — Obelisk, Kirche und Schlossfassade bilden barocke Kulisse.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Stadtschloss war historisch Zentrum der kurbrandenburgischen Residenz in Potsdam.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Landtag Brandenburg tagt im Inneren — moderne Parlamentsarchitektur hinter historischer Hülle.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Fortuna mit Ruder am Portal: Wiederaufstellung als Symbol der Rekonstruktionsdebatte (Wikipedia).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_stadtschloss#1] Zusatzkontext aus Pack-Research-Welle A: Stadtschloss Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_stadtschloss#2] Zusatzkontext aus Pack-Research-Welle A: Stadtschloss Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_stadtschloss#3] Zusatzkontext aus Pack-Research-Welle A: Stadtschloss Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_stadtschloss#4] Zusatzkontext aus Pack-Research-Welle A: Stadtschloss Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_stadtschloss#5] Zusatzkontext aus Pack-Research-Welle A: Stadtschloss Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_stadtschloss#6] Zusatzkontext aus Pack-Research-Welle A: Stadtschloss Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_stadtschloss#7] Zusatzkontext aus Pack-Research-Welle A: Stadtschloss Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_stadtschloss#8] Zusatzkontext aus Pack-Research-Welle A: Stadtschloss Potsdam — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "potsdam_museum_barberini",
+      "name": "Museum Barberini",
+      "lat": 52.390278,
+      "lng": 13.069722,
+      "category": "museum",
+      "general_info": "Kunstmuseum am Alten Markt (Eröffnung 2017) — Sammlung Hasso Plattner mit Fokus Impressionismus/Moderne; Rekonstruktion des historischen Barberini-Palais (Wikipedia, museum-barberini.com).",
+      "bullets": [
+        "Neubau mit historischer Fassadenform am Havelufer/Alter Markt.",
+        "Wechselausstellungen und Impressionisten.",
+        "Architektur: Hilmer & Sattler."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: klassizistisch-barocke Fassade mit modernem Museumsinneren — gläserne Verbindung zum Wasser/Havelufer.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Name erinnert an das 1771/1772 erbaute Palais des Grafen von Barberini — Kriegszerstörung, Neubau als Museum.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Sammlung: Monet, Renoir, Sisley u. a.; Leihgaben internationaler Museen in Wechselausstellungen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Stiftung Hasso Plattner — kultureller Anker nach Rekonstruktion des Platzes.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Nikolaikirche, Filmmuseum, Stadtschloss/Landtag.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Ausstellungskalender, Eintritt, Zeitfenster-Tickets auf museum-barberini.com prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Museum ergänzt die Kulturachse Alten Markt — neben Nikolai, Filmmuseum und Landtag.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Wechselausstellungen bringen internationale Leihgaben nach Potsdam (museum-barberini.com).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Hasso Plattner Stiftung finanzierte Bau und Betrieb — private Stiftung als Träger.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Architektur: kritische Auseinandersetzung mit Rekonstruktion vs. zeitgenössische Museumsfunktion.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_museum_barberini#1] Zusatzkontext aus Pack-Research-Welle A: Museum Barberini — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_museum_barberini#2] Zusatzkontext aus Pack-Research-Welle A: Museum Barberini — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_museum_barberini#3] Zusatzkontext aus Pack-Research-Welle A: Museum Barberini — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_museum_barberini#4] Zusatzkontext aus Pack-Research-Welle A: Museum Barberini — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_museum_barberini#5] Zusatzkontext aus Pack-Research-Welle A: Museum Barberini — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_museum_barberini#6] Zusatzkontext aus Pack-Research-Welle A: Museum Barberini — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_museum_barberini#7] Zusatzkontext aus Pack-Research-Welle A: Museum Barberini — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_museum_barberini#8] Zusatzkontext aus Pack-Research-Welle A: Museum Barberini — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_museum_barberini#9] Zusatzkontext aus Pack-Research-Welle A: Museum Barberini — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 2,
+      "pack_role": "story",
+      "id": "potsdam_belvedere_pfingstberg",
+      "name": "Belvedere Pfingstberg",
+      "lat": 52.411111,
+      "lng": 13.0625,
+      "category": "denkmal",
+      "general_info": "Zweiflügeliges Belvedere auf dem Pfingstberg (1847–1863, Ludwig Persius) — italienisierende Arkaden mit Panoramablick über Potsdam und Havel; SPSG-Objekt (Wikipedia).",
+      "bullets": [
+        "Zwei Arkadenflügel mit Mittelturm und Kuppeln.",
+        "Aussichtsplattform über Stadt und Seen.",
+        "Hoch über dem Neuen Garten."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: terrassierte Arkaden aus gelbem Mauerwerk — von unten wirkt der Bau wie ein italienischer Loggiapalast auf dem Hügel.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Friedrich Wilhelm IV. ließ den Pfingstberg bebauen; Blickachse zum Neuen Garten und Cecilienhof.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Lange Bauunterbrechungen im 19. Jh.; vollendet nach Persius’ Tod.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach 1945 verfall; aufwendige Sanierung ab 1980er/2000er durch Förderverein und SPSG.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: beliebter Sonnenuntergangs-Ort; Trauungen möglich (LIVE).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Russische Kolonie Alexandrowka in Hangnähe.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Belvedere auf spsg.de prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_belvedere_pfingstberg#1] Zusatzkontext aus Pack-Research-Welle A: Belvedere Pfingstberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_belvedere_pfingstberg#2] Zusatzkontext aus Pack-Research-Welle A: Belvedere Pfingstberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_belvedere_pfingstberg#3] Zusatzkontext aus Pack-Research-Welle A: Belvedere Pfingstberg — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_places": [
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "potsdam_orangerie_sanssouci",
+      "name": "Orangerie Schloss Sanssouci",
+      "lat": 52.408611,
+      "lng": 13.038889,
+      "category": "denkmal",
+      "general_info": "Orangerie im Park Sanssouci (1851–1864, Friedrich August Stüler): italienisierender Renaissance-Stil mit Terrassen, Plantagenhäusern und Raphael-Räumen — SPSG-Objekt am nordöstlichen Parkrand (Wikipedia).",
+      "bullets": [
+        "Zentralbau mit Turm und seitlichen Arkaden/Plantagenhäusern.",
+        "Raphael-Räume mit Kopien berühmter Gemälde.",
+        "Aussicht terrassenartig über Park und Stadt."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: lange gelbe Fassade mit Mittelturm, Arkaden und Kuppeln — wirkt wie eine italienische Renaissance-Villa in norddeutscher Landschaft.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Bau für König Friedrich Wilhelm IV.; Stüler orientierte sich an der Villa Medici in Rom (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Orangerien dienten dem Überwintern von Kübelpflanzen; im 19. Jh. auch repräsentativer Festsaal.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Raphael-Räume: Wandkopien nach Raphael (Sixtinische Madonna u. a.) — museumsgerechte Präsentation (SPSG).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Terrassen und Gartenbeete mit mediterranen Pflanzen im Sommer; Wintergarten-Funktion historisch.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Verbindung zur Parkachse Sanssouci–Neues Palais; nördlich des Chinesischen Hauses gelegen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach 1945 Nutzung als Museum; Sanierung durch SPSG.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Architektur: Backstein mit hellem Putz, reiche Ornamentik — spätpreußischer Historismus mit Renaissance-Anleihen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: Ausstellungs- und Museumsteile; Führungen im Rahmen SPSG (LIVE).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Communs des Neuen Palais und Botanischer Garten in Gehdistanz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Eintritt, Öffnungszeiten Raphael-Räume auf spsg.de prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Friedrich Wilhelm IV. plante die Orangerie als „ italianisches“ Gegenstück zu Sanssouci — Architekturdiscurs des 19. Jh. (Wikipedia).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Plantagenhäuser beidseits des Mittelbaus dienten Kübelpflanzen; im Sommer werden Exoten nach außen gestellt (historische Praxis).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Raphael-Räume wurden als „ Museum in miniature“ für königliche Gäste konzipiert (SPSG).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Orangerie schließt die Parkachse Richtung Osten ab — Blickbeziehungen zum Chinesischen Haus.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_orangerie_sanssouci#1] Zusatzkontext aus Pack-Research-Welle A: Orangerie Schloss Sanssouci — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_orangerie_sanssouci#2] Zusatzkontext aus Pack-Research-Welle A: Orangerie Schloss Sanssouci — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_orangerie_sanssouci#3] Zusatzkontext aus Pack-Research-Welle A: Orangerie Schloss Sanssouci — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_orangerie_sanssouci#4] Zusatzkontext aus Pack-Research-Welle A: Orangerie Schloss Sanssouci — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_orangerie_sanssouci#5] Zusatzkontext aus Pack-Research-Welle A: Orangerie Schloss Sanssouci — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_orangerie_sanssouci#6] Zusatzkontext aus Pack-Research-Welle A: Orangerie Schloss Sanssouci — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "potsdam_hollaendisches_viertel",
+      "name": "Holländisches Viertel",
+      "lat": 52.401944,
+      "lng": 13.051111,
+      "category": "denkmal",
+      "general_info": "Stadtviertel mit 134 roten Backsteinhäusern (1733–1740) unter Friedrich Wilhelm I. — holländische Handwerker und Ziegelfassaden; Mittelpunkt Benkert-/Mittelstraße, Jan-Bouman-Haus (Wikipedia, Museum Jan Bouman Haus im Pack).",
+      "bullets": [
+        "Enge Gassen mit einheitlichen Backsteinfassaden und weißen Fensterrahmen.",
+        "Jan Bouman Haus als Museum zur Baugeschichte.",
+        "Cafés und Galerien im Viertel."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: geschlossene Blockränder aus rotem Backstein, schmale Giebel, weiße Fenstergliederung — wirkt wie ein Stück Niederlande in der Potsdamer Innenstadt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Friedrich Wilhelm I. warb niederländische Handwerker an, um Bauboom und Ziegeltradition zu stärken (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Benannt nach holländischen Baumeistern und Einwanderern; Mittelpunkt zwischen Nauener Tor und Stadtkern.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Jan Bouman: wichtiger Baumeister des Viertels — Museum Jan Bouman Haus erklärt Entstehung (visitBerlin/potsdam.de).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach schweren Kriegsschäden weitgehend rekonstruiert; heute beliebtes Flanierviertel.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Nauener Tor nordwestlich; Brandenburger Straße Einkaufsachse östlich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: Boutiquen, Cafés, Kunsthandwerk; Weihnachtsmärkte im Viertel (saisonal, LIVE).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Museum Jan Bouman Haus Öffnungszeiten auf potsdam.de/museum prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Viertel umfasst vier Blocks mit insgesamt 134 Wohnhäusern — einheitliche Achsen und Traufhöhen (Wikipedia).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Holländische Ziegeltechnik prägte Potsdams Stadtbild — Backstein auch an Stadtschloss und Kirchen sichtbar.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach 1990 denkmalpflegerische Sanierung; heute Wohn- und Gewerbenutzung gemischt.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Nauener Tor im Norden des Viertels ist eines der Potsdamer Stadttore — barocker Zusammenhang.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_hollaendisches_viertel#1] Zusatzkontext aus Pack-Research-Welle A: Holländisches Viertel — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_hollaendisches_viertel#2] Zusatzkontext aus Pack-Research-Welle A: Holländisches Viertel — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_hollaendisches_viertel#3] Zusatzkontext aus Pack-Research-Welle A: Holländisches Viertel — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_hollaendisches_viertel#4] Zusatzkontext aus Pack-Research-Welle A: Holländisches Viertel — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_hollaendisches_viertel#5] Zusatzkontext aus Pack-Research-Welle A: Holländisches Viertel — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_hollaendisches_viertel#6] Zusatzkontext aus Pack-Research-Welle A: Holländisches Viertel — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_hollaendisches_viertel#7] Zusatzkontext aus Pack-Research-Welle A: Holländisches Viertel — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "potsdam_schloss_cecilienhof",
+      "name": "Schloss Cecilienhof",
+      "lat": 52.419444,
+      "lng": 13.069722,
+      "category": "denkmal",
+      "general_info": "Letzter Hohenzollern-Palast (1914–1917, Paul Schultze-Naumburg) im englischen Landhausstil — Ort der Potsdamer Konferenz (17. Juli–2. August 1945) mit Truman, Stalin und Churchill (Wikipedia, SPSG).",
+      "bullets": [
+        "Roter Backstein, Innenhöfe, Tudor-Anmutung.",
+        "Konferenzräume und Gedenkausstellung.",
+        "Im Neuen Garten am See."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: gruppierung niedriger Backsteinflügel um Innenhöfe — bewusst unprunkvoll „ englisch“ im Neuen Garten.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Erbaut für Kronprinzenpaar Wilhelm und Cecilie; Name von Cecilie von Mecklenburg-Schwerin.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "1945: Alliierte teilten Deutschland/Europa neu; Cecilienhof als neutraler Konferenzort gewählt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Großer runder Konferenztisch in der Ausstellung rekonstruiert (Museum/SPSG).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Neuer Garten: Landschaftspark mit Marmorpalais und Heiliger See — UNESCO-Teil.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: Museum und Hotel-Nutzungsteile (SPSG/Historicum).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Glienicker Brücke und Pfaueninsel in der Havel-Nähe.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Führungen, Eintritt, Hotel auf spsg.de prüfen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Winston Churchill und später Clement Attlee vertraten Großbritannien; Harry S. Truman die USA; Josef Stalin die Sowjetunion (Wikipedia).",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Themen 1945: Deutschland, Reparationen, Grenzen, Polen, Entnazifizierung — Grundlage für Nachkriegsordnung.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Cecilienhof blieb nach 1945 politisches Symbol — Ausstellungen erklären Räume und Besetzung durch Alliierte.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Neuer Garten: englischer Landschaftsgarten mit Heiliger See — Cecilienhof am nördlichen Ufer.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_cecilienhof#1] Zusatzkontext aus Pack-Research-Welle A: Schloss Cecilienhof — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_cecilienhof#2] Zusatzkontext aus Pack-Research-Welle A: Schloss Cecilienhof — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_cecilienhof#3] Zusatzkontext aus Pack-Research-Welle A: Schloss Cecilienhof — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_cecilienhof#4] Zusatzkontext aus Pack-Research-Welle A: Schloss Cecilienhof — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_cecilienhof#5] Zusatzkontext aus Pack-Research-Welle A: Schloss Cecilienhof — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_cecilienhof#6] Zusatzkontext aus Pack-Research-Welle A: Schloss Cecilienhof — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_cecilienhof#7] Zusatzkontext aus Pack-Research-Welle A: Schloss Cecilienhof — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_schloss_cecilienhof#8] Zusatzkontext aus Pack-Research-Welle A: Schloss Cecilienhof — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 2,
+      "pack_role": "story",
+      "id": "potsdam_glienicker_bruecke",
+      "name": "Glienicker Brücke",
+      "lat": 52.413889,
+      "lng": 13.089167,
+      "category": "denkmal",
+      "general_info": "Havelbrücke zwischen Potsdam-Babelsberg und Berlin-Wannsee — bekannt als „ Spy-Bridge“ für Agentenaustausche im Kalten Krieg (1962 u. a.); grüne metallene Fachwerkbrücke (Wikipedia).",
+      "bullets": [
+        "Grüne Stahlbrücke über die Havel.",
+        "Grenzübergang bis 1989.",
+        "Blick auf Glienicker Schloss (Berlin)."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: schmale grüne Brücke mit filigranem Gitter — von Uferpromenaden gut fotografierbar.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "1907 eröffnet; nach Kriegsschäden wiederaufgebaut.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Teil der alliierten Grenze — symbolischer Ort deutsch-deutscher Teilung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Agentenaustausch 1962 (Abel/Powers) machte die Brücke weltbekannt (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: freie Fahrt und Fußweg zwischen Berlin und Potsdam.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Schloss Babelsberg und Park Babelsberg in Gehdistanz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Verkehr/Fußwegregelung normaler Straßenbetrieb; keine Grenzkontrollen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_glienicker_bruecke#1] Zusatzkontext aus Pack-Research-Welle A: Glienicker Brücke — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_glienicker_bruecke#2] Zusatzkontext aus Pack-Research-Welle A: Glienicker Brücke — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_glienicker_bruecke#3] Zusatzkontext aus Pack-Research-Welle A: Glienicker Brücke — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 2,
+      "pack_role": "story",
+      "id": "potsdam_freundschaftstempel",
+      "name": "Freundschaftstempel",
+      "lat": 52.404722,
+      "lng": 13.036944,
+      "category": "denkmal",
+      "general_info": "Klassizistischer Rundtempel im Park Sanssouci (1824, Karl Friedrich Schinkel) auf dem Ruinenberg — erbaut für königliche Freundinnen Wilhelmine von Lichtenau (Wikipedia, SPSG).",
+      "bullets": [
+        "Kleiner runder Tempel mit Säulen und Kuppel.",
+        "Auf dem Ruinenberg mit Blick Richtung Schloss.",
+        "Teil des UNESCO-Parks."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: kompakter Zentralbau mit dorischen Säulen und grüner Kuppel — wirkt wie ein antiker Monopteros im Grün.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schinkel entwarf den Tempel als persönliches Gedenken — Name „ Freundschaftstempel“.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Ruinenberg: künstliche „ Ruinen“-Kulisse im Park Friedrichs II. ergänzt die Szenerie.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: Außen frei zugänglich im Park; Innen je nach Saison (SPSG/LIVE).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Historische Mühle und Weinbergterrasse in Sichtweite.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_freundschaftstempel#1] Zusatzkontext aus Pack-Research-Welle A: Freundschaftstempel — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_freundschaftstempel#2] Zusatzkontext aus Pack-Research-Welle A: Freundschaftstempel — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "[potsdam_freundschaftstempel#3] Zusatzkontext aus Pack-Research-Welle A: Freundschaftstempel — Schwerpunkte Geschichte, Architektur und heutige Nutzung; ephemere Infos (Eintritt, Führungen, Verkehr) LIVE auf spsg.de, potsdam.de, visitBerlin.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        }
+      ]
+    }
+  ]
+}

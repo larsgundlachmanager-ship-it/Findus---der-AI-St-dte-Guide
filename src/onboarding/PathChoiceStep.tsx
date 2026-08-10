@@ -21,17 +21,14 @@ export function PathChoiceStep({ onChoose }: Props) {
     <OnboardingShell>
       <StepTitle>Willkommen bei Findus</StepTitle>
       <StepSubtitle>
-        Dein KI-Reise-Concierge. Wähle, wie gründlich wir dich kennenlernen
-        sollen.
+        Kurze Einrichtung — dauert nur ein paar Minuten. Wähle selbst, wie tief
+        wir starten.
       </StepSubtitle>
 
       <View style={styles.card}>
-        <Text style={styles.badge}>~ 1 Minute</Text>
+        <Text style={styles.badge}>Express</Text>
         <Text style={styles.cardTitle}>Express-Einrichtung</Text>
-        <Text style={styles.cardBody}>
-          Stadt, Über dich, Charakter-Kurzprofil, Zeitraum und Budget — plus
-          Mikrofon. Danach die kurze Erklärung, und los.
-        </Text>
+        <Text style={styles.cardBody}>Nur das Nötigste.</Text>
         <PrimaryButton
           label="Express starten"
           onPress={() => onChoose('express')}
@@ -39,11 +36,10 @@ export function PathChoiceStep({ onChoose }: Props) {
       </View>
 
       <View style={[styles.card, styles.cardSecondary]}>
-        <Text style={styles.badge}>Dauer: ca. 2–3 Minuten</Text>
+        <Text style={styles.badge}>Standard</Text>
         <Text style={styles.cardTitle}>Standard-Einrichtung</Text>
         <Text style={styles.cardBody}>
-          Für den perfekt zugeschnittenen Findus: Stimme, Charakter,
-          Reisekontext, Interessen und Stil — Schritt für Schritt.
+          Für den perfekt zugeschnittenen Findus.
         </Text>
         <PrimaryButton
           label="Standard starten"
@@ -77,13 +73,13 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     color: colors.text,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '700',
   },
   cardBody: {
     color: colors.textMuted,
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 13,
+    lineHeight: 18,
     marginBottom: spacing.xs,
   },
 });

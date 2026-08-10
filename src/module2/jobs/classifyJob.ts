@@ -109,7 +109,7 @@ function scoreJobs(text: string): Hit[] {
     add('safety_lost', 11);
   }
   if (
-    /\b(toilette|toiletten|\bwc\b|geldautomat|\batm\b|trinkwasser|handyakku|akku|laden\s+sofort|sofort\s+laden|adapter|öffentliche\s+toilette)\b/u.test(
+    /\b(toilette|toiletten|\bwc\b|geldautomat|\batm\b|trinkwasser|handyakku|akku|laden\s+sofort|sofort\s+laden|adapter|öffentliche\s+toilette|powerbank|steckdose|handy\s*laden)\b/u.test(
       t,
     )
   ) {
@@ -224,14 +224,22 @@ function scoreJobs(text: string): Hit[] {
       t,
     )
   ) {
-    add('nav_route', 7);
+    // Explizite Nav schlägt Sport-Job (sonst landet „Tennisclub navigieren“ in Knowledge)
+    const navBoost =
+      /\b(tennis|club|café|cafe|restaurant|hotel|museum|apotheke|supermarkt)\b/u.test(
+        t,
+      )
+        ? 12
+        : 7;
+    add('nav_route', navBoost);
   }
 
   // Activity
   if (
     /\b(spikeball|bouldern|bungee|surf(?:en|kurs)?|kitesurf|sup\b|stand[-\s]?up|wandern|joggen|inline|beachvolleyball|klettern|paragliding|rafting|tauchen|golf|tennis|paintball)\b/u.test(
       t,
-    )
+    ) &&
+    !/\b(bring\s+mich|navigier|führ\s+mich|fuehr\s+mich|route\s+zu)\b/u.test(t)
   ) {
     add('activity_sport', 10);
   }

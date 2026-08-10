@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outPath = path.join(__dirname, '..', 'src', 'services', 'tts', 'pronunciationMap.ts');
-const G = '\u0261'; // Kokoro ɡ
+const G = '\u0261'; // IPA ɡ
 
 const e = (w, ipa) => [String(w).toLowerCase(), String(ipa).replace(/g/g, G)];
 
@@ -178,7 +178,7 @@ const categories = [
 const mergeNames = categories.map(([n]) => n);
 
 let body = `/**
- * Erweiterbare Aussprache-Map für Kokoro TTS (5000+ Ausnahmen).
+ * Erweiterbare Aussprache-Map für IPA TTS (5000+ Ausnahmen).
  * AUTO-GENERIERT von scripts/generatePronunciationMap.mjs — bei Bedarf neu erzeugen.
  *
  * IPA nutzt Vocab-kompatibles ɡ (U+0261), nicht ASCII g.

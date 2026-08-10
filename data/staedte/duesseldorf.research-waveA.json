@@ -1,0 +1,963 @@
+{
+  "city_history": "Düsseldorf: Residenzstadt der Kurfürsten von der Pfalz; Königsallee, MedienHafen-Architektur und Rheinmetropole (Wikipedia).",
+  "notes": [
+    "Wave A — Wikipedia DE + manual visuell; LIVE ephemeral; no dialog scripts."
+  ],
+  "offline_qa": [],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "duesseldorf_konigsallee",
+      "name": "Königsallee",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Prachtboulevard mit Kö-Graben, Kastanien und Luxus-Ladenpassagen.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Doppelallee mit Wassergraben und Kastanien.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Königsallee wurde ab 1802 als Prachtboulevard angelegt; der Wassergraben (Kö-Graben) und Kastanien prägen das Straßenbild (Wikipedia Königsallee).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Luxus-Ladenpassagen und Modehäuser säumen den Boulevard; der Schadow-Kreis am Anfang verbindet Altstadt und Kö (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Düsseldorf ([ˈdʏsl̩ˌdɔʁf] , Düsseldorfer Platt Düsseldörp) ist die Landeshauptstadt Nordrhein-Westfalens und der Behördensitz des Regierungsbezirks Düsseldorf.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die kreisfreie Stadt am Rhein ist mit 619.444 Einwohnern am 31.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dezember 2025 die zweitgrößte Stadt des Bundeslandes und die sechstgrößte Stadt in Deutschland.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Düsseldorf hat eine Fläche von 217,41 Quadratkilometern und gehört mit 2.849 Einwohnern pro Quadratkilometer zu den dichter besiedelten Städten Deutschlands.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Stadt ist das führende Wirtschaftszentrum der Metropolregion Rhein-Ruhr mit rund 10,2 Millionen Einwohnern und der Metropolregion Rheinland mit 8,7 Millionen Einwohnern.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie liegt im Kern des zentralen europäischen Wirtschaftsraumes.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Rheinmetropole gehört zu den fünf wichtigsten, international stark verflochtenen Wirtschaftszentren Deutschlands und ist ein bedeutender Finanz- und Börsenplatz.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Überregionale Bekanntheit genießt Düsseldorf durch seine Altstadt („längste Theke der Welt“), seinen Einkaufsboulevard Königsallee („Kö“), seinen Standort für Kleidermode und den Düsseldorfer Karneval.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zudem ist die Stadt durch die große Anzahl ostasiatischer Einwohner bekannt, darunter die japanische Gemeinde mit über 8400 Einwohnern, deren Wohn- und Geschäftsbereich in der Stadtmitte die einzige Japantown Deutschlands bildet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geographie Räumliche Lage Das überwiegend rechtsrheinisch gelegene Düsseldorf befindet sich – mit Ausnahme der Stadtteile Ludenberg, Gerresheim und Hubbelrath – im mittleren Teil des Niederrheinischen Tieflands auf einer von zahlreichen Rheinarmen durchzogenen Niederung.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In Nordsüdrichtung durchzieht im Osten als Mittelgebirgsschwelle die Niederterrasse des Rheins das Stadtgebiet, das weitgehend auf dem holozänen Flussbett liegt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Stadtteile Oberkassel, Niederkassel, Heerdt und Lörick liegen am linken Rheinufer.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Stadt grenzt südwestlich an das Ruhrgebiet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit der Stadt Duisburg hat Düsseldorf im Norden eine gemeinsame Grenze.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "duesseldorf_rheinturm_dusseldorf_gespiegelt",
+      "name": "Rheinturm Düsseldorf - gespiegelt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "240,5 m Fernsehturm (1981) mit Aussichtsplattform und Lichtskulptur.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Betonschaft mit Kugel und Antenne — Wahrzeichen der Skyline.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Rheinturm Düsseldorf ist 240,5 Meter hoch und wurde 1981 in Betrieb genommen (Wikipedia Rheinturm Düsseldorf).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Er dient als Fernmeldeturm und trägt eine Aussichtsplattform sowie ein Drehrestaurant (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Lichtskulptur „Lichtzeitpegel“ an der Turmfassade ist ein Wahrzeichen der Landeshauptstadt (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: rheinturm.de Öffnung.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Düsseldorf ([ˈdʏsl̩ˌdɔʁf] , Düsseldorfer Platt Düsseldörp) ist die Landeshauptstadt Nordrhein-Westfalens und der Behördensitz des Regierungsbezirks Düsseldorf.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die kreisfreie Stadt am Rhein ist mit 619.444 Einwohnern am 31.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dezember 2025 die zweitgrößte Stadt des Bundeslandes und die sechstgrößte Stadt in Deutschland.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Düsseldorf hat eine Fläche von 217,41 Quadratkilometern und gehört mit 2.849 Einwohnern pro Quadratkilometer zu den dichter besiedelten Städten Deutschlands.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Stadt ist das führende Wirtschaftszentrum der Metropolregion Rhein-Ruhr mit rund 10,2 Millionen Einwohnern und der Metropolregion Rheinland mit 8,7 Millionen Einwohnern.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie liegt im Kern des zentralen europäischen Wirtschaftsraumes.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Rheinmetropole gehört zu den fünf wichtigsten, international stark verflochtenen Wirtschaftszentren Deutschlands und ist ein bedeutender Finanz- und Börsenplatz.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Überregionale Bekanntheit genießt Düsseldorf durch seine Altstadt („längste Theke der Welt“), seinen Einkaufsboulevard Königsallee („Kö“), seinen Standort für Kleidermode und den Düsseldorfer Karneval.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zudem ist die Stadt durch die große Anzahl ostasiatischer Einwohner bekannt, darunter die japanische Gemeinde mit über 8400 Einwohnern, deren Wohn- und Geschäftsbereich in der Stadtmitte die einzige Japantown Deutschlands bildet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geographie Räumliche Lage Das überwiegend rechtsrheinisch gelegene Düsseldorf befindet sich – mit Ausnahme der Stadtteile Ludenberg, Gerresheim und Hubbelrath – im mittleren Teil des Niederrheinischen Tieflands auf einer von zahlreichen Rheinarmen durchzogenen Niederung.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In Nordsüdrichtung durchzieht im Osten als Mittelgebirgsschwelle die Niederterrasse des Rheins das Stadtgebiet, das weitgehend auf dem holozänen Flussbett liegt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Stadtteile Oberkassel, Niederkassel, Heerdt und Lörick liegen am linken Rheinufer.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Stadt grenzt südwestlich an das Ruhrgebiet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit der Stadt Duisburg hat Düsseldorf im Norden eine gemeinsame Grenze.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Düsseldorf-Hafen ist ein durch Industrie, Logistik, Gewerbe und Büronutzung geprägter Stadtteil Düsseldorfs mit lediglich 377 Einwohnern, was auf einer Gesamtfläche von 3,86 km² einer Einwohnerdichte von 98 Einwohner/km² entspricht; somit ist er der Stadtteil mit der geringsten Einwohnerzahl.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Einen Großteil der Fläche belegt der 1896 eröffnete Düsseldorfer Wirtschaftshafen; er ist der drittgrößte Binnenhafen Deutschlands und ein Teil der Neuss-Düsseldorfer Häfen GmbH & Co.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Stadtteil Hafen gehört zum Stadtbezirk 3.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Lange Zeit wurde der Hafen als Stadtteil nicht wahrgenommen, da dieser Bereich ein großes (zum Teil auch abgesperrtes) Industrieareal war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die seit den 1990er Jahren einsetzende Umwidmung der direkt an Unterbilk grenzenden Teile des Hafengebietes zum so genannten „Medienhafen“ und die darauf folgende Neubebauung mit zum Teil architektonisch ambitionierten Gebäuden brachten das Gebiet ins öffentliche Bewusstsein.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In diesem Bereich haben sich zahlreiche Unternehmen aus der Medien- und Werbebranche angesiedelt, ebenso Mode- und Designerbetriebe mit großflächigen Ausstellungsräumen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ein Multiplex-Kino, zahlreiche Restaurants, eine Großraumdiskothek sowie Clubs und Lounges sorgen zudem für ein reges Nachtleben.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Altersdurchschnitt von 39,4 Jahren ist unter dem Durchschnitt des Stadtbezirks 3 und dem der Stadt Düsseldorf.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Die Anfänge 1886–1913 Vor dem Aufkommen der Eisenbahn und des LKWs hatten Flüsse und andere Wasserstraßen stets eine überragende Bedeutung als Transportweg für Güter und Menschen (siehe auch Rheinschifffahrt).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Düsseldorf war seit seiner Gründung eine Hafenstadt, was auch im Ankersymbol seines Stadtwappens sichtbar wird.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundertelang legten Schiffe an geeigneten Uferabschnitten an; im 17.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert wurde ein Hafenbecken an der heutigen Carlstadt gebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhunderts ließen die Regierung des Großherzogtums Berg und die Stadt Düsseldorf längs der Nordseite der heutigen Kunstakademie Düsseldorf zum Schutz der Schiffe vor Hochwasser und Eisgang den Sicherheitshafen (Düsseldorf) anlegen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhunderts und eines starken Bevölkerungswachstums zeigte sich die Notwendigkeit zum Bau eines großen Handelshafens.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "duesseldorf_altstadt_dusseldorf",
+      "name": "Altstadt Düsseldorf",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "„Längste Theke der Welt“ — enge Gassen mit Brauereien zwischen Markt und Rhein.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Schmalen Fassaden, Kneipen dicht nebeneinander.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Altstadt ist der flächenmäßig zweitkleinste der 50 Düsseldorfer Stadtteile und liegt im Stadtbezirk 1 am Rhein.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Hier leben auf einer Fläche von 0,47 km² 2244 Einwohner.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Bevölkerungsdichte beträgt 4774 Einwohner/km².",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Altstadt ist das historische, politische und kulturelle Zentrum der Landeshauptstadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Stadtteil befinden sich u. a. das Rathaus, die Kunstsammlung Nordrhein-Westfalen sowie die Kunstakademie Düsseldorf.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Weite Teile der Altstadt sind Fußgängerzone mit zahlreichen Ladenlokalen und gastronomischen Einrichtungen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Auf einem halben Quadratkilometer ballen sich hier über 300 Kneipen, Diskotheken und Restaurants, die der Altstadt den im „Altbierlied“ besungenen Ruf der „längsten Theke der Welt“ eingetragen haben.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Front der Altstadt zum Rhein bildet die Rheinuferpromenade.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach Nordosten wird die Altstadt vom Hofgarten begrenzt, nach Süden geht sie in die Carlstadt über, nach Osten in den Stadtteil Stadtmitte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Die Altstadt ist die Keimzelle der Stadt Düsseldorf, obwohl es ältere Ortsteile im heutigen Stadtgebiet gibt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In einer Urkunde von 1159 bestätigte Papst Urban IV. dem Stift der Heiligen Ursula in Köln, dass ein Einkommen aus „Dusseldorp“ in Höhe von fünf Schilling (Münze) gezahlt würde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In einer weiteren nicht datierten Urkunde vor 1190 verpfändete der Ritter Arnold von Tyvern seinen gesamten umfangreichen rechtsrheinischen Besitz für 100 Mark Silber an Graf Engelbert von Berg.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Besitz betraf das Erbgut des Edelmannes mit Grundstücken in Holthausen, bei Wald, Monheim, an der Anger, Dusseldorp und Hummelgis.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Vermutlich gehörte zu diesem Besitz auch ein Sahlhof, der im Bereich der späteren Burg lag.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Pfand wurde nicht eingelöst und war damit Eigentum der Grafen von Berg.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhunderts bereits eine gewisse Bedeutung als Fähr- und Handelsstützpunkt zwischen den beiden Rheinufern.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "duesseldorf_aussichtspunkt_hafen_und_gehry_gebaude",
+      "name": "Aussichtspunkt Hafen und Gehry-Gebäude",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "MedienHafen mit Frank Gehry’s gewellten Fassaden am Rhein.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Geschwungene Metallfassaden drei Gebäude am Hafenbecken.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Neue Zollhof ist ein Gebäudeensemble im Düsseldorfer „Medienhafen“, das am 19.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Gebäude sind nach ihrem Architekten und Designer Frank Gehry auch als Gehry-Bauten bekannt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Anfang 1990 wurde ein Wettbewerb für einen Neubau auf dem Gelände des abzubrechenden Zollhofes ausgeschrieben, den Zaha Hadid zwar gewann, deren „dekonstruktiver Entwurf“ schließlich aber nicht ausgeführt wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von 1996 bis 1998 wurden stattdessen nach Entwürfen von Frank Gehry und Beucker, Maschlanka und Partner für etwa 120 Millionen D-Mark drei dekonstruktivistische Bauten errichtet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als Bauherr fungierte die Philipp Holzmann AG und die Düsseldorfer Werbeagentur Rempen & Partner.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die drei Gebäude zeigen weder Gesimse noch Sockel.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Auffallend ist die Krümmung der Fassade mit einer „fließend[en], gewellte[n] Oberfläche“.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Aufteilung auf drei Baukörper und die Freihaltung von fußläufigen Zwischenräumen war bei dem Projekt dem Ziel geschuldet, für das angrenzende Wohnquartier einen Zugang zum Hafen freizuhalten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Gebäude ist offiziell im Besitz eines Luxemburger Fonds, jedoch enthüllten im Februar 2021 die Recherchen investigativer Journalisten im Rahmen des Projekt OpenLux, dass der eigentliche Eigentümer der Sohn des indonesischen Palmöl-Magnaten Sukanto Tanoto ist.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Eigentümerschaft Andre Tanotos wurde anscheinend durch das Zwischenschalten mehrerer Briefkastenfirmen in Luxemburg verschleiert, um auf diesem Weg Steuern zu vermeiden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Verlag Peter Pomp, Bottrop / Essen 1999, ISBN 978-3-89355-206-1.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In: Structurae Stadtplanungsamt Düsseldorf: Der Neue Zollhof (Gehry-Bauten) Einzelnachweise",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "duesseldorf_medienhafen_dusseldorf_e_v",
+      "name": "MedienHafen Düsseldorf e.V.",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Hafenquartier mit Architektur der 1990er — Büros, Medien, Gastronomie.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Kranbahnen, Speicher und moderne Neubauten am Wasser.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Düsseldorf-Hafen ist ein durch Industrie, Logistik, Gewerbe und Büronutzung geprägter Stadtteil Düsseldorfs mit lediglich 377 Einwohnern, was auf einer Gesamtfläche von 3,86 km² einer Einwohnerdichte von 98 Einwohner/km² entspricht; somit ist er der Stadtteil mit der geringsten Einwohnerzahl.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Einen Großteil der Fläche belegt der 1896 eröffnete Düsseldorfer Wirtschaftshafen; er ist der drittgrößte Binnenhafen Deutschlands und ein Teil der Neuss-Düsseldorfer Häfen GmbH & Co.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Stadtteil Hafen gehört zum Stadtbezirk 3.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Lange Zeit wurde der Hafen als Stadtteil nicht wahrgenommen, da dieser Bereich ein großes (zum Teil auch abgesperrtes) Industrieareal war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die seit den 1990er Jahren einsetzende Umwidmung der direkt an Unterbilk grenzenden Teile des Hafengebietes zum so genannten „Medienhafen“ und die darauf folgende Neubebauung mit zum Teil architektonisch ambitionierten Gebäuden brachten das Gebiet ins öffentliche Bewusstsein.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In diesem Bereich haben sich zahlreiche Unternehmen aus der Medien- und Werbebranche angesiedelt, ebenso Mode- und Designerbetriebe mit großflächigen Ausstellungsräumen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ein Multiplex-Kino, zahlreiche Restaurants, eine Großraumdiskothek sowie Clubs und Lounges sorgen zudem für ein reges Nachtleben.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Altersdurchschnitt von 39,4 Jahren ist unter dem Durchschnitt des Stadtbezirks 3 und dem der Stadt Düsseldorf.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Die Anfänge 1886–1913 Vor dem Aufkommen der Eisenbahn und des LKWs hatten Flüsse und andere Wasserstraßen stets eine überragende Bedeutung als Transportweg für Güter und Menschen (siehe auch Rheinschifffahrt).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Düsseldorf war seit seiner Gründung eine Hafenstadt, was auch im Ankersymbol seines Stadtwappens sichtbar wird.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundertelang legten Schiffe an geeigneten Uferabschnitten an; im 17.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert wurde ein Hafenbecken an der heutigen Carlstadt gebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "duesseldorf_schloss_benrath",
+      "name": "Schloss Benrath",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Spätbarockes Jagdschloss (1756–1773) mit Spiegelweiher und Park.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Rosa Putz-Fassade mit zwei Flügeln am Weiher.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: schloss-benrath.de Führungen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schloss Benrath ist eine ehemalige Residenz der Kurfürsten von der Pfalz in der nordrhein-westfälischen Landeshauptstadt Düsseldorf.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die barocke Dreiflügelanlage wurde in den Jahren 1755 bis 1771 im Auftrag von Karl Theodor von der Pfalz nach Entwurf von Nicolas de Pigage erbaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Hervorzuheben sind das Vestibül, der Kuppelsaal und der Schlosspark.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Baugeschichte Das Schloss liegt im heutigen Stadtteil Benrath der nordrhein-westfälischen Landeshauptstadt Düsseldorf.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Benrath war bis zur Eingemeindung im Jahr 1929 eine selbstständige Gemeinde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Eine ursprüngliche Burg der „Herren van Benroide“, über die keine genaueren Informationen überliefert sind, wurde bereits gegen Ende des 12.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhunderts von den Grafen von Berg übernommen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ob diese mittelalterliche Burg bereits eine Wasserburg war oder ob erst die „Berger“ sie umbauten, ist ebenfalls nicht bekannt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die zeitweise Anwesenheit der Grafen und späteren Herzöge in einer Burg in Royde ist aber durch Urkunden ab dem 13.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhunderts wurde sie von den Herzögen einige Male verpfändet, jedoch immer wieder ausgelöst.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Diese ursprüngliche und inzwischen baufällige Wasserburg aus dem 15.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert sollte auf Weisung von Elisabeth Amalia Magdalena, der zweiten Frau des Herzogs Philipp Wilhelm, 1660 in ein repräsentatives Wasserschloss im Renaissancestil umgestaltet werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Oberingenieur Johann Lollio wurde mit dem Bau des Renaissanceschlosses beauftragt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahr 1666 wurde es fertiggestellt und für den Sommer- und Jagdaufenthalt der Familie des Herzogs genutzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der älteste Sohn und Nachfolger Philipp Wilhelms, Kurfürst Johann Wilhelm von Pfalz-Neuburg (genannt Jan Wellem), der im Düsseldorfer Schloss residierte, war mit Schloss Benrath eng verbunden und nutzte es mit seiner zweiten Gemahlin Anna Maria Luisa de’ Medici als Sommerfrische.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Während er in Mannheim und Schwetzingen residierte, beauftragte er mit dem Neubau seinen Hofarchitekten Nicolas de Pigage (1723–1796), der in Paris ausgebildet worden war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Pigage ließ zunächst das baufällige Wasserschloss abreißen, nur die Kapelle und ein Seitentrakt, die sogenannte Orangerie, blieben erhalten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zeugnisse des alten Schlosses findet man noch in Fresken, Stuckaturen und Kaminen in Räumen der Orangerie und an einem Altar in der Kapelle.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das neue Schloss entstand in den Jahren 1755 bis 1771 nach Entwurf von Pigage im Auftrag Karl Theodors als eigenes Jagd- und Sommerschloss sowie als späterer Witwensitz für seine Gemahlin Elisabeth Auguste.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das neue Barockschloss wurde etwa 300 Meter nördlich des alten angelegt und erstrahlte nach 16-jähriger Bauzeit auf einer Grundfläche von 42 mal 27 Metern in der Farbe Altrosa, wobei das Herrenkabinett im Rokokostil und die Empfangsräume im klassizistischen Stil gehalten wurden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In der scheinbar eingeschossigen Fassade zeigt sich eine Art „Understatement“ des fürstlichen Bauherrn.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Denn hinter den Fassaden verbirgt sich in vier Geschossen ein raffiniert durchkomponiertes System von 80 Räumen, zwei Lichthöfen und sieben Treppenhäusern.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dies erzeugte einen Überraschungseffekt, wie er in der barocken Bau- und Gartenkunst schon vorher beliebt war: Besucher sollten erst im Innern die Geräumigkeit bemerken.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Kurze Zeit dauerte es noch, bis die Wasserspiele, die Weiher und Parkanlagen vollendet waren, die in engem Zusammenhang mit dem Bau stehen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die runden und eckigen Formen der Grünanlagen setzen sich im Schloss fort.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Schloss mit seinen beiden Flügeln und Torwächterhäusern ist symmetrisch.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ebenso wurden die Lebensbereiche von Kurfürst und Kurfürstin spiegelbildlich gebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Wohntrakt der Kurfürstin ist im Osten mit Blick auf den französischen Garten angelegt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die fürstlichen Wohn- und Schlafräume sowie die Dienstbotenkammern gruppieren sich um zwei versteckte Innenhöfe, die von außen nicht sichtbar sind.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Obergeschoss wurde die kurfürstliche Hauskapelle eingerichtet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ebenso sind dort Apartments für Gäste des Fürstenpaares sowie zwei Gesellschaftsräume untergebracht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zur Ausstattung gehören Parkettböden, Marmorkamine, farbig gefasste Vertäfelungen, geschnitzte Spiegelrahmen und farbige Chintz–Wandbespannungen, die im Rahmen von Restaurierungsmaßnahmen in den 1970er Jahren erneuert wurden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_places": []
+}

@@ -1,33 +1,24 @@
 /**
  * Erkennt, wenn der Nutzer näher an einer anderen Stadt ist als an der
  * aktuell gewählten — und bietet einen Wechsel mit kurzer Begrüßung an.
+ * UI: CitySwitchPromptHost (Cover + Fakten), kein System-Alert.
+ *
+ * Pack-Download nur nach explizitem Accept — kein Warm-Prefetch
+ * benachbarter Städte (Paywall: Städte einzeln kaufen).
  */
 
-import { Alert } from 'react-native';
 import {
   loadCityCatalog,
   installCityPack,
   type CityCatalogItem,
 } from './cityCatalogService';
 import { getCachedUserProfile } from './userProfileService';
-import {
-  speakAssistantText,
-  getVoiceSettingsForTour,
-} from './ttsService';
 import { useFinnusStore } from '../store/useFinnusStore';
+import { speakCityWelcomeForCity } from './cityWelcomeService';
 
 const SWITCH_GAP_KM = 5;
 const CHECK_INTERVAL_MS = 3 * 60_000;
 const MIN_MOVE_KM = 0.5;
-
-const CITY_INTROS: Record<string, string> = {
-  wangerooge:
-    'Willkommen auf Wangerooge! Ich begleite dich durch die autofreie Nordseeinsel — von der Inselbahn bis zum Westturm.',
-  prisdorf:
-    'Willkommen in Prisdorf! Ich zeige dir das Dorf zwischen Pinneberg und der Bahnlinie nach Hamburg.',
-  pinneberg:
-    'Willkommen in Pinneberg! Ich kenne die Stadt am Rand der Marsch — lass uns loslegen.',
-};
 
 export type CitySwitchResult = {
   cityId: string;
@@ -38,7 +29,23 @@ export type CityProximityHandlers = {
   onCitySwitched: (result: CitySwitchResult) => void | Promise<void>;
 };
 
+export type CitySwitchPromptPayload = {
+  nearest: CityCatalogItem;
+  selected: CityCatalogItem;
+  nearestKm: number;
+  selectedKm: number;
+  gapKm: number;
+};
+
+export type CitySwitchDecision = 'accept' | 'dismiss';
+
+type CitySwitchPresenter = (
+  payload: CitySwitchPromptPayload,
+) => Promise<CitySwitchDecision>;
+
 let handlers: CityProximityHandlers | null = null;
+let presenter: CitySwitchPresenter | null = null;
+let settledListener: (() => void) | null = null;
 let catalogCache: CityCatalogItem[] | null = null;
 let catalogFetchedAt = 0;
 let lastCheckAt = 0;
@@ -53,6 +60,19 @@ const DISMISS_COOLDOWN_MS = 30 * 60_000;
 
 export function registerCityProximityHandlers(h: CityProximityHandlers | null): void {
   handlers = h;
+}
+
+export function registerCitySwitchPresenter(
+  p: CitySwitchPresenter | null,
+): void {
+  presenter = p;
+}
+
+/** UI schließt den Busy-State, wenn Wechsel/Dismiss durch ist. */
+export function registerCitySwitchSettledListener(
+  fn: (() => void) | null,
+): void {
+  settledListener = fn;
 }
 
 function haversineKm(
@@ -83,23 +103,6 @@ async function getCatalog(): Promise<CityCatalogItem[]> {
   return catalog;
 }
 
-function cityIntro(city: CityCatalogItem): string {
-  const custom = CITY_INTROS[city.id];
-  if (custom) return custom;
-  const sym = city.symbol ?? '📍';
-  return `${sym} Willkommen in ${city.name}! Ich bin Findus und begleite dich durch die Stadt.`;
-}
-
-async function greetNewCity(city: CityCatalogItem): Promise<void> {
-  const intro = cityIntro(city);
-  useFinnusStore.getState().addChatMessage({ role: 'assistant', content: intro });
-  const voice = await getVoiceSettingsForTour();
-  await speakAssistantText(intro, {
-    voiceId: voice.voiceId,
-    speechRate: voice.speechRate,
-  });
-}
-
 async function applyCitySwitch(city: CityCatalogItem): Promise<void> {
   await installCityPack(city.id);
   const result: CitySwitchResult = {
@@ -107,7 +110,7 @@ async function applyCitySwitch(city: CityCatalogItem): Promise<void> {
     cityName: city.name,
   };
   await handlers?.onCitySwitched(result);
-  await greetNewCity(city);
+  await speakCityWelcomeForCity(city, { preferSwitch: true });
 }
 
 function shouldThrottle(lat: number, lng: number): boolean {
@@ -124,7 +127,7 @@ function shouldThrottle(lat: number, lng: number): boolean {
 }
 
 /**
- * Prüft GPS gegen Städtekatalog. Zeigt einmalig einen Wechsel-Dialog,
+ * Prüft GPS gegen Städtekatalog. Zeigt einmalig den Wechsel-Dialog,
  * wenn eine andere Stadt mindestens 5 km näher ist als die gewählte.
  */
 export async function checkCityProximity(lat: number, lng: number): Promise<void> {
@@ -173,38 +176,33 @@ export async function checkCityProximity(lat: number, lng: number): Promise<void
     return;
   }
 
-  promptOpen = true;
-  const nearestKm = nearest.distanceKm.toFixed(1);
-  const selectedKm = selected.distanceKm.toFixed(1);
+  if (!presenter) {
+    console.warn('[cityProximity] no UI presenter registered');
+    return;
+  }
 
-  Alert.alert(
-    `${nearest.symbol ?? '📍'} ${nearest.name}?`,
-    `Du bist gerade näher an ${nearest.name} (${nearestKm} km) als an ${selected.name ?? 'deiner Stadt'} (${selectedKm} km). Soll ich auf ${nearest.name} umschalten?`,
-    [
-      {
-        text: 'Nein, danke',
-        style: 'cancel',
-        onPress: () => {
-          lastDismissedCityId = nearest.id;
-          lastDismissedAt = Date.now();
-          promptOpen = false;
-        },
-      },
-      {
-        text: `Ja, ${nearest.name}`,
-        onPress: () => {
-          void (async () => {
-            try {
-              await applyCitySwitch(nearest);
-            } catch (err) {
-              console.warn('[cityProximity] switch failed:', err);
-            } finally {
-              promptOpen = false;
-            }
-          })();
-        },
-      },
-    ],
-    { cancelable: true, onDismiss: () => { promptOpen = false; } },
-  );
+  promptOpen = true;
+  try {
+    const decision = await presenter({
+      nearest,
+      selected,
+      nearestKm: nearest.distanceKm,
+      selectedKm: selected.distanceKm,
+      gapKm: gap,
+    });
+
+    if (decision === 'accept') {
+      try {
+        await applyCitySwitch(nearest);
+      } catch (err) {
+        console.warn('[cityProximity] switch failed:', err);
+      }
+    } else {
+      lastDismissedCityId = nearest.id;
+      lastDismissedAt = Date.now();
+    }
+  } finally {
+    promptOpen = false;
+    settledListener?.();
+  }
 }

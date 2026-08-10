@@ -1,0 +1,20 @@
+{
+  "city_id": "luebeck",
+  "demoted": 0,
+  "history_source": "kept",
+  "pack_index": {
+    "total": 204,
+    "story": 19,
+    "directory": 185,
+    "offline_qa": 135,
+    "note": "UI: Gesamtzahl; Trigger Story Tier 1–2 (+ Interesse)."
+  },
+  "gemini_prompt": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\luebeck.gemini-master.md",
+  "thin_story": 19,
+  "gate": {
+    "ok": false,
+    "errors": 1,
+    "warnings": 105
+  },
+  "applied": true
+}

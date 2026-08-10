@@ -3,7 +3,7 @@
  *
  * Säule 1: europeanBasePhonetics.json (Bundle, ≥5.000 Einträge)
  * Säule 2: user_custom_phonetics (SQLite, POI-Scanner)
- * Säule 3: transformMultilingualTerms() vor Piper TTS
+ * Säule 3: transformMultilingualTerms() vor TTS TTS
  */
 import europeanBaseJson from '../../assets/phonetics/europeanBasePhonetics.json';
 import { getDatabase } from '../../db/database';
@@ -160,7 +160,7 @@ export function lookupMultilingualPhonetic(word: string): string | null {
 }
 
 /**
- * Audio-only (Stufe A, kurz vor Piper): EU-/Fremdwort-Ortho.
+ * Audio-only (Stufe A, kurz vor TTS): EU-/Fremdwort-Ortho.
  * Nie auf Untertitel anwenden — Display bleibt Originalschreibweise.
  * Phrasen zuerst (längste Keys), dann Einzelwörter — Wortgrenzen-respektierend.
  */

@@ -12,6 +12,10 @@ export const colors = {
   online: '#3DCF7A',
   /** Findus offline / Diagnose nötig */
   offline: '#E8913A',
+  /** Findus „Denken“ (nach User spricht) */
+  thinking: '#3D7CFF',
+  /** Findus wirklich offline (kein Internetzugang) */
+  offlineGray: '#6F7A7A',
   border: 'rgba(244, 239, 230, 0.12)',
 };
 

@@ -17,16 +17,26 @@ export const AFFILIATE_REDIRECT_NOTICE =
  * Passus für die Datenschutzerklärung — Tracking bei Weiterleitung zu Partnern.
  */
 export const PRIVACY_AFFILIATE_PASSAGE =
-  'Wenn du über Findus zu Partnern weitergeleitet wirst (z. B. GetYourGuide, Musement, Viator, Uber, Economy Bookings, Bounce, Stay22 oder CJ Affiliate), ' +
+  'Wenn du über Findus zu Partnern weitergeleitet wirst (z. B. GetYourGuide, Musement, Viator, Uber, DiscoverCars, Economy Bookings, Bounce, Stay22, Airalo, Travelpayouts/Klook/Tiqets oder CJ Affiliate), ' +
   'können anonymisierte Tracking-Parameter (Affiliate-/Partner-IDs) in der URL mitübertragen werden. ' +
   'Damit können wir Provisionen zuordnen. Es werden dabei keine personenbezogenen Profildaten an diese Partner übermittelt. ' +
   'Beim Aufruf der Partner-Websites können dort Cookies und ähnliche Technologien gesetzt werden — es gelten die Datenschutzbestimmungen der jeweiligen Partner.';
 
 /** Kurzer Transparenz-Hinweis für Impressum / Rechtliches. */
 export const AFFILIATE_TRANSPARENCY_IMPRINT =
-  'Findus kann bei Touren, Tickets, Fahrten, Mietwagen, Gepäckaufbewahrung und Unterkünften Partner-Links nutzen. ' +
+  'Findus kann bei Touren, Tickets, Fahrten, Mietwagen, Gepäckaufbewahrung, eSIM und Unterkünften Partner-Links nutzen. ' +
   'Die Auswahl und Qualität der Empfehlungen orientiert sich an deiner Anfrage; ' +
   'über Partner-Links können wir eine Provision erhalten. Für dich ändert sich am Preis nichts.';
+
+/** Account / Cloud-Sync (Einstellungen & Onboarding). */
+export const ACCOUNT_SYNC_NOTICE =
+  'Mit Konto speichert Findus Profil, Stempelkarte, Pläne und Merker verschlüsselt in deiner Cloud (nur für dich, mit Login). ' +
+  'Als Gast bleiben alle Daten nur lokal auf dem Gerät.';
+
+/** Newsletter Opt-in — getrennt vom Sync. */
+export const NEWSLETTER_OPT_IN_NOTICE =
+  'Newsletter nur mit ausdrücklicher Zustimmung. Abmelden jederzeit in den Einstellungen oder über den Link in der Mail. ' +
+  'Ohne Konto und Opt-in kein Newsletter.';
 
 /** DSGVO-Hinweis Audio / Mikrofon (Onboarding & Einstellungen). */
 export const AUDIO_CONSENT_NOTICE =
@@ -35,16 +45,44 @@ export const AUDIO_CONSENT_NOTICE =
 /** EU AI Act — Transparenzhinweis. */
 export const AI_TRANSPARENCY_NOTICE =
   'Findus ist ein KI-gestütztes System. Empfehlungen, Tour-Erklärungen und Antworten werden automatisiert durch Sprachmodelle erzeugt. ' +
-  'Bitte prüfe wichtige Angaben (Öffnungszeiten, Preise, Barrierefreiheit) vor Ort oder beim Anbieter.';
+  'Bitte prüfe wichtige Angaben (Öffnungszeiten, Preise, Barrierefreiheit, Live-Abfahrten oder Wetterumschwünge) vor Ort oder beim Anbieter.';
 
-/** Platzhalter Verantwortlicher — vor Live-Gang ersetzen. */
+/** Konto, Cloud-Sync & Gerätewechsel (kurz für Einstellungen / Datenschutz). */
+export const ACCOUNT_CLOUD_SYNC_PASSAGE =
+  'Mit einem Findus-Konto (Magic Link, Google oder Apple) kannst du Profil, Stempelkarte, Zeitachse und Merk-Einträge optional in Supabase synchronisieren. ' +
+  'Die JSON-Dateien auf deinem Gerät bleiben die primäre Quelle; Uploads erfolgen nur bei Änderungen und nach kurzer Verzögerung. ' +
+  'Ohne Login oder im Gastmodus bleibt alles ausschließlich lokal.';
+
+/** Newsletter — Einwilligung getrennt vom Konto-Sync. */
+export const NEWSLETTER_PRIVACY_PASSAGE =
+  'Der optionale Findus-Newsletter (Produkt-Updates, Reise-Tipps) wird nur versendet, wenn du ihn in den Einstellungen aktivierst. ' +
+  'Dafür speichern wir E-Mail-Adresse (vom Login), Opt-in-Zeitpunkt und Sprache. Du kannst die Einwilligung jederzeit widerrufen — ohne Auswirkung auf die App-Nutzung.';
+
+/** Verantwortlicher — SSOT für App-Impressum / Datenschutz (wie website/impressum.html). */
 export const LEGAL_CONTROLLER = {
-  name: '[Name / Firma eintragen]',
-  address: '[Straße, PLZ Ort eintragen]',
-  email: '[datenschutz@beispiel.de]',
-  phone: '[Telefon optional]',
-  representative: '[Vertretungsberechtigte Person]',
+  name: 'Lars Gundlach',
+  address: 'Heisterhoop 12\n25497 Prisdorf\nDeutschland',
+  email: 'lars.gundlach.manager@gmail.com',
+  phone: '',
+  representative: 'Lars Gundlach',
 } as const;
+
+/** True, solange noch Platzhalter in LEGAL_CONTROLLER stehen (Shipping-Blocker). */
+export function isLegalControllerIncomplete(): boolean {
+  const blob = [
+    LEGAL_CONTROLLER.name,
+    LEGAL_CONTROLLER.address,
+    LEGAL_CONTROLLER.email,
+    LEGAL_CONTROLLER.representative,
+  ].join(' ');
+  return /PLACEHOLDER|\[Name|\[Straße|beispiel\.de/i.test(blob);
+}
+
+/** Callout nur wenn isLegalControllerIncomplete() — sonst in der UI ausblenden. */
+export const LEGAL_PLACEHOLDER_CALLOUT =
+  '⛔ SHIPPING-BLOCKER: Die Angaben zum Verantwortlichen sind noch PLATZHALTER. ' +
+  'Diese App darf nicht veröffentlicht oder in Stores eingereicht werden, ' +
+  'solange LEGAL_CONTROLLER in constants/legal.ts nicht durch echte Unternehmensdaten ersetzt wurde.';
 
 export type LegalChapterId =
   | 'controller'
@@ -73,8 +111,7 @@ export const LEGAL_CHAPTERS: LegalChapter[] = [
       (LEGAL_CONTROLLER.phone
         ? `Telefon: ${LEGAL_CONTROLLER.phone}\n`
         : '') +
-      `Vertreten durch: ${LEGAL_CONTROLLER.representative}\n\n` +
-      `Hinweis: Bitte ersetze die Platzhalter vor der Veröffentlichung durch deine echten Unternehmensangaben.`,
+      `Vertreten durch: ${LEGAL_CONTROLLER.representative}`,
   },
   {
     id: 'controller',
@@ -95,8 +132,14 @@ export const LEGAL_CHAPTERS: LegalChapter[] = [
       '(oder einen von dir gewählten Hörmodus freigibst). ' +
       AUDIO_CONSENT_NOTICE +
       '\n' +
-      '• Standortdaten: zur Erkennung von Sehenswürdigkeiten und Navigation, sofern du den Standort freigibst.\n' +
-      '• Nutzungsdaten: z. B. besuchte Orte in der aktuellen Tour, Chatverlauf der Sitzung — zur Kontextführung der KI.\n\n' +
+      '• Standortdaten: zur Erkennung von Sehenswürdigkeiten, Navigation, Stadt-/POI-Zuordnung, Wetterbezug und situativen Vorschlägen, sofern du den Standort freigibst.\n' +
+      '• Nutzungsdaten: z. B. besuchte Orte in der aktuellen Tour, Chatverlauf der Sitzung, genutzte Tipps/Hilfen und lokale Stempel-/Routenstände — zur Kontextführung der KI und für adaptive Erklärungen.\n' +
+      '• Benachrichtigungsdaten: falls du Erinnerungen für Bus, Flug oder Wecker nutzt, werden lokale Reminder und deren Zeitpunkte auf dem Gerät verarbeitet.\n' +
+      '• Wetter- und Verbindungsdaten: für Routen, Regenwarnungen, Live-Verbindungen, Verspätungen oder Flugstatus werden situationsabhängig externe Datenquellen abgefragt.\n\n' +
+      ACCOUNT_CLOUD_SYNC_PASSAGE +
+      '\n\n' +
+      NEWSLETTER_PRIVACY_PASSAGE +
+      '\n\n' +
       'Eine Weitergabe an Dritte zu Werbezwecken findet nicht statt.',
   },
   {
@@ -106,7 +149,7 @@ export const LEGAL_CHAPTERS: LegalChapter[] = [
       'Deine Anfragen und der notwendige Kontext (z. B. Profil-Präferenzen, aktueller Ort) können an ' +
       'LLM-Anbieter (u. a. OpenAI, Google Gemini / Anthropic — je nach Konfiguration) übermittelt werden, ' +
       'um Antworten und Tour-Inhalte zu erzeugen. ' +
-      'Es werden nur die für die Anfrage erforderlichen Daten übertragen.\n\n' +
+      'Es werden nur die für die Anfrage erforderlichen Daten übertragen. Dazu können je nach Funktion auch Wetter-, Routing-, Verkehrs-, Flug- oder Fähren-Kontexte gehören.\n\n' +
       AI_TRANSPARENCY_NOTICE,
   },
   {
@@ -126,7 +169,7 @@ export const LEGAL_CHAPTERS: LegalChapter[] = [
       '• Datenübertragbarkeit\n' +
       '• Widerruf erteilter Einwilligungen mit Wirkung für die Zukunft (z. B. Audio-Consent)\n' +
       '• Beschwerde bei einer Aufsichtsbehörde\n\n' +
-      'In der App kannst du unter Einstellungen → Einrichtung die App zurücksetzen und lokale Profildaten löschen. ' +
+      'In der App kannst du unter Einstellungen → Einrichtung die App zurücksetzen, lokale Profildaten löschen und erklärende Hilfen/Tipps neu lernen lassen. ' +
       `Für weitere Anfragen: ${LEGAL_CONTROLLER.email}`,
   },
   {
@@ -137,7 +180,7 @@ export const LEGAL_CHAPTERS: LegalChapter[] = [
 ];
 
 const PARTNER_URL_RE =
-  /getyourguide\.com|musement\.com|viator\.com|tripadvisor\.com|m\.uber\.com|uber\.com|tui\.com|economybookings\.com|bounce\.com|stay22\.com|cj\.com|anrdoezrs\.net/i;
+  /getyourguide\.com|musement\.com|viator\.com|tripadvisor\.com|m\.uber\.com|uber\.com|tui\.com|economybookings\.com|discovercars\.com|bounce\.com|stay22\.com|expedia\.com|expedia\.de|airalo\.com|travsim\.com|cj\.com|anrdoezrs\.net|tpx\.li|c111\.travelpayouts\.com|kiwi\.com|klook\.com|tiqets\.com|kkday\.com|wegotrip\.com|gocity\.com|saily\.com|yesim\.|drimsim\.|welcomepickups\.com|gettransfer\.com|kiwitaxi\.com|intui\.travel|localrent\.com|getrentacar\.com|autoeurope\.|bikesbooking\.com|radicalstorage\.com|aviasales\.|airhelp\.com|compensair\.com|ektatraveling\.com|qeeq\.com|awin1\.com|travelsecure\.de/i;
 
 /** True, wenn die Action einen Affiliate-/Partner-Kanal öffnet. */
 export function isPartnerAffiliateAction(action: QuickAction): boolean {
@@ -146,7 +189,8 @@ export function isPartnerAffiliateAction(action: QuickAction): boolean {
     action.type === 'BOOK_UBER' ||
     action.type === 'BOOK_CAR_RENTAL' ||
     action.type === 'BOOK_BOUNCE_LUGGAGE' ||
-    action.type === 'BOOK_STAY22'
+    action.type === 'BOOK_STAY22' ||
+    action.type === 'BOOK_ESIM'
   ) {
     return true;
   }

@@ -19,6 +19,17 @@ export function abortActionBoardDeep(): void {
 }
 
 export function runActionBoard(input: ActionBoardInput): ActionBoardResult {
+  const seed = input.seedActions ?? [];
+  const seedHasGroundedNav = seed.some(
+    (a) =>
+      a.type === 'START_NAVIGATION' &&
+      typeof a.payload.destLat === 'number' &&
+      typeof a.payload.destLng === 'number',
+  );
+  const seedHasUrl = seed.some(
+    (a) => a.type === 'OPEN_URL' && Boolean(a.payload.url),
+  );
+
   const entities =
     input.entities?.length
       ? input.entities
@@ -38,7 +49,10 @@ export function runActionBoard(input: ActionBoardInput): ActionBoardResult {
               poiId: input.module1.poiId,
             },
           ]
-        : extractActionEntities(input.speechText, input.userText);
+        : // Kein Speech-Mining wenn schon echte Nav/URL-Seeds da sind
+          seedHasGroundedNav || seedHasUrl
+          ? []
+          : extractActionEntities(input.speechText, input.userText);
 
   const opportunities = scanOpportunities({
     speechText: input.speechText,

@@ -131,10 +131,11 @@ function insertGeoAnchor(anchor: IngestGeoAnchor, dayKey: string): void {
   // Nur HEUTE: weicher GPS-Start nahe jetzt (für Gap-Fill / Anreise)
   if (!isToday) return;
 
-  let startMs = clampToFutureMs(Date.now(), {
-    nowMs: Date.now(),
-    minAheadMs: 20 * 60_000,
-  });
+  const startMs =
+    clampToFutureMs(Date.now(), {
+      nowMs: Date.now(),
+      minAheadMs: 20 * 60_000,
+    }) ?? Date.now() + 20 * 60_000;
   const stop: FuturePlanStop = {
     id: `anchor_${dayKey}_start`,
     title: label.slice(0, 48),

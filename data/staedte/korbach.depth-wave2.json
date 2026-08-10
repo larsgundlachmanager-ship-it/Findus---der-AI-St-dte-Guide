@@ -1,0 +1,1215 @@
+{
+  "notes": [
+    "Depth wave 2: additive pools from Wikipedia, korbach.de, HLNUG/GeoPark sources cited in prior research. Hours/prices LIVE only. No demotion."
+  ],
+  "spots": [
+    {
+      "id": "korbach_korbacher_spalte",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Geologie: Die Spalte liegt im Randkalk der Werra-Formation (unterster Zechstein); Verfüllung nach Starkregen kurz nach der Entstehung — deshalb gut erhaltene Tetrapoden-Fossilien im Sediment statt in Karsthöhlen.",
+          "tags": [
+            "natur",
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Forschung: Systematische Grabungen mit Finanzierung der National Geographic Society; Nature-Veröffentlichung 1988 (Sues & Boy) zum Procynosuchus-Unterkiefer — erster Nachweis dieser Gattung auf der Nordhalbkugel.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Schutz: Bodendenkmal nach hessischem Denkmalschutzgesetz; Stadt erwarb die Fundstelle, überdachte die Austrittsstelle und schuf eine Besucherplattform — Pavillon/Spielplatz frei zugänglich, überdachte Spalte nur mit Führung.",
+          "tags": [
+            "geschichte",
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Quer: GeoFoyer Kalkturm (Museum-Außenstelle seit 2015) erklärt Kalkgewinnung; Lehrpfad GeoPfad; Teile der Sammlung auch im Naturkundemuseum Karlsruhe.",
+          "tags": [
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Regelmäßige Führungen „Auf den Spuren des Korbacher Dackels“ laut Stadtveranstaltungskalender — Termine und Zugang zur überdachten Spalte vor Besuch prüfen (korbach.de).",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Paläontologie: Sues & Munk (1996) beschrieben eine außergewöhnliche Tetrapoden-Vergesellschaftung aus dem Zechstein bei Korbach; die Spalte gilt in Fachliteratur als älteste fossilführende Spalte Europas.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Fauna: Neben Procynosuchus Funde von Protorosauriern, Captorhiniden, Pareiasauriern und Dicynodontiern — Landwirbeltiere des späten Perm, nicht Meeresfauna.",
+          "tags": [
+            "natur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Untergrund: Spalte setzt sich südwestlich und östlich im Untergrund fort, Gesamtlänge ca. 1 km, Breite über 4 m — am Steinbruch nur ein Ausschnitt sichtbar.",
+          "tags": [
+            "natur",
+            "depth_wave2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_kilianskirche",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Bauchronik: Chor ab 1335, Johanneskapelle (später Sakristei) und Turmuntergeschoss gleichzeitig; Turmoberbau 1380–1392 — ursprünglich ca. 93 m hoch, zu den höchsten Kirchtürmen des 14. Jahrhunderts gezählt; welsche Haube/Laterne erst 1709 nach Blitzschäden.",
+          "tags": [
+            "geschichte",
+            "architektur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Langhaus: Baubeginn 1388, Gewölbe 1450; bis dahin stand zwischen Chor und Turm eine ältere, kleinere Vorgängerkirche. Nach Brand 1685 Dacherneuerung bis 1692.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Architektur: Spätgotische Hallenkirche 3:3, Formen an Soester Wiesenkirche orientiert; Langhaus bei quadratischen Jochen breiter als lang; Westturm mit vier Giebeln und barockem Dachreiter; Marienkapelle (~1340) an Südturm, zeitweise Münze, seit 1958 Kriegergedächtnisstätte.",
+          "tags": [
+            "architektur",
+            "visuell",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Ausstattung (Auswahl): Flügelaltar 1527 vom Korbacher Franziskanermaler (Graf Philipp III. von Waldeck und Anna von Kleve als Stifter); Sakramentshaus 1525 Bunkeman; Steinkanzel Ende 14. Jh. — älteste erhaltene Steinkanzel Hessens; Hochaltarmensa um 1340.",
+          "tags": [
+            "kunst",
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Orgeln: Euler-Orgel 1957 (34 Register); 2011 freistehende Kuhn-Orgel mit 34 Registern und neuem Klangkonzept — beide auf Westempore.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Gottesdienst- und Besichtigungszeiten ephemer — Kirchengemeinde/Tourismus prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Figurenportal Süd: Anfang 15. Jh. reiches ikonographisches Programm; Westportal mit gemeinsamer Gewänderahmung von Tür und hohem Fenster — seltene gotische Komposition.",
+          "tags": [
+            "architektur",
+            "kunst",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Gewölbe: Chor-Kreuzrippen auf schlanken Dienstbündeln; Langhaus auf Rundpfeilern; Schlusssteine Chor 14. Jh., Langhaus 15. Jh.; Maßwerkfenster quergeteilt, Farbfassung nach Resten erneuert.",
+          "tags": [
+            "architektur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Ausstattung II: Kruzifix Holz Anfang 14. Jh.; Taufstein 14. Jh.; Sakramentshaus Turmhelm 1525; Epitaphien Wolmeringhausen 16. Jh.; gusseiserne Grabplatten 17./18. Jh.",
+          "tags": [
+            "kunst",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Stadt: Kilian = Hauptkirche der Altstadt, während die Neustadt Nikolai erhielt — Vereinigung 1377 schuf politische Einheit bei zwei gotischen Hallenkirchen.",
+          "tags": [
+            "geschichte",
+            "quer",
+            "depth_wave2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_st_nicolai",
+      "lat": 51.27386,
+      "lng": 8.87053,
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Neustadt: Historische Hauptkirche der Korbacher Neustadt — Gegenstück zur Kilian-Altstadt; große dreischiffige spätgotische Hallenkirche, vier Joche, Chor zwei Joche mit 5/8-Schluss, Mitte 15. Jh. errichtet.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Turm: Westturm bereits 1359; Spitzhelm mit vier Steingiebeln 1702 erneuert — sichtbare Neigung (baustatisch/Westwind in älteren Darstellungen). Seitenschiffe halb so breit wie Mittelschiff.",
+          "tags": [
+            "architektur",
+            "visuell",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Ausstattung: Flügelaltar 1518 (Franziskanermaler, Anbetung der Könige); prunkvolles Wandgrab Fürst Georg Friedrich von Waldeck († 1692), ca. 12 m hoch; Steinkanzel um 1460; Wandmalereien Maria/Johannes (15. Jh.) im südlichen Seitenschiff.",
+          "tags": [
+            "kunst",
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Stadtgeschichte: Neustadt wuchs außerhalb der Altstadt an den Fernhandelswegen; Vereinigung mit Altstadt 1377 — Nikolai markiert das nördliche historische Zentrum gegenüber Kilian.",
+          "tags": [
+            "geschichte",
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Orgel: Prospekt barock 1744 (Schäffer); Instrument 1982 Dieter Noeske, 30 Register geplant (25 realisiert), historisches Gehäuse.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnung außerhalb Gottesdienste und Führungen ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Schlussstein: Wappen des Hansekaufmanns Johannes Rinck (Köln) im Gewölbe — Stiftungen für den Kirchenbau dokumentiert.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Geneigt: Schiefer Westturm — in Quellen mit baustatischer Neigung und dominantem Westwind erklärt; prägt die Silhouette der Neustadt.",
+          "tags": [
+            "visuell",
+            "architektur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Waldeck: Grabmal Georg Friedrich (ca. 12 mal 7 m) mit Reiterfigur, Kardinaltugenden, Wappen — Fürstenhaus Waldeck-Pyrmont mit Korbach verbunden.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Pfarrer: Carl Curtze ab 1831; Samuel Rothenberg 1951–1962 — lokale Kirchengeschichte dokumentiert.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Stil: Turm westfälisch-gotisch (1359), Chor und Schiff eher hessisch-fränkisch; Emporen nach 1602 — zwei Bautraditionen in einem Bau.",
+          "tags": [
+            "architektur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Gemeinde: Evangelisch-lutherische Pfarrkirche der Neustadt; Besichtigung außerhalb Gottesdienste — LIVE Zeiten prüfen.",
+          "tags": [
+            "leben_jetzt",
+            "live_hint",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2d Architektur: Vorgebauter Westturm 1359, Hallenschiff Mitte 15. Jh.; steil proportioniertes Westportal mit schlanken Fialen — prägend für die Kirchstraße der Neustadt.",
+          "tags": [
+            "depth_wave2",
+            "topup"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_rathaus",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Vereinigung: Am 6. Oktober 1377 schlossen Alt- und Neustadt einen Vertrag zur gemeinsamen Stadt; das Rathaus entstand genau auf der Grenze als steinernes Einigungszeichen — Lage an der Stechbahn/Rathausplatz bis heute.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Stadtbrand 1664: Nahezu alle Wohnhäuser zerstört; gotische Steinkirchen und steinerne Lagerhäuser (Steinkammern) blieben erhalten — am Rathaus blieb der gotische Treppengiebel an der Südseite mit Stadtwappen.",
+          "tags": [
+            "geschichte",
+            "architektur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Roland: Eine der seltenen Rolandstatuen in Hessen am Rathaus (Original von 1450, Kopie außen; Original im Foyer berichtet) — Symbol städtischer Gerichtsbarkeit und Marktrecht.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Bauten: Erneuerungen 1702–1706 nach dem Brand; Erweiterung 1970; aktuell Rathausneubau-Konzept „Urban Mining“ der Stadt (korbach.de) — historische Substanz und moderner Verwaltungsbau im Diskurs.",
+          "tags": [
+            "geschichte",
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Hanse-Kontext: Korbach 1469 erstmals als Hansemitglied erwähnt, südlichste Hansestadt; Kaufleute mit Tuch, Fellen, Bier und regionalen Metallen — Rathausplatz mit Kump als Treffpunkt.",
+          "tags": [
+            "geschichte",
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Rathaus-Öffnungszeiten Verwaltung Mo–Fr laut korbach.de (Vormittag, Do zusätzlich Nachmittag) — Führungen/Innenbesichtigung gesondert prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Kaiserbesuch: Karl IV. (damals römischer König) besuchte 1349 Korbach — gleiches Jahr erste urkundliche Hospitalsstiftung am Tränketor.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Mauerring: 1414 doppelter Mauerring mit fünf Toren vollendet — Rathaus auf der Alt- und Neustadt-Grenze als Verwaltungs- und Symbolzentrum.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Steinkammern: Feuerfeste Steinlagerhäuser der Hansekaufleute überstanden den Brand 1664 — prägen die Altstadt neben Rathaus und Kirchen.",
+          "tags": [
+            "geschichte",
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Roland-Umzug: Roland von 1450 lange in Kilianportal-Nische, in den 1930ern an der Rathaus-Nordseite — Gerichts- und Marktrechtssymbol.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_wolfgang_bonhage_museum",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Wurzeln: Private Altertumssammlung Carl Nelle ab 1876, 1924 der Stadt gestiftet; Heimatmuseum 1925 im gotischen Steinhaus (14. Jh., ehemals feuerfestes Lagerhaus) am Kirchplatz.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Steinhaus: 16. Jh. Umbau zum Stadthaus der Brüder Johann und Otto von Wolmeringhausen; Staffelgiebel, sichtbare Umbauspuren an Bruchsteinmauerwerk; ergänzt durch drei Fachwerkhäuser 18./19. Jh.",
+          "tags": [
+            "architektur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Neubau 1994–1997 Berthold Penkhues (Kassel): Muschelkalk-Fassaden, vier Teilbauten, überdachter Lichthof — Sonderpreis Deutscher Städtebaupreis 1999, Simon-Louis-du-Ry-Plakette 1998, Museumspreis Sparkassen-Kulturstiftung 2002.",
+          "tags": [
+            "architektur",
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Ausstellung (~1.700 m²): Stadt- und Regionalgeschichte, Gold-/Kupfer-/Eisenbergbau Eisenberg, Kalkstein (GeoFoyer Kalkturm seit 2015 an der Spalte); Procynosuchus-Skelett und Therapsiden-Diorama; Filmarchiv Thomas Henke seit 2017.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Namensgeber Wolfgang Bonhage (1937–2004), Bürgermeister 1977–2001, trieb Museumserweiterung voran; GeoPark-Infostelle GrenzWelten.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Regelmäßige Museumsführungen und Öffnungszeiten laut Veranstaltungskalender korbach.de / museum-korbach.de — Saison und Sonderausstellungen ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Sammlung Nelle: Buchbinder Carl Nelle (1858–?) sammelte ab 1876, stiftete 1924 — Basis des städtischen Heimatmuseums.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Erweiterungen: 1934 und Nachkriegs-Erweiterung um drei Fachwerkhäuser; Neubau Penkhues ermöglichte Fossil-Ausstellung der 1964 entdeckten Spalte.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Therapsiden-Diorama: Lebendrekonstruktionen u. a. Diictodon und Scymnognathus neben Procynosuchus — Oberperm-Landschaft vor 255 Mio. Jahren.",
+          "tags": [
+            "natur",
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b GeoFoyer: Außenstelle am Kalkturm seit 2015 — Kalksteinbruch-Geschichte, Ergänzung zur Spalte vor Ort.",
+          "tags": [
+            "quer",
+            "depth_wave2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_historische_altstadt",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Doppelkern: Altstadt um Kilian, Neustadt um Nikolai — 1377 vereint; doppelter Mauerring 1414 vollendet, fünf Tore (Tränke-, Dalwigker-, Enser-, Lengefelder-, Berndorfer Tor); nur Enser Tor erhalten.",
+          "tags": [
+            "geschichte",
+            "visuell",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Handel: Soester Stadtrecht 1188; Lage an Heidenstraße (Köln–Leipzig) und Weinstraße (Frankfurt–Bremen); Steinkammern als feuersichere Lager der Hansekaufleute.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Überlebt: Nach Brand 1664 ein Fachwerkhaus „Im Katthagen“ von 1593 als ältestes Wohnhaus; gotische Hallenkirchen und Steinbauten prägen das Stadtbild.",
+          "tags": [
+            "geschichte",
+            "architektur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Brunnen: Vier erhaltene Kümpe (Lengefelderstraße/Feldhühnerchenbrunnen, Kilian, Rathaus, alter Markt) — heutige Steinkümpe überwiegend 19. Jh., mittelalterliche Wasserversorgung.",
+          "tags": [
+            "geschichte",
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Erlebnis: Stadtführung „Fachwerk und Kalkstein“ (korbach.de); Rundweg „Zwischen den Mauern“; Goldspur am Eisenberg als ergänzender Themenpfad.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Höhenlage: Altstadt 366–392 m ü. NHN — höchstgelegene Kreisstadt Hessens (Wikipedia Korbach).",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Termine Stadtführungen und Altstadtfeste ephemer — Korbach-Information prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Soester Recht: 1188 Stadtrecht durch Bischof Bernhard II. von Paderborn — Grundlage für Markt und Handel.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Neustadt-Wachstum: Obere und untere Neustadt außerhalb der Altstadt — Kaufleute an Heiden- und Weinstraße; im 14. Jh. Kilian und Nikolai als gotische Zeugen.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Krieg: Dreißigjähriger Krieg reduzierte Bevölkerung von 2600 auf 1100; Siebenjähriger Krieg — Gefecht bei Korbach am 10. Juli 1760 nördlich der Stadt.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Reformation: Gesamte Grafschaft Waldeck protestantisch; im 19. Jh. katholische Zuwanderung — Marien- und Josephskirche.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Enser Tor: Einzig erhaltenes Stadttor — Orientierungspunkt für Rundgänge entlang der Stadtmauer.",
+          "tags": [
+            "visuell",
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Eisenbahn: Twistetalbahn 1893 und Industrialisierung (Peters/Continental) veränderten die Stadt, der Kern blieb mittelalterliches Gefüge.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Curbechi 980: Erste urkundliche Erwähnung — Otto II. tauschte 980 Korbach u. a. an Kloster Corvey; Siedlungsspuren am Kilian-Standort sollen älter sein.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Hanse 1469: Erste Nennung als Hansemitglied; geographisch südlichste Hansestadt — Handel mit Tuch, Fellen, Bier und regionalen Metallen.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2d Hansestadt: Seit 28. Juni 2013 amtliche Zusatzbezeichnung Hansestadt — einzige Hansestadt im heutigen Hessen mit doppeltem mittelalterlichem Kern.",
+          "tags": [
+            "depth_wave2",
+            "topup"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_georg_viktor_turm",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Turm: 22,5 m, Landesbaumeister Wilhelm Müller, eingeweiht 3. Juni 1905 zu Ehren Fürst Georg Viktor von Waldeck und Pyrmont; Wappenstein von 1520 (Philipp III./Anna von Cleve) am Aufgang aus der Burgruine verbaut.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Eisenberg: 560 m, ca. 200 m über Korbacher Ebene, Goldvorkommen; Burgruine Eisenberg 13. Jh., urkundlich 1345, Residenz Waldeck-Eisenberg 1487–1692, Schlossausbau 1520, Verfall nach Dreißigjährigem Krieg, Freilegung 1974–1982.",
+          "tags": [
+            "geschichte",
+            "natur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Panorama: Blick Richtung Korbach, Habichtswald, Ederhöhen/Kellerwald, Rothaargebirge bei Klarheit; AR-Panorama „Georg-Viktor-Turm PANORAMA“ für Burgrekonstruktion berichtet.",
+          "tags": [
+            "leben_jetzt",
+            "visuell",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Gold: Mittelalterlicher Bergbau, Erliegen im Dreißigjährigen Krieg; moderne Wiederaufnahmeversuche erfolglos; feine Verteilung im Gestein — Itter und Eder erhalten Goldanteile aus den Bächen.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Turm laut Wikipedia/Eisenberg-Artikel typisch 15. April–31. Oktober täglich 9–19 Uhr — vor Anfahrt aktuell prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Naturpark: Eisenberg im Naturpark Diemelsee; Dominanz 6 km, Prominenz 112 m — Hausberg Korbachs mit Panoramatafeln.",
+          "tags": [
+            "natur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Wanderwege: Goldspur Eisenberg, Barbarossaweg, Waldecker Weg, Sauerland-Höhenflug am Berg — Verbindung Goldhausen und Nordenbeck.",
+          "tags": [
+            "leben_jetzt",
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Burgchronik: Residenz Waldeck-Eisenberg 1487–1692; Plünderung 1621; Verfall; archäologische Freilegung 1974–1982 zeigt Grundmauern, Wall und Graben.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Modern: AR-Panorama-App rekonstruiert die Burg für Besucher — ergänzt die physische Ruine am Turmfuß.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Müller-Bau: Landesbaumeister Wilhelm Müller (1851–1928) entwarf den Turm; Einweihung 3. Juni 1905 — Symbol waldeckischer Landesgeschichte auf dem Hausberg.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Geologie: Eisenberg 560 m, Landschaftswahrzeichen wegen Golderzen; Bäche wie Itter tragen Goldpartikel zur Eder — regionale Bergbau-Tradition.",
+          "tags": [
+            "natur",
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2d Besuch: Turmfuß mit Burgruine frei zugänglich; Aufstieg zum 22,5-m-Georg-Viktor-Turm lohnt bei klarer Sicht — LIVE Saisonöffnung prüfen.",
+          "tags": [
+            "depth_wave2",
+            "topup"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_besucherbergwerk_korbach_goldhausen",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Goldbergwerk: Besucherbergwerk am Eisenberg bei Goldhausen erklärt historischen Goldbergbau — eine der bedeutenden Goldlagerstätten Deutschlands im regionalen Kontext (Wikipedia Eisenberg).",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Verknüpfung: Lehrpfad Goldspur Eisenberg verbindet Turm, Burgruine und Bergwerk; Museum Korbach zeigt Bergbau- und Goldgeschichte in den Gewölben.",
+          "tags": [
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Mittelalter: Gold am Eisenberg schon im Mittelalter abgebaut; Bergbau während des Dreißigjährigen Kriegs zum Erliegen gekommen — Thema der Führungen unter Tage.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Ort: Treffpunkt laut Stadtkalender oft Zechenhaus am Dorfgemeinschaftshaus Goldhausen bei regulären Goldbergwerk-Führungen.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Regelmäßige Führungen im Goldbergwerk laut korbach.de — Termine, Tickets und Ausrüstung (feste Schuhe) vor Buchung prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Regional: Eisenberg-Gold als eine der reichsten Lagerstätten Deutschlands beschrieben — mittelalterlicher Abbau, Kriegsstillstand, im 20. Jh. erfolglose Industrieversuche.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Umwelt: Feine Goldverteilung macht industriellen Abbau unrentabel und umweltschädlich — in Quellen noch etwa 10 Tonnen Gold im Berg vermutet.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Museum: Wolfgang-Bonhage-Museum zeigt Bergbau-Technik und Goldgeschichte in historischen Gewölben — Vorbereitung auf den Stollenbesuch.",
+          "tags": [
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Denkmalpflege: Führungsblätter des Landesamts für Denkmalpflege dokumentieren Goldbergwerk und Burg als archäologische Denkmäler in Hessen.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Stollen: Führungen unter Tage erklären mittelalterliche Goldgewinnung am Eisenberg — Schwerpunkt Erlebnis und Technikgeschichte.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Untere Tiefe: Verwandter Goldbergwerk-Komplex Untere-Tiefe-Tal-Stollen — ergänzende Industriedenkmäler laut Denkmalführungen.",
+          "tags": [
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Eisenberger Lied: Lokale Lied- und Bergtradition am Hausberg — kultureller Bezug neben Turm und Burgruine.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2d Goldspur: Lehrpfad am Eisenberg verbindet Bergwerk, Turm und Burgruine; Zechenhaus Goldhausen als Treffpunkt regulärer Führungen laut korbach.de.",
+          "tags": [
+            "depth_wave2",
+            "topup"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_korbach_hauptbahnhof",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Eröffnung: 15. August 1893 Twistetalbahn nach Volkmarsen/Warburg — wirtschaftlicher Aufschwung Ende 19. Jh.; seit Ende 2018 amtlich „Hauptbahnhof“.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Knoten: Heute Trennungsbahnhof — Strecken Richtung Kassel (über Volkmarsen), Marburg (Untere Edertalbahn, Reaktivierung 11. September 2015), Brilon (Uplandbahn); ehemals Kreuzung mit Ederseebahn nach Waldeck/Wabern (Radweg ab Korbach).",
+          "tags": [
+            "geschichte",
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Gebäude: Empfangsgebäude 1912 Neubau Alois Holtmeyer (L-Grundriss, Natursteinsockel, turmartiger Osttrakt) ersetzte Bahnhof von 1893; Kriegsschäden, Umbau 1950er; Hessentag-Umbau 2018 mit ZOB.",
+          "tags": [
+            "architektur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 ÖPNV: Städtische Ringlinien (seit 1997, fünf Linien) treffen alle 20 Minuten am Hbf; Haltepunkt Korbach Süd 1,5 km südlich für Südoststadt.",
+          "tags": [
+            "leben_jetzt",
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Betrieb: Kurhessenbahn RB4 stündlich Kassel, RE/RB97 Marburg–Brilon im Stundentakt bzw. Zweistundentakt; Triebwagenwerk seit Dezember 2018.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Fahrplan, Baustellen und Schienenersatz ephemer — DB/bahn.de und NVV prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_kumpe_brunnen_am_alten_marktplatz",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Kümpe: Traditionelle Brunnenform nordhessischer Städte; Korbach hatte vier erhaltene Kümpe — am alten Markt, Rathaus, Kilian und Lengefelderstraße (Feldhühnerchenbrunnen).",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Funktion: Mittelalterliche Wasserversorgung an Marktplätzen an Fernhandelswegen; heutige Steinkümpe größtenteils Schöpfungen des 19. Jahrhunderts auf historischen Standorten.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Platz: Alter Markt nahe Stechbahn — Orientierung zwischen Rathaus, Museum und Kilian.",
+          "tags": [
+            "quer",
+            "visuell",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Markt- und Festveranstaltungen am Platz ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Feldhühnerchen: Historischer Spottname der Korbacher aus dem Rebhuhn-Reichtum des Waldecker Gefildes — Brunnen am Markt als sozialer Mittelpunkt.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Handel: Marktplätze an der Kreuzung Heidenstraße und Weinstraße — Kümpe versorgte Marktgeschehen und Handwerker.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_stadtpark_korbach",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Stadtgrün: Städtische Parkanlage zur Naherholung im Kernstadtgebiet — Kontrast zu Fachwerk-Altstadt; laut Stadtnews u. a. Spielfest-Bezug Stadtpark und Goldpark.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Angebot: Spazierwege, Sportkurse (z. B. Zumba/Dance Fitness laut Veranstaltungskalender korbach.de im Stadtpark).",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Quer: Laaker Teich und Marbecktal als weitere Naherholung im Stadtgebiet.",
+          "tags": [
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Veranstaltungen und Kurszeiten ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Kuhbach: Die Kernstadt wird vom Kuhbach durchflossen — südlich in Itter, Eder und Weser; Park nahe städtischem Grün entlang des Bachsystems.",
+          "tags": [
+            "natur",
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Events: Stadt meldet Kultur- und Spielfest-Bezüge zu Stadtpark und Goldpark — saisonale Nutzung.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Lage: Grünanlage nahe Kernstadt — Übergang von historischer Altstadt zu modernen Wohn- und Freizeitflächen.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_naherholungsgebiet_marbecktal",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Lage: Marbeck als Gewässer am Epper Pass/Eisenberg-Umfeld — naturnahe Tal- und Waldlandschaft südwestlich der Kernstadt, Wanderweg-Netz (Barbarossaweg, Waldecker Weg in der Region).",
+          "tags": [
+            "natur",
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Naherholung: Schutz- und Erholungsfunktion; oft gemeinsam mit Schanzenberg erwähnt — ruhige Gegenwelt zur Hanse-Altstadt.",
+          "tags": [
+            "natur",
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Geografie: Eisenberg-Dominanz 6 km; Marbeck fließt Richtung Epper Pass — Teil des Ostsauerländer Gebirgsrandes.",
+          "tags": [
+            "natur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Wegezustand und Regeln der Schutzgebiete ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Epper Pass: Verbindung Korbacher Ebene zur Medebacher Bucht — Marbeck am Pass; Landesstraße 3083 und Wanderachsen.",
+          "tags": [
+            "natur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Diemelsee-Nähe: Naturraum Eschenberg-Eisenbergrücken — Teil des Ostsauerländer Gebirgsrandes.",
+          "tags": [
+            "natur",
+            "depth_wave2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_schanzenberg_bei_korbach",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Naturraum: Erhebung im Naherholungsgebiet bei Korbach — verbunden mit Marbecktal-Pfaden und Waldecker Landschaft am Übergang zur Korbacher Ebene.",
+          "tags": [
+            "natur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Wandern: Regionalwege und Naturpark Diemelsee-Umfeld in erreichbarer Nähe zum Eisenberg-Rücken.",
+          "tags": [
+            "leben_jetzt",
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Wege und Zugänge saisonal prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Schutzgebiet: Erhebung im Naherholungsgefüge mit Marbecktal — Wald- und Hügellandschaft für kurze Ausflüge ab Korbach.",
+          "tags": [
+            "natur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Eisenberg-Blick: Von höheren Punkten der Region Blick Richtung Eisenberg — geologisch Gold- und Burgschauplatz.",
+          "tags": [
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Wandern: Kurze Rundwege verbinden Schanzenberg mit Marbecktal — ruhige Alternative zur Altstadt.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Flora: Waldecker Feld- und Waldränder mit typischer Vegetation des Zechstein-Gürtels in der Region.",
+          "tags": [
+            "natur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2d Nahe: Schanzenberg und Marbecktal bilden zusammen das Naherholungsangebot südwestlich der Altstadt — weniger Trubel als Marktplatz.",
+          "tags": [
+            "depth_wave2",
+            "topup"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_hexengarten",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Thema: Kräuter-/Duftgarten im Korbacher Umfeld — pädagogischer Naturstopp zu Gewürz- und Heilpflanzen, oft mit Marbecktal-Pfaden kombiniert.",
+          "tags": [
+            "natur",
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Kontext: Waldeckische Feldlandschaft (Zechsteingürtel) bot historisch Rebhühner-Reichtum — Spottname „Feldhühnerchen“ für Korbacher (Wikipedia).",
+          "tags": [
+            "geschichte",
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Saisonale Beete und Zugang ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Tourismus: Thematischer Kräutergarten ergänzt Marbecktal-Gewürz- und Pflanzenpfade — sinnliche Station für Familien.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Region: Waldecker Gefilde und Zechstein-Landschaft prägen die Flora — historische Rebhuhn-Heimat des Spottnamens Feldhühnerchen.",
+          "tags": [
+            "geschichte",
+            "natur",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Pädagogik: Kräuter- und Duftpflanzen für Schul- und Familiengruppen — Ergänzung zum Naherholungsangebot Marbecktal.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Saison: Beete und Duftintensität variieren über das Jahr — LIVE vor Ort prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2d Duft: Kräuterbeete als Erlebnisstation im Grünzügel — ideal kombiniert mit Marbecktal-Wanderung an halbem Tag.",
+          "tags": [
+            "depth_wave2",
+            "topup"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_stadtpark_laaker_teich",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Laaker Teich: Teich- und Parklandschaft im Stadtgebiet — ruhiger Wasser-Grünraum neben Laaker Weg-Bewohnerschaft.",
+          "tags": [
+            "visuell",
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Naherholung: Spazieren, Pause am Wasser; Ergänzung zum zentralen Stadtpark und Marbecktal.",
+          "tags": [
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Wasserfläche/Pflege ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Laaker Weg: Wohnquartier und Teichufer — städtischer Wasser-Grünraum abseits der Altstadt.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Verbindung: Ergänzt Stadtpark und Marbecktal im Netz der Korbacher Naherholung.",
+          "tags": [
+            "quer",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Teich: Offene Wasserfläche mit Uferwegen — Picknick und Spaziergang abseits des Marktgeschehens.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2c Stadtgrün: Teil des Korbacher Parknetzes neben Stadtpark und Goldpark-Entwicklungen laut Stadtmedien.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2d Wasser: Laaker Teich als ruhige Parkfläche im Stadtgebiet — Spazierweg rund um die Teichufer, nahe Laaker Weg.",
+          "tags": [
+            "depth_wave2",
+            "topup"
+          ]
+        },
+        {
+          "text": "Wave2d Alltag: Laaker Teich dient Anwohnern und Spaziergängern als grüne Pause — Kombination mit Stadtpark oder Altstadtbummel auf einem Tagesausflug in Korbach.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_freilichtbuhne_korbach",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Wurzeln: Theaterspiel seit 16. Jh. in Korbach nachgewiesen (Pastoralspiele); Abraham-Saur-Komödie 1591 in Marburg gedruckt, danach in Korbach aufgeführt.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Stadtmauer-Bühne: Seit 1936 Aufführungen an der alten Stadtmauer im Schießhagen; Verein Freilichtbühne Korbach e. V. gegründet 8. März 1982 (Vorläufer Festspielgruppe Schützengilde 1377).",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Heute: Sommersaison mit Kinder- und Erwachsenenstück plus Gastspiele; Kapazität 534 Plätze (Stand Vereinsangaben 2025); Mitglied Verband Deutscher Freilichtbühnen; wiederholt 10.000+ Zuschauer pro Saison berichtet.",
+          "tags": [
+            "leben_jetzt",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Spielplan, Vorverkauf und Wetterausfälle ephemer — flb-korbach.de / Stadtveranstaltungskalender.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "korbach_alte_landwehr_300_meter_langer_schutzwall_aus_dem_mittelalter",
+      "deep_data_pool": [
+        {
+          "text": "Wave2 Befestigung: Ergänzt den doppelten Stadtmauerring (1414) nach außen — Landwehren sicherten Feldmark und Zugangswege vor der Kernstadt.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Padberger Fehde 1413–1418: Grenzkonflikte mit den Herren von Padberg prägten die Befestigungsphase — Höhepunkt der Auseinandersetzungen um Waldeck/Korbach.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2 Erlebnis: Wall als erlaufenes Denkmal in der Landschaft — Quer zu Enser Tor (einzige erhaltene Stadttor-Anlage) und Altstadt-Rundwegen.",
+          "tags": [
+            "quer",
+            "visuell",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "LIVE: Zugangspfad und Beschilderung ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Länge: Etwa 300 m Wallprofil — sichtbares Relikt der äußeren Verteidigung jenseits des Mauerrings.",
+          "tags": [
+            "geschichte",
+            "visuell",
+            "depth_wave2"
+          ]
+        },
+        {
+          "text": "Wave2b Hanse: Nach Vereinigung 1377 und Mauerring 1414 schützten Landwehren die wachsende wirtschaftliche Macht der Hansestadt.",
+          "tags": [
+            "geschichte",
+            "depth_wave2"
+          ]
+        }
+      ]
+    }
+  ]
+}

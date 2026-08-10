@@ -1,0 +1,476 @@
+{
+  "notes": [
+    "Depth-balance wave 2: twelve core Hamburg cultural story spots (churches, parks, museums, harbor, memorials).",
+    "Sources: Wikipedia, hamburg.de, official church/museum sites, HPA, UNESCO. Prices/hours LIVE only. No dialogue scripts."
+  ],
+  "spots": [
+    {
+      "id": "hamburg_alter_elbtunnel",
+      "name": "Alter Elbtunnel",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "St.-Pauli-Elbtunnel (Alter Elbtunnel): seit 7. September 1911 Fuß-, Rad- und Autoverbindung unter der Elbe zwischen Landungsbrücken und Steinwerder. Zwei 426,5 m lange Röhren in ca. 24 m Tiefe; markante Kuppel-Eingangsbauten mit Aufzügen. Denkmal seit 2003, zentraler Hafen-Kurzweg und Ausflugsziel.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: quadratische Eingangspavillons mit Kuppeldächern an Landungsbrücken und auf Steinwerder; darunter Schächte mit großen Fahrstühlen und 132 Stufen als Alternative; unter der Elbe zwei parallel geflieste Röhren.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1901 beschloss die Bürgerschaft einen festen Elbübergang für Hafenarbeiter; Baubeginn 22. Juli 1907 (Philipp Holzmann), Eröffnung 7. September 1911 — Ersatz für wetterabhängige Fähren.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Technik (berichtet): zwei eiserne Tunnelröhren à ca. 5,92 m Außendurchmesser, Gesamtlänge je Röhre 426,5 m; hydraulische Aufzüge ca. 24 m unter MW; Ornamentik an den Wänden.",
+          "tags": ["geschichte", "technik"]
+        },
+        {
+          "text": "Heute: stark frequentierter Alltagsweg für Pendler sowie Touristen-Shortcut; beliebter Kulissenort für Fotos und Veranstaltungen; laufende Erhaltung durch HPA.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: direkt an den St. Pauli Landungsbrücken; Blick von Steinwerder auf Containerhafen und Elbphilharmonie; Gegenstück zum Neuen Elbtunnel (Autobahn).",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Sperrungen einzelner Röhren wegen Sanierung, Fahrzeugregeln und Aufzugsbetrieb ephemer — vor Fahrt prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Alten Elbtunnel?",
+          "a": "An den grün patinierten Kuppel-Eingangsbauten an den Landungsbrücken — von dort führen Aufzüge oder Treppen in die unterirdischen Elbröhren."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_chilehaus",
+      "name": "Chilehaus",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Expressionistisches Kontorhaus (Fritz Höger, 1922–1924) im Kontorhausviertel: zehn Geschosse, markante Schiffsbug-Spitze an der Burchardstraße, ca. 4,8 Mio. Oldenburger Klinker. Auftraggeber Henry B. Sloman (Salpeter/Chile-Handel). UNESCO-Welterbe 2015 (Speicherstadt und Kontorhausviertel mit Chilehaus).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: dunkelrote Klinkerfassade mit scharfem, schiffsbugartigem Ostkeil; terrassierte Obergeschosse; Andenkondor an der Spitze (Wappen Chiles); Höfe mit Brunnen und Backsteinornamentik.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1921 kaufte Sloman das Grundstück; Entwurf Fritz Höger, Fertigstellung 1924 — eines der ersten Hochhäuser Deutschlands im Kontorhaus-Typ, Symbol der Welthandelsstadt nach dem Ersten Weltkrieg.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Konstruktion: Stahlbeton auf ca. 16 m tiefen Pfählen wegen weichen Elb-Ufers; Fassade mit komplexen Klinkerbändern und Skulpturen (u. a. Richard Kuöhl).",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Leben jetzt: Bürohaus mit durchgängigen Innenhöfen (öffentlich begehbar); Erdgeschoss mit Gastronom und Läden — kein klassisches Museum, aber Architektur-Highlight im Kontorhausviertel.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Nachbarbauten Sprinkenhof und Meßberghof; wenige Gehminuten zur Speicherstadt und Brooksbrücke; U-Bahn Meßberg.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Mieterzugänge und Hoföffnungen können eingeschränkt sein — respektvoll im Arbeitspark bleiben.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Chilehaus?",
+          "a": "An der keilförmigen, schiffsbug-ähnlichen Klinkerecke mit Andenkondor — besonders gut von der Burchardstraße und vom Kontorhausviertel aus."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_speicherstadt",
+      "name": "Speicherstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Größter zusammenhängender historischer Hafen-Speicherkomplex der Welt: 1883–1927 auf Eilanden in der Elbe, rote Backstein-Neogotik, Kanäle und Brücken. Freihafen nach Zollvereins-Abkommen 1888; Planung u. a. Franz Andreas Meyer. UNESCO-Welterbe 2015 gemeinsam mit Kontorhausviertel und Chilehaus.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: uniforme rote Backsteinfassaden, Giebel und Türme über Wasserstraßen; enge Brücken (Brooksbrücke als Zugang), Spiegelungen in Fleeten — besonders eindrucksvoll bei Abendbeleuchtung.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Nach 1888 entstand die Freihafen-Speicherstadt auf Eichenpfahlgründungen; 15 große Blockspeicher und Fleetnetz für zollfreie Waren — Reaktion auf den Eintritt Hamburgs in den Deutschen Zollverein.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "1940er schwer beschädigt, danach weitgehend originalgetreu wiederaufgebaut (u. a. Werner Kallmorgen); heute Mischung aus Logistik, Kultur (Miniatur Wunderland, Museen) und HafenCity-Nachbarschaft.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Leben jetzt: Spaziergänge entlang der Fleete, Speicherstadtmuseum, Kaffee-Röstereien und Hafenrundfahrten; viele Speicher weiter Lager- oder Büronutzung.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Wasserschloss an der Holländischen Brook; Chilehaus und Elbphilharmonie in unmittelbarer Nähe; traditionelle Barkassen verbinden Landungsbrücken mit HafenCity.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Museumöffnungen, Führungen und Gewerbebetrieb variieren — keine festen Pack-Zeiten.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Speicherstadt?",
+          "a": "An den roten Backstein-Speicherblöcken direkt über den Fleeten und Kanälen — typisch vom Sandtorkai oder von der Brooksbrücke."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hamburger_rathaus",
+      "name": "Hamburger Rathaus",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Sitz von Bürgerschaft und Senat am Rathausmarkt: Neorenaissance-Bau nach Martin Haller, 1886–1897 (Eröffnung 26. Oktober 1897). 112 m Turm, ca. 647 Räume, kupfergrünes Dach — repräsentatives Symbol der Hansestadt und republikanischen Tradition.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: breite Sandsteinfassade mit Mittelturm (112 m), reich verzierte Fensterbögen; Innenhof mit Hygieia-Brunnen; grünes Kupferdach als Stadtsilhouette neben den Hauptkirchen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Vorgänger nach Großbrand 1842 zerstört; Neubau in wirtschaftlich starken Jahren des Kaiserreichs sollte Unabhängigkeit und Welthandel Hamburgs ausdrücken (647 Räume, u. a. Kaisersaal, Phoenixsaal).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Architektur: Neorenaissance außen, innen historisierende Säle; Wappen mit Burg und Mariensterne; Fassade mit Kaisermedaillons als bewusstes politisches Signal der Stadtrepublik.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Leben jetzt: aktiver Regierungssitz und zugleich touristisches Gebäude mit Führungen durch Repräsentationsräume; Rathausmarkt als Veranstaltungsplatz (u. a. Weihnachtsmarkt).",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Binnenalster und Jungfernstieg in Laufweite; Nachbarhaus Börse/Handelskammer; Mahnmal St. Nikolai und Speicherstadt südöstlich.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Führungszeiten, Sperrungen bei Staatsanlässen und Turmbesteigung ephemer — vor Besuch prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Hamburger Rathaus?",
+          "a": "Am hohen Mittelturm mit grünem Kupferdach am Rathausmarkt — die ornamentierte Neorenaissance-Fassade ist von der Binnenalster-Seite gut sichtbar."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hauptkirche_st_michaelis",
+      "name": "Hauptkirche St. Michaelis",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "„Michel“: bedeutendste Barockkirche Norddeutschlands, Wahrzeichen der Neustadt. Turm 132 m hoch, kupferne Haube; heutiger Bau nach Bränden (1750, 1906) 1907–1912 in Stahlbeton rekonstruiert. Erzengel Michael am Turmportal; aktive Hauptkirche mit Aussichtsplattform.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: weißer Barockbau mit massivem Turm und grünlicher Kupferkuppel — von Hafen, Elbe und Stadt weithin Orientierungspunkt; große Uhr und Glockenstube im Turm.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1647–1661 erster großer Kirchenbau in der Neustadt; 1750–1762 barocker Neubau (Prey/Sonnin); 1906 erneut zerstört, Wiederaufbau unter Julius Faulwasser mit Stahlbetonkern bei erhaltener barocker Silhouette.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Innen: dreischiffige Halle mit weitläufiger Empore, hoher Altar (ca. 20 m), C. P. E. Bach in der Gruft — Seefahrer nutzten den Turm traditionell als Landmark.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Leben jetzt: Gottesdienste, Konzerte und Turmbesuch (Lift oder 452 Stufen) mit Panorama über Hafen und Innenstadt; Turmwächter-Choräle morgens und abends (Tradition).",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: nahe Landungsbrücken und Alter Elbtunnel; eine von fünf evangelisch-lutherischen Hauptkirchen; gegenüber Hafen-Einfahrt sichtbar.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Turmöffnungszeiten und Eintritt ephemer — saisonal unterschiedlich, auf der Michel-Website prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Michel?",
+          "a": "Am 132 Meter hohen Turm mit markanter Kupferhaube über der Neustadt — oft schon von der Elbe aus als erster „Kirchturm“ sichtbar."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_mahnmal_st_nikolai",
+      "name": "Mahnmal St. Nikolai",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Ruine der neugotischen Hauptkirche St. Nikolai (1846–1874) am Hopfenmarkt: Turm 147 m, im Sommer 1943 bei „Operation Gomorrha“ weitgehend zerstört. Seit 1977 Mahnmal gegen Krieg; Museum im Kellergewölbe, Panoramaplattform per Glasaufzug (ca. 76 m Höhe).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: hoher neugotischer Turm mit offener, ausgebrannter Kirchenruine daneben — Bombensplitter noch an Mauerresten; zentral zwischen Rathaus, Speicherstadt und Alster.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Nach Großbrand 1842 Neubau als eine der größten neugotischen Kirchen Deutschlands; 1943 schwer getroffen, Wiederaufbau der Gemeinde abgelehnt — neue Hauptkirche St. Nikolai ab 1962 in Harvestehude.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "1960 Denkmalschutz; Erinnerungsarbeit seit 1980er durch Trägerverein; Ausstellung „Gomorrha 1943“ dokumentiert Luftkrieg und Zerstörung Hamburgs.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Leben jetzt: Gedenkstätte mit Museum (ca. 350 m²), Aussichtsplattform mit historischen Vergleichsfotos von 1943; Veranstaltungen zu Frieden und Erinnerungskultur.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: höchster Kirchturm Hamburgs diente alliierten Piloten als Orientierung; Willy-Brandt-Straße führt dicht vorbei; Nachbarschaft Speicherstadt und HafenCity.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Museum/Lift und Eintritt ephemer — vor Besuch auf Mahnmal-Website prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Mahnmal St. Nikolai?",
+          "a": "Am schlanken 147-Meter-Turm mit der offenen Backsteinruine des Kirchenschiffs — unübersehbar zwischen Rathausmarkt und Speicherstadt."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_planten_un_blomen",
+      "name": "Planten un Blomen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Zentraler Park hinter dem Dammtor (ca. 47 ha): entstanden aus Friedhof/Zoo-Umgestaltung für die Niederdeutsche Gartenschau 1935 (Eröffnung 6. Juni 1935). Botanischer Garten, größter japanischer Garten Europas, Parksee — berühmt für Wasserlichtkonzerte an der Wasserlichtorgel (ab 1938, heutige Anlage seit IGA 1973).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: großer Parksee mit Fontänen; Rosengarten, Tropenhaus und japanischer Tee-Garten; im Sommer abends farbige Wasser- und Lichtspiele am See.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1934–1935 Umbau unter Hans Meding/Karl Plomin; Name „Planten un Blomen“ (Plants and Flowers); Parksee diente früh als Eisbahn im Winter (Kühlrohre unter dem Becken).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "1943 schwere Kriegsschäden; Wiederaufbau und Gartenschauen 1953/1963; Wasserlichtorgel 1973 zur IGA in heutiger Form (mehrere Fontänen, Lichtsteuerung).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Erholung, Spielplätze, Musikpavillon-Konzerte, Apothekergarten; Eislauf im Winter am See — grüne Lunge zwischen CCH, Dammtor und Wallanlagen.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: direkt an den Großen Wallanlagen und nahe Museum für Hamburgische Geschichte (Holstenwall); Dammtor-Bahnhof als Nordzugang.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Wasserlichtkonzerte saisonal (typisch Mai–September, Abendzeiten variieren); Programm und Startzeiten jährlich prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Planten un Blomen?",
+          "a": "Am großen Parksee hinter dem Dammtor — abends im Sommer oft die beleuchteten Fontänen der Wasserlichtorgel."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_stadtpark_hamburg",
+      "name": "Stadtpark Hamburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Volkspark in Winterhude (ca. 148 ha): Eröffnung 1. Juli 1914 nach Plänen von Fritz Schumacher, Ferdinand Sperber und Gartenbaudirektor Otto Linne — „Freiluft-Volkshaus“ mit Festwiese, Stadtparksee und Wasserturm. Planetarium Hamburg seit 1930 im ehemaligen Wasserturm (Oskar Menzel, 1912–1916).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: weite Festwiese, Stadtparksee und monumentale Wasserturmachse; 64 m hoher Backsteinturm (Planetarium) mit nächtlicher Beleuchtung — Wahrzeichen des Parks.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1901 Flächenkauf (Sierichsches Gehölz); nach jahrelanger Planung Baubeginn 1910, Eröffnung 1914 trotz noch laufender Arbeiten — Modell eines sozialen Großstadtparks.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Wasserturm 1916 fertig, bis 1924 Versorgung, ab April 1930 öffentliches Planetarium (Zeiss-Projektor) — eines der ältesten Sternentheater weltweit.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Leben jetzt: Joggen, Picknick, Freilichtbühne, Planschbecken; Kultur im Planetarium — nach WWII Wiederaufbau und schrittweise Rückbau der einstigen Autostraßen im Park.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: nördlich der Innenstadt zwischen Winterhude und Barmbek; nahe Alster-Landschaft; U-Bahn Borgweg/Saarlandstraße/Christuskirche.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Planetarium-Shows, Freilichtkonzerte und Badeseason am See ephemer — Kalender prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Hamburger Stadtpark?",
+          "a": "An der langen Allee zum Backstein-Wasserturm mit Planetarium-Kuppel und am großen Stadtparksee mit Festwiese."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_internationales_maritimes_museum_hamburg",
+      "name": "Internationales Maritimes Museum Hamburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Schifffahrtsmuseum im Kaispeicher B (Koreastraße, Speicherstadt): Privatsammlung Peter Tamm — Schiffsmodelle, Kunst und maritime Objekte auf neun Decks (ca. 12.000 m²). Eröffnung 2008; Gebäude Kaispeicher B von 1878/79 (ältester Speicher im Hafen, Hansen & Meerwein).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: massiver Backstein-Speicher an der Fleetseite HafenCity; neun Etagen Ausstellung, sichtbare Deckstruktur; Anleger „Maritimes Museum“ für Hafenfähren.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Sammlung Tamms ab 1930er (Modellgeschenk der Mutter); öffentlich ab 2008 nach Verlegung aus Othmarschen; Stiftung Peter Tamm Sen. führt das Haus.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Kaispeicher B: einer der frühesten Kaispeicher Hamburgs, heute UNESCO-Umfeld Speicherstadt; Ausstellung spannt von prähistorischem Einbaum-Leihgaben bis Moderne und Polar-Forschung.",
+          "tags": ["geschichte", "quer"]
+        },
+        {
+          "text": "Leben jetzt: Rundgang oft 2–3 Stunden empfohlen; Bistro im Speicher, ergänzt durch Barkassen-Linie mit Halt am Museum.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Miniatur Wunderland und Elbphilharmonie in Gehdistanz; Verbindung zur Barkassen-Rundfahrt ab Landungsbrücken.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Tarife und Sonderausstellungen ephemer — vor Besuch auf imm-hamburg.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Internationale Maritime Museum?",
+          "a": "Am historischen Kaispeicher B an der Koreastraße in der Speicherstadt — großer Backsteinblock mit Hafen-Anlegestelle „Maritimes Museum“."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_museum_fur_hamburgische_geschichte",
+      "name": "Museum für Hamburgische Geschichte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Stadtgeschichtliches Museum der Stiftung Historische Museen (Holstenwall 24): gegründet 1908, Gebäude Fritz Schumacher 1914–1922 auf Bastion Henricus, eröffnet 1922. Über 500.000 Objekte; Fassade und Innenhof mit geretteten Spolien aus zerstörten Hamburger Bauten. Derzeit große Sanierung/Modernisierung (Schließung bis voraussichtlich Ende 2028).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: keilförmiger Backsteinbau, gegen Holstenwall gedreht; Portalfragmente und Skulpturen aus alten Bürgerhäusern in der Fassade; großer Innenhof mit St.-Petri-Südportal.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Wurzeln im Verein für Hamburgische Geschichte (1839); Neubau nach Schleifung der Wallanlagen auf ehemaliger Bastion Henricus — Schumacher integrierte über 300 Spolien (1842-Brand, Speicherstadt-Bau).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Dauerausstellung (vor Schließung): Stadtgeschichte von Hammaburg (~800) bis Gegenwart — Hafen, Bürgerschaft, Alltagskultur; Gebäude selbst als „Ausstellungsstück“.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Leben jetzt: während Sanierung digitale Angebote (museum4punkt0/Spolien-App); nach Wiedereröffnung erweiterte Dauerausstellung geplant.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Millerntor und Planten un Blomen unmittelbar; nahe St.-Pauli-Bezirk und Messehallen.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Baustatus, Pop-up-Ausstellungen und digitale Programme ephemer — shmh.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Museum für Hamburgische Geschichte?",
+          "a": "Am markanten Schumacher-Bau am Holstenwall mit eingebauten historischen Portalen — keilförmig zwischen Wallanlagen und Millerntor."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_cap_san_diego",
+      "name": "Cap San Diego",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Stückgutfrachter der Hamburg Süd (Deutsche Werft, Stapellauf 15. Dezember 1961): 159,4 m Länge, „Weißer Schwan des Südatlantiks“, letztes Schiff einer Sechs-Schiff-Serie. Seit 1986/88 Museumsschiff an der Überseebrücke — weltweit größtes noch seetüchtiges Museumsschiff; Denkmalschutz seit 2003.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: elegante weiße Frachter-Silhouette am Überseekai; Ladeluken, Kommandobrücke und Schornstein prägen das Hafenbild neben Rickmer Rickmers und Elbphilharmonie.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1962–1981 Liniendienst Hamburg–Südamerika (ca. 120 Reisen); Stückgut statt Container; 1986 Kauf durch Hamburg vor Verschrottung in Hongkong.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Technik (berichtet): MAN-Zweitakt-Dieselmotor, 9 Zylinder, ca. 11.600 PS; Geschwindigkeit bis ca. 20 Knoten — Typus des deutschen Hochseefrachters vor Containerära.",
+          "tags": ["geschichte", "technik"]
+        },
+        {
+          "text": "Leben jetzt: Museum von Maschinenraum bis Brücke; Gastronomie an Bord; gelegentliche Fahrten auf der Elbe und Übernachtungen in Kabinen.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Landungsbrücken fußläufig; Hafengeburtstag und Hafenfest oft mit Cap-Fahrten; Nachbarmuseum Rickmer Rickmers (festgemacht).",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Besuchszeiten, Fahrttickets und Kabinenbuchung ephemer — capsandiego.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Cap San Diego?",
+          "a": "Am langen, weiß gestrichenen Frachter an der Überseebrücke — klassische Stückgut-Silhouette mit hohem Schornstein im HafenCity-Ufer."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_st_pauli_landungsbrucken",
+      "name": "St. Pauli Landungsbrücken",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Hamburgs zentraler Hafen-Landing: repräsentativer Landungsbau aus Tuffstein (Raabe & Wöhlecke, 1907–1909), ca. 205 m lang mit Kuppeln und Türmen. Zehn schwimmende Pontons mit beweglichen Brücken wegen Elbtide; heutige Pontons überwiegend 1953–1955. HADAG-Fähren, Hafenrundfahrten, Zugang Alter Elbtunnel.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: langer Tuffstein-Bau mit grünen Kupferdächern, Torbögen zu den Brücken; Pontons schwimmen tideabhängig höher oder tiefer — Blick auf Michel und Hafeneinfahrt.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Erste Landungsbrücke 1839 für Kohle-Dampfer; Neubau 1907–1909 als Passagierterminal für Überseedampfer (HAPAG); Skulpturen u. a. Arthur Bock.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "1943 zerstört; Wiederaufbau der Pontons 1953–1955, Verbindung Brücke 2–3 1976; heute Knoten für Hafengeburtstag, Cruise Days und Fährennetz.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Leben jetzt: Hafenrundfahrten, Barkassen, Elbe-Fähren; Einstieg Alter Elbtunnel; Treffpunkt zwischen Reeperbahn, Fischmarkt und HafenCity.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Alter Elbtunnel an Brücke 1/2; U/S-Bahn Knoten Landungsbrücken; gegenüber St. Pauli Fischmarkt (Sonntag).",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Fähr-Takte, Rundfahrt-Anbieter und Events ephemer — HADAG und Hafenkalender prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Landungsbrücken?",
+          "a": "Am langen Tuffstein-Terminal mit Kuppeln an der Elbe in St. Pauli — von hier führen die beweglichen Stege zu den schwimmenden Pontons."
+        }
+      ]
+    }
+  ]
+}

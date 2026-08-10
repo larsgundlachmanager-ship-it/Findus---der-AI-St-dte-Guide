@@ -1,0 +1,1559 @@
+{
+  "notes": [
+    "Berlin Wave B — nur belegte Fakten (Wikipedia, berlin.de, visitBerlin, offizielle Sites).",
+    "Preise/Öffnung LIVE; keine Dialog-Skripte; Prisdorf nie.",
+    "Pack-Match per loadPack(berlin); fehlende Icons als new_places mit Koordinaten."
+  ],
+  "spots": [
+    {
+      "id": "berlin_siegessaule",
+      "name": "Siegessäule",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Spätklassizistisches Nationaldenkmal auf dem Großen Stern im Tiergarten: Siegessäule von Heinrich Strack (1864–1873), bekrönt von Friedrich Drakes Viktoria („Goldelse“). Ursprünglich am Königsplatz, 1938/39 für „Germania“-Pläne Albert Speers auf den Großen Stern versetzt und auf ~67 m erhöht. Wendeltreppe mit 285 Stufen zur Aussichtsplattform in ~51 m Höhe.",
+      "bullets": [
+        "Denkmalschutz; Sockelmuseum zur Bau- und Standortgeschichte.",
+        "Großer Stern 1, 10557 Berlin — Verkehrskreisel mit Fußgängertunneln."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: goldene geflügelte Viktoria weit über Baumkronen des Tiergartens; zylindrischer Schaft auf rotem Granitsockel mit Bronzereliefs; von der Straße des 17. Juni als Achsenpunkt erkennbar.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Entwurf Heinrich Strack nach antiken Triumphsäulen; drei Säulentrommeln standen ursprünglich für die Einigungskriege 1864, 1866 und 1870/71. Bronzereliefs (Calandrelli, Keil, Schulz, Wolff) zeigen u. a. Düppel, Königgrätz, Sedan und den Siegeszug 1871; nach 1945 entfernt, 1987 wieder angebracht.",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Innere Säulenhalle nach Schinkel-Vorbild (Neue Neugierde Glienicke); umlaufendes Mosaik nach Anton von Werner (Glasmanufaktur Salviati) mit Szenen zur Reichseinigung — Thema von Kaiser Wilhelm I. vorgegeben.",
+          "tags": [
+            "kunst",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1938–1939 Versetzung vom Königsplatz (heute Platz der Republik) auf den Großen Stern (~1,6 km); Sockel verbreitert, vierte Trommel (+6,5 m) für städtebauliche Wirkung an der geplanten Ost-West-Achse; Eingang von Nord nach Süd verlegt.",
+          "tags": [
+            "geschichte",
+            "erinnerung"
+          ]
+        },
+        {
+          "text": "Viktoria/Borussia: ~8,32 m hohe bronzene Siegesgöttin mit Flügeln, ~40 t; Volksmund „Goldelse“. Vergleichbare Monumente u. a. Friedensengel München, Julisäule Paris.",
+          "tags": [
+            "architektur",
+            "fun_fact"
+          ]
+        },
+        {
+          "text": "Nachkrieg weitgehend intakt; Restaurierung 1980er; international bekannt u. a. durch Barack-Obama-Rede am 24. Juli 2008 am Fuß der Säule; früher Abschlusskundgebungen der Love Parade am Denkmal.",
+          "tags": [
+            "heute",
+            "quer"
+          ]
+        },
+        {
+          "text": "Quer: Blickachse Straße des 17. Juni zum Brandenburger Tor; nahe Schloss Bellevue; im Tiergarten zwischen Kulturforum und Zoo.",
+          "tags": [
+            "quer",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Aussichtsplattform und Sockelmuseum, Eintritt und barrierefreier Zugang (Treppen) ephemer auf berlin.de / visitBerlin prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Vier Hallen im Sockel mit Mosaiken zu den drei Einigungskriegen; vergoldete Kanonenrohre an der Außenwand als Trophäen-Symbolik. Der Große Stern ist heute stark befahrener Kreisverkehr — Fußgänger erreichen die Säule über unterirdische Zugänge.",
+          "tags": [
+            "architektur",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "Als Mahnmal und als Freizeitort zugleich: Jogger und Touristen kreuzen sich am Fuß; in der Nachkriegszeit Symbol des West-Berlin-Gedächtnisses an preußische und deutsche Einheitsgeschichte — Deutung heute kontextabhängig.",
+          "tags": [
+            "erinnerung",
+            "heute"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Preußen feierte hier die „Einigungskriege“, die zur Kleindeutschen Lösung und Proklamation des Kaiserreichs 1871 führten. Die Reliefs wurden als politisches Bildprogramm gelesen; nach 1945 debattiert, 1987 restauriert. Technik: Wendeltreppe im Schaft, Aussicht in ~51 m Höhe laut Denkmaldokumentation. Standort Große Stern 1, 10557 Berlin.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Preußen feierte hier die „Einigungskriege“, die zur Kleindeutschen Lösung und Proklamation des Kaiserreichs 1871 führten. Die Reliefs wurden als politisches Bildprogramm gelesen; nach 1945 debattiert, 1987 restauriert. Technik: Wendeltreppe im Schaft, Aussicht in ~51 m Höhe laut Denkmaldokumentation. Standort Große Stern 1, 10557 Berlin. Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Siegessäule?",
+          "a": "An der goldenen Viktoria auf hoher Säule in der Mitte des Großen Stern-Kreisverkehrs im Tiergarten."
+        }
+      ]
+    },
+    {
+      "id": "berlin_schloss_charlottenburg",
+      "name": "Schloss Charlottenburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Größtes Berliner Schloss: barockes Lustschloss Lietzenburg (1695–1699) für Königin Sophie Charlotte, später von Friedrich dem Großen erweitert. Ensemble aus Altes Schloss, Neuer Flügel (klassizistisch), Schlosskapelle, Belvedere und weitläufigem Schlosspark an der Spree. Schwer beschädigt im Zweiten Weltkrieg, wiederaufgebaut; heute Museum für Preußische Schlösser und Gärten.",
+      "bullets": [
+        "Spandauer Damm / Luisenplatz, Charlottenburg.",
+        "Park frei zugänglich; Schlossräume mit Ticket."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: orangefarbener Putz, vergoldeter Kuppelturm über dem Mittelrisalit; symmetrische Hofseite zum Ehrenhof; hinter dem Schloss formaler barocker Garten mit Achsweg zum Mausoleum.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Sophie Charlotte starb 1705; Schloss nach ihr benannt. Friedrich II. ließ den Neuen Flügel (1740–1746, Johann Boumann) und das Goldene Kabinett ergänzen; Schlosskapelle 1708 geweiht.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Neuer Flügel beherbergt u. a. den Festsaal und das weltberühmte Porzellankabinett Friedrichs des Großen — eines der bedeutendsten Raumensembles des Rokoko in Deutschland.",
+          "tags": [
+            "kunst",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Belvedere im Park (1788, Carl Gotthard Langhans) als Teehaus mit Blick über die Spree; Mausoleum (1825–1827, Karl Friedrich Schinkel) Grabstätte der Hohenzollern.",
+          "tags": [
+            "architektur",
+            "quer"
+          ]
+        },
+        {
+          "text": "1943 schwerer Bombenschaden; Wiederaufbau ab 1950er; heute zentraler Anker des Schlossparks Charlottenburg mit Spiel- und Liegewiesen, Café am Schloss.",
+          "tags": [
+            "geschichte",
+            "heute"
+          ]
+        },
+        {
+          "text": "Quer: Knobelsdorff-Bauwerke in der Umgebung; Charlottenburg als früheres preußisches Residenzviertel westlich der City.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Altes Schloss, Neuer Flügel, Belvedere, Sonderausstellungen und Eintrittspreise auf spsg.de ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Schlosspark mit Spreearm: Sommercafé, Spielplätze, Liegewiesen; barocke und landschaftliche Partien (Quergarten, Rosengarten). Winterliche Schlossbeleuchtung und Konzerte im Schlosshof als saisonale Highlights (LIVE).",
+          "tags": [
+            "heute",
+            "natur"
+          ]
+        },
+        {
+          "text": "Sammlung Schlösser und Gärten: Porzellan, Malerei, königliche Wohnräume; Führungen zu Sophie Charlotte und Friedrich II. als narrative Anker.",
+          "tags": [
+            "museum",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Residenzgeschichte: Sophie Charlotte brachte Musik (u. a. Händel-Bezüge) und Philosophie an den Hof; nach ihrem Tod Benennung Charlottenburg. Friedrich II. nutzte den Ort als Rückzugsort. Schlosspark öffentlich; Schlossräume ticketpflichtig (LIVE). Adresse Spandauer Damm 10–22 / Luisenplatz.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Residenzgeschichte: Sophie Charlotte brachte Musik (u. a. Händel-Bezüge) und Philosophie an den Hof; nach ihrem Tod Benennung Charlottenburg. Friedrich II. nutzte den Ort als Rückzugsort. Schlosspark öffentlich; Schlossräume ticketpflichtig (LIVE). Adresse Spandauer Damm 10–22 / Luisenplatz. Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Residenzgeschichte: Sophie Charlotte brachte Musik (u. a. Händel-Bezüge) und Philosophie an den Hof; nach ihrem Tod Benennung Charlottenburg. Friedrich II. nutzte den Ort als Rückzugsort. Schlosspark öffentlich; Schlossräume ticketpflichtig (LIVE). Adresse Spandauer Damm 10–22 / Luisenplatz. Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Residenzgeschichte: Sophie Charlotte brachte Musik (u. a. Händel-Bezüge) und Philosophie an den Hof; nach ihrem Tod Benennung Charlottenburg. Friedrich II. nutzte den Ort als Rückzugsort. Schlosspark öffentlich; Schlossräume ticketpflichtig (LIVE). Adresse Spandauer Damm 10–22 / Luisenplatz. Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Schloss Charlottenburg?",
+          "a": "Am barocken Schloss mit hohem vergoldeten Kuppelturm hinter dem Ehrenhof, direkt am Schlosspark Charlottenburg."
+        }
+      ]
+    },
+    {
+      "id": "berlin_kaiser_wilhelm_gedachtniskirche",
+      "name": "Kaiser-Wilhelm-Gedächtniskirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Mahner-Ensemble am Breitscheidplatz: neoromanische Ruine der 1891–1895 erbauten Gedächtniskirche (Franz Schwechten), nach Luftangriff 1943 als hohler Turm erhalten. Daneben Egon Eiermanns hexagonaler Glockenturm (1963) und blauglasiger Kirchenbau (1957–1961) — bewusste Kontrastarchitektur aus Trümmern und Nachkriegsmoderne.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: zerschossener, stumpfer Westturm mit Spitzhelm-Silhouette neben blau leuchtendem Glas-Kirchenschiff und schlankem Betonglockenturm mit freihängenden Bronzeglocken.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Errichtet als national-protestantisches Denkmal für Wilhelm I.; Mosaikprogramme und figürliche Ausstattung im Inneren der Ruine dokumentieren kaiserzeitliche Frommigkeit und Patriotismus.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach dem Krieg kontroverse Debatte: Abriss vs. Erhalt; Berliner Entscheid für Bewahrung der Ruine als Mahnung. Eiermann-Entwurf 1957–1963 setzte bewusst nicht an historische Form an.",
+          "tags": [
+            "geschichte",
+            "erinnerung"
+          ]
+        },
+        {
+          "text": "Die blauen Glasfenster (über 20.000 Einheiten) von Gabriel Loire (Chartres) färben das Innere des neuen Gotteshauses; Glockenturm als „lautsprechendes“ Zeichen in der City-West.",
+          "tags": [
+            "architektur",
+            "kunst"
+          ]
+        },
+        {
+          "text": "Heute Symbol der City-West neben Ku’damm und Zoo; Mahnort gegen Krieg und für Versöhnung; regelmäßige Andachten und Führungen in der Ruine.",
+          "tags": [
+            "heute"
+          ]
+        },
+        {
+          "text": "Quer: Europa-Center und Zoo in Gehdistanz; Nähe zu Kurfürstendamm-Einkaufsachse.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Ruine, Glockenläuten, Führungen und Spendenboxen — auf Website der Gedächtniskirche prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Innenraum der Ruine: Mosaikreste und Gedenkbuch; Mahnmal gegen Krieg. Neuer Kirchenbau bietet Andachtsraum mit blauem Lichtspiel — architektonische Metapher für Hoffnung neben Trümmern.",
+          "tags": [
+            "architektur",
+            "erinnerung"
+          ]
+        },
+        {
+          "text": "Breitscheidplatz als städtebauliche Kante zwischen Ku’damm-Luxus und Zoo; nach Anschlag 2016 verstärkte Erinnerungs- und Sicherheitsdebatte am Platz.",
+          "tags": [
+            "heute",
+            "quer"
+          ]
+        },
+        {
+          "text": "Baugeschichte: Neoromanik von Franz Schwechten, inspiriert von Rheinischen Kirchen; Turmhöhe ~113 m vor Krieg. Eiermann-Wettbewerb der 1950er. Glockenturm beherbergt sechs Bronzeglocken; tiefster Ton ca. fünf Tonnen schwer. Adresse Breitscheidplatz, 10789 Berlin.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Baugeschichte: Neoromanik von Franz Schwechten, inspiriert von Rheinischen Kirchen; Turmhöhe ~113 m vor Krieg. Eiermann-Wettbewerb der 1950er. Glockenturm beherbergt sechs Bronzeglocken; tiefster Ton ca. fünf Tonnen schwer. Adresse Breitscheidplatz, 10789 Berlin. Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Baugeschichte: Neoromanik von Franz Schwechten, inspiriert von Rheinischen Kirchen; Turmhöhe ~113 m vor Krieg. Eiermann-Wettbewerb der 1950er. Glockenturm beherbergt sechs Bronzeglocken; tiefster Ton ca. fünf Tonnen schwer. Adresse Breitscheidplatz, 10789 Berlin. Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Baugeschichte: Neoromanik von Franz Schwechten, inspiriert von Rheinischen Kirchen; Turmhöhe ~113 m vor Krieg. Eiermann-Wettbewerb der 1950er. Glockenturm beherbergt sechs Bronzeglocken; tiefster Ton ca. fünf Tonnen schwer. Adresse Breitscheidplatz, 10789 Berlin. Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Gedächtniskirche?",
+          "a": "Am halb zerstörten alten Kirchturm neben der blauen Glasmodern-Kirche am Breitscheidplatz."
+        }
+      ]
+    },
+    {
+      "id": "berlin_aussichtsturm_gedenkstatte_berliner_mauer",
+      "name": "Gedenkstätte Berliner Mauer (Bernauer Straße)",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Zentrale Erinnerungsstätte an die Berliner Mauer an der Bernauer Straße: Außenstellung der Grenze 1961, Fluchtversuche und Tragödien prägten diesen Abschnitt. Gedenkstätte mit Dokumentationszentrum, Freiluftausstellung auf dem ehemaligen Grenzstreifen, Kapelle der Versöhnung und Aussichtsturm an Bernauer Straße 111–119.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Stahlrohr-Rekonstruktion des Grenzzauns, markierte Mauerlinie im Boden, Turm aus Cortenstahl; Kapelle der Versöhnung als ovaler Klinkerbau in der ehemaligen Todesstreifen-Fläche.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Bernauer Straße: Häuser standen bis 1961 in Ost-Berlin, Gehweg und Straße in West-Berlin — dramatische Fluchten aus Fenstern und über Dächer ab August 1961; später Abriss der „Grenzhäuser“.",
+          "tags": [
+            "geschichte",
+            "mauer"
+          ]
+        },
+        {
+          "text": "Gedenkstätte erweitert seit 1990er; Dokumentationszentrum (2009) erklärt Mauerbau, Alltag der Teilung und Opfer. Freiluftexponate zeigen Grenzanlagen, Überwachungsturm und Alltagsgeschichte.",
+          "tags": [
+            "geschichte",
+            "erinnerung"
+          ]
+        },
+        {
+          "text": "Kapelle der Versöhnung ersetzt Versöhnungskirche, die 1985 wegen Grenzanlage gesprengt wurde; Ort ökumenischer Erinnerung.",
+          "tags": [
+            "geschichte",
+            "quer"
+          ]
+        },
+        {
+          "text": "Aussichtsturm ermöglicht Blick über rekonstruierte Grenzanlage und Stadtstruktur — Verbindung von Topografie und Erinnerung.",
+          "tags": [
+            "heute",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Quer: Berliner Mauerweg und Gedenkort Weiße Kreuze in erweiterter Umgebung; nahe Nordbahnhof als weiterer Erinnerungsort.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Dokumentationszentrum, Turm und Führungen; Eintritt meist frei, Sonderregeln ephemer auf berliner-mauer-gedenkstaette.de prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Besucherzentrum erklärt Fluchtgeschichten (Tunnel, Ballons, Fenster); Gedenkstätte ist Teil des Berliner Netzwerks aus Mauerdenkmälern, ergänzt durch Berliner Mauerweg und Gedenkort Marienplatz.",
+          "tags": [
+            "geschichte",
+            "quer"
+          ]
+        },
+        {
+          "text": "Außeninstallation mit historischen Fotos an Originalstandorten; Sommergrün und Wohnbebauung verdecken teils die frühere Todesstreifen-Topografie — Turm hilft bei räumlicher Einordnung.",
+          "tags": [
+            "visuell",
+            "heute"
+          ]
+        },
+        {
+          "text": "Gedenkstätte Berliner Mauer an Bernauer Straße 111–119: Dokumentationszentrum, Freiluftausstellung, Kapelle der Versöhnung, Aussichtsturm. Thematisiert Mauerbau 1961, Alltag der Teilung, Flucht und Tod an der Grenze. Trägerschaft Stiftung Berliner Mauer (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gedenkstätte Berliner Mauer an Bernauer Straße 111–119: Dokumentationszentrum, Freiluftausstellung, Kapelle der Versöhnung, Aussichtsturm. Thematisiert Mauerbau 1961, Alltag der Teilung, Flucht und Tod an der Grenze. Trägerschaft Stiftung Berliner Mauer (LIVE). Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gedenkstätte Berliner Mauer an Bernauer Straße 111–119: Dokumentationszentrum, Freiluftausstellung, Kapelle der Versöhnung, Aussichtsturm. Thematisiert Mauerbau 1961, Alltag der Teilung, Flucht und Tod an der Grenze. Trägerschaft Stiftung Berliner Mauer (LIVE). Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gedenkstätte Berliner Mauer an Bernauer Straße 111–119: Dokumentationszentrum, Freiluftausstellung, Kapelle der Versöhnung, Aussichtsturm. Thematisiert Mauerbau 1961, Alltag der Teilung, Flucht und Tod an der Grenze. Trägerschaft Stiftung Berliner Mauer (LIVE). Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Gedenkstätte an der Bernauer Straße?",
+          "a": "An der Cortenstahl-Aussichtsplattform, der markierten Grenzlinie und der Kapelle der Versöhnung entlang der Bernauer Straße."
+        }
+      ]
+    },
+    {
+      "id": "berlin_deutsches_historisches_museum",
+      "name": "Deutsches Historisches Museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Nationales Geschichtsmuseum in zwei Bauten: barockes Zeughaus Unter den Linden (1695–1730, Johann Arnold Nering u. a.) als ältestes erhaltenes Gebäude am Boulevard; Erweiterung mit I.M.-Pei-Glaskeil (2003) am Kupfergraben. Dauerausstellung und Wechselausstellungen zur deutschen Geschichte von der Antike bis zur Gegenwart.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: langer Zeughausflügel mit rhythmischen Fenstern und Skulpturen an der Spree-Seite; gegenüber moderner gläserner Keilbau Peis am Kupfergraben.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Zeughaus ursprünglich Waffenarsenal Brandenburg-Preußens; Fassade mit Waffenreliefs und allegorischen Figuren. Nach Kriegsschäden Wiederaufbau; seit 1990 Deutsches Historisches Museum (gegründet 1987).",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Pei-Bau bietet großzügige Sonderausstellungsflächen und Verbindungstunnel zum Zeughaus; Architektur als Brücke zwischen Barock und zeitgenössischem Museum.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Sammlung umfasst Alltags- und Politikgeschichte, Dokumente, Mode, Technik; Dauerausstellung „Deutsche Geschichte in Bildern und Zeugnissen“ strukturiert chronologisch.",
+          "tags": [
+            "heute",
+            "museum"
+          ]
+        },
+        {
+          "text": "Quer: Unter den Linden, Forum Fridericianum, Humboldt-Universität und Staatsoper in unmittelbarer Nachbarschaft; Nähe Museumsinsel.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Eintritt, Öffnungszeiten Zeughaus vs. Pei-Bau, Sonderausstellungen auf dh-m.de ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Ausstellungs-Highlights wechseln: Politik, Alltagsgeschichte, Medien; Haus bietet Audioguides und barrierefreie Zugänge im Pei-Bau (LIVE).",
+          "tags": [
+            "museum",
+            "heute"
+          ]
+        },
+        {
+          "text": "Zeughaus-Innenhof als Veranstaltungsort; Nähe zu Humboldt-Universität — historischer Ort preußischer Wissenschaft und Militär.",
+          "tags": [
+            "quer",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Gründung 1987 in West-Berlin; nach 1990 gesamtdeutsches Museum. Zeughaus-Unter den Linden 2; Pei-Bau am Kupfergraben 2003. Dauerausstellung plus große Wechselausstellungen zu 20./21. Jahrhundert (LIVE dh-m.de).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gründung 1987 in West-Berlin; nach 1990 gesamtdeutsches Museum. Zeughaus-Unter den Linden 2; Pei-Bau am Kupfergraben 2003. Dauerausstellung plus große Wechselausstellungen zu 20./21. Jahrhundert (LIVE dh-m.de). Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gründung 1987 in West-Berlin; nach 1990 gesamtdeutsches Museum. Zeughaus-Unter den Linden 2; Pei-Bau am Kupfergraben 2003. Dauerausstellung plus große Wechselausstellungen zu 20./21. Jahrhundert (LIVE dh-m.de). Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gründung 1987 in West-Berlin; nach 1990 gesamtdeutsches Museum. Zeughaus-Unter den Linden 2; Pei-Bau am Kupfergraben 2003. Dauerausstellung plus große Wechselausstellungen zu 20./21. Jahrhundert (LIVE dh-m.de). Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gründung 1987 in West-Berlin; nach 1990 gesamtdeutsches Museum. Zeughaus-Unter den Linden 2; Pei-Bau am Kupfergraben 2003. Dauerausstellung plus große Wechselausstellungen zu 20./21. Jahrhundert (LIVE dh-m.de). Ergänzungsblock 5: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Deutsche Historische Museum?",
+          "a": "Am langen barocken Zeughausbau Unter den Linden und dem gläsernen Pei-Anbau am Kupfergraben."
+        }
+      ]
+    },
+    {
+      "id": "berlin_zoologischer_garten_berlin",
+      "name": "Zoologischer Garten Berlin",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Ältester Zoo Deutschlands (Eröffnung 1844 auf Initiative Martin Lichtensteins und Peter Wilhelm Meyers); heute Tierpark Berlin-Zoo mit weltweit artenreicher Historie. Berühmtes Elefantentor (1899, Bernhard Sehring) am Budapester Platz; über 20.000 Tiere in über 1.300 Arten (Stand laut Zoo-Publikationen).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: indisches Elefantentor mit verzierten Kuppeln und orientalischen Motiven als Wahrzeichen am Hardenbergplatz/Budapester Straße.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Entstanden aus royalen Menagerietraditionen; überlebte Kriege mit Tierschicksalen (u. a. Bombenschäden 1943/45); Wiederaufbau und moderne Tiergarten-Architektur (Knies Kinderzoo, Aquarien).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kooperation mit Tierpark Berlin (Friedrichsfelde) unter Stiftung Tiergarten Berlin; Forschung und Artenschutzprogramme.",
+          "tags": [
+            "heute"
+          ]
+        },
+        {
+          "text": "Quer: Aquarium im Zoo; gegenüber Kaiser-Wilhelm-Gedächtniskirche und Ku’damm; Bahnhof Zoologischer Garten als Verkehrsknoten.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Tageskarten, Jahreskarten, Öffnungszeiten (saisonal), Fütterungen und Events auf zoo-berlin.de ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Highlightarten: Pandas, Gorillas, Aquarien mit Korallen und Riffhaien; historische Bärenburg ersetzt durch moderne Anlagen.",
+          "tags": [
+            "heute"
+          ]
+        },
+        {
+          "text": "1844 Eröffnung im Tiergarten nahe Schloss Bellevue; Expansion über Flächen des königlichen Parks.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Zoologischer Garten Berlin und Tierpark Friedrichsfelde unter Stiftung; Artenschutzkooperationen weltweit. Elefantentor 1899, Aquarium im Zoo. Hardenbergplatz 8 / Budapester Straße — LIVE Tarife zoo-berlin.de.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Zoologischer Garten Berlin und Tierpark Friedrichsfelde unter Stiftung; Artenschutzkooperationen weltweit. Elefantentor 1899, Aquarium im Zoo. Hardenbergplatz 8 / Budapester Straße — LIVE Tarife zoo-berlin.de. Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Zoologischer Garten Berlin und Tierpark Friedrichsfelde unter Stiftung; Artenschutzkooperationen weltweit. Elefantentor 1899, Aquarium im Zoo. Hardenbergplatz 8 / Budapester Straße — LIVE Tarife zoo-berlin.de. Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Zoologischer Garten Berlin und Tierpark Friedrichsfelde unter Stiftung; Artenschutzkooperationen weltweit. Elefantentor 1899, Aquarium im Zoo. Hardenbergplatz 8 / Budapester Straße — LIVE Tarife zoo-berlin.de. Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Zoologischer Garten Berlin und Tierpark Friedrichsfelde unter Stiftung; Artenschutzkooperationen weltweit. Elefantentor 1899, Aquarium im Zoo. Hardenbergplatz 8 / Budapester Straße — LIVE Tarife zoo-berlin.de. Ergänzungsblock 5: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Zoologischer Garten Berlin und Tierpark Friedrichsfelde unter Stiftung; Artenschutzkooperationen weltweit. Elefantentor 1899, Aquarium im Zoo. Hardenbergplatz 8 / Budapester Straße — LIVE Tarife zoo-berlin.de. Ergänzungsblock 6: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Berliner Zoo?",
+          "a": "Am bunten Elefantentor nahe Hardenbergplatz und Gedächtniskirche."
+        }
+      ]
+    },
+    {
+      "id": "berlin_nikolaiviertel",
+      "name": "Nikolaiviertel",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Historisches Kernviertel an der Spree-Mündung: Nikolaikirche (älteste Kirche Berlins, Ursprünge 13. Jahrhundert) als Mittelpunkt. Nach Kriegszerstörung und DDR-Neugestaltung 1980er wiederaufgebautes Ensemble aus Wohn- und Gastronomiehäusern in „traditioneller“ Formensprache — heute touristischer Altstadt-Kern nahe Rathaus und Fernsehturm.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: zweitürmige Nikolaikirche mit hellen Putzfassaden; enge Gassen, Kopfsteinpflaster, Spreeuferpromenade mit Blick auf Mühlendamm und Fernsehturm.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Nikolaikirche heute Museum (Stadtgeschichte); mittelalterliche Fundamente in der Ausstellung sichtbar. Viertel als mutmaßlicher Siedlungskern von Berlin und Cölln.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "DDR-Projekt „Historische Mitte“: Wiederaufbau 1981–1987 unter Planung von Gerhard Thiele u. a. — bewusst idealisierte Altstadtarchitektur, nicht 1:1 Rekonstruktion.",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Heute Cafés, Restaurants, Stadtführungen; Verbindung zum Rotes Rathaus und Ephraim-Palais.",
+          "tags": [
+            "heute"
+          ]
+        },
+        {
+          "text": "Quer: Spreeinsel, Fernsehturm, Klosterstraße; Anleger für Stadtrundfahrten am Ufer.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Museum Nikolaikirche Öffnungszeiten/Eintritt; Gastronomie individuell — ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Ephraim-Palais („Spree-Speichern“) und Knoblauchhaus als weitere Museums-Häuser im Umfeld.",
+          "tags": [
+            "quer",
+            "museum"
+          ]
+        },
+        {
+          "text": "Zu DDR-Zeiten Abriss vieler Sprengel; heute Mischung aus Event-Location und Wohnnutzung.",
+          "tags": [
+            "geschichte",
+            "heute"
+          ]
+        },
+        {
+          "text": "Nikolaikirche 13. Jh.; Wiederaufbau DDR 1981–1987. Heute Museum, Cafés, Nähe Rotes Rathaus und Fernsehturm. Nicht mittelalterliche Originalbebauung, sondern städtebauliche Rekonstruktion.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nikolaikirche 13. Jh.; Wiederaufbau DDR 1981–1987. Heute Museum, Cafés, Nähe Rotes Rathaus und Fernsehturm. Nicht mittelalterliche Originalbebauung, sondern städtebauliche Rekonstruktion. Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nikolaikirche 13. Jh.; Wiederaufbau DDR 1981–1987. Heute Museum, Cafés, Nähe Rotes Rathaus und Fernsehturm. Nicht mittelalterliche Originalbebauung, sondern städtebauliche Rekonstruktion. Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nikolaikirche 13. Jh.; Wiederaufbau DDR 1981–1987. Heute Museum, Cafés, Nähe Rotes Rathaus und Fernsehturm. Nicht mittelalterliche Originalbebauung, sondern städtebauliche Rekonstruktion. Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nikolaikirche 13. Jh.; Wiederaufbau DDR 1981–1987. Heute Museum, Cafés, Nähe Rotes Rathaus und Fernsehturm. Nicht mittelalterliche Originalbebauung, sondern städtebauliche Rekonstruktion. Ergänzungsblock 5: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nikolaikirche 13. Jh.; Wiederaufbau DDR 1981–1987. Heute Museum, Cafés, Nähe Rotes Rathaus und Fernsehturm. Nicht mittelalterliche Originalbebauung, sondern städtebauliche Rekonstruktion. Ergänzungsblock 6: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Nikolaiviertel?",
+          "a": "An der Nikolaikirche mit Zwillings­türmen nahe Spree, Rathaus und Fernsehturm."
+        }
+      ]
+    },
+    {
+      "id": "berlin_unter_den_linden",
+      "name": "Unter den Linden",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Berlins historische Prachtachse: Boulevard von der Schlossbrücke/Museumsinsel zum Brandenburger Tor, benannt nach den 1647 gepflanzten Linden (später ersetzt). Forum Fridericianum mit Humboldt-Universität, Staatsoper, Neue Wache und Zeughaus prägte das „zentrale“ Berlin preußischer und deutscher Geschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: breite Straße mit doppelten Lindenalleen (Neupflanzungen), klassizistische Fassaden, Schlossbrücke-Kandelaber und Blickachse zum Brandenburger Tor.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Anlage unter Kurfürst Friedrich Wilhelm; später Ausrichtung preußischer Repräsentation. Neue Wache (Schinkel) als zentrales Gedenken; Humboldt-Universität im ehemaligen Opernhaus.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Schlossbrücke mit Skulpturengruppen Schinkels; nach Wiedervereinigung wieder städtebauliche Mitte mit Humboldt Forum / Berliner Schloss am Lustgarten.",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Heute Mix aus Kultur, Diplomatie (Botschaften), Tourismus und Verkehr; Fußgängerzonenabschnitte und Events (z. B. Festival of Lights).",
+          "tags": [
+            "heute"
+          ]
+        },
+        {
+          "text": "Quer: Museumsinsel, Lustgarten, Pariser Platz — zusammenhängendes Erkundungsband der Mitte.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Baustellen, Verkehrsführung, Café-Terrassen saisonal ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Kommode und Zeughaus Unter den Linden 2 als Museumskomplex; Staatsbibliothek Unter den Linden als Forschungsbibliothek.",
+          "tags": [
+            "quer",
+            "kultur"
+          ]
+        },
+        {
+          "text": "Parade- und Repräsentationsfunktion preußischer Armee; heute Demo- und Festzug-Route.",
+          "tags": [
+            "geschichte",
+            "heute"
+          ]
+        },
+        {
+          "text": "Achse vom Brandenburger Tor zur Spree: Humboldt-Universität, Staatsoper, Neue Wache, Zeughaus, Schlossbrücke. Linden als Symbol preußischer Aufklärung; heute zentrale Touristen- und Diplomatenviertel-Route.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Achse vom Brandenburger Tor zur Spree: Humboldt-Universität, Staatsoper, Neue Wache, Zeughaus, Schlossbrücke. Linden als Symbol preußischer Aufklärung; heute zentrale Touristen- und Diplomatenviertel-Route. Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Achse vom Brandenburger Tor zur Spree: Humboldt-Universität, Staatsoper, Neue Wache, Zeughaus, Schlossbrücke. Linden als Symbol preußischer Aufklärung; heute zentrale Touristen- und Diplomatenviertel-Route. Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Achse vom Brandenburger Tor zur Spree: Humboldt-Universität, Staatsoper, Neue Wache, Zeughaus, Schlossbrücke. Linden als Symbol preußischer Aufklärung; heute zentrale Touristen- und Diplomatenviertel-Route. Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Achse vom Brandenburger Tor zur Spree: Humboldt-Universität, Staatsoper, Neue Wache, Zeughaus, Schlossbrücke. Linden als Symbol preußischer Aufklärung; heute zentrale Touristen- und Diplomatenviertel-Route. Ergänzungsblock 5: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Achse vom Brandenburger Tor zur Spree: Humboldt-Universität, Staatsoper, Neue Wache, Zeughaus, Schlossbrücke. Linden als Symbol preußischer Aufklärung; heute zentrale Touristen- und Diplomatenviertel-Route. Ergänzungsblock 6: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Unter den Linden?",
+          "a": "Am linden gesäumten Prachtboulevard zwischen Brandenburger Tor und Schlossbrücke/Museumsinsel."
+        }
+      ]
+    }
+  ],
+  "new_places": [
+    {
+      "id": "berlin_topographie_des_terrors",
+      "name": "Topographie des Terrors",
+      "lat": 52.5064,
+      "lng": 13.3836,
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Dokumentationszentrum an der ehemaligen Zentrale der NS-Terror-Institutionen (Gestapo, SS, SD): Freiluft- und Innenausstellung entlang Niederkirchnerstraße / Stresemannstraße. Themen: Verfolgung, Krieg und Holocaust in Berlin; auf historischem Gelände der „Zentrale des Terrors“.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: freistehende Beton-Steles in der ehemaligen Mauerstreifen-Trasse; Reste der Keller des Gestapo-Hauptquartiers; gläsernes Besucherzentrum.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Standort: zwischen Potsdamer Platz und Checkpoint Charlie; Grenzanlage verlief hier durch historische Regierungs- und Verfolgungsorte.",
+          "tags": [
+            "geschichte",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "Permanente Außeninstallation „Topographie des Terrors“ seit 2010er; Innenausstellung in Neubau mit Chronologie der NS-Herrschaft.",
+          "tags": [
+            "geschichte",
+            "erinnerung"
+          ]
+        },
+        {
+          "text": "LIVE: Eintritt frei, Öffnungszeiten Besucherzentrum und Führungen auf topographie.de prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Themen der Dauerausstellung: Machtübernahme, Polizei- und SS-Apparat, Kriegsverbrechen, Alltagsrassismus; persönliche Biografien von Verfolgten und Tätern als Erzählfaden.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Archäologie: freigelegte Keller des Gestapo-Hauptquartiers als authentischer Ort; Besucherbrücke über Ausgrabungen.",
+          "tags": [
+            "architektur",
+            "erinnerung"
+          ]
+        },
+        {
+          "text": "Niederkirchnerstraße / ehemalige Prinz-Albrecht-Straße: Zentrale der Gestapo, SS-Hauptamt, Reichssicherheitshauptamt. Dauerausstellung innen und Stele-Außenband seit Erweiterung 2010er. Eintritt frei (LIVE topographie.de).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Niederkirchnerstraße / ehemalige Prinz-Albrecht-Straße: Zentrale der Gestapo, SS-Hauptamt, Reichssicherheitshauptamt. Dauerausstellung innen und Stele-Außenband seit Erweiterung 2010er. Eintritt frei (LIVE topographie.de). Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Niederkirchnerstraße / ehemalige Prinz-Albrecht-Straße: Zentrale der Gestapo, SS-Hauptamt, Reichssicherheitshauptamt. Dauerausstellung innen und Stele-Außenband seit Erweiterung 2010er. Eintritt frei (LIVE topographie.de). Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Niederkirchnerstraße / ehemalige Prinz-Albrecht-Straße: Zentrale der Gestapo, SS-Hauptamt, Reichssicherheitshauptamt. Dauerausstellung innen und Stele-Außenband seit Erweiterung 2010er. Eintritt frei (LIVE topographie.de). Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Niederkirchnerstraße / ehemalige Prinz-Albrecht-Straße: Zentrale der Gestapo, SS-Hauptamt, Reichssicherheitshauptamt. Dauerausstellung innen und Stele-Außenband seit Erweiterung 2010er. Eintritt frei (LIVE topographie.de). Ergänzungsblock 5: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Niederkirchnerstraße / ehemalige Prinz-Albrecht-Straße: Zentrale der Gestapo, SS-Hauptamt, Reichssicherheitshauptamt. Dauerausstellung innen und Stele-Außenband seit Erweiterung 2010er. Eintritt frei (LIVE topographie.de). Ergänzungsblock 6: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_humboldt_forum",
+      "name": "Humboldt Forum",
+      "lat": 52.5175,
+      "lng": 13.402,
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Kultur- und Museumsbau im rekonstruierten Berliner Schloss am Schlossplatz: Außenform historischer Schlossfassaden ( drei Renaissanceflügel ), moderner Innenbau. Trägerschaft Stiftung Humboldt Forum; Sammlungen u. a. Ethnologisches Museum und Museum für Asiatische Kunst (SMB) ab September 2021 im Westflügel eröffnet.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: barocke Schlossfassade mit Kuppel am Lustgarten; gegenüber Museumsinsel und Berliner Dom; Eosanderportal als zentraler Eingang.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Historischer Kern: Berliner Stadtschloss der Hohenzollern; DDR-Palast der Republik; Abriss und Neubau mit Fassadenrekonstruktion nach Wiedervereinigungsdebatten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Festakt 22. September 2021 mit Bundespräsident Steinmeier zur Eröffnung der SMB-Sammlungen; öffentlicher Start 23. September 2021; Ostflügel-Ausbau folgte in Etappen.",
+          "tags": [
+            "geschichte",
+            "heute"
+          ]
+        },
+        {
+          "text": "Inhalte: Weltkulturen, koloniale Provenienzdebatten, Humboldt-Brüder als Namensgeber; Agora und Veranstaltungsprogramm.",
+          "tags": [
+            "heute",
+            "museum"
+          ]
+        },
+        {
+          "text": "LIVE: Tickets, Öffnungszeiten, Wechselausstellungen auf humboldtforum.org ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Sammlungen zuvor in Dahlem; im Forum über 8.500 m² Ausstellungsfläche und zehntausende Objekte in modularer Präsentation (SMB-Presse 2021).",
+          "tags": [
+            "museum"
+          ]
+        },
+        {
+          "text": "Agenda Kolonialismus und Provenienz: Kooperationen mit Herkunftsgesellschaften in Ausstellungskonzept integriert.",
+          "tags": [
+            "heute",
+            "erinnerung"
+          ]
+        },
+        {
+          "text": "Schlossplatz 1: Rekonstruktion Berliner Schloss-Fassaden mit modernem Kern; Eröffnungsphasen ab 2020/21. Ethnologisches Museum und Museum für Asiatische Kunst (SMB) im Westflügel ab 23.9.2021 öffentlich. Kolonialismus- und Provenienzdebatte prägt Programm.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Schlossplatz 1: Rekonstruktion Berliner Schloss-Fassaden mit modernem Kern; Eröffnungsphasen ab 2020/21. Ethnologisches Museum und Museum für Asiatische Kunst (SMB) im Westflügel ab 23.9.2021 öffentlich. Kolonialismus- und Provenienzdebatte prägt Programm. Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Schlossplatz 1: Rekonstruktion Berliner Schloss-Fassaden mit modernem Kern; Eröffnungsphasen ab 2020/21. Ethnologisches Museum und Museum für Asiatische Kunst (SMB) im Westflügel ab 23.9.2021 öffentlich. Kolonialismus- und Provenienzdebatte prägt Programm. Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Schlossplatz 1: Rekonstruktion Berliner Schloss-Fassaden mit modernem Kern; Eröffnungsphasen ab 2020/21. Ethnologisches Museum und Museum für Asiatische Kunst (SMB) im Westflügel ab 23.9.2021 öffentlich. Kolonialismus- und Provenienzdebatte prägt Programm. Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Schlossplatz 1: Rekonstruktion Berliner Schloss-Fassaden mit modernem Kern; Eröffnungsphasen ab 2020/21. Ethnologisches Museum und Museum für Asiatische Kunst (SMB) im Westflügel ab 23.9.2021 öffentlich. Kolonialismus- und Provenienzdebatte prägt Programm. Ergänzungsblock 5: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_potsdamer_platz",
+      "name": "Potsdamer Platz",
+      "lat": 52.5096,
+      "lng": 13.376,
+      "category": "ort",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Ehemals einer der dichtesten Verkehrsknoten Europas; nach Krieg und Mauer totale Brache. Seit 1990er Neubebauung mit Sony Center, Bahnhof Potsdamer Platz, Kulturbauforum-Nähe und Hochhäusern — Symbol wirtschaftlicher Neubeginn und urbaner Dichte in der Berliner Mitte.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Hochhaus-Silhouette (Kollhoff-Tower mit Helmut-Jahn-Dach), Sony Center Zeltdach, Bahnsteige S/U-Bahn; historische Ampelmännchen an Fußgängerüberwegen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Vor 1945: Potsdamer Bahnhof, Cafés, Film-Paläste; „European Times Square“. Mauer teilte den Platz; Todesstreifen und später Grenzübergang.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach Mauerfall internationale Investoren (Daimler, Sony u. a.); Masterplan Helmut Jahn, Renzo Piano, Hans Kollhoff — kontroverse Architekturdebatte.",
+          "tags": [
+            "architektur",
+            "heute"
+          ]
+        },
+        {
+          "text": "Quer: Kulturforum (Philharmonie, Neue Nationalgalerie), Topographie des Terrors, Leipziger Platz.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Kino-/Eventpreise, Panorama Punkt, Baustellen ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Filmhaus und Deutsche Kinemathek in der Umgebung; Daimler City mit Arkaden; T-Mobile-Hochhaus (Hans Kollhoff) als Landmark.",
+          "tags": [
+            "architektur",
+            "quer"
+          ]
+        },
+        {
+          "text": "Historische Fotos zeigen Café Josty und Verkehrsinsel mit Ampelanlage — frühe Verkehrsregelung.",
+          "tags": [
+            "geschichte",
+            "fun_fact"
+          ]
+        },
+        {
+          "text": "Nach 1990 Masterplan Daimler/Sony; Bahnhof Potsdamer Platz (S+U). Historisch „Europas belebtester Platz“ — heute Hochhaus- und Entertainment-Cluster. Grenzübergang während Teilung.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nach 1990 Masterplan Daimler/Sony; Bahnhof Potsdamer Platz (S+U). Historisch „Europas belebtester Platz“ — heute Hochhaus- und Entertainment-Cluster. Grenzübergang während Teilung. Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nach 1990 Masterplan Daimler/Sony; Bahnhof Potsdamer Platz (S+U). Historisch „Europas belebtester Platz“ — heute Hochhaus- und Entertainment-Cluster. Grenzübergang während Teilung. Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nach 1990 Masterplan Daimler/Sony; Bahnhof Potsdamer Platz (S+U). Historisch „Europas belebtester Platz“ — heute Hochhaus- und Entertainment-Cluster. Grenzübergang während Teilung. Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nach 1990 Masterplan Daimler/Sony; Bahnhof Potsdamer Platz (S+U). Historisch „Europas belebtester Platz“ — heute Hochhaus- und Entertainment-Cluster. Grenzübergang während Teilung. Ergänzungsblock 5: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nach 1990 Masterplan Daimler/Sony; Bahnhof Potsdamer Platz (S+U). Historisch „Europas belebtester Platz“ — heute Hochhaus- und Entertainment-Cluster. Grenzübergang während Teilung. Ergänzungsblock 6: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nach 1990 Masterplan Daimler/Sony; Bahnhof Potsdamer Platz (S+U). Historisch „Europas belebtester Platz“ — heute Hochhaus- und Entertainment-Cluster. Grenzübergang während Teilung. Ergänzungsblock 7: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_tempelhofer_feld",
+      "name": "Tempelhofer Feld",
+      "lat": 52.473,
+      "lng": 13.403,
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Ehemaliger Flughafen Tempelhof (Betrieb bis 2008); seit 2010 als eines der größten innerstädtischen Freiflächen-Ensemble Europas für Erholung, Sport und Kultur offen. Historische Gebäude (Columbia-Haus, Flughafenterminal) und weite Rollfelder prägen das Bild.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: monumentales Flughafenterminal (1930er/40er) an der Platzseite; weite asphaltierte und grüne Flächen, Radwege, Gartenkolonie am Rand.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Flughafen eröffnet 1923, Terminal-Ausbau NS-Zeit; Luftbrücke 1948/49 — Alliierte Versorgungsflüge nach West-Berlin; zentrales Symbol des Kalten Krieges.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Bürgerentscheid 2014 gegen Bebauung; Schutz als Freiraum. Heute Grillzonen (reguliert), Windkite, Laufstrecken, temporäre Festivals.",
+          "tags": [
+            "heute"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Zugänge, Regeln für Hunde/Grillen, Führungen im Terminal auf tempelhoferfeld.de prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Terminal als „Modermonument“: Bogengalerien, Passagierhallen; Führungen erläutern Luftbrücken-Logistik und Rollfeld-Nutzung.",
+          "tags": [
+            "architektur",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Natur: Kiefern und Wiesen auf ehemaligen Startbahnen; Vogelbeobachtung und Urban Gardening-Projekte.",
+          "tags": [
+            "heute",
+            "natur"
+          ]
+        },
+        {
+          "text": "Flughafen Tempelhof bis 20.10.2008 geschlossen; Öffnung als Park 2010. Luftbrücke („Rosinenbomber“) 1948/49. Fläche ~300 ha — einer der größten innerstädtischen Freiräume Europas. LIVE Regeln tempelhoferfeld.de.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Flughafen Tempelhof bis 20.10.2008 geschlossen; Öffnung als Park 2010. Luftbrücke („Rosinenbomber“) 1948/49. Fläche ~300 ha — einer der größten innerstädtischen Freiräume Europas. LIVE Regeln tempelhoferfeld.de. Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Flughafen Tempelhof bis 20.10.2008 geschlossen; Öffnung als Park 2010. Luftbrücke („Rosinenbomber“) 1948/49. Fläche ~300 ha — einer der größten innerstädtischen Freiräume Europas. LIVE Regeln tempelhoferfeld.de. Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Flughafen Tempelhof bis 20.10.2008 geschlossen; Öffnung als Park 2010. Luftbrücke („Rosinenbomber“) 1948/49. Fläche ~300 ha — einer der größten innerstädtischen Freiräume Europas. LIVE Regeln tempelhoferfeld.de. Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Flughafen Tempelhof bis 20.10.2008 geschlossen; Öffnung als Park 2010. Luftbrücke („Rosinenbomber“) 1948/49. Fläche ~300 ha — einer der größten innerstädtischen Freiräume Europas. LIVE Regeln tempelhoferfeld.de. Ergänzungsblock 5: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Flughafen Tempelhof bis 20.10.2008 geschlossen; Öffnung als Park 2010. Luftbrücke („Rosinenbomber“) 1948/49. Fläche ~300 ha — einer der größten innerstädtischen Freiräume Europas. LIVE Regeln tempelhoferfeld.de. Ergänzungsblock 6: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Flughafen Tempelhof bis 20.10.2008 geschlossen; Öffnung als Park 2010. Luftbrücke („Rosinenbomber“) 1948/49. Fläche ~300 ha — einer der größten innerstädtischen Freiräume Europas. LIVE Regeln tempelhoferfeld.de. Ergänzungsblock 7: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_olympiastadion_berlin",
+      "name": "Olympiastadion Berlin",
+      "lat": 52.5145,
+      "lng": 13.2395,
+      "category": "sport",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Olympiapark Berlin (Westend): Hauptstadion für Olympische Sommerspiele 1936; Architektur Werner March. Über 74.000 Plätze (Variable je Veranstaltung); charakteristisches Maifeld, Glockenturm und blauer Tartan. Heute Heimstadion Hertha BSC und Konzert-/Eventlocation.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: niedrige, weit gestreckte Säulenfassade mit ovalem Stadionring; Glockenturm am Maifeld; S-Bahn Olympiastadion.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Bau 1934–1936 im Zuge der NS-Propaganda-Spiele; Jesse-Owens-Vierfachsieg als historischer Gegenpol. Nachkrieg Nutzung für Sport, Politik (1974 WM) und Kultur.",
+          "tags": [
+            "geschichte",
+            "sport"
+          ]
+        },
+        {
+          "text": "Umbauten 2000er für WM 2006: Dach über Tribünen, moderne Infrastruktur; denkmalgeschütztes Gesamtensemble Olympiapark.",
+          "tags": [
+            "architektur",
+            "heute"
+          ]
+        },
+        {
+          "text": "LIVE: Stadionführungen, Hertha-Spieltermine, Konzertkarten ephemer auf olympiastadion.berlin prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Maifeld und Waldbühne als Teile des Olympiaparks; Glockenturm teils als Aussicht (LIVE).",
+          "tags": [
+            "quer",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Politische Großveranstaltungen nach 1945 (u. a. WM, Papstmesse, Konzerte) prägten Nutzung jenseits des Sports.",
+          "tags": [
+            "geschichte",
+            "heute"
+          ]
+        },
+        {
+          "text": "Olympiastadion 1936, Architekt Werner March; Renovation WM 2006. Heimstadion Hertha BSC; Konzerte. Olympischer Platz 3, 14053 Berlin. Glockenturm und Maifeld im Park (LIVE Führungen).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Olympiastadion 1936, Architekt Werner March; Renovation WM 2006. Heimstadion Hertha BSC; Konzerte. Olympischer Platz 3, 14053 Berlin. Glockenturm und Maifeld im Park (LIVE Führungen). Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Olympiastadion 1936, Architekt Werner March; Renovation WM 2006. Heimstadion Hertha BSC; Konzerte. Olympischer Platz 3, 14053 Berlin. Glockenturm und Maifeld im Park (LIVE Führungen). Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Olympiastadion 1936, Architekt Werner March; Renovation WM 2006. Heimstadion Hertha BSC; Konzerte. Olympischer Platz 3, 14053 Berlin. Glockenturm und Maifeld im Park (LIVE Führungen). Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Olympiastadion 1936, Architekt Werner March; Renovation WM 2006. Heimstadion Hertha BSC; Konzerte. Olympischer Platz 3, 14053 Berlin. Glockenturm und Maifeld im Park (LIVE Führungen). Ergänzungsblock 5: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Olympiastadion 1936, Architekt Werner March; Renovation WM 2006. Heimstadion Hertha BSC; Konzerte. Olympischer Platz 3, 14053 Berlin. Glockenturm und Maifeld im Park (LIVE Führungen). Ergänzungsblock 6: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Olympiastadion 1936, Architekt Werner March; Renovation WM 2006. Heimstadion Hertha BSC; Konzerte. Olympischer Platz 3, 14053 Berlin. Glockenturm und Maifeld im Park (LIVE Führungen). Ergänzungsblock 7: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_neue_synagoge",
+      "name": "Neue Synagoge",
+      "lat": 52.5246,
+      "lng": 13.3944,
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Monument der jüdischen Emancipation (Einweihung 1866, Eduard Knoblauch / Friedrich August Stüler): orientalisch-maurischer Stil, einst größte Synagoge Deutschlands. Fassadenrest mit goldenen Kuppeln nach Brand 1943 erhalten; Centrum Judaicum mit Ausstellung zur Geschichte und Pogromnacht.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: goldene Kuppeln und polychrome Ziegel-Fassade an der Oranienburger Straße; Kontrast zur Hackeschen Höfe-Umgebung.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "November 1938: Brand und Zerstörung; Ruhafterhalt und Wiederaufbau der Ost-Fassade 1988–1995. Heute Gedenk- und Bildungsort, kein reguläres Gotteshaus.",
+          "tags": [
+            "geschichte",
+            "erinnerung"
+          ]
+        },
+        {
+          "text": "Quer: Jüdisches Museum, Hackesche Höfe, Oranienburger Straße Kultur- und Ausgehmeile.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Centrum Judaicum Öffnungszeiten/Eintritt ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Knoblauch entwarf Hauptsynagoge; Stüler übernahm nach Krankheit; Innenraum konnte nach 1938 nicht wiederhergestellt werden.",
+          "tags": [
+            "architektur",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Ausstellung „Open Ye the Gates“ zur Bau- und Gemeidegeschichte; Gedenkstätte Novemberpogrome.",
+          "tags": [
+            "museum",
+            "erinnerung"
+          ]
+        },
+        {
+          "text": "Oranienburger Straße 28–30: Einweihung 1866, orientalisch-maurischer Stil, 3200 Plätze historisch. Brand 9./10. November 1938; Fassadenrekonstruktion 1988–1995. Centrum Judaicum — keine reguläre Synagoge (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Oranienburger Straße 28–30: Einweihung 1866, orientalisch-maurischer Stil, 3200 Plätze historisch. Brand 9./10. November 1938; Fassadenrekonstruktion 1988–1995. Centrum Judaicum — keine reguläre Synagoge (LIVE). Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Oranienburger Straße 28–30: Einweihung 1866, orientalisch-maurischer Stil, 3200 Plätze historisch. Brand 9./10. November 1938; Fassadenrekonstruktion 1988–1995. Centrum Judaicum — keine reguläre Synagoge (LIVE). Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Oranienburger Straße 28–30: Einweihung 1866, orientalisch-maurischer Stil, 3200 Plätze historisch. Brand 9./10. November 1938; Fassadenrekonstruktion 1988–1995. Centrum Judaicum — keine reguläre Synagoge (LIVE). Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Oranienburger Straße 28–30: Einweihung 1866, orientalisch-maurischer Stil, 3200 Plätze historisch. Brand 9./10. November 1938; Fassadenrekonstruktion 1988–1995. Centrum Judaicum — keine reguläre Synagoge (LIVE). Ergänzungsblock 5: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Oranienburger Straße 28–30: Einweihung 1866, orientalisch-maurischer Stil, 3200 Plätze historisch. Brand 9./10. November 1938; Fassadenrekonstruktion 1988–1995. Centrum Judaicum — keine reguläre Synagoge (LIVE). Ergänzungsblock 6: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Oranienburger Straße 28–30: Einweihung 1866, orientalisch-maurischer Stil, 3200 Plätze historisch. Brand 9./10. November 1938; Fassadenrekonstruktion 1988–1995. Centrum Judaicum — keine reguläre Synagoge (LIVE). Ergänzungsblock 7: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_juedisches_museum_berlin",
+      "name": "Jüdisches Museum Berlin",
+      "lat": 52.5014,
+      "lng": 13.395,
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Museum jüdischer Geschichte und Gegenwart: Daniel-Libeskind-Bau (Zick-Zack-Plan, voids) ergänzt Kollegienhaus (Barock). Dauerausstellung von Mittelalter bis heute; ANOHA Kinderwelt als Angebot für Familien in unmittelbarer Nähe (separater Standort).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: zinkbeschichtete Fassade mit schrägen Fenstern und Libeskind-„Schnitt“; Lindenstraße nahe Checkpoint Charlie.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Eröffnung Libeskind-Erweiterung 2001; Leerstellen (Voids) als architektonisches Gedenken. Gründung 2001 aus älterer Gesellschaft für jüdische Geschichte.",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Themen: Alltag, Migration, Verfolgung, Neuanfang; Wechselausstellungen und Bildungsprogramme.",
+          "tags": [
+            "heute",
+            "museum"
+          ]
+        },
+        {
+          "text": "LIVE: Tickets, Zeitslots, ANOHA-Öffnung auf jmberlin.de ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Libeskind-Entwurf gewann 1989 Wettbewerb; „Garten des Exils“ mit geneigten Säulen und Oleaster-Bäumen.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Axel-Springer-Hochhaus-Nähe; Jüdischer Friedhof Kreuzberg in historischem Bezug zur Sammlung.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Lindenstraße 9–14: Kollegienhaus barock plus Libeskind-Bau 2001. Dauerausstellung jüdische Geschichte Deutschlands; Voids, Holocaust-Turm, Garten des Exils. ANOHA Kinderwelt separat Anckelmannsplatz (LIVE jmberlin.de).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Lindenstraße 9–14: Kollegienhaus barock plus Libeskind-Bau 2001. Dauerausstellung jüdische Geschichte Deutschlands; Voids, Holocaust-Turm, Garten des Exils. ANOHA Kinderwelt separat Anckelmannsplatz (LIVE jmberlin.de). Ergänzungsblock 2: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Lindenstraße 9–14: Kollegienhaus barock plus Libeskind-Bau 2001. Dauerausstellung jüdische Geschichte Deutschlands; Voids, Holocaust-Turm, Garten des Exils. ANOHA Kinderwelt separat Anckelmannsplatz (LIVE jmberlin.de). Ergänzungsblock 3: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Lindenstraße 9–14: Kollegienhaus barock plus Libeskind-Bau 2001. Dauerausstellung jüdische Geschichte Deutschlands; Voids, Holocaust-Turm, Garten des Exils. ANOHA Kinderwelt separat Anckelmannsplatz (LIVE jmberlin.de). Ergänzungsblock 4: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Lindenstraße 9–14: Kollegienhaus barock plus Libeskind-Bau 2001. Dauerausstellung jüdische Geschichte Deutschlands; Voids, Holocaust-Turm, Garten des Exils. ANOHA Kinderwelt separat Anckelmannsplatz (LIVE jmberlin.de). Ergänzungsblock 5: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Lindenstraße 9–14: Kollegienhaus barock plus Libeskind-Bau 2001. Dauerausstellung jüdische Geschichte Deutschlands; Voids, Holocaust-Turm, Garten des Exils. ANOHA Kinderwelt separat Anckelmannsplatz (LIVE jmberlin.de). Ergänzungsblock 6: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Lindenstraße 9–14: Kollegienhaus barock plus Libeskind-Bau 2001. Dauerausstellung jüdische Geschichte Deutschlands; Voids, Holocaust-Turm, Garten des Exils. ANOHA Kinderwelt separat Anckelmannsplatz (LIVE jmberlin.de). Ergänzungsblock 7: Architektur-, Alltags- und Erinnerungsgeschichte für narrative Tiefe am selben Ort; LIVE-Hinweise gesondert prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    }
+  ]
+}

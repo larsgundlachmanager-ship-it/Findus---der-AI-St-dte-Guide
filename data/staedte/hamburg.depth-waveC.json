@@ -1,0 +1,1872 @@
+{
+  "notes": [
+    "Depth Wave C: additive top-up for parks/monuments/landmarks already partially filled — target ≥12 deep after merge.",
+    "Sources: Wikipedia, hamburg.de, official museum/park/church pages, WSA/Denkmalamt. Prices/hours LIVE only. No dialogue scripts. No inventing."
+  ],
+  "spots": [
+    {
+      "id": "hamburg_bischofsburg_speersort",
+      "name": "Bischofsburg Speersort",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Bischofsturm/Bischofsburg am Speersort 10 (St. Petri-Hof): ringförmiges Turmfundament aus dem 12. Jahrhundert, Außendurchmesser ca. 19 m — ältester erhaltener Steinbau-Rest der Hamburger Altstadt. 1962–65 freigelegt; frühere Deutung als erzbischöflicher Wohnturm (11. Jh.) widerlegt; heute vermutlich Teil des ältesten Stadttores / Heidenwalls. Außenstelle des Archäologischen Museums Hamburg.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: unter Straßenniveau liegender Steinring im Schauraum Speersort 10 / Kreuslerstraße, nahe Hammaburg-Platz und St. Petri — oft durch Glas/Cafe-Zugang sichtbar.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Entdeckung 30. August 1962 bei Ausschachtung fürs St.-Petri-Gemeindezentrum; Grabungen bis 1965.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Frühere Lesart: steinernes Haus des Erzbischofs Bezelin-Alebrand (Adam von Bremen, 1074). Neuere Grabungen (u. a. 2008) datieren den Ring ins 12. Jh. und deuten ihn als Befestigung/Tor am Heidenwall.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Lage auf Geesthöhe am ältesten Siedlungskern; Steinstraße gilt als älteste Straße und alter Handelsweg.",
+          "tags": [
+            "geschichte",
+            "quer"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Schauraum als Museum „Die Bischofsburg“ (Archäologisches Museum Hamburg) mit Lichtinszenierung nach Neugestaltung; Zugang oft über Ladenpassage.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Hammaburg-Platz, St. Petri, Domplatz — frühe Stadtgeschichte kompakt lesbar.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Schauraum/Zugang und Führungen ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Fun: Replik des ersten Hamburger Staatssiegels (1241) zeigt Tortürme, die mit der frühen Toranlage am Speersort in Verbindung gebracht werden.",
+          "tags": [
+            "geschichte",
+            "quer"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Bischofsburg?",
+          "a": "Am steinernen Ringfundament unter dem St.-Petri-Hof Speersort 10, direkt neben dem Hammaburg-Platz."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_bergedorf_museum",
+      "name": "Bergedorf Museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Bergedorf Museum im Schloss Bergedorf (Bergedorfer Schloßstraße 4): Hamburgs einziges erhaltenes Schloss, im 13. Jh. als Wasserburg an der Bille angelegt; jahrhundertelang Verwaltungsbau (u. a. Kondominat Hamburg–Lübeck 1420–1868). Seit 1953 Museum für Bergedorf und die Vierlande; Dauerausstellung „stadtlandfluss“; Teil der Bergedorfer Museumslandschaft mit Freilichtmuseum Rieck-Haus.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: vierflügelige Wasserburg mit Graben und Schlosspark — Wahrzeichen Bergedorfs, kein höfisches Residenzschloss.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Geschichte: Wasserburg ab 13. Jh.; „festes Haus“ urkundlich im 14. Jh.; 1320–1420 zeitweise Residenz Sachsen-Lauenburg; 1420 Eroberung durch Hamburg und Lübeck.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kondominat: gemeinsame Verwaltung Hamburg/Lübeck ca. 1420–1867/68; Amtleute im Schloss; 1868 kaufte Hamburg den Lübecker Anteil.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Bau: ca. 30×30 m Vierflügelanlage; Flügel um 1600 (Backsteingotik/Renaissance), Fachwerk 1661; Torbau/Nordflügel/Turm 1899–1901 neogotisch erneuert.",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Dauerausstellung „stadtlandfluss“, Wechselausstellungen, Konzerte/Kino im Hof, Museumscafé; Trauungen im Schloss berichtet.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Freilichtmuseum Rieck-Haus (Vierlande); Schleusengraben/Bille-Landschaft.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnung (Bericht Di–So, Mo zu) und Eintritt/Kombiticket Rieck-Haus ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Park: denkmalgeschützter Schlosspark umgibt die Anlage — Spaziergang vor/nach dem Museumsbesuch.",
+          "tags": [
+            "leben_jetzt",
+            "quer"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Bergedorf Museum?",
+          "a": "Am Wasserburg-Schloss mit Graben und Park an der Bergedorfer Schloßstraße — Hamburgs einziges erhaltenes Schloss."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_berliner_tor",
+      "name": "Berliner Tor",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Berliner Tor: historisches Stadttor des „Neuen Werks“ (1679–1682) am Eingang der Vorstadt St. Georg Richtung Berlin/Hammer Landstraße; offizieller Name seit Umgestaltung 1833–36. Heute Verkehrsknoten St. Georg/Borgfelde/Hammerbrook mit S-/U-Bahnhof Berliner Tor; Straßennamen Berliner Tor und Berlinertordamm erinnern an den Walldurchlass.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: dichter Schnellbahn-/Straßenknoten; Landmarke u. a. Berliner Tor Center ums frühere Polizeipräsidium — Torgebäude selbst ist abgegangen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Geschichte: erbaut mit dem Neuen Werk 1679–1682 zum Schutz St. Georgs; zuvor oft „No. 1“ oder Hammer Tor genannt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach französischer Besatzung: 1833–36 Umbau — Wallgraben-Brücke durch Damm ersetzt, pfeilerbegrenzte Durchfahrten für Torsperre/Akzise bis Aufhebung 1861.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Name „Berliner Thor“ offiziell seit der Umgestaltung 1836; Heerstraße führte nach Bergedorf und weiter Richtung Berlin.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Lübecker Tor und spätere Sechslingspforte als weitere Zugänge des Neuen Werks; Straße Beim Strohhause vom Kavallerie-Strohspeicher.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Umstieg S-/U-Bahn, Zugang St. Georg und Hammerbrook; starker Alltagsknoten.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Fahrpläne und Baustellen HVV/DB ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Fun/Kontext: östlicher Wallring wich später Gleisen; Name bleibt als Ortsmarke ohne steinernes Tor.",
+          "tags": [
+            "geschichte",
+            "quer"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Berliner Tor heute?",
+          "a": "Am S-/U-Bahnhof und Verkehrsknoten St. Georg/Borgfelde — der historische Walldurchlass ist abgetragen, der Name blieb."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_boberger_dunenhaus",
+      "name": "Boberger Dünenhaus",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Boberger Dünenhaus (Boberger Furt 50): Info-/Umweltbildungshaus der Loki Schmidt Stiftung am Einstieg ins Naturschutzgebiet Boberger Niederung (seit 1991, Fläche zuletzt erweitert). Ausstellung zu Geologie, Flora/Fauna; Start vier markierter Rundwege (Dünen-, Moor-, Terrassen-, Wiesenweg). NSG mit Binnendünen, Geesthang, Moor und Marsch — eines der artenreichsten Schutzgebiete Hamburgs.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: kleines Infohaus an der Boberger Furt; dahinter offene Dünen-/Heideflächen und Wege in die Niederung.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "NSG Boberger Niederung seit 1991; Naturdenkmäler Boberger Düne und Achtermoor seit 1968; Erweiterung 2025 auf ca. 464 ha berichtet (zuvor ~355 ha).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Landschaft: Geesthang, Binnendünen, Niedermoor/Achtermoor, Marsch Billwerder — auf engem Raum mehrere Biotoptypen.",
+          "tags": [
+            "leben_jetzt",
+            "quer"
+          ]
+        },
+        {
+          "text": "Wege: Dünenweg, Moorweg, Terrassenweg, Wiesenweg — jeweils wenige Kilometer, symbolmarkiert; Faltblätter im Haus.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Träger: Loki Schmidt Stiftung / Stiftung Naturschutz — Führungen, Kinder-/Familienangebote, Pflegehinweise.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Boberger See/Badestellen und Segelflugplatz im weiteren Areal — NSG-Regeln beachten (u. a. E-Scooter verboten berichtet).",
+          "tags": [
+            "quer",
+            "live_hint"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnung Dünenhaus und Führungsprogramm ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Anreise-Hinweis: S 21 Mittlerer Landweg + Bus Richtung Boberger Furt berichtet — LIVE Verbindungen prüfen.",
+          "tags": [
+            "live_hint",
+            "quer"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Dünenhaus?",
+          "a": "Am Infohaus an der Boberger Furt — Einstieg zu den markierten Wegen in die Boberger Dünen und Niederung."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_grosse_wallanlagen",
+      "name": "Große Wallanlagen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Große Wallanlagen: westlicher Abschnitt der Hamburger Wallbefestigung (Johan van Valckenburgh, 1616–1625), nach 1814/1820–1837 unter Isaak Hermann Altmann in Parklandschaft umgewandelt. Heute Teil des Wallringparks / Planten un Blomen (Name seit 1986 für den Gesamtzug Millerntor–Dammtor); IGAs 1953/63/73 prägten die heutige Gestaltung.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: parkartige Wall-/Grabenreste mit Wegen und Bäumen zwischen Dammtor/Messe und Millerntor — Stadtgrün auf Festungslinie.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Festung 1616–1625: Valckenburgh-Wallring; Hamburg blieb im Dreißigjährigen Krieg weitgehend verschont — Handelsvorteil der befestigten Stadt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Entfestigung: nach französischer Besatzung Abtragung; Altmann wandelte Wälle nach englischem Vorbild in Bürgerpark um (ab ca. 1820).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Ostteil des Rings wich Gleisen/Hauptbahnhof; Westteil blieb Grünzug inkl. Große/Kleine Wallanlagen und Alter Botanischer Garten.",
+          "tags": [
+            "geschichte",
+            "quer"
+          ]
+        },
+        {
+          "text": "Seit 1986 offiziell unter dem Namen Planten un Blomen zusammengefasst; zuvor teils Wallringpark genannt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Spazieren, Verbindung Messe/Dammtor–St. Pauli; Wasserlicht-/Parkangebote im Gesamtpark LIVE prüfen.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Alter Botanischer Garten, Kleine Wallanlagen, Alter Elbpark/Stintfang, Bismarck-Denkmal.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Parkzugang frei; Veranstaltungen und Teilschließungen ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Großen Wallanlagen?",
+          "a": "Am parkartigen Grünzug auf der alten Festungslinie bei Dammtor/Messe — Teil von Planten un Blomen."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_heinrich_heine_denkmal",
+      "name": "Heinrich-Heine-Denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Heinrich-Heine-Denkmal auf dem Rathausmarkt: Bronze von Waldemar Otto, enthüllt 11. Mai 1982. Erinnert an den Dichter Heinrich Heine (1797–1856) und an das 1926 im Stadtpark eingeweihte, 1933 von den Nationalsozialisten entfernte und später eingeschmolzene Denkmal von Hugo Lederer. Sockel mit Reliefs u. a. zu Bücherverbrennung und Denkmalzerstörung.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: nachdenkliche Bronzefigur im Mantel auf Granitsockel am Rathausmarkt — vor dem Namen zuerst Haltung/Figur beschreiben.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Erstes Lederer-Denkmal: Guss 1913, Einweihung Stadtpark 13. August 1926; NS-Demontage 1933, Metall später für Rüstung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Neuschöpfung 1982: Initiative Heine-Gesellschaft/Arie Goral, Kultursenator Tarnowski, Spenden; Bildhauer Waldemar Otto; Guss Schmäke Düsseldorf.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Sockel: Bronzereliefs und Tafeln erinnern an Bücherverbrennung 1933 und Abriss des Stadtpark-Denkmals.",
+          "tags": [
+            "geschichte",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Heine-Bezug Hamburg: Familie/Verlag Campe, Aufenthalte; Antisemitismus und Zensur prägten die Denkmalgeschichte.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Rathaus/Rathausmarkt; Bismarck-Denkmal ebenfalls von Hugo Lederer (anderes Werk).",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Leben jetzt: kurzer Stopp am Rathausmarkt; öffentlich frei zugänglich.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Platzveranstaltungen/Absperrungen am Rathausmarkt ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Heine-Denkmal?",
+          "a": "An der Bronzefigur mit verschränkten Armen auf dem Sockel mitten auf dem Rathausmarkt."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_leuchtturm_rissen_oberfeuer",
+      "name": "Leuchtturm Rissen (Oberfeuer)",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Oberfeuer Tinsdal in Hamburg-Rissen: rot-weiß gestreifter sechseckiger Stahlgitterturm (Bau 1899, Betrieb ab 1. Januar 1900), ca. 42 m Turmhöhe, Feuerhöhe ca. 56 m ü. NN. Bildet mit Unterfeuer Wittenbergen die Richtfeuerlinie Wittenbergen–Tinsdal für elbabwärts fahrende Schiffe. Seit 1966 elektrisch, seit 1979 ferngesteuert; Denkmalschutz seit 31. März 2004.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: hoher rot-weiß gestreifter Stahlgitterturm auf der Geest über der Elbe in Rissen/Tinsdal — klar als Seezeichen lesbar.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Geschichte: 1899 erbaut, seit 1.1.1900 in Betrieb; gehört zu den ältesten Stahl-Leuchttürmen dieser Bauweise (Treppenrohr/Gratsparren).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Funktion: Oberfeuer der Linie Wittenbergen–Tinsdal; Unterfeuer Wittenbergen ca. 800 m entfernt am Falkensteiner Ufer.",
+          "tags": [
+            "geschichte",
+            "technik"
+          ]
+        },
+        {
+          "text": "Technik-Historie: Petroleum → 1927 Flüssiggas → ab 1966 elektrisch; 1988 Doppelsignalscheinwerfer; Kennung Iso.W.8s berichtet; Tragweite Oberfeuer ca. 16 sm.",
+          "tags": [
+            "technik"
+          ]
+        },
+        {
+          "text": "Farbkleid: rote Streifen ab 1927/28 zur besseren Tageserkennbarkeit.",
+          "tags": [
+            "visuell",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: aktiver Seezeichenbetrieb (WSA); Außenansicht vom Elbufer/Geest — Turmbesteigung nicht als Touristenangebot annehmen.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Unterfeuer Wittenbergen; Elbstrand/Wittenbergen als Uferraum.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Zugangsumfeld und Wege am Geesthang ephemer; Feuerkennungen nur als Orientierung, keine Navigation aus dem Pack.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Oberfeuer Rissen/Tinsdal?",
+          "a": "Am hohen rot-weiß gestreiften Stahlgitterturm auf der Geest in Rissen — Pair mit dem niedrigeren Unterfeuer Wittenbergen an der Elbe."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_nsg_eppendorfer_moor",
+      "name": "NSG Eppendorfer Moor",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Naturschutzgebiet Eppendorfer Moor zwischen Alsterkrugchaussee und Flughafen Hamburg (Groß Borstel/Eppendorf): ca. 26 ha, größtes innerstädtisches Moor Europas berichtet. Flachmoor mit Hochmoorresten auf eiszeitlicher Terrasse. NSG seit 1982 (zunächst 15,3 ha), Erweiterung Ende 2014/2015 um 10,7 ha. Botanisch seit 1798 bekannt (u. a. locus classicus Mittlerer Sonnentau).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: feuchtes Moor-/Gehölzmosaik mit Wegen und Schilf-/Heideflächen direkt an der Alsterkrugchaussee — Stadtmoor, kein großer Wildpark.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Schutz: NSG 1982; Erweiterung auf 26 ha zum 30.12.2014 (Verordnung Jan. 2015); Flächen im Eigentum der Stadt, Betreuung u. a. NABU berichtet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Botanik-Geschichte: 1798 durch Dreves/Hayne beschrieben; Mittlerer Sonnentau hier erstmals wissenschaftlich gefasst; Goldmedaille St. Louis 1904 für Flora-Ausstellung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nutzungsspuren: Schießstand Infanterie-Regiment 76 bis 1904 (Straße Kugelfang); Entwässerung, Aufforstung, Grundwasserabsenkung — Artenrückgang und spätere Renaturierung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: strukturreicher Moorkomplex (Röhricht, Seggen, Glockenheide, Gebüsch); Brutvögel und bedrohte Arten — Wege und Ruhezonen beachten.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Nähe Flughafen Fuhlsbüttel und Alsterlauf — Fluglärm vs. innerstädtische Naturinsel.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Betretung nur auf freigegebenen Wegen; aktuelle Pflege-/Sperrhinweise ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Fun: trotz Kleinfläche (viertkleinstes HH-NSG) hohe Bedeutung als zentral gelegenes Moorökosystem.",
+          "tags": [
+            "quer"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Eppendorfer Moor?",
+          "a": "Am feuchten Moorgrün direkt an der Alsterkrugchaussee zwischen Eppendorf und Groß Borstel — beschildertes Naturschutzgebiet."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_sandtorpark",
+      "name": "Sandtorpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Sandtorpark in der HafenCity (Quartier Am Sandtorpark/Grasbrook): erster neu angelegter Park der HafenCity, Eröffnung April 2011, ca. 6000 m² — kleinster HafenCity-Park. Gestaltung EMBT Arquitectes (Barcelona); Fläche war bis in die 1960er Teil des Sandtorhafens (ab 1866 erstes modernes Hafenbecken). Name erinnert an früheres Stadttor zur Elbinsel Grasbrook.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: kleiner Hügel-/Wiesenpark zwischen Büro- und Wohnbauten, Katharinenschule und Ellipsenturm — ruhiger Kontrast zu Magellan-Terrassen/Sandtorhafen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Geschichte Fläche: Sandtorhafen ab 1866; 1960er Teilverfüllung für RoRo; 1980er Kaffee-Lagerei mit Silo/Hallen; Abriss und Quartiersneubau.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Name: historisches Sandtor zwischen Altstadt und Grasbrook; Quartier mischt Wohnen, Büros, Schule.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Gestaltung: EMBT setzt Pflaster-/Freiraummotive der Magellan-Terrassen fort; Eröffnung mit Nachbarschaftsfest April 2011.",
+          "tags": [
+            "architektur",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Spiel-/Liegewiesen im dichten Quartier; Nähe Coffee-Plaza (Neumann-Kaffee) und Grasbrookpark (größerer Spielpark ab 2013).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Sandtorhafen/Traditionsschiffe, Elbphilharmonie-Achse, Speicherstadt-Nordkante.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Park frei; Baustellen/Events im Quartier ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Fun: trotz Nähe zum Wasser hat dieses Teilquartier keinen direkten Kai — Sichtbezug zum Sandtorhafen bleibt.",
+          "tags": [
+            "quer"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Sandtorpark?",
+          "a": "Am kleinen begrünten Innenhof-Park zwischen HafenCity-Neubauten und Katharinenschule — nicht mit den Pontons am Sandtorhafen verwechseln."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_elbphilharmonie_hamburg",
+      "name": "Elbphilharmonie Hamburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Elbphilharmonie auf Kaispeicher A (Platz der Deutschen Einheit 1): Herzog & de Meuron, Eröffnung 11. Januar 2017. Glaswelle auf Backstein-Kaispeicher (1963); Plaza als öffentliche Aussichtsebene über Tube-Rolltreppe. Großer Saal mit Weinberg-Bestuhlung; Wahrzeichen der HafenCity.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: glasige Wellenkrone auf massivem Backstein-Kaispeicher an der Elbspitze — von Kehrwieder und Niederhafen weithin lesbar.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Kaispeicher A historisch Kaffee-/Kakao-Speicher (Werner Kallmorgen); Neubau setzt den Sockel fort statt Abriss.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Eröffnung 11.1.2017 nach langer Bauzeit und Kostensteigerung; seither eines der meistbesuchten Kulturhäuser der Stadt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Plaza: öffentliche Aussichtsebene mit Elbblick — Zugang über die Tube; Ticketregeln LIVE prüfen.",
+          "tags": [
+            "leben_jetzt",
+            "live_hint"
+          ]
+        },
+        {
+          "text": "Akustik/Saal: Großer Saal mit umlaufender Weinberg-Bestuhlung und weißer Reflexionshaut (Bericht Yasuhisa Toyota).",
+          "tags": [
+            "technik",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Laeiszhalle als historisches Konzerthaus-Pendant; Sandtorhafen/Traditionsschiffe; Kehrwiederspitze.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Konzertkarten, Plaza-Zugang und Führungen ephemer — nie Pack-Preise vorlesen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Elbphilharmonie?",
+          "a": "An der gläsernen Wellenkrone auf dem Backstein-Kaispeicher an der westlichen HafenCity-Spitze."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_denkmal_opfer_der_sturmflut_1962",
+      "name": "Denkmal Opfer der Sturmflut 1962",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Denkmal „Den Opfern der Sturmflut“ (stilisierte Woge) — verlegt an das Museum Elbinsel Wilhelmsburg nach Transformation des Spreehafenviertels. Erinnerung an die Sturmflutnacht 16./17. Februar 1962 (Orkan Vincinette) mit 315 Toten in Hamburg, Schwerpunkt Wilhelmsburg.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: stilisierte Woge/Denkmalplastik am Erinnerungsort Museum Elbinsel — Form vor Namen beschreiben.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Nacht 16./17.2.1962: Deichbrüche, u. a. Spreehafen/Wilhelmsburg; 315 Todesopfer in Hamburg berichtet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Innensenator Helmut Schmidt forderte Bundeswehr-Hilfe an — verfassungsrechtlich umstritten, politisch prägend für Krisenmanagement.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Standortwechsel: Denkmal vom früheren Spreehafen-Kontext an das Museum Elbinsel Wilhelmsburg verlegt (B-Plan-Transformation).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Gedenken und Museums-/Inselkontext; weitere Mahnmale u. a. Finkenwerder Süderdeich, Francop, Ohlsdorf.",
+          "tags": [
+            "leben_jetzt",
+            "quer"
+          ]
+        },
+        {
+          "text": "Quer: Warften-Prinzip der HafenCity als städtebauliche Antwort auf 1962.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Museumsöffnung und Gedenkveranstaltungen ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erinnert das Denkmal?",
+          "a": "An die Opfer der Sturmflut vom Februar 1962 — besonders schwer getroffen war Wilhelmsburg."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_messberghof",
+      "name": "Meßberghof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Meßberghof (bis 1938 Ballinhaus) am Meßberg: Kontorhaus 1922–1924 von Hans und Oskar Gerson, Stahlbeton mit Bockhorner Klinkern. Benannt nach Reeder Albert Ballin; 1938 unter NS-Gauleiter Kaufmann umbenannt. Seit 2015 Teil des UNESCO-Welterbes Speicherstadt und Kontorhausviertel; Travertin-Treppenhaus und Fassadenfiguren (Kunstmann/Fischer) bemerkenswert.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: flächiges zehngeschossiges Klinker-Kontorhaus am Meßberg — ruhiger Kontrast zum spitzen Chilehaus.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Bau 1922–24 Hans & Oskar Gerson für AG für In- und Auslandsunternehmungen; früher Name Ballinhaus nach Albert Ballin (HAPAG).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1938 Zwangsumbenennung in Meßberghof wegen Ballins jüdischer Herkunft; Namensrückgabe später nicht umgesetzt (HAPAG-Bau am Ballindamm trägt „Ballinhaus“).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "UNESCO 2015: Kontorhausviertel inkl. Meßberghof zusammen mit Speicherstadt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Ausstattung: repräsentatives Treppenhaus (Travertin/Sandstein); originale Kunstmann-Figuren später im UG, Fassadenkonsolen 1996/97 durch Lothar Fischer erneuert.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Quer: Chilehaus, Sprinkenhof, Mohlenhof — Kontorhaus-Cluster östlich der Altstadt.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Bürohaus; Passagen/Treppenhaus tagsüber oft einsehbar — Zutritt ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Meßberghof?",
+          "a": "Am flächigen Klinker-Kontorhaus am Meßberg im UNESCO-Kontorhausviertel, nahe Chilehaus."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_harburger_berge",
+      "name": "Harburger Berge",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Harburger Berge (Schwarze Berge): bewaldeter Höhenzug südlich der Elbe in Hamburg-Harburg und angrenzendem Niedersachsen. Höchste Erhebung Hamburgs: Hasselbrack ca. 116 m ü. NHN. Naherholungsraum mit Heideausläufern; Querbezug zur Fischbeker Heide und Neugrabener Heide.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: bewaldete Höhen und Heidekanten über dem Harburger Süden — spürbar über der Elbmarsch.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Geomorphologie: Endmoränen-/Geestlandschaft der Harburger Berge; Hasselbrack als Hamburgs höchster Punkt berichtet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Wandern, Rad, Aussichten; Anbindung an Heide-Schutzgebiete im Südwesten.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Fischbeker Heide (NSG), Neugrabener Heide, Harburg-Zentrum im Norden am Geesthang.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Kulturlandschaft: historische Rodung und Heidenutzung auf Sandböden — verwandt mit Lüneburger-Heide-Komplex.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Wege, Sperrungen und Waldarbeiten ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Fun: „Berge“ relativ — für norddeutsche Verhältnisse aber klar spürbarer Höhenzug.",
+          "tags": [
+            "quer"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Harburger Berge?",
+          "a": "An bewaldeten Höhenzügen südlich der Elbe über Harburg — mit Hasselbrack als höchstem Punkt Hamburgs."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_mahnmal_sturmflut_finkenwerder_suderdeich",
+      "name": "Mahnmal Sturmflut Finkenwerder Süderdeich",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Bronzetafel am Finkenwerder Süderdeich 68: erinnert an Sturmflutnacht 16./17.2.1962 (Orkan Vincinette) und Helfer der Nachbarschaft Süderdeich; Hubschrauber-Motiv für Luftrettung (Helmut Schmidt / Bundeswehr-Luftbrücke).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: unscheinbare Bronzetafel am Deich-/Parkplatzrand Süderdeich — leicht zu übersehen, Form vor Ort lesen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Finkenwerder war 1962 stark betroffen; Tafel ehrt lokale Helfer und die Luftrettung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Hubschrauber-Relief verweist auf die Luftbrücke unter Innensenator Helmut Schmidt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: kurzer Gedenkstopp am Deich; Elbinsel-Alltag drumherum.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: zentrales Flutdenkmal Museum Elbinsel Wilhelmsburg; Warften-Konzept HafenCity.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: freier Zugang; Deichwege/Veranstaltungen ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erinnert die Tafel am Süderdeich?",
+          "a": "An die Sturmflut 1962 und die Rettung aus der Luft bzw. Nachbarschaftshilfe in Finkenwerder."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_tropen_aquarium_beim_tierpark_hagenbeck",
+      "name": "Tropen-Aquarium beim Tierpark Hagenbeck",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Tropen-Aquarium am Tierpark Hagenbeck (Stellingen): eigenständiges Unterwasser-/Tropenmodul mit separater Ticketlogik und Kombioption zum Tierpark. Themenwelten mit Haien, Krokodilen und tropischen Lebensräumen; Fütterungszeiten rotierend.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: tropisch gestaltetes Aquarium-Gebäude am Hagenbeck-Ensemble — eigener Eingangsbereich neben dem Zoo.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Funktion: ergänzt den Freiluft-Zoo um Unterwasser- und Tropenthemen; Entscheidung Zoo vs. Aquarium vs. Kombi am Kassensystem.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Carl Hagenbecks Panorama-Idee im angrenzenden Tierpark — Freigehege ohne klassische Gitterstäbe.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Rundgang durch thematische Aquarien/Terrarien; Fütterungen Haie/Krokodile nach Plan.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Einzeltickets, Kombi und Öffnungszeiten ephemer — Preise nie aus dem Pack.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "LIVE: Fütterungszeiten und Sonderaktionen rotierend prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist das Aquarium Teil des Zoos?",
+          "a": "Es gehört zum Hagenbeck-Ensemble, hat aber eigene Ticketlogik — Kombi oft möglich, LIVE prüfen."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_wasserschloss_speicherstadt",
+      "name": "Wasserschloss Speicherstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Wasserschloss am Holländischen Brook (Dienerreihe/Brook): neugotisches Solitär 1905–1907 von Bernhard Georg Hanssen und Wilhelm Meerwein. Historisch einziger bewohnbarer Ort im Freihafenbereich berichtet; heute Teekontor/Gastronomie im UNESCO-Speicherstadt-Ensemble.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: freistehendes neugotisches Backstein-Solitär mit Türmchen mitten in den Fleeten — sofort vom Speicherzeilen-Raster unterscheidbar.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Bau 1905–1907 Hanssen & Meerwein; Wohnfunktion im ansonsten streng zollisolierten Freihafen berichtet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Teekontor/Gastronomie und Fleetblick; touristischer Foto-Stopp.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Zollmuseum, Miniatur Wunderland, Kehrwieder — Speicherstadt-West.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "UNESCO-Kontext: Teil des Welterbes Speicherstadt und Kontorhausviertel (2015).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Gastronomie-Öffnung und Reservierung ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Wasserschloss?",
+          "a": "Am freistehenden neugotischen Backsteinbau mit Türmchen mitten in den Fleeten der Speicherstadt."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_alter_botanischer_garten",
+      "name": "Alter Botanischer Garten",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Historischer Standort des Hamburger Botanischen Gartens in den Wallanlagen (heute Planten un Blomen / Dammtor). Ab 1821 Botanischer Garten; nach Krieg und IGAs Umgestaltung; Freigelände 1979 nach Klein Flottbek (Loki-Schmidt-Garten) verlegt; Tropengewächshäuser von 1963 verblieben am Dammtor.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: parkartige Wallanlagen-Fläche bei Dammtor mit historischen Gewächshaus-Silhouetten — grüner Kontrast zur Innenstadt.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "1821 gegründet (Johann Georg Christian Lehmann); ab 1857 Staatsinstitut; später Uni-Botanik.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "IGA 1953/63/73 prägte Wiederaufbau; Tropengewächshäuser 1963 (Hermkes/Apel) blieben hier.",
+          "tags": [
+            "geschichte",
+            "architektur"
+          ]
+        },
+        {
+          "text": "1979 Freigelände → Loki-Schmidt-Garten Klein Flottbek; alter Standort ging in Planten un Blomen auf.",
+          "tags": [
+            "geschichte",
+            "quer"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Spazieren im Parkkontext; Gewächshaus-Besuch nur wenn zugänglich — Sanierungsstatus LIVE.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Zugang Gewächshäuser und Bauzustand ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist das noch der Botanische Garten?",
+          "a": "Das Freigelände zog nach Klein Flottbek; am Dammtor bleiben Park und die alten Schaugewächshäuser im Planten-un-Blomen-Kontext."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_alsterfontane",
+      "name": "Alsterfontäne",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Wahrzeichen auf der Binnenalster: seit 18. April 1987 in Betrieb. Idee von Moderator Carlheinz Hollmann nach dem Vorbild des Genfer Jet d’eau; Sponsoren u. a. Blohm + Voss. Betriebshöhe typisch um 50–60 m (wetter-/windabhängig); Finanzierung über Sponsoren/Stiftung, koordiniert u. a. mit Hamburg Wasser. Saison Frühjahr–Herbst, im Winter oft Alstertanne an derselben Stelle.",
+      "deep_data_pool": [
+        {
+          "text": "Standort mittig Binnenalster: beste Blickachsen Jungfernstieg, Lombardsbrücke, Ballindamm.",
+          "tags": [
+            "visuell",
+            "quer"
+          ]
+        },
+        {
+          "text": "Finanzierung über Sponsoren/Stiftungsmodell — kein klassisches städtisches Springbrunnen-Budget allein.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Winter: Fontäne außer Betrieb; oft Ersatz durch Alstertanne als saisonales Wahrzeichen.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Einschalt-/Abbautermine und Höhe bei Wind ephemer — nicht als Fixmaß vorlesen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_baakenpark",
+      "name": "Baakenpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "1,6 ha Park als künstliche Halbinsel im Baakenhafenbecken (östliche HafenCity). Wettbewerb 2012 gewonnen von Atelier Loidl (Berlin); Eröffnung Mai 2018. Baakenhafenbecken historisch 1887 für Seeschiffe; heute Grünzentrum mit Spiel-/Sportflächen und ca. 15 m hohem „Himmelsberg“.",
+      "deep_data_pool": [
+        {
+          "text": "Himmelsberg ca. 15 m: Aussicht Richtung Elbphilharmonie und Elbbrückenquartier.",
+          "tags": [
+            "visuell",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Deutscher Landschaftsarchitektur Preis 2019 für den Baakenpark berichtet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Brückenanbindung ins Quartier ohne Straßenquerung — Park als Alltagsgrün für Baakenhafen-Wohnen.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Veranstaltungen, Baustellen am Ostende und Sperrungen ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_botanischer_garten_der_universitat_hamburg_loki_schmidt_garten",
+      "name": "Botanischer Garten der Universität Hamburg - Loki-Schmidt-Garten",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Botanischer Garten der Universität Hamburg in Klein Flottbek/Osdorf (~24–25 ha). Freigelände eröffnet 5. Juli 1979; seit 23. Oktober 2012 Loki-Schmidt-Garten. Themenbereiche u. a. Nutzpflanzen, Rose, Wüste, Mittelmeer, Rhododendron, japanischer Garten (Yoshikuni Araki, 1979).",
+      "deep_data_pool": [
+        {
+          "text": "Eingangsbereich: Mammutbäume und Loki-Schmidt-Denkmal berichtet — Orientierung am S-Bahnhof Klein Flottbek.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Japanischer Garten 1979 von Yoshikuni Araki — einer der markanten Themenbereiche.",
+          "tags": [
+            "geschichte",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Loki-Schmidt-Haus als Nutzpflanzen-Museum/Info berichtet — LIVE Öffnung prüfen.",
+          "tags": [
+            "leben_jetzt",
+            "live_hint"
+          ]
+        },
+        {
+          "text": "Quer: Schaugewächshäuser bleiben am historischen Dammtor-Standort (Alter Botanischer Garten).",
+          "tags": [
+            "quer"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_dammtor",
+      "name": "Dammtor",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Bahnhof Hamburg Dammtor: Anlage 1903 eröffnet („Kaiserbahnhof“, Wilhelm II.). Architekt Ernst Moeller; Halle ca. 112×25 m, Höhe ca. 23,5 m; Historismus mit Jugendstil-Anklängen. Name nach dem früheren Dammtor der Stadtbefestigung; Lage Rotherbaum/Nähe Messe.",
+      "deep_data_pool": [
+        {
+          "text": "Denkmalgeschützt; umfassende Sanierung um 1999–2002 berichtet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Fern- und S-Bahn plus starker Messe-/Congress-Zugang (CCH).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Planten un Blomen, Alter Botanischer Garten, Binnenalster Richtung Jungfernstieg.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Abfahrten und Bahnsteigänderungen HVV/DB ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_fischbeker_heide",
+      "name": "Fischbeker Heide",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Naturschutzgebiet im Südwesten Hamburgs (Neugraben-Fischbek/Hausbruch): ca. 773 ha Heide- und Waldlandschaft; nach der Lüneburger Heide eine der größten Heide-Kulturlandschaften Deutschlands. NSG seit 1958; Hasselbrack (~116 m) als höchste Erhebung Hamburgs im Süden.",
+      "deep_data_pool": [
+        {
+          "text": "Pflege: Entkusseln und Heidschnucken-Beweidung halten die Heide offen gegen Verbuschung.",
+          "tags": [
+            "leben_jetzt",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Archäologischer Wanderpfad (Helms-Museum) zu Grab-/Megalithanlagen im Gebiet.",
+          "tags": [
+            "leben_jetzt",
+            "quer"
+          ]
+        },
+        {
+          "text": "Blüte: August/Anfang September oft lilafarbene Besenheide — saisonaler Höhepunkt.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Wegeführung, Sperrungen und Führungen ephemer — NSG-Regeln beachten.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hamburg_bunker",
+      "name": "Hamburg BUNKER",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Flakturm IV / Grüner Bunker an der Feldstraße am Heiligengeistfeld (St. Pauli): 1942 errichtet; nach Krieg Wohn-/Mediennutzung; 2019–2024 Aufstockung und Begrünung mit öffentlichem Bergpfad und Dachgarten.",
+      "deep_data_pool": [
+        {
+          "text": "Aufstockung ca. 20 m; Bergpfad ~550–560 m; Dachgarten ca. 1.400 m² öffentlich berichtet.",
+          "tags": [
+            "architektur",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Erinnerungsort: NS-Zwangsarbeit und Zivilschutz im Luftkrieg — Kontexttafeln beachten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Energiebunker Wilhelmsburg (Flakturm VI) als zweiter erhaltener Hamburger Flakturm.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Dachgarten-/Pfad-Öffnung, Hotel/Gastronomie und Tickets ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_markthalle_hamburg",
+      "name": "Markthalle Hamburg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Markthalle Hamburg (Klosterwall 11): 1913/14 Fritz Schumacher als Blumen-/Gemüsemarkthalle; ab Silvester 1976/77 Musikzentrum. Frühe DE-Konzerte u. a. AC/DC, Ramones, Motörhead; Bukowski-Lesung 18.5.1978 berichtet.",
+      "deep_data_pool": [
+        {
+          "text": "Kapazität und Indie-/Rock-Profil prägen das Haus bis heute — ~150–200 Konzerte/Jahr berichtet.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Nicht barrierefrei wegen alter Bausubstanz — LIVE Zugangsinfo prüfen.",
+          "tags": [
+            "live_hint"
+          ]
+        },
+        {
+          "text": "Lage Klosterwall direkt an den Gleisen südlich des Hauptbahnhofs — U Steinstraße fußläufig; roter Backsteinlangbau als Orientierung.",
+          "tags": [
+            "visuell",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Abendprogramm und Vorverkauf ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_rathaus",
+      "name": "Rathaus",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Hamburger Rathaus am Rathausmarkt: Neo-Renaissance-Bau nach dem Großen Brand 1842, fertiggestellt 1897. Sitz von Senat und Bürgerschaft; Turm und Prunkfassade prägen die Sichtachse vom Jungfernstieg. Rathausmarkt mit Heine-Denkmal und Alsterarkaden-Nähe.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: sandsteinfarbene Prunkfassade mit Turm und Arkaden am Rathausmarkt — zentrales Stadtbild-Motiv.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Geschichte: Vorgängerbauten; Neubau nach 1842, Einweihung 1897 als Symbol der wiederaufgebauten Innenstadt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: politische Mitte, öffentliche Innenhof-Passage oft tagsüber; Führungen LIVE.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Binnenalster/Jungfernstieg, St. Petri, Heine-Denkmal auf dem Markt.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Führungen, Sitzungszeiten und Platz-Events ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Rathaus?",
+          "a": "An der großen Neo-Renaissance-Fassade mit Turm am Rathausmarkt zwischen Alster und Mönckebergstraße."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_binnenalster",
+      "name": "Binnenalster",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Binnenalster: ca. 18 ha Innenstadt-Wasserbecken, entstanden durch Aufstauung der Alster; zusammen mit Jungfernstieg städtebauliches Herzstück. Fontäne saisonal; Alsterrundfahrten ab Jungfernstieg.",
+      "deep_data_pool": [
+        {
+          "text": "Trennung Außen-/Binnenalster an Lombards-/Kennedybrücke — klarer Stadtbild-Schnitt.",
+          "tags": [
+            "visuell",
+            "quer"
+          ]
+        },
+        {
+          "text": "Uferbauten oft auf Pfahlgründungen wegen weichem Baugrund berichtet.",
+          "tags": [
+            "technik",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Alsterrundfahrten, Bootsverleih und Fontänenbetrieb ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_bismarck_denkmal",
+      "name": "Bismarck-Denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Bismarck-Denkmal im Alten Elbpark (Hugo Lederer, 1906): ca. 34,3 m Granit — größtes Bismarck-Denkmal seiner Art berichtet. Südlicher Abschluss oberhalb Landungsbrücken; postkoloniale Kontextualisierung wird debattiert.",
+      "deep_data_pool": [
+        {
+          "text": "Standort Alter Elbpark/Stintfang-Hang: Blickbeziehung zu Landungsbrücken und Hafen.",
+          "tags": [
+            "visuell",
+            "quer"
+          ]
+        },
+        {
+          "text": "Kontext: imperialer Machtanspruch der Kaiserzeit; heutige Debatte um Erklärtafeln/Kontextualisierung.",
+          "tags": [
+            "geschichte",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Parkzugang frei; Kontexttafeln falls vorhanden prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_deichtorhallen_hamburg",
+      "name": "Deichtorhallen Hamburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Zwei Stahl-Glas-Großmarkthallen (Deichtorstraße 1–2) von 1911–1914 auf dem Gelände des ehemaligen Berliner Bahnhofs: Nordhalle Ernst Voss, Südhalle Fritz Schumacher. Ab 1989 Kunst-/Fotozentrum für zeitgenössische Kunst und Fotografie.",
+      "deep_data_pool": [
+        {
+          "text": "Standort am Deichtorplatz zwischen Altstadt, HafenCity und Kunstmeile — wenige Minuten vom Hbf.",
+          "tags": [
+            "visuell",
+            "quer"
+          ]
+        },
+        {
+          "text": "PHOXXI als zusätzlicher Ausstellungsort im Ensemble berichtet — Barrierefreiheit teils unterschiedlich.",
+          "tags": [
+            "leben_jetzt",
+            "live_hint"
+          ]
+        },
+        {
+          "text": "LIVE: Ausstellungen, Öffnung und Tickets ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_deutsches_zollmuseum",
+      "name": "Deutsches Zollmuseum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Deutsches Zollmuseum in der ehemaligen Zollabfertigung Alter Wandrahm 16 / Kornhausbrücke: Ausstellung zu Zollgeschichte, Schmuggel und Artenschutz; Außenexponat Zollkreuzer Oldenburg.",
+      "deep_data_pool": [
+        {
+          "text": "Gebäude/EG barrierefrei berichtet — LIVE bestätigen.",
+          "tags": [
+            "leben_jetzt",
+            "live_hint"
+          ]
+        },
+        {
+          "text": "Quer: Freihafen-Logik der Speicherstadt bis 2013; IMMH als maritimes Pendant.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Eintritt und Öffnung (oft Di–So) ephemer; unter 18 oft frei berichtet.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+      "name": "Hauptkirche St. Petri",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Älteste noch bestehende Pfarrkirche Hamburgs (Marktkirche ab 1195). Fast völlig vernichtet 1842; gotische Hallenkirche neu geweiht 7.5.1849. Turmhelm 1878, ca. 132 m; Plattform über viele Stufen. Löwenkopf-Türzieher (~1342) als ältestes erhaltenes Kunstwerk berichtet.",
+      "deep_data_pool": [
+        {
+          "text": "Lage am Beginn der Mönckebergstraße neben Rathausmarkt — grüner Kupferturm als Stadtmarke.",
+          "tags": [
+            "visuell",
+            "quer"
+          ]
+        },
+        {
+          "text": "1842: Kirche im Großen Brand zerstört; Wiederaufbau Mitte 19. Jh.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Turmaufstieg Öffnung/Tickets und Gottesdienste ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_kehrwiederspitze",
+      "name": "Kehrwiederspitze",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Westlichste Landzunge der Speicherstadt am Übergang Binnenhafen/Niederhafen. Name vom Abschiedsgruß für auslaufende Seeleute. Sichtachsen: Elbphilharmonie, Speicherstadt-Wassertor, Zaha-Hadid-Promenade; nah Miniatur Wunderland.",
+      "deep_data_pool": [
+        {
+          "text": "Frei zugängliche Kaimauer-Spitze — starker Foto-/Orientierungspunkt zur Elphi.",
+          "tags": [
+            "leben_jetzt",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Quer: Block D Miniatur Wunderland, Wasserschloss, Sandtorhafen.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: jederzeit frei begehbar; Events/Absperrungen am Kai ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_laeiszhalle",
+      "name": "Laeiszhalle",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Neobarockes Konzerthaus am Johannes-Brahms-Platz, eingeweiht 1908 aus Stiftung Carl und Sophie Laeisz; Architekten Martin Haller und Emil Meerwein. Bis 2017 Haupthaus der großen Orchester; heute Ergänzung zur Elbphilharmonie.",
+      "deep_data_pool": [
+        {
+          "text": "Großer Saal ca. 2.000 Plätze berichtet; Profil Klassik, Kammermusik, Jazz.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Gemeinsame Ticketstrukturen mit der Elbphilharmonie berichtet — LIVE prüfen.",
+          "tags": [
+            "live_hint",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Spielplan und Karten ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_markk_museum_am_rothenbaum",
+      "name": "MARKK Museum am Rothenbaum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "MARKK (bis 2018 Museum für Völkerkunde) an der Rothenbaumchaussee 64: Monumentalbau 1912. Fokus Kulturen und Künste der Welt, kritische Provenienzforschung und dekoloniale Debatten.",
+      "deep_data_pool": [
+        {
+          "text": "Gegründet 1879; Neubau 1912; Umbenennung MARKK 2018 als Signal neuer Museumsarbeit.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: MK&G (Design) und Kunsthalle (Kanon) als komplementäre Museen.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Eintritt/Öffnung und Abendfreie-Fenster ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_museum_fur_kunst_und_gewerbe_hamburg_mk_g",
+      "name": "Museum für Kunst und Gewerbe Hamburg (MK&G)",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "MK&G am Steintorplatz (Neorenaissance, eröffnet 1877): Design-/Kunstgewerbemuseum mit über 500.000 Objekten. Highlights u. a. Jugendstil-Pariser Saal (1900) und Verner-Panton-Spiegel-Kantine (1969).",
+      "deep_data_pool": [
+        {
+          "text": "Lage direkt östlich des Hauptbahnhofs am Steintorplatz — gelber Neorenaissance-Bau.",
+          "tags": [
+            "visuell",
+            "quer"
+          ]
+        },
+        {
+          "text": "Freiraum EG oft ohne Ticket nutzbar berichtet — LIVE bestätigen.",
+          "tags": [
+            "leben_jetzt",
+            "live_hint"
+          ]
+        },
+        {
+          "text": "LIVE: Eintritt, Sonderaktionen und Öffnung ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_speicherstadtmuseum",
+      "name": "Speicherstadtmuseum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Speicherstadtmuseum in Block L (Am Sandtorkai 36, Bau 1888): Arbeitswelt der Quartiersleute und Ewerführer; Zollanschluss 1888. Probierstube für historische Tee-/Kaffeeverkostung berichtet.",
+      "deep_data_pool": [
+        {
+          "text": "Authentischer Speicher mit genieteter Stahlkonstruktion — Originalatmosphäre der Lagerhausarbeit.",
+          "tags": [
+            "visuell",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Freihafen-Ende 1.1.2013; Nachbarn Miniatur Wunderland und IMMH.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnung (oft Mo–Fr) und Verkostungsangebot ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_thalia_theater",
+      "name": "Thalia Theater",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Staatstheater am Alstertor: gegründet 1843 von Chéri Maurice; Neubau 1912 Lundt & Kallmorgen; Wiederaufbau bis 1960 Werner Kallmorgen. Festes Ensemble; Zweitspielstätte Gaußstraße Altona.",
+      "deep_data_pool": [
+        {
+          "text": "Säulenfassade mit Tempelgiebel am Gerhart-Hauptmann-Platz — klassisches Sprechtheater-Haus.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Intendanz Sonja Anders ab Spielzeit 2025/26 berichtet — LIVE Spielplan.",
+          "tags": [
+            "leben_jetzt",
+            "live_hint"
+          ]
+        },
+        {
+          "text": "LIVE: Karten Tageskasse/Online und Lessingtage-Programm ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_panoptikum",
+      "name": "Panoptikum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Ältestes Wachsfigurenkabinett Deutschlands am Spielbudenplatz 3: gegründet 1879 von Friedrich Hermann Faerber, seit über vier Generationen in Familienhand; über 120 Figuren.",
+      "deep_data_pool": [
+        {
+          "text": "Neon-Schrift Panoptikum am Spielbudenplatz/Reeperbahn — sofortiger Blickfang.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Keine Schließfächer/Garderobe berichtet — LIVE bestätigen.",
+          "tags": [
+            "live_hint"
+          ]
+        },
+        {
+          "text": "LIVE: Eintritt und Öffnung (Sa länger berichtet) ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_altonaer_fischmarkt",
+      "name": "Altonaer Fischmarkt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Markttradition seit 1703 (damals dänisches Altona), sonntags morgens. Freiluftmarkt an Großer Elbstraße / St. Pauli Fischmarkt; Zentrum die Fischauktionshalle von 1895.",
+      "deep_data_pool": [
+        {
+          "text": "Fischauktionshalle: dreischiffige Backstein-Eisen-Konstruktion mit Glaskuppel — auch Konzert-/Frühschoppen-Ort.",
+          "tags": [
+            "visuell",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Startzeiten Sommer/Winter und Händlerangebot ephemer — freier Marktzugang.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hauptkirche_st_jacobi_hauptkirche_st_jacobi",
+      "name": "Hauptkirche St. Jacobi",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Spätgotische Hallenkirche an der Steinstraße; beim Brand 1842 verschont. Berühmt für die Arp-Schnitger-Orgel; Turm ca. 84 m mit limitiertem Aufstieg.",
+      "deep_data_pool": [
+        {
+          "text": "Arp-Schnitger-Orgel: größte noch erhaltene Barockorgel Nordeuropas berichtet.",
+          "tags": [
+            "geschichte",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Kirche oft täglich offen; Turmaufstieg/Turmcafé stark limitiert — ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hauptkirche_st_katharinen_hauptkirche_st_katharinen",
+      "name": "Hauptkirche St. Katharinen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Seeleute- und Hafenarbeiter-Kirche an der Schwelle zur Speicherstadt. Beim Brand 1842 blieb das Katharinen-Viertel durch Anwohnerwehr verschont. Kupfergedeckter Turmhelm; Offene Kirche.",
+      "deep_data_pool": [
+        {
+          "text": "Lage zwischen Altstadt und Speicherstadt an der Willy-Brandt-Straße — Kupferhelm als Marke.",
+          "tags": [
+            "visuell",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Offene Kirche, Turmführungen (oft Saison samstags) und Dienstagsmarkt auf dem Kirchhof ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_tierpark_hagenbeck",
+      "name": "Tierpark Hagenbeck",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Tierpark Hagenbeck (Lokstedter Grenzstraße 2, Stellingen): Carl Hagenbeck prägte panoramaartige, gitterlose Freianlagen. Bis heute Familienbesitz — einziger deutscher Großzoo ohne staatliche Regelfinanzierung berichtet. Tropen-Aquarium separat/Kombi.",
+      "deep_data_pool": [
+        {
+          "text": "U2 Hagenbecks Tierpark als klassische Anreise — Eingang Lokstedter Grenzstraße.",
+          "tags": [
+            "leben_jetzt",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Tickets Tierpark/Aquarium/Kombi, Öffnung Sommer/Winter und Hunde-Regel ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hamburg_hauptbahnhof",
+      "name": "Hamburg Hauptbahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Hamburg Hauptbahnhof: zentraler Fern-/S-Bahn-Knoten; eröffnet 1906 anstelle mehrerer Kopfbahnhöfe. Eine der meistfrequentierten Stationen Deutschlands/Europas; Tourist Info Kirchenallee; Schließfächer Nord/Süd.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: große Bahnsteighalle zwischen Steintor und Kirchenallee — Ost-West-Durchgang Stadt.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Geschichte: 1906 als Durchgangsbahnhof ersetzt ältere Kopfbahnhöfe; Wallring-Ost wich den Gleisen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Störungen, Schließfach-Verfügbarkeit und Baustellen ephemer — DB/HVV prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hamburger_kunsthalle",
+      "name": "Hamburger Kunsthalle",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Hamburger Kunsthalle (Glockengießerwall 5): Ensemble historischer Backsteinbau + Galerie der Gegenwart. Sammlungen Mittelalter bis Gegenwart; eines der bedeutendsten Kunstmuseen Deutschlands.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: historischer Backsteinbau und weißer Gegenwarts-Kubus nördlich des Hbf am Glockengießerwall.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "LIVE: Eintritt, Sonderausstellungs-Zuschläge und 1.-Do-Abend-Frei ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_miniatur_wunderland",
+      "name": "Miniatur Wunderland",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Größte Modelleisenbahnanlage der Welt in Block D / Kehrwieder 2; Modellfläche >1694 m² berichtet; Tag-Nacht-Zyklus ca. alle 15 Min. Online-Zeitfenster dringend empfohlen.",
+      "deep_data_pool": [
+        {
+          "text": "Betreiber: Gebrüder Spiegel; stetige Erweiterung um Kontinente/Themenwelten berichtet.",
+          "tags": [
+            "geschichte",
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "LIVE: Online-Zeitfenster-Tickets zwingend empfohlen — Verfügbarkeit ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    }
+  ]
+}

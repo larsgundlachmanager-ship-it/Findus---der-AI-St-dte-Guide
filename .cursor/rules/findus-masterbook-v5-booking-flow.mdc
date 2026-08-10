@@ -44,6 +44,8 @@ Code: `src/services/flights/inselfliegerAdvisor.ts`
 | Primary only if priced | `price.total` present → book button | ✅ |
 | Sold out / unpriced → alternatives | City search with prices only | ✅ |
 | Affiliate deep link with dates | Stay22 Allez `aid` + checkin/checkout | ✅ |
+| Maps-Pitch (Reviews + Flair) | Places Details + Gemini Slow-Lane | ✅ |
+| Günstigstes Zimmer lebendig verkaufen | Stay22 Fast-Lane + Maps Deep | ✅ |
 
 ### What does NOT work 1:1
 
@@ -53,7 +55,23 @@ Code: `src/services/flights/inselfliegerAdvisor.ts`
 | High rate limits | Demo mode 5 req/min | No Stay22 API key in app yet | Set `EXPO_PUBLIC_STAY22_API_KEY` from Stay22 Hub |
 | Scrape booking.com HTML | Blocked / ToS | Not allowed | Stay22 / Booking Demand API only |
 
-Code: `src/services/concierge/hotelAvailabilityService.ts` + `hotelBookingPack.ts`
+Code: `src/services/concierge/hotelAvailabilityService.ts` + `hotelBookingPack.ts` + `venueMapsPitch.ts` + `mapsPitchDeepResearch.ts`
+
+---
+
+## Maps-Pitch (Hotels / Museen / Venues)
+
+```
+Places Details (reviews + editorial)
+  → Gemini verdichtet Flair / Review-Themen
+  → Hotel: Stay22-Livepreis im Pitch verkaufen
+  → Buttons = Book / Web / Tickets
+```
+
+Fast-Lane Hotel = Stay22 inventar + lebendiger Sell.  
+Slow-Lane = Google-Maps-Reviews nachreichen (ohne Doppel-Skript).
+
+Code: `src/services/navigation/placePitchDetails.ts`, `src/services/research/venueMapsPitch.ts`, `src/module2/agents/mapsPitchDeepResearch.ts`
 
 ---
 

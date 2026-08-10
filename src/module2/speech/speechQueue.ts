@@ -20,6 +20,8 @@ type SpeechJob = {
   /** Volltext — ein Durchlauf, keine Chunk-Parallelität */
   text: string;
   turnId: string;
+  /** Mic hat Bridge schon gesprochen — Queue wartet nur auf Idle */
+  alreadySpoken?: boolean;
 };
 
 type Listener = (evt: {
@@ -72,6 +74,8 @@ export function enqueueSpeech(opts: {
   kind: SpeechJobKind;
   text: string;
   turnId: string;
+  /** Bridge schon via Mic/contextualBridge gesprochen */
+  alreadySpoken?: boolean;
 }): string {
   const id = `sq_${++jobSeq}`;
   const text = (opts.text ?? '').replace(/\s+/g, ' ').trim();
@@ -90,7 +94,13 @@ export function enqueueSpeech(opts: {
     mainActiveOrPending = true;
   }
 
-  queue.push({ id, kind: opts.kind, text, turnId: opts.turnId });
+  queue.push({
+    id,
+    kind: opts.kind,
+    text,
+    turnId: opts.turnId,
+    alreadySpoken: opts.alreadySpoken === true,
+  });
   void drain();
   return id;
 }
@@ -150,19 +160,24 @@ async function drain(): Promise<void> {
       emit({ type: 'start', job: next });
 
       try {
-        // Ein Stream, gleiche Priority — keine Preemption Bridging↔Main
-        await playSentenceChunks(
-          (async function* () {
-            const parts = chunkTextForTts(next.text);
-            if (parts.length === 0) {
-              yield next.text;
-              return;
-            }
-            for (const p of parts) yield p;
-          })(),
-          undefined,
-          { priority: 'question' },
-        );
+        if (next.alreadySpoken) {
+          // Mic/Bridge-Pfad hat TTS schon — nur Idle abwarten
+          await waitUntilSpeechIdle();
+        } else {
+          // Ein Stream, gleiche Priority — keine Preemption Bridging↔Main
+          await playSentenceChunks(
+            (async function* () {
+              const parts = chunkTextForTts(next.text);
+              if (parts.length === 0) {
+                yield next.text;
+                return;
+              }
+              for (const p of parts) yield p;
+            })(),
+            undefined,
+            { priority: 'question' },
+          );
+        }
       } catch {
         /* soft — nächster Job trotzdem */
       }

@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 
-group = 'com.finnus'
+group = 'de.findus'
 version = '1.0.0'
 
 def expoModulesCorePlugin = new File(["node", "--print", "require.resolve('expo-modules-core/package.json')"].execute(null, rootDir).text.trim(), "../android/ExpoModulesCorePlugin.gradle")

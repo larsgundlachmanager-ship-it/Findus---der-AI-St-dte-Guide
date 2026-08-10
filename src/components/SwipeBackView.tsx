@@ -21,6 +21,11 @@ type Props = {
   onBack: () => void;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  /**
+   * Oberer Bereich ohne Edge-Capture (px) — z. B. Top-Bar mit ‹-Tag-Navigation,
+   * sonst frisst die 28px-Kante den linken Pfeil.
+   */
+  edgeTopInset?: number;
 };
 
 /**
@@ -32,6 +37,7 @@ export function SwipeBackView({
   onBack,
   children,
   style,
+  edgeTopInset = 0,
 }: Props) {
   const onBackRef = useRef(onBack);
   onBackRef.current = onBack;
@@ -75,7 +81,10 @@ export function SwipeBackView({
       {children}
       {enabled ? (
         <View
-          style={styles.edge}
+          style={[
+            styles.edge,
+            edgeTopInset > 0 ? { top: edgeTopInset } : null,
+          ]}
           {...pan.panHandlers}
           accessibilityElementsHidden
           importantForAccessibility="no-hide-descendants"

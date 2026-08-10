@@ -1,7 +1,9 @@
 /**
- * Passive Dwell Tracking —
- * ≥10 Min → stilles Memory-Logging
- * ≥20 Min → Stempelkarte (OSM/POI-Punkt)
+ * GPS Dwell Tracking:
+ * - >=2 Min am Ort (klarer POI) -> Stempelkarte + Zeitachse
+ * - Vorbeilaufen / <2 Min -> kein Eintrag
+ * - Ausnahme: Modul 1 startet -> sofort (narrationPipeline)
+ * - >=10 Min -> zusaetzliches stilles Memory-Logging
  */
 
 import * as Location from 'expo-location';
@@ -17,16 +19,21 @@ import { getTrackSpeedMs } from './navigation/gpsTrackBuffer';
 
 /** Unter dieser Geschwindigkeit gilt User als stehend (Explore Flow B). */
 const STATIONARY_SPEED_MS = 0.45;
-/** Mindest-Verweildauer bevor „stehend“ für Story gilt. */
+/** Mindest-Verweildauer bevor ?stehend? f?r Story gilt. */
 const STATIONARY_MIN_DWELL_MS = 8_000;
 
 /** Radius um den Dwell-Anker (Meter). */
 export const DWELL_RADIUS_M = 20;
 /** Mindest-Verweildauer bevor Memory geloggt wird. */
 export const DWELL_MIN_MS = 10 * 60 * 1000;
-/** Ab dieser Dauer → Stempelkarte (OpenStreetMap / POI). */
-export const DWELL_STAMP_MS = 20 * 60 * 1000;
-/** Wie oft höchstens ein Tick ausgewertet wird. */
+/**
+ * Stempelkarte + Zeitachse: mindestens 2 Minuten am Ort.
+ * K?rzer (z. B. 1:30) ? kein Eintrag (au?er Modul 1).
+ */
+export const DWELL_TIMELINE_MS = 2 * 60 * 1000;
+/** Gleicher Gate wie Zeitachse. */
+export const DWELL_STAMP_MS = DWELL_TIMELINE_MS;
+/** Wie oft h?chstens ein Tick ausgewertet wird. */
 const TICK_MIN_INTERVAL_MS = 15_000;
 /** HUD: Ort erst anzeigen, wenn Nutzer 1 Minute am selben Ort bleibt. */
 const HUD_SHOW_AFTER_MS = 60_000;
@@ -38,6 +45,8 @@ type DwellSession = {
   lastSeenAtMs: number;
   logged: boolean;
   stamped: boolean;
+  /** ?2 Min ? Zeitachse */
+  onTimeline: boolean;
   poiId?: number;
   nameHint?: string;
   /** Ensure we only write HUD location once per dwell session. */
@@ -54,13 +63,13 @@ function classifyPoi(poi: Poi): UserEntityType {
     return 'hotel';
   }
   if (
-    /(restaurant|gastro|essen|café|cafe|bäckerei|baeckerei|imbiss|burger|pizzeria|bar|kneipe)/i.test(
+    /(restaurant|gastro|essen|caf?|cafe|b?ckerei|baeckerei|imbiss|burger|pizzeria|bar|kneipe)/i.test(
       blob,
     )
   ) {
     return 'restaurant';
   }
-  if (/(bahnhof|haltepunkt|bus|fähre|faehre|hafen|gleis|transit)/i.test(blob)) {
+  if (/(bahnhof|haltepunkt|bus|f?hre|faehre|hafen|gleis|transit)/i.test(blob)) {
     return 'transit';
   }
   if (poi.kind === 'area' || poi.kind === 'sub' || poi.kind === 'legacy') {
@@ -96,16 +105,29 @@ async function reverseNameHint(
     });
     const p = places[0];
     if (!p) return null;
-    const name =
-      p.name?.trim() ||
-      p.street?.trim() ||
-      p.district?.trim() ||
-      p.city?.trim() ||
-      null;
+    const street = p.street?.trim();
+    const streetNr = (p as { streetNumber?: string }).streetNumber?.trim();
+    if (street) {
+      const { formatStreetPin, simplifyPlaceName } = await import(
+        './timeline/placeLabelClean'
+      );
+      // Benannter Ort (nicht nur Straße) bevorzugen
+      const named = p.name?.trim();
+      if (
+        named &&
+        named.toLowerCase() !== street.toLowerCase() &&
+        !/^\d/.test(named) &&
+        named.length > 2
+      ) {
+        return simplifyPlaceName(named) || named;
+      }
+      return formatStreetPin(street, streetNr);
+    }
+    const name = p.name?.trim() || p.district?.trim() || null;
     if (!name) return null;
-    // Keine reinen Hausnummern / PLZ als Entity-Name
     if (/^\d{4,5}$/.test(name) || /^\d+\s*$/.test(name)) return null;
-    return name;
+    const { simplifyPlaceName } = await import('./timeline/placeLabelClean');
+    return simplifyPlaceName(name) || name;
   } catch {
     return null;
   }
@@ -116,7 +138,7 @@ function resetSession(): void {
 }
 
 /**
- * Jeden GPS-Fix aufrufen (auch während Audio — Memory läuft still).
+ * Jeden GPS-Fix aufrufen (auch w?hrend Audio ? Memory l?uft still).
  */
 export async function tickDwellTracking(
   lat: number,
@@ -135,6 +157,7 @@ export async function tickDwellTracking(
       lastSeenAtMs: nowMs,
       logged: false,
       stamped: false,
+      onTimeline: false,
       poiId: near?.poi.id,
       nameHint: near?.poi.name,
       hudShown: false,
@@ -150,15 +173,18 @@ export async function tickDwellTracking(
   );
 
   if (dist > DWELL_RADIUS_M) {
-    // User left the stable radius — do not keep showing the old place name.
+    // User left the stable radius ? do not keep showing the old place name.
     useFinnusStore.getState().setCurrentLocationName(null);
 
-    // Session beenden; ggf. vorher flushen / stempeln
+    // Session beenden; ggf. vorher flushen / Zeitachse / stempeln
     const elapsed = session.lastSeenAtMs - session.startedAtMs;
     if (!session.logged && elapsed >= DWELL_MIN_MS) {
       await flushDwellSession(session);
     }
-    if (!session.stamped && elapsed >= DWELL_STAMP_MS) {
+    if (
+      (!session.onTimeline || !session.stamped) &&
+      elapsed >= DWELL_TIMELINE_MS
+    ) {
       await stampDwellOnPassport(session);
     }
     resetSession();
@@ -171,6 +197,7 @@ export async function tickDwellTracking(
       lastSeenAtMs: nowMs,
       logged: false,
       stamped: false,
+      onTimeline: false,
       poiId: near?.poi.id,
       nameHint: near?.poi.name,
       hudShown: false,
@@ -184,23 +211,37 @@ export async function tickDwellTracking(
     await flushDwellSession(session);
     session.logged = true;
   }
-  if (!session.stamped && dwellMs >= DWELL_STAMP_MS) {
+  // Ein Gate: ?2 Min ? Zeitachse + Stempelkarte (stamp ruft Zeitachse mit)
+  if (
+    (!session.onTimeline || !session.stamped) &&
+    dwellMs >= DWELL_TIMELINE_MS
+  ) {
     await stampDwellOnPassport(session);
+    session.onTimeline = true;
     session.stamped = true;
   }
 
   if (!session.hudShown && dwellMs >= HUD_SHOW_AFTER_MS) {
     session.hudShown = true;
 
-    // Prefer the cached POI name (fast + stable). If unavailable, fall back
-    // to reverse geocode once.
-    const fromHint = session.nameHint?.trim() ?? '';
-    const place =
-      fromHint ||
-      (await reverseNameHint(session.anchorLat, session.anchorLng)) ||
-      `Ort bei ${session.anchorLat.toFixed(4)}, ${session.anchorLng.toFixed(4)}`;
-
-    useFinnusStore.getState().setCurrentLocationName(place);
+    // Prefer cached POI; sonst OSM→Google→📍 Straße+Nr. (nie „Gegend“)
+    let place = session.nameHint?.trim() ?? '';
+    if (!place) {
+      try {
+        const { resolveDwellPlace } = await import('./timeline/resolveDwellPlace');
+        const hit = await resolveDwellPlace(
+          session.anchorLat,
+          session.anchorLng,
+        );
+        place = hit.title;
+      } catch {
+        place =
+          (await reverseNameHint(session.anchorLat, session.anchorLng)) ?? '';
+      }
+    }
+    if (place) {
+      useFinnusStore.getState().setCurrentLocationName(place);
+    }
   }
 }
 
@@ -237,11 +278,11 @@ async function flushDwellSession(s: DwellSession): Promise<void> {
   }
 
   if (!name) {
-    name = `Ort bei ${s.anchorLat.toFixed(4)}, ${s.anchorLng.toFixed(4)}`;
+    name = 'Unbenannter Ort';
     type = 'custom';
   }
 
-  // Hotels nur als Kandidat, wenn nicht schon bestätigt — User soll bestätigen
+  // Hotels nur als Kandidat, wenn nicht schon best?tigt ? User soll best?tigen
   const isConfirmed = type !== 'hotel';
 
   useUserMemoryStore.getState().addOrUpdateEntity({
@@ -262,7 +303,132 @@ async function flushDwellSession(s: DwellSession): Promise<void> {
   }
 }
 
-/** ≥20 Min Verweilen → Stempelkarte nur mit klarem Ort ≤30 m. */
+/** ≥2 Min Verweilen → Zeitachse (Pack/OSM → Google → 📍 Straße+Nr.). */
+async function putDwellOnZeitachse(s: DwellSession): Promise<void> {
+  const dwellMin = Math.max(
+    2,
+    Math.round((s.lastSeenAtMs - s.startedAtMs) / 60_000),
+  );
+
+  let hit: {
+    title: string;
+    confidence: number;
+    via: string;
+    poiId?: number | null;
+  } | null = null;
+
+  try {
+    const { resolveDwellPlace } = await import('./timeline/resolveDwellPlace');
+    hit = await resolveDwellPlace(s.anchorLat, s.anchorLng);
+  } catch {
+    hit = null;
+  }
+
+  // Pack-Hint nur wenn Resolve nichts Besseres fand
+  if (
+    hit == null ||
+    hit.via === 'address' ||
+    /^📍/.test(hit.title)
+  ) {
+    let poiId = s.poiId ?? null;
+    let name = s.nameHint?.trim() || '';
+    if (poiId != null) {
+      const pois = await getAllPois();
+      const poi = pois.find((p) => p.id === poiId);
+      if (poi) {
+        const d = haversineMeters(s.anchorLat, s.anchorLng, poi.lat, poi.lng);
+        if (d <= 30) {
+          name = poi.name;
+        } else {
+          name = '';
+          poiId = null;
+        }
+      }
+    }
+    if (!name) {
+      const near = await nearestPoiWithin(s.anchorLat, s.anchorLng, 30);
+      if (near) {
+        name = near.poi.name;
+        poiId = near.poi.id;
+      }
+    }
+    if (name) {
+      const { simplifyPlaceName } = await import('./timeline/placeLabelClean');
+      hit = {
+        title: simplifyPlaceName(name) || name,
+        confidence: 0.95,
+        via: 'pack',
+        poiId,
+      };
+    }
+  }
+
+  if (!hit?.title) return;
+
+  try {
+    const { recordDwellVisit } = await import('./timeline/recordDwellVisit');
+    recordDwellVisit({
+      hit: {
+        title: hit.title,
+        confidence: hit.confidence,
+        via: (hit.via as 'pack' | 'osm' | 'google' | 'address') || 'address',
+        poiId: hit.poiId ?? null,
+      },
+      lat: s.anchorLat,
+      lng: s.anchorLng,
+      arrivedAtMs: s.startedAtMs,
+      dwellMin,
+    });
+  } catch {
+    /* soft */
+  }
+
+  const poiId = hit.poiId ?? null;
+  if (poiId == null) {
+    if (__DEV__) {
+      console.log(`[dwell] zeitachse address-only "${hit.title}" ${dwellMin}min`);
+    }
+    return;
+  }
+
+  const name = hit.title;
+  const store = useFinnusStore.getState();
+  const existing = store.visitedHistory.find(
+    (v) =>
+      v.poiId === poiId ||
+      (v.name.toLowerCase() === name.toLowerCase() &&
+        Math.abs(v.visitedAt - s.startedAtMs) < 6 * 60 * 60_000),
+  );
+  if (!existing) {
+    store.addVisitedPlace({
+      poiId,
+      name,
+      kind: 'historic',
+      keyFacts: [`Verweilt ${dwellMin} Min`],
+      visitedAt: s.startedAtMs,
+      onTimeline: true,
+      lat: s.anchorLat,
+      lng: s.anchorLng,
+    });
+  } else if (existing.onTimeline !== true) {
+    store.addVisitedPlace({
+      ...existing,
+      keyFacts: [
+        `Verweilt ${dwellMin} Min`,
+        ...existing.keyFacts.filter((f) => !/per\s+gps/i.test(f)),
+      ].slice(0, 4),
+      onTimeline: true,
+      lat: existing.lat ?? s.anchorLat,
+      lng: existing.lng ?? s.anchorLng,
+    });
+  }
+
+  if (__DEV__) {
+    console.log(`[dwell] zeitachse "${name}" ${dwellMin}min`);
+  }
+}
+
+/** ?2 Min Verweilen ? Stempelkarte nur mit klarem Ort ?30 m. */
 async function stampDwellOnPassport(s: DwellSession): Promise<void> {
   let name = s.nameHint?.trim() || '';
   let poiId = s.poiId ?? null;
@@ -287,11 +453,16 @@ async function stampDwellOnPassport(s: DwellSession): Promise<void> {
     }
   }
 
-  // Kein klarer Ort im 30-m-Umkreis → nicht in Planung / Stempel
+  // Zeitachse immer (auch Stra?e+Nr. ohne Pack-POI)
+  if (!s.onTimeline) {
+    await putDwellOnZeitachse(s);
+  }
+
+  // Stempelkarte nur mit klarem Pack-POI ?30 m
   if (!name || !poiId) {
     if (__DEV__) {
       console.log(
-        `[dwell] skip stamp — kein Ort ≤30 m (${s.anchorLat.toFixed(5)}, ${s.anchorLng.toFixed(5)})`,
+        `[dwell] skip passport stamp ? kein Pack-POI ?30 m (${s.anchorLat.toFixed(5)}, ${s.anchorLng.toFixed(5)})`,
       );
     }
     return;
@@ -306,82 +477,32 @@ async function stampDwellOnPassport(s: DwellSession): Promise<void> {
   );
   if (already) return;
 
-  const stampId = poiId;
-
   store.addVisitedPlace({
-    poiId: stampId,
+    poiId,
     name,
     kind: 'historic',
     keyFacts: [
       `Verweilt ${Math.round((s.lastSeenAtMs - s.startedAtMs) / 60_000)} Min`,
-      `${s.anchorLat.toFixed(5)}, ${s.anchorLng.toFixed(5)}`,
     ],
     visitedAt: s.startedAtMs,
+    onTimeline: true,
+    lat: s.anchorLat,
+    lng: s.anchorLng,
   });
 
-  try {
-    const { upsertVisitFromStamp } = require('./timeline/visitLog') as {
-      upsertVisitFromStamp: (o: {
-        name: string;
-        lat?: number | null;
-        lng?: number | null;
-        poiId?: number | null;
-        arrivedAtMs: number;
-        dwellMin?: number | null;
-        source?: 'dwell' | 'stamp';
-      }) => unknown;
-    };
-    upsertVisitFromStamp({
-      name,
-      lat: s.anchorLat,
-      lng: s.anchorLng,
-      poiId: stampId,
-      arrivedAtMs: s.startedAtMs,
-      dwellMin: Math.round((s.lastSeenAtMs - s.startedAtMs) / 60_000),
-      source: 'dwell',
-    });
-  } catch {
-    /* soft */
-  }
-
-  try {
-    const { noteModule1PlaceOnAxis } = require('./module5/unifiedDayAxis') as {
-      noteModule1PlaceOnAxis: (o: {
-        name: string;
-        lat?: number;
-        lng?: number;
-        poiId?: number;
-        atMs?: number;
-        dwellMin?: number;
-        source?: 'dwell';
-      }) => void;
-    };
-    noteModule1PlaceOnAxis({
-      name,
-      lat: s.anchorLat,
-      lng: s.anchorLng,
-      poiId: stampId,
-      atMs: s.startedAtMs,
-      dwellMin: Math.round((s.lastSeenAtMs - s.startedAtMs) / 60_000),
-      source: 'dwell',
-    });
-  } catch {
-    /* soft */
-  }
-
   if (__DEV__) {
-    console.log(`[dwell] stamp passport "${name}" id=${stampId}`);
+    console.log(`[dwell] stamp passport "${name}" id=${poiId}`);
   }
 }
 
-/** Für Tests / Simulation: Session zurücksetzen */
+/** F?r Tests / Simulation: Session zur?cksetzen */
 export function resetDwellTracking(): void {
   resetSession();
   lastTickAt = 0;
 }
 
 /**
- * User steht still genug → Modul 1 darf volle Story ohne Teaser starten.
+ * User steht still genug ? Modul 1 darf volle Story ohne Teaser starten.
  */
 export function isUserStationaryForExplore(nowMs: number = Date.now()): boolean {
   if (!session) return false;

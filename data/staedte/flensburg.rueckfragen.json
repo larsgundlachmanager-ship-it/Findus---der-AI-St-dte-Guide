@@ -1,0 +1,1148 @@
+{
+  "city_id": "flensburg",
+  "story": 190,
+  "minStory": 45,
+  "thin": [
+    {
+      "id": "flensburg_eichhornchenweg_wander_radpfad_im_handewitter_forst",
+      "name": "\"Eichhörnchenweg\" Wander- & Radpfad im Handewitter Forst",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "flensburg_1_klasse_yachtcharter",
+      "name": "1. Klasse Yachtcharter",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "flensburg_alive_bucher_geschenke_mehr",
+      "name": "Alive - Bücher, Geschenke & Mehr",
+      "tier": 2,
+      "category": "souvenir"
+    },
+    {
+      "id": "flensburg_alte_gleisbrucke_uber_den_hafendamm_zum_osthafen",
+      "name": "Alte Gleisbrücke über den Hafendamm zum Osthafen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_alter_mastkran",
+      "name": "Alter Mastkran",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_ansgar_kirke_flensborg_nord",
+      "name": "Ansgar Kirke Flensborg Nord",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_art_creativ_flensburg_ihr_ideenreich",
+      "name": "ART Creativ Flensburg – Ihr Ideenreich",
+      "tier": 2,
+      "category": "souvenir"
+    },
+    {
+      "id": "flensburg_aussichtsplattform",
+      "name": "Aussichtsplattform",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "flensburg_aussichtsplattform_am_volkspark",
+      "name": "Aussichtsplattform am Volkspark",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "flensburg_aussichtspunkt_fordeblick",
+      "name": "Aussichtspunkt Fördeblick",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "flensburg_aussichtspunkt_kleine_treppe",
+      "name": "Aussichtspunkt Kleine Treppe",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "flensburg_aussichtspunkt_sankelmarker_see",
+      "name": "Aussichtspunkt Sankelmarker See",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "flensburg_aussichtspunkt_sitzpilz_am_danfossbach",
+      "name": "Aussichtspunkt Sitzpilz am Danfossbach",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "flensburg_bahnhof_serpentine_flensburg",
+      "name": "Bahnhof/Serpentine - Flensburg",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "flensburg_ballastbrucke_flensburg",
+      "name": "Ballastbrücke - Flensburg",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "flensburg_ballettschule_flensburg",
+      "name": "Ballettschule Flensburg",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "flensburg_bierbike_flensburg",
+      "name": "BierBike Flensburg",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "flensburg_bierbike_hof",
+      "name": "BierBike Hof",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "flensburg_blutenwiese_am_trogelsbyhof",
+      "name": "Blütenwiese am Trögelsbyhof",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_blutenwiese_flensburg_bluht",
+      "name": "Blütenwiese Flensburg blüht",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_braasch_rum_rum_manufaktur_museum",
+      "name": "Braasch Rum & Rum Manufaktur Museum",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "flensburg_broschmann_finke_theater_company",
+      "name": "Broschmann & Finke Theater Company",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "flensburg_bundsenkapelle",
+      "name": "Bundsenkapelle",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_burghof",
+      "name": "Burghof",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_burgplatz_flensburg",
+      "name": "Burgplatz - Flensburg",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_cambio_carsharing_station_schloss",
+      "name": "cambio CarSharing - Station Schloss",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_campelle_esg_flensburg",
+      "name": "Campelle ESG Flensburg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_canvero_shop_flensburg",
+      "name": "Canvero Shop Flensburg",
+      "tier": 2,
+      "category": "souvenir"
+    },
+    {
+      "id": "flensburg_carlisle_park",
+      "name": "Carlisle-Park",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_caspersen_skulpturen_atrium",
+      "name": "Caspersen Skulpturen Atrium",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_christiansenpark",
+      "name": "Christiansenpark",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_christophorus_skulptur",
+      "name": "Christophorus-Skulptur",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_christuskirche_zu_flensburg_murwik_der_ev_luth_kirchengemeinde_murwik",
+      "name": "Christuskirche zu Flensburg Mürwik der Ev.-Luth. Kirchengemeinde Mürwik",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_citti_ticketcenter",
+      "name": "CITTI Ticketcenter",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "flensburg_citygames_flensburg",
+      "name": "CityGames Flensburg",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "flensburg_collundtspark",
+      "name": "Collundtspark",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_deko_simmo",
+      "name": "Deko Simmo",
+      "tier": 2,
+      "category": "souvenir"
+    },
+    {
+      "id": "flensburg_denkmal_general_carl_von_wrangel",
+      "name": "Denkmal General Carl von Wrangel",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_denkmal_sms_blucher",
+      "name": "Denkmal SMS BLÜCHER",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_det_lille_teater_flensborg",
+      "name": "Det lille Teater Flensborg",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "flensburg_deutsches_rotes_kreuz_kreisverband_flensburg_stadt_e_v",
+      "name": "Deutsches Rotes Kreuz, Kreisverband Flensburg-Stadt e.V.",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_dr_kreuz",
+      "name": "Dr. Kreuz",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_drei_eisbaren_von_johannes_caspersen",
+      "name": "Drei Eisbären von Johannes Caspersen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_drk_schwesternschaft_elsa_brandstrom",
+      "name": "DRK Schwesternschaft Elsa Brändström",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_duburg",
+      "name": "Duburg",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_e_fun_holler",
+      "name": "E-Fun Höller",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "flensburg_eddeboe",
+      "name": "Eddeboe",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_ehemaliges_disc_golf_auf_dem_campus",
+      "name": "Ehemaliges Disc Golf auf dem Campus",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "flensburg_ehemaliges_freilandlabor",
+      "name": "Ehemaliges Freilandlabor",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "flensburg_ehrenhain",
+      "name": "Ehrenhain",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_eiszeit_haus",
+      "name": "Eiszeit Haus",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "flensburg_enibasknots_kleine_schatze_selbstbedienungsschrank",
+      "name": "enibasknots \"kleine Schätze \" Selbstbedienungsschrank",
+      "tier": 2,
+      "category": "souvenir"
+    },
+    {
+      "id": "flensburg_equippers_flensburg_e_v",
+      "name": "Equippers Flensburg e.V. ⛪",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_evangelisch_freikirchliche_gemeinde_flensburg_baptisten_kdor",
+      "name": "Evangelisch-Freikirchliche Gemeinde Flensburg (Baptisten) KdöR",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_fahrradfahre_flensburger_forde_hafen_flensburg",
+      "name": "Fahrradfähre Flensburger Förde - Hafen Flensburg",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "flensburg_ferienwohnung_flensburg_solitude_strand",
+      "name": "Ferienwohnung Flensburg Solitüde Strand",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_flensbloc_boulderhalle_flensburg",
+      "name": "FlensBloc - Boulderhalle Flensburg",
+      "tier": 2,
+      "category": "activity"
+    },
+    {
+      "id": "flensburg_flensboat_de",
+      "name": "Flensboat.de",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "flensburg_flensburg",
+      "name": "Flensburg",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "flensburg_flensburg_bahnhof",
+      "name": "Flensburg Bahnhof",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "flensburg_flensburg_bahnhof_tegelbarg",
+      "name": "Flensburg Bahnhof/Tegelbarg",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "flensburg_flensburg_galerie",
+      "name": "Flensburg Galerie",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "flensburg_flensburg_hafen",
+      "name": "Flensburg Hafen",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "flensburg_flensburg_yachtclub_e_v",
+      "name": "Flensburg Yachtclub e.V.",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "flensburg_flensburger_hafen_gmbh",
+      "name": "Flensburger Hafen GmbH",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "flensburg_flensburger_stadion",
+      "name": "Flensburger Stadion",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "flensburg_flensburger_stadtmatrosen",
+      "name": "Flensburger Stadtmatrosen",
+      "tier": 2,
+      "category": "souvenir"
+    },
+    {
+      "id": "flensburg_flensburger_hafen",
+      "name": "Flensburger-Hafen",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "flensburg_fly_sail",
+      "name": "FLY & SAIL",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "flensburg_flying_tiger_copenhagen",
+      "name": "Flying Tiger Copenhagen",
+      "tier": 2,
+      "category": "souvenir"
+    },
+    {
+      "id": "flensburg_fordeblick",
+      "name": "Fördeblick",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_fordebrucke_flensburg",
+      "name": "Fördebrücke - Flensburg",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "flensburg_forum_theater_flensburg",
+      "name": "Forum Theater Flensburg",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "flensburg_frs_syltfahre_gmbh_co_kg",
+      "name": "FRS Syltfähre GmbH & Co. KG",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "flensburg_funk_und_telegraphenhaus_flensburg_murwik",
+      "name": "Funk- und Telegraphenhaus (Flensburg-Mürwik)",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_galerie_der_miezen_katzenkunst_norderstrasse_flensburg",
+      "name": "Galerie der Miezen - Katzenkunst Norderstraße Flensburg",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "flensburg_gallery4",
+      "name": "Gallery4",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "flensburg_gartenkolonie_112",
+      "name": "Gartenkolonie 112",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_gendarmstien",
+      "name": "Gendarmstien",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "flensburg_gertruds_krautergarten_heilkrautergarten",
+      "name": "Gertruds Kräutergarten (Heilkräutergarten)",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_hafendamm_flensburg",
+      "name": "Hafendamm - Flensburg",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "flensburg_hafenspitze",
+      "name": "Hafenspitze",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "flensburg_haptik_galerie_fur_gebrauchskunst",
+      "name": "haptik - Galerie für Gebrauchskunst",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "flensburg_harrisleer_kreuz",
+      "name": "Harrisleer Kreuz",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_helligandskirken_dansk",
+      "name": "Helligåndskirken - dansk",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_hermanns_schrebergarten",
+      "name": "Hermanns Schrebergarten",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_holmnixe",
+      "name": "Holmnixe",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_holunderhutte",
+      "name": "Holunderhütte",
+      "tier": 2,
+      "category": "souvenir"
+    },
+    {
+      "id": "flensburg_hundefreilauf_flensburg_e_v",
+      "name": "Hundefreilauf Flensburg e.V.",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_hundestrand",
+      "name": "Hundestrand",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_hundestrand_ostseebad",
+      "name": "Hundestrand Ostseebad",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_idstedtlowe",
+      "name": "Idstedtlöwe",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_im_jaich_stadthafen_flensburg",
+      "name": "im-jaich stadthafen Flensburg",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "flensburg_jelte_duchene_park",
+      "name": "Jelte Duchêne Park",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_johannistreppe",
+      "name": "Johannistreppe",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_johannsen_rum_johannsens_hokerei_rum_aus_der_traditionellen_manufaktur",
+      "name": "Johannsen Rum & Johannsens Hökerei: Rum aus der traditionellen Manufaktur Johannsen in Flensburg",
+      "tier": 2,
+      "category": "souvenir"
+    },
+    {
+      "id": "flensburg_k3_stadtfuhrungen_flensburg",
+      "name": "k3 stadtführungen Flensburg",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "flensburg_katholische_kirche_st_ansgar",
+      "name": "Katholische Kirche St Ansgar",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_katholische_kirche_st_marien",
+      "name": "Katholische Kirche St. Marien",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_katholische_ordensschwestern_dienerinnen_vom_heiligen_blut",
+      "name": "Katholische Ordensschwestern \"Dienerinnen vom Heiligen Blut\"",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_kleine_buhne",
+      "name": "Kleine Bühne",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "flensburg_kletterhalle_flensburg",
+      "name": "Kletterhalle Flensburg",
+      "tier": 2,
+      "category": "activity"
+    },
+    {
+      "id": "flensburg_kolonie_81a_am_wasserturm_verein_der_gartenfreunde_flensburg_e_v",
+      "name": "Kolonie 81a, Am Wasserturm, Verein der Gartenfreunde Flensburg e.V.",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_kompagnietor",
+      "name": "Kompagnietor",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_kong_arrildshoj_park",
+      "name": "Kong-Arrildshoj-Park",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "flensburg_kopf_einer_windkraftanlage",
+      "name": "Kopf einer Windkraftanlage",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_krautergarten_mit_farberpflanzen_und_wildgarten",
+      "name": "Kräutergarten mit Färberpflanzen und Wildgarten",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_kreuzlucke_flensburg",
+      "name": "Kreuzlücke - Flensburg",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_krieger_denkmal",
+      "name": "Krieger Denkmal",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_kriegsdenkmal",
+      "name": "Kriegsdenkmal",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_kulturwerkstatt_kuhlhaus",
+      "name": "Kulturwerkstatt Kühlhaus",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "flensburg_lautrupsbach_wanderweg",
+      "name": "Lautrupsbach Wanderweg",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "flensburg_logenhaus_flensburg",
+      "name": "Logenhaus Flensburg",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_marchenskulpturen_im_volkspark",
+      "name": "Märchenskulpturen im Volkspark",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "flensburg_marienholzung",
+      "name": "Marienhölzung",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "flensburg_marientreppe",
+      "name": "Marientreppe",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_marina_flensburg",
+      "name": "Marina Flensburg",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "flensburg_marina_werftkontor_gmbh",
+      "name": "Marina Werftkontor GmbH",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "flensburg_maskenbrunnen_von_bildhauer",
+      "name": "Maskenbrunnen von Bildhauer",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_mehrjahrige_bluhflache_flensburg_bluht",
+      "name": "Mehrjährige Blühfläche Flensburg blüht",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_minigolfplatz_solitude",
+      "name": "Minigolfplatz Solitüde",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "flensburg_mr_scandis_funpark",
+      "name": "Mr. Scandis Funpark",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "flensburg_muhlenstrom_wasserrad",
+      "name": "Mühlenstrom-Wasserrad",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_museumsberg_flensburg",
+      "name": "Museumsberg Flensburg",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "flensburg_museumsberg_flensburg_hans_christiansen_haus",
+      "name": "Museumsberg Flensburg, Hans-Christiansen-Haus",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "flensburg_museumshafen_flensburg_e_v",
+      "name": "Museumshafen Flensburg e. V.",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "flensburg_mystery_house_live_escape_room_spiele_flensburg",
+      "name": "Mystery House Live Escape Room Spiele Flensburg",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "flensburg_naherholungsgebiet_taruper_seenplatte_und_adelbybek",
+      "name": "Naherholungsgebiet Taruper Seenplatte und Adelbybek",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "flensburg_naturschutzgebiet_twedter_feld",
+      "name": "Naturschutzgebiet Twedter Feld",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "flensburg_neptunbrunnen",
+      "name": "Neptunbrunnen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_neuapostolische_kirche_flensburg",
+      "name": "Neuapostolische Kirche Flensburg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_neubauer_reisen_ihr_regionaler_reiseveranstalter",
+      "name": "Neubauer Reisen - Ihr regionaler Reiseveranstalter",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "flensburg_niederdeutsche_buhne_flensburg_gemeinnutzige_gmbh",
+      "name": "Niederdeutsche Bühne Flensburg gemeinnützige GmbH",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "flensburg_nordern_art",
+      "name": "Nordern Art",
+      "tier": 2,
+      "category": "souvenir"
+    },
+    {
+      "id": "flensburg_nsg_twedter_feld",
+      "name": "NSG Twedter Feld",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_obelisk_zum_gedenken_an_die_schlacht_von_bau",
+      "name": "Obelisk zum Gedenken an die Schlacht von Bau",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_ostliche_altstadt_flensburgs",
+      "name": "östliche Altstadt Flensburgs",
+      "tier": 2,
+      "category": "altstadt"
+    },
+    {
+      "id": "flensburg_ostseebad_flensburg",
+      "name": "Ostseebad Flensburg",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_park_konventgarten_spielplatz",
+      "name": "Park Konventgarten Spielplatz",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_pauluskirche_zu_flensburg_der_ev_luth_paulus_kirchengemeinde_flensburg",
+      "name": "Pauluskirche zu Flensburg der Ev.-Luth. Paulus-Kirchengemeinde Flensburg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_phanomenta",
+      "name": "Phänomenta",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "flensburg_plop_shop_vor_der_flensburger_brauerei",
+      "name": "Plop-Shop vor der Flensburger Brauerei",
+      "tier": 2,
+      "category": "souvenir"
+    },
+    {
+      "id": "flensburg_rastplatz_am_uferweg_von_solitude_nach_glucksburg",
+      "name": "Rastplatz am Uferweg von Solitüde nach Glücksburg",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "flensburg_rathaus_flensburg",
+      "name": "Rathaus - Flensburg",
+      "tier": 2,
+      "category": "geschichte"
+    },
+    {
+      "id": "flensburg_rathausplatz",
+      "name": "Rathausplatz",
+      "tier": 2,
+      "category": "geschichte"
+    },
+    {
+      "id": "flensburg_restaurant_galerie",
+      "name": "Restaurant Galerie",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "flensburg_roxy_concerts",
+      "name": "Roxy Concerts",
+      "tier": 2,
+      "category": "kino"
+    },
+    {
+      "id": "flensburg_russisch_deutsche_buhne",
+      "name": "Russisch-Deutsche Bühne",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "flensburg_schiffahrtsmuseum_flensburg",
+      "name": "Schiffahrtsmuseum - Flensburg",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "flensburg_schloss_glucksburg",
+      "name": "Schloss Glücksburg",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_schlosspark",
+      "name": "Schloßpark",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_schonen_aussicht_in_flensburg",
+      "name": "Schönen Aussicht in Flensburg",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_schoner_fleck_wald",
+      "name": "Schöner Fleck wald",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "flensburg_se_reisen_flensburg",
+      "name": "SE Reisen Flensburg",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "flensburg_sitzgelegenheit_am_hafen",
+      "name": "Sitzgelegenheit am Hafen",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_solitude",
+      "name": "Solitüde",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_sonnenwendwiese",
+      "name": "Sonnenwendwiese",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_sonwik_yachthafen",
+      "name": "Sonwik Yachthafen",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "flensburg_spiegelgrotte",
+      "name": "Spiegelgrotte",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_st_gertrud_kirche_flensburg_ev_luth_kirchengemeinde_st_gertrud_zu_flen",
+      "name": "St. Gertrud Kirche Flensburg - Ev.-Luth. Kirchengemeinde St. Gertrud zu Flensburg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_st_johannis_kirche_flensburg_ev_luth_kirchengemeinde_flensburg_st_joha",
+      "name": "St. Johannis Kirche Flensburg - Ev.-Luth. Kirchengemeinde Flensburg-St. Johannis",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_st_johannis_kirche_zu_flensburg_der_ev_luth_kirchengemeinde_adelby_eng",
+      "name": "St. Johannis Kirche zu Flensburg der Ev.-Luth. Kirchengemeinde Adelby-Engelsby",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_st_jurgen_kirche_flensburg_ev_luth_kirchengemeinde_flensburg_st_jurgen",
+      "name": "St. Jürgen Kirche Flensburg - Ev.-Luth. Kirchengemeinde Flensburg-St. Jürgen",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_st_marien_kirche_flensburg",
+      "name": "St. Marien Kirche Flensburg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_st_michael_kirche_flensburg_ev_luth_kirchengemeinde_st_michael_in_flen",
+      "name": "St. Michael Kirche Flensburg - Ev.-Luth. Kirchengemeinde St. Michael in Flensburg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_st_nikolai_kirche_zu_flensburg_der_ev_luth_st_nikolai_kirchengemeinde_",
+      "name": "St. Nikolai Kirche zu Flensburg der Ev.-Luth. St. Nikolai-Kirchengemeinde Flensburg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_st_petri_kirche_flensburg_ev_luth_st_petrigemeinde_in_flensburg",
+      "name": "St. Petri Kirche Flensburg - Ev.-Luth. St. Petrigemeinde in Flensburg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "flensburg_stadt_flensburg",
+      "name": "Stadt Flensburg",
+      "tier": 2,
+      "category": "verwaltung"
+    },
+    {
+      "id": "flensburg_stadttheater_flensburg",
+      "name": "Stadttheater - Flensburg",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "flensburg_stadtwerke_flensburg_ladestation",
+      "name": "Stadtwerke Flensburg-Ladestation",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "flensburg_steinskulptur",
+      "name": "Steinskulptur",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_stiftungsland_harrislee",
+      "name": "Stiftungsland Harrislee",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "flensburg_stiftungsland_schaferhaus",
+      "name": "Stiftungsland Schäferhaus",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "flensburg_strand_glucksburg",
+      "name": "Strand Glücksburg",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_strandbad_wassersleben",
+      "name": "Strandbad Wassersleben",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_sudermarkt",
+      "name": "Südermarkt",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "flensburg_tauchermuseum_flensburg",
+      "name": "Tauchermuseum Flensburg",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "flensburg_tbz_recyclinghof_kauslund",
+      "name": "TBZ Recyclinghof Kauslund",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "flensburg_theaterschule_flensburg_ggmbh",
+      "name": "Theaterschule Flensburg gGmbH",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "flensburg_tsb_flensburg_sportanlage",
+      "name": "TSB Flensburg Sportanlage",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "flensburg_volkspark",
+      "name": "Volkspark",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_wander_rad_rastplatz",
+      "name": "Wander- & Rad-Rastplatz",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "flensburg_wasserplatz",
+      "name": "Wasserplatz",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "flensburg_wassersportschule_nord_ostsee_kanal_sportbootfuhrerschein_flensburg",
+      "name": "Wassersportschule Nord-Ostsee-Kanal | Sportbootführerschein Flensburg",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "flensburg_wasserturm_fruerlund",
+      "name": "Wasserturm Fruerlund",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "flensburg_weiche_bahnhof_flensburg",
+      "name": "Weiche Bahnhof - Flensburg",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "flensburg_wildgehege_marienholzung",
+      "name": "Wildgehege Marienhölzung",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "flensburg_wildschweingehege_friedeholz",
+      "name": "Wildschweingehege Friedeholz",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "flensburg_wochenmarkt_auf_dem_sudermarkt",
+      "name": "Wochenmarkt auf dem Südermarkt",
+      "tier": 2,
+      "category": "markt"
+    },
+    {
+      "id": "flensburg_yachtcharter_flensburg",
+      "name": "Yachtcharter Flensburg",
+      "tier": 2,
+      "category": "tour"
+    }
+  ],
+  "google_missing": []
+}

@@ -1,5 +1,5 @@
 /**
- * TTS Engine facade — Active-Voice Keep-Warm API (Piper).
+ * TTS Engine facade — Active-Voice Keep-Warm API (Cartesia).
  */
 export {
   voicePreloader,
@@ -9,20 +9,16 @@ export {
 export { voicePreloader as ttsEngine } from './voicePreloader';
 
 export {
-  warmupKokoro,
-  warmupPiperEngine,
+  warmupTtsEngine,
   startVoiceBuffer,
   synthesizeWav,
-  speakWithKokoro,
-  speakWithPiper,
+  speakText,
   speakAssistantText,
   stopSpeaking,
-  isKokoroReady,
-  isPiperReady,
+  isTtsReady,
   loadVoiceIntoRam,
   unloadVoiceFromRam,
   unloadInactiveVoicePacks,
   ensureMartinOrtSession,
-  markKokoroWarmedUp,
-  markPiperWarmedUp,
+  markTtsWarmedUp,
 } from '../AudioVoiceService';

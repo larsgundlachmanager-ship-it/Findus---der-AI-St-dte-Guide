@@ -1,13 +1,14 @@
 import { shortestAngleDelta } from './bearing';
 
 /**
- * Exponential low-pass on compass heading with 0/360 wrap handling.
- * Lower alpha = smoother / more lag. ~0.15–0.22 feels buttery on foot.
+ * Adaptive exponential low-pass on compass heading with 0/360 wrap.
+ * Base alpha ≈ 0.55: snappy for body turns, still softens handshake jitter.
+ * Large deltas temporarily raise alpha so the needle catches up immediately.
  */
 export class HeadingLowPass {
   private value: number | null = null;
 
-  constructor(private readonly alpha: number = 0.18) {}
+  constructor(private readonly alpha: number = 0.55) {}
 
   push(rawDeg: number): number {
     const raw = ((rawDeg % 360) + 360) % 360;
@@ -16,7 +17,17 @@ export class HeadingLowPass {
       return raw;
     }
     const delta = shortestAngleDelta(this.value, raw);
-    this.value = (this.value + this.alpha * delta + 360) % 360;
+    const abs = Math.abs(delta);
+    let a = this.alpha;
+    if (abs > 40) {
+      a = Math.min(0.9, this.alpha * 1.65);
+    } else if (abs > 15) {
+      a = Math.min(0.78, this.alpha * 1.35);
+    } else if (abs < 2) {
+      // Micro jitter — light damp only
+      a = this.alpha * 0.75;
+    }
+    this.value = (this.value + a * delta + 360) % 360;
     return this.value;
   }
 

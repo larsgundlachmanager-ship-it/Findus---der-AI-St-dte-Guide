@@ -7,6 +7,7 @@ import type { QuickAction } from '../types/concierge';
 import type { GeminiConciergeResponse } from '../types/concierge';
 import { getCachedUserProfile } from './userProfileService';
 import { useFinnusStore } from '../store/useFinnusStore';
+import { spotifyArtistsFromProfile } from './persona/spotifyConnect';
 
 const PLAYLIST_RE =
   /\b(playlist|spotify|musik|song|songs|feier|party|überfahrt|ueberfahrt|fähre|faehre|radio)\b/iu;
@@ -37,10 +38,60 @@ export function buildSpotifyRadioSearchUrl(seed: string): string {
   return `https://open.spotify.com/search/${encodeURIComponent(q)}`;
 }
 
+/** Kontextuelle Spotify-Suche — frei, ohne feste Program-Playlist. */
+export function buildContextualPlaylistQuery(opts?: {
+  userText?: string;
+  city?: string | null;
+  mood?: string | null;
+}): string | null {
+  const profile = getCachedUserProfile();
+  const bits: string[] = [];
+  const artists = spotifyArtistsFromProfile(profile);
+  if (artists.length > 0) {
+    bits.push(artists.slice(0, 3).join(' '));
+  }
+  const city =
+    opts?.city?.trim() ||
+    profile?.cityName?.trim() ||
+    useFinnusStore.getState().currentLocationName?.trim() ||
+    '';
+  if (city) bits.push(city);
+  if (opts?.mood?.trim()) bits.push(opts.mood.trim());
+  if (opts?.userText?.trim()) {
+    const t = opts.userText.trim();
+    if (/party|feier|chill|roadtrip|fähre|strand|regen|workout/iu.test(t)) {
+      bits.push(t.split(/\s+/).slice(0, 4).join(' '));
+    }
+  }
+  if (bits.length === 0) return null;
+  if (!/playlist|radio|mix/i.test(bits.join(' '))) bits.push('playlist');
+  return bits.join(' ').slice(0, 80);
+}
+
+export function hasPlaylistIntent(
+  response: GeminiConciergeResponse,
+  userText?: string,
+): boolean {
+  if (userText && looksLikePlaylistRequest(userText)) return true;
+  return (
+    looksLikePlaylistRequest(response.speechText) ||
+    PLAYLIST_RE.test(response.cardTitle ?? '') ||
+    response.visualBullets.some((b) => PLAYLIST_RE.test(b)) ||
+    response.quickActions.some(isPlaylistQuickAction)
+  );
+}
+
 /** Baut eine Suche aus Ort, User-Prefs und Kontext — keine feste Playlist-ID. */
 export function buildPersonalizedPlaylistQuery(
   response?: GeminiConciergeResponse | null,
-): string {
+  userText?: string,
+): string | null {
+  const contextual = buildContextualPlaylistQuery({
+    userText,
+    city: getCachedUserProfile()?.cityName,
+  });
+  if (contextual) return contextual;
+
   const profile = getCachedUserProfile();
   const store = useFinnusStore.getState();
   const bits: string[] = [];
@@ -76,7 +127,7 @@ export function buildPersonalizedPlaylistQuery(
   }
 
   if (bits.length === 0) {
-    bits.push('entspannt deutsch playlist');
+    return null;
   } else if (!/playlist|radio|mix/i.test(bits.join(' '))) {
     bits.push('playlist');
   }
@@ -84,26 +135,34 @@ export function buildPersonalizedPlaylistQuery(
   return bits.join(' ').slice(0, 80);
 }
 
-function extractPlaylistQuery(response: GeminiConciergeResponse): string {
+function extractPlaylistQuery(
+  response: GeminiConciergeResponse,
+  userText?: string,
+): string | null {
   const title = response.cardTitle?.trim() ?? '';
   if (title && /playlist|musik|feier|radio/i.test(title)) {
     const cleaned = title.replace(/^🎵\s*/u, '').trim();
-    // Titel mit Ort/User anreichern
-    return buildPersonalizedPlaylistQuery({
-      ...response,
-      cardTitle: cleaned,
-    });
+    return buildPersonalizedPlaylistQuery(
+      {
+        ...response,
+        cardTitle: cleaned,
+      },
+      userText,
+    );
   }
   const bullet = response.visualBullets.find((b) =>
     /playlist|feier|party|musik|radio/i.test(b),
   );
   if (bullet) {
-    return buildPersonalizedPlaylistQuery({
-      ...response,
-      speechText: bullet,
-    });
+    return buildPersonalizedPlaylistQuery(
+      {
+        ...response,
+        speechText: bullet,
+      },
+      userText,
+    );
   }
-  return buildPersonalizedPlaylistQuery(response);
+  return buildPersonalizedPlaylistQuery(response, userText);
 }
 
 /**
@@ -111,19 +170,22 @@ function extractPlaylistQuery(response: GeminiConciergeResponse): string {
  */
 export function enrichPlaylistOffers(
   response: GeminiConciergeResponse,
+  userText?: string,
 ): GeminiConciergeResponse {
-  const playlistIdx = response.quickActions.findIndex(isPlaylistQuickAction);
-  const speechWantsMusic =
-    looksLikePlaylistRequest(response.speechText) ||
-    PLAYLIST_RE.test(response.cardTitle ?? '') ||
-    response.visualBullets.some((b) => PLAYLIST_RE.test(b));
+  if (!hasPlaylistIntent(response, userText)) return response;
 
-  if (playlistIdx < 0 && !speechWantsMusic) return response;
-
-  const query = extractPlaylistQuery(response);
+  const query = extractPlaylistQuery(response, userText);
+  // Schweigen wenn leer: kein Chip, kein Musik-Filler
+  if (!query?.trim()) {
+    return {
+      ...response,
+      quickActions: response.quickActions.filter((a) => !isPlaylistQuickAction(a)),
+    };
+  }
   const primaryUrl = buildSpotifySearchUrl(query);
   const radioUrl = buildSpotifyRadioSearchUrl(query);
   const actions = [...response.quickActions];
+  const playlistIdx = actions.findIndex(isPlaylistQuickAction);
 
   if (playlistIdx >= 0) {
     const existing = actions[playlistIdx]!;
@@ -156,32 +218,8 @@ export function enrichPlaylistOffers(
     });
   }
 
-  let speechText = response.speechText.trim();
-  if (
-    /\b(soll\s+ich|möchtest\s+du|moechtest\s+du|willst\s+du|öffnen|oeffnen)\b/iu.test(
-      speechText,
-    ) ||
-    !/zusammengestellt|fertig|habe\s+dir|passend/iu.test(speechText)
-  ) {
-    speechText =
-      'Ich hab dir eine Playlist zusammengestellt, die zu dir und dem Ort passt. ' +
-      'Wenn du was anderes willst, sag mir einfach deinen Wunsch — sonst gibt\'s auch Radio zum passenden Vibe.';
-  }
-
-  const visualBullets =
-    response.visualBullets.length > 0
-      ? response.visualBullets.slice(0, 3)
-      : [
-          'Passend zu dir & dem Ort',
-          'Oder Radio zum Song',
-          'Sag mir deinen Wunsch',
-        ];
-
   return {
     ...response,
-    speechText,
-    cardTitle: response.cardTitle?.trim() || 'Deine Playlist',
-    visualBullets,
     quickActions: actions,
   };
 }

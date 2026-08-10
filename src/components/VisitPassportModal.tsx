@@ -4,52 +4,43 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import { colors, spacing } from '../constants/theme';
 import { UI_LAYER } from '../constants/uiLayers';
 import { useFinnusStore } from '../store/useFinnusStore';
-import { useUserMemoryStore } from '../store/useUserMemoryStore';
 import { getNavigationRoutePlan } from '../services/navigation';
 import {
-  emojiForPlace,
-  toStampSummary,
-} from '../services/navigation/stampBullets';
-import {
-  labelForStampCategory,
-  resolveStampMapCategory,
   STAMP_MAP_LEGEND,
+  colorForStampCategory,
+  resolveStampMapCategory,
   type StampMapCategory,
 } from '../services/navigation/stampMapCategories';
+import {
+  MODUL1_MAP_CATEGORY,
+  MODUL1_MAP_COLORS,
+} from '../services/navigation/stampMapModul1';
 import { clearNavigationHard } from '../services/navigation/hardNavOverride';
 import {
   getTopQuickAddTargets,
   loadNavSearchHistory,
   recordNavSearch,
 } from '../services/navigation/navSearchHistory';
-import { StampCityMap } from './StampCityMap';
+import { StampCityMap, type StampMapMarker } from './StampCityMap';
 import { DraggableStopList } from './DraggableStopList';
+import { SwipeBackView } from './SwipeBackView';
 import { computeAreaCoverage } from '../services/discovery/areaCoverageService';
 import { ensureActiveCityCoverageBounds } from '../services/discovery/cityCoverageBounds';
 import {
   getWalkTrackSnapshot,
-  listWalkTrackDateKeys,
   loadWalkTrack,
 } from '../services/discovery/walkTrackService';
 import { useGpsStore } from '../store/useGpsStore';
-import { useDayPlanStore } from '../store/useDayPlanStore';
-import { todayDateKey, clockLabel } from '../types/dayPlan';
 import {
   hydrateVisitLog,
-  getVisitsForDate,
-  listVisitDateKeys,
-  listVisitMonthKeys,
-  visitNodesForMap,
   importStampsIntoVisitLog,
-  formatDelayLabel,
-  todayVisitSummary,
 } from '../services/timeline/visitLog';
-import { UnifiedDayAxisView } from './UnifiedDayAxisView';
 import {
   normalizePassportTab,
   type PassportTab,
@@ -60,6 +51,10 @@ import {
   markStampMapInteracted,
   shouldShowStampMapOnboarding,
 } from '../services/ui/stampPassportUxPrefs';
+import {
+  getPlanBikeMPerMin,
+  getPlanWalkMPerMin,
+} from '../services/mobility/paceProfile';
 
 type Props = {
   visible: boolean;
@@ -75,6 +70,7 @@ function formatKm(m: number | null | undefined): string {
 }
 
 const CATEGORY_PLURAL: Partial<Record<StampMapCategory, string>> = {
+  modul1: 'Modul-1-Trigger',
   essen: 'Restaurants',
   cafe: 'Cafés',
   kultur: 'Kulturorte',
@@ -103,7 +99,6 @@ export function VisitPassportModal({
   const navActive = useFinnusStore((s) => s.navActive);
   const navVisible = useFinnusStore((s) => s.navVisible);
   const multiStopTour = useFinnusStore((s) => s.multiStopTour);
-  const entities = useUserMemoryStore((s) => s.entities);
   const [tab, setTab] = useState<PassportTab>('discover');
   const [showVisited, setShowVisited] = useState(true);
   const [enabledCategories, setEnabledCategories] = useState<
@@ -114,12 +109,11 @@ export function VisitPassportModal({
   const [routeListDragging, setRouteListDragging] = useState(false);
   const [showMapOnboarding, setShowMapOnboarding] = useState(true);
   const [coverageTick, setCoverageTick] = useState(0);
-  const [historyDateKey, setHistoryDateKey] = useState(todayDateKey());
-  const [historyMonth, setHistoryMonth] = useState(() => todayDateKey().slice(0, 7));
-  const [visitTick, setVisitTick] = useState(0);
+  const [mapWidth, setMapWidth] = useState(0);
+  const { width: windowWidth } = useWindowDimensions();
   const lastGpsLat = useGpsStore((s) => s.lat);
   const lastGpsLng = useGpsStore((s) => s.lng);
-  const dayPlan = useDayPlanStore((s) => s.plansByDate[historyDateKey]);
+  const transportMode = useFinnusStore((s) => s.transportMode);
 
   const navigating = navActive && navVisible;
   const routePlan = navigating || multiStopTour ? getNavigationRoutePlan() : null;
@@ -143,7 +137,6 @@ export function VisitPassportModal({
         const p = pois.find((x) => x.id === poiId);
         return p ? { lat: p.lat, lng: p.lng } : null;
       });
-      setVisitTick((n) => n + 1);
     });
   }, [visible, visitedHistory.length, pois]);
 
@@ -219,89 +212,73 @@ export function VisitPassportModal({
     return s;
   }, [visitedHistory]);
 
-  const historyMonths = useMemo(() => {
-    void visitTick;
-    const fromVisits = listVisitMonthKeys();
-    const fromWalk = listWalkTrackDateKeys().map((k) => k.slice(0, 7));
-    const fromPlans = Object.keys(useDayPlanStore.getState().plansByDate).map(
-      (k) => k.slice(0, 7),
-    );
-    return [...new Set([...fromVisits, ...fromWalk, ...fromPlans, historyMonth])].sort();
-  }, [visitTick, historyMonth]);
-
-  const historyDaysInMonth = useMemo(() => {
-    void visitTick;
-    const days = new Set<string>();
-    for (const k of listVisitDateKeys()) {
-      if (k.startsWith(historyMonth)) days.add(k);
-    }
-    for (const k of listWalkTrackDateKeys()) {
-      if (k.startsWith(historyMonth)) days.add(k);
-    }
-    for (const k of Object.keys(useDayPlanStore.getState().plansByDate)) {
-      if (k.startsWith(historyMonth)) days.add(k);
-    }
-    days.add(todayDateKey());
-    return [...days].sort();
-  }, [visitTick, historyMonth]);
-
-  const dayVisits = useMemo(() => {
-    void visitTick;
-    return getVisitsForDate(historyDateKey);
-  }, [visitTick, historyDateKey]);
-
-  const mapVisitNodes = useMemo(() => {
-    void visitTick;
-    return visitNodesForMap(historyDateKey);
-  }, [visitTick, historyDateKey]);
-
-  /** Chronological timeline — newest first, keep revisits as separate moments. */
-  const timeline = useMemo(() => {
-    const out: Array<{
-      poiId: number;
-      name: string;
-      kind: string;
-      emoji: string;
-      summary: string;
-      at: number;
-      category: StampMapCategory;
-    }> = [];
+  /** Stempel ohne Match im aktuellen Pack — trotzdem auf der Karte zeigen. */
+  const orphanVisited = useMemo((): StampMapMarker[] => {
+    const poiById = new Map(pois.map((p) => [p.id, p]));
+    const out: StampMapMarker[] = [];
     for (const e of visitedHistory) {
-      const poi = pois.find((p) => p.id === e.poiId);
-      const summary = toStampSummary(e.keyFacts, {
-        teaser: poi?.teaser_text,
+      const pack = poiById.get(e.poiId);
+      if (pack && Number.isFinite(pack.lat) && Number.isFinite(pack.lng)) {
+        continue;
+      }
+      const lat = e.lat;
+      const lng = e.lng;
+      if (
+        lat == null ||
+        lng == null ||
+        !Number.isFinite(lat) ||
+        !Number.isFinite(lng)
+      ) {
+        continue;
+      }
+      const category = resolveStampMapCategory({
+        category: null,
         name: e.name,
+        kind: e.kind,
+        tags: null,
       });
       out.push({
-        poiId: e.poiId,
-        name: e.name.replace(/\s*[·•|]\s*Wegweiser\s*$/i, '').trim(),
-        kind: e.kind,
-        emoji: emojiForPlace({
-          kind: e.kind,
-          category: poi?.category,
-          name: e.name,
-        }),
-        summary,
-        at: e.visitedAt,
-        category: resolveStampMapCategory({
-          category: poi?.category,
-          name: e.name,
-          kind: e.kind,
-          tags: poi?.tags_json,
-        }),
+        id: e.poiId,
+        name: e.name,
+        lat,
+        lng,
+        visited: true,
+        category,
+        color: colorForStampCategory(category),
       });
     }
-    return out.sort((a, b) => b.at - a.at);
-  }, [pois, visitedHistory]);
+    return out;
+  }, [visitedHistory, pois]);
 
-  const stamps = useMemo(() => {
-    const seen = new Set<number>();
-    return timeline.filter((s) => {
-      if (seen.has(s.poiId)) return false;
-      seen.add(s.poiId);
-      return true;
+  // Alte Stempel ohne lat/lng aus aktuellem Pack nachziehen (einmalig soft)
+  useEffect(() => {
+    if (!visible || !pois.length) return;
+    const cur = useFinnusStore.getState().visitedHistory;
+    let changed = false;
+    const next = cur.map((e) => {
+      if (e.lat != null && e.lng != null) return e;
+      const p = pois.find((x) => x.id === e.poiId);
+      if (!p || !Number.isFinite(p.lat) || !Number.isFinite(p.lng)) return e;
+      changed = true;
+      return { ...e, lat: p.lat, lng: p.lng };
     });
-  }, [timeline]);
+    if (changed) {
+      useFinnusStore.setState({ visitedHistory: next });
+      void import('../services/navigation/stampPassportPersistence').then((m) =>
+        m.saveStampPassport(next),
+      );
+    }
+  }, [visible, pois, visitedHistory.length]);
+
+  const discoveredCount = visitedPoiIds.size;
+
+  const mapHeight = useMemo(() => {
+    const w =
+      mapWidth > 40
+        ? mapWidth
+        : Math.max(280, windowWidth - spacing.md * 2);
+    return Math.round((w * 10) / 12);
+  }, [mapWidth, windowWidth]);
 
   const areaTotal = useMemo(
     () =>
@@ -309,30 +286,6 @@ export function VisitPassportModal({
         .length,
     [pois],
   );
-
-  const categoryStats = useMemo(() => {
-    const counts = new Map<StampMapCategory, number>();
-    for (const s of stamps) {
-      counts.set(s.category, (counts.get(s.category) ?? 0) + 1);
-    }
-    return [...counts.entries()]
-      .filter(([, n]) => n > 0)
-      .sort((a, b) => b[1] - a[1])
-      .map(([cat, n]) => {
-        const plural = CATEGORY_PLURAL[cat] ?? labelForStampCategory(cat);
-        return `${n} ${plural}`;
-      });
-  }, [stamps]);
-
-  const dwellMinutes = useMemo(() => {
-    let sum = 0;
-    for (const e of entities) {
-      if (typeof e.dwellTimeMinutes === 'number' && e.dwellTimeMinutes > 0) {
-        sum += e.dwellTimeMinutes;
-      }
-    }
-    return Math.round(sum);
-  }, [entities]);
 
   const onQuickAdd = useCallback(
     (prompt: string) => {
@@ -342,16 +295,24 @@ export function VisitPassportModal({
     [onQuickNavAdd],
   );
 
+  const handleBack = useCallback(() => {
+    if (showMapOnboarding) {
+      setShowMapOnboarding(false);
+      return;
+    }
+    onClose();
+  }, [showMapOnboarding, onClose]);
+
   if (!visible) return null;
 
   return (
     <View style={styles.overlay} pointerEvents="auto">
       <Pressable
         style={styles.backdropTap}
-        onPress={onClose}
+        onPress={handleBack}
         accessibilityLabel="Schließen"
       />
-      <View style={styles.sheet}>
+      <SwipeBackView enabled={visible} onBack={handleBack} style={styles.sheet}>
         <View style={styles.header}>
           <View style={styles.headerText}>
             <Text style={styles.kicker}>🎫 Stempelkarte</Text>
@@ -364,7 +325,7 @@ export function VisitPassportModal({
                 : areaCoverage.percent > 0
                   ? `${areaCoverage.percent} % der Gegend erkundet · `
                   : ''}
-              {stamps.length}
+              {discoveredCount}
               {areaTotal > 0 ? ` von ${areaTotal}` : ''} Orte entdeckt
               {multiStopTour ? ` · ${multiStopTour.stops.length} Stopps` : ''}
             </Text>
@@ -378,7 +339,6 @@ export function VisitPassportModal({
           {(
             [
               { id: 'discover' as const, label: 'Entdeckung' },
-              { id: 'timeline' as const, label: 'Zeitachse' },
               { id: 'route' as const, label: 'Route' },
             ] as const
           ).map((t) => (
@@ -396,68 +356,6 @@ export function VisitPassportModal({
           ))}
         </View>
 
-        <View style={styles.historyBar}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {historyMonths.map((m) => (
-              <Pressable
-                key={m}
-                style={[
-                  styles.histChip,
-                  historyMonth === m && styles.histChipOn,
-                ]}
-                onPress={() => {
-                  setHistoryMonth(m);
-                  const days = [
-                    ...listVisitDateKeys(),
-                    ...listWalkTrackDateKeys(),
-                    ...Object.keys(useDayPlanStore.getState().plansByDate),
-                  ].filter((d) => d.startsWith(m));
-                  const uniq = [...new Set(days)].sort();
-                  if (uniq.length) setHistoryDateKey(uniq[uniq.length - 1]!);
-                  else setHistoryDateKey(`${m}-01`);
-                }}
-              >
-                <Text
-                  style={[
-                    styles.histChipText,
-                    historyMonth === m && styles.histChipTextOn,
-                  ]}
-                >
-                  {m}
-                </Text>
-              </Pressable>
-            ))}
-          </ScrollView>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={{ marginTop: 6 }}
-          >
-            {historyDaysInMonth.map((d) => (
-              <Pressable
-                key={d}
-                style={[
-                  styles.histChip,
-                  historyDateKey === d && styles.histChipOn,
-                ]}
-                onPress={() => setHistoryDateKey(d)}
-              >
-                <Text
-                  style={[
-                    styles.histChipText,
-                    historyDateKey === d && styles.histChipTextOn,
-                  ]}
-                >
-                  {d.slice(8)}
-                </Text>
-              </Pressable>
-            ))}
-          </ScrollView>
-          <Text style={styles.histSummary}>
-            {todayVisitSummary(historyDateKey)} · {historyDateKey}
-          </Text>
-        </View>
-
         {tab === 'discover' ? (
           <ScrollView
             style={styles.bodyScroll}
@@ -466,46 +364,23 @@ export function VisitPassportModal({
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            {/* 1 · Flüchtiger Onboarding-Text */}
             {showMapOnboarding ? (
               <View style={styles.guideCard}>
-                <Text style={styles.guideTitle}>Deine Tour & Entdeckungen</Text>
+                <Text style={styles.guideTitle}>Deine Entdeckungen</Text>
                 <Text style={styles.guideBody}>
-                  Zoome und wische auf der Karte. Darunter filterst du
-                  Kategorien — und ganz unten siehst du chronologisch, wann du
-                  wo warst.
+                  Oben filterst du Verweilt, Modul-1-Trigger, Restaurants und
+                  mehr — darunter die Karte mit Fog-of-War und deinem
+                  Erkundungsstand.
                 </Text>
               </View>
             ) : null}
 
-            {/* 2 · Interaktive Karte */}
-            <View style={styles.mapBlock}>
-              <View style={styles.coverageBadge}>
-                <Text style={styles.coverageValue}>{areaCoverage.percent} %</Text>
-                <Text style={styles.coverageLabel}>
-                  {areaCoverage.cityName
-                    ? `${areaCoverage.cityName} erkundet`
-                    : 'Fläche erkundet'}
-                </Text>
-              </View>
-              <StampCityMap
-                pois={pois}
-                visitedPoiIds={visitedPoiIds}
-                showVisited={showVisited}
-                enabledCategories={enabledCategories}
-                height={460}
-                onMapInteracted={onMapInteracted}
-                historyDateKey={historyDateKey}
-                visitNodes={mapVisitNodes}
-                showDayRoute
-              />
-            </View>
-
-            {/* 3 · Kategorien & Legende — default nur „Besucht“ */}
+            {/* Filter oben: Verweilt · Modul 1 · Restaurants · … */}
             <View style={styles.filterBlock}>
-              <Text style={styles.filterTitle}>Kategorien & Legende</Text>
               <Text style={styles.filterHint}>
-                Standard: nur Besucht. Weitere Kategorien schalten Pins hinzu.
+                Tippe, um Pins auf der Karte ein- oder auszublenden. „Modul-1-Trigger“
+                zeigt Orte, an denen Findus von allein sprechen würde (ohne
+                Prefs wie „keine Kirchen“).
               </Text>
               <View style={styles.legendRow}>
                 <Pressable
@@ -517,7 +392,7 @@ export function VisitPassportModal({
                   ]}
                   accessibilityRole="button"
                   accessibilityState={{ selected: showVisited }}
-                  accessibilityLabel="Besucht ein- oder ausblenden"
+                  accessibilityLabel="Verweilte Orte ein- oder ausblenden"
                 >
                   <View style={[styles.dot, styles.dotVisited]}>
                     <Text style={styles.dotCheck}>✓</Text>
@@ -528,11 +403,12 @@ export function VisitPassportModal({
                       !showVisited && styles.legendLabelOff,
                     ]}
                   >
-                    Besucht
+                    Verweilt
                   </Text>
                 </Pressable>
                 {STAMP_MAP_LEGEND.map((item) => {
                   const on = enabledCategories.has(item.id);
+                  const isModul1 = item.id === MODUL1_MAP_CATEGORY;
                   return (
                     <Pressable
                       key={item.id}
@@ -546,13 +422,39 @@ export function VisitPassportModal({
                       accessibilityState={{ selected: on }}
                       accessibilityLabel={`${item.label}${on ? ' ausblenden' : ' einblenden'}`}
                     >
-                      <View
-                        style={[
-                          styles.dot,
-                          { backgroundColor: item.color },
-                          !on && styles.dotOff,
-                        ]}
-                      />
+                      {isModul1 ? (
+                        <View style={styles.modul1Dots}>
+                          <View
+                            style={[
+                              styles.dot,
+                              { backgroundColor: MODUL1_MAP_COLORS.neutral },
+                              !on && styles.dotOff,
+                            ]}
+                          />
+                          <View
+                            style={[
+                              styles.dot,
+                              { backgroundColor: MODUL1_MAP_COLORS.liked },
+                              !on && styles.dotOff,
+                            ]}
+                          />
+                          <View
+                            style={[
+                              styles.dot,
+                              { backgroundColor: MODUL1_MAP_COLORS.visited },
+                              !on && styles.dotOff,
+                            ]}
+                          />
+                        </View>
+                      ) : (
+                        <View
+                          style={[
+                            styles.dot,
+                            { backgroundColor: item.color },
+                            !on && styles.dotOff,
+                          ]}
+                        />
+                      )}
                       <Text
                         style={[
                           styles.legendLabel,
@@ -565,137 +467,70 @@ export function VisitPassportModal({
                   );
                 })}
               </View>
-            </View>
-
-            {/* 4 · Chronologische Stempel-Timeline */}
-            <View style={styles.timelineHeader}>
-              <Text style={styles.timelineTitle}>Wann warst du wo?</Text>
-              <Text style={styles.timelineSub}>
-                {stamps.length}
-                {areaTotal > 0 ? ` von ${areaTotal}` : ''} Orten
-                {categoryStats.length
-                  ? ` · ${categoryStats.slice(0, 3).join(' · ')}`
-                  : ''}
-                {dwellMinutes > 0 ? ` · ${dwellMinutes} Min verweilt` : ''}
-              </Text>
-            </View>
-
-            {timeline.length === 0 ? (
-              <View style={styles.emptyCard}>
-                <Text style={styles.emptyEmoji}>🗺️</Text>
-                <Text style={styles.empty}>
-                  Noch keine Stempel — sobald du an einem Ort verweilst oder
-                  Findus erzählt, landet er hier mit Uhrzeit.
-                </Text>
-              </View>
-            ) : (
-              timeline.map((s, i) => (
-                <View key={`${s.poiId}-${s.at}-${i}`} style={styles.card}>
-                  <View style={styles.stampSeal}>
-                    <Text style={styles.stampEmoji}>{s.emoji}</Text>
-                    <Text style={styles.stampNum}>
-                      {new Date(s.at).toLocaleTimeString('de-DE', {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
-                    </Text>
+              {enabledCategories.has(MODUL1_MAP_CATEGORY) ? (
+                <View style={styles.modul1ToneRow}>
+                  <View style={styles.modul1ToneItem}>
+                    <View
+                      style={[
+                        styles.dot,
+                        { backgroundColor: MODUL1_MAP_COLORS.neutral },
+                      ]}
+                    />
+                    <Text style={styles.modul1ToneLabel}>Neutral</Text>
                   </View>
-                  <View style={styles.cardBody}>
-                    <Text style={styles.cardTitle} numberOfLines={2}>
-                      {s.name}
-                    </Text>
-                    <Text style={styles.cardMeta}>
-                      {new Date(s.at).toLocaleDateString('de-DE', {
-                        weekday: 'short',
-                        day: '2-digit',
-                        month: 'short',
-                      })}
-                      {' · '}
-                      {labelForStampCategory(s.category)}
-                    </Text>
-                    <Text style={styles.summary} numberOfLines={3}>
-                      {s.summary}
-                    </Text>
+                  <View style={styles.modul1ToneItem}>
+                    <View
+                      style={[
+                        styles.dot,
+                        { backgroundColor: MODUL1_MAP_COLORS.liked },
+                      ]}
+                    />
+                    <Text style={styles.modul1ToneLabel}>Gerne · offen</Text>
+                  </View>
+                  <View style={styles.modul1ToneItem}>
+                    <View
+                      style={[
+                        styles.dot,
+                        styles.dotVisited,
+                        { backgroundColor: MODUL1_MAP_COLORS.visited },
+                      ]}
+                    >
+                      <Text style={styles.dotCheck}>✓</Text>
+                    </View>
+                    <Text style={styles.modul1ToneLabel}>Schon da</Text>
                   </View>
                 </View>
-              ))
-            )}
-          </ScrollView>
-        ) : null}
+              ) : null}
+            </View>
 
-        {tab === 'timeline' ? (
-          <ScrollView
-            style={styles.bodyScroll}
-            contentContainerStyle={styles.discoverScroll}
-            nestedScrollEnabled
-            showsVerticalScrollIndicator={false}
-          >
-            <View style={styles.mapBlock}>
+            {/* Karte + Prozent / Fortschritt */}
+            <View
+              style={styles.mapBlock}
+              onLayout={(e) => setMapWidth(e.nativeEvent.layout.width)}
+            >
+              <View style={styles.coverageBadge}>
+                <Text style={styles.coverageValue}>{areaCoverage.percent} %</Text>
+                <Text style={styles.coverageLabel}>
+                  {areaCoverage.cityName
+                    ? `${areaCoverage.cityName} erkundet`
+                    : 'Fläche erkundet'}
+                </Text>
+                <Text style={styles.coverageCount}>
+                  {discoveredCount}
+                  {areaTotal > 0 ? ` / ${areaTotal}` : ''} Orte
+                </Text>
+              </View>
               <StampCityMap
                 pois={pois}
                 visitedPoiIds={visitedPoiIds}
-                showVisited
-                enabledCategories={new Set()}
-                height={320}
+                showVisited={showVisited}
+                orphanVisited={orphanVisited}
+                enabledCategories={enabledCategories}
+                height={mapHeight}
                 onMapInteracted={onMapInteracted}
-                historyDateKey={historyDateKey}
-                visitNodes={mapVisitNodes}
-                showDayRoute
+                showDayRoute={false}
               />
             </View>
-
-            <View style={styles.timelineHeader}>
-              <Text style={styles.timelineTitle}>Eine Achse</Text>
-              <Text style={styles.timelineSub}>
-                Oben Zeitachse (bis jetzt) · unten Planung · Modul-1-Orte inklusive
-              </Text>
-            </View>
-
-            <UnifiedDayAxisView
-              dateKey={historyDateKey}
-              refreshKey={`${visitTick}-${dayPlan?.updatedAtMs ?? 0}-${dayVisits.length}`}
-              compact
-            />
-
-            <View style={styles.timelineHeader}>
-              <Text style={styles.timelineTitle}>Visit-Log</Text>
-              <Text style={styles.timelineSub}>
-                Ankunft · Abfahrt · Verweildauer
-              </Text>
-            </View>
-            {dayVisits.length === 0 ? (
-              <View style={styles.emptyCard}>
-                <Text style={styles.empty}>
-                  Keine Besuche an diesem Tag — Nav, Dwell und Stempel füllen
-                  das Log automatisch.
-                </Text>
-              </View>
-            ) : (
-              dayVisits.map((v) => (
-                <View key={v.id} style={styles.card}>
-                  <View style={styles.stampSeal}>
-                    <Text style={styles.stampEmoji}>📍</Text>
-                    <Text style={styles.stampNum}>
-                      {clockLabel(v.arrivedAtMs)}
-                    </Text>
-                  </View>
-                  <View style={styles.cardBody}>
-                    <Text style={styles.cardTitle}>{v.name}</Text>
-                    <Text style={styles.cardMeta}>
-                      {v.leftAtMs
-                        ? `bis ${clockLabel(v.leftAtMs)}`
-                        : 'noch vor Ort'}
-                      {v.dwellMin != null ? ` · ${v.dwellMin} Min` : ''}
-                      {v.delayMs != null && formatDelayLabel(v.delayMs)
-                        ? ` · ${formatDelayLabel(v.delayMs)}`
-                        : ''}
-                      {' · '}
-                      {v.source}
-                    </Text>
-                  </View>
-                </View>
-              ))
-            )}
           </ScrollView>
         ) : null}
 
@@ -707,33 +542,36 @@ export function VisitPassportModal({
             scrollEnabled={!routeListDragging}
             keyboardShouldPersistTaps="handled"
           >
-            {multiStopTour ? (
-              <View style={styles.routeSummary}>
-                <Text style={styles.routeLine}>
-                  Nächster Stop ·{' '}
-                  {multiStopTour.stops[multiStopTour.currentIndex]?.name ?? '—'}
-                </Text>
-                <Text style={styles.routeLine}>
-                  Stop{' '}
-                  {Math.min(
-                    multiStopTour.currentIndex + 1,
-                    multiStopTour.stops.length,
-                  )}
-                  /{multiStopTour.stops.length}
-                  {' · '}~{formatKm(multiStopTour.estimatedDistanceM)} zu Fuß
-                </Text>
-              </View>
+            {multiStopTour?.stops?.length ? (
+              <DraggableStopList
+                stops={multiStopTour.stops}
+                currentIndex={multiStopTour.currentIndex}
+                onDraggingChange={setRouteListDragging}
+              />
             ) : routePlan ? (
-              <View style={styles.routeSummary}>
-                <Text style={styles.routeLine}>
-                  Nächster Punkt: {routePlan.nextPointName} (
-                  {formatKm(routePlan.legM)})
-                </Text>
-                <Text style={styles.routeLine}>
-                  Ziel: {routePlan.destinationName} · noch{' '}
-                  {formatKm(routePlan.remainingM)}
-                </Text>
-              </View>
+              (() => {
+                const bike = transportMode === 'bicycle';
+                const mpm = bike ? getPlanBikeMPerMin() : getPlanWalkMPerMin();
+                const remaining = routePlan.remainingM;
+                const mins = Math.max(
+                  1,
+                  Math.round(remaining / Math.max(1, mpm)),
+                );
+                const eta = bike ? `~${mins} Min Rad` : `~${mins} Min Fuß`;
+                return (
+                  <View style={styles.routeStop}>
+                    <Text style={styles.routeStopIcon}>→</Text>
+                    <View style={styles.routeStopCopy}>
+                      <Text style={styles.routeStopMeta} numberOfLines={1}>
+                        {formatKm(remaining)} · {eta}
+                      </Text>
+                      <Text style={styles.routeStopText} numberOfLines={2}>
+                        {routePlan.destinationName}
+                      </Text>
+                    </View>
+                  </View>
+                );
+              })()
             ) : !hasRoute ? (
               <View style={styles.emptyCard}>
                 <Text style={styles.emptyEmoji}>🧭</Text>
@@ -742,35 +580,7 @@ export function VisitPassportModal({
                   hinzufügen unten.
                 </Text>
               </View>
-            ) : (
-              <View style={styles.routeSummary}>
-                <Text style={styles.routeLine}>Route aktiv</Text>
-              </View>
-            )}
-
-            {multiStopTour?.stops?.length ? (
-              <DraggableStopList
-                stops={multiStopTour.stops}
-                currentIndex={multiStopTour.currentIndex}
-                onDraggingChange={setRouteListDragging}
-              />
-            ) : (
-              (routePlan?.stops ?? []).map((s, i, arr) => (
-                  <View key={`${s.name}-${i}`} style={styles.routeStop}>
-                    <Text style={styles.routeStopIcon}>
-                      {s.done ? '✓' : arr.findIndex((x) => !x.done) === i ? '→' : '○'}
-                    </Text>
-                    <Text
-                      style={[
-                        styles.routeStopText,
-                        s.done && styles.routeStopDone,
-                      ]}
-                    >
-                      {s.name}
-                    </Text>
-                  </View>
-                ))
-            )}
+            ) : null}
 
             <View style={styles.quickBlock}>
               <Text style={styles.quickTitle}>Schnell hinzufügen</Text>
@@ -816,7 +626,7 @@ export function VisitPassportModal({
             </Pressable>
           </ScrollView>
         ) : null}
-      </View>
+      </SwipeBackView>
     </View>
   );
 }
@@ -915,6 +725,27 @@ const styles = StyleSheet.create({
   dotOff: {
     opacity: 0.35,
   },
+  modul1Dots: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 2,
+  },
+  modul1ToneRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 12,
+    marginTop: 4,
+  },
+  modul1ToneItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  modul1ToneLabel: {
+    color: colors.textMuted,
+    fontSize: 11,
+    fontWeight: '600',
+  },
   dotVisited: {
     width: 14,
     height: 14,
@@ -976,7 +807,8 @@ const styles = StyleSheet.create({
     minHeight: 0,
   },
   mapBlock: {
-    paddingHorizontal: spacing.sm,
+    marginHorizontal: -spacing.md,
+    paddingHorizontal: 0,
     gap: 10,
     paddingBottom: spacing.sm,
     position: 'relative',
@@ -984,7 +816,7 @@ const styles = StyleSheet.create({
   coverageBadge: {
     position: 'absolute',
     top: spacing.sm,
-    right: spacing.md + 4,
+    right: spacing.md,
     zIndex: UI_LAYER.sheet + 2,
     backgroundColor: 'rgba(8, 18, 14, 0.88)',
     borderRadius: 12,
@@ -1008,6 +840,12 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 0.4,
     marginTop: 2,
+  },
+  coverageCount: {
+    color: colors.text,
+    fontSize: 11,
+    fontWeight: '700',
+    marginTop: 4,
   },
   bodyScroll: {
     flex: 1,
@@ -1266,9 +1104,9 @@ const styles = StyleSheet.create({
   },
   routeStop: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: 8,
-    paddingVertical: 8,
+    paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
   },
@@ -1276,13 +1114,24 @@ const styles = StyleSheet.create({
     width: 22,
     color: colors.accent,
     fontWeight: '800',
-    fontSize: 14,
+    fontSize: 18,
+    marginTop: 2,
+  },
+  routeStopCopy: {
+    flex: 1,
+    minWidth: 0,
+    gap: 2,
+  },
+  routeStopMeta: {
+    color: colors.accent,
+    fontSize: 13,
+    fontWeight: '700',
   },
   routeStopText: {
     flex: 1,
     color: colors.text,
     fontSize: 15,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   routeStopDone: {
     color: colors.textMuted,

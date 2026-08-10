@@ -1,0 +1,58 @@
+---
+description: Neue Stadt nur per Name — Agent baut Pack in Wangerooge-Qualität (city:auto + Deep Research + Upload). Trigger bei „neue Stadt“, „Stadt X“, „Erstell Datensatz“.
+alwaysApply: true
+---
+
+# Findus — Stadt automatisch (Wangerooge-Qualität)
+
+## User-Trigger
+
+Wenn der User **nur einen Stadtnamen** nennt oder schreibt:
+
+- „neue Stadt: X“
+- „Stadt X“
+- „Erstell Datensatz X“
+- „Pack für X“
+
+→ **vollautomatisch** durchziehen. Kein Gemini-Paste verlangen. Keine Rückfragen außer fehlenden Credentials.
+
+## Pflicht-Ablauf (Agent)
+
+1. `npm run city:auto -- --city "<Name>" --id <slug>`  
+   (Skeleton → Directory → Classify → Live-Hints → Wikipedia → Polish → Entrances → Cover → Gate → `data/staedte/<id>.agent-brief.md`)
+2. **Deep Research selbst** nach `findus-agent-deep-research.mdc` (ehem. Gemini-Prompt):  
+   Spots + 50 Kategorien, Web/Chroniken/Gemeinde — nichts erfinden; LIVE-only; keine Dialog-Skripte  
+3. Merge per ID (`*.research.json` + Merge/Polish; Merge-Matcher: **ID first**, kurze Stadtnamen nicht falsch matchen)
+4. Gate sauber (keine thin T1)
+5. Search-Meta in `cityCovers.ts` wenn sinnvoll
+6. **Cover:** Wenn Pending-User-Bild (`city:cover:pending`) → Cover-Agent stylizen + `city:cover:apply` (Kernrollen-Stil). Sonst Wikipedia-Cover / lokales Asset.
+7. `npm run upload:city -- data/staedte/<id>.json` — **ohne Extra-Freigabe** (User-Default: Pack-Uploads sind vorab erlaubt)
+
+## Qualitätsziel (klein/mittel, Wangerooge-Stil)
+
+- Lieber **weniger Stories, tief** (Ziel ≈ 12–25 Stories für kleine Orte) als 70 dünne
+- Pro Story-Ort: genug Rohstoff für **~1200 Zeichen** gesprochene Story (`general_info` + `deep_data_pool` Text-Pool **≥ ~1200**, ideal `deep ≥ 12`)
+- **Große/Ikonische Orte** (Wahrzeichen, Top-Museen, Schlösser): Text-Pool gerne **≥ ~3000** Zeichen (für Mehr-Historie / Adjustable Depth) — gesprochene Hauptstory bleibt Masterbook-Max (~1200), Pack speichert tiefer
+- Noise (Bushaltestellen, Gastro, Hotels) → Directory
+- Cover: User-Pending (stylisiert) schlägt Wikipedia; sonst Wikipedia-Wahrzeichen
+
+## Cover vor Research
+
+User schickt Bild vor Stadt-Erstellung → sofort `npm run city:cover:queue`. Nach Pack: Soft-Photo-Stil (`findus_soft_photo_v1`) → `city:cover:apply --upload`.
+
+Cover-Stil SSOT: `scripts/cityPack/coverStyle.mjs` · Skill `findus-city-cover`
+
+## Nicht vom User verlangen
+
+- Gemini-Briefs ausfüllen
+- Research JSON tippen
+- Manuelle Zwischen-Commands
+
+Optional: User darf trotzdem Research pasten — dann nur mergen.
+
+## SSOT Scripts
+
+- `npm run city:auto`
+- `npm run city:wiki -- --city <id> --apply`
+- `npm run city:cover:queue` / `city:cover:pending` / `city:cover:apply`
+- Pack-Builder-Details: `findus-city-pack-builder.mdc`

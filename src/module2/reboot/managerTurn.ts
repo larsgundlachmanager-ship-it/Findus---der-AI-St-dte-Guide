@@ -1,6 +1,6 @@
 /**
- * Call-1 Manager (dünn) — Job + Thread → Bridge-Budget + ThinkAhead.
- * Kein Gemini hier: nur Struktur aus Classifier + Topic-Router.
+ * Call-1 Manager (LEGACY sync) — nur noch für Tests/shouldSuppressBridge.
+ * Hot Path: analyzeManagerTurn + runConciergeTurn.
  */
 
 import type { JobClassification } from '../jobs/types';
@@ -30,6 +30,23 @@ export function shouldSuppressBridge(opts: {
   jobId: string;
   userText: string;
 }): boolean {
+  // Live-Chat: nie Bridge — direkte Antwort (Fast-Lane)
+  try {
+    const { isLiveChatTurnActive } = require('../../services/handsFree/liveChatTurnContext') as {
+      isLiveChatTurnActive: () => boolean;
+    };
+    if (isLiveChatTurnActive()) return true;
+  } catch {
+    /* soft */
+  }
+  try {
+    const { isLiveChatActive } = require('../../services/handsFree/liveChatSession') as {
+      isLiveChatActive: () => boolean;
+    };
+    if (isLiveChatActive()) return true;
+  } catch {
+    /* soft */
+  }
   // App-Steuerung / Hands-free: kein Bridge-Vorgeplänkel
   if (
     /\b(shortcut|hands[-\s]?free|sprechen[- ]?notification|live[-\s]?chat|gesprächs?modus|taschenlampe|stimme\s+(?:von|ändern)|einstellung)\b/iu.test(
@@ -39,16 +56,9 @@ export function shouldSuppressBridge(opts: {
     return true;
   }
   const mode = opts.topicMode;
+  // Gleicher Blaupausen-Chat (Kino, Essen, …): keine neue Bridge — direkt Antwort.
   if (mode === 'continue' || mode === 'resume') {
-    if (STORY_JOBS.has(opts.jobId)) return true;
-    // Anapher / Rückfrage ohne neues Thema
-    if (
-      /\b(warum|wieso|weshalb|und\s+dann|was\s+noch|mehr\s+dazu|Erzähl|erzähl|geschlossen|wann|wie\s+viel|noch\s+mehr|mehr\s+historie|mehr\s+zur\s+geschichte)\b/iu.test(
-        opts.userText,
-      )
-    ) {
-      return true;
-    }
+    return true;
   }
   // Button „Mehr Historie“ immer ohne Bridge — auch wenn Topic-Router „new“ sagt
   if (

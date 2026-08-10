@@ -1,0 +1,378 @@
+{
+  "city_history": "Brandenburg an der Havel: Dominsel, Dom St. Peter und Paul und Havel-Inselstädte — Wiege der Mark Brandenburg.",
+  "notes": [
+    "Wave A — verified facts, LIVE ephemeral, no dialog scripts."
+  ],
+  "offline_qa": [],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "brandenburg_havel_dom_st_peter_und_paul",
+      "name": "Dom St. Peter und Paul",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Dom St. Peter und Paul auf der Dominsel: größte mittelalterliche Kirche Brandenburgs — romanisch-gotischer Backsteinbau.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: massiver Backsteindom mit Türmen auf der Dominsel, umgeben von Havelarmen und Altstadt.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Kernbau 12.–14. Jahrhundert; wichtigste Bischofskirche der Mark Brandenburg (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Dominsel gilt als historische Wiege Brandenburgs — slawische Burg Brandenburg und späterer Bischofssitz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Innen: gotische Hallen, Grabdenkmäler und Ausstellungen zur Kirchengeschichte.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Architektur: Backstein gotik typisch für Norddeutschland; romanische Anteile im Chor.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Altstadt Brandenburg, Rathaus und St.- Katharinen-Kirche auf der anderen Havelseite erreichbar.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "Dommuseum und Führungen zu Architektur und Bischofsgeschichte.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Havel umfließt die Dominsel — Brücken verbinden mit Neustadt und Altstadt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Gottesdienste, Konzerte und Kulturveranstaltungen im Dom.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Silhouette der Doppeltürme prägt Stadtpanorama von Havel und Neustadt aus — Orientierungspunkt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Dom wurde mehrfach restauriert nach Kriegsschäden — heutige Dachform und Farbe dokumentiert.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Bischofsgeschichte verbindet Dominsel mit Christianisierung der Slawen in der Mark.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Der Dom gilt als „cradle of Brandenburg“ — Bischofssitz und slawische Vorgeschichte auf der Dominsel.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Innenraum: gotische Säulen, farbige Fenster und Grabplatten brandenburgischer Bischöfe.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Dommuseum zeigt liturgische Geräte und Baugeschichte — Führungen über Dom e.V.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Dominsel ist UNESCO-Vorbereitung und EU-Projekt „European Heritage“ — touristische Aufwertung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Umgebung: Burgwallreste und archäologische Funde — Landesmuseum ergänzt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Konzerterei im Dom nutzt Akustik der Halle — Orgel und Chor regelmäßig.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Domkrypta und Bischofsgräber — Führungen nach Anmeldung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Dominsel-Archäologie: slawische Ringwallanlage unter mittelalterlichen Schichten.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "EU-Projekte zur touristischen Erschließung der Dominsel — Besucherzentrum in Planung/Realisierung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Orgelkonzerte und Choräle — liturgischer Kalender online.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Dom ist Bischofskirche und Wahrzeichen der Dominsel — größte mittelalterliche Kirche Brandenburgs.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Romanisch-gotischer Backsteinbau mit langem Baufortschritt über mehrere Jahrhunderte.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Dommuseum und Turmführungen nach Verfügbarkeit — Aussicht über Havel und Altstadt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Verbindung zur slawischen Burg Brandenburg — archäologische Funde in Nachbarnähe.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Gottesdienste, Konzerte und Führungen prägen den Dom als lebendige Kirche — nicht nur Museum.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Dominsel und Altstadt sind durch Brücken verbunden — Rundweg Havelufer einschließlich Dom empfohlen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Backsteingotik und romanische Anteile machen den Dom zu einem Studienobjekt der Architekturgeschichte Norddeutschlands.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Turm- und Kirchenführungen nach Ankündigung — Aussicht über Havellandschaft.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Dom bleibt Bischofssitz — liturgischer Kalender und Konzerte online der Gemeinde bzw. Domkapitel.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "brandenburg_havel_brandenburg_altstadt",
+      "name": "Brandenburg-Altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Brandenburg Altstadt: mittelalterliche Stadt auf der Insel in der Havel mit Fachwerk, Kirchen und historischem Hafen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Fachwerkhäuser, Kirchtürme, Havelpromenade und enge Gassen — kleinstädtische Atmosphäre.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Altstadt auf der Inselstadt in der Havel; gegründet als slawische Siedlung und deutsche Stadt (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "St.- Katharinen-Kirche und weiteres Backsteinerbe in der Altstadt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Historischer Hafen und Schifffahrt auf der Havel; Radwege entlang des Flusses.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Dominsel mit St.- Peter-und-Paul-Dom über Brücken erreichbar.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Altstädtischer Markt mit Rathaus und Patrizierhäusern — gotische Backsteinarchitektur.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "St.- Katharinen-Kirche und gotisches Haus als weitere Highlights der Altstadt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Havelpromenade verbindet Altstadt mit Wassersport und Marinas.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Slawendorf-Archäologiepark am Stadtrand ergänzt mittelalterliche Geschichte.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Gotisches Haus und Tortürme der Stadtbefestigung — Rundgang Altstadt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Cafés in Fachwerkhäusern — Fontane-Bezüge in der Region.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "brandenburg_havel_rathaus_brandenburg",
+      "name": "Rathaus Altstädtischer Markt Brandenburg",
+      "lat": 52.4119,
+      "lng": 12.5311,
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Rathaus Brandenburg an der Havel: spätgotischer Backsteinbau am Altstädtischen Markt — Wahrzeichen der Altstadt.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Backstein-Rathaus mit Schieferdach und Turm am Marktplatz — zentral in der Altstadt.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Gotischer Backsteinbau, Wahrzeichen der politischen Geschichte der Stadt (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Marktplatz mit Cafés und Veranstaltungen; Verbindung zur Havelpromenade.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Dominsel und Neustadt über Brücken — drei Stadtteile durch Havel getrennt.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Das Rathaus am Altstädtischen Markt ist spätgotischer Backsteinbau — Wappen und Turm prägen die Silhouette.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Sitz der Stadtverwaltung Brandenburg an der Havel — Führungen selten, Außenansicht öffentlich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Marktplatz verbindet Rathaus mit gotischem Haus und Cafés — Fußgängerzone.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Historische Gerichts- und Ratsfunktionen des Baus seit dem Mittelalter (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Turm und Giebel des Rathauses prägen Postkartenmotiv der Altstadt.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_places": []
+}

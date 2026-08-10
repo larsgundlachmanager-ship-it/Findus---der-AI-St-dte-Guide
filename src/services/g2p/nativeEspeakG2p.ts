@@ -1,11 +1,11 @@
 /**
- * Natives espeak-ng G2P (de / de-DE) → Kokoro-IPA.
+ * Natives espeak-ng G2P (de / de-DE) → TTS-IPA.
  *
  * Primär: JNI C++ (findus-espeak). Fallback: JS-Regelwerk (nur wenn Native fehlt).
  */
 
 import { Platform } from 'react-native';
-import { filterPhonemesToVocab } from '../../constants/kokoroVocab';
+import { filterPhonemesToVocab } from '../../constants/phonemeSanitize';
 import type { GermanG2PProvider } from './types';
 import { normalizeGermanTtsText } from './germanTextNormalize';
 import { phonemizeGermanIpa } from './de/germanIpaG2p';
@@ -65,11 +65,11 @@ export async function warmupNativeEspeakG2P(): Promise<boolean> {
 }
 
 /**
- * Post-Processing: espeak IPA → Kokoro-Vocab (ʏ→y, Stress behalten, Filter).
+ * Post-Processing: espeak IPA → TTS-Vocab (ʏ→y, Stress behalten, Filter).
  * Wichtig: IPA ɡ (\u0261) NICHT nach ASCII g mappen — g fehlt im Vocab und
  * wird sonst verworfen (Begleiter→Beleiter, anlegen→anleen).
  */
-export function mapEspeakIpaToKokoro(ipa: string): string {
+export function mapEspeakIpaToTts(ipa: string): string {
   let s = ipa.normalize('NFC');
 
   s = s.replace(/\u028f/g, 'y'); // ʏ → y
@@ -118,8 +118,8 @@ export async function phonemizeGermanNativeEspeak(
   if (nativeReady && mod) {
     const raw = await mod.nativeEspeakTextToPhonemes(normalized, VOICE_DE);
     assertNoEnglishPhonemes(raw, 'espeak-raw');
-    const mapped = mapEspeakIpaToKokoro(raw);
-    assertNoEnglishPhonemes(mapped, 'kokoro-mapped');
+    const mapped = mapEspeakIpaToTts(raw);
+    assertNoEnglishPhonemes(mapped, 'TTS-mapped');
     if (__DEV__) {
       console.log(
         `[g2p/espeak-native] de IPA (${mapped.length}): ${mapped.slice(0, 140)}`,

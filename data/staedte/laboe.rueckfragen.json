@@ -1,0 +1,158 @@
+{
+  "city_id": "laboe",
+  "story": 25,
+  "minStory": 25,
+  "thin": [
+    {
+      "id": "laboe_kurpark_laboe",
+      "name": "Kurpark Laboe",
+      "tier": 1,
+      "category": "natur"
+    },
+    {
+      "id": "laboe_laboe_baltic_bay_hafen",
+      "name": "Laboe Baltic Bay Hafen",
+      "tier": 1,
+      "category": "hafen"
+    },
+    {
+      "id": "laboe_marine_ehrenmal",
+      "name": "Marine-Ehrenmal Laboe",
+      "tier": 1,
+      "category": "museum"
+    },
+    {
+      "id": "laboe_ostseestrand",
+      "name": "Ostseestrand",
+      "tier": 1,
+      "category": "natur"
+    },
+    {
+      "id": "laboe_strandpromenade",
+      "name": "Strandpromenade",
+      "tier": 1,
+      "category": "natur"
+    },
+    {
+      "id": "laboe_technisches_museum_u_995",
+      "name": "U-Boot U 995",
+      "tier": 1,
+      "category": "museum"
+    },
+    {
+      "id": "laboe_yacht_und_gewerbehafen_ostseebad_laboe",
+      "name": "Yacht- und Gewerbehafen Ostseebad Laboe",
+      "tier": 1,
+      "category": "hafen"
+    },
+    {
+      "id": "laboe_alte_ausgebrannte_eiche",
+      "name": "Alte ausgebrannte Eiche",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "laboe_anker_gottes_kirche_ev_luth_anker_gottes_kirchengemeinde_laboe",
+      "name": "Anker-Gottes-Kirche Laboe",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "laboe_beachvolleyballfelder_strand_laboe",
+      "name": "Beachvolleyballfelder Strand Laboe",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "laboe_dgzrs_die_seenotretter_station_laboe",
+      "name": "DGzRS - Die Seenotretter (Station Laboe)",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "laboe_fordepanorama_uber_kieler_bucht",
+      "name": "Fördepanorama über Kieler Bucht",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "laboe_fordewanderweg_laboe",
+      "name": "Fördewanderweg Laboe",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "laboe_gedenkstatte_im_laboer_kurpark",
+      "name": "Gedenkstätte im Laboer Kurpark",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "laboe_hundestrand_laboe",
+      "name": "Hundestrand Laboe",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "laboe_minigolf_laboe_getranke_snacks_und_grillmoglichkeit",
+      "name": "Minigolf Laboe",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "laboe_moltenort_u_boat_memorial",
+      "name": "Möltenort U-Boat Memorial",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "laboe_museumshafen_probstei_e_v",
+      "name": "Museumshafen Probstei e.V.",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "laboe_naturerlebnisraum_dunenlandschaft_laboe",
+      "name": "Naturerlebnisraum \"Dünenlandschaft Laboe\"",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "laboe_naturerlebnisraum_kinderabenteuerland",
+      "name": "Naturerlebnisraum Kinderabenteuerland",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "laboe_naturschutzgebiet_bottsand",
+      "name": "Naturschutzgebiet Bottsand",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "laboe_schiffsschraube_d_stentrans",
+      "name": "Schiffsschraube d. \" Stentrans\"",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "laboe_spielplatz_laboe",
+      "name": "Spielplatz Laboe",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "laboe_stoschplatz",
+      "name": "Stoschplatz",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "laboe_strandkunst_am_stromkasten",
+      "name": "Strandkunst am Stromkasten",
+      "tier": 2,
+      "category": "denkmal"
+    }
+  ],
+  "google_missing": []
+}

@@ -1,0 +1,14 @@
+{
+  "name": "findus-device-audio",
+  "version": "1.0.0",
+  "description": "iOS Lock + Headset route for Findus speech delivery (Android: app FindusDeviceAudioModule)",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {},
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  }
+}

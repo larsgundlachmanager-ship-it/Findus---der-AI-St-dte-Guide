@@ -17,18 +17,51 @@ module.exports = () => {
           process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ?? '',
         EXPO_PUBLIC_CITY_ID: process.env.EXPO_PUBLIC_CITY_ID ?? 'prisdorf',
         EXPO_PUBLIC_OPENAI_API_KEY: process.env.EXPO_PUBLIC_OPENAI_API_KEY ?? '',
+        EXPO_PUBLIC_CARTESIA_API_KEY:
+          process.env.EXPO_PUBLIC_CARTESIA_API_KEY ?? '',
         EXPO_PUBLIC_GEMINI_API_KEY: process.env.EXPO_PUBLIC_GEMINI_API_KEY ?? '',
+        EXPO_PUBLIC_USE_LLM_PROXY: process.env.EXPO_PUBLIC_USE_LLM_PROXY ?? '',
+        EXPO_PUBLIC_GEMINI_PROXY_URL:
+          process.env.EXPO_PUBLIC_GEMINI_PROXY_URL ?? '',
+        EXPO_PUBLIC_CARTESIA_PROXY_URL:
+          process.env.EXPO_PUBLIC_CARTESIA_PROXY_URL ?? '',
+        EXPO_PUBLIC_OSRM_BASE: process.env.EXPO_PUBLIC_OSRM_BASE ?? '',
+        EXPO_PUBLIC_PREFER_GOOGLE_ROUTING:
+          process.env.EXPO_PUBLIC_PREFER_GOOGLE_ROUTING ?? '',
         EXPO_PUBLIC_GOOGLE_API_KEY: process.env.EXPO_PUBLIC_GOOGLE_API_KEY ?? '',
         EXPO_PUBLIC_GOOGLE_MAPS_API_KEY:
           process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY ??
           process.env.GOOGLE_MAPS_API_KEY ??
           '',
-        EXPO_PUBLIC_KOKORO_MODEL_URL:
-          process.env.EXPO_PUBLIC_KOKORO_MODEL_URL ?? '',
-        EXPO_PUBLIC_KOKORO_VOICE_URL:
-          process.env.EXPO_PUBLIC_KOKORO_VOICE_URL ?? '',
-        EXPO_PUBLIC_KOKORO_VOCAB_URL:
-          process.env.EXPO_PUBLIC_KOKORO_VOCAB_URL ?? '',
+        EXPO_PUBLIC_OPENWEATHER_API_KEY:
+          process.env.EXPO_PUBLIC_OPENWEATHER_API_KEY ??
+          process.env.OPENWEATHER_API_KEY ??
+          '',
+        EXPO_PUBLIC_GTFS_RT_URL: process.env.EXPO_PUBLIC_GTFS_RT_URL ?? '',
+        EXPO_PUBLIC_DELIJN_API_KEY:
+          process.env.EXPO_PUBLIC_DELIJN_API_KEY ?? '',
+        EXPO_PUBLIC_DELIJN_BASE_URL:
+          process.env.EXPO_PUBLIC_DELIJN_BASE_URL ?? '',
+        EXPO_PUBLIC_PARKOPEDIA_API_KEY:
+          process.env.EXPO_PUBLIC_PARKOPEDIA_API_KEY ?? '',
+        /** Optionale DB-/HAFAS-Basis (Default: v6.db.transport.rest). */
+        EXPO_PUBLIC_DB_HAFAS_BASE_URL:
+          process.env.EXPO_PUBLIC_DB_HAFAS_BASE_URL ??
+          process.env.EXPO_PUBLIC_DB_API_BASE_URL ??
+          '',
+        EXPO_PUBLIC_DB_CLIENT_ID: process.env.EXPO_PUBLIC_DB_CLIENT_ID ?? '',
+        // P0: never bundle DB client secret into the APK
+        EXPO_PUBLIC_DB_API_KEY:
+          process.env.EXPO_PUBLIC_DB_API_KEY ??
+          process.env.EXPO_PUBLIC_DEUTSCHE_BAHN_API_KEY ??
+          '',
+        /** Transitous MOTIS (EU ÖPNV + Live GTFS-RT). */
+        EXPO_PUBLIC_TRANSITOUS_BASE_URL:
+          process.env.EXPO_PUBLIC_TRANSITOUS_BASE_URL ??
+          'https://api.transitous.org/api',
+        /** FlightAware AeroAPI v4. */
+        EXPO_PUBLIC_FLIGHTAWARE_API_KEY:
+          process.env.EXPO_PUBLIC_FLIGHTAWARE_API_KEY ?? '',
         EXPO_PUBLIC_LOCAL_MODEL_PATH:
           process.env.EXPO_PUBLIC_LOCAL_MODEL_PATH ?? '',
         EXPO_PUBLIC_GYG_PARTNER_ID:

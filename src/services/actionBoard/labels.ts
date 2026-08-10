@@ -96,11 +96,22 @@ export function labelForOpportunity(
   },
 ): string {
   if (opts?.multiChoice && entity) {
+    if (kind === 'hotel_book') {
+      const short = entity.name.split(/[|,]/)[0]!.trim().slice(0, 12);
+      const medal = entity.rank === 1 ? '🥇' : '🥈';
+      const pending = opts?.pending ? '…' : '';
+      const star = opts?.affiliate ? '*' : '';
+      return shortenActionLabel(`${medal} ${short}${pending}${star}`);
+    }
     return medalIntentLabel(kind, entity.rank, opts);
   }
   if (entity && (kind === 'hotel_book' || !opts?.multiChoice)) {
     if (kind === 'hotel_book') {
-      return singleEntityLabel(kind, entity.name, opts);
+      const short = entity.name.split(/[|,]/)[0]!.trim().slice(0, 14);
+      const emoji = INTENT_EMOJI.hotel_book ?? '🛏️';
+      const pending = opts?.pending ? '…' : '';
+      const star = opts?.affiliate ? '*' : '';
+      return shortenActionLabel(`${emoji} ${short}${pending}${star}`);
     }
     if (opts?.multiChoice === false && entity.rank === 1) {
       return singleEntityLabel(kind, entity.name, opts);

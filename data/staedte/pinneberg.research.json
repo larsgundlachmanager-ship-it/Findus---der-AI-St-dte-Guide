@@ -1,0 +1,640 @@
+{
+  "city_history": "Pinneberg (1351 „Pinnenberghe“) wuchs um Burg/Renaissanceschloss der Grafschaft Schauenburg-Pinneberg; Siedlungsschwerpunkte an Koppelstraße und Dingstätte. 1640 Aussterben der Schauenburger → dänische Herrschaft über Landdrosten. Schlosszerstörung im 17. Jh., Abriss der Ruine 1720. 1695 Poststation an der Dingstätte (Route Kopenhagen–Hamburg). Drostei 1765–67; Besuch König Christian VII. 1769. 1867 Kreis Pinneberg mit Kreissitz; Landratsamt später Rübekamp 2 (1893). Thesdorf-Eingemeindung 1928; Baumschul-/Rosenland, Holsteiner Rosenfest ab 1929; Kreiskrankenhaus Fahltskamp 1929. Weltwirtschaftskrise mit massiver Arbeitslosigkeit (~2400 Erwerbslose 1932) und politischer Radikalisierung. NS-Zeit: Rosengarten 1934, Freibad 1938, Stadion 1939, Garnisonsstadt 1939. WWII weitgehend ohne Flächenbombardement — historische Substanz (Drostei) blieb erhalten. Nach 1945 Wiederaufbau, Vertriebene, Gewerbe; 2002 saniertes Rathaus und Rathauspassage. Heute: Kreisstadt und Pendlerknoten in der Metropolregion Hamburg.",
+  "links": [
+    {
+      "id": "pinneberg_tourismus",
+      "title": "Stadt Pinneberg",
+      "url": "https://www.pinneberg.de",
+      "provider": "Stadt Pinneberg",
+      "tags": [
+        "official",
+        "orientierung"
+      ]
+    }
+  ],
+  "live_research": [
+    {
+      "id": "events_today",
+      "topic": "events",
+      "prompt": "Was läuft HEUTE und in den nächsten 7 Tagen in Pinneberg (Konzerte, SummerJazz, Theater, Führungen)? Nur belegte Termine mit Datum, Ort, Link — keine Pack-Preise.",
+      "tags": [
+        "live_research",
+        "ephemeral",
+        "events"
+      ]
+    },
+    {
+      "id": "tours_activities",
+      "topic": "tours",
+      "prompt": "Aktuelle Führungen, Bäder-Öffnung, Ausstellungen Drostei/Stadtmuseum/Samlandmuseum Pinneberg — Links und heutige Zeiten frisch suchen.",
+      "tags": [
+        "live_research",
+        "ephemeral",
+        "tours"
+      ]
+    },
+    {
+      "id": "dining_live",
+      "topic": "dining",
+      "prompt": "Aktuelle Speisekarten und Öffnungszeiten empfohlener Restaurants/Cafés in Pinneberg — Links suchen, keine Pack-Preise.",
+      "tags": [
+        "live_research",
+        "ephemeral",
+        "dining"
+      ]
+    },
+    {
+      "id": "hotels_live",
+      "topic": "hotels",
+      "prompt": "Hotel-/Unterkunftspreise und Verfügbarkeit in Pinneberg für das Reisedatum live suchen.",
+      "tags": [
+        "live_research",
+        "ephemeral",
+        "hotels"
+      ]
+    },
+    {
+      "id": "summerjazz",
+      "topic": "events",
+      "prompt": "SummerJazz Pinneberg: aktuelles Festivaljahr, Bühnen, Programm und Festival-Pin — nur frische Quellen, keine alten Pack-Preise.",
+      "tags": [
+        "live_research",
+        "ephemeral",
+        "events"
+      ]
+    }
+  ],
+  "spots": [
+    {
+      "id": "pinneberg_die_drostei",
+      "name": "Die Drostei",
+      "category": "museum",
+      "general_info": "An der Dingstätte steht die Drostei — Barock-Palais von 1765–67, bedeutendstes profanes Baudenkmal des Kreises, heute Kreiskulturzentrum mit Ausstellungen und dem SummerJazz-Vorplatz.",
+      "facts": {
+        "origin": "1765–67 als Wohn- und Amtsgebäude für Hans von Ahlefeldt im Auftrag der dänischen Herrschaft Pinneberg errichtet; 1769 residierte der dänische König hier.",
+        "architecture": "Backsteinbau mit rationalistisch-kühl zugeschriebener Sonnin-Formensprache; En-Filade mit drei Salons und historischer Treppenanlage. Urheberschaft historisch auch Cai Dose/Greggenhofer diskutiert.",
+        "now": "Seit der Restaurierung 1984–91 Kreiskulturzentrum und Denkmal. Vorplatz = Hauptbühne SummerJazz. Nicht barrierefrei.",
+        "tags": [
+          "museum",
+          "barock",
+          "geschichte",
+          "must_have",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Adresse: Dingstätte 23, 25421 Pinneberg.",
+        "1765–67 für Landdrost Hans von Ahlefeldt; dänischer Herrschaftssitz.",
+        "Bis 1933 preußische Landräte; 1933 SA-„Standartenhaus“ in oberen Räumen, Katasteramt im EG.",
+        "Restaurierung 1984–91 → Kreiskulturzentrum.",
+        "Vorplatz auf historischem Thingplatz mit Schwursteinen."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Die Drostei (1765–67) ist das bedeutendste Barock-Palais im Kreis Pinneberg. Bauherr: Landdrost und Geheimer Konferenzrat Hans von Ahlefeldt (1710–1780). Architektonisch oft Ernst Georg Sonnin zugeschrieben.",
+          "tags": [
+            "geschichte",
+            "architecture",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Raumfolge weitgehend original: hölzerne Treppenanlage und drei Salons en filade mit farbigen Stoffwandbespannungen nach historischen Vorbildern.",
+          "tags": [
+            "architecture",
+            "detail",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Ab 1933 nutzte die Pinneberger SA obere Räume als „Standartenhaus“, während das Katasteramt das Erdgeschoss belegte — dunkles Kapitel der Hausgeschichte.",
+          "tags": [
+            "geschichte",
+            "ww2",
+            "master_report"
+          ]
+        },
+        {
+          "text": "User-Frage: Was stand hier vor der Drostei? Antwort: Die Keimzelle war Burg/Schloss; nach Brand 1658 und Abriss 1720 entstand später die Drostei als neues Machtzentrum am Thingplatz.",
+          "tags": [
+            "faq",
+            "user_question",
+            "tiefenwissen",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "User-Frage: Was bedeuten die Sterne am Portal? Antwort: Die architektonischen Sterne gelten als dekorative Elemente — vermutlich von Sonnin integriert, nicht als geheimes Wappenzeichen zu lesen.",
+          "tags": [
+            "faq",
+            "user_question",
+            "architecture"
+          ]
+        },
+        {
+          "text": "LIVE: Ausstellungszeiten und Eintritt Drostei — aktuell suchen; Preise nie aus dem Pack vorlesen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "LIVE: SummerJazz — Programm und Festival-Pin frisch recherchieren (traditionell Freiluft kostenfrei, Finanzierung über Sponsoren/Pin).",
+          "tags": [
+            "live_hint",
+            "events",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist die Drostei barrierefrei?",
+          "a": "Nein — der historische Bau ist nicht barrierefrei zugänglich."
+        },
+        {
+          "q": "Was passiert auf dem Vorplatz?",
+          "a": "Der Vorplatz ist Hauptbühne des SummerJazz und liegt auf dem historischen Thingplatz mit Schwursteinen."
+        }
+      ]
+    },
+    {
+      "id": "pinneberg_stadtmuseum",
+      "name": "Stadtmuseum Pinneberg",
+      "category": "museum",
+      "general_info": "Neben der Drostei steht das Stadtmuseum im Alten Amtsgericht von 1854/55 — Stadtentwicklung, Künstler-Nachlässe und im Keller die ILO-Motoren-Sammlung.",
+      "facts": {
+        "origin": "1854/55 als „Geschäftslocal“ der Landdrostei gebaut, um Justiz und Verwaltung zu trennen — lokal bis heute „Altes Amtsgericht“ genannt.",
+        "architecture": "Königlich-preußischer Bau direkt an der Dingstätte neben der Drostei.",
+        "now": "Museum von Frühgeschichte bis WWII; Behandlungszimmer/Atelier Rudolph Grothkop; Thiersch-Gemälde; Görbing-Mineralien; ILO-Motoren im Untergeschoss. Eintritt traditionell kostenfrei (Spende).",
+        "tags": [
+          "museum",
+          "geschichte",
+          "ilo",
+          "must_have",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Adresse: Dingstätte 25, 25421 Pinneberg.",
+        "Erbaut 1854/55 als Justiz-/Verwaltungsbau neben der Drostei.",
+        "Highlight: original erhaltenes Behandlungszimmer/Atelier des Zahnarztes und Malers Rudolph Grothkop (geb. 1908 in Pinneberg).",
+        "Nachlass Günther Thiersch (~40 Ölgemälde) und Mineralien-/Edelsteinsammlung Johannes Görbing (~4000 Exponate).",
+        "Keller: industriegeschichtliche ILO-Motoren-Kollektion."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Weil die Drostei als Machtzentrale zu klein wurde, entstand 1855 dieses Haus für die Justiz — deshalb der Volksname „Altes Amtsgericht“.",
+          "tags": [
+            "geschichte",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Querverweis ILO: Die Motoren im Keller prägen die lokale Industriegeschichte — später am Torhaus ILO-Park steht man auf dem ehemaligen Produktionsgrund.",
+          "tags": [
+            "ilo",
+            "geschichte",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Stadtmuseum frisch prüfen (typisch Mi/Fr/Sa/So nachmittags, Do vormittags; Mo/Di oft Ruhetag).",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was ist das Besondere im Keller?",
+          "a": "Die industriegeschichtliche Sammlung historischer ILO-Motoren — einst größter deutscher Zweitaktmotoren-Produzent aus Pinneberg."
+        }
+      ]
+    },
+    {
+      "id": "pinneberg_bahnhof_pr",
+      "name": "Bahnhof Pinneberg & P+R Anlage",
+      "category": "bahnhof",
+      "general_info": "Der Bahnhof Pinneberg ist das verkehrstechnische Nadelöhr zur Metropole — S3 Richtung Hamburg, P+R an der Rockvillestraße und Pendler-Drehkreuz der Stadt.",
+      "facts": {
+        "origin": "Bahnhof als historisches und heutiges Tor zwischen holsteinischer Stadt und Hamburg.",
+        "now": "S3-Anbindung HVV; P+R Rockvillestraße; Schnellbus-Optionen Richtung Flughafen vom nahen Fahltskamp historisch relevant für Flugreisende.",
+        "tags": [
+          "bahnhof",
+          "transport",
+          "must_have",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Zentraler ÖPNV-Knoten: S-Bahn S3 im HVV.",
+        "P+R an der Rockvillestraße — typischer Pendler-Einstieg.",
+        "LIVE: Fahrplan, Störungen und Ticketpreise immer frisch suchen."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Pinneberg ist hochgradig in den HVV integriert; die S3 ist die zentrale Lebensader zum Hamburger Hauptbahnhof. Auf der Hamburger S-Bahn wird ATO over ETCS (teilautomatisiert GoA2) schrittweise eingeführt — Auswirkungen auf Takt/Zuverlässigkeit sind netzweit relevant.",
+          "tags": [
+            "transport",
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Aktuelle S-Bahn-/Busfahrpläne, Ticketpreise und P+R-Regeln frisch recherchieren.",
+          "tags": [
+            "live_hint",
+            "transport",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pinneberg_stadtgeschichte",
+      "name": "Pinneberg Stadtgeschichte & Orientierung",
+      "category": "geschichte",
+      "general_info": "Von der Eisenzeit am Ratsberg über Burg, Schlossbrand und Drostei bis zu ILO und Pendlerstadt: Pinnebergs Geschichte ist in wenigen Straßen um Dingstätte und Bahntrasse greifbar.",
+      "facts": {
+        "origin": "1351 „Pinnenberghe“; Burg um 1200; Schloss 1472; Brand 1658; Drostei ab 1765 als neues Zentrum.",
+        "now": "Pendlerstadt in der Metropolregion Hamburg; Thesdorf 1928 eingemeindet; kulturelle Anker Drostei, Museum, SummerJazz.",
+        "tags": [
+          "geschichte",
+          "city_welcome",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Eisenzeitlicher Fund 2016 am Ratsberg (Langhaus nahe Bestattung).",
+        "1370 Eroberung durch Adolf VIII.; 1658 Schlossbrand durch Schweden; 1720 Abriss.",
+        "1930er: sozialräumliche Spaltung — „Klein-Moskau“ westlich der Bahn vs. sozialdemokratisches Pinneberg-Nord/Wupperman.",
+        "Thesdorf 1928 eingemeindet; 1967 eigene S-Bahn; Hochhauskomplex Sauermilch (17 Stockwerke) prägt bis heute."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "User-Frage: Warum heißt Pinneberg so? Antwort: 1351 urkundlich „Pinnenberghe“ — die Siedlung wuchs um Burg/Schloss und später die Drostei am Thingplatz.",
+          "tags": [
+            "faq",
+            "user_question",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: SummerJazz jedes Jahr am zweiten Augustwochenende — aktuelles Motto/Programm frisch suchen (2025: 150 Jahre Stadt; 2026: Zukunftsmusik laut Bericht).",
+          "tags": [
+            "live_hint",
+            "events",
+            "ephemeral"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_places": [
+    {
+      "name": "Samlandmuseum",
+      "category": "museum",
+      "query": "Samlandmuseum Fahltskamp 30 Pinneberg",
+      "general_info": "Im Alten Bürgerhaus am Fahltskamp bewahrt das Samlandmuseum die Erinnerung an den ostpreußischen Kreis Fischhausen — Patenschaft der Stadt seit 1951, geprägt von geretteten Artefakten der Flucht.",
+      "facts": {
+        "origin": "Kreistag übernahm 1951 die Patenschaft für den Landkreis Fischhausen/Samland; maßgeblich initiiert von Kreisheimatpfleger Hermann Sommer.",
+        "now": "Ausstellung zu Steilküste, Bernstein („Samlandgold“), Vogelwarte Rossitten; nach Brand 2009 kuratorisch überarbeitet, 2011 neu eröffnet. Besuch oft nur nach Anmeldung.",
+        "tags": [
+          "museum",
+          "geschichte",
+          "samland",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Adresse: Fahltskamp 30, 25421 Pinneberg (Altes Bürgerhaus).",
+        "Patenschaft Pinneberg–Fischhausen/Samland seit 1951.",
+        "Themen: Bernsteinabbau, Burg Lochstädt-Bestände, ostpreußisches Bildarchiv."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "LIVE: Besichtigung Samlandmuseum meist nach Anmeldung — aktuelle Kontaktzeiten frisch suchen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum gibt es in Pinneberg ein Samlandmuseum?",
+          "a": "Nach 1945 kamen viele Vertriebene; 1951 übernahm der Kreistag die Patenschaft für den ostpreußischen Kreis Fischhausen."
+        }
+      ],
+      "approach_hints": [
+        {
+          "meters": 80,
+          "teaser": "Am Fahltskamp: das Alte Bürgerhaus mit dem Samlandmuseum liegt voraus — hier trifft Nachkriegsgeschichte auf gerettete Samland-Erinnerung."
+        }
+      ]
+    },
+    {
+      "name": "Wasserturm Pinneberg",
+      "category": "denkmal",
+      "query": "Wasserturm Peiner Weg 43 Pinneberg",
+      "general_info": "Am Peiner Weg ragt der 40,85-Meter-Wasserturm von 1912 als visuelles Wahrzeichen — einst Intze-Behälter für die Industrie, heute denkmalgeschütztes Wohnhaus in Privatbesitz.",
+      "facts": {
+        "origin": "1912 von den Union-Eisenwerken (später Herman Wupperman) errichtet; Blaupause Husumer Wasserturm 1902.",
+        "architecture": "Konischer Backsteinschaft auf achteckigem Sockel, weit auskragendes Schieferdach, Stützbodenbehälter Intze-Typ (~300 m³).",
+        "now": "Betrieb 1956 eingestellt; seit den 1990ern Wohnnutzung mit Zwischendecken und Aufzug. Innenbesichtigung ausgeschlossen (Privat).",
+        "tags": [
+          "denkmal",
+          "architecture",
+          "aussicht",
+          "must_have",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Adresse: Peiner Weg 43, Pinneberg.",
+        "Höhe ca. 40,85 m; Kulturdenkmal.",
+        "Früher Wasserversorgung für Werke/Stadt; heute Privatwohnen — nur von außen erleben."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "User-Frage: Kann man in den Wasserturm hinein? Antwort: Nein — Privateigentum mit Wohnnutzung, Innenbesichtigung ausgeschlossen. Der Reiz liegt in der Silhouette und dem Industriedenkmal von außen.",
+          "tags": [
+            "faq",
+            "user_question"
+          ]
+        }
+      ],
+      "approach_hints": [
+        {
+          "meters": 250,
+          "teaser": "Über den Dächern zeichnet sich der Kegelhelm des Wasserturms ab — Pinnebergs industrielles Wahrzeichen von 1912."
+        },
+        {
+          "meters": 40,
+          "teaser": "Am Schaft des Turms: hier lag einst der Intze-Behälter für Tausende Arbeiter — heute führt ein privater Aufzug durch Wohnstockwerke unter das Schieferdach."
+        }
+      ]
+    },
+    {
+      "name": "Torhaus ILO Park",
+      "category": "denkmal",
+      "query": "Torhaus ILO Park Pinneberg",
+      "general_info": "Am ILO Park verbindet das Torhaus achtgeschossigen Neubau mit dem denkmalgeschützten Verwaltungsbau der ehemaligen Motorenwerke — hier stand Deutschlands größter Zweitaktmotoren-Produzent.",
+      "facts": {
+        "origin": "Heinrich Christiansen verlagerte 1913 seine 1911 in Altona gegründete Fabrik nach Pinneberg; ILO aus Esperanto „gutes Werkzeug“.",
+        "architecture": "Torhaus ILO Park: fließende Verbindung Neubau und denkmalgeschütztes Verwaltungsgebäude der Werke.",
+        "now": "Produktion bis 1990; heute ILO Park als Quartier für Gewerbe und Wohnen.",
+        "tags": [
+          "denkmal",
+          "ilo",
+          "geschichte",
+          "must_have",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "1913–1990: größter deutscher Zweitaktmotoren-Produzent; Kunden u. a. Tempo, Goliath, Hercules, Zündapp.",
+        "Verkäufe an Rockwell/Tecumseh in späteren Jahren; Produktionsende 1990.",
+        "Querverweis: ILO-Motoren-Sammlung im Stadtmuseum-Keller."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "User-Frage: Was bedeutet ILO? Antwort: Aus dem Esperanto für „gutes Werkzeug“ — Markenkern der Pinneberger Motorenwerke.",
+          "tags": [
+            "faq",
+            "user_question",
+            "sprache"
+          ]
+        }
+      ],
+      "approach_hints": [
+        {
+          "meters": 120,
+          "teaser": "Du näherst dich dem ILO Park — wo früher Motoren für halb Deutschland liefen, verbindet heute das Torhaus Alt und Neu."
+        }
+      ]
+    },
+    {
+      "name": "Bäder Pinneberg",
+      "category": "freizeit",
+      "query": "Bäder Pinneberg Burmeisterallee",
+      "general_info": "In der Burmeisterallee bündeln die Bäder Pinneberg Hallen- und Freibad: 50-Meter-Bahn, Sprungturm und Sommerbecken — die sportliche Nasszelle der Stadt.",
+      "facts": {
+        "origin": "Städtische Bäderanlage Burmeisterallee 6.",
+        "now": "Hallenbad 50 m / ca. 28,5 °C mit 3-m-Sprungturm; Freibad 25 m mit Strömungskanal. Jährliche Revisionspausen typisch bis Mitte Januar.",
+        "tags": [
+          "freizeit",
+          "sport",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Adresse: Burmeisterallee 6, Pinneberg.",
+        "LIVE: Eintritt, Kassenzeiten und Urban-Sports-Einlösung immer frisch prüfen."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "LIVE: Öffnungszeiten, Revision und Tickets Bäder Pinneberg frisch suchen — keine Pack-Preise.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "VfL Pinneberg Stadion Fahltsweide",
+      "category": "sport",
+      "query": "VfL Pinneberg Fahltsweide",
+      "general_info": "An der Fahltsweide spielt der VfL Pinneberg 1945 — Naturrasen-Stadion mit Laufbahn und Kunstrasenplatz mit Flutlicht als sportliches Herz der Stadt.",
+      "facts": {
+        "origin": "VfL Pinneberg 1945 an der Fahltsweide 1.",
+        "now": "Stadion 1 Naturrasen/Laufbahn (Kapazität historisch ~6000); Stadion 2 Kunstrasen/Flutlicht (~1500).",
+        "tags": [
+          "sport",
+          "freizeit",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Adressebereich: Fahltsweide 1, Pinneberg.",
+        "LIVE: Spielplan und Tickets frisch recherchieren."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "LIVE: Aktuelle Spiele und Öffnung des Sportgeländes frisch suchen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Drosteipark",
+      "category": "natur",
+      "query": "Drosteipark Pinneberg",
+      "general_info": "Rund um die Drostei öffnet sich der Drosteipark als grüne Atemstelle mitten in der Innenstadt — Naherholung zwischen Barockfassade und Stadtalltag.",
+      "facts": {
+        "origin": "Parkanlage im Kontext des historischen Herrschafts- und Kulturzentrums.",
+        "now": "Kostenfrei zugängliche Grünfläche; Rosengarten und Waldgebiet Fahlt ergänzen die Naherholungstopografie.",
+        "tags": [
+          "natur",
+          "park",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Zentraler Park an der Drostei.",
+        "Weitere Grünräume: historischer Rosengarten und Waldgebiet Fahlt."
+      ]
+    },
+    {
+      "name": "Christuskirche Pinneberg",
+      "category": "kirche",
+      "query": "Christuskirche Pinneberg",
+      "general_info": "Die Christuskirche ist ein markanter Sakralbau im Stadtbild Pinnebergs — Orientierungspunkt für Gemeindeleben und Stadtspaziergänge.",
+      "facts": {
+        "tags": [
+          "kirche",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Evangelische Stadtkirche als städtebaulicher Anker.",
+        "LIVE: Gottesdienst-/Konzerttermine nur live suchen."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "LIVE: Gottesdienste und Konzerte an der Christuskirche frisch recherchieren.",
+          "tags": [
+            "live_hint",
+            "events",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "S-Bahn Station Pinneberg-Thesdorf",
+      "category": "bahnhof",
+      "query": "Bahnhof Pinneberg-Thesdorf",
+      "general_info": "Seit 1967 hat Thesdorf eigene S-Bahn — der Haltepunkt machte aus dem einstigen Bauerndorf einen Pendlerstadtteil Pinnebergs.",
+      "facts": {
+        "origin": "Thesdorf am 7. Januar 1928 eingemeindet (1148 ha); S-Bahn-Station seit 23. September 1967.",
+        "now": "Wichtiger S3-Zugang im Stadtteil; Hochhauskomplex Sauermilch (17 Stockwerke, ~400 Wohnungen) prägt die Silhouette.",
+        "tags": [
+          "bahnhof",
+          "transport",
+          "thesdorf",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "S-Bahn-Halt Thesdorf seit 1967.",
+        "Stadtteiltransformation 1965–75 mit markantem Hochhausensemble."
+      ]
+    },
+    {
+      "name": "Regio Klinikum Pinneberg",
+      "category": "gesundheit",
+      "query": "Regio Klinikum Pinneberg Fahltskamp",
+      "general_info": "Am Fahltskamp sichert das Regio Klinikum die Notfallversorgung — Zentrum für Notfall- und Akutmedizin rund um die Uhr.",
+      "facts": {
+        "origin": "Krankenhausstandort Fahltskamp 74.",
+        "now": "24/7 Notaufnahme; KV-Anlaufpraxis am Klinikum für minderschwere Fälle außerhalb der Praxiszeiten.",
+        "tags": [
+          "gesundheit",
+          "notfall",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Adresse: Fahltskamp 74, Pinneberg.",
+        "LIVE: Aktuelle Anlaufpraxis-Zeiten frisch prüfen."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "LIVE: Öffnungszeiten der KV-Anlaufpraxis und Besuchshinweise Klinikum frisch suchen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "notfall"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rathaus Pinneberg",
+      "category": "verwaltung",
+      "query": "Rathaus Pinneberg Bismarckstraße",
+      "general_info": "Im Rathaus an der Bismarckstraße sitzt die Stadtverwaltung — Bürgerbüro, Fundbüro und Puls der Fußgängerzone am Rathausvorplatz mit Wochenmarkt.",
+      "facts": {
+        "origin": "Kommunales Verwaltungszentrum Bismarckstraße 8.",
+        "now": "Bürgerbüro/Fundbüro; Wochenmarkt Di/Do/Sa am Rathausvorplatz (Waldenau mittwochs Satellit).",
+        "tags": [
+          "verwaltung",
+          "orientierung",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Adresse: Bismarckstraße 8, Pinneberg.",
+        "Wochenmarkt Rathausvorplatz: typisch Di/Do/Sa vormittags; Do oft höhere Händlerdichte.",
+        "LIVE: Markttage und Parken-Plus-Regeln frisch verifizieren."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "LIVE: Aktuelle Markttage, Händler und Parkgebühren Innenstadt frisch suchen — keine Pack-Preise vorlesen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Waldgebiet Fahlt",
+      "category": "natur",
+      "query": "Fahlt Wald Pinneberg",
+      "general_info": "Das Waldgebiet Fahlt ist Pinnebergs grüne Ruhezone — jederzeit zugängliche Naherholung abseits der Fußgängerzone.",
+      "facts": {
+        "now": "Weitläufige, kostenfrei zugängliche Waldwege zur stillen Erholung.",
+        "tags": [
+          "natur",
+          "aussicht",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Naherholungswald Fahlt.",
+        "Ergänzt Drosteipark und Rosengarten im Grünnetz der Stadt."
+      ]
+    },
+    {
+      "name": "Rosengarten Pinneberg",
+      "category": "natur",
+      "query": "Rosengarten Pinneberg",
+      "general_info": "Der historische Rosengarten ist eine der gepflegten Grüninseln Pinnebergs — Blüte, Wege und Stadtruhe nah am Zentrum.",
+      "facts": {
+        "tags": [
+          "natur",
+          "park",
+          "master_report"
+        ]
+      },
+      "bullets": [
+        "Historischer Rosengarten als Naherholungsziel.",
+        "LIVE: Blütezeit und Veranstaltungen saisonal frisch prüfen."
+      ]
+    }
+  ],
+  "master_hyperlocal_merged_at": "2026-08-02T23:34:07.038Z",
+  "master_notes": [
+    "Drostei, Stadtmuseum, Samlandmuseum, Wasserturm, ILO-Park",
+    "Prisdorf: Alte Schule, SAV-Angelteich, Haltepunkt 1844/1990",
+    "SummerJazz / Wochenmarkt / Taxi / Klinik = LIVE/QA"
+  ],
+  "deep_profile_merged_at": "2026-08-02T23:41:59.817Z"
+}

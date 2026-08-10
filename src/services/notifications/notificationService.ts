@@ -6,9 +6,11 @@
 import { Platform } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import { getCachedUserProfile } from '../userProfileService';
+import type { LogisticsMode } from '../logistics/logisticsTriggerMath';
 import {
   buildFlightReminderBody,
-  buildTransitReminderBody,
+  buildLeaveReminderBody,
+  cleanLeaveDestLabel,
   computeLeaveByMs,
   minutesUntilDepartureAtLeave,
   parseDepartureMsFromText,
@@ -177,12 +179,17 @@ async function scheduleDateNotification(opts: {
 }
 
 /**
- * Schedule ÖPNV leave reminder at T_dep − walkEta − safetyBuffer.
+ * Schedule leave-by reminder at T_dep − walkEta − safetyBuffer.
+ * Mode steuert Copy (Fuß/Rad vs. ÖPNV) — kein Bus-Text bei Walk.
  */
-export async function scheduleTransitDepartureReminder(opts: {
+export async function scheduleLeaveByReminder(opts: {
   departureMs: number;
   walkEtaMinutes: number;
-  line: string;
+  mode?: LogisticsMode | 'transit' | string | null;
+  /** Zielname (Fuß/Rad) oder Linien-Label (Transit). */
+  title?: string;
+  line?: string;
+  destName?: string;
   stationName?: string;
   safetyBufferMin?: number;
   /** Stable id so re-scheduling replaces the previous one. */
@@ -190,30 +197,60 @@ export async function scheduleTransitDepartureReminder(opts: {
 }): Promise<ScheduleReminderResult> {
   if (!remindersWanted()) return { ok: false, reason: 'disabled' };
 
+  const mode = opts.mode ?? 'generic';
+  const isTransit =
+    mode === 'bus' ||
+    mode === 'train' ||
+    mode === 'ferry' ||
+    mode === 'transit';
+
+  // Fuß/Rad: nur Reisezeit als „spätestens dahin“ — kein Extra-Bahnhofs-Puffer in der Copy
+  const safetyForSchedule =
+    mode === 'walk' ||
+    mode === 'bike' ||
+    mode === 'car' ||
+    mode === 'taxi' ||
+    mode === 'generic'
+      ? Math.min(3, opts.safetyBufferMin ?? 2)
+      : opts.safetyBufferMin;
+
   const leave = computeLeaveByMs({
     departureMs: opts.departureMs,
     walkEtaMinutes: opts.walkEtaMinutes,
-    safetyBufferMin: opts.safetyBufferMin,
+    safetyBufferMin: safetyForSchedule,
   });
   if (!leave) return { ok: false, reason: 'too_soon' };
 
   const perm = await requestNotificationPermission();
   if (!perm.granted) return { ok: false, reason: 'permission' };
 
-  const mins = minutesUntilDepartureAtLeave(opts.departureMs, leave.leaveByMs);
-  const body = buildTransitReminderBody({
-    line: opts.line,
-    minutesUntilDeparture: mins,
-    stationName: opts.stationName,
+  const mins = isTransit
+    ? minutesUntilDepartureAtLeave(opts.departureMs, leave.leaveByMs)
+    : Math.max(1, Math.round(opts.walkEtaMinutes));
+
+  const dest =
+    cleanLeaveDestLabel(opts.destName) ||
+    cleanLeaveDestLabel(opts.title) ||
+    undefined;
+  const body = buildLeaveReminderBody({
+    mode,
+    line: opts.line ?? (isTransit ? opts.title : undefined),
+    destName: dest,
+    stationName: isTransit ? opts.stationName : undefined,
+    minutesUntilArrive: mins,
+    // Kontext-Hints (bezahlt/Checkout) nie in voraus geplante Push-Bodies —
+    // die sind beim Feuern oft falsch. Live nur in Voice/Checkpoint.
+    contextHint: null,
   });
-  const identifier =
-    opts.reminderKey != null
-      ? `transit:${opts.reminderKey}`
-      : `transit:${opts.line}:${opts.departureMs}`;
+
+  const keyBase = opts.reminderKey ?? `${mode}:${dest ?? opts.line ?? 'x'}:${opts.departureMs}`;
+  const identifier = isTransit ? `transit:${keyBase}` : `leave:${keyBase}`;
 
   try {
     if (opts.reminderKey) {
       await cancelReminderById(identifier);
+      await cancelReminderById(`transit:${opts.reminderKey}`);
+      await cancelReminderById(`leave:${opts.reminderKey}`);
     }
     const notificationId = await scheduleDateNotification({
       title: 'Findus — Zeit aufzubrechen',
@@ -222,8 +259,10 @@ export async function scheduleTransitDepartureReminder(opts: {
       channelId: DEPARTURE_CHANNEL_ID,
       identifier,
       data: {
-        type: 'transit_departure',
-        line: opts.line,
+        type: isTransit ? 'transit_departure' : 'leave_by',
+        mode,
+        line: opts.line ?? null,
+        destName: dest ?? null,
         departureMs: opts.departureMs,
         stationName: opts.stationName ?? null,
       },
@@ -236,6 +275,27 @@ export async function scheduleTransitDepartureReminder(opts: {
       error: err instanceof Error ? err.message : String(err),
     };
   }
+}
+
+/**
+ * @deprecated Prefer scheduleLeaveByReminder — alias for transit callers.
+ */
+export async function scheduleTransitDepartureReminder(opts: {
+  departureMs: number;
+  walkEtaMinutes: number;
+  line: string;
+  stationName?: string;
+  safetyBufferMin?: number;
+  reminderKey?: string;
+  mode?: LogisticsMode | 'transit' | string | null;
+  destName?: string;
+}): Promise<ScheduleReminderResult> {
+  return scheduleLeaveByReminder({
+    ...opts,
+    mode: opts.mode ?? 'bus',
+    title: opts.line,
+    line: opts.line,
+  });
 }
 
 /**
@@ -449,10 +509,10 @@ export async function scheduleTestReminder(opts?: {
         title: 'Findus — Test',
         body:
           opts?.body ??
-          buildTransitReminderBody({
-            line: 'X',
-            minutesUntilDeparture: 12,
-            stationName: 'Test-Haltestelle',
+          buildLeaveReminderBody({
+            mode: 'walk',
+            destName: 'Testziel',
+            minutesUntilArrive: 12,
           }),
         sound: true,
         data: { type: 'test' },

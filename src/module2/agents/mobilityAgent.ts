@@ -11,8 +11,16 @@ import { resolveLocalAnchor } from '../context/shortTermContext';
 import { resolveWorkingPlace } from '../context/placeContext';
 import {
   estimateTravelEtaRouted,
+  formatBikeEtaSpeech,
+  formatDistanceKmOrM,
   formatWalkBikeEtaSpeech,
+  formatWalkEtaSpeech,
 } from '../../services/navigation/travelEta';
+import {
+  detectTravelModeVoiceOverride,
+  forceBikeModeFromVoice,
+  setPreferredTravelMode,
+} from '../../services/navigation/travelModeContext';
 import { useFinnusStore } from '../../store/useFinnusStore';
 import { useFuturePlanStore } from '../timeline/futurePlanState';
 import { addPlanStop } from '../timeline/planLiveEdits';
@@ -41,8 +49,26 @@ function wantsTransit(text: string): boolean {
   );
 }
 
+function wantsBike(text: string): boolean {
+  return (
+    detectTravelModeVoiceOverride(text) === 'bike' ||
+    /\b(fahrrad|radeln|radele|mit\s+dem\s+rad|e-?bike|bike)\b/i.test(text)
+  );
+}
+
+function wantsEtaOnly(text: string): boolean {
+  return (
+    /\b(wie\s+lange|wieviel\s+zeit|dauer|brauch(?:e|st|en)?|minuten|eta)\b/i.test(
+      text,
+    ) && !/\b(führ\s+mich|fuehr\s+mich|navigier|bring\s+mich|start(?:e)?\s+(?:die\s+)?route)\b/i.test(text)
+  );
+}
+
 function extractDestName(text: string): string {
   const m =
+    text.match(
+      /\bnach\s+([A-Za-zÄÖÜäöüß][\w\-ÄÖÜäöüß]*(?:\s+[A-Za-zÄÖÜäöüß][\w\-ÄÖÜäöüß]*){0,2})(?=\s|$|[.?!]|,|brauch|mit|zu\s+fu)/i,
+    ) ||
     text.match(
       /\b(?:zu(?:m|r)?|nach)\s+(.+?)(?:\s*[.?!]|$)/i,
     ) ||
@@ -57,7 +83,7 @@ function extractDestName(text: string): string {
     );
   let name = (m?.[1] ?? text)
     .replace(/\s+/g, ' ')
-    .replace(/\b(zu\s+mein(?:em|en)?\s+navi|bitte)\b/gi, '')
+    .replace(/\b(zu\s+mein(?:em|en)?\s+navi|bitte|brauch(?:e|st|en)?|wie\s+lange|mit\s+dem\s+(?:fahrrad|rad))\b/gi, '')
     .trim();
   // Elphi / Elphi-Harmonie → Elbphilharmonie (nicht Antwerpen etc.)
   if (
@@ -175,6 +201,15 @@ export const mobilityAgent: Module2Agent = {
       place.biasMode === 'named_city' ? place.city : null;
     const append = wantsAppendToRoute(task.rewrittenText);
     const transitAsk = wantsTransit(task.rewrittenText);
+    const bikeAsk = wantsBike(task.rewrittenText);
+    const etaOnly = wantsEtaOnly(task.rewrittenText);
+    if (bikeAsk) {
+      forceBikeModeFromVoice();
+    } else {
+      const modeHit = detectTravelModeVoiceOverride(task.rewrittenText);
+      if (modeHit === 'foot') setPreferredTravelMode('foot');
+    }
+    const routeMode: 'walking' | 'bicycling' = bikeAsk ? 'bicycling' : 'walking';
 
     const local = resolveLocalAnchor(task.rewrittenText);
     let resolved = local?.name ?? 'dein Ziel';
@@ -185,19 +220,14 @@ export const mobilityAgent: Module2Agent = {
 
     if (!local) {
       const destName = extractDestName(task.rewrittenText);
-      const pick = await resolvePlace({
-        query: destName,
-        lat: a.lat,
-        lng: a.lng,
-        cityHint: softCity,
-      });
-      if (pick) {
-        lat = pick.lat;
-        lng = pick.lng;
-        resolved = pick.name;
-        openNow = pick.openNow === true;
-        if (pick.openNow === false) closedPick = pick;
-      } else {
+      // Städte/Orte: Geocode zuerst (schneller + treffsicherer als Places-POI)
+      const looksLikeTown =
+        destName.length >= 3 &&
+        destName.length <= 48 &&
+        !/\b(supermarkt|bäcker|baecker|café|cafe|restaurant|apotheke|toilette|klo|tennis|club|sport|museum|hotel|park|kneipe|bar|fitness|schwimm)\b/i.test(
+          destName,
+        );
+      if (looksLikeTown || etaOnly || bikeAsk) {
         const g = await geocodePlaceName(destName, {
           biasLat: a.lat,
           biasLng: a.lng,
@@ -207,8 +237,34 @@ export const mobilityAgent: Module2Agent = {
           lat = g.lat;
           lng = g.lng;
           resolved = g.label;
-        } else {
-          resolved = destName || resolved;
+        }
+      }
+      if (resolved === 'dein Ziel' || (!looksLikeTown && !etaOnly)) {
+        const pick = await resolvePlace({
+          query: destName,
+          lat: a.lat,
+          lng: a.lng,
+          cityHint: softCity,
+        });
+        if (pick) {
+          lat = pick.lat;
+          lng = pick.lng;
+          resolved = pick.name;
+          openNow = pick.openNow === true;
+          if (pick.openNow === false) closedPick = pick;
+        } else if (resolved === 'dein Ziel') {
+          const g = await geocodePlaceName(destName, {
+            biasLat: a.lat,
+            biasLng: a.lng,
+            cityHint: softCity,
+          });
+          if (g) {
+            lat = g.lat;
+            lng = g.lng;
+            resolved = g.label;
+          } else {
+            resolved = destName || resolved;
+          }
         }
       }
     }
@@ -430,18 +486,67 @@ export const mobilityAgent: Module2Agent = {
       destLat: lat,
       destLng: lng,
       destName: resolved,
-      mode: 'walking',
+      mode: routeMode,
+      skipObstacles: etaOnly || bikeAsk,
     });
     const km = eta.distanceM / 1000;
-    const etaLine = formatWalkBikeEtaSpeech(eta);
-    const offerTransit = shouldOfferTransit({
-      walkMin: eta.directWalkMinutes,
-      bikeMin: eta.bikeMinutes,
-    });
+    const etaLine = bikeAsk
+      ? formatBikeEtaSpeech(eta)
+      : routeMode === 'walking' && !transitAsk
+        ? formatWalkBikeEtaSpeech(eta)
+        : formatWalkBikeEtaSpeech(eta);
+    const offerTransit =
+      !bikeAsk &&
+      shouldOfferTransit({
+        walkMin: eta.directWalkMinutes,
+        bikeMin: eta.bikeMinutes,
+      });
     const fromBit =
       append && anchor.name !== 'hier'
         ? `Von ${anchor.name} sind es noch `
         : '';
+
+    // Reine ETA-Frage (z. B. Fahrrad nach Uetersen): sofort Zahl + Los-Frage
+    if (etaOnly && !append && !transitAsk) {
+      const lead = bikeAsk
+        ? formatBikeEtaSpeech(eta)
+        : formatWalkEtaSpeech(eta);
+      const ask = bikeAsk
+        ? 'Wollen wir direkt losradeln?'
+        : 'Wollen wir direkt los?';
+      return {
+        agent: 'mobility',
+        ok: true,
+        draftText:
+          `${lead} nach ${resolved}. ${ask} ` +
+          `FLOW: Bei Ja → Route starten (${bikeAsk ? 'Rad' : 'Fuß'}), erster Abbiegehinweis. Kein Roman, kein Fuß-Fallback wenn Rad gefragt.`,
+        bullets: [
+          resolved,
+          bikeAsk
+            ? `Rad ~${eta.bikeMinutes} Min`
+            : `Fuß ~${eta.directWalkMinutes} Min`,
+          eta.routed
+            ? `Route ${formatDistanceKmOrM(eta.distanceM)}`
+            : `~${km.toFixed(1)} km`,
+        ].slice(0, 3),
+        buttons: [
+          {
+            id: 'start_nav',
+            label: shortenActionLabel(
+              bikeAsk ? '🚴 Losradeln' : '🗺️ Route starten',
+            ),
+            payload: {
+              kind: 'navigate',
+              lat,
+              lng,
+              label: resolved,
+              preferBike: bikeAsk,
+            },
+          },
+        ],
+        meta: { openNow, bike: bikeAsk, etaOnly: true },
+      };
+    }
 
     // Stopp anhängen: Timeline + Multi-Stop
     if (append) {
@@ -525,14 +630,16 @@ export const mobilityAgent: Module2Agent = {
     }
 
     let draft: string;
-    if (offerTransit) {
+    if (bikeAsk) {
+      draft = `${formatBikeEtaSpeech(eta)} nach ${resolved}. Wollen wir direkt losradeln?`;
+    } else if (offerTransit) {
       draft =
         `${resolved} — ${etaLine}. ` +
         `ÖPNV kann sich lohnen (Fuß/Rad ab ~30 Min oder klar schneller). Tippe ÖPNV für die Verbindung.`;
     } else if (km > 2.5) {
-      draft = `Alles klar, ich starte die Navigation zu ${resolved}. ${etaLine}.`;
+      draft = `${etaLine} nach ${resolved}. Wollen wir direkt los?`;
     } else {
-      draft = `Alles klar, ich starte die Navigation zu ${resolved}. ${etaLine}.`;
+      draft = `${etaLine} nach ${resolved}. Wollen wir direkt los?`;
     }
 
     // Bei sinnvoller ÖPNV-Distanz sofort Journey mitliefern
@@ -618,17 +725,22 @@ export const mobilityAgent: Module2Agent = {
         eta.routed
           ? `Route ${Math.round(eta.distanceM)} m`
           : `~${km.toFixed(1)} km`,
-        `Fuß ~${eta.directWalkMinutes} · Rad ~${eta.bikeMinutes} Min`,
+        bikeAsk
+          ? `Rad ~${eta.bikeMinutes} Min`
+          : `Fuß ~${eta.directWalkMinutes} · Rad ~${eta.bikeMinutes} Min`,
       ].slice(0, 3),
       buttons: [
         {
           id: 'start_nav',
-          label: shortenActionLabel('🗺️ Route starten'),
+          label: shortenActionLabel(
+            bikeAsk ? '🚴 Losradeln' : '🗺️ Route starten',
+          ),
           payload: {
             kind: 'navigate',
             lat,
             lng,
             label: resolved,
+            preferBike: bikeAsk,
           },
         },
         ...(offerTransit
@@ -645,7 +757,7 @@ export const mobilityAgent: Module2Agent = {
             ]
           : []),
       ],
-      meta: { openNow },
+      meta: { openNow, bike: bikeAsk },
     };
   },
 };

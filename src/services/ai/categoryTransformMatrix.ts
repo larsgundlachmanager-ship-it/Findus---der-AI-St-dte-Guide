@@ -123,13 +123,12 @@ const PERSONALITY_TO_MATRIX: Record<string, MatrixPersona> = {
 };
 
 const VOICE_TO_MATRIX: Partial<Record<VoiceId, MatrixPersona>> = {
-  gen_z: 'gen_z',
-  historiker: 'historiker',
-  dorfaeltester: 'dorfaeltester',
-  erzaehler: 'erzaehler',
-  prinzessin: 'prinzessin',
-  standard_m: 'standard_m',
-  standard_w: 'standard_w',
+  daniel: 'gen_z',
+  varson: 'gen_z',
+  lukas: 'erzaehler',
+  sebastian: 'standard_m',
+  alina: 'standard_w',
+  marlene: 'historiker',
 };
 
 /** @deprecated Inhaltliche Matrix-Beispiele entfernt — nur noch Stil. */
@@ -140,7 +139,7 @@ export function resolveMatrixPersona(
   personality?: string | null,
 ): MatrixPersona {
   const p = profile ?? getCachedUserProfile();
-  const voiceId = (p?.voiceId ?? 'standard_m') as VoiceId;
+  const voiceId = (p?.voiceId ?? 'alina') as VoiceId;
   if (VOICE_TO_MATRIX[voiceId]) return VOICE_TO_MATRIX[voiceId]!;
   if (personality && PERSONALITY_TO_MATRIX[personality]) {
     return PERSONALITY_TO_MATRIX[personality];

@@ -1,0 +1,3722 @@
+{
+  "city_id": "oranienburg",
+  "apply": true,
+  "maxDelta": 80,
+  "summary": {
+    "ok": 202,
+    "check": 1,
+    "bad": 15,
+    "errors": 0,
+    "applied": 2
+  },
+  "rows": [
+    {
+      "id": "oranienburg_oranienburg",
+      "name": "Oranienburg",
+      "before": {
+        "lat": 52.75449913999999,
+        "lng": 13.24837906
+      },
+      "google": {
+        "lat": 52.7557351,
+        "lng": 13.2408643,
+        "place_id": "ChIJX0iQk0AHqUcRRHuFGUXqQ0U",
+        "address": "Oranienburg"
+      },
+      "delta_m": 524,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_s_bahn_berlin_instandhaltung_stutzpunkt_oranienburg",
+      "name": "S-Bahn Berlin Instandhaltung Stützpunkt Oranienburg",
+      "before": {
+        "lat": 52.74795854,
+        "lng": 13.254244279999998
+      },
+      "google": {
+        "lat": 52.7480304,
+        "lng": 13.254363,
+        "place_id": "ChIJIyD_z1oHqUcRISnwP1Id6hY",
+        "address": "André-Pican-Straße 41C, 16515 Oranienburg"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_s_oranienburg_bhf",
+      "name": "S Oranienburg Bhf",
+      "before": {
+        "lat": 52.75484814,
+        "lng": 13.247711259999999
+      },
+      "google": {
+        "lat": 52.754571,
+        "lng": 13.2484978,
+        "place_id": "ChIJo6mnnkEHqUcR6zaMSJ2xbhs",
+        "address": "16515 Oranienburg, Deutschland"
+      },
+      "delta_m": 61,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "oranienburg_p_r_bahnhof_oranienburg",
+      "name": "P+R Bahnhof Oranienburg",
+      "before": {
+        "lat": 52.75077974,
+        "lng": 13.25000898
+      },
+      "google": {
+        "lat": 52.7508516,
+        "lng": 13.2501277,
+        "place_id": "ChIJY-E8C0QHqUcRPsiy5F_CcCc",
+        "address": "Stralsunder Str. 30, 16515 Oranienburg"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_reiseservice",
+      "name": "Reiseservice",
+      "before": {
+        "lat": 52.753580840000005,
+        "lng": 13.248411260000001
+      },
+      "google": {
+        "lat": 52.7536527,
+        "lng": 13.24853,
+        "place_id": "ChIJUcjynUEHqUcRhV7IJMJ8iiA",
+        "address": "Bahnhofs Platz 1, 16515 Oranienburg"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_oranienburg_schlosshafen",
+      "name": "Oranienburg Schloßhafen",
+      "before": {
+        "lat": 52.75843888000001,
+        "lng": 13.23555758
+      },
+      "google": {
+        "lat": 52.7584784,
+        "lng": 13.2356229,
+        "place_id": "ChIJv3A4ARYHqUcRXiKu0TbjrG4",
+        "address": "Oranienburg Schloßhafen, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_schlosshafen_oranienburg_mit_reisemobilstellplatz",
+      "name": "Schlosshafen Oranienburg mit Reisemobilstellplatz",
+      "before": {
+        "lat": 52.75800598000001,
+        "lng": 13.238387280000001
+      },
+      "google": {
+        "lat": 52.75804549999999,
+        "lng": 13.2384526,
+        "place_id": "ChIJeb04ARYHqUcR6e40PJKGx98",
+        "address": "Rungestraße 47, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_bollwerk_anleger",
+      "name": "Bollwerk-Anleger",
+      "before": {
+        "lat": 52.75155218,
+        "lng": 13.2402176
+      },
+      "google": {
+        "lat": 52.7515917,
+        "lng": 13.2402829,
+        "place_id": "ChIJP3GMNwAHqUcRqpy4d8GljvM",
+        "address": "Havelpromenade, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_caravanstellplatz_am_schlosshafen_oranienburg",
+      "name": "Caravanstellplatz am Schloßhafen Oranienburg",
+      "before": {
+        "lat": 52.75735988,
+        "lng": 13.23844268
+      },
+      "google": {
+        "lat": 52.7573994,
+        "lng": 13.238508,
+        "place_id": "ChIJD0YSihUHqUcRHh6jsxifz3c",
+        "address": "Rungestraße 47, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_stadtanleger_oranienburg",
+      "name": "Stadtanleger Oranienburg",
+      "before": {
+        "lat": 52.75560858,
+        "lng": 13.2239001
+      },
+      "google": {
+        "lat": 52.75564809999999,
+        "lng": 13.2239654,
+        "place_id": "ChIJ5WdCCcgHqUcRykRUd7PRrrY",
+        "address": "Hinter dem Schloßpark 2, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_schlossmuseum_oranienburg",
+      "name": "Schlossmuseum Oranienburg",
+      "before": {
+        "lat": 52.75477378000001,
+        "lng": 13.236498500000001
+      },
+      "google": {
+        "lat": 52.7548133,
+        "lng": 13.2365638,
+        "place_id": "ChIJPRKeqmcHqUcRX97RL5eeO5s",
+        "address": "Schloßpl. 1, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_st_nicolai_kirche_pfarrsprengel_oranienburg",
+      "name": "St.-Nicolai-Kirche - Pfarrsprengel Oranienburg",
+      "before": {
+        "lat": 52.75155778,
+        "lng": 13.234337400000001
+      },
+      "google": {
+        "lat": 52.7515973,
+        "lng": 13.2344027,
+        "place_id": "ChIJLf8Kke4HqUcRbLUmW3_AGXY",
+        "address": "Havelstraße 28, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_neuapostolische_kirche_oranienburg",
+      "name": "Neuapostolische Kirche Oranienburg",
+      "before": {
+        "lat": 52.745164880000004,
+        "lng": 13.2351124
+      },
+      "google": {
+        "lat": 52.7452044,
+        "lng": 13.2351777,
+        "place_id": "ChIJv4DssDcHqUcRRHz7F0GmnYQ",
+        "address": "Erzbergerstraße 43, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_ev_kirchengemeinde_st_nicolai_oranienburg",
+      "name": "Ev. Kirchengemeinde St. Nicolai Oranienburg",
+      "before": {
+        "lat": 52.753884979999995,
+        "lng": 13.243908999999999
+      },
+      "google": {
+        "lat": 52.7515973,
+        "lng": 13.2344027,
+        "place_id": "ChIJLf8Kke4HqUcRbLUmW3_AGXY",
+        "address": "Havelstraße 28, 16515 Oranienburg"
+      },
+      "delta_m": 689,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_katholische_pfarrkirche_herz_jesu",
+      "name": "Katholische Pfarrkirche Herz Jesu",
+      "before": {
+        "lat": 52.74697308,
+        "lng": 13.238822500000001
+      },
+      "google": {
+        "lat": 52.7470126,
+        "lng": 13.2388878,
+        "place_id": "ChIJl5WGAEgHqUcRGuVH8srjQjA",
+        "address": "Augustin-Sandtner-Straße 3, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_dorfkirche_sachsenhausen_oranienburg",
+      "name": "Dorfkirche Sachsenhausen (Oranienburg)",
+      "before": {
+        "lat": 52.77846078,
+        "lng": 13.24169366
+      },
+      "google": {
+        "lat": 52.7785003,
+        "lng": 13.241759,
+        "place_id": "ChIJuT6AMQgHqUcRGGNJku9Yj40",
+        "address": "Granseer Str. 27, 16515 Oranienburg-Sachsenhausen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_evangelisch_freikirchliche_gemeinde_oranienburg",
+      "name": "Evangelisch-Freikirchliche Gemeinde Oranienburg",
+      "before": {
+        "lat": 52.754743680000004,
+        "lng": 13.245543600000001
+      },
+      "google": {
+        "lat": 52.7547832,
+        "lng": 13.2456089,
+        "place_id": "ChIJ21OyVkAHqUcRUuqWlkcSVIo",
+        "address": "Mittelstraße 13, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_bethlehemkapelle_oranienburg",
+      "name": "Bethlehemkapelle Oranienburg",
+      "before": {
+        "lat": 52.73030088,
+        "lng": 13.248547519999999
+      },
+      "google": {
+        "lat": 52.7303404,
+        "lng": 13.2486128,
+        "place_id": "ChIJ-_gixa0AqUcRea4aUlSpmec",
+        "address": "Saalestraße 3A, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_kic_evangelisch_methodistische_kirche_oranienburg",
+      "name": "KiC Evangelisch-methodistische Kirche Oranienburg",
+      "before": {
+        "lat": 52.74674778,
+        "lng": 13.232504999999998
+      },
+      "google": {
+        "lat": 52.7467873,
+        "lng": 13.2325703,
+        "place_id": "ChIJrcwt8zkHqUcRBX7FhlepgPE",
+        "address": "Julius-Leber-Straße 26, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_c_z_glaube_in_aktion_e_v_oranienburg",
+      "name": "C.Z. Glaube in Aktion e.V. Oranienburg",
+      "before": {
+        "lat": 52.75491838000001,
+        "lng": 13.2550184
+      },
+      "google": {
+        "lat": 52.7549579,
+        "lng": 13.2550837,
+        "place_id": "ChIJQVPj4X0HqUcRQs2l4UKNIMU",
+        "address": "André-Pican-Straße 16, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_freikirche_der_siebenten_tags_adventisten_gemeinde_oranienburg",
+      "name": "Freikirche der Siebenten-Tags-Adventisten Gemeinde Oranienburg",
+      "before": {
+        "lat": 52.74750948,
+        "lng": 13.234881300000001
+      },
+      "google": {
+        "lat": 52.747549,
+        "lng": 13.2349466,
+        "place_id": "ChIJ38A8gDcHqUcRBY-Da56_fs4",
+        "address": "Martin-Luther-Straße 34, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_tagespflege_an_der_nicolai_kirche_oranienburg",
+      "name": "Tagespflege An der Nicolai Kirche Oranienburg",
+      "before": {
+        "lat": 52.752130980000004,
+        "lng": 13.233493099999999
+      },
+      "google": {
+        "lat": 52.75217050000001,
+        "lng": 13.2335584,
+        "place_id": "ChIJj-RTEwAHqUcRmM2cjXbWaTg",
+        "address": "Bötzower Pl. 4, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_gemeinschaft_der_siebenten",
+      "name": "Gemeinschaft der Siebenten-",
+      "before": {
+        "lat": 52.76839048000001,
+        "lng": 13.23308468
+      },
+      "google": {
+        "lat": 52.747549,
+        "lng": 13.2349466,
+        "place_id": "ChIJ38A8gDcHqUcRBY-Da56_fs4",
+        "address": "Martin-Luther-Straße 34, 16515 Oranienburg"
+      },
+      "delta_m": 2321,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+      "name": "Landeskirchliche Gemeinschaft (LKG) Oranienburg - Eden",
+      "before": {
+        "lat": 52.751392280000005,
+        "lng": 13.2057547
+      },
+      "google": {
+        "lat": 52.7514318,
+        "lng": 13.20582,
+        "place_id": "ChIJ__-jMtgGqUcRQGhy8KP8fB4",
+        "address": "Baltzerweg 70, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+      "name": "Denkmal für das KZ Sachsenhausen",
+      "before": {
+        "lat": 52.76815218,
+        "lng": 13.260628180000001
+      },
+      "google": {
+        "lat": 52.7681917,
+        "lng": 13.2606935,
+        "place_id": "ChIJB3HTgnAHqUcRPIzToDGAwgk",
+        "address": "Str. d. Nationen 22, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_denkmal_konzentrationslager_oranienburg",
+      "name": "Denkmal Konzentrationslager Oranienburg",
+      "before": {
+        "lat": 52.74839478,
+        "lng": 13.2370359
+      },
+      "google": {
+        "lat": 52.7681917,
+        "lng": 13.2606935,
+        "place_id": "ChIJB3HTgnAHqUcRPIzToDGAwgk",
+        "address": "Str. d. Nationen 22, 16515 Oranienburg"
+      },
+      "delta_m": 2717,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_f_f_runge",
+      "name": "F. F. Runge",
+      "before": {
+        "lat": 52.758119980000004,
+        "lng": 13.24085998
+      },
+      "google": {
+        "lat": 52.75399110000001,
+        "lng": 13.2468618,
+        "place_id": "ChIJV_MyoEEHqUcRgjqtPo53nvU",
+        "address": "Willy-Brandt-Straße 20, 16515 Oranienburg"
+      },
+      "delta_m": 611,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_die_anklagende",
+      "name": "Die Anklagende",
+      "before": {
+        "lat": 52.75410958,
+        "lng": 13.2373175
+      },
+      "google": {
+        "lat": 52.7541491,
+        "lng": 13.2373828,
+        "place_id": "ChIJTT2QbZMHqUcRqq5Vv2VaTf8",
+        "address": "Schloßpl. 1, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_klinkerhafenbrucke",
+      "name": "Klinkerhafenbrücke",
+      "before": {
+        "lat": 52.77850588,
+        "lng": 13.28016316
+      },
+      "google": {
+        "lat": 52.7785454,
+        "lng": 13.2802285,
+        "place_id": "ChIJLXGPBgAHqUcR2RL4oTQA9G4",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_gedenkstatte_kz_aussenlager_klinkerwerk",
+      "name": "Gedenkstätte KZ-Außenlager Klinkerwerk",
+      "before": {
+        "lat": 52.77552458,
+        "lng": 13.281045760000001
+      },
+      "google": {
+        "lat": 52.7755641,
+        "lng": 13.2811111,
+        "place_id": "ChIJAVVRMGQHqUcRaazhyBj3KY0",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_reichsfreiherr_otto_von_schwerin",
+      "name": "Reichsfreiherr Otto von Schwerin",
+      "before": {
+        "lat": 52.753454180000006,
+        "lng": 13.2358984
+      },
+      "google": {
+        "lat": 52.7534937,
+        "lng": 13.2359637,
+        "place_id": "ChIJ_XJlOwAHqUcRt2NbRpaNg6c",
+        "address": "Breite Str. 1, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_krassin_park",
+      "name": "Krassin Park",
+      "before": {
+        "lat": 52.747961880000005,
+        "lng": 13.2376584
+      },
+      "google": {
+        "lat": 52.7480014,
+        "lng": 13.2377237,
+        "place_id": "ChIJtbnhB68HqUcRQlhrxavp8f0",
+        "address": "Augustin-Sandtner-Straße 25, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_schlosspark_oranienburg",
+      "name": "Schlosspark Oranienburg",
+      "before": {
+        "lat": 52.755959180000005,
+        "lng": 13.230441200000001
+      },
+      "google": {
+        "lat": 52.7559987,
+        "lng": 13.2305065,
+        "place_id": "ChIJpwHmfWMnsUcRuUjrR4royug",
+        "address": "Schloßpl. 1, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_schlossgarten",
+      "name": "Schlossgarten",
+      "before": {
+        "lat": 52.75677968,
+        "lng": 13.22581498
+      },
+      "google": {
+        "lat": 52.7559987,
+        "lng": 13.2305065,
+        "place_id": "ChIJpwHmfWMnsUcRuUjrR4royug",
+        "address": "Schloßpl. 1, 16515 Oranienburg"
+      },
+      "delta_m": 327,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_weisser_strand_am_lehnitzsee",
+      "name": "Weißer Strand am Lehnitzsee",
+      "before": {
+        "lat": 52.75737528,
+        "lng": 13.274418180000001
+      },
+      "google": {
+        "lat": 52.7574148,
+        "lng": 13.2744835,
+        "place_id": "ChIJkQFe2GEHqUcRAfhCg-bH8Eg",
+        "address": "Weißer Strand am Lehnitzsee, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_oranienburger_strand",
+      "name": "Oranienburger Strand",
+      "before": {
+        "lat": 52.75605928,
+        "lng": 13.2650237
+      },
+      "google": {
+        "lat": 52.7560988,
+        "lng": 13.265089,
+        "place_id": "ChIJ4xbwTmcHqUcR0Eigew0C0wE",
+        "address": "Oranienburger Strand, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_pferdeinsel",
+      "name": "Pferdeinsel",
+      "before": {
+        "lat": 52.75168608,
+        "lng": 13.242746299999999
+      },
+      "google": {
+        "lat": 52.7517256,
+        "lng": 13.2428116,
+        "place_id": "ChIJu5v0NUcHqUcRGYhT5ChcPT8",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_bollwerk",
+      "name": "Bollwerk",
+      "before": {
+        "lat": 52.75326948000001,
+        "lng": 13.2386589
+      },
+      "google": {
+        "lat": 52.75330899999999,
+        "lng": 13.2387242,
+        "place_id": "ChIJubE0tMsHqUcRqMNl4Z_Xupg",
+        "address": "16515, Havelpromenade, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_athletic_park_oranienburg",
+      "name": "Athletic Park Oranienburg",
+      "before": {
+        "lat": 52.75624878,
+        "lng": 13.2628058
+      },
+      "google": {
+        "lat": 52.7562883,
+        "lng": 13.2628711,
+        "place_id": "ChIJhR3PsAsHqUcRO5cxIe5eePY",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_turm_erlebniscity",
+      "name": "TURM ErlebnisCity",
+      "before": {
+        "lat": 52.75015348000001,
+        "lng": 13.2577191
+      },
+      "google": {
+        "lat": 52.750193,
+        "lng": 13.2577844,
+        "place_id": "ChIJXaVB_FoHqUcRNzwY86KyC9Q",
+        "address": "André-Pican-Straße 42, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_spielplatz_schlosspark_oranienburg",
+      "name": "Spielplatz Schlosspark Oranienburg",
+      "before": {
+        "lat": 52.75724178,
+        "lng": 13.23433588
+      },
+      "google": {
+        "lat": 52.7572813,
+        "lng": 13.2344012,
+        "place_id": "ChIJ4Y5tnXUHqUcRRUWfX-qKQVg",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_freizeitgelande_tolora",
+      "name": "Freizeitgelände TolOra",
+      "before": {
+        "lat": 52.749640680000006,
+        "lng": 13.2423386
+      },
+      "google": {
+        "lat": 52.74968020000001,
+        "lng": 13.2424039,
+        "place_id": "ChIJf-JaDEcHqUcRTFaQnuB9pWk",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_strand_bolli_am_lehnitzsee",
+      "name": "Strand \"Bolli\" am Lehnitzsee",
+      "before": {
+        "lat": 52.746830179999996,
+        "lng": 13.261602
+      },
+      "google": {
+        "lat": 52.7468697,
+        "lng": 13.2616673,
+        "place_id": "ChIJcbKFgFkHqUcRDdn1nyI1mCA",
+        "address": "Strand \"Bolli\" am Lehnitzsee, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_pinnower_see",
+      "name": "Pinnower See",
+      "before": {
+        "lat": 52.72059808,
+        "lng": 13.24307534
+      },
+      "google": {
+        "lat": 52.7206376,
+        "lng": 13.2431406,
+        "place_id": "ChIJAQAAwKQAqUcRqQdRxkctVaA",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_wild_west_oranienburg_am_weissen_strand_two_bedroom_house",
+      "name": "Wild West Oranienburg am Weißen Strand - Two-Bedroom House",
+      "before": {
+        "lat": 52.75829177999999,
+        "lng": 13.27979418
+      },
+      "google": {
+        "lat": 52.75833129999999,
+        "lng": 13.2798595,
+        "place_id": "ChIJXRKI0d6pqUcRoRTxBUV0ycY",
+        "address": "16515 Oranienburg, Deutschland"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_turmchen",
+      "name": "Türmchen",
+      "before": {
+        "lat": 52.749865680000006,
+        "lng": 13.2567067
+      },
+      "google": {
+        "lat": 52.7499052,
+        "lng": 13.256772,
+        "place_id": "ChIJXaVB_FoHqUcRzUGsDSIDApE",
+        "address": "André-Pican-Straße 42, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_oranienburg_turm_erlebniscity",
+      "name": "Oranienburg, TURM ErlebnisCity",
+      "before": {
+        "lat": 52.75067048,
+        "lng": 13.255174700000001
+      },
+      "google": {
+        "lat": 52.750193,
+        "lng": 13.2577844,
+        "place_id": "ChIJXaVB_FoHqUcRNzwY86KyC9Q",
+        "address": "André-Pican-Straße 42, 16515 Oranienburg"
+      },
+      "delta_m": 183,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_christliche_kita_leuchtturm_im_cjo_e_v",
+      "name": "Christliche Kita Leuchtturm im CJO e.V.",
+      "before": {
+        "lat": 52.75765298,
+        "lng": 13.240239679999998
+      },
+      "google": {
+        "lat": 52.7576925,
+        "lng": 13.240305,
+        "place_id": "ChIJN0j61T8HqUcR5ZHA0VgRMO4",
+        "address": "Am Schlosshafen 1, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_sportplatz_am_schloss",
+      "name": "Sportplatz am Schloss",
+      "before": {
+        "lat": 52.756809579999995,
+        "lng": 13.236374980000003
+      },
+      "google": {
+        "lat": 52.7568491,
+        "lng": 13.2364403,
+        "place_id": "ChIJk7GtDT4HqUcRFRYScwwE1gQ",
+        "address": "Schloßpl. 3, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_orafol_arena",
+      "name": "Orafol-Arena",
+      "before": {
+        "lat": 52.74820918,
+        "lng": 13.2568791
+      },
+      "google": {
+        "lat": 52.7482487,
+        "lng": 13.2569444,
+        "place_id": "ChIJhWeqiH8HqUcRTpb_Brzf2qM",
+        "address": "André-Pican-Straße 41A, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_wassersportclub_mowe_oranienburg_e_v",
+      "name": "Wassersportclub Möwe Oranienburg e.V.",
+      "before": {
+        "lat": 52.75277648,
+        "lng": 13.2410077
+      },
+      "google": {
+        "lat": 52.752816,
+        "lng": 13.241073,
+        "place_id": "ChIJifvpn0AHqUcR0Xl6T2UGQzY",
+        "address": "Louise-Henriette-Steg 1, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_familyrocks_boulderhalle",
+      "name": "FamilyRocks Boulderhalle",
+      "before": {
+        "lat": 52.76819068,
+        "lng": 13.246547979999999
+      },
+      "google": {
+        "lat": 52.7682302,
+        "lng": 13.2466133,
+        "place_id": "ChIJ-4Rvgh4HqUcRcVK4pybSFBM",
+        "address": "Chausseestraße 62, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_burgerzentrum_oranienburg",
+      "name": "Bürgerzentrum Oranienburg",
+      "before": {
+        "lat": 52.74471818000001,
+        "lng": 13.241087299999998
+      },
+      "google": {
+        "lat": 52.7471954,
+        "lng": 13.2424273,
+        "place_id": "ChIJ-evC0kcHqUcRzpz636r5AAs",
+        "address": "Albert-Buchmann-Straße 17, 16515 Oranienburg"
+      },
+      "delta_m": 290,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_steganlage_oranienburg",
+      "name": "Steganlage Oranienburg",
+      "before": {
+        "lat": 52.75110008,
+        "lng": 13.259063000000001
+      },
+      "google": {
+        "lat": 52.75113959999999,
+        "lng": 13.2591283,
+        "place_id": "ChIJqQcYLQAHqUcRVjWjCE9M4IQ",
+        "address": "André-Pican-Straße, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_spielplatz_pferdeinsel",
+      "name": "Spielplatz Pferdeinsel",
+      "before": {
+        "lat": 52.75125908,
+        "lng": 13.241805500000002
+      },
+      "google": {
+        "lat": 52.7512986,
+        "lng": 13.2418708,
+        "place_id": "ChIJOYymRUcHqUcRMdme_P-47ww",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_familien_sport_verein_oberhavel_e_v_fsvo_e_v",
+      "name": "Familien-Sport-Verein Oberhavel E.V.-FSVO e.V.",
+      "before": {
+        "lat": 52.754255979999996,
+        "lng": 13.2428503
+      },
+      "google": {
+        "lat": 52.7542955,
+        "lng": 13.2429156,
+        "place_id": "ChIJzSDbmCcBqUcRLbvksgxWAOU",
+        "address": "Lehnitzstraße 21 d, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_turn_und_sportgemeinschaft_eden_e_v",
+      "name": "Turn- und Sportgemeinschaft Eden e.V.",
+      "before": {
+        "lat": 52.75161318000001,
+        "lng": 13.207230800000001
+      },
+      "google": {
+        "lat": 52.7516527,
+        "lng": 13.2072961,
+        "place_id": "ChIJsbe0PtgGqUcR5Dl-NsrEljk",
+        "address": "Baltzerweg 51, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_stadtverwaltung_oranienburg",
+      "name": "Stadtverwaltung Oranienburg",
+      "before": {
+        "lat": 52.755890279999996,
+        "lng": 13.2364038
+      },
+      "google": {
+        "lat": 52.7559298,
+        "lng": 13.2364691,
+        "place_id": "ChIJBw1cjlrKcUERm-HZvP8NS_s",
+        "address": "Schloßpl. 1, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_stadthof_der_stadt_oranienburg",
+      "name": "Stadthof der Stadt Oranienburg",
+      "before": {
+        "lat": 52.77653048,
+        "lng": 13.23308466
+      },
+      "google": {
+        "lat": 52.77657,
+        "lng": 13.23315,
+        "place_id": "ChIJN08e9AYHqUcRyY9h4GUhQnk",
+        "address": "Friedrich-Siewert-Straße 8, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_kurfurstin_louise_henriette_von_oranien",
+      "name": "Kurfürstin Louise Henriette von Oranien",
+      "before": {
+        "lat": 52.754084680000005,
+        "lng": 13.2362748
+      },
+      "google": {
+        "lat": 52.7541242,
+        "lng": 13.2363401,
+        "place_id": "ChIJHcma6j4HqUcR6_Dcm1Hlf6c",
+        "address": "Schloßpl. 1, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_altstadtklause",
+      "name": "Altstadtklause",
+      "before": {
+        "lat": 52.75139048,
+        "lng": 13.232694700000001
+      },
+      "google": {
+        "lat": 52.75143,
+        "lng": 13.23276,
+        "place_id": "ChIJ5QVU3zsHqUcRraiUmi2nP5w",
+        "address": "Havelstraße 16, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_tourist_information_oranienburg",
+      "name": "Tourist-Information Oranienburg",
+      "before": {
+        "lat": 52.75355187999999,
+        "lng": 13.237501499999999
+      },
+      "google": {
+        "lat": 52.7535914,
+        "lng": 13.2375668,
+        "place_id": "ChIJIX4F3z4HqUcRwkzP-0cnEuU",
+        "address": "Schloßpl. 2, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_orangerie_im_schlosspark",
+      "name": "Orangerie im Schlosspark",
+      "before": {
+        "lat": 52.75435878,
+        "lng": 13.2296557
+      },
+      "google": {
+        "lat": 52.7543983,
+        "lng": 13.229721,
+        "place_id": "ChIJk4NEjjwHqUcRWHghg0oe1Zg",
+        "address": "Kanalstraße 26A, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_gedenkstatte_und_museum_sachsenhausen",
+      "name": "Gedenkstätte und Museum Sachsenhausen",
+      "before": {
+        "lat": 52.76586408000001,
+        "lng": 13.264156980000001
+      },
+      "google": {
+        "lat": 52.76590359999999,
+        "lng": 13.2642223,
+        "place_id": "ChIJBeQpGRdOqEcRIjFSs-2d684",
+        "address": "Str. d. Nationen 22, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_lehnitzschleuse",
+      "name": "Lehnitzschleuse",
+      "before": {
+        "lat": 52.76875378,
+        "lng": 13.27980698
+      },
+      "google": {
+        "lat": 52.7678523,
+        "lng": 13.2789426,
+        "place_id": "ChIJgSGNR3wHqUcRrvue3SgTb2Q",
+        "address": "Lehnitzschleuse, 16515 Oranienburg"
+      },
+      "delta_m": 116,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "oranienburg_traumschuff_theater",
+      "name": "Traumschüff Theater",
+      "before": {
+        "lat": 52.75102708000001,
+        "lng": 13.223519999999999
+      },
+      "google": {
+        "lat": 52.75106659999999,
+        "lng": 13.2235853,
+        "place_id": "ChIJQRyCKTD1qEcROw0s4fix5mA",
+        "address": "Kremmener Str. 43, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_filmpalast_oranienburg",
+      "name": "Filmpalast Oranienburg",
+      "before": {
+        "lat": 52.749960480000006,
+        "lng": 13.2374347
+      },
+      "google": {
+        "lat": 52.75,
+        "lng": 13.2375,
+        "place_id": "ChIJFY9V9jgHqUcRt30dtnP46u4",
+        "address": "Berliner Str. 40, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_sven_o_winter_theater_bau_herr_winter",
+      "name": "Sven O. Winter Theater Bau Herr Winter",
+      "before": {
+        "lat": 52.76687648000001,
+        "lng": 13.28238068
+      },
+      "google": {
+        "lat": 52.76691599999999,
+        "lng": 13.282446,
+        "place_id": "ChIJPbafN9apqUcRgeFT7gbAq18",
+        "address": "Lehnitzschleuse 11, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_naturlehrpfad",
+      "name": "Naturlehrpfad",
+      "before": {
+        "lat": 52.758147980000004,
+        "lng": 13.26899718
+      },
+      "google": {
+        "lat": 52.7581875,
+        "lng": 13.2690625,
+        "place_id": "ChIJB6wJWwAHqUcRRAQuy3LPZJ0",
+        "address": "Q759+7J, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_saubucht_lehnitzsee",
+      "name": "Saubucht Lehnitzsee",
+      "before": {
+        "lat": 52.76781278,
+        "lng": 13.27887728
+      },
+      "google": {
+        "lat": 52.76785229999999,
+        "lng": 13.2789426,
+        "place_id": "ChIJ84IvLwAHqUcRTS7nDAp1i1I",
+        "address": "Lehnitzschleuse, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_rad_sport_oranienburg",
+      "name": "Rad-Sport Oranienburg",
+      "before": {
+        "lat": 52.755250079999996,
+        "lng": 13.238412199999999
+      },
+      "google": {
+        "lat": 52.7552896,
+        "lng": 13.2384775,
+        "place_id": "ChIJXaykVD4HqUcR3gShK4hZWPY",
+        "address": "Bernauer Str. 2, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_fahrrad_center_hebestreit_inh_m_schleising",
+      "name": "Fahrrad Center Hebestreit Inh. M. Schleising",
+      "before": {
+        "lat": 52.75257948000001,
+        "lng": 13.2342737
+      },
+      "google": {
+        "lat": 52.752619,
+        "lng": 13.234339,
+        "place_id": "ChIJQSWIUTkHqUcRoKFnaRJFsmI",
+        "address": "Bötzower Pl. 7, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_fahrradhaus_klaas",
+      "name": "Fahrradhaus Klaas",
+      "before": {
+        "lat": 52.755432080000006,
+        "lng": 13.2393799
+      },
+      "google": {
+        "lat": 52.7554716,
+        "lng": 13.2394452,
+        "place_id": "ChIJnR7WrT8HqUcRVZl4e4jsi_4",
+        "address": "Bernauer Str. 10, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_little_john_bikes",
+      "name": "Little John Bikes",
+      "before": {
+        "lat": 52.74466178,
+        "lng": 13.2541686
+      },
+      "google": {
+        "lat": 52.7447013,
+        "lng": 13.2542339,
+        "place_id": "ChIJqZ-eirEHqUcRLCc5OuuEg2c",
+        "address": "Lehnitzstraße 87-89, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_cook_rein_breite_strasse",
+      "name": "COOK REIN BREITE STRASSE",
+      "before": {
+        "lat": 52.75253368,
+        "lng": 13.235451399999999
+      },
+      "google": {
+        "lat": 52.7525732,
+        "lng": 13.2355167,
+        "place_id": "ChIJnZD2xCsHqUcRUXcvcrx4U8Y",
+        "address": "Breite Str. 7, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_lehnitzsee",
+      "name": "Lehnitzsee",
+      "before": {
+        "lat": 52.75113838,
+        "lng": 13.261887100000001
+      },
+      "google": {
+        "lat": 52.7511779,
+        "lng": 13.2619524,
+        "place_id": "ChIJN_xXaGAHqUcRytt-_9BqyVw",
+        "address": "Lehnitzsee, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_oranienburger_kanal",
+      "name": "Oranienburger Kanal",
+      "before": {
+        "lat": 52.73958678,
+        "lng": 13.22412632
+      },
+      "google": {
+        "lat": 52.7396263,
+        "lng": 13.2241916,
+        "place_id": "ChIJ0wyKdUoHqUcRMLqohUjz6tE",
+        "address": "Oranienburger Kanal"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_tiergarten_schleuse",
+      "name": "Tiergarten Schleuse",
+      "before": {
+        "lat": 52.780894079999996,
+        "lng": 13.207951959999999
+      },
+      "google": {
+        "lat": 52.7809336,
+        "lng": 13.2080173,
+        "place_id": "ChIJz6MTbrAHqUcR1oOcwZoroFw",
+        "address": "16515 Oranienburg-Sachsenhausen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_ladengalerie_kolorit_maria_windisch",
+      "name": "Ladengalerie kolorit Maria Windisch",
+      "before": {
+        "lat": 52.75617958,
+        "lng": 13.241821100000001
+      },
+      "google": {
+        "lat": 52.7562191,
+        "lng": 13.2418864,
+        "place_id": "ChIJY2fYlT8HqUcRki2uTwfjim8",
+        "address": "Bernauer Str. 24, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_geschenkekiste",
+      "name": "Geschenkekiste",
+      "before": {
+        "lat": 52.73454968,
+        "lng": 13.244795219999997
+      },
+      "google": {
+        "lat": 52.73458919999999,
+        "lng": 13.2448605,
+        "place_id": "ChIJkeG-zCwBqUcRvUWX72sySKY",
+        "address": "Saarlandstraße 75, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_gerson_getranke",
+      "name": "Gerson Getränke",
+      "before": {
+        "lat": 52.75002597999999,
+        "lng": 13.2182481
+      },
+      "google": {
+        "lat": 52.7500655,
+        "lng": 13.2183134,
+        "place_id": "ChIJebnF8SUHqUcR1yj2jFqbbOk",
+        "address": "Eichendorffstraße 11, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_blumenladen_oranienburg",
+      "name": "BLUMENLADEN ORANIENBURG",
+      "before": {
+        "lat": 52.75750488,
+        "lng": 13.250874079999999
+      },
+      "google": {
+        "lat": 52.7575444,
+        "lng": 13.2509394,
+        "place_id": "ChIJ90P475YHqUcR_hl865OP9Bk",
+        "address": "Bernauer Str. 71, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_gold_silber_galerie_im_oranienprk",
+      "name": "GOLD & SILBER GALERIE Im ORANIENPRK",
+      "before": {
+        "lat": 52.74893278,
+        "lng": 13.2233328
+      },
+      "google": {
+        "lat": 52.7489723,
+        "lng": 13.2233981,
+        "place_id": "ChIJ2Xp6RSUHqUcRvq6CwGAxltM",
+        "address": "Friedensstraße 8, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_oberhavel_kliniken_gmbh_klinik_oranienburg",
+      "name": "Oberhavel Kliniken GmbH - Klinik Oranienburg",
+      "before": {
+        "lat": 52.74313918,
+        "lng": 13.242465919999997
+      },
+      "google": {
+        "lat": 52.74317869999999,
+        "lng": 13.2425312,
+        "place_id": "ChIJBZ7zFUkHqUcRwoRQaF1RS88",
+        "address": "Robert-Koch-Straße 2-12, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_preussen_apotheke_oranienburg",
+      "name": "Preussen Apotheke Oranienburg",
+      "before": {
+        "lat": 52.75842038,
+        "lng": 13.25313138
+      },
+      "google": {
+        "lat": 52.7584599,
+        "lng": 13.2531967,
+        "place_id": "ChIJH5PqpmkHqUcRUAAFPsiyz8k",
+        "address": "Bernauer Str. 100, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_praxis_oranienburg_ch_vogel_suhrig_und_dr_u_freyburg",
+      "name": "Praxis Oranienburg - Ch. Vogel-Sührig und Dr. U. Freyburg",
+      "before": {
+        "lat": 52.757597780000005,
+        "lng": 13.24905678
+      },
+      "google": {
+        "lat": 52.7576373,
+        "lng": 13.2491221,
+        "place_id": "ChIJm09JIGoHqUcRR0CBJAL6w0c",
+        "address": "Bernauer Str. 74, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_oberhavel_gesundheitszentrum_mvz_oranienburg",
+      "name": "Oberhavel Gesundheitszentrum - MVZ Oranienburg",
+      "before": {
+        "lat": 52.74367298,
+        "lng": 13.243310499999998
+      },
+      "google": {
+        "lat": 52.7437125,
+        "lng": 13.2433758,
+        "place_id": "ChIJX6sQPEkHqUcR4v9dkWqxKuU",
+        "address": "Robert-Koch-Straße 2, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_dr_juliane_rettig_zimmermann",
+      "name": "Dr. Juliane Rettig-Zimmermann",
+      "before": {
+        "lat": 52.75735188,
+        "lng": 13.248030080000001
+      },
+      "google": {
+        "lat": 52.7573914,
+        "lng": 13.2480954,
+        "place_id": "ChIJr8eSkVVTqEcRCNLY9UAmuwQ",
+        "address": "Bernauer Str. 66, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_stern_apotheke_im_arztehaus",
+      "name": "Stern Apotheke im Ärztehaus",
+      "before": {
+        "lat": 52.760564380000005,
+        "lng": 13.24299158
+      },
+      "google": {
+        "lat": 52.7606039,
+        "lng": 13.2430569,
+        "place_id": "ChIJsU4ccBUHqUcR4MvLs3Oup1w",
+        "address": "Sachsenhausener Str. 32, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_oberhavel_kliniken_gmbh_klinik_oranienburg_zentrale_notaufnahme",
+      "name": "Oberhavel Kliniken GmbH - Klinik Oranienburg - Zentrale Notaufnahme",
+      "before": {
+        "lat": 52.742096079999996,
+        "lng": 13.241446719999999
+      },
+      "google": {
+        "lat": 52.7421356,
+        "lng": 13.241512,
+        "place_id": "ChIJsf_ZJEkHqUcRJgVKJUm4LnE",
+        "address": "Robert-Koch-Straße 2-12, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_hausarztpraxis_viktoria_basinkevich",
+      "name": "Hausarztpraxis Viktoria Basinkevich",
+      "before": {
+        "lat": 52.77520848,
+        "lng": 13.233927259999998
+      },
+      "google": {
+        "lat": 52.775248,
+        "lng": 13.2339926,
+        "place_id": "ChIJT_M5XRUHqUcRlKX-US-N3To",
+        "address": "Hermann-Löns-Straße 4, 16515 Oranienburg-Sachsenhausen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_frau_dr_med_beate_duwel",
+      "name": "Frau Dr. med. Beate Düwel",
+      "before": {
+        "lat": 52.75617808,
+        "lng": 13.2448521
+      },
+      "google": {
+        "lat": 52.7562176,
+        "lng": 13.2449174,
+        "place_id": "ChIJaXpbPUAHqUcRZjKxVuPJBIQ",
+        "address": "Bernauer Str. 53, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_august_wilhelm_steg_oranienburg",
+      "name": "August Wilhelm Steg Oranienburg",
+      "before": {
+        "lat": 52.75809968,
+        "lng": 13.23715248
+      },
+      "google": {
+        "lat": 52.7581392,
+        "lng": 13.2372178,
+        "place_id": "ChIJ00vy9xUHqUcRKRwCDuD2jM4",
+        "address": "Rungestraße 49, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_ehemalige_schleuse_sachsenhausen",
+      "name": "ehemalige Schleuse Sachsenhausen",
+      "before": {
+        "lat": 52.77614748,
+        "lng": 13.242617659999999
+      },
+      "google": {
+        "lat": 52.776187,
+        "lng": 13.242683,
+        "place_id": "ChIJGRD7gdAHqUcRttRZPTy6FPY",
+        "address": "Granseer Str. 23, 16515 Oranienburg-Sachsenhausen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_kleines_wehr_sachsenhausen",
+      "name": "Kleines Wehr Sachsenhausen",
+      "before": {
+        "lat": 52.77550828,
+        "lng": 13.242998359999998
+      },
+      "google": {
+        "lat": 52.7755478,
+        "lng": 13.2430637,
+        "place_id": "ChIJi6P_bgAHqUcRRqO-D-WrnnA",
+        "address": "Chausseestraße, 16515 Oranienburg-Sachsenhausen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_museum_sowjetisches_speziallager_nr_7_nr_1",
+      "name": "Museum \"Sowjetisches Speziallager Nr. 7 / Nr. 1\"",
+      "before": {
+        "lat": 52.769138780000006,
+        "lng": 13.25915978
+      },
+      "google": {
+        "lat": 52.7691783,
+        "lng": 13.2592251,
+        "place_id": "ChIJLd-0dHEHqUcRGCrWEtffXcs",
+        "address": "Str. d. Nationen 22, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_grabstatte_von_silvio_gesell",
+      "name": "Grabstätte von Silvio Gesell",
+      "before": {
+        "lat": 52.749600480000005,
+        "lng": 13.2263677
+      },
+      "google": {
+        "lat": 52.74964,
+        "lng": 13.226433,
+        "place_id": "ChIJX7TADHYBqUcRd0fsPIhnHH0",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_restaurant_galerie",
+      "name": "Restaurant Galerie",
+      "before": {
+        "lat": 52.753770079999995,
+        "lng": 13.2552281
+      },
+      "google": {
+        "lat": 52.7538096,
+        "lng": 13.2552934,
+        "place_id": "ChIJ5-ig50IHqUcRC2jqb7RP3fg",
+        "address": "André-Pican-Straße 23, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_bob_ross_instructor_galerie_augustburk",
+      "name": "Bob Ross Instructor Galerie Augustburk",
+      "before": {
+        "lat": 52.724875479999994,
+        "lng": 13.246602540000001
+      },
+      "google": {
+        "lat": 52.724915,
+        "lng": 13.2466678,
+        "place_id": "ChIJH6mvg68AqUcRKhfD_l5y_CU",
+        "address": "Richard-Wagner-Straße 9, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_bistro_an_der_gedenkstatte_sachsenhausen",
+      "name": "Bistro an der Gedenkstätte Sachsenhausen",
+      "before": {
+        "lat": 52.76384928,
+        "lng": 13.26076428
+      },
+      "google": {
+        "lat": 52.7638888,
+        "lng": 13.2608296,
+        "place_id": "ChIJ6cImmoMHqUcR5U68tSQ9PA0",
+        "address": "Str. d. Nationen 22, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_massengrab_an_der_dune",
+      "name": "Massengrab An Der Düne",
+      "before": {
+        "lat": 52.770150879999996,
+        "lng": 13.26574186
+      },
+      "google": {
+        "lat": 52.7701904,
+        "lng": 13.2658072,
+        "place_id": "ChIJM78IYQsHqUcRxleI6sQ3Mm8",
+        "address": "Am Heidering 7, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_gedenkstatte_todesmarsch",
+      "name": "Gedenkstätte Todesmarsch",
+      "before": {
+        "lat": 52.76253088,
+        "lng": 13.25541718
+      },
+      "google": {
+        "lat": 52.76257039999999,
+        "lng": 13.2554825,
+        "place_id": "ChIJBQfUShMHqUcRCsPNhKMGO88",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_gedenkort_station_z",
+      "name": "Gedenkort \"Station Z\"",
+      "before": {
+        "lat": 52.76746498,
+        "lng": 13.25939618
+      },
+      "google": {
+        "lat": 52.76750450000001,
+        "lng": 13.2594615,
+        "place_id": "ChIJDVrXyHEHqUcRUXR3BGeV_o8",
+        "address": "Str. d. Nationen 22, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_oranienburger_wochenmarkt",
+      "name": "ORANIENBURGER WOCHENMARKT",
+      "before": {
+        "lat": 52.756165380000006,
+        "lng": 13.242679200000001
+      },
+      "google": {
+        "lat": 52.7562049,
+        "lng": 13.2427445,
+        "place_id": "ChIJicTk9D8HqUcRSLB1kzrJmqs",
+        "address": "Bernauer Str. 30C, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_parkplatz_am_schloss",
+      "name": "Parkplatz am Schloss",
+      "before": {
+        "lat": 52.75645878,
+        "lng": 13.235490399999998
+      },
+      "google": {
+        "lat": 52.7532286,
+        "lng": 13.2364504,
+        "place_id": "ChIJb1vW8nAHqUcRTtHAUS7brZ8",
+        "address": "Schloßpl. 1A, 16515 Oranienburg"
+      },
+      "delta_m": 365,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_schlossparkcafe",
+      "name": "Schlossparkcafé",
+      "before": {
+        "lat": 52.75783488,
+        "lng": 13.23435598
+      },
+      "google": {
+        "lat": 52.7578744,
+        "lng": 13.2344213,
+        "place_id": "ChIJMcpS8j0HqUcRgC_wqwykYoc",
+        "address": "Rungestraße 49, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_tiny_forest_grunzug_walther_bothe_strasse",
+      "name": "Tiny Forest Grünzug Walther-Bothe-Straße",
+      "before": {
+        "lat": 52.74444378,
+        "lng": 13.232447099999998
+      },
+      "google": {
+        "lat": 52.7444833,
+        "lng": 13.2325124,
+        "place_id": "ChIJH9q1ZQAHqUcR_2M2NolnizY",
+        "address": "Walther-Bothe-Straße, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_kleingartenverein_havelfreude_e_v",
+      "name": "Kleingartenverein Havelfreude E.v.",
+      "before": {
+        "lat": 52.760537080000006,
+        "lng": 13.234292579999998
+      },
+      "google": {
+        "lat": 52.7605766,
+        "lng": 13.2343579,
+        "place_id": "ChIJMXuURRYHqUcRXIfiECvqJBg",
+        "address": "Blumenweg 4, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_gartengemeinschaft_e_v",
+      "name": "Gartengemeinschaft e.V.",
+      "before": {
+        "lat": 52.76521108000001,
+        "lng": 13.24090938
+      },
+      "google": {
+        "lat": 52.76525059999999,
+        "lng": 13.2409747,
+        "place_id": "ChIJqWJJaBEHqUcRBD9nQyNwruc",
+        "address": "Adolf-Mertens-Straße 18, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_schlappmeisterei_hundeauslaufgebiet",
+      "name": "Schlappmeisterei Hundeauslaufgebiet",
+      "before": {
+        "lat": 52.75791088,
+        "lng": 13.23636068
+      },
+      "google": {
+        "lat": 52.7579504,
+        "lng": 13.236426,
+        "place_id": "ChIJDx92_tMHqUcRWLpqx_D8-Ko",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_grunpflege_gartenzwerg",
+      "name": "Grünpflege Gartenzwerg",
+      "before": {
+        "lat": 52.75910048000001,
+        "lng": 13.251214580000001
+      },
+      "google": {
+        "lat": 52.75914,
+        "lng": 13.2512799,
+        "place_id": "ChIJe5NRCtgHqUcR91eF5LC_bSw",
+        "address": "Freienwalder Str. 27, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_gedenkort_zum_klinkerwerk",
+      "name": "Gedenkort Zum Klinkerwerk",
+      "before": {
+        "lat": 52.769521780000005,
+        "lng": 13.28120648
+      },
+      "google": {
+        "lat": 52.7695613,
+        "lng": 13.2812718,
+        "place_id": "ChIJwQ3F_dWpqUcRy5hMSsQNHrk",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_hafenrestaurant_lubea",
+      "name": "Hafenrestaurant LuBea",
+      "before": {
+        "lat": 52.75491078,
+        "lng": 13.262574699999998
+      },
+      "google": {
+        "lat": 52.7549503,
+        "lng": 13.26264,
+        "place_id": "ChIJbdI_iF0HqUcRO4-7Wieh8N0",
+        "address": "Rüdesheimer Str. 21, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_wassersport_oranienburg_bootsschule_bootsverleih",
+      "name": "Wassersport Oranienburg Bootsschule Bootsverleih",
+      "before": {
+        "lat": 52.76743668,
+        "lng": 13.246550879999997
+      },
+      "google": {
+        "lat": 52.7674762,
+        "lng": 13.2466162,
+        "place_id": "ChIJ2ww1C0oHqUcR6iY_idUAAO4",
+        "address": "Chausseestraße 64, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_bootsschule_oranienburg_seit_1991",
+      "name": "Bootsschule Oranienburg seit 1991",
+      "before": {
+        "lat": 52.74259028,
+        "lng": 13.259061220000001
+      },
+      "google": {
+        "lat": 52.7426298,
+        "lng": 13.2591265,
+        "place_id": "ChIJ0WiRWwQHqUcRtSAErzWoD50",
+        "address": "Lehnitzstraße 101, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_kanuverleih",
+      "name": "Kanuverleih",
+      "before": {
+        "lat": 52.724253280000006,
+        "lng": 13.251094640000002
+      },
+      "google": {
+        "lat": 52.7242928,
+        "lng": 13.2511599,
+        "place_id": "ChIJK2IvtagAqUcR7Pjieq1S92I",
+        "address": "Spitzwegstraße, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_oranienburger_fahrgastschifffahrt_gbr_manfred_und_rudiger_ulack",
+      "name": "Oranienburger Fahrgastschifffahrt GbR, Manfred und Rüdiger Ulack",
+      "before": {
+        "lat": 52.75113668,
+        "lng": 13.2408188
+      },
+      "google": {
+        "lat": 52.7511762,
+        "lng": 13.2408841,
+        "place_id": "ChIJb9fApgwHqUcRZIzSMtmtl44",
+        "address": "Havelpromenade, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_nani_s_kinderparadies",
+      "name": "Nani´s Kinderparadies",
+      "before": {
+        "lat": 52.75552468000001,
+        "lng": 13.2411409
+      },
+      "google": {
+        "lat": 52.75556419999999,
+        "lng": 13.2412062,
+        "place_id": "ChIJXypTkD8HqUcRHxlHQIx_a9E",
+        "address": "Bernauer Str. 25, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_action_oranienburg",
+      "name": "Action Oranienburg",
+      "before": {
+        "lat": 52.74479398,
+        "lng": 13.2383415
+      },
+      "google": {
+        "lat": 52.7448335,
+        "lng": 13.2384068,
+        "place_id": "ChIJx7DStyIHqUcReFajANsTDM8",
+        "address": "Berliner Str. 78, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_schreibwaren_am_bahnhof",
+      "name": "Schreibwaren Am Bahnhof",
+      "before": {
+        "lat": 52.75556598000001,
+        "lng": 13.246970499999998
+      },
+      "google": {
+        "lat": 52.75560549999999,
+        "lng": 13.2470358,
+        "place_id": "ChIJC_IdykEHqUcRm-WK7NnTAJs",
+        "address": "Stralsunder Str. 6, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_marktschwarmer_oranienburg",
+      "name": "Marktschwärmer Oranienburg",
+      "before": {
+        "lat": 52.75136228,
+        "lng": 13.2256891
+      },
+      "google": {
+        "lat": 52.7514018,
+        "lng": 13.2257544,
+        "place_id": "ChIJg2cJdrkHqUcRP6_6bhTQB_Q",
+        "address": "Kremmener Str. 48, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_wochenmarkt_bernauer_str",
+      "name": "wochenmarkt bernauer str.",
+      "before": {
+        "lat": 52.75182488,
+        "lng": 13.2374223
+      },
+      "google": {
+        "lat": 52.7562049,
+        "lng": 13.2427445,
+        "place_id": "ChIJicTk9D8HqUcRSLB1kzrJmqs",
+        "address": "Bernauer Str. 30C, 16515 Oranienburg"
+      },
+      "delta_m": 605,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_kaufland_oranienburg",
+      "name": "Kaufland Oranienburg",
+      "before": {
+        "lat": 52.74946616,
+        "lng": 13.2235349
+      },
+      "google": {
+        "lat": 52.74949489999999,
+        "lng": 13.2235824,
+        "place_id": "ChIJoUSkUCUHqUcR4NUzJ_RkRwA",
+        "address": "Friedensstraße 8, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_rewe",
+      "name": "REWE",
+      "before": {
+        "lat": 52.74539286,
+        "lng": 13.253580920000001
+      },
+      "google": {
+        "lat": 52.7454216,
+        "lng": 13.2536284,
+        "place_id": "ChIJCfk3BlAHqUcRFtIoD5m_i40",
+        "address": "Lehnitzstraße 85, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_oranienpark",
+      "name": "Oranienpark",
+      "before": {
+        "lat": 52.75001516,
+        "lng": 13.224344300000002
+      },
+      "google": {
+        "lat": 52.75004389999999,
+        "lng": 13.2243918,
+        "place_id": "ChIJ_VsizToHqUcRT4C2XYq7ylE",
+        "address": "Friedensstraße, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_aldi_nord",
+      "name": "ALDI Nord",
+      "before": {
+        "lat": 52.75209026,
+        "lng": 13.2027085
+      },
+      "google": {
+        "lat": 52.752119,
+        "lng": 13.202756,
+        "place_id": "ChIJx-k48dkGqUcRm8JKSZejwYY",
+        "address": "Germendorfer Allee 20, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_edeka_hein",
+      "name": "EDEKA Hein",
+      "before": {
+        "lat": 52.76383836,
+        "lng": 13.2468458
+      },
+      "google": {
+        "lat": 52.76386710000001,
+        "lng": 13.2468933,
+        "place_id": "ChIJAQ8GNBMHqUcRQXob1atw1PY",
+        "address": "Sachsenhausener Str. 21, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_edeka_gardow",
+      "name": "EDEKA Gardow",
+      "before": {
+        "lat": 52.735967759999994,
+        "lng": 13.241276619999999
+      },
+      "google": {
+        "lat": 52.7359965,
+        "lng": 13.2413241,
+        "place_id": "ChIJqXEtVksHqUcRZM9emsMBhtQ",
+        "address": "Berliner Str. 119-125, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_parkplatz_lidl",
+      "name": "Parkplatz Lidl",
+      "before": {
+        "lat": 52.75393846000001,
+        "lng": 13.2560271
+      },
+      "google": {
+        "lat": 52.75396720000001,
+        "lng": 13.2560746,
+        "place_id": "ChIJ-fxeHDoHqUcRXZPRDmws5RI",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_rewe_logistikzentrum",
+      "name": "REWE- Logistikzentrum",
+      "before": {
+        "lat": 52.72983536,
+        "lng": 13.218317440000002
+      },
+      "google": {
+        "lat": 52.7298641,
+        "lng": 13.2183649,
+        "place_id": "ChIJFbU4H84AqUcRra5gbOEmnkA",
+        "address": "Rewestraße 1, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_polizeiinspektion_oberhavel",
+      "name": "Polizeiinspektion Oberhavel",
+      "before": {
+        "lat": 52.754010359999995,
+        "lng": 13.2082352
+      },
+      "google": {
+        "lat": 52.7540391,
+        "lng": 13.2082827,
+        "place_id": "ChIJV7C6WjgHqUcRacPBr5AP9NE",
+        "address": "Germendorfer Allee 17, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_luisen_apotheke",
+      "name": "Luisen Apotheke",
+      "before": {
+        "lat": 52.743699660000004,
+        "lng": 13.238689220000001
+      },
+      "google": {
+        "lat": 52.74372839999999,
+        "lng": 13.2387367,
+        "place_id": "ChIJg48CxkkHqUcRMNP4kA2SDCA",
+        "address": "Berliner Str. 94, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_polizei_brandenburg_2_einsatzhundertschaft",
+      "name": "Polizei Brandenburg 2.Einsatzhundertschaft",
+      "before": {
+        "lat": 52.76290156,
+        "lng": 13.2668667
+      },
+      "google": {
+        "lat": 52.7629303,
+        "lng": 13.2669142,
+        "place_id": "ChIJm2iXpZ4HqUcRXrDRjHeNTFM",
+        "address": "Bernauer Str. 146, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_hochschule_der_polizei_des_landes_brandenburg",
+      "name": "Hochschule der Polizei des Landes Brandenburg",
+      "before": {
+        "lat": 52.76281076,
+        "lng": 13.2692235
+      },
+      "google": {
+        "lat": 52.7628395,
+        "lng": 13.269271,
+        "place_id": "ChIJiwaVgGQHqUcRD8ED-D-pRxQ",
+        "address": "Bernauer Str. 146, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_spielplatz_angerwiese",
+      "name": "Spielplatz Angerwiese",
+      "before": {
+        "lat": 52.763364460000005,
+        "lng": 13.251602400000001
+      },
+      "google": {
+        "lat": 52.7633932,
+        "lng": 13.2516499,
+        "place_id": "ChIJn40N3M0HqUcRgyuAsRsLIUI",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_spielplatz_lindenring",
+      "name": "Spielplatz Lindenring",
+      "before": {
+        "lat": 52.75026696,
+        "lng": 13.2455499
+      },
+      "google": {
+        "lat": 52.7502957,
+        "lng": 13.2455974,
+        "place_id": "ChIJ0RML6kYHqUcRHnuVVGkd9aw",
+        "address": "Lindenring 34, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_spielplatz",
+      "name": "Spielplatz",
+      "before": {
+        "lat": 52.75225236,
+        "lng": 13.232119700000002
+      },
+      "google": {
+        "lat": 52.7512986,
+        "lng": 13.2418708,
+        "place_id": "ChIJOYymRUcHqUcRMdme_P-47ww",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 665,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_spielplatz_werrastrasse",
+      "name": "Spielplatz Werrastraße",
+      "before": {
+        "lat": 52.73594646,
+        "lng": 13.24477472
+      },
+      "google": {
+        "lat": 52.7359752,
+        "lng": 13.2448222,
+        "place_id": "ChIJdcf5uL8HqUcRXPRWOyRuLtM",
+        "address": "Donaustraße, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_spielplatz_karl_marx_platz",
+      "name": "Spielplatz Karl-Marx-Platz",
+      "before": {
+        "lat": 52.73211476,
+        "lng": 13.26134362
+      },
+      "google": {
+        "lat": 52.7321435,
+        "lng": 13.2613911,
+        "place_id": "ChIJ6W_Zc-cBqUcR53VQ3d6sWUc",
+        "address": "16515 Oranienburg-Lehnitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_orchester_ronny_heinrich",
+      "name": "Orchester Ronny Heinrich",
+      "before": {
+        "lat": 52.735800360000006,
+        "lng": 13.249250720000001
+      },
+      "google": {
+        "lat": 52.7358291,
+        "lng": 13.2492982,
+        "place_id": "ChIJT4NcpFIHqUcRczt6Hf3pe5A",
+        "address": "Okerstraße 3, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_fischerparkplatz",
+      "name": "Fischerparkplatz",
+      "before": {
+        "lat": 52.754799760000004,
+        "lng": 13.238868200000002
+      },
+      "google": {
+        "lat": 52.7548285,
+        "lng": 13.2389157,
+        "place_id": "ChIJ1btsBD8HqUcRMqafn6ych38",
+        "address": "Unnamed Road, 16515, Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_parkplatz_schmachtenhagener_forst",
+      "name": "Parkplatz Schmachtenhagener Forst",
+      "before": {
+        "lat": 52.76440976,
+        "lng": 13.3067971
+      },
+      "google": {
+        "lat": 52.7644385,
+        "lng": 13.3068446,
+        "place_id": "ChIJY6aBv0ypqUcRL2jNv9DvcoU",
+        "address": "Oranienburger Ch, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_parkplatz_s_lehnitz",
+      "name": "Parkplatz S Lehnitz",
+      "before": {
+        "lat": 52.74236705999999,
+        "lng": 13.26300412
+      },
+      "google": {
+        "lat": 52.7423958,
+        "lng": 13.2630516,
+        "place_id": "ChIJaTAvCVcHqUcR7wiEnpthDjk",
+        "address": "16515 Oranienburg-Lehnitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_tc_oranienburg_1990_e_v",
+      "name": "TC Oranienburg 1990 e.V.",
+      "before": {
+        "lat": 52.752861259999996,
+        "lng": 13.258892499999998
+      },
+      "google": {
+        "lat": 52.75289,
+        "lng": 13.25894,
+        "place_id": "ChIJ4bf9H10HqUcRPQxyJCPTHeQ",
+        "address": "Heidelberger Str. 34, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_kunstrasenplatz",
+      "name": "Kunstrasenplatz",
+      "before": {
+        "lat": 52.74666996,
+        "lng": 13.25858542
+      },
+      "google": {
+        "lat": 52.7466987,
+        "lng": 13.2586329,
+        "place_id": "ChIJD1eBJgAHqUcRA5rVxCzfOqM",
+        "address": "16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_elgora_stadion",
+      "name": "ELGORA-Stadion",
+      "before": {
+        "lat": 52.77534746,
+        "lng": 13.23849358
+      },
+      "google": {
+        "lat": 52.7753762,
+        "lng": 13.2385411,
+        "place_id": "ChIJAQAAowgHqUcRmBDrmAVX7RU",
+        "address": "Am Park 44, 16515 Oranienburg-Sachsenhausen"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_turn_und_sportverein_1896_sachsenhausen",
+      "name": "Turn-und Sportverein 1896 Sachsenhausen",
+      "before": {
+        "lat": 52.775079559999995,
+        "lng": 13.23940858
+      },
+      "google": {
+        "lat": 52.7751083,
+        "lng": 13.2394561,
+        "place_id": "ChIJ56Hy9QUHqUcRSMraCdWet7A",
+        "address": "Eric-Collins-Straße 8, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_sportplatz_fsv_germendorf",
+      "name": "Sportplatz FSV Germendorf",
+      "before": {
+        "lat": 52.751079159999996,
+        "lng": 13.175332299999999
+      },
+      "google": {
+        "lat": 52.7511079,
+        "lng": 13.1753798,
+        "place_id": "ChIJo1pUHI8HqUcRWOHxW61B2SY",
+        "address": "16515 Oranienburg-Germendorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_m_mehner_schwimmbad_u_saunatechnik_u_montagen",
+      "name": "M. Mehner Schwimmbad- u. Saunatechnik u. Montagen",
+      "before": {
+        "lat": 52.76387526,
+        "lng": 13.256255
+      },
+      "google": {
+        "lat": 52.763904,
+        "lng": 13.2563025,
+        "place_id": "ChIJozgKim4HqUcREPhZ6Kuv2hc",
+        "address": "Hirtenweg 1, 16515 Oranienburg-Sachsenhausen"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_trinkwasserbrunnen",
+      "name": "Trinkwasserbrunnen",
+      "before": {
+        "lat": 52.75532596000001,
+        "lng": 13.263306
+      },
+      "google": {
+        "lat": 52.7553547,
+        "lng": 13.2633535,
+        "place_id": "ChIJNbOAIgAHqUcRvNcPxKsyO6w",
+        "address": "Rüdesheimer Str. 21, 16515 Oranienburg-Lehnitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_star_tankstelle",
+      "name": "star Tankstelle",
+      "before": {
+        "lat": 52.744663960000004,
+        "lng": 13.23740792
+      },
+      "google": {
+        "lat": 52.74469269999999,
+        "lng": 13.2374554,
+        "place_id": "ChIJYYTJ1TcHqUcRhHbFxW3UZM4",
+        "address": "Berliner Str. 73, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_sprint_tankstelle_nassenheide",
+      "name": "Sprint Tankstelle Nassenheide",
+      "before": {
+        "lat": 52.81136806000001,
+        "lng": 13.22330224
+      },
+      "google": {
+        "lat": 52.8113968,
+        "lng": 13.2233498,
+        "place_id": "ChIJr6XSfzoGqUcRE-9gGNBjGmo",
+        "address": "Teerofener Weg 4, 16775 Löwenberger Land-Nassenheide"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_orlen_tankstelle",
+      "name": "ORLEN Tankstelle",
+      "before": {
+        "lat": 52.76910716,
+        "lng": 13.24710088
+      },
+      "google": {
+        "lat": 52.76913589999999,
+        "lng": 13.2471484,
+        "place_id": "ChIJ2SFZEw0HqUcRF4iH45MPclk",
+        "address": "Chausseestraße 60, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_sb_tank",
+      "name": "SB Tank",
+      "before": {
+        "lat": 52.76527886,
+        "lng": 13.244869099999999
+      },
+      "google": {
+        "lat": 52.7653076,
+        "lng": 13.2449166,
+        "place_id": "ChIJc6yvHRMHqUcRfKrwxQpbj8s",
+        "address": "Sachsenhausener Str. 25, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_tankpool24",
+      "name": "tankpool24",
+      "before": {
+        "lat": 52.73231886,
+        "lng": 13.217399419999998
+      },
+      "google": {
+        "lat": 52.7323476,
+        "lng": 13.2174469,
+        "place_id": "ChIJRRPKbM4AqUcRxX9rmXEV4Pw",
+        "address": "Rewestraße 3, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_totalenergies_tankstelle",
+      "name": "TotalEnergies Tankstelle",
+      "before": {
+        "lat": 52.73815516,
+        "lng": 13.24923402
+      },
+      "google": {
+        "lat": 52.7381839,
+        "lng": 13.2492815,
+        "place_id": "ChIJA6IVhk0HqUcRSC02mrzue68",
+        "address": "Saarlandstraße 40-42, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_sprint_tankstelle",
+      "name": "Sprint Tankstelle",
+      "before": {
+        "lat": 52.749141859999995,
+        "lng": 13.194284819999998
+      },
+      "google": {
+        "lat": 52.7491706,
+        "lng": 13.1943323,
+        "place_id": "ChIJlTfjn84GqUcRhSLqiFhHSfI",
+        "address": "Germendorfer Dorfstraße 32, 16515 Oranienburg-Germendorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_hoyer_automatenstation",
+      "name": "Hoyer Automatenstation",
+      "before": {
+        "lat": 52.73587216000001,
+        "lng": 13.17215272
+      },
+      "google": {
+        "lat": 52.7359009,
+        "lng": 13.1722002,
+        "place_id": "ChIJY1GgMTYBqUcRm84cuUs32Ec",
+        "address": "Veltener Str. 24, 16515 Oranienburg-Germendorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_backerei_konditorei_plentz_cafehaus",
+      "name": "Bäckerei & Konditorei Plentz - Caféhaus",
+      "before": {
+        "lat": 52.75195596,
+        "lng": 13.235848999999998
+      },
+      "google": {
+        "lat": 52.75198469999999,
+        "lng": 13.2358965,
+        "place_id": "ChIJ37gQn6foZEERNFiwptuc0wg",
+        "address": "Breite Str. 10, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_backerei_michael_prussog",
+      "name": "Bäckerei Michael Prussog",
+      "before": {
+        "lat": 52.75369376,
+        "lng": 13.2287848
+      },
+      "google": {
+        "lat": 52.75372249999999,
+        "lng": 13.2288323,
+        "place_id": "ChIJrTz5SKboZEERi9DemNjc_Rw",
+        "address": "Kanalstraße 29, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_grunlers_backstube",
+      "name": "Grünlers Backstube",
+      "before": {
+        "lat": 52.72616676,
+        "lng": 13.24752504
+      },
+      "google": {
+        "lat": 52.7261955,
+        "lng": 13.2475725,
+        "place_id": "ChIJbWNBpq8AqUcRUjTmHsOU5kk",
+        "address": "Berliner Str. 209, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_wriezener_backstube",
+      "name": "Wriezener Backstube",
+      "before": {
+        "lat": 52.75578846,
+        "lng": 13.240331700000002
+      },
+      "google": {
+        "lat": 52.7558172,
+        "lng": 13.2403792,
+        "place_id": "ChIJxXnBytIHqUcRGSy8eNomZEI",
+        "address": "Sachsenhausener Str. 41, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_roland_schulz",
+      "name": "Roland Schulz",
+      "before": {
+        "lat": 52.759129959999996,
+        "lng": 13.256458499999999
+      },
+      "google": {
+        "lat": 52.7591587,
+        "lng": 13.256506,
+        "place_id": "ChIJVYt3_GgHqUcR6A6qEFGY9-8",
+        "address": "Bernauer Str. 120, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_backshop_weisse_stadt",
+      "name": "Backshop Weiße Stadt",
+      "before": {
+        "lat": 52.743972459999995,
+        "lng": 13.235607919999998
+      },
+      "google": {
+        "lat": 52.7440012,
+        "lng": 13.2356554,
+        "place_id": "ChIJz4wEOjYHqUcRNaOIE3JVKDw",
+        "address": "Vughter Str. 5, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_rossmann_drogeriemarkt",
+      "name": "ROSSMANN Drogeriemarkt",
+      "before": {
+        "lat": 52.75418076,
+        "lng": 13.239009
+      },
+      "google": {
+        "lat": 52.7542095,
+        "lng": 13.2390565,
+        "place_id": "ChIJg2A-Gz8HqUcRJFJ7vnMujoA",
+        "address": "Fischerstraße 16, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_dm_drogerie_markt",
+      "name": "dm-drogerie markt",
+      "before": {
+        "lat": 52.736769960000004,
+        "lng": 13.24194802
+      },
+      "google": {
+        "lat": 52.7550198,
+        "lng": 13.2473273,
+        "place_id": "ChIJW11fK0AHqUcRdR4uu-QnGU0",
+        "address": "Stralsunder Str. 9, 16515 Oranienburg"
+      },
+      "delta_m": 2061,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_drk_kreisverband_markisch_oder_havel_spree_e_v",
+      "name": "DRK Kreisverband Märkisch-Oder-Havel-Spree e.V.",
+      "before": {
+        "lat": 52.74296976000001,
+        "lng": 13.239350120000001
+      },
+      "google": {
+        "lat": 52.7429985,
+        "lng": 13.2393976,
+        "place_id": "ChIJyxUGvUkHqUcR6S1ml8vICXQ",
+        "address": "Berliner Str. 104, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_imbiss_sauna_friedrichsthal_alte_fahre",
+      "name": "Imbiss & Sauna Friedrichsthal \"Alte Fähre\"",
+      "before": {
+        "lat": 52.792749060000006,
+        "lng": 13.28773026
+      },
+      "google": {
+        "lat": 52.7927778,
+        "lng": 13.2877778,
+        "place_id": "ChIJVTpCrIsHqUcR9jvtjcyNDMM",
+        "address": "Malzer Ch 196, 16515 Oranienburg-Friedrichsthal"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_sv_friedrichsthal_e_v",
+      "name": "SV Friedrichsthal e.V.",
+      "before": {
+        "lat": 52.79116616000001,
+        "lng": 13.272706159999998
+      },
+      "google": {
+        "lat": 52.7911949,
+        "lng": 13.2727537,
+        "place_id": "ChIJb5kQkZEHqUcRbJHy_IW1Y9I",
+        "address": "Friedrichsthaler Ch 65, 16515 Oranienburg-Friedrichsthal"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_heilstatte_grabowsee",
+      "name": "Heilstätte Grabowsee",
+      "before": {
+        "lat": 52.78671856,
+        "lng": 13.291934359999999
+      },
+      "google": {
+        "lat": 52.7867473,
+        "lng": 13.2919819,
+        "place_id": "ChIJG7PYoyeoqUcRLA-9GbXM4WE",
+        "address": "Malzer Weg, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_staustufe_friedrichsthal",
+      "name": "Staustufe Friedrichsthal",
+      "before": {
+        "lat": 52.80533706,
+        "lng": 13.27323994
+      },
+      "google": {
+        "lat": 52.8053658,
+        "lng": 13.2732875,
+        "place_id": "ChIJkX-FLAAHqUcRWAK7cpvLGl8",
+        "address": "16515 Oranienburg-Malz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_deutsches_rotes_kreuz_jugendarbeit",
+      "name": "Deutsches Rotes Kreuz Jugendarbeit",
+      "before": {
+        "lat": 52.748183860000005,
+        "lng": 13.24020792
+      },
+      "google": {
+        "lat": 52.7482126,
+        "lng": 13.2402554,
+        "place_id": "ChIJyRjMkkcHqUcRQt-KhIITXPA",
+        "address": "Augustin-Sandtner-Straße 104, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_evangelische_kirche_friedrichsthal_oranienburg",
+      "name": "Evangelische Kirche Friedrichsthal (Oranienburg)",
+      "before": {
+        "lat": 52.79700336,
+        "lng": 13.277427260000001
+      },
+      "google": {
+        "lat": 52.7970321,
+        "lng": 13.2774748,
+        "place_id": "ChIJb_jHspIHqUcRVvgJOEAe6aM",
+        "address": "Dorfpl., 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_drk",
+      "name": "DRK",
+      "before": {
+        "lat": 52.74712126000001,
+        "lng": 13.24233252
+      },
+      "google": {
+        "lat": 52.7429985,
+        "lng": 13.2393976,
+        "place_id": "ChIJyxUGvUkHqUcR6S1ml8vICXQ",
+        "address": "Berliner Str. 104, 16515 Oranienburg"
+      },
+      "delta_m": 499,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_grabowseebrucke",
+      "name": "Grabowseebrücke",
+      "before": {
+        "lat": 52.79211126,
+        "lng": 13.287866159999998
+      },
+      "google": {
+        "lat": 52.79214,
+        "lng": 13.2879137,
+        "place_id": "ChIJN9edBCgHqUcRqlDWLN9-nv4",
+        "address": "Oder-Havel-Kanal, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_stasher_luggage_storage_berliner_strasse_open_24_7",
+      "name": "Stasher Luggage Storage - Berliner Strasse - Open 24-7",
+      "before": {
+        "lat": 52.74774325999999,
+        "lng": 13.23596152
+      },
+      "google": {
+        "lat": 52.747772,
+        "lng": 13.236009,
+        "place_id": "ChIJHcxJzCcHqUcRiwCRwdmjW64",
+        "address": "Berliner Str. 49, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_storebox_dein_lager_nebenan",
+      "name": "Storebox - Dein Lager nebenan",
+      "before": {
+        "lat": 52.75312736000001,
+        "lng": 13.2345571
+      },
+      "google": {
+        "lat": 52.7531561,
+        "lng": 13.2346046,
+        "place_id": "ChIJB8KYzugHqUcRHH1StesV_Cg",
+        "address": "Kanalstraße 4, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_souveniermunzen_automat",
+      "name": "Souveniermünzen Automat",
+      "before": {
+        "lat": 52.74361526,
+        "lng": 13.154223819999999
+      },
+      "google": {
+        "lat": 52.73458919999999,
+        "lng": 13.2448605,
+        "place_id": "ChIJkeG-zCwBqUcRvUWX72sySKY",
+        "address": "Saarlandstraße 75, 16515 Oranienburg"
+      },
+      "delta_m": 6184,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_viet_flavour_restaurant",
+      "name": "Viet Flavour Restaurant",
+      "before": {
+        "lat": 52.75831326,
+        "lng": 13.2546557
+      },
+      "google": {
+        "lat": 52.758342,
+        "lng": 13.2547032,
+        "place_id": "ChIJtc16ZTwHqUcR0skY6cLgzas",
+        "address": "Bernauer Str. 93, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_eden_cafe_bonita_manana",
+      "name": "Eden Cafe Bonita mañana",
+      "before": {
+        "lat": 52.74931495999999,
+        "lng": 13.2059561
+      },
+      "google": {
+        "lat": 52.7493437,
+        "lng": 13.2060036,
+        "place_id": "ChIJg1hVDQAHqUcRDlPxrzqA70U",
+        "address": "Struveweg 503, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_viet_dragon_vietnamesisches_restaurant_sushi",
+      "name": "Viet Dragon Vietnamesisches Restaurant & Sushi",
+      "before": {
+        "lat": 52.748760059999995,
+        "lng": 13.175587519999999
+      },
+      "google": {
+        "lat": 52.7487888,
+        "lng": 13.175635,
+        "place_id": "ChIJnyvFESkHqUcRHRhM3udgzqI",
+        "address": "Germendorfer Dorfstraße 8, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_restaurant_zum_taubenschlag",
+      "name": "Restaurant zum Taubenschlag",
+      "before": {
+        "lat": 52.750381260000005,
+        "lng": 13.1703941
+      },
+      "google": {
+        "lat": 52.75041,
+        "lng": 13.1704416,
+        "place_id": "ChIJWYMtSrEGqUcR3d1bR5YFoT4",
+        "address": "Hohenbrucher Str. 2, 16515 Oranienburg-Germendorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_ny_ny_restaurant",
+      "name": "Ny Ny Restaurant",
+      "before": {
+        "lat": 52.766104659999996,
+        "lng": 13.2452833
+      },
+      "google": {
+        "lat": 52.7661334,
+        "lng": 13.2453308,
+        "place_id": "ChIJwZWwGi8HqUcRJ7vljl4Ic8Y",
+        "address": "Chausseestraße 1, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_mellis_small_kitchen_cafe",
+      "name": "Mellis Small Kitchen Cafe",
+      "before": {
+        "lat": 52.74530516000001,
+        "lng": 13.23793762
+      },
+      "google": {
+        "lat": 52.7453339,
+        "lng": 13.2379851,
+        "place_id": "ChIJ6Y3k5s4HqUcRBjDqNWsH6pk",
+        "address": "Berliner Str. 76, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_cafe_louise",
+      "name": "Café Louise",
+      "before": {
+        "lat": 52.75735376,
+        "lng": 13.250077200000002
+      },
+      "google": {
+        "lat": 52.7573825,
+        "lng": 13.2501247,
+        "place_id": "ChIJezi8GmoHqUcRX0Ld_PHABvQ",
+        "address": "Bernauer Str. 67, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_cook_rein",
+      "name": "cook rein",
+      "before": {
+        "lat": 52.75501246000001,
+        "lng": 13.2466643
+      },
+      "google": {
+        "lat": 52.7550412,
+        "lng": 13.2467118,
+        "place_id": "ChIJj4o_skEHqUcRA_Hk7QvlNsM",
+        "address": "Schulstraße 4, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_milchbar",
+      "name": "Milchbar",
+      "before": {
+        "lat": 52.75702536,
+        "lng": 13.246415199999998
+      },
+      "google": {
+        "lat": 52.7570541,
+        "lng": 13.2464627,
+        "place_id": "ChIJwQajgmoHqUcRoknvH44UM88",
+        "address": "Bernauer Str. 62, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_cafeteria_im_gmosz",
+      "name": "Cafeteria im Gmosz",
+      "before": {
+        "lat": 52.75213136,
+        "lng": 13.2542237
+      },
+      "google": {
+        "lat": 52.7521601,
+        "lng": 13.2542712,
+        "place_id": "ChIJXcafQQAHqUcRO2rdDVEqwYM",
+        "address": "André-Pican-Straße 39, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_cafe_rondell",
+      "name": "Cafe Rondell",
+      "before": {
+        "lat": 52.74539006,
+        "lng": 13.26392002
+      },
+      "google": {
+        "lat": 52.7454188,
+        "lng": 13.2639675,
+        "place_id": "ChIJQcJyyFkHqUcRjj_fXnKbJYc",
+        "address": "Friedrich-Wolf-Straße 26, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_hotel_cleopatra_ii",
+      "name": "Hotel \"Cleopatra II\"",
+      "before": {
+        "lat": 52.738471260000004,
+        "lng": 13.24063262
+      },
+      "google": {
+        "lat": 52.73849999999999,
+        "lng": 13.2406801,
+        "place_id": "ChIJl8OpZyoHqUcRen3wysTXfBU",
+        "address": "Weimarer Str. 1A, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_restaurant_pension_sonnenburg",
+      "name": "Restaurant & Pension Sonnenburg",
+      "before": {
+        "lat": 52.738764460000006,
+        "lng": 13.25324142
+      },
+      "google": {
+        "lat": 52.7387932,
+        "lng": 13.2532889,
+        "place_id": "ChIJjxFmMVIHqUcRgivGKa4FL-0",
+        "address": "Robert-Koch-Straße 67, 16515 Oranienburg-Lehnitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_alte_lebkuchenfabrik",
+      "name": "Alte Lebkuchenfabrik",
+      "before": {
+        "lat": 52.759624259999995,
+        "lng": 13.0268168
+      },
+      "google": {
+        "lat": 52.759653,
+        "lng": 13.0268643,
+        "place_id": "ChIJKan4qqocqUcR4bKLekKpWNM",
+        "address": "Berliner Str. 4, 16766 Kremmen"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_buffet_hotel",
+      "name": "Buffet Hotel",
+      "before": {
+        "lat": 52.68770776,
+        "lng": 13.28704188
+      },
+      "google": {
+        "lat": 52.6877365,
+        "lng": 13.2870893,
+        "place_id": "ChIJaYnj91eqqUcRD1umCgQ0LJg",
+        "address": "Clara-Zetkin-Straße 9, 16547 Birkenwerder"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_pension_hotel_anny",
+      "name": "Pension Hotel-Anny",
+      "before": {
+        "lat": 52.727619260000004,
+        "lng": 13.247839539999998
+      },
+      "google": {
+        "lat": 52.72764799999999,
+        "lng": 13.247887,
+        "place_id": "ChIJtRX0Wq4AqUcRsQElxoU_F_A",
+        "address": "Berliner Str. 254, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_pension_eden_im_lilienthalhaus",
+      "name": "Pension Eden im Lilienthalhaus",
+      "before": {
+        "lat": 52.75031885999999,
+        "lng": 13.2078542
+      },
+      "google": {
+        "lat": 52.7503476,
+        "lng": 13.2079017,
+        "place_id": "ChIJjVFy99cGqUcRE5_whBFdk3Q",
+        "address": "Struveweg 102, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_lindas_pension_landgasthof",
+      "name": "Lindas Pension & Landgasthof",
+      "before": {
+        "lat": 52.74836126,
+        "lng": 13.066192519999998
+      },
+      "google": {
+        "lat": 52.74839,
+        "lng": 13.06624,
+        "place_id": "ChIJr9WNHGUDqUcRoh4BpdIZshA",
+        "address": "Mittelweg 18, 16766 Kremmen"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_oranjehus",
+      "name": "Oranjehus",
+      "before": {
+        "lat": 52.77666226,
+        "lng": 13.239566479999999
+      },
+      "google": {
+        "lat": 52.776691,
+        "lng": 13.239614,
+        "place_id": "ChIJ935y9QgHqUcRAi8YV5igYCU",
+        "address": "Clara-Zetkin-Straße 31, 16515 Oranienburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_gasthof_und_pension_palmenhof",
+      "name": "Gasthof und Pension Palmenhof",
+      "before": {
+        "lat": 52.724042759999996,
+        "lng": 13.195559639999999
+      },
+      "google": {
+        "lat": 52.7240715,
+        "lng": 13.1956071,
+        "place_id": "ChIJw_NFXt8AqUcRbk5XdVMVbG4",
+        "address": "Ringstraße 1, 16767 Leegebruch"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_gasthof_velten",
+      "name": "Gasthof Velten",
+      "before": {
+        "lat": 52.68601016,
+        "lng": 13.171841879999999
+      },
+      "google": {
+        "lat": 52.6860389,
+        "lng": 13.1718893,
+        "place_id": "ChIJF4qip7QBqUcROOJG7FccrY0",
+        "address": "Bahnstraße 6, 16727 Velten"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_vulkan_im_tier_freizeit_und_saurierpark_germendorf",
+      "name": "Vulkan im Tier-, Freizeit- und Saurierpark Germendorf",
+      "before": {
+        "lat": 52.744230259999995,
+        "lng": 13.152734240000001
+      },
+      "google": {
+        "lat": 52.74426620000001,
+        "lng": 13.1527936,
+        "place_id": "ChIJv21kPn4BqUcRRYeP59Nr-Bo",
+        "address": "An den Waldseen 1A, 16515 Oranienburg-Germendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_tier_freizeit_und_saurierpark_germendorf",
+      "name": "Tier-, Freizeit- und Saurierpark Germendorf",
+      "before": {
+        "lat": 52.74728156,
+        "lng": 13.156389039999999
+      },
+      "google": {
+        "lat": 52.74731749999999,
+        "lng": 13.1564484,
+        "place_id": "ChIJTegttVIBqUcRtHbryPOyvKw",
+        "address": "An den Waldseen 1A, 16515 Oranienburg-Germendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_bismarckeiche",
+      "name": "Bismarckeiche",
+      "before": {
+        "lat": 52.77006516,
+        "lng": 13.326603
+      },
+      "google": {
+        "lat": 52.7701011,
+        "lng": 13.3266624,
+        "place_id": "ChIJJ54BEwCpqUcR6OJhK6Z5F2Y",
+        "address": "L29 19, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_alter_bunker",
+      "name": "Alter Bunker",
+      "before": {
+        "lat": 52.78875756,
+        "lng": 13.27943238
+      },
+      "google": {
+        "lat": 52.7887935,
+        "lng": 13.2794918,
+        "place_id": "ChIJR5bTbwAHqUcRAH25918NLEI",
+        "address": "Q7QH+GR, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_preussischer_meilenstein",
+      "name": "Preußischer Meilenstein",
+      "before": {
+        "lat": 52.66452936,
+        "lng": 13.284497660000003
+      },
+      "google": {
+        "lat": 52.6645653,
+        "lng": 13.2845569,
+        "place_id": "ChIJlQvzPACrqUcRHjpSaivTf7I",
+        "address": "Berliner Str. 8, 16540 Hohen Neuendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_louise_henriette_brunnen",
+      "name": "Louise-Henriette-Brunnen",
+      "before": {
+        "lat": 52.69161145999999,
+        "lng": 13.276581920000002
+      },
+      "google": {
+        "lat": 52.6916474,
+        "lng": 13.2766412,
+        "place_id": "ChIJ_UdpVnyrqUcRYcNNSGsoVbA",
+        "address": "Hauptstraße 83-75, 16547 Birkenwerder"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_dorfkirche_zehlendorf_oranienburg",
+      "name": "Dorfkirche Zehlendorf (Oranienburg)",
+      "before": {
+        "lat": 52.783828459999995,
+        "lng": 13.386447899999999
+      },
+      "google": {
+        "lat": 52.7838644,
+        "lng": 13.3865073,
+        "place_id": "ChIJabrIkMCoqUcR6TwE3fudrko",
+        "address": "Alte Dorfstraße 99, 16515 Oranienburg-Zehlendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_kirche_germendorf_pfarrsprengel_oranienburg",
+      "name": "Kirche Germendorf - Pfarrsprengel Oranienburg",
+      "before": {
+        "lat": 52.74955296,
+        "lng": 13.17460734
+      },
+      "google": {
+        "lat": 52.7495889,
+        "lng": 13.1746667,
+        "place_id": "ChIJPyTA9uIHqUcRSoTwtbtNzhc",
+        "address": "Germendorfer Dorfstraße 60, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_trainings_park_calisthenics_park_berliner_weg",
+      "name": "Trainings Park - Calisthenics Park Berliner Weg",
+      "before": {
+        "lat": 52.75156846,
+        "lng": 13.371404340000002
+      },
+      "google": {
+        "lat": 52.7516044,
+        "lng": 13.3714637,
+        "place_id": "ChIJ68ifWYupqUcRuB930dtmQpo",
+        "address": "Teufelsseer Weg 2, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_borgsdorf_briesewanderweg",
+      "name": "Borgsdorf, Briesewanderweg",
+      "before": {
+        "lat": 52.73337136,
+        "lng": 13.36766176
+      },
+      "google": {
+        "lat": 52.7334073,
+        "lng": 13.3677211,
+        "place_id": "ChIJJ-qs3kSpqUcRSOHvDaPb8w8",
+        "address": "Briesesteig 1, 16515 Oranienburg-Wensickendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_adfc_ortsgruppe_oranienburg",
+      "name": "ADFC Ortsgruppe Oranienburg",
+      "before": {
+        "lat": 52.798404059999996,
+        "lng": 13.26681048
+      },
+      "google": {
+        "lat": 52.79844,
+        "lng": 13.2668699,
+        "place_id": "ChIJXSbxU0EHqUcRl1Zw_Guo7b4",
+        "address": "Dameswalder Weg 125, 16515 Oranienburg-Friedrichsthal"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_weinberg_muhlensee",
+      "name": "Weinberg Mühlensee",
+      "before": {
+        "lat": 52.71776156000001,
+        "lng": 13.08789788
+      },
+      "google": {
+        "lat": 52.7177975,
+        "lng": 13.0879572,
+        "place_id": "ChIJMW8-U7ADqUcRtlbFkJuh7vc",
+        "address": "16727, Weinbergweg, 16727 Oberkrämer"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_schleuse_pinnow",
+      "name": "Schleuse Pinnow",
+      "before": {
+        "lat": 52.71654876,
+        "lng": 13.23798998
+      },
+      "google": {
+        "lat": 52.7165847,
+        "lng": 13.2380493,
+        "place_id": "ChIJySh9Jr0AqUcRkye_GRRlv2A",
+        "address": "Pinnower Schleuse 11, 16515 Oranienburg-Lehnitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_mauerweg_nordpunkt",
+      "name": "Mauerweg Nordpunkt",
+      "before": {
+        "lat": 52.66212406,
+        "lng": 13.28534076
+      },
+      "google": {
+        "lat": 52.66216,
+        "lng": 13.2854,
+        "place_id": "ChIJg26h-t6qqUcRlXLpToUAQ34",
+        "address": "Stolper Str. 44, 16540 Hohen Neuendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "oranienburg_ferienhaus_am_alten_malzer_kanal",
+      "name": "Ferienhaus am Alten Malzer Kanal",
+      "before": {
+        "lat": 52.79759935999999,
+        "lng": 13.28876068
+      },
+      "google": {
+        "lat": 52.7976353,
+        "lng": 13.2888201,
+        "place_id": "ChIJd4RX7PQHqUcRa36kjGRRZp8",
+        "address": "Am Malzer Kanal 2, 16515 Oranienburg-Malz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_bernsteinsee_badesee",
+      "name": "Bernsteinsee (Badesee)",
+      "before": {
+        "lat": 52.69948985999999,
+        "lng": 13.224760400000003
+      },
+      "google": {
+        "lat": 52.6995258,
+        "lng": 13.2248197,
+        "place_id": "ChIJ1w4gdIkAqUcRCbo6CYAMoGs",
+        "address": "Am Bernsteinsee 1, 16727 Velten"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_wsc_lehnitz_e_v",
+      "name": "WSC Lehnitz e.V.",
+      "before": {
+        "lat": 52.74750196,
+        "lng": 13.263435140000002
+      },
+      "google": {
+        "lat": 52.7475379,
+        "lng": 13.2634945,
+        "place_id": "ChIJEXi0FVkHqUcR79E-FsXfP68",
+        "address": "Badeweg 2, 16515 Oranienburg-Lehnitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_hausboot_fahren",
+      "name": "Hausboot-fahren",
+      "before": {
+        "lat": 52.81849715999999,
+        "lng": 13.33106614
+      },
+      "google": {
+        "lat": 52.8185331,
+        "lng": 13.3311256,
+        "place_id": "ChIJzU0Hl0SnqUcRjMJWvO608No",
+        "address": "Bernöwe, 16515 Oranienburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "oranienburg_marktschwarmer_oranienburg_zehlendorf",
+      "name": "Marktschwärmer Oranienburg-Zehlendorf",
+      "before": {
+        "lat": 52.78044714,
+        "lng": 13.388634719999999
+      },
+      "google": {
+        "lat": 52.7804723,
+        "lng": 13.3886763,
+        "place_id": "ChIJeWp-BLKpqUcR_u0rBemuT8k",
+        "address": "Wensickendorfer Str. 13, 16515 Oranienburg-Zehlendorf"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    }
+  ]
+}

@@ -10,6 +10,24 @@ function readConfig(): { url: string; anonKey: string } {
 
 let client: SupabaseClient | null = null;
 
+/** AsyncStorage-Adapter für Session (Expo / RN), soft wenn Package fehlt. */
+function createAuthStorage():
+  | {
+      getItem: (key: string) => Promise<string | null>;
+      setItem: (key: string, value: string) => Promise<void>;
+      removeItem: (key: string) => Promise<void>;
+    }
+  | undefined {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const AsyncStorage = require('@react-native-async-storage/async-storage')
+      .default;
+    return AsyncStorage;
+  } catch {
+    return undefined;
+  }
+}
+
 export function getSupabase(): SupabaseClient | null {
   const { url, anonKey } = readConfig();
 
@@ -23,10 +41,22 @@ export function getSupabase(): SupabaseClient | null {
   }
 
   if (!client) {
+    const storage = createAuthStorage();
     client = createClient(url, anonKey, {
       auth: {
-        persistSession: false,
-        autoRefreshToken: false,
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: false,
+        ...(storage
+          ? {
+              storage: {
+                getItem: (key: string) => storage.getItem(key),
+                setItem: (key: string, value: string) =>
+                  storage.setItem(key, value),
+                removeItem: (key: string) => storage.removeItem(key),
+              },
+            }
+          : {}),
       },
     });
   }

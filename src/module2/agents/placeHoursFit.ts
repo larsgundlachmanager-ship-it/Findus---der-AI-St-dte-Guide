@@ -1,7 +1,4 @@
-/**
- * Place opening-hours fit for dining/catalog (UI/agent shared, no planning engine).
- */
-
+import { scoreSourceTrust } from '../../services/research/sourceTrust';
 import { closingTimeAllowsStay } from '../../services/concierge/closingHours';
 import type { DiscoveredPlace } from '../../services/navigation/googleMapsNav';
 
@@ -16,7 +13,26 @@ export type PlanVisitWindow = {
 export type PlaceHoursFields = Pick<
   DiscoveredPlace,
   'openNow' | 'opensAtMin' | 'closesAtMin'
->;
+> & {
+  /** 0–1 Quellen-Vertrauen (Google live > OSM > unbekannt) */
+  hoursTrust?: number | null;
+};
+
+/** Vertrauen für Place-Hours (gleiche Skala wie Events/Web). */
+export function scorePlaceHoursTrust(place: PlaceHoursFields): number {
+  const hasClock = place.opensAtMin != null || place.closesAtMin != null;
+  return scoreSourceTrust({
+    liveOpenNow: place.openNow,
+    hasTime: hasClock,
+    sourceHint: hasClock ? 'opening_hours maps/osm' : 'unknown',
+    confidence:
+      place.openNow != null && hasClock
+        ? 'high'
+        : place.openNow != null || hasClock
+          ? 'medium'
+          : 'low',
+  });
+}
 
 function minutesOfDay(ms: number): number {
   const d = new Date(ms);

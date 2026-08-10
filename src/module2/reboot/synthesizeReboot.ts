@@ -30,12 +30,14 @@ function buildSynthesisBlock(budget: number): string {
     live.active && live.askBeforeDeepResearch
       ? '\n- Live-Chat: keine ungefragte Deep-Web-Recherche — erst kurze Antwort, bei Bedarf Rückfrage/Button „Tiefer recherchieren“.\n'
       : '';
-  const maxChars = live.active && live.humanTone ? Math.min(budget, 420) : budget;
+  const maxChars = live.active && live.humanTone ? Math.min(budget, 280) : budget;
+  const bridgeBit = live.active
+    ? '- LIVE-CHAT: KEINE Bridge, kein Ack, kein Name am Satzanfang. Erster Satz = Antwort.\n'
+    : `${FINDUS_BRIDGE_CONTINUITY_BLOCK}\n`;
   return `=== REBOOT SYNTHESE (Call-2) ===
 Du bekommst User-Frage + FAKTEN (stilfrei). Schreibe EINE natürliche Antwort zum Vorlesen.
 ${FINDUS_ANSWER_FIRST_BLOCK}
-${FINDUS_BRIDGE_CONTINUITY_BLOCK}
-${FINDUS_REBOOT_MANAGER_THINK_AHEAD_BLOCK}
+${bridgeBit}${FINDUS_REBOOT_MANAGER_THINK_AHEAD_BLOCK}
 ${liveBlock}${deepAsk}- Nur belegte Fakten — nichts erfinden.
 - Buttons/Stichpunkte aus den mitgelieferten Actions/Bullets übernehmen oder knapp spiegeln.
 - Kein Meta (API/Agent/Pack/FAKTEN/FLOW/PACK-DATENSATZ). Keine zweite Bridge.
@@ -65,7 +67,13 @@ export function scrubRebootSpeech(
     .replace(
       /\b(gute frage|interessante frage|ich schau(e)? (mal|kurz)|lass mich (kurz )?schauen|ich recherchier(e)?)\b[,!.\s]*/giu,
       '',
-    );
+    )
+    .replace(
+      /\b(das\s+klingt\s+nach\s+(dem\s+)?(perfekten|guten|coolen)\s+plan|klingt\s+nach\s+einem?\s+perfekten\s+plan)\b[^.!?]*/giu,
+      '',
+    )
+    .replace(/^(moin|hallo|hi|hey)\s+[A-ZÄÖÜ][\w\-äöüÄÖÜß]{1,20}[,!.\s]+/iu, '')
+    .replace(/^(moin|hallo|hi|hey)[,!.\s]+/iu, '');
 
   if (opts.bridgeOneLiner) {
     // Typische Ack-Opener nicht nochmal
@@ -104,8 +112,12 @@ export async function synthesizeRebootTurn(opts: {
   };
 
   if (!hasGeminiApiKey()) {
+    const { fallbackSpeech } = await import('../../services/debug/fallbackLabel');
     return finalize(
-      humanizeAgentDraft(opts.fact.draftText, { maxChars: budget + 200 }),
+      fallbackSpeech(
+        'Synthese-ohne-Key',
+        humanizeAgentDraft(opts.fact.draftText, { maxChars: budget + 200 }),
+      ),
       opts.fact.bullets ?? [],
     );
   }
@@ -164,15 +176,23 @@ export async function synthesizeRebootTurn(opts: {
     const parsed = parseJson(raw);
     let speech = (parsed?.speech || '').trim();
     if (!speech) {
-      speech = humanizeAgentDraft(opts.fact.draftText, { maxChars: budget + 200 });
+      const { fallbackSpeech } = await import('../../services/debug/fallbackLabel');
+      speech = fallbackSpeech(
+        'Synthese-leer',
+        humanizeAgentDraft(opts.fact.draftText, { maxChars: budget + 200 }),
+      );
     }
     const bullets = parsed?.bullets?.length
       ? parsed.bullets
       : (opts.fact.bullets ?? []);
     return finalize(speech, bullets);
   } catch {
+    const { fallbackSpeech } = await import('../../services/debug/fallbackLabel');
     return finalize(
-      humanizeAgentDraft(opts.fact.draftText, { maxChars: budget + 200 }),
+      fallbackSpeech(
+        'Synthese-Fehler',
+        humanizeAgentDraft(opts.fact.draftText, { maxChars: budget + 200 }),
+      ),
       opts.fact.bullets ?? [],
     );
   }

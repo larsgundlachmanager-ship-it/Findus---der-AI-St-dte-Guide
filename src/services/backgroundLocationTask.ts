@@ -21,6 +21,10 @@ let liveHandler:
     }) => void)
   | null = null;
 
+/** Wetter im BG höchstens alle 25 Min neu planen (Regen-Push aktualisieren). */
+let lastWeatherBgMs = 0;
+const WEATHER_BG_MIN_MS = 25 * 60_000;
+
 export function setBackgroundLocationHandler(
   handler:
     | ((coords: {
@@ -41,11 +45,30 @@ if (!TaskManager.isTaskDefined(FINDUS_LOCATION_TASK)) {
     }
     const locs = (data as BgPayload | undefined)?.locations;
     const last = locs?.[locs.length - 1];
-    if (!last || !liveHandler) return;
-    liveHandler({
-      lat: last.coords.latitude,
-      lng: last.coords.longitude,
-      accuracy: last.coords.accuracy,
-    });
+    if (!last) return;
+
+    if (liveHandler) {
+      liveHandler({
+        lat: last.coords.latitude,
+        lng: last.coords.longitude,
+        accuracy: last.coords.accuracy,
+      });
+    }
+
+    const now = Date.now();
+    if (now - lastWeatherBgMs < WEATHER_BG_MIN_MS) return;
+    lastWeatherBgMs = now;
+    try {
+      const { runWeatherTrackerCheck } = await import(
+        './logistics/weatherTracker'
+      );
+      await runWeatherTrackerCheck({
+        force: true,
+        lat: last.coords.latitude,
+        lng: last.coords.longitude,
+      });
+    } catch (err) {
+      if (__DEV__) console.warn('[location] bg weather refresh failed', err);
+    }
   });
 }

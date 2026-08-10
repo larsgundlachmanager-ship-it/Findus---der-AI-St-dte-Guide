@@ -1,18 +1,47 @@
 /**
  * Smart Transit: konkrete Abfahrt + Verspätung + Gehzeit-Check + Nav-Angebot.
- * Live-Fahrplan via db.transport.rest (wenn erreichbar), sonst Takt-Schätzung.
+ * Live-Fahrplan: Transitous (GTFS-RT) → DB/HAFAS → Takt-Schätzung.
+ * Live-Pacing: Buffer = Dep_live − (now + ETA_walk).
  */
 
-import { getAllPois, haversineMeters } from '../../db/database';
+import { haversineMeters } from '../../db/database';
 import type { Poi } from '../../db/types';
 import { useFinnusStore } from '../../store/useFinnusStore';
 import { getCachedUserProfile } from '../userProfileService';
 import { resolvePersonaEngine } from '../personaEngine';
+import {
+  getPlanBikeMPerMin,
+  getPlanWalkMPerMin,
+} from '../mobility/paceProfile';
 import { env } from '../../config/env';
 import {
   findNearestStationPoi,
   shouldRouteToFerryAdvisor,
 } from './transportContext';
+import { fetchLiveDeparturesForCity } from './adapters';
+import {
+  resolveIbnrForCity,
+  resolveTransitousStopIdForCity,
+} from './stationRegistry';
+import {
+  evaluateLivePacing,
+  formatPacingSpeech,
+  runLivePacing,
+  type PacingResult,
+} from './livePacingEngine';
+import {
+  isCatchMyBusQuery,
+  scheduleCatchMyBusReminder,
+  getActiveCatchMyBusReminder,
+} from './catchMyBusReminder';
+import { resolveActiveTravelMode } from '../navigation/travelModeContext';
+import {
+  applyWalkEtaWeatherMultiplier,
+  type WeatherRoutingAdjustment,
+} from '../weather/weatherRouting';
+import { resolveWeatherRouting } from '../weatherService';
+import { scheduleTransitDepartureReminder } from '../notifications/notificationService';
+import { DEFAULT_SAFETY_BUFFER_MIN } from '../notifications/reminderMath';
 
 export type TransitDeparture = {
   line: string;
@@ -37,19 +66,61 @@ export type TransitAdvice = {
   walkMinutes: number;
   distanceM: number;
   departures: TransitDeparture[];
-  source: 'live' | 'takt';
+  source: 'live' | 'takt' | 'transitous' | 'journey';
   destinationHint: string | null;
+  pacing?: PacingResult | null;
+  /** Wetter-Routing (Starkregen → längere Gehzeit + Voice) */
+  weather?: WeatherRoutingAdjustment | null;
+  /** Door-to-door: Ankunft am Ziel */
+  arrivalWhen?: Date | null;
+  arrivalLabel?: string | null;
+  /** Gesamtminuten A→B wenn Journey */
+  journeyMinutes?: number | null;
+  /** true = Journey gecacht für Stempelkarte / ÖPNV starten */
+  hasJourneyNav?: boolean;
+  /** Zugang zum Bahnhof: nur „Rad“ sagen wenn wirklich Bike-Mode */
+  accessMode?: 'walk' | 'bike';
 };
 
 const TRANSIT_QUERY =
-  /\b(wann\s+fährt|wann\s+faehrt|nächste\s+(bahn|zug|bus|s-bahn|regionalbahn)|naechste\s+(bahn|zug|bus)|abfahrt|fahrplan|verbindung|welche\s+(bahn|zug|linie)|nächster\s+zug|naechster\s+zug|wie\s+komm(?:e|)\s+ich\s+nach|verspät|verspaet|pünktlich|puenktlich|hat\s+die\s+(bahn|zug)|fällt\s+aus|faellt\s+aus|ausfall|verspätung|verspaetung)\b/iu;
+  /\b(wann\s+fährt|wann\s+faehrt|nächste\s+(bahn|zug|bus|s-bahn|regionalbahn)|naechste\s+(bahn|zug|bus)|abfahrt|fahrplan|verbindung|welche\s+(bahn|zug|linie)|nächster\s+zug|naechster\s+zug|wie\s+komm(?:e|)\s+ich\s+(?:nach|zu|mit)\s+(?:dem\s+)?(?:zug|bahn|bus|öpnv|oepnv|s-bahn)|öpnv|oepnv|verspät|verspaet|pünktlich|puenktlich|hat\s+die\s+(bahn|zug)|fällt\s+aus|faellt\s+aus|ausfall|verspätung|verspaetung|wann\s+muss\s+ich\s+los|mit\s+(?:dem\s+)?(?:zug|bahn|bus)|fahrkarte|bahnticket)\b/iu;
 
-const DB_REST = 'https://v6.db.transport.rest';
-const FETCH_MS = 5_000;
+/** Explizite Fuß-/Rad-Nav zu Amenity → kein ÖPNV-Short-Circuit. */
+const AMENITY_NAV_RE =
+  /\b(?:navigier(?:e|en)?|bring\s+mich|führ\s+mich|fuehr\s+mich|geh(?:en)?\s+(?:wir\s+)?(?:hin\s+)?(?:zum|zur|nach)|route\s+zu(?:m|r)?|kannst\s+du\s+mich\s+(?:dahin|dort|zum|zur)|fahr\s+mich|lass\s+uns\s+(?:zum|zur))\b/iu;
 
-/** Bekannte Halte → IBNR für Live-Abfahrten. */
+const AMENITY_PLACE_RE =
+  /\b(tennis|club|café|cafe|bäck|baeck|restaurant|imbiss|supermarkt|apotheke|museum|hotel|park|strand|kneipe|bar|fitness|sport(?:platz|halle|zentrum)?|schwimm|schule|kirche|bibliothek|arzt|friseur)\b/iu;
+
+/**
+ * „Navigiere zum Tennisclub“ / „bring mich dahin“ — Modul 2 / Mobility, nicht Bahn-Takt.
+ */
+export function isAmenityNavIntent(text: string): boolean {
+  const t = text.trim();
+  if (!t) return false;
+  // Explizite ÖPNV-Wörter → Transit behalten
+  if (
+    /\b(zug|bahn|bus|s-bahn|öpnv|oepnv|regionalbahn|fahrplan|abfahrt|verbindung|haltestelle|bahnhof|haltepunkt|rb\s*\d+|u-bahn|tram|straße?nbahn)\b/iu.test(
+      t,
+    )
+  ) {
+    return false;
+  }
+  if (AMENITY_NAV_RE.test(t) && AMENITY_PLACE_RE.test(t)) return true;
+  // „kannst du mich dahin navigieren“ nach Ortsnennung im Kontext
+  if (
+    AMENITY_NAV_RE.test(t) &&
+    /\b(dahin|dort|hin|zum|zur|nach)\b/iu.test(t) &&
+    !/\b(pinneberg|hamburg|berlin|hbf|hauptbahnhof)\b/iu.test(t)
+  ) {
+    return true;
+  }
+  return false;
+}
+
+/** @deprecated IBNR kommt aus Pack _transit / stationRegistry */
 const STATION_IBNR: Record<string, string> = {
-  prisdorf: '8004878',
+  prisdorf: '8004888',
 };
 
 /** Fallback-Takt wenn Live ausfällt. */
@@ -75,10 +146,13 @@ const CITY_TAKT: Record<
   },
 };
 
-const WALK_M_PER_MIN = 80;
-const BIKE_M_PER_MIN = 220;
-/** Minuten Puffer: darunter = „schaffst du nicht stressfrei“. */
-const TIGHT_BUFFER_MIN = 2;
+/** Fallback = Default-Planungsgeschwindigkeit (~3,5 km/h), nicht Optimismus. */
+const WALK_M_PER_MIN_FALLBACK = 58;
+const BIKE_M_PER_MIN_FALLBACK = 220;
+/** Luftlinie → realer Fußweg (Umwege, Straßen) */
+const WALK_PATH_FACTOR = 1.45;
+/** Minuten Puffer über Gehzeit hinaus — darunter = sportlich / nächste Bahn. */
+const TIGHT_BUFFER_MIN = 5;
 
 export function isTransitQuery(text: string): boolean {
   const t = text.trim();
@@ -90,7 +164,9 @@ export function isTransitQuery(text: string): boolean {
   ) {
     return false;
   }
-  return TRANSIT_QUERY.test(t);
+  // Amenity-Nav (Tennisclub, Café, …) nie als ÖPNV short-circuiten
+  if (isAmenityNavIntent(t)) return false;
+  return TRANSIT_QUERY.test(t) || isCatchMyBusQuery(t);
 }
 
 /** Async-Variante: schließt standortbasierte Fähr-Fragen aus. */
@@ -123,25 +199,62 @@ function cityId(): string {
 
 function extractDestinationHint(text: string): string | null {
   const m = text.match(
-    /\b(?:nach|richtung|zu)\s+([A-ZÄÖÜa-zäöüß][\wäöüß\-]*(?:\s+[A-ZÄÖÜa-zäöüß][\wäöüß\-]*){0,2})/u,
+    /\b(?:nach|richtung|zu)\s+([A-ZÄÖÜa-zäöüß][\wäöüß\-]*(?:\s+[A-ZÄÖÜa-zäöüß][\wäöüß\-]*){0,3})/u,
   );
   if (!m?.[1]) return null;
   const dest = m[1]
-    .replace(/\s+(bitte|jetzt|mal|mit|der|die|das).*$/iu, '')
+    .replace(
+      /\s+(bitte|jetzt|mal|mit|der|die|das|einmal|rausuchen|raussuchen|nehmen|geht|fahren|fährt|faehrt).*$/iu,
+      '',
+    )
     .trim();
   if (dest.length < 3) return null;
   if (/^(bahnhof|haltepunkt|station|zug|bahn)\b/iu.test(dest)) return null;
-  return dest.slice(0, 40);
+  return dest.slice(0, 60);
+}
+
+/** Zielort genannt → door-to-door Journey, nicht nur Abfahrtstafel. */
+export function wantsDestinationJourney(text: string): boolean {
+  const hint = extractDestinationHint(text);
+  if (!hint) return false;
+  // „nächste Bahn nach X“ / „Verbindung nach X“ / Hbf
+  return (
+    /\b(nach|richtung)\b/iu.test(text) &&
+    (/\b(hauptbahnhof|hbf|bahnhof)\b/iu.test(text) ||
+      /\b(hamburg|berlin|münchen|muenchen|köln|koeln|bremen|kiel|lübeck|luebeck|pinneberg)\b/iu.test(
+        hint,
+      ) ||
+      hint.split(/\s+/).length >= 1)
+  );
 }
 
 async function findStationPoi(): Promise<Poi | null> {
   return findNearestStationPoi();
 }
 
-function walkMinutesForDistance(distanceM: number): number {
-  const mobility = resolvePersonaEngine(getCachedUserProfile()).mobilityMode;
-  const mpm = mobility === 'bike' ? BIKE_M_PER_MIN : WALK_M_PER_MIN;
-  return Math.max(1, Math.ceil(distanceM / mpm));
+function walkMinutesForDistance(
+  distanceM: number,
+  weather?: WeatherRoutingAdjustment | null,
+): { minutes: number; mode: 'walk' | 'bike' } {
+  const travel = resolveActiveTravelMode().mode;
+  const mobility =
+    travel === 'bike'
+      ? 'bike'
+      : resolvePersonaEngine(getCachedUserProfile()).mobilityMode;
+  const useBike = mobility === 'bike' || travel === 'bike';
+  let mpm: number;
+  try {
+    mpm = useBike ? getPlanBikeMPerMin() : getPlanWalkMPerMin();
+  } catch {
+    mpm = useBike ? BIKE_M_PER_MIN_FALLBACK : WALK_M_PER_MIN_FALLBACK;
+  }
+  // Haversine ist Luftlinie — Fußweg länger (Pfadfaktor); Rad etwas weniger
+  const pathM = distanceM * (useBike ? 1.2 : WALK_PATH_FACTOR);
+  const base = Math.max(1, Math.ceil(pathM / mpm));
+  const minutes = weather
+    ? applyWalkEtaWeatherMultiplier(base, weather.walkEtaMultiplier)
+    : base;
+  return { minutes, mode: useBike ? 'bike' : 'walk' };
 }
 
 function formatClock(d: Date): string {
@@ -152,27 +265,6 @@ function formatClock(d: Date): string {
 
 function minutesUntil(d: Date, now = new Date()): number {
   return Math.max(0, Math.round((d.getTime() - now.getTime()) / 60_000));
-}
-
-function parseIsoDate(value: string | null | undefined): Date | null {
-  if (!value) return null;
-  const d = new Date(value);
-  return Number.isNaN(d.getTime()) ? null : d;
-}
-
-/** Verspätung in Sekunden aus API-Feld oder Differenz when − plannedWhen. */
-function resolveDelaySec(
-  delay: number | null | undefined,
-  when: Date,
-  plannedWhen: Date | null,
-): number | null {
-  if (typeof delay === 'number' && Number.isFinite(delay)) {
-    return Math.round(delay);
-  }
-  if (plannedWhen) {
-    return Math.round((when.getTime() - plannedWhen.getTime()) / 1000);
-  }
-  return null;
 }
 
 function delayMinutes(delaySec: number | null): number | null {
@@ -186,8 +278,8 @@ export function formatDelayStatus(dep: TransitDeparture): string {
   const mins = delayMinutes(dep.delaySec);
   if (mins == null) return 'Verspätung unbekannt';
   if (mins <= 0) return 'pünktlich';
-  if (mins === 1) return '+1 Min';
-  return `+${mins} Min`;
+  if (mins === 1) return '+1 Minute';
+  return `+${mins} Minuten`;
 }
 
 function delaySpeechClause(dep: TransitDeparture): string {
@@ -202,7 +294,9 @@ function delaySpeechClause(dep: TransitDeparture): string {
     return 'Laut Live-Daten fährt sie pünktlich.';
   }
   const planned =
-    dep.plannedWhen != null ? `Plan war ${formatClock(dep.plannedWhen)} Uhr — ` : '';
+    dep.plannedWhen != null
+      ? `Plan war ${formatClock(dep.plannedWhen)} Uhr — `
+      : '';
   if (mins === 1) {
     return `${planned}aktuell eine Minute Verspätung.`;
   }
@@ -212,75 +306,33 @@ function delaySpeechClause(dep: TransitDeparture): string {
 async function fetchLiveDepartures(
   ibnr: string,
   destinationHint: string | null,
-): Promise<TransitDeparture[] | null> {
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), FETCH_MS);
-  try {
-    const url = `${DB_REST}/stops/${encodeURIComponent(ibnr)}/departures?duration=120&results=12&remarks=true`;
-    const res = await fetch(url, { signal: ctrl.signal });
-    if (!res.ok) return null;
-    const data = (await res.json()) as {
-      departures?: Array<{
-        when?: string | null;
-        plannedWhen?: string | null;
-        delay?: number | null;
-        cancelled?: boolean | null;
-        direction?: string;
-        line?: { name?: string; productName?: string };
-      }>;
-    };
-    const list = data.departures ?? [];
-    if (list.length === 0) return null;
-
-    const hint = destinationHint?.toLowerCase() ?? null;
-    const mapped: TransitDeparture[] = [];
-    for (const d of list) {
-      const cancelled = d.cancelled === true;
-      const plannedWhen = parseIsoDate(d.plannedWhen);
-      const when =
-        parseIsoDate(d.when) ??
-        (cancelled ? plannedWhen : null) ??
-        plannedWhen;
-      if (!when) continue;
-      // Ausfälle behalten; vergangene Abfahrten (ohne Ausfall) skippen
-      if (
-        !cancelled &&
-        when.getTime() < Date.now() - 60_000
-      ) {
-        continue;
-      }
-      const delaySec = cancelled
-        ? null
-        : resolveDelaySec(d.delay, when, plannedWhen);
-      const direction = (d.direction ?? '').trim() || 'unbekannt';
-      mapped.push({
-        line: (d.line?.name || d.line?.productName || 'Zug').trim(),
-        direction,
-        when,
-        plannedWhen,
-        delaySec,
-        cancelled,
-        planned: false,
-      });
-    }
-    if (mapped.length === 0) return null;
-
-    // Laufende Züge zuerst, Ausfälle ans Ende
-    mapped.sort((a, b) => {
-      if (a.cancelled !== b.cancelled) return a.cancelled ? 1 : -1;
-      if (hint) {
-        const ah = a.direction.toLowerCase().includes(hint) ? 0 : 1;
-        const bh = b.direction.toLowerCase().includes(hint) ? 0 : 1;
-        if (ah !== bh) return ah - bh;
-      }
-      return a.when.getTime() - b.when.getTime();
-    });
-    return mapped.slice(0, 6);
-  } catch {
-    return null;
-  } finally {
-    clearTimeout(timer);
-  }
+  city?: string,
+  station?: Poi | null,
+): Promise<{ deps: TransitDeparture[]; source: 'live' | 'transitous' } | null> {
+  const cityKey = city ?? cityId();
+  const live = await fetchLiveDeparturesForCity({
+    cityId: cityKey,
+    stopId: ibnr,
+    directionHint: destinationHint,
+    limit: 6,
+    stationLat: station?.lat,
+    stationLng: station?.lng,
+    stationName: station?.name,
+    transitousStopId: resolveTransitousStopIdForCity(cityKey),
+  });
+  if (!live?.departures?.length) return null;
+  return {
+    source: live.source === 'transitous' ? 'transitous' : 'live',
+    deps: live.departures.map((d) => ({
+      line: d.line,
+      direction: d.direction,
+      when: d.when,
+      plannedWhen: d.plannedWhen,
+      delaySec: d.delaySec,
+      cancelled: d.cancelled,
+      planned: d.planned,
+    })),
+  };
 }
 
 function buildTaktDepartures(
@@ -294,26 +346,40 @@ function buildTaktDepartures(
   const out: TransitDeparture[] = [];
 
   cfg.lines.forEach((line, lineIdx) => {
-    let dir = line.directions[0];
+    let dir = line.directions[0] ?? '—';
     if (hint) {
-      const match = line.directions.find(
-        (d) =>
-          d.toLowerCase().includes(hint) || hint.includes(d.toLowerCase()),
-      );
+      // Explizites Match zuerst (Hamburg vor Pinneberg!)
+      const ranked = [...line.directions].sort((a, b) => {
+        const score = (d: string) => {
+          const dl = d.toLowerCase();
+          if (hint.includes(dl) || dl.includes(hint.split(/\s+/)[0] ?? '')) {
+            return 2;
+          }
+          if (/hamburg/i.test(hint) && /hamburg/i.test(d)) return 3;
+          if (/pinneberg/i.test(hint) && /pinneberg/i.test(d)) return 3;
+          return 0;
+        };
+        return score(b) - score(a);
+      });
+      const match = ranked.find((d) => {
+        const dl = d.toLowerCase();
+        if (/hamburg/i.test(hint)) return /hamburg/i.test(d);
+        if (/pinneberg/i.test(hint)) return /pinneberg/i.test(d);
+        return (
+          dl.includes(hint) ||
+          hint.includes(dl) ||
+          hint.split(/\s+/).some((t) => t.length >= 4 && dl.includes(t))
+        );
+      });
       if (match) dir = match;
-      else if (/hamburg|pinneberg|tornesch/i.test(hint)) {
-        dir =
-          line.directions.find((d) =>
-            /hamburg|pinneberg|tornesch/i.test(d),
-          ) ?? dir;
-      }
     }
 
     const cadence = Math.max(15, line.cadenceMin);
     const offsetMin = lineIdx * Math.floor(cadence / 2);
     const base = new Date(now.getTime() + 3 * 60_000);
-    let minutes =
-      Math.ceil((base.getMinutes() - offsetMin) / cadence) * cadence + offsetMin;
+    const minutes =
+      Math.ceil((base.getMinutes() - offsetMin) / cadence) * cadence +
+      offsetMin;
     const first = new Date(base);
     first.setSeconds(0, 0);
     first.setMinutes(0);
@@ -351,32 +417,84 @@ export async function buildTransitAdvice(
   const store = useFinnusStore.getState();
   const lat = store.lastGpsLat;
   const lng = store.lastGpsLng;
+
+  const stationNamePreview = station.name
+    .replace(/\s*[·•|]\s*Wegweiser\s*$/i, '')
+    .replace(/\s+und\s+historisches.*$/i, '')
+    .trim();
+
+  const weather = await resolveWeatherRouting({
+    lat: lat ?? undefined,
+    lng: lng ?? undefined,
+    stationName: stationNamePreview,
+  });
+
   let distanceM = 0;
-  let walkMinutes = 8;
+  let walkMinutes = applyWalkEtaWeatherMultiplier(8, weather.walkEtaMultiplier);
+  let accessMode: 'walk' | 'bike' = 'walk';
   if (lat != null && lng != null) {
     distanceM = Math.round(haversineMeters(lat, lng, station.lat, station.lng));
-    walkMinutes = walkMinutesForDistance(distanceM);
+    const access = walkMinutesForDistance(distanceM, weather);
+    walkMinutes = access.minutes;
+    accessMode = access.mode;
   }
 
   const destinationHint = extractDestinationHint(text);
   const city = cityId();
-  const ibnr = STATION_IBNR[city];
-  let departures: TransitDeparture[] | null = null;
-  let source: 'live' | 'takt' = 'takt';
+  const ibnr = resolveIbnrForCity(city) || STATION_IBNR[city];
+  let departures: TransitDeparture[] = [];
+  let source: 'live' | 'takt' | 'transitous' | 'journey' = 'takt';
 
   if (ibnr) {
-    departures = await fetchLiveDepartures(ibnr, destinationHint);
-    if (departures?.length) source = 'live';
+    const live = await fetchLiveDepartures(
+      ibnr,
+      destinationHint,
+      city,
+      station,
+    );
+    if (live?.deps?.length) {
+      departures = live.deps;
+      source = live.source;
+    }
   }
-  if (!departures?.length) {
+  // Kein Takt-Erfinden, wenn User ein konkretes Ziel genannt hat
+  if (!departures.length && !destinationHint) {
     departures = buildTaktDepartures(city, destinationHint);
     source = 'takt';
   }
 
-  const stationName = station.name
-    .replace(/\s*[·•|]\s*Wegweiser\s*$/i, '')
-    .replace(/\s+und\s+historisches.*$/i, '')
-    .trim();
+  const stationName = stationNamePreview;
+
+  const firstRunnable =
+    departures.find((d) => !d.cancelled) ?? departures[0] ?? null;
+  let pacing: PacingResult | null = null;
+  if (firstRunnable && source !== 'takt') {
+    const { getNavPhase } = await import('../navigation/boardingDetector');
+    pacing = await runLivePacing({
+      departure: firstRunnable,
+      walkEtaMin: walkMinutes,
+      from: lat != null && lng != null ? { lat, lng } : null,
+      to: { lat: station.lat, lng: station.lng },
+      skipRebook: getNavPhase() === 'in_transit',
+    });
+  } else if (firstRunnable) {
+    const base = evaluateLivePacing({
+      departure: firstRunnable,
+      walkEtaMin: walkMinutes,
+    });
+    pacing = {
+      ...base,
+      speech: formatPacingSpeech(base),
+      nextConnection: null,
+    };
+  }
+
+  if (pacing && weather.isHeavyRain && weather.voiceAlert) {
+    pacing = {
+      ...pacing,
+      speech: `${pacing.speech} ${weather.voiceAlert}`,
+    };
+  }
 
   return {
     stationPoi: station,
@@ -386,16 +504,21 @@ export async function buildTransitAdvice(
     departures,
     source,
     destinationHint,
+    pacing,
+    weather,
+    accessMode,
   };
 }
 
 function navOfferClause(offerNavigation: boolean): string {
   if (!offerNavigation) return '';
-  return ' Soll ich dir den Kompass rüber zum Bahnhof anmachen?';
+  // Just-Do-It: Button startet Nav — keine Permission-Frage in der Speech
+  return ' Route zum Bahnhof liegt bereit.';
 }
 
 /**
  * Deterministische Kumpel-Antwort inkl. Verspätung, Gehzeit-Check + optional Nav-Angebot.
+ * Nutzt Live-Pacing-Szenarien (Entwarnung / Ansporn / Neu-Berechnung).
  */
 export function formatTransitReply(
   advice: TransitAdvice,
@@ -405,12 +528,85 @@ export function formatTransitReply(
   const runnable = advice.departures.filter((d) => !d.cancelled);
   const first = runnable[0] ?? advice.departures[0];
   const second = runnable[1] ?? advice.departures[1] ?? first;
+  const accessMode =
+    advice.accessMode ??
+    (resolveActiveTravelMode().mode === 'bike' ? 'bike' : 'walk');
+  const accessPhrase =
+    accessMode === 'bike'
+      ? `Du brauchst von hier aus etwa ${advice.walkMinutes} Minuten mit dem Rad`
+      : advice.distanceM > 0
+        ? `Du brauchst von hier aus gut ${advice.walkMinutes} Minuten zu Fuß`
+        : `Rechne mit etwa ${advice.walkMinutes} Minuten Fußweg zum Bahnhof`;
 
   if (!first) {
+    if (advice.destinationHint) {
+      return (
+        `Für ${advice.destinationHint} krieg ich gerade keine belegte Live-Verbindung vom ${advice.stationName}. ` +
+        `Kurz die Bahn-App oder den Aushang checken — ich erfinde keine Linie.` +
+        navOfferClause(offerNavigation)
+      );
+    }
     return (
-      `Am ${advice.stationName} habe ich gerade keinen Live-Fahrplan — prüfe die App der Bahn oder den Schalter vor Ort.` +
+      `Am ${advice.stationName} komm ich gerade nicht an aktuelle Abfahrten ran — am besten kurz die Bahn-App oder den Aushang vor Ort checken.` +
       navOfferClause(offerNavigation)
     );
+  }
+
+  // Door-to-door Journey: Abfahrt + Ankunft immer zu Ende erzählen
+  if (
+    advice.source === 'journey' &&
+    advice.arrivalWhen &&
+    advice.arrivalLabel
+  ) {
+    const untilFirst = minutesUntil(first.when, now);
+    const leaveIn = Math.max(0, untilFirst - advice.walkMinutes - TIGHT_BUFFER_MIN);
+    const tight = untilFirst < advice.walkMinutes + TIGHT_BUFFER_MIN;
+    const arrive = formatClock(advice.arrivalWhen);
+    const total =
+      advice.journeyMinutes != null
+        ? ` Gesamtfahrt ca. ${advice.journeyMinutes} Minuten.`
+        : '';
+    const delayClause = delaySpeechClause(first);
+    let body =
+      `Die nächste sinnvolle Verbindung nach ${advice.arrivalLabel}: ${first.line} ab ${advice.stationName} um ${formatClock(first.when)} Uhr` +
+      (first.direction ? ` Richtung ${first.direction}` : '') +
+      `. ` +
+      (delayClause ? `${delayClause} ` : '') +
+      `Ankunft gegen ${arrive} Uhr.${total} `;
+    if (tight && second && second.when.getTime() !== first.when.getTime()) {
+      body +=
+        `${accessPhrase} — das wird richtig sportlich. Wenn du sprinten willst, ok; sonst nimm die nächste um ${formatClock(second.when)} Uhr` +
+        (second.direction ? ` Richtung ${second.direction}` : '') +
+        `. `;
+    } else if (leaveIn <= 0) {
+      body += `${accessPhrase} — am besten jetzt los. `;
+    } else {
+      body += `${accessPhrase}. Du hast noch etwa ${leaveIn} Minuten, bis du los solltest — kein Stress. `;
+    }
+    return body.trim() + navOfferClause(offerNavigation);
+  }
+
+  // Live-Pacing hat Vorrang (Entwarnung / Zahn zulegen / verpasst)
+  if (
+    advice.pacing &&
+    (advice.pacing.scenario === 'relaxed' ||
+      advice.pacing.scenario === 'tight' ||
+      advice.pacing.scenario === 'missed')
+  ) {
+    // Pacing-Speech oft abgeschnitten — Ankunft/Ziel + Alternative anhängen
+    let speech = advice.pacing.speech.replace(/\s+/g, ' ').trim();
+    if (advice.destinationHint && !/ankunft|ankommen/i.test(speech)) {
+      speech += ` Richtung ${first.direction}.`;
+    }
+    if (
+      advice.pacing.scenario === 'tight' &&
+      second &&
+      second.when.getTime() !== first.when.getTime() &&
+      !/nächste|danach|sonst/i.test(speech)
+    ) {
+      speech += ` Sonst die ${second.line} um ${formatClock(second.when)} Uhr.`;
+    }
+    return speech + navOfferClause(offerNavigation);
   }
 
   if (first.cancelled) {
@@ -421,7 +617,7 @@ export function formatTransitReply(
         `Die nächste ${first.line} Richtung ${first.direction} fällt gerade aus. ` +
         `Danach kommt die ${next.line} um ${formatClock(next.when)} Uhr` +
         (nextDelay ? ` — ${nextDelay}` : '.') +
-        ` Du brauchst etwa ${advice.walkMinutes} Minuten zu Fuß.` +
+        ` ${accessPhrase}.` +
         navOfferClause(offerNavigation)
       );
     }
@@ -433,10 +629,10 @@ export function formatTransitReply(
 
   const untilFirst = minutesUntil(first.when, now);
   const tight = untilFirst < advice.walkMinutes + TIGHT_BUFFER_MIN;
-  const walkPhrase =
-    advice.distanceM > 0
-      ? `Du brauchst von hier aus aber gut ${advice.walkMinutes} Minuten zu Fuß`
-      : `Rechne mit etwa ${advice.walkMinutes} Minuten Fußweg zum Bahnhof`;
+  const weatherClause =
+    advice.weather?.isHeavyRain && advice.weather.voiceAlert
+      ? ` ${advice.weather.voiceAlert}`
+      : '';
 
   const line1 = first.line.replace(/\s+/g, ' ');
   const dir1 = first.direction;
@@ -444,7 +640,7 @@ export function formatTransitReply(
   const delayClause = delaySpeechClause(first);
   const liveGap =
     advice.source === 'takt'
-      ? ' Live-Verspätungen kann ich gerade nicht prüfen — das ist der übliche Takt.'
+      ? ' Live-Verspätungen fehlen gerade (DB/HAFAS nicht erreichbar) — das ist der übliche Takt, keine Live-Garantie.'
       : '';
 
   if (tight && second && second.when.getTime() !== first.when.getTime()) {
@@ -454,19 +650,25 @@ export function formatTransitReply(
     return (
       `Die nächste ${line1} Richtung ${dir1} fährt um ${t1} Uhr am ${advice.stationName} ab. ` +
       (delayClause ? `${delayClause} ` : '') +
-      `${walkPhrase} — die wäre also extrem knapp! ` +
+      `${accessPhrase} — die wäre also richtig sportlich! ` +
       `Mein Tipp: Nimm entspannt die ${line2} um ${t2} Uhr` +
       (delay2 ? ` (${delay2.replace(/\.$/, '')})` : '') +
       `. Dann hast du am Bahnsteig noch ein paar Minuten Puffer.` +
+      weatherClause +
       liveGap +
       navOfferClause(offerNavigation)
     );
   }
 
+  const leaveIn = Math.max(0, untilFirst - advice.walkMinutes - TIGHT_BUFFER_MIN);
   return (
     `Die nächste ${line1} Richtung ${dir1} fährt um ${t1} Uhr am ${advice.stationName} ab. ` +
     (delayClause ? `${delayClause} ` : '') +
-    `${walkPhrase.replace(' aber', '')} — das passt entspannt.` +
+    `${accessPhrase.replace(' aber', '')}` +
+    (leaveIn > 2
+      ? ` — du hast noch etwa ${leaveIn} Minuten, bis du los solltest.`
+      : ' — das passt entspannt.') +
+    weatherClause +
     liveGap +
     navOfferClause(offerNavigation)
   );
@@ -489,17 +691,29 @@ export function buildTransitPromptBlock(advice: TransitAdvice): string {
     .join('\n');
 
   const liveNote =
-    advice.source === 'live'
+    advice.source === 'live' || advice.source === 'transitous'
       ? 'Live-Abfahrten inkl. Verspätung/Ausfall — Status GENAU so sagen (pünktlich / +X Min / fällt aus).'
       : 'Nur üblicher Takt — KEINE Verspätung behaupten. Sag ehrlich, dass Live-Daten gerade fehlen.';
+
+  const pacingNote = advice.pacing
+    ? `Live-Pacing: Szenario=${advice.pacing.scenario}, Buffer=${advice.pacing.bufferMin} Min, Delay=${advice.pacing.delayMin ?? '—'} Min.`
+    : '';
 
   return `
 === ECHTE TRANSIT- & EMPFEHLUNGS-LOGIK (PFLICHT) ===
 Station: ${advice.stationName}
 Gehzeit vom Nutzer: ca. ${advice.walkMinutes} Minuten (${advice.distanceM > 0 ? `${advice.distanceM} m` : 'Distanz geschätzt'})
-Fahrplan-Quelle: ${advice.source === 'live' ? 'Live-Abfahrten' : 'üblicher Takt (RB61/RB71)'}
+Fahrplan-Quelle: ${
+    advice.source === 'transitous'
+      ? 'Transitous (GTFS-RT)'
+      : advice.source === 'live'
+        ? 'Live-Abfahrten (DB/HAFAS)'
+        : 'üblicher Takt (RB61/RB71)'
+  }
 ${liveNote}
+${pacingNote}
 ${advice.destinationHint ? `Ziel-Hinweis des Users: ${advice.destinationHint}` : ''}
+${advice.weather?.promptBlock ?? ''}
 
 Nächste Abfahrten (NUR DIESE Zeiten & Status nennen — nichts erfinden):
 ${rows}
@@ -508,10 +722,232 @@ Regeln:
 1. Nenne konkrete Linie + Uhrzeit + Richtung + Verspätungsstatus (wenn Live).
 2. Vergleiche Restzeit bis Abfahrt mit Gehzeit. Ist es knapp (< Gehzeit + 2 Min): sag klar, dass er die Bahn nicht stressfrei schafft, und empfehle die nächste.
 3. Bei Ausfall: klar sagen und nächste Alternative nennen.
-4. Schließe IMMER mit: „Soll ich dir den Kompass rüber zum Bahnhof anmachen?“
-5. Ton: hilfsbereiter Kumpel im Ohr — kein DB-App-Verweis als Ausweichmanöver.
-6. 3–5 Sätze, flüssig, kein Markdown.
+4. Bei Verspätung ≥ 3 Min Puffer: Entwarnung („entspannt laufen“).
+5. Schließe IMMER mit: „Route zum Bahnhof liegt bereit.“ (Button startet — nicht fragen)
+6. Ton: hilfsbereiter Kumpel im Ohr — kein DB-App-Verweis als Ausweichmanöver.
+7. Bei Starkregen: mehr Laufzeit + überdachten Weg erwähnen (siehe WETTER-ROUTING).
+8. 3–5 Sätze, flüssig, kein Markdown.
 `.trim();
+}
+
+/** Door-to-door Live-Journey für „Bahn nach X / Hamburg Hbf“. */
+async function tryDestinationJourneyAdvice(
+  text: string,
+): Promise<{
+  advice: TransitAdvice;
+  reply: string;
+  offerNavigation: boolean;
+} | null> {
+  const destHint = extractDestinationHint(text);
+  if (!destHint) return null;
+
+  const store = useFinnusStore.getState();
+  const lat = store.lastGpsLat;
+  const lng = store.lastGpsLng;
+  if (
+    lat == null ||
+    lng == null ||
+    !Number.isFinite(lat) ||
+    !Number.isFinite(lng)
+  ) {
+    return null;
+  }
+
+  const station = await findStationPoi();
+  if (!station) return null;
+
+  let destLat: number | null = null;
+  let destLng: number | null = null;
+  let destName = destHint;
+
+  try {
+    const { searchDbLocations } = await import('./dbRestJourneys');
+    const hits = await searchDbLocations(destHint, {
+      lat,
+      lng,
+      results: 8,
+    });
+    const preferred =
+      hits.find((h) => /hauptbahnhof|\bhbf\b/i.test(h.name)) ??
+      hits.find((h) =>
+        destHint
+          .toLowerCase()
+          .split(/\s+/)
+          .filter((t) => t.length >= 4)
+          .every((t) => h.name.toLowerCase().includes(t)),
+      ) ??
+      hits[0];
+    if (preferred) {
+      destLat = preferred.lat;
+      destLng = preferred.lng;
+      destName = preferred.name;
+    }
+  } catch {
+    /* geocode fallback */
+  }
+
+  if (destLat == null || destLng == null) {
+    try {
+      const { geocodePlaceName } = await import('../navigation/googleMapsNav');
+      const g = await geocodePlaceName(destHint, {
+        biasLat: lat,
+        biasLng: lng,
+      });
+      if (g) {
+        destLat = g.lat;
+        destLng = g.lng;
+        destName = g.label || destHint;
+      }
+    } catch {
+      return null;
+    }
+  }
+  if (destLat == null || destLng == null) return null;
+
+  if (haversineMeters(destLat, destLng, station.lat, station.lng) < 400) {
+    return null;
+  }
+
+  const { planJourney } = await import('./journeyPlanner');
+  const plan = await planJourney({
+    from: { lat, lng },
+    to: { lat: destLat, lng: destLng },
+    travelMode: 'transit',
+    numItineraries: 4,
+  });
+  if (!plan.itineraries.length) return null;
+
+  const now = Date.now();
+  const weather = await resolveWeatherRouting({
+    lat,
+    lng,
+    stationName: station.name,
+  });
+  const distanceM = Math.round(
+    haversineMeters(lat, lng, station.lat, station.lng),
+  );
+  const access = walkMinutesForDistance(distanceM, weather);
+
+  const scored = plan.itineraries
+    .map((it) => {
+      const dep = it.firstTransitDeparture ?? it.startTime;
+      const untilDep = (dep.getTime() - now) / 60_000;
+      const catchable = untilDep >= access.minutes + 1;
+      const last = it.legs[it.legs.length - 1];
+      const endDist =
+        last?.toLat != null && last?.toLng != null
+          ? haversineMeters(last.toLat, last.toLng, destLat!, destLng!)
+          : 0;
+      return { it, untilDep, catchable, endDist };
+    })
+    .filter((x) => x.endDist < 2_500)
+    .sort((a, b) => {
+      if (a.catchable !== b.catchable) return a.catchable ? -1 : 1;
+      return a.it.endTime.getTime() - b.it.endTime.getTime();
+    });
+
+  const best = scored[0]?.it;
+  const alt = scored[1]?.it ?? null;
+  if (!best) return null;
+
+  const { rememberJourneyForStart } = await import(
+    '../navigation/journeyStartCache'
+  );
+  rememberJourneyForStart({
+    itinerary: best,
+    destName,
+    destLat,
+    destLng,
+  });
+
+  const firstTransit = best.legs.find(
+    (l) => l.mode !== 'WALK' && l.mode !== 'BIKE',
+  );
+  const depWhen =
+    best.firstTransitDeparture ?? firstTransit?.startTime ?? best.startTime;
+  const line = best.firstTransitLine ?? firstTransit?.line ?? 'Bahn';
+  const direction =
+    firstTransit?.headsign?.trim() ||
+    firstTransit?.toName?.trim() ||
+    destName;
+
+  const departures: TransitDeparture[] = [
+    {
+      line,
+      direction,
+      when: depWhen,
+      plannedWhen: firstTransit?.scheduledStart ?? depWhen,
+      delaySec: best.firstTransitDelaySec,
+      cancelled: false,
+      planned: !firstTransit?.realTime,
+    },
+  ];
+  if (alt) {
+    const altTransit = alt.legs.find(
+      (l) => l.mode !== 'WALK' && l.mode !== 'BIKE',
+    );
+    const altDep =
+      alt.firstTransitDeparture ?? altTransit?.startTime ?? alt.startTime;
+    departures.push({
+      line: alt.firstTransitLine ?? altTransit?.line ?? 'Bahn',
+      direction:
+        altTransit?.headsign?.trim() ||
+        altTransit?.toName?.trim() ||
+        destName,
+      when: altDep,
+      plannedWhen: altTransit?.scheduledStart ?? altDep,
+      delaySec: alt.firstTransitDelaySec,
+      cancelled: false,
+      planned: !altTransit?.realTime,
+    });
+  }
+
+  const walkMin =
+    best.walkToStopSec != null
+      ? Math.max(1, Math.round(best.walkToStopSec / 60))
+      : access.minutes;
+
+  const advice: TransitAdvice = {
+    stationPoi: station,
+    stationName: station.name
+      .replace(/\s*[·•|]\s*Wegweiser\s*$/i, '')
+      .replace(/\s+und\s+historisches.*$/i, '')
+      .trim(),
+    walkMinutes: walkMin,
+    distanceM,
+    departures,
+    source: 'journey',
+    destinationHint: destHint,
+    weather,
+    accessMode: access.mode,
+    arrivalWhen: best.endTime,
+    arrivalLabel: destName,
+    journeyMinutes: Math.max(1, Math.round(best.durationSec / 60)),
+    hasJourneyNav: true,
+    pacing: null,
+  };
+
+  useFinnusStore.getState().setPendingNavOffer({
+    poiId: station.id,
+    name: station.name,
+    lat: destLat,
+    lng: destLng,
+  });
+
+  void scheduleTransitDepartureReminder({
+    departureMs: depWhen.getTime(),
+    walkEtaMinutes: walkMin,
+    line,
+    stationName: advice.stationName,
+    safetyBufferMin: DEFAULT_SAFETY_BUFFER_MIN,
+    reminderKey: `journey:${station.id}:${line}:${depWhen.getTime()}`,
+  }).catch(() => undefined);
+
+  return {
+    advice,
+    reply: formatTransitReply(advice, true),
+    offerNavigation: true,
+  };
 }
 
 export async function prepareTransitFollowUp(text: string): Promise<{
@@ -519,10 +955,61 @@ export async function prepareTransitFollowUp(text: string): Promise<{
   reply: string;
   offerNavigation: boolean;
 } | null> {
+  // Ziel genannt → Live door-to-door (Ankunft + echte Linie), kein Takt-Fantasie
+  if (wantsDestinationJourney(text)) {
+    const destJourney = await tryDestinationJourneyAdvice(text);
+    if (destJourney) return destJourney;
+  }
+
   const advice = await buildTransitAdvice(text);
   if (!advice) return null;
 
-  const offerNavigation = !isScheduleOnlyQuery(text);
+  const catchMyBus = isCatchMyBusQuery(text);
+  const offerNavigation = !isScheduleOnlyQuery(text) && !catchMyBus;
+
+  if (catchMyBus) {
+    const first =
+      advice.departures.find((d) => !d.cancelled) ?? advice.departures[0];
+    if (first) {
+      const { reminder, confirmSpeech } = scheduleCatchMyBusReminder({
+        departure: first,
+        walkEtaMin: advice.walkMinutes,
+        destinationHint: advice.destinationHint,
+        stationName: advice.stationName,
+        destLat: advice.stationPoi.lat,
+        destLng: advice.stationPoi.lng,
+      });
+      void reminder;
+      // Feed guardian with live status so cancel/delay triggers Plan B
+      try {
+        const { reportConnectionDisruption } = await import(
+          '../logistics/logisticsTriggerEngine'
+        );
+        const eventId = `catch-bus-${getActiveCatchMyBusReminder()?.id ?? ''}`;
+        if (first.cancelled) {
+          reportConnectionDisruption({
+            eventId,
+            status: 'cancelled',
+            note: `${first.line} fällt aus`,
+          });
+        } else if (first.delaySec != null && first.delaySec >= 180) {
+          reportConnectionDisruption({
+            eventId,
+            status: 'delayed',
+            delayMin: Math.round(first.delaySec / 60),
+            note: `${first.line} +${Math.round(first.delaySec / 60)} Min`,
+          });
+        }
+      } catch {
+        /* optional */
+      }
+      return {
+        advice,
+        reply: confirmSpeech,
+        offerNavigation: false,
+      };
+    }
+  }
 
   if (offerNavigation) {
     useFinnusStore.getState().setPendingNavOffer({
@@ -531,6 +1018,22 @@ export async function prepareTransitFollowUp(text: string): Promise<{
     });
   } else {
     useFinnusStore.getState().setPendingNavOffer(null);
+  }
+
+  // Auch bei normaler Abfahrtsfrage: OS-Push zum Leave-by planen
+  const firstRunnable =
+    advice.departures.find((d) => !d.cancelled) ?? advice.departures[0];
+  if (firstRunnable) {
+    void scheduleTransitDepartureReminder({
+      departureMs: firstRunnable.when.getTime(),
+      walkEtaMinutes: advice.walkMinutes,
+      line: firstRunnable.line,
+      stationName: advice.stationName,
+      safetyBufferMin: DEFAULT_SAFETY_BUFFER_MIN,
+      reminderKey: `${advice.stationPoi.id}:${firstRunnable.line}:${firstRunnable.when.getTime()}`,
+    }).catch((err) => {
+      console.warn('[transit] schedule reminder failed:', err);
+    });
   }
 
   return {

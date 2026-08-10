@@ -1,0 +1,263 @@
+{
+  "city_history": "UNESCO seit Juli 2015: Speicherstadt und Kontorhausviertel mit Chilehaus — funktionales Duo aus Lager- und Büroquartier des Handelsbooms. Speicherstadt ~1,1 km (1885–1927, Franz Andreas Meyer) auf ~3,5 Mio. Pfählen; Kontorhausviertel als erstes reines Büroquartier Europas (1920er–50er), Ikonen Chilehaus und Sprinkenhof. Maritime Erschließung u. a. über HADAG-Linie 62 (HVV AB) entlang Elbe Landungsbrücken→Finkenwerder.",
+  "notes": [
+    "Preise/Takte nur LIVE.",
+    "Dedup: Rathaus-U→Rathaus; Elphi-Aliase→Elbphilharmonie; Dammtorpark→Planten; Tropen-Aquarium als Sub/Linked zu Hagenbeck; Prisdorf nie.",
+    "Keine Dialog-Skripte."
+  ],
+  "offline_qa": [
+    {
+      "q": "HADAG Linie 62 — wohin und Takt?",
+      "a": "Hafenfähre Landungsbrücken Brücke 3 → Altona Fischmarkt → Dockland → Neumühlen/Övelgönne → Bubendey-Ufer → Finkenwerder (~30 Min.). Tagsüber oft 15-Min-Takt, Randzeiten 30 Min.; Sommer Wochenende mittags teils dichter. Voll in HVV AB. LIVE Fahrplan prüfen. Fahrradmitnahme kostenfrei berichtet.",
+      "tags": ["hadag", "ferry", "oepnv", "live"]
+    },
+    {
+      "q": "Wo ist der Anleger für HADAG 62?",
+      "a": "St. Pauli-Landungsbrücken, Brücke 3. Anschluss U3/S1/S3 und Museumsschiffe.",
+      "tags": ["hadag", "landungsbruecken"]
+    },
+    {
+      "q": "Öffentliche Toiletten zentral?",
+      "a": "Bericht: barrierefreie Anlagen u. a. an Landungsbrücken, Jungfernstieg, Hauptbahnhof sowie Speicherstadt-Bereich beim Deutschen Zollmuseum. LIVE Status prüfen. Viele Gastro/Shops nur mit Kaufbeleg.",
+      "tags": ["toiletten", "barrierefreiheit", "offline_qa"]
+    },
+    {
+      "q": "Elbufer-Radweg — Route?",
+      "a": "Zusammenhängende Route Landungsbrücken über Övelgönne bis Blankenese; kombinierbar mit kostenfreier Fahrradmitnahme auf HADAG-Fähren. LIVE Sperrungen prüfen.",
+      "tags": ["rad", "elbstrand", "hadag"]
+    },
+    {
+      "q": "Park and Ride Hamburg?",
+      "a": "P+R an äußeren Schnellbahnstationen im HVV-Bereich AB zur Entlastung der Innenstadt. LIVE Standorte/Tarife.",
+      "tags": ["pr", "auto", "oepnv"]
+    },
+    {
+      "q": "Deutschlandticket und Hamburg CARD?",
+      "a": "Hamburg CARD mit ÖPNV AB + Partner-Rabatte. Für D-Ticket-Inhaber gibt es berichtete Optionen ohne Nahverkehr / Upgrade-Kombi (z. B. Hafenliebe). LIVE aktuelle Angebote prüfen.",
+      "tags": ["ticket", "hamburg_card", "live"]
+    },
+    {
+      "q": "Was ist das UNESCO-Welterbe in Hamburg?",
+      "a": "Seit Juli 2015: Speicherstadt und Kontorhausviertel mit Chilehaus — größtes zusammenhängendes Speicherensemble plus erstes reines Büroquartier Europas.",
+      "tags": ["unesco", "speicherstadt"]
+    }
+  ],
+  "spots": [
+    {
+      "id": "hamburg_speicherstadt",
+      "name": "Speicherstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "UNESCO-Welterbe (Juli 2015) mit Kontorhausviertel/Chilehaus: größtes zusammenhängendes Speicherensemble der Welt, ca. 1,1 km zwischen Deichtorhallen und Baumwall. Erbaut 1885–1927 unter Franz Andreas Meyer auf ~3,5 Millionen Nadelholz-/Eichenpfählen (je ~12 m). Neugotische Backsteinarchitektur (Spitzbögen, Treppengiebel, Zinnen) mit Tragwerk-Evolution Holz→Gusseisen→Eisenbeton. Abends Illumination durch ca. 800 Scheinwerfer berichtet.",
+      "bullets": [
+        "Freihafen-Logik bis 2013; heute Kultur/UNESCO.",
+        "HHLA-„Rathaus der Speicherstadt“ St. Annen 1 (1902–04).",
+        "Wasserschloss am Holländischen Brook als historisch einziger Wohnort im Freihafen."
+      ],
+      "deep_data_pool": [
+        { "text": "Visuell: neugotischer Backsteingürtel über Fleeten zwischen Deichtor und Baumwall; nachts starke Illumination und Wasserspiegelung.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Bauzeit 1885–1927; Oberbauleitung Franz Andreas Meyer; Pfahlgründung ~3,5 Mio. Pfähle à ~12 m.", "tags": ["geschichte", "architektur"] },
+        { "text": "HHLA-Zentrale St. Annen 1 („Rathaus der Speicherstadt“), 1902–1904 Hanssen & Meerwein, Neorenaissance/Spätgotik.", "tags": ["architektur"] },
+        { "text": "Wasserschloss Holländischer Brook 1905–1907: historisch einziger bewohnbarer Ort im Freihafen; heute Teekontor/Gastronomie berichtet.", "tags": ["architektur", "quer"] },
+        { "text": "Quer: Kontorhausviertel/Chilehaus als administratives Pendant zum Lagerquartier; Zollmuseum und Speicherstadtmuseum als Inhaltsanker.", "tags": ["quer", "unesco"] },
+        { "text": "LIVE: öffentlicher Raum/Fleete jederzeit; Museen und Gastronomie Öffnung/Preise ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ],
+      "faqs": [
+        { "q": "Woran erkenne ich die Speicherstadt?", "a": "Am zusammenhängenden neugotischen Backstein-Speichergürtel über den Fleeten zwischen Deichtorhallen und Baumwall." }
+      ]
+    },
+    {
+      "id": "hamburg_chilehaus",
+      "name": "Chilehaus",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Ikone des Klinkerexpressionismus im UNESCO-Kontorhausviertel: 1922–1924 von Fritz Höger für Henry B. Sloman. Ostspitze wie Schiffsbug; ~4,8 Mio. Backsteine, ~2800 Fenster; Keramik-Plastiken Richard Kuöhl und Andenkondor. Zehngeschossiger Meilenstein der Backsteinarchitektur.",
+      "deep_data_pool": [
+        { "text": "Visuell: scharfe Ostspitze wie Schiffsnase an Pumpen/Burchardstraße; dunkler Klinkerzehngeschosser.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Bau 1922–1924 Fritz Höger; Auftraggeber Reeder Henry B. Sloman; ~4,8 Mio. Backsteine, ~2800 Fenster berichtet.", "tags": ["geschichte", "architektur"] },
+        { "text": "Skulpturen/Keramik Richard Kuöhl; Andenkondor-Motiv als Chile-Bezug berichtet.", "tags": ["kunst"] },
+        { "text": "Quer: mit Sprinkenhof und Meßberghof Kern des Kontorhausviertels; UNESCO seit 2015 mit Speicherstadt.", "tags": ["quer", "unesco"] },
+        { "text": "LIVE: Passagen/Höfe tagsüber oft passierbar — Zutritt ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ],
+      "faqs": [
+        { "q": "Woran erkenne ich das Chilehaus?", "a": "An der messerscharfen Klinker-Spitze wie ein Schiffsbug im Kontorhausviertel." }
+      ]
+    },
+    {
+      "id": "hamburg_sprinkenhof",
+      "name": "Sprinkenhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Größtes Kontorhaus des UNESCO-Viertels: drei Bauabschnitte 1927–1943 von Fritz Höger sowie Hans und Oskar Gerson. Drei Innenhöfe; Klinkerzierverbände; vergoldete Reliefmedaillons Ludwig Kunstmann berichtet. Ergänzt Chilehaus als Büro-Monument.",
+      "deep_data_pool": [
+        { "text": "Drei Innenhöfe; Klinkerzierverband; Kunstmann-Terrakotten/Reliefmedaillons berichtet.", "tags": ["architektur", "kunst"] },
+        { "text": "Bauabschnitte 1927–1943 Höger + Gerson-Brüder; zeitweise größter Bürokomplex Europas berichtet.", "tags": ["geschichte"] },
+        { "text": "Quer: Chilehaus und Meßberghof im selben UNESCO-Kontorhaus-Cluster.", "tags": ["quer", "unesco"] },
+        { "text": "LIVE: Innenhöfe/Passagen tagsüber oft frei passierbar.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "hamburg_wasserschloss_speicherstadt",
+      "name": "Wasserschloss Speicherstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "category": "denkmal",
+      "general_info": "Neugotisches Solitär am Holländischen Brook (1905–1907, Bernhard Georg Hanssen & Wilhelm Meerwein): historisch einziger bewohnbarer Ort im Freihafenbereich. Heute Teekontor mit Gastronomie berichtet.",
+      "deep_data_pool": [
+        { "text": "Visuell: freistehendes neugotisches Backstein-Solitär am Fleet / Holländischer Brook.", "tags": ["visuell", "wegweiser"] },
+        { "text": "1905–1907 Hanssen & Meerwein; einziger Wohnort im historischen Freihafen berichtet.", "tags": ["geschichte"] },
+        { "text": "LIVE: Gastronomie/Teekontor Öffnung ephemer.", "tags": ["live_hint", "ephemeral"] },
+        { "text": "Quer: Teil des UNESCO-Speicherstadt-Ensembles.", "tags": ["quer", "unesco"] }
+      ],
+      "faqs": [
+        { "q": "Woran erkenne ich das Wasserschloss?", "a": "Am freistehenden neugotischen Backsteinbau mitten in den Fleeten der Speicherstadt." }
+      ]
+    },
+    {
+      "id": "hamburg_museum_fur_kunst_und_gewerbe_hamburg_mk_g",
+      "name": "Museum für Kunst und Gewerbe Hamburg (MK&G)",
+      "deep_data_pool": [
+        { "text": "LIVE 2026: Eintritt und Sonderaktionen (Happy Holidays, Letzte Runde, 1. Do Abend frei, HH CARD) ephemer prüfen; Freiraum/Shop/Bibliothek oft ohne Ticket; Shylight-Installation Wartungsfenster 2026 berichtet.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "hamburg_markk_museum_am_rothenbaum",
+      "name": "MARKK Museum am Rothenbaum",
+      "deep_data_pool": [
+        { "text": "LIVE 2026: Do bis 21 Uhr, ab 16 Uhr oft frei; unter 18 und Ethnologie-Studierende Uni HH frei berichtet — Status ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "hamburg_hamburger_kunsthalle",
+      "name": "Hamburger Kunsthalle",
+      "deep_data_pool": [
+        { "text": "LIVE 2026: Eintritt/Flexticket/Kombi Michel/1. Do Abend frei/Audioguide App oder Leihgerät — Preise ephemer prüfen.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "hamburg_deutsches_zollmuseum",
+      "name": "Deutsches Zollmuseum",
+      "deep_data_pool": [
+        { "text": "LIVE: Eintritt niedrig, unter 18 frei, Di–So; öffentliche Toiletten-Nähe im Speicherstadt-Bereich berichtet.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "hamburg_panoptikum",
+      "name": "Panoptikum",
+      "deep_data_pool": [
+        { "text": "LIVE: Eintritt Erwachsene/Kinder/Senioren/Studenten; HH CARD Rabatt; Audioguide oft inkl. — ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "hamburg_tierpark_hagenbeck",
+      "name": "Tierpark Hagenbeck",
+      "deep_data_pool": [
+        { "text": "LIVE: getrennte und Kombi-Tickets Tierpark/Tropen-Aquarium; Fütterungszeiten Krokodile/Haie rotierend; Hunde nicht gestattet — ephemer prüfen.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "hamburg_tropen_aquarium_beim_tierpark_hagenbeck",
+      "name": "Tropen-Aquarium beim Tierpark Hagenbeck",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Eigenständiges Untermodul des Tierparks Hagenbeck mit separater Kasse/Ticketstruktur. LIVE Kombi- oder Einzeltickets; Fütterungen Haie/Krokodile nach Wochentag.",
+      "deep_data_pool": [
+        { "text": "Als Submodul zu Hagenbeck führen: separate Kassen, Kombi-Tickets möglich.", "tags": ["policy", "dedup"] },
+        { "text": "LIVE: Eintritt Aquarium und Kombi mit Tierpark; Öffnung ganzjährig berichtet — ephemer.", "tags": ["live_hint", "ephemeral"] },
+        { "text": "Quer: Carl Hagenbeck / Panorama-Gehege-Idee im angrenzenden Tierpark.", "tags": ["quer"] }
+      ]
+    },
+    {
+      "id": "hamburg_hadag_seetouristik_und_fahrdienst_ag",
+      "name": "HADAG Seetouristik und Fährdienst AG",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "general_info": "HADAG-Hafenfähren im HVV-Tarif AB. Rückgrat Elbe: Linie 62 Landungsbrücken Brücke 3 → Finkenwerder über Fischmarkt, Dockland, Övelgönne, Bubendey-Ufer. Fahrradmitnahme kostenfrei berichtet.",
+      "deep_data_pool": [
+        { "text": "Linie 62: Start Landungsbrücken Brücke 3; Endstation Finkenwerder (~30 Min.); Umstieg 64 Teufelsbrück möglich.", "tags": ["transit"] },
+        { "text": "LIVE: Takt Mo–Fr tags 15 Min., Rand 30 Min.; Sommer Wochenende mittags teils ~10 Min. — Fahrplan ephemer.", "tags": ["live_hint", "ephemeral"] },
+        { "text": "Quer: erschließt Fischmarkt, Museumshafen Övelgönne, Elbstrand, Containerblick Bubendey, Finkenwerder/Airbus-Radwege.", "tags": ["quer"] }
+      ]
+    },
+    {
+      "id": "hamburg_sandtorpark",
+      "name": "Sandtorpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "HafenCity-Nachbarraum der Elbphilharmonie: Sandtorhafen/Traditionsschiff-Pontons als Liegeplätze für historische Wasserfahrzeuge und Gastronomie mit Sichtachse zur Elphi.",
+      "deep_data_pool": [
+        { "text": "Visuell: Pontonanlagen und Traditionsschiffe nahe Elbphilharmonie/Sandtorhafen.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Quer: Plaza/Elbphilharmonie und Kehrwiederspitze/Speicherstadt-Sichtachsen.", "tags": ["quer"] },
+        { "text": "LIVE: Gastronomie auf Pontons (Öffnung) ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "hamburg_planten_un_blomen",
+      "name": "Planten un Blomen",
+      "deep_data_pool": [
+        { "text": "Dammtorpark ist Teilbereich/Ensemble-Duplikat von Planten un Blomen — kanonisch hier führen.", "tags": ["dedup", "policy"] }
+      ]
+    }
+  ],
+  "new_places": [
+    {
+      "name": "Meßberghof",
+      "lat": 53.5482,
+      "lng": 10.0012,
+      "place_tier": 2,
+      "pack_role": "story",
+      "category": "denkmal",
+      "district": "Kontorhausviertel",
+      "tags": ["unesco", "kontorhaus", "deep_research_merged", "story"],
+      "general_info": "Kontorhaus am Meßberg (ehemals Ballinhaus), 1923–1924 von Hans und Oskar Gerson. Frühes Kontorhaus mit repräsentativem Travertin-Treppenhaus; Teil des UNESCO-Kontorhausviertels neben Chilehaus und Sprinkenhof.",
+      "deep_data_pool": [
+        { "text": "Visuell: Kontorhaus-Block am Meßberg im Klinkerviertel östlich Chilehaus.", "tags": ["visuell", "wegweiser"] },
+        { "text": "1923–1924 Hans & Oskar Gerson; früher Name Ballinhaus; Travertin-Treppenhaus berichtet.", "tags": ["geschichte", "architektur"] },
+        { "text": "Quer: Chilehaus/Sprinkenhof/Montanhof/Mohlenhof als Kontorhaus-Cluster.", "tags": ["quer", "unesco"] },
+        { "text": "LIVE: Bürohaus; Passagen tagsüber oft einsehbar — Zutritt ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ],
+      "faqs": [
+        { "q": "Woran erkenne ich den Meßberghof?", "a": "Am Kontorhaus-Block am Meßberg im UNESCO-Kontorhausviertel, nahe Chilehaus." }
+      ]
+    },
+    {
+      "name": "Dockland",
+      "lat": 53.5438,
+      "lng": 9.9365,
+      "place_tier": 2,
+      "pack_role": "story",
+      "category": "aussicht",
+      "district": "Altona",
+      "tags": ["aussicht", "hafen", "deep_research_merged", "story"],
+      "general_info": "Parallelogramm-Bürogebäude am Fischereihafen mit öffentlich zugänglicher Aussichtsplattform. HADAG-62-Halt Dockland (Fischereihafen) zwischen Fischmarkt und Övelgönne.",
+      "deep_data_pool": [
+        { "text": "Visuell: schräges Parallelogramm-Gebäude am Elbufer mit Dach-Aussicht.", "tags": ["visuell", "wegweiser"] },
+        { "text": "HADAG 62 Halt Dockland; Elbufer-Radweg-Anschluss.", "tags": ["transit"] },
+        { "text": "LIVE: Aussichtsdach öffentlich — Öffnungsstatus ephemer prüfen.", "tags": ["live_hint", "ephemeral"] },
+        { "text": "Quer: Fischmarkt und Museumshafen Övelgönne entlang Linie 62.", "tags": ["quer"] }
+      ],
+      "faqs": [
+        { "q": "Woran erkenne ich Dockland?", "a": "Am schrägen Parallelogramm-Bürohaus am Fischereihafen mit Aussichtsdach über der Elbe." }
+      ]
+    },
+    {
+      "name": "Traditionsschiffhafen HafenCity",
+      "lat": 53.5428,
+      "lng": 9.9865,
+      "place_tier": 2,
+      "pack_role": "story",
+      "category": "hafen",
+      "district": "HafenCity",
+      "tags": ["hafencity", "deep_research_merged", "story"],
+      "general_info": "Pontonanlagen in der HafenCity nahe Elbphilharmonie: Liegeplätze für historische Wasserfahrzeuge und Gastronomie mit Sichtachse zur Plaza/Elphi. Ergänzt Sandtorhafen als maritimen Nachbarort.",
+      "deep_data_pool": [
+        { "text": "Visuell: Traditionsschiffe und Pontons mit Blick auf Elbphilharmonie.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Quer: Elbphilharmonie Plaza und Sandtorhafen.", "tags": ["quer"] },
+        { "text": "LIVE: Gastronomie/Zugang Pontons ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ],
+      "faqs": [
+        { "q": "Woran erkenne ich den Traditionsschiffhafen?", "a": "An den Pontons mit historischen Schiffen direkt bei der Elbphilharmonie in der HafenCity." }
+      ]
+    }
+  ]
+}

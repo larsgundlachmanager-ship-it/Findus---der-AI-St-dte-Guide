@@ -98,6 +98,7 @@ export function presentToUi(
           payload: {
             url: p.url,
             destName: p.destName?.trim() || undefined,
+            entityName: p.destName?.trim() || undefined,
           },
         };
       }
@@ -134,6 +135,13 @@ export function presentToUi(
               (data.destination as string) ??
               (data.city as string) ??
               (data.dest as string),
+            ...(typeof data.checkin === 'string'
+              ? { checkin: data.checkin }
+              : {}),
+            ...(typeof data.checkout === 'string'
+              ? { checkout: data.checkout }
+              : {}),
+            ...(typeof data.adults === 'number' ? { adults: data.adults } : {}),
           },
         };
       }
@@ -175,7 +183,7 @@ export function presentToUi(
         id: cardId,
         createdAtMs: Date.now(),
         speechText: speech,
-        visualBullets: clampVisualBullets(bullets),
+        visualBullets: clampVisualBullets(bullets, { speechText: speech }),
         quickActions: finalActions,
         cardTitle: 'Findus',
       });
@@ -187,7 +195,7 @@ export function presentToUi(
         id: cardId,
         createdAtMs: Date.now(),
         speechText: speech,
-        visualBullets: clampVisualBullets(bullets),
+        visualBullets: clampVisualBullets(bullets, { speechText: speech }),
         quickActions: finalActions,
         cardTitle: 'Findus',
       });

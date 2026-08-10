@@ -1,0 +1,215 @@
+{
+  "city_history": "Werder (Havel): Inselstadt mit Obstplantagen und Baumblütenfest — Havelnaher Kurort südlich von Potsdam.",
+  "notes": [
+    "Wave A — verified facts, LIVE ephemeral, no dialog scripts."
+  ],
+  "offline_qa": [],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "werder_insel_werder",
+      "name": "Insel Werder",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Inselstadt Werder (Havel): historische Kernstadt auf einer Havelinsel — Plantagen, Markt und Baumblütenfest.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: enge Gassen, Backsteinfassaden, Obstplantagen und Havelufer — Inselcharakter mit Brücken und Fähren.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Werder liegt an der Einmündung der Glindowsee-Kette in die Havel; Insel seit Mittelalter besiedelt (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Baumblütenfest seit 1879 — eines der ältesten Feste Deutschlands; Hauptsaison Ende April/Anfang Mai (Kirschblüte).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Plantagen prägen Stadt und Wirtschaft; Werder ist traditionelles Obstanbaugebiet Brandenburgs.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Marktplatz und historische Altstadt mit Cafés; Fußgängerzonen auf der Insel.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Heilig-Geist-Kirche und Inselsteg; Anlegestellen für Havel-Schifffahrt nach Potsdam und Berlin.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Die Havel-Insel ist durch Straßenbrücken und Fähren erreichbar — Inselcharakter bleibt durch Uferzonen spürbar.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Plantagenwirtschaft liefert Kirschen, Steinobst und Most — lokale Produkte auf Märkten.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Baumblütenfest zieht sechsstellige Besucherzahlen an — ÖPNV-Verstärkung an Festwochenenden.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Historische Bürgerhäuser am Markt und in Seitenstraßen — teils denkmalgeschützt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Glindowsee und Phöben als Nachbarorte — Wasserwanderung rund um Werder möglich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Historische Werft- und Hafentradition an der Havel — heute Freizeitboote.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "werder_heilig_geist_kirche",
+      "name": "Heilig-Geist-Kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Heilig-Geist-Kirche Werder: Backsteinkirche der Inselstadt — prägendes Sakralbauwerk nahe Markt und Havel.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Backsteingotik mit Turm, nahe Markt und Ufer — Orientierungspunkt in der Altstadt.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Evangelische Gemeinde Werder/Havel; historischer Kernbau mit späteren Ergänzungen (Wikipedia/Kirchenführer).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Baumblütenfest und Plantagenrundgänge starten oft in der Altstadt um die Kirche.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Backsteinbau prägt das Stadtbild; Turm dient als Navigationspunkt auf der Insel.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Gemeindegeschichte reicht ins Mittelalter; Innenausstattung mit historischen Epitaphen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Kirchenführungen nach Vereinbarung — gotische Fensterformen und Backsteinfassade.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "werder_werder_havel_markt",
+      "name": "Werder (Havel), Markt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Markt Werder (Havel): Zentrum der Inselstadt mit Rathaus-Umfeld, Cafés und Obstverkauf — soziales Herz Werders.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Platz mit Rathaus-Fassade, Gastronomie, Marktständen — besonders während Baumblütenfest.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Historischer Marktplatz der Inselstadt; Verbindung zu Plantagen und Havelpromenade.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Heilig-Geist-Kirche und Schiffsanleger fußläufig.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Rathaus und Markt bilden politisches Zentrum der Inselstadt — Veranstaltungen bei Baumblütenfest.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Cafés mit Blick auf Markt und Plantagen — saisonale Obstkuchen-Klassiker.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Wochenmarkt und Obststände — saisonal mit Werderaner Kirschen und Most.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    }
+  ],
+  "new_places": []
+}

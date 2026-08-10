@@ -1,6 +1,6 @@
 ---
 description: Complete AGI Rulebook for Findus (190+ Laws for Logic, Audio, UI, Spatial, Affiliate, Planning)
-globs: ["src/runtime/questionsModule.ts", "src/services/geminiService.ts", "src/components/**/*.tsx", "src/db/database.ts", "src/runtime/orchestrator.ts"]
+globs: ["src/services/geminiService.ts", "src/components/**/*.tsx", "src/db/database.ts", "src/runtime/orchestrator.ts"]
 ---
 
 # FINDUS AGI CONCIERGE – VOLLSTÄNDIGES GESETZBUCH

@@ -1,0 +1,1833 @@
+{
+  "city_id": "wangerooge",
+  "apply": false,
+  "maxDelta": 80,
+  "summary": {
+    "ok": 100,
+    "check": 3,
+    "bad": 4,
+    "errors": 0,
+    "applied": 0
+  },
+  "rows": [
+    {
+      "id": "wangerooge_cafe_pudding",
+      "name": "Café Pudding",
+      "before": {
+        "lat": 53.7932481223083,
+        "lng": 7.900001948713656
+      },
+      "google": {
+        "lat": 53.7931709,
+        "lng": 7.899998200000001,
+        "place_id": "ChIJbQ1pS2-AtkcRcIkKiHqD1kk",
+        "address": "Zedeliusstraße 49, 26486 Wangerooge"
+      },
+      "delta_m": 9,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wangerooge_db_bahnhof_wangerooge",
+      "name": "Inselbahnhof Wangerooge",
+      "before": {
+        "lat": 53.78792926,
+        "lng": 7.898642220000001
+      },
+      "google": {
+        "lat": 53.7878971,
+        "lng": 7.899437199999999,
+        "place_id": "ChIJY7TNomaAtkcRPUWoT1iXQq8",
+        "address": "Bahnhofstraße, 26486 Wangerooge"
+      },
+      "delta_m": 52,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_inselmuseum_alter_leuchtturm",
+      "name": "Alter Leuchtturm (Inselmuseum & Standesamt)",
+      "before": {
+        "lat": 53.78875048,
+        "lng": 7.89918672
+      },
+      "google": {
+        "lat": 53.7887936,
+        "lng": 7.8992597,
+        "place_id": "ChIJM70wg2aAtkcR5gZeCPEh99Y",
+        "address": "Zedeliusstraße 3, 26486 Wangerooge"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_westturm",
+      "name": "Westturm",
+      "before": {
+        "lat": 53.784669179999995,
+        "lng": 7.8574543199999995
+      },
+      "google": {
+        "lat": 53.7847123,
+        "lng": 7.857527299999999,
+        "place_id": "ChIJ0ZcyJs1_tkcRj2f3K_ZOhW8",
+        "address": "Str. Zum Westen 27, 26486 Wangerooge-Westen"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_fahranleger_wangerooge",
+      "name": "Fähranleger Wangerooge",
+      "before": {
+        "lat": 53.77466408,
+        "lng": 7.867105560000001
+      },
+      "google": {
+        "lat": 53.77471079999999,
+        "lng": 7.867184600000001,
+        "place_id": "ChIJlVbz36F_tkcRaijkc_-3WxE",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_nationalpark_haus_wangerooge",
+      "name": "Nationalpark-Haus „Rosenhaus“",
+      "before": {
+        "lat": 53.790608279999994,
+        "lng": 7.901655100000001
+      },
+      "google": {
+        "lat": 53.79065139999999,
+        "lng": 7.9017281,
+        "place_id": "ChIJJ2NVR2aAtkcRXI9PwyjyHQI",
+        "address": "Friedrich-August-Straße 18, 26486 Wangerooge"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_bistro_am_strand_wangerooge",
+      "name": "Bistro am Strand Wangerooge",
+      "before": {
+        "lat": 53.79312365999999,
+        "lng": 7.899251100000001
+      },
+      "google": {
+        "lat": 53.793156,
+        "lng": 7.899464000000001,
+        "place_id": "ChIJFWPt2mWAtkcRvXpGjGenV4I",
+        "address": "Ob. Strandpromenade 19, 26486 Wangerooge"
+      },
+      "delta_m": 14,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_neuer_leuchtturm_wangerooge",
+      "name": "Neuer Leuchtturm Wangerooge",
+      "before": {
+        "lat": 53.79006478,
+        "lng": 7.8571033
+      },
+      "google": {
+        "lat": 53.7901079,
+        "lng": 7.8571763,
+        "place_id": "ChIJiyQvmM5_tkcRpzZBLqdeTmA",
+        "address": "Str. Zum Westen, 26486 Wangerooge"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_nikolai_kirche_evangelisch_lutherische_kirchenge",
+      "name": "Nikolai-Kirche - Evangelisch-lutherische Kirchengemeinde Wangerooge",
+      "before": {
+        "lat": 53.788735579999994,
+        "lng": 7.900125319999999
+      },
+      "google": {
+        "lat": 53.78877869999999,
+        "lng": 7.9001983,
+        "place_id": "ChIJx8LMIF6BtkcRikpK1VkjHJ8",
+        "address": "Dorfpl. 32, 26486 Wangerooge"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_djh_bistro_westturm",
+      "name": "DJH-Bistro Westturm",
+      "before": {
+        "lat": 53.78450356,
+        "lng": 7.85784274
+      },
+      "google": {
+        "lat": 53.7845323,
+        "lng": 7.857891400000001,
+        "place_id": "ChIJ8aPuUqB_tkcRimWXakOidTY",
+        "address": "Str. Zum Westen 38, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wangerooge_haus_am_alten_leuchtturm",
+      "name": "Haus Am Alten Leuchtturm",
+      "before": {
+        "lat": 53.78914388,
+        "lng": 7.89776002
+      },
+      "google": {
+        "lat": 53.789187,
+        "lng": 7.897833,
+        "place_id": "ChIJM70wg2aAtkcR0yT7xNprbag",
+        "address": "Schulstraße 5, 26486 Wangerooge"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_dorfplatz",
+      "name": "Dorfplatz",
+      "before": {
+        "lat": 53.78954808000001,
+        "lng": 7.899986920000001
+      },
+      "google": {
+        "lat": 53.7895948,
+        "lng": 7.900066,
+        "place_id": "ChIJVVUVY2aAtkcRrPhM1K4AQ4k",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_obere_strandpromenade",
+      "name": "Obere Strandpromenade",
+      "before": {
+        "lat": 53.79326786,
+        "lng": 7.9004379
+      },
+      "google": {
+        "lat": 53.7933002,
+        "lng": 7.9006508,
+        "place_id": "ChIJESCZt2iAtkcRz7jrT-y_f2o",
+        "address": "Ob. Strandpromenade, 26486 Wangerooge"
+      },
+      "delta_m": 14,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_restaurant_friesenjung",
+      "name": "Restaurant Friesenjung",
+      "before": {
+        "lat": 53.79324666,
+        "lng": 7.898202039999999
+      },
+      "google": {
+        "lat": 53.7932754,
+        "lng": 7.898250699999999,
+        "place_id": "ChIJwwuybW-AtkcRLk9w1F3qAKQ",
+        "address": "Ob. Strandpromenade 5, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_digger_s_strandbar",
+      "name": "Digger´s Strandbar",
+      "before": {
+        "lat": 53.79345236,
+        "lng": 7.8962819
+      },
+      "google": {
+        "lat": 53.7934847,
+        "lng": 7.8964948,
+        "place_id": "ChIJE0obcW-AtkcR76vlEKdvS4k",
+        "address": "Ob. Strandpromenade 3, 26486 Wangerooge"
+      },
+      "delta_m": 14,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_restaurant_unser_boot",
+      "name": "Restaurant \"Unser Boot\"",
+      "before": {
+        "lat": 53.79038216,
+        "lng": 7.899021639999999
+      },
+      "google": {
+        "lat": 53.7904109,
+        "lng": 7.899070299999999,
+        "place_id": "ChIJMebM2GWAtkcR_5SCed9zTIU",
+        "address": "Zedeliusstraße 21, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_griechisches_restaurant_kreta",
+      "name": "Griechisches Restaurant Kreta",
+      "before": {
+        "lat": 53.79205296,
+        "lng": 7.892901339999999
+      },
+      "google": {
+        "lat": 53.7920817,
+        "lng": 7.89295,
+        "place_id": "ChIJiWQYsnqAtkcRU9sOrvVUSxk",
+        "address": "Fußweg Zum Westen 2, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_italian_love_story",
+      "name": "Italian Love Story",
+      "before": {
+        "lat": 53.79224216,
+        "lng": 7.9000315400000005
+      },
+      "google": {
+        "lat": 53.7922709,
+        "lng": 7.900080200000001,
+        "place_id": "ChIJO3bUsyiBtkcRCjc_aYRRMqg",
+        "address": "Zedeliusstraße 41, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_restaurant_buhne_35",
+      "name": "Restaurant BUHNE 35",
+      "before": {
+        "lat": 53.79171436,
+        "lng": 7.89987364
+      },
+      "google": {
+        "lat": 53.7917431,
+        "lng": 7.8999223,
+        "place_id": "ChIJ-R7lA2aAtkcRoJCY9QEltQM",
+        "address": "Zedeliusstraße 35, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_gaststatte_dune_17",
+      "name": "Gaststätte Düne 17",
+      "before": {
+        "lat": 53.792162059999995,
+        "lng": 7.8999526399999995
+      },
+      "google": {
+        "lat": 53.79219080000001,
+        "lng": 7.900001299999999,
+        "place_id": "ChIJkyaHqmiAtkcRqpJU-L0ZL_g",
+        "address": "Zedeliusstraße 39, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_strandhotel_gerken",
+      "name": "Strandhotel Gerken",
+      "before": {
+        "lat": 53.79308966,
+        "lng": 7.9006411
+      },
+      "google": {
+        "lat": 53.793122,
+        "lng": 7.900854000000001,
+        "place_id": "ChIJixRFsmiAtkcR1bbuet4Yei8",
+        "address": "21 Strandpromenade, Zedeliusstraße 47, 26486 Wangerooge"
+      },
+      "delta_m": 14,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_restaurant_kruse",
+      "name": "Restaurant Kruse",
+      "before": {
+        "lat": 53.79199516,
+        "lng": 7.89842024
+      },
+      "google": {
+        "lat": 53.7920239,
+        "lng": 7.898468899999999,
+        "place_id": "ChIJJVk5NSq1Y0ERKUyrsgfctng",
+        "address": "Elisabeth-Anna-Straße 15-17, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_eiscafe_pizzeria_ristorante_venezia",
+      "name": "Eiscafé, Pizzeria & Ristorante Venezia",
+      "before": {
+        "lat": 53.790419459999995,
+        "lng": 7.89867134
+      },
+      "google": {
+        "lat": 53.7904482,
+        "lng": 7.898720000000001,
+        "place_id": "ChIJ8Q9c3GWAtkcRtYyBQasBm7s",
+        "address": "Zedeliusstraße 20, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wangerooge_cafe_neudeich",
+      "name": "Cafe Neudeich",
+      "before": {
+        "lat": 53.78607926000001,
+        "lng": 7.93134534
+      },
+      "google": {
+        "lat": 53.786108,
+        "lng": 7.931394,
+        "place_id": "ChIJV6EPF1OAtkcRLXeih7BPAWg",
+        "address": "Str. Zum Osten 1, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_inselbackerei_kruse_ohg",
+      "name": "Inselbäckerei Kruse oHG",
+      "before": {
+        "lat": 53.79021656,
+        "lng": 7.89854994
+      },
+      "google": {
+        "lat": 53.7902453,
+        "lng": 7.8985986,
+        "place_id": "ChIJFWPt2mWAtkcR2F1oW0DK_I0",
+        "address": "Zedeliusstraße 18, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_der_pirat",
+      "name": "Der Pirat",
+      "before": {
+        "lat": 53.79272816,
+        "lng": 7.90002554
+      },
+      "google": {
+        "lat": 53.7927569,
+        "lng": 7.900074200000001,
+        "place_id": "ChIJTwdorWiAtkcRhusJ_MJbW6Q",
+        "address": "Zedeliusstraße 47, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_inselmarkt_wangerooge_lammers_e_k",
+      "name": "Inselmarkt Wangerooge Lammers e.K.",
+      "before": {
+        "lat": 53.791432459999996,
+        "lng": 7.90091494
+      },
+      "google": {
+        "lat": 53.7914612,
+        "lng": 7.900963600000001,
+        "place_id": "ChIJPZc6GWaAtkcR2vUjbAFMdHM",
+        "address": "Charlottenstraße 22, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_frischemarkt_wangerooge",
+      "name": "Frischemarkt Wangerooge",
+      "before": {
+        "lat": 53.791538460000005,
+        "lng": 7.90026364
+      },
+      "google": {
+        "lat": 53.7915672,
+        "lng": 7.9003123,
+        "place_id": "ChIJzbVWBGaAtkcRcE6OYLBE_hs",
+        "address": "Charlottenstraße 20, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_cafe_treibsand",
+      "name": "Café Treibsand",
+      "before": {
+        "lat": 53.79173256,
+        "lng": 7.89956414
+      },
+      "google": {
+        "lat": 53.7917613,
+        "lng": 7.899612800000001,
+        "place_id": "ChIJ07Xw-2WAtkcRguS_VCeaOj8",
+        "address": "Zedeliusstraße 32, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wangerooge_parkhotel_wangerooge",
+      "name": "Parkhotel Wangerooge",
+      "before": {
+        "lat": 53.790316080000004,
+        "lng": 7.900073399999999
+      },
+      "google": {
+        "lat": 53.7903556,
+        "lng": 7.9001403,
+        "place_id": "ChIJVVrTb2aAtkcRl6K_bgrsfTE",
+        "address": "Dorfpl. 16, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_teestube_wangerooge_ug_haftungsbeschrankt",
+      "name": "Teestube Wangerooge UG (haftungsbeschränkt)",
+      "before": {
+        "lat": 53.790623059999994,
+        "lng": 7.898312540000001
+      },
+      "google": {
+        "lat": 53.7906518,
+        "lng": 7.8983612,
+        "place_id": "ChIJNUre3GWAtkcRfjoHh469Ia4",
+        "address": "Friedrich-August-Straße 13, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_hotel_hanken",
+      "name": "Hotel Hanken",
+      "before": {
+        "lat": 53.792504480000005,
+        "lng": 7.89954508
+      },
+      "google": {
+        "lat": 53.792544,
+        "lng": 7.899611999999999,
+        "place_id": "ChIJryVaU2-AtkcRMS3itYKOwbc",
+        "address": "Zedeliusstraße 38, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_wfv_gmbh_wangerooge",
+      "name": "WFV GmbH Wangerooge",
+      "before": {
+        "lat": 53.79128868,
+        "lng": 7.89927138
+      },
+      "google": {
+        "lat": 53.7913282,
+        "lng": 7.8993383,
+        "place_id": "ChIJn3jq2GWAtkcRHjL4X4wSJFA",
+        "address": "Zedeliusstraße 30, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_backerei_bolte",
+      "name": "Bäckerei Bolte",
+      "before": {
+        "lat": 53.79114846,
+        "lng": 7.899314340000001
+      },
+      "google": {
+        "lat": 53.7911772,
+        "lng": 7.899362999999998,
+        "place_id": "ChIJcSNa4mWAtkcRk9k9QqGt8VA",
+        "address": "Zedeliusstraße 28, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_meerwasser_erlebnisbad_oase",
+      "name": "Meerwasser Erlebnisbad Oase",
+      "before": {
+        "lat": 53.79363188,
+        "lng": 7.8946485
+      },
+      "google": {
+        "lat": 53.793675,
+        "lng": 7.894721499999999,
+        "place_id": "ChIJBZNcNW-AtkcRuL0P0VdRXUY",
+        "address": "Ob. Strandpromenade 2, 26486 Wangerooge"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_kaffee_kontor_wangerooge",
+      "name": "Kaffee Kontor Wangerooge",
+      "before": {
+        "lat": 53.79254356,
+        "lng": 7.90048484
+      },
+      "google": {
+        "lat": 53.7925723,
+        "lng": 7.900533500000001,
+        "place_id": "ChIJYbLqZDqBtkcRFkxMN0JUYYo",
+        "address": "Peterstraße 17, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_restaurant_krusch",
+      "name": "Restaurant Krüsch",
+      "before": {
+        "lat": 53.792785259999995,
+        "lng": 7.90242244
+      },
+      "google": {
+        "lat": 53.792814,
+        "lng": 7.902471099999999,
+        "place_id": "ChIJS_nfPK2BtkcREVBZhh9xbHM",
+        "address": "Ob. Strandpromenade 27, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_jan_seedorf",
+      "name": "Jan Seedorf",
+      "before": {
+        "lat": 53.79294126,
+        "lng": 7.875502739999999
+      },
+      "google": {
+        "lat": 53.79297,
+        "lng": 7.875551400000001,
+        "place_id": "ChIJe5ytvsx_tkcR3T1s0DZk3wQ",
+        "address": "Str. Zum Westen 17, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_surfcafe_wangerooge",
+      "name": "Surfcafé Wangerooge",
+      "before": {
+        "lat": 53.793655560000005,
+        "lng": 7.8928733399999995
+      },
+      "google": {
+        "lat": 53.7936843,
+        "lng": 7.892922,
+        "place_id": "ChIJSe5b4G-AtkcRCSsnjIKfdqc",
+        "address": "Ob. Strandpromenade 1, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_lazarettbunker_wangerooge",
+      "name": "Lazarettbunker Wangerooge",
+      "before": {
+        "lat": 53.79175557999999,
+        "lng": 7.905669999999999
+      },
+      "google": {
+        "lat": 53.7917987,
+        "lng": 7.905742999999998,
+        "place_id": "ChIJZeqtCWiAtkcRw3QVhvvKFpI",
+        "address": "Jadestraße 9A, 26486 Wangerooge"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wangerooge_die_fischbar",
+      "name": "Die Fischbar",
+      "before": {
+        "lat": 53.792047059999994,
+        "lng": 7.89993904
+      },
+      "google": {
+        "lat": 53.7920758,
+        "lng": 7.899987700000001,
+        "place_id": "ChIJkyaHqmiAtkcRpsV9Ossfz8g",
+        "address": "Zedeliusstraße 39a, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_westkap_wangerooge",
+      "name": "Westkap Wangerooge",
+      "before": {
+        "lat": 53.787110080000005,
+        "lng": 7.850052099999999
+      },
+      "google": {
+        "lat": 53.7871496,
+        "lng": 7.850118999999999,
+        "place_id": "ChIJWb5b_8p_tkcR6RYrO9bCh3w",
+        "address": "Str. Zum Westen 26, 26486 Wangerooge-Westen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_cafe_klonschnack",
+      "name": "Café Klönschnack",
+      "before": {
+        "lat": 53.788831259999995,
+        "lng": 7.89838134
+      },
+      "google": {
+        "lat": 53.78886,
+        "lng": 7.898429999999999,
+        "place_id": "ChIJZUZmk_6BtkcRovA44bgrHBI",
+        "address": "Zedeliusstraße 4, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_fischerstube",
+      "name": "Fischerstube",
+      "before": {
+        "lat": 53.793042060000005,
+        "lng": 7.90038524
+      },
+      "google": {
+        "lat": 53.7930708,
+        "lng": 7.900433899999999,
+        "place_id": "ChIJ984Ft-eBtkcRVxNhHoOP8zg",
+        "address": "Ob. Strandpromenade 21, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_restaurant_asterias",
+      "name": "Restaurant Asterias",
+      "before": {
+        "lat": 53.79294976,
+        "lng": 7.89963084
+      },
+      "google": {
+        "lat": 53.7929785,
+        "lng": 7.8996795,
+        "place_id": "ChIJkWRVlH2BtkcRwRXoEeQx0Uk",
+        "address": "Ob. Strandpromenade 19, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_snabbelkraam",
+      "name": "Snabbelkraam",
+      "before": {
+        "lat": 53.79249426,
+        "lng": 7.900137740000001
+      },
+      "google": {
+        "lat": 53.792523,
+        "lng": 7.9001864,
+        "place_id": "ChIJsckWUXqBtkcRfBp5Fh0fBEk",
+        "address": "Zedeliusstraße 45, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_fischgeschaft_kruse",
+      "name": "Fischgeschäft Kruse",
+      "before": {
+        "lat": 53.79198045999999,
+        "lng": 7.898772939999999
+      },
+      "google": {
+        "lat": 53.7920092,
+        "lng": 7.898821599999999,
+        "place_id": "ChIJGzYc6xSBtkcRBTCWSyZG9So",
+        "address": "Elisabeth-Anna-Straße 17, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_atlantic_hotel_garni_albrecht",
+      "name": "atlantic Hotel Garni Albrecht",
+      "before": {
+        "lat": 53.79261048000001,
+        "lng": 7.8980030800000005
+      },
+      "google": {
+        "lat": 53.79264999999999,
+        "lng": 7.898070000000001,
+        "place_id": "ChIJ0dhjZ2-AtkcRRkeexNRIKBw",
+        "address": "Peterstraße 13, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_cafe_famoos",
+      "name": "Café Famoos",
+      "before": {
+        "lat": 53.789691559999994,
+        "lng": 7.899283339999999
+      },
+      "google": {
+        "lat": 53.7897203,
+        "lng": 7.899332,
+        "place_id": "ChIJD_TUfmaAtkcRZ284rj0QiE0",
+        "address": "Dorfpl. 8, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_haus_am_meer_wangerooge",
+      "name": "Haus Am Meer Wangerooge",
+      "before": {
+        "lat": 53.78912817999999,
+        "lng": 7.8506265
+      },
+      "google": {
+        "lat": 53.7891677,
+        "lng": 7.850693399999999,
+        "place_id": "ChIJD5PzKCq1Y0ERPcRgTtK8nOk",
+        "address": "Str. Zum Westen 8, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_der_kuchenladen",
+      "name": "Der Kuchenladen",
+      "before": {
+        "lat": 53.79283946,
+        "lng": 7.900200240000001
+      },
+      "google": {
+        "lat": 53.7928682,
+        "lng": 7.900248899999999,
+        "place_id": "ChIJhSv5smiAtkcRYBM9UmMrkVo",
+        "address": "Zedeliusstraße 47, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wangerooge_inselverein_des_gutenbergheims_wangerooge_e_v",
+      "name": "Inselverein des Gutenbergheims Wangerooge e.V.",
+      "before": {
+        "lat": 53.78501448000001,
+        "lng": 7.853730799999999
+      },
+      "google": {
+        "lat": 53.785054,
+        "lng": 7.8537977,
+        "place_id": "ChIJXyR2p8x_tkcRO29_1dkhdws",
+        "address": "Str. Zum Westen 34, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_strandburg",
+      "name": "Strandburg",
+      "before": {
+        "lat": 53.79073715999999,
+        "lng": 7.8969282
+      },
+      "google": {
+        "lat": 53.7907695,
+        "lng": 7.8971411,
+        "place_id": "ChIJQWtAvmWAtkcRg2hgoPxEyvc",
+        "address": "Friedrich-August-Straße 9, 26486 Wangerooge"
+      },
+      "delta_m": 14,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_delis_strandreich",
+      "name": "Delis Strandreich",
+      "before": {
+        "lat": 53.79203516,
+        "lng": 7.8978364999999995
+      },
+      "google": {
+        "lat": 53.79206749999999,
+        "lng": 7.8980494,
+        "place_id": "ChIJc46DFH-BtkcRLEYbZYslgIs",
+        "address": "Elisabeth-Anna-Straße 13, 26486 Wangerooge"
+      },
+      "delta_m": 14,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_hauptstrand",
+      "name": "Hauptstrand Wangerooge",
+      "before": {
+        "lat": 53.793810236435505,
+        "lng": 7.900007090797873
+      },
+      "google": {
+        "lat": 53.7939355,
+        "lng": 7.90022,
+        "place_id": "ChIJXxuuM2-AtkcRviIwQT2lwDA",
+        "address": "Hauptstrand Wangerooge, 26486 Wangerooge"
+      },
+      "delta_m": 20,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_hartmannstand_gedenken",
+      "name": "Mahnmal Bunker Hartmannsstand",
+      "before": {
+        "lat": 53.793710474308305,
+        "lng": 7.892071985976064
+      },
+      "google": {
+        "lat": 53.7936547,
+        "lng": 7.892340000000001,
+        "place_id": "ChIJP1dgGXCAtkcR-4P9L0_Niog",
+        "address": "Elisabeth-Anna-Straße, 26486 Wangerooge"
+      },
+      "delta_m": 19,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_st_willehad",
+      "name": "St.-Willehad-Kirche & Mutter-Kind-Klinik",
+      "before": {
+        "lat": 53.79097748444126,
+        "lng": 7.910492466280817
+      },
+      "google": {
+        "lat": 53.792255,
+        "lng": 7.903588699999999,
+        "place_id": "ChIJPWF5fGiAtkcRcMJMvXZd09Q",
+        "address": "Westingstraße 7, 26486 Wangerooge"
+      },
+      "delta_m": 475,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_golfclub",
+      "name": "Golfclub Insel Wangerooge",
+      "before": {
+        "lat": 53.78894015199425,
+        "lng": 7.9127651458349035
+      },
+      "google": {
+        "lat": 53.789021,
+        "lng": 7.912902,
+        "place_id": "ChIJlcE-UVyAtkcRaCvkPTyRYiA",
+        "address": "Siedlerstraße 39a, 26486 Wangerooge-Nordseebad"
+      },
+      "delta_m": 13,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_diggers_aussenposten",
+      "name": "Digger's Außenposten",
+      "before": {
+        "lat": 53.7934954540424,
+        "lng": 7.896993635517299
+      },
+      "google": {
+        "lat": 53.7934847,
+        "lng": 7.8964948,
+        "place_id": "ChIJE0obcW-AtkcR76vlEKdvS4k",
+        "address": "Ob. Strandpromenade 3, 26486 Wangerooge"
+      },
+      "delta_m": 33,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_fundamente_alter_westturm",
+      "name": "Fundamente Alter Westturm (Ebbe)",
+      "before": {
+        "lat": 53.790574701329504,
+        "lng": 7.850269560393519
+      },
+      "google": {
+        "lat": 53.7906286,
+        "lng": 7.850360800000001,
+        "place_id": "ChIJm28BdZd_tkcRyhGYlZYiZhs",
+        "address": "Am Wattenmeer, Wangerooge"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "harlesiel_faehrhafen",
+      "name": "Fährhafen Harlesiel (Gepäck- & Logistik-Terminal)",
+      "before": {
+        "lat": 53.70820998577075,
+        "lng": 7.81033495482865
+      },
+      "google": {
+        "lat": 53.77471079999999,
+        "lng": 7.867184600000001,
+        "place_id": "ChIJlVbz36F_tkcRaijkc_-3WxE",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 8286,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_polizei",
+      "name": "Polizeistation Wangerooge",
+      "before": {
+        "lat": 53.7913928607977,
+        "lng": 7.897377755196507
+      },
+      "google": {
+        "lat": 53.7914818,
+        "lng": 7.897480600000001,
+        "place_id": "ChIJTcNAkmWAtkcRjfscvqJLP9M",
+        "address": "Charlottenstraße 9, 26486 Wangerooge"
+      },
+      "delta_m": 12,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_praxis_kortenhorn",
+      "name": "Hausarztpraxis Dr. Kortenhorn",
+      "before": {
+        "lat": 53.7900789607977,
+        "lng": 7.89941725691119
+      },
+      "google": {
+        "lat": 53.7900928,
+        "lng": 7.8994721,
+        "place_id": "ChIJX9AEd2aAtkcRajZAkBiioi4",
+        "address": "Robbenstraße 12, 26486 Wangerooge"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_insel_apotheke",
+      "name": "Insel-Apotheke",
+      "before": {
+        "lat": 53.791280260797706,
+        "lng": 7.899825955343459
+      },
+      "google": {
+        "lat": 53.7912883,
+        "lng": 7.8998214,
+        "place_id": "ChIJlWjACWaAtkcR7KwPxBnm9po",
+        "address": "Zedeliusstraße 31, 26486 Wangerooge"
+      },
+      "delta_m": 1,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_lzo_geldautomat",
+      "name": "LzO Geldautomat (barrierefrei)",
+      "before": {
+        "lat": 53.79186406079769,
+        "lng": 7.899458254581542
+      },
+      "google": {
+        "lat": 53.7918915,
+        "lng": 7.899531,
+        "place_id": "ChIJB1vn_mWAtkcRC6fHW-MN7Bo",
+        "address": "Zedeliusstraße 34, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wangerooge_aussichtsplatz_wangerooge",
+      "name": "Aussichtsplatz Wangerooge",
+      "before": {
+        "lat": 53.793589940000004,
+        "lng": 7.88987204
+      },
+      "google": {
+        "lat": 53.7936618,
+        "lng": 7.889993699999999,
+        "place_id": "ChIJaenpbnCAtkcRtzhX0AzFZ8U",
+        "address": "Fußweg Zum Westen 5, 26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_deckwerk_wangerooge",
+      "name": "Deckwerk Wangerooge",
+      "before": {
+        "lat": 53.78626494,
+        "lng": 7.84897146
+      },
+      "google": {
+        "lat": 53.7863368,
+        "lng": 7.849093099999999,
+        "place_id": "ChIJT4GsBQB_tkcRZBiNyyk0IfU",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_westlagune_wangerooge",
+      "name": "Westlagune Wangerooge",
+      "before": {
+        "lat": 53.78809474,
+        "lng": 7.8703610600000005
+      },
+      "google": {
+        "lat": 53.7881666,
+        "lng": 7.870482699999998,
+        "place_id": "ChIJB89ZDwB_tkcRwaeyu920QMQ",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_hafeneinfahrt_backbord_wangerooge",
+      "name": "Hafeneinfahrt Backbord Wangerooge",
+      "before": {
+        "lat": 53.772293579999996,
+        "lng": 7.86553012
+      },
+      "google": {
+        "lat": 53.77611820000001,
+        "lng": 7.8675923,
+        "place_id": "ChIJXdz9PSl-tkcRpTsPGu98VXc",
+        "address": "Unnamed Road, 26486 Wangerooge-Westen"
+      },
+      "delta_m": 446,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "wangerooge_flugplatz_wangerooge_edwg",
+      "name": "Flugplatz Wangerooge (EDWG)",
+      "before": {
+        "lat": 53.78832618,
+        "lng": 7.9088461
+      },
+      "google": {
+        "lat": 53.7883657,
+        "lng": 7.908913,
+        "place_id": "ChIJeWAsA1qAtkcR2i8xwhxJtCw",
+        "address": "Siedlerstraße 39a, 26486 Wangerooge-Nordseebad"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_bunkerreste_jade_ost_batterie",
+      "name": "Bunkerreste Jade-Ost-Batterie",
+      "before": {
+        "lat": 53.78909195999999,
+        "lng": 7.922993460000001
+      },
+      "google": {
+        "lat": 53.7891243,
+        "lng": 7.9230482,
+        "place_id": "ChIJkaphqGKBtkcRgEs4sgJa-Q8",
+        "address": "QWQF+J6, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_jever_aussichtsplattform",
+      "name": "Jever-Aussichtsplattform",
+      "before": {
+        "lat": 53.78383814,
+        "lng": 7.94560836
+      },
+      "google": {
+        "lat": 53.78391,
+        "lng": 7.945729999999999,
+        "place_id": "ChIJIYIpLK-BtkcRV_8n9A1nHe4",
+        "address": "Unnamed Road, 26486 Wangerooge-Westen"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_tuunpad",
+      "name": "Tuunpad",
+      "before": {
+        "lat": 53.79073144,
+        "lng": 7.891085739999999
+      },
+      "google": {
+        "lat": 53.7908033,
+        "lng": 7.8912074,
+        "place_id": "ChIJz_sfZi2BtkcRKTnp-EhkeeU",
+        "address": "Am Wattenmeer, 26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_lokschuppen_wangerooge",
+      "name": "Lokschuppen Wangerooge",
+      "before": {
+        "lat": 53.78743508,
+        "lng": 7.898877400000001
+      },
+      "google": {
+        "lat": 53.7874746,
+        "lng": 7.898944299999999,
+        "place_id": "ChIJYyjyBgCBtkcRngDulhreNUM",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_altes_wiegehauschen",
+      "name": "Altes Wiegehäuschen",
+      "before": {
+        "lat": 53.78837195999999,
+        "lng": 7.89984576
+      },
+      "google": {
+        "lat": 53.7884043,
+        "lng": 7.899900499999999,
+        "place_id": "ChIJ83IafwCBtkcRaZFcak0H630",
+        "address": "Bahnhofstraße 11-9, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_plattform_westende_wangerooge",
+      "name": "Plattform Westende Wangerooge",
+      "before": {
+        "lat": 53.78739064,
+        "lng": 7.8469118600000005
+      },
+      "google": {
+        "lat": 53.7874625,
+        "lng": 7.847033499999998,
+        "place_id": "ChIJw9MJNB9_tkcRXhfjI9LzAdI",
+        "address": "Str. Zum Westen 26, 26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_denk_mal_nach",
+      "name": "Denk-mal-nach",
+      "before": {
+        "lat": 53.79331908,
+        "lng": 7.901971280000001
+      },
+      "google": {
+        "lat": 53.7933586,
+        "lng": 7.902038199999999,
+        "place_id": "ChIJybT-kB-BtkcRZ2-5UIF42K8",
+        "address": "Ob. Strandpromenade 23, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_kriegerdenkmal",
+      "name": "Kriegerdenkmal",
+      "before": {
+        "lat": 53.789190559999994,
+        "lng": 7.900069060000002
+      },
+      "google": {
+        "lat": 53.78922290000001,
+        "lng": 7.9001238,
+        "place_id": "ChIJt7w_6MmBtkcRDr_z56a_tdo",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_dunenlandschaft_seelen_pfad",
+      "name": "Dünenlandschaft / Seelen-Pfad",
+      "before": {
+        "lat": 53.786775940000005,
+        "lng": 7.933022460000001
+      },
+      "google": {
+        "lat": 53.7868478,
+        "lng": 7.933144099999999,
+        "place_id": "ChIJk8MJQQCBtkcRi9Kykf2_8g8",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_ehemaliger_ostlicher_anleger_wangerooge",
+      "name": "Ehemaliger östlicher Anleger Wangerooge",
+      "before": {
+        "lat": 53.77441888,
+        "lng": 7.969997820000001
+      },
+      "google": {
+        "lat": 53.7744584,
+        "lng": 7.9700647,
+        "place_id": "ChIJ8WkMLYmBtkcRxpRrBC6kS28",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_dunenlandschaft_westlagune",
+      "name": "Dünenlandschaft / Westlagune",
+      "before": {
+        "lat": 53.79200574,
+        "lng": 7.8727012400000005
+      },
+      "google": {
+        "lat": 53.7920776,
+        "lng": 7.872822900000001,
+        "place_id": "ChIJX9uWYgB_tkcRplnzGYL_RRs",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_kurpark_teichgarten",
+      "name": "Kurpark - Teichgarten",
+      "before": {
+        "lat": 53.791360039999994,
+        "lng": 7.89427024
+      },
+      "google": {
+        "lat": 53.79143190000001,
+        "lng": 7.8943919,
+        "place_id": "ChIJSSrDPACBtkcRewyXZY8r4to",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_mellumrat_e_v_wangerooge_oststation",
+      "name": "Mellumrat e.V. Wangerooge Oststation",
+      "before": {
+        "lat": 53.78634047999999,
+        "lng": 7.933216100000001
+      },
+      "google": {
+        "lat": 53.78637999999999,
+        "lng": 7.933282999999999,
+        "place_id": "ChIJJ6yvuFuBtkcRsTAytbsr70w",
+        "address": "Str. Zum Osten 2, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_petra_losch_wattwandern_wangerooge",
+      "name": "Petra Lösch - Wattwandern Wangerooge",
+      "before": {
+        "lat": 53.79275244,
+        "lng": 7.90422114
+      },
+      "google": {
+        "lat": 53.7928243,
+        "lng": 7.9043428,
+        "place_id": "ChIJM2UuIlKBtkcR_ERtBgeHANY",
+        "address": "Ob. Strandpromenade 35, 26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wangerooge_hundestrand",
+      "name": "Hundestrand",
+      "before": {
+        "lat": 53.79291284,
+        "lng": 7.90696884
+      },
+      "google": {
+        "lat": 53.7929847,
+        "lng": 7.907090499999999,
+        "place_id": "ChIJoZCLoUKAtkcRnWE4uOU9IbI",
+        "address": "Ob. Strandpromenade 37, 26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_musik_pavillion_im_rosengarten",
+      "name": "Musik Pavillion im Rosengarten",
+      "before": {
+        "lat": 53.79064423999999,
+        "lng": 7.900782340000001
+      },
+      "google": {
+        "lat": 53.7907161,
+        "lng": 7.900904,
+        "place_id": "ChIJ3ZukawCBtkcRQVWx1dsLCbs",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_memorial_luftwaffen_geschwader_71",
+      "name": "Memorial Luftwaffen Geschwader 71",
+      "before": {
+        "lat": 53.788635740000004,
+        "lng": 7.908743459999999
+      },
+      "google": {
+        "lat": 53.7887076,
+        "lng": 7.908865100000001,
+        "place_id": "ChIJo-WdHgCBtkcRug86oMlwRyg",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_kurpark_rosengarten",
+      "name": "Kurpark - Rosengarten",
+      "before": {
+        "lat": 53.79069694,
+        "lng": 7.900200239999999
+      },
+      "google": {
+        "lat": 53.7907688,
+        "lng": 7.9003219,
+        "place_id": "ChIJISU_DWaAtkcR0Dz2lcOLYKI",
+        "address": "Friedrich-August-Straße 15, 26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_kurpark_steingarten",
+      "name": "Steingarten (Kurpark)",
+      "before": {
+        "lat": 53.791234440000004,
+        "lng": 7.89599054
+      },
+      "google": {
+        "lat": 53.7913063,
+        "lng": 7.896112199999999,
+        "place_id": "ChIJq7x8YACBtkcRz-SMhP3CM2I",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_modular_pumptrack_skateanlage",
+      "name": "Modular Pumptrack Skateanlage",
+      "before": {
+        "lat": 53.793327780000006,
+        "lng": 7.89327488
+      },
+      "google": {
+        "lat": 53.7933673,
+        "lng": 7.893341800000001,
+        "place_id": "ChIJVeWIVMaBtkcRJYIbjfpwHZA",
+        "address": "26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_kath_pfarrgemeinde_st_willehad_gemeindeburo",
+      "name": "Kath. Pfarrgemeinde St. Willehad Gemeindebüro",
+      "before": {
+        "lat": 53.79188628000001,
+        "lng": 7.90270338
+      },
+      "google": {
+        "lat": 53.792255,
+        "lng": 7.903588699999999,
+        "place_id": "ChIJPWF5fGiAtkcRcMJMvXZd09Q",
+        "address": "Westingstraße 7, 26486 Wangerooge"
+      },
+      "delta_m": 71,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_klockhaus",
+      "name": "Klockhaus",
+      "before": {
+        "lat": 53.78857418,
+        "lng": 7.9006691
+      },
+      "google": {
+        "lat": 53.78861370000001,
+        "lng": 7.900736,
+        "place_id": "ChIJNQ-hXc6BtkcRYW2nUevoj7c",
+        "address": "Carstensstraße 126486, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_sport_und_surfstrand_wangerooge",
+      "name": "Sport- und Surfstrand Wangerooge",
+      "before": {
+        "lat": 53.79408204,
+        "lng": 7.8947030400000004
+      },
+      "google": {
+        "lat": 53.7941539,
+        "lng": 7.8948247,
+        "place_id": "ChIJsZlkQwCBtkcRbzkLaMOoSNg",
+        "address": "Ob. Strandpromenade 2, 26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wangerooge_kampfbahn_siedlerstrasse",
+      "name": "Kampfbahn Siedlerstraße",
+      "before": {
+        "lat": 53.78881718,
+        "lng": 7.9112876
+      },
+      "google": {
+        "lat": 53.7888567,
+        "lng": 7.911354500000001,
+        "place_id": "ChIJrUQu9FyAtkcR_bnItbIap9E",
+        "address": "Siedlerstraße 44, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_dunen_spielplatz",
+      "name": "Dünen-Spielplatz",
+      "before": {
+        "lat": 53.79292344,
+        "lng": 7.89177894
+      },
+      "google": {
+        "lat": 53.7929953,
+        "lng": 7.891900599999999,
+        "place_id": "ChIJTeCcpnqAtkcRkn6VjWBXknA",
+        "address": "Elisabeth-Anna-Straße, 26486 Wangerooge-West"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_spielplatz_am_westlichen_strand",
+      "name": "Spielplatz am westlichen Strand",
+      "before": {
+        "lat": 53.79391824,
+        "lng": 7.896210139999999
+      },
+      "google": {
+        "lat": 53.7939901,
+        "lng": 7.8963318,
+        "place_id": "ChIJI9QwoW-AtkcRAhhl-EQRThs",
+        "address": "Ob. Strandpromenade, 26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_spielplatz_am_ostlichen_strand",
+      "name": "Spielplatz am östlichen Strand",
+      "before": {
+        "lat": 53.79327684,
+        "lng": 7.904443240000001
+      },
+      "google": {
+        "lat": 53.7933487,
+        "lng": 7.9045649,
+        "place_id": "ChIJoTZyrTGBtkcRif5Jex0zrzY",
+        "address": "Ob. Strandpromenade 33, 26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_kinderspielhaus_sockenland",
+      "name": "Kinderspielhaus Sockenland",
+      "before": {
+        "lat": 53.79216778,
+        "lng": 7.89210518
+      },
+      "google": {
+        "lat": 53.79220729999999,
+        "lng": 7.892172100000001,
+        "place_id": "ChIJ0Vf0rHqAtkcRqFvCLjc80G4",
+        "address": "Fußweg Zum Westen 1A, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_hafenmeister_wangerooge",
+      "name": "Hafenmeister Wangerooge",
+      "before": {
+        "lat": 53.77607868,
+        "lng": 7.86752542
+      },
+      "google": {
+        "lat": 53.77611820000001,
+        "lng": 7.8675923,
+        "place_id": "ChIJXdz9PSl-tkcRpTsPGu98VXc",
+        "address": "Unnamed Road, 26486 Wangerooge-Westen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "wangerooge_schiffsmeldestelle_wangerooge",
+      "name": "Schiffsmeldestelle Wangerooge",
+      "before": {
+        "lat": 53.77656488,
+        "lng": 7.86820032
+      },
+      "google": {
+        "lat": 53.7766044,
+        "lng": 7.868267199999999,
+        "place_id": "ChIJTyybl-J_tkcRIrix-P4RAbs",
+        "address": "Am Hafen Wangerooge, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_friedhofskapelle",
+      "name": "Friedhofskapelle",
+      "before": {
+        "lat": 53.79099298,
+        "lng": 7.888414299999999
+      },
+      "google": {
+        "lat": 53.7910325,
+        "lng": 7.8884812,
+        "place_id": "ChIJNS0i9nqAtkcR8zkIwV3Z-7g",
+        "address": "Unnamed Road, 26486, Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_helmer_und_christine_janssen_haus_klippersteven_wohn",
+      "name": "Helmer und Christine Janßen, Haus Klippersteven Wohnung Wattwurm und Möwe",
+      "before": {
+        "lat": 53.79239814,
+        "lng": 7.90107834
+      },
+      "google": {
+        "lat": 53.79246999999999,
+        "lng": 7.901199999999999,
+        "place_id": "ChIJydKOpGiAtkcRUTpuPMHpQtI",
+        "address": "Peterstraße 21, 26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_dunenhaus",
+      "name": "Dünenhaus",
+      "before": {
+        "lat": 53.78963274,
+        "lng": 7.89570224
+      },
+      "google": {
+        "lat": 53.7897046,
+        "lng": 7.895823900000001,
+        "place_id": "ChIJ7Zlbq2WAtkcRZa7eRXYk7gc",
+        "address": "In den Osterdünen 3, 26486 Wangerooge"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_collage_galerie_am_damenpfad",
+      "name": "Collage - Galerie am Damenpfad",
+      "before": {
+        "lat": 53.79107518000001,
+        "lng": 7.902299999999999
+      },
+      "google": {
+        "lat": 53.79111469999999,
+        "lng": 7.9023669,
+        "place_id": "ChIJ50xkMGaAtkcREIK3GbIQGWI",
+        "address": "Charlottenstraße 25, 26486 Wangerooge"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_historische_uhr_pudding_uhr",
+      "name": "Historische Uhr / Pudding-Uhr",
+      "before": {
+        "lat": 53.79343635999999,
+        "lng": 7.900018060000001
+      },
+      "google": {
+        "lat": 53.79346870000001,
+        "lng": 7.900072799999998,
+        "place_id": "ChIJC9KkCwCBtkcR50Bgd7Aq0Ko",
+        "address": "Ob. Strandpromenade 19, 26486 Wangerooge"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_wangerooger_tennis_club_e_v",
+      "name": "Wangerooger Tennis Club e. V.",
+      "before": {
+        "lat": 53.791878659999995,
+        "lng": 7.893638259999999
+      },
+      "google": {
+        "lat": 53.7879573,
+        "lng": 7.8988584,
+        "place_id": "ChIJr6q5oWaAtkcR0IkttVPOgF4",
+        "address": "Zedeliusstraße 31, 26486 Wangerooge"
+      },
+      "delta_m": 555,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "wangerooge_wangerooge_erholung_ist_eine_insel_kurverwaltung",
+      "name": "Wangerooge - Erholung ist eine Insel (Kurverwaltung Nordseeheilbad Wangerooge)",
+      "before": {
+        "lat": 53.793134480000006,
+        "lng": 7.89660682
+      },
+      "google": {
+        "lat": 53.7931812,
+        "lng": 7.8966859,
+        "place_id": "ChIJ4-_6dm-AtkcRU75GDEu_nIs",
+        "address": "Ob. Strandpromenade 3, 26486 Wangerooge"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    }
+  ]
+}

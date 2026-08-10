@@ -1,5 +1,5 @@
 /**
- * Sprachpakete für Findus TTS — Piper DE (6 Stimmen).
+ * Sprachpakete für Findus TTS — Cartesia DE.
  */
 export type LanguagePackId = 'de';
 
@@ -9,8 +9,6 @@ export type LanguagePack = {
   flag: string;
   preferBundled: boolean;
   defaultVoiceId: string;
-  /** @deprecated Kokoro-Lang-Code — Piper nutzt espeak voice "de". */
-  kokoroLang?: string;
   modelUrl?: string;
   voiceUrl?: string;
   modelSizeMb?: number;
@@ -22,8 +20,7 @@ export const LANGUAGE_PACKS: LanguagePack[] = [
     labelDe: 'Deutsch',
     flag: '🇩🇪',
     preferBundled: true,
-    defaultVoiceId: 'standard_m',
-    kokoroLang: 'de',
+    defaultVoiceId: 'alina',
     modelSizeMb: 63,
   },
 ];

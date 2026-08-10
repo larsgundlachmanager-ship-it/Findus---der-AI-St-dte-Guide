@@ -1,0 +1,694 @@
+/**
+ * Calm medical / Notfall concierge — early path before LLM.
+ * Never pretends to place a call; offers landestypischen Notruf + concrete Arzt/Klinik/Apotheke
+ * with real coords + phone when available.
+ */
+
+import {
+  getDeviceHeadingDeg,
+  getMovementBearingDeg,
+} from '../navigation/navigationService';
+import {
+  runContextualDiscovery,
+  type DiscoveryCandidate,
+  type DiscoveryResult,
+} from '../navigation/contextualDiscovery';
+import { useUserMemoryStore } from '../../store/useUserMemoryStore';
+import { useFinnusStore } from '../../store/useFinnusStore';
+import type { GeminiConciergeResponse, QuickAction } from '../../types/concierge';
+import { shortenActionLabel } from './actionLabelShorten';
+import { getCachedUserProfile } from '../userProfileService';
+import {
+  resolveCountryEmergencyInfo,
+  type CountryEmergencyInfo,
+} from './emergencyNumbersByCountry';
+import { searchPlacesExpanding } from '../navigation/expandingPlaceSearch';
+import { checkVenueWebsiteStatus } from '../research/venueWebsiteStatus';
+import type { DiscoveredPlace } from '../navigation/googleMapsNav';
+import { distanceMeters } from '../navigation/bearing';
+
+export type EmergencyKind =
+  | 'sos'
+  | 'hospital'
+  | 'pharmacy'
+  | 'doctor'
+  | 'dentist'
+  | 'lost';
+
+/** Körperteil / Symptom → richtige Einrichtung (nicht Zahn bei Knöchel). */
+export type InjurySpecialty =
+  | 'tooth'
+  | 'foot'
+  | 'eye'
+  | 'allergy'
+  | 'general';
+
+const SOS_RE =
+  /\b(notfall|notruf|notaufnahme|emergency|ambulance|rettung|hilfe\s*!|sos|112|911|999|lebensgefahr|bewusstlos)\b/iu;
+const HOSPITAL_RE =
+  /\b(krankenhaus|klinik|hospital|notarzt|unfall|notaufnahme)\b/iu;
+const PHARMACY_RE =
+  /\b(apotheke|pharmacy|notdienst.?apotheke)\b/iu;
+const DOCTOR_RE =
+  /\b(arzt|ärztin|aerztin|praxis|hausarzt|medizin|ambulanz|ärztlich|aerztlich|116\s*117)\b/iu;
+const DENTIST_RE =
+  /\b(zahnarzt|zahnärztin|zahnaerztin|zahnschmerzen?|zahnweh|zahn\s+gebrochen)\b/iu;
+const ILL_RE =
+  /\b(krank|übel|uebel|fieber|schwindel|erbrochen|kotz|verletzung|blut|schmerzen|akut|verstaucht|gebrochen)\b/iu;
+const HELP_FAST_RE =
+  /\b(hilfe|schnell|sofort|dringend|nächste[rn]?|in\s+der\s+nähe|rauszuchen|finden)\b/iu;
+const LOST_RE =
+  /\b(verloren|verlaufen|verirrt|ich\s+(find|finde)\s+(den\s+weg\s+)?nicht|ich\s+hab\s+mich\s+(verlaufen|verirrt|verloren)|bin\s+ich\s+verloren|lost)\b/iu;
+
+const FOOT_RE =
+  /\b(fu[sß]|fuss|knöchel|knoechel|knie|bein|sprunggelenk).{0,24}\b(gebrochen|verstaucht|weh|schmerz|verletz)|(?:gebrochen|verstaucht).{0,24}\b(fu[sß]|fuss|knöchel|knoechel|knie|bein)\b/iu;
+const EYE_RE =
+  /\b(auge|augen|augenarzt).{0,20}\b(schmerz|weh|verletzung|not)|augennot/iu;
+const ALLERGY_RE =
+  /\b(allerg|anaphyl|quallen?|stich|schwellung\s+im\s+gesicht)/iu;
+
+export function detectInjurySpecialty(text: string): InjurySpecialty {
+  const t = text.replace(/\s+/g, ' ').trim();
+  // Fuß/Knöchel VOR generischem „zahn“-Substring in anderen Wörtern
+  if (FOOT_RE.test(t)) return 'foot';
+  if (DENTIST_RE.test(t) || /\bzahn(?:arzt|schmerzen?|weh|klinik)?\b/i.test(t)) {
+    return 'tooth';
+  }
+  if (EYE_RE.test(t)) return 'eye';
+  if (ALLERGY_RE.test(t)) return 'allergy';
+  return 'general';
+}
+
+export function detectEmergencyIntent(text: string): EmergencyKind | null {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (!t) return null;
+  // Hours / menu questions about pharmacy are not medical SOS
+  if (
+    /\b(öffnungszeit|oeffnungszeit|wann\s+hat|speisekarte|menü|menu)\b/iu.test(t) &&
+    !SOS_RE.test(t) &&
+    !ILL_RE.test(t) &&
+    !DENTIST_RE.test(t) &&
+    !FOOT_RE.test(t)
+  ) {
+    return null;
+  }
+  if (DENTIST_RE.test(t)) return 'dentist';
+  if (FOOT_RE.test(t)) return 'hospital';
+  if (SOS_RE.test(t)) return 'sos';
+  if (HOSPITAL_RE.test(t)) return 'hospital';
+  if (DOCTOR_RE.test(t)) return 'doctor';
+  if (PHARMACY_RE.test(t)) return 'pharmacy';
+  // „Kumpel ist krank — Hilfe / schnell“ ohne explizites Arzt-Wort
+  if (ILL_RE.test(t) && HELP_FAST_RE.test(t)) return 'doctor';
+  if (LOST_RE.test(t)) return 'lost';
+  return null;
+}
+
+function hotelNavAction(): QuickAction | null {
+  const hotel =
+    useUserMemoryStore
+      .getState()
+      .getConfirmedHotel(getCachedUserProfile()?.cityId) ??
+    useUserMemoryStore.getState().getConfirmedHotel();
+  if (
+    !hotel ||
+    typeof hotel.lat !== 'number' ||
+    typeof hotel.lng !== 'number' ||
+    !Number.isFinite(hotel.lat) ||
+    !Number.isFinite(hotel.lng)
+  ) {
+    return null;
+  }
+  return {
+    type: 'START_NAVIGATION',
+    label: shortenActionLabel(
+      `🏨 ${hotel.name.replace(/^Hotel\s+/i, '')}`,
+    ),
+    payload: {
+      destName: hotel.name,
+      destLat: hotel.lat,
+      destLng: hotel.lng,
+      targetPoiId: hotel.poiId ?? undefined,
+      keepCard: true,
+    },
+  };
+}
+
+function formatDist(m: number): string {
+  if (m < 1000) return `${Math.max(50, Math.round(m / 50) * 50)} Meter`;
+  return `${(m / 1000).toFixed(1)} Kilometer`;
+}
+
+function dialPrimary(info: CountryEmergencyInfo): QuickAction {
+  return {
+    type: 'DIAL_PHONE',
+    label: shortenActionLabel(`📞 ${info.primary.number} ${info.primary.label}`),
+    payload: { phoneNumber: info.primary.number },
+  };
+}
+
+function dialMedicalAdvice(info: CountryEmergencyInfo): QuickAction | null {
+  if (!info.medicalAdvice) return null;
+  return {
+    type: 'DIAL_PHONE',
+    label: shortenActionLabel(
+      `📞 ${info.medicalAdvice.number} ${info.medicalAdvice.label}`,
+    ),
+    payload: { phoneNumber: info.medicalAdvice.number },
+  };
+}
+
+function primaryBullet(info: CountryEmergencyInfo): string {
+  return `Notruf ${info.countryLabel}: ${info.primary.number}`;
+}
+
+function adviceBullet(info: CountryEmergencyInfo): string | null {
+  if (!info.medicalAdvice) return null;
+  return `${info.medicalAdvice.label}: ${info.medicalAdvice.number}`;
+}
+
+type HelpKind = 'hospital' | 'pharmacy' | 'doctor' | 'dentist';
+
+async function findHelp(
+  kind: HelpKind,
+  origin: { lat: number; lng: number },
+): Promise<DiscoveryResult> {
+  const placeType =
+    kind === 'hospital'
+      ? 'hospital'
+      : kind === 'pharmacy'
+        ? 'pharmacy'
+        : kind === 'dentist'
+          ? 'dentist'
+          : 'doctor';
+  const label =
+    kind === 'hospital'
+      ? 'Krankenhaus'
+      : kind === 'pharmacy'
+        ? 'Apotheke'
+        : kind === 'dentist'
+          ? 'Zahnarzt'
+          : 'Arzt';
+  return runContextualDiscovery({
+    placeType,
+    label,
+    origin,
+    headingDeg: getDeviceHeadingDeg(),
+    movementBearingDeg: getMovementBearingDeg(),
+    emergency: true,
+  });
+}
+
+function placeFromDiscovered(
+  p: DiscoveredPlace,
+  origin: { lat: number; lng: number },
+): DiscoveryCandidate {
+  const distanceM = Math.round(
+    distanceMeters(origin.lat, origin.lng, p.lat, p.lng),
+  );
+  return {
+    placeId: p.placeId,
+    name: p.name,
+    lat: p.lat,
+    lng: p.lng,
+    distanceM,
+    aheadM: distanceM,
+    rating: p.rating ?? null,
+    openNow: p.openNow === true,
+    types: p.types,
+    lowRated: false,
+    detourM: null,
+    phoneNumber: p.phoneNumber?.trim() || null,
+    websiteUri: p.websiteUri?.trim() || null,
+  };
+}
+
+/**
+ * Specialty-Suche + Website-Urlaubsfilter.
+ * Geschlossene/Urlaub-Praxen raus; Notfallpraxis bevorzugen wenn Primär ausfällt.
+ */
+async function findSpecialtyHelp(
+  specialty: InjurySpecialty,
+  origin: { lat: number; lng: number },
+  signal?: AbortSignal,
+): Promise<{
+  primary: DiscoveryResult | null;
+  skippedVacation: string[];
+  hoursChecked: boolean;
+}> {
+  const skippedVacation: string[] = [];
+  let hoursChecked = false;
+
+  const plans: Array<{ placeType: string; keyword: string; label: string }> =
+    specialty === 'tooth'
+      ? [
+          {
+            placeType: 'dentist',
+            keyword: 'Zahnarzt Notdienst',
+            label: 'Zahnarzt / Notdienst',
+          },
+          {
+            placeType: 'hospital',
+            keyword: 'Zahnklinik Notaufnahme',
+            label: 'Zahnklinik',
+          },
+        ]
+      : specialty === 'foot'
+        ? [
+            {
+              placeType: 'hospital',
+              keyword: 'Unfallchirurgie Notaufnahme',
+              label: 'Unfall / Notaufnahme',
+            },
+            {
+              placeType: 'doctor',
+              keyword: 'Orthopädie Notfall',
+              label: 'Orthopädie',
+            },
+          ]
+        : specialty === 'eye'
+          ? [
+              {
+                placeType: 'doctor',
+                keyword: 'Augenarzt Notdienst',
+                label: 'Augenarzt',
+              },
+              {
+                placeType: 'hospital',
+                keyword: 'Augenklinik',
+                label: 'Augenklinik',
+              },
+            ]
+          : specialty === 'allergy'
+            ? [
+                {
+                  placeType: 'hospital',
+                  keyword: 'Notaufnahme',
+                  label: 'Notaufnahme',
+                },
+                {
+                  placeType: 'pharmacy',
+                  keyword: 'Apotheke Notdienst',
+                  label: 'Apotheke',
+                },
+              ]
+            : [
+                {
+                  placeType: 'doctor',
+                  keyword: 'Arzt Notdienst',
+                  label: 'Arzt',
+                },
+                {
+                  placeType: 'hospital',
+                  keyword: 'Notaufnahme',
+                  label: 'Krankenhaus',
+                },
+              ];
+
+  for (const plan of plans) {
+    if (signal?.aborted) break;
+    const expanded = await searchPlacesExpanding({
+      lat: origin.lat,
+      lng: origin.lng,
+      placeType: plan.placeType,
+      keyword: plan.keyword,
+      openNow: true,
+      minResults: 2,
+    });
+    const ranked = [...expanded.places].sort((a, b) => {
+      const ao = a.openNow === true ? 0 : 1;
+      const bo = b.openNow === true ? 0 : 1;
+      if (ao !== bo) return ao - bo;
+      return 0;
+    });
+
+    const survivors: DiscoveryCandidate[] = [];
+    for (const p of ranked.slice(0, 5)) {
+      if (signal?.aborted) break;
+      if (p.openNow === false) continue;
+      const status = await checkVenueWebsiteStatus(p.websiteUri, { signal });
+      if (status.checked) hoursChecked = true;
+      if (status.likelyClosedOrVacation) {
+        skippedVacation.push(p.name);
+        continue;
+      }
+      survivors.push(placeFromDiscovered(p, origin));
+      if (survivors.length >= 2) break;
+    }
+
+    // Fallback: ohne Open-Filter, aber Website-Check behalten
+    if (!survivors.length && expanded.places.length) {
+      const loose = await searchPlacesExpanding({
+        lat: origin.lat,
+        lng: origin.lng,
+        placeType: plan.placeType,
+        keyword: plan.keyword,
+        openNow: false,
+        minResults: 2,
+      });
+      for (const p of loose.places.slice(0, 4)) {
+        const status = await checkVenueWebsiteStatus(p.websiteUri, { signal });
+        if (status.checked) hoursChecked = true;
+        if (status.likelyClosedOrVacation) {
+          skippedVacation.push(p.name);
+          continue;
+        }
+        survivors.push(placeFromDiscovered(p, origin));
+        if (survivors.length >= 2) break;
+      }
+    }
+
+    if (survivors.length) {
+      const top = survivors[0]!;
+      return {
+        primary: {
+          queryLabel: plan.label,
+          candidates: survivors,
+          speech: '',
+          quickActions: navAndDialForPlace(top, plan.label),
+          needsConfirmation: false,
+          autoInserted: false,
+        },
+        skippedVacation: [...new Set(skippedVacation)],
+        hoursChecked,
+      };
+    }
+  }
+
+  return { primary: null, skippedVacation: [...new Set(skippedVacation)], hoursChecked };
+}
+
+function placeLabel(c: DiscoveryCandidate, fallback: string): string {
+  const name = (c.name || '').trim();
+  return name || fallback;
+}
+
+function navAndDialForPlace(
+  c: DiscoveryCandidate,
+  what: string,
+): QuickAction[] {
+  const actions: QuickAction[] = [
+    {
+      type: 'START_NAVIGATION',
+      label: shortenActionLabel(`📍 ${placeLabel(c, what)}`),
+      payload: {
+        destName: placeLabel(c, what),
+        destLat: c.lat,
+        destLng: c.lng,
+        targetPoiId: c.placeId ? `place:${c.placeId}` : undefined,
+        skipClosingGate: true,
+        keepCard: true,
+      },
+    },
+  ];
+  const phone = (c.phoneNumber || '').trim();
+  if (phone.replace(/\D/g, '').length >= 6) {
+    actions.push({
+      type: 'DIAL_PHONE',
+      label: shortenActionLabel(`📞 ${placeLabel(c, what)}`),
+      payload: { phoneNumber: phone },
+    });
+  }
+  return actions;
+}
+
+function buildEmergencyConcierge(opts: {
+  speech: string;
+  bullets: string[];
+  actions: QuickAction[];
+  title: string;
+}): GeminiConciergeResponse {
+  return {
+    cardTitle: opts.title,
+    speechText: opts.speech,
+    visualBullets: opts.bullets,
+    quickActions: opts.actions.slice(0, 4),
+  };
+}
+
+/**
+ * Deterministic medical / Notfall handler. Calm, concrete, no fake emergency calls.
+ */
+export async function handleEmergencyConcierge(
+  text: string,
+  origin: { lat: number; lng: number } | null,
+): Promise<{
+  handled: boolean;
+  reply?: string;
+  startedNav?: boolean;
+  concierge?: GeminiConciergeResponse;
+  meta?: {
+    specialty?: InjurySpecialty;
+    hoursChecked?: boolean;
+    skippedVacation?: string[];
+    openNow?: boolean | null;
+  };
+}> {
+  const kind = detectEmergencyIntent(text);
+  if (!kind) return { handled: false };
+
+  const hotelAction = hotelNavAction();
+  const emergencyInfo = await resolveCountryEmergencyInfo({
+    lat: origin?.lat,
+    lng: origin?.lng,
+  });
+  const dialSos = dialPrimary(emergencyInfo);
+  const dialAdvice = dialMedicalAdvice(emergencyInfo);
+  const sosNum = emergencyInfo.primary.number;
+  const sosLabel = emergencyInfo.primary.label;
+
+  // Lost without GPS → hotel if known, else calm tip
+  if (kind === 'lost') {
+    const bullets = [
+      primaryBullet(emergencyInfo),
+      hotelAction
+        ? 'Route zum gespeicherten Hotel verfügbar'
+        : 'Hotel noch nicht gespeichert — sag mir den Namen',
+    ];
+    let speech = `Alles gut — ruhig bleiben. In ${emergencyInfo.countryLabel} erreichst du den Notruf unter ${sosNum}. `;
+    if (hotelAction) {
+      speech +=
+        'Ich kann dich zu deinem Hotel zurückbringen — Route ist bereit.';
+    } else if (origin) {
+      speech +=
+        'Sag mir ein Markenzeichen in der Nähe oder deinen Hotelnamen, dann find ich dich.';
+    } else {
+      speech +=
+        'GPS kurz an — dann bring ich dich zurück zum Hotel oder zu einem festen Punkt.';
+    }
+    const actions: QuickAction[] = [dialSos];
+    if (hotelAction) actions.push(hotelAction);
+    const concierge = buildEmergencyConcierge({
+      speech,
+      bullets,
+      actions,
+      title: 'Orientierung',
+    });
+    return { handled: true, reply: speech, concierge };
+  }
+
+  if (!origin) {
+    const advice = adviceBullet(emergencyInfo);
+    const speech =
+      `Ruhig bleiben. Bei Lebensgefahr: ${sosNum} tippen (${sosLabel} in ${emergencyInfo.countryLabel}). Ich brauche kurz GPS, dann zeig ich dir den nächsten Arzt oder die Klinik mit Route und Nummer.`;
+    const concierge = buildEmergencyConcierge({
+      speech,
+      bullets: [
+        primaryBullet(emergencyInfo),
+        ...(advice ? [advice] : []),
+        'GPS an → konkrete Praxis/Klinik',
+      ].slice(0, 3),
+      actions: [
+        dialSos,
+        ...(dialAdvice ? [dialAdvice] : []),
+        ...(hotelAction ? [hotelAction] : []),
+      ],
+      title: 'Hilfe',
+    });
+    return { handled: true, reply: speech, concierge };
+  }
+
+  const specialty = detectInjurySpecialty(text);
+  const useSpecialtyPath =
+    specialty === 'tooth' ||
+    specialty === 'foot' ||
+    specialty === 'eye' ||
+    specialty === 'allergy' ||
+    kind === 'dentist';
+
+  let primary: DiscoveryResult | null = null;
+  let secondary: DiscoveryResult | null = null;
+  let skippedVacation: string[] = [];
+  let hoursChecked = false;
+
+  if (useSpecialtyPath) {
+    const spec = await findSpecialtyHelp(
+      kind === 'dentist' ? 'tooth' : specialty,
+      origin,
+    );
+    primary = spec.primary;
+    skippedVacation = spec.skippedVacation;
+    hoursChecked = spec.hoursChecked;
+  } else {
+    // Prefer: doctor for Arzt/krank, hospital for sos/hospital, pharmacy for pharmacy
+    const order: HelpKind[] =
+      kind === 'pharmacy'
+        ? ['pharmacy', 'doctor', 'hospital']
+        : kind === 'hospital' || kind === 'sos'
+          ? ['hospital', 'doctor', 'pharmacy']
+          : ['doctor', 'hospital', 'pharmacy'];
+
+    const results: DiscoveryResult[] = [];
+    for (const k of order) {
+      const r = await findHelp(k, origin);
+      if (r.candidates.length) results.push(r);
+      if (results.length >= 2) break;
+    }
+    primary = results[0] ?? null;
+    secondary = results[1] ?? null;
+
+    // Website-Check auch im Standardpfad (Top-Kandidat)
+    if (primary?.candidates[0]?.websiteUri) {
+      const status = await checkVenueWebsiteStatus(
+        primary.candidates[0].websiteUri,
+      );
+      hoursChecked = status.checked || hoursChecked;
+      if (status.likelyClosedOrVacation) {
+        skippedVacation.push(primary.candidates[0].name);
+        const rest = primary.candidates.slice(1);
+        if (rest.length) {
+          primary = { ...primary, candidates: rest };
+        } else if (secondary?.candidates.length) {
+          primary = secondary;
+          secondary = null;
+        } else {
+          // Specialty-Fallback Notaufnahme
+          const fallback = await findSpecialtyHelp('general', origin);
+          primary = fallback.primary;
+          skippedVacation.push(...fallback.skippedVacation);
+          hoursChecked = hoursChecked || fallback.hoursChecked;
+        }
+      }
+    }
+  }
+
+  const top = primary?.candidates[0] ?? null;
+  const alt =
+    primary?.candidates[1] ?? secondary?.candidates[0] ?? null;
+
+  const bullets: string[] = [
+    `Lebensgefahr → ${sosNum} (du tippst, ich rufe nicht selbst)`,
+  ];
+  const actions: QuickAction[] = [dialSos];
+
+  let speech = '';
+
+  if (top && primary) {
+    const what = primary.queryLabel || 'Hilfe';
+    const vacNote =
+      skippedVacation.length > 0
+        ? ` ${skippedVacation[0]} fällt laut Website aus (Urlaub/geschlossen) — deshalb die Alternative. `
+        : '';
+    speech =
+      vacNote +
+      `${what} in der Nähe: ${placeLabel(top, what)}, circa ${formatDist(top.distanceM)}` +
+      `${top.openNow ? ', gerade offen' : ''}` +
+      `${hoursChecked ? ' (Website geprüft)' : ''}. ` +
+      `Route liegt bereit` +
+      `${top.phoneNumber ? ' — und die Durchwahl zum Anrufen' : ''}. ` +
+      `Bei akuter Lebensgefahr: sofort ${sosNum}. ` +
+      (specialty === 'foot'
+        ? 'Knöchel/Fuß → Unfall/Orthopädie, nicht Zahnarzt. '
+        : specialty === 'tooth'
+          ? 'Zahn → Zahnarzt-Notdienst. '
+          : '') +
+      `Was genau fehlt — Fieber, Übelkeit, Verletzung, Atemnot? Dann kann ich dich vor Ort ruhig mitdenken.`;
+    bullets.push(
+      `${placeLabel(top, what)} · ${formatDist(top.distanceM)}${
+        top.openNow ? ' · offen' : ''
+      }`,
+    );
+    if (top.phoneNumber) {
+      bullets.push(`Tel. ${top.phoneNumber}`);
+    } else if (dialAdvice && emergencyInfo.medicalAdvice) {
+      bullets.push(adviceBullet(emergencyInfo)!);
+      actions.push(dialAdvice);
+    }
+    actions.push(...navAndDialForPlace(top, what));
+    useFinnusStore.getState().setPendingNavOffer({
+      poiId: -1,
+      name: placeLabel(top, what),
+      lat: top.lat,
+      lng: top.lng,
+    });
+  } else {
+    const advicePart = emergencyInfo.medicalAdvice
+      ? ` Sonst ${emergencyInfo.medicalAdvice.number} für ${emergencyInfo.medicalAdvice.label}.`
+      : '';
+    const vacPart =
+      skippedVacation.length > 0
+        ? ` Mehrere Praxen laut Website im Urlaub/geschlossen.`
+        : '';
+    speech =
+      `Gerade finde ich keine passende offene Hilfe in der Nähe — bei Notfall sofort ${sosNum}.${vacPart}${advicePart} Was genau fehlt der Person?`;
+    bullets.push('Keine passende Praxis/Klinik gefunden');
+    if (dialAdvice && emergencyInfo.medicalAdvice) {
+      bullets.push(adviceBullet(emergencyInfo)!);
+      actions.push(dialAdvice);
+    }
+  }
+
+  if (alt && (!top || alt.placeId !== top.placeId)) {
+    const altLabel = primary?.queryLabel || secondary?.queryLabel || 'Alternative';
+    bullets.push(
+      `${altLabel}: ${placeLabel(alt, altLabel)} · ${formatDist(alt.distanceM)}`,
+    );
+    if (actions.length < 4) {
+      actions.push({
+        type: 'START_NAVIGATION',
+        label: shortenActionLabel(`📍 ${altLabel}`),
+        payload: {
+          destName: placeLabel(alt, altLabel),
+          destLat: alt.lat,
+          destLng: alt.lng,
+          targetPoiId: alt.placeId ? `place:${alt.placeId}` : undefined,
+          skipClosingGate: true,
+          keepCard: true,
+        },
+      });
+    }
+  }
+
+  if (hotelAction && actions.length < 4) {
+    actions.push(hotelAction);
+    bullets.push('Hotel-Route verfügbar');
+  }
+
+  if (primary?.candidates.length) {
+    useFinnusStore.getState().setDiscoveryCandidates(primary.candidates);
+  }
+
+  const concierge = buildEmergencyConcierge({
+    speech: speech.trim(),
+    bullets: bullets.slice(0, 3),
+    actions,
+    title:
+      kind === 'pharmacy'
+        ? 'Apotheke'
+        : kind === 'dentist' || specialty === 'tooth'
+          ? 'Zahnarzt'
+          : 'Arzt & Hilfe',
+  });
+
+  return {
+    handled: true,
+    reply: speech.trim(),
+    concierge,
+    meta: {
+      specialty,
+      hoursChecked,
+      skippedVacation,
+      openNow: top?.openNow ?? null,
+    },
+  };
+}

@@ -15,7 +15,7 @@ export type CityCoverageBounds = {
   lngMax: number;
   /** Optional grobes Polygon [lat,lng][] für Karten-Overlay */
   polygon?: Array<[number, number]>;
-  source: 'builtin' | 'nominatim' | 'pack_estimate';
+  source: 'builtin' | 'nominatim' | 'pack_estimate' | 'pack';
 };
 
 const PATH = `${FileSystem.documentDirectory}findus-city-coverage-bounds.json`;
@@ -100,7 +100,7 @@ export function getBuiltinCityBounds(cityId: string): CityCoverageBounds | null 
 }
 
 /**
- * Sync: Builtin → Disk-Cache → null.
+ * Sync: Disk-Cache (inkl. Pack) → Builtin → null.
  */
 export function resolveCityCoverageBoundsSync(
   cityId?: string | null,
@@ -114,6 +114,53 @@ export function resolveCityCoverageBoundsSync(
   const builtin = getBuiltinCityBounds(id);
   if (builtin) return builtin;
   return null;
+}
+
+/**
+ * Aus Stadt-Pack `_coverage` beim Install registrieren.
+ * Pack schlägt Builtin, wird von Nominatim-Polygon ggf. später verfeinert.
+ */
+export function registerCoverageBoundsFromPack(opts: {
+  cityId: string;
+  name?: string;
+  latMin: number;
+  latMax: number;
+  lngMin: number;
+  lngMax: number;
+  polygon?: Array<[number, number]>;
+}): CityCoverageBounds | null {
+  const id = opts.cityId.trim().toLowerCase();
+  if (!id) return null;
+  if (
+    ![opts.latMin, opts.latMax, opts.lngMin, opts.lngMax].every(Number.isFinite)
+  ) {
+    return null;
+  }
+  if (opts.latMin >= opts.latMax || opts.lngMin >= opts.lngMax) return null;
+
+  void hydrate();
+  const bounds: CityCoverageBounds = {
+    cityId: id,
+    name: opts.name ?? id,
+    latMin: opts.latMin,
+    latMax: opts.latMax,
+    lngMin: opts.lngMin,
+    lngMax: opts.lngMax,
+    polygon: opts.polygon?.length ? opts.polygon : undefined,
+    source: 'pack',
+  };
+  // Don't overwrite a richer nominatim polygon unless pack also has polygon
+  const existing = cache[id];
+  if (
+    existing?.source === 'nominatim' &&
+    existing.polygon?.length &&
+    !bounds.polygon?.length
+  ) {
+    return existing;
+  }
+  cache[id] = bounds;
+  persist();
+  return bounds;
 }
 
 /** Pack-Zentrum → grobe Schätz-BBox (~3 km Radius). */
@@ -245,9 +292,12 @@ export async function ensureActiveCityCoverageBounds(): Promise<CityCoverageBoun
   const cityId = (profile?.cityId ?? '').trim().toLowerCase();
   if (!cityId) return null;
   const existing = resolveCityCoverageBoundsSync(cityId);
-  if (existing?.source === 'nominatim' || existing?.source === 'builtin') {
-    // Builtin: einmal Nominatim im Hintergrund für Polygon
-    if (existing.source === 'builtin' && !existing.polygon?.length) {
+  if (existing?.source === 'nominatim' || existing?.source === 'builtin' || existing?.source === 'pack') {
+    // Builtin/Pack: einmal Nominatim im Hintergrund für Polygon
+    if (
+      (existing.source === 'builtin' || existing.source === 'pack') &&
+      !existing.polygon?.length
+    ) {
       void fetchAndCacheCityBoundsFromNominatim({
         cityId,
         displayName: profile?.cityName || existing.name,

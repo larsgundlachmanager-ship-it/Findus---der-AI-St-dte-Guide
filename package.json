@@ -28,6 +28,8 @@
     "test:live-quality": "npx --yes tsx scripts/run-live-quality.ts",
     "test:laboe-battery": "npx --yes tsx scripts/run-laboe-battery.ts",
     "test:reboot-scenarios": "npx --yes tsx scripts/run-reboot-scenario-gate.ts",
+    "test:manager-harness": "npx --yes tsx scripts/run-manager-harness.ts",
+    "test:pitch-gate": "npx --yes tsx scripts/run-pitch-gate.ts",
     "verify:push-weather": "node scripts/verifyPushAndWeather.mjs",
     "validate:g2p": "node scripts/validate-german-g2p.cjs",
     "validate:espeak": "node scripts/validate-native-espeak-g2p.cjs",
@@ -56,6 +58,8 @@
     "build:wangerooge-full": "node scripts/buildWangeroogeFull.mjs",
     "bake:walk": "node scripts/bakeWalkGraph.mjs",
     "upload:city": "node scripts/uploadCityPack.mjs",
+    "blueprint:pending": "node scripts/blueprint-pending.mjs",
+    "blueprint:publish": "node scripts/blueprint-publish.mjs",
     "beta:situations:review": "node scripts/betaSituations.mjs review",
     "beta:situations:sync": "node scripts/betaSituations.mjs sync",
     "beta:situations:promote": "node scripts/betaSituations.mjs promote",
@@ -86,6 +90,7 @@
     "expo-status-bar": "~2.0.1",
     "expo-task-manager": "~12.0.6",
     "expo-web-browser": "14.0.2",
+    "findus-device-audio": "file:modules/findus-device-audio",
     "findus-espeak": "file:modules/findus-espeak",
     "jszip": "^3.10.1",
     "llama.rn": "^0.5.11",
@@ -104,8 +109,10 @@
     "@types/jszip": "^3.4.0",
     "@types/react": "~18.3.12",
     "patch-package": "^8.0.1",
-    "sharp": "^0.34.5",
     "typescript": "~5.3.3"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.34.5"
   },
   "private": true
 }

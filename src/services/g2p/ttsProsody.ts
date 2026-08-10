@@ -13,7 +13,7 @@ const COMPOUND_PRONUNCIATION: [RegExp, string][] = [
 ];
 
 /**
- * Entfernt LLM-/Engine-Atempausen, die Kokoro zäh und geröchelt wirken lassen.
+ * Entfernt LLM-/Engine-Atempausen, die TTS zäh und geröchelt wirken lassen.
  * Ellipsen, Gedankenstriche, gestapelte Punkte → Komma oder einzelner Punkt.
  */
 export function stripArtificialBreathPauses(text: string): string {
@@ -42,7 +42,7 @@ export function normalizeNaturalPunctuation(text: string): string {
 }
 
 /**
- * Defensive Prosodie für Kokoro — flüssig wie Sample-WAVs.
+ * Defensive Prosodie für TTS — flüssig wie Sample-WAVs.
  * Injiziert KEINE Ellipsen und KEINE Extra-Atemholen-Marker.
  */
 export function applyTtsProsodyPolish(text: string): string {

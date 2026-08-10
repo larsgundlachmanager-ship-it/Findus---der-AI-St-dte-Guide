@@ -9,22 +9,23 @@ export type PermissionAlertKind =
   | 'locationServices'
   | 'microphone'
   | 'speechUnavailable'
-  | 'audioConsent';
+  | 'audioConsent'
+  | 'notifications';
 
 const COPY: Record<
   PermissionAlertKind,
   { title: string; message: string; openSettings: boolean }
 > = {
   location: {
-    title: 'Standort-Berechtigung fehlt',
+    title: 'Standort-Berechtigung',
     message:
-      'Findus braucht deinen Standort, um Sehenswürdigkeiten zu erkennen und dich zu navigieren. Bitte erlaube den Zugriff.',
+      'Findus braucht deinen Standort für Orte in der Nähe und Navigation. Bitte erlauben — danach kannst du „Immer zulassen“ direkt im System-Dialog tippen.',
     openSettings: true,
   },
   locationServices: {
     title: 'Standort-Dienste aus',
     message:
-      'Am Gerät sind die Standort-Dienste deaktiviert. Bitte schalte sie ein, damit Findus Orte in der Nähe finden kann.',
+      'Am Gerät sind die Standort-Dienste deaktiviert. Bitte schalte sie ein, damit Findus Orte in der Nähe finden, Navigationshinweise geben und Trigger rechtzeitig erkennen kann.',
     openSettings: true,
   },
   microphone: {
@@ -44,6 +45,12 @@ const COPY: Record<
     message:
       'Bitte bestätige unter Einstellungen → Einrichtung → Datenschutz & Mikrofon, dass Spracheingaben verarbeitet werden dürfen.',
     openSettings: false,
+  },
+  notifications: {
+    title: 'Benachrichtigungen fehlen',
+    message:
+      'Damit Findus dich rechtzeitig zum Bus oder Flug erinnern oder wecken kann — auch bei gesperrtem Bildschirm — bitte Benachrichtigungen erlauben.',
+    openSettings: true,
   },
 };
 

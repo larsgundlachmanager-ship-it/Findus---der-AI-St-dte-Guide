@@ -1,6 +1,8 @@
 /**
- * Modul-2 Entry — Reboot SSOT only.
- * Legacy Override-Stack: src/_legacy_quarantine/module2/runPipeline.legacy.ts
+ * Modul-2 Entry — nur Concierge-Manager (neue Vision).
+ * Legacy Override-Stack ist tot; keine parallele Bridge/Floskel.
  */
 
-export { runRebootPipeline as runModule2Pipeline } from '../reboot/runRebootPipeline';
+export { runConciergeTurn as runModule2Pipeline } from '../router/runConciergeTurn';
+/** @deprecated Alias — gleicher Manager-Pfad */
+export { runConciergeTurn as runRebootPipeline } from '../router/runConciergeTurn';

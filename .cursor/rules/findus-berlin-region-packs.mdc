@@ -1,0 +1,36 @@
+---
+description: Berlin-Region Pack-Familie — Zentral vs Umland vs eigene Städte (Paywall).
+alwaysApply: false
+---
+
+# Findus — Berlin-Region Packs
+
+## Produkte (strikt getrennt)
+
+| city_id | Name | Rolle |
+|---------|------|--------|
+| `berlin-zentral` | Berlin Zentral | Base — Highlights Kern |
+| `berlin-umland` | Berlin Umland | Addon / später Paywall — äußeres Berlin **ohne** Zentral-Orte |
+| `potsdam` | Potsdam | Eigene Stadt (inkl. Babelsberg) |
+| `spreewald`, `beelitz`, `oranienburg`, `werder`, `brandenburg_havel`, `bad_saarow`, `chorin`, `wandlitz`, `rheinsberg` | eigenständig | Tourismus-Ziele um Berlin (IDs mit `_`, nicht `-`) |
+
+## Zentral-Geografie
+
+Charlottenburg ↔ Lichtenberg, Gesundbrunnen ↔ Schöneberg/Kreuzberg.
+
+SSOT: `scripts/cityPack/berlinRegionPolicy.mjs` (`BERLIN_ZENTRUM_BBOX`, Force-/Exclude-IDs).
+
+- Olympiastadion, Tempelhofer Feld, Tierpark, Gärten der Welt → **Umland**, nicht Zentral.
+- Kein Spot in beiden Packs. Nach Umland-Discovery immer `pruneBerlinUmlandStrict.mjs`.
+
+## Workflow
+
+```text
+splitBerlinZentrumUmland.mjs   # → berlin-zentral.json + berlin-umland.json
+city:auto --city Berlin --id berlin-umland --radius 28000 --skip-wiki
+node scripts/cityPack/pruneBerlinUmlandStrict.mjs
+city:auto --city Potsdam --id potsdam
+# + 9 Outlier-Städte laut BERLIN_OUTLIER_CITIES
+```
+
+Paywall-Feld im Pack: `_product.paywall` / `_product.tier` (`base` | `addon` | `city`).

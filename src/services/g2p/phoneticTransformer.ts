@@ -1,5 +1,5 @@
 /**
- * Phonetic Pre-Filter vor eSpeak/Kokoro.
+ * Phonetic Pre-Filter vor eSpeak/TTS.
  * - Alle Ziffern → ausgeschriebene deutsche Wörter
  * - Clean-Text: keine Bindestriche (außer Lautmalerei), Ellipsen, Sternchen, Sonderzeichen
  * - Uhrzeiten, Ordinal-Daten, Buchstaben-Codes
@@ -7,20 +7,13 @@
  * - Lautmalerei: Tüt-tüt! → Tüt-tüt (Bindestrich bleibt)
  * - Buchstabier-Fallen & Markdown-Müll entfernen
  * - Prisdorf → Prissdorf (kurzes i)
- * - Audio-only: Englisch-Ortho + Kurzwort-Hints (Hof→Hoff); UI bleibt Original
- * - Scan: pronunciations.json + englishOrthoPronunciations.json vor G2P
+ * - Audio-only: Englisch-Ortho für Anglizismen; Alltagswörter bleiben Deutsch
  */
 
 import englishOrthoJson from '../../assets/data/englishOrthoPronunciations.json';
-import deOrthoJson from '../../assets/data/deOrthoPronunciations.json';
 import deProblemWordJson from '../../assets/data/deProblemWordPronunciations.json';
-import pronunciationsJson from '../../assets/data/pronunciations.json';
-import {
-  applyDictionaryToAudioText,
-  getCombinedDictionary,
-  onDictionaryCacheInvalidate,
-} from '../tts/dictionaryEngine';
-import { applyGermanTtsProsodyRules } from './germanTtsProsodyRules';
+import { onDictionaryCacheInvalidate } from '../tts/dictionaryEngine';
+import { stripStageDirections } from './germanTtsProsodyRules';
 import { stripArtificialBreathPauses } from './ttsProsody';
 
 /** IPA-typische Zeichen — Werte damit bleiben IPA-Marker, keine Ortho-Hints. */
@@ -163,8 +156,9 @@ export function numberToGermanWords(
     const century = Math.floor(v / 100);
     const rest = v % 100;
     const head = underHundred(century);
+    // Leerzeichen vor Rest → TTS betont „neunzehnhundert elf“ statt Ziffern-Salat
     const body =
-      rest === 0 ? 'hundert' : `hundert${underHundred(rest)}`;
+      rest === 0 ? 'hundert' : `hundert ${underHundred(rest)}`;
     return neg ? `minus ${head}${body}` : `${head}${body}`;
   }
 
@@ -268,7 +262,7 @@ export function transformLetterCodes(text: string): string {
       if (letters.length <= 3 && /[AEIOUÄÖÜ]/i.test(letters) && !digits) {
         return toTitleCaseDe(letters);
       }
-      // Kein Buchstabieren: als Wort belassen (Kokoro stolpert sonst über „V I N")
+      // Kein Buchstabieren: als Wort belassen (TTS stolpert sonst über „V I N")
       const word = toTitleCaseDe(letters);
       if (!digits) return word;
       return `${word} ${numberToGermanWords(Number(digits))}`;
@@ -306,7 +300,7 @@ const SHORT_NOUN_AUDIO: Record<string, string> = {
   höfe: 'Höffe',
   hoefe: 'Höffe',
   innenhof: 'Innenhoff',
-  bahnhof: 'Bahnoff',
+  // Bahnhof/kurz/heißt: nicht hier — Cartesia-IPA in cartesiaInlinePhonemes.ts
   bauernhof: 'Bauernhoff',
   schulhof: 'Schulhoff',
   hinterhof: 'Hinterhoff',
@@ -314,6 +308,17 @@ const SHORT_NOUN_AUDIO: Record<string, string> = {
   gasthof: 'Gasthoff',
   friedhof: 'Friedhoff',
   kirchhof: 'Kirchhoff',
+  // Cartesia: z→engl. /z/, st→engl. /st/, rein→engl. reen, sonst→falsch
+  zack: 'Tsack',
+  zahnrad: 'Tsahn-Raat',
+  zahnräder: 'Tsahn-Rääter',
+  zahnraeder: 'Tsahn-Rääter',
+  stopp: 'Schtopp',
+  stopps: 'Schtopps',
+  zwischenstopp: 'Zwischen-Schtopp',
+  zwischenstopps: 'Zwischen-Schtopps',
+  rein: 'Raihn',
+  sonst: 'Zonst',
   dom: 'Dohm',
   rat: 'Raht',
   tor: 'Tohr',
@@ -326,6 +331,24 @@ const SHORT_NOUN_AUDIO: Record<string, string> = {
   see: 'Seh',
   ort: 'Ortt',
   weg: 'Weeg',
+  // Cartesia liest „Platz“ sonst oft englisch — dt. z = /ts/
+  platz: 'Plaz',
+  plätze: 'Pläze',
+  plaetze: 'Pläze',
+  marktplatz: 'Marktplaz',
+  marienplatz: 'Marienplaz',
+  rathausplatz: 'Rathausplaz',
+  sportplatz: 'Sportplaz',
+  golfplatz: 'Golfplaz',
+  parkplatz: 'Parkplaz',
+  stellplatz: 'Stellplaz',
+  abstellplatz: 'Abstellplaz',
+  spielplatz: 'Spielplaz',
+  // Cartesia liest „Sprache“ sonst oft falsch
+  sprache: 'Schpraache',
+  sprachen: 'Schpraachen',
+  sprachlich: 'schpraachlich',
+  markt: 'Markt',
   kai: 'Kai',
   pier: 'Piir',
   bürger: 'Büürger',
@@ -560,6 +583,9 @@ export function applyPlaceNamePhonetics(text: string): string {
 export function stripSpellTrapsAndMarkdownJunk(text: string): string {
   let s = text;
 
+  // Regie ZUERST (*flüstert*), sonst bleiben die Wörter nach Asterisk-Strip hörbar
+  s = stripStageDirections(s);
+
   // Markdown / Formatierungs-Artefakte
   s = s.replace(/\bSmall\s+(Cup|Caps|Cap)\b/gi, ' ');
   s = s.replace(/[*#_~`]+/g, ' ');
@@ -589,7 +615,7 @@ export function stripSpellTrapsAndMarkdownJunk(text: string): string {
  * Clean-Text: Ellipsen, Sternchen, Sonderzeichen weg.
  * Bindestriche in Lautmalerei (Tüt-tüt) bleiben erhalten.
  * Nur Buchstaben, Ziffern (danach expandiert), einfache Satzzeichen.
- * Keine künstlichen Atempausen für Kokoro.
+ * Keine künstlichen Atempausen für TTS.
  */
 export function sanitizeSpokenText(text: string): string {
   let s = stripArtificialBreathPauses(text);
@@ -626,6 +652,10 @@ export function sanitizeSpokenText(text: string): string {
 export function prepareDisplayText(text: string): string {
   let s = text.normalize('NFKC').replace(/\s+/g, ' ').trim();
   if (!s) return s;
+  // Cartesia-/IPA-Spans gehören nie in UI/Untertitel
+  s = s.replace(/<<[^>]*>>/g, ' ');
+  s = s.replace(/⟦[^⟧]*⟧/g, ' ');
+  s = s.replace(/\[[ˈˌ][^\]\n]{0,80}\]/g, ' ');
   s = stripSpellTrapsAndMarkdownJunk(s);
   s = expandTransitLineCodes(s);
   s = applyPlaceNamePhonetics(s);
@@ -650,28 +680,18 @@ export function prepareSpokenText(text: string): string {
 }
 
 /**
- * Audio-Pfad: Display-Basis → Aussprache (Ortho auf Originalwörtern) → Prosodie.
- * UI behält prepareDisplayText (Fairway, Hof). Tempo systemweit 1.0.
- * Dictionary-Engine (Base + Cloud + User) ersetzt vor Ortho per `\bWort\b`.
+ * Audio-Pfad für Cartesia (Hard-Reboot):
+ * Display-Basis, keine Ortho-/IPA-/Fremdwort-Hacks.
  */
 export function prepareAudioText(text: string): string {
   let s = prepareDisplayText(text);
   if (!s) return s;
-  // A) Aussprache zuerst (Ortho auf Originalwörtern — IPA/Ortho greifen)
-  s = stripArtificialBreathPauses(s);
-  s = applyDictionaryToAudioText(s);
-  s = applyEnglishOrthoPronunciations(s);
-  s = applyShortNounAudioHints(s);
-  s = normalizeShortGermanNounCasing(s);
-  s = applyShortNounAudioHints(s);
-  // B) Prosodie danach: Emotion, Pausen, Spannung
-  s = applyGermanTtsProsodyRules(s);
   s = stripArtificialBreathPauses(s);
   return s.replace(/\s+/g, ' ').trim();
 }
 
 /**
- * Vollständiger Pre-Filter vor G2P/Kokoro (Audio).
+ * Vollständiger Pre-Filter vor G2P/TTS (Audio).
  */
 export function applyPhoneticTransformer(text: string): string {
   return prepareAudioText(text);
@@ -700,34 +720,14 @@ function getEnglishOrthoMap(): Map<string, string> {
   if (englishOrthoCache) return englishOrthoCache;
   const map = new Map<string, string>();
 
-  const ingest = (record: Record<string, string>, orthoOnly: boolean) => {
-    for (const [k, v] of Object.entries(record)) {
-      const key = k.normalize('NFKC').toLowerCase().trim();
-      const val = String(v ?? '').trim();
-      if (!key || !val) continue;
-      if (orthoOnly && !isOrthoPronunciation(val)) continue;
-      // Kurzwort-Hints und Englisch-Ortho gewinnen gegen generische IPA-Reste
-      map.set(key, val);
-    }
-  };
-
-  // Basis: dediziertes Englisch-Ortho-Lexikon
-  ingest(englishOrthoJson as Record<string, string>, false);
-  // DE Problemwörter (Geschichte, Schule, Lütte, …) — Audio-only Ortho
-  ingest(deOrthoJson as Record<string, string>, false);
-  // DE Problemwörter IPA/Ortho-Mix: nur Ortho (Hoff/Bahnoff)
-  ingest(deProblemWordJson as Record<string, string>, true);
-  // Overlay: Ortho-Hints aus pronunciations.json
-  ingest(pronunciationsJson as Record<string, string>, true);
-
-  // Dynamische Engine: Cloud-Updates + User-Scan (Ortho-Werte)
-  for (const [k, v] of getCombinedDictionary()) {
-    if (isOrthoPronunciation(v)) map.set(k, v);
-  }
-
-  // Eingebaute Kurzwort-Hints immer zuletzt (gewinnen)
-  for (const [k, v] of Object.entries(SHORT_NOUN_AUDIO)) {
-    map.set(k.toLowerCase(), v);
+  // Nur echtes EN-Ortho (vibe→Vaib, guide→Geid …).
+  // deOrtho / deProblemWord / SHORT_NOUN / Dictionary-Base erzeugen auf
+  // nativen DE-Cartesia-Stimmen Akzent (steht→…, Platz→Plaz, rein→Raihn).
+  for (const [k, v] of Object.entries(englishOrthoJson as Record<string, string>)) {
+    const key = k.normalize('NFKC').toLowerCase().trim();
+    const val = String(v ?? '').trim();
+    if (!key || !val) continue;
+    map.set(key, val);
   }
 
   englishOrthoCache = map;
@@ -753,7 +753,8 @@ function escapeRe(s: string): string {
 }
 
 /**
- * Ersetzt englische/fremde Wörter + Kurzwörter durch deutsche Orthografie für eSpeak.
+ * Ersetzt englische Lehnwörter durch deutsche Orthografie-Hints für TTS.
+ * Nur englishOrthoPronunciations.json — keine DE-Alltagswort-Hacks.
  * Nur für Audio — Untertitel bleiben unverändert.
  */
 export function applyEnglishOrthoPronunciations(text: string): string {

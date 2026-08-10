@@ -1,0 +1,2381 @@
+{
+  "notes": [
+    "Berlin Wave C — fehlende Story-Icons + Vertiefung dünner T1. Nur belegte Fakten (Wikipedia, Stiftung/Museum-Sites, berlin.de).",
+    "Preise/Öffnung LIVE; keine Dialog-Skripte."
+  ],
+  "spots": [
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_checkpoint_charlie",
+      "name": "Checkpoint Charlie",
+      "lat": 52.5074463,
+      "lng": 13.390391,
+      "category": "denkmal",
+      "general_info": "Grenzübergang Friedrichstraße zwischen Zimmer- und Kochstraße (1961–1990) für Alliierte und Berechtigte zwischen Sowjetischem und US-Sektor. Heute Erinnerungsort mit Replik des Grenzhäuschens; Original im AlliiertenMuseum Dahlem.",
+      "bullets": [
+        "NATO-Alphabet: Charlie = dritter alliierter Kontrollpunkt.",
+        "Kreuzung Friedrichstraße / Zimmerstraße.",
+        "Mauer-Museum in der Nähe (LIVE)."
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Checkpoint Charlie?",
+          "a": "An der Friedrichstraße: Replik des weißen Grenzschutz-Häuschens, Bodenmarkierung der früheren Grenze und Schilder der alliierten Sektoren."
+        }
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: touristisch markierte Kreuzung mit Zimmerstraße; kleines weißes Wachhäuschen-Replikat, Flaggen und Fotomotiv „You are leaving the American sector“.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Historie: nach Mauerbau August/September 1961 von West-Alliierten eingerichtet für registriertes Überschreiten der Sektorengrenze (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Benennung: Alpha Helmstedt/Marienborn, Bravo Dreilinden, Charlie Friedrichstraße — dritter alliierter Zugang in Berlin.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Verband Ost-Berlin Mitte mit West-Berlin Kreuzberg; einer der wenigen innerstädtischen Übergänge für Ausländer und Alliierten-Personal.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Oktober 1961: Panzerkrise — US- und sowjetische Panzer standen Stunden an der Friedrichstraße gegenüber, bevor beide Seiten zurückzogen (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1963: John F. Kennedy besuchte Berlin; Checkpoint als Medien-Symbol des Kalten Krieges weltweit.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Zahlreiche dokumentierte Fluchtversuche in der Umgebung; Mauer, Stacheldraht und Schießbefehl prägten den Alltag bis 1989.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach 1990 Abbruch der Grenzanlagen; Asphaltmarkierungen der Mauerlinie in der Umgebung als Berliner Mauerdenkmal.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Original-Grenzhäuschen im AlliiertenMuseum Dahlem; am Ort steht eine Nachbildung für Besucher.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Friedrichstraße: vor 1961 durchgängige Pracht- und Geschäftsachse; Teilung zerschnitt das Netz bis zur Wiedervereinigung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Topographie des Terrors und Gropius-Bau in Gehdistanz; Potsdamer Platz nördlich wieder vernetzt.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Kommerzialisierung am Ort ist kontrovers diskutiert — dennoch zentraler Lernort der Teilungsgeschichte.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Mauermuseum Haus am Checkpoint Charlie (private Sammlung) ergänzt den öffentlichen Erinnerungsort — LIVE Öffnung/Preise.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Zimmerstraße und Kochstraße markieren die ehemalige Grenzlinie zwischen Ost- und West-Berlin.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Die innerstädtische Grenze verlief hier mitten durch dicht bebaute Blockrand — Alltagsszenen der Teilung oft fotografiert.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1989: nach Maueröffnung strömten Menschen auch hier zwischen den Sektoren; Symbolbilder der friedlichen Revolution.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Mauermuseum, Führungen und Sonderausstellungen ephemer auf offiziellen Sites prüfen — Pack ohne Ticketpreise.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Grenzübergang nur für Diplomaten, Alliierte Streitkräfte und registrierte Besucher — nicht für Ost-Berliner Alltagspendeln. Kontrollen durch US- und sowjetische Soldaten an gegenüberliegenden Posten. Friedrichstraße blieb Sperrzone mit Sichtachsen zur Mauer.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Peter-Fechter-Gedenkstein und weitere Erinnerungsmale in der Nachbarschaft verweisen auf Todesopfer an der Mauer — ergänzende Stationen zu Fuß entlang der ehemaligen Grenze.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Standort Friedrichstraße 43–45 (Nähe): Mauermuseum zeigt Alltagsgegenstände der Flucht — ergänzt open-air Erinnerung am Checkpoint.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Koordinaten Kreuzung: klassischer Startpunkt für Mauer-Rundgänge Richtung Topographie des Terrors und Potsdamer Platz.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Alliierten-Schilder in Deutsch/Englisch/Französisch/Russisch erinnern an Vier-Mächte-Status bis 1990.",
+          "tags": [
+            "geschichte"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_topographie_des_terrors",
+      "name": "Topographie des Terrors",
+      "lat": 52.50639,
+      "lng": 13.38361,
+      "category": "museum",
+      "general_info": "Dokumentationszentrum auf dem Gelände der ehemaligen „Zentrale des Terrors“ (Gestapo, SS, SD) an der Niederkirchnerstraße. Freiluft- und Innenausstellung zu NS-Verfolgung, Krieg und Holocaust; archäologisch freigelegte Keller des Gestapo-Hauptquartiers.",
+      "bullets": [
+        "Niederkirchnerstraße / ehem. Prinz-Albrecht-Straße.",
+        "Eintritt laut Stiftung meist frei (LIVE).",
+        "Zwischen Potsdamer Platz und Checkpoint Charlie."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Beton-Stelen entlang der ehemaligen Mauertrasse; gläsernes Besucherzentrum; sichtbare Ausgrabungen der Gestapo-Keller.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Standort: zwischen Ministergärten und Anhalter Bahnhof-Viadukt; Grenzanlage der Berliner Mauer verlief hier durch historisches Verfolgungsareal.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Permanente Außeninstallation seit 2010er; Innenausstellung in Neubau mit Chronologie von 1933 bis 1945.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Themen: Machtübernahme, Polizei- und SS-Apparat, Kriegsverbrechen, Alltagsrassismus; Biografien von Verfolgten und Tätern.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Archäologie: Keller des Gestapo-Hauptquartiers als authentischer Ort; Besucherbrücke über Ausgrabungen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nachbarbau: Martin-Gropius-Bau (Ausstellungen); Abgrenzung zur Wilhelmstraße als ehemalige Regierungsachse.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Stiftung Topographie des Terrors (Land Berlin) betreibt Dauerausstellung und Bildungsprogramm.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Außenband: 15 Stationen entlang der Niederkirchnerstraße mit historischen Fotos am Originalstandort.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Innenausstellung: strukturierte Module zu Institutionen der NS-Terrorherrschaft und ihren Opfern.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Jüdisches Museum und Denkmal für die ermordeten Juden Europas in erweiterter Gehdistanz.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Historischer Kontext: Prinz-Albrecht-Straße beherbergte ab 1930er zentrale Repressionsorgane des NS-Staats.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach 1945: Trümmerfeld im Grenzstreifen; erst nach Mauerfall wieder zugänglich für umfassende Aufarbeitung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Besucherzentrum, Führungen, Sonderausstellungen auf topographie.de ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Bildungsangebote für Schulen und Archive digital ergänzt — LIVE Termine.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Barrierefreiheit: ebenerdige Außenwege; Innenbereich mit Aufzug (LIVE Status).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Erinnerungspolitik: Ort verbindet Stadtgeschichte mit europäischer Verantwortung — keine heroische Architektur, nüchterne Dokumentation.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: „Reichssicherheitshauptamt“ und SS-Führung nutzten benachbarte Bauten für Planung von Deportation und Verfolgung — räumliche Nähe verdeutlicht Bürokratie des Terrors.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Nach 1990 internationale Ausstellungsprojekte auf dem Areal; heute einer der meistbesuchten NS-Dokumentationsorte Deutschlands (LIVE Besucherzahlen).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Benachbarte „Martin-Gropius-Bau“ (Weltkulturen) teilt historisches Areal — kombinierte Besuche möglich (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Wilhelmstraße und Anhalter Straße: ehemalige Regierungsachse des Kaiserreichs und der Weimarer Republik — Kontext für NS-Machtübernahme.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Stelen-Außenweg barrierefrei; bei Regen wetterfeste Kleidung — Freiluftdominiert.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Forschung und Archive der Stiftung ergänzen Ausstellung — Bildungsmaterial für Schulen online (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Erinnerung an Widerstand und Verfolgung einzelner Berliner Biografien in Modulen der Innenausstellung.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Besucherzentrum mit Buchshop und Bildungsmaterial — Einstieg vor Außenrundgang empfohlen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Topographie des Terrors: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_humboldt_forum",
+      "name": "Humboldt Forum",
+      "lat": 52.5175,
+      "lng": 13.402,
+      "category": "museum",
+      "general_info": "Kultur- und Museumsbau im rekonstruierten Berliner Schloss am Schlossplatz: historische Schlossfassaden mit modernem Innenbau. Stiftung Humboldt Forum; Sammlungen des Ethnologischen Museums und Museum für Asiatische Kunst (SMB) ab 23. September 2021 im Westflügel öffentlich.",
+      "bullets": [
+        "Schlossplatz 1, Lustgarten.",
+        "Debatte zu Kolonialismus und Provenienz.",
+        "Gegenüber Museumsinsel und Berliner Dom."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: barocke Schlossfassade mit Kuppel am Lustgarten; Eosanderportal; Blickachse zur Museumsinsel.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Historie: Hohenzollern-Stadtschloss; DDR-Palast der Republik; Abriss 2000er und Neubau mit Fassadenrekonstruktion nach Wiedervereinigungsdebatte.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Festakt 22. September 2021 mit Bundespräsident Steinmeier; öffentlicher Start SMB-Sammlungen 23. September 2021.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Ostflügel und Agora in weiteren Eröffnungsphasen — LIVE humboldtforum.org.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Sammlungen zuvor in Dahlem; im Forum großflächige Präsentation von Weltkulturen und Asiatischer Kunst.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Namen: Alexander und Wilhelm von Humboldt — Wissenschaft und Welterkundung als Leitmotiv.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Programm: Ausstellungen, Konzerte, Vorträge in Agora und Humboldt Lab.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Architektur: Franco Stella — drei historische Fassadenflügel, zeitgenössischer Kern und Dachlandschaft.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Lustgarten, Altes Museum, Berliner Dom und Spree-Insel fußläufig.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Koloniale Herkunft vieler Objekte: Provenienzforschung und Kooperationen mit Herkunftsgesellschaften im Konzept.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Schlossplatz als historisches Zentrum preußischer Macht — wieder städtebauliche Mitte nach jahrzehntelanger Leerstelle.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kuppel und Schlossportal sind Orientierungspunkte von Unter den Linden und Spreeufer.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Tickets, Öffnungszeiten, Wechselausstellungen auf humboldtforum.org ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Dachterrasse teils öffentlich zugänglich — LIVE Regeln.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Barrierefreie Zugänge über moderne Kernarchitektur — LIVE Hinweise vor Ort.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Palast der Republik (1976) stand hier bis Abriss; Erinnerung an DDR-Kulturpolitik in Debatten um Nachfolgebau dokumentiert.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Wiederaufbau-Entscheidung des Bundestags 2002 prägte Berliner Stadtdiskurs — Balance aus historischer Form und zeitgenössischer Nutzung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Humboldt Forum vereint Berliner Schloss-Geschichte, DDR-Erbe und globale Sammlungsgeschichte in einem Haus — keine einheitliche Deutung, bewusst plural.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Schlosskirche im Bau: historische Kapelle im Schloss als weiterer Eröffnungsschwerpunkt (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Humboldt-Universität benannt nach Brüdern — nahe am Lustgarten, wissenschaftlicher Kontext zur Ausstellung.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Spreepromenade verbindet Forum mit Monbijoupark und James-Simon-Galerie-Eingang der Museumsinsel.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Kritische Debatten um Fassadenrekonstruktion vs. Palast der Republik-Erinnerung begleiten Haus seit Planungsphase.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Digitale Guides und mehrsprachige Beschilderung — LIVE App-Angebote.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Humboldt Forum: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Humboldt Forum: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_potsdamer_platz",
+      "name": "Potsdamer Platz",
+      "lat": 52.5096,
+      "lng": 13.376,
+      "category": "ort",
+      "general_info": "Historischer Verkehrsknoten Berlins: vor dem Krieg einer der verkehrsreichsten Plätze Europas; im Krieg zerstört; durch Mauer und Todesstreifen geteilt; nach 1990 einer der größten innerstädtischen Neubauquartiere mit Sony Center, Bahnhof Potsdamer Platz und Hochhäusern.",
+      "bullets": [
+        "S-Bahn/U-Bahn Potsdamer Platz.",
+        "Sony Center Kuppel; Panorama Punkt (LIVE).",
+        "Mauerstreifen früher mitten durch den Platz."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Hochhaus-Silhouette mit Sony Center-Glasdach, Bahntrasse und Fußgängerzonen; rote Mauer-Pfosten als Erinnerungsspur.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Historie: Potsdamer Bahnhof und Platz als Drehkreuz; 1920er/30er Symbol moderner Großstadt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1945: weitgehend Trümmerfeld; Grenze verlief ab 1961 durch das Areal — „Niemandsland“.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach Mauerfall 1989: Bauwagen und Spekulation; Masterplan der 1990er mit internationalen Architekten (Helmut Jahn, Renzo Piano u. a.).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Sony Center: zeltartige Kuppel über öffentlichem Platz — Büros, Kino, Gastronomie.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Deutsche Bahn: Bahnhof Potsdamer Platz unterirdisch angebunden — ICE- und Regionalverkehr.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Mauer-Dokumentation: Pfosten und Bodenmarkierungen erinnern an frühere Grenze.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Kulturforum mit Philharmonie und Neue Nationalgalerie südwestlich; Tiergarten nördlich.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Filmhaus und Entertainment; LEGOLAND Discovery Centre am Platz (LIVE).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Panorama Punkt im Kollhoff-Tower: Aussicht über früheres Mauerband (LIVE Ticket).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Historische Fotos zeigen frühere Lichtzeichenanlage und Verkehrsdichte — Kontrast zu heutiger Fußgängerdominanz.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Daimler City und Quartiersbebauung der 1990er prägen Blockstruktur.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Kino-Programm, Events, Gastronomie-Öffnung ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "ÖPNV: U2, S1/S2/S25, Busse — zentraler Umsteigeknoten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach 2000: weiterer Hotel- und Bürobau; Platz als Symbol wirtschaftlicher Wiedervereinigung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Erste europäische Ampelanlage 1924 am Potsdamer Platz oft zitiert — Technikgeschichte und Moderne Metropole.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Cafés und Kabarett der 1920er machten den Platz zum Kulturkreuz — Literatur und Film dokumentieren Alltag bis 1933.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Nach 1990 internationale Investoren und Stadtplanung rekonstruierten urbanen Kern aus Brache — Debatte über Dichte, Höhe und Öffentlichkeit des Platzes.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Bahnhof Potsdamer Platz: ICE-Anbindung und Einkaufspassagen unter Platz (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Kino im Sony Center und Filmhaus — Berlinale-Veranstaltungen zeitweise am Platz (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "T-Mobile-Hochhaus (Ernst-Reuter-Platz-Nähe) und Quartiers-Türme prägen Skyline-Silhouette vom Tiergarten.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Historischer „Potsdamer Bahnhof“ nicht mehr am Platz — Erinnerung in Dokumentation und Stadtrundgängen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Winter: Weihnachtsmarkt-Standorte variieren — LIVE.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Potsdamer Platz: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Potsdamer Platz: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Potsdamer Platz: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_olympiastadion_berlin",
+      "name": "Olympiastadion Berlin",
+      "lat": 52.514722,
+      "lng": 13.239444,
+      "category": "sport",
+      "general_info": "Olympiapark Berlin (Westend): Hauptstadion der Olympischen Sommerspiele 1936 (Architekt Werner March); Glockenturm und Maifeld. Heute Heimstadion Hertha BSC, Konzert- und Eventlocation; WM-2006-Umbau mit Tribünendach.",
+      "bullets": [
+        "Olympischer Platz 3, Charlottenburg-Wilmersdorf.",
+        "S-Bahn Olympiastadion.",
+        "Glockenturm teils Aussicht (LIVE)."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: niedrige Säulenfassade mit ovalem Stadionring; blauer Tartan; Glockenturm am Maifeld.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Bau 1934–1936 im Zuge der NS-Propaganda-Spiele; Jesse Owens gewann vier Goldmedaillen 1936.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nachkrieg: Nutzung für Sport, Politik und Kultur; 1974 WM-Spiele in Berlin.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Umbauten 2000er für FIFA WM 2006: Dach über Tribünen, moderne Logistik — denkmalgeschütztes Ensemble.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kapazität variiert je Veranstaltung — Fußball Bundesliga und internationale Spiele.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Maifeld: riesige Rasenfläche für Massenveranstaltungen und Festivals.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Waldbühne als Freilichtbühne im Olympiapark — Sommerkonzerte (LIVE).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Glockenturm: erneuert; Aussichtsplattform nach historischem Vorbild (LIVE).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Grunewald und Westend-Villen; AVUS-Historie in der Region.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Architektur March: klassizistische Formensprache der 1930er, weitläufige Achsen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Erinnerungskultur: Ausstellung und Führungen thematisieren NS-Nutzung und Owens (LIVE).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Stadionführungen, Hertha-Spieltermine, Konzertkarten auf olympiastadion.berlin.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Olympische Flamme und Ehrenhof erinnern an Spiele 1936 — kritische Einordnung in Führungen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Barrierefreie Zugänge modernisiert — LIVE Services vor Ort.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Bell Tower und Langemarck-Halle im Park gehörten zum Gesamtensemble — städtebauliche Inszenierung der Spiele.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Nach 1945 britische Besatzung nutzte Stadion; später Bundesliga-Fußball etablierte Hertha als Dauermieter.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: WM 2006 brachte internationale Aufmerksamkeit zurück — Architekturbalance zwischen Denkmalschutz und Moderne.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Olympiapark als Gesamtanlage: weitläufige Grünachsen zwischen Stadion, Maifeld und Waldbühne.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Fritz-Schilgen-Fackellauf 1936 und Fackel-Design — olympische Ikonographie (historisch).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Hertha BSC: Traditionsverein Westberlins — Spielbetrieb prägt Wochenendbesuch (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Führungen durch VIP-Bereiche und Presse-Räume — LIVE Buchung.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nachhaltigkeit: moderne LED-Beleuchtung und Event-Logistik nach WM-Umbau.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Olympiastadion Berlin: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Olympiastadion Berlin: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Olympiastadion Berlin: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Olympiastadion Berlin: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_neue_synagoge",
+      "name": "Neue Synagoge",
+      "lat": 52.524722,
+      "lng": 13.394444,
+      "category": "museum",
+      "general_info": "Monument der jüdischen Emanzipation: Einweihung 1866 (Eduard Knoblauch, Friedrich August Stüler), orientalisch-maurischer Stil; einst größte Synagoge Deutschlands. Nach Brand 1943 Fassadenrest mit goldenen Kuppeln; Centrum Judaicum mit Ausstellung zur Geschichte und Pogromnacht.",
+      "bullets": [
+        "Oranienburger Straße 28–30.",
+        "Kein reguläres Gotteshaus — Gedenk- und Bildungsort.",
+        "Centrum Judaicum (LIVE)."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: goldene Kuppeln und polychrome Ziegel-Fassade an der Oranienburger Straße; Kontrast zu Hackeschen Höfen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "1866: Einweihung in Gegenwart von Otto von Bismarck berichtet (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "November 1938: Brand und Zerstörung; Innenraum nicht wiederhergestellt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1988–1995: Sicherung und Wiederaufbau der Ost-Fassade als Mahnmal.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Centrum Judaicum: Archive und Dauerausstellung zur Berliner Jüdischen Gemeinde.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Architektur: maurische Fensterbögen und Zentralkuppel als Orient-Referenz des 19. Jahrhunderts.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Hackesche Höfe, Oranienburger Straße Ausgehmeile; Jüdisches Museum weiter südlich.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Gedenken an Pogromnacht und Shoah — Ort der Bildung, nicht des Gottesdienstes.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Knoblauch entwarf Synagoge; Stüler vollendete nach Krankheit des Architekten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Centrum Judaicum Öffnungszeiten/Eintritt ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Innenhof teils zugänglich — LIVE Führungen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Synagoge überstand 1938 äußerlich teilweise — Symbol zerstörter jüdischer Gemeinde Berlins.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach 1990 Integration in touristische Route jüdischer Geschichte Mitte.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Jüdische Gemeinde wuchs im 19. Jahrhundert — Neue Synagoge als sichtbares Zeichen bürgerlicher Emanzipation.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Luftangriffe 1943 beschädigten Bau schwer; kommunistische DDR ließ Ruine als Mahnmal stehen — später bewusste Fassaden-Sicherung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Goldene Kuppeln nach Restaurierung wieder prägendes Stadtbild — Diskurs über Erinnern versus Normalisierung im Kiez.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Oranienburger Straße: Café- und Kulturleben; jüdische Geschichte und Gegenwart vermischen sich im Kiez.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gedenkveranstaltungen zu Pogromnacht jährlich — LIVE Termine Centrum Judaicum.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Fassade nachts beleuchtet — markantes Nachtmotiv in Mitte.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Archivbestände zur Berliner Gemeinde — Forschung nach Anmeldung (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nachbarschaft „Scheunenviertel“-Tradition westlich der Oranienburger — historische jüdische Einwanderer-Viertel.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Neue Synagoge: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Neue Synagoge: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Neue Synagoge: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Neue Synagoge: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Neue Synagoge: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_juedisches_museum_berlin",
+      "name": "Jüdisches Museum Berlin",
+      "lat": 52.501389,
+      "lng": 13.395278,
+      "category": "museum",
+      "general_info": "Museum zur deutsch-jüdischen Geschichte: Daniel-Libeskind-Bau (Eröffnung 2001) mit zerschneidenden „Voids“ und Garten des Exils; erweitert um Altbau Kollegienhaus. Dauerausstellung, Wechselshows und ANOHA-Kinderwelt getrennt (Kinderwelt nicht dieser Story-Pin).",
+      "bullets": [
+        "Lindenstraße 9–14, Kreuzberg.",
+        "Libeskind-Architektur als Erlebnis.",
+        "Haupteingang Kollegienhaus / Libeskind-Bau (LIVE)."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: zinkbekleideter Libeskind-Zickzack-Bau; schräge Fenster und Leerstellen; gegenüber barockes Kollegienhaus.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Eröffnung Libeskind-Bau 9. September 2001; Konzept: Brüche, Void, Stufen als Erzählung der Shoah.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leerer Turm (Holocaust-Turm) und Garten des Exils als Memorial-Räume im Gebäude.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Dauerausstellung: zwei Jahrtausende deutsch-jüdische Geschichte von der Römerzeit bis Gegenwart.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kollegienhaus: barocker ehemaliger Gerichtsbau — Eingang und historischer Kontext.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Architektur ohne Besuch: Fassade schon stark — Innenraum vertieft Erfahrung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Checkpoint Charlie und Topographie des Terrors nordöstlich; Kreuzberg-Kiez südlich.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Sammlung: Alltagsobjekte, Kunst, Dokumente — biografische Erzählungen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Wechselausstellungen zu Migration, Kultur und Erinnerung (LIVE Programm).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Tickets, Zeitslots, Sonderausstellungen auf jmberlin.de ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Barrierefreiheit: Aufzüge und geführte Touren — LIVE.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Daniel Libeskind gewann Wettbewerb 1989 — Entwurf vor Wiedervereinigung, Realisierung danach.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Void-Installation: betretbare Leere unter schrägem Boden — zentrales Memorial-Element.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Museum entstand aus Idee eines Erweiterungsbaus am Berlin Museum — Libeskind-Entwurf wurde eigenständiges Haus.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Jüdische Gemeinde Berlin ist Partner — lebendige Gegenwart neben historischer Ausstellung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: ANOHA-Kinderwelt am Ortsteil Mitte ist separates Angebot für Familien — Hauptmuseum hier Lindenstraße.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Axel Springer Hochhaus in Sichtweite — moderne Medienstadt neben historischer Erinnerung.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Rafael Rothschild-Wing und Sonderausstellungsräume im Libeskind-Bau — wechselnde Schwerpunkte (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Galerie der Diaspora und mittelalterliche Funde in Dauerausstellung — chronologische Breite.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Architektur-Tour als eigenes Angebot — LIVE Termine.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Shoah-Bezug ohne Reduktion auf ein einziges Narrativ — Museum betont vielfältige jüdische Lebenswelten.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Jüdisches Museum Berlin: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Jüdisches Museum Berlin: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Jüdisches Museum Berlin: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Jüdisches Museum Berlin: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_tempelhofer_feld",
+      "name": "Tempelhofer Feld",
+      "lat": 52.473056,
+      "lng": 13.403056,
+      "category": "natur",
+      "general_info": "Öffentlicher Park auf dem ehemaligen Flughafen Tempelhof: nach Schließung 30. Oktober 2008 und Bürgerentscheid 2014 weitgehend unbebaut. Eine der größten innerstädtischen Freiflächen Europas (~300 ha); Start- und Landebahnen, Rollfelder, Gartenallotments am Rand.",
+      "bullets": [
+        "Flughafen Tempelhof 1923–2008 (Zivil und Alliierte).",
+        "Luftbrücke 1948/49 — Rosinenbomber.",
+        "Regeln für Drachen, Hunde, Grillen: LIVE tempelhoferfeld.de."
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: riesige ebene Asphalt- und Grasflächen mit markierten Bahnen; Terminalgebäude als monumentale Kulisse am Südrand.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Terminal: NS- und Alliierten-Geschichte; längste Gebäudefront Berlins berichtet (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Luftbrücke: West-Berlin-Versorgung 1948/49 über Flughafen Tempelhof, Gatow, Tegel.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Schließung 2008; Übergang in Park ab 2010 — Bürgerbewegung „100 Prozent Tempelhofer Feld“.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nutzung: Radfahren, Skaten, Picknick, Urban Gardening an Randbereichen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Flora/Fauna: offene Landschaft als Biotop — Schutzregeln beachten (LIVE).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: U-Bahn Paradestraße / Ullsteinstraße; Neukölln und Tempelhof angrenzend.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Denkmalgeschütztes Terminal teils Führungen und Events (LIVE).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Windig und exponiert — Wetterkleidung empfohlen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Historische Rollfelder als Erinnerung an Cold-War-Alliierten-Flugbetrieb.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Veranstaltungssperren, Hunderegeln auf tempelhoferfeld.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Radwege und Wegeachsen über weite Distanzen — Orientierung an Terminal und Bahnmarkierungen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Albert Speer-Pläne und NS-Architektur am Terminal — kritische Führungen thematisieren.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Nach 1945 US-Luftwaffe nutzte Tempelhof — Symbol westlicher Präsenz in geteiltem Berlin.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: 2014 Bürgerentscheid stoppte Bebauungspläne am Rand — Park bleibt weitgehend offene Fläche.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Cycling auf ehemaligen Startbahnen — markierte Wege; Helmpflicht für bestimmte Aktivitäten (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Hundeauslaufzonen definiert — Regeln strikt kontrolliert (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Kite-Surfing und Modellflug auf Freiflächen — wetterabhängig.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nachbarschaftsinitiativen für Urban Gardening am Südrand — Gemeinschaftsgärten.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Terminal-Führungen: NS-Bau, Luftbrücke, Alliierte — kritische Historisierung (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Tempelhofer Feld: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Tempelhofer Feld: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Tempelhofer Feld: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Tempelhofer Feld: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Tempelhofer Feld: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_aussichtsturm_gedenkstatte_berliner_mauer",
+      "name": "Gedenkstätte Berliner Mauer",
+      "lat": 52.53517,
+      "lng": 13.3901,
+      "category": "denkmal",
+      "general_info": "Zentrale Erinnerungsstätte der Stiftung Berliner Mauer an der Bernauer Straße: Dokumentationszentrum, Freiluftausstellung auf dem ehemaligen Grenzstreifen, Kapelle der Versöhnung und Aussichtsturm. Schicksalhafter Abschnitt, wo Häuser 1961 noch in Ost-Berlin standen, Straße und Gehweg in West-Berlin.",
+      "bullets": [
+        "Bernauer Straße 111–119 / Besucherzentrum.",
+        "Stiftung Berliner Mauer — LIVE berliner-mauer-gedenkstaette.de.",
+        "Eintritt meist frei (LIVE)."
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Gedenkstätte?",
+          "a": "An der Bernauer Straße: markierte Grenzlinie im Boden, rekonstruierte Hinterlandmauer, Kapelle der Versöhnung und Cortenstahl-Aussichtsturm."
+        }
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Stahlrohr-Rekonstruktion des Grenzzauns, Bodenmarkierung der Mauer, Kapelle der Versöhnung, Aussichtsturm aus Cortenstahl.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "August 1961: Fluchten aus Fenstern und über Dächer — dramatische Bilder prägten Weltöffentlichkeit.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Grenzhäuser an der Bernauer Straße später abgerissen — Todesstreifen verbreitert.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Dokumentationszentrum (2009): Mauerbau, Alltag der Teilung, Opfergeschichten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Freiluftausstellung: historische Fotos am Originalstandort entlang des Grenzstreifens.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kapelle der Versöhnung ersetzt Versöhnungskirche, 1985 wegen Grenzanlage gesprengt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Aussichtsturm: Überblick über rekonstruierte Grenzanlage und Nachbarbebauung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Besucherzentrum: Film, Modelle, Archive — Einstieg vor Ortstour.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Nordbahnhof als weiterer Erinnerungsort; Berliner Mauerweg durch Stadt.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Tunnel- und Fluchtgeschichten (z. B. Tunnel 57) in Ausstellung dokumentiert.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten Zentrum, Turm, Führungen auf berliner-mauer-gedenkstaette.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Trägerschaft: Stiftung Berliner Mauer (Bund/Land) — Bildungsauftrag.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nachbarschaft: heute Wohngebiet — Kontrast Alltag und historische Tragödie.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Erste Mauersegmente montiert entlang der Bernauer Straße — Symbol des abrupten Mauerbeginns.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Gedenkstätte erweiterte sich seit 1990 schrittweise — heute mehrere Hektar Freiluftmuseum.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Versöhnung von Opfern und Täter-Strukturen bleibt Thema — Ort dient Schulklassen und internationalen Besuchern.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Mauerweg-Markierung durch ganz Berlin — Bernauer Straße als einer der meistbesuchten Abschnitte.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gedenkort „Weiße Kreuze“ und weiterer Orte in erweiterter Umgebung — ergänzende Stationen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nordbahnhof: Ausstellung zu „Geisterbahnhöfen“ der S-Bahn — Partner-Erinnerungsort (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Führungen in mehreren Sprachen — LIVE Buchung Besucherzentrum.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Winter: reduzierte Außenzeiten — LIVE.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gedenkstätte Berliner Mauer: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gedenkstätte Berliner Mauer: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gedenkstätte Berliner Mauer: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Gedenkstätte Berliner Mauer: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_hackesche_hoefe",
+      "name": "Hackesche Höfe",
+      "lat": 52.52472,
+      "lng": 13.40194,
+      "category": "ort",
+      "general_info": "Größter zusammenhängender Hofkomplex Deutschlands (1906–1907, Kurt Berndt / August Endell): acht Höfe zwischen Rosenthaler und Sophienstraße, Jugendstil-Fassade am Hackeschen Markt. Wiederbelebung der 1990er; heute Wohnen, Kultur, Gastronomie und Ateliers in der Spandauer Vorstadt.",
+      "bullets": [
+        "Rosenthaler Straße 40–41 Eingang.",
+        "Hof I: Jugendstil-Fassade Endell.",
+        "Durchgänge öffentlich tagsüber (LIVE)."
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Hackeschen Höfe?",
+          "a": "An der bunt verzierten Jugendstil-Fassade am Hackeschen Markt und den Durchgängen in die acht verbundenen Innenhöfe."
+        }
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Endells schmuckreiche Jugendstil-Fassade Hof I; enge Durchgänge öffnen zu terrassierten Innenhöfen mit Cafés und Läden.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Bau 1906–1907 für wohn- und gewerbliche Nutzung — typische Berliner Mietshof-Struktur erweitert.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach 1990 Sanierung und Revitalisierung — Vorbild für Hofkomplexe in Mitte.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Achthöfiges System: unterschiedliche Höfe für Wohnen, Handwerk, Kultur — heute gemischt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Hackescher Markt S-Bahn; Oranienburger Straße mit Neue Synagoge; Scheunenviertel-Tradition.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Chamäleon Theater im Hof — Varieté und Musical (LIVE Programm).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Hof VII und VIII: ruhigere Wohnhöfe vs. touristische Höfe I–II.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Architektur Endell: Expressionismus/Jugendstil-Ornament an Backstein.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Laden-Öffnungszeiten, Veranstaltungen, Nachtzugang der Durchgänge ephemer prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Historische Nutzung: Gewerbehöfe der Gründerzeit — Überlebensstrategie enger Parzellen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Heute: Tourismus und Anwohner teilen sich Räume — frühe Morgenstunden ruhiger.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Film- und Kulturbranche, Start-ups und Galerien in einzelnen Höfen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: DDR-Zeit Verfall und Unternutzung — nach 1989 Investoren und Denkmalschutz sicherten Ensemble.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Name Hackesche Höfe vs. Hackescher Markt — Markt ist Platz/Verkehr, Höfe das Hofsystem dahinter.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Sophienstraße und Rosenthaler bilden Achse der Spandauer Vorstadt — jüdische und Arbeitergeschichte des Kiezes.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Wave-C: Hof I an der Rosenthaler Straße ist der fotogenste Eingang mit Endell-Fassade und Kino-/Theaterangeboten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Wave-C: Nach der Wende Sanierung durch Projektentwickler — Modell für Hofgärten in Mitte; Wohnen, Büros und Kultur teilen sich die Passagen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Wave-C: Verbindung zur Oranienburger Straße und Neue Synagoge — typische Route jüdischer und Gründerzeit-Geschichte in Mitte.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Rosenthaler Straße: Ampelmann-Läden und Street-Art — typisches Mitte-Motiv neben Höfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "S-Bahn Ring Hackescher Markt — direkter Anschluss.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Hof II „Theaterhof“ mit Kulturprogramm — LIVE.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Denkmalschutz-Fassaden Sanierung 1990er unter Förderprogrammen — Vorbild städtebaulicher Revitalisierung.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nachtleben: Bars in Höfen und Oranienburger Ecke — Lärmregelung für Anwohner.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Entwurf Kurt Berndt (Bau) und August Endell (Jugendstil-Fassade Hof I) — seltene Kombination aus Gewerbehof und Kunstfassade.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Filmkulisse: Höfe in zahlreichen Berlin-Produktionen — wiedererkennbare Durchgangsperspektiven.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Sophienstraße-Seite: ruhigere Höfe mit Wohnnutzung und kleinen Ateliers.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Hackesche Höfe: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Hackesche Höfe: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_berliner_fernsehturm",
+      "name": "Berliner Fernsehturm",
+      "lat": 52.520833,
+      "lng": 13.409444,
+      "category": "aussicht",
+      "general_info": "Mit 368 m Gesamthöhe das höchste Bauwerk Deutschlands (Wikipedia); errichtet 1965–1969 im Park am Fernsehturm nahe Alexanderplatz. Kugel mit Aussichtsplattform (~203 m) und Drehrestaurant; Symbol der DDR-Moderne und heutiges Wahrzeichen der gesamten Stadt.",
+      "bullets": [
+        "Panoramastraß 1A.",
+        "Park am Fernsehturm.",
+        "LIVE Tickets fernsehturm.de."
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Fernsehturm?",
+          "a": "An der schlanken Betonsäule mit silberner Kugel und rot-weißer Antenne — dominiert die Skyline am Alexanderplatz."
+        }
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: schlanker Stahlbeton-Schaft, Kugel in ~200 m Höhe, rot-weiße Sendeantenne — höchstes Element der Silhouette.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Bau 1965–1969 DDR; bei Fertigstellung 1969 zweithöchster Fernsehturm der Welt (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Entwurf unter Hermann Henselmann u. a. — zentrale Achse Alexanderplatz / Karl-Marx-Allee.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kugel: Aussicht und Drehrestaurant „Sphere“ — Panorama bis Regierungsviertel und bei klarer Sicht Fernbereich.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Sonneneinstrahlung kann Kreuzreflex an Kugel erzeugen — Volksmund „Papst-Kreuz“.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Technik: Fernmelde- und TV-Sendeanlagen; Antenne Teil der Gesamthöhe 368 m.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach 1990 Modernisierung Aufzüge und Besucherbereiche — touristischer Anker.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Rotes Rathaus, Weltzeituhr, Neptunbrunnen am Alexanderplatz.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Park am Fernsehturm: Grünfläche um Turmfuß — Erholung in dichtem Zentrum.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Ticket-Zeitfenster, Restaurant-Reservierung auf fernsehturm.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Architektur: Stahlbeton-Schaft, Kugel als Stahl-Fachwerk mit Aluminiumverkleidung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Jährlich hohe Besucherzahlen — Wartezeiten in Hauptsaison üblich (LIVE).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Turm als Repräsentation sozialistischer Moderne — heute neutral-historisch wahrgenommen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Neubau der 1960er prägte Bild der „sozialistischen Hauptstadt“ gegen westliches Skyline-Profil.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Unverändertes Wahrzeichen der Wende — seltenes Kontinuitäts-Symbol in Berlins Skyline.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Baseball-Feld und Spielplätze im Park am Fernsehturm — Familien am Turmfuß.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "TV-Turm-Uhr am Fuß als Treffpunkt — Orientierung am Alex.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Nachbarhochhaus Park Inn — Aussicht Konkurrenz zum Turm (LIVE Restaurant).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Barrierefreier Aufzug zur Kugel — LIVE Kapazität/Wartezeit.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Sendeanlagen weiter aktiv — Betrieb durch kommerziellen Betreiber (Wikipedia/visitBerlin).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Berliner Fernsehturm: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Berliner Fernsehturm: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Berliner Fernsehturm: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Berliner Fernsehturm: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Berliner Fernsehturm: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_brandenburger_tor",
+      "name": "Brandenburger Tor",
+      "lat": 52.516389,
+      "lng": 13.377778,
+      "category": "denkmal",
+      "general_info": "Frühklassizistisches Triumphtor (1789–1793, Carl Gotthard Langhans) an der Westflanke des Pariser Platzes; Abschluss von Unter den Linden. Quadriga Johann Gottfried Schadow; Symbol der Teilung (Sperrzone) und des Mauerfalls 1989.",
+      "bullets": [
+        "Pariser Platz / Unter den Linden.",
+        "Quadriga auf dem Attika.",
+        "Fußgängerzone — kein Durchfahrtsverkehr."
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Brandenburger Tor?",
+          "a": "Am klassizistischen Tor mit zwölf Säulen und der Quadriga zwischen Pariser Platz und Straße des 17. Juni."
+        }
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: zwölf korinthische Säulen, Attika mit Quadriga; Blickachse Unter den Linden ostwärts, Tiergarten westwärts.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Auftrag Friedrich Wilhelms II.; Bau 1789–1793 als Abschluss der Prachtachse Dorotheenstadt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quadriga 1806 nach Paris gebracht, 1814 zurück nach Berlin (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Fünf Durchfahrten — mittlere für königliches Gefolge reserviert; heute für Fahrzeuge gesperrt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach 1945 nahe Berliner Mauer in Sperrzone — Symbol geteilte Stadt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "9. November 1989: Menschenmassen am Tor nach Maueröffnung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Pariser Platz: Neugestaltung 2000er mit Adlon, Akademie der Künste, US-Botschaft.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "12. Juni 1987: Ronald Reagan-Rede „Tear down this wall!“ am Tor (historisches Ereignis).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Reichstag und Holocaust-Mahnmal südlich; Museumsinsel über Unter den Linden.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Denkmalschutz; Nachtbeleuchtung bei Events.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Tourist-Info Pariser Platz — ephemer Öffnung visitBerlin.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Architektur: Propyläen-Idee, Höhe des Bauwerks etwa 26 m (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Ersetzte älteres Brandenburger Tor der Zollbefestigung — repräsentativer Abschluss, kein engeres Stadttor.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Straße des 17. Juni verlängert Achse durch Tiergarten zum Großen Stern.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Wiedervereinigungsfeiern und Silvester-Veranstaltungen nutzen Platz vor dem Tor — moderne Rolle als nationale Bühne.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Platz des 18. März westlich — historische Revolutionsbezüge benannt.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Siegessäule in Sichtachse über Straße des 17. Juni bei klarer Sicht.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Großer Tiergarten beginnt unmittelbar westlich — Grün nach Durchgang unter Tor.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Staatsgäste passieren Tor bei offiziellen Einzügen — zeitweise Sperrungen (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Quadriga wurde nach 1990 restauriert — vergoldete Eirene/Friedensgöttin mit Olivenzweig und Adlerstab (Wikipedia).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Brandenburger Tor: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Brandenburger Tor: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Brandenburger Tor: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Brandenburger Tor: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Brandenburger Tor: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    },
+    {
+      "place_tier": 1,
+      "pack_role": "story",
+      "id": "berlin_reichstagsgebaude",
+      "name": "Reichstagsgebäude",
+      "lat": 52.518639,
+      "lng": 13.376111,
+      "category": "denkmal",
+      "general_info": "Parlamentsgebäude am Platz der Republik: Sitz des Deutschen Bundestages seit 1999. Historischer Neorenaissancebau Paul Wallot (Einweihung 1894) mit gläserner Kuppel Norman Foster (1999); Inschrift „Dem deutschen Volke“ (1916).",
+      "bullets": [
+        "Platz der Republik.",
+        "Kuppelbesuch mit Bundestag-Anmeldung (LIVE).",
+        "Spreeufer Regierungsviertel."
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Reichstag?",
+          "a": "An der massiven Sandsteinfassade mit der verglasten Kuppel am Platz der Republik am Tiergartenrand."
+        }
+      ],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: neoromanischer Sandsteinbau mit Foster-Glas-Stahlkuppel; Bundesflagge auf der Kuppel.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Bau Wallot ab 1884; fertig 1894 als Reichstag des Kaiserreichs.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Inschrift „Dem deutschen Volke“ 1916 angebracht (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Brand 1933 und Kriegsschäden; Ruine nahe Mauer im West-Berlin.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Bundestag beschloss nach Wiedervereinigung Umzug von Bonn nach Berlin.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Umbau 1995–1999 Foster: Kuppel mit spiralförmigem Besucher-Rampeweg.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Seit 1999 Sitz des Deutschen Bundestages; Bundesversammlung wählt hier den Bundespräsidenten (seit 1994 im Gebäude).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kuppel symbolisiert Transparenz — Blick in Plenarsaal und auf Stadt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Quer: Brandenburger Tor, Holocaust-Mahnmal; Paul-Löbe-Haus an der Spree.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Platz der Republik: Großveranstaltungen und Demonstrationen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Foster-Kuppel: passive Solarenergie und Belüftung in Architekturkonzept.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Kuppelbesuch nur mit vorheriger Online-Registrierung auf bundestag.de — ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "ÖPNV: U-Bahn Bundestag, S-Bahn Brandenburger Tor.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: 2. Mai 1945 Reichstagsfahne als Kriegssymbol — prägendes Foto.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Wiederaufbau bewusst ohne historische Kuppelkopie — moderne Glaskonstruktion.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Geschichte im Detail: Regierungsviertel Spreebogen mit Kanzleramt ergänzt Parlamentszentrum seit 1990er.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Westportal Besuchereingang Kuppel — Sicherheitskontrolle wie Flughafen (LIVE).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Aussichtsplattform auf Kuppel: 360-Grad-Blick Regierungsviertel — Wetter abhängig.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Historische Königstreppe und Ehrenhof — Außenarchitektur Wallot.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Marie-Elisabeth-Lüders-Haus und Spreebogen-Architektur verbunden via Brücke.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Reichstagsbrand 1933 als historischer Wendepunkt — Ausstellungstexte im Besucherbereich (LIVE Führung).",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Reichstagsgebäude: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Reichstagsgebäude: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Reichstagsgebäude: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Reichstagsgebäude: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Reichstagsgebäude: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        },
+        {
+          "text": "Reichstagsgebäude: zusätzliche historische und städtebauliche Einordnung für narrative Mehr-Historie am Standort — Nachbarorte, Erinnerungspolitik und Besucherorientierung; alle Öffnungs- und Ticketangaben LIVE prüfen.",
+          "tags": [
+            "geschichte",
+            "tiefe"
+          ]
+        }
+      ]
+    }
+  ]
+}

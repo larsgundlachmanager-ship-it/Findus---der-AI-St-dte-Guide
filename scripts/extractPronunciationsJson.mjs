@@ -20,7 +20,7 @@ function unescapeStr(s) {
     .replace(/\\\\/g, '\\');
 }
 
-function toKokoroIpa(ipa) {
+function toIPAIpa(ipa) {
   return ipa.replace(/g/g, G);
 }
 
@@ -33,7 +33,7 @@ function extractOverrides(src) {
     const key = unescapeStr(m[1] ?? m[2] ?? m[3] ?? '')
       .toLowerCase()
       .trim();
-    const ipa = toKokoroIpa(unescapeStr(m[4] ?? m[5] ?? '').trim());
+    const ipa = toIPAIpa(unescapeStr(m[4] ?? m[5] ?? '').trim());
     if (!key || !ipa) continue;
     if (key === 'as' || key === 'const' || key === 'export') continue;
     map.set(key, ipa);
@@ -82,7 +82,7 @@ const existing = fs.existsSync(outPath)
 const overrides = extractOverrides(fs.readFileSync(overridesPath, 'utf8'));
 
 const merged = new Map([
-  ...Object.entries(existing).map(([k, v]) => [String(k).toLowerCase(), toKokoroIpa(String(v))]),
+  ...Object.entries(existing).map(([k, v]) => [String(k).toLowerCase(), toIPAIpa(String(v))]),
   ...overrides,
   ...Object.entries(essentials),
 ]);

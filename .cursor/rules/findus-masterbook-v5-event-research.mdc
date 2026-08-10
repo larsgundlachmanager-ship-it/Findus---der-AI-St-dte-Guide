@@ -23,3 +23,11 @@ alwaysApply: true
 - Nie „Soll ich die Nummer / Party / Orte heraussuchen?“ — Ergebnis + Buttons in derselben Antwort.
 - Party/Nightlife → 2 Locations + Nav; Telefon → `DIAL_PHONE`.
 - Rückfrage nur bei echter Blockade.
+
+## Buchungsportal-Hard-Match (Verleih / Mietrad)
+
+- Genannte Plattform = Must-Have-Filter — Partnerschaft nur mit Beleg, sonst ehrlich.
+- Unbekanntes Portal kurz erklären (Mietrad = Buchungsplattform für Fahrradverleihe).
+- Belegte Buchungs-URL → `OPEN_URL` in derselben Antwort.
+- Adresse nur auf Nachfrage — dann voll (Straße + Nr. + Ort) in Speech **und** Stichpunkten.
+- SSOT: `FINDUS_BOOKING_PLATFORM_HARD_MATCH_BLOCK` + `bookingPlatformActions.ts`.

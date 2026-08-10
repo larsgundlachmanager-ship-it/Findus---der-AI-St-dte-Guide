@@ -1,0 +1,87 @@
+{
+  "audit": {
+    "verified_at": "2026-07-23T11:56:46.722Z",
+    "method": "Nominatim/OSM centroids; Google Maps/Earth/Street View blocked by consent wall (no GOOGLE_MAPS_API_KEY)",
+    "removed_unverified": [
+      "generisches Café am Kurplatz",
+      "generisches Fischrestaurant",
+      "generische Bücherstube",
+      "generisches Heimatmuseum",
+      "Dünen-Platzhalter mit Juist-Falschtreffer"
+    ]
+  },
+  "places": [
+    {
+      "id": "wangerooge_anleger",
+      "lat": 53.783225,
+      "lng": 7.943805,
+      "source": "Nominatim way/171929493 Alte Fähranleger"
+    },
+    {
+      "id": "wangerooge_inselbahnhof",
+      "lat": 53.787822,
+      "lng": 7.899471,
+      "source": "Nominatim railway=station Wangerooge"
+    },
+    {
+      "id": "wangerooge_leuchtturm",
+      "lat": 53.788797,
+      "lng": 7.899223,
+      "source": "Nominatim way/135321794 Inselmuseum Alter Leuchtturm, Zedeliusstraße 3"
+    },
+    {
+      "id": "wangerooge_westturm",
+      "lat": 53.784679,
+      "lng": 7.857532,
+      "source": "Nominatim way/59869587 Westturm, Im Westen 46"
+    },
+    {
+      "id": "wangerooge_nikolaikirche",
+      "lat": 53.788783,
+      "lng": 7.900322,
+      "source": "Nominatim way/30127198 Nikolai-Kirche, Dorfplatz 34"
+    },
+    {
+      "id": "wangerooge_dorfplatz",
+      "lat": 53.7896,
+      "lng": 7.900096,
+      "source": "Nominatim leisure=park Dorfplatz Wangerooge"
+    },
+    {
+      "id": "wangerooge_nationalparkhaus",
+      "lat": 53.790643,
+      "lng": 7.901587,
+      "source": "Nominatim way/42428558 Friedrich-August-Straße 18"
+    },
+    {
+      "id": "wangerooge_promenade",
+      "lat": 53.793196,
+      "lng": 7.902312,
+      "source": "Nominatim highway=pedestrian Obere Strandpromenade"
+    },
+    {
+      "id": "wangerooge_hauptstrand",
+      "lat": 53.794,
+      "lng": 7.9015,
+      "source": "Abgeleitet nördlich der Oberen Strandpromenade (OSM pedestrian axis); kein einzelner beach-Node mit stabilem Namen"
+    },
+    {
+      "id": "wangerooge_cafe_pudding",
+      "lat": 53.793201,
+      "lng": 7.900057,
+      "source": "Nominatim Cafe Pudding, Zedeliusstraße 49"
+    },
+    {
+      "id": "wangerooge_bistro_am_strand",
+      "lat": 53.793152,
+      "lng": 7.899572,
+      "source": "Nominatim Bistro am Strand, Obere Strandpromenade 19"
+    },
+    {
+      "id": "wangerooge_weststrand",
+      "lat": 53.7855,
+      "lng": 7.8555,
+      "source": "Schätzung westlich des Westturms (Im Westen); kein stabiler beach-Name in Nominatim — needs_field_check"
+    }
+  ]
+}

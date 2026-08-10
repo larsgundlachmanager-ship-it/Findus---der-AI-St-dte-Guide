@@ -93,7 +93,7 @@ function compactJudgeOutput(raw: JudgeOutputSnapshot): JudgeOutputSnapshot {
     quickActions: (raw.quickActions ?? []).slice(0, 4).map(
       (a): QuickActionLite => ({
         type: a.type,
-        label: trimText(a.label).slice(0, 40),
+        label: trimText(a.label).slice(0, 20),
         payload: {
           targetPoiId: a.payload?.targetPoiId,
           phoneNumber: a.payload?.phoneNumber,

@@ -86,13 +86,13 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.finnus.app'
+    namespace 'de.findus.app'
     defaultConfig {
-        applicationId 'com.finnus.app'
+        applicationId 'de.findus.app'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 23
+        versionName "2.0.0"
     }
     signingConfigs {
         debug {
@@ -101,15 +101,46 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            def keystorePropertiesFile = rootProject.file('keystore.properties')
+            if (keystorePropertiesFile.exists()) {
+                def keystoreProperties = new Properties()
+                keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            } else if (System.getenv("EAS_BUILD") == "true" && System.getenv("ANDROID_KEYSTORE_PATH")) {
+                // EAS remote credentials (injected as env)
+                storeFile file(System.getenv("ANDROID_KEYSTORE_PATH"))
+                storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+                keyAlias System.getenv("ANDROID_KEY_ALIAS")
+                keyPassword System.getenv("ANDROID_KEY_PASSWORD")
+            }
+        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            def keystorePropertiesFile = rootProject.file('keystore.properties')
+            def isEas = System.getenv("EAS_BUILD") == "true"
+            def hasLocal = keystorePropertiesFile.exists()
+            def hasEasEnv = isEas && System.getenv("ANDROID_KEYSTORE_PATH")
+            if (hasLocal || hasEasEnv) {
+                signingConfig signingConfigs.release
+            } else if (isEas) {
+                // Cloud build without local keystore.properties (gitignored).
+                // Configure Play upload key via: npx eas-cli credentials -p android
+                // Until then Gradle must still configure — EAS may also patch signing later.
+                logger.warn("EAS_BUILD without keystore.properties / ANDROID_KEYSTORE_PATH — using debug signing. Run 'eas credentials -p android' to attach your Play upload key.")
+                signingConfig signingConfigs.debug
+            } else {
+                throw new GradleException(
+                    "Missing android/keystore.properties — required for Play upload signing."
+                )
+            }
             shrinkResources (findProperty('android.enableShrinkResourcesInReleaseBuilds')?.toBoolean() ?: false)
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
@@ -147,9 +178,6 @@ android {
 }
 
 dependencies {
-    // onnxruntime-react-native @generated begin onnxruntime-react-native - expo prebuild (DO NOT MODIFY) sync-ec94e2a0d49f04b1bbc51ec3f57c45710b04aad8
-    implementation project(':onnxruntime-react-native')
-    // onnxruntime-react-native @generated end onnxruntime-react-native
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 

@@ -8,7 +8,7 @@
 import type { FindusJobId } from '../jobs/types';
 import type { ManagerModule, ThinkAheadHint } from './types';
 
-export const REBOOT_MAX_PARALLEL_FACT_JOBS = 2;
+export const REBOOT_MAX_PARALLEL_FACT_JOBS = 20;
 
 export const REBOOT_MANAGER_MODULES: Record<
   ManagerModule,
@@ -117,6 +117,7 @@ export const FINDUS_REBOOT_MANAGER_THINK_AHEAD_BLOCK = `MANAGER MITDENKEN (SSOT 
 - Kombi (gratis parken + Pizza TA + Förde) → ein combo-Cluster, nicht drei lose Antworten.
 - Speisekarte / Ticket / Stay22-Deep-Link: Fast-Antwort zuerst; Links dürfen als pending Actions nachpoppen (Slow-Lane).
 - Bridge: höchstens eine pro neuem Topic. Follow-up im selben Topic: keine neue Bridge.
+- Name des Users: nicht in Bridge/Hauptantwort (außer echte Begrüßung nach langer Idle — Manager setzt nameAllowed).
 - 1 Amenity-Treffer im sinnvollen Radius → autoStartNav; 2+ → kurz wählen lassen.
 - Laufende Multi-Stop-Tour: Spontan-Ziel (Aldi/Durst) EINWEBEN, nie die ganze Queue löschen. On-route Stop vor Spontan, Rest bleibt. Harter Cut nur bei explizitem „Route löschen / andere Tour“.
 - Stop-Priorität: must → Reminder ~5 Min locker; high = jetzt oben; soft = Errand ohne Druck.

@@ -1,0 +1,4578 @@
+{
+  "city_id": "flensburg",
+  "apply": true,
+  "maxDelta": 80,
+  "summary": {
+    "ok": 241,
+    "check": 6,
+    "bad": 21,
+    "errors": 0,
+    "applied": 8
+  },
+  "rows": [
+    {
+      "id": "flensburg_flensburg",
+      "name": "Flensburg",
+      "before": {
+        "lat": 54.77459914,
+        "lng": 9.436712
+      },
+      "google": {
+        "lat": 54.7937431,
+        "lng": 9.4469964,
+        "place_id": "ChIJ6bkaGr1Cs0cRZ0ROgyxjz1s",
+        "address": "Flensburg"
+      },
+      "delta_m": 2229,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_bahnhof_serpentine_flensburg",
+      "name": "Bahnhof/Serpentine - Flensburg",
+      "before": {
+        "lat": 54.77493814,
+        "lng": 9.4350954
+      },
+      "google": {
+        "lat": 54.77500999999999,
+        "lng": 9.43522,
+        "place_id": "ChIJ31er355Cs0cRRVXFFUKLGFQ",
+        "address": "24941 Flensburg, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_flensburg_bahnhof_tegelbarg",
+      "name": "Flensburg Bahnhof/Tegelbarg",
+      "before": {
+        "lat": 54.77380813999999,
+        "lng": 9.434695399999999
+      },
+      "google": {
+        "lat": 54.77388,
+        "lng": 9.43482,
+        "place_id": "ChIJJ86M_Z5Cs0cRzbQnkUTfMKY",
+        "address": "24941 Flensburg, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_weiche_bahnhof_flensburg",
+      "name": "Weiche Bahnhof - Flensburg",
+      "before": {
+        "lat": 54.757808139999995,
+        "lng": 9.39890546
+      },
+      "google": {
+        "lat": 54.75788,
+        "lng": 9.39903,
+        "place_id": "ChIJC0PuaQlos0cRo-m5FhxzlUc",
+        "address": "24941 Flensburg, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_fordebrucke_flensburg",
+      "name": "Fördebrücke - Flensburg",
+      "before": {
+        "lat": 54.789598139999995,
+        "lng": 9.433845360000001
+      },
+      "google": {
+        "lat": 54.78967,
+        "lng": 9.43397,
+        "place_id": "ChIJN8bgSL5Cs0cRXre7F0TWt_8",
+        "address": "24939 Flensburg, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_schiffahrtsmuseum_flensburg",
+      "name": "Schiffahrtsmuseum - Flensburg",
+      "before": {
+        "lat": 54.79305813999999,
+        "lng": 9.433385339999997
+      },
+      "google": {
+        "lat": 54.7930325,
+        "lng": 9.433122899999999,
+        "place_id": "ChIJeb2BhAQ630MRvF5w-dvWMmY",
+        "address": "Schiffbrücke 39, 24939 Flensburg-Altstadt"
+      },
+      "delta_m": 17,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_flensburg_bahnhof",
+      "name": "Flensburg Bahnhof",
+      "before": {
+        "lat": 54.775158139999995,
+        "lng": 9.437045399999999
+      },
+      "google": {
+        "lat": 54.774671,
+        "lng": 9.4368366,
+        "place_id": "ChIJwxsJ-JhCs0cRzg5Y8cVkBVc",
+        "address": "Am Bundesbahnhof 5, 24937 Flensburg"
+      },
+      "delta_m": 56,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "flensburg_ballastbrucke_flensburg",
+      "name": "Ballastbrücke - Flensburg",
+      "before": {
+        "lat": 54.79325024,
+        "lng": 9.43894874
+      },
+      "google": {
+        "lat": 54.7933221,
+        "lng": 9.4390734,
+        "place_id": "ChIJdRhpsupCs0cR1kjQT-TXJjc",
+        "address": "24937 Flensburg, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_sudermarkt",
+      "name": "Südermarkt",
+      "before": {
+        "lat": 54.781765140000005,
+        "lng": 9.43683868
+      },
+      "google": {
+        "lat": 54.7825608,
+        "lng": 9.4359919,
+        "place_id": "ChIJdYtwk5dCs0cRwtRd2cj3Cao",
+        "address": "Südermarkt, 24937 Flensburg"
+      },
+      "delta_m": 104,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "flensburg_hafendamm_flensburg",
+      "name": "Hafendamm - Flensburg",
+      "before": {
+        "lat": 54.790715139999996,
+        "lng": 9.43834636
+      },
+      "google": {
+        "lat": 54.79078699999999,
+        "lng": 9.438471,
+        "place_id": "ChIJhzbqbJVCs0cRnebqY66T96I",
+        "address": "24937 Flensburg, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_stadtwerke_flensburg_ladestation",
+      "name": "Stadtwerke Flensburg-Ladestation",
+      "before": {
+        "lat": 54.78073564,
+        "lng": 9.437732180000001
+      },
+      "google": {
+        "lat": 54.79613819999999,
+        "lng": 9.4470662,
+        "place_id": "ChIJCbspDexCs0cRAMUUueNn4is",
+        "address": "Am Wasserturm 2, 24943 Flensburg"
+      },
+      "delta_m": 1814,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_fahrradfahre_flensburger_forde_hafen_flensburg",
+      "name": "Fahrradfähre Flensburger Förde - Hafen Flensburg",
+      "before": {
+        "lat": 54.78850738,
+        "lng": 9.43588144
+      },
+      "google": {
+        "lat": 54.7885469,
+        "lng": 9.43595,
+        "place_id": "ChIJL-sSAM9Ds0cRtgwt4iZfYsk",
+        "address": "Schiffbrücke, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_flensburger_hafen",
+      "name": "Flensburger-Hafen",
+      "before": {
+        "lat": 54.78329378000001,
+        "lng": 9.43326476
+      },
+      "google": {
+        "lat": 54.7833333,
+        "lng": 9.4333333,
+        "place_id": "ChIJ-4B-Z71Cs0cRWJDkQzkhwCY",
+        "address": "Flensburger-Hafen, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_flensburg_hafen",
+      "name": "Flensburg Hafen",
+      "before": {
+        "lat": 54.79339258,
+        "lng": 9.43429754
+      },
+      "google": {
+        "lat": 54.7833333,
+        "lng": 9.4333333,
+        "place_id": "ChIJ-4B-Z71Cs0cRWJDkQzkhwCY",
+        "address": "Flensburger-Hafen, 24937 Flensburg"
+      },
+      "delta_m": 1120,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_flensburger_hafen_gmbh",
+      "name": "Flensburger Hafen GmbH",
+      "before": {
+        "lat": 54.80107208,
+        "lng": 9.43770222
+      },
+      "google": {
+        "lat": 54.8011116,
+        "lng": 9.4377708,
+        "place_id": "ChIJCx5_X8JCs0cRycqKUX54214",
+        "address": "Am Industriehafen 7, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_frs_syltfahre_gmbh_co_kg",
+      "name": "FRS Syltfähre GmbH & Co. KG",
+      "before": {
+        "lat": 54.78873518,
+        "lng": 9.43423034
+      },
+      "google": {
+        "lat": 54.7887747,
+        "lng": 9.4342989,
+        "place_id": "ChIJdX_aP75Cs0cR1tQ7mZoT4ew",
+        "address": "Norderhofenden 19, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_hafenspitze",
+      "name": "Hafenspitze",
+      "before": {
+        "lat": 54.78824418000001,
+        "lng": 9.43695266
+      },
+      "google": {
+        "lat": 54.7882837,
+        "lng": 9.4370212,
+        "place_id": "ChIJ_e7Q7ZVCs0cRmhKa_BxbUDs",
+        "address": "Am Kanalschuppen 4, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_im_jaich_stadthafen_flensburg",
+      "name": "im-jaich stadthafen Flensburg",
+      "before": {
+        "lat": 54.79013178,
+        "lng": 9.437686339999999
+      },
+      "google": {
+        "lat": 54.7901713,
+        "lng": 9.4377549,
+        "place_id": "ChIJ93HL9pVCs0cRdCG9Vg4JLpM",
+        "address": "Am Kanalschuppen 6, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_museumsberg_flensburg",
+      "name": "Museumsberg Flensburg",
+      "before": {
+        "lat": 54.78592948000001,
+        "lng": 9.431675559999999
+      },
+      "google": {
+        "lat": 54.7854626,
+        "lng": 9.4316683,
+        "place_id": "ChIJZ797n71Cs0cRgpGGCIZgCaA",
+        "address": "Museumsberg, 24937 Flensburg"
+      },
+      "delta_m": 52,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "flensburg_phanomenta",
+      "name": "Phänomenta",
+      "before": {
+        "lat": 54.79537948000001,
+        "lng": 9.429956440000002
+      },
+      "google": {
+        "lat": 54.795419,
+        "lng": 9.430024999999999,
+        "place_id": "ChIJP0Q7M8dCs0cRihdd3kYW51g",
+        "address": "Norderstraße 157-163, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_braasch_rum_rum_manufaktur_museum",
+      "name": "Braasch Rum & Rum Manufaktur Museum",
+      "before": {
+        "lat": 54.78142008,
+        "lng": 9.435531559999998
+      },
+      "google": {
+        "lat": 54.7814596,
+        "lng": 9.4356001,
+        "place_id": "ChIJt1ytGJhCs0cRm2vBawNaetQ",
+        "address": "Rote Str. 26-28, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_museumshafen_flensburg_e_v",
+      "name": "Museumshafen Flensburg e. V.",
+      "before": {
+        "lat": 54.79265638,
+        "lng": 9.43244804
+      },
+      "google": {
+        "lat": 54.7926959,
+        "lng": 9.4325166,
+        "place_id": "ChIJs5tVe79Cs0cRuEF8Ey7KQ-8",
+        "address": "Herrenstall 11, 24939 Flensburg-Altstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_museumsberg_flensburg_hans_christiansen_haus",
+      "name": "Museumsberg Flensburg, Hans-Christiansen-Haus",
+      "before": {
+        "lat": 54.78640548,
+        "lng": 9.43113026
+      },
+      "google": {
+        "lat": 54.786445,
+        "lng": 9.431198799999999,
+        "place_id": "ChIJQ53Z4f9Ds0cReRzkTFcy5YI",
+        "address": "Museumsberg 1, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_tauchermuseum_flensburg",
+      "name": "Tauchermuseum Flensburg",
+      "before": {
+        "lat": 54.80766268,
+        "lng": 9.42916942
+      },
+      "google": {
+        "lat": 54.80770219999999,
+        "lng": 9.429238,
+        "place_id": "ChIJYeBcEAVDs0cRCx9McG1-QIs",
+        "address": "Batteriestraße 63, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_eiszeit_haus",
+      "name": "Eiszeit Haus",
+      "before": {
+        "lat": 54.78577037999999,
+        "lng": 9.42623086
+      },
+      "google": {
+        "lat": 54.7858099,
+        "lng": 9.4262994,
+        "place_id": "ChIJxQEZhbtCs0cReR5esYqHWNQ",
+        "address": "Mühlenstraße 7, 24937 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_st_nikolai_kirche_zu_flensburg_der_ev_luth_st_nikolai_kirchengemeinde_",
+      "name": "St. Nikolai Kirche zu Flensburg der Ev.-Luth. St. Nikolai-Kirchengemeinde Flensburg",
+      "before": {
+        "lat": 54.78308098,
+        "lng": 9.43558966
+      },
+      "google": {
+        "lat": 54.7831205,
+        "lng": 9.435658199999999,
+        "place_id": "ChIJ3_gY65dCs0cRm2oEDAYWDP8",
+        "address": "Nikolaikirchhof 8, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_st_marien_kirche_flensburg",
+      "name": "St. Marien Kirche Flensburg",
+      "before": {
+        "lat": 54.78983908,
+        "lng": 9.43196094
+      },
+      "google": {
+        "lat": 54.78987859999999,
+        "lng": 9.432029499999999,
+        "place_id": "ChIJ3-dt-b5Cs0cR6ic3s1o8uik",
+        "address": "Marienkirchhof 7, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_katholische_kirche_st_marien",
+      "name": "Katholische Kirche St. Marien",
+      "before": {
+        "lat": 54.787514380000005,
+        "lng": 9.43129076
+      },
+      "google": {
+        "lat": 54.7875539,
+        "lng": 9.4313593,
+        "place_id": "ChIJPbYVgr5Cs0cRTh-6DnEEcg8",
+        "address": "Nordergraben 36, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_st_jurgen_kirche_flensburg_ev_luth_kirchengemeinde_flensburg_st_jurgen",
+      "name": "St. Jürgen Kirche Flensburg - Ev.-Luth. Kirchengemeinde Flensburg-St. Jürgen",
+      "before": {
+        "lat": 54.79101998,
+        "lng": 9.44151454
+      },
+      "google": {
+        "lat": 54.7910595,
+        "lng": 9.441583099999999,
+        "place_id": "ChIJv32MC_lDs0cRVvMouAi4Jks",
+        "address": "Jürgensgaarder Str. 2, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_helligandskirken_dansk",
+      "name": "Helligåndskirken - dansk",
+      "before": {
+        "lat": 54.78765748000001,
+        "lng": 9.432512560000001
+      },
+      "google": {
+        "lat": 54.787697,
+        "lng": 9.4325811,
+        "place_id": "ChIJy7mId75Cs0cRkNK5lwUCtWA",
+        "address": "Große Str. 43, 24937 Flensburg-Altstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_st_johannis_kirche_flensburg_ev_luth_kirchengemeinde_flensburg_st_joha",
+      "name": "St. Johannis Kirche Flensburg - Ev.-Luth. Kirchengemeinde Flensburg-St. Johannis",
+      "before": {
+        "lat": 54.78353828,
+        "lng": 9.44056936
+      },
+      "google": {
+        "lat": 54.7835778,
+        "lng": 9.440637899999999,
+        "place_id": "ChIJFZGML5dCs0cRlknTpj5U8G8",
+        "address": "Johanniskirchhof 22, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_bundsenkapelle",
+      "name": "Bundsenkapelle",
+      "before": {
+        "lat": 54.78706808,
+        "lng": 9.428342359999998
+      },
+      "google": {
+        "lat": 54.7871076,
+        "lng": 9.4284109,
+        "place_id": "ChIJsz-e0dpDs0cRYZgduqNqzKg",
+        "address": "Selckstraße 9, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_christuskirche_zu_flensburg_murwik_der_ev_luth_kirchengemeinde_murwik",
+      "name": "Christuskirche zu Flensburg Mürwik der Ev.-Luth. Kirchengemeinde Mürwik",
+      "before": {
+        "lat": 54.81154928000001,
+        "lng": 9.46341132
+      },
+      "google": {
+        "lat": 54.8115888,
+        "lng": 9.4634799,
+        "place_id": "ChIJ11ybvgVDs0cRSU0eKzfxtN4",
+        "address": "Fördestraße 4, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_st_michael_kirche_flensburg_ev_luth_kirchengemeinde_st_michael_in_flen",
+      "name": "St. Michael Kirche Flensburg - Ev.-Luth. Kirchengemeinde St. Michael in Flensburg",
+      "before": {
+        "lat": 54.78192398,
+        "lng": 9.41901596
+      },
+      "google": {
+        "lat": 54.7819635,
+        "lng": 9.4190845,
+        "place_id": "ChIJ9RlyXaVCs0cRyArNwf4MQso",
+        "address": "Am Ochsenmarkt 38, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_st_johannis_kirche_zu_flensburg_der_ev_luth_kirchengemeinde_adelby_eng",
+      "name": "St. Johannis Kirche zu Flensburg der Ev.-Luth. Kirchengemeinde Adelby-Engelsby",
+      "before": {
+        "lat": 54.78404848,
+        "lng": 9.466188060000002
+      },
+      "google": {
+        "lat": 54.784088,
+        "lng": 9.4662566,
+        "place_id": "ChIJ9b29sn1Ds0cRVVRgUINludw",
+        "address": "Richard-Wagner-Straße 51, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_evangelisch_freikirchliche_gemeinde_flensburg_baptisten_kdor",
+      "name": "Evangelisch-Freikirchliche Gemeinde Flensburg (Baptisten) KdöR",
+      "before": {
+        "lat": 54.792116580000005,
+        "lng": 9.44857994
+      },
+      "google": {
+        "lat": 54.7921561,
+        "lng": 9.4486485,
+        "place_id": "ChIJE7ep1uxCs0cRx1_qgRNAUjI",
+        "address": "Bismarckstraße 110, 24943 Flensburg-Jürgensby"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_st_petri_kirche_flensburg_ev_luth_st_petrigemeinde_in_flensburg",
+      "name": "St. Petri Kirche Flensburg - Ev.-Luth. St. Petrigemeinde in Flensburg",
+      "before": {
+        "lat": 54.80070668,
+        "lng": 9.421430019999999
+      },
+      "google": {
+        "lat": 54.8007462,
+        "lng": 9.4214986,
+        "place_id": "ChIJrbQNkqJDs0cR_FNoWFvTkco",
+        "address": "Bauer Landstraße 10, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_campelle_esg_flensburg",
+      "name": "Campelle ESG Flensburg",
+      "before": {
+        "lat": 54.77609478000001,
+        "lng": 9.452172180000002
+      },
+      "google": {
+        "lat": 54.7761343,
+        "lng": 9.452240699999999,
+        "place_id": "ChIJtV6hXYRCs0cRok3ODNK1GPA",
+        "address": "Thomas-Fincke-Straße 16, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_neuapostolische_kirche_flensburg",
+      "name": "Neuapostolische Kirche Flensburg",
+      "before": {
+        "lat": 54.78114898,
+        "lng": 9.43229706
+      },
+      "google": {
+        "lat": 54.7811885,
+        "lng": 9.432365599999999,
+        "place_id": "ChIJwZQnpaJCs0cRr_7EQhlrATA",
+        "address": "Am Pferdewasser 8, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_ansgar_kirke_flensborg_nord",
+      "name": "Ansgar Kirke Flensborg Nord",
+      "before": {
+        "lat": 54.802662180000006,
+        "lng": 9.42365432
+      },
+      "google": {
+        "lat": 54.8027017,
+        "lng": 9.4237229,
+        "place_id": "ChIJBRUFAQAAABARfoqNIXQHJNE",
+        "address": "Apenrader Str. 25, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_katholische_kirche_st_ansgar",
+      "name": "Katholische Kirche St Ansgar",
+      "before": {
+        "lat": 54.80582098,
+        "lng": 9.464992120000002
+      },
+      "google": {
+        "lat": 54.80586049999999,
+        "lng": 9.4650607,
+        "place_id": "ChIJD7w3aRhDs0cRaK7pPHFoYNk",
+        "address": "Ansgarstraße 1, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_st_gertrud_kirche_flensburg_ev_luth_kirchengemeinde_st_gertrud_zu_flen",
+      "name": "St. Gertrud Kirche Flensburg - Ev.-Luth. Kirchengemeinde St. Gertrud zu Flensburg",
+      "before": {
+        "lat": 54.79117708,
+        "lng": 9.41678804
+      },
+      "google": {
+        "lat": 54.7912166,
+        "lng": 9.4168566,
+        "place_id": "ChIJ9-nxLI5Ds0cREEoGOIDAb4w",
+        "address": "Marienhölzungsweg 51, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_equippers_flensburg_e_v",
+      "name": "Equippers Flensburg e.V. ⛪",
+      "before": {
+        "lat": 54.77179288,
+        "lng": 9.42828498
+      },
+      "google": {
+        "lat": 54.7718324,
+        "lng": 9.4283535,
+        "place_id": "ChIJ89Bhbr5Cs0cR6CA2BD1lqK4",
+        "address": "Zur Bleiche 44a, 24941 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_neptunbrunnen",
+      "name": "Neptunbrunnen",
+      "before": {
+        "lat": 54.789249080000005,
+        "lng": 9.43212334
+      },
+      "google": {
+        "lat": 54.7892886,
+        "lng": 9.4321919,
+        "place_id": "ChIJ2cSXWb5Cs0cR2seQnn88Lhk",
+        "address": "Marienkirchhof, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_christophorus_skulptur",
+      "name": "Christophorus-Skulptur",
+      "before": {
+        "lat": 54.79621668,
+        "lng": 9.43168244
+      },
+      "google": {
+        "lat": 54.79625619999999,
+        "lng": 9.431751,
+        "place_id": "ChIJkcSup9FDs0cRQMrAxWv3LdA",
+        "address": "24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_holmnixe",
+      "name": "Holmnixe",
+      "before": {
+        "lat": 54.78448238,
+        "lng": 9.435288359999998
+      },
+      "google": {
+        "lat": 54.78452189999999,
+        "lng": 9.4353569,
+        "place_id": "ChIJecGx0pdCs0cRQE_zQGJn-AU",
+        "address": "Holm, 24937 Flensburg-Altstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_kriegsdenkmal",
+      "name": "Kriegsdenkmal",
+      "before": {
+        "lat": 54.81881278000001,
+        "lng": 9.475471099999998
+      },
+      "google": {
+        "lat": 54.8188523,
+        "lng": 9.475539699999999,
+        "place_id": "ChIJm0c403tDs0cRu6misAH-zvg",
+        "address": "Twedter Holz 15, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_maskenbrunnen_von_bildhauer",
+      "name": "Maskenbrunnen von Bildhauer",
+      "before": {
+        "lat": 54.78588368,
+        "lng": 9.43258166
+      },
+      "google": {
+        "lat": 54.7859232,
+        "lng": 9.4326502,
+        "place_id": "ChIJBVNJeQBDs0cRnY_dF4ktVA0",
+        "address": "Südergraben 17, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_denkmal_general_carl_von_wrangel",
+      "name": "Denkmal General Carl von Wrangel",
+      "before": {
+        "lat": 54.78827418000001,
+        "lng": 9.427034459999998
+      },
+      "google": {
+        "lat": 54.7883137,
+        "lng": 9.427102999999999,
+        "place_id": "ChIJkUlTG8RDs0cRVgzAbVQxogE",
+        "address": "Selckstraße, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_steinskulptur",
+      "name": "Steinskulptur",
+      "before": {
+        "lat": 54.77507138,
+        "lng": 9.41654448
+      },
+      "google": {
+        "lat": 54.7751109,
+        "lng": 9.416613,
+        "place_id": "ChIJTzCswlVDs0cRd_AkShmHGZc",
+        "address": "24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_drei_eisbaren_von_johannes_caspersen",
+      "name": "Drei Eisbären von Johannes Caspersen",
+      "before": {
+        "lat": 54.78447258,
+        "lng": 9.433202259999998
+      },
+      "google": {
+        "lat": 54.7845121,
+        "lng": 9.433270799999999,
+        "place_id": "ChIJ4RtRcGdDs0cR0c08FEUo6IM",
+        "address": "Friedrichstraße 2, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_kopf_einer_windkraftanlage",
+      "name": "Kopf einer Windkraftanlage",
+      "before": {
+        "lat": 54.77536318,
+        "lng": 9.45205718
+      },
+      "google": {
+        "lat": 54.7948728,
+        "lng": 9.4393131,
+        "place_id": "ChIJf0Efj-pCs0cRCfMQYtfQ3co",
+        "address": "Ballastbrücke 18, 24937 Flensburg"
+      },
+      "delta_m": 2318,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_idstedtlowe",
+      "name": "Idstedtlöwe",
+      "before": {
+        "lat": 54.78527398,
+        "lng": 9.429756559999998
+      },
+      "google": {
+        "lat": 54.7853135,
+        "lng": 9.4298251,
+        "place_id": "ChIJWejP-LxCs0cR-4VkfhEFiu0",
+        "address": "Museumsberg 1, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_caspersen_skulpturen_atrium",
+      "name": "Caspersen Skulpturen Atrium",
+      "before": {
+        "lat": 54.79704798,
+        "lng": 9.42844094
+      },
+      "google": {
+        "lat": 54.7970875,
+        "lng": 9.428509499999999,
+        "place_id": "ChIJof7brxRDs0cRv81vtT5TZeU",
+        "address": "Neustadt 16, 24939 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_sonnenwendwiese",
+      "name": "Sonnenwendwiese",
+      "before": {
+        "lat": 54.80294678,
+        "lng": 9.445400520000002
+      },
+      "google": {
+        "lat": 54.8029863,
+        "lng": 9.4454691,
+        "place_id": "ChIJ4261g-hCs0cRTsp4P-_lEMo",
+        "address": "Unnamed Road, 24943, Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_solitude",
+      "name": "Solitüde",
+      "before": {
+        "lat": 54.82340558,
+        "lng": 9.4901338
+      },
+      "google": {
+        "lat": 54.8234451,
+        "lng": 9.4902024,
+        "place_id": "ChIJlQcao6VDs0cRBSCU9lVVU6Y",
+        "address": "Flensburg Fjord, 24944 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_schonen_aussicht_in_flensburg",
+      "name": "Schönen Aussicht in Flensburg",
+      "before": {
+        "lat": 54.789687879999995,
+        "lng": 9.440809640000001
+      },
+      "google": {
+        "lat": 54.7897274,
+        "lng": 9.4408782,
+        "place_id": "ChIJcSwGJwBDs0cRDuIhyeHGL1w",
+        "address": "Erlenweg 2, 24943 Flensburg-Jürgensby"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_ostseebad_flensburg",
+      "name": "Ostseebad Flensburg",
+      "before": {
+        "lat": 54.81314098,
+        "lng": 9.4297632
+      },
+      "google": {
+        "lat": 54.81318049999999,
+        "lng": 9.429831799999999,
+        "place_id": "ChIJQRO1L9hCs0cRd3WEYzwzF8o",
+        "address": "Am Ostseebad 29, 24939 Flensburg-Klues"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_volkspark",
+      "name": "Volkspark",
+      "before": {
+        "lat": 54.79617058,
+        "lng": 9.44245444
+      },
+      "google": {
+        "lat": 54.7962101,
+        "lng": 9.442523,
+        "place_id": "ChIJdQvItOtCs0cRc1zIEk_Fph4",
+        "address": "Am Volkspark 500, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_carlisle_park",
+      "name": "Carlisle-Park",
+      "before": {
+        "lat": 54.77616708000001,
+        "lng": 9.437704380000001
+      },
+      "google": {
+        "lat": 54.77620659999999,
+        "lng": 9.437772899999999,
+        "place_id": "ChIJS20noE1Ds0cRGAoaSEELWEE",
+        "address": "Bahnhofstraße, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_ferienwohnung_flensburg_solitude_strand",
+      "name": "Ferienwohnung Flensburg Solitüde Strand",
+      "before": {
+        "lat": 54.81973118,
+        "lng": 9.483316499999999
+      },
+      "google": {
+        "lat": 54.8197707,
+        "lng": 9.4833851,
+        "place_id": "ChIJ3ZHxQrhDs0cR-aOMByp4ZM4",
+        "address": "Solitüder Str. 29, 24944 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_hundestrand_ostseebad",
+      "name": "Hundestrand Ostseebad",
+      "before": {
+        "lat": 54.81181368,
+        "lng": 9.431334719999999
+      },
+      "google": {
+        "lat": 54.81185319999999,
+        "lng": 9.4314033,
+        "place_id": "ChIJqSyxntlCs0cRlQ9BSVgEUBs",
+        "address": "Am Ostseebad 8, 24939 Flensburg-Klues"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_collundtspark",
+      "name": "Collundtspark",
+      "before": {
+        "lat": 54.79470828000001,
+        "lng": 9.42860994
+      },
+      "google": {
+        "lat": 54.7947478,
+        "lng": 9.4286785,
+        "place_id": "ChIJ4WWZQMdCs0cRQpuBaFI4T8w",
+        "address": "Schloßstraße 28, 24939 Flensburg-Neustadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_strandbad_wassersleben",
+      "name": "Strandbad Wassersleben",
+      "before": {
+        "lat": 54.825924279999995,
+        "lng": 9.41973108
+      },
+      "google": {
+        "lat": 54.8259638,
+        "lng": 9.4197997,
+        "place_id": "ChIJD22HZy1Ds0cRGiIXnOy2S2c",
+        "address": "24955 Harrislee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_jelte_duchene_park",
+      "name": "Jelte Duchêne Park",
+      "before": {
+        "lat": 54.774689779999996,
+        "lng": 9.470186680000001
+      },
+      "google": {
+        "lat": 54.7747293,
+        "lng": 9.4702552,
+        "place_id": "ChIJaTH-dSJDs0cRN-buueVBHzA",
+        "address": "24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_sitzgelegenheit_am_hafen",
+      "name": "Sitzgelegenheit am Hafen",
+      "before": {
+        "lat": 54.788842980000005,
+        "lng": 9.437446439999999
+      },
+      "google": {
+        "lat": 54.7888825,
+        "lng": 9.437515,
+        "place_id": "ChIJ5-LXG_pDs0cRjBELr7T6vY0",
+        "address": "Hafendamm 505, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_park_konventgarten_spielplatz",
+      "name": "Park Konventgarten Spielplatz",
+      "before": {
+        "lat": 54.78189628,
+        "lng": 9.444057760000002
+      },
+      "google": {
+        "lat": 54.7819358,
+        "lng": 9.444126299999999,
+        "place_id": "ChIJw8zjNCBDs0cR-HlR3lNG2Ac",
+        "address": "24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_hundestrand",
+      "name": "Hundestrand",
+      "before": {
+        "lat": 54.822605380000006,
+        "lng": 9.4854425
+      },
+      "google": {
+        "lat": 54.8226449,
+        "lng": 9.4855111,
+        "place_id": "ChIJjRFiXmNDs0cRqtux4IZzCg0",
+        "address": "Hundestrand, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_hundefreilauf_flensburg_e_v",
+      "name": "Hundefreilauf Flensburg e.V.",
+      "before": {
+        "lat": 54.77284488,
+        "lng": 9.413211379999998
+      },
+      "google": {
+        "lat": 54.7728844,
+        "lng": 9.4132799,
+        "place_id": "ChIJIU1uGahCs0cR49nmRAGR-68",
+        "address": "Quakenweg 14, 24941 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_strand_glucksburg",
+      "name": "Strand Glücksburg",
+      "before": {
+        "lat": 54.84124408,
+        "lng": 9.530596460000002
+      },
+      "google": {
+        "lat": 54.8412836,
+        "lng": 9.5306651,
+        "place_id": "ChIJU7Iv6jtDs0cROY_gvHhj-eo",
+        "address": "Strandweg, 24960 Glücksburg (Ostsee)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_wasserplatz",
+      "name": "Wasserplatz",
+      "before": {
+        "lat": 54.801469180000005,
+        "lng": 9.42822032
+      },
+      "google": {
+        "lat": 54.8015087,
+        "lng": 9.4282889,
+        "place_id": "ChIJ42MzXfFDs0cRWsCX5IXXOpo",
+        "address": "Unnamed Road, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_aussichtsplattform_am_volkspark",
+      "name": "Aussichtsplattform am Volkspark",
+      "before": {
+        "lat": 54.794769880000004,
+        "lng": 9.44097374
+      },
+      "google": {
+        "lat": 54.7948094,
+        "lng": 9.4410423,
+        "place_id": "ChIJWYBVErVDs0cRRqxpF08ul60",
+        "address": "24937 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_wasserturm_fruerlund",
+      "name": "Wasserturm Fruerlund",
+      "before": {
+        "lat": 54.79607168,
+        "lng": 9.44644984
+      },
+      "google": {
+        "lat": 54.7961112,
+        "lng": 9.4465184,
+        "place_id": "ChIJGdspdexCs0cRKyvibMh59IE",
+        "address": "Am Volkspark 500, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_aussichtsplattform",
+      "name": "Aussichtsplattform",
+      "before": {
+        "lat": 54.792993779999996,
+        "lng": 9.429538339999999
+      },
+      "google": {
+        "lat": 54.804576,
+        "lng": 9.4418153,
+        "place_id": "ChIJl72iGgBDs0cREFO2t1AkUrU",
+        "address": "Harniskai 1, 24937 Flensburg"
+      },
+      "delta_m": 1509,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_minigolfplatz_solitude",
+      "name": "Minigolfplatz Solitüde",
+      "before": {
+        "lat": 54.82074548000001,
+        "lng": 9.488003699999998
+      },
+      "google": {
+        "lat": 54.820785,
+        "lng": 9.488072299999999,
+        "place_id": "ChIJ5Qn8aq9Ds0cR3HqCTzfoPoU",
+        "address": "Solitüde 13A, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_flensburger_stadion",
+      "name": "Flensburger Stadion",
+      "before": {
+        "lat": 54.801829680000004,
+        "lng": 9.45048602
+      },
+      "google": {
+        "lat": 54.8018692,
+        "lng": 9.4505546,
+        "place_id": "ChIJb_sTfqdDs0cRmbiL5gqrFrI",
+        "address": "Arndtstraße 5, 24943 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_tsb_flensburg_sportanlage",
+      "name": "TSB Flensburg Sportanlage",
+      "before": {
+        "lat": 54.788900479999995,
+        "lng": 9.417910639999999
+      },
+      "google": {
+        "lat": 54.78894,
+        "lng": 9.4179792,
+        "place_id": "ChIJBVKNM7dCs0cRYy7WiZZFaI0",
+        "address": "Am Schützenhof 16, 24939 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_ehemaliges_disc_golf_auf_dem_campus",
+      "name": "Ehemaliges Disc Golf auf dem Campus",
+      "before": {
+        "lat": 54.77362658,
+        "lng": 9.454835280000001
+      },
+      "google": {
+        "lat": 54.7736661,
+        "lng": 9.4549038,
+        "place_id": "ChIJJ3cQQ4FCs0cRq29LtRTAeXU",
+        "address": "Campusallee 2, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_stadt_flensburg",
+      "name": "Stadt Flensburg",
+      "before": {
+        "lat": 54.780988279999995,
+        "lng": 9.43358246
+      },
+      "google": {
+        "lat": 54.7810278,
+        "lng": 9.433651,
+        "place_id": "ChIJd2EqBphCs0cRVpkFOeX86f4",
+        "address": "Rathauspl. 1, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_ostliche_altstadt_flensburgs",
+      "name": "östliche Altstadt Flensburgs",
+      "before": {
+        "lat": 54.78942688000001,
+        "lng": 9.44001064
+      },
+      "google": {
+        "lat": 54.78946639999999,
+        "lng": 9.4400792,
+        "place_id": "ChIJA1o1q5VCs0cRvTatzzYdlEA",
+        "address": "Sankt-Jürgen-Straße 42, 24937 Flensburg-Jürgensby"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_aussichtspunkt_fordeblick",
+      "name": "Aussichtspunkt Fördeblick",
+      "before": {
+        "lat": 54.80453648,
+        "lng": 9.441746720000001
+      },
+      "google": {
+        "lat": 54.804576,
+        "lng": 9.4418153,
+        "place_id": "ChIJl72iGgBDs0cREFO2t1AkUrU",
+        "address": "Harniskai 1, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_aussichtspunkt_kleine_treppe",
+      "name": "Aussichtspunkt Kleine Treppe",
+      "before": {
+        "lat": 54.78877508000001,
+        "lng": 9.44089714
+      },
+      "google": {
+        "lat": 54.78881459999999,
+        "lng": 9.4409657,
+        "place_id": "ChIJZ2LiFgBDs0cRN0B0l3Eom7w",
+        "address": "Brixstraße 18, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_aussichtspunkt_sitzpilz_am_danfossbach",
+      "name": "Aussichtspunkt Sitzpilz am Danfossbach",
+      "before": {
+        "lat": 54.81790298,
+        "lng": 9.426194200000001
+      },
+      "google": {
+        "lat": 54.8179425,
+        "lng": 9.4262628,
+        "place_id": "ChIJNeQIHABDs0cRNgTkJwEV0Es",
+        "address": "24939 Flensburg-Klues"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_niederdeutsche_buhne_flensburg_gemeinnutzige_gmbh",
+      "name": "Niederdeutsche Bühne Flensburg gemeinnützige GmbH",
+      "before": {
+        "lat": 54.78562868,
+        "lng": 9.44027826
+      },
+      "google": {
+        "lat": 54.7856682,
+        "lng": 9.4403468,
+        "place_id": "ChIJ-xcuk5ZCs0cRQCrljIBv-bg",
+        "address": "Augustastraße 5, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_kleine_buhne",
+      "name": "Kleine Bühne",
+      "before": {
+        "lat": 54.78658758,
+        "lng": 9.432577159999997
+      },
+      "google": {
+        "lat": 54.7866271,
+        "lng": 9.4326457,
+        "place_id": "ChIJXTdTxL1Cs0cRrgbFhTqDR4c",
+        "address": "Nordergraben 12, 24937 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_theaterschule_flensburg_ggmbh",
+      "name": "Theaterschule Flensburg gGmbH",
+      "before": {
+        "lat": 54.79092578000001,
+        "lng": 9.44796884
+      },
+      "google": {
+        "lat": 54.7909653,
+        "lng": 9.448037399999999,
+        "place_id": "ChIJ52gjJJNCs0cRZdiAI_a3mWI",
+        "address": "Adelbyer Kirchenweg 1, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_stadttheater_flensburg",
+      "name": "Stadttheater - Flensburg",
+      "before": {
+        "lat": 54.78604048,
+        "lng": 9.433431459999998
+      },
+      "google": {
+        "lat": 54.7863238,
+        "lng": 9.433029399999999,
+        "place_id": "ChIJmesQlb1Cs0cR2ZaJkd6PD9w",
+        "address": "Rathausstraße 22, 24937 Flensburg"
+      },
+      "delta_m": 41,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "flensburg_det_lille_teater_flensborg",
+      "name": "Det lille Teater Flensborg",
+      "before": {
+        "lat": 54.78976208,
+        "lng": 9.42989944
+      },
+      "google": {
+        "lat": 54.7898016,
+        "lng": 9.429967999999999,
+        "place_id": "ChIJc5Oaw75Cs0cREj1nWFEIJWM",
+        "address": "Marienstraße 20, 24937 Flensburg-Altstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_forum_theater_flensburg",
+      "name": "Forum Theater Flensburg",
+      "before": {
+        "lat": 54.80450958,
+        "lng": 9.419894619999999
+      },
+      "google": {
+        "lat": 54.8045491,
+        "lng": 9.4199632,
+        "place_id": "ChIJiyVGGM5Cs0cRjsT69LIU-Og",
+        "address": "Alter Kupfermühlenweg 38, 24939 Flensburg-Klues"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_lautrupsbach_wanderweg",
+      "name": "Lautrupsbach Wanderweg",
+      "before": {
+        "lat": 54.79141818000001,
+        "lng": 9.459654839999999
+      },
+      "google": {
+        "lat": 54.7914577,
+        "lng": 9.4597234,
+        "place_id": "ChIJMyJkTwBDs0cR_PZ8JbtMy00",
+        "address": "24943 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_eichhornchenweg_wander_radpfad_im_handewitter_forst",
+      "name": "\"Eichhörnchenweg\" Wander- & Radpfad im Handewitter Forst",
+      "before": {
+        "lat": 54.74336788000001,
+        "lng": 9.37715712
+      },
+      "google": {
+        "lat": 54.7434074,
+        "lng": 9.3772256,
+        "place_id": "ChIJba_ABapns0cRHCTHrA_53m8",
+        "address": "Zwischen Altholzkrug (nahe 42) 24983, Handewitt, Flensburg, Bredstedter Ch, 24976 Handewitt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_ehemaliges_freilandlabor",
+      "name": "Ehemaliges Freilandlabor",
+      "before": {
+        "lat": 54.77312208000001,
+        "lng": 9.445496780000001
+      },
+      "google": {
+        "lat": 54.77316159999999,
+        "lng": 9.4455653,
+        "place_id": "ChIJbSHf7ZxDs0cRcBFmfcGzgFs",
+        "address": "24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_gendarmstien",
+      "name": "Gendarmstien",
+      "before": {
+        "lat": 54.837892079999996,
+        "lng": 9.44367156
+      },
+      "google": {
+        "lat": 54.8379316,
+        "lng": 9.443740199999999,
+        "place_id": "ChIJc-dxQEdDs0cRtxHmIRvLu2I",
+        "address": "Molevej 24, 6340 Kruså, Dänemark"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_rastplatz_am_uferweg_von_solitude_nach_glucksburg",
+      "name": "Rastplatz am Uferweg von Solitüde nach Glücksburg",
+      "before": {
+        "lat": 54.831062280000005,
+        "lng": 9.50679868
+      },
+      "google": {
+        "lat": 54.8311018,
+        "lng": 9.5068673,
+        "place_id": "ChIJC5dUlM1Ds0cR2pF79B2zLjE",
+        "address": "24960 Glücksburg (Ostsee)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_naherholungsgebiet_taruper_seenplatte_und_adelbybek",
+      "name": "Naherholungsgebiet Taruper Seenplatte und Adelbybek",
+      "before": {
+        "lat": 54.77576158000001,
+        "lng": 9.480901679999999
+      },
+      "google": {
+        "lat": 54.7758011,
+        "lng": 9.4809702,
+        "place_id": "ChIJfW5MVABDs0cRj856gbc_GxI",
+        "address": "Zur Adelbybek 17, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_naturschutzgebiet_twedter_feld",
+      "name": "Naturschutzgebiet Twedter Feld",
+      "before": {
+        "lat": 54.81094208,
+        "lng": 9.48589282
+      },
+      "google": {
+        "lat": 54.8109816,
+        "lng": 9.485961399999999,
+        "place_id": "ChIJScWbMn9Ds0cRYJ0Ulf7_OEs",
+        "address": "Twedter Feld 20, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_marienholzung",
+      "name": "Marienhölzung",
+      "before": {
+        "lat": 54.78770748000001,
+        "lng": 9.38992326
+      },
+      "google": {
+        "lat": 54.7833333,
+        "lng": 9.3833333,
+        "place_id": "ChIJze2YAVtds0cR55RO8yp-YpQ",
+        "address": "Marienhölzung, 24941 Flensburg"
+      },
+      "delta_m": 644,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_stiftungsland_harrislee",
+      "name": "Stiftungsland Harrislee",
+      "before": {
+        "lat": 54.79682848,
+        "lng": 9.36774144
+      },
+      "google": {
+        "lat": 54.796868,
+        "lng": 9.36781,
+        "place_id": "ChIJu8TNV99ds0cRC3mrPDF_fsU",
+        "address": "Schäferweg 3, 24955 Harrislee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_wander_rad_rastplatz",
+      "name": "Wander- & Rad-Rastplatz",
+      "before": {
+        "lat": 54.73140217999999,
+        "lng": 9.36662824
+      },
+      "google": {
+        "lat": 54.7314417,
+        "lng": 9.3666967,
+        "place_id": "ChIJ_2Hd6Chns0cRUunARUPOVxg",
+        "address": "Flensburger Strasse, Ecke, Hügelweg 31, 24983 Handewitt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_schoner_fleck_wald",
+      "name": "Schöner Fleck wald",
+      "before": {
+        "lat": 54.78349368000001,
+        "lng": 9.38497956
+      },
+      "google": {
+        "lat": 54.78353320000001,
+        "lng": 9.385048099999999,
+        "place_id": "ChIJGUcrJQBds0cRfOEjtGxd_Io",
+        "address": "Q9MP+C2, 24941 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_wildgehege_marienholzung",
+      "name": "Wildgehege Marienhölzung",
+      "before": {
+        "lat": 54.78588258,
+        "lng": 9.39373086
+      },
+      "google": {
+        "lat": 54.7859221,
+        "lng": 9.393799399999999,
+        "place_id": "ChIJdahdPE5ds0cR-nztwkmAmKY",
+        "address": "Marienhölzungsweg 161, 24941 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_mystery_house_live_escape_room_spiele_flensburg",
+      "name": "Mystery House Live Escape Room Spiele Flensburg",
+      "before": {
+        "lat": 54.77767078000001,
+        "lng": 9.412865659999998
+      },
+      "google": {
+        "lat": 54.7777103,
+        "lng": 9.412934199999999,
+        "place_id": "ChIJE1wa1KhCs0cREqfKwBqZE7A",
+        "address": "Marienallee 70, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_wildschweingehege_friedeholz",
+      "name": "Wildschweingehege Friedeholz",
+      "before": {
+        "lat": 54.84328998000001,
+        "lng": 9.54858306
+      },
+      "google": {
+        "lat": 54.8433295,
+        "lng": 9.548651699999999,
+        "place_id": "ChIJ5YAdzcJDs0cR18wzyg54b-I",
+        "address": "Paulinenallee 1A, 24960 Glücksburg (Ostsee)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_kong_arrildshoj_park",
+      "name": "Kong-Arrildshoj-Park",
+      "before": {
+        "lat": 54.760506080000006,
+        "lng": 9.381055100000001
+      },
+      "google": {
+        "lat": 54.7605456,
+        "lng": 9.3811236,
+        "place_id": "ChIJlerCmOVns0cR2NbBxfwoQ84",
+        "address": "Ebenezer-Howard-Allee 23, 24941 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_mr_scandis_funpark",
+      "name": "Mr. Scandis Funpark",
+      "before": {
+        "lat": 54.77887048,
+        "lng": 9.33232146
+      },
+      "google": {
+        "lat": 54.77891,
+        "lng": 9.33239,
+        "place_id": "ChIJp4l2voBds0cRDcJoUVbrJyg",
+        "address": "Skandinavien-Damm 2, 24983 Handewitt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_e_fun_holler",
+      "name": "E-Fun Höller",
+      "before": {
+        "lat": 54.77396008000001,
+        "lng": 9.318556480000002
+      },
+      "google": {
+        "lat": 54.7739996,
+        "lng": 9.318624999999999,
+        "place_id": "ChIJ95mzZBpos0cRhSfc0B6oQRk",
+        "address": "Ketelsenweg 5b, 24983 Handewitt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_marchenskulpturen_im_volkspark",
+      "name": "Märchenskulpturen im Volkspark",
+      "before": {
+        "lat": 54.79529768,
+        "lng": 9.444844040000001
+      },
+      "google": {
+        "lat": 54.7953372,
+        "lng": 9.4449126,
+        "place_id": "ChIJPfpDo85Ds0cRBa8G0yKG72Q",
+        "address": "24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_deko_simmo",
+      "name": "Deko Simmo",
+      "before": {
+        "lat": 54.79941858000001,
+        "lng": 9.42307734
+      },
+      "google": {
+        "lat": 54.7994581,
+        "lng": 9.4231459,
+        "place_id": "ChIJ-26BmAdDs0cRg8XQbQWTQdY",
+        "address": "Neustadt 63, 24939 Flensburg-Klues"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_flensburger_stadtmatrosen",
+      "name": "Flensburger Stadtmatrosen",
+      "before": {
+        "lat": 54.79039058000001,
+        "lng": 9.431260140000001
+      },
+      "google": {
+        "lat": 54.79043009999999,
+        "lng": 9.4313287,
+        "place_id": "ChIJ389oQ79Cs0cRDufSgFq6VA0",
+        "address": "Norderstraße 19, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_enibasknots_kleine_schatze_selbstbedienungsschrank",
+      "name": "enibasknots \"kleine Schätze \" Selbstbedienungsschrank",
+      "before": {
+        "lat": 54.799480779999996,
+        "lng": 9.493195240000002
+      },
+      "google": {
+        "lat": 54.7995203,
+        "lng": 9.4932638,
+        "place_id": "ChIJgdQfpVdDs0cRPlSHY_9MDBQ",
+        "address": "Christine-Christiansen-Straße 22, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_canvero_shop_flensburg",
+      "name": "Canvero Shop Flensburg",
+      "before": {
+        "lat": 54.78524888,
+        "lng": 9.435397660000001
+      },
+      "google": {
+        "lat": 54.7852884,
+        "lng": 9.435466199999999,
+        "place_id": "ChIJcdpe51pDs0cRS6KErr3DcLQ",
+        "address": "Holm 17, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_holunderhutte",
+      "name": "Holunderhütte",
+      "before": {
+        "lat": 54.754828380000006,
+        "lng": 9.3980688
+      },
+      "google": {
+        "lat": 54.7548679,
+        "lng": 9.3981373,
+        "place_id": "ChIJCzWOmCtps0cRTCNtvqXD-gM",
+        "address": "Holunderweg 50, 24941 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_flying_tiger_copenhagen",
+      "name": "Flying Tiger Copenhagen",
+      "before": {
+        "lat": 54.78331068,
+        "lng": 9.436435059999999
+      },
+      "google": {
+        "lat": 54.7833502,
+        "lng": 9.4365036,
+        "place_id": "ChIJQQKXdJdCs0cRQrxPp8fpuDk",
+        "address": "Holm 57, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_nordern_art",
+      "name": "Nordern Art",
+      "before": {
+        "lat": 54.79160788,
+        "lng": 9.43146344
+      },
+      "google": {
+        "lat": 54.7916474,
+        "lng": 9.431531999999999,
+        "place_id": "ChIJzV6BvjRDs0cROcM1G4UXGTw",
+        "address": "Norderstraße 38, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_plop_shop_vor_der_flensburger_brauerei",
+      "name": "Plop-Shop vor der Flensburger Brauerei",
+      "before": {
+        "lat": 54.77888618000001,
+        "lng": 9.435749060000001
+      },
+      "google": {
+        "lat": 54.77892569999999,
+        "lng": 9.4358176,
+        "place_id": "ChIJ_b9tujhDs0cR_OEMJrDvx2M",
+        "address": "Munketoft 12, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_alive_bucher_geschenke_mehr",
+      "name": "Alive - Bücher, Geschenke & Mehr",
+      "before": {
+        "lat": 54.77000228000001,
+        "lng": 9.396735580000001
+      },
+      "google": {
+        "lat": 54.77004179999999,
+        "lng": 9.396804099999999,
+        "place_id": "ChIJ159-Of5ns0cRxd5XZEC9bwo",
+        "address": "Lilienthalstraße 22, 24941 Flensburg-Friesischer Berg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_johannsen_rum_johannsens_hokerei_rum_aus_der_traditionellen_manufaktur",
+      "name": "Johannsen Rum & Johannsens Hökerei: Rum aus der traditionellen Manufaktur Johannsen in Flensburg",
+      "before": {
+        "lat": 54.78979448,
+        "lng": 9.43086714
+      },
+      "google": {
+        "lat": 54.789834,
+        "lng": 9.4309357,
+        "place_id": "ChIJMRw85r5Cs0cRcZwQf9GenlE",
+        "address": "Marienstraße 6-8, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_malteser_fordeklinikum_st_katharina_standort_knuthstrasse",
+      "name": "Malteser Fördeklinikum St. Katharina Standort Knuthstraße",
+      "before": {
+        "lat": 54.79028228,
+        "lng": 9.426077939999999
+      },
+      "google": {
+        "lat": 54.7903218,
+        "lng": 9.4261465,
+        "place_id": "ChIJU6MRELlCs0cRaU7ePDewy34",
+        "address": "Knuthstraße 1, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_malteser_fordeklinikum_st_katharina_standort_waldstrasse",
+      "name": "Malteser Fördeklinikum St. Katharina Standort Waldstraße",
+      "before": {
+        "lat": 54.791770580000005,
+        "lng": 9.42139714
+      },
+      "google": {
+        "lat": 54.7918101,
+        "lng": 9.421465699999999,
+        "place_id": "ChIJ6YyPGbhCs0cRIVN940TfTUw",
+        "address": "Waldstraße 17, 24939 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_lowen_apotheke",
+      "name": "Löwen-Apotheke",
+      "before": {
+        "lat": 54.76030108,
+        "lng": 9.432188400000001
+      },
+      "google": {
+        "lat": 54.7603406,
+        "lng": 9.432256899999999,
+        "place_id": "ChIJ9RI1lyRos0cR7yF9QSNr5zo",
+        "address": "Schleswiger Str. 130, 24941 Flensburg-Südstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_easyapotheke_flensburg_galerie",
+      "name": "easyApotheke Flensburg Galerie",
+      "before": {
+        "lat": 54.78272938,
+        "lng": 9.43784346
+      },
+      "google": {
+        "lat": 54.7827689,
+        "lng": 9.437911999999999,
+        "place_id": "ChIJye_mdZdCs0cRsJvDSqEiZWY",
+        "address": "Holm 57-61, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_blasberg_apotheke_dr_matthias_grundmann_e_k",
+      "name": "Blasberg-Apotheke Dr. Matthias Grundmann e.K.",
+      "before": {
+        "lat": 54.80096168,
+        "lng": 9.45443812
+      },
+      "google": {
+        "lat": 54.80100119999999,
+        "lng": 9.4545067,
+        "place_id": "ChIJzdffbO5Cs0cRWcK4xCEFX2Y",
+        "address": "Mürwiker Str. 89, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_arztehaus_am_zob",
+      "name": "Ärztehaus Am Zob",
+      "before": {
+        "lat": 54.78564078000001,
+        "lng": 9.436823059999998
+      },
+      "google": {
+        "lat": 54.7856803,
+        "lng": 9.4368916,
+        "place_id": "ChIJW-lIQJZCs0cReUlYfR9rkTo",
+        "address": "Süderhofenden 12, 24937 Flensburg-Altstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_gemeinschaftspraxis_am_sudermarkt_dr_med_wolfram_gitter_dr_frank_eberh",
+      "name": "Gemeinschaftspraxis am Südermarkt - Dr. med. Wolfram Gitter & Dr. Frank-Eberhard Aust",
+      "before": {
+        "lat": 54.78227708000001,
+        "lng": 9.436071960000001
+      },
+      "google": {
+        "lat": 54.78231659999999,
+        "lng": 9.436140499999999,
+        "place_id": "ChIJsTHzjZdCs0cRLADgHGZsUBw",
+        "address": "Südermarkt 9, 24937 Flensburg-Altstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_wulf_f_m_jansen_facharzt_fur_allgemein_medizin",
+      "name": "Wulf F.M. Jansen Facharzt für allgemein Medizin",
+      "before": {
+        "lat": 54.79777908,
+        "lng": 9.45278024
+      },
+      "google": {
+        "lat": 54.7978186,
+        "lng": 9.4528488,
+        "place_id": "ChIJcZ07E-5Cs0cRBdqoMNIW_qg",
+        "address": "Mürwiker Str. 52, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_hausarzte_friesische_strasse",
+      "name": "Hausärzte Friesische Straße",
+      "before": {
+        "lat": 54.78230448000001,
+        "lng": 9.435079060000001
+      },
+      "google": {
+        "lat": 54.78234399999999,
+        "lng": 9.435147599999999,
+        "place_id": "ChIJLXis_pdCs0cRGuJmCzYVaFo",
+        "address": "Friesische Str. 3, 24937 Flensburg-Friesischer Berg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_frau_dr_med_iwona_michaelsen",
+      "name": "Frau Dr. med. Iwona Michaelsen",
+      "before": {
+        "lat": 54.80119048,
+        "lng": 9.453526120000001
+      },
+      "google": {
+        "lat": 54.80123,
+        "lng": 9.4535947,
+        "place_id": "ChIJUz2Vxu9Cs0cROTUNJ2O807Q",
+        "address": "Im Gesundheitszentrum am Stadion, Mürwiker Str. 89, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_nord_apotheke_inh_joachim_kempa",
+      "name": "Nord-Apotheke Inh. Joachim Kempa",
+      "before": {
+        "lat": 54.800019080000006,
+        "lng": 9.42320564
+      },
+      "google": {
+        "lat": 54.8000586,
+        "lng": 9.4232742,
+        "place_id": "ChIJwQsbT89Cs0cRc01je0K1wi8",
+        "address": "Apenrader Str. 4, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_evangelisch_lutherische_diakonissenanstalt_zu_flensburg",
+      "name": "Evangelisch-lutherische Diakonissenanstalt zu Flensburg",
+      "before": {
+        "lat": 54.79027698,
+        "lng": 9.42382604
+      },
+      "google": {
+        "lat": 54.7903165,
+        "lng": 9.423894599999999,
+        "place_id": "ChIJ-3LAQLlCs0cRfLjjutiCIR8",
+        "address": "Duburger Str. 81, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_hausarztpraxis_sonwik",
+      "name": "HAUSARZTPRAXIS SONWIK",
+      "before": {
+        "lat": 54.806692180000006,
+        "lng": 9.45258932
+      },
+      "google": {
+        "lat": 54.8067317,
+        "lng": 9.4526579,
+        "place_id": "ChIJheLlovxCs0cR7y1nrINhSdI",
+        "address": "Am Fördeufer 1b/2. OG, 24944 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_johannistreppe",
+      "name": "Johannistreppe",
+      "before": {
+        "lat": 54.78034548000001,
+        "lng": 9.44305306
+      },
+      "google": {
+        "lat": 54.780385,
+        "lng": 9.4431216,
+        "place_id": "ChIJu0TCbZpCs0cRkJ3s6AXTT90",
+        "address": "Johannistreppe, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_alte_gleisbrucke_uber_den_hafendamm_zum_osthafen",
+      "name": "Alte Gleisbrücke über den Hafendamm zum Osthafen",
+      "before": {
+        "lat": 54.78700038000001,
+        "lng": 9.43789036
+      },
+      "google": {
+        "lat": 54.7870399,
+        "lng": 9.4379589,
+        "place_id": "ChIJGXxggstDs0cR8FNunHgs1m4",
+        "address": "Hafendamm, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_alter_mastkran",
+      "name": "Alter Mastkran",
+      "before": {
+        "lat": 54.794203679999995,
+        "lng": 9.43368404
+      },
+      "google": {
+        "lat": 54.7942432,
+        "lng": 9.4337526,
+        "place_id": "ChIJRzHV1AZDs0cRiFXv004F2dg",
+        "address": "Schiffbrücke 44, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_marientreppe",
+      "name": "Marientreppe",
+      "before": {
+        "lat": 54.792152980000004,
+        "lng": 9.43030344
+      },
+      "google": {
+        "lat": 54.7921808,
+        "lng": 9.4303764,
+        "place_id": "ChIJdQKARr9Cs0cRl1tll8riFog",
+        "address": "Marientreppe, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_denkmal_sms_blucher",
+      "name": "Denkmal SMS BLÜCHER",
+      "before": {
+        "lat": 54.78496008,
+        "lng": 9.421898960000002
+      },
+      "google": {
+        "lat": 54.7849996,
+        "lng": 9.4219675,
+        "place_id": "ChIJ9U9YawBDs0cRHRjbLzAaY1c",
+        "address": "Friedhofstraße 26G, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_obelisk_zum_gedenken_an_die_schlacht_von_bau",
+      "name": "Obelisk zum Gedenken an die Schlacht von Bau",
+      "before": {
+        "lat": 54.79881877999999,
+        "lng": 9.42402004
+      },
+      "google": {
+        "lat": 54.7988583,
+        "lng": 9.4240886,
+        "place_id": "ChIJ65MNUTJDs0cRQSHcvl9Ws20",
+        "address": "Nordstadt, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_funk_und_telegraphenhaus_flensburg_murwik",
+      "name": "Funk- und Telegraphenhaus (Flensburg-Mürwik)",
+      "before": {
+        "lat": 54.807872079999996,
+        "lng": 9.457663219999999
+      },
+      "google": {
+        "lat": 54.8079116,
+        "lng": 9.4577318,
+        "place_id": "ChIJp_p8VuNCs0cRSJ55pD4N6jE",
+        "address": "Swinemünder Str. 12, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_logenhaus_flensburg",
+      "name": "Logenhaus Flensburg",
+      "before": {
+        "lat": 54.78790978000001,
+        "lng": 9.430401759999999
+      },
+      "google": {
+        "lat": 54.78794929999999,
+        "lng": 9.4304703,
+        "place_id": "ChIJoaFAnL5Cs0cR7_e8if0eC_U",
+        "address": "Nordergraben 23, 24937 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_krieger_denkmal",
+      "name": "Krieger Denkmal",
+      "before": {
+        "lat": 54.78187848,
+        "lng": 9.42979346
+      },
+      "google": {
+        "lat": 54.781918,
+        "lng": 9.429862,
+        "place_id": "ChIJ_WcR65BDs0cRHNS2m6waqMw",
+        "address": "Südergraben, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_muhlenstrom_wasserrad",
+      "name": "Mühlenstrom-Wasserrad",
+      "before": {
+        "lat": 54.78486888,
+        "lng": 9.437890759999998
+      },
+      "google": {
+        "lat": 54.7849084,
+        "lng": 9.4379593,
+        "place_id": "ChIJodglFQBDs0cRdMXtNIo0B1w",
+        "address": "Zob 502, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_spiegelgrotte",
+      "name": "Spiegelgrotte",
+      "before": {
+        "lat": 54.785082779999996,
+        "lng": 9.43227356
+      },
+      "google": {
+        "lat": 54.7851223,
+        "lng": 9.4323421,
+        "place_id": "ChIJW2VB55lDs0cR_FoifPvzXV8",
+        "address": "24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_flensburg_galerie",
+      "name": "Flensburg Galerie",
+      "before": {
+        "lat": 54.78324728,
+        "lng": 9.43800096
+      },
+      "google": {
+        "lat": 54.7832868,
+        "lng": 9.4380695,
+        "place_id": "ChIJ79sUvJdCs0cR0v9GcY9WoS4",
+        "address": "Holm 57-61, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_galerie_der_miezen_katzenkunst_norderstrasse_flensburg",
+      "name": "Galerie der Miezen - Katzenkunst Norderstraße Flensburg",
+      "before": {
+        "lat": 54.79261248,
+        "lng": 9.43126484
+      },
+      "google": {
+        "lat": 54.792652,
+        "lng": 9.4313334,
+        "place_id": "ChIJj62UfJhDs0cRLYsevW1mPsY",
+        "address": "Norderstraße, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_gallery4",
+      "name": "Gallery4",
+      "before": {
+        "lat": 54.80011858,
+        "lng": 9.43768374
+      },
+      "google": {
+        "lat": 54.8001581,
+        "lng": 9.437752300000001,
+        "place_id": "ChIJDRueZ8JCs0cRobxDZtbTbJs",
+        "address": "Harniskai 13, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_restaurant_galerie",
+      "name": "Restaurant Galerie",
+      "before": {
+        "lat": 54.78396018000001,
+        "lng": 9.43546576
+      },
+      "google": {
+        "lat": 54.7839997,
+        "lng": 9.435534299999999,
+        "place_id": "ChIJ7en12ZdCs0cR82E5lH8-kgU",
+        "address": "Holm 66, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_haptik_galerie_fur_gebrauchskunst",
+      "name": "haptik - Galerie für Gebrauchskunst",
+      "before": {
+        "lat": 54.78838078,
+        "lng": 9.43304676
+      },
+      "google": {
+        "lat": 54.7884203,
+        "lng": 9.433115299999999,
+        "place_id": "ChIJA68vAxZDs0cRMQ7rQrxRIog",
+        "address": "Querspeicher im Brasseriehof, Große Str. 42 - 44, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_katholische_ordensschwestern_dienerinnen_vom_heiligen_blut",
+      "name": "Katholische Ordensschwestern \"Dienerinnen vom Heiligen Blut\"",
+      "before": {
+        "lat": 54.782606980000004,
+        "lng": 9.39054416
+      },
+      "google": {
+        "lat": 54.78264650000001,
+        "lng": 9.3906127,
+        "place_id": "ChIJpTr5jV1ds0cRuuPRJSAX1gc",
+        "address": "Am Magdalenenhof 15, 24941 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_pauluskirche_zu_flensburg_der_ev_luth_paulus_kirchengemeinde_flensburg",
+      "name": "Pauluskirche zu Flensburg der Ev.-Luth. Paulus-Kirchengemeinde Flensburg",
+      "before": {
+        "lat": 54.773767379999995,
+        "lng": 9.43315628
+      },
+      "google": {
+        "lat": 54.7738069,
+        "lng": 9.433224800000001,
+        "place_id": "ChIJozv3xilDs0cR1GoNTR2ML68",
+        "address": "Diblerstraße 4, 24941 Flensburg-Südstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_rathausplatz",
+      "name": "Rathausplatz",
+      "before": {
+        "lat": 54.78090788000001,
+        "lng": 9.43482276
+      },
+      "google": {
+        "lat": 54.780592,
+        "lng": 9.4339992,
+        "place_id": "ChIJhftdbZhCs0cRE3LNrBgfzZw",
+        "address": "Rathauspl., 24937 Flensburg"
+      },
+      "delta_m": 63,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "flensburg_rathaus_flensburg",
+      "name": "Rathaus - Flensburg",
+      "before": {
+        "lat": 54.781922480000006,
+        "lng": 9.433642459999998
+      },
+      "google": {
+        "lat": 54.7810278,
+        "lng": 9.433651,
+        "place_id": "ChIJd2EqBphCs0cRVpkFOeX86f4",
+        "address": "Rathauspl. 1, 24937 Flensburg"
+      },
+      "delta_m": 99,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "flensburg_schloss_glucksburg",
+      "name": "Schloss Glücksburg",
+      "before": {
+        "lat": 54.83190248,
+        "lng": 9.543334179999999
+      },
+      "google": {
+        "lat": 54.831942,
+        "lng": 9.543402799999999,
+        "place_id": "ChIJx0tha19Bs0cRlYlD269biD8",
+        "address": "Schlosshof 0, 24960 Glücksburg (Ostsee)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_burghof",
+      "name": "Burghof",
+      "before": {
+        "lat": 54.790308679999995,
+        "lng": 9.42975224
+      },
+      "google": {
+        "lat": 54.7903071,
+        "lng": 9.4298263,
+        "place_id": "ChIJf-e72b5Cs0cRNE-ip8SLaZo",
+        "address": "Burghof, 24939 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_duburg",
+      "name": "Duburg",
+      "before": {
+        "lat": 54.79269308000001,
+        "lng": 9.42832214
+      },
+      "google": {
+        "lat": 54.795523,
+        "lng": 9.425652999999999,
+        "place_id": "ChIJNz5ne7hCs0cRaygSycHfiLw",
+        "address": "24939 Flensburg-Duburg"
+      },
+      "delta_m": 358,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_eddeboe",
+      "name": "Eddeboe",
+      "before": {
+        "lat": 54.78532578000001,
+        "lng": 9.38667966
+      },
+      "google": {
+        "lat": 54.7853653,
+        "lng": 9.3867482,
+        "place_id": "ChIJs_uas1pds0cR4V2zyf49OYI",
+        "address": "Am Magdalenenhof 15C, 24941 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_kompagnietor",
+      "name": "Kompagnietor",
+      "before": {
+        "lat": 54.790171980000004,
+        "lng": 9.433500239999999
+      },
+      "google": {
+        "lat": 54.7902115,
+        "lng": 9.4335688,
+        "place_id": "ChIJlUi-69ZDs0cRdhWiNHlbOrE",
+        "address": "Kompagniestraße, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_burgplatz_flensburg",
+      "name": "Burgplatz - Flensburg",
+      "before": {
+        "lat": 54.79115698,
+        "lng": 9.424783940000001
+      },
+      "google": {
+        "lat": 54.7912637,
+        "lng": 9.4251561,
+        "place_id": "ChIJo3XwTbhCs0cRNdbAx7vwh7k",
+        "address": "Burgpl., 24939 Flensburg"
+      },
+      "delta_m": 27,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "flensburg_schlosspark",
+      "name": "Schloßpark",
+      "before": {
+        "lat": 54.83378378,
+        "lng": 9.54482258
+      },
+      "google": {
+        "lat": 54.831942,
+        "lng": 9.543402799999999,
+        "place_id": "ChIJx0tha19Bs0cRlYlD269biD8",
+        "address": "Schlosshof 0, 24960 Glücksburg (Ostsee)"
+      },
+      "delta_m": 224,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_cambio_carsharing_station_schloss",
+      "name": "cambio CarSharing - Station Schloss",
+      "before": {
+        "lat": 54.79400298,
+        "lng": 9.427425840000002
+      },
+      "google": {
+        "lat": 54.7940425,
+        "lng": 9.427494399999999,
+        "place_id": "ChIJTesRZhZDs0cRCJ9W4ZPGop4",
+        "address": "Burgstraße 38, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_aussichtspunkt_sankelmarker_see",
+      "name": "Aussichtspunkt Sankelmarker See",
+      "before": {
+        "lat": 54.71118308,
+        "lng": 9.43334408
+      },
+      "google": {
+        "lat": 54.7112226,
+        "lng": 9.4334125,
+        "place_id": "ChIJ-Ymr-FJps0cRG6sBfxaKy74",
+        "address": "Seeweg, 24988 Oeversee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_krautergarten_mit_farberpflanzen_und_wildgarten",
+      "name": "Kräutergarten mit Färberpflanzen und Wildgarten",
+      "before": {
+        "lat": 54.77536028000001,
+        "lng": 9.458658779999999
+      },
+      "google": {
+        "lat": 54.7753998,
+        "lng": 9.4587273,
+        "place_id": "ChIJ28vWfEZDs0cR4KoNcv0GhiQ",
+        "address": "Universität Erweiterungsbau, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_hermanns_schrebergarten",
+      "name": "Hermanns Schrebergarten",
+      "before": {
+        "lat": 54.77067958,
+        "lng": 9.45081538
+      },
+      "google": {
+        "lat": 54.7707191,
+        "lng": 9.4508839,
+        "place_id": "ChIJi2uoLiJDs0cRVQLpgntxokQ",
+        "address": "Munketoft, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_blutenwiese_am_trogelsbyhof",
+      "name": "Blütenwiese am Trögelsbyhof",
+      "before": {
+        "lat": 54.79175318,
+        "lng": 9.49981324
+      },
+      "google": {
+        "lat": 54.7917927,
+        "lng": 9.499881799999999,
+        "place_id": "ChIJResmUe1Ds0cReBfGoa6YAVo",
+        "address": "Fuchsberg 500, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_gertruds_krautergarten_heilkrautergarten",
+      "name": "Gertruds Kräutergarten (Heilkräutergarten)",
+      "before": {
+        "lat": 54.78474848,
+        "lng": 9.39528846
+      },
+      "google": {
+        "lat": 54.784788,
+        "lng": 9.395356999999999,
+        "place_id": "ChIJl6tXkBRds0cRtvNaayvrISI",
+        "address": "Stille Liebe W, 24941 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_kolonie_81a_am_wasserturm_verein_der_gartenfreunde_flensburg_e_v",
+      "name": "Kolonie 81a, Am Wasserturm, Verein der Gartenfreunde Flensburg e.V.",
+      "before": {
+        "lat": 54.79497138000001,
+        "lng": 9.446192739999999
+      },
+      "google": {
+        "lat": 54.79501089999999,
+        "lng": 9.4462613,
+        "place_id": "ChIJn1xgHKRDs0cRVjPgEQpYZ6E",
+        "address": "Am Wasserturm, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_gartenkolonie_112",
+      "name": "Gartenkolonie 112",
+      "before": {
+        "lat": 54.76809748000001,
+        "lng": 9.42860158
+      },
+      "google": {
+        "lat": 54.768137,
+        "lng": 9.4286701,
+        "place_id": "ChIJJ2XZ2Jpps0cRcnKaM_6qNP4",
+        "address": "Unnamed Road, 24941 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_christiansenpark",
+      "name": "Christiansenpark",
+      "before": {
+        "lat": 54.78426938,
+        "lng": 9.42507926
+      },
+      "google": {
+        "lat": 54.7843089,
+        "lng": 9.4251478,
+        "place_id": "ChIJI7qcf7tCs0cRwXMI__lrh4Q",
+        "address": "Christiansenpark, Stuhrsallee, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_blutenwiese_flensburg_bluht",
+      "name": "Blütenwiese Flensburg blüht",
+      "before": {
+        "lat": 54.77764288000001,
+        "lng": 9.45959686
+      },
+      "google": {
+        "lat": 54.7776824,
+        "lng": 9.4596654,
+        "place_id": "ChIJX-8pk4tDs0cRzD7pecd5B4w",
+        "address": "24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_stiftungsland_schaferhaus",
+      "name": "Stiftungsland Schäferhaus",
+      "before": {
+        "lat": 54.766593879999995,
+        "lng": 9.378246579999999
+      },
+      "google": {
+        "lat": 54.7666334,
+        "lng": 9.3783151,
+        "place_id": "ChIJ6QP0VvBns0cRgrR3qrnTJRg",
+        "address": "24941 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_broschmann_finke_theater_company",
+      "name": "Broschmann & Finke Theater Company",
+      "before": {
+        "lat": 54.80014627999999,
+        "lng": 9.39078784
+      },
+      "google": {
+        "lat": 54.80018579999999,
+        "lng": 9.390856399999999,
+        "place_id": "ChIJTUHhZJRCs0cRbCPh6PeGHjI",
+        "address": "Spielstätte, Süderstraße 101, 24955 Harrislee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_russisch_deutsche_buhne",
+      "name": "Russisch-Deutsche Bühne",
+      "before": {
+        "lat": 54.81407048,
+        "lng": 9.4781715
+      },
+      "google": {
+        "lat": 54.81411,
+        "lng": 9.478240099999999,
+        "place_id": "ChIJp5WA86pDs0cRc2Cxtrxl0Eg",
+        "address": "Marrensberg 33, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_kulturwerkstatt_kuhlhaus",
+      "name": "Kulturwerkstatt Kühlhaus",
+      "before": {
+        "lat": 54.774551380000005,
+        "lng": 9.440534779999998
+      },
+      "google": {
+        "lat": 54.7745909,
+        "lng": 9.4406033,
+        "place_id": "ChIJ27tHFJxCs0cRnZoOMbG_ttE",
+        "address": "Mühlendamm 25, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_ballettschule_flensburg",
+      "name": "Ballettschule Flensburg",
+      "before": {
+        "lat": 54.78841628,
+        "lng": 9.43182416
+      },
+      "google": {
+        "lat": 54.78845579999999,
+        "lng": 9.431892699999999,
+        "place_id": "ChIJA_-kBJZCs0cRKdjoW29FkdY",
+        "address": "Große Str. 65, 24937 Flensburg-Altstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_citti_ticketcenter",
+      "name": "CITTI Ticketcenter",
+      "before": {
+        "lat": 54.77421288000001,
+        "lng": 9.396727279999999
+      },
+      "google": {
+        "lat": 54.77425239999999,
+        "lng": 9.3967958,
+        "place_id": "ChIJfcUAZ1Vds0cR71EGfxH6X2o",
+        "address": "Langberger Weg 4, 24941 Flensburg-Friesischer Berg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_marina_flensburg",
+      "name": "Marina Flensburg",
+      "before": {
+        "lat": 54.80210868,
+        "lng": 9.428819520000001
+      },
+      "google": {
+        "lat": 54.8021482,
+        "lng": 9.4288881,
+        "place_id": "ChIJ7w1YknNDs0cR_m_TuXeVZN8",
+        "address": "Brauereiweg 16, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_sonwik_yachthafen",
+      "name": "Sonwik Yachthafen",
+      "before": {
+        "lat": 54.81082648,
+        "lng": 9.453779019999999
+      },
+      "google": {
+        "lat": 54.810866,
+        "lng": 9.453847600000001,
+        "place_id": "ChIJwd3KtuNCs0cR9oBnzB5iCUo",
+        "address": "Fördepromenade 1, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_marina_werftkontor_gmbh",
+      "name": "Marina Werftkontor GmbH",
+      "before": {
+        "lat": 54.79499118,
+        "lng": 9.43771714
+      },
+      "google": {
+        "lat": 54.7950307,
+        "lng": 9.4377857,
+        "place_id": "ChIJX-21LsBCs0cRHRLLyu9C4rQ",
+        "address": "Ballastkai 8, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_flensburg_yachtclub_e_v",
+      "name": "Flensburg Yachtclub e.V.",
+      "before": {
+        "lat": 54.82148278,
+        "lng": 9.472593700000001
+      },
+      "google": {
+        "lat": 54.8215223,
+        "lng": 9.4726623,
+        "place_id": "ChIJrzcjQAZDs0cRrV2wNQPsDVY",
+        "address": "Ewoldtweg 2, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_flensboat_de",
+      "name": "Flensboat.de",
+      "before": {
+        "lat": 54.793764079999995,
+        "lng": 9.437239139999999
+      },
+      "google": {
+        "lat": 54.7938036,
+        "lng": 9.4373077,
+        "place_id": "ChIJOZfhYIlDs0cRtVZNeziXhNI",
+        "address": "Ballastkai 3, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_fly_sail",
+      "name": "FLY & SAIL",
+      "before": {
+        "lat": 54.80824548,
+        "lng": 9.453452420000001
+      },
+      "google": {
+        "lat": 54.808285,
+        "lng": 9.453521,
+        "place_id": "ChIJM02CiONCs0cRVVaw0gubTEs",
+        "address": "Wasserflugstation, Fördepromenade 1a, 24944 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_yachtcharter_flensburg",
+      "name": "Yachtcharter Flensburg",
+      "before": {
+        "lat": 54.798933479999995,
+        "lng": 9.427975739999999
+      },
+      "google": {
+        "lat": 54.798973,
+        "lng": 9.4280443,
+        "place_id": "ChIJIwUbCcVCs0cRBLpXopIuRHI",
+        "address": "Strandweg 1, 24939 Flensburg-Klues"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_k3_stadtfuhrungen_flensburg",
+      "name": "k3 stadtführungen Flensburg",
+      "before": {
+        "lat": 54.80608858000001,
+        "lng": 9.48285722
+      },
+      "google": {
+        "lat": 54.8061281,
+        "lng": 9.4829258,
+        "place_id": "ChIJqQLn3VNCs0cRSn3yLHfCPsI",
+        "address": "Zypressenweg 42, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_citygames_flensburg",
+      "name": "CityGames Flensburg",
+      "before": {
+        "lat": 54.808304080000006,
+        "lng": 9.45503652
+      },
+      "google": {
+        "lat": 54.8083436,
+        "lng": 9.455105099999999,
+        "place_id": "ChIJFbjePRVDs0cRAGAdSHROOgE",
+        "address": "Fördepromenade 2f, 24944 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_bierbike_flensburg",
+      "name": "BierBike Flensburg",
+      "before": {
+        "lat": 54.812190480000005,
+        "lng": 9.4738214
+      },
+      "google": {
+        "lat": 54.81223,
+        "lng": 9.473889999999999,
+        "place_id": "ChIJ26a6I4ZCs0cRTCkMX3LqCS0",
+        "address": "Am Bauernhof 24, 24944 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_se_reisen_flensburg",
+      "name": "SE Reisen Flensburg",
+      "before": {
+        "lat": 54.79546388,
+        "lng": 9.43108094
+      },
+      "google": {
+        "lat": 54.79550339999999,
+        "lng": 9.4311495,
+        "place_id": "ChIJm1QENEZDs0cRI_01LB5mkg8",
+        "address": "Schiffbrücke 66, 24939 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_bierbike_hof",
+      "name": "BierBike Hof",
+      "before": {
+        "lat": 54.779087679999996,
+        "lng": 9.43864056
+      },
+      "google": {
+        "lat": 54.7791272,
+        "lng": 9.438709099999999,
+        "place_id": "ChIJl87D3XpCs0cRavNQaNlMLqk",
+        "address": "Bahnhofstraße 21, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_wassersportschule_nord_ostsee_kanal_sportbootfuhrerschein_flensburg",
+      "name": "Wassersportschule Nord-Ostsee-Kanal | Sportbootführerschein Flensburg",
+      "before": {
+        "lat": 54.80334798,
+        "lng": 9.451639920000002
+      },
+      "google": {
+        "lat": 54.8033875,
+        "lng": 9.451708499999999,
+        "place_id": "ChIJaY4VGb1Ds0cRsINAFItdM1k",
+        "address": "Fichtestraße 16, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_neubauer_reisen_ihr_regionaler_reiseveranstalter",
+      "name": "Neubauer Reisen - Ihr regionaler Reiseveranstalter",
+      "before": {
+        "lat": 54.76239858,
+        "lng": 9.451238
+      },
+      "google": {
+        "lat": 54.7624381,
+        "lng": 9.4513065,
+        "place_id": "ChIJ1y09Nv8530MR6_uxnjHP85I",
+        "address": "Marie-Curie-Ring 39, 24941 Flensburg-Südstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_1_klasse_yachtcharter",
+      "name": "1. Klasse Yachtcharter",
+      "before": {
+        "lat": 54.80999688000001,
+        "lng": 9.454399720000001
+      },
+      "google": {
+        "lat": 54.81003639999999,
+        "lng": 9.4544683,
+        "place_id": "ChIJyfdG8hFDs0cR1JjBdC5fbYQ",
+        "address": "Fördepromenade 503, 24944 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_art_creativ_flensburg_ihr_ideenreich",
+      "name": "ART Creativ Flensburg – Ihr Ideenreich",
+      "before": {
+        "lat": 54.76343208000001,
+        "lng": 9.434852799999998
+      },
+      "google": {
+        "lat": 54.7634716,
+        "lng": 9.4349213,
+        "place_id": "ChIJg175iSNos0cRl7jEhIfiX0M",
+        "address": "Schleswiger Str. 104B, 24941 Flensburg-Südstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_wochenmarkt_auf_dem_sudermarkt",
+      "name": "Wochenmarkt auf dem Südermarkt",
+      "before": {
+        "lat": 54.78275798,
+        "lng": 9.43627306
+      },
+      "google": {
+        "lat": 54.7827975,
+        "lng": 9.4363416,
+        "place_id": "ChIJh3talJdCs0cRbVOs1fcQ-ZU",
+        "address": "Südermarkt, 24937 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_kaufland_flensburg",
+      "name": "Kaufland Flensburg",
+      "before": {
+        "lat": 54.762097759999996,
+        "lng": 9.431257579999999
+      },
+      "google": {
+        "lat": 54.7621265,
+        "lng": 9.4313074,
+        "place_id": "ChIJOQaZmCRos0cRJgboUVqJ5D4",
+        "address": "Schleswiger Str. 130, 24941 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_aldi_nord",
+      "name": "ALDI Nord",
+      "before": {
+        "lat": 54.77889126,
+        "lng": 9.41522616
+      },
+      "google": {
+        "lat": 54.79978120000001,
+        "lng": 9.425620499999999,
+        "place_id": "ChIJWa4PCfdDs0cRG6C_LjqspBI",
+        "address": "Werftstraße 29, 24939 Flensburg"
+      },
+      "delta_m": 2417,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_lidl",
+      "name": "Lidl",
+      "before": {
+        "lat": 54.777906660000006,
+        "lng": 9.416244559999999
+      },
+      "google": {
+        "lat": 54.79738,
+        "lng": 9.426829999999999,
+        "place_id": "ChIJ73sOWcZCs0cRvuLq1LQrjyw",
+        "address": "Neustadt 23, 24939 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 2269,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_duburg_apotheke",
+      "name": "Duburg Apotheke",
+      "before": {
+        "lat": 54.79290456,
+        "lng": 9.421474239999998
+      },
+      "google": {
+        "lat": 54.79293329999999,
+        "lng": 9.4215241,
+        "place_id": "ChIJ1yGN9rdCs0cRRQ1NqpJnhr8",
+        "address": "Waldstraße 13-15, 24939 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_1_polizeirevier_flensburg",
+      "name": "1.Polizeirevier Flensburg",
+      "before": {
+        "lat": 54.78723886,
+        "lng": 9.43606494
+      },
+      "google": {
+        "lat": 54.7872676,
+        "lng": 9.4361148,
+        "place_id": "ChIJHVdM_pVCs0cRZosarz6O7xc",
+        "address": "Norderhofenden 1, 24937 Flensburg-Altstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_polizeistation_mitte",
+      "name": "Polizeistation Mitte",
+      "before": {
+        "lat": 54.787229059999994,
+        "lng": 9.43375604
+      },
+      "google": {
+        "lat": 54.7872578,
+        "lng": 9.4338059,
+        "place_id": "ChIJf5L94L1Cs0cRU_Vk07ddDm0",
+        "address": "Große Str. 16, 24937 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_polizeidirektion_flensburg",
+      "name": "Polizeidirektion Flensburg",
+      "before": {
+        "lat": 54.797651859999995,
+        "lng": 9.42662924
+      },
+      "google": {
+        "lat": 54.7872676,
+        "lng": 9.4361148,
+        "place_id": "ChIJHVdM_pVCs0cRZosarz6O7xc",
+        "address": "Norderhofenden 1, 24937 Flensburg-Altstadt"
+      },
+      "delta_m": 1305,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_piratenspielplatz_hochfeld",
+      "name": "Piratenspielplatz Hochfeld",
+      "before": {
+        "lat": 54.76783626,
+        "lng": 9.46712478
+      },
+      "google": {
+        "lat": 54.767865,
+        "lng": 9.4671746,
+        "place_id": "ChIJuT38_dVps0cRVgh_yXAFTfY",
+        "address": "Pielweg, 24943 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_spielplatz_hesttoft",
+      "name": "Spielplatz Hesttoft",
+      "before": {
+        "lat": 54.79521356,
+        "lng": 9.46495704
+      },
+      "google": {
+        "lat": 54.7952423,
+        "lng": 9.465006899999999,
+        "place_id": "ChIJy44hMvRCs0cRPWf56nNT41s",
+        "address": "24943 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_spielplatz_am_margarethenhof",
+      "name": "Spielplatz am Margarethenhof",
+      "before": {
+        "lat": 54.786720159999994,
+        "lng": 9.44163034
+      },
+      "google": {
+        "lat": 54.7867489,
+        "lng": 9.4416802,
+        "place_id": "ChIJuxYTp5ZCs0cRXVyuseZyGXY",
+        "address": "24937 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_waldspielplatz",
+      "name": "Waldspielplatz",
+      "before": {
+        "lat": 54.79092426,
+        "lng": 9.397803640000001
+      },
+      "google": {
+        "lat": 54.79095299999999,
+        "lng": 9.3978535,
+        "place_id": "ChIJkUIAWElds0cR5WTe70j2cIM",
+        "address": "Marienhölzungsweg, 24941 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_spielplatz_wasserturm",
+      "name": "Spielplatz Wasserturm",
+      "before": {
+        "lat": 54.795391359999996,
+        "lng": 9.44218574
+      },
+      "google": {
+        "lat": 54.79542009999999,
+        "lng": 9.4422356,
+        "place_id": "ChIJc-lQq-tCs0cRmUaEOmnPs8Y",
+        "address": "24943 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_abenteuerspielplatz",
+      "name": "Abenteuerspielplatz",
+      "before": {
+        "lat": 54.799961259999996,
+        "lng": 9.41309014
+      },
+      "google": {
+        "lat": 54.79998999999999,
+        "lng": 9.41314,
+        "place_id": "ChIJt_rWgMtCs0cRDyUSfQjDH9g",
+        "address": "Taubenstraße 9, 24939 Flensburg-Klues"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_spielplatz_schwarzental",
+      "name": "Spielplatz Schwarzental",
+      "before": {
+        "lat": 54.79804616,
+        "lng": 9.41989634
+      },
+      "google": {
+        "lat": 54.7980749,
+        "lng": 9.4199462,
+        "place_id": "ChIJt_RL4MhCs0cRz74QkjrxVAA",
+        "address": "Schwarzental, 24939 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_teetime_golf_gmbh",
+      "name": "TeeTime Golf GmbH",
+      "before": {
+        "lat": 54.800624559999996,
+        "lng": 9.439625439999999
+      },
+      "google": {
+        "lat": 54.8006533,
+        "lng": 9.4396753,
+        "place_id": "ChIJWVffTYdB3YcRLQFHw82-iFI",
+        "address": "Am Industriehafen 4, 24937 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_roxy_concerts",
+      "name": "Roxy Concerts",
+      "before": {
+        "lat": 54.76760125999999,
+        "lng": 9.43799018
+      },
+      "google": {
+        "lat": 54.76763,
+        "lng": 9.438039999999999,
+        "place_id": "ChIJx1SW3yZos0cRoFJLokBZgFw",
+        "address": "Mergenthalerstraße 6, 24941 Flensburg-Südstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_flensbloc_boulderhalle_flensburg",
+      "name": "FlensBloc - Boulderhalle Flensburg",
+      "before": {
+        "lat": 54.77625716,
+        "lng": 9.395245460000002
+      },
+      "google": {
+        "lat": 54.7762859,
+        "lng": 9.3952953,
+        "place_id": "ChIJZ8gHIGJds0cR5DTQgVjIoOw",
+        "address": "Westerallee 159, 24941 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_kletterhalle_flensburg",
+      "name": "Kletterhalle Flensburg",
+      "before": {
+        "lat": 54.80446706,
+        "lng": 9.462560219999999
+      },
+      "google": {
+        "lat": 54.7762859,
+        "lng": 9.3952953,
+        "place_id": "ChIJZ8gHIGJds0cR5DTQgVjIoOw",
+        "address": "Westerallee 159, 24941 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 5331,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_nsg_twedter_feld",
+      "name": "NSG Twedter Feld",
+      "before": {
+        "lat": 54.80967846000001,
+        "lng": 9.490593819999999
+      },
+      "google": {
+        "lat": 54.8097072,
+        "lng": 9.4906437,
+        "place_id": "ChIJEdIiI9lDs0cR9xiSUll7jCA",
+        "address": "Unnamed Road, 24944 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_wald_parkplatz",
+      "name": "Wald Parkplatz",
+      "before": {
+        "lat": 54.783662660000005,
+        "lng": 9.38971986
+      },
+      "google": {
+        "lat": 54.7836914,
+        "lng": 9.3897697,
+        "place_id": "ChIJDfK69adds0cRonlxxCDDQJ8",
+        "address": "Am Magdalenenhof 15C, 24941 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_fordeblick",
+      "name": "Fördeblick",
+      "before": {
+        "lat": 54.823021059999995,
+        "lng": 9.477227500000001
+      },
+      "google": {
+        "lat": 54.8219238,
+        "lng": 9.4769013,
+        "place_id": "ChIJi-CI6QdDs0cRfrXJGSaitgs",
+        "address": "Fördeblick, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 124,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_mehrjahrige_bluhflache_flensburg_bluht",
+      "name": "Mehrjährige Blühfläche Flensburg blüht",
+      "before": {
+        "lat": 54.79845366000001,
+        "lng": 9.46777534
+      },
+      "google": {
+        "lat": 54.7984824,
+        "lng": 9.4678252,
+        "place_id": "ChIJu7ePxrhDs0cRJUnrx1Ywv0k",
+        "address": "Alsterbogen 111, 24943 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_flensburger_tennisclub_e_v",
+      "name": "Flensburger Tennisclub e.V.",
+      "before": {
+        "lat": 54.79226126,
+        "lng": 9.41155014
+      },
+      "google": {
+        "lat": 54.79229,
+        "lng": 9.4116,
+        "place_id": "ChIJcyUntLVCs0cRABJ11SGFNP0",
+        "address": "Marienhölzungsweg 64, 24939 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_tragerverein_flensburg_stadion_e_v",
+      "name": "Trägerverein Flensburg Stadion e.V.",
+      "before": {
+        "lat": 54.80305886,
+        "lng": 9.450552720000001
+      },
+      "google": {
+        "lat": 54.8030876,
+        "lng": 9.4506026,
+        "place_id": "ChIJE8FKi-VCs0cRgKHOPe55X4g",
+        "address": "Arndtstraße 5, 24943 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_tennisclub_murwik_e_v",
+      "name": "Tennisclub Mürwik e. V.",
+      "before": {
+        "lat": 54.800931760000005,
+        "lng": 9.44564884
+      },
+      "google": {
+        "lat": 54.8009605,
+        "lng": 9.4456987,
+        "place_id": "ChIJQV8zsxE630MRVdlsLNTVODA",
+        "address": "Volkspark, Jahnstraße, 24943 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_flensburg_stadion",
+      "name": "Flensburg, Stadion",
+      "before": {
+        "lat": 54.80241126000001,
+        "lng": 9.45557012
+      },
+      "google": {
+        "lat": 54.8018692,
+        "lng": 9.4505546,
+        "place_id": "ChIJb_sTfqdDs0cRmbiL5gqrFrI",
+        "address": "Arndtstraße 5, 24943 Flensburg-Mürwik"
+      },
+      "delta_m": 327,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_manfred_werner_stadion",
+      "name": "Manfred-Werner-Stadion",
+      "before": {
+        "lat": 54.75964906,
+        "lng": 9.40724118
+      },
+      "google": {
+        "lat": 54.7596778,
+        "lng": 9.407290999999999,
+        "place_id": "ChIJ--DSkWNps0cRw636IL-gdPk",
+        "address": "Bredstedter Str. 2, 24941 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_flensburg_baltics_baseball_ballpark",
+      "name": "Flensburg Baltics Baseball Ballpark",
+      "before": {
+        "lat": 54.80055006,
+        "lng": 9.44868554
+      },
+      "google": {
+        "lat": 54.8005788,
+        "lng": 9.4487354,
+        "place_id": "ChIJWxAVL-9Cs0cRF0LJWf-5mJ4",
+        "address": "Blasberg 21, 24943 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_trinkwasserquelle",
+      "name": "Trinkwasserquelle",
+      "before": {
+        "lat": 54.81120326,
+        "lng": 9.429395519999998
+      },
+      "google": {
+        "lat": 54.8115068,
+        "lng": 9.429462,
+        "place_id": "ChIJedFLvg5Ds0cRt75jY8ZfAZ0",
+        "address": "Am Ostseebad 6, 24939 Flensburg-Klues"
+      },
+      "delta_m": 34,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "flensburg_wiking_tank_wasch_fl_nord",
+      "name": "WIKING Tank & Wasch | FL-Nord",
+      "before": {
+        "lat": 54.796661660000005,
+        "lng": 9.429026740000001
+      },
+      "google": {
+        "lat": 54.7966904,
+        "lng": 9.429076600000002,
+        "place_id": "ChIJy6WL58ZCs0cRCm-RqUs5BXQ",
+        "address": "Neustadt 14, 24939 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_team_tankstelle_flensburg_friedenshugel",
+      "name": "team Tankstelle Flensburg Friedenshügel",
+      "before": {
+        "lat": 54.775821459999996,
+        "lng": 9.40793116
+      },
+      "google": {
+        "lat": 54.7758502,
+        "lng": 9.407981,
+        "place_id": "ChIJBaqV1atCs0cRNUnbOYHF0kI",
+        "address": "Am Friedenshügel 39, 24941 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_team_tankstelle_flensburg_schottweg",
+      "name": "team Tankstelle Flensburg Schottweg",
+      "before": {
+        "lat": 54.79888906,
+        "lng": 9.475668240000001
+      },
+      "google": {
+        "lat": 54.7989178,
+        "lng": 9.4757181,
+        "place_id": "ChIJLUtZuVlCs0cREtX6HKa28lQ",
+        "address": "Schottweg 96, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_team_tankstelle_flensburg_peelwatt",
+      "name": "team Tankstelle Flensburg Peelwatt",
+      "before": {
+        "lat": 54.763330859999996,
+        "lng": 9.44940628
+      },
+      "google": {
+        "lat": 54.76335959999999,
+        "lng": 9.449456099999999,
+        "place_id": "ChIJhcpPSsJps0cRCrqST9WA_tA",
+        "address": "Marie-Curie-Ring 45, 24941 Flensburg-Südstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_aral",
+      "name": "Aral",
+      "before": {
+        "lat": 54.774728960000004,
+        "lng": 9.425384159999998
+      },
+      "google": {
+        "lat": 54.77475769999999,
+        "lng": 9.425434,
+        "place_id": "ChIJPUxSH6FCs0cR8IHGnqJ85QQ",
+        "address": "Husumer Str. 30, 24941 Flensburg-Südstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_aral_tankstelle_hilgenberg",
+      "name": "Aral Tankstelle Hilgenberg",
+      "before": {
+        "lat": 54.79707996,
+        "lng": 9.47598984
+      },
+      "google": {
+        "lat": 54.7971087,
+        "lng": 9.4760397,
+        "place_id": "ChIJRzLIIllCs0cRPnUYIYnAjjg",
+        "address": "Nordstraße 20, 24943 Flensburg-Engelsby"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_tankpool24",
+      "name": "tankpool24",
+      "before": {
+        "lat": 54.798722659999996,
+        "lng": 9.440637839999999
+      },
+      "google": {
+        "lat": 54.7987514,
+        "lng": 9.440687700000002,
+        "place_id": "ChIJ8eFU6elCs0cR9uJXjiClZO8",
+        "address": "Harnis 15, 24937 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_wiking_tank_fl_west_sb_automatentankstelle",
+      "name": "WIKING Tank | FL-West | SB-Automatentankstelle",
+      "before": {
+        "lat": 54.763395159999995,
+        "lng": 9.416620779999999
+      },
+      "google": {
+        "lat": 54.7634239,
+        "lng": 9.4166706,
+        "place_id": "ChIJuQf_oQZps0cRHKR2eGnVTik",
+        "address": "Am Sophienhof 2, 24941 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_shell",
+      "name": "Shell",
+      "before": {
+        "lat": 54.75635826,
+        "lng": 9.401784180000002
+      },
+      "google": {
+        "lat": 54.7990737,
+        "lng": 9.4120125,
+        "place_id": "ChIJacwza8tCs0cR_9yyO7TD_FA",
+        "address": "Harrisleer Str. 98, 24939 Flensburg"
+      },
+      "delta_m": 4795,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_backhouse_flensburg_gmbh_co_kg",
+      "name": "backhouse Flensburg GmbH & Co. KG",
+      "before": {
+        "lat": 54.786376059999995,
+        "lng": 9.436585740000002
+      },
+      "google": {
+        "lat": 54.7864048,
+        "lng": 9.436635599999999,
+        "place_id": "ChIJ37XeDJZCs0cRuuZsF5kORcM",
+        "address": "Rathausstraße 1, 24937 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_kloster_backerei_mit_cafe",
+      "name": "Kloster-Bäckerei mit Café",
+      "before": {
+        "lat": 54.782559760000005,
+        "lng": 9.42398036
+      },
+      "google": {
+        "lat": 54.7828676,
+        "lng": 9.4366547,
+        "place_id": "ChIJfaIqBHA330MRSh6r2Ad-qsE",
+        "address": "Südermarkt 3, 24937 Flensburg"
+      },
+      "delta_m": 813,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_dm_drogerie_markt",
+      "name": "dm-drogerie markt",
+      "before": {
+        "lat": 54.79818585999999,
+        "lng": 9.47458774
+      },
+      "google": {
+        "lat": 54.7824286,
+        "lng": 9.4373205,
+        "place_id": "ChIJJZB8zf0530MREi3J5U5eXMA",
+        "address": "Angelburger Str. 8, 24937 Flensburg-Altstadt"
+      },
+      "delta_m": 2963,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_rossmann_drogeriemarkt",
+      "name": "ROSSMANN Drogeriemarkt",
+      "before": {
+        "lat": 54.814784259999996,
+        "lng": 9.46977702
+      },
+      "google": {
+        "lat": 54.801216,
+        "lng": 9.4540948,
+        "place_id": "ChIJUz2Vxu9Cs0cRQKGrncvTDzM",
+        "address": "Mürwiker Str. 89, 24943 Flensburg"
+      },
+      "delta_m": 1813,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_deutsches_rotes_kreuz_kreisverband_flensburg_stadt_e_v",
+      "name": "Deutsches Rotes Kreuz, Kreisverband Flensburg-Stadt e.V.",
+      "before": {
+        "lat": 54.770741959999995,
+        "lng": 9.439333959999999
+      },
+      "google": {
+        "lat": 54.7707707,
+        "lng": 9.4393838,
+        "place_id": "ChIJr70e851Cs0cRF04U7QoYmkc",
+        "address": "Valentinerhof 29, 24941 Flensburg-Südstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_kreuzlucke_flensburg",
+      "name": "Kreuzlücke - Flensburg",
+      "before": {
+        "lat": 54.78187126,
+        "lng": 9.472880159999999
+      },
+      "google": {
+        "lat": 54.7819,
+        "lng": 9.47293,
+        "place_id": "ChIJ66e7fmRCs0cRyaRwBMkhgjg",
+        "address": "24943 Flensburg, Deutschland"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_harrisleer_kreuz",
+      "name": "Harrisleer Kreuz",
+      "before": {
+        "lat": 54.79934026000001,
+        "lng": 9.410053139999999
+      },
+      "google": {
+        "lat": 54.799369,
+        "lng": 9.410103,
+        "place_id": "ChIJ3wP4Q8tCs0cRfUOJkW333WM",
+        "address": "24939 Flensburg, Deutschland"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_drk_schwesternschaft_elsa_brandstrom",
+      "name": "DRK Schwesternschaft Elsa Brändström",
+      "before": {
+        "lat": 54.79396956000001,
+        "lng": 9.44918504
+      },
+      "google": {
+        "lat": 54.79399830000001,
+        "lng": 9.4492349,
+        "place_id": "ChIJu7j7_OxCs0cRm05DUlAIU7E",
+        "address": "Mürwiker Str. 2, 24943 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_dr_kreuz",
+      "name": "Dr. Kreuz",
+      "before": {
+        "lat": 54.78859976,
+        "lng": 9.41956054
+      },
+      "google": {
+        "lat": 54.7886285,
+        "lng": 9.419610400000002,
+        "place_id": "ChIJAQDcUrdCs0cRjyYIrlIsC0o",
+        "address": "Nerongsallee 11, 24939 Flensburg-Nordstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_tbz_recyclinghof_kauslund",
+      "name": "TBZ Recyclinghof Kauslund",
+      "before": {
+        "lat": 54.801250960000004,
+        "lng": 9.485138420000002
+      },
+      "google": {
+        "lat": 54.8012797,
+        "lng": 9.485188299999999,
+        "place_id": "ChIJN1vQFFBCs0cRZjl0pmpGDQI",
+        "address": "Kauslundhof 8, 24943 Flensburg-Engelsby"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_kreuz_apotheke_inh_ulrike_spey_e_k",
+      "name": "Kreuz-Apotheke Inh. Ulrike Spey e.K.",
+      "before": {
+        "lat": 54.781392059999995,
+        "lng": 9.47656736
+      },
+      "google": {
+        "lat": 54.7814208,
+        "lng": 9.4766172,
+        "place_id": "ChIJtekUZWRCs0cRP26bbgwuVa4",
+        "address": "Taruper Hauptstraße 55, 24943 Flensburg-Tarup"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_offentliche_toilette",
+      "name": "Öffentliche Toilette",
+      "before": {
+        "lat": 54.81289656,
+        "lng": 9.428400719999999
+      },
+      "google": {
+        "lat": 54.788878,
+        "lng": 9.4375616,
+        "place_id": "ChIJW_u-JLRDs0cR3AIdjj-hUhg",
+        "address": "Hafendamm 505, 24937 Flensburg"
+      },
+      "delta_m": 2735,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_toilet_wc_handwitt",
+      "name": "Toilet Wc Handwitt",
+      "before": {
+        "lat": 54.74863326,
+        "lng": 9.377540999999999
+      },
+      "google": {
+        "lat": 54.748662,
+        "lng": 9.3775908,
+        "place_id": "ChIJ_ejGUQBns0cRVhEWkOAZ2rc",
+        "address": "Altholzkrug 36, 24976 Handewitt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_storebox_dein_lager_nebenan",
+      "name": "Storebox - Dein Lager nebenan",
+      "before": {
+        "lat": 54.79279506,
+        "lng": 9.467281539999998
+      },
+      "google": {
+        "lat": 54.7928238,
+        "lng": 9.467331399999999,
+        "place_id": "ChIJT_l-VTZDs0cRtNcums5DRwQ",
+        "address": "Engelsbyer Str. 11, 24943 Flensburg-Engelsby"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_selfstorage_flensburg",
+      "name": "selfstorage-flensburg",
+      "before": {
+        "lat": 54.76121166,
+        "lng": 9.41307688
+      },
+      "google": {
+        "lat": 54.7612404,
+        "lng": 9.4131267,
+        "place_id": "ChIJ-T3fdRBos0cR1pHM75J31eU",
+        "address": "Philipp-Reis-Straße 16, 24941 Flensburg-Weiche"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_leder_freytag_citti_park",
+      "name": "Leder Freytag - CITTI-Park",
+      "before": {
+        "lat": 54.77372116,
+        "lng": 9.39632886
+      },
+      "google": {
+        "lat": 54.7737499,
+        "lng": 9.3963787,
+        "place_id": "ChIJAayfiv9ns0cRp0gEaSJdcXo",
+        "address": "Langberger Weg 4, 24941 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_lagerhostel",
+      "name": "Lagerhostel",
+      "before": {
+        "lat": 54.75154796,
+        "lng": 9.3813379
+      },
+      "google": {
+        "lat": 54.75157669999999,
+        "lng": 9.381387700000001,
+        "place_id": "ChIJtZdykt1ns0cRBaAEDrBWyxY",
+        "address": "Altholzkrug 13, 24976 Handewitt-Weding"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_citylagerhaus_flensburg",
+      "name": "Citylagerhaus Flensburg",
+      "before": {
+        "lat": 54.779255060000004,
+        "lng": 9.392544660000002
+      },
+      "google": {
+        "lat": 54.77928379999999,
+        "lng": 9.3925945,
+        "place_id": "ChIJG1_hs1Zds0cRfXmU7UsGsY0",
+        "address": "Heinrich-Kaufmann-Straße 10, 24941 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_restaurant_alte_senfmuhle",
+      "name": "Restaurant Alte Senfmühle",
+      "before": {
+        "lat": 54.784023760000004,
+        "lng": 9.436844660000002
+      },
+      "google": {
+        "lat": 54.78405249999999,
+        "lng": 9.4368945,
+        "place_id": "ChIJE8SwtpdCs0cRoz5g06V8CO8",
+        "address": "Holm 45, 24937 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_shalimar_restaurant_flensburg",
+      "name": "Shalimar Restaurant Flensburg",
+      "before": {
+        "lat": 54.78652526,
+        "lng": 9.435490240000002
+      },
+      "google": {
+        "lat": 54.786554,
+        "lng": 9.435540099999999,
+        "place_id": "ChIJNSRGtr5Cs0cRCK1SW1Z7FQU",
+        "address": "Rathausstraße 6, 24937 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_nikolai_flammkuchen_in_flensburg",
+      "name": "NIKOLAI - Flammkuchen in Flensburg",
+      "before": {
+        "lat": 54.784623859999996,
+        "lng": 9.436482459999999
+      },
+      "google": {
+        "lat": 54.78465259999999,
+        "lng": 9.4365323,
+        "place_id": "ChIJoQH6vdNDs0cRUi7s3AQ02QU",
+        "address": "Nikolaistraße 10, 24937 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_marien_cafe",
+      "name": "Marien-Café",
+      "before": {
+        "lat": 54.781919859999995,
+        "lng": 9.402870859999998
+      },
+      "google": {
+        "lat": 54.7819486,
+        "lng": 9.4029207,
+        "place_id": "ChIJ8VkX4b5Cs0cRxre_rB7eeWk",
+        "address": "Westerallee 55, 24941 Flensburg-Westliche Höhe"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_hotel_seeblick_am_sankelmarker_see_maritim_shop",
+      "name": "Hotel Seeblick am Sankelmarker See / Maritim Shop",
+      "before": {
+        "lat": 54.71680756000001,
+        "lng": 9.44334464
+      },
+      "google": {
+        "lat": 54.7168363,
+        "lng": 9.443394399999999,
+        "place_id": "ChIJ4W4tZqJps0cRm6h_9CAf-4E",
+        "address": "Bundesstraße 6-8, 24988 Oeversee"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_aarskogs_boutique_hotel",
+      "name": "Aarskogs Boutique Hotel",
+      "before": {
+        "lat": 54.84306676,
+        "lng": 9.54135788
+      },
+      "google": {
+        "lat": 54.8430955,
+        "lng": 9.5414078,
+        "place_id": "ChIJLcknZWdDs0cRh0NvIRzK_fM",
+        "address": "Paulinenallee 5, 24960 Glücksburg (Ostsee)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_hotel_direktionsvilla_1880",
+      "name": "Hotel Direktionsvilla 1880",
+      "before": {
+        "lat": 54.837253759999996,
+        "lng": 9.414358580000002
+      },
+      "google": {
+        "lat": 54.8372825,
+        "lng": 9.4144085,
+        "place_id": "ChIJjYAjIcpcs0cRaLGcF-p_c0o",
+        "address": "Grenztal 2, 24955 Harrislee-Kupfermühle"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_hotel_am_fjord",
+      "name": "Hotel am Fjord",
+      "before": {
+        "lat": 54.78666186,
+        "lng": 9.43906444
+      },
+      "google": {
+        "lat": 54.7866906,
+        "lng": 9.4391143,
+        "place_id": "ChIJj6oFf5ZCs0cRT1Vh0mvTjXY",
+        "address": "Wilhelmstraße 1, 24937 Flensburg-Jürgensby"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_gluck_in_sicht_ostseelodges",
+      "name": "Glück in Sicht Ostseelodges",
+      "before": {
+        "lat": 54.846477459999996,
+        "lng": 9.54115298
+      },
+      "google": {
+        "lat": 54.8465062,
+        "lng": 9.5412029,
+        "place_id": "ChIJt0d8T_lDs0cRtoWzKz8kg5E",
+        "address": "Schwennaustraße 37, 24960 Glücksburg (Ostsee)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_gastehaus_hansen",
+      "name": "Gästehaus Hansen",
+      "before": {
+        "lat": 54.81485126,
+        "lng": 9.54805012
+      },
+      "google": {
+        "lat": 54.81488,
+        "lng": 9.5481,
+        "place_id": "ChIJIeCCc3tBs0cRuFLy5QU9RKw",
+        "address": "Ulstrup 21, 24999 Wees-Ulstrup"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_flensbed_hostel_boardinghouse",
+      "name": "Flensbed Hostel & Boardinghouse",
+      "before": {
+        "lat": 54.77932836,
+        "lng": 9.437767159999998
+      },
+      "google": {
+        "lat": 54.7793571,
+        "lng": 9.437816999999999,
+        "place_id": "ChIJqdlVpJlCs0cRJ1u-S1VSuKQ",
+        "address": "Bahnhofstraße 28, 24937 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_gastehaus_seewarte",
+      "name": "Gästehaus Seewarte",
+      "before": {
+        "lat": 54.807145760000004,
+        "lng": 9.45967482
+      },
+      "google": {
+        "lat": 54.8071745,
+        "lng": 9.459724699999999,
+        "place_id": "ChIJhYQkXPtCs0cROC2gKVoPvSQ",
+        "address": "Mürwiker Str. 164, 24944 Flensburg-Mürwik"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_gasthof_handewitt_inh_pierre_schonbaum",
+      "name": "Gasthof Handewitt Inh. Pierre Schönbaum",
+      "before": {
+        "lat": 54.76314336,
+        "lng": 9.32531908
+      },
+      "google": {
+        "lat": 54.7631721,
+        "lng": 9.325368899999999,
+        "place_id": "ChIJTw67UXFns0cR6yuPFJr16aA",
+        "address": "Osterstraße 2, 24983 Handewitt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_hotel_fruerlund",
+      "name": "Hotel Fruerlund",
+      "before": {
+        "lat": 54.79062146,
+        "lng": 9.46110834
+      },
+      "google": {
+        "lat": 54.79065019999999,
+        "lng": 9.461158200000002,
+        "place_id": "ChIJ3W5DTYtCs0cRzO_p-a08VD0",
+        "address": "Glücksburger Str. 174, 24943 Flensburg-Jürgensby"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_hostel_flensburg",
+      "name": "Hostel Flensburg",
+      "before": {
+        "lat": 54.77829236,
+        "lng": 9.426598760000001
+      },
+      "google": {
+        "lat": 54.7783211,
+        "lng": 9.4266486,
+        "place_id": "ChIJA8067qNCs0cRYbnX8XYECec",
+        "address": "Zur Exe 23, 24937 Flensburg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_ehrenhain",
+      "name": "Ehrenhain",
+      "before": {
+        "lat": 54.80004276,
+        "lng": 9.44822386
+      },
+      "google": {
+        "lat": 54.8000787,
+        "lng": 9.4482862,
+        "place_id": "ChIJce5s1u5Cs0cR_-baFpwVlLU",
+        "address": "Blasberg 13, 24943 Flensburg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_",
+      "name": "Туалет",
+      "before": {
+        "lat": 54.75969844,
+        "lng": 9.3974904
+      },
+      "google": {
+        "lat": 54.7597236,
+        "lng": 9.397534,
+        "place_id": "ChIJQ5SaOQBps0cRiF1kgjjZ2v4",
+        "address": "Ochsenweg 69, 24941 Flensburg-Weiche"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_umzugsservice_transport_flensburg",
+      "name": "Umzugsservice Transport Flensburg",
+      "before": {
+        "lat": 54.80612434,
+        "lng": 9.401957659999999
+      },
+      "google": {
+        "lat": 54.8061495,
+        "lng": 9.4020013,
+        "place_id": "ChIJ8bqY73JDs0cRDBnvAU_1NN0",
+        "address": "Wiesenkamp 23, 24955 Harrislee"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_woolworth",
+      "name": "Woolworth",
+      "before": {
+        "lat": 54.78512823999999,
+        "lng": 9.43447698
+      },
+      "google": {
+        "lat": 54.7851534,
+        "lng": 9.434520599999999,
+        "place_id": "ChIJV3-KOm1Ds0cRouZCM-MZbKE",
+        "address": "Holm 22-28, 24937 Flensburg"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "flensburg_intersport",
+      "name": "Intersport",
+      "before": {
+        "lat": 54.78607853999999,
+        "lng": 9.434318479999998
+      },
+      "google": {
+        "lat": 54.7861037,
+        "lng": 9.4343621,
+        "place_id": "ChIJOYDujL1Cs0cRChkIRQ3QyNI",
+        "address": "Holm 1, 24937 Flensburg"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_krumet_sonderposten_filiale_flensburg",
+      "name": "Krümet Sonderposten - Filiale Flensburg",
+      "before": {
+        "lat": 54.76288723999998,
+        "lng": 9.416247100000001
+      },
+      "google": {
+        "lat": 54.7629124,
+        "lng": 9.4162907,
+        "place_id": "ChIJmYnxjBpos0cRAw2XGqWcxog",
+        "address": "Am Sophienhof 2, 24941 Flensburg-Weiche"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "flensburg_ds_angelsport_center_der_angelladen_in_flensburg",
+      "name": "DS Angelsport-Center / Der Angelladen in Flensburg",
+      "before": {
+        "lat": 54.76289424,
+        "lng": 9.3959706
+      },
+      "google": {
+        "lat": 54.76291939999999,
+        "lng": 9.3960142,
+        "place_id": "ChIJhVe2_gdos0cR5AFRB30V5V4",
+        "address": "Ochsenweg 72, 24941 Flensburg"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    }
+  ]
+}

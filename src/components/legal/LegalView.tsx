@@ -13,6 +13,8 @@ import { colors, spacing } from '../../constants/theme';
 import {
   AFFILIATE_DISCLOSURE_SHORT,
   LEGAL_CHAPTERS,
+  LEGAL_PLACEHOLDER_CALLOUT,
+  isLegalControllerIncomplete,
   type LegalChapterId,
 } from '../../constants/legal';
 import { SwipeBackView } from '../SwipeBackView';
@@ -60,9 +62,16 @@ export function LegalView({
         </View>
 
         <ScrollView contentContainerStyle={styles.body}>
+          {isLegalControllerIncomplete() ? (
+            <View style={styles.callout}>
+              <Text style={styles.calloutText}>{LEGAL_PLACEHOLDER_CALLOUT}</Text>
+            </View>
+          ) : null}
+
           <Text style={styles.intro}>
-            Hier findest du alle Pflichtangaben zu Verantwortlichem,
-            Datenverarbeitung, KI-Einsatz und Partner-Links.
+            Hier findest du die aktuellen Pflichtangaben zu Verantwortlichem,
+            Datenverarbeitung, Standort, Mikrofon, KI-Einsatz,
+            Wetter-/Verbindungsdaten, Erinnerungen und Partner-Links.
           </Text>
 
           {LEGAL_CHAPTERS.map((ch) => {
@@ -149,6 +158,20 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 19,
     marginBottom: spacing.md,
+  },
+  callout: {
+    borderRadius: 12,
+    padding: spacing.md,
+    marginBottom: spacing.md,
+    backgroundColor: 'rgba(180, 40, 40, 0.22)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 120, 80, 0.55)',
+  },
+  calloutText: {
+    color: '#FFB4A0',
+    fontSize: 13,
+    lineHeight: 19,
+    fontWeight: '700',
   },
   chapter: {
     borderWidth: 1,

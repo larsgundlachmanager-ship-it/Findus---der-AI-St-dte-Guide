@@ -105,7 +105,7 @@ function buildMasterPrompt(opts: {
     'Leite elegant über ("Bevor wir loslegen, zeige ich dir kurz, wie das hier funktioniert...").',
     'Erkläre die UI-Elemente GENAU in dieser Reihenfolge und nutze die Emojis als visuelle Anker:',
     '👆 Unten links — Action-Button: tippen oder lange drücken (Spracheingabe). Konkrete Beispiele: Wetter, Stufen eines Turms, Tischreservierung.',
-    '📍 Oben links — Info-Leiste & Stempelkarte: aktueller Ort / Navigation; Tippen öffnet die Stempelkarte.',
+    '📍 Oben links — Live-Anzeige: Ort / Tipps tippen. Stempelkarte: Karten-Icon oben rechts unter dem Zahnrad.',
     '🗺️ Swipe-Geste — Routen-Modus: während Navigation wischen; Multi-Stops planen, Drag & Drop, löschen.',
     '⚙️ Oben rechts — Einstellungen: Zahnrad für Datenschutz und Stimme ändern.',
     '',
@@ -171,9 +171,9 @@ export async function composeFirstMapWelcomeSpeech(
     `Hier in ${city} begleite ich dich ab jetzt. ` +
     `Bevor wir loslegen, kurz die Bedienung: ` +
     `👆 Unten links ist der Action-Button — tippen zum Schreiben, lange drücken zum Sprechen. Frag mich nach dem Wetter, Details vor Ort oder einer Reservierung. ` +
-    `📍 Oben links siehst du Ort und Navigation; Tippen öffnet deine Stempelkarte. ` +
+    `📍 Oben links siehst du Ort und Tipps — tippen lädt Tipps. Stempelkarte: Karten-Icon unter dem Zahnrad. ` +
     `🗺️ Beim Navigieren wisch zur Seite für den Routen-Modus mit mehreren Stops. ` +
-    `⚙️ Oben rechts das Zahnrad für Stimme und Datenschutz. ` +
+    `⚙️ Oben rechts Kalender und Zahnrad; darunter die Stempelkarte. ` +
     `So, ich bin da — lauf einfach los und melde dich, wenn was ist!`
   );
 }

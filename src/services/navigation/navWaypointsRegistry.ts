@@ -15,7 +15,17 @@ export function setNavWaypointsForSpot(
   }
   waypointsBySpotKey.set(
     key,
-    waypoints.map((w) => ({ lat: w.lat, lng: w.lng })),
+    waypoints.map((w) => ({
+      lat: w.lat,
+      lng: w.lng,
+      maneuver: w.maneuver ?? null,
+      roadName: w.roadName ?? null,
+      landmark: w.landmark ?? null,
+      cue: w.cue ?? null,
+      instruction: w.instruction ?? null,
+      isStation: w.isStation === true,
+      stationName: w.stationName ?? null,
+    })),
   );
 }
 

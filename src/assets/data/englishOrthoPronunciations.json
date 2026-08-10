@@ -3,7 +3,7 @@
   "fairways": "Feerwäys",
   "golfcourse": "Golfkors",
   "golf course": "Golfkors",
-  "golfplatz": "Golfplatz",
+  "golfplatz": "Golfplaz",
   "highlight": "Heilait",
   "highlights": "Heilaitz",
   "guide": "Geid",
@@ -125,5 +125,10 @@
   "sale": "Seil",
   "deal": "Diil",
   "cash": "Käsch",
-  "card": "Kaad"
+  "card": "Kaad",
+  "tsv": "Tee-Ess-Vau",
+  "marktkauf": "Marktkauf",
+  "edeka": "Edeeka",
+  "rewe": "Rewe",
+  "tennis": "Tennis"
 }

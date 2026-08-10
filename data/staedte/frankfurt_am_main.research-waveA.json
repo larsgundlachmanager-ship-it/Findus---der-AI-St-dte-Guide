@@ -1,0 +1,1582 @@
+{
+  "city_history": "Frankfurt am Main: Kaiserstadt und Messestadt; Paulskirche 1848, Skyline am Main, Goethe-Geburtshaus (Wikipedia).",
+  "notes": [
+    "Wave A — Wikipedia DE + manual visuell; LIVE ephemeral; no dialog scripts."
+  ],
+  "offline_qa": [],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "frankfurt_am_main_roemer_city",
+      "name": "Roemer City",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Mittelalterliches Rathausensemble Römer am Römerberg — Wahrzeichen der Mainmetropole.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Drei Giebelhäuser mit Staffelgiebeln am Römerberg; Fachwerkhäuser am Platz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Jahrhundert das Rathaus der Stadt Frankfurt am Main und mit seiner charakteristischen Treppengiebelfassade eines ihrer Wahrzeichen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er ist als Zentrum der Stadtpolitik Sitz der Stadtvertreter und des Oberbürgermeisters.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das mittlere der ursprünglich drei eigenständigen Gebäude am Römerberg ist das eigentliche Haus zum Römer.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Unter „Römer“ wird schon seit Jahrhunderten der gesamte Rathauskomplex verstanden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Es existieren verschiedene, einander widersprechende Deutungen über die Herkunft des Namens.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Luftangriffe auf Frankfurt am Main im Zweiten Weltkrieg ließen nur die steinernen Fassaden und Erdgeschosse der mittelalterlichen Häuser stehen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Hinter der emblematischen Fassade verbirgt sich der Neubau eines modernen Bürohauses im Stil der frühen 1950er Jahre.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Als die Verwaltung der Stadt im 14.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert ein neues Domizil brauchte, kaufte der Rat am 11.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "März 1405 die beiden repräsentativen Bürgerhäuser mit den Namen Römer und Goldener Schwan und machte sie zum Amtssitz mitten im Zentrum der damaligen Stadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bartholomäus zählten sie als Ort der meisten Wahlen zum römisch-deutschen König bzw.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Königswahlen und -krönungen und damit zu den bedeutendsten Gebäuden in der Geschichte des Heiligen Römischen Reiches Deutscher Nation.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Über fast fünf Jahrhunderte dehnte sich der Rathauskomplex durch Zukäufe von den ursprünglich zwei auf schließlich elf baulich miteinander verbundene Bürgerhäuser aus, die nach und nach zu Diensträumen umgenutzt wurden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhunderts kam es nach Entwürfen von Max Meckel, Franz von Hoven und Ludwig Neher zu einem großangelegten Neubau, der das Äußere der Anlage bis heute prägt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Inneren finden sich heute Reste historistischer, jedoch überwiegend schlichte Raumprogramme der Nachkriegszeit, nachdem fast alle Gebäude bei den Luftangriffen im Zweiten Weltkrieg ausbrannten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Vier der heute noch elf als eigenständig abzugrenzenden Teilbauten sind zudem auch äußerliche Neuschöpfungen aus den frühen 1950er Jahren in der Nachfolge vollständig zerstörter Fachwerkbauten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frankfurt_am_main_katholische_kirchengemeinde_dom_st_bartholomaus",
+      "name": "Katholische Kirchengemeinde Dom St. Bartholomäus",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Kaiserdom St. Bartholomäus am Domplatz — Wahl- und Krönungsstätte deutscher Kaiser.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Roter Sandsteindom mit schlankem Turm am Domplatz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Bartholomäus zu Frankfurt am Main, kurz Frankfurter Dom) in Frankfurt am Main, der größte Sakralbau der Stadt, ist die ehemalige Wahl- und Krönungskirche der römisch-deutschen Kaiser und als solche ein bedeutendes Baudenkmal der Reichsgeschichte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Dom war von 852 bis 1803 eine Stiftskirche, aber nie Kathedrale.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der heutige Dom ist die vierte Kirche an gleicher Stelle.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert ergrabene Vorgängerbauten lassen sich bis in das 7.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die frühkarolingische Kapelle der Königspfalz Frankfurt war Ort der Synode von Frankfurt 794 und eng mit der Geschichte Frankfurts und der Frankfurter Altstadt verbunden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In der 852 geweihten Salvatorkirche fand 855 die erste Königswahl in Frankfurt statt. 1239 erhielt die Kirche das Patrozinium des Apostels Bartholomäus, und der Bau des heutigen gotischen Doms wurde begonnen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er entstand im Wesentlichen zwischen 1250 und 1514, als der 1415 begonnene Bau des Westturms aus Geldmangel ohne die geplante Laterne abgeschlossen werden musste.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die in Mitteleuropa einzigartige Lösung sollte das Stadtbild über Jahrhunderte prägen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Erst nach dem Dombrand 1867 wurde der – architektonisch immer noch einzigartige – Turm nach den erhaltenen Plänen des Mittelalters bis 1878 vollendet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Typologisch handelt es sich um eine dreischiffige Hallenkirche mit gestrecktem 5/8-Chorschluss und angesetztem Westturm auf quadratischem Grundriss.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Durch das aus städtebaugeschichtlichen Gründen sehr kurze (nur drei Joche) Langhaus und das sehr lange Querhaus weist der Dom die Grundform eines Zentralbaus auf.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Gebäude ist komplett aus Naturstein errichtet, hinter dem Putz zwischen den Steinmetzarbeiten und Eckquadern verbirgt sich weniger bearbeiteter Bruchstein.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Abgesehen von zwei kurzen Perioden (1533–1548 und 1631–1635), blieb der Dom auch nach der Einführung der Reformation in Frankfurt katholisch und war bis zum Jahr 1917 die einzige Pfarrkirche dieser Konfession in der Stadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er ist das größte Kirchengebäude im 1827 gegründeten Bistum Limburg.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bedeutung Der Frankfurter Dom gehört nicht zu den größten Sakralbauten in Mitteleuropa.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seine Bedeutung als Nationalsymbol beruht vielmehr auf seiner politisch-geschichtlichen Rolle im Heiligen Römischen Reich Deutscher Nation, weshalb er zu den Kaiserdomen gezählt wird.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frankfurt_am_main_main_tower",
+      "name": "MAIN TOWER",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "200 m Büroturm mit öffentlicher Aussichtsplattform — Panorama über Bankenviertel und Main.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Glasfassade am Mainufer; Aussichtsetage oberhalb der Bankdistrikte.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Aussicht Öffnungszeiten: maintower.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Main Tower (offizielle Schreibweise: MAIN TOWER) ist ein Wolkenkratzer in der Innenstadt von Frankfurt am Main.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit 200 Metern Höhe (mit Mast: 240 Meter) ist er zusammen mit dem Tower 185 das fünfthöchste Hochhaus in Deutschland.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Gebäude ist der Frankfurter Hauptsitz der Landesbank Hessen-Thüringen (Helaba).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Planung und Technik Die Planung wurde vom Hamburger Architekturbüro Architekten Schweger + Partner durchgeführt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Teile seiner unteren Stockwerke sind in die historische Fassade der Ursprungsgebäude eingefasst.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Erbaut wurde der Main Tower von 1996 bis 1999 durch die „ARGE Main Tower“ (u. a.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit Geschwindigkeiten von bis zu sieben Metern pro Sekunde (25,2 km/h) gehören die 26 Personen- und drei Lastenaufzüge zu den schnellsten in Deutschland.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im September 2011 wurde der Main Tower nach den Standards von „Leadership in Energy and Environmental Design (LEED)“ mit dem Gold-Status zertifiziert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im August 2016 wurde der Main Tower nach den Standards von „Leadership in Energy and Environmental Design (LEED)“ mit dem Platin-Status zertifiziert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bauherr des Main Towers war die Helicon Verwaltungsgesellschaft GmbH & Co.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Immobilien KG, ein Konsortium aus der Helaba und einigen Sparkassen, sowie der DekaBank.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nutzung Der Main Tower hat fünf Untergeschosse und 56 Obergeschosse sowie zwei öffentlich zugängliche Aussichtsplattformen (Höhe: 198 Meter und etwa 192 Meter), die gegen Entgelt begehbar sind.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Obergeschoss befindet sich das Main Tower Restaurant & Lounge, hier kocht Martin Weghofer in 187 Metern Höhe; der Innenraum wurde von Bernd Mey gestaltet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mieter im Main Tower sind die Landesbank Hessen-Thüringen (Helaba), Merrill Lynch, die Anwaltskanzleien Cleary, Gottlieb, Steen & Hamilton LLP und Sullivan & Cromwell LLP, seit 2006 das australische Konsulat und 2022 eröffnete der K-1 BusinessClub den höchsten Coworking Space Deutschlands.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "An seiner Spitze befindet sich eine Sendeantenne für die Hörfunkprogramme hr-info und You FM.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ein weiterer Nutzer war der Hessische Rundfunk, der hier bis Oktober 2015 ein Fernsehstudio betrieb.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frankfurt_am_main_palmengarten_frankfurt",
+      "name": "Palmengarten Frankfurt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "22 ha botanischer Garten (1871) mit Tropen- und Subtropenhäusern im Westend.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Gewächshäuser und Wiesen zwischen Bahnhofsviertel und Westend.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Eintritt und Öffnung: palmengarten.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Palmengarten ist einer von zwei botanischen Gärten in Frankfurt am Main und liegt im Stadtteil Westend.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der 1871 eröffnete Garten ist mit 22 ha einer der größten seiner Art in Deutschland.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Direkt an die nordöstliche Ecke des Palmengartens schließt der Botanische Garten Frankfurt an, der bis 2011 zum Fachbereich Biowissenschaften der Johann Wolfgang Goethe-Universität Frankfurt am Main gehörte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ebenfalls direkt benachbart liegt der Grüneburgpark.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Diese drei Gärten bilden die größte innenstadtnahe Grünanlage Frankfurts.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bis Oktober 2006 befand sich östlich des Palmengartens das Amerikanische Generalkonsulat.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Palmengarten Frankfurt ist Mitglied im Verband Botanischer Gärten und Mitglied von BioFrankfurt, dem Frankfurter Netzwerk für Biodiversität.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit der Palmengarten-Gesellschaft Freunde des Palmengartens e.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "V. besteht seit 1931 ein Förderverein, dessen knapp 1400 Mitglieder den Palmengarten unterstützen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Der im Jahr 1871 eröffnete Palmengarten entsprang wie viele andere Frankfurter Sehenswürdigkeiten, zum Beispiel der Eiserne Steg, privater bürgerlicher Initiative.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dazu wurde 1868 ein Verein gegründet, um die von Adolf von Nassau (dem späteren Großherzog von Luxemburg) zum Verkauf angebotenen tropischen Baum- und Pflanzenbestände der Orangerie seiner ehemaligen Residenz von Schloss Biebrich für diesen neuen Bürgerpark zu kaufen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Gartenfachmann Heinrich Siesmayer war mit dem Verkauf betraut worden und es gelang ihm, den Verein für die Förderung des öffentlichen Verkehrslebens in Frankfurt für die wertvollen Pflanzenbestände zu interessieren.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mai 1868 bildete sich ein Komitee zum Erwerb der Biebricher Wintergärten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Eine Aktiengesellschaft wurde gegründet, die sich die Siesmayerschen Ideen eines Südpalastes zu eigen machte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Leopold Sonnemann, der Gründer der Frankfurter Zeitung, setzte sich mit viel Elan für die Idee ein.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sehr schnell waren die Aktien für rund 300.000 Gulden gezeichnet und im Mai 1869 konstituierte sich die Palmengarten-Gesellschaft.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frankfurt_am_main_stadel_museum",
+      "name": "Städel Museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Eines der ältesten und bedeutendsten Kunstmuseen Deutschlands am Museumsufer.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Historischer Trakt am Mainufer; moderne Erweiterung unter Garten.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Tickets staedelmuseum.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Städelsche Kunstinstitut und Städtische Galerie (Eigenbezeichnung: Städel Museum, umgangssprachlich auch: Städel) in Frankfurt am Main ist eines der bedeutendsten deutschen Kunstmuseen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seine Sammlung umfasst rund 3.100 Gemälde vom Mittelalter über die Moderne bis zur Gegenwartskunst.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Graphische Sammlung mit über 100.000 Zeichnungen und Druckgrafiken ist in einem Präsenzsaal zugänglich.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zum Bestand des Städel Museums gehören außerdem über 5.000 Fotografien, 660 Skulpturen und eine Präsenzbibliothek mit 115.000 Bänden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Stiftung erfolgte durch das Testament von Johann Friedrich Städel (1815).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Sammlung erhielt 1833 ein erstes eigenes Ausstellungsgebäude.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der heutige Standort am Museumsufer wurde 1878 bezogen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Gründung Nach dem Tod des Frankfurter Bankiers und Gewürzhändlers Johann Friedrich Städel im Jahre 1816 wurde sein am 15.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "März 1815 verfasstes Testament eröffnet, in dem er das nach ihm benannte Kunstinstitut stiftete.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er vererbte sein Haus am Rossmarkt, die dort ausgestellte Kunstsammlung und sein Vermögen im Umfang von ca. 1,3 Millionen Gulden dem Institut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dessen Auftrag war zum einen der Unterhalt einer öffentlichen Sammlung, zum anderen die Ausbildung von Künstlern in der angeschlossenen Kunsthochschule; diese wurde später von der Stadt Frankfurt übernommen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im folgenden Jahr fochten entfernte Verwandte Johann Friedrich Städels das Testament an, was zu einem bis 1829 andauernden Prozess führte, der in der Folge die Arbeit des Instituts behinderte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Laut Testament sollten fünf Administratoren aus der Frankfurter Bürgerschaft die Leitung des Instituts übernehmen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als erster Inspektor wurde 1817 Carl Friedrich Wendelstadt berufen. 1830 wurde Philipp Veit, ein Nazarener, Vorsteher der Malschule und Direktor der Galerie.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In dieser Zeit wurden Werke aus Städels Sammlung, die den qualitativen Ansprüchen des Museums nicht genügten, verkauft.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit den Einnahmen wurde der Ankauf anderer Werke finanziert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Eigenes Museumsgebäude 1833 zog das Museum in ein umgebautes Gebäude an der Neuen Mainzer Straße um.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahr 1840 kam es zu einem Wechsel in der Verwaltung des Museums, als Johann David Passavant neuer Inspektor wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er war schon vorher für das Städelsche Kunstinstitut tätig gewesen und hatte unter anderem Ankäufe vermittelt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In die bis 1861 dauernde Amtszeit Passavants fielen bedeutende Erwerbungen für die Sammlung wie das Weibliche Idealbildnis von Sandro Botticelli oder Teile der Sammlung Wilhelms II. der Niederlande, die 1850 versteigert worden war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Unter der Leitung des 1861 eingesetzten Inspektors Gerhard Malß wurden das Kupferstichkabinett und die Galerie neu geordnet. 1870 wurden auf der Versteigerung der Sammlung Brentano-Birckenstock weitere bedeutende Werke für die Sammlung des Städelschen Kunstinstituts erworben.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Umzug an den Main Im Jahre 1878 zog das Städelsche Kunstinstitut erneut um, diesmal an den heute als Museumsufer bekannten Schaumainkai, wo ein neues Gebäude für das Museum errichtet worden war. 1885 wurde Georg Kohlbacher neuer Inspektor, der vier Jahre später von Henry Thode abgelöst wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Thodes Position war die neu geschaffene Direktion, welche an die Stelle des Inspektors trat.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sein Interesse galt vor allem der italienischen Malerei, die nun einen Schwerpunkt der Einkäufe bildete.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Vom 1891 ernannten Direktor Heinrich Weizsäcker wurde der erste Gesamtkatalog der Sammlung des Städelschen Kunstinstituts angefertigt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Um das Museum finanziell zu unterstützen, gründete Leopold Sonnemann, der Verleger der Frankfurter Zeitung, 1899 den Städelschen Museums-Verein, der inzwischen über 9.000 Mitglieder zählt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nachdem 1904 Ludwig Justi Direktor des Museums geworden war, erwarb er mit einem Bild von Claude Monet ein impressionistisches Gemälde, ergänzte die Sammlung aber auch mit Bildern wie Die Blendung Simsons von Rembrandt van Rijn.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als Folge des ersten Frankfurter Bilderstreits wurde der 1906 neu berufene Direktor Georg Swarzenski 1907 erster gemeinsamer Leiter des Städelschen Kunstinstituts und der neu gegründeten Städtischen Galerie im Städel.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit nun finanzieller Förderung der Stadt wurde in größerem Umfang Moderne Kunst angekauft.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Swarzenski ergänzte die Sammlung bis zum Ersten Weltkrieg um die meisten französischen Impressionisten, die bis heute Bestandteil der Sammlung sind.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dazu kamen zeitgenössische Werke von Künstlern wie Franz Marc und Max Beckmann, der zugleich Lehrer an der Städelschule war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In der Folge wurde das Museumsgebäude erweitert, um mehr Ausstellungsfläche zur Verfügung zu haben.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frankfurt_am_main_goethe_haus",
+      "name": "Goethe-Haus",
+      "place_tier": 1,
+      "pack_role": "story",
+      "lat": 50.110278,
+      "lng": 8.677778,
+      "category": "museum",
+      "general_info": "Geburtshaus Johann Wolfgang von Goethes (1749) — Museum und Forschungsstätte.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Bürgerhaus mit Fachwerk-/Stein-Fassade Große Hirschgraben.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Goethe-Haus in der Großer Hirschgraben 23–25 ist das Geburtshaus Johann Wolfgang von Goethes, geboren 28. August 1749 (Goethehaus Frankfurt, Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das barocke Bürgerhaus wurde im Zweiten Weltkrieg zerstört und anhand der Originalpläne wiederaufgebaut; heute Museum und Forschungsstätte der Freien Deutschen Hochstift (Goethehaus Frankfurt).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Im Geburtshaus sind Wohnräume der Familie Goethe historisch eingerichtet; der Dichter verbrachte seine Kindheit bis zur Studienzeit hier (Goethehaus Frankfurt).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das angrenzende Goethe-Museum zeigt Ausstellungen zur Klassik und Moderne (Goethehaus Frankfurt).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Visuell im Ensemble: Fachwerk- und Putz-Fassaden der Altstadt nahe Liebfrauenberg.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Museum Öffnung: goethehaus-frankfurt.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Johann Wolfgang Goethe, ab 1782 von Goethe (* 28.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "März 1832 in Weimar), war ein deutscher Dichter, Politiker und Naturforscher.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er gilt als einer der bedeutendsten Schöpfer deutschsprachiger Dichtung.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Goethe stammte aus einer wohlhabenden und angesehenen bürgerlichen Familie; sein Großvater mütterlicherseits war als Stadtschultheiß höchster Justizbeamter der Stadt Frankfurt am Main, sein Vater Doktor der Rechte und Kaiserlicher Rat.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er und seine Schwester Cornelia erfuhren eine aufwendige Ausbildung durch Hauslehrer.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dem Wunsch seines Vaters folgend, studierte Goethe in Leipzig und Straßburg Rechtswissenschaft und war danach als Advokat in Wetzlar und Frankfurt tätig.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Gleichzeitig folgte er seiner Neigung zur Dichtkunst.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die ersten Anerkennungen in der Welt der Literatur erzielte er 1773 mit dem Drama Götz von Berlichingen, das ihm nationalen Erfolg eintrug, und 1774 mit dem Briefroman Die Leiden des jungen Werthers, mit dem er sogar europäischen Erfolg erreichte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Beide Werke sind der literarischen Strömung des Sturm und Drang (1765 bis 1785) zuzuordnen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der jugendliche Herzog Carl August von Sachsen-Weimar-Eisenach berief den 26-jährigen Goethe 1775 an seinen Hof in Weimar, wo er schließlich für den Rest seines Lebens blieb.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er bekleidete dort als Freund und Minister des Herzogs politische und administrative Ämter und leitete ein Vierteljahrhundert das Weimarer Hoftheater.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die aus seiner amtlichen Tätigkeit resultierende Vernachlässigung seiner schöpferischen Fähigkeiten löste nach dem ersten Weimarer Jahrzehnt eine persönliche Krise aus, der sich Goethe durch die Flucht nach Italien entzog.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Italienreise von September 1786 bis Mai 1788 empfand er als eine „Wiedergeburt“.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ihr verdankte er die Vollendung wichtiger Werke wie Iphigenie auf Tauris (1787), Egmont (1788) und Torquato Tasso (1790).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Frankfurt am Main () ist mit 760.656 Einwohnern (31.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dezember 2025) die bevölkerungsreichste Stadt des Landes Hessen und die fünftgrößte Deutschlands.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie ist kreisfrei und bildet das Zentrum der Region Frankfurt am Main mit mehr als 2,3 Millionen Einwohnern.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In der Metropolregion Frankfurt/Rhein-Main (Rhein-Main-Gebiet) leben etwa 5,8 Millionen Menschen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit dem Mittelalter gehört Frankfurt am Main zu den bedeutenden städtischen Zentren Deutschlands.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahr 794 erstmals urkundlich erwähnt, war es seit 1372 Reichsstadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bis zum Ende des Heiligen Römischen Reiches 1806 wurden die meisten römisch-deutschen Könige in Frankfurt am Main gewählt und seit 1562 auch zum Kaiser gekrönt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von 1815 an war die Freie Stadt Frankfurt ein souveräner Mitgliedstaat des Deutschen Bundes und zugleich dessen politisches Zentrum.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Bundesversammlung hatte hier ebenso ihren Sitz wie die Nationalversammlung und die Provisorische Zentralgewalt während der Revolution von 1848/49.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach dem Deutschen Krieg von 1866 annektierte Preußen die Freie Stadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Infolge der raschen Industrialisierung setzte ein starkes Bevölkerungswachstum ein.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit 1875 zählte die Stadt über 100.000 und seit 1928 mehr als 500.000 Einwohner.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als Zeichen der Verpflichtung zur europäischen Einigung nennt sich Frankfurt seit 1998 Europastadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Frankfurt am Main ist ein internationaler Finanzplatz, bedeutendes Industrie-, Dienstleistungs- und Messezentrum und zählt zu den ökonomischen Weltstädten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frankfurt_am_main_alte_oper",
+      "name": "Alte Oper",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Konzerthaus im Gründerzeit-Stil (1880) am Opernplatz — Wiederaufbau nach 1952.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Renaissance-Revival-Fassade mit Loggia am Opernplatz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Alte Oper am Opernplatz in Frankfurt am Main ist ein Konzert- und Veranstaltungshaus.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie wurde 1873 bis 1880 als Opernhaus der Städtischen Bühnen erbaut und bei einem Luftangriff 1944 zerstört.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Während die Oper Frankfurt 1951 eine neue Spielstätte am Theaterplatz erhielt, blieb das Opernhaus noch lange Ruine.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Erst 1976 begann der Wiederaufbau, der 1981 abgeschlossen war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Planungen Frankfurts erster fester Theaterbau, das 1782 eröffnete Comoedienhaus am Theaterplatz, genügte mehr als 80 Jahre lang den Anforderungen der Frankfurter Bürgerschaft.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Parkett, den Parkettlogen, zwei Rängen und einer Galerie bot es etwa 1000 Sitzplätze.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Noch 1854 wehrten sich die Bürger erfolgreich gegen Pläne für einen Neubau.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach der Annexion der Freien Stadt Frankfurt durch Preußen sorgte der Frankfurter Receß vom März 1869 für eine neue Diskussion.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die zwangsweise Eingliederung der ehemals souveränen Stadt in die preußische Provinz Hessen-Nassau wurde von der selbstbewussten Frankfurter Bürgerschaft als Demütigung empfunden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die wirtschaftlichen Aussichten der auf Handel und Finanzwirtschaft angewiesenen Stadt waren unsicher, zumal ihre Finanzen durch eine von Preußen erhobene enorme Kriegskontribution von 5,8 Millionen Gulden belastet waren, die von den nur rund 8000 steuerpflichtigen Bürgern aufzubringen waren.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit dem Gesetz vom März 1869 erhielt Frankfurt nicht nur die Kontribution zurück, sondern darüber hinaus eine Entschädigung von drei Millionen Gulden für das vom preußischen Staat beanspruchte staatliche Vermögen der Freien Stadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dezember 1869 regte der vom preußischen König bestellte neue Oberbürgermeister Daniel Heinrich Mumm von Schwarzenstein den Neubau eines Theaters an.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dezember 1869 versammelte sich daraufhin eine Gruppe von 67 vermögenden Bürgern im Saalbau und gründete einen Förderverein für den Theaterneubau.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Januar 1870 kamen Spenden in Höhe von 480.000 Gulden zusammen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Opernhaus steht damit am Anfang einer Reihe repräsentativer Bauprojekte der Gründerzeit nach dem Frieden von Frankfurt 1871, mit dem die Stadt ihren politischen Bedeutungsverlust kompensierte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bauprojekt Zu Beginn der Planung hatte Frankfurt etwa 80.000 Einwohner, die schon bis 1873 auf 100.000 anwuchsen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frankfurt_am_main_hessen_shop_kleinmarkthalle",
+      "name": "Hessen Shop Kleinmarkthalle",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Markthalle am Hasengasse — über 60 Stände; Hessen-Shop ist Eingangsbereich.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Backsteinhalle 1954; Marktstände innen — Eingang Hasengasse.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Kleinmarkthalle an der Hasengasse wurde 1954 eröffnet und ersetzte die 1944 zerstörte alte Markthalle (Wikipedia Kleinmarkthalle Frankfurt).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "In der Halle sind über 60 Marktstände mit Obst, Gemüse, Metzerei, Backwaren und internationalen Spezialitäten (Stadt Frankfurt).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Backsteinbauwerk mit Bogentragwerk ist ein zentraler Marktplatz der Innenstadt nahe Zeil und Konstablerwache (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Hessen-Shop im Eingangsbereich bietet regionale Produkte — der Pack-Spot markiert diesen Eingangsbereich der Halle.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Frankfurt am Main () ist mit 760.656 Einwohnern (31.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dezember 2025) die bevölkerungsreichste Stadt des Landes Hessen und die fünftgrößte Deutschlands.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie ist kreisfrei und bildet das Zentrum der Region Frankfurt am Main mit mehr als 2,3 Millionen Einwohnern.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In der Metropolregion Frankfurt/Rhein-Main (Rhein-Main-Gebiet) leben etwa 5,8 Millionen Menschen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit dem Mittelalter gehört Frankfurt am Main zu den bedeutenden städtischen Zentren Deutschlands.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahr 794 erstmals urkundlich erwähnt, war es seit 1372 Reichsstadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bis zum Ende des Heiligen Römischen Reiches 1806 wurden die meisten römisch-deutschen Könige in Frankfurt am Main gewählt und seit 1562 auch zum Kaiser gekrönt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von 1815 an war die Freie Stadt Frankfurt ein souveräner Mitgliedstaat des Deutschen Bundes und zugleich dessen politisches Zentrum.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Bundesversammlung hatte hier ebenso ihren Sitz wie die Nationalversammlung und die Provisorische Zentralgewalt während der Revolution von 1848/49.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach dem Deutschen Krieg von 1866 annektierte Preußen die Freie Stadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Infolge der raschen Industrialisierung setzte ein starkes Bevölkerungswachstum ein.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit 1875 zählte die Stadt über 100.000 und seit 1928 mehr als 500.000 Einwohner.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als Zeichen der Verpflichtung zur europäischen Einigung nennt sich Frankfurt seit 1998 Europastadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Frankfurt am Main ist ein internationaler Finanzplatz, bedeutendes Industrie-, Dienstleistungs- und Messezentrum und zählt zu den ökonomischen Weltstädten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frankfurt_am_main_paulskirche",
+      "name": "Paulskirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Nationalversammlung 1848 in der ovalen Kirche — Symbol deutscher Demokratie.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Rote Sandstein-oval auf Paulsplatz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Paulskirche in Frankfurt am Main ist ein als Ausstellungs-, Gedenk- und Versammlungsort genutzter ehemaliger Kirchenbau, in dem von 1848 bis 1849 die Frankfurter Nationalversammlung tagte, das erste demokratisch gewählte Parlament für ganz Deutschland.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die von ihm ausgearbeitete Paulskirchenverfassung wurde zum Vorbild der Weimarer Reichsverfassung von 1919 und des Grundgesetzes für die Bundesrepublik Deutschland von 1949.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Paulskirche gilt daher als Erinnerungsort der deutschen Demokratie und nationales Symbol.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der klassizistische Rundbau des Architekten Johann Friedrich Christian Hess war zwischen 1789 und 1833 anstelle der 1786 abgerissenen mittelalterlichen Barfüßerkirche erbaut worden und diente bis 1944 als evangelisch-lutherische Hauptkirche Frankfurts.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach einem Luftangriff auf die Stadt brannte die Paulskirche am 18.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "März 1944 wie viele der umliegenden Bauten der Frankfurter Altstadt völlig aus.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von ihrer Innenausstattung aus ihrer Zeit als Tagungsort der Nationalversammlung ist daher fast nichts mehr vorhanden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach dem Zweiten Weltkrieg wurde die Paulskirche 1947/48 als erstes historisches Gebäude Frankfurts mit Hilfe von Spenden aus allen deutschen Ländern äußerlich bis auf das Kegeldach wiederaufgebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Aus Mangel an Geld und Baumaterial wurde der Innenraum sehr schlicht gestaltet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Anstelle des früheren Kirchenraumes mit Emporen entstanden eine niedrige Wandelhalle und ein darüberliegender Versammlungsraum mit Plenarsaal-Bestuhlung.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Wiedereröffnung als Haus aller Deutschen erfolgte zum 100.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Heute wird die Paulskirche für Ausstellungen und öffentliche Veranstaltungen genutzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Am bekanntesten davon ist die alljährliche Verleihung des Friedenspreises des Deutschen Buchhandels.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Barfüßerkloster im Mittelalter Die mittelalterliche Barfüßerkirche wurde als Kirche des Frankfurter Barfüßer- oder Franziskanerkloster erstmals 1270 urkundlich erwähnt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Möglicherweise waren Kirche und Kloster jedoch bereits einige Jahrzehnte älter.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Frankfurter Patrizier Achilles Augustus von Lersner berichtete in seiner 1706 erschienenen Chronik, dass die Barfüßerkirche bereits 1238 bestanden haben müsse, wie aus einer (nicht erhaltenen) Grabinschrift des Stifters Henrich Knoblauch an der Kirche hervorginge.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frankfurt_am_main_eiserner_steg",
+      "name": "Eiserner Steg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Fußgängerbrücke über den Main (1869) — Verbindung Altstadt und Sachsenhausen mit Skyline-Blick.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Eisenfachwerkbrücke mit Blick auf Skyline und Dom.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Eiserne Steg ist eine seit 1868 bestehende Fußgängerbrücke über den Main in Frankfurt zwischen der Altstadt (Fahrtor, Historisches Museum) und dem Stadtteil Sachsenhausen (Schul-/Schifferstraße, Krankenhaus Sachsenhausen).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die erste Ausführung wurde 1912 durch eine verbreiterte und verstärkte Konstruktion ersetzt, die außerdem höher gelegt wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach der Sprengung in den letzten Tagen des Zweiten Weltkrieges wurde diese 1946 unverändert wieder aufgebaut, 1993 aber anlässlich einer Renovierung nochmals etwas höher gesetzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Eiserner Steg von 1868 Planung Bevor der Eiserne Steg errichtet wurde, gab es im damaligen Magistrat zahlreiche Eingaben und Diskussionen seitens der Bevölkerung, die bemängelten, dass die Alte Brücke als bislang einzige Brücke keinesfalls ausreichend sei, die Kommunikation mit den südlichen Stadtteilen und dem Umland zu verbessern.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Hintergrund stand die Zunahme der Bevölkerung von 35.000 Einwohnern um 1800 auf fast 57.000 Einwohner im Jahr 1840.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nie und Nimmer, hieß es in den Eingaben, könne die Alte Brücke die zunehmenden Fiakerfahrten zu den Bahnhöfen, die Steinfuhren, sowie besonders die vermehrten Bierfuhren verkraften.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Doch der Magistrat zeigte sich ob der Kosten dieses Projektes stur.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Schließlich griffen die Bürger und – wie in Frankfurt üblich – speziell die Händler zur Selbsthilfe und gründeten im Juni 1867 einen Verein zum Bau einer eisernen Fußgängerbrücke, die bald darauf nur noch unter ihrem bis heute erhaltenen Namen Eiserner Steg in den Nachrichtenblättern bekannt wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Man konnte Anteilsscheine im Wert von 100 Gulden verzinst zu 5 % von einer Privatgesellschaft erwerben.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach vollständiger Tilgung der auf 120.000 Gulden geschätzten Baukosten sollte die Brücke kostenlos der Stadt übereignet werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Konstruktion und Bau Nach dieser Zusicherung der Finanzierung wurde das Projekt durch die Stadtverordneten verabschiedet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Auftrag der Gesellschaft zur Errichtung einer Eisernen Brücke am Fahrtor entwarf der Ingenieur Peter Schmick eine versteifte Hängebrücke nach den Ideen von Claus Koepcke.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dieser hatte vorgeschlagen, die eine Kette bildenden Glieder einer schmiedeeisernen Kettenbrücke zusammen mit den Verbindungsgliedern zwischen Kette und Gehsteg als feste „Wände“ an den beiden Brückenseiten auszuführen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Beide „Wände“ bildeten zusammen mit der Gehbahn einen festen U-förmigen Brückenüberbau.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die oberen Ränder (Gurte) der „Wände“ behielten die parabolische Form einer traditionellen Hängebrücke.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie waren von Ufer zu Ufer in je vier dreieckartige Abschnitte unterteilt, deren je zwei obere Ecken sich an den Spitzen der beiden im Fluss befindlichen Pylone trafen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_places": []
+}

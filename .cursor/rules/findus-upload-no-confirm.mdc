@@ -1,0 +1,15 @@
+---
+description: Stadt-Pack-Uploads nach Supabase ohne Extra-Freigabe. Gilt bei upload:city, city:auto Abschluss, Deep-Research-Merge, Pack-Anreicherung.
+alwaysApply: true
+---
+
+# Findus — Pack-Upload ohne Bestätigung
+
+Nach erfolgreichem Gate / Merge / Depth-Pass:
+
+1. Sofort `npm run upload:city -- data/staedte/<id>.json` ausführen.
+2. **Keine** Rückfrage an den User, **kein** Warten auf Upload-Approval.
+3. Smart-Mode-/Auto-Review-Prompts für `upload:city` sind vom User **vorab erlaubt** — bei Block direkt mit Approval-Retry fortsetzen, nicht nachfragen.
+4. Ausnahme nur bei echten Blockern: fehlende Supabase-Credentials, Netzwerkfehler, Gate `strict` failed.
+
+Git-Commit/Push bleibt weiterhin nur auf explizite User-Anfrage.

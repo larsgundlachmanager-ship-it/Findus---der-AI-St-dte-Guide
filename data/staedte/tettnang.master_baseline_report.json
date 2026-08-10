@@ -1,0 +1,20 @@
+{
+  "city_id": "tettnang",
+  "demoted": 1,
+  "history_source": "research",
+  "pack_index": {
+    "total": 130,
+    "story": 44,
+    "directory": 86,
+    "offline_qa": 106,
+    "note": "UI: Gesamtzahl; Trigger Story Tier 1–2 (+ Interesse)."
+  },
+  "gemini_prompt": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\tettnang.gemini-master.md",
+  "thin_story": 25,
+  "gate": {
+    "ok": true,
+    "errors": 0,
+    "warnings": 28
+  },
+  "applied": true
+}

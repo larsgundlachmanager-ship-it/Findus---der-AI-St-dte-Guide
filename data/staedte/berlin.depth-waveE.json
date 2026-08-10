@@ -1,0 +1,1557 @@
+{
+  "notes": [
+    "Berlin depth wave E — additive deep_data_pool (+ general_info wo leer). Quellen: Wikipedia, berlin.de, visitBerlin, offizielle Museen/Oper.",
+    "Pack bereits ≥3000 auf allen Wave-E-Icons — zusätzliche deduplizierte Fakten-Chunks (kein generisches Padding).",
+    "LIVE für Öffnung/Preise. Kein Upload in diesem Schritt."
+  ],
+  "spots": [
+    {
+      "id": "berlin_grosser_tiergarten",
+      "name": "Großer Tiergarten",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: weite Wiesen, Alleen und Teichlandschaft zwischen Hochbauten — vom Brandenburger Tor über Straße des 17. Juni bis zum Großen Stern und Zoo.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "1527: Kurfürst Joachim I. ließ Jagdgebiet anlegen; „Tiergarten“ als Name für Wildgehege und später Park (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1742: Friedrich II. öffnete den Park der Bevölkerung — Übergang von Fürstenpark zum städtischen Freiraum.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1830er: Peter Joseph Lenné überarbeitet Wege, Sichtachsen und Pflanzungen im Stil englischer Landschaftsgärten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Großer Stern: zentraler Verkehrsknoten mit Fußgängertunneln; seit 1938/39 Standort der Siegessäule (versetzt vom Königsplatz).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Denkmäler im Park: u. a. Bismarck-Nationaldenkmal, Königin-Luise-Denkmal, Goethe- und Lessing-Denkmal, Comenius-Brunnen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Zweiter Weltkrieg: starke Entwaldung als Brennholz; Nachkrieg Wiederaufforstung und schrittweise Rekonstruktion der Wege.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Sowjetisches Ehrenmal Tiergarten an der Straße des 17. Juni — Gedenken an Soldaten der Roten Armee (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Schloss Bellevue am Spreeufer: Amtssitz des Bundespräsidenten am Rand des Parks.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Südlicher Rand: Kulturforum mit Philharmonie, Neue Nationalgalerie und Staatsbibliothek — Kultur trifft Park.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Tiergartenstraße und Hofjägerallee: historische Achsen durch den Park; Verbindung zu Spree und Regierungsviertel.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Rousseau-Insel und Neuer See: beliebte Spazier- und Bootsziele; Café am Neuen See im Park.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach Mauerfall 1989 wieder durchgängige Ost-West-Verbindung durch den Park und entlang der Straße des 17. Juni.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Joggen, Rad, Picknick, Liegewiesen; Großer Tiergarten ganzjährig öffentlich zugänglich ohne Eintritt.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Zoo Berlin am Hardenbergplatz, Siegessäule, Brandenburger Tor, Schloss Bellevue, Haus der Kulturen der Welt.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Vogel- und Kleintiervielfalt in altem Baumbestand; Fledermaus- und Spechtarten in den Randbereichen (Naturführer Berlin).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Winters: reduzierte Beleuchtung, trotzdem frequentierte Hauptwege; Sommer: Open-Air-Events am Spreeufer in Nachbarschaft.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_mauerpark",
+      "name": "Mauerpark",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: lange Wiese mit Sportanlagen, Mauerresten und Tribünen am „Bearpit“ — zwischen Gleimstraße und Bernauer Straße-Nähe.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Name „Mauerpark“: Park liegt auf Gelände der früheren Grenzanlagen zwischen Ost- und West-Berlin (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1990er: Umgestaltung aus Brach- und Grenzflächen zu öffentlichem Park; Teil der innerstädtischen Grünvernetzung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Sonntags Flohmarkt entlang der Gleimstraße — einer der bekanntesten Berliner Trödelmärkte (visitBerlin).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Bearpit-Karaoke: open-air Bühnenkultur sonntags; internationales Publikum (ephemer — Wetter und Saison).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Sport: Basketballfelder, Slackline-Bäume, Beachvolleyball; Friedrich-Ludwig-Jahn-Sportpark grenzt nördlich.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Mauersegmente als historische Zeugnisse im Park — ergänzend zu Gedenkstätte Bernauer Straße.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Max-Schmeling-Halle und Jahn-Sportpark als Nachbarn — Konzert- und Sportgroßevents (LIVE Kalender).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Picknick, Musik, Skate und Spaziergänge; junge, urbane Parkkultur in Prenzlauer Berg.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Bernauer Straße Gedenkstätte, Gleisdreieck-Park, Kulturbrauerei, Arkonaplatz.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Akustik und Lärmschutz: Wohnbebauung rund um den Park — Nutzungskonflikte werden städtisch begleitet (Presseberichte).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Grünbrücken und Bepflanzung verbinden ehemals getrennte Stadtstrukturen nach 1989.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Winter weniger Marktaktivität; Sommer Hauptsaison für Flohmarkt und Karaoke.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Historie: Grenzstreifen war hier besonders breit — dokumentiert in Mauergedenkstätten der Nachbarschaft.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_berlin_treptower_park",
+      "name": "Berlin Treptower Park",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: weitläufige Wiesen und Alleen mit Blick auf gewaltige Sowjetische Ehrenmal-Anlage am Spreeufer.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Parkfläche historisch als Volkspark konzipiert; Spreeufer und Gastronomie (Zenner) als traditioneller Ausflugsort.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Sowjetisches Ehrenmal: zur Erinnerung an ca. 80.000 in Berlin gefallene Sowjetsoldaten (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Architekten: u. a. Jakow Belopolski, Wladimir Isajew, Alexander A. Gorpenko; Landschaftsgestaltung Willy Scheld.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Zentrale Figur: 12 m hohe „Mutter Heimat“ aus Bronze auf Sockel mit Goldmosaik — ikonisches Motiv.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Sechzehn Sarkophage mit Reliefs aus Marmor zeigen Kampf- und Opferszenen des Zweiten Weltkriegs.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Ehemaliges Stalin-Relief an der Eingangsanlage 1961 entfernt; historische Fotos dokumentieren die Veränderung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Ehrenhalle mit Fresken und Sowjetischem Ehrenmal-Inschriftband — feierliche Achsensymmetrie.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach 1990 bleibt Gedenkstätte erhalten; Pflege durch Berlin und russische Partner (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Spazieren, Rad am Spreeufer, Liegewiesen; Gedenkstätte free access (LIVE Sonderveranstaltungen).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Plänterwald, Insel der Jugend, Arena Berlin/Eventflächen an der Spree.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Zenner Biergarten: historische Gaststätte im Park — Sommerbetrieb (LIVE).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Volksparktradition: Konzerte und Feste auf Wiesen — Kalender ephemer.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_berliner_mauerweg",
+      "name": "Berliner Mauerweg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Wegemarkierung mit Mauerweg-Logo, oft parallel zu Mauerstreifen, Gleisanlagen oder Gewässern — städtisch und ländlich wechselnd.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Gesamtlänge rund 160 km — vollständiger Ring um West-Berlin bzw. entlang der früheren Grenze (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Route für Radfahrer und Wanderer in Abschnitten; offizielle Beschilderung und Online-Karten (berlin.de).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kein einzelner Park, sondern Verbindungsweg mit Erinnerungsstationen, Info-Tafeln und Resten von Wachtürmen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Abschnitte führen an Gedenkstätte Bernauer Straße, East Side Gallery, Checkpoint Charlie-Umfeld und Grünzügen vorbei.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Teile verlaufen auf ehemaligen Kontrollwegen und Kolonnenstraßen der Grenztruppen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Brandenburg-Anteil: Mauerweg verbindet Berlin mit umliegenden Gemeinden — ländliche Passagen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Tagesetappen oder mehrtägige Tour; Radverleih und ÖPNV-Anbindung je Abschnitt (LIVE).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Kombination mit Mauermuseum, Dokumentationszentrum und städtischen Parks entlang der Route.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Erinnerungspolitik: Weg verbindet Freizeit und Lernen über die Teilungsgeschichte (Senatsstelle).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Jahreszeitlich: winterliche Abschnitte weniger belebt; Frühjahr/Herbst beliebt für Radtouren.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Historische Fotos am Info-Tafeln zeigen frühere Sperr- und Todesstreifen-Situation.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Grenzübergänge und ehemalige Übergangsstellen werden an Markierungen erklärt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_tierpark_berlin",
+      "name": "Tierpark Berlin",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: weitläufige Parklandschaft mit Schloss Friedrichsfelde, großen Gehegen und asiatisch gestalteten Toranlagen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Eröffnung 2. Juli 1955 als „Tierpark Berlin“ — östliches Gegenstück zum Zoologischen Garten (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Namenspatron Alfred Brehm; Fokus auf artgerechte, großflächige Haltung und Zucht seltener Arten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Berühmter Elefant „Knautschke“ wurde GDR-Mediensymbol — Standbilder und Erinnerung im Park.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Schloss Friedrichsfelde: barockes Schloss im Tierpark, Ausstellungen und Veranstaltungen (LIVE).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Stiftung Tiergarten Berlin verwaltet Tierpark und Zoo gemeinsam — Forschung und Artenschutz.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Großgehege für Hirsche, Bisons und Raubtiere; historische Bärenanlagen modernisiert.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Familienausflug, Führungen, Fütterungen — Tickets und Öffnung LIVE (tierpark.de).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Friedrichsfelde Palace Museum, Tram-Anbindung, Gedenkstätte Hohenschönhausen in weiter Ferne.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Fläche ermöglicht Kombination Zoo-Besuch und Spaziergang wie in einem Landschaftspark.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach 1990 Investitionen in Gehege und Besucherzentren; internationale Kooperationen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Historie: Konkurrenz und später Partnerschaft mit Zoo Berlin spiegeln Berliner Teilungsgeschichte.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_garten_der_welt",
+      "name": "Gärten der Welt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: pagodenartige Dächer, Kabelkrane der IGA, formal angelegte Gärten und Wiesen über Marzahn.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Entwicklung aus Erholungspark Marzahn (1970er) und Internationalen Gartenausstellungen (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "IGA 2017 brachte neue Gärten und Seilbahn — städtebauliche Aufwertung des Bezirks.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Chinesischer Garten „Garten des wiedergewonnenen Mondes“, japanischer Kaisergarten, koreanischer Garten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Arabisch-islamischer Garten, italienischer Renaissance-Garten, Balinese Garten — kulturelle Vielfalt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Jüdischer Garten seit Erweiterung — Erinnerung und Gartenkunst verbunden (Presse/SMB-nahe Dokumentation).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Gründer-Gärten und Karl-Foerster-Staudengarten für heimische Pflanzenkunde.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Spaziergänge, Events, IGA-Halle — Eintritt und Saison LIVE (gruen-berlin.de / visitBerlin).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Kienbergpark, Seilbahn zum Kienberg, Plattenbau-Architektur Marzahn als Kontrast.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Nachwende: Park entstand auf rekultivierten Industrie- und Wohngebietsflächen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Gartenschau-Tradition verbindet Bildung, Botanik und Freizeit für Familien.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_st_marienkirche",
+      "name": "St. Marienkirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Backsteingotik mit hohem Turm neben Neptunbrunnen und Rotes Rathaus — Fernsehturm im Hintergrund.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Erste Erwähnung 1292; zentrale Pfarrkirche der mittelalterlichen Doppelstadt Berlin-Cölln (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Gotischer Hallenchor; barocke Veränderungen am Turm und Innenausstattung in späteren Jahrhunderten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Zweiter Weltkrieg: schwere Schäden; Wiederaufbau in DDR als bewusstes Zeichen historischer Kontinuität.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Neptunbrunnen vor der Kirche: barockes Brunnenensemble mit vier Flüssen-Allegorien.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nähe Nikolaiviertel und Spree — historische Mitte der Stadt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Gottesdienste, Konzerte, Turmbesteigung saisonal (LIVE Gemeinde/Museum).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Rotes Rathaus, Fernsehturm, Nikolaikirche, Spreepromenade.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Innen: spätgotische Formen und restaurierte Ausstattung — Führungen LIVE.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Historische Grabplatten und Epitaphe als Zeugnisse Berliner Bürgerschaft.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Protestantische Gemeinde St. Marien aktiv in der City-Mitte.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_franzosische_kirche_zu_berlin_hugenottenkirche",
+      "name": "Französische Kirche zu Berlin (Hugenottenkirche)",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: schlanker Turm mit charakteristischer Haube am Gendarmenmarkt zwischen Konzerthaus und Deutschem Dom.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "1685: Edikt von Fontainebleau vertreibt Hugenotten aus Frankreich — Zuwanderung nach Brandenburg (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kurfürst Friedrich Wilhelm I. lud Glaubensflüchtlinge ein; Berliner „Friedrichstadt“ als Siedlungsgebiet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Kirche 1701–1705 errichtet; Architektur im barocken Stil für reformierte französische Gemeinde.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Französischsprachige Tradition in Gottesdiensten und Kultur bis heute facettenreich.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Gendarmenmarkt als städtebauliches Ensemble: Französischer Dom, Deutscher Dom, Schauspielhaus/Konzerthaus.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Orgel und Konzerte: musikalische Tradition — Kalender LIVE.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Gottesdienst, Führungen, Gendarmenmarkt-Festivals.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Deutscher Dom Ausstellung, Konzerthaus Berlin, Friedrichstraße.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Hugenotten brachten Handwerk, Künste und Handel — prägten Berliner Wirtschaftsgeschichte.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Innenraum: schlicht-reformierte Ausstattung mit historischen Epitaphen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_altes_museum",
+      "name": "Altes Museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: breiter Säulenportikus mit grün patinierter Kuppelrotunde, Blick vom Lustgarten und Berliner Dom.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Schinkels Entwurf prägte klassizistische Museumarchitektur Deutschlands (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Rotunde im Inneren: historische Raumfolge für Skulpturensaal-Konzept 19. Jh.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Antikensammlung: griechische und römische Kunst, u. a. Porträts und Vasen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Teil des Museumsinsel-Ensembles mit Neues Museum, Pergamon, Bode, Alte Nationalgalerie.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "James-Simon-Galerie als Besucherzentrum südlich — Eingangsbereich SMB (seit 2019).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach Kriegsschäden und Teilung Wiederaufbau; heute sanierte Ausstellungsräume (SMB).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Dauerausstellung Antike, Sonderausstellungen — Ticket SMB LIVE.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Berliner Dom, Lustgarten, Humboldt Forum, Spreepromenade.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Forum Fridericianum: historische Idee eines Kulturforums Unter den Linden.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Architektur: Säulenordnung nach antikem Vorbild symbolisiert Bildung und Staat.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_bode_museum",
+      "name": "Bode-Museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: gewölbtes Hauptportal und Kuppel über der Spree — „Monbijou-Brücke“ als klassischer Fotostandpunkt.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Ursprünglich Kaiser-Friedrich-Museum; 1956 umbenannt nach Wilhelm von Bode (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Skulpturensammlung: Mittelalter bis 18. Jh., u. a. Donatello, Riemenschneider-Kontext.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Museum für Byzantinische Kunst: ikonische Werke und Kulturgüter des Byzanz.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Münzkabinett: eine der bedeutendsten numismatischen Sammlungen weltweit (SMB).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Innenhof und Treppenhäuser: repräsentative Beaux-Arts-Architektur von Ihne.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach Wiederaufbau post-1990 zentrale Achse der Museumsinsel-Sanierung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: kombinierte Ticketoptionen Museumsinsel — Öffnung LIVE smb.museum.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Neues Museum, Pergamonbau, Spreefahrt, Monbijoupark.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "UNESCO-Welterbe Museumsinsel: Bode als nördlicher Abschluss des Ensembles.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Barocksaal und Skulpturengalerien für „Mehr Historie“-Tiefe geeignet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_museum_fur_naturkunde",
+      "name": "Museum für Naturkunde",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: historisches Gebäude mit modernem Glasanbau; im Saal rekonstruierte Dinosaurierskelette unter Hohe Decke.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Gegründet 1810; Sammlungen überleben Kriege mit Verlusten und späterer Wiederzusammenführung (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Giraffatitan brancai: eines der größten montierten Dinosaurierskelette weltweit — Tendaguru-Funde.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Tyrannosaurus rex „Tristan“: prominent ausgestelltes Fossil — Wechselausstellungen LIVE.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Systematische Sammlungen: Mineralogie, Zoologie, Paläontologie, Evolution.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Forschung: Biodiversität, Klimawandel, Digitisierung der Sammlung (MfN Berlin).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Architektur: Bombenschäden, Sanierung und Erweiterung für Besucherströme.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Familien, Schulklassen, Sonderausstellungen — Tickets LIVE (museumfuernaturkunde.berlin).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Humboldt-Universität, Nordbahnhof, Regierungsviertel.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Historische Sammlungsräume mit Fisch-, Vogel- und Säugetierpräparaten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Öffentliche Führungen zu Evolution und Fossilienforschung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_deutsche_oper_berlin",
+      "name": "Deutsche Oper Berlin",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: breite Glasfront und helle Foyerarchitektur an der Bismarckstraße — Kontrast zum historischen Charlottenburg.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Eröffnung 1912 als „Deutsche Oper“; Zerstörung 1943, Neubau eröffnet 1961 (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Architekt Fritz Bornemann: funktionaler Nachkriegsoperbau mit großer Bühnentechnik.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Repertoire: Oper, Ballett, Operette — internationales Ensemble (stiftung-oper-berlin.de).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Intendanten und Regisseure prägten stilbildende Inszenierungen — Programm LIVE.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Premieren, Spielplan online; barrierefreie Zugänge modernisiert (LIVE).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Charlottenburg, Ku’damm, Savignyplatz, Schloss Charlottenburg.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Akustik und Sichtlinien: Saal für große Besucherzahlen konzipiert.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nachwende: Sanierungen Foyer und Bühnentechnik; internationale Gastspiele.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Historie: West-Berliner Opernanker während der Teilung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_konzerthaus_berlin",
+      "name": "Konzerthaus Berlin",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: klassizistische Säulenfront mit Dreiecksgiebel zwischen Französischer und Deutscher Dom am Gendarmenmarkt.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Schinkel entwarf das Schauspielhaus als Herzstück des Gendarmenmarkt-Ensembles (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1945 ausgebrannt; Wiederaufbau 1984 als Konzerthaus mit moderner Akustik.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Konzerthausorchester Berlin: traditionsreiches Orchester mit festem Spielplan.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Großer Saal, Kleiner Saal und Werner-Otto-Saal für unterschiedliche Formate.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Symphoniekonzerte, Kammerkonzerte, Festivals — Karten LIVE (konzerthaus.de).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Französische Kirche, Deutscher Dom, Friedrichstraße, Unter den Linden.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Gendarmenmarkt: Weihnachtsmarkt und Open-Air-Events saisonal (LIVE).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Architekturdetails: Schinkels Proportionen und Giebelreliefs nach historischem Vorbild.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Teilung: Gendarmenmarkt an der Sektorgrenze — symbolische Mitte nach 1990.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_zoologischer_garten_berlin",
+      "name": "Zoologischer Garten Berlin",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Zoologischer Garten Station und Ku’damm-Nähe; Elefantentor als orientalisch anmutendes Wahrzeichen am Hardenbergplatz.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "1844 Eröffnung durch Naturforscher Martin Lichtenstein und Zoologischen Verein — ältester Zoo Deutschlands (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Elefantentor 1899: Entwurf Peter Emil Löffler im maurischen Stil — Wappentier Berliner Bär am Tor.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Weltkrieg: schwere Schäden; berühmte Tiergeschichten wie Knautschke im Ost-Zoo vs. West-Zoo.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Heute über 20.000 Tiere in über 1.300 Arten — artenreichster Zoo Europas nach Artikelzahl (Zoo Berlin).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Große Panda-Aufzucht Kooperation mit China; Biodiversitätszentrum und Artenschutzprojekte.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Aquarium im Zoo: Fische, Reptilien, Insekten unter einem Dach — separates Ticket LIVE.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Stiftung Tiergarten Berlin: gemeinsame Strategie mit Tierpark Friedrichsfelde.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Tageskarten, Jahreskarten, Fütterungen — zoo-berlin.de LIVE.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Gedächtniskirche, Ku’damm, Landwehrkanal, Aquarium.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Historische Tierhäuser modernisiert; Affenhaus und Vogelvolieren Sanierungsprojekte.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Forschung: Erhaltungszucht bedrohter Arten, wissenschaftliche Publikationen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_nikolaiviertel",
+      "name": "Nikolaiviertel",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: wiederaufgebaute kleinteilige Häuser und Kopfsteinpflaster an der Spree — Nikolaikirche mit doppeltem Turm.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Nikolaikirche: älteste Kirche Berlins (ca. 1230); heute Museum und Konzertsaal (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Historische Mitte Berlin-Cölln; Zerstörung im Krieg, städtebauliche Neugestaltung 1980er DDR.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Rekonstruktion als touristisches und Wohnviertel mit Gastronomie an der Spree.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Ephraim-Palais: Rokoko-Fassade als Ausstellungsort Stadtmuseum — LIVE.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Knoblauch-Haus: Bürgerhausmuseum zur Geschichte des Bürgertums.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Spaziergänge, Cafés, Bootsanleger; Nikolaikirche Führungen LIVE.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Rotes Rathaus, Spreeinsel, Molkenmarkt, Alexanderplatz.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Historische Grundrisse der Doppelstadt an Info-Tafeln erklärt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach 1990 weitere Sanierungen und Nutzungsmix Wohnen/Gastronomie/Kultur.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Spreeuferpromenade verbindet zum Dom und Museumsinsel.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_deutsches_historisches_museum",
+      "name": "Deutsches Historisches Museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Zeughaus-Unter den Linden mit barocker Fassade und modernem I.M.-Pei-Anbau (Exhibition Hall).",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Zeughaus: ältestes erhaltenes Gebäude am Boulevard; Waffensammlung historisch, heute Dauerausstellung (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Pei-Bau 2003: Glas- und Stahlbau für Wechselausstellungen und große Rundgänge.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Dauerausstellung „Deutsche Geschichte in Bildern und Zeugnissen“ — chronologischer Rundweg.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Sammlung: Alltags- und Politikgeschichte von Mittelalter bis Gegenwart.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Sonderausstellungen national und international — dhm.de LIVE.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Unter den Linden, Humboldt-Universität, Bebelplatz, Staatsoper.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Bebelplatz: Buchverbrennung 1933 — Gedenkraum „Leere Bibliothek“ in Gehdistanz.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Forschung und Bildung: Vermittlung kontroverser Themen mit Quellenarbeit.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Barockes Zeughaus-Inneres mit historischer Decke und Vitrinen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_kaiser_wilhelm_gedachtniskirche",
+      "name": "Kaiser-Wilhelm-Gedächtniskirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: hohler, beschädigter Turm mit Kreuz und neue blaue Glasbeton-Kirche Eiermanns am Breitscheidplatz.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "1891–1895: Neoromanische Gedächtniskirche für Wilhelm I. nach Entwurf Franz Schwechten (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "November 1943: schwere Luftschäden; Turm als Mahnmal stehen gelassen — „Hohler Zahn“.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1961: Eiermann-Bauten — hexagonale Kirchenräume mit blauen Glasfenstern von Gabriel Loire.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Mosaikprogramme im Inneren der Ruine teils erhalten — Kriegszerstörung sichtbar.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Gottesdienste, Gedenkandachten, Turmaufstieg saisonal — LIVE Gemeinde.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Ku’damm, Zoo, Europa-Center, Tauentzienstraße.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Mahnmal-Funktion: bewusste Kombination aus Ruine und Neubau statt reinem Wiederaufbau.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Breitscheidplatz: zentraler West-Berliner Platz — Weihnachtsmarkt und Events (LIVE).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Historische Fotos zeigen Turm vor und nach dem Krieg.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berlin_unter_den_linden",
+      "name": "Unter den Linden",
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: breite Prachtachse mit Lindenbäumen (Neupflanzungen), Staatsoper, Humboldt-Universität und Schlossbrücke zum Dom.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "1647: Kurfürst Friedrich Wilhelm ließ Unter den Linden als Reit- und Promenadenachse anlegen (Wikipedia).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Forum Fridericianum: Opernhaus, Universität, Akademie — Aufklärungsprojekt Friedrichs II.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Humboldt-Universität: Hauptgebäude am Boulevard; Gründung 1810 als Berliner Universität.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Staatsoper Unter den Linden: historische Oper mit Sanierung und Neueröffnung 2017 (Staatsoper Berlin).",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Bebelplatz: Staatsbibliothek, Hedwigskathedrale, Hotel Adlon — städtebauliche Ensembles.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Schlossbrücke: Schinkels Brückenarchitektur zum Lustgarten und Museumsinsel.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "DDR-Zeit: breite Republikstraße; Palast der Republik (abgerissen) und Staatsratsgebäude.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach 1990: Humboldt Forum im Berliner Schloss; Wiederherstellung historischer Silhouette.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Flanieren, Cafés, Kulturinstitute — Baustellen und Verkehr ephemer (LIVE).",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Quer: Brandenburger Tor, Deutsches Historisches Museum, Friedrichstraße, Spree.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Parade- und Demonstrationsgeschichte von Kaiserzeit bis friedliche Revolution.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Saisonprogramme ephemer auf berlin.de, visitBerlin oder offiziellen Betreiber-Sites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    }
+  ]
+}

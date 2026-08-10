@@ -39,6 +39,7 @@ export type JobFactKey =
   | 'venue_options'
   | 'hard_match_evidence'
   | 'showtimes_future'
+  | 'film_or_genre_picks'
   | 'price_eur'
   | 'ticket_or_info_url'
   | 'route_or_nav'

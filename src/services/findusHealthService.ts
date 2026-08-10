@@ -7,7 +7,7 @@ import * as Network from 'expo-network';
 import { env } from '../config/env';
 import { useFinnusStore } from '../store/useFinnusStore';
 import { hasGeminiApiKey } from './geminiService';
-import { hasOpenAiTtsKey } from './openaiTtsService';
+import { hasCartesiaTtsKey } from './cartesiaTtsService';
 
 function hasOpenAiChatKey(): boolean {
   const key = env.openAiApiKey();
@@ -97,19 +97,19 @@ export function evaluateFindusHealth(): FindusHealth {
     });
   }
 
-  const ttsLocalOk = store.kokoroReady;
-  const ttsCloud = store.ttsProvider === 'openai' && hasOpenAiTtsKey();
-  if (!ttsLocalOk && !ttsCloud && store.kokoroStatusMessage) {
+  const ttsLocalOk = store.ttsReady;
+  const ttsCloud = store.ttsProvider !== 'system' && hasCartesiaTtsKey();
+  if (!ttsLocalOk && !ttsCloud && store.ttsStatusMessage) {
     issues.push({
       id: 'tts',
       title: 'Stimme nicht bereit',
-      fix: 'Sprachmodell laden lassen oder in den Einstellungen TTS prüfen.',
+      fix: 'Cartesia-Key prüfen oder Offline-Systemstimme in den Einstellungen.',
     });
-  } else if (store.kokoroStatusMessage && /fehlt|fehl|unavailable|nicht/i.test(store.kokoroStatusMessage)) {
+  } else if (store.ttsStatusMessage && /fehlt|fehl|unavailable|nicht/i.test(store.ttsStatusMessage)) {
     issues.push({
       id: 'tts_msg',
       title: 'Stimme meldet ein Problem',
-      fix: store.kokoroStatusMessage,
+      fix: store.ttsStatusMessage,
     });
   }
 
@@ -164,7 +164,7 @@ export function buildHealthStatusReply(health?: FindusHealth): string {
   );
   const tone =
     h.presence === 'offline'
-      ? 'Ich bin gerade offline (orange).'
+      ? 'Ich bin gerade offline (grau).'
       : 'Ich bin online, aber etwas hakt (orange).';
   return `${tone} Das ist aktuell kaputt bzw. zu prüfen:\n${lines.join('\n')}`;
 }

@@ -18,6 +18,7 @@ import {
 import { resolvePersonaEngine } from '../personaEngine';
 
 export type PoiHookKind =
+  | 'atm'
   | 'cafe'
   | 'bakery'
   | 'salon'
@@ -36,9 +37,11 @@ export type PoiHookKind =
   | 'sports'
   | 'historic'
   | 'station'
+  | 'service'
   | 'generic';
 
 const KIND_LABEL_DE: Record<PoiHookKind, string> = {
+  atm: 'Geldautomat',
   cafe: 'Café',
   bakery: 'Bäckerei',
   salon: 'Friseur',
@@ -57,8 +60,15 @@ const KIND_LABEL_DE: Record<PoiHookKind, string> = {
   sports: 'Sportplatz',
   historic: 'Gebäude',
   station: 'Bahnhof',
+  service: 'Service',
   generic: 'Ort',
 };
+
+/** Wortgrenzen — „barrierefrei“ darf nicht „bar“ matchen. */
+const RE_BAR_VENUE = /\b(bar|kneipe|pub|club|disco)\b/i;
+const RE_BAKERY = /\b(bäckerei|baeckerei|bäcker|baecker|konditorei|backstube|backhaus)\b/i;
+const RE_ATM =
+  /\b(geldautomat|bankomat|sb-filiale|sb\s+filiale|sparkasse|volksbank|landessparkasse|\batm\b)\b/i;
 
 type HookBank = Record<PoiHookKind, string[]>;
 
@@ -66,13 +76,20 @@ type HookBank = Record<PoiHookKind, string[]>;
  * Kontext-Hooks bei Ankunft am Ort — direkt, persönlich, ohne Rubrik.
  */
 const BASE_HOOKS: HookBank = {
+  atm: [
+    'Geldautomat voraus — auf Reisen unterschätzt, bis man ihn braucht.',
+    'Bargeld-Backup: genau der praktische Spot, wenn die Karte nicht zieht.',
+  ],
+  service: [
+    'Unscheinbar, aber wichtig — hier liegt ein Service, den du bald brauchst.',
+  ],
   cafe: [
     'Schau mal! Vor dir duftet schon das Café — kleine Pause gefällig?',
     'Riechst du das auch schon? Genau vor dir wartet ein Spot, der hungrige Seelen rettet.',
   ],
   bakery: [
-    'Na, hungrig? Da vorne duftet’s nach frischen Brötchen…',
-    'Hand aufs Herz — wann hattest du zuletzt ein richtiges Franzbrötchen?',
+    'Na, hungrig? Da vorne duftet’s nach frischem Gebäck…',
+    'Riechst du das? Genau vor dir backt jemand noch richtig handwerklich.',
   ],
   salon: [
     'Na, ein neuer Haarschnitt nötig? Da vorne wartet ein Friseur auf dich.',
@@ -198,9 +215,8 @@ export function classifyWegweiserTarget(
   if (/(blume|florist|floristik|blumenladen|strauß|strauss)/i.test(blob)) {
     return 'florist';
   }
-  if (/(bäck|baeck|brot|brötchen|franzbrötchen|konditorei)/i.test(blob)) {
-    return 'bakery';
-  }
+  if (RE_ATM.test(blob)) return 'generic';
+  if (RE_BAKERY.test(blob)) return 'bakery';
   // Gedenkort vor Wasser — „Bilsbek“ im Ehrenmal-Namen ≠ Badehose
   if (/(ehrenmal|denkmal|mahnmal|gedenken|krieger|gedenkstein)/i.test(blob)) {
     return 'memorial';
@@ -237,22 +253,6 @@ function shortDest(dest: string): string {
     : dest;
 }
 
-function firstNameOf(profile?: UserProfile | null): string {
-  return profile?.firstName?.trim() || '';
-}
-
-function hey(name: string, line: string): string {
-  if (!name) return line;
-  if (new RegExp(name, 'i').test(line)) return line;
-  if (/^(na|hey|schau|riechst|spürst|hörst|magst|lust|bist|warst|hand)/i.test(line)) {
-    return line.replace(
-      /^(na|hey|schau mal|riechst du|spürst du|hörst du|magst du|lust|bist du|warst du|hand aufs herz)/i,
-      (m) => `${m}, ${name}`,
-    );
-  }
-  return `${name}, ${line.charAt(0).toLowerCase()}${line.slice(1)}`;
-}
-
 /**
  * Interaktiver Approach-Opener — spricht DEN USER an.
  * VERBOTEN: „Wegweiser“, Selbstgespräch („Was ist das? Ah…“), Meta-Regie.
@@ -265,7 +265,6 @@ export function buildWegweiserHook(
   const dest = extractWegweiserDestination(poi.name);
   const kind = classifyWegweiserTarget(poi, dest);
   const short = shortDest(dest);
-  const name = firstNameOf(p);
   const engine = resolvePersonaEngine(p);
   const prefs = p?.experiencePrefs ?? {};
 
@@ -279,21 +278,21 @@ export function buildWegweiserHook(
     prefs.streetfood === 'yes';
 
   const waterHooks = [
-    `Hörst du das Rauschen? Da vorne liegt ${short} — magst du kurz zum Wasser?`,
-    `Wasser voraus: ${short}. Lust auf eine kurze Brise und die Geschichte dazu?`,
-    `Na, bereit für etwas Frisches? Gleich vor dir fließt ${short} — komm näher, ich erzähl dir, warum der Ort tickt.`,
+    `Hörst du das Rauschen? Das glitzernde Band da vorne — das ist ${short}. Magst du kurz zum Wasser?`,
+    `Wasser voraus: siehst du die Wellen? Das ist ${short}. Lust auf eine kurze Brise und die Geschichte dazu?`,
+    `Na, bereit für etwas Frisches? Gleich vor dir fließt was — ${short}. Komm näher, ich erzähl dir, warum der Ort tickt.`,
   ];
 
   const stationHooks = [
-    `Tüt-tüt — da vorne liegt ${short}. Lust auf ein Stück Bahngeschichte?`,
-    `Siehst du den Bahnhof schon? ${short} verbindet das Dorf mit der weiten Welt — kurz reinschnuppern?`,
+    `Siehst du das Gebäude mit den Gleisen? Das ist ${short}. Lust auf ein Stück Bahngeschichte?`,
+    `Der lange Bau da vorne mit dem Bahnsteig — ${short} verbindet das Dorf mit der weiten Welt. Kurz reinschnuppern?`,
     `Bahn voraus. Magst du wissen, warum ${short} für den Ort so wichtig war?`,
   ];
 
   const churchHooks = likesChurches
     ? [
         `Pst… da vorne steht ${short}. Magst du kurz reinschnuppern — solche Orte flüstern richtig?`,
-        `Siehst du ${short}? Wenn dich alte Mauern interessieren: da steckt mehr drin, als der erste Blick verrät.`,
+        `Siehst du ${short}? Wenn dich alte Mauern interessieren: hier lohnt ein genauer Blick.`,
       ]
     : [
         `Da vorne liegt ${short}. Kein Muss — aber eine kurze Geschichte wäre drin, falls du Lust hast.`,
@@ -335,22 +334,21 @@ export function buildWegweiserHook(
       ];
 
   const bakeryHooks = [
-    `Na, hungrig? Da vorne duftet ${short} nach frischen Brötchen…`,
-    `Hand aufs Herz — wann hattest du zuletzt ein richtiges Franzbrötchen? ${short} liegt gleich vor dir.`,
+    `Na, hungrig? Da vorne duftet ${short} nach frischem Gebäck…`,
     `Riechst du das? ${short} — der Duft allein ist schon eine Einladung.`,
   ];
 
   const salonHooks = [
     `Na, ein neuer Haarschnitt nötig? Da vorne auf der rechten Seite liegt ${short}.`,
     `Spieglein, Spieglein — Lust auf einen frischen Schnitt? ${short} wartet gleich vorne.`,
-    `Hey${name ? ` ${name}` : ''}, da vorne ist ein Friseur: ${short}. Termin-Idee für später — oder nur vorbeischauen?`,
+    `Hey, da vorne ist ein Friseur: ${short}. Termin-Idee für später — oder nur vorbeischauen?`,
     `Frische Frisur gefällig? Vorne rechts siehst du ${short} — soll ich dir kurz erzählen, was den Spot besonders macht?`,
   ];
 
   const floristHooks = [
     `Na, Blumen für jemanden — oder nur reinriechen? Da vorne liegt ${short}.`,
     `Duft von frischen Blumen voraus: ${short}. Lust auf einen kurzen Blick an die Theke?`,
-    `Hey${name ? ` ${name}` : ''}, ${short} liegt gleich vor dir — Fest, Alltag oder Trauer, hier gibt’s den Strauß ohne Extra-Weg.`,
+    `Hey, ${short} liegt gleich vor dir — Fest, Alltag oder Trauer, hier gibt’s den Strauß ohne Extra-Weg.`,
     `Magst du kurz zur Floristik? ${short} sitzt praktisch mitten im Einkauf — reinriechen lohnt sich.`,
   ];
 
@@ -379,12 +377,12 @@ export function buildWegweiserHook(
     ? [
         `Da vorne liegt ${short}. Unscheinbar? Vielleicht. Geschichte? Definitiv. Kurz reinschnuppern?`,
         `Schau mal Richtung ${short} — da steckt mehr Story, als der erste Blick verrät.`,
-        `Na${name ? ` ${name}` : ''}, ${short} liegt gleich vor dir. Magst du die kleine Geschichte dazu?`,
+        `Na, ${short} liegt gleich vor dir. Magst du die kleine Geschichte dazu?`,
       ]
     : [
         `Da vorne: ${short}. Kurzer Stopp mit einer netten Anekdote — interessiert?`,
         `Schau mal, ${short}. Wenn du Lust hast, erzähl ich dir gleich, warum der Spot tickt.`,
-        `Hey${name ? ` ${name}` : ''} — ${short} liegt vor dir. Rein oder weiter? Deine Wahl.`,
+        `Hey — ${short} liegt vor dir. Rein oder weiter? Deine Wahl.`,
       ];
 
   const bank: Record<WegweiserTargetKind, string[]> = {
@@ -413,10 +411,6 @@ export function buildWegweiserHook(
   // Persona-Ton leicht einfärben
   if (engine.persona === 'gen_z' && !/yo|check|vibe/i.test(line) && Math.random() < 0.35) {
     line = line.replace(/\?$/, ' — checkst du?');
-  }
-
-  if (name && !new RegExp(name, 'i').test(line) && Math.random() < 0.5) {
-    line = hey(name, line);
   }
 
   // Absolute Tabus final strippen (falls je reinrutschen)
@@ -472,7 +466,7 @@ export function isBoringApproachTeaser(text: string): boolean {
 }
 
 const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
-  gen_z: {
+  daniel: {
     cafe: ['Yo, schon Kaffee-Entzug? Der Spot hier rettet dich.'],
     bakery: ['Bro, Brötchen-Alert. Da duftet’s richtig.'],
     salon: ['Na, Cut nötig? Der Friseur vorne rettet schlechte Haartage.'],
@@ -484,7 +478,19 @@ const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
     ],
     generic: ['Yo, neuer Spot — kurz reinzoomen, da steckt Story drin.'],
   },
-  prinzessin: {
+  varson: {
+    cafe: ['Yo, schon Kaffee-Entzug? Der Spot hier rettet dich.'],
+    bakery: ['Bro, Brötchen-Alert. Da duftet’s richtig.'],
+    salon: ['Na, Cut nötig? Der Friseur vorne rettet schlechte Haartage.'],
+    golf: ['Ready für den Abschlag? Die Greens hier haben echten Vibe.'],
+    station: ['Tüt-tüt, Einsteigen bitte! Bahnhof-Vibe, wir zoomen rein.'],
+    water: ['Badehose checken — jetzt wird’s erfrischend!'],
+    nature: [
+      'Pollen-Check: Hast du eine Allergie — oder dürfen wir hier tief durchatmen?',
+    ],
+    generic: ['Yo, neuer Spot — kurz reinzoomen, da steckt Story drin.'],
+  },
+  alina: {
     cafe: ['Welch warmer Duft! Ein Ort für eine kleine Pause.'],
     salon: ['Vielleicht ein wenig Frische für die Haare? Der Salon wartet.'],
     church: ['Pst... Wenn diese alten Mauern sprechen könnten...'],
@@ -493,7 +499,7 @@ const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
     water: ['Ich hoffe, die Badehose ist dabei — es wird erfrischend!'],
     generic: ['Pst... Dieser Ort flüstert bereits, wenn man genau hinhört.'],
   },
-  erzaehler: {
+  lukas: {
     cafe: ['Nahaufnahme: dampfender Kaffee. Die Szene beginnt.'],
     salon: ['Schnitt! Die nächste Szene spielt im Salon vor dir.'],
     golf: ['Abschlag! Die Greens liegen vor uns wie eine Bühne.'],
@@ -501,44 +507,201 @@ const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
     water: ['Wasser voraus — und die Geschichte nimmt Fahrt auf.'],
     generic: ['Vorhang auf: Dieser Spot hat eine Steilvorlage für uns.'],
   },
-  dorfaeltester: {
-    cafe: ['Ach ja. Riechst du auch schon den frischen Bohnenkaffee?'],
-    salon: ['Ach ja. Friseur voraus — früher gab’s nur einen im Dorf.'],
-    bakery: ['Ach ja. Der Duft von frischem Brot… den kenn ich noch.'],
-    golf: ['Ach ja. Bereit für den Abschlag? Die Greens kenn ich schon ewig.'],
-    station: ['Ach ja. Tüt-tüt — hier am Bahnhof hab ich als Junge die Züge gezählt.'],
-    nature: ['Ach ja. Hast du eine Pollenallergie? Hier blüht’s echt.'],
-    generic: ['Ach ja. Moin — hier steckt mehr drin, als man denkt.'],
-  },
-  historiker: {
-    church: [
-      'Schau mal: vor dir steht die Kirche. Diese Mauern könnten ein ganzes Kapitel erzählen.',
-    ],
-    station: [
-      'Tüt-tüt! Vor dir liegt der Bahnhof — ein geschichtsintensiver Knotenpunkt.',
-    ],
-    salon: [
-      'Vor dir der Salon — Alltagsgeschichte, die man oft übersieht. Magst du kurz reinschnuppern?',
-    ],
-    golf: [
-      'Schau mal: vor dir liegt die Anlage. Mehr Hintergrund als das Fairway verrät.',
-    ],
-    historic: [
-      'Schau mal! Vor dir steht das Bauwerk. Geh einfach drauf zu, und ich erzähl dir, was dahintersteckt.',
-    ],
-    generic: [
-      'Schau mal! Vor dir liegt der Ort. Geh drauf zu — ich bleib bei dir und erzähl dir mehr.',
-    ],
+  sebastian: {
+    cafe: ['Moin — Kaffee-Duft voraus. Kurz reinschauen?'],
+    salon: ['Frische Frisur gefällig? Der Salon liegt direkt vor dir.'],
+    golf: ['Abschlag bereit? Die Greens hier haben Charakter.'],
+    station: ['Tüt-tüt, Einsteigen bitte — Bahnhof voraus.'],
+    water: ['Wasser voraus — Badehose parat?'],
+    generic: ['Schau mal — hier steckt eine Geschichte drin.'],
   },
 };
+
+function pick<T>(list: T[]): T {
+  return list[Math.floor(Math.random() * list.length)] ?? list[0];
+}
+
+function pickSeeded<T>(list: T[], seed: number): T {
+  if (!list.length) return list[0];
+  const idx = Math.abs(seed) % list.length;
+  return list[idx] ?? list[0];
+}
+
+const FAQ_PREFIX_RE =
+  /^User-Frage:\s*.+?\s*Antwort:\s*/i;
+
+function cleanFactSnippet(raw: string): string {
+  return raw
+    .replace(FAQ_PREFIX_RE, '')
+    .replace(/^\[(Kurzfakt|Erzählung|Detail|FAQ)[^\]]*\]\s*/i, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+type HookMaterial = {
+  title: string;
+  hours: string | null;
+  accessible: boolean;
+  island: boolean;
+  detail: string | null;
+};
+
+function extractHookMaterial(
+  poi: PoiWithFacts,
+  profile?: UserProfile | null,
+): HookMaterial {
+  const title = humanizePoiTitleForSpeech(poi.name);
+  const blob = [
+    poi.name,
+    poi.teaser_text ?? '',
+    poi.facts.map((f) => f.fact_text).join(' '),
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const hoursMatch =
+    blob.match(
+      /(?:täglich|daily)[^.]{0,40}?\d{1,2}[:.]?\d{0,2}\s*[–-]\s*\d{1,2}[:.]?\d{0,2}/i,
+    ) ??
+    blob.match(/\d{1,2}[:.]?\d{2}\s*[–-]\s*\d{1,2}[:.]?\d{2}/);
+
+  const detail =
+    poi.facts
+      .map((f) => cleanFactSnippet(f.fact_text))
+      .find((t) => t.length >= 18 && t.length <= 130 && !/^user-frage/i.test(t)) ??
+    (poi.teaser_text ? cleanFactSnippet(poi.teaser_text) : null);
+
+  const cityBlob = `${profile?.cityName ?? ''} ${blob}`;
+  const island =
+    /\b(wangerooge|juist|norderney|baltrum|langeoog|sylt|helgoland|insel)\b/i.test(
+      cityBlob,
+    );
+
+  return {
+    title,
+    hours: hoursMatch?.[0]?.replace(/\s+/g, ' ').trim() ?? null,
+    accessible: /barrierefrei|rollstuhl/i.test(blob),
+    island,
+    detail: detail && detail.length <= 130 ? detail : null,
+  };
+}
+
+/**
+ * Opener aus Ort + Fakten — kein Franzbrötchen an Geldautomaten, kein Template-Roulette.
+ */
+function buildFactBasedHook(
+  poi: PoiWithFacts,
+  kind: PoiHookKind,
+  profile?: UserProfile | null,
+  sessionMemory?: SessionMemory | null,
+): string {
+  const m = extractHookMaterial(poi, profile);
+  const seed = poi.id * 31 + (sessionMemory?.entries?.length ?? 0) * 17;
+
+  const variants: string[] = [];
+
+  switch (kind) {
+    case 'atm':
+      if (m.island) {
+        variants.push(
+          `Auf der Insel zählt Bargeld noch — ${m.title} ist dein Backup, wenn die Karte nicht überall zieht.`,
+          `Kleine Buden, Strandbar, Fährticket: ${m.title} rettet dich, wenn’s mit dem Geld eng wird.`,
+        );
+      }
+      if (m.accessible) {
+        variants.push(
+          `${m.title} — barrierefrei${m.hours ? `, ${m.hours}` : ''}. Praktisch, wenn du noch schnell Geld brauchst.`,
+        );
+      }
+      if (m.hours) {
+        variants.push(
+          `${m.title}: ${m.hours}. Genau der Spot, wenn du noch Bargeld brauchst.`,
+        );
+      }
+      variants.push(
+        `Geldautomat voraus — ${m.title}. Auf Reisen unterschätzt, bis man ihn braucht.`,
+        `${m.title}: hier holst du dir Bargeld, ohne die Insel zu verlassen.`,
+      );
+      break;
+
+    case 'service':
+      variants.push(
+        m.detail
+          ? `${m.title} — ${m.detail}`
+          : `${m.title}: genau der praktische Service, den du hier brauchst.`,
+        `Unscheinbar, aber wichtig: ${m.title}${m.hours ? ` (${m.hours})` : ''}.`,
+      );
+      break;
+
+    case 'bakery':
+      variants.push(
+        `Riechst du das? ${m.title}${m.detail ? ` — ${m.detail}` : ' — frisch gebacken vor dir.'}`,
+        `${m.title}${m.detail ? `: ${m.detail}` : ' — hier duftet’s nach Handwerk.'}`,
+      );
+      break;
+
+    case 'cafe':
+      variants.push(
+        `${m.title}${m.detail ? ` — ${m.detail}` : ' — kurze Pause? Kaffee lockt.'}`,
+        `Kaffee-Radar: ${m.title}. Lust auf einen Stopp?`,
+      );
+      break;
+
+    case 'station':
+      variants.push(
+        `Tüt-tüt — hörst du die Schienen? Genau hier rollt Geschichte.`,
+        `Spürst du den Bahnsteig unter den Füßen? Gleich erzähl ich, was hier los war.`,
+      );
+      break;
+
+    case 'water':
+      variants.push(
+        `Hörst du das Plätschern? Du stehst direkt am Ufer.`,
+        `Spürst du die Feuchtigkeit in der Luft? Genau hier am Wasser lohnt ein Blick.`,
+      );
+      break;
+
+    case 'church':
+    case 'museum':
+    case 'castle':
+    case 'historic':
+      variants.push(
+        `Pst… nimm dir einen Moment — hier flüstert Geschichte.`,
+        `Schau genau hin: Mauern und Details, die man leicht übersieht.`,
+      );
+      break;
+
+    case 'salon':
+      variants.push(`${m.title} — frischer Schnitt oder nur neugierig?`);
+      break;
+
+    case 'bar':
+      variants.push(
+        `${m.title}${m.detail ? `: ${m.detail}` : ' — abends geht hier was.'}`,
+      );
+      break;
+
+    default:
+      // Kein Titel+Fakt-Vorspann — sinnlich starten; Gemini benennt den Ort
+      // VERBOTEN: „steckt mehr drin als der erste Blick“ (Cliché / Doppel-Intro)
+      variants.push(
+        `Nimm dir einen kurzen Moment — schau dich hier einmal richtig um.`,
+        `Du stehst mitten in einem Ort, der seine eigene Geschichte hat.`,
+      );
+  }
+
+  const hook = pickSeeded(variants.filter(Boolean), seed);
+  return hook.replace(/\s+/g, ' ').trim();
+}
 
 export function classifyPoiHookKind(poi: PoiWithFacts): PoiHookKind {
   const cat = (poi.category ?? '').toLowerCase();
   const name = poi.name.toLowerCase();
-  const blob =
-    `${poi.name} ${poi.facts.map((f) => f.fact_text).join(' ')}`.toLowerCase();
+  const blobRaw =
+    `${poi.name} ${poi.teaser_text ?? ''} ${poi.facts.map((f) => f.fact_text).join(' ')}`;
+  const blob = blobRaw.toLowerCase();
+  const blobNoBarrier = blob.replace(/barrierefrei/g, '');
 
-  // Gedenkorte ZUERST — „Bilsbek“ im Namen darf nie Badehose-Hooks triggern
   if (
     /(ehrenmal|kriegerdenkmal|krieger\s*denkmal|gedenkstein|gedenkstätte|gedenkstaette|kriegsopfer|gefallenendenkmal)/i.test(
       name + blob,
@@ -549,16 +712,17 @@ export function classifyPoiHookKind(poi: PoiWithFacts): PoiHookKind {
     return 'historic';
   }
 
+  if (RE_ATM.test(name + blob)) return 'atm';
+  if (cat === 'service' && !RE_BAKERY.test(name + blob)) return 'service';
+
   if (/(fris[oö]r|friseur|coiffeur|haar|salon|barber)/i.test(name + blob)) {
     return 'salon';
   }
   if (/(blume|florist|floristik|blumenladen)/i.test(name + blob)) {
     return 'florist';
   }
-  if (/(bäck|baeck|brötchen|franzbrötchen|konditorei)/i.test(name + blob)) {
-    return 'bakery';
-  }
-  // Wasser nur, wenn der ORT selbst Wasser ist — nicht weil „Bilsbek“ im Ortsnamen vorkommt
+  if (RE_BAKERY.test(name + blob)) return 'bakery';
+
   if (
     /(teich|see\b|fluss|bach|hafen|strand|wasser|kanal|pinnau)/i.test(name) &&
     !/(brücke|bruecke|denkmal|ehrenmal|schule|raum|verein|reiter)/i.test(name)
@@ -602,8 +766,7 @@ export function classifyPoiHookKind(poi: PoiWithFacts): PoiHookKind {
   if (/(museum|galerie|ausstellung)/i.test(blob)) return 'museum';
   if (/(schloss|burg|castle|festung)/i.test(blob)) return 'castle';
   if (/(park|garten|garden|grünanlage|brunnen)/i.test(blob)) return 'park';
-  if (/(bar|club|kneipe|pub|disco)/i.test(blob) && !/golf/i.test(blob))
-    return 'bar';
+  if (RE_BAR_VENUE.test(name) || RE_BAR_VENUE.test(blobNoBarrier)) return 'bar';
   if (/(markt|market|wochenmarkt|supermarkt|center)/i.test(blob)) return 'market';
   if (/(laden|shop|apotheke|drogerie|einkauf)/i.test(blob)) return 'shop';
   if (
@@ -614,10 +777,6 @@ export function classifyPoiHookKind(poi: PoiWithFacts): PoiHookKind {
     return 'historic';
   }
   return 'generic';
-}
-
-function pick<T>(list: T[]): T {
-  return list[Math.floor(Math.random() * list.length)] ?? list[0];
 }
 
 function bridgeHook(
@@ -643,6 +802,9 @@ function bridgeHook(
       return 'Noch ein Friseur voraus — Schnitt-Radar piept schon wieder.';
     case 'museum':
       return 'Schon das nächste Museum, nach dem vorhin.';
+    case 'atm':
+    case 'service':
+      return `Und schon der nächste ${label} auf unserer Route.`;
     case 'historic':
     case 'castle':
       return `Und schon das nächste ${label}, direkt nach ${last.name}.`;
@@ -652,90 +814,62 @@ function bridgeHook(
 }
 
 /**
- * Persönlicher Hook: Name + du/dein, wenn Profil bekannt.
+ * Persönlicher Hook ohne Vorname (Quote nur in Hauptstory).
  */
 function maybePersonalHook(
   kind: PoiHookKind,
   profile?: UserProfile | null,
+  _poiId?: number,
 ): string | null {
   const h = resolvePersonalEngagement(profile);
-  const name = h.firstName;
-  const heyName = name ? `Hey ${name}, ` : '';
   const roll = Math.random();
 
   if (kind === 'salon') {
-    return name
-      ? `Hey ${name}, na — neuer Haarschnitt nötig? Der Salon liegt genau vor dir.`
-      : 'Na, ein neuer Haarschnitt nötig? Der Friseur liegt genau vor dir.';
+    return 'Na, ein neuer Haarschnitt nötig? Der Friseur liegt genau vor dir.';
   }
 
   if (kind === 'florist') {
-    return name
-      ? `Hey ${name}, Lust auf frische Blumen — oder nur kurz reinriechen?`
-      : 'Na, Blumen für jemanden — oder nur reinriechen? Der Laden liegt genau vor dir.';
+    return 'Na, Blumen für jemanden — oder nur reinriechen? Der Laden liegt genau vor dir.';
   }
 
-  if (kind === 'bakery' && roll < 0.7) {
-    return name
-      ? `Hey ${name}, riechst du die Brötchen schon — oder soll ich dich erst überreden?`
-      : 'Riechst du die Brötchen schon — oder soll ich dich erst überreden?';
-  }
+  // Kein generisches Essens-Hook-Roulette — Opener kommt aus buildFactBasedHook
+  if (kind === 'atm' || kind === 'service') return null;
 
   if (kind === 'bar' && h.alcoholOk) {
     if (h.aperolInterest) {
-      return name
-        ? `Hey ${name}, hast du schon wieder Lust auf einen Aperol?`
-        : 'Hast du schon wieder Lust auf einen Aperol?';
+      return 'Hast du schon wieder Lust auf einen Aperol?';
     }
     if (roll < 0.55) {
-      return `${heyName}Lust auf einen Drink an diesem Spot — oder ist das noch nicht deine Baustelle?`;
+      return 'Lust auf einen Drink an diesem Spot — oder ist das noch nicht deine Baustelle?';
     }
   }
 
   if (kind === 'cafe' && (h.coffeeOk || roll < 0.5)) {
-    return name
-      ? `Hey ${name}, jetzt wäre ein Kaffee für dich doch was, oder?`
-      : 'Jetzt wäre ein Kaffee für dich doch was, oder?';
+    return 'Jetzt wäre ein Kaffee für dich doch was, oder?';
   }
 
   if (kind === 'water' && roll < 0.55) {
-    return name
-      ? `Hey ${name}, hast du eine Badehose dabei — oder bleiben deine Schuhe an?`
-      : 'Hast du eine Badehose dabei — oder bleiben deine Schuhe an?';
+    return 'Hast du eine Badehose dabei — oder bleiben deine Schuhe an?';
   }
 
   if (kind === 'nature' && roll < 0.7) {
-    return name
-      ? `${name}, hast du eine Pollenallergie — oder dürfen wir deine Nase freilassen?`
-      : 'Hast du eine Pollenallergie — oder dürfen wir deine Nase freilassen?';
+    return 'Hast du eine Pollenallergie — oder dürfen wir deine Nase freilassen?';
   }
 
   if (kind === 'golf' && roll < 0.55) {
-    return name
-      ? `${name}, ist Golf dein Ding — oder schaust du dir die Greens nur an?`
-      : 'Ist Golf dein Ding — oder schaust du dir die Greens nur an?';
+    return 'Ist Golf dein Ding — oder schaust du dir die Greens nur an?';
   }
 
   if (kind === 'station' && roll < 0.5) {
-    return name
-      ? `${name}, warst du hier schon mal — oder ist das dein erster Stopp?`
-      : 'Warst du hier schon mal — oder ist das dein erster Stopp?';
+    return 'Warst du hier schon mal — oder ist das dein erster Stopp?';
   }
 
   if (kind === 'historic' && roll < 0.45) {
-    return name
-      ? `${heyName}hast du schon mal an so einem Ort selbst Hand angelegt?`
-      : 'Hast du schon mal an so einem Ort selbst Hand angelegt?';
+    return 'Hast du schon mal an so einem Ort selbst Hand angelegt?';
   }
 
   if (kind === 'museum' && roll < 0.5) {
-    return name
-      ? `${name}, magst du Museen — oder brauchst du erst den richtigen Köder?`
-      : 'Magst du Museen — oder brauchst du erst den richtigen Köder?';
-  }
-
-  if (name && roll < 0.45) {
-    return `Hey ${name}, schau mal — das hier vor dir ist für dich spannend.`;
+    return 'Magst du Museen — oder brauchst du erst den richtigen Köder?';
   }
 
   return null;
@@ -750,13 +884,10 @@ export function buildFastHook(
   sessionMemory?: SessionMemory | null,
 ): string {
   const p = profile ?? getCachedUserProfile();
-  const voiceId = (p?.voiceId ?? 'standard_m') as VoiceId;
   const kind = classifyPoiHookKind(poi);
-  const last = lastVisitedPlace(sessionMemory);
   const spokenTitle = humanizePoiTitleForSpeech(poi.name);
   const nameLower = poi.name.toLowerCase();
 
-  // Memorial / Ehrenmal: respektvoller Anker — nie Badehose/Wasser-Humor
   if (
     /(ehrenmal|kriegerdenkmal|gedenkstein|gedenk)/i.test(nameLower) ||
     (poi.category ?? '').toLowerCase() === 'denkmal'
@@ -767,67 +898,14 @@ export function buildFastHook(
     return `Du stehst jetzt direkt vor ${spokenTitle}. Nimm dir ruhig einen kurzen Moment, um das Ganze auf dich wirken zu lassen.`;
   }
 
-  // Jagd / Feldflur: Umgebung statt Rohname
   if (/(jagdgemeinschaft|jagdverein|revier)/i.test(nameLower)) {
-    return 'Du schaust hier jetzt direkt auf die weite Feldflur. Ehrlich gesagt sieht das auf den ersten Blick einfach nur nach ruhiger Natur aus — aber hier steckt richtig Leben drin!';
+    return 'Du schaust hier jetzt direkt auf die weite Feldflur mit Feldern und Knicks.';
   }
 
-  const personal = maybePersonalHook(kind, p);
-  if (personal) return personal;
-
-  const bridge = bridgeHook(
-    kind,
-    last ? { kind: last.kind, name: last.name } : null,
-  );
-  if (bridge) return bridge;
-
-  const voiceBank = VOICE_HOOKS[voiceId];
-  const candidates =
-    voiceBank?.[kind] ??
-    voiceBank?.generic ??
-    BASE_HOOKS[kind] ??
-    BASE_HOOKS.generic;
-
-  let hook = pick(candidates);
-
-  if (kind === 'station') {
-    if (!/bahnhof/i.test(hook) && /bahnhof/i.test(spokenTitle)) {
-      hook = `Tüt-tüt, Einsteigen bitte! Wir stehen am ${spokenTitle}.`;
-    } else if (/am Bahnhof\.?$/i.test(hook)) {
-      hook = hook.replace(/am Bahnhof\.?$/i, `am ${spokenTitle}.`);
-    }
+  const factHook = buildFactBasedHook(poi, kind, p, sessionMemory);
+  if (factHook) {
+    return factHook.replace(/\bWegweiser\b/gi, '').replace(/\s+/g, ' ').trim();
   }
 
-  if (kind === 'golf' && /peiner|hof|fairway/i.test(spokenTitle)) {
-    if (!/green|abschlag|handicap/i.test(hook)) {
-      hook = pick(BASE_HOOKS.golf);
-    }
-  }
-
-  if (kind === 'salon' && !/frisur|schnitt|friseur|salon/i.test(hook)) {
-    hook = pick(BASE_HOOKS.salon);
-  }
-
-  const firstName = p?.firstName?.trim();
-  if (firstName && !new RegExp(firstName, 'i').test(hook)) {
-    if (Math.random() < 0.55) {
-      hook = hook.match(/^(schau mal|pass auf|sag mal|tüt-tüt|na[,!]?)/i)
-        ? hook.replace(
-            /^(schau mal|pass auf|sag mal|tüt-tüt[!.,]?|na[,!]?)\s*/i,
-            (_m, open: string) => `${open} ${firstName}, `,
-          )
-        : `${firstName}, ${hook.charAt(0).toLowerCase()}${hook.slice(1)}`;
-    }
-  } else if (
-    !firstName &&
-    !/\b(du|dein|deine|dir)\b/i.test(hook) &&
-    Math.random() < 0.4
-  ) {
-    hook = hook.replace(/\?$/, ' — für dich?');
-  }
-
-  return hook
-    .replace(/\bWegweiser\b/gi, '')
-    .replace(/\s{2,}/g, ' ')
-    .trim();
+  return `Schau mal — ${spokenTitle}. Ich erzähl dir gleich, was diesen Spot besonders macht.`;
 }

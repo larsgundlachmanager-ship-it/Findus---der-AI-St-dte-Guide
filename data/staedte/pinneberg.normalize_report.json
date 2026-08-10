@@ -1,0 +1,181 @@
+{
+  "city_id": "pinneberg",
+  "spots": [
+    {
+      "id": "pinneberg_bahnhof_pr",
+      "status": "NORMALIZED",
+      "fromTriggers": [
+        "pinneberg_bahnhof_pr_t1",
+        "pinneberg_bahnhof_pr_t2",
+        "pinneberg_bahnhof_pr_t3"
+      ],
+      "lat": 53.6549011,
+      "lng": 9.7989172,
+      "google": {
+        "place_id": "ChIJRVcfqFiAsUcRfDlbllL0rtE",
+        "address": "Rockvillestraße, 25421 Pinneberg"
+      },
+      "approaches": 2,
+      "deep": 17
+    },
+    {
+      "id": "pinneberg_hotel_cap_polonio",
+      "status": "NORMALIZED",
+      "fromTriggers": [
+        "pinneberg_hotel_cap_polonio_t1",
+        "pinneberg_hotel_cap_polonio_t2",
+        "pinneberg_hotel_cap_polonio_t3"
+      ],
+      "lat": 53.6579644,
+      "lng": 9.8067478,
+      "google": {
+        "place_id": "ChIJ1S5lkfOAsUcRUZlMd7BOnzA",
+        "address": "Fahltskamp 48, 25421 Pinneberg"
+      },
+      "approaches": 2,
+      "deep": 16
+    },
+    {
+      "id": "pinneberg_die_drostei",
+      "status": "NORMALIZED",
+      "fromTriggers": [
+        "pinneberg_die_drostei_t1",
+        "pinneberg_die_drostei_t2",
+        "pinneberg_die_drostei_t3"
+      ],
+      "lat": 53.66095,
+      "lng": 9.796636,
+      "google": {
+        "place_id": "ChIJSQZUwF-AsUcRUhQsT2Ek1hI",
+        "address": "Dingstätte 23, 25421 Pinneberg"
+      },
+      "approaches": 2,
+      "deep": 16
+    },
+    {
+      "id": "pinneberg_stadtmuseum",
+      "status": "NORMALIZED",
+      "fromTriggers": [
+        "pinneberg_stadtmuseum_t1",
+        "pinneberg_stadtmuseum_t2",
+        "pinneberg_stadtmuseum_t3"
+      ],
+      "lat": 53.6609783,
+      "lng": 9.7960839,
+      "google": {
+        "place_id": "ChIJd9V9yF-AsUcRrwTUOQiE4Kw",
+        "address": "Dingstätte 25, 25421 Pinneberg"
+      },
+      "approaches": 2,
+      "deep": 16
+    },
+    {
+      "id": "pinneberg_rathauspassage",
+      "status": "NORMALIZED",
+      "fromTriggers": [
+        "pinneberg_rathauspassage_t1",
+        "pinneberg_rathauspassage_t2",
+        "pinneberg_rathauspassage_t3"
+      ],
+      "lat": 53.6625239,
+      "lng": 9.7987893,
+      "google": {
+        "place_id": "ChIJhTofDGCAsUcRHjFa_hlN4EI",
+        "address": "Friedrich-Ebert-Straße 31, 25421 Pinneberg"
+      },
+      "approaches": 2,
+      "deep": 16
+    },
+    {
+      "id": "pinneberg_kriegerdenkmal_bahnhofvorplatz",
+      "status": "NORMALIZED",
+      "fromTriggers": [
+        "pinneberg_kriegerdenkmal_bahnhofvorplatz_t1",
+        "pinneberg_kriegerdenkmal_bahnhofvorplatz_t2",
+        "pinneberg_kriegerdenkmal_bahnhofvorplatz_t3"
+      ],
+      "lat": 53.6558369,
+      "lng": 9.797842000000001,
+      "google": {
+        "place_id": "ChIJtzFvJA-BsUcRvuY7woCXRC8",
+        "address": "Rockvillestraße, 25421 Pinneberg"
+      },
+      "approaches": 2,
+      "deep": 16
+    },
+    {
+      "id": "pinneberg_deutsches_baumschulmuseum",
+      "status": "NORMALIZED",
+      "fromTriggers": [
+        "pinneberg_deutsches_baumschulmuseum_t1",
+        "pinneberg_deutsches_baumschulmuseum_t2",
+        "pinneberg_deutsches_baumschulmuseum_t3"
+      ],
+      "lat": 53.6415612,
+      "lng": 9.8205777,
+      "google": {
+        "place_id": "ChIJ3Q8WiOCAsUcRnUS79o3cURY",
+        "address": "Halstenbeker Str. 29, 25421 Pinneberg"
+      },
+      "approaches": 2,
+      "deep": 16
+    }
+  ],
+  "apply": true,
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [
+      "coverage: missing must-have category 'denkmal'",
+      "coverage: missing must-have category 'kirche'",
+      "coverage: missing must-have category 'natur'",
+      "coverage: missing must-have category 'aussicht'",
+      "coverage: missing must-have category 'freizeit'"
+    ],
+    "stats": {
+      "spots": 7,
+      "triggers": 7,
+      "missingTrigger": 0,
+      "missingNarration": 0,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 0,
+      "orphanTriggers": 0,
+      "categories": [
+        "bahnhof",
+        "einkaufen",
+        "hotel",
+        "museum"
+      ],
+      "missingMustHave": [
+        "denkmal",
+        "kirche",
+        "natur",
+        "aussicht",
+        "freizeit"
+      ],
+      "nicePresent": [
+        "hotel",
+        "einkaufen",
+        "bahnhof"
+      ],
+      "liveResearch": 4,
+      "hasTransit": false,
+      "hasMobility": false,
+      "links": 0
+    },
+    "gaps": {
+      "needsNarration": [],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [],
+      "missingCategories": [
+        "denkmal",
+        "kirche",
+        "natur",
+        "aussicht",
+        "freizeit"
+      ]
+    }
+  }
+}

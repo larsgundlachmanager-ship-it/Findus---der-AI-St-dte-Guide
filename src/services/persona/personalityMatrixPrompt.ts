@@ -1,0 +1,175 @@
+/**
+ * Persönlichkeits-Matrix → Prompt-Struktur (keine Scripts, nur Blaupausen).
+ */
+
+import type { UserProfile } from '../../types/userProfile';
+import type {
+  CoreRoleId,
+  KnowledgeStyleId,
+  SpleenId,
+  VibeToneId,
+} from '../../constants/personalityMatrix';
+import {
+  CORE_ROLES,
+  KNOWLEDGE_STYLES,
+  SPLEENS,
+  VIBE_TONES,
+  migrateLegacyPersonality,
+} from '../../constants/personalityMatrix';
+import { FINDUS_FEW_SHOT_DISCLAIMER } from '../concierge/findusResponsePolicy';
+
+export type EffectivePersonalityMatrix = {
+  coreRole: CoreRoleId;
+  vibeTone: VibeToneId;
+  knowledgeStyle: KnowledgeStyleId;
+  spleens: SpleenId[];
+};
+
+export function resolveEffectivePersonalityMatrix(
+  profile?: UserProfile | null,
+): EffectivePersonalityMatrix {
+  const p = profile;
+  const hasMatrixField =
+    p?.coreRole != null ||
+    p?.vibeTone != null ||
+    p?.knowledgeStyle != null ||
+    (p?.spleens?.length ?? 0) > 0;
+
+  if (hasMatrixField && p?.coreRole) {
+    return {
+      coreRole: p.coreRole,
+      vibeTone: p.vibeTone ?? 'balanced',
+      knowledgeStyle: p.knowledgeStyle ?? 'clear_essence',
+      spleens: [...(p.spleens ?? [])].slice(0, 2),
+    };
+  }
+
+  if ((p?.characters?.length ?? 0) > 0 || (p?.tonalities?.length ?? 0) > 0) {
+    return migrateLegacyPersonality({
+      characters: p?.characters,
+      tonalities: p?.tonalities,
+    });
+  }
+
+  return {
+    coreRole: 'classic_guide',
+    vibeTone: 'balanced',
+    knowledgeStyle: 'clear_essence',
+    spleens: [],
+  };
+}
+
+export function matrixUsesFormalAddress(coreRole: CoreRoleId): boolean {
+  return coreRole === 'aristocrat';
+}
+
+export function matrixUsesBuddyAddress(coreRole: CoreRoleId): boolean {
+  return coreRole === 'buddy' || coreRole === 'nerd';
+}
+
+function optionHint<T extends string>(
+  list: { id: T; labelDe: string; infoDe: string }[],
+  id: T,
+): string {
+  const o = list.find((x) => x.id === id);
+  if (!o) return '';
+  return `${o.labelDe}: ${o.infoDe}`;
+}
+
+/** Struktur-Hints für Master-Prompt / Synthese — Wortlaut frei. */
+export function buildPersonalityMatrixPromptBlock(
+  profile?: UserProfile | null,
+  opts?: { activeSpleens?: SpleenId[] | null },
+): string {
+  const m = resolveEffectivePersonalityMatrix(profile);
+  const spleens = (opts?.activeSpleens ?? m.spleens).slice(0, 2);
+
+  const addressRule = matrixUsesFormalAddress(m.coreRole)
+    ? '- Anrede: durchgehend Sie — gepflegt, respektvoll, keine Kumpel-Slang-Pflicht.'
+    : matrixUsesBuddyAddress(m.coreRole)
+      ? '- Anrede: Du, auf Augenhöhe — locker, aber respektvoll; kein erzwungenes Bro/Digga.'
+      : m.coreRole === 'innocent_child'
+        ? '- Anrede: Du. Tempo und Dynamik wie die Kind-Hörprobe: schneller, impulsiv, staunend, kurze Sätze, echte Neugier — kein ruhiger Erwachsenen-Vortrag.'
+        : '- Anrede: Du (Standard-Reisebegleiter), warm und klar.';
+
+  const tempoRule =
+    m.vibeTone === 'mystic'
+      ? '- Tempo: zügig wie ein Podcast — Spannung über Wortwahl, nicht durch lange Pausen oder Schnecken-Vorlesen.'
+      : null;
+
+  const antiFluffRule =
+    m.vibeTone === 'mystic' || m.knowledgeStyle === 'myth_hunter'
+      ? '- FAKTEN-PFLICHT: Mystik/„man munkelt“/Aura/Geheimnis NUR mit belegtem Stoff aus dem Datensatz. Ist der Datensatz dünn → kurz und ehrlich die echten Fakten, KEIN atmosphärisches Gelaber, KEINE erfundenen Koordinaten-Mythen.'
+      : null;
+
+  const roleHint = optionHint(CORE_ROLES, m.coreRole);
+  const vibeHint = optionHint(VIBE_TONES, m.vibeTone);
+  const knowHint = optionHint(KNOWLEDGE_STYLES, m.knowledgeStyle);
+  const spleenHints = spleens
+    .map((id) => optionHint(SPLEENS, id))
+    .filter(Boolean)
+    .map((h) => `  · ${h}`)
+    .join('\n');
+
+  const rel: string[] = [];
+  if (profile?.humorOk) rel.push('Humor explizit ok — Witze dosiert.');
+  if (profile?.geekMode) rel.push('Geek-Mode: Details/Popkultur-Vergleiche willkommen.');
+  if (profile?.freeChatOk) rel.push('Smalltalk/Plaudern ok — nicht jedes Mal zur Tour zurücklenken.');
+  try {
+    const {
+      getForegroundThread,
+      listResumableThreads,
+    } = require('../memory/conversationThreads') as {
+      getForegroundThread: () => { label: string } | null;
+      listResumableThreads: () => Array<{ label: string; id: string }>;
+    };
+    const fg = getForegroundThread();
+    const parked = listResumableThreads()
+      .filter((t) => t.label && t.label !== fg?.label)
+      .slice(0, 3)
+      .map((t) => t.label);
+    if (fg?.label) {
+      rel.push(`Aktiver Gesprächsthread: ${fg.label} — Bezüge nur hierher.`);
+    }
+    if (parked.length) {
+      rel.push(
+        `Geparkte Themen (nur bei Resume): ${parked.join('; ')}`,
+      );
+    } else if ((profile?.openThreads?.length ?? 0) > 0) {
+      rel.push(
+        `Offene Gesprächsfäden (kurz aufgreifen wenn passend): ${profile!.openThreads!.slice(-4).join('; ')}`,
+      );
+    }
+  } catch {
+    if ((profile?.openThreads?.length ?? 0) > 0) {
+      rel.push(
+        `Offene Gesprächsfäden (kurz aufgreifen wenn passend): ${profile!.openThreads!.slice(-4).join('; ')}`,
+      );
+    }
+  }
+
+  return `=== PERSÖNLICHKEITS-MATRIX (Struktur — Wortlaut frei) ===
+${addressRule}
+${tempoRule ? `${tempoRule}\n` : ''}${antiFluffRule ? `${antiFluffRule}\n` : ''}- Rolle (Kat. 1): ${roleHint}
+- Vibe (Kat. 2): ${vibeHint}
+- Wissensstil (Kat. 3): ${knowHint}
+${spleenHints ? `- Spleens (Kat. 4, dosiert):\n${spleenHints}` : '- Spleens: keine — zurückhaltend bleiben.'}
+${rel.length ? `- Beziehung/Kontext:\n${rel.map((l) => `  · ${l}`).join('\n')}` : ''}
+${FINDUS_FEW_SHOT_DISCLAIMER}`;
+}
+
+export function buildCharacterFlavorFromMatrix(
+  profile?: UserProfile | null,
+): string {
+  const m = resolveEffectivePersonalityMatrix(profile);
+  const parts = [
+    optionHint(CORE_ROLES, m.coreRole),
+    optionHint(VIBE_TONES, m.vibeTone),
+    optionHint(KNOWLEDGE_STYLES, m.knowledgeStyle),
+  ].filter(Boolean);
+  for (const s of m.spleens.slice(0, 2)) {
+    const h = optionHint(SPLEENS, s);
+    if (h) parts.push(h);
+  }
+  return parts.join(' | ');
+}

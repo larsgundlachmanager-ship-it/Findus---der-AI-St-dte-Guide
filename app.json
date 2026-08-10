@@ -2,7 +2,9 @@
   "expo": {
     "name": "Findus",
     "slug": "findus",
-    "version": "1.0.0",
+    "version": "2.0.0",
+    "owner": "findusai",
+    "scheme": "findus",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -14,14 +16,22 @@
     },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.finnus.app",
+      "bundleIdentifier": "de.findus.app",
+      "buildNumber": "17",
+      "usesAppleSignIn": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Findus nutzt deinen Standort, um Tour-Stops in der Nähe zu erkennen.",
         "NSLocationAlwaysAndWhenInUseUsageDescription": "Findus braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
         "NSLocationAlwaysUsageDescription": "Findus braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
-        "UIBackgroundModes": ["location", "audio"],
+        "UIBackgroundModes": [
+          "location",
+          "audio"
+        ],
         "NSMicrophoneUsageDescription": "Findus braucht das Mikrofon für deine Rückfragen.",
-        "NSSpeechRecognitionUsageDescription": "Findus wandelt deine Sprache in Text um."
+        "NSSpeechRecognitionUsageDescription": "Findus wandelt deine Sprache in Text um.",
+        "NSPhotoLibraryUsageDescription": "Findus greift nicht aktiv auf deine Fotomediathek zu. Diese Angabe ist erforderlich, weil eingebundene Bibliotheken die Foto-API referenzieren können.",
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "Findus nutzt die Kamera nur für die Taschenlampe (Torch), nicht für Fotos."
       }
     },
     "android": {
@@ -29,7 +39,62 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#18181B"
       },
-      "package": "com.finnus.app",
+      "package": "de.findus.app",
+      "versionCode": 23,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": false,
+          "data": [
+            {
+              "scheme": "findus"
+            },
+            {
+              "scheme": "de.findus.app"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        },
+        {
+          "action": "VIEW",
+          "autoVerify": false,
+          "data": [
+            {
+              "scheme": "findus",
+              "host": "auth",
+              "pathPrefix": "/"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        },
+        {
+          "action": "VIEW",
+          "autoVerify": false,
+          "data": [
+            {
+              "scheme": "findus",
+              "host": "voice",
+              "pathPrefix": "/"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        },
+        {
+          "action": "ASSIST",
+          "category": [
+            "DEFAULT"
+          ]
+        }
+      ],
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
@@ -38,13 +103,16 @@
         "FOREGROUND_SERVICE_LOCATION",
         "RECORD_AUDIO",
         "MODIFY_AUDIO_SETTINGS",
-        "INTERNET"
+        "INTERNET",
+        "POST_NOTIFICATIONS",
+        "RECEIVE_BOOT_COMPLETED",
+        "SCHEDULE_EXACT_ALARM",
+        "com.android.alarm.permission.SET_ALARM",
+        "VIBRATE"
       ]
     },
     "plugins": [
       "./plugins/withJetifier",
-      "./plugins/withPiperAssets",
-      "./plugins/withKokoroAssets",
       "./plugins/withFindusEspeak",
       [
         "expo-dev-client",
@@ -59,6 +127,15 @@
           "locationAlwaysAndWhenInUsePermission": "Findus braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
           "isAndroidBackgroundLocationEnabled": true,
           "isAndroidForegroundServiceEnabled": true
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#C4A35A",
+          "sounds": [],
+          "defaultChannel": "findus-departure-reminders"
         }
       ],
       [
@@ -78,9 +155,13 @@
           ]
         }
       ],
-      "onnxruntime-react-native",
       "expo-asset",
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "208487d8-640a-47d8-b77e-5ece29680839"
+      }
+    }
   }
 }

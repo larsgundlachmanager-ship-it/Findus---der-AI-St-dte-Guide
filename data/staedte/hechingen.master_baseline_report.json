@@ -1,0 +1,20 @@
+{
+  "city_id": "hechingen",
+  "demoted": 0,
+  "history_source": "research",
+  "pack_index": {
+    "total": 130,
+    "story": 52,
+    "directory": 78,
+    "offline_qa": 189,
+    "note": "UI: Gesamtzahl; Trigger Story Tier 1–2 (+ Interesse)."
+  },
+  "gemini_prompt": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\hechingen.gemini-master.md",
+  "thin_story": 35,
+  "gate": {
+    "ok": true,
+    "errors": 0,
+    "warnings": 19
+  },
+  "applied": true
+}

@@ -33,14 +33,14 @@ export const THRESHOLDS_BY_MODE: Record<
   walk: {
     waypointAdvanceM: 12,
     proximityTriggerM: 18,
-    turnImminentM: 20,
+    turnImminentM: 25,
     stationPassM: 30,
     geofenceRadiusScale: 1,
   },
   bicycle: {
     waypointAdvanceM: 35,
     proximityTriggerM: 45,
-    turnImminentM: 40,
+    turnImminentM: 75,
     stationPassM: 40,
     geofenceRadiusScale: 2.4,
   },
@@ -154,7 +154,14 @@ export function directionsModeForNav(opts?: {
   preferBike?: boolean;
 }): 'walking' | 'bicycling' | 'transit' {
   const motion = opts?.motion ?? 'walk';
-  if (opts?.preferTransit) return 'transit';
+  // In Transit: echte Haltestellenkette aus Directions transit_details.
+  if (
+    opts?.preferTransit ||
+    motion === 'transit_bus' ||
+    motion === 'transit_train'
+  ) {
+    return 'transit';
+  }
   if (opts?.preferBike || motion === 'bicycle') return 'bicycling';
   return 'walking';
 }
@@ -171,6 +178,25 @@ export function formatRemainingStations(n: number | null | undefined): string {
   if (n === 0) return 'Ziel';
   if (n === 1) return 'Noch 1 Station';
   return `Noch ${Math.round(n)} Stationen`;
+}
+
+/** Kompass-HUD: nur Modus-Emoji (🚶 / 🚴 / 🚌 / 🚆). */
+export function navTransportEmoji(
+  mode: MotionTransportMode | null | undefined,
+): string {
+  if (mode === 'bicycle') return '🚴';
+  if (mode === 'transit_bus') return '🚌';
+  if (mode === 'transit_train') return '🚆';
+  return '🚶';
+}
+
+/** Kompass-Statuszeile: `🚶 → Ort` (nie „Navigiere zum Wegpunkt“). */
+export function formatNavHudTitle(
+  destName: string | null | undefined,
+  mode: MotionTransportMode | null | undefined,
+): string {
+  const place = (destName ?? '').trim() || 'Ziel';
+  return `${navTransportEmoji(mode)} → ${place}`;
 }
 
 /** Typisches Tempo (m/s), wenn GPS-Speed fehlt oder Stand. */
@@ -203,9 +229,9 @@ export function estimateEtaMinutes(
 
 export function formatEtaMinutes(mins: number | null | undefined): string {
   if (mins == null || !Number.isFinite(mins) || mins <= 0) return '';
-  if (mins < 60) return `ca. ${mins} Min`;
+  if (mins < 60) return `circa ${mins} Minuten`;
   const h = Math.floor(mins / 60);
   const m = mins % 60;
-  if (m === 0) return `ca. ${h} Std`;
-  return `ca. ${h} Std ${m} Min`;
+  if (m === 0) return `circa ${h} Stunden`;
+  return `circa ${h} Stunden ${m} Minuten`;
 }

@@ -1,0 +1,705 @@
+{
+  "city_history": "Hochheim am Main: Weinbau-Stadt im Rheingau, bekannt für Hochheimer Wein und historische Kernstadt (Wikipedia).",
+  "notes": [
+    "Wave A — Wikipedia DE + manual visuell; LIVE ephemeral; no dialog scripts."
+  ],
+  "offline_qa": [
+    {
+      "q": "Welche Weinlage ist Hochheim namensgebend?",
+      "a": "Die Lage „Hochheim“ im Rheingau — Begriff „Hock“ für Wein (Volksmund, Weinbauverband Rheingau).",
+      "tags": [
+        "wein"
+      ]
+    }
+  ],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "hochheim_am_main_altstadt_hochheim",
+      "name": "Altstadt Hochheim",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Historischer Ortskern mit Fachwerk, Weingütern und Kirchen — Rheingau-Weinstadt.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Engere Gassen, Fachwerk und Weinstuben nahe Main.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Hochheim am Main ist eine Stadt mit 18.425 Einwohnern (31.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dezember 2025) im südhessischen Main-Taunus-Kreis und liegt zentral im Rhein-Main-Gebiet zwischen Frankfurt am Main und Mainz.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Hochheim gehörte zunächst zum Mainkreis und später zum Landkreis Wiesbaden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bei dessen Auflösung im Jahr 1928 wurde die Stadt dem Main-Taunus-Kreis zugeordnet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geografie Geografische Lage Die Stadt Hochheim liegt etwa 35 Meter über der Untermainebene auf einer Geländestufe am Südrand des Main-Taunus-Vorlandes.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Südhang dieser sich auf etwa fünf Kilometer Länge erstreckenden Geländestufe besteht, teilweise bis dicht ans Mainufer, aus Weinbergen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von den Weinbergen und vom südlichen Stadtrand gibt es eine Fernsicht bis Darmstadt, zur Neunkircher Höhe im Odenwald, zu der markanten Spitze des Melibokus an der Bergstraße in 38 Kilometern Entfernung und schließlich bis Oppenheim in Rheinhessen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Stadtsilhouette ist aus südlicher Richtung weit sichtbar.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In unmittelbarer Nähe befinden sich die Großstädte Frankfurt am Main, Wiesbaden und Mainz.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nachbargemeinden Hochheim grenzt im Norden an Hofheim am Taunus, im Osten an Flörsheim am Main, im Süden, getrennt durch den Main, an Rüsselsheim am Main, Bischofsheim und Ginsheim-Gustavsburg (alle drei Kreis Groß-Gerau) sowie im Westen an die Ortsbezirke Mainz-Kostheim und Delkenheim der hessischen Landeshauptstadt Wiesbaden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Stadtgliederung Hochheim besteht aus der Kernstadt Hochheim, der um den Bahnhof am Mainufer angesiedelten Südstadt, die durch Weinberge von der Hochheimer Altstadt getrennt ist, und dem 1977 eingemeindeten Stadtteil Massenheim mit ungefähr 2000 Einwohnern.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit dieser Zeit gehört auch das Wiesbadener Kreuz zum Hochheimer Stadtgebiet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte In Hochheim wurde ein keltisches Fürstengrab gefunden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zur Römerzeit war das Gebiet bereits dicht besiedelt und der Weinbau wurde eingeführt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert dort siedelnden Alemannen zurück, auf die die Franken folgten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mittelalter Hochheim wurde 754 während des Todeszugs von Bonifatius erstmals schriftlich erwähnt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hochheim_am_main_pfarrkirche_st_peter_und_paul",
+      "name": "Pfarrkirche St. Peter und Paul",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Katholische Pfarrkirche im Ortskern — Sakralbau der Weinbau-Gemeinde.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Kirchturm über Dächern der Altstadt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Peter und Paul ist ein weithin sichtbares Wahrzeichen der Stadt Hochheim am Main, sie gilt als die einzige hessische spätbarocke Fresko-Kirche.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Baugeschichte Sie wurde in den Jahren 1730 bis 1732 auf den Fundamenten der Vorgängerkirche von dem Mainzer Ingenieur-Hauptmann Johann Farolsky erbaut. 1775 schuf der aus Söflingen (heute Stadtteil von Ulm) stammende Johann Baptist Enderle, der von 1725 bis 1798 lebte, die spätbarocken Fresken im Kirchenschiff und Hochchor sowie an den beiden Emporenbrüstungen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Restaurierung Risse im Gewölbe, Verschmutzungen durch Staub und Kerzenruß und vielfach unfachmännisch durchgeführte Ausbesserungen und Übermalungen schädigten die Fresken schwer.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Diese Restaurierungsversuche erfolgten in den Jahren 1852, 1896, 1930 bis 1932 und 1970 bis 1972.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Statische Sicherungsmaßnahmen wurden zusätzlich notwendig.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als sich im Jahr 1989 Risse in den Wänden zeigten, war offenkundig, dass die Kirche einsturzgefährdet war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Sicherung des Bauwerks unter Einbeziehung einer völligen Außenrenovierung mit der heutigen weiß-roten Farbgebung erfolgte in den Jahren 1993 bis 1995.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Fachleute erklärten indes die kostbaren Fresken für unrettbar verloren.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Grund für dieses Urteil war, dass in den 1950er Jahren das Dachgebälk mit Holzschutzmitteln imprägniert worden war, wobei die verwendeten Chemikalien durch die Decke in das Fresko eingedrungen waren, die Darstellungen verdunkelt und die Substanz zerstört hatten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Entgegen der Prognose gelang es dennoch, die Fresken zu retten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Restaurierungsarbeiten dauerten von 1999 bis 2005.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Fresken sind jetzt in ihrer ursprünglichen Farbigkeit und Lebendigkeit wieder zu sehen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Restaurierungsarbeiten sind in einem Arbeitsheft für die Denkmalpflege in Hessen dokumentiert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Januar 2016 wurde vermutlich wegen Brandstiftung ein Beichtstuhl völlig zerstört und das Gebäude stark verraucht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die entstandenen Schäden wurden in einem Zeitraum von mehr als einem Jahr behoben, sodass am Palmsonntag 2017 die Kirche im neuen/alten Glanz wieder eröffnet werden konnte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Kunstwerk im Rosengarten Seit 2006 ist im Rosengarten neben der Kirche die Skulptur Großer Rhythmus (2000) des Bildhauers Rudolf J.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_weinbaumuseum",
+      "name": "Hochheimer Weinbaumuseum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Museum zur Geschichte des Hochheimer Weinbaus und der Keltertradition.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Museum in historischem Gebäude der Weinstadt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten vor Ort / Gemeinde recherchieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Hochheim am Main ist eine Stadt mit 18.425 Einwohnern (31.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dezember 2025) im südhessischen Main-Taunus-Kreis und liegt zentral im Rhein-Main-Gebiet zwischen Frankfurt am Main und Mainz.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Hochheim gehörte zunächst zum Mainkreis und später zum Landkreis Wiesbaden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bei dessen Auflösung im Jahr 1928 wurde die Stadt dem Main-Taunus-Kreis zugeordnet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geografie Geografische Lage Die Stadt Hochheim liegt etwa 35 Meter über der Untermainebene auf einer Geländestufe am Südrand des Main-Taunus-Vorlandes.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Südhang dieser sich auf etwa fünf Kilometer Länge erstreckenden Geländestufe besteht, teilweise bis dicht ans Mainufer, aus Weinbergen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von den Weinbergen und vom südlichen Stadtrand gibt es eine Fernsicht bis Darmstadt, zur Neunkircher Höhe im Odenwald, zu der markanten Spitze des Melibokus an der Bergstraße in 38 Kilometern Entfernung und schließlich bis Oppenheim in Rheinhessen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Stadtsilhouette ist aus südlicher Richtung weit sichtbar.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In unmittelbarer Nähe befinden sich die Großstädte Frankfurt am Main, Wiesbaden und Mainz.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nachbargemeinden Hochheim grenzt im Norden an Hofheim am Taunus, im Osten an Flörsheim am Main, im Süden, getrennt durch den Main, an Rüsselsheim am Main, Bischofsheim und Ginsheim-Gustavsburg (alle drei Kreis Groß-Gerau) sowie im Westen an die Ortsbezirke Mainz-Kostheim und Delkenheim der hessischen Landeshauptstadt Wiesbaden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Stadtgliederung Hochheim besteht aus der Kernstadt Hochheim, der um den Bahnhof am Mainufer angesiedelten Südstadt, die durch Weinberge von der Hochheimer Altstadt getrennt ist, und dem 1977 eingemeindeten Stadtteil Massenheim mit ungefähr 2000 Einwohnern.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit dieser Zeit gehört auch das Wiesbadener Kreuz zum Hochheimer Stadtgebiet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte In Hochheim wurde ein keltisches Fürstengrab gefunden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zur Römerzeit war das Gebiet bereits dicht besiedelt und der Weinbau wurde eingeführt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert dort siedelnden Alemannen zurück, auf die die Franken folgten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mittelalter Hochheim wurde 754 während des Todeszugs von Bonifatius erstmals schriftlich erwähnt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Massenheim wurde erstmals 819 als Geschenk an das Kloster Fulda erwähnt. 1273 wurde das Dorf Hochheim vom Kölner Domkapitel an das Mainzer Domkapitel verkauft.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahr 1484 verlieh Kaiser Friedrich III. das Recht, jährlich zwei Märkte abzuhalten. 19. und 20.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert Mit dem Reichsdeputationshauptschluss fiel Hochheim 1803 an das Fürstentum Nassau-Usingen, das 1806 mit dem Fürstentum Nassau-Weilburg zum Herzogtum Nassau vereinigt wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "November 1813 fanden am Hochheimer Kippel die letzten Kämpfe der napoleonischen Truppen vor ihrem Rückzug aus Deutschland statt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bei diesem Gefecht bei Hochheim wurden 1800 Opfer auf französischer Seite und mehr als 200 auf der Seite der Alliierten beklagt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Eine Gedenkausstellung war im Rathaus der Stadt Hofheim am Taunus im April und Mai 2014 zu sehen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ab April 1817 war Hochheim Sitz eines herzoglich-nassauischen Amtes, und seit 1820 wird der Ort als Stadt geführt, ohne dass sich die Verleihung der Stadtrechte urkundlich nachweisen lässt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nachdem das Herzogtum Nassau 1866 im Preußisch-Österreichischen Krieg unterlegen war, wurde es von Preußen annektiert und seiner Provinz Hessen-Nassau zugeordnet, wodurch auch Hochheim bis 1945 preußisch wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_weinberge",
+      "name": "Hochheimer Weinberge",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Rebenhänge der Lage Hochheim mit Blick Richtung Main-Ebene.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Terrassierte Weinberge über dem Ort.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Hochheim am Main ist eine Stadt mit 18.425 Einwohnern (31.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dezember 2025) im südhessischen Main-Taunus-Kreis und liegt zentral im Rhein-Main-Gebiet zwischen Frankfurt am Main und Mainz.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Hochheim gehörte zunächst zum Mainkreis und später zum Landkreis Wiesbaden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bei dessen Auflösung im Jahr 1928 wurde die Stadt dem Main-Taunus-Kreis zugeordnet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geografie Geografische Lage Die Stadt Hochheim liegt etwa 35 Meter über der Untermainebene auf einer Geländestufe am Südrand des Main-Taunus-Vorlandes.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Südhang dieser sich auf etwa fünf Kilometer Länge erstreckenden Geländestufe besteht, teilweise bis dicht ans Mainufer, aus Weinbergen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von den Weinbergen und vom südlichen Stadtrand gibt es eine Fernsicht bis Darmstadt, zur Neunkircher Höhe im Odenwald, zu der markanten Spitze des Melibokus an der Bergstraße in 38 Kilometern Entfernung und schließlich bis Oppenheim in Rheinhessen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Stadtsilhouette ist aus südlicher Richtung weit sichtbar.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In unmittelbarer Nähe befinden sich die Großstädte Frankfurt am Main, Wiesbaden und Mainz.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nachbargemeinden Hochheim grenzt im Norden an Hofheim am Taunus, im Osten an Flörsheim am Main, im Süden, getrennt durch den Main, an Rüsselsheim am Main, Bischofsheim und Ginsheim-Gustavsburg (alle drei Kreis Groß-Gerau) sowie im Westen an die Ortsbezirke Mainz-Kostheim und Delkenheim der hessischen Landeshauptstadt Wiesbaden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Stadtgliederung Hochheim besteht aus der Kernstadt Hochheim, der um den Bahnhof am Mainufer angesiedelten Südstadt, die durch Weinberge von der Hochheimer Altstadt getrennt ist, und dem 1977 eingemeindeten Stadtteil Massenheim mit ungefähr 2000 Einwohnern.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit dieser Zeit gehört auch das Wiesbadener Kreuz zum Hochheimer Stadtgebiet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte In Hochheim wurde ein keltisches Fürstengrab gefunden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zur Römerzeit war das Gebiet bereits dicht besiedelt und der Weinbau wurde eingeführt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert dort siedelnden Alemannen zurück, auf die die Franken folgten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mittelalter Hochheim wurde 754 während des Todeszugs von Bonifatius erstmals schriftlich erwähnt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Massenheim wurde erstmals 819 als Geschenk an das Kloster Fulda erwähnt. 1273 wurde das Dorf Hochheim vom Kölner Domkapitel an das Mainzer Domkapitel verkauft.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahr 1484 verlieh Kaiser Friedrich III. das Recht, jährlich zwei Märkte abzuhalten. 19. und 20.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hochheim_am_main_pension_eventlocation_tor_zum_rheingau",
+      "name": "Pension & Eventlocation \"Tor zum Rheingau\"",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Gasthof-Name verweist auf Hochheims Lage am Eingang des Rheingau.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Gasthaus an Durchgangsstraße Richtung Rheingau.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Rheingau ist eine Kulturlandschaft im Südwesten Hessens, die sich rechtsrheinisch zwischen Walluf und Lorchhausen und von dort bis zum Taunushauptkamm erstreckt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Rhein, der hier die Grenze zwischen Hessen und Rheinland-Pfalz bildet, wird bei Wiesbaden aus seiner allgemeinen Nordrichtung abgelenkt und fließt für etwa 25 Kilometer nach Westen, bevor er sich beim Binger Loch wieder nordwärts wendet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die dominierende Geländeform ist daher der Südhang, was insbesondere dem Weinanbau im Rheingau zugutekommt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit dem Flussabschnitt zwischen Rüdesheim und Lorch, dem südlichen Ende des 130 Kilometer langen Durchbruchstals des Mittelrheins durch das Rheinische Schiefergebirge, gehört der Rheingau aber auch zum Welterbe Oberes Mittelrheintal.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dieses bereicherte er durch zahlreiche historische Stätten und Denkmäler.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Naturräumlich zählt der Rheingau zum Rhein-Main-Tiefland und bildet die Haupteinheit 236.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geographie Landschaft Die Region ist dreigeteilt: Direkt am Rhein befinden sich flach abfallende, lössbedeckte Weinberge, Dörfer und Weingüter.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die alte Kulturlandschaft besitzt viele historische Burgen, Schlösser, Kirchen und Klöster, die den Rheingau auch für den Tourismus attraktiv machen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Oberhalb der Weinberge geht der Rheingau in das so genannte Rheingaugebirge mit dem Hinterlandswald über.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Quarzitrücken mit der höchsten Erhebung des Rheingaus, der Kalten Herberge (619 m), einer bewaldeten Kuppe oberhalb von Hallgarten, fällt mit vielen kleinen Bachtälern ab ins Wispertal.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_places": []
+}

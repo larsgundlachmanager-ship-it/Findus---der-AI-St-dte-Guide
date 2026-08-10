@@ -15,8 +15,10 @@ import { useSessionPlanStore } from '../../store/useSessionPlanStore';
 import { getCachedWeatherSnapshot } from '../weatherService';
 import {
   evaluateContextTriggers,
+  getCachedBatteryLevel01,
   refreshBatteryCache,
 } from './contextTriggerMatrix';
+import { allowProactiveHudTip } from './nachtruhePolicy';
 
 export const HUD_ENGINE_INTERVAL_MS = 15 * 60_000;
 
@@ -28,6 +30,11 @@ export type HudTipKind =
   | 'weather_rain'
   | 'weather_summary'
   | 'open_task'
+  | 'battery_charge'
+  | 'wake_alarm'
+  | 'parking_ticket'
+  | 'nav_eta'
+  | 'transit_depart'
   | 'generic';
 
 export type HudTipCandidate = {
@@ -37,6 +44,8 @@ export type HudTipCandidate = {
   text: string;
   /** Meta unter dem Titel */
   meta?: string;
+  /** Tippen → konkreter Concierge-/Discovery-Prompt */
+  tellMorePrompt?: string;
   /**
    * 0–100 — höher = dringender / relevanter.
    * Engine pickt max score (bei Gleichstand frühere kind-Priorität).
@@ -53,11 +62,16 @@ export type HudTipContext = {
 type TipProducer = (ctx: HudTipContext) => HudTipCandidate[];
 
 const KIND_TIEBREAK: Record<HudTipKind, number> = {
+  battery_charge: 95,
+  parking_ticket: 92,
   shopping_closing: 90,
   session_deadline: 85,
+  wake_alarm: 84,
+  transit_depart: 83,
+  nav_eta: 82,
   hotel_checkin: 80,
   hotel_breakfast: 75,
-  weather_rain: 70,
+  weather_rain: 72,
   open_task: 55,
   weather_summary: 40,
   generic: 10,
@@ -200,7 +214,10 @@ const produceHotelCheckout: TipProducer = (ctx) => {
     {
       id: `checkout-${parsed.label}`,
       kind: 'session_deadline',
-      text: `Checkout um ${parsed.label} Uhr`,
+      text:
+        remaining > 0
+          ? `Checkout um ${parsed.label} · in ${remaining} Min`
+          : `Checkout um ${parsed.label} Uhr`,
       meta: hotel.name ? `Hotel · ${hotel.name}` : 'Hotel',
       score: Math.min(100, score),
     },
@@ -308,7 +325,8 @@ const produceSessionDeadline: TipProducer = (ctx) => {
         id: `leaveby-${plan.leaveByMs}`,
         kind: 'session_deadline',
         text: countdown,
-        meta: `Leave-by ${formatClock(plan.leaveByMs)} · pünktlich am Ziel`,
+        meta: `Leave-by ${formatClock(plan.leaveByMs)} · Tippen hilft?`,
+        tellMorePrompt: `Leave-by ${formatClock(plan.leaveByMs)} — kurz bestätigen und Route/nächste Schritte, falls ich jetzt los muss.`,
         score,
       });
     }
@@ -323,7 +341,8 @@ const produceSessionDeadline: TipProducer = (ctx) => {
         id: `arrive-${stop.id}`,
         kind: 'session_deadline',
         text: `${stop.label} bis ${formatClock(stop.arriveByMs!)} Uhr`,
-        meta: 'Offener Termin',
+        meta: 'Termin · Tippen für Leave-by',
+        tellMorePrompt: `Termin „${stop.label}“ bis ${formatClock(stop.arriveByMs!)} — wann los und Route?`,
         score,
       });
     }
@@ -347,20 +366,25 @@ const produceWeather: TipProducer = () => {
     const line = getWeatherHudLine();
     const st = getWeatherTrackerState();
     if (line) {
-      const mins = st?.rainStartsInMin ?? (
-        st?.nextRainAtMs != null
+      const mins =
+        st?.rainStartsInMin ??
+        (st?.nextRainAtMs != null
           ? Math.round((st.nextRainAtMs - Date.now()) / 60_000)
-          : 99
-      );
+          : 99);
+      const soon = mins <= 30;
       tips.push({
         id: `rain-hud-${st?.nextRainAtMs ?? 'x'}`,
         kind: 'weather_rain',
         text: line,
-        meta:
-          mins <= 30
-            ? 'Vielleicht kurz rein — Café / Indoor?'
+        meta: soon
+          ? 'Schirm/Indoor? Tippen, wenn’s hilft.'
+          : mins <= 90
+            ? `In ~${mins} Min — Schirm mitnehmen?`
             : undefined,
-        score: mins <= 5 ? 95 : mins <= 30 ? 88 : 70,
+        tellMorePrompt: soon
+          ? 'Regen bald — Café oder Indoor in der Nähe mit Route, und sag mir ob Schirm sinnvoll ist.'
+          : `In etwa ${mins} Minuten könnte es regnen — was soll ich anpassen (Route, Indoor, Schirm)?`,
+        score: mins <= 5 ? 95 : mins <= 30 ? 88 : mins <= 90 ? 74 : 60,
       });
     }
   } catch {
@@ -372,7 +396,8 @@ const produceWeather: TipProducer = () => {
 
   if (weather.nextRainAtMs != null && !tips.some((t) => t.kind === 'weather_rain')) {
     const delta = weather.nextRainAtMs - Date.now();
-    if (delta > 0 && delta <= 3 * 60 * 60_000) {
+    // HUD ab 90 Min; Speech bleibt ~30 Min (weatherTracker)
+    if (delta > 0 && delta <= 90 * 60_000) {
       const mins = Math.round(delta / 60_000);
       tips.push({
         id: `rain-${weather.nextRainAtMs}`,
@@ -381,8 +406,15 @@ const produceWeather: TipProducer = () => {
           weather.rainStartsInMin != null
             ? `🌧 Regen in ${weather.rainStartsInMin} Min`
             : `🌧 Regen in ${mins} Min (${formatClock(weather.nextRainAtMs)})`,
-        meta: delta <= 35 * 60_000 ? 'Vielleicht kurz rein — Café / Indoor?' : undefined,
-        score: delta <= 35 * 60_000 ? 84 : 66,
+        meta:
+          delta <= 30 * 60_000
+            ? 'Schirm/Indoor? Tippen, wenn’s hilft.'
+            : `Ab ~${formatClock(weather.nextRainAtMs)} · Schirm?`,
+        tellMorePrompt:
+          delta <= 30 * 60_000
+            ? 'Regen bald — Café oder Indoor in der Nähe mit Route.'
+            : `In etwa ${mins} Minuten Regen möglich — Schirm/Jacke oder Plan anpassen?`,
+        score: delta <= 30 * 60_000 ? 84 : 72,
       });
     }
   }
@@ -393,6 +425,8 @@ const produceWeather: TipProducer = () => {
       id: `wx-${summary.slice(0, 24)}`,
       kind: 'weather_summary',
       text: summary,
+      meta: 'Mehr Wetter-Tipps?',
+      tellMorePrompt: '__WEATHER_DAY_CHECK__',
       score: 38,
     });
   }
@@ -400,16 +434,243 @@ const produceWeather: TipProducer = () => {
   return tips;
 };
 
-const produceOpenTasks: TipProducer = () => {
+const produceBatteryCharge: TipProducer = () => {
+  refreshBatteryCache();
+  const bat = getCachedBatteryLevel01();
+  if (bat == null || !Number.isFinite(bat)) return [];
+  const pct = Math.round(bat * 100);
+  // HUD vor Survival-Speech (15 %): ab 25 % fragen
+  if (pct > 25) return [];
+  const critical = pct <= 15;
+  return [
+    {
+      id: `battery-${pct}`,
+      kind: 'battery_charge',
+      text: critical
+        ? `🔋 Akku ${pct} % — Powerbank?`
+        : '🔋 Brauchst du mehr Akku?',
+      meta: critical
+        ? 'Nächste Station ansteuern?'
+        : `Noch ${pct} % · Tippen = suchen`,
+      tellMorePrompt:
+        'Akku wird knapp — such Powerbank-Automaten oder Café mit Steckdosen in der Nähe und gib mir Route-Buttons.',
+      score: critical ? 97 : pct <= 18 ? 93 : 80,
+    },
+  ];
+};
+
+const produceWakeAlarm: TipProducer = (ctx) => {
+  try {
+    const { planDayKeyFromMs } = require('../../utils/dateKeys') as {
+      planDayKeyFromMs: (ms: number) => string;
+    };
+    const { listWakeStopsForDay } = require('../alarms/nativeAlarmBridge') as {
+      listWakeStopsForDay: (dayKey: string) => Array<{
+        id: string;
+        title: string;
+        plannedStartMs?: number | null;
+      }>;
+    };
+    const dayKey = planDayKeyFromMs(ctx.nowMs);
+    const wakes = listWakeStopsForDay(dayKey)
+      .filter(
+        (s) =>
+          s.plannedStartMs != null &&
+          s.plannedStartMs > ctx.nowMs - 2 * 60_000,
+      )
+      .sort(
+        (a, b) => (a.plannedStartMs ?? 0) - (b.plannedStartMs ?? 0),
+      );
+    const next = wakes[0];
+    if (!next?.plannedStartMs) return [];
+    const delta = next.plannedStartMs - ctx.nowMs;
+    if (delta > 14 * 60 * 60_000) return [];
+    const mins = Math.max(0, Math.round(delta / 60_000));
+    const clock = formatClock(next.plannedStartMs);
+    return [
+      {
+        id: `wake-${next.plannedStartMs}`,
+        kind: 'wake_alarm',
+        text: `⏰ Wecker ${clock}`,
+        meta:
+          mins <= 0
+            ? 'Gleich · passt das?'
+            : mins < 60
+              ? `In ${mins} Min · passt das?`
+              : `Noch ${Math.floor(mins / 60)} Std ${mins % 60} Min`,
+        tellMorePrompt: `Mein Wecker steht auf ${clock}. Kurz prüfen ob das passt, oder anpassen.`,
+        score: mins <= 30 ? 90 : mins <= 120 ? 70 : 52,
+      },
+    ];
+  } catch {
+    return [];
+  }
+};
+
+const produceParkingTicket: TipProducer = (ctx) => {
+  try {
+    const { getParkingSpot, formatParkingHudCard } = require('../timeline/parkingSpotStore') as {
+      getParkingSpot: () => {
+        label: string;
+        maxDurationMin: number | null;
+        parkedAtMs: number;
+      } | null;
+      formatParkingHudCard: (nowMs: number) => {
+        title: string;
+        meta?: string;
+      } | null;
+    };
+    const spot = getParkingSpot();
+    if (!spot) return [];
+    const line = formatParkingHudCard(ctx.nowMs);
+    if (!line) return [];
+    let score = 58;
+    let tell =
+      'Status zu meinem Parkplatz — Countdown und ob ich bald zurück muss.';
+    if (spot.maxDurationMin != null && spot.maxDurationMin > 0) {
+      const rem =
+        spot.maxDurationMin -
+        Math.round((ctx.nowMs - spot.parkedAtMs) / 60_000);
+      if (rem <= 0) score = 96;
+      else if (rem <= 20) score = 92;
+      else if (rem <= 45) score = 84;
+      else if (rem <= 90) score = 70;
+      tell =
+        rem <= 0
+          ? 'Parkticket abgelaufen — Route zurück zum Auto und was ich tun soll.'
+          : `Parkticket: noch ca. ${rem} Min. Sag mir, wann ich los zum Auto soll — mit Route.`;
+    }
+    return [
+      {
+        id: `park-ticket-${spot.parkedAtMs}`,
+        kind: 'parking_ticket',
+        text: line.title,
+        meta: line.meta
+          ? `${line.meta} · Tippen hilft?`
+          : 'Tippen für Leave-by',
+        tellMorePrompt: tell,
+        score,
+      },
+    ];
+  } catch {
+    return [];
+  }
+};
+
+const produceNavEta: TipProducer = (ctx) => {
+  const store = useFinnusStore.getState();
+  if (!store.navActive || !store.navVisible) return [];
+  const rem = store.navDistanceM;
+  if (rem == null || !Number.isFinite(rem) || rem <= 0) return [];
+  const target =
+    store.navTargetName?.trim() ||
+    store.multiStopTour?.stops[store.multiStopTour.currentIndex]?.name ||
+    'Ziel';
+  let etaMin: number;
+  try {
+    const { resolveActiveTravelMode } = require('../navigation/travelModeContext') as {
+      resolveActiveTravelMode: () => { mode: string };
+    };
+    const { bikeMinutesForDistanceM, walkMinutesForDistanceM } = require('../navigation/travelEta') as {
+      bikeMinutesForDistanceM: (m: number) => number;
+      walkMinutesForDistanceM: (m: number) => number;
+    };
+    const travel = resolveActiveTravelMode().mode;
+    etaMin =
+      travel === 'bike'
+        ? bikeMinutesForDistanceM(rem)
+        : walkMinutesForDistanceM(rem);
+  } catch {
+    etaMin = Math.max(1, Math.round(rem / 80));
+  }
+  const arriveAt = ctx.nowMs + etaMin * 60_000;
+  const distLabel =
+    rem < 1000 ? `${Math.round(rem)} m` : `${(rem / 1000).toFixed(1)} km`;
+  return [
+    {
+      id: `nav-eta-${target}`,
+      kind: 'nav_eta',
+      text: `📍 Ankunft ~${formatClock(arriveAt)}`,
+      meta: `${target} · ${distLabel} · ~${etaMin} Min`,
+      tellMorePrompt: `Kurz zur Route nach ${target}: Ankunft, nächster Hinweis, und was ich unterwegs beachten soll.`,
+      score: etaMin <= 8 ? 78 : 62,
+    },
+  ];
+};
+
+const produceTransitDepart: TipProducer = (ctx) => {
+  try {
+    const { planDayKeyFromMs } = require('../../utils/dateKeys') as {
+      planDayKeyFromMs: (ms: number) => string;
+    };
+    const { useFuturePlanStore } = require('../../module2/timeline/futurePlanState') as {
+      useFuturePlanStore: {
+        getState: () => {
+          getPlanForDay: (dayKey: string) => {
+            stops: Array<{
+              id: string;
+              title: string;
+              transport: string;
+              plannedStartMs?: number | null;
+              status?: string;
+              emoji?: string;
+            }>;
+          };
+        };
+      };
+    };
+    const dayKey = planDayKeyFromMs(ctx.nowMs);
+    const stops = useFuturePlanStore
+      .getState()
+      .getPlanForDay(dayKey)
+      .stops.filter(
+        (s) =>
+          s.status !== 'done' &&
+          s.plannedStartMs != null &&
+          s.plannedStartMs > ctx.nowMs &&
+          (s.transport === 'transit' ||
+            /bahn|zug|bus|tram|ubahn|s-bahn|öpnv|haltestelle/i.test(
+              `${s.title} ${s.emoji ?? ''}`,
+            )),
+      )
+      .sort((a, b) => (a.plannedStartMs ?? 0) - (b.plannedStartMs ?? 0));
+    const next = stops[0];
+    if (!next?.plannedStartMs) return [];
+    const delta = next.plannedStartMs - ctx.nowMs;
+    if (delta > 3 * 60 * 60_000) return [];
+    const mins = Math.max(1, Math.round(delta / 60_000));
+    const clock = formatClock(next.plannedStartMs);
+    return [
+      {
+        id: `transit-${next.id}`,
+        kind: 'transit_depart',
+        text: `🚆 Abfahrt ${clock}`,
+        meta: `${next.title} · in ${mins} Min · hilft das?`,
+        tellMorePrompt: `Meine Bahn/Bus-Abfahrt um ${clock} (${next.title}) — Leave-by, Weg zur Haltestelle und was ich beachten soll.`,
+        score: mins <= 15 ? 94 : mins <= 45 ? 82 : 68,
+      },
+    ];
+  } catch {
+    return [];
+  }
+};
+
+const produceOpenTasks: TipProducer = (ctx) => {
   const tasks = useShoppingTaskStore.getState().getOpenTasks();
   if (!tasks.length) return [];
-  const top = tasks[0]!;
+  // Offene Punkte erst nach 4 Min erinnern
+  const ripe = tasks.filter(
+    (t) => ctx.nowMs - (t.createdAtMs ?? 0) >= 4 * 60_000,
+  );
+  if (!ripe.length) return [];
+  const top = ripe[0]!;
   return [
     {
       id: `task-${top.id}`,
       kind: 'open_task',
       text: `Noch offen: ${top.itemLabel}`,
-      meta: 'Erinnerung',
+      meta: 'Tippen, wenn’s jetzt hilft',
+      tellMorePrompt: `Offener Punkt „${top.itemLabel}“ — konkrete nächste Schritte und Route wenn sinnvoll.`,
       score: 48,
     },
   ];
@@ -418,13 +679,31 @@ const produceOpenTasks: TipProducer = () => {
 /** Trigger-Matrix → HUD (Top-Score als generic Tip). */
 const produceContextMatrix: TipProducer = () => {
   refreshBatteryCache();
-  const top = evaluateContextTriggers({ limit: 3 });
+  let amenityKinds = new Set<string>();
+  try {
+    const { getNearbyAmenityHudCards } = require('./liveHudNearbyAmenities') as {
+      getNearbyAmenityHudCards: () => Array<{ kind: string }>;
+    };
+    amenityKinds = new Set(getNearbyAmenityHudCards().map((c) => c.kind));
+  } catch {
+    /* soft */
+  }
+  const top = evaluateContextTriggers({ limit: 5 }).filter((t) => {
+    if (t.id === 'low_battery_charge') return false; // eigener battery_charge Producer
+    // Doppel vermeiden: konkrete Nearby-Karten schlagen generische Matrix
+    if (t.id === 'toilet_nearby' && amenityKinds.has('toilet')) return false;
+    if (t.id === 'drinking_water_nearby' && amenityKinds.has('drinking_water'))
+      return false;
+    if (t.id === 'ice_cream_hot' && amenityKinds.has('ice_cream')) return false;
+    return true;
+  });
   return top.map((t) => ({
     id: `ctx-${t.id}`,
     kind: 'generic' as const,
     text: t.title,
-    meta: t.prompt.slice(0, 64),
-    score: Math.min(92, t.score),
+    meta: 'Nur wenn’s hilft — tippen.',
+    tellMorePrompt: t.prompt,
+    score: Math.min(82, Math.round(t.score * 0.85)),
   }));
 };
 
@@ -436,6 +715,11 @@ const PRODUCERS: TipProducer[] = [
   produceShoppingClosing,
   produceSessionDeadline,
   produceWeather,
+  produceBatteryCharge,
+  produceWakeAlarm,
+  produceParkingTicket,
+  produceNavEta,
+  produceTransitDepart,
   produceOpenTasks,
   produceContextMatrix,
 ];
@@ -480,7 +764,9 @@ export function collectHudTipCandidates(
       if (__DEV__) console.warn('[hudEngine] producer failed', err);
     }
   }
-  return all;
+  return all.filter((t) =>
+    allowProactiveHudTip({ kind: t.kind, score: t.score, nowMs: full.nowMs }),
+  );
 }
 
 export function pickBestHudTip(

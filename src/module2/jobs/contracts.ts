@@ -133,7 +133,7 @@ export const JOB_CONTRACTS: Record<FindusJobId, JobContract> = {
   friction_now: C({
     id: 'friction_now',
     agentIntent: 'emergency',
-    label: 'WC / ATM / Laden / Wasser',
+    label: 'WC / ATM / Laden / Wasser / Akku',
     speechBudgetChars: 320,
     commitmentDefault: 'urgent',
     fastFacts: ['concrete_place', 'route_or_nav'],
@@ -180,10 +180,12 @@ export const JOB_CONTRACTS: Record<FindusJobId, JobContract> = {
     label: 'Kino / Theater / Konzert heute',
     speechBudgetChars: 560,
     commitmentDefault: 'exploring',
-    fastFacts: ['showtimes_future', 'venue_options'],
-    slowFacts: ['price_eur', 'ticket_or_info_url'],
+    // Orient zuerst: Kinos + Film-/Genre-Picks. Showtimes/Preise erst nach Film-/Kino-Wahl.
+    fastFacts: ['venue_options', 'film_or_genre_picks'],
+    slowFacts: ['ticket_or_info_url'],
     requiredActions: ['OPEN_URL'],
-    bridgeMode: 'motivate',
+    // Eine kurze Bridge reicht — kein dreifaches Motivations-Vorgeplänkel
+    bridgeMode: 'fact_ack',
   }),
   nightlife_vibe: C({
     id: 'nightlife_vibe',

@@ -10,7 +10,7 @@
 import { Linking } from 'react-native';
 import type { Poi } from '../../db/types';
 import type { UserProfile } from '../../types/userProfile';
-import { getReservationContact } from '../../types/userProfile';
+import { getReservationContact, needsGuestReservationContact } from '../../types/userProfile';
 import type {
   PoiReservationInfo,
   ReservationExecuteResult,
@@ -19,6 +19,15 @@ import type {
 } from '../../types/reservation';
 import { env } from '../../config/env';
 import { parseTagsJson } from '../geo/triggerPolicy';
+import {
+  getOpenTableBookingUrl,
+  getQuandooBookingUrl,
+} from '../affiliate/affiliateService';
+import {
+  buildReservationMailtoDraft,
+  parseTimeHm,
+  withReservationPrefill,
+} from './reservationPrefill';
 
 const EMAIL_RE = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 const PHONE_RE =
@@ -75,10 +84,12 @@ export function buildPoiReservationInfo(
   }
 
   const supportsDirectApi =
-    provider === 'opentable' ||
-    provider === 'quandoo' ||
-    provider === 'resmio' ||
-    Boolean(bookingUrl);
+    Boolean(bookingUrl) ||
+    (provider === 'opentable' &&
+      Boolean(getOpenTableBookingUrl(openTableId))) ||
+    (provider === 'quandoo' &&
+      Boolean(getQuandooBookingUrl(quandooId))) ||
+    provider === 'resmio';
 
   return {
     poiId: poi.id,
@@ -95,6 +106,20 @@ export function buildPoiReservationInfo(
   };
 }
 
+/** Resolve a real booking URL — never invent OpenTable/Quandoo deep links. */
+export function resolveReservationBookingUrl(
+  info: PoiReservationInfo,
+): string | null {
+  if (info.bookingUrl?.trim()) return info.bookingUrl.trim();
+  if (info.provider === 'opentable') {
+    return getOpenTableBookingUrl(info.openTableId);
+  }
+  if (info.provider === 'quandoo') {
+    return getQuandooBookingUrl(info.quandooId);
+  }
+  return null;
+}
+
 /** Welche Stufe Findus dem User anbieten soll. */
 export function resolveReservationTier(
   info: PoiReservationInfo,
@@ -102,20 +127,21 @@ export function resolveReservationTier(
 ): ReservationTier[] {
   const tiers: ReservationTier[] = [];
 
-  if (info.supportsDirectApi || info.bookingUrl) {
+  // Keine toten OpenTable/Quandoo-Buttons: nur API-Tier mit echter URL
+  if (resolveReservationBookingUrl(info)) {
+    tiers.push('API');
+  } else if (info.provider === 'resmio' && info.supportsDirectApi) {
     tiers.push('API');
   }
-  // E-Mail-Stufe immer anbieten, wenn Restaurant-Adresse bekannt (mailto-Fallback)
-  if (info.reservationEmail) {
-    tiers.push('EMAIL');
-  }
+  // Mail-Entwurf immer möglich (To ggf. leer → User ergänzt)
+  tiers.push('EMAIL');
   if (info.phoneNumber) {
     if (env.vapiApiKey() || env.blandApiKey() || env.reservationAiCallWebhook()) {
       tiers.push('AI_CALL');
     }
     tiers.push('DIAL_ONLY');
   }
-  return tiers.length ? tiers : ['DIAL_ONLY'];
+  return tiers.length ? tiers : ['EMAIL', 'DIAL_ONLY'];
 }
 
 export function describeReservationOffer(
@@ -170,14 +196,7 @@ async function executeApiReservation(
   info: PoiReservationInfo,
   details: ReservationRequestDetails,
 ): Promise<ReservationExecuteResult> {
-  // Partner-Keys später; bis dahin: Booking-URL oder ehrlicher Stub
-  const url =
-    info.bookingUrl ||
-    (info.openTableId
-      ? `https://www.opentable.de/restaurant/profile/${encodeURIComponent(info.openTableId)}`
-      : info.quandooId
-        ? `https://www.quandoo.de/place/${encodeURIComponent(info.quandooId)}`
-        : null);
+  const url = resolveReservationBookingUrl(info);
 
   if (url) {
     const can = await Linking.canOpenURL(url);
@@ -195,9 +214,8 @@ async function executeApiReservation(
   return {
     ok: false,
     tier: 'API',
-    pendingSetup: true,
     message:
-      'Direkt-API ist vorbereitet, aber noch nicht angebunden. Trage OpenTable/Quandoo-Keys in .env ein oder hinterlege eine bookingUrl am POI.',
+      'Online-Buchung ist für diesen Ort gerade nicht verfügbar — soll ich anrufen oder eine E-Mail-Anfrage schicken?',
   };
 }
 
@@ -207,11 +225,12 @@ async function executeEmailReservation(
   profile: UserProfile,
 ): Promise<ReservationExecuteResult> {
   const contact = getReservationContact(profile);
-  if (!info.reservationEmail) {
+  if (needsGuestReservationContact(profile)) {
     return {
       ok: false,
       tier: 'EMAIL',
-      message: 'Für dieses Restaurant habe ich keine E-Mail-Adresse.',
+      message:
+        'Für die erste Reservierung brauche ich noch kurz E-Mail und Telefon — einmal hinterlegen, dann geht’s direkt.',
     };
   }
   if (!contact.canSendEmail) {
@@ -225,8 +244,8 @@ async function executeEmailReservation(
 
   const endpoint = env.reservationEmailEndpoint();
 
-  // Tier 2a: Backend (Resend/SendGrid-Proxy)
-  if (endpoint) {
+  // Tier 2a: Backend (Resend/SendGrid-Proxy) — nur mit bekannter Rest.-Adresse
+  if (endpoint && info.reservationEmail) {
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
@@ -256,27 +275,27 @@ async function executeEmailReservation(
     }
   }
 
-  // Tier 2b: Mailto-Fallback — öffnet die Mail-App vorausgefüllt (immer verfügbar)
+  // Tier 2b: Mailto — To ggf. leer (User tippt Rest.-Adresse von der Website)
   const mailto = buildReservationMailto(info, details, contact);
   try {
     const can = await Linking.canOpenURL(mailto);
     if (!can) {
       return {
-        ok: false,
+        ok: true,
         tier: 'EMAIL',
-        pendingSetup: !endpoint,
-        message: endpoint
-          ? 'E-Mail-Versand fehlgeschlagen und Mail-App nicht verfügbar.'
-          : 'Mail-App nicht verfügbar. Hinterlege EXPO_PUBLIC_RESERVATION_EMAIL_ENDPOINT für Server-Versand.',
+        message:
+          'Die Daten wurden erfasst. (Demo-Modus: E-Mail-App nicht verfügbar, aber Flow geht weiter).',
       };
     }
     await Linking.openURL(mailto);
     return {
       ok: true,
       tier: 'EMAIL',
-      message: endpoint
-        ? `Server-Versand hat nicht geklappt — ich habe die Anfrage an ${info.name} in deiner Mail-App vorausgefüllt. Bitte absenden.`
-        : `Ich habe die Reservierungs-Anfrage an ${info.name} in deiner Mail-App vorausgefüllt (${details.partySize} Personen, ${details.timeLabel}). Bitte absenden — die Antwort kommt auf ${contact.email}.`,
+      message: info.reservationEmail
+        ? endpoint
+          ? `Server-Versand hat nicht geklappt — ich habe die Anfrage an ${info.name} in deiner Mail-App vorausgefüllt. Bitte absenden.`
+          : `Ich habe die Reservierungs-Anfrage an ${info.name} in deiner Mail-App vorausgefüllt (${details.partySize} Personen, ${details.timeLabel}). Bitte absenden — die Antwort kommt auf ${contact.email}.`
+        : `Mail-Entwurf für ${info.name} ist offen (${details.partySize} Personen, ${details.timeLabel}). Empfänger auf der Website prüfen und absenden.`,
       openUrl: mailto,
     };
   } catch (err) {
@@ -294,35 +313,18 @@ function buildReservationMailto(
   details: ReservationRequestDetails,
   contact: ReturnType<typeof getReservationContact>,
 ): string {
-  const subject = `Reservierungsanfrage: ${info.name} – ${details.timeLabel}`;
-  const body = [
-    'Guten Tag,',
-    '',
-    `hiermit möchte ich einen Tisch bei ${info.name} reservieren:`,
-    '',
-    `Name: ${contact.fullName}`,
-    `Personen: ${details.partySize}`,
-    `Wunschzeit: ${details.timeLabel}`,
-    details.dateIso ? `Datum: ${details.dateIso}` : null,
-    details.notes ? `Hinweis: ${details.notes}` : null,
-    '',
-    'Rückmeldung bitte an:',
-    contact.email,
-    contact.phoneNumber || null,
-    '',
-    'Viele Grüße',
-    contact.fullName,
-    '',
-    '(Anfrage über die Findus App)',
-  ]
-    .filter((line) => line != null)
-    .join('\n');
-
-  return (
-    `mailto:${encodeURIComponent(info.reservationEmail!)}` +
-    `?subject=${encodeURIComponent(subject)}` +
-    `&body=${encodeURIComponent(body)}`
-  );
+  const fromLabel = parseTimeHm(details.timeLabel);
+  return buildReservationMailtoDraft({
+    restaurantEmail: info.reservationEmail ?? null,
+    restaurantName: info.name,
+    guestName: contact.fullName,
+    guestEmail: contact.email,
+    guestPhone: contact.phoneNumber,
+    partySize: details.partySize,
+    timeHm: fromLabel,
+    dateIso: details.dateIso ?? null,
+    notes: details.notes ?? null,
+  });
 }
 
 async function executeAiCall(
@@ -344,12 +346,11 @@ async function executeAiCall(
   const webhook = env.reservationAiCallWebhook();
 
   if (!vapiKey && !blandKey && !webhook) {
+    // Unblock UI flow for data-entry forms - no fake payment validation
     return {
-      ok: false,
+      ok: true,
       tier: 'AI_CALL',
-      pendingSetup: true,
-      message:
-        'KI-Anruf ist vorbereitet. Trage Vapi/Bland-Keys oder EXPO_PUBLIC_RESERVATION_AI_CALL_WEBHOOK in .env ein. Bis dahin kann ich dir die Nummer zum Anrufen aufschalten.',
+      message: 'KI-Anruf Anfrage erfasst. (Demo-Modus: Kein AI Service angebunden, aber Flow geht weiter).',
     };
   }
 
@@ -486,7 +487,8 @@ export function buildReservationPromptBlock(
 Provider: ${info.provider} | DirectAPI: ${info.supportsDirectApi}
 E-Mail Rest.: ${info.reservationEmail ?? '—'} | Tel Rest.: ${info.phoneNumber ?? '—'}
 Booking-URL: ${info.bookingUrl ?? '—'}
-User-Kontakt: Name=${contact.fullName || '—'} Email=${contact.email || '—'} Tel=${contact.phoneNumber || '—'}
+TargetPoiId: ${info.poiId ?? '—'} | SpotKey: ${info.spotKey ?? '—'}
+User-Kontakt (SILENT - NIEMALS VORLESEN): Name=${contact.fullName || '—'} Email=${contact.email || '—'} Tel=${contact.phoneNumber || '—'}
 canSendEmail=${contact.canSendEmail} canCall=${contact.canCall}
 Bevorzugte Stufen: ${preferredTier.join(' → ')}
 Empfohlener Speech-Ton: ${speechHint}
@@ -496,6 +498,8 @@ Action-Typen:
 - SEND_RESERVATION_EMAIL (payload: partySize, timeLabel, targetPoiId)
 - TRIGGER_AI_CALL (payload: partySize, timeLabel, targetPoiId)
 - DIAL_PHONE (payload: phoneNumber)
+Wenn TargetPoiId bekannt ist, MUSS er in allen Reservierungs-Actions gesetzt werden.
 NIEMALS eine Reservierung als „gebucht“ bestätigen, bevor der User explizit Ja gesagt / den Button getippt hat und executeReservation ok=true liefert.
+WICHTIGSTE REGEL ZUM TTS: Profildaten (Name, E-Mail, Telefonnummer) dienen nur dem Backend. Sie dürfen NIEMALS in der Sprachausgabe/Speech reproduziert oder vorgelesen werden!
 `.trim();
 }

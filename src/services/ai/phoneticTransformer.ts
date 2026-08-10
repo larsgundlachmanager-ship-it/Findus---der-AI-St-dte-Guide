@@ -1,17 +1,7 @@
 /**
  * Re-Export: Phonetic Transformer lebt unter g2p/.
- * Audio-only Orthografie + Kurzwort-Schutz vor Kokoro / speakTwoPhase.
- * Display bleibt Original; nur Audio wird phonetisch korrigiert.
- * Dictionary-Engine (Base + Cloud + User-Scan) läuft vor jeder Audio-Generierung.
- *
- * Pflicht-Swaps (Audio):
- * - „Prisdorf" → „Prissdorf"
- * - „Hof" → „Hoff" (Komposita: Bahnhof→Bahnoff, …)
- * - „Bus" → „Buss"
- * Plus: Small-Cup/Markdown-Müll, Liniennummern, Sound-Hooks (Tüt-tüt).
- *
- * Queue: AudioVoiceService.speakTwoPhase hält Fast-Hook sofort spielbereit,
- * während Body-Sätze entkoppelt im Hintergrund vorbereitet werden.
+ * Audio-only: EN-Ortho für Anglizismen; Alltagswörter bleiben Deutsch (native Cartesia).
+ * Display bleibt Original.
  */
 export {
   applyPhoneticTransformer,

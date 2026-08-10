@@ -1,25 +1,22 @@
-# Findus V5 — Städte-Zeitachse (Plan vs. Ist)
+﻿# Findus V5 — Städte-Zeitachse (Visit-Log)
 
 ## Ziel
 
-Google-Timeline-ähnlich: geplante Zeiten + Realität. Verzug propagiert auf den Rest des Tages. Visit-Log + GPS-Tagesroute auf der Stempelkarte. Historie über Monate.
+Visit-Log + GPS-Tagesroute auf der Stempelkarte. Historie über Monate. (Modul-5-Tagesplan entfernt.)
 
 ## Daten
 
-- DayPlan `actualStartMs` / `actualEndMs` (Modul 5)
 - Visit-Log: `findus-visit-log-v1.json` (~18 Monate, max 4000)
-- Day plans: Retention ~18 Monate beim Hydrate
 - Walk-Track: `sampleWalkTrackForDay(dateKey)` für Tagesroute
 
 ## Hooks
 
-- Nav-Start → `applyNavStartActual` (Verzug vs. Plan-Abmarsch)
-- Nav-Arrive → `applyNavArriveActual` + Visit-Arrival
-- Place-Left → `applyPlaceLeftActual` + Visit-Departure
-- Dwell-Stempel → `upsertVisitFromStamp`
+- Nav-Arrive → Visit-Arrival (Stempelkarte/Zeitachse erst nach ≥2 Min oder Modul 1)
+- Place-Left → Visit-Departure
+- Dwell ≥ **2 Min** → Stempelkarte **und** Zeitachse (klarer POI)
+- Kürzer / Vorbeilaufen → **kein** Eintrag (Fog-Trail bleibt separat)
+- Modul-1-Hauptpunkt (Story startet) → sofort Stempelkarte + Zeitachse
 
 ## UI
 
-- Planung: Timeline zeigt **Ist** primär, Plan durchgestrichen, Verzug-Badge
-- Stempelkarte: Tab **Zeitachse**, Monat-/Tag-Picker, grüne Tagesroute + nummerierte Visit-Knoten
-- `propagatePlanDelay` verschiebt weiche Folgeslots (harte Deadlines bleiben)
+- Stempelkarte: Tab **Entdeckung**, Monat-/Tag-Picker, grüne Tagesroute + nummerierte Visit-Knoten

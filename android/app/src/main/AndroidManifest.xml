@@ -2,15 +2,24 @@
   <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <uses-permission android:name="android.permission.CAMERA"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION"/>
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
   <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+  <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+  <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
+  <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
   <uses-permission android:name="android.permission.VIBRATE"/>
+  <uses-permission android:name="android.permission.WAKE_LOCK"/>
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-feature android:name="android.hardware.camera" android:required="false"/>
+  <uses-feature android:name="android.hardware.camera.flash" android:required="false"/>
   <queries>
     <intent>
       <action android:name="android.intent.action.VIEW"/>
@@ -33,6 +42,34 @@
       <action android:name="android.speech.RecognitionService"/>
     </intent>
   </queries>
+  <!-- Package visibility for AlarmClock intents + common OEM clock apps (Android 11+) -->
+  <queries>
+    <intent>
+      <action android:name="android.intent.action.SET_ALARM"/>
+      <category android:name="android.intent.category.DEFAULT"/>
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.SHOW_ALARMS"/>
+      <category android:name="android.intent.category.DEFAULT"/>
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.SET_TIMER"/>
+      <category android:name="android.intent.category.DEFAULT"/>
+    </intent>
+    <package android:name="com.google.android.deskclock"/>
+    <package android:name="com.android.deskclock"/>
+    <package android:name="com.sec.android.app.clockpackage"/>
+    <package android:name="com.samsung.android.app.clockpack"/>
+    <package android:name="com.oneplus.deskclock"/>
+    <package android:name="com.coloros.alarmclock"/>
+    <package android:name="com.oplus.alarmclock"/>
+    <package android:name="com.huawei.deskclock"/>
+    <package android:name="com.android.alarmclock"/>
+    <package android:name="com.miui.clock"/>
+    <package android:name="com.xiaomi.clock"/>
+    <package android:name="com.sonyericsson.organizer"/>
+    <package android:name="com.asus.deskclock"/>
+  </queries>
   <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="true" android:theme="@style/AppTheme" android:supportsRtl="true">
     <meta-data android:name="expo.modules.updates.ENABLED" android:value="false"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH" android:value="ALWAYS"/>
@@ -42,13 +79,53 @@
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
+      <meta-data
+        android:name="android.app.shortcuts"
+        android:resource="@xml/shortcuts"/>
       <intent-filter>
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="com.finnus.app"/>
+        <!-- Auth deep links (Magic Link / OAuth). Must match Linking.createURL scheme. -->
+        <data android:scheme="findus"/>
+        <data android:scheme="de.findus.app"/>
         <data android:scheme="exp+findus"/>
       </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <data android:scheme="findus" android:host="auth" android:pathPrefix="/"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <data android:scheme="findus" android:host="voice" android:pathPrefix="/"/>
+      </intent-filter>
+      <!-- Optional: erscheint als Assistent-Kandidat — ersetzt Gemini/Power-Taste nicht automatisch -->
+      <intent-filter>
+        <action android:name="android.intent.action.ASSIST"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
     </activity>
+    <receiver
+      android:name=".FindusAlarmReceiver"
+      android:exported="false"
+      android:enabled="true">
+      <intent-filter>
+        <action android:name="de.findus.app.ACTION_FINDUS_ALARM_FIRE"/>
+      </intent-filter>
+    </receiver>
+    <receiver
+      android:name=".FindusAlarmBootReceiver"
+      android:exported="false"
+      android:enabled="true">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
+        <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+      </intent-filter>
+    </receiver>
   </application>
 </manifest>

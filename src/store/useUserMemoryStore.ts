@@ -399,10 +399,7 @@ export function formatUserMemoryForPrompt(): string {
     const dwell =
       e.dwellTimeMinutes != null ? ` · ${e.dwellTimeMinutes} Min.` : '';
     const note = e.notes ? ` · Notiz: ${e.notes}` : '';
-    const coords =
-      e.lat != null && e.lng != null
-        ? ` · GPS ${e.lat.toFixed(5)},${e.lng.toFixed(5)}`
-        : '';
+    const coords = '';
     const city =
       e.type === 'hotel' && e.cityId ? ` · Stadt ${e.cityId}` : '';
     return `- [${e.type}/${conf}] ${e.name}${when}${dwell}${note}${coords}${city}`;

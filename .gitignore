@@ -5,6 +5,9 @@ node_modules/
 dist/
 npm-debug.*
 *.jks
+*.keystore
+!android/app/debug.keystore
+android/keystore.properties
 *.p8
 *.p12
 *.key
@@ -14,10 +17,42 @@ web-build/
 .env
 *.gguf
 *.onnx
-!native-assets/kokoro/*.onnx
 .tmp-espeak/
+.tmp-*/
+.tmp-*.txt
+tsc-*.txt
+tsc-*.tmp
+tmp-*.json
+_tmp_*.py
+android-build-log.txt
 native-assets/espeak-ng-data/
 native-assets/espeak-ng.ready
 modules/findus-espeak/android/src/main/jniLibs/
 modules/findus-espeak/android/src/main/cpp/third_party/
-.DS_Store
+# Large city cover masters (upload scripts only — not bundled in APK)
+assets/onboarding/city-*-soft.png
+assets/onboarding/city-*.png
+assets/onboarding/city-*-2.png
+assets/onboarding/city-*-3.png
+assets/onboarding/remote-covers/*.png
+!assets/onboarding/remote-covers/*.jpg
+
+# Local toolchains / store archives (whatsnew txt may still live under releases/)
+releases/
+.tools/
+
+# Research paste leftovers
+data/staedte/*.gemini-*.md
+GEMINI-STIMMEN-PASTE.md
+src/assets/audio/_female_audit/
+
+# EAS local signing / Play submit secrets
+credentials.json
+*service-account*.json
+google-play-*.json
+pc-api-*.json
+
+
+# Local Google/Firebase JSON dumps
+findus-der-ki-*.json
+

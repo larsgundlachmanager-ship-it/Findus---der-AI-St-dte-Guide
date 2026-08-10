@@ -9,8 +9,21 @@ Set-Location (Split-Path $PSScriptRoot -Parent)
 . "$PSScriptRoot\android-env.ps1"
 Set-FindusAndroidEnv
 
+# Node 24 + Expo Config: ohne NODE_ENV scheitert createExpoConfig
+if (-not $env:NODE_ENV) { $env:NODE_ENV = 'production' }
+
+# Guard: expo-modules-core's index.js is intentionally null (Node stub).
+# Metro must resolve via "main": "src/index.ts" — otherwise the app boots to a black screen
+# ("Cannot read property 'requireOptionalNativeModule' of null").
+$emcPkg = Join-Path (Split-Path $PSScriptRoot -Parent) 'node_modules\expo-modules-core\package.json'
+if (Test-Path $emcPkg) {
+    $emcMain = (Get-Content $emcPkg -Raw | ConvertFrom-Json).main
+    if ($emcMain -ne 'src/index.ts') {
+        throw "expo-modules-core package.json main is '$emcMain' (expected 'src/index.ts'). Fix before release build."
+    }
+}
+
 if (-not $SkipFetch) {
-    npm run fetch:kokoro
     npm run fetch:espeak
     npm run generate:voice-assets
 }

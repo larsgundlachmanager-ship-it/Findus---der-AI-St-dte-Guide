@@ -125,16 +125,34 @@ async function fillCinema(
   input: DeepFillInput,
   missing: Set<string>,
 ): Promise<DeepFillResult> {
-  const { researchCinemaAndShowtimes } = await import(
-    '../../services/research/cinemaShowtimeResearch'
-  );
+  const {
+    detectCinemaPhase,
+    researchCinemaAndShowtimes,
+  } = await import('../../services/research/cinemaShowtimeResearch');
+  const phase =
+    (input.meta?.cinemaPhase as 'orient' | 'showtimes' | undefined) ??
+    detectCinemaPhase(input.userText);
+  // Orient-Turn: keine nachgeschobene Uhrzeiten-Speech (User wollte Orientierung)
+  if (phase === 'orient' && !missing.has('showtimes_future')) {
+    return {
+      filled: false,
+      agentResult: {
+        agent: 'deep_research',
+        ok: true,
+        draftText: '',
+        meta: { silent: true, cinema: true, cinemaPhase: 'orient' },
+      },
+    };
+  }
+
   const research = await researchCinemaAndShowtimes({
     userText: input.userText,
     lat: input.lat,
     lng: input.lng,
     signal: input.signal,
     venuesOnly: false,
-    showtimeBudgetMs: 14_000,
+    phase,
+    showtimeBudgetMs: phase === 'orient' ? 10_000 : 14_000,
   });
 
   const buttons: Module2ActionButton[] = [
@@ -145,29 +163,44 @@ async function fillCinema(
   const priceLines = research.showtimes
     .filter((s) => s.priceEur != null)
     .map((s) => `${s.filmTitle}: ca. ${s.priceEur} €`);
-  const spokenExtra = [
-    research.showtimes.length
-      ? `Nachgeliefert: ${research.showtimes
-          .slice(0, 2)
-          .map((s) => `${s.filmTitle} ${s.whenLabel}${s.priceEur != null ? ` · ${s.priceEur}€` : ''}`)
-          .join('; ')}.`
-      : '',
-    priceLines[0] ? `Ticket-Preis belegt: ${priceLines[0]}.` : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
+  // Nur im Showtimes-Turn laut nachliefern — Orient bleibt still (nur Card-Buttons)
+  const spokenExtra =
+    research.phase === 'showtimes'
+      ? [
+          research.showtimes.length
+            ? `Nachgeliefert: ${research.showtimes
+                .slice(0, 2)
+                .map(
+                  (s) =>
+                    `${s.filmTitle} ${s.whenLabel}${s.priceEur != null ? ` · ${s.priceEur}€` : ''}`,
+                )
+                .join('; ')}.`
+            : '',
+          priceLines[0] ? `Ticket-Preis belegt: ${priceLines[0]}.` : '',
+        ]
+          .filter(Boolean)
+          .join(' ')
+      : '';
 
   return {
-    filled: research.showtimes.length > 0 || buttons.length > 0,
+    filled:
+      research.filmPicks.length > 0 ||
+      research.showtimes.length > 0 ||
+      buttons.length > 0,
     agentResult: {
       agent: 'deep_research',
       ok: true,
       draftText: research.promptBlock,
-      bullets: research.showtimes.slice(0, 2).map((s) => {
-        const price =
-          s.priceEur != null ? ` · ${s.priceEur}€` : '';
-        return `${s.cinemaName}: ${s.whenLabel}${price}`;
-      }),
+      bullets:
+        research.phase === 'orient'
+          ? research.filmPicks.slice(0, 2).map((f) =>
+              f.genreHint ? `${f.title} · ${f.genreHint}` : f.title,
+            )
+          : research.showtimes.slice(0, 2).map((s) => {
+              const price =
+                s.priceEur != null ? ` · ${s.priceEur}€` : '';
+              return `${s.cinemaName}: ${s.whenLabel}${price}`;
+            }),
       buttons,
       money: research.showtimes
         .filter((s) => s.priceEur != null)
@@ -179,6 +212,8 @@ async function fillCinema(
         })),
       meta: {
         cinema: true,
+        cinemaPhase: research.phase,
+        filmPicks: research.filmPicks,
         showtimes: research.showtimes,
         hasTicketBtn: buttons.some((b) => /🎫|ticket/i.test(b.label)),
         spokenExtra: spokenExtra || undefined,

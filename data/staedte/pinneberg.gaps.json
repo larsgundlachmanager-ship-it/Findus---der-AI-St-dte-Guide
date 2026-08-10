@@ -1,0 +1,54 @@
+{
+  "city_id": "pinneberg",
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+      "spots": 20,
+      "triggers": 20,
+      "missingTrigger": 0,
+      "missingNarration": 0,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 0,
+      "orphanTriggers": 0,
+      "categories": [
+        "aussicht",
+        "bahnhof",
+        "denkmal",
+        "einkaufen",
+        "freizeit",
+        "geschichte",
+        "gesundheit",
+        "hotel",
+        "kirche",
+        "museum",
+        "natur",
+        "sport",
+        "verwaltung"
+      ],
+      "missingMustHave": [],
+      "nicePresent": [
+        "hotel",
+        "einkaufen",
+        "gesundheit",
+        "sport",
+        "bahnhof"
+      ],
+      "liveResearch": 5,
+      "hasCoverage": true,
+      "hasTransit": true,
+      "hasMobility": false,
+      "links": 1
+    },
+    "gaps": {
+      "needsNarration": [],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [],
+      "missingCategories": []
+    }
+  },
+  "generated_at": "2026-08-02T20:48:58.815Z"
+}

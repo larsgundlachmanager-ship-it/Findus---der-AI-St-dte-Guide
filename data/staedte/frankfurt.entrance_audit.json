@@ -1,0 +1,6667 @@
+{
+  "city_id": "frankfurt",
+  "apply": true,
+  "maxDelta": 80,
+  "summary": {
+    "ok": 356,
+    "check": 3,
+    "bad": 32,
+    "errors": 0,
+    "applied": 6
+  },
+  "rows": [
+    {
+      "id": "frankfurt_lokalbahnhof",
+      "name": "Lokalbahnhof",
+      "before": {
+        "lat": 50.10188814,
+        "lng": 8.692017959999998
+      },
+      "google": {
+        "lat": 50.10196,
+        "lng": 8.692129999999999,
+        "place_id": "ChIJ6TBi3iEMvUcRYoYpeLk8yrI",
+        "address": "60594 Frankfurt am Main, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_haltepunkt_eiserner_steg_historische_eisenbahn_frankfurt",
+      "name": "Haltepunkt Eiserner Steg - Historische Eisenbahn Frankfurt",
+      "before": {
+        "lat": 50.10880044,
+        "lng": 8.68138474
+      },
+      "google": {
+        "lat": 50.10887229999999,
+        "lng": 8.6814968,
+        "place_id": "ChIJ69nX1acOvUcRphXWnxG7eQs",
+        "address": "Eiserner Steg, 60311, 60311 Frankfurt am Main"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurt_main_sud",
+      "name": "Frankfurt (Main) Süd",
+      "before": {
+        "lat": 50.09966274,
+        "lng": 8.685687859999998
+      },
+      "google": {
+        "lat": 50.07605700000001,
+        "lng": 8.6700409,
+        "place_id": "ChIJH6uHA3ELvUcRxpCuIiovRz4",
+        "address": "Frankfurt-Süd"
+      },
+      "delta_m": 2852,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_hauptwache",
+      "name": "Hauptwache",
+      "before": {
+        "lat": 50.11363804,
+        "lng": 8.67886254
+      },
+      "google": {
+        "lat": 50.1137099,
+        "lng": 8.6789746,
+        "place_id": "ChIJ2YhJAK8OvUcRVKL_Pubm908",
+        "address": "60313 Frankfurt am Main"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_ostendstrasse",
+      "name": "Ostendstraße",
+      "before": {
+        "lat": 50.11350384,
+        "lng": 8.696032939999998
+      },
+      "google": {
+        "lat": 50.1114725,
+        "lng": 8.6990036,
+        "place_id": "ChIJ4dAFFZkOvUcR-loWTWeBAHM",
+        "address": "Ostendstraße, 60314 Frankfurt am Main-Bornheim/Ostend"
+      },
+      "delta_m": 310,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurt_main_hauptbahnhof",
+      "name": "Frankfurt (Main) Hauptbahnhof",
+      "before": {
+        "lat": 50.10707204,
+        "lng": 8.66367164
+      },
+      "google": {
+        "lat": 50.1071439,
+        "lng": 8.6637837,
+        "place_id": "ChIJ-bKRN_4LvUcRrK86lzLJZkM",
+        "address": "Am Hauptbahnhof, 60329 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_frankfurt_main_taunusanlage",
+      "name": "Frankfurt (Main) Taunusanlage",
+      "before": {
+        "lat": 50.11405893999999,
+        "lng": 8.66977354
+      },
+      "google": {
+        "lat": 50.1127797,
+        "lng": 8.6688958,
+        "place_id": "ChIJW4rHoqwOvUcRWTZml9wc7Xs",
+        "address": "Taunusanlage, Frankfurt am Main"
+      },
+      "delta_m": 155,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_ostbahnhof",
+      "name": "Ostbahnhof",
+      "before": {
+        "lat": 50.11243064,
+        "lng": 8.70692784
+      },
+      "google": {
+        "lat": 50.1125025,
+        "lng": 8.7070399,
+        "place_id": "ChIJGdTtL4UOvUcRYhOBV13aSC8",
+        "address": "60314 Frankfurt am Main"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurt_main_west",
+      "name": "Frankfurt (Main) West",
+      "before": {
+        "lat": 50.11943264,
+        "lng": 8.63921512
+      },
+      "google": {
+        "lat": 50.1195045,
+        "lng": 8.6393272,
+        "place_id": "ChIJlfUWOmYJvUcRX7Db-Ij3gB4",
+        "address": "Kasseler Str. 7, 60486 Frankfurt am Main"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bahnhof_frankfurt_main_konstablerwache",
+      "name": "Bahnhof Frankfurt (Main) Konstablerwache",
+      "before": {
+        "lat": 50.11445474,
+        "lng": 8.68786494
+      },
+      "google": {
+        "lat": 50.11459,
+        "lng": 8.68641,
+        "place_id": "ChIJgUbG6qQOvUcRgVOR14n4fAc",
+        "address": "60313 Frankfurt am Main, Deutschland"
+      },
+      "delta_m": 105,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "frankfurt_bahnhof_frankfurt_louisa",
+      "name": "Bahnhof Frankfurt-Louisa",
+      "before": {
+        "lat": 50.083908140000005,
+        "lng": 8.670888
+      },
+      "google": {
+        "lat": 50.0840014,
+        "lng": 8.6704346,
+        "place_id": "ChIJeyaW73IMvUcRFkVG5rEUpYM",
+        "address": "60598 Frankfurt am Main, Deutschland"
+      },
+      "delta_m": 34,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "frankfurt_griesheim",
+      "name": "Griesheim",
+      "before": {
+        "lat": 50.09422814,
+        "lng": 8.60629798
+      },
+      "google": {
+        "lat": 50.0965406,
+        "lng": 8.5987565,
+        "place_id": "ChIJSU6-1C8KvUcRAJqzKVBDIgU",
+        "address": "Frankfurt-Griesheim, Frankfurt am Main West"
+      },
+      "delta_m": 596,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurt_main_hauptbahnhof_tief",
+      "name": "Frankfurt (Main) Hauptbahnhof tief",
+      "before": {
+        "lat": 50.10659074,
+        "lng": 8.662402539999999
+      },
+      "google": {
+        "lat": 50.1071439,
+        "lng": 8.6637837,
+        "place_id": "ChIJ-bKRN_4LvUcRrK86lzLJZkM",
+        "address": "Am Hauptbahnhof, 60329 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 116,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "frankfurt_osthafen",
+      "name": "Osthafen",
+      "before": {
+        "lat": 50.10857158,
+        "lng": 8.713549460000001
+      },
+      "google": {
+        "lat": 50.1086111,
+        "lng": 8.7136111,
+        "place_id": "ChIJlSTHVoEOvUcROZzFNLgtlPM",
+        "address": "Osthafen, 60314 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_mainfahre_schwanheim_hochst",
+      "name": "Mainfähre Schwanheim-Höchst",
+      "before": {
+        "lat": 50.09834117999999,
+        "lng": 8.550435779999999
+      },
+      "google": {
+        "lat": 50.0983807,
+        "lng": 8.5504974,
+        "place_id": "ChIJU1KNxqOgvUcR1-Wi0Bn4ULI",
+        "address": "Höchst, 65929 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_hfm_managementgesellschaft_fur_hafen_und_markt_mbh",
+      "name": "HFM Managementgesellschaft für Hafen und Markt mbH",
+      "before": {
+        "lat": 50.11278628,
+        "lng": 8.72057696
+      },
+      "google": {
+        "lat": 50.1128258,
+        "lng": 8.7206386,
+        "place_id": "ChIJ-4tDlkMPvUcROD6m6Xs8XMA",
+        "address": "Lindleystraße 14, 60314 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hafenbahn_frankfurt_am_main_hfm",
+      "name": "Hafenbahn Frankfurt am Main (HFM)",
+      "before": {
+        "lat": 50.109298980000005,
+        "lng": 8.69015896
+      },
+      "google": {
+        "lat": 50.1093385,
+        "lng": 8.6902206,
+        "place_id": "ChIJkQjUdu8PvUcR9qw5Vj964gM",
+        "address": "60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hafenpark",
+      "name": "Hafenpark",
+      "before": {
+        "lat": 50.10814608,
+        "lng": 8.70807258
+      },
+      "google": {
+        "lat": 50.1078546,
+        "lng": 8.707648599999999,
+        "place_id": "ChIJTW9-P4MOvUcRyIWxrZaOp_M",
+        "address": "Hafenpark, Mayfarthstraße, 60314 Frankfurt am Main"
+      },
+      "delta_m": 44,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "frankfurt_marina_westhafen_kombuse",
+      "name": "Marina Westhafen & Kombüse",
+      "before": {
+        "lat": 50.09919988,
+        "lng": 8.659362980000001
+      },
+      "google": {
+        "lat": 50.09923939999999,
+        "lng": 8.6594246,
+        "place_id": "ChIJM-oI-fgLvUcRW4zYK9U0AOE",
+        "address": "Bachforellenweg 51, 60327 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_flohmarkt_osthafen",
+      "name": "Flohmarkt Osthafen",
+      "before": {
+        "lat": 50.11101008,
+        "lng": 8.714270860000001
+      },
+      "google": {
+        "lat": 50.1110496,
+        "lng": 8.7143325,
+        "place_id": "ChIJkVvyU4YOvUcRey02BGQrwME",
+        "address": "Lindleystraße 8, 60314 Frankfurt am Main-Bornheim/Ostend"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_walter_kolb_fahrrad_und_personenfahre",
+      "name": "\"Walter Kolb\", Fahrrad- und Personenfähre",
+      "before": {
+        "lat": 50.09874298,
+        "lng": 8.549957379999999
+      },
+      "google": {
+        "lat": 50.0987825,
+        "lng": 8.550018999999999,
+        "place_id": "ChIJr6jxxqOgvUcRHycRhEM279k",
+        "address": "65929, Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_westhafen_tower",
+      "name": "Westhafen Tower",
+      "before": {
+        "lat": 50.101283480000006,
+        "lng": 8.66430838
+      },
+      "google": {
+        "lat": 50.101323,
+        "lng": 8.66437,
+        "place_id": "ChIJaYL5ovgLvUcRet2dmM0va64",
+        "address": "Westhafenpl. 1, 60327 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hafenbecken_westhafen",
+      "name": "Hafenbecken Westhafen",
+      "before": {
+        "lat": 50.09944958,
+        "lng": 8.660080579999999
+      },
+      "google": {
+        "lat": 50.0994891,
+        "lng": 8.6601422,
+        "place_id": "ChIJ4zIOrvkLvUcRUY9KPS8mbMA",
+        "address": "Hafenbecken Westhafen, 60327 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_historisches_museum_frankfurt",
+      "name": "Historisches Museum Frankfurt",
+      "before": {
+        "lat": 50.10944438,
+        "lng": 8.68227346
+      },
+      "google": {
+        "lat": 50.1094839,
+        "lng": 8.6823351,
+        "place_id": "ChIJ51rYSKYOvUcRqPU28wH49uI",
+        "address": "Saalhof 1, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_stadel_museum",
+      "name": "Städel Museum",
+      "before": {
+        "lat": 50.10305298,
+        "lng": 8.67399668
+      },
+      "google": {
+        "lat": 50.1030925,
+        "lng": 8.6740583,
+        "place_id": "ChIJ61K7owMMvUcRn_SCURQ0DaE",
+        "address": "Schaumainkai 63, 60596 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_judisches_museum_frankfurt",
+      "name": "Jüdisches Museum Frankfurt",
+      "before": {
+        "lat": 50.10708448,
+        "lng": 8.674248080000002
+      },
+      "google": {
+        "lat": 50.107124,
+        "lng": 8.6743097,
+        "place_id": "ChIJWXz64KkOvUcRkLMDDCsGK4Y",
+        "address": "Bertha-Pappenheim-Platz 1, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_schirn_kunsthalle_frankfurt",
+      "name": "Schirn Kunsthalle Frankfurt",
+      "before": {
+        "lat": 50.12128978,
+        "lng": 8.652778759999999
+      },
+      "google": {
+        "lat": 50.1213293,
+        "lng": 8.652840399999999,
+        "place_id": "ChIJecFPZqYOvUcRzAv_mdvzpNg",
+        "address": "Gabriel-Riesser-Weg 3, 60325 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_senckenberg_naturmuseum",
+      "name": "Senckenberg Naturmuseum",
+      "before": {
+        "lat": 50.11751837999999,
+        "lng": 8.652174659999998
+      },
+      "google": {
+        "lat": 50.11755789999999,
+        "lng": 8.6522363,
+        "place_id": "ChIJ2V1QFlsJvUcRSRhgQZzHGNA",
+        "address": "Senckenberganlage 25, 60325 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_dommuseum_frankfurt",
+      "name": "Dommuseum Frankfurt",
+      "before": {
+        "lat": 50.110670479999996,
+        "lng": 8.68485836
+      },
+      "google": {
+        "lat": 50.11071,
+        "lng": 8.68492,
+        "place_id": "ChIJ-aeFpqYOvUcRaNUjK01UeUg",
+        "address": "Domplatz 1, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_museumsufer_frankfurt",
+      "name": "Museumsufer Frankfurt",
+      "before": {
+        "lat": 50.10680218,
+        "lng": 8.687898579999999
+      },
+      "google": {
+        "lat": 50.1068417,
+        "lng": 8.6879602,
+        "place_id": "ChIJ8zv9kaAOvUcRezK1s9p9PIQ",
+        "address": "Brückenstraße 3-7, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_dialogmuseum",
+      "name": "DIALOGMUSEUM",
+      "before": {
+        "lat": 50.11317458,
+        "lng": 8.67846326
+      },
+      "google": {
+        "lat": 50.1132141,
+        "lng": 8.6785249,
+        "place_id": "ChIJP22zSoQOvUcRmnMToWHZvyY",
+        "address": "An der Hauptwache, B-Ebene Passage 10, Abgang, Roßmarkt, 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_deutsches_romantik_museum_drm",
+      "name": "Deutsches Romantik-Museum (DRM)",
+      "before": {
+        "lat": 50.11105378,
+        "lng": 8.67756146
+      },
+      "google": {
+        "lat": 50.1110933,
+        "lng": 8.6776231,
+        "place_id": "ChIJi4xOqXIPvUcRRHYypbPKOHA",
+        "address": "Großer Hirschgraben 23-25, 60311 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_deutsches_architekturmuseum_dam",
+      "name": "Deutsches Architekturmuseum (DAM)",
+      "before": {
+        "lat": 50.104948379999996,
+        "lng": 8.67723948
+      },
+      "google": {
+        "lat": 50.1049879,
+        "lng": 8.6773011,
+        "place_id": "ChIJQRMc6wIMvUcRnC37_Er9Xgw",
+        "address": "Schaumainkai 43, 60596 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_museum_fur_kommunikation_frankfurt",
+      "name": "Museum für Kommunikation Frankfurt",
+      "before": {
+        "lat": 50.10451827999999,
+        "lng": 8.67602788
+      },
+      "google": {
+        "lat": 50.10455779999999,
+        "lng": 8.6760895,
+        "place_id": "ChIJbQZk-gIMvUcRAFFLb9Hk-NQ",
+        "address": "Schaumainkai 53, 60596 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_caricatura_museum_frankfurt_museum_fur_komische_kunst",
+      "name": "Caricatura Museum Frankfurt - Museum für Komische Kunst",
+      "before": {
+        "lat": 50.109961780000006,
+        "lng": 8.68521936
+      },
+      "google": {
+        "lat": 50.1100013,
+        "lng": 8.685281,
+        "place_id": "ChIJ51rYSKYOvUcRwdb-pil9c1E",
+        "address": "Weckmarkt 17, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_liebieghaus_skulpturensammlung",
+      "name": "Liebieghaus Skulpturensammlung",
+      "before": {
+        "lat": 50.10192058,
+        "lng": 8.67167388
+      },
+      "google": {
+        "lat": 50.1019601,
+        "lng": 8.6717355,
+        "place_id": "ChIJCVhqVAEMvUcRkubV29-eViM",
+        "address": "Schaumainkai 71, 60596 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_experiminta_sciencecenter",
+      "name": "EXPERIMINTA ScienceCenter",
+      "before": {
+        "lat": 50.115388679999995,
+        "lng": 8.647726760000001
+      },
+      "google": {
+        "lat": 50.1154282,
+        "lng": 8.6477884,
+        "place_id": "ChIJCdh4bFwJvUcRLJz_4weaZEg",
+        "address": "Hamburger Allee 22-24, 60486 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_archaologisches_museum_frankfurt",
+      "name": "Archäologisches Museum Frankfurt",
+      "before": {
+        "lat": 50.108916980000004,
+        "lng": 8.678395960000001
+      },
+      "google": {
+        "lat": 50.1089565,
+        "lng": 8.6784576,
+        "place_id": "ChIJI4SniqgOvUcRPqloZEOBBns",
+        "address": "Karmelitergasse 1, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_museum_angewandte_kunst",
+      "name": "Museum Angewandte Kunst",
+      "before": {
+        "lat": 50.10627047999999,
+        "lng": 8.68053838
+      },
+      "google": {
+        "lat": 50.10631,
+        "lng": 8.6806,
+        "place_id": "ChIJ0x4n9KcOvUcRHMfBCPAQuv8",
+        "address": "Schaumainkai 17, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_struwwelpeter_museum",
+      "name": "Struwwelpeter Museum",
+      "before": {
+        "lat": 50.11097658,
+        "lng": 8.68357726
+      },
+      "google": {
+        "lat": 50.1110161,
+        "lng": 8.6836389,
+        "place_id": "ChIJ26KWG1AJvUcR0e5naA_l5eU",
+        "address": "Hinter dem Lämmchen 2-4, 60311 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_liebfrauenkirche",
+      "name": "Liebfrauenkirche",
+      "before": {
+        "lat": 50.11302698,
+        "lng": 8.681412060000001
+      },
+      "google": {
+        "lat": 50.1130665,
+        "lng": 8.6814737,
+        "place_id": "ChIJqaMAYa8OvUcRcJCH4xge-L8",
+        "address": "Liebfrauenberg, 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_st_leonhard",
+      "name": "St. Leonhard",
+      "before": {
+        "lat": 50.10886138000001,
+        "lng": 8.68006016
+      },
+      "google": {
+        "lat": 50.10890089999999,
+        "lng": 8.6801218,
+        "place_id": "ChIJtSLdh6gOvUcREg_MfiOFKoE",
+        "address": "Am Leonhardstor 25, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_evangelische_st_katharinenkirche_frankfurt_evangelische_lutherische_st",
+      "name": "Evangelische St. Katharinenkirche Frankfurt - Evangelische-lutherische St. Katharinengemeinde Frankfurt/Main",
+      "before": {
+        "lat": 50.11319168,
+        "lng": 8.679389160000001
+      },
+      "google": {
+        "lat": 50.1132312,
+        "lng": 8.6794508,
+        "place_id": "ChIJvRIdEa8OvUcRCYwqJE79Uck",
+        "address": "An der Hauptwache, Zeil 131, 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_herz_marien_kirche",
+      "name": "Herz-Marien-Kirche",
+      "before": {
+        "lat": 50.10161918,
+        "lng": 8.69696898
+      },
+      "google": {
+        "lat": 50.10165869999999,
+        "lng": 8.6970306,
+        "place_id": "ChIJHzr2aX4Tc0ERfAEXI3CSY4I",
+        "address": "Auf dem Mühlberg 14, 60599 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_st_antonius",
+      "name": "St. Antonius",
+      "before": {
+        "lat": 50.11146438,
+        "lng": 8.66062226
+      },
+      "google": {
+        "lat": 50.1115039,
+        "lng": 8.6606839,
+        "place_id": "ChIJFzLYn1YJvUcRoVUWAJ_cDQ0",
+        "address": "Savignystraße 15, 60325 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_allerheiligen",
+      "name": "Allerheiligen",
+      "before": {
+        "lat": 50.11690368000001,
+        "lng": 8.70243816
+      },
+      "google": {
+        "lat": 50.11694319999999,
+        "lng": 8.7024998,
+        "place_id": "ChIJlfk5zJAOvUcRitsPz926sxc",
+        "address": "Thüringer Str. 31, 60316 Frankfurt am Main-Bornheim/Ostend"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_st_bernhard",
+      "name": "St. Bernhard",
+      "before": {
+        "lat": 50.12308847999999,
+        "lng": 8.690042459999999
+      },
+      "google": {
+        "lat": 50.123128,
+        "lng": 8.6901041,
+        "place_id": "ChIJmf-Pc7kOvUcR-oP_CvL8yTU",
+        "address": "Koselstraße 11-13, 60318 Frankfurt am Main-Innenstadt III"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_paulskirche",
+      "name": "Paulskirche",
+      "before": {
+        "lat": 50.111154580000004,
+        "lng": 8.68069576
+      },
+      "google": {
+        "lat": 50.1111941,
+        "lng": 8.6807574,
+        "place_id": "ChIJuYpTG6YOvUcR1NRE7AjKDqg",
+        "address": "Paulsplatz 11, 60311 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_dreikonigskirche",
+      "name": "Dreikönigskirche",
+      "before": {
+        "lat": 50.10727867999999,
+        "lng": 8.68491978
+      },
+      "google": {
+        "lat": 50.10731819999999,
+        "lng": 8.6849814,
+        "place_id": "ChIJV7LKOacOvUcRmZpH30ysLIs",
+        "address": "Sachsenhäuser Ufer, 60594 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frauenfriedenskirche",
+      "name": "Frauenfriedenskirche",
+      "before": {
+        "lat": 50.12857908000001,
+        "lng": 8.64593884
+      },
+      "google": {
+        "lat": 50.1286186,
+        "lng": 8.6460005,
+        "place_id": "ChIJYfMSuWoJvUcRYqnb6IerJao",
+        "address": "Zeppelinallee 101, 60487 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_sankt_bonifatius_frankfurt",
+      "name": "Sankt Bonifatius Frankfurt",
+      "before": {
+        "lat": 50.098082180000006,
+        "lng": 8.67778148
+      },
+      "google": {
+        "lat": 50.0981217,
+        "lng": 8.6778431,
+        "place_id": "ChIJ6VEzxRoMvUcRdrljGHIQS8A",
+        "address": "Holbeinstraße 70, 60596 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_heiliggeistkirche",
+      "name": "Heiliggeistkirche",
+      "before": {
+        "lat": 50.111887779999996,
+        "lng": 8.686945660000001
+      },
+      "google": {
+        "lat": 50.1119273,
+        "lng": 8.6870073,
+        "place_id": "ChIJT9tqCaQOvUcRpMJvPYmN6a0",
+        "address": "Dominikanergasse 14, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_st_ignatius",
+      "name": "St. Ignatius",
+      "before": {
+        "lat": 50.11910048,
+        "lng": 8.67162556
+      },
+      "google": {
+        "lat": 50.11913999999999,
+        "lng": 8.6716872,
+        "place_id": "ChIJCfVIwrIOvUcRFo_Z2fE51yI",
+        "address": "Gärtnerweg 60, 60322 Frankfurt am Main-Innenstadt II"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_okumenisches_zentrum_christuskirche_frankfurt_evangelische_personalkir",
+      "name": "Ökumenisches Zentrum Christuskirche Frankfurt - Evangelische Personalkirchengemeinde Christus-Immanuel Frankfurt/Main",
+      "before": {
+        "lat": 50.11791948,
+        "lng": 8.65575446
+      },
+      "google": {
+        "lat": 50.117959,
+        "lng": 8.6558161,
+        "place_id": "ChIJ8zqbKiwJvUcRRj8JRFEXky8",
+        "address": "Beethovenpl. 11-13, 60325 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_heilig_kreuz_zentrum_fur_christliche_meditation_und_spiritualitat",
+      "name": "Heilig Kreuz - Zentrum für christliche Meditation und Spiritualität",
+      "before": {
+        "lat": 50.12735728,
+        "lng": 8.718423940000001
+      },
+      "google": {
+        "lat": 50.1273968,
+        "lng": 8.7184856,
+        "place_id": "ChIJS6-phfMOvUcRN5oZUl6pdYg",
+        "address": "Kettelerallee 45, 60385 Frankfurt am Main-Bornheim/Ostend"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_marchenbrunnen",
+      "name": "Märchenbrunnen",
+      "before": {
+        "lat": 50.10829378,
+        "lng": 8.672993960000001
+      },
+      "google": {
+        "lat": 50.1083333,
+        "lng": 8.6730556,
+        "place_id": "ChIJjecqIqoOvUcRPtfHiVRv2r0",
+        "address": "Willy-Brandt-Platz, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_justitia_brunnen",
+      "name": "Justitia-Brunnen",
+      "before": {
+        "lat": 50.110396879999996,
+        "lng": 8.682093360000001
+      },
+      "google": {
+        "lat": 50.1104364,
+        "lng": 8.682155,
+        "place_id": "ChIJP0aDFKYOvUcRiq_xlWA6o2M",
+        "address": "Gerechtigkeitsbrunnen, Römerberg, 60311 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurter_grune_sosse_denkmal",
+      "name": "Frankfurter Grüne-Soße-Denkmal",
+      "before": {
+        "lat": 50.10119228,
+        "lng": 8.71799308
+      },
+      "google": {
+        "lat": 50.1012318,
+        "lng": 8.7180547,
+        "place_id": "ChIJAby4KdUNvUcRxfIIMG6o9VU",
+        "address": "Speckgasse 7, 60599 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_marshall_brunnen",
+      "name": "Marshall-Brunnen",
+      "before": {
+        "lat": 50.11448358,
+        "lng": 8.671065160000001
+      },
+      "google": {
+        "lat": 50.1145231,
+        "lng": 8.6711268,
+        "place_id": "ChIJ01pb46wOvUcRTWpjfs_UVr0",
+        "address": "Taunusanlage 20, 60325 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_goethe_denkmal",
+      "name": "Goethe-Denkmal",
+      "before": {
+        "lat": 50.11323718,
+        "lng": 8.676527160000001
+      },
+      "google": {
+        "lat": 50.1132767,
+        "lng": 8.6765888,
+        "place_id": "ChIJeUBex64OvUcRdcIsq2T2DD8",
+        "address": "Goethepl., 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_brunnen_am_kaiserplatz",
+      "name": "Brunnen am Kaiserplatz",
+      "before": {
+        "lat": 50.11051368,
+        "lng": 8.67509116
+      },
+      "google": {
+        "lat": 50.1105532,
+        "lng": 8.6751528,
+        "place_id": "ChIJAVaFaakOvUcRD2hDXpDc934",
+        "address": "Kaiserstraße 19-21, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_schneewitchen_denkmal_snow_white",
+      "name": "Schneewitchen-Denkmal (Snow White)",
+      "before": {
+        "lat": 50.11202408,
+        "lng": 8.670706860000001
+      },
+      "google": {
+        "lat": 50.1120636,
+        "lng": 8.6707685,
+        "place_id": "ChIJQ2BBsacPvUcRy_v_13_KJSU",
+        "address": "Taunusanlage, 60329 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_brockhaus_brunnen_frankfurt_lutz_brockhaus_1984",
+      "name": "Brockhaus-Brunnen, Frankfurt - Lutz Brockhaus (1984)",
+      "before": {
+        "lat": 50.11449848000001,
+        "lng": 8.683348659999998
+      },
+      "google": {
+        "lat": 50.114538,
+        "lng": 8.6834103,
+        "place_id": "ChIJ59bobaUOvUcR9PJ-ON8EF4A",
+        "address": "Zeil 87, 60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_lucae_brunnen",
+      "name": "Lucae-Brunnen",
+      "before": {
+        "lat": 50.11522337999999,
+        "lng": 8.67148426
+      },
+      "google": {
+        "lat": 50.1152629,
+        "lng": 8.6715459,
+        "place_id": "ChIJ10zlBK0OvUcRtCwpWThK3Ac",
+        "address": "Taunusanlage 21, 60325 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_fressgass_brunnen",
+      "name": "Freßgass-Brunnen",
+      "before": {
+        "lat": 50.114424979999995,
+        "lng": 8.674989559999998
+      },
+      "google": {
+        "lat": 50.1144645,
+        "lng": 8.6750512,
+        "place_id": "ChIJWzcSAGwPvUcR5XTPKU3Ious",
+        "address": "Große Bockenheimer Str., 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_euro_skulptur_von_ottmar_horl",
+      "name": "\"Euro-Skulptur\" von Ottmar Hörl",
+      "before": {
+        "lat": 50.10895138000001,
+        "lng": 8.67302856
+      },
+      "google": {
+        "lat": 50.10899089999999,
+        "lng": 8.673090199999999,
+        "place_id": "ChIJj7AZL6oOvUcRyzN695jssdk",
+        "address": "Willy-Brandt-Platz, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_opferdenkmal_den_opfern",
+      "name": "Opferdenkmal \"Den Opfern\"",
+      "before": {
+        "lat": 50.11001698,
+        "lng": 8.671849960000001
+      },
+      "google": {
+        "lat": 50.1100565,
+        "lng": 8.6719116,
+        "place_id": "ChIJSX6Y2WUPvUcRFhj3oUsOpHA",
+        "address": "60311 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_merkur_brunnen",
+      "name": "Merkur-Brunnen",
+      "before": {
+        "lat": 50.11356748,
+        "lng": 8.65089566
+      },
+      "google": {
+        "lat": 50.11360699999999,
+        "lng": 8.6509573,
+        "place_id": "ChIJTdrcYlkJvUcRSC5eC_wPEIM",
+        "address": "Ludwig-Erhard-Anlage 1, 60327 Frankfurt am Main-Innenstadt II"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_st_georg_brunnen",
+      "name": "St. Georg Brunnen",
+      "before": {
+        "lat": 50.10609708,
+        "lng": 8.69074388
+      },
+      "google": {
+        "lat": 50.1061366,
+        "lng": 8.6908055,
+        "place_id": "ChIJWc36CoMPvUcRepMNKjIVbqk",
+        "address": "Frankensteiner Str. 6-20, 60594 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_schwanheimer_dune",
+      "name": "Schwanheimer Düne",
+      "before": {
+        "lat": 50.08812588000001,
+        "lng": 8.5596517
+      },
+      "google": {
+        "lat": 50.0881654,
+        "lng": 8.5597133,
+        "place_id": "ChIJw6ei03YKvUcR9LmdUZF4Q5E",
+        "address": "Höchster Weg 70, 60529 Frankfurt am Main West"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_lohrpark",
+      "name": "Lohrpark",
+      "before": {
+        "lat": 50.15092607999999,
+        "lng": 8.72848662
+      },
+      "google": {
+        "lat": 50.1509656,
+        "lng": 8.7285483,
+        "place_id": "ChIJK_HQ5wYPvUcRCneiVBK9HsA",
+        "address": "Auf dem Lohr, 60389 Frankfurt am Main-Frankfurt-Ost"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_liegewiese_gruneburgpark",
+      "name": "Liegewiese Grüneburgpark",
+      "before": {
+        "lat": 50.12937538,
+        "lng": 8.66028624
+      },
+      "google": {
+        "lat": 50.1294149,
+        "lng": 8.6603479,
+        "place_id": "ChIJ76JUoXUJvUcR5ffts2fSUjM",
+        "address": "Westend-Nord, 60323 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_bethmannpark",
+      "name": "Bethmannpark",
+      "before": {
+        "lat": 50.11884748,
+        "lng": 8.69088646
+      },
+      "google": {
+        "lat": 50.118887,
+        "lng": 8.6909481,
+        "place_id": "ChIJXXsvj7wOvUcR7Bw75UXlMo8",
+        "address": "Friedberger Landstraße 8, 60316 Frankfurt am Main-Innenstadt III"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_hochster_mainufer",
+      "name": "Höchster Mainufer",
+      "before": {
+        "lat": 50.09748947999999,
+        "lng": 8.547476679999999
+      },
+      "google": {
+        "lat": 50.09752899999999,
+        "lng": 8.5475383,
+        "place_id": "ChIJ59GnL4yhvUcRg4wlSxo9yrM",
+        "address": "Batterie, 65929 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_rennbahnpark",
+      "name": "Rennbahnpark",
+      "before": {
+        "lat": 50.08578308,
+        "lng": 8.6544063
+      },
+      "google": {
+        "lat": 50.0858226,
+        "lng": 8.6544679,
+        "place_id": "ChIJu1D6eKULvUcR-C_PvUpzfmY",
+        "address": "Niederräder Landstraße 11, 60528 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_rothschildpark",
+      "name": "Rothschildpark",
+      "before": {
+        "lat": 50.117757080000004,
+        "lng": 8.670083660000001
+      },
+      "google": {
+        "lat": 50.1177966,
+        "lng": 8.6701453,
+        "place_id": "ChIJ8ZBcrLIOvUcR_Hqx9Y1_4qo",
+        "address": "Reuterweg 14, 60323 Frankfurt am Main-Innenstadt II"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_elli_lucht_park",
+      "name": "Elli-Lucht-Park",
+      "before": {
+        "lat": 50.08960958,
+        "lng": 8.6481259
+      },
+      "google": {
+        "lat": 50.0896491,
+        "lng": 8.648187499999999,
+        "place_id": "ChIJ26knoPILvUcR4JzVqqFQS38",
+        "address": "Stadtteilpark Niederrad, Kelsterbacher Str. 2B, 60528 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_natur_ship_ms_heimliche_liebe",
+      "name": "Natur Ship MS Heimliche Liebe",
+      "before": {
+        "lat": 50.093453280000006,
+        "lng": 8.64773428
+      },
+      "google": {
+        "lat": 50.0934928,
+        "lng": 8.6477959,
+        "place_id": "ChIJgwopCe4LvUcRBpKtrZdJwfs",
+        "address": "Niederräder Ufer 8, 60528 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_gunthersburgpark",
+      "name": "Günthersburgpark",
+      "before": {
+        "lat": 50.12969027999999,
+        "lng": 8.70252644
+      },
+      "google": {
+        "lat": 50.1297298,
+        "lng": 8.7025881,
+        "place_id": "ChIJvyi9ZuoOvUcRCDw-Zei71uM",
+        "address": "Wetteraustraße 7, 60389 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_hochster_stadtpark",
+      "name": "Höchster Stadtpark",
+      "before": {
+        "lat": 50.10978638,
+        "lng": 8.55553676
+      },
+      "google": {
+        "lat": 50.1098259,
+        "lng": 8.5555984,
+        "place_id": "ChIJ5xLOUamgvUcRAIJ2Uc4kuoE",
+        "address": "Palleskestraße 5, 65929 Frankfurt am Main West"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_gruneburgpark",
+      "name": "Grüneburgpark",
+      "before": {
+        "lat": 50.12733118,
+        "lng": 8.66157924
+      },
+      "google": {
+        "lat": 50.12737070000001,
+        "lng": 8.6616409,
+        "place_id": "ChIJnc3vbEgJvUcRxGJfy-eGHW8",
+        "address": "August-Siebert-Straße 22, 60323 Frankfurt am Main-Innenstadt II"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_waldspielpark_louisa",
+      "name": "Waldspielpark Louisa",
+      "before": {
+        "lat": 50.087454879999996,
+        "lng": 8.6671214
+      },
+      "google": {
+        "lat": 50.0874944,
+        "lng": 8.667183,
+        "place_id": "ChIJ8_hzswwMvUcREOSZ0JrMMxU",
+        "address": "Mörfelder Landstraße 265, 60598 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurter_stadtwald",
+      "name": "Frankfurter Stadtwald",
+      "before": {
+        "lat": 50.07055007999999,
+        "lng": 8.67864022
+      },
+      "google": {
+        "lat": 50.0705896,
+        "lng": 8.6787018,
+        "place_id": "ChIJkTFprc4NvUcRAwCuVYOV7VA",
+        "address": "60528 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_adolph_von_holzhausen_park",
+      "name": "Adolph-von-Holzhausen-Park",
+      "before": {
+        "lat": 50.12619078,
+        "lng": 8.678497440000001
+      },
+      "google": {
+        "lat": 50.1262303,
+        "lng": 8.6785591,
+        "place_id": "ChIJRUF65rUOvUcRJG5zOi-Cs-E",
+        "address": "Hammanstraße 18, 60322 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_aquatorialsonnenuhr",
+      "name": "Äquatorialsonnenuhr",
+      "before": {
+        "lat": 50.108980079999995,
+        "lng": 8.691030759999999
+      },
+      "google": {
+        "lat": 50.1090196,
+        "lng": 8.691092399999999,
+        "place_id": "ChIJLX44u6EOvUcRqrMKnlZdlNU",
+        "address": "Schöne Aussicht 6, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_waldspielpark_heinrich_kraft_park",
+      "name": "Waldspielpark Heinrich-Kraft-Park",
+      "before": {
+        "lat": 50.13761948,
+        "lng": 8.76641504
+      },
+      "google": {
+        "lat": 50.137659,
+        "lng": 8.7664767,
+        "place_id": "ChIJ8ZKUeDEOvUcRx5z7defhoYY",
+        "address": "Heinrich-Kraft-Park, 60386 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_main_tower",
+      "name": "MAIN TOWER",
+      "before": {
+        "lat": 50.11250048000001,
+        "lng": 8.672078359999999
+      },
+      "google": {
+        "lat": 50.11254,
+        "lng": 8.672139999999999,
+        "place_id": "ChIJX0usKIcPvUcRex4ytC72h58",
+        "address": "Neue Mainzer Str. 52–58, 60311 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_goetheturm",
+      "name": "Goetheturm",
+      "before": {
+        "lat": 50.08894378,
+        "lng": 8.7113199
+      },
+      "google": {
+        "lat": 50.0889833,
+        "lng": 8.7113815,
+        "place_id": "ChIJweBfv_wNvUcRKuVpBeDxBQM",
+        "address": "Am Goetheturm, 60599 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_taunusturm",
+      "name": "Taunusturm",
+      "before": {
+        "lat": 50.11074308,
+        "lng": 8.672478660000001
+      },
+      "google": {
+        "lat": 50.1107826,
+        "lng": 8.6725403,
+        "place_id": "ChIJvfwI6qsOvUcRtY30MduUDJE",
+        "address": "Taunus Turm, Taunustor 1, 60310 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_neuer_henninger_turm",
+      "name": "Neuer Henninger-Turm",
+      "before": {
+        "lat": 50.097195580000005,
+        "lng": 8.693755880000001
+      },
+      "google": {
+        "lat": 50.0958709,
+        "lng": 8.6963969,
+        "place_id": "ChIJ77qAZCMMvUcR0g9yXfCcG8U",
+        "address": "Am Henninger Turm, 60599 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 239,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_aussichtsplattform_feuerloschboot",
+      "name": "Aussichtsplattform Feuerlöschboot",
+      "before": {
+        "lat": 50.08944998,
+        "lng": 8.6343907
+      },
+      "google": {
+        "lat": 50.0894895,
+        "lng": 8.6344523,
+        "place_id": "ChIJYW5QgQMLvUcRnyA8DI98RmQ",
+        "address": "Schwanheimer Str. 140, 60528 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_turm_der_alten_stadtmauer",
+      "name": "Turm der alten Stadtmauer",
+      "before": {
+        "lat": 50.11690198,
+        "lng": 8.679608960000001
+      },
+      "google": {
+        "lat": 50.1169415,
+        "lng": 8.6796706,
+        "place_id": "ChIJIZh_bgAPvUcRNjoLpoZqXM4",
+        "address": "Eschenheimer Tor, 60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hamburger_am_turm_frankfurt_am_main",
+      "name": "Hamburger am Turm Frankfurt am Main",
+      "before": {
+        "lat": 50.117852479999996,
+        "lng": 8.679822360000001
+      },
+      "google": {
+        "lat": 50.117892,
+        "lng": 8.679884,
+        "place_id": "ChIJS7rY0LEOvUcRYs46r7O4Zwo",
+        "address": "Eschenheimer Anlagen, 60318 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_messeturm_frankfurt",
+      "name": "Messeturm Frankfurt",
+      "before": {
+        "lat": 50.11246197999999,
+        "lng": 8.65282566
+      },
+      "google": {
+        "lat": 50.1125015,
+        "lng": 8.6528873,
+        "place_id": "ChIJ-bHglVkJvUcR3QX81bHeD1o",
+        "address": "Friedrich-Ebert-Anlage 49, 60308 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_kuhhirtenturm",
+      "name": "Kuhhirtenturm",
+      "before": {
+        "lat": 50.10669517999999,
+        "lng": 8.689659080000002
+      },
+      "google": {
+        "lat": 50.1067347,
+        "lng": 8.689720699999999,
+        "place_id": "ChIJnYEDYAAPvUcRnfX5G0JKUkw",
+        "address": "Große Rittergasse 118, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_silberturm",
+      "name": "Silberturm",
+      "before": {
+        "lat": 50.10958198,
+        "lng": 8.66908866
+      },
+      "google": {
+        "lat": 50.109694,
+        "lng": 8.6691898,
+        "place_id": "ChIJwbq54aoOvUcRz9SwO5CG1Kk",
+        "address": "Silberturm, Weserstraße, 60329 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 14,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bockenheimer_warte",
+      "name": "Bockenheimer Warte",
+      "before": {
+        "lat": 50.12002998,
+        "lng": 8.650936759999999
+      },
+      "google": {
+        "lat": 50.1200695,
+        "lng": 8.650998399999999,
+        "place_id": "ChIJe5bUo0QJvUcR4YMSorD5ovw",
+        "address": "Bockenheimer Warte, 60325 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_turm_hotel_frankfurt",
+      "name": "Turm Hotel Frankfurt",
+      "before": {
+        "lat": 50.11990258,
+        "lng": 8.677776560000002
+      },
+      "google": {
+        "lat": 50.1199421,
+        "lng": 8.6778382,
+        "place_id": "ChIJZ62GcLEOvUcRMvdfSqnaUD8",
+        "address": "Eschersheimer Landstraße 20, 60322 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_schwarzlicht_minigolf_frankfurt_am_main_golfzone",
+      "name": "Schwarzlicht Minigolf Frankfurt am Main | GolfZone",
+      "before": {
+        "lat": 50.13720628,
+        "lng": 8.741664440000001
+      },
+      "google": {
+        "lat": 50.1372458,
+        "lng": 8.7417261,
+        "place_id": "ChIJ43JowaUPvUcRPlHKuwGBe4E",
+        "address": "Friesstraße 3, 60388 Frankfurt am Main-Frankfurt-Ost"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_schwarzlichthelden_minigolf",
+      "name": "Schwarzlichthelden Minigolf",
+      "before": {
+        "lat": 50.12357078,
+        "lng": 8.702889560000001
+      },
+      "google": {
+        "lat": 50.1236103,
+        "lng": 8.7029512,
+        "place_id": "ChIJZ4X9wOEPvUcRJ12GwDvSSgI",
+        "address": "Berger Str. 138, 60385 Frankfurt am Main-Innenstadt III"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_sportpark_frankfurt",
+      "name": "Sportpark Frankfurt",
+      "before": {
+        "lat": 50.16332297999999,
+        "lng": 8.6878746
+      },
+      "google": {
+        "lat": 50.1633625,
+        "lng": 8.687936299999999,
+        "place_id": "ChIJx2moljAPvUcRCsbbInPZe8w",
+        "address": "August-Schanz-Straße 24-26, 60433 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_sportpark_preungesheim",
+      "name": "Sportpark Preungesheim",
+      "before": {
+        "lat": 50.15107988,
+        "lng": 8.70191782
+      },
+      "google": {
+        "lat": 50.1511194,
+        "lng": 8.7019795,
+        "place_id": "ChIJUWiOZSEPvUcRju-5TQkGhRY",
+        "address": "Goldpeppingstraße 8, 60435 Frankfurt am Main Nord-Ost"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_freibad_stadion",
+      "name": "Freibad Stadion",
+      "before": {
+        "lat": 50.07067638000001,
+        "lng": 8.65099112
+      },
+      "google": {
+        "lat": 50.0707159,
+        "lng": 8.6510527,
+        "place_id": "ChIJ32qZCIELvUcRMxX4guiqLzA",
+        "address": "Mörfelder Landstraße 362, 60528 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_textorbad",
+      "name": "Textorbad",
+      "before": {
+        "lat": 50.10134938,
+        "lng": 8.68549398
+      },
+      "google": {
+        "lat": 50.1013889,
+        "lng": 8.685555599999999,
+        "place_id": "ChIJ40ydsB4MvUcRuD5wQmnVQgU",
+        "address": "Textorstraße 42, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_silobad",
+      "name": "Silobad",
+      "before": {
+        "lat": 50.102531580000004,
+        "lng": 8.52876648
+      },
+      "google": {
+        "lat": 50.1025711,
+        "lng": 8.5288281,
+        "place_id": "ChIJ_3E1X34Tc0ERPPO7I9_p7xg",
+        "address": "Hunsrückstraße 100, 65929 Frankfurt am Main West"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_freibad_hausen",
+      "name": "Freibad Hausen",
+      "before": {
+        "lat": 50.13040968,
+        "lng": 8.62192894
+      },
+      "google": {
+        "lat": 50.1304492,
+        "lng": 8.6219906,
+        "place_id": "ChIJdXc2QHUJvUcRvek9CjgOfO4",
+        "address": "Ludwig-Landmann-Straße 341, 60488 Frankfurt am Main-Frankfurt-Mitte-West"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_lasertag_frankfurt",
+      "name": "LaserTag Frankfurt",
+      "before": {
+        "lat": 50.11510958,
+        "lng": 8.71040106
+      },
+      "google": {
+        "lat": 50.1352317,
+        "lng": 8.7432135,
+        "place_id": "ChIJbR7dNE4OvUcRDmf5J6yJcFw",
+        "address": "Borsigallee 18, 60388 Frankfurt am Main-Frankfurt-Ost"
+      },
+      "delta_m": 3237,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_sportplatz_mainwasen",
+      "name": "Sportplatz Mainwasen",
+      "before": {
+        "lat": 50.104616879999995,
+        "lng": 8.707706980000001
+      },
+      "google": {
+        "lat": 50.1046564,
+        "lng": 8.7077686,
+        "place_id": "ChIJOc5om4IOvUcRc4yPlto1qmg",
+        "address": "Gerbermühlstraße 110, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_soccerbeat",
+      "name": "SOCCERBEAT",
+      "before": {
+        "lat": 50.114804379999995,
+        "lng": 8.68138506
+      },
+      "google": {
+        "lat": 50.1148439,
+        "lng": 8.6814467,
+        "place_id": "ChIJs8tkROAPvUcRZ6mKeAXkWQ4",
+        "address": "Zeil 106/MyZeil, 2. Etage, 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_fussballgolf_karben",
+      "name": "Fussballgolf Karben",
+      "before": {
+        "lat": 50.23311528000001,
+        "lng": 8.711906
+      },
+      "google": {
+        "lat": 50.2331548,
+        "lng": 8.7119678,
+        "place_id": "ChIJD9AqHywEvUcRfz3cdoy5pus",
+        "address": "Eckhardsgraben 7, 61184 Karben-Petterweil"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_sportgarten_der_ftg_frankfurt",
+      "name": "Sportgarten der FTG Frankfurt",
+      "before": {
+        "lat": 50.12028418,
+        "lng": 8.61408266
+      },
+      "google": {
+        "lat": 50.1203237,
+        "lng": 8.6141443,
+        "place_id": "ChIJ962jJ4MJvUcRgQwiEseGsa4",
+        "address": "Rebstöcker Weg 15, 60489 Frankfurt am Main-Frankfurt-Mitte-West"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_stadt_frankfurt_am_main_zentrales_burgeramt",
+      "name": "Stadt Frankfurt am Main | Zentrales Bürgeramt",
+      "before": {
+        "lat": 50.114901880000005,
+        "lng": 8.69354106
+      },
+      "google": {
+        "lat": 50.1149414,
+        "lng": 8.6936027,
+        "place_id": "ChIJ3ZiJx6IOvUcRz8FKRG-PDpc",
+        "address": "Zeil 3, 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_magistrat_der_stadt_frankfurt_am_main",
+      "name": "Magistrat der Stadt Frankfurt am Main",
+      "before": {
+        "lat": 50.11516108000001,
+        "lng": 8.68611226
+      },
+      "google": {
+        "lat": 50.11520059999999,
+        "lng": 8.6861739,
+        "place_id": "ChIJ_0NC3KQOvUcRh6vgj_NZPl8",
+        "address": "Große Friedberger Str. 7, 60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_fristenbriefkasten_der_stadtverwaltung_frankfurt_am_main",
+      "name": "Fristenbriefkasten der Stadtverwaltung Frankfurt am Main",
+      "before": {
+        "lat": 50.10998008,
+        "lng": 8.679908759999998
+      },
+      "google": {
+        "lat": 50.11001960000001,
+        "lng": 8.6799704,
+        "place_id": "ChIJF52fpMcPvUcRuma5PQfIxCY",
+        "address": "Limpurgergasse 8, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_roemer_city",
+      "name": "Roemer City",
+      "before": {
+        "lat": 50.11025318,
+        "lng": 8.681077759999999
+      },
+      "google": {
+        "lat": 50.110581,
+        "lng": 8.6818062,
+        "place_id": "ChIJz1QQDqYOvUcRIg-vuOMzHW8",
+        "address": "Römerberg 23, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 63,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "frankfurt_burgeramt_dornbusch",
+      "name": "Bürgeramt Dornbusch",
+      "before": {
+        "lat": 50.13972618,
+        "lng": 8.67036672
+      },
+      "google": {
+        "lat": 50.13976570000001,
+        "lng": 8.6704284,
+        "place_id": "ChIJVc-7T5UJvUcR68D_jY4mZdA",
+        "address": "Eschersheimer Landstraße 248, 60320 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_stadt_frankfurt_am_main_burgeramt_nieder_eschbach",
+      "name": "Stadt Frankfurt am Main | Bürgeramt Nieder-Eschbach",
+      "before": {
+        "lat": 50.198721680000006,
+        "lng": 8.67134066
+      },
+      "google": {
+        "lat": 50.1987612,
+        "lng": 8.6714024,
+        "place_id": "ChIJM2S8SxgGvUcRcBeOIA0IKZo",
+        "address": "Deuil-La-Barre-Straße 26, 60437 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_stadt_frankfurt_am_main_burgeramt_nordwest",
+      "name": "Stadt Frankfurt am Main | Bürgeramt Nordwest",
+      "before": {
+        "lat": 50.15890668,
+        "lng": 8.6321771
+      },
+      "google": {
+        "lat": 50.1589462,
+        "lng": 8.6322388,
+        "place_id": "ChIJO_HOHPkIvUcRPiYtxYvfp14",
+        "address": "Nidaforum 3, 60439 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_stadt_frankfurt_am_main_burgeramt_hochst",
+      "name": "Stadt Frankfurt am Main | Bürgeramt Höchst",
+      "before": {
+        "lat": 50.101513280000006,
+        "lng": 8.54266328
+      },
+      "google": {
+        "lat": 50.1015528,
+        "lng": 8.5427249,
+        "place_id": "ChIJr8EkEX4Tc0ERQCxO23EmLrU",
+        "address": "Dalbergstraße 14, 65929 Frankfurt am Main West"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_stadt_frankfurt_am_main_burgeramt_bergen_enkheim",
+      "name": "Stadt Frankfurt am Main | Bürgeramt Bergen-Enkheim",
+      "before": {
+        "lat": 50.15468358,
+        "lng": 8.75286022
+      },
+      "google": {
+        "lat": 50.1547231,
+        "lng": 8.7529219,
+        "place_id": "ChIJF-VINroPvUcRBrf6dDgid_E",
+        "address": "Marktstraße 30, 60388 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_stadt_frankfurt_am_main_burgeramt_aussenstelle_fechenheim",
+      "name": "Stadt Frankfurt am Main | Bürgeramt - Außenstelle Fechenheim",
+      "before": {
+        "lat": 50.124292679999996,
+        "lng": 8.769436840000001
+      },
+      "google": {
+        "lat": 50.1243322,
+        "lng": 8.769498500000001,
+        "place_id": "ChIJc_gLP3APvUcRFyI6ROrsqa0",
+        "address": "Alt-Fechenheim 89, 60386 Frankfurt am Main-Frankfurt-Ost"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_aussichtspunkt_startbahn_west",
+      "name": "Aussichtspunkt Startbahn West",
+      "before": {
+        "lat": 50.02162628,
+        "lng": 8.523127980000002
+      },
+      "google": {
+        "lat": 50.0216658,
+        "lng": 8.5231895,
+        "place_id": "ChIJ9_k51391vUcRWT8o6Leqs6w",
+        "address": "Airportring, 60549 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_aussichtspunkt_galeria_sky_lounge",
+      "name": "Aussichtspunkt Galeria Sky Lounge",
+      "before": {
+        "lat": 50.11430828,
+        "lng": 8.679824559999998
+      },
+      "google": {
+        "lat": 50.1143478,
+        "lng": 8.6798862,
+        "place_id": "ChIJNZJDWgAPvUcRHuKHfbqsvfw",
+        "address": "Zeil 116-126, 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_aussichtspunkt_steinbach",
+      "name": "Aussichtspunkt Steinbach",
+      "before": {
+        "lat": 50.16331848,
+        "lng": 8.588896300000002
+      },
+      "google": {
+        "lat": 50.163358,
+        "lng": 8.588958,
+        "place_id": "ChIJA4bM5FoJvUcRpaUBDYoMcKs",
+        "address": "5H7Q+8H, 61449 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_mainblick",
+      "name": "Mainblick",
+      "before": {
+        "lat": 50.09265327999999,
+        "lng": 8.6422342
+      },
+      "google": {
+        "lat": 50.09269279999999,
+        "lng": 8.6422958,
+        "place_id": "ChIJMVXOcvILvUcRRXh-nDxGKd0",
+        "address": "Unnamed Road,60528, 60528 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_karl_bieber_hohe_aussichtspunkt",
+      "name": "Karl-Bieber-Höhe Aussichtspunkt",
+      "before": {
+        "lat": 50.20152558000001,
+        "lng": 8.67994594
+      },
+      "google": {
+        "lat": 50.2015651,
+        "lng": 8.680007699999999,
+        "place_id": "ChIJ1V9FRRAGvUcRpZcm3xLxmqw",
+        "address": "Karl-Bieber-Höhe, 60437 Frankfurt am Main-Nieder-Eschbach"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_aussichtsplattform_zeppelinheim_planespotting",
+      "name": "Aussichtsplattform Zeppelinheim Planespotting",
+      "before": {
+        "lat": 50.03937098,
+        "lng": 8.59673856
+      },
+      "google": {
+        "lat": 50.0394105,
+        "lng": 8.5968001,
+        "place_id": "ChIJ01MfkCgLvUcRqjh5m2WVmUU",
+        "address": "Flughafen, 60549 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_aussichtspunkt_ins_vogelschutzgebiet_mit_erklarungstafel",
+      "name": "Aussichtspunkt ins Vogelschutzgebiet mit Erklärungstafel",
+      "before": {
+        "lat": 50.14227808,
+        "lng": 8.733936120000001
+      },
+      "google": {
+        "lat": 50.1423176,
+        "lng": 8.7339978,
+        "place_id": "ChIJvSgQI_YPvUcRnHEuMrlgSiI",
+        "address": "Gwinnerstraße, 60388 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_maintor_panorama",
+      "name": "MainTor Panorama",
+      "before": {
+        "lat": 50.10772808,
+        "lng": 8.67602628
+      },
+      "google": {
+        "lat": 50.1077676,
+        "lng": 8.676087899999999,
+        "place_id": "ChIJzWlwyakOvUcRWmcrpwG6Zbw",
+        "address": "Neue Mainzer Str. 2-4, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_viewpoint_europe",
+      "name": "Viewpoint Europe",
+      "before": {
+        "lat": 50.10909148,
+        "lng": 8.67046536
+      },
+      "google": {
+        "lat": 50.109131,
+        "lng": 8.670527,
+        "place_id": "ChIJAQExSKwOvUcRBqp48xNBbpI",
+        "address": "Kaiserstraße 38, 60329 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_main_aussicht",
+      "name": "Main-Aussicht",
+      "before": {
+        "lat": 50.09469048,
+        "lng": 8.64406198
+      },
+      "google": {
+        "lat": 50.107676,
+        "lng": 8.6845274,
+        "place_id": "ChIJrRL68h4PvUcRljattCduYzM",
+        "address": "Färberstraße 67, 60594 Frankfurt am Main"
+      },
+      "delta_m": 3227,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_aussichtspunkt_staustufe_griesheim",
+      "name": "Aussichtspunkt Staustufe Griesheim",
+      "before": {
+        "lat": 50.08814848,
+        "lng": 8.6089261
+      },
+      "google": {
+        "lat": 50.088188,
+        "lng": 8.6089877,
+        "place_id": "ChIJa0Z7TgALvUcR1tkSKCfGysA",
+        "address": "Schwanheim, 60529 Frankfurt am Main West"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_aussichtspunkt_skyline_fotomotive",
+      "name": "Aussichtspunkt Skyline Fotomotive",
+      "before": {
+        "lat": 50.106463680000005,
+        "lng": 8.71125438
+      },
+      "google": {
+        "lat": 50.107676,
+        "lng": 8.6845274,
+        "place_id": "ChIJrRL68h4PvUcRljattCduYzM",
+        "address": "Färberstraße 67, 60594 Frankfurt am Main"
+      },
+      "delta_m": 1911,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_skyline_viewpoint",
+      "name": "Skyline Viewpoint",
+      "before": {
+        "lat": 50.10107678,
+        "lng": 8.669040380000002
+      },
+      "google": {
+        "lat": 50.107676,
+        "lng": 8.6845274,
+        "place_id": "ChIJrRL68h4PvUcRljattCduYzM",
+        "address": "Färberstraße 67, 60594 Frankfurt am Main"
+      },
+      "delta_m": 1326,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_blick_auf_skyline_frankfurt",
+      "name": "Blick auf Skyline Frankfurt",
+      "before": {
+        "lat": 50.16102128,
+        "lng": 8.772238999999999
+      },
+      "google": {
+        "lat": 50.1610608,
+        "lng": 8.772300699999999,
+        "place_id": "ChIJuQTSVpwRvUcRdxVgmfw-5Ig",
+        "address": "Hohe Str., 63477 Maintal"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_skyline_frankfurt_city",
+      "name": "Skyline Frankfurt City",
+      "before": {
+        "lat": 50.10856128,
+        "lng": 8.68755366
+      },
+      "google": {
+        "lat": 50.1086008,
+        "lng": 8.6876153,
+        "place_id": "ChIJvzPZjZ0PvUcR0ea27MmIPTc",
+        "address": "Alte Brücke 2, 60594 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_oper_frankfurt",
+      "name": "Oper Frankfurt",
+      "before": {
+        "lat": 50.10809948,
+        "lng": 8.673775079999999
+      },
+      "google": {
+        "lat": 50.10813899999999,
+        "lng": 8.673836699999999,
+        "place_id": "ChIJjQ6iiakOvUcRGmdK7fWHb1U",
+        "address": "Untermainanlage 11, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_alte_oper",
+      "name": "Alte Oper",
+      "before": {
+        "lat": 50.11599238,
+        "lng": 8.671854360000001
+      },
+      "google": {
+        "lat": 50.1160319,
+        "lng": 8.671916,
+        "place_id": "ChIJkbtVDq0OvUcRKL3BbW6vzb4",
+        "address": "Opernpl. 1, 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_stadtwald_frankfurt_main",
+      "name": "Stadtwald Frankfurt/Main",
+      "before": {
+        "lat": 50.069939180000006,
+        "lng": 8.683075220000001
+      },
+      "google": {
+        "lat": 50.0705896,
+        "lng": 8.6787018,
+        "place_id": "ChIJkTFprc4NvUcRAwCuVYOV7VA",
+        "address": "60528 Frankfurt am Main"
+      },
+      "delta_m": 320,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_schwanheimer_wald",
+      "name": "Schwanheimer Wald",
+      "before": {
+        "lat": 50.07689828,
+        "lng": 8.57798062
+      },
+      "google": {
+        "lat": 50.0769378,
+        "lng": 8.578042199999999,
+        "place_id": "ChIJnTRS6IoLvUcRypFnwLAKQi4",
+        "address": "Schwanheim, 60529 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_der_mainradweg",
+      "name": "Der MainRadweg",
+      "before": {
+        "lat": 50.10816268,
+        "lng": 8.76543498
+      },
+      "google": {
+        "lat": 50.10820220000001,
+        "lng": 8.765496599999999,
+        "place_id": "ChIJ2-FqUeoPvUcRWDC0cOoO_VU",
+        "address": "Unnamed Road 63065, 63065 Offenbach am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_fahrrad_box_radfahren_in_frankfurt",
+      "name": "Fahrrad-Box Radfahren in Frankfurt",
+      "before": {
+        "lat": 50.12430648,
+        "lng": 8.60678334
+      },
+      "google": {
+        "lat": 50.124346,
+        "lng": 8.606845,
+        "place_id": "ChIJz4jr-38JvUcR_VF2GXYlQyw",
+        "address": "Breitlacherstraße 78, 60489 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_allgemeiner_deutscher_fahrrad_club_frankfurt_am_main_e_v",
+      "name": "Allgemeiner Deutscher Fahrrad-Club Frankfurt am Main e.V.",
+      "before": {
+        "lat": 50.13151868,
+        "lng": 8.626149739999999
+      },
+      "google": {
+        "lat": 50.1315582,
+        "lng": 8.626211399999999,
+        "place_id": "ChIJ8wuJ_rMOvUcRf3xYf32pAgE",
+        "address": "Bachmannstraße 2-4, 60488 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_radwegroute",
+      "name": "Radwegroute",
+      "before": {
+        "lat": 50.13355797999999,
+        "lng": 8.80107714
+      },
+      "google": {
+        "lat": 50.1335975,
+        "lng": 8.8011388,
+        "place_id": "ChIJBz48df0RvUcREBRcQNEX7Qc",
+        "address": "Schmiedegasse 8, 63075 Offenbach am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_meldeplattform_radverkehr",
+      "name": "Meldeplattform Radverkehr",
+      "before": {
+        "lat": 50.05634687999999,
+        "lng": 8.59233214
+      },
+      "google": {
+        "lat": 50.05638640000001,
+        "lng": 8.592393699999999,
+        "place_id": "ChIJjebRn7sLvUcRzVLzvD9TIhw",
+        "address": "Bessie-Coleman-Straße 7, 60549 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_cube_store_frankfurt_am_main",
+      "name": "CUBE Store Frankfurt am Main",
+      "before": {
+        "lat": 50.13211728,
+        "lng": 8.74338594
+      },
+      "google": {
+        "lat": 50.1321568,
+        "lng": 8.7434476,
+        "place_id": "ChIJ4TCIxjcPvUcRh5I8mmS6X4c",
+        "address": "Wächtersbacher Str. 88-90, 60386 Frankfurt am Main-Frankfurt-Ost"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_fahrrad_bottgen_gmbh",
+      "name": "Fahrrad Böttgen GmbH",
+      "before": {
+        "lat": 50.12997738,
+        "lng": 8.71176734
+      },
+      "google": {
+        "lat": 50.1300169,
+        "lng": 8.711829,
+        "place_id": "ChIJXb-hle0OvUcR15xuvRaqzcM",
+        "address": "Große Spillingsgasse 8, 60385 Frankfurt am Main-Bornheim/Ostend"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_schraube_rad_meisterwerkstatt_fahrradwerkstatt",
+      "name": "Schraube & Rad Meisterwerkstatt Fahrradwerkstatt",
+      "before": {
+        "lat": 50.120583980000006,
+        "lng": 8.686369860000001
+      },
+      "google": {
+        "lat": 50.1206235,
+        "lng": 8.6864315,
+        "place_id": "ChIJOb9i2NwPvUcRqBrQvrAQPKg",
+        "address": "Eckenheimer Landstraße 16, 60318 Frankfurt am Main-Innenstadt III"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_regionalpark_niddaroute",
+      "name": "Regionalpark Niddaroute",
+      "before": {
+        "lat": 50.23330478,
+        "lng": 8.762619599999999
+      },
+      "google": {
+        "lat": 50.23334430000001,
+        "lng": 8.7626814,
+        "place_id": "ChIJ_9ixtvkEvUcR3-ocz_PTI1Q",
+        "address": "Rathauspl. 1, 61184 Karben-Groß-Karben"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_regionalverband_frankfurtrheinmain",
+      "name": "Regionalverband FrankfurtRheinMain",
+      "before": {
+        "lat": 50.10734038,
+        "lng": 8.66049598
+      },
+      "google": {
+        "lat": 50.1073799,
+        "lng": 8.660557599999999,
+        "place_id": "ChIJ8UHzBP4LvUcRVfNJtqlQUyo",
+        "address": "Poststraße 16, 60329 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_rad_touren_teufel",
+      "name": "Rad-Touren-Teufel",
+      "before": {
+        "lat": 50.10330238,
+        "lng": 8.68933208
+      },
+      "google": {
+        "lat": 50.1033419,
+        "lng": 8.6893937,
+        "place_id": "ChIJfXImdi6EokcRQydWQrjIJ0Q",
+        "address": "Martin-May-Straße 7, 60594 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_waterbike_germany",
+      "name": "Waterbike-Germany",
+      "before": {
+        "lat": 50.10552417999999,
+        "lng": 8.71650678
+      },
+      "google": {
+        "lat": 50.1055637,
+        "lng": 8.7165684,
+        "place_id": "ChIJgVLF55oPvUcR6ka1UV-PKBg",
+        "address": "Mainwasenweg, 60594 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_fahrrad_reparaturstation_frankfurt",
+      "name": "Fahrrad-Reparaturstation Frankfurt",
+      "before": {
+        "lat": 50.11387938,
+        "lng": 8.62753946
+      },
+      "google": {
+        "lat": 50.10183420000001,
+        "lng": 8.661795,
+        "place_id": "ChIJkaf5XQALvUcR2UGwuldLVBo",
+        "address": "Rottweiler Str. 34, 60327 Frankfurt am Main"
+      },
+      "delta_m": 2786,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_alter_flugplatz_frankfurt_am_main",
+      "name": "Alter Flugplatz Frankfurt am Main",
+      "before": {
+        "lat": 50.17773998,
+        "lng": 8.65958888
+      },
+      "google": {
+        "lat": 50.1777795,
+        "lng": 8.659650599999999,
+        "place_id": "ChIJD0FQejQPvUcRLZt02UED440",
+        "address": "Am Burghof 55, 60437 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_friedensbrucke",
+      "name": "Friedensbrücke",
+      "before": {
+        "lat": 50.10081058,
+        "lng": 8.66691238
+      },
+      "google": {
+        "lat": 50.1008501,
+        "lng": 8.666974,
+        "place_id": "ChIJu8aOFwcMvUcR6_9q-IN1Rkc",
+        "address": "Friedensbrücke, 60596 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_flaschenpost_frankfurt_am_main",
+      "name": "Flaschenpost Frankfurt am Main",
+      "before": {
+        "lat": 50.09582827999999,
+        "lng": 8.691353079999999
+      },
+      "google": {
+        "lat": 50.0958678,
+        "lng": 8.6914147,
+        "place_id": "ChIJTymz_HwLvUcR14u8Nu8zlMc",
+        "address": "Darmstädter Landstraße 185, 60598 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_niedwald",
+      "name": "Niedwald",
+      "before": {
+        "lat": 50.10908368,
+        "lng": 8.59198806
+      },
+      "google": {
+        "lat": 50.1091232,
+        "lng": 8.5920497,
+        "place_id": "ChIJ9SPJO8wLvUcRKXwNVJ9r-3I",
+        "address": "Nied, 65934 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_b_o_c_bike_outdoor_company_gmbh_co_kg",
+      "name": "B.O.C. - BIKE & OUTDOOR COMPANY GmbH & Co. KG",
+      "before": {
+        "lat": 50.12361338000001,
+        "lng": 8.742217559999998
+      },
+      "google": {
+        "lat": 50.1236529,
+        "lng": 8.742279200000002,
+        "place_id": "ChIJV9CcQUIOvUcR6dUZWTUs_ZM",
+        "address": "Hanauer Landstraße 435, 60314 Frankfurt am Main-Bornheim/Ostend"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_zoo_frankfurt",
+      "name": "Zoo Frankfurt",
+      "before": {
+        "lat": 50.116431479999996,
+        "lng": 8.699236059999999
+      },
+      "google": {
+        "lat": 50.116471,
+        "lng": 8.699297699999999,
+        "place_id": "ChIJnx0ysJAOvUcRTHFb1aYN8pI",
+        "address": "Bernhard-Grzimek-Allee 1, 60316 Frankfurt am Main-Bornheim/Ostend"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_kobelt_zoo_gesellschaft_prof_dr_w_kobelt_e_v",
+      "name": "Kobelt Zoo, Gesellschaft Prof. Dr. W. Kobelt e. V.",
+      "before": {
+        "lat": 50.081782880000006,
+        "lng": 8.581698999999999
+      },
+      "google": {
+        "lat": 50.0818224,
+        "lng": 8.581760599999999,
+        "place_id": "ChIJC5gZhEIKvUcRhqX3iaB_cus",
+        "address": "Schwanheimer Bahnstraße 5, 60529 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_grzimekhaus",
+      "name": "Grzimekhaus",
+      "before": {
+        "lat": 50.11635438,
+        "lng": 8.702248860000001
+      },
+      "google": {
+        "lat": 50.1163939,
+        "lng": 8.7023105,
+        "place_id": "ChIJW-ddkaQPvUcRvK6b8pxEwEc",
+        "address": "Grzimekhaus, Nachttiere, 60316 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_streichelzoo",
+      "name": "Streichelzoo",
+      "before": {
+        "lat": 50.11535687999999,
+        "lng": 8.70109686
+      },
+      "google": {
+        "lat": 50.1153964,
+        "lng": 8.7011585,
+        "place_id": "ChIJ_-55AC8PvUcRaW1qn08Mhtw",
+        "address": "Trampeltiere, 60316 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_freizeitpark_kalbach",
+      "name": "Freizeitpark Kalbach",
+      "before": {
+        "lat": 50.18698067999999,
+        "lng": 8.63689066
+      },
+      "google": {
+        "lat": 50.1870202,
+        "lng": 8.6369524,
+        "place_id": "ChIJQaUsCX4IvUcRgJWKU3bKRTE",
+        "address": "Kalbacher Stadtpfad 7-9, 60437 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_offenbacher_waldzoo_e_v",
+      "name": "Offenbacher Waldzoo e.V.",
+      "before": {
+        "lat": 50.08004588,
+        "lng": 8.7788023
+      },
+      "google": {
+        "lat": 50.08008539999999,
+        "lng": 8.7788639,
+        "place_id": "ChIJaZds8hISvUcRDreikuL8_oY",
+        "address": "Waldstraße 275, 63071 Offenbach am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_trinkwasserspender_zoo",
+      "name": "Trinkwasserspender Zoo",
+      "before": {
+        "lat": 50.115834379999995,
+        "lng": 8.697892260000001
+      },
+      "google": {
+        "lat": 50.1158739,
+        "lng": 8.6979539,
+        "place_id": "ChIJlX6dfQAPvUcR79E56zP136Q",
+        "address": "Alfred-Brehm-Platz, 60316 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_katzendschungel",
+      "name": "Katzendschungel",
+      "before": {
+        "lat": 50.11650098,
+        "lng": 8.701330160000001
+      },
+      "google": {
+        "lat": 50.11654050000001,
+        "lng": 8.7013918,
+        "place_id": "ChIJMYm-0zwPvUcRWPEQvB2RUUY",
+        "address": "Katzendschungel, 60316 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_waldspielpark_schwanheim",
+      "name": "Waldspielpark Schwanheim",
+      "before": {
+        "lat": 50.07939718,
+        "lng": 8.576903499999998
+      },
+      "google": {
+        "lat": 50.0794367,
+        "lng": 8.576965099999999,
+        "place_id": "ChIJK_Fid2cKvUcRUBVuE49FCAc",
+        "address": "Stöppelschneise, 60529 Frankfurt am Main West"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_exotarium_zoo_frankfurt",
+      "name": "Exotarium Zoo Frankfurt",
+      "before": {
+        "lat": 50.11585498000001,
+        "lng": 8.70273966
+      },
+      "google": {
+        "lat": 50.1158945,
+        "lng": 8.702801299999999,
+        "place_id": "ChIJs4aMyfwJvUcR1-6YRiDUwqs",
+        "address": "Bernhard-Grzimek-Allee, 60316 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_freizeitpark_oberwiesen",
+      "name": "Freizeitpark Oberwiesen",
+      "before": {
+        "lat": 50.155598479999995,
+        "lng": 8.552717099999999
+      },
+      "google": {
+        "lat": 50.155638,
+        "lng": 8.552778800000002,
+        "place_id": "ChIJkSfncnWnvUcRXA3sQ472mog",
+        "address": "Schöne Aussicht 35, 65760 Eschborn-Niederhöchstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_hessen_shop_kleinmarkthalle",
+      "name": "Hessen Shop Kleinmarkthalle",
+      "before": {
+        "lat": 50.11254938,
+        "lng": 8.68221846
+      },
+      "google": {
+        "lat": 50.1125889,
+        "lng": 8.6822801,
+        "place_id": "ChIJFxL08aUOvUcR3Itns_OmetA",
+        "address": "An der Kleinmarkthalle, 60311 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_thomas_pfeilschmidt_souvenirs",
+      "name": "Thomas Pfeilschmidt Souvenirs",
+      "before": {
+        "lat": 50.10995867999999,
+        "lng": 8.68171286
+      },
+      "google": {
+        "lat": 50.1099982,
+        "lng": 8.6817745,
+        "place_id": "ChIJ69SEPqYOvUcRFkg5Gdt1Mio",
+        "address": "Römerberg 13, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_elbenwald",
+      "name": "Elbenwald",
+      "before": {
+        "lat": 50.115171079999996,
+        "lng": 8.680648960000001
+      },
+      "google": {
+        "lat": 50.1152106,
+        "lng": 8.6807106,
+        "place_id": "ChIJe3Gw8q8OvUcR7FcX0Oq1rzY",
+        "address": "Zeil 106, 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_kiosk_souvenirshop",
+      "name": "Kiosk & Souvenirshop",
+      "before": {
+        "lat": 50.11218158,
+        "lng": 8.680421959999999
+      },
+      "google": {
+        "lat": 50.1122211,
+        "lng": 8.680483599999999,
+        "place_id": "ChIJLRnLRK8OvUcRBxTpOX2CCy4",
+        "address": "Sandhofpassage, Sandgasse 6, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hessen_shop_leipziger_strasse",
+      "name": "Hessen Shop Leipziger Straße",
+      "before": {
+        "lat": 50.122497079999995,
+        "lng": 8.645514760000001
+      },
+      "google": {
+        "lat": 50.1225366,
+        "lng": 8.6455764,
+        "place_id": "ChIJoZVnZUIJvUcRJAElDvb7CpI",
+        "address": "Leipziger Str. 49, 60487 Frankfurt am Main-Innenstadt II"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bembeltown_design_and_more_gbr_bembel_shop",
+      "name": "Bembeltown Design and more GbR Bembel Shop",
+      "before": {
+        "lat": 50.12746788,
+        "lng": 8.62738884
+      },
+      "google": {
+        "lat": 50.1275074,
+        "lng": 8.6274505,
+        "place_id": "ChIJBxZ6DZsJvUcRUP6F9qCSuPM",
+        "address": "Tilsiter Str. 10, 60487 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_palmengarten_shop_im_eingangsschauhaus",
+      "name": "Palmengarten-Shop im Eingangsschauhaus",
+      "before": {
+        "lat": 50.121666579999996,
+        "lng": 8.65680126
+      },
+      "google": {
+        "lat": 50.1217061,
+        "lng": 8.6568629,
+        "place_id": "ChIJOe-MG0oJvUcRrnz39pAryyM",
+        "address": "Siesmayerstraße 63, 60323 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_germany_on_my_mind_frankfurt_airport",
+      "name": "Germany On My Mind Frankfurt Airport",
+      "before": {
+        "lat": 50.05051908,
+        "lng": 8.57117224
+      },
+      "google": {
+        "lat": 50.0505586,
+        "lng": 8.5712338,
+        "place_id": "ChIJaWY7QMALvUcRbFMwUg6khHQ",
+        "address": "Frankfurt Airport, B und Terminal 3 Marktplatz, Security Area, Terminal 1 Bereich, 60549 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_germany_more_frankfurt_airport",
+      "name": "germany & more Frankfurt Airport",
+      "before": {
+        "lat": 50.049866980000004,
+        "lng": 8.571670639999999
+      },
+      "google": {
+        "lat": 50.0499065,
+        "lng": 8.5717322,
+        "place_id": "ChIJocj_WMAKvUcRXscF1nOgu-Q",
+        "address": "Terminal 1 Bereich B, Public Area, Abflugring, 60549 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_australien_shop_frankfurt",
+      "name": "Australien Shop Frankfurt",
+      "before": {
+        "lat": 50.11174288000001,
+        "lng": 8.68258286
+      },
+      "google": {
+        "lat": 50.1117824,
+        "lng": 8.6826445,
+        "place_id": "ChIJewaZ5qUOvUcRAw0xxayB1ug",
+        "address": "Berliner Str. 33, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_euroshop",
+      "name": "EuroShop",
+      "before": {
+        "lat": 50.10782288,
+        "lng": 8.66558048
+      },
+      "google": {
+        "lat": 50.10786239999999,
+        "lng": 8.6656421,
+        "place_id": "ChIJC0DKW1UJvUcRp1N27M8lx4E",
+        "address": "Kaiserstraße 74, 60329 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurter_rotkreuz_kliniken_e_v_klinik_maingau",
+      "name": "Frankfurter Rotkreuz-Kliniken e.V. - Klinik Maingau",
+      "before": {
+        "lat": 50.119930780000004,
+        "lng": 8.68797526
+      },
+      "google": {
+        "lat": 50.1199703,
+        "lng": 8.6880369,
+        "place_id": "ChIJM4ErvJcOvUcRODmmb0RNKrE",
+        "address": "Scheffelstraße 2-14, 60318 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_schiffer_campus_universitatsmedizin_frankfurt",
+      "name": "Schiffer Campus, Universitätsmedizin Frankfurt",
+      "before": {
+        "lat": 50.10657148,
+        "lng": 8.68368248
+      },
+      "google": {
+        "lat": 50.106611,
+        "lng": 8.6837441,
+        "place_id": "ChIJNy729HgTc0ER7SiGDFkhojE",
+        "address": "Schulstraße 31, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_rosen_apotheke",
+      "name": "Rosen Apotheke",
+      "before": {
+        "lat": 50.11178217999999,
+        "lng": 8.67714666
+      },
+      "google": {
+        "lat": 50.1118217,
+        "lng": 8.6772083,
+        "place_id": "ChIJDZ5f1agOvUcR-Y7DT73YE2Y",
+        "address": "Am Salzhaus 3-5, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurter_rotkreuz_kliniken_e_v_klinik_rotes_kreuz",
+      "name": "Frankfurter Rotkreuz-Kliniken e.V - Klinik Rotes Kreuz",
+      "before": {
+        "lat": 50.11714058,
+        "lng": 8.69720706
+      },
+      "google": {
+        "lat": 50.1171801,
+        "lng": 8.6972687,
+        "place_id": "ChIJM4ErvJcOvUcRCls_QN3GzaE",
+        "address": "Königswarterstraße 8-16, 60316 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hirsch_apotheke_ihre_apotheker",
+      "name": "Hirsch Apotheke IHRE APOTHEKER",
+      "before": {
+        "lat": 50.11393808,
+        "lng": 8.68139496
+      },
+      "google": {
+        "lat": 50.1139776,
+        "lng": 8.681456599999999,
+        "place_id": "ChIJa98Tgq8OvUcRtwmrts0rsk4",
+        "address": "Zeil 111, 60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_burgerhospital_frankfurt",
+      "name": "Bürgerhospital Frankfurt",
+      "before": {
+        "lat": 50.13072088,
+        "lng": 8.68672204
+      },
+      "google": {
+        "lat": 50.1307604,
+        "lng": 8.6867837,
+        "place_id": "ChIJI-YoocgOvUcR2Yto1quBLYI",
+        "address": "Nibelungenallee 37, 60318 Frankfurt am Main-Innenstadt III"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_prinzen_apotheke",
+      "name": "Prinzen-Apotheke",
+      "before": {
+        "lat": 50.11355348000001,
+        "lng": 8.683844160000001
+      },
+      "google": {
+        "lat": 50.11359299999999,
+        "lng": 8.6839058,
+        "place_id": "ChIJnXm1qKUOvUcRIntt5YIiXdM",
+        "address": "Töngesgasse 22, 60311 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_privatarztlicher_notdienst_frankfurt",
+      "name": "Privatärztlicher Notdienst Frankfurt",
+      "before": {
+        "lat": 50.114338079999996,
+        "lng": 8.685710160000001
+      },
+      "google": {
+        "lat": 50.1143776,
+        "lng": 8.6857718,
+        "place_id": "ChIJQyeFWBcPvUcRqpvXyBHzhX4",
+        "address": "Zeil 65, 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hospital_zum_heiligen_geist",
+      "name": "Hospital zum Heiligen Geist",
+      "before": {
+        "lat": 50.110078779999995,
+        "lng": 8.69291346
+      },
+      "google": {
+        "lat": 50.1101183,
+        "lng": 8.6929751,
+        "place_id": "ChIJDQah96EOvUcR64QhjsW4_qs",
+        "address": "Lange Str. 4-6, 60311 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_centrum_apotheke_an_der_hauptwache",
+      "name": "Centrum Apotheke an der Hauptwache",
+      "before": {
+        "lat": 50.11448408,
+        "lng": 8.67864546
+      },
+      "google": {
+        "lat": 50.1145236,
+        "lng": 8.6787071,
+        "place_id": "ChIJzX70O24PvUcRaP0kcHIJ36s",
+        "address": "Schillerstraße 4, 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_universitatsmedizin_frankfurt",
+      "name": "Universitätsmedizin Frankfurt",
+      "before": {
+        "lat": 50.09493938,
+        "lng": 8.661945379999999
+      },
+      "google": {
+        "lat": 50.0949789,
+        "lng": 8.662007,
+        "place_id": "ChIJNdxwy_cLvUcRcuAbuvCuUrw",
+        "address": "Theodor-Stern-Kai 7, 60596 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_haus_und_facharzt_zentrum_dr_med_daniel_ekhart_kollegen",
+      "name": "Haus- und Facharzt-Zentrum Dr. med. Daniel Ekhart & Kollegen",
+      "before": {
+        "lat": 50.10496588000001,
+        "lng": 8.678291980000001
+      },
+      "google": {
+        "lat": 50.1050054,
+        "lng": 8.6783536,
+        "place_id": "ChIJKcgr0XgTc0ER28PXccyyl4g",
+        "address": "Schweizer Str. 5, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_agaplesion_markus_krankenhaus",
+      "name": "AGAPLESION MARKUS KRANKENHAUS",
+      "before": {
+        "lat": 50.13558938,
+        "lng": 8.64728774
+      },
+      "google": {
+        "lat": 50.1356289,
+        "lng": 8.6473494,
+        "place_id": "ChIJf4OSQBYJvUcRdN8aAg0c8uo",
+        "address": "Wilhelm-Epstein-Straße 4, 60431 Frankfurt am Main-Innenstadt II"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_hermes_apotheke",
+      "name": "Hermes Apotheke",
+      "before": {
+        "lat": 50.10854468,
+        "lng": 8.66807156
+      },
+      "google": {
+        "lat": 50.1085842,
+        "lng": 8.6681332,
+        "place_id": "ChIJTxSrv6oOvUcRYiHrm8qojxw",
+        "address": "Kaiserstraße 56, 60329 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_struwwelpeter_apotheke_am_kaiserplatz",
+      "name": "Struwwelpeter-Apotheke am Kaiserplatz",
+      "before": {
+        "lat": 50.111221979999996,
+        "lng": 8.67587596
+      },
+      "google": {
+        "lat": 50.1112615,
+        "lng": 8.6759376,
+        "place_id": "ChIJsdsnSakOvUcRm5yTyNz_ue8",
+        "address": "Kaiserstraße 10, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_praxis_fur_allgemeinmedizin_peter_gaigl",
+      "name": "Praxis für Allgemeinmedizin Peter Gaigl",
+      "before": {
+        "lat": 50.11809477999999,
+        "lng": 8.67850926
+      },
+      "google": {
+        "lat": 50.1181343,
+        "lng": 8.678570900000002,
+        "place_id": "ChIJ2V-nyLEOvUcREN7E0cxdxUs",
+        "address": "Eschersheimer Landstraße 1, 60322 Frankfurt am Main-Innenstadt II"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_5k_universum_apotheke",
+      "name": "5K Universum Apotheke",
+      "before": {
+        "lat": 50.09596757999999,
+        "lng": 8.66378538
+      },
+      "google": {
+        "lat": 50.09600709999999,
+        "lng": 8.663846999999999,
+        "place_id": "ChIJ5X8llfcLvUcR9nhD106Yomw",
+        "address": "Theodor-Stern-Kai 7, Haus 12, 60596 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_palmengarten_frankfurt",
+      "name": "Palmengarten Frankfurt",
+      "before": {
+        "lat": 50.12317538,
+        "lng": 8.65776846
+      },
+      "google": {
+        "lat": 50.1232149,
+        "lng": 8.6578301,
+        "place_id": "ChIJxfLE2UUJvUcR5WlJbp2M1D0",
+        "address": "Palmengarten der Stadt, Siesmayerstraße 63, 60323 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_eiserner_steg",
+      "name": "Eiserner Steg",
+      "before": {
+        "lat": 50.108071280000004,
+        "lng": 8.682067280000002
+      },
+      "google": {
+        "lat": 50.1081108,
+        "lng": 8.6821289,
+        "place_id": "ChIJox1qlqcOvUcRp60YI90hyz8",
+        "address": "Eiserner Steg, 60311 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_wasserfall",
+      "name": "Wasserfall",
+      "before": {
+        "lat": 50.12282878,
+        "lng": 8.65424496
+      },
+      "google": {
+        "lat": 50.1228683,
+        "lng": 8.6543066,
+        "place_id": "ChIJzXQw4gkJvUcRzGeK9OGXLzA",
+        "address": "Steingarten, Zeppelinallee 18, 60323 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bester_skylineblick",
+      "name": "Bester Skylineblick",
+      "before": {
+        "lat": 50.10696598,
+        "lng": 8.681057380000002
+      },
+      "google": {
+        "lat": 50.1070055,
+        "lng": 8.681118999999999,
+        "place_id": "ChIJL08_JwANvUcRhlPuzV6rWEA",
+        "address": "Schaumainkai 15, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_sitzender",
+      "name": "Sitzender",
+      "before": {
+        "lat": 50.11878438,
+        "lng": 8.681089559999998
+      },
+      "google": {
+        "lat": 50.1188239,
+        "lng": 8.6811512,
+        "place_id": "ChIJDQeVa4kPvUcR95JXghiJDuE",
+        "address": "Eschenheimer Anlage 33, 60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_liegende",
+      "name": "Liegende",
+      "before": {
+        "lat": 50.114657480000005,
+        "lng": 8.673820359999999
+      },
+      "google": {
+        "lat": 50.114697,
+        "lng": 8.673882,
+        "place_id": "ChIJNd6MpbcPvUcRrvMF18yI0YU",
+        "address": "Große Bockenheimer Str. 37-39, 60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bethmann_fountain",
+      "name": "Bethmann Fountain",
+      "before": {
+        "lat": 50.11770198000001,
+        "lng": 8.69088266
+      },
+      "google": {
+        "lat": 50.1177415,
+        "lng": 8.6909443,
+        "place_id": "ChIJVYE6E0QPvUcRPgYeK0nlPzg",
+        "address": "Friedberger Anlage 32, 60316 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_staufermauer",
+      "name": "Staufermauer",
+      "before": {
+        "lat": 50.11352298,
+        "lng": 8.686648960000001
+      },
+      "google": {
+        "lat": 50.1135226,
+        "lng": 8.686912699999999,
+        "place_id": "ChIJp9UZYKQOvUcR_7aKL89xRhA",
+        "address": "Staufenmauer, Fahrgasse, 60311 Frankfurt am Main"
+      },
+      "delta_m": 19,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_schiller_denkmal",
+      "name": "Schiller-Denkmal",
+      "before": {
+        "lat": 50.111068679999995,
+        "lng": 8.671215859999998
+      },
+      "google": {
+        "lat": 50.1132767,
+        "lng": 8.6765888,
+        "place_id": "ChIJeUBex64OvUcRdcIsq2T2DD8",
+        "address": "Goethepl., 60313 Frankfurt am Main"
+      },
+      "delta_m": 455,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_schirn_kunsthalle_frankfurt_stammhaus_am_romer",
+      "name": "SCHIRN Kunsthalle Frankfurt - Stammhaus am Römer",
+      "before": {
+        "lat": 50.11017418,
+        "lng": 8.68347686
+      },
+      "google": {
+        "lat": 50.1102137,
+        "lng": 8.6835385,
+        "place_id": "ChIJr8vEBwAPvUcRl-5ddEPOGdE",
+        "address": "Gabriel-Riesser-Weg 3, 60325 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_portikus",
+      "name": "Portikus",
+      "before": {
+        "lat": 50.10797918,
+        "lng": 8.68726498
+      },
+      "google": {
+        "lat": 50.1080187,
+        "lng": 8.6873266,
+        "place_id": "ChIJlfuA26AOvUcR3Lwa8gdlAFs",
+        "address": "Maininsel, Alte Brücke 2, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurter_kunstverein",
+      "name": "Frankfurter Kunstverein",
+      "before": {
+        "lat": 50.110717480000005,
+        "lng": 8.68273106
+      },
+      "google": {
+        "lat": 50.11075700000001,
+        "lng": 8.6827927,
+        "place_id": "ChIJYUB7cqYOvUcRiQ1Vtoq9vVA",
+        "address": "Markt 44, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_ausstellungshalle_1a",
+      "name": "AusstellungsHalle 1a",
+      "before": {
+        "lat": 50.105079679999996,
+        "lng": 8.68666018
+      },
+      "google": {
+        "lat": 50.1051192,
+        "lng": 8.686721799999999,
+        "place_id": "ChIJcSY6dp2ZB0cRC8_ArUS2xCA",
+        "address": "Schulstraße 1a, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_galerie_rothamel_frankfurt",
+      "name": "Galerie Rothamel Frankfurt",
+      "before": {
+        "lat": 50.12180748,
+        "lng": 8.67001236
+      },
+      "google": {
+        "lat": 50.121847,
+        "lng": 8.670074,
+        "place_id": "ChIJEb_Qp6YOvUcRGmq3C65KLJY",
+        "address": "Reuterweg 71, 60323 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_galerie_das_bilderhaus",
+      "name": "Galerie DAS BILDERHAUS",
+      "before": {
+        "lat": 50.12285498,
+        "lng": 8.681951459999999
+      },
+      "google": {
+        "lat": 50.1228945,
+        "lng": 8.682013099999999,
+        "place_id": "ChIJF7qJIrcOvUcRDdQjmlc7reU",
+        "address": "Hermannstraße 41, 60318 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_galerie_maurer",
+      "name": "Galerie Maurer",
+      "before": {
+        "lat": 50.11003158,
+        "lng": 8.687159459999998
+      },
+      "google": {
+        "lat": 50.1100711,
+        "lng": 8.6872211,
+        "place_id": "ChIJmQKNTKEOvUcRgsTF_L86Gk8",
+        "address": "Fahrgasse 5, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_timeride_frankfurt",
+      "name": "TimeRide Frankfurt",
+      "before": {
+        "lat": 50.11170308,
+        "lng": 8.68109026
+      },
+      "google": {
+        "lat": 50.1117426,
+        "lng": 8.6811519,
+        "place_id": "ChIJE-X1qt8PvUcRj5cg8ImuFEk",
+        "address": "Berliner Str. 42a, 60311 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_galerie_muhlfeld_stohrer",
+      "name": "galerie . mühlfeld + stohrer",
+      "before": {
+        "lat": 50.111735079999995,
+        "lng": 8.685879660000001
+      },
+      "google": {
+        "lat": 50.1117746,
+        "lng": 8.6859413,
+        "place_id": "ChIJc64zPaQOvUcR0T2MBF1xC0U",
+        "address": "Fahrgasse 27, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_galerie_perpetuel",
+      "name": "Galerie Perpétuel",
+      "before": {
+        "lat": 50.10587048,
+        "lng": 8.68471838
+      },
+      "google": {
+        "lat": 50.10591,
+        "lng": 8.68478,
+        "place_id": "ChIJjeZp9h0MvUcRXP4L_J4K324",
+        "address": "Oppenheimer Str. 39, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_kriminalmuseum_kriminaltechnische_lehrmittelsammlung_des_polizeiprasid",
+      "name": "Kriminalmuseum - Kriminaltechnische Lehrmittelsammlung des Polizeipräsidiums Frankfurt am Main",
+      "before": {
+        "lat": 50.13282348,
+        "lng": 8.674095340000001
+      },
+      "google": {
+        "lat": 50.132863,
+        "lng": 8.674157,
+        "place_id": "ChIJEwG9VjMJvUcRWZqm0DS_ibI",
+        "address": "Adickesallee 70, 60322 Frankfurt am Main-Innenstadt III"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_katholische_kirchengemeinde_dom_st_bartholomaus",
+      "name": "Katholische Kirchengemeinde Dom St. Bartholomäus",
+      "before": {
+        "lat": 50.11123407999999,
+        "lng": 8.684937260000002
+      },
+      "google": {
+        "lat": 50.1112736,
+        "lng": 8.6849989,
+        "place_id": "ChIJ6XRqKKQOvUcROcn65NntwGE",
+        "address": "Domplatz 14, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_georgioskirche",
+      "name": "Georgioskirche",
+      "before": {
+        "lat": 50.128440780000005,
+        "lng": 8.66335254
+      },
+      "google": {
+        "lat": 50.1284803,
+        "lng": 8.6634142,
+        "place_id": "ChIJ51g5KjYJvUcRyeuZsC2MaVE",
+        "address": "Sebastian-Rinz-Straße 2A, 60323 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_altes_rathaus",
+      "name": "altes Rathaus",
+      "before": {
+        "lat": 50.09999988,
+        "lng": 8.56418208
+      },
+      "google": {
+        "lat": 50.1105339,
+        "lng": 8.6810154,
+        "place_id": "ChIJ6friXQAPvUcRDVZJ-OJekAc",
+        "address": "Paulsplatz, 60311 Frankfurt am Main"
+      },
+      "delta_m": 8414,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_rathaus",
+      "name": "Rathaus",
+      "before": {
+        "lat": 50.20333398,
+        "lng": 8.70891104
+      },
+      "google": {
+        "lat": 50.110581,
+        "lng": 8.6818062,
+        "place_id": "ChIJz1QQDqYOvUcRIg-vuOMzHW8",
+        "address": "Römerberg 23, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 10493,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hochster_schloss_altes_schloss_ein_haus_der_deutschen_stiftung_denkmal",
+      "name": "Höchster Schloss (Altes Schloss) - ein Haus der Deutschen Stiftung Denkmalschutz",
+      "before": {
+        "lat": 50.098246180000004,
+        "lng": 8.54714098
+      },
+      "google": {
+        "lat": 50.0982857,
+        "lng": 8.5472026,
+        "place_id": "ChIJ4ehqBqOgvUcRsAgpgS9Lnt0",
+        "address": "Höchster Schloßpl. 16, 65929 Frankfurt am Main West"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_das_neue_schloss_hochst",
+      "name": "Das neue Schloss Höchst",
+      "before": {
+        "lat": 50.09806268,
+        "lng": 8.54568708
+      },
+      "google": {
+        "lat": 50.0981022,
+        "lng": 8.545748699999999,
+        "place_id": "ChIJxUl-IKOgvUcR6hn-qiPoIsw",
+        "address": "Burggraben 1, 65929 Frankfurt am Main West"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_burg_rodelheim",
+      "name": "Burg Rödelheim",
+      "before": {
+        "lat": 50.12220608,
+        "lng": 8.61241826
+      },
+      "google": {
+        "lat": 50.1222456,
+        "lng": 8.612479900000002,
+        "place_id": "ChIJ6QGtG9kJvUcRBf1PpYTO5Ws",
+        "address": "Auf d. Insel 16, 60489 Frankfurt am Main-Frankfurt-Mitte-West"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_histor_verwaltung_der_sammlung_burg_nesselburg",
+      "name": "Histor. Verwaltung der \"Sammlung Burg Nesselburg\"",
+      "before": {
+        "lat": 50.09944738,
+        "lng": 8.720360379999999
+      },
+      "google": {
+        "lat": 50.0994869,
+        "lng": 8.720422,
+        "place_id": "ChIJT34bgvUNvUcRtRScgSx5OZY",
+        "address": "w. Burgruine Nesselburg / OAL-Nesselwang c/o Herrn Gerald Wimmer, Bleiweißstraße 7, 60599 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_schloss_isenburg",
+      "name": "Schloss Isenburg",
+      "before": {
+        "lat": 50.107745480000006,
+        "lng": 8.76498748
+      },
+      "google": {
+        "lat": 50.107785,
+        "lng": 8.765049099999999,
+        "place_id": "ChIJaWkziAQOvUcR7dFp9yX4RP0",
+        "address": "Schloßstraße 66, 63065 Offenbach am Main-Frankfurt-Ost"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_burg_kronberg",
+      "name": "Burg Kronberg",
+      "before": {
+        "lat": 50.18105308,
+        "lng": 8.50652398
+      },
+      "google": {
+        "lat": 50.1810926,
+        "lng": 8.5065857,
+        "place_id": "ChIJPT2gnECmvUcRNM11aGgWaGQ",
+        "address": "Schloßstraße 10–12, 61476 Kronberg im Taunus"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_schelmenburg",
+      "name": "Schelmenburg",
+      "before": {
+        "lat": 50.15587008,
+        "lng": 8.751582200000001
+      },
+      "google": {
+        "lat": 50.1559096,
+        "lng": 8.7516439,
+        "place_id": "ChIJpy3XqLsPvUcRNgbijqbZl3w",
+        "address": "Schelmenburgpl. 1, 60388 Frankfurt am Main-Bergen-Enkheim"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_schloss_hochst",
+      "name": "Schloss Höchst",
+      "before": {
+        "lat": 50.09706328,
+        "lng": 8.54569868
+      },
+      "google": {
+        "lat": 50.0982857,
+        "lng": 8.5472026,
+        "place_id": "ChIJ4ehqBqOgvUcRsAgpgS9Lnt0",
+        "address": "Höchster Schloßpl. 16, 65929 Frankfurt am Main West"
+      },
+      "delta_m": 173,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurt_main_eschenheimer_tor",
+      "name": "Frankfurt (Main) Eschenheimer Tor",
+      "before": {
+        "lat": 50.118480479999995,
+        "lng": 8.67969836
+      },
+      "google": {
+        "lat": 50.1174772,
+        "lng": 8.6795293,
+        "place_id": "ChIJk0mD0rEOvUcRlW0oxQlBj28",
+        "address": "Eschenheimer Tor, Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 112,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "frankfurt_aussichtspunkt_theodor_stern_kai_3",
+      "name": "Aussichtspunkt Theodor-Stern-Kai 3",
+      "before": {
+        "lat": 50.09592887999999,
+        "lng": 8.65880278
+      },
+      "google": {
+        "lat": 50.0959684,
+        "lng": 8.658864399999999,
+        "place_id": "ChIJRb7ZIgALvUcRGNtH6Ups5D8",
+        "address": "Theodor-Stern-Kai 3, 60596 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_viewpoint_spielplatz",
+      "name": "Viewpoint- Spielplatz",
+      "before": {
+        "lat": 50.107398880000005,
+        "lng": 8.77119638
+      },
+      "google": {
+        "lat": 50.08862000000001,
+        "lng": 8.721044599999999,
+        "place_id": "ChIJ7VDBpM4NvUcRa8TXWLdfAKs",
+        "address": "Sachsenhäuser Landwehrweg, 60598 Frankfurt am Main"
+      },
+      "delta_m": 4142,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_flosserbrucke",
+      "name": "Flößerbrücke",
+      "before": {
+        "lat": 50.10765908,
+        "lng": 8.69477618
+      },
+      "google": {
+        "lat": 50.1076986,
+        "lng": 8.6948378,
+        "place_id": "ChIJx4MZoJ8OvUcRxtgwCVUsT2M",
+        "address": "Flößerbrücke, 60594 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_botanischer_garten_frankfurt",
+      "name": "Botanischer Garten Frankfurt",
+      "before": {
+        "lat": 50.12695608,
+        "lng": 8.658444939999999
+      },
+      "google": {
+        "lat": 50.1269956,
+        "lng": 8.658506599999999,
+        "place_id": "ChIJS7NuPUYJvUcRbgjTeQ3Y32A",
+        "address": "Siesmayerstraße 72, 60323 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_goethe_universitat_frankfurt_am_main_wissenschaftsgarten",
+      "name": "Goethe-Universität Frankfurt am Main Wissenschaftsgarten",
+      "before": {
+        "lat": 50.17028558,
+        "lng": 8.6290771
+      },
+      "google": {
+        "lat": 50.1703251,
+        "lng": 8.6291388,
+        "place_id": "ChIJkUe7rF8IvUcR13PS_TBv3Cc",
+        "address": "Altenhöferallee 1f, 60438 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_haus_leonhardsbrunn",
+      "name": "Haus Leonhardsbrunn",
+      "before": {
+        "lat": 50.126194780000006,
+        "lng": 8.65470504
+      },
+      "google": {
+        "lat": 50.1262343,
+        "lng": 8.6547667,
+        "place_id": "ChIJMR3-4kYJvUcRJZOUIc1h37s",
+        "address": "B8 9-5,60487, 60487 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_tropicarium",
+      "name": "Tropicarium",
+      "before": {
+        "lat": 50.12385428,
+        "lng": 8.65724854
+      },
+      "google": {
+        "lat": 50.1238938,
+        "lng": 8.657310200000001,
+        "place_id": "ChIJnRImCUYJvUcRtz4i7Iwgpnw",
+        "address": "Westend-Süd, 60323 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_senckenbergischer_arzneipflanzengarten",
+      "name": "Senckenbergischer Arzneipflanzengarten",
+      "before": {
+        "lat": 50.12642288000001,
+        "lng": 8.65928444
+      },
+      "google": {
+        "lat": 50.1264624,
+        "lng": 8.6593461,
+        "place_id": "ChIJV6GWTOYJvUcRgNmLo-HjkBA",
+        "address": "Unnamed Road, 60323, 60323 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_europagarten",
+      "name": "Europagarten",
+      "before": {
+        "lat": 50.10795018,
+        "lng": 8.63219528
+      },
+      "google": {
+        "lat": 50.1079897,
+        "lng": 8.6322569,
+        "place_id": "ChIJe34vw9gLvUcRn-1hfTaZj-M",
+        "address": "Pariser Str. 44, 60486 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bluten_und_schmetterlingshaus",
+      "name": "Blüten- und Schmetterlingshaus",
+      "before": {
+        "lat": 50.12445478000001,
+        "lng": 8.653566139999999
+      },
+      "google": {
+        "lat": 50.12449429999999,
+        "lng": 8.6536278,
+        "place_id": "ChIJbfhTEuQJvUcREvRdMCETFKY",
+        "address": "Blüten- und Schmetterlingshaus, Palmengarten, 60323 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_frankfurt_main_botanischer_garten",
+      "name": "Frankfurt (Main) Botanischer Garten",
+      "before": {
+        "lat": 50.12590048,
+        "lng": 8.65389834
+      },
+      "google": {
+        "lat": 50.1269956,
+        "lng": 8.658506599999999,
+        "place_id": "ChIJS7NuPUYJvUcRbgjTeQ3Y32A",
+        "address": "Siesmayerstraße 72, 60323 Frankfurt am Main"
+      },
+      "delta_m": 350,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_gallusgarten_gemeinschaftsgarten",
+      "name": "GallusGarten Gemeinschaftsgarten",
+      "before": {
+        "lat": 50.105790479999996,
+        "lng": 8.62922138
+      },
+      "google": {
+        "lat": 50.10583,
+        "lng": 8.629283,
+        "place_id": "ChIJcfMpSwoLvUcRtwKVOcv1ZTw",
+        "address": "Schneidhainer Str. 17-1, 60326 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_grungurtelwanderweg_pragestelle_n1",
+      "name": "Grüngürtelwanderweg Prägestelle N1",
+      "before": {
+        "lat": 50.17802168,
+        "lng": 8.67188248
+      },
+      "google": {
+        "lat": 50.17806119999999,
+        "lng": 8.6719442,
+        "place_id": "ChIJNThjGgAJvUcRv76r_93M44s",
+        "address": "5MHC+6Q, 60437 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_grungurtelwanderweg_pragestelle_b3",
+      "name": "Grüngürtelwanderweg Prägestelle B3",
+      "before": {
+        "lat": 50.165065479999996,
+        "lng": 8.7103212
+      },
+      "google": {
+        "lat": 50.165105,
+        "lng": 8.710382899999999,
+        "place_id": "ChIJsebBdQAPvUcRAy653o_rkzs",
+        "address": "5P86+25, 60435 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_schwanheimer_wiesen",
+      "name": "Schwanheimer Wiesen",
+      "before": {
+        "lat": 50.07890008,
+        "lng": 8.569962299999998
+      },
+      "google": {
+        "lat": 50.0789396,
+        "lng": 8.570023899999999,
+        "place_id": "ChIJrd4iN6ELvUcROXnT51hlJwU",
+        "address": "Schwanheim, 60529 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_goetherad_fahrradverleih_am_goetheturm",
+      "name": "Goetherad - Fahrradverleih am Goetheturm",
+      "before": {
+        "lat": 50.089477880000004,
+        "lng": 8.7095259
+      },
+      "google": {
+        "lat": 50.0895174,
+        "lng": 8.7095875,
+        "place_id": "ChIJT1HFljMMvUcRIGL1FCBOyHM",
+        "address": "Sachsenhäuser Landwehrweg 1, 60599 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_wheelspin_inh_johannes_wicht",
+      "name": "Wheelspin | Inh. Johannes Wicht",
+      "before": {
+        "lat": 50.202422479999996,
+        "lng": 8.70941764
+      },
+      "google": {
+        "lat": 50.202462,
+        "lng": 8.7094794,
+        "place_id": "ChIJ_wKpVe8FvUcRjpb9VCJtjZw",
+        "address": "Alt-Erlenbach 35, 60437 Frankfurt am Main-Nieder-Erlenbach"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_theaterhaus_kindertheater_jugendtheater",
+      "name": "Theaterhaus Kindertheater Jugendtheater",
+      "before": {
+        "lat": 50.11063478,
+        "lng": 8.69139136
+      },
+      "google": {
+        "lat": 50.1106743,
+        "lng": 8.691453,
+        "place_id": "ChIJ-f70h6EOvUcRym9VaTwDXDU",
+        "address": "Schützenstraße 12, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_kellertheater_frankfurt",
+      "name": "Kellertheater Frankfurt",
+      "before": {
+        "lat": 50.10960448,
+        "lng": 8.689498859999999
+      },
+      "google": {
+        "lat": 50.109644,
+        "lng": 8.689560499999999,
+        "place_id": "ChIJo9XRbKEOvUcRjZQB5QpGn8Q",
+        "address": "Mainstraße 2, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_schauspiel_frankfurt",
+      "name": "Schauspiel Frankfurt",
+      "before": {
+        "lat": 50.10859088000001,
+        "lng": 8.674836260000001
+      },
+      "google": {
+        "lat": 50.1086304,
+        "lng": 8.6748979,
+        "place_id": "ChIJgdfMlqkOvUcRDCw3ivvZ8Zw",
+        "address": "Neue Mainzer Str. 17, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_papageno_musiktheater",
+      "name": "Papageno Musiktheater",
+      "before": {
+        "lat": 50.12142748,
+        "lng": 8.65497136
+      },
+      "google": {
+        "lat": 50.121467,
+        "lng": 8.655033,
+        "place_id": "ChIJD4i91CsJvUcRVxTMVIyQ3Vo",
+        "address": "Palmengartenstraße 11, 60325 Frankfurt am Main-Innenstadt II"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_galli_theater_frankfurt",
+      "name": "Galli Theater Frankfurt",
+      "before": {
+        "lat": 50.11616798,
+        "lng": 8.644773559999999
+      },
+      "google": {
+        "lat": 50.11620749999999,
+        "lng": 8.6448352,
+        "place_id": "ChIJV-PolF0JvUcRn-gkvTG7yjI",
+        "address": "Hamburger Allee 45, 60486 Frankfurt am Main-Innenstadt II"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_gallus_theater",
+      "name": "Gallus Theater",
+      "before": {
+        "lat": 50.10180708,
+        "lng": 8.64233068
+      },
+      "google": {
+        "lat": 50.10184659999999,
+        "lng": 8.6423923,
+        "place_id": "ChIJd1S25OYLvUcRmFMsz-agA7o",
+        "address": "Adlerwerke, Kleyerstraße 15, 60326 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_kulturhaus_frankfurt",
+      "name": "Kulturhaus Frankfurt",
+      "before": {
+        "lat": 50.11559748,
+        "lng": 8.69596536
+      },
+      "google": {
+        "lat": 50.115637,
+        "lng": 8.696026999999999,
+        "place_id": "ChIJB4bgAZgOvUcRHqHoQu8bpio",
+        "address": "Pfingstweidstraße 2, 60316 Frankfurt am Main-Bornheim/Ostend"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_the_english_theatre_frankfurt",
+      "name": "The English Theatre Frankfurt",
+      "before": {
+        "lat": 50.10938888,
+        "lng": 8.67131576
+      },
+      "google": {
+        "lat": 50.1094284,
+        "lng": 8.671377399999999,
+        "place_id": "ChIJjyhK66oOvUcRvTyJLDXCX7M",
+        "address": "Gallusanlage 7, 60329 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_tigerpalast",
+      "name": "Tigerpalast",
+      "before": {
+        "lat": 50.11537588,
+        "lng": 8.691583459999999
+      },
+      "google": {
+        "lat": 50.1154154,
+        "lng": 8.6916451,
+        "place_id": "ChIJLbBoLqMOvUcRgwN2-HFRFTI",
+        "address": "Heiligkreuzgasse 16, 60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_dramatische_buhne_frankfurt",
+      "name": "Dramatische Bühne Frankfurt",
+      "before": {
+        "lat": 50.12369038,
+        "lng": 8.64110326
+      },
+      "google": {
+        "lat": 50.1237299,
+        "lng": 8.6411649,
+        "place_id": "ChIJ-wYEdGkJvUcRT3jYdL6_pdg",
+        "address": "Leipziger Str. 91, 60487 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_theater_willy_praml",
+      "name": "Theater Willy Praml",
+      "before": {
+        "lat": 50.11915448,
+        "lng": 8.70105586
+      },
+      "google": {
+        "lat": 50.119194,
+        "lng": 8.701117499999999,
+        "place_id": "ChIJ9ZrkxpYOvUcRtYZQkzJej2c",
+        "address": "Waldschmidtstraße 19, 60316 Frankfurt am Main-Bornheim/Ostend"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_bockenheimer_depot",
+      "name": "Bockenheimer Depot",
+      "before": {
+        "lat": 50.12067667999999,
+        "lng": 8.65183266
+      },
+      "google": {
+        "lat": 50.1207162,
+        "lng": 8.6518943,
+        "place_id": "ChIJ9fuvnEQJvUcRseA5MNKMsmc",
+        "address": "Bockenheimer Depot, 60325 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_kunstler_innenhaus_mousonturm",
+      "name": "Künstler*innenhaus Mousonturm",
+      "before": {
+        "lat": 50.11911257999999,
+        "lng": 8.69883076
+      },
+      "google": {
+        "lat": 50.1191521,
+        "lng": 8.6988924,
+        "place_id": "ChIJyUiKaZYOvUcRuFqDK5VCahs",
+        "address": "Waldschmidtstraße 4, 60316 Frankfurt am Main-Bornheim/Ostend"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_marina_griesheim",
+      "name": "Marina, Griesheim",
+      "before": {
+        "lat": 50.09020468,
+        "lng": 8.6082767
+      },
+      "google": {
+        "lat": 50.0902442,
+        "lng": 8.6083383,
+        "place_id": "ChIJiZT44B4LvUcROhlTSHTcnWs",
+        "address": "Griesheimer Ufer, 65933 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bootshafen_mainkur",
+      "name": "Bootshafen Mainkur",
+      "before": {
+        "lat": 50.13734638,
+        "lng": 8.79142294
+      },
+      "google": {
+        "lat": 50.1373859,
+        "lng": 8.791484600000002,
+        "place_id": "ChIJEbZ-aMsRvUcRoEJFXarS2i4",
+        "address": "Frankfurter Landstraße 99, 63477 Dörnigheim"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurter_motorbootclub_e_v",
+      "name": "Frankfurter Motorbootclub e.V.",
+      "before": {
+        "lat": 50.08961208000001,
+        "lng": 8.6356497
+      },
+      "google": {
+        "lat": 50.0896516,
+        "lng": 8.635711299999999,
+        "place_id": "ChIJp_pz3-oLvUcRmhzLj0VQ3Kw",
+        "address": "Mainfeldstraße 19, 60528 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_marina_beauty_frankfurt_am_main",
+      "name": "Marina Beauty / Frankfurt am Main",
+      "before": {
+        "lat": 50.100189879999995,
+        "lng": 8.719082779999999
+      },
+      "google": {
+        "lat": 50.1002294,
+        "lng": 8.7191444,
+        "place_id": "ChIJ_8XV9TQNvUcRa5llJc5hjfM",
+        "address": "Speckgasse 2, 60599 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_osthafenfestival",
+      "name": "Osthafenfestival",
+      "before": {
+        "lat": 50.11322638,
+        "lng": 8.721172860000001
+      },
+      "google": {
+        "lat": 50.11326589999999,
+        "lng": 8.7212345,
+        "place_id": "ChIJR3lcMNYPvUcRJJgbZkA5rkU",
+        "address": "Lindleystraße, 60314 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_alter_hafenkran",
+      "name": "Alter Hafenkran",
+      "before": {
+        "lat": 50.09979308,
+        "lng": 8.55189328
+      },
+      "google": {
+        "lat": 50.1078463,
+        "lng": 8.6979227,
+        "place_id": "ChIJdyDBDAAPvUcRLXwVr2Q8NAc",
+        "address": "Weseler Werft, Eckhardtstraße, 60314 Frankfurt am Main"
+      },
+      "delta_m": 10453,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_maya_marina_tattoo",
+      "name": "Maya Marina Tattoo",
+      "before": {
+        "lat": 50.12042978000001,
+        "lng": 8.705113760000001
+      },
+      "google": {
+        "lat": 50.1204693,
+        "lng": 8.7051754,
+        "place_id": "ChIJiQGCJ-iJ3moR7RAUfjAS-6Y",
+        "address": "Habsburgerallee 41, 60385 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hafen_2",
+      "name": "Hafen 2",
+      "before": {
+        "lat": 50.11205448,
+        "lng": 8.740769660000002
+      },
+      "google": {
+        "lat": 50.112094,
+        "lng": 8.7408313,
+        "place_id": "ChIJ79PUHxIOvUcR4RupZ0x1suM",
+        "address": "Nordring 129, 63067 Offenbach am Main-Nordend"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_paarberatung_marina_vaupel_single_paar_familien_coaching",
+      "name": "Paarberatung - Marina Vaupel - Single-, Paar-, & Familien-Coaching",
+      "before": {
+        "lat": 50.08828778,
+        "lng": 8.645917700000002
+      },
+      "google": {
+        "lat": 50.0883273,
+        "lng": 8.6459793,
+        "place_id": "ChIJ25YcdccPvUcRZmL2HT6xBFw",
+        "address": "Schwanheimer Str. 1, 60528 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_tierpark_hattersheim_e_v",
+      "name": "Tierpark Hattersheim e.V.",
+      "before": {
+        "lat": 50.06755448,
+        "lng": 8.49336132
+      },
+      "google": {
+        "lat": 50.067594,
+        "lng": 8.493422899999999,
+        "place_id": "ChIJZbPJmrKhvUcRYAIc-tSYk_4",
+        "address": "Glockwiesenweg Ecke, Eschenbachstraße, 65795 Hattersheim am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bootsverleih",
+      "name": "Bootsverleih",
+      "before": {
+        "lat": 50.122247279999996,
+        "lng": 8.65453546
+      },
+      "google": {
+        "lat": 50.1222868,
+        "lng": 8.6545971,
+        "place_id": "ChIJIdg-fwMJvUcREP2V3b3vQ4A",
+        "address": "Westend-Süd, 60323 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_aqua_fun_bootsverleih_frankfurt_im_freigut",
+      "name": "Aqua Fun Bootsverleih Frankfurt im Freigut",
+      "before": {
+        "lat": 50.10744378,
+        "lng": 8.68271078
+      },
+      "google": {
+        "lat": 50.1074833,
+        "lng": 8.6827724,
+        "place_id": "ChIJp1W7QfIPvUcR_0B1XWbpZWs",
+        "address": "Eiserner Steg, 60594 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_italianflairboating_ug_partyboote",
+      "name": "ItalianFlairBoating UG Partyboote",
+      "before": {
+        "lat": 50.09866438,
+        "lng": 8.65977238
+      },
+      "google": {
+        "lat": 50.0987039,
+        "lng": 8.659834,
+        "place_id": "ChIJZbUsELUPvUcRRHe8wFL82pE",
+        "address": "Karpfenweg 22, 60327 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_morena_event_bootsverleih_frankfurt",
+      "name": "Morena Event - Bootsverleih Frankfurt",
+      "before": {
+        "lat": 50.104420579999996,
+        "lng": 8.623715780000001
+      },
+      "google": {
+        "lat": 50.1044601,
+        "lng": 8.6237774,
+        "place_id": "ChIJ_95xi6ALvUcRogu7gR57GzI",
+        "address": "Rebstöcker Str. 106, 60326 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_mainhattan_cruises_frankfurt",
+      "name": "Mainhattan Cruises Frankfurt",
+      "before": {
+        "lat": 50.10434178,
+        "lng": 8.67415778
+      },
+      "google": {
+        "lat": 50.1043813,
+        "lng": 8.6742194,
+        "place_id": "ChIJwVXqLfUNvUcRpo4G8sKR410",
+        "address": "Schaumainkai 56, 60596 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurter_stadtevents",
+      "name": "Frankfurter Stadtevents",
+      "before": {
+        "lat": 50.10895448,
+        "lng": 8.657029360000001
+      },
+      "google": {
+        "lat": 50.108994,
+        "lng": 8.657091,
+        "place_id": "ChIJ_S7rNFYJvUcRRyxet7-gKas",
+        "address": "Frankfurter Stadtevents c/o Journal Frankfurt, Ludwigstraße 33-37, 60327 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hop_on_hop_off_stop_main_tower_frankfurt_sightseeing",
+      "name": "Hop-On Hop-Off Stop: Main Tower (Frankfurt Sightseeing)",
+      "before": {
+        "lat": 50.11199038000001,
+        "lng": 8.672592159999999
+      },
+      "google": {
+        "lat": 50.1120299,
+        "lng": 8.672653799999999,
+        "place_id": "ChIJ80THRk8PvUcRAZJTGAswsqA",
+        "address": "Neue Mainzer Str. 46, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_nima_lieblingsstucke_fur_gross_und_klein",
+      "name": "Nima Lieblingsstücke für Groß und Klein",
+      "before": {
+        "lat": 50.12288638,
+        "lng": 8.68709906
+      },
+      "google": {
+        "lat": 50.1229259,
+        "lng": 8.6871607,
+        "place_id": "ChIJDxkXo7kOvUcRfg2euXP2YV8",
+        "address": "Koselstraße 57, 60318 Frankfurt am Main-Innenstadt III"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bitter_zart_chocolaterie_feine_sachen",
+      "name": "Bitter & Zart Chocolaterie & Feine Sachen",
+      "before": {
+        "lat": 50.111510679999995,
+        "lng": 8.68377946
+      },
+      "google": {
+        "lat": 50.1115502,
+        "lng": 8.6838411,
+        "place_id": "ChIJW-1pKaQOvUcRLc_6WoZpBCQ",
+        "address": "Braubachstraße 14, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hessen_shop_rodelheim",
+      "name": "Hessen Shop Rödelheim",
+      "before": {
+        "lat": 50.12567478,
+        "lng": 8.61042874
+      },
+      "google": {
+        "lat": 50.1257143,
+        "lng": 8.6104904,
+        "place_id": "ChIJgcJQG8QJvUcRdRQAFj4ruRk",
+        "address": "Lorscher Str. 7, 60489 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurter_fass_frankfurter_spezialitaten_spirituosen",
+      "name": "Frankfurter Fass - Frankfurter Spezialitäten & Spirituosen",
+      "before": {
+        "lat": 50.11337668,
+        "lng": 8.68288336
+      },
+      "google": {
+        "lat": 50.1134162,
+        "lng": 8.682945,
+        "place_id": "ChIJEbR0maUOvUcRAyAr00Wa1S8",
+        "address": "Töngesgasse 38, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bauernmarkt_konstablerwache",
+      "name": "Bauernmarkt Konstablerwache",
+      "before": {
+        "lat": 50.11452308,
+        "lng": 8.68696996
+      },
+      "google": {
+        "lat": 50.1145626,
+        "lng": 8.6870316,
+        "place_id": "ChIJg5Uxk6QOvUcRe4oBZgnFkhQ",
+        "address": "Konstablerwache, 60313 Frankfurt am Main"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_kaufland_frankfurt_am_main",
+      "name": "Kaufland Frankfurt am Main",
+      "before": {
+        "lat": 50.131955860000005,
+        "lng": 8.74977576
+      },
+      "google": {
+        "lat": 50.1319846,
+        "lng": 8.7498206,
+        "place_id": "ChIJ3xuNAkYOvUcRV0GK4YlEDJg",
+        "address": "Wächtersbacher Str. 75, 60386 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_mounjaro_apotheke",
+      "name": "Mounjaro Apotheke",
+      "before": {
+        "lat": 50.11434806,
+        "lng": 8.68198538
+      },
+      "google": {
+        "lat": 50.1143768,
+        "lng": 8.6820302,
+        "place_id": "ChIJ-WWD1HcPvUcRktBfYGLpANk",
+        "address": "Zeil 106, 60313 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_sanftes_gras_apotheke",
+      "name": "Sanftes Gras Apotheke",
+      "before": {
+        "lat": 50.10550336,
+        "lng": 8.68560608
+      },
+      "google": {
+        "lat": 50.1055321,
+        "lng": 8.685650899999999,
+        "place_id": "ChIJT5gZlrINvUcRqWOrwosiOTA",
+        "address": "Walter-Kolb-Straße 9-11, 60594 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_raben_apotheke",
+      "name": "Raben-Apotheke",
+      "before": {
+        "lat": 50.10157626,
+        "lng": 8.68112718
+      },
+      "google": {
+        "lat": 50.101605,
+        "lng": 8.681172,
+        "place_id": "ChIJFaeDfRwMvUcRUdhWHs3Y3is",
+        "address": "Schweizer Str. 55, 60594 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_universitatsklinikum_frankfurt_zentrale_notaufnahme",
+      "name": "Universitätsklinikum Frankfurt - Zentrale Notaufnahme",
+      "before": {
+        "lat": 50.09569036,
+        "lng": 8.66170868
+      },
+      "google": {
+        "lat": 50.0957191,
+        "lng": 8.6617535,
+        "place_id": "ChIJtybXXYgLvUcRBcSs2Sq5bsc",
+        "address": "Theodor-Stern-Kai 7, 60596 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_zentrale_notaufnahme_am_agaplesion_markus_krankenhaus",
+      "name": "Zentrale Notaufnahme am AGAPLESION MARKUS KRANKENHAUS",
+      "before": {
+        "lat": 50.13666486,
+        "lng": 8.647369560000001
+      },
+      "google": {
+        "lat": 50.1366936,
+        "lng": 8.647414399999999,
+        "place_id": "ChIJNwJTJ1kJvUcRxsOA2PdgK6w",
+        "address": "Wilhelm-Epstein-Straße 4, 60431 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_universitatsklinikum_frankfurt_notfallambulanz_der_klinik_fur_kinder_u",
+      "name": "Universitätsklinikum Frankfurt Notfallambulanz der Klinik für Kinder- und Jugendmedizin",
+      "before": {
+        "lat": 50.09389896,
+        "lng": 8.657824800000002
+      },
+      "google": {
+        "lat": 50.09392769999999,
+        "lng": 8.6578696,
+        "place_id": "ChIJgQjglPcLvUcRldiarM1ufuI",
+        "address": "Building 32, Theodor-Stern-Kai 7, 60596 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_bg_unfallklinik_frankfurt_am_main",
+      "name": "BG Unfallklinik Frankfurt am Main",
+      "before": {
+        "lat": 50.145221559999996,
+        "lng": 8.709694240000001
+      },
+      "google": {
+        "lat": 50.1452503,
+        "lng": 8.7097391,
+        "place_id": "ChIJXcJa3eEOvUcRvFVmslgVzwk",
+        "address": "Friedberger Landstraße 430, 60389 Frankfurt am Main-Frankfurt-Ost"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_1_polizeirevier_frankfurt_innenstadt",
+      "name": "1. Polizeirevier Frankfurt (Innenstadt)",
+      "before": {
+        "lat": 50.114651460000005,
+        "lng": 8.68959548
+      },
+      "google": {
+        "lat": 50.1146802,
+        "lng": 8.689640299999999,
+        "place_id": "ChIJT2CcQqMOvUcRMcBV_H7wdQM",
+        "address": "Zeil 33, 60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_8_polizeirevier_frankfurt_sachsenhausen",
+      "name": "8. Polizeirevier Frankfurt (Sachsenhausen)",
+      "before": {
+        "lat": 50.10158966,
+        "lng": 8.69351518
+      },
+      "google": {
+        "lat": 50.1016184,
+        "lng": 8.69356,
+        "place_id": "ChIJqdMdan4Tc0ERCj3leXBRZ78",
+        "address": "Offenbacher Landstraße 29, 60599 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_polizeiprasidium_frankfurt_am_main",
+      "name": "Polizeipräsidium Frankfurt am Main",
+      "before": {
+        "lat": 50.13209936,
+        "lng": 8.67399586
+      },
+      "google": {
+        "lat": 50.1321281,
+        "lng": 8.674040699999999,
+        "place_id": "ChIJEwG9VjMJvUcRjwGvs3fY6Mc",
+        "address": "Adickesallee 70, 60322 Frankfurt am Main-Innenstadt III"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_4_polizeirevier_frankfurt_bahnhofsviertel",
+      "name": "4. Polizeirevier Frankfurt (Bahnhofsviertel)",
+      "before": {
+        "lat": 50.10352196,
+        "lng": 8.661667679999999
+      },
+      "google": {
+        "lat": 50.1035507,
+        "lng": 8.6617125,
+        "place_id": "ChIJKSpgJ_8LvUcRvzcFPSjbxpg",
+        "address": "Gutleutstraße 112, 60327 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_6_polizeirevier_frankfurt_bornheim",
+      "name": "6. Polizeirevier Frankfurt (Bornheim)",
+      "before": {
+        "lat": 50.13088286,
+        "lng": 8.710661660000001
+      },
+      "google": {
+        "lat": 50.1309116,
+        "lng": 8.710706499999999,
+        "place_id": "ChIJaRNeYe4OvUcRckgkugJQ5gk",
+        "address": "Turmstraße 7 - 9, 60385 Frankfurt am Main-Bornheim/Ostend"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_13_polizeirevier_frankfurt_bockenheim",
+      "name": "13. Polizeirevier - Frankfurt (Bockenheim)",
+      "before": {
+        "lat": 50.11822286,
+        "lng": 8.64443256
+      },
+      "google": {
+        "lat": 50.11825160000001,
+        "lng": 8.6444774,
+        "place_id": "ChIJV85VQl0JvUcRhUV2FLYlHN4",
+        "address": "Schloßstraße 88-90, 60486 Frankfurt am Main-Innenstadt II"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bundespolizeiinspektion_frankfurt_am_main",
+      "name": "Bundespolizeiinspektion Frankfurt am Main",
+      "before": {
+        "lat": 50.107539259999996,
+        "lng": 8.661382380000001
+      },
+      "google": {
+        "lat": 50.107568,
+        "lng": 8.6614272,
+        "place_id": "ChIJi28FiVUJvUcRJbxda8KYCI4",
+        "address": "Poststraße 3, 60329 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_12_polizeirevier_frankfurt_eschersheim",
+      "name": "12. Polizeirevier Frankfurt (Eschersheim)",
+      "before": {
+        "lat": 50.149947159999996,
+        "lng": 8.663193339999998
+      },
+      "google": {
+        "lat": 50.1499759,
+        "lng": 8.6632382,
+        "place_id": "ChIJRUtEYtgIvUcREtQJqQ4LEnM",
+        "address": "Am Schwalbenschwanz 3, 60431 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_spielplatz_frankfurt_mainkai",
+      "name": "Spielplatz Frankfurt Mainkai",
+      "before": {
+        "lat": 50.10767326,
+        "lng": 8.67719438
+      },
+      "google": {
+        "lat": 50.107702,
+        "lng": 8.677239199999999,
+        "place_id": "ChIJ19kLN6gOvUcRrHH9fffarKc",
+        "address": "Untermainkai 4, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_spielplatz_holbeinsteg",
+      "name": "Spielplatz Holbeinsteg",
+      "before": {
+        "lat": 50.10325086,
+        "lng": 8.66905338
+      },
+      "google": {
+        "lat": 50.1032796,
+        "lng": 8.669098199999999,
+        "place_id": "ChIJGwZxIgEMvUcR2i-CSm8E-JM",
+        "address": "Gutleutviertel, 60329 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_spielplatz_oppenheimer_platz",
+      "name": "Spielplatz Oppenheimer Platz",
+      "before": {
+        "lat": 50.10369706,
+        "lng": 8.68308378
+      },
+      "google": {
+        "lat": 50.1037258,
+        "lng": 8.6831286,
+        "place_id": "ChIJ0QdX76gNvUcRFr8gTTIwUIs",
+        "address": "Sachsenhausen-Nord, 60594 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bruckenspielplatz",
+      "name": "Brückenspielplatz",
+      "before": {
+        "lat": 50.10396936000001,
+        "lng": 8.68646038
+      },
+      "google": {
+        "lat": 50.1039981,
+        "lng": 8.6865052,
+        "place_id": "ChIJH47Bo04NvUcRMffs9a8Wx1A",
+        "address": "Sachsenhausen-Nord, 60594 Frankfurt am Main-Nord"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_abenteuerspielplatz_gunthersburg",
+      "name": "Abenteuerspielplatz Günthersburg",
+      "before": {
+        "lat": 50.133492260000004,
+        "lng": 8.70112036
+      },
+      "google": {
+        "lat": 50.13352099999999,
+        "lng": 8.7011652,
+        "place_id": "ChIJT2tnGeoOvUcRbiyJq_mp224",
+        "address": "Wetteraustraße 41, 60311 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_spielplatz_im_holzhausenpark",
+      "name": "Spielplatz im Holzhausenpark",
+      "before": {
+        "lat": 50.12673856,
+        "lng": 8.67797826
+      },
+      "google": {
+        "lat": 50.1267673,
+        "lng": 8.678023099999999,
+        "place_id": "ChIJW1PY9rUOvUcR5u5XmoIgO3k",
+        "address": "Hammanstraße 18, 60322 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_drachenburgspielplatz",
+      "name": "Drachenburgspielplatz",
+      "before": {
+        "lat": 50.11928836,
+        "lng": 8.68671556
+      },
+      "google": {
+        "lat": 50.1193171,
+        "lng": 8.686760399999999,
+        "place_id": "ChIJET3jUroOvUcRkgpAYH8H71c",
+        "address": "Bleichstraße 14, 60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_spielplatz_bethmannpark",
+      "name": "Spielplatz Bethmannpark",
+      "before": {
+        "lat": 50.119261259999995,
+        "lng": 8.69167156
+      },
+      "google": {
+        "lat": 50.11929,
+        "lng": 8.691716399999999,
+        "place_id": "ChIJQ5JqSSkPvUcRiu9nYjfx9pE",
+        "address": "Nordend-Ost, 60316 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_frankfurter_golf_club_e_v",
+      "name": "Frankfurter Golf Club e. V.",
+      "before": {
+        "lat": 50.074206659999994,
+        "lng": 8.63496202
+      },
+      "google": {
+        "lat": 50.07423540000001,
+        "lng": 8.6350068,
+        "place_id": "ChIJzWvtuaELvUcRjBfPQbxWqD4",
+        "address": "Golfstraße 41, Anfahrt über, Hahnstraße 76, 60528 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_frankfurter_golf_club_e_v_greenkeeper",
+      "name": "Frankfurter Golf-Club e.V. Greenkeeper",
+      "before": {
+        "lat": 50.07405466,
+        "lng": 8.63976642
+      },
+      "google": {
+        "lat": 50.0740834,
+        "lng": 8.6398112,
+        "place_id": "ChIJJ2ZwdpsLvUcRrRM3-DaWKSo",
+        "address": "Am Polopl. 4, 60528 Frankfurt am Main West"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_cinema_filmtheater",
+      "name": "Cinema Filmtheater",
+      "before": {
+        "lat": 50.11250476,
+        "lng": 8.67876718
+      },
+      "google": {
+        "lat": 50.1125335,
+        "lng": 8.678811999999999,
+        "place_id": "ChIJp352JK8OvUcRIEScJ-2O39A",
+        "address": "Roßmarkt 7, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_eldorado_filmtheater",
+      "name": "Eldorado Filmtheater",
+      "before": {
+        "lat": 50.11691566,
+        "lng": 8.685232979999999
+      },
+      "google": {
+        "lat": 50.1169444,
+        "lng": 8.6852778,
+        "place_id": "ChIJH40B0LoOvUcRHRHZ-VIMOrY",
+        "address": "Schäfergasse 29, 60313 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_harmonie_filmtheater",
+      "name": "Harmonie Filmtheater",
+      "before": {
+        "lat": 50.103439259999995,
+        "lng": 8.690877180000001
+      },
+      "google": {
+        "lat": 50.103468,
+        "lng": 8.690922,
+        "place_id": "ChIJC8zY-B8MvUcRxfTjkLMf7jc",
+        "address": "Dreieichstraße 54, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_mal_seh_n_kino",
+      "name": "Mal Seh’n Kino",
+      "before": {
+        "lat": 50.12399086,
+        "lng": 8.685606859999998
+      },
+      "google": {
+        "lat": 50.1240196,
+        "lng": 8.6856517,
+        "place_id": "ChIJ2S9k0rkOvUcR7r9IGYIib5I",
+        "address": "Adlerflychtstraße 6, 60318 Frankfurt am Main-Innenstadt III"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_boulderwelt_frankfurt",
+      "name": "Boulderwelt Frankfurt",
+      "before": {
+        "lat": 50.16396666000001,
+        "lng": 8.68484572
+      },
+      "google": {
+        "lat": 50.1639954,
+        "lng": 8.6848906,
+        "place_id": "ChIJdU0CszQPvUcRE4jnwdsfFgY",
+        "address": "August-Schanz-Straße 50, 60433 Frankfurt am Main Nord-Ost"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_dav_kletterzentrum_frankfurt_main",
+      "name": "DAV Kletterzentrum Frankfurt / Main",
+      "before": {
+        "lat": 50.16006266,
+        "lng": 8.68638222
+      },
+      "google": {
+        "lat": 50.1600914,
+        "lng": 8.6864271,
+        "place_id": "ChIJ97irVjIPvUcROF0VAldZe4M",
+        "address": "Homburger Landstraße 283, 60433 Frankfurt am Main Nord-Ost"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_dynochrom_boulderhalle_frankfurt",
+      "name": "Dynochrom Boulderhalle Frankfurt",
+      "before": {
+        "lat": 50.136862359999995,
+        "lng": 8.732663059999998
+      },
+      "google": {
+        "lat": 50.1368911,
+        "lng": 8.7327079,
+        "place_id": "ChIJeTRI8FYOvUcR17bJQ6NCWQA",
+        "address": "Flinschstraße 45, 60388 Frankfurt am Main-Frankfurt-Ost"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_waldparkplatz_am_forsthaus_oberrad",
+      "name": "Waldparkplatz am Forsthaus Oberrad",
+      "before": {
+        "lat": 50.09368496,
+        "lng": 8.727355
+      },
+      "google": {
+        "lat": 50.0937137,
+        "lng": 8.727399799999999,
+        "place_id": "ChIJXWANlIENvUcRXeJkWNxCaY0",
+        "address": "Sachsenhausen-Süd, 60599 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_strba_rechtsanwalte_fachanwalte_arbeitsr_weg_und_mietr",
+      "name": "Strba Rechtsanwälte Fachanwälte ArbeitsR, WEG und MietR",
+      "before": {
+        "lat": 50.119104459999996,
+        "lng": 8.682358359999998
+      },
+      "google": {
+        "lat": 50.1191332,
+        "lng": 8.6824032,
+        "place_id": "ChIJdzlfYrAOvUcRu8icDFtR-b8",
+        "address": "Eschenheimer Anlage 28, 60318 Frankfurt am Main-Innenstadt III"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_parkplatz_niddaufer",
+      "name": "Parkplatz Niddaufer",
+      "before": {
+        "lat": 50.14824826,
+        "lng": 8.62426114
+      },
+      "google": {
+        "lat": 50.14827700000001,
+        "lng": 8.624305999999999,
+        "place_id": "ChIJ-0DovEcJvUcRoIhbDGKcatU",
+        "address": "Praunheimer Landstraße 228, 60488 Frankfurt am Main-Frankfurt-Mitte-West"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_parkplatz_grastranke",
+      "name": "Parkplatz Grastränke",
+      "before": {
+        "lat": 50.07370976,
+        "lng": 8.71664942
+      },
+      "google": {
+        "lat": 50.0737385,
+        "lng": 8.7166942,
+        "place_id": "ChIJCe0V7qQNvUcRq9N-kVk218E",
+        "address": "Sachsenhausen-Nord, 60599 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_eintracht_frankfurt_tennis",
+      "name": "Eintracht Frankfurt Tennis",
+      "before": {
+        "lat": 50.13465496,
+        "lng": 8.730087860000001
+      },
+      "google": {
+        "lat": 50.1346837,
+        "lng": 8.7301327,
+        "place_id": "ChIJz0VliI8PvUcRn16shcA3-A8",
+        "address": "Alfred-Pfaff-Straße 1, 60386 Frankfurt am Main-Frankfurt-Ost"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_tennisabteilung_der_sport_und_kulturgemeinschaft_frankfurt_am_main_e_v",
+      "name": "Tennisabteilung der Sport- und Kulturgemeinschaft Frankfurt am Main e. V.",
+      "before": {
+        "lat": 50.071721059999994,
+        "lng": 8.63734152
+      },
+      "google": {
+        "lat": 50.0717498,
+        "lng": 8.6373863,
+        "place_id": "ChIJw_W3QJwLvUcRplTfIDZl3pw",
+        "address": "Am Polopl. 12, 60528 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_deutsche_bank_park",
+      "name": "Deutsche Bank Park",
+      "before": {
+        "lat": 50.06855196,
+        "lng": 8.645427219999998
+      },
+      "google": {
+        "lat": 50.0685807,
+        "lng": 8.645472,
+        "place_id": "ChIJ4YZAN4ILvUcRCpwnOJut73I",
+        "address": "Mörfelder Landstraße 362, 60528 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_tennis_club_schwarz_weiss_e_v",
+      "name": "Tennis-Club Schwarz-Weiß e.V.",
+      "before": {
+        "lat": 50.09208096,
+        "lng": 8.6735488
+      },
+      "google": {
+        "lat": 50.0921097,
+        "lng": 8.6735936,
+        "place_id": "ChIJbwHEEw4MvUcRhxs3XGfykFA",
+        "address": "Riedhofweg 14, 60596 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_sportpark_stadion_frankfurt_a_m_gesellschaft_projektentwicklungen_mbh",
+      "name": "Sportpark Stadion Frankfurt a.M. Gesellschaft Projektentwicklungen mbH",
+      "before": {
+        "lat": 50.06771006,
+        "lng": 8.64605622
+      },
+      "google": {
+        "lat": 50.0677388,
+        "lng": 8.646101,
+        "place_id": "ChIJSTTXk6YOvUcRGHG7lLUnGNw",
+        "address": "Mörfelder Landstraße 362, 60528 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_tenniszentrum_niddapark_gmbh_co_kg",
+      "name": "Tenniszentrum Niddapark GmbH & Co. KG",
+      "before": {
+        "lat": 50.13787876,
+        "lng": 8.639512360000001
+      },
+      "google": {
+        "lat": 50.1379075,
+        "lng": 8.639557200000002,
+        "place_id": "ChIJB682VRAJvUcR4q0ucLsbntE",
+        "address": "Am Ginnheimer Wäldchen 1, 60431 Frankfurt am Main-Frankfurt-Mitte-Nord"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_tennishalle_sport_club_1880_e_v",
+      "name": "Tennishalle Sport Club 1880 e.V.",
+      "before": {
+        "lat": 50.13340906,
+        "lng": 8.67957746
+      },
+      "google": {
+        "lat": 50.1334378,
+        "lng": 8.6796223,
+        "place_id": "ChIJ7YJEbKUPvUcRJlY0XYDIYT0",
+        "address": "Feldgerichtstraße 22, 60320 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_sportpark_riederwaldwiese",
+      "name": "Sportpark Riederwaldwiese",
+      "before": {
+        "lat": 50.12545306,
+        "lng": 8.73635386
+      },
+      "google": {
+        "lat": 50.1254818,
+        "lng": 8.736398699999999,
+        "place_id": "ChIJcfaWWpQPvUcR4m0Hfy5XdOU",
+        "address": "Volgersbrunnenweg 3, 60386 Frankfurt am Main-Frankfurt-Ost"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_ftc_1914_palmengarten_e_v",
+      "name": "FTC 1914 Palmengarten e.V.",
+      "before": {
+        "lat": 50.16507126,
+        "lng": 8.66510522
+      },
+      "google": {
+        "lat": 50.1651,
+        "lng": 8.6651501,
+        "place_id": "ChIJhZ7Rr8YIvUcRZX2TGJeE0aY",
+        "address": "Berkersheimer Weg 106, 60433 Frankfurt am Main-Frankfurt-Mitte-Nord"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_brentanobad",
+      "name": "Brentanobad",
+      "before": {
+        "lat": 50.12573096,
+        "lng": 8.61985356
+      },
+      "google": {
+        "lat": 50.1257597,
+        "lng": 8.6198984,
+        "place_id": "ChIJY4ZI450JvUcRjTDtxXhyNi4",
+        "address": "Rödelheimer Parkweg 13, 60489 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_titus_thermen",
+      "name": "Titus Thermen",
+      "before": {
+        "lat": 50.15842676,
+        "lng": 8.63152274
+      },
+      "google": {
+        "lat": 50.1584555,
+        "lng": 8.6315676,
+        "place_id": "ChIJDfDq5vgIvUcRo6S09J8ieKI",
+        "address": "Walter-Möller-Platz 2, 60439 Frankfurt am Main-Frankfurt-Nord-West"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_riedbad_bergen_enkheim",
+      "name": "Riedbad Bergen-Enkheim",
+      "before": {
+        "lat": 50.15191476,
+        "lng": 8.76343734
+      },
+      "google": {
+        "lat": 50.15194349999999,
+        "lng": 8.7634822,
+        "place_id": "ChIJQbzheMgPvUcRNUeGPYn7Fmo",
+        "address": "Fritz-Schubert-Ring 2, 60388 Frankfurt am Main-Bergen-Enkheim"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_freibad_eschersheim",
+      "name": "Freibad Eschersheim",
+      "before": {
+        "lat": 50.16244216,
+        "lng": 8.652991619999998
+      },
+      "google": {
+        "lat": 50.1624709,
+        "lng": 8.653036499999999,
+        "place_id": "ChIJB3tWVegIvUcRAV5zZoyrims",
+        "address": "Alexander-Riese-Weg 2, 60439 Frankfurt am Main-Frankfurt-Mitte-Nord"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_freibad_bergen_enkheim",
+      "name": "Freibad Bergen Enkheim",
+      "before": {
+        "lat": 50.150984959999995,
+        "lng": 8.763372540000002
+      },
+      "google": {
+        "lat": 50.1510137,
+        "lng": 8.7634174,
+        "place_id": "ChIJ9UbSjsgPvUcR5rLQuUh7_8g",
+        "address": "Leuchte 169, 60388 Frankfurt am Main-Bergen-Enkheim"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_mainova_trinkbrunnen_zeil",
+      "name": "Mainova Trinkbrunnen Zeil",
+      "before": {
+        "lat": 50.11362106,
+        "lng": 8.68044678
+      },
+      "google": {
+        "lat": 50.1136498,
+        "lng": 8.6804916,
+        "place_id": "ChIJc66idwAPvUcRCBimtbOM4Tw",
+        "address": "Liebfrauenstraße 3, 60313 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_trinkbrunnen_am_paulsplatz",
+      "name": "Trinkbrunnen am Paulsplatz",
+      "before": {
+        "lat": 50.11093156,
+        "lng": 8.681834480000001
+      },
+      "google": {
+        "lat": 50.1109603,
+        "lng": 8.6818793,
+        "place_id": "ChIJv3EElHwPvUcRRbovYfnVu60",
+        "address": "Paulsplatz, 60311 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_mainova_trinkbrunnen",
+      "name": "Mainova Trinkbrunnen",
+      "before": {
+        "lat": 50.10485476,
+        "lng": 8.663376979999999
+      },
+      "google": {
+        "lat": 50.1048835,
+        "lng": 8.6634218,
+        "place_id": "ChIJQ4BQBgALvUcRgPcbnZwv2jg",
+        "address": "Karlsruher Str. 14, 60329 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_trinkbrunnen_gunthersburgpark",
+      "name": "Trinkbrunnen Günthersburgpark",
+      "before": {
+        "lat": 50.13018606000001,
+        "lng": 8.705037260000001
+      },
+      "google": {
+        "lat": 50.1302148,
+        "lng": 8.7050821,
+        "place_id": "ChIJYdRGc4wPvUcRnCVj8a_6_SU",
+        "address": "Günthersburgpark, 60389 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_mainova_trinkbrunnen_francois_mitterrand_platz",
+      "name": "Mainova Trinkbrunnen François-Mitterrand-Platz",
+      "before": {
+        "lat": 50.11061366,
+        "lng": 8.665498979999999
+      },
+      "google": {
+        "lat": 50.1106424,
+        "lng": 8.6655438,
+        "place_id": "ChIJT653OwAJvUcRSFkXIjxjZcQ",
+        "address": "Mainzer Landstraße 35, 60329 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_mainova_trinkbrunnen_trinkwasserlehrpfad",
+      "name": "Mainova Trinkbrunnen Trinkwasserlehrpfad",
+      "before": {
+        "lat": 50.13662736,
+        "lng": 8.699906559999999
+      },
+      "google": {
+        "lat": 50.1366561,
+        "lng": 8.6999514,
+        "place_id": "ChIJ2wNYhzsPvUcRLEJEMaOFq-g",
+        "address": "Am Wasserpark 2, 60389 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "frankfurt_esso_tankstelle",
+      "name": "Esso Tankstelle",
+      "before": {
+        "lat": 50.098630160000006,
+        "lng": 8.66885228
+      },
+      "google": {
+        "lat": 50.0986589,
+        "lng": 8.668897099999999,
+        "place_id": "ChIJf8ElaQYMvUcRADkppjKJbJY",
+        "address": "Stresemannallee 10, 60596 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_aral_tankstelle",
+      "name": "Aral Tankstelle",
+      "before": {
+        "lat": 50.10224106,
+        "lng": 8.69610278
+      },
+      "google": {
+        "lat": 50.1022698,
+        "lng": 8.6961476,
+        "place_id": "ChIJ9d98GyEMvUcR2UbbjMNWNNY",
+        "address": "Siemensstraße 37, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_esso",
+      "name": "Esso",
+      "before": {
+        "lat": 50.10171286,
+        "lng": 8.62644008
+      },
+      "google": {
+        "lat": 50.0986589,
+        "lng": 8.668897099999999,
+        "place_id": "ChIJf8ElaQYMvUcRADkppjKJbJY",
+        "address": "Stresemannallee 10, 60596 Frankfurt am Main"
+      },
+      "delta_m": 3047,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_jet_tankstelle",
+      "name": "JET Tankstelle",
+      "before": {
+        "lat": 50.13837126,
+        "lng": 8.74435514
+      },
+      "google": {
+        "lat": 50.1384,
+        "lng": 8.744399999999999,
+        "place_id": "ChIJx0YHyU0OvUcRhg9nmUDleo0",
+        "address": "Borsigallee 29, 60388 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_aral",
+      "name": "Aral",
+      "before": {
+        "lat": 50.08976116,
+        "lng": 8.690707499999998
+      },
+      "google": {
+        "lat": 50.1022698,
+        "lng": 8.6961476,
+        "place_id": "ChIJ9d98GyEMvUcR2UbbjMNWNNY",
+        "address": "Siemensstraße 37, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 1444,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_shell",
+      "name": "Shell",
+      "before": {
+        "lat": 50.129833659999996,
+        "lng": 8.69434306
+      },
+      "google": {
+        "lat": 50.0490487,
+        "lng": 8.5614125,
+        "place_id": "ChIJOQmGFrwKvUcRemeKEvn0hSE",
+        "address": "Airportring Beim Tor 21, 60549 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 13062,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_zeit_fur_brot",
+      "name": "ZEIT FÜR BROT",
+      "before": {
+        "lat": 50.11939926,
+        "lng": 8.679557159999998
+      },
+      "google": {
+        "lat": 50.119428,
+        "lng": 8.679602,
+        "place_id": "ChIJ3bFfB7EOvUcRexpPqGvMlJM",
+        "address": "Oeder Weg 15, 60318 Frankfurt am Main-Innenstadt III"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_der_backer_eifler",
+      "name": "Der Bäcker Eifler",
+      "before": {
+        "lat": 50.111783759999994,
+        "lng": 8.676358879999999
+      },
+      "google": {
+        "lat": 50.11363069999999,
+        "lng": 8.683647299999999,
+        "place_id": "ChIJoQAooaUOvUcRkCRbhm3OULw",
+        "address": "Hasengasse 15, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 559,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_der_backer_eifler_fressgasse",
+      "name": "Der Bäcker Eifler Fressgasse",
+      "before": {
+        "lat": 50.114449560000004,
+        "lng": 8.67606718
+      },
+      "google": {
+        "lat": 50.11447829999999,
+        "lng": 8.676112,
+        "place_id": "ChIJHaNPiK4OvUcRdpZ09r9HLzc",
+        "address": "Kalbächer Gasse, Große Bockenheimer Str. 8, 60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_backerei_und_konditorei_huck",
+      "name": "Bäckerei und Konditorei Huck",
+      "before": {
+        "lat": 50.11269866,
+        "lng": 8.68322388
+      },
+      "google": {
+        "lat": 50.1127274,
+        "lng": 8.6832687,
+        "place_id": "ChIJGQlM9KEPvUcR3pGtWWv-DOo",
+        "address": "Kleinmarkthalle 70/71, Hasengasse 5, 60311 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_rossmann_drogeriemarkt",
+      "name": "ROSSMANN Drogeriemarkt",
+      "before": {
+        "lat": 50.11287206000001,
+        "lng": 8.67764128
+      },
+      "google": {
+        "lat": 50.1129008,
+        "lng": 8.677686099999999,
+        "place_id": "ChIJ31Bw3q4OvUcR4QVmqFfbV_o",
+        "address": "Roßmarkt 10, 60311 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_deutsches_rotes_kreuz_bezirksverband_frankfurt_am_main_e_v",
+      "name": "Deutsches Rotes Kreuz Bezirksverband Frankfurt am Main e.V.",
+      "before": {
+        "lat": 50.116187260000004,
+        "lng": 8.691005480000001
+      },
+      "google": {
+        "lat": 50.11621599999999,
+        "lng": 8.691050299999999,
+        "place_id": "ChIJ565_y7wOvUcRELUZj3WFDU0",
+        "address": "Seilerstraße 23, 60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_deutsches_rotes_kreuz_bezirksverband_frankfurt_e_v_ortsvereinigung_sud",
+      "name": "Deutsches Rotes Kreuz Bezirksverband Frankfurt e.V. Ortsvereinigung Süd",
+      "before": {
+        "lat": 50.08743546,
+        "lng": 8.6462534
+      },
+      "google": {
+        "lat": 50.0874642,
+        "lng": 8.6462982,
+        "place_id": "ChIJj1s5pZILvUcR-IUKS7_8-UY",
+        "address": "Schwarzwaldstraße 12, 60528 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_schwesternschaft_vom_roten_kreuz_frankfurt_main_v_1866_e_v",
+      "name": "Schwesternschaft vom Roten Kreuz Frankfurt/Main v. 1866 e. V.",
+      "before": {
+        "lat": 50.11647866,
+        "lng": 8.697650679999999
+      },
+      "google": {
+        "lat": 50.1165074,
+        "lng": 8.6976955,
+        "place_id": "ChIJOXP4lJcOvUcR7BgOr0rDq6A",
+        "address": "Alfred-Brehm-Platz 11, 60316 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_deutsches_rotes_kreuz_ortsverein_bornheim",
+      "name": "Deutsches Rotes Kreuz Ortsverein Bornheim",
+      "before": {
+        "lat": 50.12774906,
+        "lng": 8.70350416
+      },
+      "google": {
+        "lat": 50.1277778,
+        "lng": 8.703548999999999,
+        "place_id": "ChIJE8GlCesOvUcRXQS74rL7DS4",
+        "address": "Burgstraße 95, 60389 Frankfurt am Main-Innenstadt III"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_deutsches_rotes_kreuz_in_hessen_volunta_ggmbh_niederlassung_frankfurt",
+      "name": "Deutsches Rotes Kreuz in Hessen Volunta gGmbH Niederlassung Frankfurt",
+      "before": {
+        "lat": 50.11301626,
+        "lng": 8.69337818
+      },
+      "google": {
+        "lat": 50.113045,
+        "lng": 8.693423,
+        "place_id": "ChIJx00f7KIOvUcRoJqEps5EzwM",
+        "address": "Allerheiligentor 2-4, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_offentliche_toilette",
+      "name": "Öffentliche Toilette",
+      "before": {
+        "lat": 50.10965536,
+        "lng": 8.666825679999999
+      },
+      "google": {
+        "lat": 50.113544,
+        "lng": 8.6793883,
+        "place_id": "ChIJL1k5RUAPvUcRKcDFiYNf8L4",
+        "address": "60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 995,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_toilette",
+      "name": "Toilette",
+      "before": {
+        "lat": 50.10629076,
+        "lng": 8.67339628
+      },
+      "google": {
+        "lat": 50.113544,
+        "lng": 8.6793883,
+        "place_id": "ChIJL1k5RUAPvUcRKcDFiYNf8L4",
+        "address": "60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 913,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_wc_toilette",
+      "name": "WC Toilette",
+      "before": {
+        "lat": 50.11662746,
+        "lng": 8.683123779999999
+      },
+      "google": {
+        "lat": 50.113544,
+        "lng": 8.6793883,
+        "place_id": "ChIJL1k5RUAPvUcRKcDFiYNf8L4",
+        "address": "60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 434,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_radical_luggage_storage_frankfurt_train_station",
+      "name": "Radical - Luggage Storage Frankfurt Train Station",
+      "before": {
+        "lat": 50.108769159999994,
+        "lng": 8.66254898
+      },
+      "google": {
+        "lat": 50.1087979,
+        "lng": 8.6625938,
+        "place_id": "ChIJWbGKPLEJvUcRGRHtc42mgpI",
+        "address": "Düsseldorfer Str. 10, 60329 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bounce_luggage_storage_near_frankfurt_cathedral",
+      "name": "Bounce Luggage Storage - Near Frankfurt Cathedral",
+      "before": {
+        "lat": 50.11104996,
+        "lng": 8.69219228
+      },
+      "google": {
+        "lat": 50.1110787,
+        "lng": 8.6922371,
+        "place_id": "ChIJRWIBcdhRqEcR3N-a205ddJg",
+        "address": "Rechneigrabenstraße 1, 60311 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_luggagehero_luggage_storage_frankfurt_main_hbf",
+      "name": "LuggageHero Luggage Storage Frankfurt Main Hbf",
+      "before": {
+        "lat": 50.106965259999996,
+        "lng": 8.665886180000001
+      },
+      "google": {
+        "lat": 50.106994,
+        "lng": 8.665931000000002,
+        "place_id": "ChIJlysT-kALvUcRsf-qvm05JYs",
+        "address": "Münchener Str. 56, 60329 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_medici",
+      "name": "Medici",
+      "before": {
+        "lat": 50.11188436,
+        "lng": 8.67870068
+      },
+      "google": {
+        "lat": 50.1119131,
+        "lng": 8.6787455,
+        "place_id": "ChIJv026La8OvUcRs2_LOGWaHA4",
+        "address": "Weißadlergasse 2, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_the_nest",
+      "name": "The Nest",
+      "before": {
+        "lat": 50.11392516000001,
+        "lng": 8.671923280000001
+      },
+      "google": {
+        "lat": 50.1139539,
+        "lng": 8.671968099999999,
+        "place_id": "ChIJ-YqZikwPvUcRbdl5Fq_1M4I",
+        "address": "Neue Mainzer Str. 77, 60311 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_im_herzen_afrikas_frankfurt",
+      "name": "Im Herzen Afrikas Frankfurt",
+      "before": {
+        "lat": 50.107406360000006,
+        "lng": 8.67161298
+      },
+      "google": {
+        "lat": 50.1074351,
+        "lng": 8.6716578,
+        "place_id": "ChIJ-XZrDKoOvUcRazn8lOHOjj4",
+        "address": "Gutleutstraße 13, 60329 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_cresco",
+      "name": "Cresco",
+      "before": {
+        "lat": 50.110801460000005,
+        "lng": 8.67839448
+      },
+      "google": {
+        "lat": 50.1108302,
+        "lng": 8.678439299999999,
+        "place_id": "ChIJKZLRhMEPvUcRhRdCvxP1Ez4",
+        "address": "Berliner Str. 55, 60311 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_restaurant_paulaner_am_dom",
+      "name": "Restaurant Paulaner am Dom",
+      "before": {
+        "lat": 50.11088626000001,
+        "lng": 8.686085180000001
+      },
+      "google": {
+        "lat": 50.110915,
+        "lng": 8.68613,
+        "place_id": "ChIJY02vn6YOvUcRWO3QfMyAIgI",
+        "address": "Domplatz 6, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_friedas_bar_kitchen",
+      "name": "Friedas Bar & Kitchen",
+      "before": {
+        "lat": 50.111561259999995,
+        "lng": 8.673355180000001
+      },
+      "google": {
+        "lat": 50.11159,
+        "lng": 8.673399999999999,
+        "place_id": "ChIJLYz98KsOvUcROWq8ArGaPuk",
+        "address": "Omniturm, Große Gallusstraße 16-18, 60312 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_mainkai_cafe_bistro",
+      "name": "Mainkai Café•Bistro",
+      "before": {
+        "lat": 50.109498359999996,
+        "lng": 8.68498118
+      },
+      "google": {
+        "lat": 50.1095271,
+        "lng": 8.685025999999999,
+        "place_id": "ChIJdeBS6aYOvUcRmiSOREYOag0",
+        "address": "Mainkai 15, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_cafe_sugar_mama",
+      "name": "Café Sugar Mama",
+      "before": {
+        "lat": 50.109829260000005,
+        "lng": 8.68807808
+      },
+      "google": {
+        "lat": 50.109858,
+        "lng": 8.6881229,
+        "place_id": "ChIJwfyKRqEOvUcRjL9eMUUBDB0",
+        "address": "Kurt-Schumacher-Straße 2, 60311 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_the_coffee_club_29",
+      "name": "The Coffee Club 29",
+      "before": {
+        "lat": 50.10840076,
+        "lng": 8.64979238
+      },
+      "google": {
+        "lat": 50.1084295,
+        "lng": 8.6498372,
+        "place_id": "ChIJb-Ewf-ILvUcRGU2FBk75Lp0",
+        "address": "Europa-Allee 29, 60327 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_cafe_under_pressure",
+      "name": "Café Under Pressure",
+      "before": {
+        "lat": 50.10562666,
+        "lng": 8.692555680000002
+      },
+      "google": {
+        "lat": 50.1056554,
+        "lng": 8.6926005,
+        "place_id": "ChIJv12D5rYPvUcRxcM7FVTCLGI",
+        "address": "Große Rittergasse 20, 60594 Frankfurt am Main-Frankfurt-Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hotel_garni",
+      "name": "Hotel Garni",
+      "before": {
+        "lat": 50.11663796,
+        "lng": 8.64801078
+      },
+      "google": {
+        "lat": 50.1166667,
+        "lng": 8.6480556,
+        "place_id": "ChIJz-ZFilwJvUcR93v_quuIaJY",
+        "address": "Varrentrappstraße 73, 60486 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_pension_alpha",
+      "name": "Pension Alpha",
+      "before": {
+        "lat": 50.104299059999995,
+        "lng": 8.66369048
+      },
+      "google": {
+        "lat": 50.1043278,
+        "lng": 8.663735299999999,
+        "place_id": "ChIJrd3GEv8LvUcRuy-_YTISNTk",
+        "address": "Karlsruher Str. 7, 60329 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_pension_seckbach",
+      "name": "Pension Seckbach",
+      "before": {
+        "lat": 50.14416976,
+        "lng": 8.740248839999998
+      },
+      "google": {
+        "lat": 50.14419849999999,
+        "lng": 8.740293699999999,
+        "place_id": "ChIJZbozgbUPvUcRrZNCCHUDzCE",
+        "address": "Kruppstraße 140, 60388 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_a_o_hostel_frankfurt_galluswarte",
+      "name": "a&o Hostel Frankfurt Galluswarte",
+      "before": {
+        "lat": 50.103818059999995,
+        "lng": 8.64563278
+      },
+      "google": {
+        "lat": 50.1038468,
+        "lng": 8.645677599999999,
+        "place_id": "ChIJVxyEAOQLvUcRB82-FqoW9C0",
+        "address": "Mainzer Landstraße 226-230, 60327 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_main_hotel_frankfurt_city",
+      "name": "Main Hotel Frankfurt City",
+      "before": {
+        "lat": 50.10738166,
+        "lng": 8.669367780000002
+      },
+      "google": {
+        "lat": 50.1074104,
+        "lng": 8.6694126,
+        "place_id": "ChIJeQPkg6oOvUcRKJHlkMynZK4",
+        "address": "Elbestraße 14, 60329 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_willy_hotel_frankfurt",
+      "name": "Willy Hotel Frankfurt",
+      "before": {
+        "lat": 50.10976786,
+        "lng": 8.674476680000001
+      },
+      "google": {
+        "lat": 50.1097966,
+        "lng": 8.674521499999999,
+        "place_id": "ChIJe-JReqkOvUcRcKLtaeHWBCA",
+        "address": "Neue Mainzer Str. 24, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_hotel_admiral",
+      "name": "Hotel Admiral",
+      "before": {
+        "lat": 50.114971260000004,
+        "lng": 8.69856628
+      },
+      "google": {
+        "lat": 50.11499999999999,
+        "lng": 8.698611099999999,
+        "place_id": "ChIJIz_dKpgOvUcRgoQmh19jQtQ",
+        "address": "Hölderlinstraße 25, 60316 Frankfurt am Main"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_bernhard_knaus_fine_art_gmbh",
+      "name": "Bernhard Knaus Fine Art GmbH",
+      "before": {
+        "lat": 50.10801326,
+        "lng": 8.659621679999999
+      },
+      "google": {
+        "lat": 50.1080492,
+        "lng": 8.6596777,
+        "place_id": "ChIJQe4X9aPOl0cRiOZI0oEHj4I",
+        "address": "Niddastraße 84, 60329 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_offentliche_toilette_literaturhaus",
+      "name": "Öffentliche Toilette Literaturhaus",
+      "before": {
+        "lat": 50.10936804,
+        "lng": 8.69321578
+      },
+      "google": {
+        "lat": 50.1093932,
+        "lng": 8.693254999999999,
+        "place_id": "ChIJz1XQ4KEOvUcR6DiiesXQxsQ",
+        "address": "Schöne Aussicht 2, 60311 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_offentliche_toiletten",
+      "name": "öffentliche Toiletten",
+      "before": {
+        "lat": 50.11953484000001,
+        "lng": 8.69064088
+      },
+      "google": {
+        "lat": 50.113544,
+        "lng": 8.6793883,
+        "place_id": "ChIJL1k5RUAPvUcRKcDFiYNf8L4",
+        "address": "60313 Frankfurt am Main-Innenstadt I"
+      },
+      "delta_m": 1043,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_toitoi_toiletten",
+      "name": "Toitoi-Toiletten",
+      "before": {
+        "lat": 50.10703564,
+        "lng": 8.676269880000001
+      },
+      "google": {
+        "lat": 50.1070608,
+        "lng": 8.6763091,
+        "place_id": "ChIJ0TERZAAPvUcRWceqU9ln6EY",
+        "address": "Untermainbrücke, 60311 Frankfurt am Main"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_tuluu_toilet_download_the_app_for_access",
+      "name": "tuluu toilet - download the app for access",
+      "before": {
+        "lat": 50.115208439999996,
+        "lng": 8.682952180000001
+      },
+      "google": {
+        "lat": 50.1020076,
+        "lng": 8.6872701,
+        "place_id": "ChIJbYNug98NvUcRlX3azXMAjLg",
+        "address": "Bruchstraße 14, 60594 Frankfurt am Main"
+      },
+      "delta_m": 1500,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_stasher_luggage_storage_melibocusstrasse_open_24_7",
+      "name": "Stasher Luggage Storage - Melibocusstrasse - Open 24-7",
+      "before": {
+        "lat": 50.08307584,
+        "lng": 8.637708799999999
+      },
+      "google": {
+        "lat": 50.083101,
+        "lng": 8.637748,
+        "place_id": "ChIJxbWSdiYLvUcR8u_9CjJdRdk",
+        "address": "Melibocusstraße 52a, 60528 Frankfurt am Main"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_radical_storage_luggage_storage_near_frankfurt_hbf",
+      "name": "Radical Storage - Luggage Storage Near Frankfurt Hbf",
+      "before": {
+        "lat": 50.108294640000004,
+        "lng": 8.65847958
+      },
+      "google": {
+        "lat": 50.1087979,
+        "lng": 8.6625938,
+        "place_id": "ChIJWbGKPLEJvUcRGRHtc42mgpI",
+        "address": "Düsseldorfer Str. 10, 60329 Frankfurt am Main"
+      },
+      "delta_m": 299,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_radical_luggage_storage_frankfurt_railway_station",
+      "name": "Radical - Luggage Storage Frankfurt Railway Station",
+      "before": {
+        "lat": 50.12724084,
+        "lng": 8.70370946
+      },
+      "google": {
+        "lat": 50.1087979,
+        "lng": 8.6625938,
+        "place_id": "ChIJWbGKPLEJvUcRGRHtc42mgpI",
+        "address": "Düsseldorfer Str. 10, 60329 Frankfurt am Main"
+      },
+      "delta_m": 3578,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_stasher_luggage_storage_fleischergasse_5_frankfurt_open_24_7",
+      "name": "Stasher Luggage Storage - Fleischergasse 5 - Frankfurt - Open 24-7",
+      "before": {
+        "lat": 50.12401964000001,
+        "lng": 8.63775016
+      },
+      "google": {
+        "lat": 50.1240448,
+        "lng": 8.637789399999999,
+        "place_id": "ChIJh4Z5sPsJvUcRYBBXx7RU_dc",
+        "address": "Fleischergasse 5, 60487 Frankfurt am Main"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_radical_luggage_storage_frankfurt_main_muhlberg",
+      "name": "Radical - Luggage Storage Frankfurt Main Mühlberg",
+      "before": {
+        "lat": 50.10202184,
+        "lng": 8.70037078
+      },
+      "google": {
+        "lat": 50.102047,
+        "lng": 8.70041,
+        "place_id": "ChIJo7UdXhoNvUcRqI1nXEQ8zpk",
+        "address": "Offenbacher Landstraße 79, 60599 Frankfurt am Main"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_luggage_storage_platz_der_republik_hbf_radical_storage",
+      "name": "Luggage Storage Platz Der Republik / Hbf - Radical Storage",
+      "before": {
+        "lat": 50.10865664,
+        "lng": 8.659200180000001
+      },
+      "google": {
+        "lat": 50.1086818,
+        "lng": 8.659239399999999,
+        "place_id": "ChIJtXvR02MJvUcRlZ_S-42oc3Q",
+        "address": "Mainzer Landstraße 101, 60329 Frankfurt am Main"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_stasher_luggage_storage_romer_paulskirche_open_24_7",
+      "name": "Stasher Luggage Storage - Römer Paulskirche - Open 24-7",
+      "before": {
+        "lat": 50.11424134,
+        "lng": 8.71890348
+      },
+      "google": {
+        "lat": 50.1142665,
+        "lng": 8.7189427,
+        "place_id": "ChIJ_91Fvx4PvUcReDIMmnzvOSg",
+        "address": "Hanauer Landstraße 207, 60314 Frankfurt am Main"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "frankfurt_stasher_luggage_storage_marienplatz_u_bahn",
+      "name": "Stasher Luggage Storage - Marienplatz U-Bahn",
+      "before": {
+        "lat": 50.11816054,
+        "lng": 8.696969880000001
+      },
+      "google": {
+        "lat": 50.1181857,
+        "lng": 8.697009099999999,
+        "place_id": "ChIJp_En2uwPvUcRhG6Eq0q6y_E",
+        "address": "Sandweg 36, 60316 Frankfurt am Main-Bornheim/Ostend"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    }
+  ]
+}

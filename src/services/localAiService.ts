@@ -30,6 +30,21 @@ export type GeneratePromptOptions = {
   useFindusSystem?: boolean;
   masterContext?: MasterPromptContext;
   systemInstruction?: string;
+  tier?: 'lite' | 'pro';
+  forcePro?: boolean;
+  task?:
+    | 'nav_parse'
+    | 'weather'
+    | 'local_qa'
+    | 'intent'
+    | 'teaser'
+    | 'concierge'
+    | 'story'
+    | 'history_deep'
+    | 'itinerary'
+    | 'generic';
+  stopCount?: number;
+  flashFailed?: boolean;
 };
 
 export function hasTextEngine(): boolean {
@@ -52,6 +67,11 @@ export async function generatePromptText(
         useFindusSystem: options?.useFindusSystem,
         masterContext: options?.masterContext,
         systemInstruction: options?.systemInstruction,
+        tier: options?.tier,
+        forcePro: options?.forcePro,
+        task: options?.task,
+        stopCount: options?.stopCount,
+        flashFailed: options?.flashFailed,
       });
       if (text.trim()) return text.trim();
     } catch (error) {
@@ -82,6 +102,11 @@ export async function* streamPromptSentences(
         useFindusSystem: options?.useFindusSystem,
         masterContext: options?.masterContext,
         systemInstruction: options?.systemInstruction,
+        tier: options?.tier,
+        forcePro: options?.forcePro,
+        task: options?.task,
+        stopCount: options?.stopCount,
+        flashFailed: options?.flashFailed,
       });
       if (text.trim()) {
         for await (const sentence of sentencesFromFullText(text.trim())) {
@@ -119,14 +144,16 @@ export async function* generateLocalTourNarrationStream(
   poi: PoiWithFacts,
 ): AsyncGenerator<string, void, unknown> {
   const profile = getCachedUserProfile() ?? createDefaultProfile();
-  // Lazy: vermeidet Require-Cycle geminiService ↔ singleShotStory via localAiService
+  // Reboot: nur noch Modul-1-POI-Chat
   const {
-    streamFindusStorySentences,
+    streamModule1ChatSentences,
+  } = require('./ai/module1PoiChat') as typeof import('./ai/module1PoiChat');
+  const {
     extractOfflineGeneralInfo,
   } = require('./ai/singleShotStory') as typeof import('./ai/singleShotStory');
   try {
     let yielded = false;
-    for await (const s of streamFindusStorySentences({
+    for await (const s of streamModule1ChatSentences({
       poi,
       profile,
       mode: 'arrival',
@@ -137,7 +164,7 @@ export async function* generateLocalTourNarrationStream(
     }
     if (yielded) return;
   } catch (error) {
-    console.warn('[textEngine] singleShot failed:', error);
+    console.warn('[textEngine] module1 chat failed:', error);
   }
 
   const offline = extractOfflineGeneralInfo(poi);

@@ -1,0 +1,272 @@
+[
+  {
+    "id": "berlin_potsdamer_platz",
+    "name": "Potsdamer Platz",
+    "gi": 271,
+    "deepN": 32,
+    "deepChars": 3408,
+    "total": 3679,
+    "lat": 52.5096,
+    "lng": 13.376
+  },
+  {
+    "id": "berlin_tempelhofer_feld",
+    "name": "Tempelhofer Feld",
+    "gi": 263,
+    "deepN": 28,
+    "deepChars": 2866,
+    "total": 3129,
+    "lat": 52.473056,
+    "lng": 13.403056
+  },
+  {
+    "id": "berlin_olympiastadion_berlin",
+    "name": "Olympiastadion Berlin",
+    "gi": 217,
+    "deepN": 30,
+    "deepChars": 3010,
+    "total": 3227,
+    "lat": 52.514722,
+    "lng": 13.239444
+  },
+  {
+    "id": "berlin_neue_synagoge",
+    "name": "Neue Synagoge",
+    "gi": 279,
+    "deepN": 27,
+    "deepChars": 2735,
+    "total": 3014,
+    "lat": 52.524722,
+    "lng": 13.394444
+  },
+  {
+    "id": "berlin_juedisches_museum_berlin",
+    "name": "Jüdisches Museum Berlin",
+    "gi": 261,
+    "deepN": 29,
+    "deepChars": 2965,
+    "total": 3226,
+    "lat": 52.501389,
+    "lng": 13.395278
+  },
+  {
+    "id": "berlin_kaiser_wilhelm_gedachtniskirche",
+    "name": "Kaiser-Wilhelm-Gedächtniskirche",
+    "gi": 325,
+    "deepN": 13,
+    "deepChars": 1961,
+    "total": 2286,
+    "lat": 52.504818,
+    "lng": 13.335082
+  },
+  {
+    "id": "berlin_aussichtsturm_gedenkstatte_berliner_mauer",
+    "name": "Aussichtsturm Gedenkstätte Berliner Mauer",
+    "gi": 301,
+    "deepN": 35,
+    "deepChars": 4244,
+    "total": 4545,
+    "lat": 52.53517,
+    "lng": 13.3901
+  },
+  {
+    "id": "berlin_zoologischer_garten_berlin",
+    "name": "Zoologischer Garten Berlin",
+    "gi": 305,
+    "deepN": 10,
+    "deepChars": 1318,
+    "total": 1623,
+    "lat": 52.50783029999999,
+    "lng": 13.3394157
+  },
+  {
+    "id": "berlin_tierpark_berlin",
+    "name": "Tierpark Berlin",
+    "gi": 0,
+    "deepN": 1,
+    "deepChars": 83,
+    "total": 83,
+    "lat": 52.5021834,
+    "lng": 13.5314733
+  },
+  {
+    "id": "berlin_nikolaiviertel",
+    "name": "Nikolaiviertel",
+    "gi": 340,
+    "deepN": 11,
+    "deepChars": 1330,
+    "total": 1670,
+    "lat": 52.5174032,
+    "lng": 13.4070297
+  },
+  {
+    "id": "berlin_unter_den_linden",
+    "name": "Unter den Linden",
+    "gi": 308,
+    "deepN": 15,
+    "deepChars": 2094,
+    "total": 2402,
+    "lat": 52.5170229,
+    "lng": 13.3890441
+  },
+  {
+    "id": "berlin_deutsches_historisches_museum",
+    "name": "Deutsches Historisches Museum",
+    "gi": 323,
+    "deepN": 12,
+    "deepChars": 1715,
+    "total": 2038,
+    "lat": 52.5186138,
+    "lng": 13.3963598
+  },
+  {
+    "id": "berlin_neues_museum",
+    "name": "Neues Museum",
+    "gi": 187,
+    "deepN": 24,
+    "deepChars": 3132,
+    "total": 3319,
+    "lat": 52.52013889,
+    "lng": 13.39777778
+  },
+  {
+    "id": "berlin_altes_museum",
+    "name": "Altes Museum",
+    "gi": 0,
+    "deepN": 2,
+    "deepChars": 173,
+    "total": 173,
+    "lat": 52.5194665,
+    "lng": 13.3987445
+  },
+  {
+    "id": "berlin_alte_nationalgalerie",
+    "name": "Alte Nationalgalerie",
+    "gi": 222,
+    "deepN": 25,
+    "deepChars": 3032,
+    "total": 3254,
+    "lat": 52.52083333,
+    "lng": 13.39827778
+  },
+  {
+    "id": "berlin_bode_museum",
+    "name": "Bode-Museum",
+    "gi": 0,
+    "deepN": 2,
+    "deepChars": 173,
+    "total": 173,
+    "lat": 52.5219816,
+    "lng": 13.3943983
+  },
+  {
+    "id": "berlin_pergamonmuseum_das_panorama",
+    "name": "Pergamonmuseum. Das Panorama",
+    "gi": 290,
+    "deepN": 22,
+    "deepChars": 2822,
+    "total": 3112,
+    "lat": 52.52102778,
+    "lng": 13.39666667
+  },
+  {
+    "id": "berlin_museum_fur_naturkunde",
+    "name": "Museum für Naturkunde",
+    "gi": 0,
+    "deepN": 2,
+    "deepChars": 173,
+    "total": 173,
+    "lat": 52.5305726,
+    "lng": 13.3791755
+  },
+  {
+    "id": "berlin_grosser_tiergarten",
+    "name": "Großer Tiergarten",
+    "gi": 0,
+    "deepN": 1,
+    "deepChars": 83,
+    "total": 83,
+    "lat": 52.5141516,
+    "lng": 13.3591634
+  },
+  {
+    "id": "berlin_mauerpark",
+    "name": "Mauerpark",
+    "gi": 0,
+    "deepN": 1,
+    "deepChars": 83,
+    "total": 83,
+    "lat": 52.5420022,
+    "lng": 13.4021371
+  },
+  {
+    "id": "berlin_berlin_treptower_park",
+    "name": "Berlin Treptower Park",
+    "gi": 0,
+    "deepN": 1,
+    "deepChars": 83,
+    "total": 83,
+    "lat": 52.4939659,
+    "lng": 13.4613863
+  },
+  {
+    "id": "berlin_berliner_mauerweg",
+    "name": "Berliner Mauerweg",
+    "gi": 0,
+    "deepN": 1,
+    "deepChars": 83,
+    "total": 83,
+    "lat": 52.52673360000001,
+    "lng": 13.3743199
+  },
+  {
+    "id": "berlin_st_marienkirche",
+    "name": "St. Marienkirche",
+    "gi": 0,
+    "deepN": 2,
+    "deepChars": 164,
+    "total": 164,
+    "lat": 52.5206108,
+    "lng": 13.4071221
+  },
+  {
+    "id": "berlin_franzosische_kirche_zu_berlin_hugenottenkirche",
+    "name": "Französische Kirche zu Berlin (Hugenottenkirche)",
+    "gi": 0,
+    "deepN": 2,
+    "deepChars": 164,
+    "total": 164,
+    "lat": 52.5143172,
+    "lng": 13.3917955
+  },
+  {
+    "id": "berlin_konzerthaus_berlin",
+    "name": "Konzerthaus Berlin",
+    "gi": 0,
+    "deepN": 3,
+    "deepChars": 236,
+    "total": 236,
+    "lat": 52.5136439,
+    "lng": 13.3917896
+  },
+  {
+    "id": "berlin_deutsche_oper_berlin",
+    "name": "Deutsche Oper Berlin",
+    "gi": 0,
+    "deepN": 3,
+    "deepChars": 236,
+    "total": 236,
+    "lat": 52.5120793,
+    "lng": 13.308348
+  },
+  {
+    "id": "berlin_garten_der_welt",
+    "name": "Gärten der Welt",
+    "gi": 0,
+    "deepN": 1,
+    "deepChars": 83,
+    "total": 83,
+    "lat": 52.5379611,
+    "lng": 13.5692782
+  }
+]

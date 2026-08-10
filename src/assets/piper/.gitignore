@@ -1,3 +1,0 @@
-# Große ONNX-Modelle — per npm run fetch:piper laden
-*.onnx
-!.gitignore

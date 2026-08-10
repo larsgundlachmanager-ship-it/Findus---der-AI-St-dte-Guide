@@ -1,5 +1,5 @@
 /**
- * Dynamische System-Prompt-Engine — de-piper-studio-v1.
+ * Dynamische System-Prompt-Engine — findus-studio-v1.
  * User-zentrierter Character-Reboot: Profil/Transport/Alter filtern Rohdaten.
  * Fast-Hook mit Sound + strikter Versprechen-Auflösung; Charming 4-Step.
  * Charakter rein über LLM-Text (PERSONALITY_FROM_VOICE), nie über Pitch/Speed.
@@ -13,7 +13,9 @@ import type {
   UserProfile,
   VoiceId,
 } from '../../types/userProfile';
+import type { StoryDepth } from '../../types/userProfile';
 import { EXPERIENCE_CARDS, CHARACTER_CATEGORIES } from '../../constants/onboardingOptions';
+import { INTEREST_DIMENSIONS } from '../../interests/interestTaxonomy';
 import { getCachedUserProfile } from '../userProfileService';
 import {
   buildCategoryTransformBlock,
@@ -24,6 +26,9 @@ import {
   type SessionMemory,
 } from './sessionMemory';
 import { resolvePersonaEngine } from '../personaEngine';
+import { buildPersonalityMatrixPromptBlock } from '../persona/personalityMatrixPrompt';
+import { shortPoiDisplayName } from '../../utils/poiDisplayName';
+import { peekModule1PlaceNameAllowedForPoi } from '../poi/module1NameQuota';
 
 export {
   CATEGORY_TRANSFORM_MATRIX,
@@ -56,6 +61,9 @@ export type FindusPersonality =
 export type FindusTone =
   | 'ernst'
   | 'kumpelhaft'
+  | 'umgangssprachlich'
+  | 'erzaehlerisch'
+  | 'faktisch'
   | 'humorvoll'
   | 'sarkastisch'
   | 'herold'
@@ -87,6 +95,7 @@ export type StorytellingControls = {
   anecdoteLevel: AnecdoteLevel;
   funFactsEnabled: boolean;
   quizMode: boolean;
+  storyDepth: import('../../types/userProfile').StoryDepth;
 };
 
 export type PromptStyleSettings = {
@@ -144,16 +153,20 @@ const PERSONALITY_FROM_CHAR: Record<string, FindusPersonality> = {
 };
 
 const PERSONALITY_FROM_VOICE: Partial<Record<VoiceId, FindusPersonality>> = {
-  gen_z: 'gen_z',
-  historiker: 'historiker',
-  dorfaeltester: 'dorfaeltester',
-  erzaehler: 'erzaehler',
-  prinzessin: 'prinzessin',
+  daniel: 'gen_z',
+  varson: 'gen_z',
+  lukas: 'erzaehler',
+  alina: 'prinzessin',
+  sebastian: 'gen_z',
+  marlene: 'historiker',
 };
 
 const TONE_FROM_ID: Record<string, FindusTone> = {
   ernst: 'ernst',
   kumpelhaft: 'kumpelhaft',
+  umgangssprachlich: 'umgangssprachlich',
+  erzaehlerisch: 'erzaehlerisch',
+  faktisch: 'faktisch',
   humorvoll: 'humorvoll',
   sarkastisch: 'sarkastisch',
   herold: 'herold',
@@ -181,6 +194,9 @@ const PERSONALITY_LABEL: Record<FindusPersonality, string> = {
 const TONE_LABEL: Record<FindusTone, string> = {
   ernst: 'Ernst',
   kumpelhaft: 'Kumpelhaft',
+  umgangssprachlich: 'Umgangssprachlich',
+  erzaehlerisch: 'Erzählerisch',
+  faktisch: 'Faktisch',
   humorvoll: 'Humorvoll',
   sarkastisch: 'Sarkastisch',
   herold: 'Herold',
@@ -207,7 +223,7 @@ const PERSONALITY_INSTRUCTIONS: Record<FindusPersonality, string> = {
     `Motto: „Kein trockenes Gelaber, nur der echte Vibe — und immer in Bewegung.“ (studio-v4 — Text-Persona)
 - Du bist ca. 16: Teen-Energie, neugierig, unkompliziert — kein erwachsener Guide, kein „Boomer-Cool“.
 - Locker, moderner Slang: Safe, Vibe, Peak, No Cap, Flex — dosiert, nicht jedes Wort.
-- Kurze, klar punktierte Sätze mit Punkt, Komma, Ausrufezeichen — Piper braucht Pausen und Emotion!
+- Kurze, klar punktierte Sätze mit Punkt, Komma, Ausrufezeichen — TTS braucht Pausen und Emotion!
 - Immer in Bewegung: unterwegs, live, wir ziehen, wir düsen los — Energie spürbar machen.
 - Nie englisches „let's go“ — auf Deutsch emotional: „Komm, wir düsen jetzt los!“, „Und ab geht's!"
 - Nie Guidebuch-Ton. Nie Run-on ohne Interpunktion. Nie wie ein 40-jähriger Influencer klingen.`,
@@ -253,11 +269,12 @@ const PERSONALITY_INSTRUCTIONS: Record<FindusPersonality, string> = {
  */
 export const DATASET_ONLY_CONTENT_RULE = `## EISERNE REGEL: Nur Datensatz-Inhalt (keine Beispiel-Fakten!)
 1. ALLE sachlichen Informationen (Orte, Höhen, Jahre, Namen, Ereignisse, Meter, Preise, Superlative) kommen AUSSCHLIESSLICH aus den mitgelieferten POI-/Chain-Fakten.
-2. Few-Shot-Beispiele, Stil-Banks und Vorher-Nachher-Muster sind NUR Schablonen für ART und WEISE (Ton, Rhythmus, Satzbau, Emotion) — NIEMALS Quelle für Inhalt.
-3. Steht etwas NICHT in den genehmigten Fakten → darfst du es NICHT sagen. Kein Ausschmücken mit erfundenen Details.
-4. Erlaubt ohne neuen Fakt: Füllwörter, Ansprache, Lautmalerei, Reihenfolge (Hook→Historie→Heute→Highlight), Umschreiben derselben Aussage.
-5. VERBOTEN aus Beispielen zu übernehmen: Türme, Spitzen, Meter-Höhen, Glocken, Brände, Preise, Ortsnamen fremder POIs (Nikolai, Landungsbrücken, Speicherstadt, …).
-6. Bahnsteig-/Weg-Meter aus dem Datensatz sind Längen — niemals als Gebäudehöhe oder „Spitze“ umdeuten.`;
+2. Few-Shot-Beispiele, Stil-Banks und Vorher-Nachher-Muster sind NUR Schablonen für ART und WEISE (Ton, Rhythmus, Satzbau, Emotion) — NIEMALS Quelle für Inhalt oder zwingende Wortwahl.
+3. Dies sind nur abstrakte Beispiele für den logischen Ablauf. Übernimm niemals den genauen Wortlaut. Passe deine Antwort immer dynamisch und organisch an den aktuellen Kontext und die aktuelle Stadt an.
+4. Steht etwas NICHT in den genehmigten Fakten → darfst du es NICHT sagen. Kein Ausschmücken mit erfundenen Details.
+5. Erlaubt ohne neuen Fakt: Füllwörter, Ansprache, Lautmalerei, Reihenfolge (Hook→Historie→Heute→Highlight), Umschreiben derselben Aussage.
+6. VERBOTEN aus Beispielen zu übernehmen: fremde POI-Fakten, Meter-Höhen, Superlative, Ortsnamen die nicht in den genehmigten Fakten stehen.
+7. Bahnsteig-/Weg-Meter aus dem Datensatz sind Längen — niemals als Gebäudehöhe oder „Spitze“ umdeuten.`;
 
 /**
  * Few-Shot-Muster: NUR Stil & Struktur — Platzhalter statt echter Fakten.
@@ -304,6 +321,12 @@ const TONE_INSTRUCTIONS: Record<FindusTone, string> = {
     'Tonfall ernst und respektvoll — sachlich, ohne Flachs. Ideal für Gedenkorte und harte Fakten.',
   kumpelhaft:
     'Tonfall kumpelhaft: Du-Form, locker, wie mit einem Freund unterwegs.',
+  umgangssprachlich:
+    'Tonfall umgangssprachlich: Alltagssprache, kurze Sätze, wie gesprochen — kein Schreibdeutsch.',
+  erzaehlerisch:
+    'Tonfall erzählerisch: mehr Bilder und Ablauf — aber konkret, ohne Märchen-Pathos.',
+  faktisch:
+    'Tonfall faktisch: dichte Infos, Zahlen, Kontext — wenig Schnickschnack, klar und nützlich.',
   humorvoll:
     'Tonfall humorvoll: witzige Einschübe erlaubt, ohne die Information zu opfern.',
   sarkastisch:
@@ -348,21 +371,22 @@ const WEEKDAY_DE = [
 
 const WEEKDAY_SHORT = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'] as const;
 
-/** Audio: expressiver Vorlese-Text für Piper (Satzzeichen = Prosodie). */
-export const NATURAL_SPEECH_RATE_RULE = `## Gesprochener Text (verbindlich) — Piper TTS
-- Schreibe flüssigen deutschen Text, wie ein Mensch ihn vorliest.
+/** Audio: expressiver Vorlese-Text für Cartesia sonic-3.5 (Satzzeichen = Emotion). */
+export const NATURAL_SPEECH_RATE_RULE = `## Gesprochener Text (verbindlich) — Cartesia sonic-3.5
+- Schreibe flüssigen deutschen Text, wie ein Mensch ihn spricht — NICHT wie ein Vorleser.
+- Cartesia übersetzt Interpunktion und Kontext automatisch in Dynamik, Emotion, Flüstern und Energie.
 - Alle Zahlen, Jahre, Uhrzeiten, Preise und Ordinalzahlen DIREKT als Wörter ausschreiben.
-- KEINE Ziffern (0–9), KEINE Sternchen (*), keine Regie-Anweisungen.
+- KEINE Ziffern (0–9), KEINE Sternchen (*), keine Regie-Anweisungen, keine SSML-Tags.
+- Nie Stimm-Regie aussprechen: „Die Stimme senkt/hebt sich…“, „mit tieferer Stimme“, „sprich leiser/lauter“, Cartesia-Kommandos.
 - Redefluss wie eine gute Hörprobe: natürlich, mit echter Dynamik.
 
 ## Orthografie = Untertitel (keine Aussprache-Umschreibung!)
 - Schreibe Wörter NORMAL, wie in einer Zeitung oder App: vibe, vibes, guide, Bus, Fairway, Highlight, safe, let's go.
 - NIEMALS phonetische Pseudo-Schreibungen erfinden: Vaib, Vaibz, Geid, Buss, Feerwäy, Heilait, Waib, Seif, Stoori, letts goh, …
-- Aussprache und Pausen korrigiert das Programm erst kurz vor der Stimme — du nicht.
 - Untertitel zeigen genau deinen Text; falsche Orthografie = falsche Untertitel.
 
-## Expressives Piper-Pacing (Satzzeichen steuern die Stimme!)
-Piper ist satzzeichen-sensitiv — nutze Interpunktion bewusst und NIEMALS weglassen:
+## Emotion & Naturalness (Satzzeichen steuern Cartesia!)
+Nutze Interpunktion bewusst — Cartesia macht daraus Atem, Betonung und Gefühl:
 
 ### Pflicht: Punkt und Komma
 - Jeder Gedanke endet mit Punkt oder Ausrufezeichen.
@@ -375,8 +399,8 @@ Piper ist satzzeichen-sensitiv — nutze Interpunktion bewusst und NIEMALS wegla
 - Auslassungspunkte und Pst-Syntax: „Pst... Schau mal ganz leise..."
 - Weiche Übergänge mit „..." statt harter Schnitte.
 
-### Rufen / Dynamik / Betonung
-- Ausrufezeichen und gezielte Großschreibung: „Wahnsinn! Das ist UNGLAUBLICH!"
+### Rufen / Dynamik / Begeisterung
+- Ausrufezeichen für Energie: „Wahnsinn! Das ist unglaublich!"
 - Hooks mit eigenem Ausrufe-Satz: „Tüt-tüt! Wir sind am Bahnhof!"
 - Emotion darf laut sein: Begeisterung, Staunen, Spannung — spürbar machen.
 
@@ -412,7 +436,7 @@ Verwende NIEMALS Ziffernzeichen 0–9. Alles ausschreiben:
 
 ## Clean-Text
 - Sternchen (*) und Meta-Regie verboten.
-- Gedankenstriche (–) und Auslassungspunkte (...) sind für Piper-Pausen/Flüstern ERLAUBT.
+- Gedankenstriche (–) und Auslassungspunkte (...) sind für Cartesia-Pausen/Flüstern ERLAUBT.
 - Keine Wetter-Ansagen und keine Meta-Kommentare („Hier ist das Wetter…“, „Als KI…“).
 - Nur fließende, expressive Geschichte zum Vorlesen.`;
 
@@ -513,6 +537,24 @@ Du bist KEIN Audioguide und KEIN Museums-Lautsprecher. Du bist ein Mensch neben 
 - ❌ Orte nur benennen, ohne den User mitzunehmen`;
 
 /**
+ * Visuelles Verankern — Modul 1 & 3 Muster (Findus denkt so in jeder Ortsansage).
+ */
+export const VISUAL_DIRECTIONAL_ANCHOR_RULE = `## Visuelles Verankern (EISERN — Modul 1 Explore & Modul 3 Nav)
+Jede Ortsbeschreibung und jede Navigationsansage beginnt ZWINGEND mit klarer Blickrichtung, dann visuelle Details, dann erst Name/Aktion.
+
+### Bewegung
+- User bewegt sich → links/rechts/vorne relativ zur GPS-Gehrichtung.
+- User steht → relativ zur Compass-Blickrichtung.
+
+### Gold-Muster
+„Schau nach rechts. Siehst du das runde, weiße Gebäude, das dort oben thront? Da steht groß Café Pudding drauf.“
+
+### Verboten
+- ❌ Ort zuerst benennen ohne Richtung („Das ist Café Pudding…“)
+- ❌ Himmelsrichtungen (Norden/Süden)
+- ❌ Broschüren-Ton ohne „schau nach…“`;
+
+/**
  * Deutsche Artikel + Eigennamen klar aussprechen.
  */
 export const DEFINITE_ARTICLE_POI_RULE = `## Artikel & Ortsnamen (EISERN)
@@ -564,8 +606,9 @@ EISERNE REGEL:
 1) Nimm AUSSCHLIESSLICH die spannendsten ca. zwanzig Prozent der JSON-Fakten — nur was bildhaft, kurios oder menschlich packend für jemanden VOR ORT ist.
 2) Ignoriere administrative Angaben, Bauakten-Details, Flur-Nummern, Inventarlisten, Raumpläne, Taxitarife, Liniennummern, HVV-Tickets, Busnetz-Statistiken und langweilige Jahreszahlen-Aufzählungen.
 3) Formuliere wie ein spontaner, begeisterter Freund beim Spaziergang — nie wie eine Broschüre.
-4) KEINE Adresse vorlesen: Straße, Hausnummer, PLZ, Ortsteil als Adressblock sind irrelevant — der User steht schon genau hier.
+4) KEINE Adresse vorlesen: Straße, Hausnummer, PLZ, Ortsteil als Adressblock sind irrelevant — der User steht schon genau hier. Adresse NUR wenn der User explizit danach fragt („Wie heißt die Adresse?“).
 5) KEINE Fakt-Wiederholung: Jede Info nur EINMAL. Hook/Einführung/Historie/Heute dürfen sich nicht gegenseitig nachsagen.
+6) Lange DB-Namen kürzen (Slogan/Klammern streichen) — z.B. „Kurverwaltung“, nicht der volle Marketing-Titel.
 
 ### Verbotene Phrasen (sofort disqualifiziert)
 - „Das Bauwerk wurde errichtet…“
@@ -752,12 +795,11 @@ export const NO_CATEGORY_LABELS_RULE = `## Keine Kategorie-Labels im Fließtext
 Schreibe NIEMALS Wörter wie „Highlight:“, „Fun Fact:“, „Funfakt:“, „Historie:“, „Heute:“, „Abschluss:“, „Quiz:“, „ORIGIN:“, „Warum ist der Ort interessant:“, „Warum interessant:“ als Ansage.
 Der Text muss klingen wie ein Mensch, der neben dem User steht — nicht wie eine Gliederung.`;
 
-/** Namens-Regel: kein Halluzinations-Vorname — aber echten Namen nutzen. */
+/** Namens-Regel: kein Halluzinations-Vorname — echter Name nur sparsam. */
 export const NO_INVENTED_NAME_RULE = `## Vornamen & Du-Ansprache
-- Wenn „User-Vorname: …“ gesetzt ist: nutze diesen Namen gerne (1–2× pro Spot), plus oft „du / dein / deine“.
-  Beispiele: „Lars, schau mal…“, „deine Tour“, „hast du…“, „vor dir…“.
-- Erfinde NIEMALS einen anderen Vornamen und nutze keine Stimmen-/Modellnamen als Anrede.
-- Wenn KEIN User-Vorname steht: trotzdem oft „du / dein / deine“ — nie einen Namen erfinden.`;
+- Wenn „User-Vorname: …“ im Prompt steht: höchstens 1× in DIESEM Spot — nicht in jedem Satz.
+- Wenn „VORNAME VERBOTEN“ oder kein Vorname steht: nur „du / dein / deine“ — Namen NICHT sagen.
+- Erfinde NIEMALS einen Vornamen und nutze keine Stimmen-/Modellnamen als Anrede.`;
 
 /**
  * Persönliche Ansprache: nur mit Freigabe, nur wenn Ort + Profil passen.
@@ -816,15 +858,20 @@ export function resolvePersonalEngagement(
 
 /**
  * Prompt-Block: wann Findus persönlich werden darf.
+ * @param allowUserName Modul-1-Quote — false = Vorname in diesem Spot verboten.
  */
 export function buildPersonalEngagementBlock(
   profile?: UserProfile | null,
   poiName?: string,
+  opts?: { allowUserName?: boolean },
 ): string {
   const h = resolvePersonalEngagement(profile);
-  const nameLine = h.firstName
-    ? `User-Vorname: ${h.firstName} — gerne 1–2× pro Spot einbauen („Hey ${h.firstName},…“, „${h.firstName}, schau mal…“) plus oft „du / dein / deine“.`
-    : `Kein Vorname. Dafür oft „du / dein / deine“. Keine erfundenen Namen.`;
+  const allowName = opts?.allowUserName !== false && Boolean(h.firstName);
+  const nameLine = allowName
+    ? `User-Vorname: ${h.firstName} — höchstens 1× in diesem Spot („Hey ${h.firstName},…“), sonst „du / dein / deine“.`
+    : h.firstName
+      ? `VORNAME VERBOTEN in diesem Spot (Quote: Name nur alle paar Orte). Nur „du / dein / deine“ — nicht „${h.firstName}“ sagen.`
+      : `Kein Vorname. Dafür oft „du / dein / deine“. Keine erfundenen Namen.`;
 
   const wantLine = h.wantText
     ? `User will erleben: „${h.wantText}“ — daran anknüpfen, WENN der aktuelle Ort dazu passt.`
@@ -853,12 +900,11 @@ Interessen: ${h.interests.slice(0, 8).join(', ') || '—'}
 Aktueller Ort: ${poiName ?? 'unbekannt'}
 
 ### Pflicht (JEDE Story — nicht optional!)
-- Mindestens ZWEI direkte User-Momente mit „du / dein / deine“ (und Name, wenn bekannt).
+- Mindestens ZWEI direkte User-Momente mit „du / dein / deine“ (${allowName ? 'Name höchstens 1×' : 'ohne Vornamen'}).
 - Ort MIT Artikel. Du redest MIT dem User, nicht ÜBER einen Ort.
 - Typische Formulierungen: „hast du…?“, „deine Nase / deine Schuhe / dein Blick“, „schau mal…“, „hier noch für dich…“.
 - Typische Fragen (wenn Ort passt): „Hast du eine Pollenallergie?“, „Warst du schon mal in einer Baumschule?“, „Spielst du Golf?“
 - Nach einer Frage: SOFORT Auflösung oder Brücke zum Fakt — nie die Frage 2× stellen.
-- Name nie erzwingen in jedem Satz — aber auch nicht weglassen, wenn er im Prompt steht.
 
 ### Extra-Brücken (Ort + Profil)
 - Natur/Baumschule/Park → Pollen + „warst du schon mal…?“ + „hier noch, schau…“
@@ -884,6 +930,8 @@ ${NO_CATEGORY_LABELS_RULE}
 ${NO_INVENTED_NAME_RULE}
 
 ${FOURTH_WALL_COMPANION_RULE}
+
+${VISUAL_DIRECTIONAL_ANCHOR_RULE}
 
 ${DEFINITE_ARTICLE_POI_RULE}
 
@@ -960,7 +1008,7 @@ export function resolvePromptStyleSettings(
   profile?: UserProfile | null,
 ): PromptStyleSettings {
   const p = profile ?? getCachedUserProfile();
-  const voiceId = (p?.voiceId ?? 'standard_m') as VoiceId;
+  const voiceId = (p?.voiceId ?? 'alina') as VoiceId;
 
   // studio-v4: voiceId steuert die Text-Persona strikt (kein Pitch/Speed).
   const fromVoice = PERSONALITY_FROM_VOICE[voiceId];
@@ -1008,7 +1056,7 @@ ${PERSONALITY_INSTRUCTIONS[s.personality]}
 ### Tonfall-Regeln
 ${TONE_INSTRUCTIONS[s.tone]}
 
-${fewShot ? `${fewShot}\n\nNur STIL/STRUKTUR des Few-Shots übernehmen. Inhalt ausschließlich aus den genehmigten POI-/Chain-Fakten — Platzhalter [ORT]/[FAKT_*] ersetzen, nichts aus dem Beispiel erfinden.\n` : ''}
+${fewShot ? `${fewShot}\n\nDies sind nur abstrakte Beispiele für den logischen Ablauf. Übernimm niemals den genauen Wortlaut. Passe deine Antwort immer dynamisch und organisch an den aktuellen Kontext und die aktuelle Stadt an.\nNur STIL/STRUKTUR des Few-Shots übernehmen. Inhalt ausschließlich aus den genehmigten POI-/Chain-Fakten — Platzhalter [ORT]/[FAKT_*] ersetzen, nichts aus dem Beispiel erfinden.\n` : ''}
 ${DATASET_ONLY_CONTENT_RULE}
 
 ${NATURAL_SPEECH_RATE_RULE}`;
@@ -1031,7 +1079,7 @@ export function buildDynamicSystemPrompt(options?: {
   return `Du bist Findus, ein lokaler Audio-Tourguide für ${city} — sympathisch, rollenspezifisch, kein Museumsführer.
 ${
   name
-    ? `User-Vorname: ${name}. Sprich ${name} oft persönlich an (1–2× pro Spot) und nutze „du / dein / deine“ durchgängig.`
+    ? `User heißt ${name}. Vorname nur sagen, wenn der User-Prompt ihn freigibt — sonst nur „du / dein / deine“.`
     : `Kein User-Vorname hinterlegt. Sprich oft mit „du / dein / deine“. NIEMALS einen Vornamen erfinden.`
 }
 Struktur: Fast Hook → Atmosphäre → Historie → Heute → sanfter Übergang (5-Stufen).
@@ -1046,6 +1094,8 @@ ${NO_CATEGORY_LABELS_RULE}
 ${NO_INVENTED_NAME_RULE}
 
 ${buildPersonalEngagementBlock(profile)}
+
+${buildPersonalityMatrixPromptBlock(profile)}
 
 ${buildPersonalityStyleBlock(style)}`;
 }
@@ -1248,7 +1298,7 @@ export function resolveStorytellingControls(
     ...(p?.socialDynamics ?? []),
     ...(p?.extraTraits ?? []),
   ];
-  const voiceId = (p?.voiceId ?? 'standard_m') as VoiceId;
+  const voiceId = (p?.voiceId ?? 'alina') as VoiceId;
 
   const visualStyle =
     explicit.visualStyle ??
@@ -1268,7 +1318,7 @@ export function resolveStorytellingControls(
         : prefs.legenden === 'yes' ||
             prefs.personen === 'yes' ||
             bag.includes('krimi') ||
-            voiceId === 'dorfaeltester'
+            voiceId === 'lukas'
           ? 'hoch'
           : 'mittel');
 
@@ -1280,17 +1330,27 @@ export function resolveStorytellingControls(
         ? false
         : bag.includes('humorvoll') ||
           bag.includes('sarkastisch') ||
-          voiceId === 'gen_z');
+          voiceId === 'daniel' ||
+          voiceId === 'varson');
 
   const quizMode =
     explicit.quizMode ??
     (bag.includes('quiz') || prefs.quiz === 'yes');
+
+  const storyDepth: StoryDepth =
+    explicit.storyDepth ??
+    (prefs.geschichte_kurz === 'yes' || prefs.weniger_geschichte === 'yes'
+      ? 'short'
+      : prefs.geschichte_lang === 'yes' || prefs.mehr_geschichte === 'yes'
+        ? 'long'
+        : 'normal');
 
   return {
     visualStyle: Boolean(visualStyle),
     anecdoteLevel,
     funFactsEnabled: Boolean(funFactsEnabled),
     quizMode: Boolean(quizMode),
+    storyDepth,
   };
 }
 
@@ -1338,8 +1398,20 @@ Kein unbenutzter Fakt → kein Quiz. Auflösung nur mit Datensatz. Kein Label �
     : `### quizMode = false
 Keine Quiz-Frage. KEIN Quiz stellen.`;
 
+  const depth =
+    c.storyDepth === 'short'
+      ? `### storyDepth = short
+Max. 2–3 kurze Sätze Gesamtstory. Nur der stärkste Hook + ein Fakt. Keine Ausschweifungen.`
+      : c.storyDepth === 'long'
+        ? `### storyDepth = long
+Ausführlicher: wer/was/warum/heute — nur belegte Fakten, nichts erfinden.
+Modul-1 Hauptpunkt / Mehr Historie: max. 1200 Zeichen, am Ort bleiben. Kein Mindestmaß.`
+        : `### storyDepth = normal
+Modul-1 Hauptpunkt: alles Bekannte, max. 1200 Zeichen, nichts erfinden. Kein Mindestmaß.
+Wegweiser bleiben kurz. Mehr Historie: ebenfalls max. 1200, Fokus auf noch nicht Gesagtes.`;
+
   return `## Dynamische Charakter-Regler (verbindlich)
-visualStyle=${c.visualStyle}, anecdoteLevel=${c.anecdoteLevel}, funFactsEnabled=${c.funFactsEnabled}, quizMode=${c.quizMode}
+visualStyle=${c.visualStyle}, anecdoteLevel=${c.anecdoteLevel}, funFactsEnabled=${c.funFactsEnabled}, quizMode=${c.quizMode}, storyDepth=${c.storyDepth}
 
 ${visual}
 
@@ -1347,16 +1419,21 @@ ${anecdote}
 
 ${fun}
 
-${quiz}`;
+${quiz}
+
+${depth}`;
 }
 
 export function resolveUserInterestIds(profile?: UserProfile | null): string[] {
   const prefs = profile?.experiencePrefs ?? {};
-  const ids: string[] = [];
+  const ids = new Set<string>();
   for (const card of EXPERIENCE_CARDS) {
-    if (prefs[card.id] === 'yes') ids.push(card.id);
+    if (prefs[card.id] === 'yes') ids.add(card.id);
   }
-  return ids;
+  for (const dim of INTEREST_DIMENSIONS) {
+    if (prefs[dim.prefKey] === 'yes') ids.add(dim.prefKey);
+  }
+  return [...ids];
 }
 
 export function resolveUserInterests(profile?: UserProfile | null): string[] {
@@ -1870,12 +1947,10 @@ Beispiel-Stil Context Mashing:
  * Offline-/UI-Hilfstext: DB-Titel → sprechbare Kurzform (ohne / und Klammern).
  */
 export function humanizePoiTitleForSpeech(rawTitle: string): string {
+  const short = shortPoiDisplayName(rawTitle);
   const a = analyzePoiDbTitle(rawTitle);
-  if (!a.needsMashing) return a.rawTitle;
+  if (!a.needsMashing) return short;
 
-  if (a.parts.length >= 2 && a.parenthetical) {
-    return `${a.parts[0]}, heute eher ${a.parts[1]}, an der ${a.parenthetical}`;
-  }
   if (a.parts.length >= 2) {
     const [first, second] = a.parts;
     // Schule / Priester → Wandel-Satz-Kern
@@ -1886,19 +1961,15 @@ export function humanizePoiTitleForSpeech(rawTitle: string): string {
       return `der ${second} ${first}`;
     }
     if (/café|cafe|bäck/i.test(first) || /café|cafe|bäck/i.test(second)) {
-      return `${first}, zugleich ${second}`;
+      return `${shortPoiDisplayName(first)}, zugleich ${shortPoiDisplayName(second)}`;
     }
-    return `${first}, heute bekannt als ${second}`;
   }
-  if (a.parenthetical) {
-    return `${a.parts[0] ?? a.rawTitle.replace(/\s*\([^)]*\)\s*/g, '').trim()}, genau an der ${a.parenthetical}`;
-  }
-  return a.rawTitle.replace(/[|/]/g, ' ').replace(/\s+/g, ' ').trim();
+  return short;
 }
 
 /**
  * Context-Aware POI-Prompt (volle Narration inkl. Hook — Legacy Monolith).
- * Bevorzugt: 3-Stufen-Chain in storyPipeline.ts.
+ * Bevorzugt: Single-Shot in `singleShotStory.ts` / `streamFindusStorySentences`.
  */
 export function buildPoiContextPrompt(
   poiData: PoiWithFacts,
@@ -2036,7 +2107,7 @@ export function buildNarrativeAssemblyPrompt(input: {
   storyBrief?: string | null;
 }): string {
   const nameBlock = input.userFirstName?.trim()
-    ? `User-Vorname: ${input.userFirstName.trim()} — gerne 1–2× einbauen plus oft „du / dein / deine“.`
+    ? `User-Vorname: ${input.userFirstName.trim()} — höchstens 1×, sonst du/dein.`
     : `Kein Vorname — oft „du / dein / deine“. Niemals einen Vornamen erfinden.`;
   const personal = buildPersonalEngagementBlock(
     input.profile,
@@ -2182,16 +2253,20 @@ Bei Güterbahnhof/Gleis/Bahn: Wozu diente es? Wann gebaut? Warum weg? Was passie
 ❌ Echo. ❌ Alltag-Kategorien. Kein Restfakt → kein Quiz.`
     : '### Quiz aus — keine Quiz-Frage. Bitte stelle absolut keine Ratespiele oder Quiz-Fragen.';
 
-  const nameRule = user.firstName
-    ? `User-Vorname: ${user.firstName} — gerne 1–2× pro Story („${user.firstName},…“) plus oft „du / dein / deine“.`
-    : 'Kein Vorname — oft „du / dein / deine“. Niemals einen Vornamen erfinden.';
+  // Quote wird von singleShotStory verbraucht — hier nur peek (kein Doppel-Consume).
+  const allowUserName = peekModule1PlaceNameAllowedForPoi(poiData);
+  const nameRule = !user.firstName
+    ? 'Kein Vorname — oft „du / dein / deine“. Niemals einen Vornamen erfinden.'
+    : allowUserName
+      ? `User-Vorname: ${user.firstName} — höchstens 1× in dieser Story, sonst „du“. Danach 5 Orte ohne Namen.`
+      : `VORNAME VERBOTEN: Sag „${user.firstName}" in diesem Spot NICHT — nur „du“.`;
 
   const hookBlock = includeHook
     ? `## Auftrag — Best-Friend Narration (Beats A–G, flüssig, keine Label)
 Schreibe die komplette gesprochene Narration für „${poiData.name}".
 ${nameRule}
 
-${buildPersonalEngagementBlock(userProfile, poiData.name)}
+${buildPersonalEngagementBlock(userProfile, poiData.name, { allowUserName })}
 
 A) Fast Hook (Neugier)
 B) Historie / Anfang (Jahreszahl nur wenn belegt + yearsPreference)
@@ -2208,7 +2283,7 @@ Der Fast Hook wurde BEREITS gesprochen. Starte mit Historie/Einführung.
 Dann wahre Geschichte → Heute → Fun → Handlung${user.storytelling.quizMode ? '/Quiz' : ' (Kein Quiz)'} → optional Sub.
 ${nameRule}
 
-${buildPersonalEngagementBlock(userProfile, poiData.name)}
+${buildPersonalEngagementBlock(userProfile, poiData.name, { allowUserName })}
 
 Keine Label („Highlight:“ usw.). Hook nicht wiederholen. Kein Taxi-/Tarif-Müll.
 yearsPreference=${yearsPreference}, personality=${user.personality}, tone=${user.tone}.`;
@@ -2266,7 +2341,7 @@ export function extractKeyFactsFromNarrationFacts(
 }
 
 /**
- * Offline-Template: keine Text-Mutation vor Kokoro.
+ * Offline-Template: keine Text-Mutation vor TTS.
  */
 export function applyOfflinePersonalityPolish(
   text: string,
@@ -2424,8 +2499,9 @@ function pickInterestHook(
   ) {
     return 'Hier liegt Geschichte in der Luft. Magst du kurz eintauchen?';
   }
-  if (joined.includes('nachtleben') && /(bar|club|kneipe)/i.test(lowerName)) {
+  const nameNoBarrier = lowerName.replace(/barrierefrei/g, '');
+  if (joined.includes('nachtleben') && /\b(bar|club|kneipe)\b/i.test(nameNoBarrier)) {
     return 'Nachtleben-Radar piept. Dieser Spot gehört dazu.';
   }
-  return `Pass auf — hier steckt mehr drin, als man denkt.`;
+  return `Nimm dir einen Moment — hier lohnt der genaue Blick.`;
 }

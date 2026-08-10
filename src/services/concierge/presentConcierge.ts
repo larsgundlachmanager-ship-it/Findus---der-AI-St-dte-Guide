@@ -18,10 +18,7 @@ import {
 import type { TransitAdvice } from '../transit/transitAdvisor';
 import { formatDelayStatus } from '../transit/transitAdvisor';
 import { getAllPois, getPoiWithFacts } from '../../db/database';
-import {
-  normalizeNavActionsAndOffer,
-  resolveAndStartNavigation,
-} from '../navigation/resolveNavTarget';
+import { normalizeNavActionsAndOffer } from '../navigation/resolveNavTarget';
 import {
   isExplicitNavIntent,
   shouldBlockAutoNavigation,
@@ -245,7 +242,10 @@ export async function autoStartNavigationIfCommitted(
 
   const navAction = navActions[0];
   const offer = store.pendingNavOffer;
-  const started = await resolveAndStartNavigation({
+  const { commitHandsFreeNavStart } = await import(
+    '../navigation/handsFreeNav'
+  );
+  const started = await commitHandsFreeNavStart({
     poiId: navAction?.payload.targetPoiId ?? offer?.poiId,
     name:
       navAction?.payload.destName ||
@@ -380,6 +380,15 @@ export async function enrichWithConciergeOffers(
     let speechText = response.speechText.trim();
     if (!speechText && ctx.fallbackSpeech?.trim()) {
       speechText = ctx.fallbackSpeech.trim();
+      try {
+        const { noteFallback } = await import('../debug/fallbackLabel');
+        if (!speechText.startsWith('Fallback:')) {
+          noteFallback('Concierge-Speech', 'fallbackSpeech ohne Prefix');
+          speechText = `Fallback: Concierge-Speech — ${speechText}`;
+        }
+      } catch {
+        /* soft */
+      }
     }
     return {
       ...response,
@@ -1411,10 +1420,35 @@ export async function presentConciergeResponse(
   let deepJobs: import('../actionBoard').DeepJob[] = [];
   try {
     const { applyActionBoardToResponse } = await import('../actionBoard');
+    // Transit-Karte: nur Station mit Coords — keine Speech-Mining-Fake-Maps
+    let boardEntities: import('../actionBoard').ActionEntity[] | undefined;
+    if (response.cardTitle === 'Nächste Bahn') {
+      const nav = response.quickActions?.find(
+        (a) =>
+          a.type === 'START_NAVIGATION' &&
+          typeof a.payload.destLat === 'number' &&
+          typeof a.payload.destLng === 'number',
+      );
+      if (nav) {
+        boardEntities = [
+          {
+            name: String(nav.payload.destName || 'Bahnhof'),
+            rank: 1,
+            lat: nav.payload.destLat as number,
+            lng: nav.payload.destLng as number,
+            poiId: nav.payload.targetPoiId ?? null,
+            category: 'other',
+          },
+        ];
+      } else {
+        boardEntities = [];
+      }
+    }
     const boarded = applyActionBoardToResponse(response, {
       userText: opts?.userText,
       cardId,
       startDeep: false,
+      entities: boardEntities,
     });
     response = boarded.response;
     deepJobs = boarded.deepJobs;
@@ -1484,6 +1518,67 @@ export async function presentConciergeResponse(
   useFinnusStore
     .getState()
     .setPendingAffiliateOffer(pickPendingAffiliateOffer(response.quickActions));
+
+  // Collective learning: Live-/Recherche-Orte + Cohort-Stil
+  try {
+    const {
+      contributePlacesFromResearchResult,
+      maybeContributeCohortStyle,
+    } = await import('../memory/collectiveLearning');
+    const { inferIntentFamily } = await import('../memory/correctionLearning');
+    const { getCachedUserProfile } = await import('../userProfileService');
+    const venues: Array<{
+      name: string;
+      lat?: number | null;
+      lng?: number | null;
+      placeType?: string;
+      sourceTrust?: number;
+    }> = [];
+    for (const a of response.quickActions) {
+      if (a.type !== 'START_NAVIGATION') continue;
+      const poiId = a.payload?.targetPoiId;
+      const numeric =
+        typeof poiId === 'number'
+          ? poiId
+          : typeof poiId === 'string' && /^-?\d+$/.test(poiId)
+            ? Number(poiId)
+            : null;
+      // Negativ / fehlend = nicht aus offiziellem Pack → Community-Overlay
+      if (numeric != null && numeric >= 0) continue;
+      const name =
+        (a.payload?.destName || a.payload?.entityName || a.label || '')
+          .replace(/^📍\s*/, '')
+          .replace(/^Route:\s*/i, '')
+          .trim();
+      if (name.length < 3) continue;
+      venues.push({
+        name: name.slice(0, 80),
+        lat: a.payload?.destLat ?? null,
+        lng: a.payload?.destLng ?? null,
+        placeType: 'place',
+        sourceTrust: 0.5,
+      });
+    }
+    if (venues.length) {
+      const city =
+        getCachedUserProfile()?.cityName ??
+        store.currentLocationName ??
+        null;
+      contributePlacesFromResearchResult({
+        query: opts?.userText || response.speechText.slice(0, 80),
+        city,
+        venues,
+      });
+    }
+    maybeContributeCohortStyle({
+      intentFamily: inferIntentFamily(
+        opts?.userText || response.speechText,
+      ),
+      answerStyle: getCachedUserProfile()?.answerStyle,
+    });
+  } catch {
+    /* soft */
+  }
 
   const voiceSettings = await getVoiceSettingsForTour();
 

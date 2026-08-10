@@ -1,7 +1,7 @@
 /**
  * Validiert de-DE IPA für den Findus-Testsatz.
  * Nutzt espeak-ng CLI falls installiert, sonst erwartet dokumentierte DE-Merkmale
- * und prüft den JS→Kokoro-Mapper gegen englische Phoneme.
+ * und prüft den JS→IPA-Mapper gegen englische Phoneme.
  *
  * Usage: node scripts/validate-native-espeak-g2p.cjs
  */
@@ -14,7 +14,7 @@ const SENTENCE =
 
 const ENGLISH_ONLY = /[θðæɹɾ]/u;
 
-/** Spiegel von mapEspeakIpaToKokoro (ohne Vocab-Filter für CLI-Check) */
+/** Spiegel von mapEspeakIpaToIPA (ohne Vocab-Filter für CLI-Check) */
 function mapEspeakIpa(ipa) {
   let s = ipa.normalize('NFC');
   s = s.replace(/\u028f/g, 'y');
@@ -75,7 +75,7 @@ if (cli) {
   const raw = phonemizeCli(cli, SENTENCE);
   failed += checkIpa(raw, 'espeak-ng raw de');
   const mapped = mapEspeakIpa(raw);
-  failed += checkIpa(mapped, 'mapped → Kokoro');
+  failed += checkIpa(mapped, 'mapped → IPA');
 } else {
   console.log('espeak-ng CLI nicht installiert — Offline-Erwartungstest');
   // Typische espeak-ng de IPA (Referenz; kann je nach Version leicht abweichen)

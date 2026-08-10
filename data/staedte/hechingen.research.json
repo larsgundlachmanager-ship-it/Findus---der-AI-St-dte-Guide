@@ -1,0 +1,338 @@
+{
+  "stadt": "Hechingen",
+  "landkreis": "Zollernalbkreis",
+  "bundesland": "Baden-Württemberg",
+  "city_history": "Die topografische und historische Entwicklung der Stadt Hechingen im Zollernalbkreis offenbart eine beispiellose Dichte an siedlungsgeschichtlichen Brüchen und wirtschaftlichen Transformationsprozessen. Die Spanne reicht von monumentalen römischen Gutshöfen über die mittelalterliche Machtkonsolidierung der Grafen von Hohenzollern bis hin zur Etablierung eines global agierenden Medizintechnik-Clusters.\n\nDie frühesten fundierten Siedlungsspuren im Raum Hechingen datieren um 1500 v. Chr., doch erst die römische Epoche hinterließ monumentale Strukturen. Die archäologischen Funde im Stadtteil Stein belegen die Existenz einer weitreichenden Villa Rustica, die ab ca. 85 n. Chr. besiedelt war. Funde von 2011 (15 Meter hohe umgestürzte Gebäudewand) und 2023 (über 100 Fragmente eines Weihedenkmals mit Götterreliefs) nähren die Hypothese, dass die Anlage Teil der verschollenen römischen Stadt Solicinium gewesen sein könnte, in deren Nähe 368 n. Chr. eine Schlacht zwischen Römern und Alamannen stattfand.\n\nNach dem Abzug der Römer um 260 n. Chr. gründeten die Alamannen unter einem Anführer namens Hacho die heutige Stadt; urkundliche Erwähnung 786 durch das Kloster St. Gallen. Mit der Belehnung der Grafen von Zollern im 11. Jahrhundert begann der Aufstieg. Nach der Zerstörung der Burg Hohenzollern 1423 forcierte sich die Entwicklung zur Residenzstadt. Unter Graf Eitelfriedrich I. (1576–1605) entstanden die Klosterkirche St. Luzen — eines der bedeutendsten Bauwerke der Spätrenaissance in Süddeutschland — sowie der bis heute erhaltene Untere Turm.\n\nMitte des 17. Jahrhunderts erhielt die jüdische Gemeinde einen Bestattungsplatz am Galgenrain. Im 18. Jahrhundert stieg die Gemeinde durch Hoffaktoren auf; herausragend Karoline Madame Kaulla (1739–1809). Dank ihres Einflusses durfte der jüdische Friedhof 1764 eingezäunt und 1800 mit einer Mauer umfriedet werden.\n\nIm Zweiten Weltkrieg wurde Hechingen Ausweichquartier des Berliner Kaiser-Wilhelm-Instituts für Physik: Werner Heisenberg und Carl Friedrich von Weizsäcker forschten in einer beschlagnahmten Trikotagenfabrik (Grotz). Der Niedergang der Textilindustrie in den 1970er Jahren und die Ansiedlung von Gambro 1973 katalysierten das heutige Medical Valley Hechingen mit über 70 Unternehmen und rund 5.000 Fachkräften. Parallel wurde der Obertorplatz zur grünen Mitte umgebaut; der Schaukelweg häppy (seit 2020) verknüpft Themen-Schaukeln, historische Bauten und den Barfußpfad im Feilbachtal.",
+  "nicht_ortsspezifische_fakten": [
+    "Hechingen ist die drittgrößte Stadt im Zollernalbkreis mit 19.807 Einwohnern und liegt auf 528 Metern Höhe.",
+    "Das KFZ-Kennzeichen lautet BL (Balingen) oder HCH (Hechingen).",
+    "Der letzte regierende Fürst Friedrich Wilhelm Constantin pflegte ein Orpheisches Hechingen und konzertierte hier mit Franz Liszt und Hector Berlioz.",
+    "Das Irma-West-Kinder- und Heimatfest (seit 1936) geht auf das Testament des ausgewanderten Hechingers Fred West zurück.",
+    "Der Nahverkehr wird stark durch die Hohenzollerische Landesbahn (SWEG) geprägt: Zollern-Alb-Bahn 1 und 2.",
+    "Medical Valley Hechingen e.V. (gegründet 2002): über 70 Unternehmen, rund 5.000 Fachkräfte; Gambro, Bentley InnoMed, ewimed, Jotec.",
+    "Im Zweiten Weltkrieg: Kaiser-Wilhelm-Institut für Physik in der Trikotagenfabrik Grotz; Reaktorversuch B8 in Haigerloch."
+  ],
+  "infra": {
+    "transit": [
+      "Bahnhof Hechingen: Regionalbahnen der HzL/SWEG (Zollern-Alb-Bahn 1 und 2) sowie Busverkehr; ZOB direkt am Bahnhof.",
+      "Hechingen liegt im NALDO-Verbund und bildet eine eigene Wabe (Stadttarif).",
+      "Bahnhof ist barrierefrei ausgebaut; Mobility Service Centre für Hilfeleistungen.",
+      "Öffentliches WC an den Bushaltestellen Bahnhofstraße.",
+      "Mobile Servicemitarbeiter (weinrote Mützen) und Kontakt zur 3-S-Zentrale."
+    ],
+    "bahnhof": [
+      "Tourist-Information ist NICHT im Bahnhof — Bürger- und Tourismusbüro am Kirchplatz 12 bzw. Marktplatz 1.",
+      "Keine U-Bahn/Tram; oberirdischer Regionalbahnhof."
+    ],
+    "service": [
+      "Polizeirevier Hechingen: Heiligkreuzstraße 6; Notruf 110; lokal 07471 9880-0; Onlinewache BW.",
+      "Zollernalb-Klinikum (Balingen/Albstadt) für zentrale Notfallversorgung; Rettung 112.",
+      "dm Haigerlocher Straße 24 (City-Center); Banken u.a. Sparkasse im Neuen Schloss, Sparda am Obertorplatz.",
+      "Nette Toilette: teilnehmende Cafés (Refugio, Eiscafe La Palma, Cafe Blixen, Backbey) — roter Aufkleber.",
+      "Barrierefreies WC im Hohenzollerischen Landesmuseum, Schloßplatz 5.",
+      "Wochenmarkt samstags vormittags an der Johannesbrücke.",
+      "QR-Code-Stadtrundgang mit 13 baulichen Highlights."
+    ],
+    "live": [
+      "LIVE: Aktuelle NALDO-Tarife und Abfahrten nie aus dem Pack vorlesen.",
+      "LIVE: Apotheken-Notdienst unter aponet.de / Landratsamt prüfen.",
+      "LIVE: Tourist-Info Öffnungszeiten und Stadtführungstickets (z. B. Blaues Blut) aktuell buchen.",
+      "LIVE: Domäne Live Sommer / Eventkalender Hofgut Domäne frisch prüfen."
+    ]
+  },
+  "orte": [
+    {
+      "ortsteil": "Hechingen-Kernstadt",
+      "spot_name": "Unterer Turm",
+      "adresse": "Staig, 72379 Hechingen",
+      "koordinaten": "48.3533, 8.9642",
+      "historische_fakten": [
+        "Der Turm ist das letzte verbliebene Stadttor der einstigen Ummauerung und diente historisch als Gefängnis, in dem die Turmstrafe (Wasser und Brot) vollzogen wurde.",
+        "Erbaut unter Graf Eitelfriedrich I.; Inschrift an der Nordfassade: Mich hat gebaut Graf Eitelfritz / vom Grund bis oben an den Spitz.",
+        "König Friedrich Wilhelm IV. von Preußen verhinderte um 1860 den geplanten Abriss und ordnete die Sanierung der Fundamente an.",
+        "Im Durchgang sind die Steinwappen der acht ehemals selbstständigen Gemeinden angebracht, die 1972 nach Hechingen eingemeindet wurden."
+      ],
+      "live_infos": [
+        "Der Turm überspannt die Straße Staig und ist permanent als Fußgängerweg zugänglich."
+      ],
+      "fun_fakts": [
+        "Dass der Turm heute noch steht, verdankt er dem Bau der Neustraße 1862, die den Verkehr vorbeileitete."
+      ],
+      "wegweiser_logik": "Vom Hohenzollerischen Landesmuseum (Schloßplatz) kommend leicht bergab Richtung Staig. Der Turm ist das markante Torbauwerk vor dem starken Gefälle zur Johannesbrücke.",
+      "triggerpunkte": [
+        {"distanz_m": 50, "view_context": "Blick von der Oberstadt in Richtung Tal.", "text": "Dort unten siehst du den Unteren Turm. Er ist das letzte erhaltene Tor der alten Stadtmauer."},
+        {"distanz_m": 15, "view_context": "Annäherung an die äußere Turmfassade.", "text": "Schau mal nach oben: Die Inschrift verrät, dass Graf Eitelfriedrich I. den Turm erbauen ließ."},
+        {"distanz_m": 3, "view_context": "Direkt im Fußgängerdurchgang unter dem Turm.", "text": "Bleib kurz stehen. Über dir im Gewölbe hingen früher Gefangene ab, und an den Wänden erkennst du die steinernen Wappen der acht eingemeindeten Stadtteile."}
+      ],
+      "quer_verbindungen": [
+        "Erinnerst du dich an die Klosterkirche St. Luzen? Beide Bauwerke entstanden auf Initiative desselben Grafen Eitelfriedrich I."
+      ]
+    },
+    {
+      "ortsteil": "Hechingen-Außenbereich",
+      "spot_name": "Jüdischer Friedhof Hechingen",
+      "adresse": "Am Fichtenwald, 72379 Hechingen",
+      "koordinaten": "48.372639, 8.963804",
+      "historische_fakten": [
+        "Um 1650 erhielt die jüdische Gemeinde die Erlaubnis, diesen Friedhof — das Haus des Lebens — am Galgenrain anzulegen.",
+        "Bis 1764 war der Friedhof ungeschützt; dann erwirkte die Hoffaktorin Madame Kaulla die Erlaubnis zur Einzäunung.",
+        "Unter Fürst Hermann Friedrich Otto wurde das Gelände 1800 mit einer Mauer umfriedet und der benachbarte städtische Galgen abgerissen.",
+        "Zu den über 1000 Bestatteten zählen Madame Kaulla (gest. 1809) und Julius Koch (gest. 1895), der Großvater von Albert Einstein."
+      ],
+      "live_infos": [
+        "LIVE: Der Friedhof ist abgeschlossen — Schlüssel bei Stadt Hechingen / Tourismusbüro anfragen.",
+        "LIVE: Zustand der Grabsteine und Stützmauer ggf. vor Besuch prüfen (Sanierung 2018)."
+      ],
+      "fun_fakts": [
+        "Der letzte Hechinger Rabbiner Dr. Samuel Mayer beschrieb den Ort als rührend Bild irdischer Vergänglichkeit, stiller Abgeschiedenheit und sanfter Wehmut."
+      ],
+      "wegweiser_logik": "Zwischen Kernstadt und Sickingen, angrenzend an das Gewerbegebiet Lotzenäcker. Von der L410 biegt Am Fichtenwald ab. Nach dem Schotterparkplatz liegt das Eisentor im dichten Baumbestand.",
+      "triggerpunkte": [
+        {"distanz_m": 100, "view_context": "Blick vom Gewerbegebiet zum bewaldeten Hügel.", "text": "Wir nähern uns dem sogenannten Galgenrain. Lange Zeit mussten die Juden ihre Toten direkt neben dem städtischen Galgen beerdigen."},
+        {"distanz_m": 25, "view_context": "Die Friedhofsmauer rückt ins Blickfeld.", "text": "Diese dicke Mauer wurde erst 1800 gebaut. Zuvor war das Gelände offen — unter anderem dank Madame Kaulla."},
+        {"distanz_m": 5, "view_context": "Direkt vor dem Eisentor und der Jugendstil-Aussegnungshalle.", "text": "Hinter diesem Tor ruht auch der Großvater von Albert Einstein. Jüdische Gräber haben ewiges Ruherecht — hier wurde nie ein Stein abgeräumt."}
+      ],
+      "quer_verbindungen": [
+        "Die unternehmerische Macht von Madame Kaulla spürt man heute eher in den Banken Stuttgarts. Hier liegt die Wurzel ihres Wirkens."
+      ]
+    },
+    {
+      "ortsteil": "Hechingen-Kernstadt",
+      "spot_name": "Klosterkirche St. Luzen",
+      "adresse": "St.-Luzen-Weg 19, 72379 Hechingen",
+      "koordinaten": "48.3610, 8.9560",
+      "historische_fakten": [
+        "Eines der bedeutendsten Bauwerke der Spätrenaissance in Süddeutschland; grundlegend umgebaut 1586–1589 durch Graf Eitelfriedrich I.",
+        "Innen: Stuck-Rosetten und Rollwerk von Wendel Neufferer sowie farbige Ausmalung von Hans de Bay.",
+        "Vor der Kirche der 1755 geschaffene Kalvarienberg mit lebensgroßer Kreuzigungsgruppe von Johann Georg Weckenmann.",
+        "Das Kloster besaß Braurecht; die Franziskaner-Brauerei wurde später eine Keimzelle der Stuttgarter Hofbräu AG."
+      ],
+      "live_infos": [
+        "LIVE: Aktuelle Öffnungszeiten und ob der Innenraum zugänglich ist, frisch prüfen.",
+        "LIVE: Ob Parkplätze am Haus frei sind, vor Ort prüfen."
+      ],
+      "fun_fakts": [
+        "Zwischen Weihnachten und Januar steht im Chorraum eine historische Jesuitenkrippe mit großen, gekleideten Holzgliederpuppen.",
+        "Ein scheidender Mönch soll an die Zellentür geschrieben haben: Oh du gutes St. Luzen-Bier, ich muss fort und du bleibst hier."
+      ],
+      "wegweiser_logik": "Vom Bahnhof ca. 500 Meter: malerische, von alten Linden und steinernen Kreuzwegstationen gesäumte Allee direkt auf den runden Kalvarienberg zu.",
+      "triggerpunkte": [
+        {"distanz_m": 80, "view_context": "Beginn der Lindenallee.", "text": "Wir laufen auf einem historischen Stationenweg. Die alten Linden säumen den Weg zur Klosterkirche."},
+        {"distanz_m": 20, "view_context": "Direkt am steinernen Rundbau des Kalvarienbergs.", "text": "Schau nach oben auf den Kalvarienberg. Die Figuren von 1755 markieren das Eingangstor zum Klosterbezirk."},
+        {"distanz_m": 5, "view_context": "Im Eingang der Kirche mit Blick auf das Gewölbe.", "text": "Blick sofort nach oben: farbgewaltige Spätrenaissance-Ausmalung und Stuck-Muscheln."}
+      ],
+      "quer_verbindungen": [
+        "Auch hier begegnet uns das Erbe von Graf Eitelfriedrich I., der Hechingen als Residenzstadt ausbaute — wie am Unteren Turm."
+      ]
+    },
+    {
+      "ortsteil": "Hechingen-Stein",
+      "spot_name": "Römisches Freilichtmuseum (Villa Rustica)",
+      "adresse": "Eichwäldle 1, 72379 Hechingen-Stein",
+      "koordinaten": "48.3761, 8.9344",
+      "historische_fakten": [
+        "Gutshof ab Ende des 1. Jahrhunderts n. Chr. mit Badegebäude, Hypokausten-Heizung und Tempelbezirk.",
+        "Wegen der Ausmaße spekulieren Historiker auf einen Bezug zur verschollenen römischen Siedlung Solicinium.",
+        "2011 wurde eine komplette, 15 Meter hohe umgestürzte Gebäudewand freigelegt.",
+        "2023 entdeckten Archäologen über 100 Fragmente eines massiven Weihedenkmals mit Götter-Reliefs."
+      ],
+      "live_infos": [
+        "LIVE: Saison/Öffnungszeiten und Eintrittspreise des Freilichtmuseums frisch recherchieren — nie aus dem Pack vorlesen."
+      ],
+      "fun_fakts": [
+        "Die ummauerte Fläche war so groß, dass heute mehrere Einfamilienhäuser mit Gärten hineinpassen würden.",
+        "2023 drehte ein Archäologe einen Stein um und sah das gemeißelte Gesicht eines antiken Gottes."
+      ],
+      "wegweiser_logik": "Im Außenbereich von Stein auf einer leichten Anhöhe (Eichwäldle). Sichtachse zum Albtrauf und zur Burg Hohenzollern.",
+      "triggerpunkte": [
+        {"distanz_m": 50, "view_context": "Annäherung an das rekonstruierte Hauptgebäude.", "text": "Das Gelände vor dir ist keine einfache Bauernhütte — hier herrschte Luxus am Rande des Römischen Reiches."},
+        {"distanz_m": 20, "view_context": "Vor dem freigelegten Badegebäude.", "text": "Das Badehaus war der antike Spa-Bereich: Hygiene und Netzwerken."},
+        {"distanz_m": 5, "view_context": "Blick in den Keller auf die Hypokausten-Pfeiler.", "text": "Schau auf diese kleinen Steinsäulen: Heiße Luft dazwischen — frühe High-Tech-Fußbodenheizung."}
+      ],
+      "quer_verbindungen": [
+        "Die Römer wussten schon um das Panorama — ähnlich wie heute von der Himmelsschaukel am Obertorplatz richtet sich der Blick zur Albkante und Burg."
+      ]
+    },
+    {
+      "ortsteil": "Hechingen-Kernstadt",
+      "spot_name": "Obertorplatz & Schaukelweg häppy",
+      "adresse": "Obertorplatz, 72379 Hechingen",
+      "koordinaten": "48.3510, 8.9630",
+      "historische_fakten": [
+        "Der Obertorplatz wurde von einer Asphalt-Verkehrsfläche zur verkehrsberuhigten grünen Mitte mit Tempo 20 umgebaut.",
+        "Naturstein-Wassertisch und geschwungener Bachlauf bilden das Zentrum der Platzgestaltung.",
+        "Der Schaukelweg wurde im September 2020 auf Initiative der Stadtgestalterin Martina Eberle eröffnet.",
+        "Das angrenzende Rathausgebäude stammt in seiner heutigen Form von 1957 von Paul Schmitthenner."
+      ],
+      "live_infos": [
+        "LIVE: Teilnehmende Nette-Toilette-Cafés und aktuelle Gastronomie am Platz prüfen.",
+        "LIVE: Schaukelweg-Stationen und Barfußpfad-Zustand saisonal prüfen."
+      ],
+      "fun_fakts": [
+        "Die Himmelsschaukel ist vier Meter hoch und richtet den Blick exakt auf die Burg Hohenzollern.",
+        "Nachts beleuchtet das Lichtkonzept Fassaden und Wasserspiel warm, Verkehrswege heller."
+      ],
+      "wegweiser_logik": "Zentrale Achse in der Oberstadt. Der Schaukelweg ist gegen den Uhrzeigersinn (vom Feilbachtal aufwärts) beschildert, um steile Anstiege zu vermeiden.",
+      "triggerpunkte": [
+        {"distanz_m": 40, "view_context": "Eintritt in die Tempo-20-Zone.", "text": "Wir erreichen die neue grüne Mitte. Vor wenigen Jahren war dies noch ein reiner Asphaltparkplatz."},
+        {"distanz_m": 15, "view_context": "Blick auf den großen Wassertisch aus Naturstein.", "text": "Hörst du das Rauschen? Im Sommer kühlen sich hier die Kinder ab — rundherum Nette Toiletten in den Cafés."},
+        {"distanz_m": 5, "view_context": "An einer Schaukelstation des häppy-Wegs.", "text": "Setz dich auf die Schaukel: Die Stadtgestalterin wollte Hechingen für alle Altersklassen wieder spielbar machen."}
+      ],
+      "quer_verbindungen": [
+        "Der Schaukelweg führt weiter in den Stadtgarten zum Kneippbecken und dem rund 900 Meter langen Barfußpfad im Feilbachtal."
+      ]
+    },
+    {
+      "ortsteil": "Hechingen-Stetten",
+      "spot_name": "Ehemaliges Dominikanerinnenkloster Stetten",
+      "adresse": "Klosterstraße, 72379 Hechingen-Stetten",
+      "koordinaten": "48.3615, 8.9830",
+      "historische_fakten": [
+        "Gegründet am 9. Januar 1267 durch Zollergraf Friedrich V.; bis 1488 Erbgrablege der Zollerngrafen.",
+        "Nach der Säkularisation: fürstliche Kaserne, Nagelschmiede, später Schuhfabrik.",
+        "Brand am 24. September 1898 zerstörte die Konventsgebäude fast vollständig; gotische Klosterkirche und Johanneskapelle blieben.",
+        "In der Kirche: spektakuläres 9 Meter hohes spätgotisches Sakramentshäuschen, das sich spiralförmig nach oben schraubt."
+      ],
+      "live_infos": [
+        "LIVE: Zugang Johanneskapelle und aktuelle Nutzungen (z. B. Lesungen in Gewölbekellern) anfragen."
+      ],
+      "fun_fakts": [
+        "Die letzte Nonne, Gundisalva Utz, lebte nach der Aufhebung noch fast 30 Jahre allein in Klausur und starb 1867 mit 91 Jahren.",
+        "Als Bettelorden-Kirche nur zierlicher Dachreiter statt massivem Kirchturm."
+      ],
+      "wegweiser_logik": "Zentral in Stetten. Die freistehende gotische Kirche mit kleinem Dachreiter ist über die Klosterstraße weithin sichtbar.",
+      "triggerpunkte": [
+        {"distanz_m": 60, "view_context": "Blick auf das Dach der Kirche.", "text": "Achte auf das Dach: kein echter Turm, nur ein kleiner Dachreiter — typisch für Bettelorden."},
+        {"distanz_m": 20, "view_context": "Vor den Ruinenwänden neben der Kirche.", "text": "Diese Mauerreste gehörten zum Kapitelsaal. 1898 vernichtete ein Brand die alten Nonnenquartiere."},
+        {"distanz_m": 5, "view_context": "Im Inneren vor dem Sakramentshäuschen.", "text": "Dieses steinerne Kunstwerk windet sich wie eine Spirale neun Meter in die Höhe."}
+      ],
+      "quer_verbindungen": [
+        "Als die Grafen um 1488 die Familiengruft in die Stiftskirche der Oberstadt verlegten, endete hier die Ära als fürstliche Grablege."
+      ]
+    },
+    {
+      "ortsteil": "Hechingen-Außenbereich",
+      "spot_name": "Hofgut Domäne",
+      "adresse": "Brielhof 1, 72379 Hechingen",
+      "koordinaten": "48.3370, 8.9550",
+      "historische_fakten": [
+        "Vom landwirtschaftlichen Gut und Pferdewirtschaft zum großen Event- und Gastro-Areal im Zollernalbkreis gewandelt.",
+        "Architektur integriert umgebaute Strukturen wie Kuhstall und Remise als Eventlocations."
+      ],
+      "live_infos": [
+        "LIVE: Küchenzeiten, Domäne Live Sommer und Ticketpreise frisch recherchieren — nie Pack-Preise."
+      ],
+      "fun_fakts": [
+        "Streichelzoo für Familien; saisonale Eventformate im Ü30-Bereich."
+      ],
+      "wegweiser_logik": "Direkt an der B27 (Ausfahrt Hechingen-Süd), gut ausgeschildert. ÖPNV: Bushaltestelle Stockoch.",
+      "triggerpunkte": [
+        {"distanz_m": 150, "view_context": "Blick von der Zufahrt B27.", "text": "Wir erreichen das Hofgut Domäne — früher Agrargebiet, heute Event-Herz der Region."},
+        {"distanz_m": 50, "view_context": "Blick auf Kuhstall und Remise.", "text": "Die Gebäude haben ihren rustikalen Charme behalten: wo einst Kühe standen, finden heute Feiern statt."},
+        {"distanz_m": 10, "view_context": "Eingang Biergarten / Open-Air-Bühne.", "text": "Hier im Biergarten und an der Open-Air-Bühne pulsiert im Sommer das Veranstaltungsleben."}
+      ],
+      "quer_verbindungen": [
+        "Die Wandlung alter Gemäuer zieht sich durch Hechingen: wie Kloster Stetten zur Schuhfabrik, so dieser Gutshof zur Eventlocation."
+      ]
+    },
+    {
+      "ortsteil": "Hechingen-Kernstadt",
+      "spot_name": "Hohenzollerisches Landesmuseum",
+      "adresse": "Schloßplatz 5, 72379 Hechingen",
+      "koordinaten": "48.3518, 8.9638",
+      "historische_fakten": [
+        "Im Alten Schloss: Relikte der Hohenzollerischen Hochzeit von 1598 und Kreuzwegstationen von Joachim Taubenschmid gehören zu den Must-Sees.",
+        "Das Alte Schloss diente später u.a. als Rathaus, Zahnpraxis und Trikotagenfabrik — und war Station der aufgebahrten Fürstin Eugenie."
+      ],
+      "live_infos": [
+        "LIVE: Öffnungszeiten und Eintritt frisch prüfen — nie Pack-Zeiten vorlesen.",
+        "LIVE: Barrierefreies WC im Museum verfügbar — Zugang bestätigen."
+      ],
+      "fun_fakts": [
+        "QR-Code-Stadtrundgang startet sinnvoll vom Schlossplatz-Umfeld."
+      ],
+      "wegweiser_logik": "Am Schloßplatz in der Oberstadt; Nachbarschaft zu Obertorplatz und Weg bergab zum Unteren Turm.",
+      "triggerpunkte": [
+        {"distanz_m": 40, "view_context": "Annäherung Schloßplatz.", "text": "Vor dir liegt das Alte Schloss — heute Hohenzollerisches Landesmuseum."},
+        {"distanz_m": 12, "view_context": "Vor dem Museumseingang.", "text": "Hier steckt die Residenzgeschichte der Zollern — und die kuriosen Nachnutzungen des Hauses."}
+      ],
+      "quer_verbindungen": [
+        "Vom Landesmuseum führt der Weg bergab zum Unteren Turm — und weiter zur Geschichte der Residenzstadt."
+      ]
+    },
+    {
+      "ortsteil": "Hechingen-Kernstadt",
+      "spot_name": "Fürstengarten mit Villa Eugenia",
+      "adresse": "Fürstengarten, 72379 Hechingen",
+      "koordinaten": "48.3495, 8.9605",
+      "historische_fakten": [
+        "Villa Eugenia war die letzte fürstliche Residenz; umrahmt vom Fürstengarten im englischen Landschaftsstil — kostenfrei zugänglich.",
+        "Im Stadtgarten-Umfeld: Heil-Kräutergarten und Kneippanlage (saisonal)."
+      ],
+      "live_infos": [
+        "LIVE: Sonntags-Tagescafé in der Villa Eugenia (Förderverein) — ob geöffnet, frisch prüfen.",
+        "LIVE: Kneippanlage Stadtgarten nur in der Sommersaison mit Wasser."
+      ],
+      "fun_fakts": [
+        "Klassizistische Residenzräume als Kulisse für das Fördervereins-Café."
+      ],
+      "wegweiser_logik": "Landschaftsgarten nahe der historischen Oberstadt; Spielplätze am Fürstengarten und in der Tobelstraße.",
+      "triggerpunkte": [
+        {"distanz_m": 45, "view_context": "Eintritt in den Landschaftsgarten.", "text": "Wir betreten den Fürstengarten — englischer Landschaftsstil um die letzte fürstliche Residenz."},
+        {"distanz_m": 15, "view_context": "Blick zur Villa Eugenia.", "text": "Die Villa Eugenia rahmt den Garten — einst fürstliche Residenz, heute Kultur- und Begegnungsort."}
+      ],
+      "quer_verbindungen": [
+        "Vom Fürstengarten ist der Weg zum Obertorplatz und zur Himmelsschaukel mit Burgblick kurz."
+      ]
+    },
+    {
+      "ortsteil": "Hechingen-Kernstadt",
+      "spot_name": "Bahnhof Hechingen",
+      "adresse": "Bahnhofstraße, 72379 Hechingen",
+      "koordinaten": "48.3565, 8.9620",
+      "historische_fakten": [
+        "Zentraler Ankunftsort mit Regionalbahnen der Hohenzollerischen Landesbahn (SWEG) — Zollern-Alb-Bahn 1 und 2 — sowie Bus/ZOB.",
+        "Oberirdischer, barrierefrei ausgebauter Bahnhof im NALDO-Verbund."
+      ],
+      "live_infos": [
+        "LIVE: Abfahrten und NALDO-Tarife frisch prüfen.",
+        "LIVE: Tourist-Info ist am Marktplatz/Kirchplatz, nicht im Bahnhof."
+      ],
+      "fun_fakts": [
+        "Von hier sind es rund 500 Meter zur Lindenallee und Klosterkirche St. Luzen."
+      ],
+      "wegweiser_logik": "Nördliche Innenstadt; ZOB direkt am Bahnhof. Richtung St. Luzen der Allee folgen; Richtung Oberstadt zum Schloßplatz/Obertorplatz.",
+      "triggerpunkte": [
+        {"distanz_m": 40, "view_context": "Vorplatz/Bahnhofsumfeld.", "text": "Du bist am Bahnhof Hechingen — Nadelöhr von HzL und Bus in die Zollernstadt."},
+        {"distanz_m": 12, "view_context": "Zugang Gleise/ZOB.", "text": "ZOB und Bahn liegen dicht beieinander — idealer Umstieg in die Stadt."}
+      ],
+      "quer_verbindungen": [
+        "Vom Bahnhof führt die Lindenallee zur Klosterkirche St. Luzen; die Burg Hohenzollern bleibt das große visuelle Ziel über der Stadt."
+      ]
+    },
+    {
+      "ortsteil": "Hechingen-Außenbereich",
+      "spot_name": "Burg Hohenzollern",
+      "adresse": "Burg Hohenzollern, Bisingen / Hechingen",
+      "koordinaten": "48.3236, 8.9675",
+      "historische_fakten": [
+        "Wahrzeichen der Region; nach Zerstörung 1423 später neu errichtet — Architekt der neugotischen Gestalt u.a. Friedrich August Stüler.",
+        "Von vielen Punkten Hechingens sichtbar, u.a. Himmelsschaukel Obertorplatz und Plateau in Stein."
+      ],
+      "live_infos": [
+        "LIVE: Tickets, Öffnungszeiten und Shuttle/Zufahrt zur Burg frisch recherchieren."
+      ],
+      "fun_fakts": [
+        "Die Himmelsschaukel am Obertorplatz ist so ausgerichtet, dass der Blick exakt zur Burg geht."
+      ],
+      "wegweiser_logik": "Südlich über der Stadt (Gemarkung Bisingen). Innerstädtisch als visueller Anker nutzen; Besuch separat planen.",
+      "triggerpunkte": [
+        {"distanz_m": 200, "view_context": "Fernblick von Hechingen.", "text": "Über dir thront die Burg Hohenzollern — das Wahrzeichen, das die Zollernstadt im Namen trägt."},
+        {"distanz_m": 40, "view_context": "Näher am Burgzugang.", "text": "Der Aufstieg zur Burg ist das große Ziel über Hechingen — Eingang und Ticketbereich voraus."}
+      ],
+      "quer_verbindungen": [
+        "Stadt und Burg gehören zusammen: Residenzgeschichte in der Altstadt, Krone auf dem Berg."
+      ]
+    }
+  ]
+}

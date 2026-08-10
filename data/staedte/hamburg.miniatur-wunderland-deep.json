@@ -1,0 +1,86 @@
+{
+  "notes": [
+    "Miniatur Wunderland mega-depth: Pack-Pool ≥3000 Zeichen für Mehr-Historie. Gesprochene Hauptstory bleibt Masterbook-Max ~1200. Preise/Tickets nur LIVE."
+  ],
+  "spots": [
+    {
+      "id": "hamburg_miniatur_wunderland",
+      "name": "Miniatur Wunderland",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Guinness-Weltrekord: größte Modelleisenbahnanlage der Welt in der Hamburger Speicherstadt (Kehrwieder / Block D). Idee Sommer 2000 (Frederik Braun in Zürich); GmbH mit Zwillingsbruder Gerrit Braun, Vater Jochen W. Braun und Stephan Hertz. Eröffnung 16. August 2001 (Knuffingen, Mitteldeutschland, Österreich). Stand ~2024: ~1700 m² Modellfläche, >16 km Gleis (H0 1:87), ~1200 Züge, ~290.000 Figuren, Tag-Nacht-Zyklus ca. alle 15 Min., >500.000 LEDs. Gebäudefläche Betreiber >10.000 m² berichtet; Erweiterung läuft (u. a. Südamerika/Asien-Planung).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: verwinkelte Gänge auf zwei Ebenen durch detailreiche Miniaturwelten; Tag-Nacht-Wechsel mit hunderttausenden LEDs; von außen Speicherstadt-Backstein, innen Modellkontinente.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Idee 2000: Frederik Braun sieht in Zürich ein Modellbahngeschäft und will die größte Modellbahn der Welt. E-Mail-Umfrage in Hamburg rankte die (noch fiktive) Anlage bei Männern auf Platz 3 der Sehenswürdigkeiten.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Gründung Miniatur Wunderland GmbH 2001 mit Frederik & Gerrit Braun, Jochen W. Braun und Stephan Hertz; Name bewusst auch für Nicht-Modellbahn-Fans. Finanzierung ohne öffentliche Gelder; Hamburger Sparkasse-Kredit berichtet.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Baubeginn Dezember 2000; Eröffnung 16.8.2001 mit drei Abschnitten. Nov. 2002 Hamburg/deutsche Küste → größte Anlage Europas. Guinness-Weltrekord Gleislänge u. a. nach Schweiz–Italien-Verbindung 2015; Gesamtlänge Betreiber/Wiki ~16,5 km (Stand Tabellen ~2024).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Maßstab H0 1:87. Berichtete Größenordnung: ~1700 m² Modellfläche, ~1230 Züge, ~12.000 Waggons, ~5300 Häuser/Brücken, ~11.000 Fahrzeuge (teilweise autonom), ~47 Flugzeuge, ~290.000 Figuren, >500.000 LEDs.",
+          "tags": ["technik", "geschichte"]
+        },
+        {
+          "text": "Knuffingen: fiktive Stadt, Car-System mit autonom fahrenden Autos; alle ~15 Min. Feuerwehr-Simulation. Carsystem auch in Amerika, Skandinavien und Airport.",
+          "tags": ["leben_jetzt", "technik"]
+        },
+        {
+          "text": "Skandinavien (~300 m², Eröffnung Juli 2005): ~30.000 Liter Echtwasser „Nord-Ost-See“, Ebbe/Flut-Simulation, Schiffe; große Brücke über das Wasser.",
+          "tags": ["geschichte", "technik"]
+        },
+        {
+          "text": "Schweiz (~250 m², 2007): Alpen über zwei Etagen, Berge bis fast 6 m Höhe durch Deckendurchbruch; Züge via Kehren/Loklift.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Knuffingen Airport (4.5.2011, ~150 m², ~6 Jahre Bau/~150.000 h): Starts/Landungen mit Katapult-/Führungstechnik, Flotte inkl. A380/747 und Spaßflugzeuge; Gebäude an Hamburger Flughafen angelehnt; Carsystem + Feuerwehr.",
+          "tags": ["technik", "leben_jetzt"]
+        },
+        {
+          "text": "Weitere Welten (Auswahl): Amerika (Vegas/Miami/Westen), Italien inkl. Venedig, Rio de Janeiro (2021), Patagonien (2023), Monaco & Provence mit Formel-1-Strecke (2024). Brücke „Welt von oben“ verbindet zwei Speicher (Deutscher Brückenbaupreis 2023 berichtet).",
+          "tags": ["geschichte", "quer"]
+        },
+        {
+          "text": "Leben jetzt: Knopfdruck-Aktionen (~200 Taster) steuern Details (Stadiontor, Transrapid, Schokolade/Lindt-Aktion berichtet). Kinderhöhlen in Augenhöhe. Optional Führungen hinter die Kulissen.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Hamburg-Abschnitt: Stadt/Küste inkl. HafenCity/Elphi-Teil; Volksparkstadion-Simulation (HSV vs. St. Pauli, Spielstand endet berichtet 4:3 für HSV); Jet-Tankstelle mit Live-Preis-Anzeige des Vorbilds berichtet.",
+          "tags": ["leben_jetzt", "quer"]
+        },
+        {
+          "text": "Quer: Speicherstadt/Kehrwieder, Elbphilharmonie-Nähe, Traditionsschiffhafen. Adresse/Pin Kehrwieder 2 / Block D — LIVE Eingang/Ticket prüfen.",
+          "tags": ["quer", "wegweiser"]
+        },
+        {
+          "text": "In Bau/Planung berichtet: Regenwald/Anden/Atacama, Mittelamerika/Karibik, später Asien/Großbritannien — Anlage wächst weiter.",
+          "tags": ["geschichte", "live_hint"]
+        },
+        {
+          "text": "LIVE: Zeitfenster/Tickets online stark empfohlen; Öffnung, Preise und aktuelle Bauabschnitte ephemer — nie aus dem Pack vorlesen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Miniatur Wunderland?",
+          "a": "Am Eingangsbereich in der Speicherstadt am Kehrwieder — innen die riesigen Modellwelten mit Tag-Nacht-Licht und fahrenden Zügen/Autos/Flugzeugen."
+        },
+        {
+          "q": "Was ist Knuffingen Airport?",
+          "a": "Der Modell-Flughafen-Abschnitt (seit 2011): Flugzeuge starten und landen realistischer als klassische Modellbahn — technisches Highlight der Anlage."
+        }
+      ]
+    }
+  ]
+}

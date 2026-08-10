@@ -15,6 +15,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Chip,
+  OnboardingDensityProvider,
   OnboardingShell,
   PrimaryButton,
   SecondaryButton,
@@ -23,9 +24,25 @@ import {
 } from './OnboardingUI';
 import { AgeLifeSlider } from './AgeLifeSlider';
 import { AudioWave } from '../components/AudioWave';
+import { SubtitlesSlot } from '../components/liveStage/SubtitlesSlot';
 import { SpeechMicButton } from '../components/SpeechMicButton';
-import { SubtitleOverlay } from '../components/SubtitleOverlay';
 import { colors, spacing } from '../constants/theme';
+import {
+  ACCESSIBILITY_NEED_OPTIONS,
+  ALLERGY_INTOLERANCE_OPTIONS,
+  BUDGET_OPTIONS,
+  DIETARY_OPTIONS,
+  ENERGY_OPTIONS,
+  TAXI_PREF_OPTIONS,
+  TRAVEL_MODE_OPTIONS,
+} from '../constants/conciergePrefs';
+import { EqualChipRow } from '../components/EqualChipRow';
+import {
+  TRAVEL_PERIOD_PRESETS,
+  matchTravelPeriodPreset,
+  type TravelPeriodPreset,
+} from '../constants/travelPeriod';
+import { Audio } from 'expo-av';
 import {
   defaultVoiceForLanguage,
   voicesForLanguage,
@@ -34,25 +51,34 @@ import { VoiceSelectorList } from '../components/VoiceSelectorList';
 import {
   CHARACTER_CATEGORIES,
   EXPERIENCE_CARDS,
-  EXPERIENCE_CATEGORY_TITLES,
+  TRAVEL_STYLE_CARD_IDS,
   type ExperienceCard,
 } from '../constants/onboardingOptions';
 import {
   INTRO_WELCOME_DE,
   t,
   voiceLabel,
-  buildExplanationOpener,
   type ExplanationHint,
 } from '../i18n';
 import { markFirstMapWelcomeDone } from '../services/onboarding/firstMapWelcomeService';
-import { buildGuidedFeatureTourSegments } from '../services/onboarding/guidedFeatureTour';
+import { queuePostTourQuestion } from '../services/onboarding/pendingPostTourQuestion';
+import {
+  buildGuidedFeatureTourSegments,
+  cityDemoPack,
+} from '../services/onboarding/guidedFeatureTour';
 import { GuidedFeatureTourOverlays } from './GuidedFeatureTourOverlays';
+import {
+  ensureWeatherFresh,
+  getCachedWeatherSnapshot,
+  getCachedWeatherSummary,
+} from '../services/weatherService';
 import type {
   AppLanguage,
   SwipePreference,
   UserProfile,
   VoiceId,
 } from '../types/userProfile';
+import type { SpleenId } from '../constants/personalityMatrix';
 import { uiLang } from '../types/userProfile';
 import {
   speakText,
@@ -70,14 +96,6 @@ import {
 } from '../services/ttsService';
 import { useFinnusStore } from '../store/useFinnusStore';
 import {
-  formatTriggerStats,
-  installCityPack,
-  loadCityCatalog,
-  resortCatalogByCoords,
-  type CityCatalogItem,
-} from '../services/cityCatalogService';
-import { getCurrentCoords } from '../services/locationService';
-import {
   startListening,
   stopListening,
   isSttAvailable,
@@ -89,34 +107,69 @@ import { SwipeBackView } from '../components/SwipeBackView';
 import { PlayPauseIcon } from '../components/PlayPauseIcon';
 import { Header } from '../components/Header';
 import { MicButton } from '../components/MicButton';
+import { PlanCalendarModal } from '../components/PlanCalendarModal';
 import { PathChoiceStep } from './PathChoiceStep';
 import { ExpressSetupStep } from './ExpressSetupStep';
 import { MicConsentStep } from './MicConsentStep';
-import type { OnboardingMode, TravelParty } from '../types/userProfile';
-import { BUDGET_OPTIONS, ENERGY_OPTIONS, TOURIST_MODE_OPTIONS } from '../constants/conciergePrefs';
-import type { BudgetCategory, EnergyLevel, TouristVsInsider } from '../types/userProfile';
+import { LanguageStep } from './LanguageStep';
+import { AuthGateStep } from './AuthGateStep';
+import { PersonalityMatrixStep } from './PersonalityMatrixStep';
+import { OnboardingInfoSheet } from './OnboardingInfoSheet';
+import { CityStep } from './CityStep';
+import { warmCityCatalogForOnboarding } from '../services/cityCatalogService';
+import type { OnboardingMode, TravelParty, MobilityPrefs } from '../types/userProfile';
+import type { BudgetCategory, EnergyLevel } from '../types/userProfile';
+import { useFuturePlanStore } from '../module2/timeline/futurePlanState';
+import { todayDateKey } from '../utils/dateKeys';
+import { resolveVoiceForPersonality } from '../services/persona/personalityVoiceMap';
+import {
+  sendMagicLink,
+  signInWithOAuthProvider,
+  mergeAuthIntoProfile,
+  refreshAuthSession,
+  handleAuthRedirectUrl,
+  subscribeAuthRedirects,
+  getAuthRedirectUrl,
+  signOutAuth,
+  getLastAuthUser,
+  type AuthSessionUser,
+} from '../services/account/findusAuth';
+import * as WebBrowser from 'expo-web-browser';
 
 type FlowStep =
-  | 'path'
-  | 'express'
+  | 'language'
   | 'intro'
+  | 'path'
+  | 'auth'
+  | 'mic'
+  | 'express'
   | 'voice'
   | 'about'
   | 'character'
   | 'city'
   | 'experience'
-  | 'mic'
   | 'summary';
 
-const EXPRESS_FLOW: FlowStep[] = ['path', 'mic', 'city', 'express', 'summary'];
-const STANDARD_FLOW: FlowStep[] = [
-  'path',
+const EXPRESS_FLOW: FlowStep[] = [
+  'language',
   'intro',
-  'mic',
-  'voice',
-  'about',
-  'character',
+  'path',
+  'auth',
   'city',
+  'express',
+  'mic',
+  'summary',
+];
+const STANDARD_FLOW: FlowStep[] = [
+  'language',
+  'intro',
+  'path',
+  'auth',
+  'about',
+  'city',
+  'mic',
+  'character',
+  'voice',
   'experience',
   'summary',
 ];
@@ -152,9 +205,38 @@ export function OnboardingNavigator({
     draft.onboardingMode ?? null,
   );
   const [flowIndex, setFlowIndex] = useState(0);
+  const [authBusy, setAuthBusy] = useState(false);
+  const [authStatus, setAuthStatus] = useState<string | null>(null);
+  const [authUser, setAuthUser] = useState<AuthSessionUser | null>(
+    () => getLastAuthUser(),
+  );
 
   const flow = mode === 'express' ? EXPRESS_FLOW : STANDARD_FLOW;
   const step = flow[Math.min(flowIndex, flow.length - 1)] ?? 'path';
+
+  const applyAuthUser = useCallback(
+    (u: AuthSessionUser, advance: boolean) => {
+      setAuthUser(u);
+      setDraft((d) => ({
+        ...d,
+        ...mergeAuthIntoProfile(d, u),
+        accountMode: 'registered',
+      }));
+      setAuthStatus(
+        u.email
+          ? `Angemeldet als ${u.email}`
+          : 'Konto bestätigt — du kannst weiter.',
+      );
+      if (!advance) return;
+      setFlowIndex((idx) => {
+        if (EXPRESS_FLOW[idx] === 'auth' || STANDARD_FLOW[idx] === 'auth') {
+          return idx + 1;
+        }
+        return idx;
+      });
+    },
+    [],
+  );
 
   const patch = (p: Partial<UserProfile>) =>
     setDraft((d) => ({ ...d, ...p }));
@@ -172,8 +254,28 @@ export function OnboardingNavigator({
         voiceId: draft.voiceId || defaultVoiceForLanguage('de'),
       });
     }
+    // Früh warmen: Stadt-Katalog + Stimmen, noch bevor City/Voice-Screens kommen
+    void warmCityCatalogForOnboarding();
+    void prepareOnboardingVoiceSamples({
+      priorityVoiceId: draft.voiceId || 'sebastian',
+    });
+    void refreshAuthSession().then((u) => {
+      if (!u) return;
+      applyAuthUser(u, false);
+    });
+    return subscribeAuthRedirects((u) => {
+      applyAuthUser(u, true);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Zurück auf Auth-Step: bestehende Session wieder erkennen
+  useEffect(() => {
+    if (step !== 'auth') return;
+    void refreshAuthSession().then((u) => {
+      if (u) applyAuthUser(u, false);
+    });
+  }, [step, applyAuthUser]);
 
   const finish = (override?: Partial<UserProfile>) => {
     void stopSpeaking();
@@ -194,6 +296,22 @@ export function OnboardingNavigator({
     void persist(next);
     const nextIndex = Math.min(flowIndex + 1, flow.length - 1);
     const nextStep = flow[nextIndex];
+    // Stadt/Stimmen schon warmen, bevor der Screen kommt — kein sichtbarer GPS-Sprung
+    if (
+      nextStep === 'city' ||
+      nextStep === 'about' ||
+      nextStep === 'auth' ||
+      nextStep === 'intro' ||
+      nextStep === 'path'
+    ) {
+      void warmCityCatalogForOnboarding();
+    }
+    if (nextStep === 'voice' || nextStep === 'character' || nextStep === 'city') {
+      void prepareOnboardingVoiceSamples({
+        priorityVoiceId: next.voiceId || 'sebastian',
+      });
+      void prefetchVoiceSamples(next.voiceId || 'sebastian');
+    }
     // Erklärung: Opener + Engine schon warm, bevor der Screen mountet
     if (nextStep === 'summary') {
       const voiceId = next.voiceId;
@@ -207,10 +325,15 @@ export function OnboardingNavigator({
   const goBack = () => {
     void stopSpeaking();
     if (flowIndex <= 0) return;
-    if (flowIndex === 1) {
+    const prevStep = flow[flowIndex - 1];
+    // Von Einrichtung zurück → Modus zurücksetzen
+    if (step === 'path') {
       setMode(null);
-      setFlowIndex(0);
+      setFlowIndex(Math.max(0, flowIndex - 1));
       return;
+    }
+    if (prevStep === 'path') {
+      setMode(null);
     }
     setFlowIndex((i) => Math.max(0, i - 1));
   };
@@ -220,6 +343,8 @@ export function OnboardingNavigator({
     void prepareOnboardingVoiceSamples({
       priorityVoiceId: 'sebastian',
     });
+    // Katalog + GPS schon während Auth/About — City-Screen ohne Resort-Sprung
+    void warmCityCatalogForOnboarding();
     setMode(nextMode);
     const next = {
       ...draft,
@@ -227,16 +352,106 @@ export function OnboardingNavigator({
       language: 'de' as const,
       voiceId: draft.voiceId || defaultVoiceForLanguage('de'),
       speechRate: 1 as const,
+      // Standard: nichts vorauswählen. Express: Rolle+Preset später wählen.
+      ...(nextMode === 'standard'
+        ? {
+            coreRole: null,
+            vibeTone: null,
+            knowledgeStyle: null,
+            spleens: [] as SpleenId[],
+          }
+        : {}),
     };
     setDraft(next);
     void persist(next);
-    setFlowIndex(1);
+    const nextFlow = nextMode === 'express' ? EXPRESS_FLOW : STANDARD_FLOW;
+    const authIdx = nextFlow.indexOf('auth');
+    setFlowIndex(authIdx >= 0 ? authIdx : flowIndex + 1);
+  };
+
+  const openOAuth = async (provider: 'google' | 'apple') => {
+    setAuthBusy(true);
+    setAuthStatus(null);
+    try {
+      const res = await signInWithOAuthProvider(provider);
+      if (!res.ok || !res.url) {
+        setAuthStatus(res.error ?? 'Login nicht verfügbar');
+        return;
+      }
+      const redirect = getAuthRedirectUrl();
+      const result = await WebBrowser.openAuthSessionAsync(res.url, redirect);
+      if (result.type === 'success' && result.url) {
+        const user = await handleAuthRedirectUrl(result.url);
+        if (user) {
+          applyAuthUser(user, false);
+          goNext({
+            accountMode: 'registered',
+            ...mergeAuthIntoProfile(draft, user),
+          });
+          return;
+        }
+      }
+      setAuthStatus('Anmeldung abgebrochen oder fehlgeschlagen.');
+    } finally {
+      setAuthBusy(false);
+    }
   };
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
+    <View style={styles.safe}>
+      <OnboardingDensityProvider age={draft.age}>
       <SwipeBackView enabled={flowIndex > 0} onBack={goBack}>
         {step === 'path' && <PathChoiceStep onChoose={choosePath} />}
+
+        {step === 'language' && (
+          <LanguageStep
+            selected={draft.language}
+            onSelect={(language) => patch({ language })}
+            onNext={() => goNext({ language: 'de' })}
+          />
+        )}
+
+        {step === 'auth' && (
+          <AuthGateStep
+            busy={authBusy}
+            statusMessage={authStatus}
+            isSignedIn={!!authUser}
+            signedInEmail={authUser?.email ?? draft.email ?? null}
+            onContinueSignedIn={() =>
+              goNext({
+                accountMode: 'registered',
+                ...(authUser ? mergeAuthIntoProfile(draft, authUser) : {}),
+              })
+            }
+            onSwitchAccount={() => {
+              setAuthBusy(true);
+              void signOutAuth()
+                .then(() => {
+                  setAuthUser(null);
+                  setAuthStatus(null);
+                  patch({ accountMode: 'guest', email: '' });
+                })
+                .finally(() => setAuthBusy(false));
+            }}
+            onGuest={() => goNext({ accountMode: 'guest' })}
+            onMagicLink={(email) => {
+              setAuthBusy(true);
+              void sendMagicLink(email).then((r) => {
+                setAuthBusy(false);
+                setAuthStatus(
+                  r.ok
+                    ? 'Magic Link gesendet. Tippe den Link in der Mail — Findus öffnet sich danach von selbst.'
+                    : r.error ?? 'Fehler',
+                );
+                if (r.ok) {
+                  patch({ email, accountMode: 'registered' });
+                }
+              });
+            }}
+            onGoogle={() => void openOAuth('google')}
+            onApple={() => void openOAuth('apple')}
+          />
+        )}
 
         {step === 'express' && (
           <ExpressSetupStep
@@ -254,9 +469,21 @@ export function OnboardingNavigator({
           <VoiceStep
             lang={lang}
             voiceId={draft.voiceId}
+            recommendedVoiceId={resolveVoiceForPersonality({
+              coreRole: draft.coreRole,
+              vibeTone: draft.vibeTone,
+              knowledgeStyle: draft.knowledgeStyle,
+              spleens: draft.spleens,
+              gender: draft.gender,
+            })}
             onChangeVoice={(voiceId) => {
               setDraft((d) => {
-                const next = { ...d, voiceId, speechRate: 1 };
+                const next = {
+                  ...d,
+                  voiceId,
+                  speechRate: 1 as const,
+                  voicePinnedByUser: true,
+                };
                 void persist(next);
                 return next;
               });
@@ -276,11 +503,49 @@ export function OnboardingNavigator({
         )}
 
         {step === 'character' && (
-          <CharacterStep
-            lang={lang}
-            draft={draft}
-            onChange={patch}
-            onNext={goNext}
+          <PersonalityMatrixStep
+            coreRole={draft.coreRole ?? null}
+            vibeTone={draft.vibeTone ?? null}
+            knowledgeStyle={draft.knowledgeStyle ?? null}
+            spleens={draft.spleens ?? []}
+            onChange={(p) => {
+              const nextRole = p.coreRole !== undefined ? p.coreRole : draft.coreRole;
+              const nextVibe = p.vibeTone !== undefined ? p.vibeTone : draft.vibeTone;
+              const nextKnow =
+                p.knowledgeStyle !== undefined
+                  ? p.knowledgeStyle
+                  : draft.knowledgeStyle;
+              const nextSpleens =
+                p.spleens !== undefined ? p.spleens : draft.spleens;
+              const voicePatch =
+                draft.voicePinnedByUser
+                  ? {}
+                  : {
+                      voiceId: resolveVoiceForPersonality({
+                        coreRole: nextRole,
+                        vibeTone: nextVibe,
+                        knowledgeStyle: nextKnow,
+                        spleens: nextSpleens,
+                        gender: draft.gender,
+                      }),
+                    };
+              patch({ ...p, ...voicePatch });
+            }}
+            onNext={() => {
+              if (!draft.voicePinnedByUser) {
+                const voiceId = resolveVoiceForPersonality({
+                  coreRole: draft.coreRole,
+                  vibeTone: draft.vibeTone,
+                  knowledgeStyle: draft.knowledgeStyle,
+                  spleens: draft.spleens,
+                  gender: draft.gender,
+                });
+                goNext({ voiceId, voicePinnedByUser: false });
+                return;
+              }
+              goNext();
+            }}
+            onInfo={undefined}
           />
         )}
 
@@ -325,15 +590,22 @@ export function OnboardingNavigator({
                 language: 'de',
                 voiceId,
                 speechRate: 1 as const,
+                voicePinnedByUser: true,
               };
-              patch({ voiceId, speechRate: 1 as const, language: 'de' });
+              patch({
+                voiceId,
+                speechRate: 1 as const,
+                language: 'de',
+                voicePinnedByUser: true,
+              });
               void persist(next);
               void voicePreloader.switchActiveVoice(voiceId);
             }}
           />
         )}
       </SwipeBackView>
-    </SafeAreaView>
+      </OnboardingDensityProvider>
+    </View>
   );
 }
 
@@ -347,7 +619,7 @@ function IntroStep({
   onSkip: () => void;
 }) {
   const isPlaying = useFinnusStore((s) => s.isAudiblySpeaking);
-  const subtitle = useFinnusStore((s) => s.subtitleText);
+  const subtitleText = useFinnusStore((s) => s.subtitleText);
   const doneRef = useRef(false);
   const onNextRef = useRef(onNext);
   const onSkipRef = useRef(onSkip);
@@ -355,10 +627,14 @@ function IntroStep({
   onSkipRef.current = onSkip;
 
   useEffect(() => {
-    // Während Intro: Hörproben weiter cachen (Infer-Queue)
+    // Während Intro: Hörproben + Stadt-Katalog vorladen (Packs/Stats), bevor City-Screen kommt
     void prepareOnboardingVoiceSamples({
       priorityVoiceId: 'sebastian',
     });
+    void warmCityCatalogForOnboarding();
+    return () => {
+      useFinnusStore.getState().setSubtitleText(null);
+    };
   }, []);
 
   useEffect(() => {
@@ -366,6 +642,8 @@ function IntroStep({
     doneRef.current = false;
 
     (async () => {
+      // Parallel zum TTS: Städte weiter vorwärmen (falls Mount-Warmup noch läuft)
+      void warmCityCatalogForOnboarding();
       try {
         await speakOnboardingIntro({ fullText: INTRO_WELCOME_DE });
       } catch (err) {
@@ -383,6 +661,7 @@ function IntroStep({
       await new Promise((r) => setTimeout(r, 800));
       if (cancelled || doneRef.current) return;
       doneRef.current = true;
+      useFinnusStore.getState().setSubtitleText(null);
       onNextRef.current();
     })();
 
@@ -394,17 +673,19 @@ function IntroStep({
 
   return (
     <OnboardingShell style={styles.introShell}>
-      <Text style={styles.durationBadge}>
-        Dauer: ca. 2–3 Minuten für perfekte Personalisierung
-      </Text>
       <View style={styles.introMain}>
         <AudioWave mood={isPlaying ? 'speaking' : 'idle'} />
-        <SubtitleOverlay text={subtitle} />
+        <View style={styles.introSubtitles} pointerEvents="none">
+          {subtitleText?.trim() ? (
+            <SubtitlesSlot text={subtitleText} />
+          ) : null}
+        </View>
       </View>
       <SecondaryButton
         label={t(lang, 'skipIntro')}
         onPress={() => {
           doneRef.current = true;
+          useFinnusStore.getState().setSubtitleText(null);
           void prepareOnboardingVoiceSamples({
             priorityVoiceId: 'sebastian',
           });
@@ -418,11 +699,13 @@ function IntroStep({
 function VoiceStep({
   lang,
   voiceId,
+  recommendedVoiceId,
   onChangeVoice,
   onNext,
 }: {
   lang: AppLanguage;
   voiceId: VoiceId;
+  recommendedVoiceId?: VoiceId;
   onChangeVoice: (id: VoiceId) => void;
   onNext: () => void;
 }) {
@@ -439,6 +722,9 @@ function VoiceStep({
       <StepTitle>{t(lang, 'voiceTitle')}</StepTitle>
       <Text style={{ color: colors.textMuted, marginBottom: 12, fontSize: 13 }}>
         Play = Offline-Hörprobe. Tippen auf den Namen wählt deine Stimme.
+        {recommendedVoiceId
+          ? ` Empfehlung zu deiner Kombi: ${recommendedVoiceId}.`
+          : ''}
       </Text>
       <ScrollView
         style={{ flex: 1 }}
@@ -530,35 +816,70 @@ function AboutYouStep({
   onChange: (p: Partial<UserProfile>) => void;
   onNext: () => void;
 }) {
-  const canContinue =
-    draft.firstName.trim().length > 0 && draft.lastName.trim().length > 0;
+  const isGuest = draft.accountMode === 'guest';
+  const emailOk = /@/.test(draft.email.trim());
+  const phoneOk = (draft.phoneNumber ?? '').replace(/\D/g, '').length >= 6;
+  const genderOk = !!draft.gender;
+  const canContinue = isGuest
+    ? draft.firstName.trim().length > 0
+    : draft.firstName.trim().length > 0 &&
+      draft.lastName.trim().length > 0 &&
+      emailOk &&
+      phoneOk &&
+      genderOk &&
+      typeof draft.age === 'number' &&
+      draft.age >= 12;
 
   return (
     <OnboardingShell>
       <StepTitle>{t(lang, 'aboutTitle')}</StepTitle>
       <ScrollView>
+        {isGuest ? (
+          <Text style={[styles.muted, { marginBottom: spacing.md }]}>
+            Als Gast reicht der Vorname. E-Mail und Telefon holen wir bei der
+            ersten Reservierung nach.
+          </Text>
+        ) : null}
         <Field
           label={t(lang, 'firstName')}
           value={draft.firstName}
           onChangeText={(firstName) => onChange({ firstName })}
         />
+        {!isGuest ? (
+          <Field
+            label={`${t(lang, 'lastName')} *`}
+            value={draft.lastName}
+            onChangeText={(lastName) => onChange({ lastName })}
+          />
+        ) : (
+          <Field
+            label={t(lang, 'lastName')}
+            value={draft.lastName}
+            onChangeText={(lastName) => onChange({ lastName })}
+          />
+        )}
         <Field
-          label={t(lang, 'lastName')}
-          value={draft.lastName}
-          onChangeText={(lastName) => onChange({ lastName })}
-        />
-        <Field
-          label={t(lang, 'email')}
+          label={isGuest ? t(lang, 'email') : `${t(lang, 'email')} *`}
           value={draft.email}
           onChangeText={(email) => onChange({ email })}
           keyboardType="email-address"
         />
+        {!isGuest && !emailOk ? (
+          <Text style={{ color: '#c45c26', fontSize: 13, marginBottom: spacing.sm }}>
+            E-Mail ist Pflicht — für Konto, Reservierungen und Newsletter.
+          </Text>
+        ) : null}
         <Field
-          label="Telefon"
+          label={isGuest ? 'Telefon' : 'Telefon *'}
           value={draft.phoneNumber ?? ''}
           onChangeText={(phoneNumber) => onChange({ phoneNumber })}
           keyboardType="phone-pad"
         />
+        {!isGuest && !phoneOk ? (
+          <Text style={{ color: '#c45c26', fontSize: 13, marginBottom: spacing.sm }}>
+            Telefon ist Pflicht — damit Findus Anrufe/Rückrufe vorbereiten kann.
+          </Text>
+        ) : null}
         <Text style={styles.rateLabel}>Geschlecht</Text>
         <View style={styles.chipRow}>
           {(
@@ -586,20 +907,6 @@ function AboutYouStep({
           age={draft.age}
           yearsLabel={t(lang, 'years')}
           onChange={(age) => onChange({ age })}
-        />
-        <Text style={styles.rateLabel}>{t(lang, 'aboutMe')}</Text>
-        <TextInput
-          value={draft.aboutMe ?? ''}
-          onChangeText={(aboutMe) => onChange({ aboutMe })}
-          style={[styles.input, styles.aboutMeInput]}
-          placeholder={t(lang, 'aboutMeHint')}
-          placeholderTextColor={colors.textMuted}
-          multiline
-          textAlignVertical="top"
-        />
-        <AboutMeVoiceField
-          value={draft.aboutMe ?? ''}
-          onChange={(aboutMe) => onChange({ aboutMe })}
         />
       </ScrollView>
       <PrimaryButton
@@ -719,6 +1026,9 @@ function CharacterStep({
       setSelected(catId, [optionId]);
       return;
     }
+    if (cat?.maxSelect != null && cur.length >= cat.maxSelect) {
+      return;
+    }
     setSelected(catId, [...cur, optionId]);
   };
 
@@ -750,6 +1060,13 @@ function CharacterStep({
             <Text style={styles.catTitle}>
               {uiLang(lang) === 'de' ? cat.titleDe : cat.titleEn}
             </Text>
+            {cat.maxSelect != null && cat.maxSelect > 1 ? (
+              <Text style={styles.catHint}>
+                {uiLang(lang) === 'de'
+                  ? `Mehrfachauswahl möglich — max. ${cat.maxSelect}. Findus mixt den Stil.`
+                  : `Multi-select — max ${cat.maxSelect}. Findus mixes the style.`}
+              </Text>
+            ) : null}
             <View style={styles.chipRow}>
               {cat.options.map((opt) => (
                 <Chip
@@ -779,197 +1096,6 @@ function CharacterStep({
   );
 }
 
-function CityStep({
-  lang,
-  selectedId,
-  onSelect,
-  onNext,
-}: {
-  lang: AppLanguage;
-  selectedId: string | null;
-  onSelect: (id: string, name: string) => void;
-  onNext: (city: { cityId: string; cityName: string }) => void;
-}) {
-  const [cities, setCities] = useState<CityCatalogItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [gpsStatus, setGpsStatus] = useState<
-    'pending' | 'ready' | 'unavailable'
-  >('pending');
-  const [loadError, setLoadError] = useState<string | null>(null);
-  const [reloadToken, setReloadToken] = useState(0);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    (async () => {
-      setLoading(true);
-      setLoadError(null);
-      setGpsStatus('pending');
-
-      try {
-        const catalog = await loadCityCatalog(null);
-        if (cancelled) return;
-        setCities(catalog);
-        setLoading(false);
-
-        if (catalog.length === 0) {
-          setLoadError(t(lang, 'noCitiesHint'));
-        }
-
-        const coords = await getCurrentCoords({ timeoutMs: 8000 });
-        if (cancelled) return;
-
-        if (coords) {
-          setCities((prev) => resortCatalogByCoords(prev, coords));
-          setGpsStatus('ready');
-        } else {
-          setGpsStatus('unavailable');
-        }
-      } catch (err) {
-        console.warn('[CityStep]', err);
-        if (!cancelled) {
-          setLoadError(err instanceof Error ? err.message : String(err));
-          setLoading(false);
-          setGpsStatus('unavailable');
-        }
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [lang, reloadToken]);
-
-  const nearest = cities[0];
-  const rest = cities.slice(1);
-  const selected = cities.find((c) => c.id === selectedId) ?? nearest;
-
-  const handleContinue = async () => {
-    if (!selected) return;
-    onSelect(selected.id, selected.name);
-    // Download im Hintergrund — User wartet nicht im City-Step
-    void installCityPack(selected.id)
-      .then((result) => {
-        if (__DEV__) {
-          console.log(
-            `[CityStep] background pack ${result.poiCount} POIs / ${result.factCount} facts`,
-          );
-        }
-      })
-      .catch((err) => {
-        console.warn('[CityStep] Hintergrund-Download:', err);
-      });
-    onNext({
-      cityId: selected.id,
-      cityName: selected.name,
-    });
-  };
-
-  return (
-    <OnboardingShell>
-      <StepTitle>{t(lang, 'cityTitle')}</StepTitle>
-      {!loading ? (
-        <Text style={styles.gpsStatus}>
-          {gpsStatus === 'pending'
-            ? t(lang, 'locatingGps')
-            : gpsStatus === 'ready'
-              ? t(lang, 'gpsReady')
-              : t(lang, 'gpsUnavailable')}
-        </Text>
-      ) : null}
-
-      {loading ? (
-        <Text style={styles.muted}>{t(lang, 'loadingCities')}</Text>
-      ) : cities.length === 0 ? (
-        <View style={styles.emptyCities}>
-          <Text style={styles.emptyTitle}>{t(lang, 'noCities')}</Text>
-          <Text style={styles.muted}>{loadError ?? t(lang, 'noCitiesHint')}</Text>
-          <SecondaryButton
-            label={t(lang, 'retryCities')}
-            onPress={() => setReloadToken((n) => n + 1)}
-          />
-        </View>
-      ) : (
-        <ScrollView>
-          {nearest ? (
-            <>
-              <Text style={styles.sectionLabel}>{t(lang, 'nearby')}</Text>
-              <CityCard
-                city={nearest}
-                lang={lang}
-                selected={selectedId === nearest.id || !selectedId}
-                onPress={() => onSelect(nearest.id, nearest.name)}
-              />
-            </>
-          ) : null}
-          {rest.length > 0 ? (
-            <>
-              <Text style={styles.sectionLabel}>{t(lang, 'otherCities')}</Text>
-              {rest.map((c) => (
-                <CityCard
-                  key={c.id}
-                  city={c}
-                  lang={lang}
-                  selected={selectedId === c.id}
-                  onPress={() => onSelect(c.id, c.name)}
-                />
-              ))}
-            </>
-          ) : null}
-        </ScrollView>
-      )}
-      {selected ? (
-        <Text style={styles.muted}>
-          Stadt-Daten laden im Hintergrund — du kannst gleich weiter.
-        </Text>
-      ) : null}
-      <PrimaryButton
-        label={`${t(lang, 'continueWith')} ${selected?.name ?? ''}`.trim()}
-        onPress={() => void handleContinue()}
-        disabled={!selected}
-      />
-    </OnboardingShell>
-  );
-}
-
-function CityCard({
-  city,
-  lang,
-  selected,
-  onPress,
-}: {
-  city: CityCatalogItem;
-  lang: AppLanguage;
-  selected: boolean;
-  onPress: () => void;
-}) {
-  return (
-    <Pressable
-      onPress={onPress}
-      style={[styles.cityCard, selected && styles.cityCardSelected]}
-    >
-      <Text style={styles.cityName}>
-        {city.symbol ?? '📍'} {city.name}
-      </Text>
-      {city.distanceKm != null ? (
-        <Text style={styles.muted}>
-          {city.distanceKm < 10
-            ? city.distanceKm.toFixed(1)
-            : Math.round(city.distanceKm)}{' '}
-          {t(lang, 'kmAway')}
-        </Text>
-      ) : null}
-      <Text style={styles.cityStats}>
-        {formatTriggerStats({
-          triggerCount: city.triggerCount,
-          zoneCount: city.zoneCount,
-          factCount: city.factCount,
-        })}
-      </Text>
-    </Pressable>
-  );
-}
-
 function ExperienceStep({
   lang,
   draft,
@@ -981,15 +1107,24 @@ function ExperienceStep({
   onChange: (p: Partial<UserProfile>) => void;
   onNext: (override?: Partial<UserProfile>) => void;
 }) {
-  const categories = (
-    ['wissen', 'vibes', 'mobilitaet', 'tempo', 'essen', 'stil'] as const
-  ).map((id) => ({
-    id,
-    title: EXPERIENCE_CATEGORY_TITLES[id][uiLang(lang)],
-    cards: EXPERIENCE_CARDS.filter(
-      (c) => c.category === id && c.id !== 'budget',
-    ),
-  }));
+  const experienceCards = EXPERIENCE_CARDS.filter(
+    (c) =>
+      (c.category === 'wissen' || c.category === 'vibes') &&
+      c.id !== 'budget' &&
+      c.id !== 'jahreszahlen' &&
+      c.id !== 'geschichte' &&
+      c.id !== 'barrierearm' &&
+      c.id !== 'geheimtipps' &&
+      c.id !== 'typisch_touri',
+  );
+
+  const [periodPreset, setPeriodPreset] = useState<TravelPeriodPreset>(() =>
+    matchTravelPeriodPreset(draft.travelPeriod),
+  );
+  const [allergyOpen, setAllergyOpen] = useState(() => {
+    const tags = draft.allergyTags ?? [];
+    return tags.some((t) => t !== 'keine');
+  });
 
   const setPref = (id: string, value: SwipePreference) => {
     const nextPrefs = { ...draft.experiencePrefs, [id]: value };
@@ -1001,10 +1136,42 @@ function ExperienceStep({
     if (id === 'weg_vom_trubel' && value === 'yes') {
       patch.touristMode = 'insider';
     }
-    if (id === 'typisch_touri' && value === 'yes') {
-      patch.touristMode = 'tourist';
-    }
     onChange(patch);
+  };
+
+  const setMobility = (
+    key: keyof MobilityPrefs,
+    value: NonNullable<MobilityPrefs[typeof key]>,
+  ) => {
+    onChange({
+      mobilityPrefs: { ...(draft.mobilityPrefs ?? {}), [key]: value },
+    });
+  };
+
+  const toggleDietary = (id: string) => {
+    const cur = draft.dietaryTags ?? [];
+    const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
+    onChange({ dietaryTags: next });
+  };
+
+  const toggleAllergy = (id: string) => {
+    const cur = (draft.allergyTags ?? []).filter((x) => x !== 'keine');
+    const next = cur.includes(id)
+      ? cur.filter((x) => x !== id)
+      : [...cur, id];
+    onChange({ allergyTags: next });
+  };
+
+  const setPeriod = (preset: TravelPeriodPreset) => {
+    setPeriodPreset(preset);
+    if (preset === 'custom') {
+      if (matchTravelPeriodPreset(draft.travelPeriod) !== 'custom') {
+        onChange({ travelPeriod: '' });
+      }
+      return;
+    }
+    const hit = TRAVEL_PERIOD_PRESETS.find((p) => p.id === preset);
+    onChange({ travelPeriod: hit?.value ?? '' });
   };
 
   const ensureDefaults = () => {
@@ -1116,90 +1283,387 @@ function ExperienceStep({
 
   return (
     <OnboardingShell>
-      <StepTitle>{t(lang, 'experienceTitle')}</StepTitle>
+      <StepTitle>Rahmenbedingungen</StepTitle>
       <ScrollView contentContainerStyle={{ paddingBottom: 24 }}>
-        <Text style={styles.fieldLabel}>Energielevel</Text>
-        <View style={styles.chipRow}>
-          {ENERGY_OPTIONS.map((o) => {
-            const on = draft.energyLevel === o.id;
-            return (
-              <Pressable
-                key={o.id}
-                onPress={() =>
-                  onChange({ energyLevel: o.id as EnergyLevel })
-                }
-                style={[styles.prefChip, on && styles.prefChipOn]}
-              >
-                <Text style={styles.prefChipLabel}>{o.label}</Text>
-                <Text style={styles.prefChipHint}>{o.hint}</Text>
-              </Pressable>
-            );
-          })}
+        <Text style={styles.rahmenLead}>
+          Alles Wichtige in einer Reihe — du entscheidest, nichts ist vorausgewählt.
+        </Text>
+
+        <View style={styles.sectionGroup}>
+          <Text style={styles.sectionGroupTitle}>Reisezeitraum</Text>
+          <EqualChipRow count={TRAVEL_PERIOD_PRESETS.length}>
+            {TRAVEL_PERIOD_PRESETS.map((p) => {
+              const on = periodPreset === p.id;
+              return (
+                <Pressable
+                  key={p.id}
+                  onPress={() => setPeriod(p.id)}
+                  style={[styles.prefChip, on && styles.prefChipOn]}
+                >
+                  <Text style={styles.prefChipLabel}>{p.label}</Text>
+                </Pressable>
+              );
+            })}
+          </EqualChipRow>
+          {periodPreset === 'custom' ? (
+            <TextInput
+              style={styles.input}
+              placeholder="z. B. 3.–10. August"
+              placeholderTextColor={colors.textMuted}
+              value={draft.travelPeriod ?? ''}
+              onChangeText={(travelPeriod) => onChange({ travelPeriod })}
+            />
+          ) : null}
         </View>
 
-        <Text style={styles.fieldLabel}>Budget — ungefähr wie viel?</Text>
-        <View style={styles.chipRow}>
-          {BUDGET_OPTIONS.map((o) => {
-            const on = draft.budgetCategory === o.id;
-            return (
-              <Pressable
-                key={o.id}
-                onPress={() =>
-                  onChange({
-                    budgetCategory: o.id as BudgetCategory,
-                    experiencePrefs: {
-                      ...draft.experiencePrefs,
-                      budget:
-                        o.id === 'sparsam'
-                          ? 'no'
-                          : o.id === 'komfort'
-                            ? 'yes'
-                            : 'neutral',
-                    },
-                  })
-                }
-                style={[styles.prefChip, on && styles.prefChipOn]}
-              >
-                <Text style={styles.prefChipLabel}>{o.label}</Text>
-                <Text style={styles.prefChipHint}>{o.hint}</Text>
-              </Pressable>
-            );
-          })}
+        <View style={styles.sectionGroup}>
+          <Text style={styles.sectionGroupTitle}>Tempo & Budget</Text>
+          <Text style={styles.fieldLabel}>Energielevel</Text>
+          <EqualChipRow count={ENERGY_OPTIONS.length}>
+            {ENERGY_OPTIONS.map((o) => {
+              const on = draft.energyLevel === o.id;
+              return (
+                <Pressable
+                  key={o.id}
+                  onPress={() =>
+                    onChange({ energyLevel: o.id as EnergyLevel })
+                  }
+                  style={[styles.prefChip, on && styles.prefChipOn]}
+                >
+                  <Text style={styles.prefChipLabel}>{o.label}</Text>
+                  <Text style={styles.prefChipHint}>{o.hint}</Text>
+                </Pressable>
+              );
+            })}
+          </EqualChipRow>
+
+          <Text style={styles.fieldLabel}>Budget — Preisorientierung</Text>
+          <EqualChipRow count={BUDGET_OPTIONS.length}>
+            {BUDGET_OPTIONS.map((o) => {
+              const on = draft.budgetCategory === o.id;
+              return (
+                <Pressable
+                  key={o.id}
+                  onPress={() =>
+                    onChange({
+                      budgetCategory: o.id as BudgetCategory,
+                      experiencePrefs: {
+                        ...draft.experiencePrefs,
+                        budget:
+                          o.id === 'sparsam'
+                            ? 'no'
+                            : o.id === 'komfort'
+                              ? 'yes'
+                              : 'neutral',
+                      },
+                    })
+                  }
+                  style={[styles.prefChip, on && styles.prefChipOn]}
+                >
+                  <Text style={styles.prefChipLabel}>{o.label}</Text>
+                  <Text style={styles.prefChipHint}>{o.hint}</Text>
+                </Pressable>
+              );
+            })}
+          </EqualChipRow>
+
+          <Text style={styles.fieldLabel}>Restaurant-Niveau</Text>
+          <EqualChipRow count={3}>
+            {(
+              [
+                { id: 'fast_cheap' as const, label: 'Schnell & günstig' },
+                { id: 'decent' as const, label: 'Vernünftig' },
+                { id: 'highlights' as const, label: 'Highlights' },
+              ] as const
+            ).map((o) => {
+              const on = draft.diningLevel === o.id;
+              return (
+                <Pressable
+                  key={o.id}
+                  onPress={() => onChange({ diningLevel: o.id })}
+                  style={[styles.prefChip, on && styles.prefChipOn]}
+                >
+                  <Text style={styles.prefChipLabel}>{o.label}</Text>
+                </Pressable>
+              );
+            })}
+          </EqualChipRow>
         </View>
 
-        <Text style={styles.fieldLabel}>Must-sees oder Geheimtipps?</Text>
-        <View style={styles.chipRow}>
-          {TOURIST_MODE_OPTIONS.map((o) => {
-            const on = draft.touristMode === o.id;
-            return (
-              <Pressable
-                key={o.id}
-                onPress={() =>
-                  onChange({ touristMode: o.id as TouristVsInsider })
-                }
-                style={[styles.prefChip, on && styles.prefChipOn]}
-              >
-                <Text style={styles.prefChipLabel}>{o.label}</Text>
-                <Text style={styles.prefChipHint}>{o.hint}</Text>
-              </Pressable>
-            );
-          })}
-        </View>
-
-        {categories.map((cat) => (
-          <View key={cat.id} style={styles.catBlock}>
-            <Text style={styles.catTitle}>{cat.title}</Text>
-            {cat.cards.map((card) => (
-              <SwipeCard
-                key={card.id}
-                card={card}
-                lang={lang}
-                value={draft.experiencePrefs[card.id] ?? 'neutral'}
-                onChange={(v) => setPref(card.id, v)}
-              />
-            ))}
+        <View style={styles.sectionGroup}>
+          <Text style={styles.sectionGroupTitle}>Mobilität</Text>
+          <Text style={[styles.muted, { marginBottom: spacing.sm }]}>
+            Wähle deine Präferenzen
+          </Text>
+          <Text style={styles.fieldLabel}>Wie reist du?</Text>
+          <EqualChipRow count={TRAVEL_MODE_OPTIONS.length}>
+            {TRAVEL_MODE_OPTIONS.map((o) => {
+              const on = (draft.travelModes ?? []).includes(o.id);
+              return (
+                <Pressable
+                  key={o.id}
+                  onPress={() => {
+                    const cur = draft.travelModes ?? [];
+                    const next = on
+                      ? cur.filter((x) => x !== o.id)
+                      : [...cur, o.id];
+                    onChange({ travelModes: next });
+                  }}
+                  style={[styles.prefChip, on && styles.prefChipOn]}
+                >
+                  <Text style={styles.prefChipLabel}>{o.label}</Text>
+                </Pressable>
+              );
+            })}
+          </EqualChipRow>
+          {(
+            [
+              {
+                key: 'walk' as const,
+                label: 'Zu Fuß',
+                opts: [
+                  { id: 'primary', label: 'Geht gut' },
+                  { id: 'rather_not', label: 'Eher nicht' },
+                ],
+              },
+              {
+                key: 'transit' as const,
+                label: 'ÖPNV',
+                opts: [
+                  { id: 'love', label: 'Gerne' },
+                  { id: 'if_needed', label: 'Wenn nötig' },
+                  { id: 'avoid', label: 'Vermeiden' },
+                ],
+              },
+              {
+                key: 'bike' as const,
+                label: 'Fahrrad',
+                opts: [
+                  { id: 'own', label: 'Habe ich' },
+                  { id: 'rent', label: 'Würde leihen' },
+                  { id: 'no', label: 'Nein' },
+                ],
+              },
+              {
+                key: 'scooter' as const,
+                label: 'E-Scooter',
+                opts: [
+                  { id: 'own', label: 'Habe ich' },
+                  { id: 'rent', label: 'Würde leihen' },
+                  { id: 'no', label: 'Nein' },
+                ],
+              },
+            ] as const
+          ).map((row) => (
+            <View key={row.key} style={{ marginBottom: spacing.sm }}>
+              <Text style={styles.muted}>{row.label}</Text>
+              <EqualChipRow count={row.opts.length}>
+                {row.opts.map((o) => {
+                  const on = (draft.mobilityPrefs ?? {})[row.key] === o.id;
+                  return (
+                    <Pressable
+                      key={o.id}
+                      onPress={() => setMobility(row.key, o.id as never)}
+                      style={[styles.prefChip, on && styles.prefChipOn]}
+                    >
+                      <Text style={styles.prefChipLabel}>{o.label}</Text>
+                    </Pressable>
+                  );
+                })}
+              </EqualChipRow>
+            </View>
+          ))}
+          <View style={{ marginBottom: spacing.sm }}>
+            <Text style={styles.muted}>Taxi</Text>
+            <EqualChipRow count={TAXI_PREF_OPTIONS.length}>
+              {TAXI_PREF_OPTIONS.map((o) => {
+                const taxi = (draft.mobilityPrefs ?? {}).taxi;
+                const car = (draft.mobilityPrefs ?? {}).car;
+                const on =
+                  taxi === o.id ||
+                  (!taxi &&
+                    ((o.id === 'love' && car === 'taxi_love') ||
+                      (o.id === 'if_saves_time' && car === 'taxi_saves_time') ||
+                      (o.id === 'no' &&
+                        (car === 'none' || car === 'own_avoid'))));
+                return (
+                  <Pressable
+                    key={o.id}
+                    onPress={() =>
+                      onChange({
+                        mobilityPrefs: {
+                          ...(draft.mobilityPrefs ?? {}),
+                          taxi: o.id,
+                          car: o.car,
+                        },
+                      })
+                    }
+                    style={[styles.prefChip, on && styles.prefChipOn]}
+                  >
+                    <Text style={styles.prefChipLabel}>{o.label}</Text>
+                  </Pressable>
+                );
+              })}
+            </EqualChipRow>
           </View>
-        ))}
+        </View>
+
+        <View style={styles.sectionGroup}>
+          <Text style={styles.sectionGroupTitle}>Barriere / besondere Bedürfnisse?</Text>
+          <EqualChipRow count={2}>
+            {(
+              [
+                { id: false, label: 'Nein' },
+                { id: true, label: 'Ja — Details' },
+              ] as const
+            ).map((o) => {
+              const on = !!draft.accessibilityCare === o.id;
+              return (
+                <Pressable
+                  key={String(o.id)}
+                  onPress={() => onChange({ accessibilityCare: o.id })}
+                  style={[styles.prefChip, on && styles.prefChipOn]}
+                >
+                  <Text style={styles.prefChipLabel}>{o.label}</Text>
+                </Pressable>
+              );
+            })}
+          </EqualChipRow>
+          {draft.accessibilityCare ? (
+            <EqualChipRow count={ACCESSIBILITY_NEED_OPTIONS.length}>
+              {ACCESSIBILITY_NEED_OPTIONS.map((o) => {
+                const on = (draft.accessibility ?? []).includes(o.id);
+                return (
+                  <Pressable
+                    key={o.id}
+                    onPress={() => {
+                      const cur = draft.accessibility ?? [];
+                      onChange({
+                        accessibility: on
+                          ? cur.filter((x) => x !== o.id)
+                          : [...cur, o.id],
+                      });
+                    }}
+                    style={[styles.prefChip, on && styles.prefChipOn]}
+                  >
+                    <Text style={styles.prefChipLabel}>{o.label}</Text>
+                  </Pressable>
+                );
+              })}
+            </EqualChipRow>
+          ) : null}
+        </View>
+
+        <View style={styles.sectionGroup}>
+          <Text style={styles.sectionGroupTitle}>Essen</Text>
+          <Text style={styles.fieldLabel}>Essen — Kategorien</Text>
+          <EqualChipRow count={4}>
+            {DIETARY_OPTIONS.filter((o) =>
+              ['vegan', 'vegetarisch', 'fisch', 'glutenfrei'].includes(o.id),
+            ).map((o) => {
+              const on = (draft.dietaryTags ?? []).includes(o.id);
+              return (
+                <Pressable
+                  key={o.id}
+                  onPress={() => toggleDietary(o.id)}
+                  style={[styles.prefChip, on && styles.prefChipOn]}
+                >
+                  <Text style={styles.prefChipLabel}>{o.label}</Text>
+                </Pressable>
+              );
+            })}
+          </EqualChipRow>
+
+          <Text style={styles.fieldLabel}>Allergien & Unverträglichkeiten</Text>
+          <EqualChipRow count={2}>
+            {(
+              [
+                { id: false, label: 'Keine' },
+                { id: true, label: 'Ja' },
+              ] as const
+            ).map((o) => {
+              const on = allergyOpen === o.id;
+              return (
+                <Pressable
+                  key={String(o.id)}
+                  onPress={() => {
+                    setAllergyOpen(o.id);
+                    if (!o.id) onChange({ allergyTags: ['keine'] });
+                    else {
+                      const cur = (draft.allergyTags ?? []).filter(
+                        (x) => x !== 'keine',
+                      );
+                      onChange({ allergyTags: cur });
+                    }
+                  }}
+                  style={[styles.prefChip, on && styles.prefChipOn]}
+                >
+                  <Text style={styles.prefChipLabel}>{o.label}</Text>
+                </Pressable>
+              );
+            })}
+          </EqualChipRow>
+          {allergyOpen ? (
+            <EqualChipRow count={ALLERGY_INTOLERANCE_OPTIONS.length}>
+              {ALLERGY_INTOLERANCE_OPTIONS.map((o) => {
+                const on = (draft.allergyTags ?? []).includes(o.id);
+                return (
+                  <Pressable
+                    key={o.id}
+                    onPress={() => toggleAllergy(o.id)}
+                    style={[styles.prefChip, on && styles.prefChipOn]}
+                  >
+                    <Text style={styles.prefChipLabel}>{o.label}</Text>
+                  </Pressable>
+                );
+              })}
+            </EqualChipRow>
+          ) : null}
+          <Field
+            label="Sonstiges (optional)"
+            value={draft.allergies ?? ''}
+            onChangeText={(allergies) => onChange({ allergies })}
+          />
+        </View>
+
+        <View style={styles.sectionGroup}>
+          <Text style={styles.sectionGroupTitle}>Reise-Stil</Text>
+          <EqualChipRow count={TRAVEL_STYLE_CARD_IDS.length}>
+            {EXPERIENCE_CARDS.filter((c) =>
+              (TRAVEL_STYLE_CARD_IDS as readonly string[]).includes(c.id),
+            ).map((card) => (
+              <Pressable
+                key={card.id}
+                onPress={() => {
+                  const cur = draft.experiencePrefs[card.id] ?? 'neutral';
+                  setPref(card.id, cur === 'yes' ? 'neutral' : 'yes');
+                }}
+                style={[
+                  styles.prefChip,
+                  draft.experiencePrefs[card.id] === 'yes' && styles.prefChipOn,
+                ]}
+              >
+                <Text style={styles.prefChipLabel}>{card.labelDe}</Text>
+              </Pressable>
+            ))}
+          </EqualChipRow>
+        </View>
+
+        <View style={[styles.sectionGroup, styles.catBlock]}>
+          <Text style={styles.catTitle}>Jetzt aber — was spricht dich an</Text>
+          <Text style={[styles.muted, { marginBottom: spacing.sm }]}>
+            Wissen, Kultur, Orte & Vibes — was dich anzieht.
+          </Text>
+          {experienceCards.map((card) => (
+            <SwipeCard
+              key={card.id}
+              card={card}
+              lang={lang}
+              value={draft.experiencePrefs[card.id] ?? 'neutral'}
+              onChange={(v) => setPref(card.id, v)}
+            />
+          ))}
+        </View>
 
         <Text style={styles.fieldLabel}>{t(lang, 'wantExperience')}</Text>
         <View style={styles.micRow}>
@@ -1233,17 +1697,7 @@ function ExperienceStep({
       </ScrollView>
       <PrimaryButton
         label={t(lang, 'continue')}
-        onPress={() =>
-          onNext({
-            energyLevel: draft.energyLevel ?? 'medium',
-            budgetCategory: draft.budgetCategory ?? 'mittel',
-            touristMode: draft.touristMode ?? 'mix',
-            mobilityMode: draft.mobilityMode ?? 'foot',
-            answerStyle: draft.answerStyle ?? 'detailed',
-            notificationsEnabled: draft.notificationsEnabled !== false,
-            dataSaverMode: false,
-          })
-        }
+        onPress={() => onNext()}
       />
     </OnboardingShell>
   );
@@ -1304,7 +1758,11 @@ function SwipeCard({
             value === 'neutral' && styles.swipeMidOn,
           ]}
         >
-          <Text style={styles.swipeMidText}>{t(lang, 'neutral')}</Text>
+          <Text style={styles.swipeMidText}>
+            {uiLang(lang) === 'de'
+              ? card.midLabelDe ?? t(lang, 'neutral')
+              : card.midLabelEn ?? t(lang, 'neutral')}
+          </Text>
         </Pressable>
         <Pressable
           onPress={() => onChange(rightValue)}
@@ -1322,7 +1780,10 @@ function SwipeCard({
   );
 }
 
-const SEGMENT_PAUSE_MS = 1000;
+/** Pause zwischen Tour-Abschnitten — bewusst kurz. */
+const SEGMENT_PAUSE_MS = 500;
+const SETTINGS_ACCORDION_MS = 420;
+const LAYOUT_WAIT_MS = 140;
 
 function SummaryIntroStep({
   draft,
@@ -1335,7 +1796,7 @@ function SummaryIntroStep({
 }) {
   void onSetVoiceId;
   const isPlaying = useFinnusStore((s) => s.isAudiblySpeaking);
-  const subtitle = useFinnusStore((s) => s.subtitleText);
+  const subtitleText = useFinnusStore((s) => s.subtitleText);
 
   const [canSkip, setCanSkip] = useState(true);
   const [fingerVisible, setFingerVisible] = useState(false);
@@ -1349,15 +1810,20 @@ function SummaryIntroStep({
   const rootRef = useRef<View>(null);
   const locationRef = useRef<View>(null);
   const micRef = useRef<View>(null);
-  const planningRef = useRef<View>(null);
   const settingsRef = useRef<View>(null);
   const module1Ref = useRef<View>(null);
   const bulletsRef = useRef<View>(null);
   const actionsRef = useRef<View>(null);
-  const planDemoRef = useRef<View>(null);
   const settingsDemoRef = useRef<View>(null);
   const queueDemoRef = useRef<View>(null);
+  const timelineRef = useRef<View>(null);
+  const planCalendarRef = useRef<View>(null);
+  const stampMapRef = useRef<View>(null);
   const lastHintRef = useRef<ExplanationHint | null>(null);
+  const [tourLandmark, setTourLandmark] = useState<string | null>(null);
+  const [helpReady, setHelpReady] = useState(false);
+  const [planCalendarOpen, setPlanCalendarOpen] = useState(false);
+  const demoStopIdsRef = useRef<string[]>([]);
 
   const finishedRef = useRef(false);
   const segmentsRef = useRef<{ hint: ExplanationHint; text: string }[]>([]);
@@ -1403,23 +1869,25 @@ function SummaryIntroStep({
   const measureTarget = useCallback((hint: ExplanationHint) => {
     return new Promise<{ x: number; y: number } | null>((resolve) => {
       const target =
-        hint === 'mic'
+        hint === 'mic' || hint === 'help_prompt'
           ? micRef.current
-          : hint === 'live_hud' || hint === 'passport' || hint === 'location'
-            ? locationRef.current
-            : hint === 'planning'
-              ? planningRef.current ?? planDemoRef.current
-              : hint === 'settings'
+          : hint === 'passport'
+            ? stampMapRef.current
+            : hint === 'live_hud' || hint === 'location'
+              ? locationRef.current
+              : hint === 'settings' || hint === 'settings_panel'
                 ? settingsRef.current
-                : hint === 'module1'
-                  ? module1Ref.current
-                  : hint === 'bullets'
-                    ? bulletsRef.current
-                    : hint === 'actions'
-                      ? actionsRef.current
-                      : hint === 'nav_queue'
-                        ? queueDemoRef.current
-                        : null;
+                : hint === 'timeline'
+                  ? planCalendarRef.current
+                  : hint === 'module1'
+                    ? module1Ref.current
+                    : hint === 'bullets'
+                      ? bulletsRef.current
+                      : hint === 'actions'
+                        ? actionsRef.current
+                        : hint === 'nav_queue'
+                          ? queueDemoRef.current
+                          : null;
       if (!target || !rootRef.current) {
         resolve(null);
         return;
@@ -1428,11 +1896,96 @@ function SummaryIntroStep({
         target.measureInWindow((x, y, w, h) => {
           resolve({
             x: x - rx + w / 2 - 18,
-            y: y - ry + h * 0.45,
+            y: y - ry + h * 0.55,
           });
         });
       });
     });
+  }, []);
+
+  const revealFingerAt = useCallback(
+    async (hint: ExplanationHint) => {
+      const pos = await measureTarget(hint);
+      if (!pos) {
+        setFingerVisible(false);
+        return false;
+      }
+      setFingerPos(pos);
+      setFingerVisible(true);
+      await new Promise<void>((resolve) => {
+        Animated.timing(fingerOpacity, {
+          toValue: 1,
+          duration: 160,
+          useNativeDriver: true,
+        }).start(() => resolve());
+      });
+      bumpFinger();
+      return true;
+    },
+    [bumpFinger, fingerOpacity, measureTarget],
+  );
+
+  const seedTourTimeline = useCallback(() => {
+    try {
+      const pack = cityDemoPack(draft.cityName ?? draft.cityId);
+      const dayKey = todayDateKey();
+      const store = useFuturePlanStore.getState();
+      store.ensureDay(dayKey);
+      const base = Date.now();
+      const ids = [
+        `tour_demo_${dayKey}_0`,
+        `tour_demo_${dayKey}_1`,
+        `tour_demo_${dayKey}_2`,
+      ];
+      demoStopIdsRef.current = ids;
+      const stops = [
+        {
+          id: ids[0]!,
+          title: pack.timelineStops[0],
+          plannedStartMs: base + 2 * 60 * 60_000,
+          plannedEndMs: base + 3 * 60 * 60_000,
+          bufferMin: 0,
+          transport: 'walk' as const,
+          kind: 'stop' as const,
+          emoji: '📍',
+        },
+        {
+          id: ids[1]!,
+          title: pack.timelineStops[1],
+          plannedStartMs: base + 4 * 60 * 60_000,
+          plannedEndMs: base + 5 * 60 * 60_000,
+          bufferMin: 0,
+          transport: 'walk' as const,
+          kind: 'stop' as const,
+          emoji: '✨',
+        },
+        {
+          id: ids[2]!,
+          title: pack.timelineStops[2],
+          plannedStartMs: base + 7 * 60 * 60_000,
+          plannedEndMs: base + 8 * 60 * 60_000,
+          bufferMin: 0,
+          transport: 'walk' as const,
+          kind: 'stop' as const,
+          emoji: '🌅',
+        },
+      ];
+      for (const s of stops) store.upsertStop(s);
+    } catch (err) {
+      console.warn('[explanation] timeline seed failed', err);
+    }
+  }, [draft.cityId, draft.cityName]);
+
+  const clearTourTimeline = useCallback(() => {
+    try {
+      const store = useFuturePlanStore.getState();
+      for (const id of demoStopIdsRef.current) {
+        store.removeStop(id);
+      }
+      demoStopIdsRef.current = [];
+    } catch {
+      /* soft */
+    }
   }, []);
 
   const showFinger = useCallback(
@@ -1441,10 +1994,12 @@ function SummaryIntroStep({
 
       if (hint === 'none') {
         setSettingsDemoOpen(false);
+        setPlanCalendarOpen(false);
+        clearTourTimeline();
         await new Promise<void>((resolve) => {
           Animated.timing(fingerOpacity, {
             toValue: 0,
-            duration: 180,
+            duration: 140,
             useNativeDriver: true,
           }).start(() => {
             setFingerVisible(false);
@@ -1454,60 +2009,103 @@ function SummaryIntroStep({
         return;
       }
 
+      // Settings: erst Finger auf Zahnrad (Panel bleibt zu) — Speech folgt im Runner
       if (hint === 'settings') {
-        setSettingsDemoOpen(true);
-        setSettingsAccordion('setup');
-      } else {
+        setPlanCalendarOpen(false);
         setSettingsDemoOpen(false);
-      }
-
-      // Kurz warten bis Overlay layoutet
-      await new Promise<void>((r) => setTimeout(r, hint === 'module1' || hint === 'planning' || hint === 'settings' ? 280 : 80));
-
-      const pos = await measureTarget(hint);
-      if (!pos) {
-        // Fallback: Mitte
-        setFingerVisible(false);
+        await new Promise<void>((r) => setTimeout(r, LAYOUT_WAIT_MS));
+        await revealFingerAt('settings');
+        bumpFinger();
+        await new Promise<void>((r) => setTimeout(r, 500));
         return;
       }
-      setFingerPos(pos);
-      setFingerVisible(true);
-      await new Promise<void>((resolve) => {
-        Animated.timing(fingerOpacity, {
-          toValue: 1,
-          duration: 220,
-          useNativeDriver: true,
-        }).start(() => resolve());
-      });
-      bumpFinger();
 
-      if (hint === 'settings') {
-        await new Promise<void>((r) => setTimeout(r, 700));
-        setSettingsAccordion('voice');
-        await new Promise<void>((r) => setTimeout(r, 900));
-        setSettingsAccordion('help');
-        await new Promise<void>((r) => setTimeout(r, 800));
-        setSettingsAccordion('feedback');
+      // Settings-Panel: öffnen, Accordion kurz durchwandern (parallel zur Speech im Runner)
+      if (hint === 'settings_panel') {
+        setPlanCalendarOpen(false);
+        setSettingsDemoOpen(true);
+        setSettingsAccordion('setup');
+        await new Promise<void>((r) => setTimeout(r, LAYOUT_WAIT_MS));
+        if (settingsDemoRef.current && rootRef.current) {
+          await new Promise<void>((resolve) => {
+            rootRef.current!.measureInWindow((rx, ry) => {
+              settingsDemoRef.current!.measureInWindow((x, y, w, h) => {
+                setFingerPos({
+                  x: x - rx + Math.min(48, w * 0.2),
+                  y: y - ry + 56,
+                });
+                setFingerVisible(true);
+                resolve();
+              });
+            });
+          });
+          bumpFinger();
+        }
+        // Accordion-Walk im Hintergrund — Speech startet sofort danach im Runner
+        void (async () => {
+          const walk = [
+            'setup',
+            'city',
+            'saverAudio',
+            'explanations',
+            'feedback',
+            'triggers',
+          ];
+          for (const id of walk) {
+            if (finishedRef.current) return;
+            setSettingsAccordion(id);
+            bumpFinger();
+            await new Promise<void>((r) => setTimeout(r, SETTINGS_ACCORDION_MS));
+          }
+        })();
+        return;
+      }
+
+      if (hint === 'timeline') {
+        setSettingsDemoOpen(false);
+        setPlanCalendarOpen(false);
+        await new Promise<void>((r) => setTimeout(r, LAYOUT_WAIT_MS));
+        await revealFingerAt('timeline');
+        await new Promise<void>((r) => setTimeout(r, 280));
+        bumpFinger();
+        await new Promise<void>((r) => setTimeout(r, 160));
+        seedTourTimeline();
+        setPlanCalendarOpen(true);
+        await new Promise<void>((r) => setTimeout(r, 220));
+        bumpFinger();
+        return;
+      }
+
+      setSettingsDemoOpen(false);
+      setPlanCalendarOpen(false);
+
+      await new Promise<void>((r) =>
+        setTimeout(
+          r,
+          hint === 'module1' || hint === 'mic' || hint === 'help_prompt'
+            ? LAYOUT_WAIT_MS
+            : 70,
+        ),
+      );
+
+      await revealFingerAt(hint);
+      if (hint === 'mic' || hint === 'help_prompt') {
+        await new Promise<void>((r) => setTimeout(r, 200));
+        bumpFinger();
+        await new Promise<void>((r) => setTimeout(r, 160));
+        bumpFinger();
       }
     },
-    [bumpFinger, fingerOpacity, measureTarget],
+    [
+      bumpFinger,
+      clearTourTimeline,
+      fingerOpacity,
+      revealFingerAt,
+      seedTourTimeline,
+    ],
   );
 
-  // Finger anhand Untertitel an Segment koppeln
-  useEffect(() => {
-    if (!subtitle) {
-      lastHintRef.current = null;
-      void showFinger('none');
-      return;
-    }
-    const hit = segmentsRef.current.find((s) =>
-      subtitle.startsWith(s.text.slice(0, Math.min(28, s.text.length))),
-    );
-    if (!hit) return;
-    if (hit.hint === lastHintRef.current) return;
-    lastHintRef.current = hit.hint;
-    void showFinger(hit.hint);
-  }, [subtitle, showFinger]);
+  // Finger wird vom Segment-Runner gesteuert
 
   useEffect(() => {
     let cancelled = false;
@@ -1531,75 +2129,88 @@ function SummaryIntroStep({
       await pause(80);
       if (cancelled || finishedRef.current) return;
 
-      // PHASE 1: persönliche Begrüßung (wie bisher) — PHASE 2: geführte Tour
-      const opener = buildExplanationOpener(draft);
+      try {
+        await ensureWeatherFresh('open');
+      } catch {
+        /* soft */
+      }
+      if (cancelled || finishedRef.current) return;
+
+      const pack = cityDemoPack(draft.cityName ?? draft.cityId);
+      setTourLandmark(pack.landmark);
+
       const tour = buildGuidedFeatureTourSegments({
-        cityName: draft.cityName ?? draft.cityId ?? 'deiner Stadt',
+        profile: draft,
+        weatherSummary: getCachedWeatherSummary(),
+        weatherSnapshot: getCachedWeatherSnapshot(),
       });
-      const segments = [
-        { hint: 'none' as const, text: opener },
-        ...tour,
-      ];
+      const segments = tour;
       segmentsRef.current = segments;
 
-      async function* explanationStream(): AsyncGenerator<
-        string,
-        void,
-        unknown
-      > {
-        for (const segment of segments) {
-          if (cancelled || finishedRef.current) return;
-          yield segment.text;
+      // Sequentiell mit kurzer Pause — Demo-Sync
+      for (let i = 0; i < segments.length; i++) {
+        if (cancelled || finishedRef.current) return;
+        const seg = segments[i]!;
+        lastHintRef.current = seg.hint;
+        await showFinger(seg.hint);
+        try {
+          await speakText(seg.text, voiceOpts);
+        } catch (e) {
+          console.warn('[explanation] speak failed:', e);
         }
-      }
-
-      try {
-        await speakSentenceStream(explanationStream(), voiceOpts);
-      } catch (err) {
-        console.warn('[explanation] stream failed:', err);
-        for (let i = 0; i < segments.length; i++) {
-          if (cancelled || finishedRef.current) return;
-          try {
-            await speakText(segments[i]!.text, voiceOpts);
-          } catch (e) {
-            console.warn('[explanation] speak failed:', e);
-          }
-          if (i < segments.length - 1) await pause(SEGMENT_PAUSE_MS);
+        // Nach Settings-Panel: schließen
+        if (seg.hint === 'settings_panel') {
+          setSettingsDemoOpen(false);
+          setSettingsAccordion(null);
+          await pause(280);
         }
+        if (i < segments.length - 1) await pause(SEGMENT_PAUSE_MS);
       }
 
       if (cancelled || finishedRef.current) return;
       await markFirstMapWelcomeDone(draft);
+      setHelpReady(true);
       setCanSkip(false);
-      await showFinger('none');
-      await pause(200);
+      setPlanCalendarOpen(false);
+      setActiveHint('help_prompt');
+      await showFinger('help_prompt');
+      await pause(300);
+      // User kann Hilfe-Chips / Mic tippen; sonst nach kurzer Zeit fertig
+      await pause(10_000);
       if (!cancelled && !finishedRef.current) {
         finishedRef.current = true;
+        await showFinger('none');
+        clearTourTimeline();
         onFinished();
       }
     })();
 
     return () => {
       cancelled = true;
+      clearTourTimeline();
       void stopSpeaking();
     };
-  }, [draft, onFinished, showFinger]);
+  }, [clearTourTimeline, draft, onFinished, showFinger]);
 
   const cityLabel = draft.cityName ?? draft.cityId ?? 'dein Ort';
 
   return (
-    <View ref={rootRef} style={styles.homeLike} collapsable={false}>
+    <SafeAreaView style={styles.homeLike} edges={['top', 'bottom']}>
+      <View ref={rootRef} style={styles.homeLikeInner} collapsable={false}>
       <Header
         locationRef={locationRef}
         settingsRef={settingsRef}
-        planningRef={planningRef}
+        planCalendarRef={planCalendarRef}
+        stampMapRef={stampMapRef}
         settingsDisabled={false}
-        onOpenPlanning={() => {
-          bumpFinger();
-          setActiveHint('planning');
-        }}
         onOpenPassport={() => {
           bumpFinger();
+          setActiveHint('passport');
+        }}
+        onOpenPlanCalendar={() => {
+          bumpFinger();
+          seedTourTimeline();
+          setPlanCalendarOpen(true);
         }}
         onOpenSettings={() => {
           setSettingsDemoOpen(true);
@@ -1615,6 +2226,8 @@ function SummaryIntroStep({
             onPress={() => {
               finishedRef.current = true;
               setSettingsDemoOpen(false);
+              setPlanCalendarOpen(false);
+              clearTourTimeline();
               setActiveHint('none');
               lastHintRef.current = null;
               void markFirstMapWelcomeDone(draft);
@@ -1627,23 +2240,56 @@ function SummaryIntroStep({
 
       <View style={styles.introMain}>
         <AudioWave mood={isPlaying ? 'speaking' : 'idle'} />
-        <SubtitleOverlay text={subtitle} />
+        <View style={styles.introSubtitles} pointerEvents="none">
+          {subtitleText?.trim() ? (
+            <SubtitlesSlot text={subtitleText} />
+          ) : null}
+        </View>
       </View>
 
       <GuidedFeatureTourOverlays
         hint={activeHint}
         cityName={cityLabel}
+        landmarkName={tourLandmark}
         settingsOpen={settingsDemoOpen}
         settingsAccordion={settingsAccordion}
         onToggleAccordion={(id) =>
           setSettingsAccordion((prev) => (prev === id ? null : id))
         }
+        helpInteractive={helpReady}
+        onHelpAction={(prompt) => {
+          finishedRef.current = true;
+          setSettingsDemoOpen(false);
+          setPlanCalendarOpen(false);
+          clearTourTimeline();
+          setActiveHint('none');
+          lastHintRef.current = null;
+          void markFirstMapWelcomeDone(draft);
+          void stopSpeaking();
+          if (prompt?.trim()) {
+            queuePostTourQuestion(prompt);
+          }
+          onFinished();
+        }}
         module1Ref={module1Ref}
         bulletsRef={bulletsRef}
         actionsRef={actionsRef}
-        planDemoRef={planDemoRef}
         settingsDemoRef={settingsDemoRef}
         queueDemoRef={queueDemoRef}
+        timelineRef={timelineRef}
+        realTimelineOpen={planCalendarOpen}
+      />
+
+      <PlanCalendarModal
+        visible={planCalendarOpen}
+        onClose={() => {
+          setPlanCalendarOpen(false);
+          clearTourTimeline();
+        }}
+        onPressIn={() => bumpFinger()}
+        onPressOut={() => undefined}
+        isListening={false}
+        isGenerating={false}
       />
 
       <View ref={micRef} collapsable={false}>
@@ -1671,7 +2317,8 @@ function SummaryIntroStep({
           <Text style={styles.fingerEmoji}>👆</Text>
         </Animated.View>
       ) : null}
-    </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -1721,11 +2368,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.bg,
   },
+  homeLikeInner: {
+    flex: 1,
+  },
   introMain: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: spacing.md,
+  },
+  introSubtitles: {
+    width: '100%',
+    minHeight: 60,
+    marginTop: spacing.md,
+    justifyContent: 'center',
   },
   skipWrap: {
     alignItems: 'center',
@@ -1922,19 +2578,73 @@ const styles = StyleSheet.create({
     minHeight: 96,
     marginBottom: spacing.md,
   },
+  sectionGroup: {
+    marginTop: spacing.md,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.sm,
+    borderRadius: 16,
+    backgroundColor: 'rgba(22, 54, 44, 0.55)',
+    borderWidth: 1,
+    borderColor: 'rgba(196, 163, 90, 0.14)',
+  },
+  sectionGroupTitle: {
+    color: colors.accent,
+    fontSize: 14,
+    fontWeight: '800',
+    marginBottom: spacing.sm,
+    marginHorizontal: spacing.xs,
+    letterSpacing: 0.2,
+  },
   catBlock: { marginBottom: spacing.lg },
   catTitle: {
     color: colors.text,
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: '700',
+    marginBottom: 4,
+  },
+  catHint: {
+    color: colors.textMuted,
+    fontSize: 12,
+    lineHeight: 16,
     marginBottom: spacing.sm,
   },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  chipRowEqual: {
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    gap: 8,
+    marginBottom: 8,
+  },
+  chipRowEqual4: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginBottom: 8,
+  },
   prefChip: {
-    minWidth: '46%',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.12)',
+    backgroundColor: 'rgba(0,0,0,0.18)',
+    marginBottom: 4,
+  },
+  prefChipEqual: {
+    flex: 1,
+    minWidth: 0,
+    paddingVertical: 10,
+    paddingHorizontal: 6,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.12)',
+    backgroundColor: 'rgba(0,0,0,0.18)',
+  },
+  prefChipEqual4: {
+    width: '47%',
     flexGrow: 1,
     paddingVertical: 10,
-    paddingHorizontal: 12,
+    paddingHorizontal: 6,
     borderRadius: 12,
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.12)',
@@ -1945,8 +2655,18 @@ const styles = StyleSheet.create({
     borderColor: colors.accent,
     backgroundColor: 'rgba(196, 163, 90, 0.15)',
   },
-  prefChipLabel: { color: colors.text, fontWeight: '700', fontSize: 13 },
-  prefChipHint: { color: colors.textMuted, fontSize: 11, marginTop: 2 },
+  prefChipLabel: {
+    color: colors.text,
+    fontWeight: '700',
+    fontSize: 13,
+    flexShrink: 1,
+  },
+  prefChipHint: {
+    color: colors.textMuted,
+    fontSize: 11,
+    marginTop: 2,
+    flexShrink: 1,
+  },
   sectionLabel: {
     color: colors.textMuted,
     textTransform: 'uppercase',
@@ -1962,6 +2682,76 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderWidth: 1,
     borderColor: colors.border,
+  },
+  cityList: {
+    gap: 12,
+    marginBottom: 8,
+  },
+  cityCardModern: {
+    backgroundColor: colors.surface,
+    borderRadius: 20,
+    marginBottom: 4,
+    borderWidth: 1.5,
+    borderColor: colors.border,
+    overflow: 'hidden',
+  },
+  cityHero: {
+    width: '100%',
+    height: 96,
+    resizeMode: 'cover',
+  },
+  cityCardBody: {
+    padding: spacing.md,
+    gap: 6,
+  },
+  cityNameModern: {
+    color: colors.text,
+    fontSize: 22,
+    fontWeight: '800',
+    letterSpacing: 0.2,
+  },
+  cityStatGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: spacing.sm,
+    gap: 8,
+  },
+  cityStatCell: {
+    width: '47%',
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    backgroundColor: 'rgba(255,255,255,0.04)',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.08)',
+  },
+  cityStatNum: {
+    color: colors.accent,
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  cityStatLabel: {
+    color: colors.textMuted,
+    fontSize: 12,
+    marginTop: 2,
+    fontWeight: '600',
+  },
+  rahmenLead: {
+    color: colors.textMuted,
+    fontSize: 14,
+    lineHeight: 20,
+    marginBottom: spacing.md,
+  },
+  cityGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+    marginBottom: 8,
+  },
+  cityCardHalf: {
+    width: '47%',
+    flexGrow: 1,
+    minWidth: '45%',
   },
   cityCardSelected: {
     borderColor: colors.accent,
@@ -1989,14 +2779,16 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   swipeCard: {
-    backgroundColor: colors.bgElevated,
-    borderRadius: 14,
-    padding: 12,
-    marginBottom: 10,
+    backgroundColor: 'rgba(28, 67, 55, 0.9)',
+    borderRadius: 16,
+    padding: 14,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(196, 163, 90, 0.16)',
   },
   swipeTitle: {
     color: colors.text,
-    fontWeight: '600',
+    fontWeight: '700',
     marginBottom: 10,
     fontSize: 15,
   },

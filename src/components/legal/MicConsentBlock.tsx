@@ -1,62 +1,38 @@
+/**
+ * Mikrofon-Wahl als sichtbare Buttons + separate Datenschutz-Bestätigung.
+ */
+
 import React from 'react';
-import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors, spacing } from '../../constants/theme';
 import { AUDIO_CONSENT_NOTICE } from '../../constants/legal';
 import type { MicListenMode } from '../../types/userProfile';
 
 type Props = {
   mode: MicListenMode | null;
-  consentChecked: boolean;
+  /** Audio-Opt-in (nur relevant bei Spracheingabe). */
+  audioConsentChecked: boolean;
+  /** Separate Datenschutz-Bestätigung (immer nötig). */
+  privacyConsentChecked: boolean;
   onChangeMode: (mode: MicListenMode) => void;
-  onChangeConsent: (checked: boolean) => void;
+  onChangeAudioConsent: (checked: boolean) => void;
+  onChangePrivacyConsent: (checked: boolean) => void;
   onOpenPrivacy?: () => void;
-  /** Nur Auswahl Voice/Tippen — Transparenz-Fließtext ausblenden (wenn schon erklärt). */
   compact?: boolean;
 };
 
-/**
- * Mikrofon-Consent als Fließtext (nicht klickbare Kacheln) + einfache Auswahl.
- * Opt-in kommt als Popup, wenn Spracheingabe gewählt wird.
- */
 export function MicConsentBlock({
   mode,
-  consentChecked,
+  audioConsentChecked,
+  privacyConsentChecked,
   onChangeMode,
-  onChangeConsent,
+  onChangeAudioConsent,
+  onChangePrivacyConsent,
   onOpenPrivacy,
   compact = false,
 }: Props) {
   const voiceOn = mode === 'hear';
   const textOnly = mode === 'dont_hear';
-
-  const chooseVoice = () => {
-    Alert.alert(
-      'Spracheingabe erlauben?',
-      `Findus nutzt deine Spracheingaben nur, während du das Mikrofon tippst oder hältst — ausschließlich zur Spracherkennung für deine Anfrage.\n\n${AUDIO_CONSENT_NOTICE}`,
-      [
-        {
-          text: 'Lieber tippen',
-          style: 'cancel',
-          onPress: () => {
-            onChangeMode('dont_hear');
-            onChangeConsent(false);
-          },
-        },
-        {
-          text: 'Erlauben',
-          onPress: () => {
-            onChangeMode('hear');
-            onChangeConsent(true);
-          },
-        },
-      ],
-    );
-  };
-
-  const chooseTextOnly = () => {
-    onChangeMode('dont_hear');
-    onChangeConsent(false);
-  };
 
   return (
     <View style={styles.wrap}>
@@ -67,43 +43,94 @@ export function MicConsentBlock({
           <Text style={styles.proseLead}>Was wir hören: </Text>
           Nur wenn du das Mikrofon aktiv tippst oder hältst. Deine Worte dienen
           ausschließlich der Spracherkennung für deine Anfrage. Kein Dauerhören,
-          keine Aufnahme im Hintergrund — Audio wird nicht an Dritte zu
-          Werbezwecken verkauft. {AUDIO_CONSENT_NOTICE}
+          keine Aufnahme im Hintergrund. {AUDIO_CONSENT_NOTICE}
         </Text>
       ) : (
         <Text style={styles.prose}>
-          Kurz wählen, wie du mit Findus sprechen möchtest. Wie Fragen stellen
-          funktioniert, erklärt Findus dir gleich danach in der Tour.
+          Wähle sichtbar, wie du mit Findus sprechen willst — und bestätige
+          danach getrennt den Datenschutz.
         </Text>
       )}
 
       <Text style={styles.choiceLabel}>Wie möchtest du mitmachen?</Text>
 
       <Pressable
-        onPress={chooseVoice}
-        style={styles.choiceRow}
-        accessibilityRole="radio"
+        onPress={() => {
+          onChangeMode('hear');
+          onChangeAudioConsent(true);
+        }}
+        style={[styles.modeBtn, voiceOn && styles.modeBtnOn]}
+        accessibilityRole="button"
         accessibilityState={{ selected: voiceOn }}
       >
-        <Text style={styles.bullet}>{voiceOn ? '●' : '○'}</Text>
-        <Text style={[styles.choiceText, voiceOn && styles.choiceTextOn]}>
-          Spracheingabe an — Mikrofon tippen oder halten
-          {voiceOn && consentChecked ? ' (aktiv)' : ''}
+        <Text style={[styles.modeTitle, voiceOn && styles.modeTitleOn]}>
+          Spracheingabe an
+        </Text>
+        <Text style={styles.modeSub}>
+          Mikrofon tippen oder halten — nur während der Anfrage. Du kannst
+          sprechen statt tippen.
         </Text>
       </Pressable>
 
       <Pressable
-        onPress={chooseTextOnly}
-        style={styles.choiceRow}
-        accessibilityRole="radio"
+        onPress={() => {
+          onChangeMode('dont_hear');
+          onChangeAudioConsent(false);
+        }}
+        style={[styles.modeBtn, textOnly && styles.modeBtnOn]}
+        accessibilityRole="button"
         accessibilityState={{ selected: textOnly }}
       >
-        <Text style={styles.bullet}>{textOnly ? '●' : '○'}</Text>
-        <Text style={[styles.choiceText, textOnly && styles.choiceTextOn]}>
-          Nur tippen — kein Mikrofon
-          {textOnly ? ' (aktiv)' : ''}
+        <Text style={[styles.modeTitle, textOnly && styles.modeTitleOn]}>
+          Nur tippen
+        </Text>
+        <Text style={styles.modeSub}>
+          Kein Mikrofon — alles muss per Tastatur getippt werden. Sprache später
+          jederzeit in den Einstellungen aktivierbar.
         </Text>
       </Pressable>
+
+      <Text style={styles.choiceLabel}>Datenschutz separat bestätigen</Text>
+      <Pressable
+        onPress={() => onChangePrivacyConsent(!privacyConsentChecked)}
+        style={[
+          styles.privacyBtn,
+          privacyConsentChecked && styles.privacyBtnOn,
+        ]}
+        accessibilityRole="checkbox"
+        accessibilityState={{ checked: privacyConsentChecked }}
+      >
+        <View
+          style={[
+            styles.checkBox,
+            privacyConsentChecked && styles.checkBoxOn,
+          ]}
+        >
+          {privacyConsentChecked ? (
+            <Text style={styles.checkMark}>✓</Text>
+          ) : null}
+        </View>
+        <View style={styles.privacyCopy}>
+          <Text
+            style={[
+              styles.privacyTitle,
+              privacyConsentChecked && styles.modeTitleOn,
+            ]}
+          >
+            Datenschutzerklärung akzeptieren
+          </Text>
+          <Text style={styles.modeSub}>
+            Pflicht — unabhängig von der Mikrofon-Wahl
+          </Text>
+        </View>
+      </Pressable>
+
+      {voiceOn ? (
+        <Text style={styles.audioNote}>
+          Spracheingabe: {AUDIO_CONSENT_NOTICE}
+          {audioConsentChecked ? ' — Einwilligung gesetzt.' : ''}
+        </Text>
+      ) : null}
 
       {onOpenPrivacy ? (
         <Pressable onPress={onOpenPrivacy} accessibilityRole="link">
@@ -114,13 +141,15 @@ export function MicConsentBlock({
   );
 }
 
-/** Spracheingabe braucht Opt-in; „Nur tippen“ reicht ohne Audio-Consent. */
+/** Mode gewählt + Datenschutz bestätigt; bei Sprache zusätzlich Audio-Opt-in. */
 export function micConsentIsValid(
   mode: MicListenMode | null,
-  consentChecked: boolean,
+  audioConsentChecked: boolean,
+  privacyConsentChecked: boolean,
 ): boolean {
+  if (!privacyConsentChecked) return false;
   if (mode === 'dont_hear') return true;
-  if (mode === 'hear') return consentChecked;
+  if (mode === 'hear') return audioConsentChecked;
   return false;
 }
 
@@ -151,27 +180,76 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
   },
-  choiceRow: {
+  modeBtn: {
+    borderWidth: 1,
+    borderColor: colors.border,
+    backgroundColor: 'rgba(0,0,0,0.22)',
+    borderRadius: 14,
+    paddingVertical: 14,
+    paddingHorizontal: 14,
+    gap: 4,
+  },
+  modeBtnOn: {
+    borderColor: colors.accent,
+    backgroundColor: 'rgba(196, 163, 90, 0.16)',
+  },
+  modeTitle: {
+    color: colors.text,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  modeTitleOn: {
+    color: colors.accent,
+  },
+  modeSub: {
+    color: colors.textMuted,
+    fontSize: 13,
+    lineHeight: 18,
+  },
+  privacyBtn: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    gap: 10,
-    paddingVertical: 6,
+    gap: 12,
+    borderWidth: 1,
+    borderColor: colors.border,
+    backgroundColor: 'rgba(0,0,0,0.22)',
+    borderRadius: 14,
+    paddingVertical: 14,
+    paddingHorizontal: 14,
   },
-  bullet: {
-    color: colors.accent,
-    fontSize: 16,
-    lineHeight: 22,
-    width: 18,
+  privacyBtnOn: {
+    borderColor: colors.wave,
+    backgroundColor: 'rgba(126, 200, 163, 0.12)',
   },
-  choiceText: {
-    flex: 1,
-    color: colors.textMuted,
+  checkBox: {
+    width: 26,
+    height: 26,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: colors.border,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 1,
+  },
+  checkBoxOn: {
+    borderColor: colors.wave,
+    backgroundColor: colors.wave,
+  },
+  checkMark: {
+    color: '#0B1220',
+    fontWeight: '800',
     fontSize: 14,
-    lineHeight: 20,
   },
-  choiceTextOn: {
+  privacyCopy: { flex: 1, gap: 2 },
+  privacyTitle: {
     color: colors.text,
-    fontWeight: '600',
+    fontSize: 15,
+    fontWeight: '700',
+  },
+  audioNote: {
+    color: colors.textMuted,
+    fontSize: 12,
+    lineHeight: 17,
   },
   link: {
     color: colors.accent,

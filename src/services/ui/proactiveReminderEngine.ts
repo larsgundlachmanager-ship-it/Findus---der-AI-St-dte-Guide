@@ -23,10 +23,12 @@ import {
   buildHudTipFullLine,
   buildHudTipPushTeaser,
 } from '../notifications/notificationTeaser';
+import { RAIN_ALERT_DATA_TYPE } from '../notifications/rainAlertNotifications';
 import { speakRuntimeText } from '../../runtime/speechModule';
 import { getVoiceSettingsForTour } from '../ttsService';
 import { isDeviceOffline } from '../navigation/networkState';
 import { tickLogisticsTriggerEngine } from '../logistics/logisticsTriggerEngine';
+import { allowProactiveReminder, allowCriticalProactiveVoice } from './nachtruhePolicy';
 
 export const REMINDER_ENGINE_INTERVAL_MS = HUD_ENGINE_INTERVAL_MS;
 export const REMINDER_PUSH_DATA_TYPE = 'proactive_reminder';
@@ -98,7 +100,12 @@ export function bootstrapReminderPushTapHandler(): void {
           type?: string;
           fullText?: string;
         };
-        if (data?.type !== REMINDER_PUSH_DATA_TYPE) return;
+        if (
+          data?.type !== REMINDER_PUSH_DATA_TYPE &&
+          data?.type !== RAIN_ALERT_DATA_TYPE
+        ) {
+          return;
+        }
         const line =
           (typeof data.fullText === 'string' && data.fullText.trim()) ||
           pendingPushFullText;
@@ -111,10 +118,15 @@ export function bootstrapReminderPushTapHandler(): void {
       const data = last?.notification.request.content.data as
         | { type?: string; fullText?: string }
         | undefined;
-      if (data?.type === REMINDER_PUSH_DATA_TYPE && data.fullText) {
-        setTimeout(() => {
-          void speakFullReminder(data.fullText!);
-        }, 700);
+      if (
+        data?.type === REMINDER_PUSH_DATA_TYPE ||
+        data?.type === RAIN_ALERT_DATA_TYPE
+      ) {
+        if (data.fullText) {
+          setTimeout(() => {
+            void speakFullReminder(String(data.fullText));
+          }, 700);
+        }
       }
     } catch (err) {
       if (__DEV__) console.warn('[reminder] tap listener failed', err);
@@ -214,7 +226,11 @@ export async function tickProactiveReminderEngine(opts?: {
     nowMs: now,
     lat: opts?.lat ?? store.lastGpsLat,
     lng: opts?.lng ?? store.lastGpsLng,
-  }).sort((a, b) => b.score - a.score);
+  })
+    .filter((t) =>
+      allowProactiveReminder({ kind: t.kind, score: t.score, nowMs: now }),
+    )
+    .sort((a, b) => b.score - a.score);
 
   let voiceTip: HudTipCandidate | null = null;
   let pushTip: HudTipCandidate | null = null;
@@ -223,10 +239,16 @@ export async function tickProactiveReminderEngine(opts?: {
 
   for (const tip of tips) {
     const channel = classifyChannel(tip);
-    if (channel === 'voice' && !voiceTip && !offline) {
+    const voiceOk = allowCriticalProactiveVoice({
+      kind: tip.kind,
+      score: tip.score,
+      nowMs: now,
+    });
+    if (channel === 'voice' && !voiceTip && !offline && voiceOk) {
       voiceTip = tip;
       await voiceReminder(tip);
     } else if (channel === 'push' && !pushTip) {
+      // Push in Nachtruhe nur bei kritischen Tips (bereits gefiltert)
       pushTip = tip;
       await pushReminder(tip);
     }

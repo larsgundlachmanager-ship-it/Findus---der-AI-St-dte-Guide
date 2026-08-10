@@ -2,4 +2,6 @@
   <string name="app_name">Findus</string>
   <string name="expo_splash_screen_resize_mode" translatable="false">contain</string>
   <string name="expo_splash_screen_status_bar_translucent" translatable="false">false</string>
+  <string name="shortcut_listen_short">Sprechen</string>
+  <string name="shortcut_listen_long">Findus zuhören / Mikro starten</string>
 </resources>

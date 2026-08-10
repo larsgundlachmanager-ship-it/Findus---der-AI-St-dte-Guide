@@ -21,7 +21,7 @@ const ABBREVIATIONS: [RegExp, string][] = [
   [/\betc\./gi, 'et cetera'],
   [/\bzzgl\./gi, 'zuzüglich'],
   [/\bggf\./gi, 'gegebenenfalls'],
-  [/\bGmbH\b/g, 'G M B H'],
+  [/\bGmbH\b/g, 'GmbH'],
   [/\bz\.\s*B\./gi, 'zum Beispiel'],
   [/\bzB\b/g, 'zum Beispiel'],
 ];
@@ -49,7 +49,7 @@ export function spellGermanLetters(run: string): string {
 }
 
 /**
- * Satzzeichen → natürliche, kurze Prosodie für Kokoro (wie Hörproben).
+ * Satzzeichen → natürliche, kurze Prosodie für TTS (wie Hörproben).
  * Keine Ellipsen, keine Gedankenstriche, kein Silence-Stacking um jedes Zeichen.
  */
 export function normalizeProsodyPunctuation(text: string): string {

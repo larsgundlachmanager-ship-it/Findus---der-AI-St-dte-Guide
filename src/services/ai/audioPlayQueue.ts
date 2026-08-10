@@ -9,7 +9,9 @@ export type AudioPlayQueueItem = {
   /** Fertige WAV-Bytes im RAM — wird erst abgespielt, wenn vollständig gerendert. */
   wavBytes: Uint8Array;
   text: string;
-  /** OpenAI TTS: fertige MP3-Datei (statt wavBytes). */
+  /** Cloud-TTS: fertige Datei (WAV/MP3) statt wavBytes. */
+  cloudUri?: string;
+  /** @deprecated use cloudUri */
   openAiUri?: string;
 };
 
@@ -57,7 +59,9 @@ export function createAudioPlayQueue(
     push(item: AudioPlayQueueItem) {
       if (closed) return;
       const hasAudio =
-        Boolean(item.openAiUri) || Boolean(item.wavBytes?.length);
+        Boolean(item.cloudUri) ||
+        Boolean(item.openAiUri) ||
+        Boolean(item.wavBytes?.length);
       if (!hasAudio || !item.text.trim()) return;
       pending.push(item);
       notifyTake();

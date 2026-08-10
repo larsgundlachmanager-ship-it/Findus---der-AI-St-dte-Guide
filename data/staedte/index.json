@@ -1,0 +1,305 @@
+{
+  "last_global_update": "2026-08-09T18:14:13.642Z",
+  "available_cities": [
+    {
+      "id": "bad_saarow",
+      "name": "Bad Saarow",
+      "data_version": 16,
+      "symbol": "🌳",
+      "lat": 52.27429619999999,
+      "lng": 14.0546568,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/bad_saarow-msjn2f61.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/bad_saarow-msjn2f61.png"
+    },
+    {
+      "id": "beelitz",
+      "name": "Beelitz",
+      "data_version": 14,
+      "symbol": "🌳",
+      "lat": 52.2353295,
+      "lng": 12.9784788,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/beelitz-msjn19cx.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/beelitz-msjn19cx.png"
+    },
+    {
+      "id": "berlin-umland",
+      "name": "Berlin Umland",
+      "data_version": 13,
+      "symbol": "🌳",
+      "lat": 52.52,
+      "lng": 13.405,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/berlin-umland-msm4fpnx.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/berlin-umland-msm4fpnx.jpg"
+    },
+    {
+      "id": "berlin-zentral",
+      "name": "Berlin Zentral",
+      "data_version": 4,
+      "symbol": "🌳",
+      "lat": 52.52,
+      "lng": 13.405,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/berlin-zentral-mskvnyof.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/berlin-zentral-mskvnyof.jpg"
+    },
+    {
+      "id": "brandenburg_havel",
+      "name": "Brandenburg an der Havel",
+      "data_version": 19,
+      "symbol": "🌳",
+      "lat": 52.4125287,
+      "lng": 12.5316444,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/brandenburg_havel-msjn2e2j.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/brandenburg_havel-msjn2e2j.png"
+    },
+    {
+      "id": "chorin",
+      "name": "Chorin",
+      "data_version": 14,
+      "symbol": "🌳",
+      "lat": 52.9038,
+      "lng": 13.87274,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/chorin-msjn2g6o.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/chorin-msjn2g6o.png"
+    },
+    {
+      "id": "dresden",
+      "name": "Dresden",
+      "data_version": 17,
+      "symbol": "🌳",
+      "lat": 51.0504088,
+      "lng": 13.7372621,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/dresden-mskvnz3f.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/dresden-mskvnz3f.jpg"
+    },
+    {
+      "id": "duesseldorf",
+      "name": "Düsseldorf",
+      "data_version": 17,
+      "symbol": "🌳",
+      "lat": 51.2230411,
+      "lng": 6.7824545,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/duesseldorf-mskvo0np.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/duesseldorf-mskvo0np.jpg"
+    },
+    {
+      "id": "flensburg",
+      "name": "Flensburg",
+      "data_version": 26,
+      "symbol": "🌳",
+      "lat": 54.7937431,
+      "lng": 9.4469964,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/flensburg-msjjewqs.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/flensburg-msjjewqs.png"
+    },
+    {
+      "id": "frankfurt_am_main",
+      "name": "Frankfurt am Main",
+      "data_version": 8,
+      "symbol": "🌳",
+      "lat": 50.1109221,
+      "lng": 8.6821267,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/frankfurt_am_main-msm4fqq4.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/frankfurt_am_main-msm4fqq4.jpg"
+    },
+    {
+      "id": "hamburg",
+      "name": "Hamburg",
+      "data_version": 55,
+      "symbol": "🌳",
+      "lat": 53.5488282,
+      "lng": 9.987170299999999,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/hamburg-msjjevth.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/hamburg-msjjevth.png"
+    },
+    {
+      "id": "hochheim_am_main",
+      "name": "Hochheim am Main",
+      "data_version": 8,
+      "symbol": "🌳",
+      "lat": 50.01358260000001,
+      "lng": 8.3599322,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/hochheim_am_main-msm4fst3.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/hochheim_am_main-msm4fst3.jpg"
+    },
+    {
+      "id": "koeln",
+      "name": "Köln",
+      "data_version": 16,
+      "symbol": "🌳",
+      "lat": 50.937531,
+      "lng": 6.9602786,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/koeln-mskvo0dq.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/koeln-mskvo0dq.jpg"
+    },
+    {
+      "id": "korbach",
+      "name": "Korbach",
+      "data_version": 18,
+      "symbol": "🌳",
+      "lat": 51.2774069,
+      "lng": 8.8709876,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/korbach-msjke5hq.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/korbach-msjke5hq.png"
+    },
+    {
+      "id": "laboe",
+      "name": "Laboe",
+      "data_version": 23,
+      "symbol": "🌳",
+      "lat": 54.4022362,
+      "lng": 10.2255695,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/laboe-msk3rlmy.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/laboe-msk3rlmy.jpg"
+    },
+    {
+      "id": "spreewald",
+      "name": "Lübbenau",
+      "data_version": 13,
+      "symbol": "🌳",
+      "lat": 51.8654806,
+      "lng": 13.9539622,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/spreewald-msjn17b3.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/spreewald-msjn17b3.png"
+    },
+    {
+      "id": "luebeck",
+      "name": "Lübeck",
+      "data_version": 25,
+      "symbol": "🌳",
+      "lat": 53.8654673,
+      "lng": 10.6865593,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/luebeck-msjjrbbs.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/luebeck-msjjrbbs.png"
+    },
+    {
+      "id": "muenchen",
+      "name": "München",
+      "data_version": 10,
+      "symbol": "🌳",
+      "lat": 48.1351253,
+      "lng": 11.5819806,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/muenchen-mskvnzdp.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/muenchen-mskvnzdp.jpg"
+    },
+    {
+      "id": "oranienburg",
+      "name": "Oranienburg",
+      "data_version": 15,
+      "symbol": "🌳",
+      "lat": 52.7557351,
+      "lng": 13.2408643,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/oranienburg-msjn1bvr.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/oranienburg-msjn1bvr.png"
+    },
+    {
+      "id": "pinneberg",
+      "name": "Pinneberg",
+      "data_version": 38,
+      "symbol": "🌳",
+      "lat": 53.661,
+      "lng": 9.7966,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/pinneberg-msjjeq8i.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/pinneberg-msjjeq8i.png"
+    },
+    {
+      "id": "potsdam",
+      "name": "Potsdam",
+      "data_version": 13,
+      "symbol": "🌳",
+      "lat": 52.3905689,
+      "lng": 13.0644729,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/potsdam-msjn155l.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/potsdam-msjn155l.png"
+    },
+    {
+      "id": "prisdorf",
+      "name": "Prisdorf",
+      "data_version": 48,
+      "symbol": "🌳",
+      "lat": 53.6799982,
+      "lng": 9.7606944,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/prisdorf-msjjrdwz.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/prisdorf-msjjrdwz.png"
+    },
+    {
+      "id": "rheinsberg",
+      "name": "Rheinsberg",
+      "data_version": 13,
+      "symbol": "🌳",
+      "lat": 53.0983691,
+      "lng": 12.8974874,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/rheinsberg-msjq3omc.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/rheinsberg-msjq3omc.png"
+    },
+    {
+      "id": "stuttgart",
+      "name": "Stuttgart",
+      "data_version": 15,
+      "symbol": "🌳",
+      "lat": 48.7758459,
+      "lng": 9.1829321,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/stuttgart-mskvo0yx.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/stuttgart-mskvo0yx.jpg"
+    },
+    {
+      "id": "tettnang",
+      "name": "Tettnang",
+      "data_version": 22,
+      "symbol": "🌿",
+      "lat": 47.6681722,
+      "lng": 9.5916036,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/tettnang-msjjeut7.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/tettnang-msjjeut7.png"
+    },
+    {
+      "id": "tornesch",
+      "name": "Tornesch",
+      "data_version": 25,
+      "symbol": "🌳",
+      "lat": 53.6973396,
+      "lng": 9.7123761,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/tornesch-msjjer27.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/tornesch-msjjer27.png"
+    },
+    {
+      "id": "wandlitz",
+      "name": "Wandlitz",
+      "data_version": 12,
+      "symbol": "🌳",
+      "lat": 52.75422,
+      "lng": 13.47277,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/wandlitz-msjq3nbn.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/wandlitz-msjq3nbn.png"
+    },
+    {
+      "id": "wangerooge",
+      "name": "Wangerooge",
+      "data_version": 35,
+      "symbol": "🏝️",
+      "lat": 53.7902,
+      "lng": 7.8995,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/wangerooge-msk3rmtt.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/wangerooge-msk3rmtt.jpg"
+    },
+    {
+      "id": "werder",
+      "name": "Werder (Havel)",
+      "data_version": 13,
+      "symbol": "🌳",
+      "lat": 52.3764709,
+      "lng": 12.9341448,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/werder-msjn1dnz.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/werder-msjn1dnz.png"
+    },
+    {
+      "id": "hechingen",
+      "name": "Zollernstadt Hechingen",
+      "data_version": 25,
+      "symbol": "🏰",
+      "lat": 48.3538888,
+      "lng": 8.9613627,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/hechingen-msjjetf6.png",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/hechingen-msjjetf6.png"
+    }
+  ]
+}

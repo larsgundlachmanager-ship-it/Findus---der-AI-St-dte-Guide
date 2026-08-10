@@ -6,16 +6,20 @@ import { namesAlign } from '../concierge/canonicalDestination';
 import type { ActionEntity } from './types';
 
 const PLACE_RE =
-  /\b(?:in|bei|zur|zum|im|auf|Richtung|Route(?:\s+zu)?|Hotel|Restaurant|Café|Cafe|Bar|Museum)\s+([A-ZÄÖÜ][\wÄÖÜäöüß\-&.']+(?:\s+[A-ZÄÖÜa-zäöüß0-9][\wÄÖÜäöüß\-&.']*){0,4})/gu;
+  /\b(?:in|bei|zur|zum|im|auf|Route(?:\s+zu)?|Hotel|Restaurant|Café|Cafe|Bar|Museum)\s+([A-ZÄÖÜ][\wÄÖÜäöüß\-&.']+(?:\s+[A-ZÄÖÜa-zäöüß0-9][\wÄÖÜäöüß\-&.']*){0,4})/gu;
 
 const BARE_VENUE_RE =
   /\b((?:Dicke|Große|Kleine|Neue|Alte)\s+[A-ZÄÖÜ][\wÄÖÜäöüß\-]+|(?:Hotel|Restaurant|Café|Cafe|Bar|Museum|Strandbar|Beachbar)\s+[A-ZÄÖÜ][\wÄÖÜäöüß\-&.']+(?:\s+[A-ZÄÖÜa-zäöüß0-9][\wÄÖÜäöüß\-&.']*){0,3})\b/gu;
 
 const STOP_WORDS =
-  /^(Heute|Abend|Uhr|Minuten|Morgen|Stadt|Nähe|Naehe|Hier|Dort|Dir|Dich|Bitte|Apple|Store|Review|Developer|App)$/i;
+  /^(Heute|Abend|Uhr|Minuten|Morgen|Stadt|Nähe|Naehe|Hier|Dort|Dir|Dich|Bitte|Apple|Store|Review|Developer|App|Haltestelle|Bahnhof|Sportlich|Sprinten|Puffer|Verbindung|Linie|Richtung)$/i;
 
 const NON_PLACE_BLOB =
   /\b(app\s*store|apple\s+developer|testflight|xcode|ios\s+app|einreich|review\s+guidelines?)\b/iu;
+
+/** Fragmente aus Transit-Speech („Richtung Pinneberg“, „zur Haltestelle … sportlich“) */
+const TRANSIT_SPEECH_JUNK =
+  /\b(sportlich|sprinten|nächste\s+nehmen|minuten|haltestelle|bahnhof|pünktlich|verspätung|entwarnung|achtung)\b/iu;
 
 function cleanName(s: string): string {
   return s.replace(/[.,!?]+$/g, '').replace(/\s+/g, ' ').trim();
@@ -44,6 +48,9 @@ export function extractActionEntities(
   const push = (raw: string) => {
     const n = cleanName(raw);
     if (n.length < 3 || STOP_WORDS.test(n)) return;
+    if (TRANSIT_SPEECH_JUNK.test(n)) return;
+    // „Haltestelle wird sportlich“ / reine Richtungsstädte ohne Kontext-Coords
+    if (/^(haltestelle|richtung)\b/iu.test(n)) return;
     if (found.some((f) => namesAlign(f, n) || namesAlign(n, f))) return;
     found.push(n);
   };

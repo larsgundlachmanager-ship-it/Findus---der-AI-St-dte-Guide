@@ -1,0 +1,62 @@
+{
+  "city_id": "prisdorf",
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+      "spots": 56,
+      "triggers": 56,
+      "missingTrigger": 0,
+      "missingNarration": 0,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 0,
+      "orphanTriggers": 0,
+      "categories": [
+        "aussicht",
+        "bahnhof",
+        "bildung",
+        "cafe",
+        "denkmal",
+        "einkaufen",
+        "freizeit",
+        "geschichte",
+        "gesundheit",
+        "kirche",
+        "kultur",
+        "museum",
+        "natur",
+        "restaurant",
+        "service",
+        "sicherheit",
+        "soziales",
+        "sport",
+        "verwaltung"
+      ],
+      "missingMustHave": [],
+      "nicePresent": [
+        "cafe",
+        "restaurant",
+        "einkaufen",
+        "service",
+        "gesundheit",
+        "sport",
+        "bahnhof"
+      ],
+      "liveResearch": 4,
+      "hasCoverage": true,
+      "hasTransit": true,
+      "hasMobility": true,
+      "links": 0
+    },
+    "gaps": {
+      "needsNarration": [],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [],
+      "missingCategories": []
+    }
+  },
+  "generated_at": "2026-08-02T19:32:16.416Z"
+}

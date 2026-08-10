@@ -40,6 +40,7 @@ import {
   noteGeminiCreditsExhausted,
 } from './llm/geminiBillingGuard';
 import { NATURAL_SPEECH_RATE_RULE } from './ai/promptBuilder';
+import { GERMAN_TTS_PROSODY_REMINDER } from './g2p/germanTtsProsodyRules';
 
 export { consumeGeminiCreditsWarning } from './llm/geminiBillingGuard';
 
@@ -48,7 +49,8 @@ const CARTESIA_EMOTION_ENGINE_RULE = `## Cartesia Emotion & Naturalness Engine
 Deine Texte werden von Cartesia sonic-3.5 gesprochen — nicht von einem Vorleser.
 Emotion, Flüstern, Begeisterung und Atempausen entstehen NUR durch Kontext und Interpunktion.
 Schreibe menschlich: Kommas für Atem, Ausrufezeichen für Energie, „..." für Flüstern/Spannung, Gedankenstriche für Pausen.
-Keine SSML, keine Regie-Anweisungen, keine phonetischen Umschreibungen.`;
+Keine SSML, keine Regie-Anweisungen, keine phonetischen Umschreibungen.
+VERBOTEN im Vorlese-Text (nie aussprechen): „Die Stimme senkt sich…“, „mit tieferer Stimme“, „sprich leiser“, „*flüstert*“, Cartesia-/Prosodie-Kommandos.`;
 
 /** Aktive Findus-System-Instruction = Master Engine + Cartesia Speech Rules. */
 export function resolveFindusSystemInstruction(
@@ -66,7 +68,7 @@ export function resolveFindusSystemInstruction(
       return FINDUS_GEMINI_SYSTEM_INSTRUCTION;
     }
   })();
-  return `${base}\n\n${CARTESIA_EMOTION_ENGINE_RULE}\n\n${NATURAL_SPEECH_RATE_RULE}`;
+  return `${base}\n\n${CARTESIA_EMOTION_ENGINE_RULE}\n\n${NATURAL_SPEECH_RATE_RULE}\n\n${GERMAN_TTS_PROSODY_REMINDER}`;
 }
 
 export {
@@ -85,6 +87,20 @@ const CONCIERGE_RESPONSE_SCHEMA = {
       type: 'ARRAY',
       items: { type: 'STRING' },
       maxItems: 3,
+    },
+    background_tasks: {
+      type: 'ARRAY',
+      items: {
+        type: 'OBJECT',
+        properties: {
+          type: { type: 'STRING' },
+          time: { type: 'STRING' },
+          label: { type: 'STRING' },
+          dateIso: { type: 'STRING' },
+        },
+        required: ['type'],
+      },
+      maxItems: 4,
     },
     quickActions: {
       type: 'ARRAY',
@@ -109,6 +125,7 @@ const CONCIERGE_RESPONSE_SCHEMA = {
               destLng: { type: 'NUMBER' },
               destName: { type: 'STRING' },
               destination: { type: 'STRING' },
+              durationMs: { type: 'NUMBER' },
             },
           },
         },
@@ -118,6 +135,12 @@ const CONCIERGE_RESPONSE_SCHEMA = {
   },
   required: ['speechText', 'visualBullets', 'quickActions'],
 } as const;
+
+/** Multi-Turn für Modul-1 POI-Chat (REST contents[]). */
+export type GeminiChatTurn = {
+  role: 'user' | 'model';
+  parts: Array<{ text: string }>;
+};
 
 export type GeminiGenerateOptions = {
   maxTokens?: number;
@@ -131,6 +154,11 @@ export type GeminiGenerateOptions = {
   enableGoogleSearch?: boolean;
   /** Erzwingt application/json (+ optionales Schema). */
   responseJson?: boolean;
+  /**
+   * Nur MIME application/json, ohne Concierge-responseSchema.
+   * Für dedizierte Extraktoren (z. B. longFormPlanExtractor).
+   */
+  jsonMimeOnly?: boolean;
   /** Cost Control: lite (default) | pro (gated). */
   tier?: GeminiModelTier;
   forcePro?: boolean;
@@ -139,6 +167,10 @@ export type GeminiGenerateOptions = {
   flashFailed?: boolean;
   /** Hard abort (z. B. Judge-Timeout) — bricht fetch ab, keine weiterlaufenden Kosten. */
   signal?: AbortSignal;
+  /** P0: Flash→Pro Auto-Escalation abschalten (Stories / Cost-Caps). */
+  allowProEscalate?: boolean;
+  /** Vorherige Turns; aktueller `prompt` wird als letzter user-Turn angehängt. */
+  chatHistory?: GeminiChatTurn[];
 };
 
 type GeminiClient = {
@@ -158,13 +190,23 @@ type GeminiClient = {
 let sdkClient: GeminiClient | null | undefined;
 
 function resolveApiKey(): string {
+  // Proxy-Modus: kein Client-Key (auch wenn noch in .env steht — nicht an upstream senden)
+  if (env.useLlmProxy()) return '';
   const key = env.geminiApiKey();
   if (!key || key.includes('your-') || key.includes('YOUR_')) return '';
   return key;
 }
 
 export function hasGeminiApiKey(): boolean {
-  return Boolean(resolveApiKey());
+  if (resolveApiKey()) return true;
+  if (
+    env.useLlmProxy() &&
+    env.geminiProxyUrl() &&
+    env.supabaseAnonKey()
+  ) {
+    return true;
+  }
+  return false;
 }
 
 /** Lazy @google/genai/web — fällt auf REST zurück, wenn Metro/RN das SDK blockt. */
@@ -232,10 +274,43 @@ function extractTextFromRest(data: unknown): string {
 }
 
 async function postGenerate(
-  url: string,
+  model: string,
   body: Record<string, unknown>,
   signal?: AbortSignal,
 ): Promise<unknown> {
+  if (env.useLlmProxy()) {
+    const proxy = env.geminiProxyUrl();
+    const anon = env.supabaseAnonKey();
+    if (!proxy || !anon) {
+      throw Object.assign(new Error('Gemini proxy misconfigured'), {
+        status: 500,
+      });
+    }
+    const response = await fetch(proxy, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${anon}`,
+        apikey: anon,
+      },
+      body: JSON.stringify({ model, body }),
+      signal,
+    });
+    if (!response.ok) {
+      const errBody = await response.text();
+      throw Object.assign(new Error(`Gemini ${response.status}: ${errBody}`), {
+        status: response.status,
+        bodyText: errBody,
+      });
+    }
+    return response.json();
+  }
+
+  const apiKey = resolveApiKey();
+  if (!apiKey) {
+    throw Object.assign(new Error('Gemini API key missing'), { status: 401 });
+  }
+  const url = `${GEMINI_API_BASE}/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -257,8 +332,7 @@ async function generateViaRest(
   prompt: string,
   options?: GeminiGenerateOptions,
 ): Promise<string> {
-  const apiKey = resolveApiKey();
-  if (!apiKey) return '';
+  if (!env.useLlmProxy() && !resolveApiKey()) return '';
 
   const useSystem = options?.useFindusSystem !== false;
   const systemText = useSystem
@@ -299,11 +373,23 @@ async function generateViaRest(
 
   if (wantJson) {
     generationConfig.responseMimeType = 'application/json';
-    generationConfig.responseSchema = CONCIERGE_RESPONSE_SCHEMA;
+    if (!options?.jsonMimeOnly) {
+      generationConfig.responseSchema = CONCIERGE_RESPONSE_SCHEMA;
+    }
   }
 
+  const history = Array.isArray(options?.chatHistory)
+    ? options!.chatHistory!.filter(
+        (t) =>
+          (t.role === 'user' || t.role === 'model') &&
+          typeof t.parts?.[0]?.text === 'string',
+      )
+    : [];
   const body: Record<string, unknown> = {
-    contents: [{ role: 'user', parts: [{ text: prompt }] }],
+    contents: [
+      ...history,
+      { role: 'user', parts: [{ text: prompt }] },
+    ],
     generationConfig,
   };
   if (systemText) {
@@ -313,11 +399,10 @@ async function generateViaRest(
     body.tools = [{ google_search: {} }];
   }
 
-  const url = `${GEMINI_API_BASE}/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
   const signal = options?.signal;
 
   try {
-    return extractTextFromRest(await postGenerate(url, body, signal));
+    return extractTextFromRest(await postGenerate(model, body, signal));
   } catch (err) {
     if (signal?.aborted) throw err;
     const msg = err instanceof Error ? err.message : String(err);
@@ -333,7 +418,7 @@ async function generateViaRest(
           `[gemini] ${model}: google_search nicht unterstützt — Retry ohne Grounding`,
         );
       }
-      return extractTextFromRest(await postGenerate(url, body, signal));
+      return extractTextFromRest(await postGenerate(model, body, signal));
     }
     // responseSchema nicht unterstützt → nur MIME json
     if (
@@ -349,10 +434,10 @@ async function generateViaRest(
         );
       }
       try {
-        return extractTextFromRest(await postGenerate(url, body, signal));
+        return extractTextFromRest(await postGenerate(model, body, signal));
       } catch {
         delete (body.generationConfig as Record<string, unknown>).responseMimeType;
-        return extractTextFromRest(await postGenerate(url, body, signal));
+        return extractTextFromRest(await postGenerate(model, body, signal));
       }
     }
     // thinkingConfig ungültig / unbekannt → ohne Thinking, aber mit hohem Cap
@@ -374,7 +459,7 @@ async function generateViaRest(
           `[gemini] ${model}: thinkingBudget nicht unterstützt — Retry mit maxOutputTokens=${gc.maxOutputTokens}`,
         );
       }
-      return extractTextFromRest(await postGenerate(url, body, signal));
+      return extractTextFromRest(await postGenerate(model, body, signal));
     }
     throw new Error(`Gemini (${model}): ${msg}`);
   }
@@ -454,7 +539,8 @@ export async function generateGeminiText(
   let sawCreditsExhausted = false;
   let flashHardFailed = false;
 
-  const sdk = options?.signal ? null : await tryLoadSdkClient();
+  const sdk =
+    options?.signal || env.useLlmProxy() ? null : await tryLoadSdkClient();
 
   const isAbortError = (err: unknown): boolean =>
     options?.signal?.aborted === true ||
@@ -542,9 +628,14 @@ export async function generateGeminiText(
   }
 
   const thinFlash = shouldEscalateHistoryToPro(text, options?.task);
+  const allowPro =
+    options?.allowProEscalate !== false &&
+    options?.task !== 'history_deep' &&
+    options?.task !== 'teaser';
 
-  // Flash thin/empty/failed → einmal Pro als Unterstützung (nicht bei leerem Guthaben / Abort)
+  // Flash thin/empty/failed → einmal Pro (nicht bei Stories/Teaser, Abort, Budget, Credits)
   if (
+    allowPro &&
     (thinFlash || flashHardFailed) &&
     !sawCreditsExhausted &&
     !options?.signal?.aborted &&
@@ -552,20 +643,45 @@ export async function generateGeminiText(
     options?.forcePro !== true &&
     options?.tier !== 'pro'
   ) {
-    if (__DEV__) {
-      console.warn(
-        `[gemini] Flash überfordert (${options?.task ?? 'generic'}) — Pro-Unterstützung`,
-      );
-    }
-    const proText = await tryModels(
-      resolveGeminiModels({
-        ...tierInput,
-        flashFailed: true,
-        forcePro: true,
-        tier: 'pro',
-      }),
+    const { canAutoEscalateToPro, recordProEscalation } = await import(
+      './llm/proEscalateBudget'
     );
-    if (proText.trim()) text = proText;
+    if (!(await canAutoEscalateToPro())) {
+      try {
+        const { noteFallback } = await import('./debug/fallbackLabel');
+        noteFallback('Gemini-Pro', 'Tagesbudget erreicht — bleibe bei Flash');
+      } catch {
+        /* soft */
+      }
+      if (__DEV__) {
+        console.warn('[gemini] Pro-Tagesbudget erreicht — bleibe bei Flash');
+      }
+    } else {
+      try {
+        const { noteFallback } = await import('./debug/fallbackLabel');
+        noteFallback(
+          'Gemini-Pro',
+          `Flash überfordert (${options?.task ?? 'generic'})`,
+        );
+      } catch {
+        /* soft */
+      }
+      if (__DEV__) {
+        console.warn(
+          `[gemini] Flash überfordert (${options?.task ?? 'generic'}) — Pro-Unterstützung`,
+        );
+      }
+      await recordProEscalation();
+      const proText = await tryModels(
+        resolveGeminiModels({
+          ...tierInput,
+          flashFailed: true,
+          forcePro: true,
+          tier: 'pro',
+        }),
+      );
+      if (proText.trim()) text = proText;
+    }
   }
 
   if (!text.trim() && lastError) {
@@ -643,7 +759,12 @@ export async function* askGeminiSentenceStream(
  */
 export async function askGeminiConciergeResponse(
   messages: Array<{ role: string; content: string }>,
-  options?: { maxTokens?: number },
+  options?: {
+    maxTokens?: number;
+    signal?: AbortSignal;
+    /** Default 20s — hart aborten, keine weiterlaufenden Kosten. */
+    timeoutMs?: number;
+  },
 ): Promise<GeminiConciergeResponse> {
   if (!hasGeminiApiKey()) {
     return wrapPlainAsConcierge(
@@ -670,14 +791,37 @@ export async function askGeminiConciergeResponse(
 
   const prompt = `${dialogue}\n\nFindus (nur JSON):`;
 
-  const raw = await generateGeminiText(prompt, {
-    systemInstruction,
-    maxTokens: options?.maxTokens ?? 700,
-    temperature: GEMINI_TEMPERATURE,
-    useFindusSystem: false,
-    responseJson: true,
-    task: 'concierge',
-  });
+  const timeoutMs = options?.timeoutMs ?? 20_000;
+  const abortCtrl = new AbortController();
+  const onParentAbort = () => abortCtrl.abort();
+  if (options?.signal) {
+    if (options.signal.aborted) abortCtrl.abort();
+    else options.signal.addEventListener('abort', onParentAbort, { once: true });
+  }
+  const timeoutId = setTimeout(() => abortCtrl.abort(), timeoutMs);
+
+  let raw = '';
+  try {
+    raw = await generateGeminiText(prompt, {
+      systemInstruction,
+      maxTokens: options?.maxTokens ?? 700,
+      temperature: GEMINI_TEMPERATURE,
+      useFindusSystem: false,
+      responseJson: true,
+      task: 'concierge',
+      signal: abortCtrl.signal,
+    });
+  } catch (err) {
+    const aborted =
+      abortCtrl.signal.aborted ||
+      (err instanceof Error &&
+        (err.name === 'AbortError' || /aborted|AbortError/i.test(err.message)));
+    if (!aborted) throw err;
+    raw = '';
+  } finally {
+    clearTimeout(timeoutId);
+    options?.signal?.removeEventListener('abort', onParentAbort);
+  }
 
   const parsed = parseConciergeResponse(raw);
   if (parsed && parsed.speechText.trim().length >= 12) return parsed;
@@ -709,6 +853,7 @@ export async function askGeminiConciergeResponse(
         useFindusSystem: false,
         maxTokens: 80,
         temperature: 0.6,
+        allowProEscalate: false,
       },
     );
     const t = live.trim();

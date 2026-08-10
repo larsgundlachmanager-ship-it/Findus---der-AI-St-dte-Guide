@@ -1,0 +1,948 @@
+{
+  "notes": [
+    "Depth Wave B: churches + theaters (20 spots) from hamburg.depth-targets.md.",
+    "Sources: Wikipedia, official church/theater sites, hamburg.de, NDR. Prices/hours LIVE only. No dialogue scripts. No merge."
+  ],
+  "spots": [
+    {
+      "id": "hamburg_st_marien_dom",
+      "name": "St. Marien-Dom",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Katholische Kathedrale des Erzbistums Hamburg in St. Georg (Am Mariendom 1): neuromanische Backstein-Emporenbasilika von Arnold Güldenpfennig, geweiht 28. Juni 1893. Seit Wiedererrichtung des Erzbistums 1995 Kathedralkirche; Denkmal Hamburg-Mitte seit 2009. Doppelturmfront an Bremer Dom angelehnt.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: neuromanische Doppelturmfront mit Spitzhelmen, Fensterrosette und Backsteinlisenen; innen weiß gehaltenes Mittelschiff mit Emporen, Querhaus und Rundapsis — weithin sichtbar nahe Hauptbahnhof/St. Georg.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Bau 1890–1893 für die wachsende katholische Gemeinde; Architekt Arnold Güldenpfennig (Paderborn); Weihe durch Bischof Bernhard Höting (Osnabrück) am 28. Juni 1893. Baupause 1892 durch die Choleraepidemie.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Nachfolger der mittelalterlichen Domkirche am Domplatz (abgerissen 1804–1807). Seit 1995 Kathedrale des neu errichteten Erzbistums Hamburg; Adresse seit 2013 Am Mariendom (zuvor Danziger Straße).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Architektur: dreischiffige Emporenbasilika mit Querhaus und Apsis; Portalfront nach Vorbild Bremer Dom (Anspielung auf Ansgar/Hamburg-Bremen). 2007–2008 Umgestaltung zur Kathedrale berichtet.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Gottesdienste, Konzerte und Domführungen; Domgemeinde Pastoraler Raum Hamburg-City. Quer: St. Ansgar-Haus/Kapelle gegenüber, Hauptbahnhof, Lange Reihe.",
+          "tags": ["leben_jetzt", "quer"]
+        },
+        {
+          "text": "Quer: Hl. Dreieinigkeits-Kirche St. Georg und Schauspielhaus/Ohnsorg in Laufweite; historischer Domstandort Altstadt separat.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Kriegsschäden 1943 (u. a. Glasfenster); Glocken mehrfach abgegeben und teilweise vom „Glockenfriedhof“ zurück — Details ephemer prüfen.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Gottesdienstzeiten, Konzerte, Führungen und Öffnung ephemer — Website Mariendom / Erzbistum prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den St. Marien-Dom?",
+          "a": "An der neuromanischen Doppelturm-Backsteinfassade mit Rosette in St. Georg — Platz Am Mariendom, nahe Hauptbahnhof."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_flussschifferkirche_hamburg",
+      "name": "Flussschifferkirche Hamburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Schwimmende evangelisch-lutherische Kirche im Binnenhafen (Hohe Brücke 2 / Kehrwiedersteg): Weserleichter Baujahr 1906, 1952 auf der Norderwerft nach Curt Erler zur Kirche umgebaut, Weihe 7. Dezember 1952. Seit 2006 Liegeplatz nahe Speicherstadt; Tradition der Binnenschifferseelsorge seit Johann Hinrich Wichern 1870.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: blau-weißes Kirchenschiff mit holzverkleidetem Aufbau, Rundbogenfenstern und kleinem Glockenturm am Heck; Zugang über den Kehrwiedersteg vom Binnenhafen nahe Deichstraße/Baumwall.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1870 gründete Johann Hinrich Wichern die Binnenschifferseelsorge; 1951 Erwerb des Weserleichters, Umbau 1952 mit Spenden (u. a. USA/Skandinavien), Weihe am 2. Advent 1952.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Maße berichtet: ca. 26 m Länge, 7 m Breite; Innenraum weitgehend Holz, ca. 100 Sitzplätze; Pfeifenorgel seit 1961. Schiff ohne Eigenantrieb — Ortswechsel per Schlepp.",
+          "tags": ["technik", "geschichte"]
+        },
+        {
+          "text": "Liegeplätze wechselten (Marktkanal, Veddel, Billwerder Bucht); seit Mai 2006 Binnenhafen. Trägerschaft seit 2007 Förderverein / ehrenamtlich.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Leben jetzt: Gottesdienste und Kultur an Bord; Barkasse „Johann Hinrich Wichern“ besucht Binnenschiffe im Hafen. „Flusi“ als Spitzname geläufig.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Speicherstadt/Kehrwieder, U Baumwall, Kran am Binnenhafen; Nähe Flussschiffer-/Hafenmilieu statt Landgemeinde.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Als einzige schwimmende Kirche dieser Art in Deutschland beworben — andere Kirchenschiffe bundesweit existieren; Status vorsichtig formulieren.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Gottesdienst-/Veranstaltungstermine, Zugang und Spendenstatus ephemer — flussschifferkirche.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Flussschifferkirche?",
+          "a": "Am schwimmenden Kirchenschiff mit kleinem Turm im Binnenhafen — Zugang über den Kehrwiedersteg nahe Deichstraße/Baumwall."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_englische_kirche_anglican_church_of_st_thomas_becket",
+      "name": "Englische Kirche / Anglican Church of St Thomas Becket",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Anglikanische Kirche am Zeughausmarkt 22 (Neustadt): klassizistischer Saalbau ohne Turm von Ole Jörgen Schmidt, geweiht 11. November 1838. Gemeinde seit Privileg für Merchant Adventurers 1611/12 — erste sanktionierte nicht-lutherische Gemeinde Hamburgs. Seit Nachkriegszeit dem Hl. Thomas Becket geweiht; Church of England, Diocese in Europe.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: schlichter klassizistischer Putzbau mit ionischem Portikus (vier Säulen) zum Zeughausmarkt — ohne Kirchturm und Glocken; wirkt eher wie ein Tempel/Saal als gotische Kirche.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1611/12: Senat gestattet englischen Merchant Adventurers Gottesdienst nach Church-of-England-Ritus — erste erlaubte nicht-lutherische Gemeinde. Lange schlicht „English Church“ genannt.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Grundstück 1835; Bau 1836–1838 durch Altonaer Architekt Ole Jörgen Schmidt (Schüler C. F. Hansen); Weihe 11. November 1838. Saal ca. 30×17 m; Denkmalschutz berichtet ab 1941.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Name St Thomas Becket (Patron der Merchant Adventurers) nach Wiedereröffnung nach dem Krieg 1947. Franzosenzeit: Adventurers zeitweilig vertrieben; Rückkehr nach 1814.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: internationale anglikanische Gemeinde; Parish Eucharist sonntags (übliche Zeit berichtet 10:30); Konzerte und Choir. Nähe St. Michaelis.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Michel / Neustadt, Portugiesenviertel und skandinavische Seemannskirchen wenige Gehminuten hafenwärts.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Historisch zeitweilig zwei „englische Kirchen“ (reformiert am Johannisbollwerk vs. anglikanisch am Zeughausmarkt) — heute gemeint ist die anglikanische am Zeughausmarkt.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Gottesdienstzeiten, Konzerte und Zugang ephemer — anglican-church-hamburg.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Englische Kirche?",
+          "a": "Am klassizistischen Bau mit Säulenportikus am Zeughausmarkt — ohne Turm, nahe dem Michel."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_norwegische_seemannskirche",
+      "name": "Norwegische Seemannskirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Norwegische Seemannskirche (Sjømannskirken i Hamburg) Ditmar-Koel-Straße 4, Portugiesenviertel/Neustadt: Seelsorge seit 1907, erste Kirche 1936 (1945 zerstört), heutiger denkmalgeschützter Backsteinbau mit freistehendem Glockenturm von Harald Bjerke Hille, geweiht April 1959. Teil der Sjømannskirken (Bistum Bjørgvin).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: moderner Backsteinbau mit kupfergedecktem Dach und freistehendem spitzem Glockenturm über dem Straßenzugang; Ensemble mit Gemeindehaus am Anfang der Ditmar-Koel-Straße.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1907 erste angemietete Seelsorgeräume; eigene Kirche 1936 geweiht, am 30. März 1945 durch Bomben völlig zerstört (Kirchendiener Oskar M. Olsen kam ums Leben). Nur die Glocke blieb unversehrt.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Neubau Architekt Harald Bjerke Hille, Einweihung April 1959; Denkmal Nr. 29299. Organisation Sjømannskirken — Norsk kirke i utlandet, Bistum Bjørgvin/Bergen.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Leben jetzt: Anlaufpunkt für Norweger:innen und Seeleute; Gottesdienste, Café/Kultur, Bordbesuche; 17. Mai (Nationalfeiertag) als großes Gemeindefest berichtet.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Ditmar-Koel-Straße = „Seemannskirchen-Meile“ mit dänischer, finnischer und schwedischer Gustaf-Adolfs-Kirche; Nähe Landungsbrücken/Michel.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "WWII: Gemeinde unterstützte norwegische Häftlinge/Widerstand — Pastoralarbeit in Lagerkontext berichtet (u. a. Weiße Busse-Kontext).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Weitere norwegische Seemannskirche in Berlin-Kreuzberg (Christus-Kirche); Hamburg bleibt der Hafenstandort.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Öffnung, Café, Gottesdienste und Veranstaltungen ephemer — Sjømannskirken Hamburg prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Norwegische Seemannskirche?",
+          "a": "Am Backsteinbau mit freistehendem spitzen Glockenturm in der Ditmar-Koel-Straße nahe den Landungsbrücken."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_schwedische_gustaf_adolfs_kirche",
+      "name": "Schwedische Gustaf-Adolfs-Kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Schwedische Gustaf Adolfskyrkan, Ditmar-Koel-Straße 36: älteste skandinavische Seemannskirche im Portugiesenviertel. Seemannsmission ab 1883; Backsteinbau mit Turm von Thomas Yderstad, Grundstein 27. Januar 1906, Weihe 12. Mai 1907 durch Erzbischof J. A. Ekman. Name nach König Gustav II. Adolf.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: hohes rotes Backsteinhaus mit markantem spitzgiebeligem Turm am westlichen Ende der Ditmar-Koel-Straße — Hafen-/Hochbahn-Kulisse nahe Landungsbrücken.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1883 Beginn der schwedischen Seemannsmission (EFS) in Hamburg; Gottesdienste zunächst in English Reformed Church / Michel-Umfeld bzw. an Bord. Grundstückskauf 1903.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Architekt Thomas Yderstad (norwegisch, in Hamburg); Weihe 12. Mai 1907. Gebäude kombinierte Kirchensaal mit Wohnungen/Büros; Büste Gustav II. Adolf seit 1907.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Als einzige skandinavische Seemannskirche Hamburgs den Zweiten Weltkrieg weitgehend unbeschädigt überstanden berichtet. Bis 1956 auch schwedische Schule im Haus.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Svenska kyrkan i Hamburg — Gottesdienste, Café/Julbasar, Gemeindeleben; Gebäude später verkauft, Gemeinde bleibt Mieterin (langfristiger Mietvertrag berichtet).",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: norwegische, dänische und finnische Seemannskirchen derselben Straße; Landungsbrücken und Michel in Sicht-/Laufweite.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Innen: Kirchensaal im Obergeschoss; Restaurierung um 2007 (Christusbild freigelegt) berichtet. Kapazität historisch ca. 150–300 je nach Quelle — LIVE nicht vorlesen.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "LIVE: Gottesdienste, Café, Basare und Öffnung ephemer — svenskakyrkan.se/hamburg prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Gustaf-Adolfs-Kirche?",
+          "a": "Am hohen Backsteinturm in der Ditmar-Koel-Straße nahe den Landungsbrücken — älteste der skandinavischen Seemannskirchen dort."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hl_dreieinigkeits_kirche_st_georg",
+      "name": "Hl. Dreieinigkeits-Kirche St. Georg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Evangelisch-lutherische Heilige-Dreieinigkeits-Kirche (umgangssprachlich St.-Georgs-Kirche) am St. Georgs Kirchhof nahe Hauptbahnhof. Ursprung Spitalkapelle ab 1220; Barockbau Johann Leonhard Prey 1747 (1943 zerstört). Heutiges Schiff 1957 von Heinz Graaf; barocker Turm bis 1962 rekonstruiert, per Glasgang verbunden.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: barocker Turm mit zierlicher Spitze neben modernem 1950er-Kirchenschiff — nicht fluchtgerecht, verbunden durch verglasten Gang; Lage St. Georgs Kirchhof nahe Lange Reihe/Hbf.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1220 Kapelle des St.-Georgs-Hospitals belegt; Erweiterungen zum Kirchenbau; 1743 Abriss der baufälligen Kirche, Neubau Prey, Einweihung 26. Oktober 1747 mit Telemann-Oratorium.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Juli 1943 Bombenzerstörung; Neubau Schiff Heinz Graaf 1957 (sakrale Architektur der 1950er); Turmwiederaufbau nach Prey-Plänen bis 21. Januar 1962.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Dreieinigkeits-Symbolik im Neubau (Dreiheit in Fenstern, Emporen, Altar-/Kanzel-/Taufbereich) berichtet. St. Georg-Statue von Gerhard Marcks (1958) am Platz.",
+          "tags": ["architektur", "leben_jetzt"]
+        },
+        {
+          "text": "Leben jetzt: Predigtstätte Gemeinde St. Georg-Borgfelde; Konzertkirche mit guter Akustik. Modell der Barockkirche im Durchgang Turm–Schiff berichtet.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Hauptbahnhof, Schauspielhaus Kirchenallee, Mariendom, Lange Reihe; Name „St. Georgskirche“ lokal geläufig trotz offiziellem Dreieinigkeits-Namen.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Prey auch an St. Michaelis beteiligt; Grab Prey im Turm der alten Kirche berichtet — Turm als Erinnerungsträger des Barockbaus.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Gottesdienste, Konzerte und Öffnung ephemer — Gemeinde St. Georg-Borgfelde prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Dreieinigkeitskirche?",
+          "a": "Am barocken Turm neben dem modernen Kirchenschiff am St. Georgs Kirchhof — nahe Hauptbahnhof und Lange Reihe."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_st_ansgar_kapelle",
+      "name": "St. Ansgar-Kapelle",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "St. Ansgar-Kapelle im St. Ansgar-Haus (Schmilinskystraße 78, St. Georg): Kapelle des Bildungs- und Gästehauses des Erzbistums Hamburg, baulich mit dem Haus verbunden, direkt gegenüber dem St. Marien-Dom. Ort für Werktagsmessen, Besinnung und Tagungsgäste; benannt nach Ansgar, dem „Apostel des Nordens“.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Kapelle im Komplex St. Ansgar-Haus an der Schmilinskystraße — Zugang über das Bildungs-/Gästehaus; Domtürme des Mariendoms direkt gegenüber als Orientierung.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "St. Ansgar-Haus = zentrales Tagungs-, Seminar- und Gästehaus des Erzbistums Hamburg (Priesterseminar-/Gästehaus-Kontext); Kapelle fest integriert für Gottesdienst und Stille.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Patron Ansgar (9. Jh.): Missionar und Erzbischof im Doppelbistum Hamburg-Bremen — Namenswahl verknüpft Haus/Kapelle mit Gründungsgeschichte der norddeutschen Kirche.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Heilige Messe werktags (übliche Zeit berichtet 7:30, außer Sonntag); Tagungsgäste und Mitarbeitende des Erzbistums; Einzelgäste im Gästehaus möglich.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: St. Marien-Dom gegenüber (Kathedrale); Pastoraler Raum Hamburg-City; Nähe Hauptbahnhof/St. Georg.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Angebot Haus: Seminarräume und Übernachtung berichtet — Kapelle als spiritueller Kern, nicht als große Touristenkirche.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Nicht verwechseln mit Kleiner Michel / St. Ansgar (Neustadt) — hier Kapelle am Dom in St. Georg.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Messzeiten, Zugang über Rezeption und Hausöffnung ephemer — ansgarhaus-hamburg.de / Mariendom prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die St. Ansgar-Kapelle?",
+          "a": "Als Kapelle im St. Ansgar-Haus an der Schmilinskystraße — direkt gegenüber den Türmen des Mariendoms."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_evangelisch_reformierte_kirche_in_hamburg",
+      "name": "Evangelisch-reformierte Kirche in Hamburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Gemeindezentrum der Evangelisch-reformierten Kirche Hamburg, Ferdinandstraße 21 (Altstadt nahe Hbf): moderne Kirche/Gemeindebau, Grundstein 17. Mai 1963, Eröffnung 9. Mai 1965 — Nachfolger der 1857 erbauten, 1943 zerstörten deutsch-reformierten Kirche (Eduard Averdieck). Reformierte Wurzeln in Hamburg/Altona seit um 1600; Fusion 1976, seit 2012 Landeskirche Leer.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: modernes Gemeindezentrum Ferdinandstraße nahe Hauptbahnhof/Binnenalster-Richtung — nicht als Turmkirche der Altstadt-Silhouette, sondern als Stadtgemeindehaus mit Kirchraum.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Reformierte Präsenz: Kaufleute und Flüchtlinge (englisch/niederländisch/französisch/deutsch) ab spät 16./früh 17. Jh. in lutherischer Stadt; Altona-Privileg 1601, Gemeindegründung 1602.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Vorgängerbau 1857 zweitürmig von Eduard Averdieck, 1943 zerstört. Neubau 1963–1965; 2011 Erweiterung/Modernisierung (u. a. Glasfenster Zehn Gebote, Atelier Lönne/Neumann).",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "1976 Fusion der drei reformierten Gemeinden (deutsch, französisch, Altona) zur Evangelisch-reformierten Kirche Hamburg; seit 1. Januar 2012 Glied der Ev.-ref. Landeskirche (Sitz Leer).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Gottesdienste und Gemeindeleben; zweiter Standort Palmaille 2 Altona; ca. 3.200–3.300 Mitglieder berichtet. Reformierte Tradition (u. a. Abendmahl sitzend am Tisch in Altona).",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Binnenalster/Jungfernstieg-Richtung, Hauptbahnhof; Altonaer Gemeindezentrum Palmaille am Balkon; Altenhof Winterhuder Weg mit Kapelle.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Historische Kirchen an Palmaille und französisch-reformierte Kirche 1904 ebenfalls Kriegsverlust — Ferdinandstraße und Palmaille sind die Nachkriegsstandorte.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Gottesdienstzeiten und Veranstaltungen ephemer — erk-hamburg.de / reformiert.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die reformierte Kirche Ferdinandstraße?",
+          "a": "Am modernen Gemeindezentrum in der Ferdinandstraße nahe dem Hauptbahnhof — Nachkriegsbau der reformierten Stadtgemeinde."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_russische_orthodoxe_kirche_des_hl_johannes_von_kronstadt",
+      "name": "Russische Orthodoxe Kirche des Hl. Johannes von Kronstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Russisch-orthodoxe Kirche am Tschaikowskyplatz 1 (St. Pauli): 1906 als evangelische Gnadenkirche erbaut, 1943 schwer beschädigt, 2004 an die Gemeinde des Moskauer Patriarchats übergeben, orthodox geweiht 30. Mai 2007. Seit Sommer 2007 fünf Zwiebeltürmchen mit orthodoxen Kreuzen; Gemeinde gegründet 2001.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: ehemalige Gnadenkirche auf Verkehrsinsel am Tschaikowskyplatz mit runden Formen und fünf Zwiebeltürmchen/Kreuzen — wirkt byzantinisch-orthodox trotz westlichem Ursprungsbau.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1906 evangelisch-lutherische Gnadenkirche; Kriegsschäden 1943, Nutzung ab 1947; später „Kunstkirche“; 2002 Fusion St. Pauli-Gemeinden, 2004 Übergabe an russisch-orthodoxe Gemeinde.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Orthodoxe Weihe 30. Mai 2007; Widmung an Johannes von Kronstadt (Prediger/Schriftsteller, Petersburg-Bezug — Partnerstadt-Kontext berichtet). Innenraum umgestaltet; Sandsteinaltar der Gnadenkirche heute in St. Pauli-Kirche.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Gottesdienste kirchenslawisch/russisch/teilweise deutsch; soziales und kulturelles Zentrum der Gemeinde (Mitgliederzahl um 2010 ca. 2000 berichtet).",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: U Messehallen, Heiligengeistfeld/St. Pauli; Filiale/Begräbniskapelle-Kontext Bahrenfeld berichtet.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Architektur der Gnadenkirche mit Rundformen galt als besonders geeignet für orthodoxe Nutzung; Zwiebeltürme 2007 aufgesetzt.",
+          "tags": ["architektur"]
+        },
+        {
+          "text": "Gemeinde jüngste russisch-orthodoxe Gemeinde Hamburgs bei Gründung 2001 — Gebäude älter als die Gemeinde.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten (Website nennt Tagesfenster), Gottesdienstplan und Kleiderregeln ephemer — hamburg-orthodox.de prüfen; keine Pack-Zeiten vorlesen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Kirche Johannes von Kronstadt?",
+          "a": "An den fünf Zwiebeltürmchen auf der Kirche am Tschaikowskyplatz — ehemalige Gnadenkirche auf der Verkehrsinsel in St. Pauli."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_ohnsorg_theater_hamburg",
+      "name": "Ohnsorg-Theater Hamburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Plattdeutsches Volkstheater am Heidi-Kabel-Platz 1 im denkmalgeschützten Bieberhaus (seit 2011), nördlich des Hauptbahnhofs. Gegründet 1902 als Dramatische Gesellschaft Hamburg; unter Richard Ohnsorg ab 1910 Fokus Niederdeutsch; 1936–2011 Große Bleichen. Fernsehübertragungen ab 1954 machten Heidi Kabel und Ensemble bundesweit bekannt.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Eingang am Heidi-Kabel-Platz vor dem Bieberhaus mit Bronzestatue Heidi Kabels; Hauptbahnhof in Sichtweite, Kirchenallee/Lange Reihe benachbart.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1902 Gründung; 1910 Leitung Richard Ohnsorg, erstes plattdeutsches Stück „Der Lotse“; 1920 Niederdeutsche Bühne Hamburg; 1936 Spielstätte Große Bleichen; Name Richard-Ohnsorg-Theater ab 1946.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "TV ab 1954 (Missingsch statt reinem Platt für überregionales Verständnis). Stars u. a. Heidi Kabel, Henry Vahl, Otto Lüthje. Eigentümer: Niederdeutsche Bühne Hamburg e. V. / GmbH.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Umzug 2011 ins Bieberhaus (1909); Eröffnung 28. August 2011 mit plattdeutschem Sommernachtstraum (Regie Michael Bogdanov). Mehr Plätze als zuvor (alt 389, plus ca. 50) plus Studiobühne.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Leben jetzt: einziges professionelles plattdeutsches Theater Deutschlands; Platt und norddeutsch geprägtes Hochdeutsch; Tourneen und TV-Aufzeichnungen.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Deutsches Schauspielhaus Kirchenallee, Mariendom, Dreieinigkeitskirche; Platzumbennung Hachmannplatz → Heidi-Kabel-Platz 2011.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Heidi Kabel: über 65 Jahre Ensemble, ca. 160 Platt-Stücke; Denkmal Inka Uzoma 2011 vor dem Haus.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Spielplan, Tickets und Preise ephemer — ohnsorg.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Ohnsorg-Theater?",
+          "a": "Am Bieberhaus am Heidi-Kabel-Platz mit der Heidi-Kabel-Statue — direkt nördlich vom Hauptbahnhof."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_deutsches_schauspielhaus_hamburg",
+      "name": "Deutsches SchauSpielHaus Hamburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Größtes Sprechtheater Deutschlands (ca. 1.200 Plätze) an der Kirchenallee 39 in St. Georg. Private AG-Gründung 1899; Neubau Fellner & Helmer (Wien) im Neobarock nach Vorbild Wiener Volkstheater; Eröffnung 15. September 1900 mit Goethes Iphigenie. Intendanten u. a. Gustaf Gründgens, Peter Zadek, Karin Beier.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: neobarocke Fassade zur Kirchenallee mit Kuppel über dem Mittelrisalit, korinthischen Säulen/Pilastern und Dichterbezug; direkt hinter dem Hauptbahnhof in St. Georg.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Initiative Hamburger Bürger zu St. Georg / Heinrich E. Wallsee; AG mit 84 Teilhabern Juni 1899; Architekten Ferdinand Fellner und Hermann Helmer; Bau ca. 1899–1900, Kosten rund 1 Mio. Mark berichtet.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Ursprünglich 1.831 Plätze, heute ca. 1.200 — weiterhin größtes Sprechtheater Deutschlands. Eröffnung 15. September 1900. Name knüpft an älteres „Nationaltheater“-Bürgerprojekt (Lessing-Kontext) an.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "1982–1984 Umbau/Restaurierung von Foyer und Zuschauerraum (neobarockes Dekor nach NS-Zeit wiederhergestellt). Ausweichspielstätten damals Operettenhaus und Kampnagel.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Staatstheater mit Ensemble und Gastregie; Malersaal als zweite Spielstätte; 2024 als „Theater des Jahres“ gewählt berichtet.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Ohnsorg/Bieberhaus, Hauptbahnhof, Lange Reihe, Mariendom; Hotel Atlantic / Außenalster in Laufweite.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Fassade musste Baupolizei-Auflagen der Kirchenallee beachten (keine Freitreppe/Vorbau) — daher eher flache Straßenfront statt freistehendem Monumentalbau.",
+          "tags": ["architektur"]
+        },
+        {
+          "text": "LIVE: Spielplan, Tickets und Führungen ephemer — schauspielhaus.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Schauspielhaus?",
+          "a": "An der neobarocken Theaterfassade mit Kuppel an der Kirchenallee — direkt hinter dem Hauptbahnhof."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hamburgische_staatsoper",
+      "name": "Hamburgische Staatsoper",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Hamburgische Staatsoper, Große Theaterstraße 25 / Dammtorstraße: ältestes öffentlich zugängliches Opernhaus Deutschlands (Operntheatrum am Gänsemarkt ab 1678). Standort seit 1827; Zuschauerhaus 1943 zerstört, Wiederaufbau 1955 (Nachkriegsmoderne). Beherbergt Oper, Philharmonisches Staatsorchester und Hamburg Ballett; Studiobühne opera stabile.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Nachkriegs-Opernhaus an Dammtorstraße/Große Theaterstraße mit breiter modernem Zuschauerhaus-Fassade; Bühnenhaus älterer Substanz; Gänsemarkt-Quartier.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "2. Januar 1678 Eröffnung Operntheatrum am Gänsemarkt — erstes bürgerlich-öffentliches Opernhaus Deutschlands. Händel als Geiger/Cembalist; Telemann Stadtmusikdirektor ab 1721; Almira-Uraufführung 1705.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "1827 Umzug als Stadt-Theater an die Dammtorstraße (Schinkel-Plan / Ausführung Wimmel, Fassade später Haller). 1934 Umbenennung Hamburgische Staatsoper. Zuschauerraum 1943 zerstört; Wiedereröffnung 15. Oktober 1955 mit Zauberflöte.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "2001–2005 neues Betriebsgebäude mit Probebühnen und opera stabile; Mantelbebauung mit Wohnungen/Büros. Haus = Oper + Orchester + Hamburg Ballett.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Leben jetzt: Opern- und Ballettspielplan, Uraufführungen/Auftragswerke; Kasse und Foyers an Großer Theaterstraße.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: opera stabile Kleine Theaterstraße; Jungfernstieg/Binnenalster; Laeiszhalle als Konzerthaus-Pendant.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Bühnenhaus von 1925 im Kern weiter genutzt berichtet; Zuschauerhaus 1955 Neubau mit damals ca. 1.690 Plätzen.",
+          "tags": ["technik", "architektur"]
+        },
+        {
+          "text": "LIVE: Spielplan, Tickets, Einführungen und Barrierefreiheit ephemer — die-hamburgische-staatsoper.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Staatsoper?",
+          "a": "Am Nachkriegs-Opernhaus an der Dammtorstraße / Großen Theaterstraße im Gänsemarkt-Viertel."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_altonaer_theater",
+      "name": "Altonaer Theater",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Privates Literaturtheater in der Museumstraße 17 (Ottensen/Altona): seit 1954 in der Aula des ehemaligen Berufsschulzentrums (Haus der Jugend / Oelsner-Bau 1928–30, Neues Bauen). Vorgänger Altonaer Stadttheater Königstraße (1943 zerstört); Tradition bis Schauspielhaus Palmaille 1783. Fokus Literaturadaptionen und Bestseller; Intendanz Axel Schneider seit 1995.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Stahlbetonbau des Neuen Bauens an der Museumstraße gegenüber/neben Altonaer Museum-Rathaus-Ensemble — Theater im Schul-/Kulturkomplex, kein barocker Theaterpalast.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1783 Schauspielhaus Palmaille; ab 1876 Theater Königstraße; 1919 Altonaer Stadttheater AG; 1943 Zerstörung. Seit 1954 Spielstätte Museumstraße.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Gebäudekomplex 1928–30 von Stadtbausenator Gustav Oelsner — bewusster Kontrast zu Altonaer Rathaus und Museum. Heute Berufliche Schule Energietechnik / Theaternutzung der Aula.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Literatur auf der Bühne (Klassiker, Bestseller, junge Literatur); Markenzeichen Bühnenfassungen literarischer Stoffe. Bis 1994 Hans Fitze, seit 1995 Axel Schneider.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Altonaer Museum, Rathaus Altona, Ottenser Zentrum; Schwesterhäuser im Verbund mit Kammerspiele/Harburger Theater unter Schneider-Intendanz berichtet.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Erfolge wie Literaturadaptionen („Die Vermessung der Welt“, „Der Hundertjährige…“) und Klassikerbearbeitungen prägen das Profil — Programm ephemer.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Vor Eingemeindung Altonas: Altonaer Stadttheater — Name erinnert an eigenständige Theaterstadt Altona.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Spielplan und Tickets ephemer — altonaer-theater.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Altonaer Theater?",
+          "a": "Am Oelsner-Bau in der Museumstraße in Ottensen — neben dem Ensemble aus Altonaer Museum und Rathaus."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hamburger_kammerspiele",
+      "name": "Hamburger Kammerspiele",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Privattheater in der Hartungstraße 9–11 (Rotherbaum): klassizistische Villa Pfennig (1863), später jüdisches Logenheim (Henry-Jones-Loge / B’nai B’rith). Theatertradition ab Erich Ziegel 1918; nach 1945 Neugründung unter Ida Ehre als Symbol für Neuanfang und Toleranz. Heute anspruchsvolles Sprechtheater; Intendanz Axel Schneider.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: herrschaftliche klassizistische Villa/Logenheim-Fassade in der Hartungstraße im Grindel-/Rotherbaum-Viertel — intimes Stadttheater, kein Großbau.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1863 Bau Otto Eduard Ferdinand Pfennig; ab 1903/04 jüdische Henry-Jones-Loge, Umbau zum Logenheim. 1937 Zwangsverkauf; 1930er Theaterumbau mit ca. 450 Plätzen berichtet.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Erich Ziegel gründete Kammerspiele 1918 (zunächst Besenbinderhof); 1920er expressionistisches Zentrum. Gustaf Gründgens fünf Jahre Ensemble. WWII: zeitweilig Thalia-/Ufa-Nutzung; 1945 einziges unzerstörtes Theater Hamburgs berichtet.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "25. Juli 1945 Vorstoß Ida Ehres um Freigabe; Wiedereröffnung als Kammerspiele — Meilenstein Nachkriegs-Theaterkultur (u. a. „Das Tor“ 1947 im Kontext berichtet).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: modernes kritisches Sprechtheater, Ur-/Erstaufführungen, Kabarett/Liederabende, Kinderstück zur Weihnachtszeit; hochbesetzte Kammerspiele.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Universität/Grindel, Dammtor; Verbund mit Altonaer Theater unter Schneider; jüdische Geschichte des Hauses als Erinnerungsort.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Britische Militärregierung nutzte das Haus 1945 kurz als „Savoy“-Kabarett — nicht zu verwechseln mit Savoy Filmtheater Steindamm.",
+          "tags": ["geschichte", "quer"]
+        },
+        {
+          "text": "LIVE: Spielplan und Tickets ephemer — hamburger-kammerspiele.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Hamburger Kammerspiele?",
+          "a": "An der klassizistischen Villa in der Hartungstraße in Rotherbaum — ehemaliges Logenheim, heute Privattheater."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_allee_theater_hamburg",
+      "name": "Allee Theater Hamburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Allee-Theater Max-Brauer-Allee 76 (Altona-Altstadt): beherbergt Theater für Kinder (gegründet 1968 von Uwe Deeken) und seit 1996 Hamburger Kammeroper. Saal ca. 200 Plätze mit barockem Bühnenportal und Orchestergraben für bis zu sieben Musiker. Seit 2016 Allee-Theater Stiftung; Straße hieß bei Gründung „Allee“ (Umbenennung Max Brauer 1975).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Etagenhaus an der Max-Brauer-Allee mit Theaterfoyer; innen rot-goldener Zuschauerraum mit barockem Portal und Einzelstühlen — intim, nicht Großoper.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Vornutzung: Lager, Komödie, ab 1951 Kino (Allee Lichtspiele, ca. 270 Plätze); Kinobetrieb endet 1967; Uwe Deeken mietet und gründet Kindertheater 1968.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "1996 Gründung Hamburger Kammeroper im selben Saal (Stagione, Fokus selten gespielte Werke 18./19. Jh. plus Klassiker); Bühnentechnik erneuert. Name vom alten Straßennamen „Allee“.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Leben jetzt: Kindermusiktheater (ab ca. 3–5 Jahren, viele Schulvorstellungen) und Kammeroper für Erwachsene; deutsche Textfassungen; Bistro im Foyer.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Gymnasium Allee gegenüber, Amtsgericht Altona nahe; Altonaer Theater und Palmaille in derselben Stadtteilkultur.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Seit 2016 gemeinnützige Stiftung; geschäftsführender Intendant Marius Adam (seit 2017 berichtet); künstlerische Leitung Kammeroper Barbara Hass berichtet.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Saal ca. 203 Plätze; Orchestergraben für bis zu sieben Musiker — Kammerformat statt Staatsopern-Maßstab.",
+          "tags": ["technik", "architektur"]
+        },
+        {
+          "text": "LIVE: Spielplan Kinder/Kammeroper und Tickets ephemer — alleetheater.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Allee-Theater?",
+          "a": "Am Theater in der Max-Brauer-Allee 76 in Altona — innen der rot-goldene Saal mit barockem Bühnenportal."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_theaterschiff_hamburg",
+      "name": "Theaterschiff Hamburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Seetüchtiges Theaterschiff im Nikolaifleet an der Holzbrücke 2: ehemaliger niederländischer Besan-Ewer „Seemöve“ (Werft van Diepen, Waterhuizen, 1912), später Küstenmotorschiff; 1974/75 von Christa und Eberhard Möbius zum Theater umgebaut, Premiere 13. Oktober 1975. Ca. 120 Plätze; Programm Satire, Kabarett, Comedy und Shows.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: weißes Schiffstheater im Nikolaifleet an der Holzbrücke — Bühne und Zuschauerraum unter Deck; Tide und Maschinenraum gehören zum Erlebnis.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Bau 1912 als Besan-Ewer (Baunummer 366, Länge zunächst ca. 20 m); Schiffsbrief Harburg 19. Juni 1912. Umbauten zum Motorschiff; WWII im Hafen gesunken, gehoben; später MS Rita Funck.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Kauf und Umbau 1974 auf Werft Garbers Rothenburgsort; Premiere „Das Schiff“ 13. Oktober 1975. Eintrag Binnenschiffsregister Hamburg Nr. 20992 (29.10.1975).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: eigenes Ensemble und Gaststars; hochseetüchtig — Gastspiele u. a. Kieler Woche, Helgoland, Elbhäfen. Leitung Heiko Schlesselmann / künstlerisch Michael Frowin berichtet.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Nikolaifleet / Deichstraße / Speicherstadt-Nähe; Flussschifferkirche im Binnenhafen thematisch verwandt (Kirche/Theater auf dem Wasser).",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Kapazität ca. 120 Plätze; Bühne sehr klein (ca. 2×2 m berichtet) — intimes Kabarettformat. Sanierung Schiff/Pontons u. a. 2020 berichtet.",
+          "tags": ["technik", "leben_jetzt"]
+        },
+        {
+          "text": "Als seetaugliches Schiffstheater Europas beworben — Alleinstellung prüfen, aber Seetüchtigkeit und Register belegt.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Spielplan, Tickets und Liegeplatz-Hinweise ephemer — theaterschiff.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Theaterschiff?",
+          "a": "Am Theaterboot im Nikolaifleet an der Holzbrücke — weißes Schiff mit Bühnenbetrieb unter Deck."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_opera_stabile_werk_wirkbuhne_der_staatsoper",
+      "name": "Opera Stabile Werk/Wirkbühne der Staatsoper",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Opera stabile: Studiobühne / Werk- und Wirkbühne der Hamburgischen Staatsoper für experimentelles Musiktheater und zeitgenössische Formate. Gegründet 1975; seit dem Betriebsgebäude-Neubau 2001–2005 im Komplex Kleine Theaterstraße (Zugang Ecke Kalkhof). Ergänzt das Große Haus an der Dammtorstraße.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Studiobühne im Betriebs-/Mantelbebauungs-Komplex der Staatsoper an der Kleinen Theaterstraße — kein eigenständiger Palast, sondern Werkstattbühne hinter dem Haupthaus.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1975 Einrichtung der experimentellen Bühne „Opera stabile“ unter dem Dach der Staatsoper für zeitgenössisches Musiktheater und Ballett-Formate.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "2001–2005 Neubau Betriebsgebäude (Probebühnen, Orchester-/Chor-/Ballettsaal, Studiobühne) hinter dem Haupthaus; Mantelbebauung mit Wohnungen und Büros zur Stadtbildverträglichkeit.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Leben jetzt: Uraufführungen, Kammeroper, experimentelle Produktionen und Werkstattformate — Programmteil der Hamburgischen Staatsoper.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Haupthaus Große Theaterstraße 25 / Dammtorstraße; Gänsemarkt; Hamburg Ballett teilt Infrastruktur.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Name „stabile“ = stabile/Werkstatt-Bühne im Gegensatz zum Großen Haus — Fokus neue Werke und kleinere Formate.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Adresse Kleine Theaterstraße 1 / Zugang über Ecke Kleine Theaterstraße und Kalkhof berichtet — Navigation LIVE prüfen.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "LIVE: Spielplan opera stabile, Tickets und Zugang ephemer — Staatsoper-Website prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Opera stabile?",
+          "a": "Als Studiobühne im Staatsoper-Komplex an der Kleinen Theaterstraße — hinter dem Haupthaus am Dammtor."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_the_english_theatre_of_hamburg_e_v",
+      "name": "The English Theatre of Hamburg e.V.",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Ältestes professionelles englischsprachiges Theater Deutschlands: gegründet 1976 von Robert Rumpf und Clifford Dean. Seit 1981 Spielstätte Lerchenfeld 14 (Mundsburg) im denkmalgeschützten ehemaligen Hammonia-Bad (Denkmalschutz ab 1971). Ca. 160 Plätze; Ensemble professioneller Schauspieler:innen aus dem englischsprachigen Raum.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Theater im historischen Bad-/Etagenbau am Lerchenfeld nahe Mundsburg — englischsprachige Spielpläne und Foyer weisen den Ort aus.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1976 Gründung durch die US-Amerikaner Robert Rumpf und Clifford Dean; wechselnde Spielorte, ab 1979 Zwischenstation Altona, seit 1981 Lerchenfeld 14.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Gebäude ehemals Hammonia-Bad (Heilbad); Denkmalschutz seit 19. November 1971. Kapazität ca. 160 Plätze.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Leben jetzt: professionelles englischsprachiges Sprechtheater (Klassiker und Gegenwart); Leitung/Programm mit Gründern und Artistic Director Paul Glaser berichtet; Gastregie möglich.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Mundsburg/Uhlenhorst; anglophone Szene ergänzt Savoy (OV-Kino) und Englische Kirche (Zeughausmarkt) thematisch.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Alle Schauspieler:innen professionell ausgebildet, oft direkt aus London engagiert berichtet — kein Amateurtheater.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Als ältestes professionelles englischsprachiges Theater Deutschlands positioniert — Gründungsjahr 1976 belegt.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Spielplan und Tickets ephemer — englishtheatre.de prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das English Theatre?",
+          "a": "Am Theater im ehemaligen Hammonia-Bad am Lerchenfeld 14 in Mundsburg — Spielplan auf Englisch."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_savoy_filmtheater",
+      "name": "Savoy Filmtheater",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Premium-Kino Steindamm 54 in St. Georg: eröffnet 14. März 1957 unter Herbert Steppan als Todd-AO-/70-mm-Breitwandkino (eines der modernsten Deutschlands/Europas seiner Zeit). Nach Multiplex-/Zwischennutzungen 2013 von Hans-Joachim Flebbe renoviert; Fokus Originalfassungen großer Filme und ausgewählte Klassiker/Theatre-Broadcasts.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Kinofoyer mit Bar am Steindamm in St. Georg; Saal als Premium-Einzelkino nach Renovierung — Adresse Steindamm 54 im Klinker-/Hotelkomplex Savoy.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Eröffnung 14. März 1957; Architekten Paul Schlüter und Joachim Glüer; konzipiert für Todd-AO (gekrümmte Breitleinwand, 70-mm, 6-Kanal). Eröffnungsfilm „Roter Staub“ noch 35 mm; später Oklahoma! u. a. in 70 mm.",
+          "tags": ["geschichte", "technik"]
+        },
+        {
+          "text": "Ursprünglich ca. 825–957 Plätze berichtet. Ab 1970/80er Umbau zu Mehrsaal, später Sparten-/Bollywood-Nutzung, zeitweise Schnäppchenmarkt; 2008–2011 Interimsstandort Metropolis-Kino.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "2013 Übernahme/Renovierung Hans-Joachim Flebbe (Invest ca. 1,2 Mio. Euro berichtet); Wiedereröffnung 19. Juni 2013. Geschäftsführung u. a. aus Streit’s-Kontext (Gary Rohweder) berichtet.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Leben jetzt: Premium-Kino mit Schwerpunkt Originalversionen (OV) großer Filme; Matineen teilweise deutsch; Live-Übertragungen (z. B. West-End) im Programm möglich.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Hauptbahnhof/St. Georg, Schauspielhaus, Ohnsorg; Steindamm historisch Kinomeile. Nicht verwechseln mit britischem „Savoy“-Kabarett 1945 in den Kammerspielen.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Name in Anlehnung an Londoner Savoy; Gebäudekomplex Hotel+Kino. Blütezeit 50er/60er mit Großepen (Lawrence von Arabien, Cleopatra, Ben Hur) berichtet.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Filme, OV/DF-Hinweise, Preise und Zeiten ephemer — savoy-filmtheater.de / Kinoprogramm prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Savoy?",
+          "a": "Am Kinofoyer am Steindamm 54 in St. Georg — Premium-Kino mit Fokus auf Originalfassungen."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_st_annenhof",
+      "name": "St.Annenhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Kontorhaus St. Annenhof an der Katharinenbrücke (Altstadt, Nähe Speicherstadt/St. Katharinen): 1907 von Baumeister Heinrich Mandix auf dem Grundstück des abgebrochenen Krahnstöverhauses (seit 1661) errichtet. Unscheinbare Straßenfassade, bemerkenswertes Treppenhaus; 1931 Fahrstuhl. Heute Büro-/Dienstnutzung (u. a. medizinische Dienste berichtet) — kein Kirchenbau.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: schlichtes Kontorhaus an der Katharinenbrücke zwischen Altstadt und Fleeten — Orientierung über Brücke und Nähe Hauptkirche St. Katharinen/Speicherstadt.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Vorgänger Krahnstöverhaus ab 1661 an Ecke Katharinenbrücke/Katharinenstraße; Abriss 1907 zugunsten des Neubaus St. Annenhof durch Heinrich Mandix.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "1907 Kontorhaus-Neubau; 1931 Einbau eines Fahrstuhls. Treppenhaus mit ungewöhnlicher Farb- und Formgebung als architektonisches Highlight berichtet (Innenzugang nicht öffentlich touristisch).",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Name „St. Annen-“ verweist auf das historische Annnen-/Katharinen-Quartier; nicht identisch mit der 1943 zerstörten St.-Annen-Kirche in Hammerbrook.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Arbeits- und Dienstgebäude — von außen Stadtraum Speicherstadt/Katharinen; Innenräume nur mit Erlaubnis/Anlass.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Hauptkirche St. Katharinen, Katharinenfleet/Speicherstadt, Cremon; Kontorhausviertel weiter östlich (Chilehaus) thematisch verwandt.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Pack-Kategorie war „kirche“/skeleton — faktisch Kontorhaus; Story-Fokus Architektur/Quartiersgeschichte statt Gottesdienst.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: Zugang nur für Nutzungen/Termine — kein öffentliches Museumsopening; Fassade jederzeit vom öffentlichen Raum sichtbar.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den St. Annenhof?",
+          "a": "Am Kontorhaus an der Katharinenbrücke nahe St. Katharinen und Speicherstadt — unscheinbare Fassade, historisches Treppenhaus innen."
+        }
+      ]
+    }
+  ]
+}

@@ -1,19 +1,16 @@
 /**
- * Öffentliche TTS-API – Instant Samples + Sentence-Streaming + Eager Boot (Piper).
+ * Öffentliche TTS-API – Instant Samples + Sentence-Streaming + Eager Boot (Cartesia).
  */
 export {
   speakAssistantText,
   speakTwoPhase,
-  speakWithPiper,
-  speakWithKokoro,
+  speakText,
   speakSentenceStream,
   speakOnboardingIntro,
   prefetchOnboardingIntro,
   prefetchOnboardingAudioBundle,
   prefetchVoiceSamples,
   prepareOnboardingVoiceSamples,
-  prefetchAllKokoroVoicePacks,
-  prefetchAllPiperModels,
   prefetchSingleVoiceSample,
   playVoiceSample,
   hydrateSampleCacheFromDisk,
@@ -23,20 +20,24 @@ export {
   synthesizeWav,
   stopSpeaking,
   resetTtsOnInterruption,
-  ensureKokoroAssets,
-  ensurePiperAssets,
+  pauseSpeakingForNav,
+  resumeSpeakingAfterNav,
+  speakNavWithMultitask,
+  playCachedNavCueWav,
+  flushQueuedNavSpeechCue,
+  enqueueNavSpeechCue,
+  isFindusSpeechBusyForNav,
+  getActiveTtsSessionCount,
+  releaseSpeakingUiIfIdle,
+  forceClearSpeakingUi,
+  ensureTtsReady,
   ensureVoicePack,
-  ensurePiperModel,
-  warmupKokoro,
-  warmupPiperEngine,
-  stopKokoroPlayback,
-  stopPiperPlayback,
+  warmupTtsEngine,
   resetVoiceSystem,
   purgeLegacyVoiceAssets,
-  isKokoroReady,
-  isPiperReady,
-  isKokoroLoading,
-  isPiperLoading,
+  isTtsReady,
+  isTtsLoading,
+  markTtsWarmedUp,
   INTRO_VOICE,
   MARTIN_PURE,
   ONBOARDING_INTRO_HEAD_DE,
@@ -44,20 +45,32 @@ export {
 } from './AudioVoiceService';
 
 export {
-  setKokoroProductInferenceEnabled,
-  setPiperProductInferenceEnabled,
-  isKokoroProductInferenceEnabled,
-  isPiperProductInferenceEnabled,
-  shouldUseKokoroInference,
-  shouldUsePiperInference,
-  enableKokoroProductMode,
-  enablePiperProductMode,
-  KOKORO_LOADING_MSG,
-  KOKORO_DOWNLOAD_MSG,
-  KOKORO_UNAVAILABLE_MSG,
-  PIPER_LOADING_MSG,
-  PIPER_DOWNLOAD_MSG,
-  PIPER_UNAVAILABLE_MSG,
+  playGeminiStream,
+  playSentenceChunks,
+  interruptAudioPipeline,
+  stopAudioPipeline,
+} from '../runtime/audioPipeline';
+
+export {
+  flushStreamingAudioQueue,
+  playStreamingAudioQueue,
+  playStreamingText,
+  getStreamingPrefetchDepth,
+} from './audio/streamingAudioQueueService';
+
+export {
+  extractStreamingChunks,
+  splitTextToStreamingChunks,
+  streamingChunksFromTextStream,
+} from './audio/punctuationChunker';
+
+export { speakRuntimeText, speakRuntimeSentences } from '../runtime/speechModule';
+
+export {
+  enableCartesiaProductMode,
+  TTS_LOADING_MSG,
+  TTS_DOWNLOAD_MSG,
+  TTS_UNAVAILABLE_MSG,
 } from './ttsPolicy';
 
 export {
@@ -95,7 +108,7 @@ import {
   hydrateSampleCacheFromDisk,
   prefetchVoiceSamples,
 } from './AudioVoiceService';
-import { enablePiperProductMode } from './ttsPolicy';
+import { enableCartesiaProductMode } from './ttsPolicy';
 import { loadUserProfile } from './userProfileService';
 import { voicePreloader } from './tts/voicePreloader';
 
@@ -103,22 +116,17 @@ export { voicePreloader };
 export type { WarmVoiceResult } from './tts/voicePreloader';
 
 /**
- * Sofort beim App-Start: Purge Kokoro-Legacy → Piper-Modell keep-warm.
+ * Sofort beim App-Start: Legacy-Assets purge → Cartesia keep-warm.
  */
-export function preloadPiperAtBoot(): void {
-  enablePiperProductMode();
+export function preloadTtsAtBoot(): void {
+  enableCartesiaProductMode();
   void hydrateSampleCacheFromDisk();
   void purgeLegacyVoiceAssets().catch(() => undefined);
 
   void loadUserProfile().then((profile) => {
-    const voiceId = profile?.voiceId ?? 'standard_m';
+    const voiceId = profile?.voiceId ?? 'alina';
     startVoiceBuffer({ speechRate: 1, priorityVoiceId: voiceId });
     void prefetchVoiceSamples(voiceId);
     void voicePreloader.warmActiveVoice(voiceId);
   });
-}
-
-/** @deprecated */
-export function preloadKokoroAtBoot(): void {
-  preloadPiperAtBoot();
 }

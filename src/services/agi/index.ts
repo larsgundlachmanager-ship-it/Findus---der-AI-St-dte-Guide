@@ -28,7 +28,10 @@ export {
   applyHardGuardrails,
   applyHardGuardrailsSync,
   scrubSpeechForTts,
+  expandGermanAbbreviationsForSpeech,
+  resolveSpeechMaxChars,
   SPEECH_MAX_CHARS,
+  SPEECH_MAX_CHARS_HISTORY,
   GUARDRAILS_SYNC,
   type GuardrailReport,
 } from './speechGuardrails';

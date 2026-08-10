@@ -1,0 +1,2686 @@
+{
+  "city_id": "spreewald",
+  "apply": true,
+  "maxDelta": 80,
+  "summary": {
+    "ok": 138,
+    "check": 0,
+    "bad": 19,
+    "errors": 0,
+    "applied": 3
+  },
+  "rows": [
+    {
+      "id": "spreewald_lubbenau",
+      "name": "Lübbenau",
+      "before": {
+        "lat": 51.86216903999999,
+        "lng": 13.96112942
+      },
+      "google": {
+        "lat": 51.8654806,
+        "lng": 13.9539622,
+        "place_id": "ChIJIQENWh4HCEcR0CReW0YgIQQ",
+        "address": "Lübbenau/Spreewald"
+      },
+      "delta_m": 615,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_lubbenau_bahnhof",
+      "name": "Lübbenau, Bahnhof",
+      "before": {
+        "lat": 51.86118814,
+        "lng": 13.961423639999998
+      },
+      "google": {
+        "lat": 51.8622409,
+        "lng": 13.9612458,
+        "place_id": "ChIJxT3FYFsHCEcRKYkfMjBCFXE",
+        "address": "03222 Lübbenau/Spreewald, Deutschland"
+      },
+      "delta_m": 118,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "spreewald_parkplatz_am_bahnhof",
+      "name": "Parkplatz am Bahnhof",
+      "before": {
+        "lat": 51.860141340000006,
+        "lng": 13.96199694
+      },
+      "google": {
+        "lat": 51.8602132,
+        "lng": 13.9621133,
+        "place_id": "ChIJX8wajz4HCEcRCW9aDgmjGgE",
+        "address": "Güterbahnhofstraße 56, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_bahnhofstrasse",
+      "name": "Bahnhofstraße",
+      "before": {
+        "lat": 51.861352739999994,
+        "lng": 13.963223339999999
+      },
+      "google": {
+        "lat": 51.8627485,
+        "lng": 13.9606118,
+        "place_id": "ChIJC9LYZVsHCEcR9CIXnlPfvfw",
+        "address": "Bahnhofstraße, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 237,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_grosser_spreewaldhafen_lubbenau",
+      "name": "Großer Spreewaldhafen Lübbenau",
+      "before": {
+        "lat": 51.86741558,
+        "lng": 13.973071479999998
+      },
+      "google": {
+        "lat": 51.8674551,
+        "lng": 13.9731355,
+        "place_id": "ChIJsQR7fWAHCEcR2BMCz2s21vI",
+        "address": "Grosser Spreewaldhafen, Dammstraße 77A, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_kleiner_hafen_am_spreeschlosschen_lubbenau_kahnfahrmannsverein_der_spr",
+      "name": "Kleiner Hafen am Spreeschlößchen Lübbenau/ Kahnfährmannsverein der Spreewaldfreunde",
+      "before": {
+        "lat": 51.869895080000006,
+        "lng": 13.97050088
+      },
+      "google": {
+        "lat": 51.8699346,
+        "lng": 13.9705649,
+        "place_id": "ChIJq_MhjF8HCEcRB17ItyTqVYc",
+        "address": "Spreestraße 10a, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_st_liebs_hafen_lubbenau_kahnfahrtenlehde_wotschofska_im_spreewald",
+      "name": "✅St.Liebs Hafen🛶 Lübbenau | KahnfahrtenLehde-Wotschofska im Spreewald",
+      "before": {
+        "lat": 51.86489488000001,
+        "lng": 13.974999700000001
+      },
+      "google": {
+        "lat": 51.8699346,
+        "lng": 13.9705649,
+        "place_id": "ChIJq_MhjF8HCEcRB17ItyTqVYc",
+        "address": "Spreestraße 10a, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 638,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_kahnfahrten_im_spreewald_henning_muller",
+      "name": "Kahnfahrten im Spreewald, Henning Müller",
+      "before": {
+        "lat": 51.86533978,
+        "lng": 13.973680800000002
+      },
+      "google": {
+        "lat": 51.8653793,
+        "lng": 13.9737448,
+        "place_id": "ChIJGSMynHkHCEcRf2sH1oGVDOg",
+        "address": "Hafen \"Am Holzgraben, Dammstraße 71, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_premium_kahnfahrten_hafen_lubbenau_spreewald",
+      "name": "Premium Kahnfahrten - Hafen Lübbenau / Spreewald",
+      "before": {
+        "lat": 51.86919818,
+        "lng": 13.969799079999998
+      },
+      "google": {
+        "lat": 51.8692377,
+        "lng": 13.9698631,
+        "place_id": "ChIJS7V3l18HCEcRsQAuvtqp4C4",
+        "address": "Spreestraße 7, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_kleiner_hafen_kahnfahrten_am_muhlenwehr",
+      "name": "Kleiner Hafen, Kahnfahrten am Mühlenwehr",
+      "before": {
+        "lat": 51.86824808,
+        "lng": 13.97146788
+      },
+      "google": {
+        "lat": 51.8699346,
+        "lng": 13.9705649,
+        "place_id": "ChIJq_MhjF8HCEcRB17ItyTqVYc",
+        "address": "Spreestraße 10a, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 198,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_hafen_snack_imbiss_am_gr_spreewaldhafen",
+      "name": "Hafen Snack - Imbiss am gr. Spreewaldhafen",
+      "before": {
+        "lat": 51.86687048,
+        "lng": 13.97276838
+      },
+      "google": {
+        "lat": 51.86691,
+        "lng": 13.9728324,
+        "place_id": "ChIJ56QT214HCEcR-KTqxh3Onzo",
+        "address": "Dammstraße 77A, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_spreewald_museum",
+      "name": "Spreewald-Museum",
+      "before": {
+        "lat": 51.869404880000005,
+        "lng": 13.96521378
+      },
+      "google": {
+        "lat": 51.8694444,
+        "lng": 13.9652778,
+        "place_id": "ChIJ-d-MNV8HCEcRp906mMQPt5Y",
+        "address": "Topfmarkt 12, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_stadtkirche_st_nikolai",
+      "name": "Stadtkirche St. Nikolai",
+      "before": {
+        "lat": 51.86783648000001,
+        "lng": 13.96935068
+      },
+      "google": {
+        "lat": 51.867876,
+        "lng": 13.9694147,
+        "place_id": "ChIJYZJvs18HCEcRDhL4bt-v800",
+        "address": "Winkelgasse 2, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_st_maria_verkundigung",
+      "name": "St. Maria Verkündigung",
+      "before": {
+        "lat": 51.86370918,
+        "lng": 13.953838600000001
+      },
+      "google": {
+        "lat": 51.8637487,
+        "lng": 13.9539026,
+        "place_id": "ChIJ8bCfd1gHCEcRZ6qhMRJaBNw",
+        "address": "Str. des Friedens 3A, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_evangelisches_pfarramt_lubbenau_neustadt",
+      "name": "Evangelisches Pfarramt Lübbenau-Neustadt",
+      "before": {
+        "lat": 51.863559880000004,
+        "lng": 13.9550613
+      },
+      "google": {
+        "lat": 51.8635994,
+        "lng": 13.9551253,
+        "place_id": "ChIJ6SFYiscccEERsxxfX7x-0oA",
+        "address": "Apfelallee 2, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_evangelischer_friedhof_lubbenau_neustadt",
+      "name": "Evangelischer Friedhof Lübbenau-Neustadt",
+      "before": {
+        "lat": 51.86266188,
+        "lng": 13.954155
+      },
+      "google": {
+        "lat": 51.86270140000001,
+        "lng": 13.954219,
+        "place_id": "ChIJ1zQKf1oHCEcR15RZzScfOZU",
+        "address": "Str. des Friedens 3a, 03222 Lübbenau/Spreewald-Neustadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_dorfkirche_zerkwitz",
+      "name": "Dorfkirche Zerkwitz",
+      "before": {
+        "lat": 51.86249048,
+        "lng": 13.929205999999999
+      },
+      "google": {
+        "lat": 51.86253000000001,
+        "lng": 13.92927,
+        "place_id": "ChIJg3UQmLEACEcRzwxBO1lqooE",
+        "address": "Hauptstraße 14, 03222 Lübbenau/Spreewald-Zerkwitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_schlosspark",
+      "name": "Schlosspark",
+      "before": {
+        "lat": 51.87030498,
+        "lng": 13.97369588
+      },
+      "google": {
+        "lat": 51.8684134,
+        "lng": 13.9740649,
+        "place_id": "ChIJF9uGbWAHCEcR1S4SGpRRNTY",
+        "address": "Schloßpark, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 212,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_zeitlos_spiele_park",
+      "name": "Zeitlos-Spiele-Park",
+      "before": {
+        "lat": 51.86057898,
+        "lng": 13.947330299999999
+      },
+      "google": {
+        "lat": 51.8606185,
+        "lng": 13.9473943,
+        "place_id": "ChIJA0752IcHCEcRxV4aGdOQLYk",
+        "address": "August-Bebel-Str. 3, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_haus_fur_mensch_und_natur",
+      "name": "Haus für Mensch und Natur",
+      "before": {
+        "lat": 51.869216879999996,
+        "lng": 13.96843558
+      },
+      "google": {
+        "lat": 51.8692564,
+        "lng": 13.9684996,
+        "place_id": "ChIJldSpc18HCEcRbIQzkmvhkik",
+        "address": "Schulstraße 9, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_spreewald_natur_camping_am_schlosspark",
+      "name": "Spreewald-Natur-Camping \"Am Schlosspark\"",
+      "before": {
+        "lat": 51.86934148,
+        "lng": 13.98019828
+      },
+      "google": {
+        "lat": 51.869381,
+        "lng": 13.9802623,
+        "place_id": "ChIJxTNDmWgHCEcRTMFI5ZGP06Y",
+        "address": "Schloßbezirk 20, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_biospharenreservat_spreewald",
+      "name": "Biosphärenreservat Spreewald",
+      "before": {
+        "lat": 51.90295408000001,
+        "lng": 13.967084439999999
+      },
+      "google": {
+        "lat": 51.90299359999999,
+        "lng": 13.9671485,
+        "place_id": "ChIJcW5r-wniB0cRuxmCfzNr2fs",
+        "address": "Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_energiefeld",
+      "name": "Energiefeld",
+      "before": {
+        "lat": 51.861056180000006,
+        "lng": 13.958913599999999
+      },
+      "google": {
+        "lat": 51.8610957,
+        "lng": 13.9589776,
+        "place_id": "ChIJb-joIscHCEcREH7rWMDQhXc",
+        "address": "Energieweg, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_spreewelten_bad_lubbenau",
+      "name": "Spreewelten Bad Lübbenau",
+      "before": {
+        "lat": 51.85701738,
+        "lng": 13.9527985
+      },
+      "google": {
+        "lat": 51.8570569,
+        "lng": 13.9528625,
+        "place_id": "ChIJ65_A50UHCEcRJU_KK38mUzg",
+        "address": "Alte Huttung 13, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_rosengarten",
+      "name": "Rosengarten",
+      "before": {
+        "lat": 51.86773968,
+        "lng": 13.97463378
+      },
+      "google": {
+        "lat": 51.8677792,
+        "lng": 13.9746978,
+        "place_id": "ChIJ52urJhEHCEcRdE4e-Olzl7k",
+        "address": "03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_rad_und_wanderweg_lehde",
+      "name": "Rad- und Wanderweg Lehde",
+      "before": {
+        "lat": 51.86665478,
+        "lng": 13.9884781
+      },
+      "google": {
+        "lat": 51.8666943,
+        "lng": 13.9885421,
+        "place_id": "ChIJk_kvIkEHCEcRTcKr_-tcuTQ",
+        "address": "03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_skatepark_lubbenau",
+      "name": "Skatepark Lübbenau",
+      "before": {
+        "lat": 51.863441980000005,
+        "lng": 13.951312199999998
+      },
+      "google": {
+        "lat": 51.8634815,
+        "lng": 13.9513762,
+        "place_id": "ChIJZ26Q3kUHCEcRN5qPPe_kwRQ",
+        "address": "Friedrich-Engels-Straße 30, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_gartenanlage_freizeit_73_ev",
+      "name": "Gartenanlage Freizeit 73 ev",
+      "before": {
+        "lat": 51.852451079999994,
+        "lng": 13.971522919999998
+      },
+      "google": {
+        "lat": 51.8524906,
+        "lng": 13.9715869,
+        "place_id": "ChIJE11himsHCEcRsjcxW-B-5IM",
+        "address": "an der L 49, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_parkplatz_spreewelten_bad_lubbenau",
+      "name": "Parkplatz Spreewelten Bad Lübbenau",
+      "before": {
+        "lat": 51.85567958,
+        "lng": 13.9511451
+      },
+      "google": {
+        "lat": 51.85571909999999,
+        "lng": 13.9512091,
+        "place_id": "ChIJcb7LDwAHCEcRf9lnYPKeFs8",
+        "address": "Alte Huttung, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_kanuheim",
+      "name": "Kanuheim",
+      "before": {
+        "lat": 51.866831579999996,
+        "lng": 13.975212579999999
+      },
+      "google": {
+        "lat": 51.8668711,
+        "lng": 13.9752766,
+        "place_id": "ChIJDadV_mAHCEcRqLb-d8ch4eg",
+        "address": "Leiper Weg, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_lubbenauer_hofgarten",
+      "name": "Lübbenauer Hofgarten",
+      "before": {
+        "lat": 51.868246479999996,
+        "lng": 13.96109788
+      },
+      "google": {
+        "lat": 51.868286,
+        "lng": 13.9611619,
+        "place_id": "ChIJ1_IkBVkHCEcR9Pw6dPwMABc",
+        "address": "Karl-Marx-Straße 82, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_insektenwiese",
+      "name": "Insektenwiese",
+      "before": {
+        "lat": 51.86160818,
+        "lng": 13.9544476
+      },
+      "google": {
+        "lat": 51.8616477,
+        "lng": 13.9545116,
+        "place_id": "ChIJAwZBnMAHCEcRIkICXuZI6Ms",
+        "address": "Erbbegräbnis 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_russische_kriegsgraber",
+      "name": "Russische Kriegsgräber",
+      "before": {
+        "lat": 51.861105980000005,
+        "lng": 13.9530337
+      },
+      "google": {
+        "lat": 51.8611455,
+        "lng": 13.9530977,
+        "place_id": "ChIJW8H9gfIHCEcRuDn4in5eDas",
+        "address": "Str. des Friedens, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_parkplatz_lubbenau",
+      "name": "Parkplatz Lübbenau",
+      "before": {
+        "lat": 51.86608688,
+        "lng": 13.9729769
+      },
+      "google": {
+        "lat": 51.86612640000001,
+        "lng": 13.9730409,
+        "place_id": "ChIJs2z2gtsHCEcRldqEg9iJE90",
+        "address": "Dammstraße 12, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_parkplatz_poststrasse_ost_8_tag",
+      "name": "Parkplatz, Poststraße Ost 8€/Tag",
+      "before": {
+        "lat": 51.86672168,
+        "lng": 13.966986179999997
+      },
+      "google": {
+        "lat": 51.8667612,
+        "lng": 13.9670502,
+        "place_id": "ChIJmXgMVegHCEcRp-kvqtRfiAE",
+        "address": "03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_marstall_lubbenau",
+      "name": "Marstall Lübbenau",
+      "before": {
+        "lat": 51.86821678,
+        "lng": 13.97413198
+      },
+      "google": {
+        "lat": 51.8682563,
+        "lng": 13.974196,
+        "place_id": "ChIJ3b6ZQWAHCEcRyAImXVu8LgM",
+        "address": "Schloßbezirk 5, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_beobachtungsturm_kranichwiese",
+      "name": "Beobachtungsturm Kranichwiese",
+      "before": {
+        "lat": 51.89949978,
+        "lng": 13.950417340000001
+      },
+      "google": {
+        "lat": 51.8995393,
+        "lng": 13.9504814,
+        "place_id": "ChIJ_4yoYdX_B0cRN8FiJ_S3x8w",
+        "address": "Unnamed Road, 15907, 15907 Lübben (Spreewald)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_barzlin",
+      "name": "Barzlin",
+      "before": {
+        "lat": 51.895671979999996,
+        "lng": 13.950961339999997
+      },
+      "google": {
+        "lat": 51.8957115,
+        "lng": 13.9510254,
+        "place_id": "ChIJPTEspAH_B0cRgcHzdTKaHSw",
+        "address": "03222 Lübben (Spreewald)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_pension_am_stadtgraben",
+      "name": "Pension \"Am Stadtgraben\"",
+      "before": {
+        "lat": 51.87032078,
+        "lng": 13.960502080000001
+      },
+      "google": {
+        "lat": 51.87036029999999,
+        "lng": 13.9605661,
+        "place_id": "ChIJCw8RXVgHCEcRLECYS8iXOos",
+        "address": "Bergstraße 9, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_minigolfplatz_lubbenau",
+      "name": "Minigolfplatz Lübbenau",
+      "before": {
+        "lat": 51.86539318,
+        "lng": 13.965481599999999
+      },
+      "google": {
+        "lat": 51.8654327,
+        "lng": 13.9655456,
+        "place_id": "ChIJXdaqgl4HCEcRC8Nqn-o6vec",
+        "address": "Poststraße 10, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_spreewelten_hallenbad_delphin",
+      "name": "Spreewelten Hallenbad Delphin",
+      "before": {
+        "lat": 51.85818718,
+        "lng": 13.939130299999999
+      },
+      "google": {
+        "lat": 51.8582267,
+        "lng": 13.9391943,
+        "place_id": "ChIJtahtiUwHCEcRsC8VUIXmWkU",
+        "address": "Werner-Seelenbinder-Straße 11B, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_tsg_lubbenau_63_e_v",
+      "name": "TSG Lübbenau 63 e.V.",
+      "before": {
+        "lat": 51.86378338000001,
+        "lng": 13.951951799999998
+      },
+      "google": {
+        "lat": 51.8638229,
+        "lng": 13.9520158,
+        "place_id": "ChIJqezHhVAHCEcRjxv8zF9GESE",
+        "address": "Str. des Friedens 2, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_blau_gelb_arena_tsg_lubbenau",
+      "name": "Blau-Gelb Arena TSG Lübbenau",
+      "before": {
+        "lat": 51.85961388,
+        "lng": 13.9401396
+      },
+      "google": {
+        "lat": 51.8596534,
+        "lng": 13.9402036,
+        "place_id": "ChIJuWsi8EwHCEcRA75pg4otB_g",
+        "address": "Werner-Seelenbinder-Straße 3A, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_bootsverleih_richter_kajaksports",
+      "name": "Bootsverleih Richter / Kajaksports",
+      "before": {
+        "lat": 51.86651278000001,
+        "lng": 13.974412300000001
+      },
+      "google": {
+        "lat": 51.8665523,
+        "lng": 13.9744763,
+        "place_id": "ChIJnQKG-WAHCEcRATul1FOM1iA",
+        "address": "Dammstraße 75, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_fussballplatz",
+      "name": "Fußballplatz",
+      "before": {
+        "lat": 51.86079788000001,
+        "lng": 13.9371624
+      },
+      "google": {
+        "lat": 51.90299359999999,
+        "lng": 13.9671485,
+        "place_id": "ChIJcW5r-wniB0cRuxmCfzNr2fs",
+        "address": "Lübbenau/Spreewald"
+      },
+      "delta_m": 5124,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_bogenschiessplatz_ralf",
+      "name": "Bogenschießplatz Ralf",
+      "before": {
+        "lat": 51.848536679999995,
+        "lng": 13.950081119999998
+      },
+      "google": {
+        "lat": 51.8485762,
+        "lng": 13.9501451,
+        "place_id": "ChIJweWlVDgHCEcRmwAj9OxcHlc",
+        "address": "Zufahrt über Neckarsulmer Str., Lübbenauer Ch, 03222 Lübbenau/Spreewald-Groß Klessow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_bootsverleih_franke",
+      "name": "Bootsverleih Franke",
+      "before": {
+        "lat": 51.86577738,
+        "lng": 13.9761279
+      },
+      "google": {
+        "lat": 51.8658169,
+        "lng": 13.9761919,
+        "place_id": "ChIJfcr8FWEHCEcRa25uE2umxkk",
+        "address": "Dammstraße 72, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_dschungel_spielplatz",
+      "name": "Dschungel-Spielplatz",
+      "before": {
+        "lat": 51.86297138,
+        "lng": 13.939848000000001
+      },
+      "google": {
+        "lat": 51.8630109,
+        "lng": 13.939912,
+        "place_id": "ChIJ80ukWU0HCEcRQmtJts5vt8M",
+        "address": "03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_bootsverleih_petrick",
+      "name": "Bootsverleih Petrick",
+      "before": {
+        "lat": 51.870862380000005,
+        "lng": 13.976415679999999
+      },
+      "google": {
+        "lat": 51.8709019,
+        "lng": 13.9764797,
+        "place_id": "ChIJi9pMjYr9B0cRSNjHudzkkls",
+        "address": "Schloßbezirk 22, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_fastfitness_lubbenau",
+      "name": "FastFitness Lübbenau",
+      "before": {
+        "lat": 51.85964438,
+        "lng": 13.942283399999999
+      },
+      "google": {
+        "lat": 51.8596839,
+        "lng": 13.9423474,
+        "place_id": "ChIJ35IJSUwHCEcRhdg7wJuCNOM",
+        "address": "Otto-Grotewohl-Straße 4 A-E, 03222 Lübbenau/Spreewald-Zerkwitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_bunte_buhne",
+      "name": "Bunte Bühne",
+      "before": {
+        "lat": 51.86151678,
+        "lng": 13.960307
+      },
+      "google": {
+        "lat": 51.8615563,
+        "lng": 13.960371,
+        "place_id": "ChIJ_29GWlsHCEcRPZB0yc2SO8Y",
+        "address": "Güterbahnhofstraße 61, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_sauenmoor",
+      "name": "Sauenmoor",
+      "before": {
+        "lat": 51.847567479999995,
+        "lng": 14.009008020000001
+      },
+      "google": {
+        "lat": 51.847607,
+        "lng": 14.009072,
+        "place_id": "ChIJ3ZIEmc8HCEcRqynWg4vyafo",
+        "address": "03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_brucke",
+      "name": "Brücke",
+      "before": {
+        "lat": 51.87478548,
+        "lng": 14.00714898
+      },
+      "google": {
+        "lat": 51.8676056,
+        "lng": 13.9730765,
+        "place_id": "ChIJH-3I4XsHCEcRhIzpRaoIdss",
+        "address": "Schloßbezirk 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 2472,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_gasthaus_wotschofska",
+      "name": "Gasthaus Wotschofska",
+      "before": {
+        "lat": 51.87443908,
+        "lng": 14.008840080000002
+      },
+      "google": {
+        "lat": 51.8744786,
+        "lng": 14.0089041,
+        "place_id": "ChIJ36HWs479B0cRkmcoMK7kU48",
+        "address": "Wotschofskaweg 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_spreewald_touristinformation_lubbenau_e_v",
+      "name": "Spreewald-Touristinformation Lübbenau e.V.",
+      "before": {
+        "lat": 51.868404979999994,
+        "lng": 13.96819398
+      },
+      "google": {
+        "lat": 51.8684445,
+        "lng": 13.968258,
+        "place_id": "ChIJVyXOB18HCEcRQZgwRAQnz2A",
+        "address": "Ehm-Welk-Straße 15, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_leiper_weggraben",
+      "name": "Leiper Weggraben",
+      "before": {
+        "lat": 51.85849008,
+        "lng": 14.008310900000001
+      },
+      "google": {
+        "lat": 51.8585296,
+        "lng": 14.0083749,
+        "place_id": "ChIJ0eWZG4MHCEcR9KBIf6FUYf8",
+        "address": "Leiper Weggraben, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_fahrrad_vogi_verkauf_service_verleih",
+      "name": "Fahrrad Vogi - Verkauf - Service - Verleih",
+      "before": {
+        "lat": 51.864867579999995,
+        "lng": 13.963988699999998
+      },
+      "google": {
+        "lat": 51.8649071,
+        "lng": 13.9640527,
+        "place_id": "ChIJmRbvEFwHCEcRwsqozobtixA",
+        "address": "Poststraße 23, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_schleuse_barzlin",
+      "name": "Schleuse Barzlin",
+      "before": {
+        "lat": 51.89777618000001,
+        "lng": 13.95205334
+      },
+      "google": {
+        "lat": 51.8978157,
+        "lng": 13.9521174,
+        "place_id": "ChIJ45bIvIH_B0cRY2gHht1_DJc",
+        "address": "Unnamed Road, 15907, 15907, 03222 Lübben (Spreewald)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_radschober",
+      "name": "Radschober",
+      "before": {
+        "lat": 51.86734978,
+        "lng": 13.96689198
+      },
+      "google": {
+        "lat": 51.8673893,
+        "lng": 13.966956,
+        "place_id": "ChIJNT29gkcHCEcR5MVRD5Zp0Uo",
+        "address": "Poststraße, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_fahrrad_goyn",
+      "name": "Fahrrad Goyn",
+      "before": {
+        "lat": 51.864770480000004,
+        "lng": 13.955954
+      },
+      "google": {
+        "lat": 51.86481,
+        "lng": 13.956018,
+        "place_id": "ChIJS6HVb1oHCEcRTRNyS8QWF_o",
+        "address": "Bahnhofstraße 30, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_landwarenhaus_gross_beuchow",
+      "name": "Landwarenhaus Gross Beuchow",
+      "before": {
+        "lat": 51.84903488,
+        "lng": 13.906077620000001
+      },
+      "google": {
+        "lat": 51.8490744,
+        "lng": 13.9061416,
+        "place_id": "ChIJWRmexb8BCEcRfUM6o1GRUec",
+        "address": "Beuchower Hauptstraße 10, 03222 Lübbenau/Spreewald-Groß Beuchow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_lubbenau_lehde",
+      "name": "Lübbenau, Lehde",
+      "before": {
+        "lat": 51.866169479999996,
+        "lng": 13.989150999999998
+      },
+      "google": {
+        "lat": 51.8635482,
+        "lng": 14.0041811,
+        "place_id": "ChIJE3Ig7nwHCEcR0L-C1kggIQo",
+        "address": "03222 Lübbenau/Spreewald-Lehde"
+      },
+      "delta_m": 1072,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_raucherei_spreewaldspezialitaten",
+      "name": "Räucherei &Spreewaldspezialitäten",
+      "before": {
+        "lat": 51.86198938,
+        "lng": 13.930737900000002
+      },
+      "google": {
+        "lat": 51.8620289,
+        "lng": 13.9308019,
+        "place_id": "ChIJ3eBbnFoHCEcRnndY7kDpPjg",
+        "address": "03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_freilandmuseum_lehde",
+      "name": "Freilandmuseum Lehde",
+      "before": {
+        "lat": 51.862532380000005,
+        "lng": 13.990957200000002
+      },
+      "google": {
+        "lat": 51.8625719,
+        "lng": 13.9910212,
+        "place_id": "ChIJ-d-MNV8HCEcR2amJogYARHw",
+        "address": "An der Giglitza 1a 03222, 03222 Lübbenau/Spreewald-Lehde"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_stelter_s_freizeitoase_lubbenau_altstadt",
+      "name": "Stelter's Freizeitoase Lübbenau/Altstadt",
+      "before": {
+        "lat": 51.863104379999996,
+        "lng": 13.961505800000001
+      },
+      "google": {
+        "lat": 51.8631439,
+        "lng": 13.9615698,
+        "place_id": "ChIJDVzCf1sHCEcRp0Mh-WgDVqg",
+        "address": "Poststraße 29, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_souvenirs_und_spielwaren_angela_glaubitz",
+      "name": "Souvenirs und Spielwaren Angela Glaubitz",
+      "before": {
+        "lat": 51.86721048,
+        "lng": 13.97213598
+      },
+      "google": {
+        "lat": 51.86725,
+        "lng": 13.9722,
+        "place_id": "ChIJ0U-8CiIHCEcRrjdxrnJeH50",
+        "address": "Dammstraße 5, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_medizinisches_zentrum_lubbenau",
+      "name": "Medizinisches Zentrum Lübbenau",
+      "before": {
+        "lat": 51.85697768,
+        "lng": 13.961329999999998
+      },
+      "google": {
+        "lat": 51.85701719999999,
+        "lng": 13.961394,
+        "place_id": "ChIJh1VKtUMHCEcRhn-cT-6udBE",
+        "address": "Robert-Koch-Straße 42, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_die_apotheke_am_burjauer",
+      "name": "Die Apotheke am Burjauer",
+      "before": {
+        "lat": 51.86697548000001,
+        "lng": 13.940046079999998
+      },
+      "google": {
+        "lat": 51.86701499999999,
+        "lng": 13.9401101,
+        "place_id": "ChIJ4y3SPK0ACEcR1IixO-Wt0jI",
+        "address": "Am Kaufland 2, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_frau_dipl_med_anne_lore_bahr",
+      "name": "Frau Dipl.-Med. Anne-Lore Bahr",
+      "before": {
+        "lat": 51.86428608,
+        "lng": 13.963172600000002
+      },
+      "google": {
+        "lat": 51.8643256,
+        "lng": 13.9632366,
+        "place_id": "ChIJBTFbC1wHCEcR448pTJ7iJNE",
+        "address": "Poststraße 25, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_praxis_dr_siegfried_stadelmayer",
+      "name": "PRAXIS Dr. Siegfried Stadelmayer",
+      "before": {
+        "lat": 51.868800480000004,
+        "lng": 13.96234598
+      },
+      "google": {
+        "lat": 51.86884,
+        "lng": 13.96241,
+        "place_id": "ChIJ0edOrrcHCEcR1iXjhfCc-tE",
+        "address": "Karl-Marx-Straße 14, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_hauptspree_lehder_flies",
+      "name": "Hauptspree - Lehder Flies",
+      "before": {
+        "lat": 51.873663279999995,
+        "lng": 13.97300178
+      },
+      "google": {
+        "lat": 51.8737028,
+        "lng": 13.9730658,
+        "place_id": "ChIJQ-D8vW39B0cRN2az4SYYTOU",
+        "address": "Erlenhorst 11, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_bergbau_skulptur_baggerschaufel",
+      "name": "Bergbau-Skulptur Baggerschaufel",
+      "before": {
+        "lat": 51.861410379999995,
+        "lng": 13.957979
+      },
+      "google": {
+        "lat": 51.8614499,
+        "lng": 13.958043,
+        "place_id": "ChIJl73pSW0HCEcRG1JuJzRM5Ew",
+        "address": "Güterbahnhofstraße 16, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_stadtgraben_dorothengraben_lubbenau",
+      "name": "Stadtgraben - Dorothengraben (Lübbenau)",
+      "before": {
+        "lat": 51.87101708,
+        "lng": 13.965309880000001
+      },
+      "google": {
+        "lat": 51.8710566,
+        "lng": 13.9653739,
+        "place_id": "ChIJIbpHi1D9B0cRif53u4qaKmo",
+        "address": "Am Wasser 8, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_kreuzgraben_dorothengraben",
+      "name": "Kreuzgraben - Dorothengraben",
+      "before": {
+        "lat": 51.880950080000005,
+        "lng": 13.96426916
+      },
+      "google": {
+        "lat": 51.8809896,
+        "lng": 13.9643332,
+        "place_id": "ChIJY0M8Z8L9B0cRSrsxKGxnUxg",
+        "address": "Bridge, Ausbau, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_lehde",
+      "name": "Lehde",
+      "before": {
+        "lat": 51.867320480000004,
+        "lng": 13.989155979999998
+      },
+      "google": {
+        "lat": 51.8635482,
+        "lng": 14.0041811,
+        "place_id": "ChIJE3Ig7nwHCEcR0L-C1kggIQo",
+        "address": "03222 Lübbenau/Spreewald-Lehde"
+      },
+      "delta_m": 1114,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_schwarzer_weg",
+      "name": "Schwarzer Weg",
+      "before": {
+        "lat": 51.84314568,
+        "lng": 14.00098092
+      },
+      "google": {
+        "lat": 51.8431852,
+        "lng": 14.0010449,
+        "place_id": "ChIJ9TkuWukHCEcRJtQI-aFs1ro",
+        "address": "Unnamed Road, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_wehr_und_schleuse_ragow",
+      "name": "Wehr und Schleuse Ragow",
+      "before": {
+        "lat": 51.89336008,
+        "lng": 13.937436060000001
+      },
+      "google": {
+        "lat": 51.8933996,
+        "lng": 13.9375001,
+        "place_id": "ChIJg3AEIXv_B0cRmP0s35wufc4",
+        "address": "Unnamed Road, 03222, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_gurkenmuseum",
+      "name": "Gurkenmuseum",
+      "before": {
+        "lat": 51.86659928,
+        "lng": 13.990901500000001
+      },
+      "google": {
+        "lat": 51.8666388,
+        "lng": 13.9909655,
+        "place_id": "ChIJq6qVeX0HCEcRPr6I2cnXWR4",
+        "address": "An d. Dolzke 6, 03222 Lübbenau/Spreewald-Lehde"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_gurkenmuseum_bauernhaus_in_der_hotelanlage_starick",
+      "name": "Gurkenmuseum & Bauernhaus in der Hotelanlage Starick",
+      "before": {
+        "lat": 51.86593327999999,
+        "lng": 13.990545700000002
+      },
+      "google": {
+        "lat": 51.86597279999999,
+        "lng": 13.9906097,
+        "place_id": "ChIJtSEyE30HCEcRJrIMYtJ8Rlc",
+        "address": "An d. Dolzke 4A, 03222 Lübbenau/Spreewald-Lehde"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_galerie_ro",
+      "name": "Galerie Ro",
+      "before": {
+        "lat": 51.86746868,
+        "lng": 13.970591379999998
+      },
+      "google": {
+        "lat": 51.8675082,
+        "lng": 13.9706554,
+        "place_id": "ChIJCVcJ0V8HCEcRF4_wv0NikV0",
+        "address": "Apothekengasse 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_orangerie_schloss_lubbenau",
+      "name": "Orangerie Schloss Lübbenau",
+      "before": {
+        "lat": 51.868202180000004,
+        "lng": 13.97546178
+      },
+      "google": {
+        "lat": 51.8682417,
+        "lng": 13.9755258,
+        "place_id": "ChIJ3xMlkoQHCEcRo_7NG2H5qBY",
+        "address": "03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_wochenmarkt_lubbenau",
+      "name": "Wochenmarkt Lübbenau",
+      "before": {
+        "lat": 51.859957179999995,
+        "lng": 13.943809400000001
+      },
+      "google": {
+        "lat": 51.8599967,
+        "lng": 13.9438734,
+        "place_id": "ChIJt7sBS0wHCEcRKFRUjiG8wIg",
+        "address": "Otto-Grotewohl-Straße 4, 03222 Lübbenau/Spreewald-Zerkwitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_schloss_lubbenau",
+      "name": "Schloss Lübbenau",
+      "before": {
+        "lat": 51.86904078,
+        "lng": 13.97376538
+      },
+      "google": {
+        "lat": 51.8690803,
+        "lng": 13.9738294,
+        "place_id": "ChIJqU_tTmAHCEcRJxHimYZOe94",
+        "address": "Schloßbezirk 6, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_schloss_beuchow",
+      "name": "Schloss Beuchow",
+      "before": {
+        "lat": 51.84857158,
+        "lng": 13.903269320000001
+      },
+      "google": {
+        "lat": 51.8486111,
+        "lng": 13.9033333,
+        "place_id": "ChIJZYTQ98IACEcRc_RKJ1FibuM",
+        "address": "Beuchower Hauptstraße 18, 03222 Lübbenau/Spreewald-Groß Beuchow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_kleingartenverein_maxim_gorki",
+      "name": "Kleingartenverein Maxim Gorki",
+      "before": {
+        "lat": 51.85914868,
+        "lng": 13.978153
+      },
+      "google": {
+        "lat": 51.8591882,
+        "lng": 13.978217,
+        "place_id": "ChIJrYiZ9fcHCEcRBjP3EIKCcks",
+        "address": "03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_kgv_gluck_auf_e_v_lubbenau",
+      "name": "KGV Glück Auf e.V. Lübbenau",
+      "before": {
+        "lat": 51.86019618,
+        "lng": 13.9702787
+      },
+      "google": {
+        "lat": 51.8602357,
+        "lng": 13.9703427,
+        "place_id": "ChIJC-qiAs8HCEcRZi4emOWjgB4",
+        "address": "03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_garten_grabpflege_martina_molle",
+      "name": "Garten & Grabpflege Martina Molle",
+      "before": {
+        "lat": 51.870043079999995,
+        "lng": 13.957580680000001
+      },
+      "google": {
+        "lat": 51.8700826,
+        "lng": 13.9576447,
+        "place_id": "ChIJB1zbiVcHCEcR4h9WiTS-iGI",
+        "address": "Kampe 4, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_bootsanleger_fur_gewerbliche_kahne",
+      "name": "Bootsanleger für gewerbliche Kähne",
+      "before": {
+        "lat": 51.863427279999996,
+        "lng": 13.9866951
+      },
+      "google": {
+        "lat": 51.8634668,
+        "lng": 13.9867591,
+        "place_id": "ChIJc8bTkEQHCEcRnowQqgYgt9M",
+        "address": "An der Lischka 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_bootsverleih_bootshaus_kaupen",
+      "name": "Bootsverleih Bootshaus Kaupen",
+      "before": {
+        "lat": 51.86616958,
+        "lng": 13.979016999999999
+      },
+      "google": {
+        "lat": 51.8662091,
+        "lng": 13.979081,
+        "place_id": "ChIJDZ8W0mMHCEcRYjbgyVELB8c",
+        "address": "Kaupen 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_bootsverleih_spreewald_kanus_kajak_kanu",
+      "name": "Bootsverleih Spreewald-Kanus / Kajak / Kanu /",
+      "before": {
+        "lat": 51.87008678000001,
+        "lng": 13.97990108
+      },
+      "google": {
+        "lat": 51.8701263,
+        "lng": 13.9799651,
+        "place_id": "ChIJjRJqbS-rkGgRNtghlKr7PPA",
+        "address": "Schloßbezirk 20, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_bootsverleih_hannemann",
+      "name": "Bootsverleih Hannemann",
+      "before": {
+        "lat": 51.87072008,
+        "lng": 13.97038058
+      },
+      "google": {
+        "lat": 51.87075960000001,
+        "lng": 13.9704446,
+        "place_id": "ChIJ40wmek4HCEcRvY8xQfc-2RA",
+        "address": "Am Wasser 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_spreewald_reederei_lubbenau",
+      "name": "Spreewald-Reederei Lübbenau",
+      "before": {
+        "lat": 51.86609198,
+        "lng": 13.973845299999999
+      },
+      "google": {
+        "lat": 51.86613149999999,
+        "lng": 13.9739093,
+        "place_id": "ChIJfeoZ5mAHCEcRaCTQjnn31tc",
+        "address": "Dammstraße 74, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_river_and_roots",
+      "name": "River and Roots",
+      "before": {
+        "lat": 51.86426438000001,
+        "lng": 13.9571108
+      },
+      "google": {
+        "lat": 51.8643039,
+        "lng": 13.9571748,
+        "place_id": "ChIJ-fou0GF2ygMRRBMaOQeq79E",
+        "address": "Bahnhofstraße 29, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_die_gurkerei_gurken_mehr_lubbenau",
+      "name": "Die Gurkerei - Gurken & mehr… - Lübbenau",
+      "before": {
+        "lat": 51.86198248000001,
+        "lng": 13.9673833
+      },
+      "google": {
+        "lat": 51.862022,
+        "lng": 13.9674473,
+        "place_id": "ChIJQyVbd5gHCEcR3fX51K5mtB8",
+        "address": "Dammstraße 47, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_tabakborse_ramona_hottas",
+      "name": "Tabakbörse Ramona Hottas",
+      "before": {
+        "lat": 51.85965728,
+        "lng": 13.951045200000001
+      },
+      "google": {
+        "lat": 51.85969679999999,
+        "lng": 13.9511092,
+        "place_id": "ChIJw6UvXkUHCEcR91Oc9i4xA3A",
+        "address": "Str. der Jugend 34, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_magic_moments",
+      "name": "Magic Moments",
+      "before": {
+        "lat": 51.868475880000005,
+        "lng": 13.967076080000002
+      },
+      "google": {
+        "lat": 51.8685154,
+        "lng": 13.9671401,
+        "place_id": "ChIJUULcI_UHCEcRw3LBudFeKwQ",
+        "address": "Ehm-Welk-Straße 28, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_spreewaldladen",
+      "name": "spreewaldladen",
+      "before": {
+        "lat": 51.86754688,
+        "lng": 13.956623580000002
+      },
+      "google": {
+        "lat": 51.8675864,
+        "lng": 13.9566876,
+        "place_id": "ChIJoV6m5lkHCEcRbOq8KI78yy4",
+        "address": "Karl-Marx-Straße 34, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_aldi_nord",
+      "name": "ALDI Nord",
+      "before": {
+        "lat": 51.86676826,
+        "lng": 13.938159440000002
+      },
+      "google": {
+        "lat": 51.866797,
+        "lng": 13.938206,
+        "place_id": "ChIJT9tljqwACEcRVwGwJ6j4DJM",
+        "address": "Am Kaufland 3, 03222 Lübbenau/Spreewald-Zerkwitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_rewe",
+      "name": "REWE",
+      "before": {
+        "lat": 51.86014526,
+        "lng": 13.953052159999999
+      },
+      "google": {
+        "lat": 51.860174,
+        "lng": 13.9530987,
+        "place_id": "ChIJ-xqtZkUHCEcRv_HDJIKU9Xc",
+        "address": "Roter Platz 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_lidl",
+      "name": "Lidl",
+      "before": {
+        "lat": 51.860021259999996,
+        "lng": 13.94111346
+      },
+      "google": {
+        "lat": 51.86005,
+        "lng": 13.94116,
+        "place_id": "ChIJ1agTTkwHCEcRmpFbswsiXlA",
+        "address": "Otto-Grotewohl-Straße 19, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_kaufland_logistik_vz_2_gmbh_co_kg",
+      "name": "Kaufland Logistik VZ 2 GmbH & Co. KG",
+      "before": {
+        "lat": 51.845905859999995,
+        "lng": 13.953557660000001
+      },
+      "google": {
+        "lat": 51.84593460000001,
+        "lng": 13.9536042,
+        "place_id": "ChIJF3tnL5AccEERQXqvNIkdnPs",
+        "address": "Neckarsulmer Str. 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_spielplatz",
+      "name": "Spielplatz",
+      "before": {
+        "lat": 51.86091496,
+        "lng": 13.95808706
+      },
+      "google": {
+        "lat": 51.866545,
+        "lng": 13.967359,
+        "place_id": "ChIJ65Na4vEHCEcRitxMMEl9qb0",
+        "address": "Poststraße, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 893,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_spinnen_spielplatz",
+      "name": "Spinnen-Spielplatz",
+      "before": {
+        "lat": 51.861722459999996,
+        "lng": 13.95170976
+      },
+      "google": {
+        "lat": 51.8617512,
+        "lng": 13.9517563,
+        "place_id": "ChIJZeJyNLEHCEcRFt4pSRQ2214",
+        "address": "Str. des Friedens 9, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_spreewaldstadion",
+      "name": "Spreewaldstadion",
+      "before": {
+        "lat": 51.86442326,
+        "lng": 13.950697139999999
+      },
+      "google": {
+        "lat": 51.864452,
+        "lng": 13.9507437,
+        "place_id": "ChIJB7skqlEHCEcRXtk3G8mWyA0",
+        "address": "Spreewaldstadion, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_parkstadion",
+      "name": "Parkstadion",
+      "before": {
+        "lat": 51.84813206,
+        "lng": 13.90636426
+      },
+      "google": {
+        "lat": 51.8481608,
+        "lng": 13.9064108,
+        "place_id": "ChIJ__-_dMMACEcRlImsfqEDs08",
+        "address": "Beuchower Hauptstraße 10a, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_motorsportzentrum_lubbenau_hindenberg",
+      "name": "Motorsportzentrum Lübbenau/Hindenberg",
+      "before": {
+        "lat": 51.85961376,
+        "lng": 13.863309360000002
+      },
+      "google": {
+        "lat": 51.8596425,
+        "lng": 13.8633559,
+        "place_id": "ChIJq6qqGl0ACEcR2zcBUVzA9HQ",
+        "address": "03222 Lübbenau/Spreewald-Hindenberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_lubbenau_friedrich_engels_str_sportplatz",
+      "name": "Lübbenau, Friedrich-Engels-Str./Sportplatz",
+      "before": {
+        "lat": 51.86362126,
+        "lng": 13.94761346
+      },
+      "google": {
+        "lat": 51.86365,
+        "lng": 13.94766,
+        "place_id": "ChIJ08RXwFEHCEcRWY5L2BBXfBc",
+        "address": "03222 Lübbenau/Spreewald, Deutschland"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_sv_wudritz",
+      "name": "SV Wudritz",
+      "before": {
+        "lat": 51.89189296000001,
+        "lng": 13.90438122
+      },
+      "google": {
+        "lat": 51.8919217,
+        "lng": 13.9044278,
+        "place_id": "ChIJAQAA-TD-B0cRvdwAeCX6hv8",
+        "address": "Alte Bahnhofstraße 14, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_spreewelten_hotel_spreewelten_erlebnisbad",
+      "name": "Spreewelten Hotel | Spreewelten Erlebnisbad",
+      "before": {
+        "lat": 51.85573256,
+        "lng": 13.95217946
+      },
+      "google": {
+        "lat": 51.8557613,
+        "lng": 13.952226,
+        "place_id": "ChIJzz9q5kUHCEcRxv8y4n1wSyU",
+        "address": "Alte Huttung 11, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_wasser_und_abwasserzweckverband_calau_wac",
+      "name": "Wasser- und Abwasserzweckverband Calau (WAC)",
+      "before": {
+        "lat": 51.866857360000004,
+        "lng": 13.946024039999998
+      },
+      "google": {
+        "lat": 51.8668861,
+        "lng": 13.9460706,
+        "place_id": "ChIJSXO_s1MHCEcREpt1u2Iy_po",
+        "address": "Berliner Str. 10, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_aral",
+      "name": "Aral",
+      "before": {
+        "lat": 51.85316716,
+        "lng": 13.949329260000003
+      },
+      "google": {
+        "lat": 51.8531959,
+        "lng": 13.9493758,
+        "place_id": "ChIJadeX2EcHCEcRo8z-V9b76EE",
+        "address": "Aral, Tankstelle, Str. des Friedens 40, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_bft_diesel_tankpunkt",
+      "name": "bft Diesel Tankpunkt",
+      "before": {
+        "lat": 51.84660666,
+        "lng": 13.959842859999998
+      },
+      "google": {
+        "lat": 51.8466354,
+        "lng": 13.9598894,
+        "place_id": "ChIJq6qZojkHCEcRzJVdm7kE2rM",
+        "address": "Neckarsulmer Str. 9, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_hem_tankstelle",
+      "name": "HEM Tankstelle",
+      "before": {
+        "lat": 51.85033826,
+        "lng": 13.906681460000001
+      },
+      "google": {
+        "lat": 51.850367,
+        "lng": 13.906728,
+        "place_id": "ChIJyaWPwMMACEcRaim_VP9sjNM",
+        "address": "LPG-Straße 1b, 03222 Lübbenau/Spreewald-Groß Beuchow"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_verbio_cng_tankstelle_lubbenau_spreewald_biomethan_geeignet_fur_lkw_so",
+      "name": "Verbio CNG-Tankstelle Lübbenau/Spreewald (Biomethan) (geeignet für LKW sowie PKW)",
+      "before": {
+        "lat": 51.83352386,
+        "lng": 13.91685278
+      },
+      "google": {
+        "lat": 51.8335526,
+        "lng": 13.9168993,
+        "place_id": "ChIJY6efdwEBCEcRGGtC4AyIjhQ",
+        "address": "03222 Lübbenau/Spreewald-Kittlitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_totalenergies_tankstelle",
+      "name": "TotalEnergies Tankstelle",
+      "before": {
+        "lat": 51.846653059999994,
+        "lng": 13.97240176
+      },
+      "google": {
+        "lat": 51.8466818,
+        "lng": 13.9724483,
+        "place_id": "ChIJM8NqVxIHCEcRz8iUutDZro4",
+        "address": "Boblitzer Chausseestraße 2c, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_barmalgas_lng_tankstelle",
+      "name": "BarMalGas LNG Tankstelle",
+      "before": {
+        "lat": 51.833829460000004,
+        "lng": 13.915965980000001
+      },
+      "google": {
+        "lat": 51.83385819999999,
+        "lng": 13.9160125,
+        "place_id": "ChIJrQ__O4wBCEcRPxcr2gItPnk",
+        "address": "Kückebuscher Weg, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_as_24",
+      "name": "AS 24",
+      "before": {
+        "lat": 51.83176126000001,
+        "lng": 13.917563480000002
+      },
+      "google": {
+        "lat": 51.83179,
+        "lng": 13.91761,
+        "place_id": "ChIJq4gf_hkBCEcRpK9tliw_ZnQ",
+        "address": "Vorberger Str. 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_alternoil_gmbh_lng_tankstelle_lubbenau",
+      "name": "Alternoil GmbH - LNG Tankstelle Lübbenau",
+      "before": {
+        "lat": 51.83105196,
+        "lng": 13.91623318
+      },
+      "google": {
+        "lat": 51.8310807,
+        "lng": 13.9162797,
+        "place_id": "ChIJ12bcD2kBCEcRLwCiPj-sCOk",
+        "address": "Vorberger Str. 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_erdgastankstelle",
+      "name": "Erdgastankstelle",
+      "before": {
+        "lat": 51.85172666,
+        "lng": 13.905977960000001
+      },
+      "google": {
+        "lat": 51.8531959,
+        "lng": 13.9493758,
+        "place_id": "ChIJadeX2EcHCEcRo8z-V9b76EE",
+        "address": "Aral, Tankstelle, Str. des Friedens 40, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 2985,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_backerei_dreissig",
+      "name": "Bäckerei Dreißig",
+      "before": {
+        "lat": 51.86030036,
+        "lng": 13.951837060000003
+      },
+      "google": {
+        "lat": 51.8601653,
+        "lng": 13.9533888,
+        "place_id": "ChIJsaPoXkUHCEcRTbqKsJuSO3M",
+        "address": "Roter Pl. 2, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 108,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "spreewald_deutsches_rotes_kreuz_kreisverband_calau_e_v",
+      "name": "Deutsches Rotes Kreuz Kreisverband Calau e.V.",
+      "before": {
+        "lat": 51.86392576000001,
+        "lng": 13.93765516
+      },
+      "google": {
+        "lat": 51.8639545,
+        "lng": 13.9377017,
+        "place_id": "ChIJ6fVpXa0ACEcREYPCUz5mSlw",
+        "address": "Rudolf-Breitscheid-Straße 23, 03222 Lübbenau/Spreewald-Zerkwitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_gipfelkreuz_schwarzer_berg",
+      "name": "Gipfelkreuz Schwarzer Berg",
+      "before": {
+        "lat": 51.823084959999996,
+        "lng": 14.029072099999999
+      },
+      "google": {
+        "lat": 51.8231137,
+        "lng": 14.0291186,
+        "place_id": "ChIJ1y20nrIHCEcRS9NcXAsXkjk",
+        "address": "Unnamed Road, 03226, 03226 Vetschau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_offentliche_toilette",
+      "name": "Öffentliche Toilette",
+      "before": {
+        "lat": 51.867909159999996,
+        "lng": 13.967833339999999
+      },
+      "google": {
+        "lat": 51.8679379,
+        "lng": 13.9678799,
+        "place_id": "ChIJ0a_QfgAHCEcR48Xil9du4bM",
+        "address": "Poststraße 14, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_wc_kostelos",
+      "name": "WC Kostelos",
+      "before": {
+        "lat": 51.86365386,
+        "lng": 13.993173860000002
+      },
+      "google": {
+        "lat": 51.8675372,
+        "lng": 13.9673945,
+        "place_id": "ChIJYx9eYm8HCEcRei73JBI-NIA",
+        "address": "Poststraße 16, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 1822,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_wc",
+      "name": "WC",
+      "before": {
+        "lat": 51.86214966,
+        "lng": 13.99247626
+      },
+      "google": {
+        "lat": 51.86691,
+        "lng": 13.9728324,
+        "place_id": "ChIJGczk83oHCEcRGHyIZbztDcU",
+        "address": "Dammstraße 77A, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 1449,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_toiletten",
+      "name": "Toiletten",
+      "before": {
+        "lat": 51.827312559999996,
+        "lng": 13.99524938
+      },
+      "google": {
+        "lat": 51.86691,
+        "lng": 13.9728324,
+        "place_id": "ChIJGczk83oHCEcRGHyIZbztDcU",
+        "address": "Dammstraße 77A, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 4665,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_kaupen_nr_6",
+      "name": "Kaupen Nr.6",
+      "before": {
+        "lat": 51.86459146000001,
+        "lng": 13.982118739999999
+      },
+      "google": {
+        "lat": 51.8647427,
+        "lng": 13.9821969,
+        "place_id": "ChIJjRcrBzUHCEcR9Ud0z1kNasA",
+        "address": "Kaupen 6, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 18,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_restaurant_zeitless",
+      "name": "Restaurant Zeitless",
+      "before": {
+        "lat": 51.86575346000001,
+        "lng": 13.954950239999999
+      },
+      "google": {
+        "lat": 51.8657822,
+        "lng": 13.9549968,
+        "place_id": "ChIJFSM4bhwHCEcRvihajLDDOKo",
+        "address": "Nach Stottoff 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_spreewald_schenke",
+      "name": "Spreewald Schenke",
+      "before": {
+        "lat": 51.85769216,
+        "lng": 13.962653759999998
+      },
+      "google": {
+        "lat": 51.8577209,
+        "lng": 13.9627003,
+        "place_id": "ChIJzVH13SAHCEcR_iqyLt7QQpo",
+        "address": "Robert-Koch-Straße 46D, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_bei_benno_s",
+      "name": "Bei Benno's",
+      "before": {
+        "lat": 51.86463766000001,
+        "lng": 13.971789039999999
+      },
+      "google": {
+        "lat": 51.8646664,
+        "lng": 13.9718356,
+        "place_id": "ChIJj8rySmcHCEcRBtG4kTPfvlM",
+        "address": "Dammstraße 24, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_brenner_s_bauernschanke",
+      "name": "Brenner´S Bauernschänke",
+      "before": {
+        "lat": 51.86468876,
+        "lng": 13.990789239999998
+      },
+      "google": {
+        "lat": 51.8647175,
+        "lng": 13.9908358,
+        "place_id": "ChIJ-1-zTnwHCEcR3n6ue9Nrujc",
+        "address": "Dorfstraße 3, 03222 Lübbenau/Spreewald-Lehde"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_steakhaus_santa_fe",
+      "name": "Steakhaus Santa Fe",
+      "before": {
+        "lat": 51.85821606,
+        "lng": 13.963366960000002
+      },
+      "google": {
+        "lat": 51.8582448,
+        "lng": 13.9634135,
+        "place_id": "ChIJ_arm_kIHCEcR18FABcFFtXo",
+        "address": "Robert-Koch-Straße 44 ￼￼E. Stuckart, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_hartmanns_cafe_bierstube_und_ferienwohnung",
+      "name": "Hartmanns Café, Bierstube und Ferienwohnung 🌺",
+      "before": {
+        "lat": 51.859910760000005,
+        "lng": 13.93594186
+      },
+      "google": {
+        "lat": 51.8599395,
+        "lng": 13.9359884,
+        "place_id": "ChIJz_6eOLMACEcR0oAOgKubkLU",
+        "address": "Kleedener Str. 5, 03222 Lübbenau/Spreewald-Zerkwitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_cafe_venedig",
+      "name": "Café Venedig",
+      "before": {
+        "lat": 51.863025959999995,
+        "lng": 13.98734696
+      },
+      "google": {
+        "lat": 51.8630547,
+        "lng": 13.9873935,
+        "place_id": "ChIJwz_5mHwHCEcRJKikwRM253A",
+        "address": "Biosphärenreservat Spreewald, An der Lischka 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_hotel_radduscher_hafen",
+      "name": "Hotel Radduscher Hafen",
+      "before": {
+        "lat": 51.81839516,
+        "lng": 14.0410371
+      },
+      "google": {
+        "lat": 51.8184239,
+        "lng": 14.0410836,
+        "place_id": "ChIJcbTFdoAICEcRbjqAmLUxtSw",
+        "address": "Radduscher Dorfstraße 10, 03226 Vetschau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_best_western_spreewald_hotel",
+      "name": "Best Western Spreewald Hotel",
+      "before": {
+        "lat": 51.851195759999996,
+        "lng": 13.906431060000003
+      },
+      "google": {
+        "lat": 51.8512245,
+        "lng": 13.9064776,
+        "place_id": "ChIJyaWPwMMACEcRGyTo9G_Fl0w",
+        "address": "LPG-Straße 1c, 03222 Lübbenau/Spreewald-Groß Beuchow"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_gasthaus_und_hotel_spreewaldeck_geschwister_noack_ohg",
+      "name": "Gasthaus und Hotel Spreewaldeck Geschwister Noack oHG",
+      "before": {
+        "lat": 51.86376956,
+        "lng": 13.96924906
+      },
+      "google": {
+        "lat": 51.8637983,
+        "lng": 13.9692956,
+        "place_id": "ChIJHzgW810HCEcRin38GdDAp1A",
+        "address": "Dammstraße 31, 03222 Lübbenau/Spreewald-Boblitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_gasthaus_dubkow_muhle",
+      "name": "Gasthaus Dubkow-Mühle",
+      "before": {
+        "lat": 51.84475116000001,
+        "lng": 14.05883236
+      },
+      "google": {
+        "lat": 51.8447799,
+        "lng": 14.0588789,
+        "place_id": "ChIJ6bKUR_0HCEcRkJnJT2S7-kY",
+        "address": "Dubkowmühle 1, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_hotel_markischheide_gmbh",
+      "name": "Hotel Märkischheide GmbH",
+      "before": {
+        "lat": 51.78682886,
+        "lng": 14.097615819999998
+      },
+      "google": {
+        "lat": 51.7868576,
+        "lng": 14.0976623,
+        "place_id": "ChIJ3XpMJCMJCEcRNU-n3q690So",
+        "address": "Lindenallee 2, 03226 Vetschau/Spreewald"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_hotel_landhaus_brodack_kutsch_u_kahnfahrten",
+      "name": "Hotel Landhaus Brodack Kutsch- u. Kahnfahrten",
+      "before": {
+        "lat": 51.919608659999994,
+        "lng": 14.0138711
+      },
+      "google": {
+        "lat": 51.9196374,
+        "lng": 14.0139177,
+        "place_id": "ChIJd41fTEX8B0cRdwPXiCzWOns",
+        "address": "Hauptstraße 33, 15913 Alt Zauche-Wußwerk-Alt Zauche"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_pension_am_markt",
+      "name": "Pension am Markt",
+      "before": {
+        "lat": 51.94138746000001,
+        "lng": 13.894844560000001
+      },
+      "google": {
+        "lat": 51.9414162,
+        "lng": 13.8948912,
+        "place_id": "ChIJM365fRb_B0cRJJupIpygBL4",
+        "address": "Hauptstraße 5, 15907 Lübben (Spreewald)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_hotel_am_muhlberg",
+      "name": "Hotel „Am Mühlberg“",
+      "before": {
+        "lat": 51.85048616,
+        "lng": 13.915447360000002
+      },
+      "google": {
+        "lat": 51.8505149,
+        "lng": 13.9154939,
+        "place_id": "ChIJCzbeDcYACEcRnFkee6jumbY",
+        "address": "Luckauer Landstraße 12, 03222 Lübbenau/Spreewald-Groß Beuchow"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_riesenmotorrad",
+      "name": "Riesenmotorrad",
+      "before": {
+        "lat": 51.83165306000001,
+        "lng": 13.995457060000001
+      },
+      "google": {
+        "lat": 51.90299359999999,
+        "lng": 13.9671485,
+        "place_id": "ChIJcW5r-wniB0cRuxmCfzNr2fs",
+        "address": "Lübbenau/Spreewald"
+      },
+      "delta_m": 8167,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_schleuse_in_lubben",
+      "name": "Schleuse in Lübben",
+      "before": {
+        "lat": 51.93923956,
+        "lng": 13.89550872
+      },
+      "google": {
+        "lat": 51.93927550000001,
+        "lng": 13.895567,
+        "place_id": "ChIJPyLr5BD_B0cRJS30mrsltQs",
+        "address": "15907 Lübben (Spreewald)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_kirche_gross_lubbenau_pfarrsprengel_lubbenau_und_umland",
+      "name": "Kirche Groß Lübbenau - Pfarrsprengel Lübbenau und Umland",
+      "before": {
+        "lat": 51.82954816,
+        "lng": 13.977839060000003
+      },
+      "google": {
+        "lat": 51.8295841,
+        "lng": 13.9778972,
+        "place_id": "ChIJwZ0TwTsHCEcRo5yj5x9H_HY",
+        "address": "Große Bergstraße 22, 03222 Lübbenau/Spreewald-Groß Lübbenau"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_schloss_lubben",
+      "name": "Schloss Lübben",
+      "before": {
+        "lat": 51.93991285999999,
+        "lng": 13.899167420000001
+      },
+      "google": {
+        "lat": 51.939008,
+        "lng": 13.899826,
+        "place_id": "ChIJE1999wv_B0cRJzZqgLWpHKU",
+        "address": "Ernst-von-Houwald-Damm 14, 15907 Lübben (Spreewald)"
+      },
+      "delta_m": 110,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "spreewald_aussichtspunkt_mit_rastplatz",
+      "name": "Aussichtspunkt mit Rastplatz",
+      "before": {
+        "lat": 51.82273216000001,
+        "lng": 13.890357360000001
+      },
+      "google": {
+        "lat": 51.8227681,
+        "lng": 13.8904155,
+        "place_id": "ChIJjfYefgABCEcR0coNY8XoCPk",
+        "address": "Lichtenau, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_klanggarten",
+      "name": "Klanggarten",
+      "before": {
+        "lat": 51.93806386,
+        "lng": 13.90066592
+      },
+      "google": {
+        "lat": 51.9380998,
+        "lng": 13.9007242,
+        "place_id": "ChIJ0bMeXQ7_B0cREGUH2Ozmbag",
+        "address": "Mühlendamm 10, 15907 Lübben (Spreewald)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_wasserspielplatz_lubben",
+      "name": "Wasserspielplatz Lübben",
+      "before": {
+        "lat": 51.93876516,
+        "lng": 13.900780919999999
+      },
+      "google": {
+        "lat": 51.93880110000001,
+        "lng": 13.9008392,
+        "place_id": "ChIJ141aLRf_B0cR_bSXioFS-dU",
+        "address": "Schlossinsel, 15907 Lübben (Spreewald)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_gartensparte_an_der_eisenbahn_raddusch",
+      "name": "Gartensparte \"An der Eisenbahn\" Raddusch",
+      "before": {
+        "lat": 51.81205466,
+        "lng": 14.03798018
+      },
+      "google": {
+        "lat": 51.8120906,
+        "lng": 14.0380383,
+        "place_id": "ChIJKSMxOoIICEcRZEy-JOUpjLM",
+        "address": "Schulweg 10, 03226 Vetschau/Spreewald-Raddusch"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_lubbenau_see",
+      "name": "Lübbenau See",
+      "before": {
+        "lat": 51.83633536,
+        "lng": 13.89482854
+      },
+      "google": {
+        "lat": 51.90299359999999,
+        "lng": 13.9671485,
+        "place_id": "ChIJcW5r-wniB0cRuxmCfzNr2fs",
+        "address": "Lübbenau/Spreewald"
+      },
+      "delta_m": 8921,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_spreelagune",
+      "name": "Spreelagune",
+      "before": {
+        "lat": 51.93749726000001,
+        "lng": 13.897421320000001
+      },
+      "google": {
+        "lat": 51.9375332,
+        "lng": 13.8974796,
+        "place_id": "ChIJYSn3WhT_B0cR_AsVFw-9snw",
+        "address": "15907 Lübben (Spreewald)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_naturhafen_leipe",
+      "name": "Naturhafen Leipe",
+      "before": {
+        "lat": 51.85320015999999,
+        "lng": 14.05037862
+      },
+      "google": {
+        "lat": 51.8532361,
+        "lng": 14.0504368,
+        "place_id": "ChIJ29uAaPwHCEcRG7o8yftkJfA",
+        "address": "Leiper Dorfstraße, 03222 Lübbenau/Spreewald"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_uberwachsenes_gebaude",
+      "name": "Überwachsenes Gebäude",
+      "before": {
+        "lat": 51.92007906,
+        "lng": 13.91427714
+      },
+      "google": {
+        "lat": 51.920115,
+        "lng": 13.9143354,
+        "place_id": "ChIJCdZHacb_B0cRlK8yas4Le3k",
+        "address": "15907 Lübben (Spreewald)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_pension_erlenhof_marlis_jedro_mudraschk",
+      "name": "Pension Erlenhof - Marlis Jedro-Mudraschk",
+      "before": {
+        "lat": 51.86852726000001,
+        "lng": 13.919622899999998
+      },
+      "google": {
+        "lat": 51.8685632,
+        "lng": 13.9196811,
+        "place_id": "ChIJpak0Bk8HCEcRVOLoaTUa5Ig",
+        "address": "Lindenstraße 5, 03222 Lübbenau/Spreewald-Krimnitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "spreewald_streichelzoo_vom_landhotel_burg",
+      "name": "Streichelzoo vom Landhotel Burg",
+      "before": {
+        "lat": 51.85550916,
+        "lng": 14.10953902
+      },
+      "google": {
+        "lat": 51.8555451,
+        "lng": 14.1095972,
+        "place_id": "ChIJRbzTN4LiB0cR4TkjEL9QBW0",
+        "address": "Ringchaussee 125, 03096 Burg-Kauper"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "spreewald_boots_fahrradverleih_keutel",
+      "name": "Boots- & Fahrradverleih Keutel",
+      "before": {
+        "lat": 51.93689666,
+        "lng": 13.904397220000002
+      },
+      "google": {
+        "lat": 51.9369326,
+        "lng": 13.9044555,
+        "place_id": "ChIJKwayQK7_B0cRXjfyesAsG-Y",
+        "address": "Friedrich-Ludwig-Jahn-Straße 37, 15907 Lübben (Spreewald)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    }
+  ]
+}

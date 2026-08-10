@@ -4,8 +4,8 @@
  * 2) pronunciations.json Map
  * 3) natives espeak-ng (de) für Rest
  */
-import { filterPhonemesToVocab } from '../../constants/kokoroVocab';
-import { mapEspeakIpaToKokoro } from './nativeEspeakG2p';
+import { filterPhonemesToVocab } from '../../constants/phonemeSanitize';
+import { mapEspeakIpaToTts } from './nativeEspeakG2p';
 import { isOrthoPronunciation } from './phoneticTransformer';
 import {
   getGlobalPhraseKeys,
@@ -155,7 +155,7 @@ export async function phonemizeWithPronunciationMap(
   const parts: string[] = [];
   for (const seg of segments) {
     if (seg.kind === 'ipa') {
-      parts.push(mapEspeakIpaToKokoro(seg.value));
+      parts.push(mapEspeakIpaToTts(seg.value));
     } else {
       const t = seg.value.trim();
       if (!t) {

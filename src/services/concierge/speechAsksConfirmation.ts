@@ -13,7 +13,7 @@ export function speechAsksForConfirmation(speech: string): boolean {
       t,
     );
   const offers =
-    /\b(heraussuch|raussuch|zeig(en)?|buch(en)?|reservier|kompass|route|tour|unterkunft|hotel|mietwagen|uber|gepäck|gepaeck|option)\b/iu.test(
+    /\b(heraussuch|raussuch|zeig(en)?|buch(en)?|reservier|vorbereiten|tisch|kompass|route|tour|unterkunft|hotel|mietwagen|uber|gepäck|gepaeck|option)\b/iu.test(
       t,
     );
   return asks && (offers || /\?/.test(t));
@@ -27,6 +27,27 @@ export function shouldShowConfirmationButton(
   actions: QuickAction[],
 ): boolean {
   if (!speechAsksForConfirmation(speech)) return false;
+  // Just-Do-It: Permission-Lookup-Fragen nie als „Ja“-Chip
+  if (
+    /\bsoll\s+ich\b[^.?!]{0,80}\b(heraussuch|raussuch|nachschau|nachseh|telefon|nummer|party|locations?|orte)\b/iu.test(
+      speech,
+    )
+  ) {
+    return false;
+  }
+  // Just-Do-It: Ergebnis schon da → kein Ja-Button für „Soll ich suchen?“
+  if (
+    actions.some((a) => a.type === 'DIAL_PHONE' && a.payload.phoneNumber) &&
+    /\b(telefon|nummer|anruf)\b/iu.test(speech)
+  ) {
+    return false;
+  }
+  if (
+    actions.filter((a) => a.type === 'START_NAVIGATION').length >= 1 &&
+    /\b(party|heraussuch|raussuch|locations?|orte|welchen\s+nehmen)\b/iu.test(speech)
+  ) {
+    return false;
+  }
   const hasReadyPlaylist = actions.some(isPlaylistQuickAction);
   if (
     hasReadyPlaylist &&

@@ -2,6 +2,27 @@ import type { RemoteFact, RemotePoi } from './supabase';
 import type { GeoLatLng, PoiTriggerKind } from '../types/poiGeo';
 import { serializePolygon } from './geo/polygon';
 import { clearNavWaypointsRegistry, setNavWaypointsForSpot } from './navigation/navWaypointsRegistry';
+import {
+  clearTransitStationRegistry,
+  setTransitPackConfig,
+  type PackTransitConfig,
+} from './transit/stationRegistry';
+import {
+  clearMobilityPackConfig,
+  setMobilityPackConfig,
+  type PackMobilityConfig,
+} from './mobility/mobilityRegistry';
+import {
+  clearLiveResearchPackConfig,
+  setLiveResearchPackConfig,
+  type PackLiveResearchPrompt,
+} from './research/liveResearchRegistry';
+import {
+  clearOfflineQaPackConfig,
+  setOfflineQaPackConfig,
+  type PackOfflineQa,
+} from './research/offlineQaRegistry';
+import { registerCoverageBoundsFromPack } from './discovery/cityCoverageBounds';
 
 type PlaceFactsPack = {
   origin?: string;
@@ -47,6 +68,10 @@ type CitySpot = {
   bullets?: string[];
   tags?: string[];
   facts?: PlaceFactsPack;
+  /** story = Trigger/Narration; directory = Offline-Katalog ohne Wegweiser-Spam */
+  pack_role?: 'story' | 'directory' | string;
+  place_tier?: number;
+  relevance?: string[];
   polygon?: Array<{ lat: number; lng: number } | GeoLatLng>;
   polygonCoordinates?: GeoLatLng[];
   approach_triggers?: ApproachPack[];
@@ -98,6 +123,15 @@ export type CityPackLink = {
   tags?: string[];
 };
 
+export type CityPackCoverage = {
+  latMin: number;
+  latMax: number;
+  lngMin: number;
+  lngMax: number;
+  /** Optional [lat,lng][] Stadtgrenze für Stempelkarte */
+  polygon?: Array<[number, number]>;
+};
+
 export type CityPack = {
   city_id: string;
   name?: string;
@@ -105,11 +139,48 @@ export type CityPack = {
   symbol?: string;
   lat?: number;
   lng?: number;
+  /**
+   * Stadtauswahl-Hero (HTTPS, z. B. Supabase staedte/covers oder Wikimedia).
+   * Hat Vorrang vor optionalen lokalen Fallbacks in cityCovers.ts.
+   */
+  cover_url?: string;
   district_division?: string[];
   spots: CitySpot[];
   trigger_points: CityTriggerPoint[];
   /** Offizielle Hilfs-Links (Ortsplan, Webcam, …) — UI, nicht Story-Fakten. */
   _links?: CityPackLink[];
+  /** Quellen-URLs aus dem Pack-Build (Website/Events) — für Action-Buttons. */
+  _meta?: {
+    sources?: string[];
+    scan_date?: string;
+    data_version?: number;
+    cover_url?: string;
+    [key: string]: unknown;
+  };
+  /** ÖPNV: Haltestellen + Verbund-/GTFS-Config. */
+  _transit?: PackTransitConfig;
+  /** Bike-Share / Parking. */
+  _mobility?: PackMobilityConfig;
+  /**
+   * Ephemeral Live-Research-Prompts (Preise, Speisekarten, heutige Events, Hotels).
+   * Nie als feste Pack-Fakten speichern — App sucht zur Laufzeit frisch.
+   */
+  _live_research?: PackLiveResearchPrompt[];
+  /**
+   * Stadt-Fläche für Stempelkarte / „% erkundet“ / „in dieser Stadt“.
+   * Nicht dasselbe wie POI-Polygone.
+   */
+  _coverage?: CityPackCoverage;
+  /** Stadtweite Offline-Fragen/Antworten (Infrastruktur, Katalog-Zusammenfassungen). */
+  _offline_qa?: PackOfflineQa[];
+  /** UI-Zahlen: Story vs Directory vs Gesamt. */
+  _pack_index?: {
+    total?: number;
+    story?: number;
+    directory?: number;
+    offline_qa?: number;
+    note?: string;
+  };
 };
 
 const BULLET_PREFIX = /^[➔➤►]\s*/u;
@@ -172,6 +243,17 @@ function collectTags(spot: CitySpot): string[] {
   for (const t of spot.tags ?? []) tags.add(String(t).toLowerCase());
   for (const t of spot.facts?.tags ?? []) tags.add(String(t).toLowerCase());
   if (spot.category) tags.add(spot.category.toLowerCase());
+  if (spot.pack_role) tags.add(String(spot.pack_role).toLowerCase());
+  if (spot.place_tier != null) tags.add(`tier${spot.place_tier}`);
+  if (
+    spot.pack_role === 'directory' ||
+    Number(spot.place_tier) === 4
+  ) {
+    tags.add('directory');
+    tags.add('tier4');
+    tags.add('offline_lookup');
+    tags.add('amenity_skip');
+  }
   if (spot.facts?.famousPersonConnected) {
     tags.add('promi');
     tags.add(`famous:${spot.facts.famousPersonConnected}`);
@@ -196,6 +278,29 @@ export function mapCityPackToRemote(
   pack: CityPack,
 ): { pois: RemotePoi[]; facts: RemoteFact[] } {
   clearNavWaypointsRegistry();
+  clearTransitStationRegistry();
+  clearMobilityPackConfig();
+  clearLiveResearchPackConfig();
+  clearOfflineQaPackConfig();
+  if (pack._transit) setTransitPackConfig(pack._transit);
+  if (pack._mobility) setMobilityPackConfig(pack._mobility);
+  if (pack._live_research?.length) {
+    setLiveResearchPackConfig(pack._live_research);
+  }
+  if (pack._offline_qa?.length) {
+    setOfflineQaPackConfig(pack._offline_qa);
+  }
+  if (pack._coverage) {
+    registerCoverageBoundsFromPack({
+      cityId: pack.city_id,
+      name: pack.name,
+      latMin: pack._coverage.latMin,
+      latMax: pack._coverage.latMax,
+      lngMin: pack._coverage.lngMin,
+      lngMax: pack._coverage.lngMax,
+      polygon: pack._coverage.polygon,
+    });
+  }
   const triggers = pack.trigger_points ?? [];
   const triggerById = new Map(triggers.map((tp) => [tp.id, tp]));
   const triggersByName = new Map<string, CityTriggerPoint[]>();
@@ -420,6 +525,15 @@ export function mapCityPackToRemote(
             landmark: (w as { landmark?: string }).landmark ?? null,
             cue: (w as { cue?: string }).cue ?? null,
             instruction: (w as { instruction?: string }).instruction ?? null,
+            isStation:
+              (w as { isStation?: boolean; is_station?: boolean }).isStation ===
+                true ||
+              (w as { is_station?: boolean }).is_station === true,
+            stationName:
+              (w as { stationName?: string; station_name?: string })
+                .stationName ??
+              (w as { station_name?: string }).station_name ??
+              null,
           })),
       );
     }

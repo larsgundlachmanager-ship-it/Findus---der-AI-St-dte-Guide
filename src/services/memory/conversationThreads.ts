@@ -310,6 +310,47 @@ function hasAnaphora(text: string): boolean {
   return false;
 }
 
+/** Neue Blaupause / neuer Chat-Tab — nicht an alten Thread kleben. */
+export function looksLikeFreshSessionOpener(text: string): boolean {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (t.length < 12) return false;
+  if (hasAnaphora(t)) return false;
+  return /\b(?:welche\s+filme|ins\s+kino|kino\s+gehen|kinoprogramm|empfehl\w*.{0,48}\b(?:film|kino)|(?:morgen|heute)\s+abend.{0,40}\b(?:kino|film)|wo\s+(?:kann|gibt).{0,48}\b(?:essen|trinken|restaurant)|ich\s+(?:hab|habe|hätt|haette?)\b.{0,24}\büberlegt|lass\s+uns\b|was\s+geht\s+(?:heute|morgen)|tagesplan|unterkunft|\bhotel\b)\b/iu.test(
+    t,
+  );
+}
+
+/** Kurze Rückfrage im laufenden Blaupausen-Chat. */
+export function isLikelyShortFollowUp(text: string): boolean {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (t.length > 0 && t.length <= 48) return true;
+  return /\b(?:warum|wieso|weshalb|und\s+dann|was\s+noch|mehr\s+dazu|erzähl|erzaehl|geschlossen|wann|wie\s+viel|noch\s+mehr|welche\s+uhrzeit|um\s+wie\s*viel|tickets?|dafür|davon|dazu|und\s+der|und\s+die|der\s+andere|die\s+andere)\b/iu.test(
+    t,
+  );
+}
+
+/**
+ * Mic-Early-Bridge: ohne Thread zu mutieren — Follow-up im offenen Chat → keine Bridge.
+ */
+export function shouldSuppressEarlyBridge(userText: string): boolean {
+  const text = (userText || '').trim();
+  if (!text) return true;
+  if (looksLikeFreshSessionOpener(text)) return false;
+  const fg = getForegroundThread();
+  if (!fg) return false;
+  const recent = nowMs() - fg.updatedAt < 45 * 60_000;
+  if (!recent) return false;
+  if (hasAnaphora(text)) return true;
+  const category = inferThreadCategory({ userText: text });
+  const sameCat =
+    fg.category === category ||
+    category === 'other' ||
+    fg.category === 'other' ||
+    category === 'chat';
+  if (sameCat && isLikelyShortFollowUp(text)) return true;
+  return false;
+}
+
 function wantsExplicitNewTopic(text: string): boolean {
   return /\b(was\s+anderes|anderes\s+thema|neues\s+thema|egal\s+(?:das|davon)|vergiss\s+(?:das|es)|ganz\s+was\s+anderes|zurück\s+zum\s+thema|wechsel(?:n)?\s+(?:wir\s+)?(?:das\s+)?thema)\b/iu.test(
     text,
@@ -510,10 +551,14 @@ export function routeConversationTopic(opts: {
     const score = scoreResumeMatch(t, text);
     if (!best || score > best.score) best = { thread: t, score };
   }
+  // Härterer Cut: Resume nur bei explizitem Zurück-Wollen oder sehr starkem Entity-Treffer —
+  // nicht schon wegen gleicher Kategorie („Kino“ klebt sonst an gestern).
   const resumeHit =
     best &&
-    best.score >= 8 &&
-    (wantsExplicitResume(text) || best.score >= 10 || category === best.thread.category);
+    !looksLikeFreshSessionOpener(text) &&
+    (wantsExplicitResume(text)
+      ? best.score >= 8
+      : best.score >= 14);
 
   if (resumeHit && best) {
     let thread = best.thread;
@@ -551,11 +596,14 @@ export function routeConversationTopic(opts: {
         normalizeToken(text).includes(normalizeToken(v)),
       );
     const recent = nowMs() - freshFg.updatedAt < 45 * 60_000;
+    // Continue nur bei Anapher, Entity-Treffer oder kurzer Rückfrage —
+    // nicht bei jedem neuen Satz derselben Kategorie in 45 Min (klebt an „gestern“).
     const cont =
       !wantsExplicitNewTopic(text) &&
+      !looksLikeFreshSessionOpener(text) &&
       (hasAnaphora(text) ||
-        (sameCat && (entityHit || recent || !opts.intent)) ||
-        (sameCat && entityHit));
+        (sameCat && entityHit) ||
+        (sameCat && recent && isLikelyShortFollowUp(text)));
 
     if (cont && !(wantsParallel(text) && !sameCat && !hasAnaphora(text))) {
       let thread = freshFg;

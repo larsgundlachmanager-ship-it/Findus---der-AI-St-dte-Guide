@@ -1,0 +1,6175 @@
+{
+  "city_id": "potsdam",
+  "apply": true,
+  "maxDelta": 80,
+  "summary": {
+    "ok": 324,
+    "check": 3,
+    "bad": 35,
+    "errors": 0,
+    "applied": 7
+  },
+  "rows": [
+    {
+      "id": "potsdam_potsdam_hauptbahnhof",
+      "name": "Potsdam Hauptbahnhof",
+      "before": {
+        "lat": 52.39113404,
+        "lng": 13.067165339999999
+      },
+      "google": {
+        "lat": 52.3912059,
+        "lng": 13.0672831,
+        "place_id": "ChIJMQlzFur1qEcRy2RpIPcoENA",
+        "address": "Friedrich-Engels-Straße 99, 14473 Potsdam"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_s_potsdam_hauptbahnhof_nord_ilb",
+      "name": "S Potsdam Hauptbahnhof/Nord ILB",
+      "before": {
+        "lat": 52.392728139999996,
+        "lng": 13.06705224
+      },
+      "google": {
+        "lat": 52.3928,
+        "lng": 13.06717,
+        "place_id": "ChIJv4FGCsL1qEcRX5y8pnqUxB4",
+        "address": "14473 Potsdam, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_potsdam_hbf",
+      "name": "Potsdam Hbf",
+      "before": {
+        "lat": 52.392037540000004,
+        "lng": 13.066763839999998
+      },
+      "google": {
+        "lat": 52.3912059,
+        "lng": 13.0672831,
+        "place_id": "ChIJMQlzFur1qEcRy2RpIPcoENA",
+        "address": "Friedrich-Engels-Straße 99, 14473 Potsdam"
+      },
+      "delta_m": 99,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "potsdam_s_potsdam_hauptbahnhof",
+      "name": "S Potsdam Hauptbahnhof",
+      "before": {
+        "lat": 52.39085814,
+        "lng": 13.06625224
+      },
+      "google": {
+        "lat": 52.3912059,
+        "lng": 13.0672831,
+        "place_id": "ChIJMQlzFur1qEcRy2RpIPcoENA",
+        "address": "Friedrich-Engels-Straße 99, 14473 Potsdam"
+      },
+      "delta_m": 80,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "potsdam_hauptbahnhof_friedrich_engels_str",
+      "name": "Hauptbahnhof/Friedrich-Engels-Str.",
+      "before": {
+        "lat": 52.39026814,
+        "lng": 13.06623224
+      },
+      "google": {
+        "lat": 52.3912059,
+        "lng": 13.0672831,
+        "place_id": "ChIJMQlzFur1qEcRy2RpIPcoENA",
+        "address": "Friedrich-Engels-Straße 99, 14473 Potsdam"
+      },
+      "delta_m": 126,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_bahnhof_babelsberg",
+      "name": "Bahnhof Babelsberg",
+      "before": {
+        "lat": 52.391328339999994,
+        "lng": 13.09277284
+      },
+      "google": {
+        "lat": 52.3914002,
+        "lng": 13.0928906,
+        "place_id": "ChIJZZcP_vb1qEcRNIAiM6eeqLY",
+        "address": "Rudolf-Breitscheid-Straße 40, 14482 Potsdam"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_charlottenhof",
+      "name": "Charlottenhof",
+      "before": {
+        "lat": 52.39283723999999,
+        "lng": 13.03607154
+      },
+      "google": {
+        "lat": 52.3929091,
+        "lng": 13.0361893,
+        "place_id": "ChIJQ1Z9zTT0qEcRRQE6qj5WZpw",
+        "address": "14471 Potsdam, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_park_sanssouci",
+      "name": "Park Sanssouci",
+      "before": {
+        "lat": 52.39379404,
+        "lng": 13.015323239999997
+      },
+      "google": {
+        "lat": 52.4032527,
+        "lng": 13.0298685,
+        "place_id": "ChIJVb8AhS30qEcR_NuoQadC_0U",
+        "address": "Zur Historischen Mühle 1, 14469 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 1442,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_platz_der_einheit_west",
+      "name": "Platz der Einheit/West",
+      "before": {
+        "lat": 52.39865994,
+        "lng": 13.05779382
+      },
+      "google": {
+        "lat": 52.3987318,
+        "lng": 13.0579116,
+        "place_id": "ChIJjajh2dr1qEcRYvLyUUUsi-U",
+        "address": "14467 Potsdam, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_parkhaus_apcoa_potsdam_hauptbahnhof",
+      "name": "Parkhaus APCOA Potsdam Hauptbahnhof",
+      "before": {
+        "lat": 52.39230703999999,
+        "lng": 13.068505539999999
+      },
+      "google": {
+        "lat": 52.3923789,
+        "lng": 13.0686233,
+        "place_id": "ChIJFypSk-n1qEcR3A6KCIwbDN0",
+        "address": "Babelsberger Str. 16, 14473 Potsdam"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_rehbrucke",
+      "name": "Rehbrücke",
+      "before": {
+        "lat": 52.35832884,
+        "lng": 13.098443219999998
+      },
+      "google": {
+        "lat": 52.3448313,
+        "lng": 13.0976386,
+        "place_id": "ChIJw-pbK5RfqEcR99D0Kt3RRKg",
+        "address": "Nuthetal-Bergholz-Rehbrücke"
+      },
+      "delta_m": 1502,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_schifffahrt_in_potsdam",
+      "name": "SCHIFFFAHRT in POTSDAM",
+      "before": {
+        "lat": 52.39362208,
+        "lng": 13.060691519999997
+      },
+      "google": {
+        "lat": 52.39366159999999,
+        "lng": 13.0607563,
+        "place_id": "ChIJb4KV9MP1qEcRjqooqBGYhps",
+        "address": "Lange Brücke 6, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_wassertaxi_potsdam_anleger_potsdam_hauptbahnhof",
+      "name": "Wassertaxi Potsdam, Anleger Potsdam Hauptbahnhof",
+      "before": {
+        "lat": 52.39234288,
+        "lng": 13.06214894
+      },
+      "google": {
+        "lat": 52.3923824,
+        "lng": 13.0622137,
+        "place_id": "ChIJxd2bHQD1qEcRxtW5Xc-1qkA",
+        "address": "Lange Brücke 6, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_fahre_f1_auf_dem_kiewitt_hermannswerder",
+      "name": "Fähre F1 - Auf dem Kiewitt - Hermannswerder",
+      "before": {
+        "lat": 52.38906978,
+        "lng": 13.039206740000001
+      },
+      "google": {
+        "lat": 52.38910929999999,
+        "lng": 13.0392715,
+        "place_id": "ChIJo16ranb1qEcRwEsM1ByBPBE",
+        "address": "An d. Vorderkappe 26, 14473 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_potsdam_hermannswerder_fahre",
+      "name": "Potsdam, Hermannswerder/Fähre",
+      "before": {
+        "lat": 52.38710048,
+        "lng": 13.039645239999999
+      },
+      "google": {
+        "lat": 52.38714,
+        "lng": 13.03971,
+        "place_id": "ChIJw9HAyLX1qEcRbro0uuyjipA",
+        "address": "14473 Potsdam, Deutschland"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_havelbucht_potsdam_city_hafen",
+      "name": "Havelbucht Potsdam City Hafen",
+      "before": {
+        "lat": 52.39444808,
+        "lng": 13.048053920000001
+      },
+      "google": {
+        "lat": 52.3944876,
+        "lng": 13.0481187,
+        "place_id": "ChIJe97Pe6H1qEcRaab_wGztALU",
+        "address": "Wall am Kiez, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_anlegestelle_station_3_potsdamer_wassertaxi_cecilienhof_meierei",
+      "name": "Anlegestelle Station 3 Potsdamer Wassertaxi \"Cecilienhof - Meierei\"",
+      "before": {
+        "lat": 52.422459079999996,
+        "lng": 13.06944138
+      },
+      "google": {
+        "lat": 52.4224986,
+        "lng": 13.0695062,
+        "place_id": "ChIJKQDQAGv3qEcRY_zwkRWN0R8",
+        "address": "Unnamed Road, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_anleger_stern_und_kreis_potsdam_lange_brucke",
+      "name": "Anleger Stern und Kreis Potsdam Lange Brücke",
+      "before": {
+        "lat": 52.39297648,
+        "lng": 13.061500420000002
+      },
+      "google": {
+        "lat": 52.393016,
+        "lng": 13.0615652,
+        "place_id": "ChIJC8RMAQj1qEcR-h28Tt1TaDo",
+        "address": "Lange Brücke, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_anlegestelle_aldi_bootsliegeplatz",
+      "name": "Anlegestelle - Aldi Bootsliegeplatz",
+      "before": {
+        "lat": 52.40814598000001,
+        "lng": 13.078332
+      },
+      "google": {
+        "lat": 52.40818549999999,
+        "lng": 13.0783968,
+        "place_id": "ChIJVdQFp7v3qEcR0supLAUj808",
+        "address": "Berliner Str. 48, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_lange_brucke",
+      "name": "Lange Brücke",
+      "before": {
+        "lat": 52.39198807999999,
+        "lng": 13.06363574
+      },
+      "google": {
+        "lat": 52.3928547,
+        "lng": 13.0625142,
+        "place_id": "ChIJ_68w0MP1qEcRZ1LjReLyBiE",
+        "address": "Lange Brücke, Potsdam"
+      },
+      "delta_m": 123,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_anlegestelle_station_6_potsdamer_wassertaxi_schiffbauergasse",
+      "name": "Anlegestelle Station 6 Potsdamer Wassertaxi \"Schiffbauergasse\"",
+      "before": {
+        "lat": 52.40385798,
+        "lng": 13.07601182
+      },
+      "google": {
+        "lat": 52.4038975,
+        "lng": 13.0760766,
+        "place_id": "ChIJWVFNZV_1qEcRljeFZMJuB7c",
+        "address": "Schiffbauergasse, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_anleger_schloss_und_park_babelsberg",
+      "name": "Anleger Schloß und Park Babelsberg",
+      "before": {
+        "lat": 52.404678679999996,
+        "lng": 13.083438320000003
+      },
+      "google": {
+        "lat": 52.4047182,
+        "lng": 13.0835031,
+        "place_id": "ChIJ-RYYcwD1qEcRrXuvpUU6uoQ",
+        "address": "Park Babelsberg 2, 14482 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_steganlage_havelbucht",
+      "name": "Steganlage Havelbucht",
+      "before": {
+        "lat": 52.393777580000005,
+        "lng": 13.042918219999999
+      },
+      "google": {
+        "lat": 52.3938171,
+        "lng": 13.042983,
+        "place_id": "ChIJpZ2mrYf1qEcRKtiSmW0fLbM",
+        "address": "Brandenburger Vorstadt, 14471 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_marina_am_tiefen_see",
+      "name": "Marina am Tiefen See",
+      "before": {
+        "lat": 52.40136928,
+        "lng": 13.073492719999999
+      },
+      "google": {
+        "lat": 52.4014088,
+        "lng": 13.0735575,
+        "place_id": "ChIJL6CBg-D1qEcRgQSK0GA-was",
+        "address": "Schiffbauergasse 8, 14467 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_yachthafen_potsdam",
+      "name": "Yachthafen Potsdam",
+      "before": {
+        "lat": 52.386960480000006,
+        "lng": 13.029360239999999
+      },
+      "google": {
+        "lat": 52.387,
+        "lng": 13.029425,
+        "place_id": "ChIJffOJO0r0qEcRq7OKgnIaR7w",
+        "address": "Kastanienallee 22C, 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_potsdam_museum_forum_fur_kunst_und_geschichte",
+      "name": "Potsdam Museum – Forum für Kunst und Geschichte",
+      "before": {
+        "lat": 52.39588238,
+        "lng": 13.062025120000001
+      },
+      "google": {
+        "lat": 52.3959219,
+        "lng": 13.0620899,
+        "place_id": "ChIJ6zdcZc_1qEcR2nzYY6kozR8",
+        "address": "Am Alten Markt 9, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_museum_barberini",
+      "name": "Museum Barberini",
+      "before": {
+        "lat": 52.39507598,
+        "lng": 13.062157719999998
+      },
+      "google": {
+        "lat": 52.3951155,
+        "lng": 13.0622225,
+        "place_id": "ChIJyV9mg0lfqEcRnbhJji6c17E",
+        "address": "Humboldtstraße 5-6, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_das_minsk_kunsthaus_in_potsdam",
+      "name": "DAS MINSK Kunsthaus in Potsdam",
+      "before": {
+        "lat": 52.38865828,
+        "lng": 13.064158240000001
+      },
+      "google": {
+        "lat": 52.3886978,
+        "lng": 13.064223,
+        "place_id": "ChIJT37oL8D1qEcR9e5A2_upX6o",
+        "address": "Max-Planck-Straße 17, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_filmmuseum_potsdam",
+      "name": "Filmmuseum Potsdam",
+      "before": {
+        "lat": 52.39521788,
+        "lng": 13.057723020000001
+      },
+      "google": {
+        "lat": 52.3952574,
+        "lng": 13.0577878,
+        "place_id": "ChIJx0a0WMT1qEcRPZfNfRsgcxU",
+        "address": "Breite Str. 1A, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_naturkundemuseum_potsdam",
+      "name": "Naturkundemuseum Potsdam",
+      "before": {
+        "lat": 52.39585358000001,
+        "lng": 13.050713820000002
+      },
+      "google": {
+        "lat": 52.3958931,
+        "lng": 13.0507786,
+        "place_id": "ChIJk9NjCc_1qEcRyzcifGijlmc",
+        "address": "Breite Str. 13, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_brandenburg_museum_fur_zukunft_gegenwart_und_geschichte",
+      "name": "Brandenburg Museum für Zukunft, Gegenwart und Geschichte",
+      "before": {
+        "lat": 52.39592448,
+        "lng": 13.05659642
+      },
+      "google": {
+        "lat": 52.395964,
+        "lng": 13.0566612,
+        "place_id": "ChIJAWKnHcX1qEcRoBRtkQu2I-k",
+        "address": "Am Neuen Markt 9, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_nano_wissenschaft_begreifen",
+      "name": "NANO - Wissenschaft begreifen",
+      "before": {
+        "lat": 52.39778098000001,
+        "lng": 13.06374702
+      },
+      "google": {
+        "lat": 52.39782049999999,
+        "lng": 13.0638118,
+        "place_id": "ChIJyaHlMkBfqEcR7eQ-wBQqS8o",
+        "address": "Am Kanal 57, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_bildergalerie_von_sanssouci",
+      "name": "Bildergalerie von Sanssouci",
+      "before": {
+        "lat": 52.403881479999995,
+        "lng": 13.04103382
+      },
+      "google": {
+        "lat": 52.403921,
+        "lng": 13.0410986,
+        "place_id": "ChIJvZ-s-i5RqEcRVuzMpJ_uGV4",
+        "address": "Im Park Sanssouci 4, 14469 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_museum_fluxus",
+      "name": "museum FLUXUS+",
+      "before": {
+        "lat": 52.402172480000004,
+        "lng": 13.07314222
+      },
+      "google": {
+        "lat": 52.402212,
+        "lng": 13.073207,
+        "place_id": "ChIJBQ88t-D1qEcRnvvaD0qjD0c",
+        "address": "Schiffbauergasse 4F, 14467 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_historische_muhle_von_sanssouci",
+      "name": "Historische Mühle von Sanssouci",
+      "before": {
+        "lat": 52.40414528,
+        "lng": 13.035632620000001
+      },
+      "google": {
+        "lat": 52.4041848,
+        "lng": 13.0356974,
+        "place_id": "ChIJRcNZJCz0qEcRbd1v97T6K_k",
+        "address": "Maulbeerallee 5, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_museum_jan_bouman_haus",
+      "name": "Museum Jan Bouman Haus",
+      "before": {
+        "lat": 52.40268538,
+        "lng": 13.059174520000003
+      },
+      "google": {
+        "lat": 52.4027249,
+        "lng": 13.0592393,
+        "place_id": "ChIJ-RcGJdr1qEcR21Lmxz2n31w",
+        "address": "Mittelstraße 8, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_st_nikolaikirche_potsdam",
+      "name": "St. Nikolaikirche Potsdam",
+      "before": {
+        "lat": 52.39606918,
+        "lng": 13.06101842
+      },
+      "google": {
+        "lat": 52.3961087,
+        "lng": 13.0610832,
+        "place_id": "ChIJ1WyuY8P1qEcRdygUf3vfj28",
+        "address": "Am Alten Markt, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_kapelle_st_josef_krankenhaus_potsdam",
+      "name": "Kapelle St-Josef-Krankenhaus Potsdam",
+      "before": {
+        "lat": 52.39973888000001,
+        "lng": 13.04474812
+      },
+      "google": {
+        "lat": 52.3997784,
+        "lng": 13.0448129,
+        "place_id": "ChIJrVzBVQD1qEcRSGeF_hWcYmc",
+        "address": "Allee nach Sanssouci 7, 14471 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_kirche_st_peter_und_paul",
+      "name": "Kirche St. Peter und Paul",
+      "before": {
+        "lat": 52.40104748,
+        "lng": 13.059715520000001
+      },
+      "google": {
+        "lat": 52.401087,
+        "lng": 13.0597803,
+        "place_id": "ChIJTXKprdv1qEcRu2eR5T9dpRw",
+        "address": "Am Bassin 7, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_nagelkreuzkapelle",
+      "name": "Nagelkreuzkapelle",
+      "before": {
+        "lat": 52.395377780000004,
+        "lng": 13.05422742
+      },
+      "google": {
+        "lat": 52.3954173,
+        "lng": 13.0542922,
+        "place_id": "ChIJT2h4e8_1qEcRCke1CDpC5vU",
+        "address": "Breite Str. 7, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_friedenskirche",
+      "name": "Friedenskirche",
+      "before": {
+        "lat": 52.40102928,
+        "lng": 13.043269420000001
+      },
+      "google": {
+        "lat": 52.4010688,
+        "lng": 13.0433342,
+        "place_id": "ChIJp-Q-jdL1qEcRIerYykYXmK4",
+        "address": "Am Grünen Gitter 3, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_franzosische_kirche",
+      "name": "Französische Kirche",
+      "before": {
+        "lat": 52.40048818,
+        "lng": 13.06263152
+      },
+      "google": {
+        "lat": 52.4005277,
+        "lng": 13.0626963,
+        "place_id": "ChIJg8wew-r1qEcR3FpHheK2ZZY",
+        "address": "Charlottenstraße 55-58, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_martin_luther_kapelle_der_evangelischen_auferstehungsgemeinde_potsdam",
+      "name": "Martin-Luther-Kapelle der evangelischen Auferstehungsgemeinde Potsdam",
+      "before": {
+        "lat": 52.372006680000005,
+        "lng": 13.08776506
+      },
+      "google": {
+        "lat": 52.3720462,
+        "lng": 13.0878298,
+        "place_id": "ChIJ1xbXWX1fqEcRnx-iIo9nXQ4",
+        "address": "Am Försteracker 1, 14478 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_neuapostolische_kirche_potsdam",
+      "name": "Neuapostolische Kirche Potsdam",
+      "before": {
+        "lat": 52.386227180000006,
+        "lng": 13.069511639999998
+      },
+      "google": {
+        "lat": 52.3862667,
+        "lng": 13.0695764,
+        "place_id": "ChIJkx4bNuv1qEcR5OESSh9P3xE",
+        "address": "Heinrich-Mann-Allee 24 A, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_alte_neuendorfer_kirche",
+      "name": "Alte Neuendorfer Kirche",
+      "before": {
+        "lat": 52.38845848,
+        "lng": 13.08758644
+      },
+      "google": {
+        "lat": 52.388498,
+        "lng": 13.0876512,
+        "place_id": "ChIJt-Asb_H1qEcRwEUAkw5Aghg",
+        "address": "Neuendorfer Anger 1, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_arnim_sche_kapelle",
+      "name": "Arnim'sche Kapelle",
+      "before": {
+        "lat": 52.386407580000004,
+        "lng": 13.071895139999999
+      },
+      "google": {
+        "lat": 52.3864471,
+        "lng": 13.0719599,
+        "place_id": "ChIJ91VXpuz1qEcR40KEWcWODl4",
+        "address": "Teltower Vorstadt, 14473 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_klein_glienicker_kapelle",
+      "name": "Klein Glienicker Kapelle",
+      "before": {
+        "lat": 52.41130568,
+        "lng": 13.0993854
+      },
+      "google": {
+        "lat": 52.4113452,
+        "lng": 13.0994502,
+        "place_id": "ChIJe9pSiQP2qEcRf0hszk9nBoU",
+        "address": "Wilhelm-Leuschner-Straße 1, 14482 Potsdam-Klein Glienicke"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_erloserkirche",
+      "name": "Erlöserkirche",
+      "before": {
+        "lat": 52.39568107999999,
+        "lng": 13.03591382
+      },
+      "google": {
+        "lat": 52.3965337,
+        "lng": 13.0363943,
+        "place_id": "ChIJHyHUQjP0qEcRXhPwRAsPd1g",
+        "address": "Nansenstraße 6, 14471 Potsdam"
+      },
+      "delta_m": 100,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "potsdam_alexander_newski_gedachtniskirche",
+      "name": "Alexander-Newski-Gedächtniskirche",
+      "before": {
+        "lat": 52.41520548,
+        "lng": 13.057516199999998
+      },
+      "google": {
+        "lat": 52.415245,
+        "lng": 13.057581,
+        "place_id": "ChIJRyDDyXv2qEcRRF4C-_6Tm6k",
+        "address": "Russische Kolonie 14, 14469 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_feg_mittendrin_kirche_fur_die_stadt",
+      "name": "FeG mittendrin - Kirche für die Stadt",
+      "before": {
+        "lat": 52.39845178,
+        "lng": 13.052788620000001
+      },
+      "google": {
+        "lat": 52.3984913,
+        "lng": 13.0528534,
+        "place_id": "ChIJ80nxfuH1qEcRSsumfK8O6Jc",
+        "address": "Bäckerstraße 1, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_the_stone_church_potsdam",
+      "name": "The Stone Church Potsdam",
+      "before": {
+        "lat": 52.40407018,
+        "lng": 13.069863520000002
+      },
+      "google": {
+        "lat": 52.4041097,
+        "lng": 13.0699283,
+        "place_id": "ChIJy57fsQdfqEcRA7ypvXXn7II",
+        "address": "Berliner Str. 136A, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_evangelisch_freikirchliche_gemeinde_potsdam_baptisten_kirche",
+      "name": "Evangelisch-Freikirchliche Gemeinde Potsdam (Baptisten-Kirche)",
+      "before": {
+        "lat": 52.39800798,
+        "lng": 13.048552820000001
+      },
+      "google": {
+        "lat": 52.3980475,
+        "lng": 13.0486176,
+        "place_id": "ChIJC0YIxMg7ZUER546s0enP_0c",
+        "address": "Schopenhauerstraße 8, 14467 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_evangelische_erloserkirchengemeinde_potsdam",
+      "name": "Evangelische Erlöserkirchengemeinde Potsdam",
+      "before": {
+        "lat": 52.396494180000005,
+        "lng": 13.036329519999999
+      },
+      "google": {
+        "lat": 52.3965337,
+        "lng": 13.0363943,
+        "place_id": "ChIJHyHUQjP0qEcRXhPwRAsPd1g",
+        "address": "Nansenstraße 6, 14471 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_denkmal_fur_den_unbekannten_deserteur_mehmet_aksoy",
+      "name": "Denkmal für den unbekannten Deserteur - Mehmet Aksoy",
+      "before": {
+        "lat": 52.39768948,
+        "lng": 13.05866982
+      },
+      "google": {
+        "lat": 52.397729,
+        "lng": 13.0587346,
+        "place_id": "ChIJVYBP0sT1qEcRxGFHHFrTL7E",
+        "address": "Am Kanal 16, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_buchstaben_skulptur_potsdam",
+      "name": "Buchstaben-Skulptur POTSDAM",
+      "before": {
+        "lat": 52.39490388,
+        "lng": 13.05892322
+      },
+      "google": {
+        "lat": 52.3949434,
+        "lng": 13.058988,
+        "place_id": "ChIJfde6DQD1qEcRU_8Yt_dSm6U",
+        "address": "Alter Markt/Landtag, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_denkmal_f_die_gefallenen_sanitater_im_1_wk",
+      "name": "Denkmal f. die gefallenen Sanitäter im 1. WK",
+      "before": {
+        "lat": 52.38569648,
+        "lng": 13.07125944
+      },
+      "google": {
+        "lat": 52.38573599999999,
+        "lng": 13.0713242,
+        "place_id": "ChIJPdC59Lz1qEcRBmQPTwNWQhE",
+        "address": "Neuer Friedhof, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_rossbrunnen",
+      "name": "Roßbrunnen",
+      "before": {
+        "lat": 52.40508638,
+        "lng": 13.03827082
+      },
+      "google": {
+        "lat": 52.40512589999999,
+        "lng": 13.0383356,
+        "place_id": "ChIJK4-gfSz0qEcRWHEL8KfcpkE",
+        "address": "14469 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_statuenrondell_ohne_namen",
+      "name": "Statuenrondell ohne Namen",
+      "before": {
+        "lat": 52.40130907999999,
+        "lng": 13.033254520000003
+      },
+      "google": {
+        "lat": 52.4013486,
+        "lng": 13.0333193,
+        "place_id": "ChIJf4A8OAD1qEcRqm-_LuLbdMo",
+        "address": "Brandenburger Vorstadt, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_spielplatz_am_brunnen",
+      "name": "Spielplatz Am Brunnen",
+      "before": {
+        "lat": 52.38019107999999,
+        "lng": 13.07390714
+      },
+      "google": {
+        "lat": 52.3802306,
+        "lng": 13.0739719,
+        "place_id": "ChIJfacQFBj1qEcRehQG--N7-K8",
+        "address": "Teltower Vorstadt, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_springbrunnen",
+      "name": "Springbrunnen",
+      "before": {
+        "lat": 52.40358408000001,
+        "lng": 13.028801320000003
+      },
+      "google": {
+        "lat": 52.3994578,
+        "lng": 13.0473617,
+        "place_id": "ChIJASUV_9H1qEcRPMTsbJ6q5I8",
+        "address": "Luisenpl., 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 1340,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_freundschaftsbrunnen_gorch_wenske_heinz_dubel_eberhard_bachmann",
+      "name": "Freundschaftsbrunnen - Gorch Wenske, Heinz Dübel, Eberhard Bachmann",
+      "before": {
+        "lat": 52.39577748000001,
+        "lng": 13.068290919999999
+      },
+      "google": {
+        "lat": 52.395817,
+        "lng": 13.0683557,
+        "place_id": "ChIJ7QKzd6T1qEcRv61Epb3I3FI",
+        "address": "Freundschaftsinsel, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_planetengarten_potsdam",
+      "name": "Planetengarten Potsdam",
+      "before": {
+        "lat": 52.40752458000001,
+        "lng": 13.06483
+      },
+      "google": {
+        "lat": 52.40756409999999,
+        "lng": 13.0648948,
+        "place_id": "ChIJbRRF0yn1qEcRqOPLrCpJhZo",
+        "address": "Nauener Vorstadt, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_berserker_skulptur",
+      "name": "Berserker (Skulptur)",
+      "before": {
+        "lat": 52.396047679999995,
+        "lng": 13.064198820000001
+      },
+      "google": {
+        "lat": 52.3960872,
+        "lng": 13.0642636,
+        "place_id": "ChIJHwzd1A_1qEcR8lnrvpwqn70",
+        "address": "Adolf-Miethe-Ufer 14467, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_springbrunnen_auf_dem_luisenplatz",
+      "name": "Springbrunnen auf dem Luisenplatz",
+      "before": {
+        "lat": 52.39941828,
+        "lng": 13.047296919999999
+      },
+      "google": {
+        "lat": 52.3994578,
+        "lng": 13.0473617,
+        "place_id": "ChIJASUV_9H1qEcRPMTsbJ6q5I8",
+        "address": "Luisenpl., 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_brunnen",
+      "name": "Brunnen",
+      "before": {
+        "lat": 52.38156108,
+        "lng": 13.11673694
+      },
+      "google": {
+        "lat": 52.379211,
+        "lng": 13.0750301,
+        "place_id": "ChIJV4uv-pH1qEcRIcuYmraMUhs",
+        "address": "Am Brunnen, 14473 Potsdam Süd"
+      },
+      "delta_m": 2843,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_herz_und_flamme_der_revolution",
+      "name": "Herz und Flamme der Revolution",
+      "before": {
+        "lat": 52.393196380000006,
+        "lng": 13.05908072
+      },
+      "google": {
+        "lat": 52.3932359,
+        "lng": 13.0591455,
+        "place_id": "ChIJadekBQD1qEcRGZcbfnsP3mU",
+        "address": "Nördliche Innenstadt, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_seitigkeiten_volker_bartsch_potsdam_walk_of_modern_art",
+      "name": "SeiTiGKeiTeN- Volker Bartsch - Potsdam Walk Of Modern Art",
+      "before": {
+        "lat": 52.39714488,
+        "lng": 13.07099522
+      },
+      "google": {
+        "lat": 52.3971844,
+        "lng": 13.07106,
+        "place_id": "ChIJL8AM9Sb1qEcR15ChtX18vmE",
+        "address": "Nördliche Innenstadt, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_neptunbassin_mit_stahl_nebel_lichtskulptur_neptuns_triumph",
+      "name": "Neptunbassin mit Stahl-Nebel-Lichtskulptur „Neptuns Triumph“",
+      "before": {
+        "lat": 52.39274798,
+        "lng": 13.05971052
+      },
+      "google": {
+        "lat": 52.3927875,
+        "lng": 13.0597753,
+        "place_id": "ChIJoYJF-cP1qEcRytaOyRWXMGU",
+        "address": "Nördliche Innenstadt, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_gedenkstele_jurgen_von_woyski",
+      "name": "Gedenkstele - Jürgen von Woyski",
+      "before": {
+        "lat": 52.40965748,
+        "lng": 13.062651800000001
+      },
+      "google": {
+        "lat": 52.40969699999999,
+        "lng": 13.0627166,
+        "place_id": "ChIJBzxRmzv3qEcR9l5dgkrffoU",
+        "address": "Nauener Vorstadt, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_skulpturensammlung",
+      "name": "Skulpturensammlung",
+      "before": {
+        "lat": 52.39545648000001,
+        "lng": 13.04729352
+      },
+      "google": {
+        "lat": 52.39549599999999,
+        "lng": 13.0473583,
+        "place_id": "ChIJO9XNbp31qEcRb2_WypwG524",
+        "address": "Breite Str. 24, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_liebespaar_unter_dem_schirm_jurgen_von_woyski",
+      "name": "Liebespaar unter dem Schirm - Jürgen von Woyski",
+      "before": {
+        "lat": 52.39490508,
+        "lng": 13.06433192
+      },
+      "google": {
+        "lat": 52.3949446,
+        "lng": 13.0643967,
+        "place_id": "ChIJM9i8p-n1qEcRqgrozWIG8SE",
+        "address": "Freundschaftsinsel, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_park_babelsberg",
+      "name": "Park Babelsberg",
+      "before": {
+        "lat": 52.404670880000005,
+        "lng": 13.09411502
+      },
+      "google": {
+        "lat": 52.4047104,
+        "lng": 13.0941798,
+        "place_id": "ChIJt-a62fz1qEcRIJwFoSAi9IQ",
+        "address": "Park Babelsberg Schlosspark, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_uferpark_landzunge",
+      "name": "Uferpark Landzunge",
+      "before": {
+        "lat": 52.39898358000001,
+        "lng": 13.071687220000001
+      },
+      "google": {
+        "lat": 52.3990231,
+        "lng": 13.071752,
+        "place_id": "ChIJ17apn-f1qEcRV1X8Q8AMyoE",
+        "address": "Zugang:beidseitig neben, Am Kanal 74, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_volkspark_potsdam",
+      "name": "Volkspark Potsdam",
+      "before": {
+        "lat": 52.41907598,
+        "lng": 13.045283900000001
+      },
+      "google": {
+        "lat": 52.4181697,
+        "lng": 13.0486414,
+        "place_id": "ChIJc1z2gIf2qEcREuOfrlfVO0Q",
+        "address": "Georg-Hermann-Allee 99, 14469 Potsdam Nord"
+      },
+      "delta_m": 249,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_flatowturm_im_park_babelsberg",
+      "name": "Flatowturm im Park Babelsberg",
+      "before": {
+        "lat": 52.40306448,
+        "lng": 13.08662022
+      },
+      "google": {
+        "lat": 52.403104,
+        "lng": 13.086685,
+        "place_id": "ChIJjf-FVgb2qEcRru550T6QvTE",
+        "address": "Park Babelsberg 12, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_nuthepark",
+      "name": "Nuthepark",
+      "before": {
+        "lat": 52.39418388,
+        "lng": 13.07149942
+      },
+      "google": {
+        "lat": 52.39422339999999,
+        "lng": 13.0715642,
+        "place_id": "ChIJH9Of-Oj1qEcRhe9amDItFmo",
+        "address": "Südliche Innenstadt, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_freundschaftsinsel",
+      "name": "Freundschaftsinsel",
+      "before": {
+        "lat": 52.39402428,
+        "lng": 13.06362182
+      },
+      "google": {
+        "lat": 52.3948991,
+        "lng": 13.0646972,
+        "place_id": "ChIJc0is9cL1qEcRgjJaVxakrlM",
+        "address": "Freundschaftsinsel, Potsdam"
+      },
+      "delta_m": 122,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_in_den_wallen",
+      "name": "In den Wällen",
+      "before": {
+        "lat": 52.41922108,
+        "lng": 13.0461797
+      },
+      "google": {
+        "lat": 52.4181697,
+        "lng": 13.0486414,
+        "place_id": "ChIJc1z2gIf2qEcREuOfrlfVO0Q",
+        "address": "Georg-Hermann-Allee 99, 14469 Potsdam Nord"
+      },
+      "delta_m": 204,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_neuer_garten",
+      "name": "Neuer Garten",
+      "before": {
+        "lat": 52.41284608000001,
+        "lng": 13.067082499999998
+      },
+      "google": {
+        "lat": 52.4128856,
+        "lng": 13.0671473,
+        "place_id": "ChIJM37vlHP2qEcRnMXHh7vmGIc",
+        "address": "Am Neuen Garten, 14467 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_stadtgarten_am_obelisk",
+      "name": "Stadtgarten am Obelisk",
+      "before": {
+        "lat": 52.40256708,
+        "lng": 13.046069820000003
+      },
+      "google": {
+        "lat": 52.4026066,
+        "lng": 13.0461346,
+        "place_id": "ChIJB-f5sNP1qEcRbxgIInLHkS0",
+        "address": "Schopenhauerstraße 22, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_rehgarten",
+      "name": "Rehgarten",
+      "before": {
+        "lat": 52.40130008,
+        "lng": 13.02574162
+      },
+      "google": {
+        "lat": 52.4013396,
+        "lng": 13.0258064,
+        "place_id": "ChIJ6SedHDD0qEcREO5wPTKXe8U",
+        "address": "Park Sanssouci, Hauptallee, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_normannischer_turm_auf_dem_ruinenberg",
+      "name": "Normannischer Turm auf dem Ruinenberg",
+      "before": {
+        "lat": 52.41009648000001,
+        "lng": 13.038698199999999
+      },
+      "google": {
+        "lat": 52.41013599999999,
+        "lng": 13.038763,
+        "place_id": "ChIJOzkbEyr0qEcRCVcPh8TB-fg",
+        "address": "Ruinenberg, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_musenrondell_im_park_sanssouci",
+      "name": "Musenrondell im Park Sanssouci",
+      "before": {
+        "lat": 52.402032080000005,
+        "lng": 13.034736319999999
+      },
+      "google": {
+        "lat": 52.4020716,
+        "lng": 13.0348011,
+        "place_id": "ChIJ7xM6Np_1qEcRAMivdZShOAo",
+        "address": "Unnamed Road, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_grosser_wiesenpark",
+      "name": "Großer Wiesenpark",
+      "before": {
+        "lat": 52.416904880000004,
+        "lng": 13.0443796
+      },
+      "google": {
+        "lat": 52.4169444,
+        "lng": 13.0444444,
+        "place_id": "ChIJC8mv34b2qEcR5tTteuo7HYM",
+        "address": "Horst-Bienek-Straße 1, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_jachthafen_am_waldbad_templiner_see",
+      "name": "Jachthafen Am Waldbad Templiner See",
+      "before": {
+        "lat": 52.361353380000004,
+        "lng": 13.023486680000001
+      },
+      "google": {
+        "lat": 52.3613929,
+        "lng": 13.0235514,
+        "place_id": "ChIJJ4OnIwP1qEcR1Exk6szbubQ",
+        "address": "Templiner Str. 110, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_belvedere_auf_dem_muhlenberg",
+      "name": "Belvedere auf dem Mühlenberg",
+      "before": {
+        "lat": 52.404070579999996,
+        "lng": 13.04508242
+      },
+      "google": {
+        "lat": 52.4041101,
+        "lng": 13.0451472,
+        "place_id": "ChIJqem6j2L1qEcRKhCitSyhXJw",
+        "address": "Mühlenbergweg, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_schlosspark_sanssouci",
+      "name": "Schlosspark Sanssouci",
+      "before": {
+        "lat": 52.402514180000004,
+        "lng": 13.03854992
+      },
+      "google": {
+        "lat": 52.4025537,
+        "lng": 13.0386147,
+        "place_id": "ChIJzaQaGy30qEcRDgAyBHWXyoM",
+        "address": "Lennestraße 32A, 14469 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_kleiner_wiesenpark",
+      "name": "Kleiner Wiesenpark",
+      "before": {
+        "lat": 52.41414708,
+        "lng": 13.0432454
+      },
+      "google": {
+        "lat": 52.4142273,
+        "lng": 13.0432944,
+        "place_id": "ChIJp7Pb_ID2qEcRejat70AnHsc",
+        "address": "Kleiner Wiesenpark, 14469 Potsdam Nord"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_der_turm",
+      "name": "Der Turm",
+      "before": {
+        "lat": 52.416247080000005,
+        "lng": 13.053936699999998
+      },
+      "google": {
+        "lat": 52.4162866,
+        "lng": 13.0540015,
+        "place_id": "ChIJlcghIOj3qEcRSxKdhImem-4",
+        "address": "Bornstedt, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_einsteinturm",
+      "name": "Einsteinturm",
+      "before": {
+        "lat": 52.37883958,
+        "lng": 13.063793960000002
+      },
+      "google": {
+        "lat": 52.3788791,
+        "lng": 13.0638587,
+        "place_id": "ChIJU6OzV5b1qEcRpkRZx8qYUWU",
+        "address": "Albert-Einstein-Straße, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_domizil_leuchtturm_ggmbh_wohngruppe_potsdam",
+      "name": "Domizil Leuchtturm gGmbH | Wohngruppe Potsdam",
+      "before": {
+        "lat": 52.412280679999995,
+        "lng": 13.026570699999999
+      },
+      "google": {
+        "lat": 52.4123202,
+        "lng": 13.0266355,
+        "place_id": "ChIJJ5QagCf0qEcRaC_MmLLFq2c",
+        "address": "Blumenstraße 13, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_kleiner_ravensberg",
+      "name": "Kleiner Ravensberg",
+      "before": {
+        "lat": 52.36057108,
+        "lng": 13.065898780000001
+      },
+      "google": {
+        "lat": 52.3611111,
+        "lng": 13.0661111,
+        "place_id": "ChIJyzWXb3f1qEcRyWNah4z5sTA",
+        "address": "Kleiner Ravensberg, 14473 Potsdam"
+      },
+      "delta_m": 62,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "potsdam_turmspitze_der_garnisonkirche",
+      "name": "Turmspitze der Garnisonkirche",
+      "before": {
+        "lat": 52.39559498,
+        "lng": 13.05305562
+      },
+      "google": {
+        "lat": 52.3956345,
+        "lng": 13.0531204,
+        "place_id": "ChIJCzO7ITL1qEcR3xnzc6RzXSo",
+        "address": "Nördliche, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_baumhaus",
+      "name": "Baumhaus",
+      "before": {
+        "lat": 52.42711218000001,
+        "lng": 13.04888238
+      },
+      "google": {
+        "lat": 52.3657951,
+        "lng": 13.1289348,
+        "place_id": "ChIJ-7bGow9fqEcRONnFx9sx4FE",
+        "address": "Sternstraße 63, 14480 Potsdam Südost"
+      },
+      "delta_m": 8717,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_aussichtspunkt_birnenweg",
+      "name": "Aussichtspunkt Birnenweg",
+      "before": {
+        "lat": 52.42363948,
+        "lng": 13.03627468
+      },
+      "google": {
+        "lat": 52.423679,
+        "lng": 13.0363395,
+        "place_id": "ChIJSTyspl73qEcRgNeeCGqXLvQ",
+        "address": "Birnenweg 13, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_domizil_leuchtturm_ggmbh_projekt_indoor_ambulante_hilfen_potsdam",
+      "name": "Domizil Leuchtturm gGmbH | Projekt Indoor & Ambulante Hilfen Potsdam",
+      "before": {
+        "lat": 52.38831818,
+        "lng": 13.07665274
+      },
+      "google": {
+        "lat": 52.3883577,
+        "lng": 13.0767175,
+        "place_id": "ChIJe-nUY4z1qEcRNBMwZrVAuvU",
+        "address": "Schlaatzstraße 16, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_blu_das_sport_und_freizeitbad_potsdam",
+      "name": "blu - Das Sport- und Freizeitbad - Potsdam",
+      "before": {
+        "lat": 52.39007478,
+        "lng": 13.06388164
+      },
+      "google": {
+        "lat": 52.3901143,
+        "lng": 13.0639464,
+        "place_id": "ChIJVS7Ou8H1qEcRZRflrH-OiqI",
+        "address": "Brauhausberg 1, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_hyzernauts_discgolfparcours_volkspark_potsdam",
+      "name": "Hyzernauts Discgolfparcours, Volkspark Potsdam",
+      "before": {
+        "lat": 52.42600757999999,
+        "lng": 13.04865168
+      },
+      "google": {
+        "lat": 52.4260471,
+        "lng": 13.0487165,
+        "place_id": "ChIJ563widD1qEcR04F33vQESYM",
+        "address": "Volkspark, Georg-Hermann-Allee 101, 14469 Potsdam Nord"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_minigolf_pit_pat",
+      "name": "Minigolf / Pit-Pat",
+      "before": {
+        "lat": 52.42484698,
+        "lng": 13.05080818
+      },
+      "google": {
+        "lat": 52.4248865,
+        "lng": 13.050873,
+        "place_id": "ChIJiag75In2qEcRQuzcJywwxUI",
+        "address": "Viereckremise, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_sportplatz_potsdamer_kickers_94",
+      "name": "Sportplatz Potsdamer Kickers 94",
+      "before": {
+        "lat": 52.41602258,
+        "lng": 13.0360762
+      },
+      "google": {
+        "lat": 52.4160621,
+        "lng": 13.036141,
+        "place_id": "ChIJg4lPeoP2qEcRxJ_0Z-RTcmc",
+        "address": "Bornstedt, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_luftschiffhafen_potsdam",
+      "name": "Luftschiffhafen Potsdam",
+      "before": {
+        "lat": 52.378012479999995,
+        "lng": 13.018673760000002
+      },
+      "google": {
+        "lat": 52.378052,
+        "lng": 13.0187385,
+        "place_id": "ChIJ5WYUCFH0qEcRLs84CnVBxB8",
+        "address": "Olympischer Weg 2, 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_fitness_parcours",
+      "name": "Fitness-Parcours",
+      "before": {
+        "lat": 52.41770738,
+        "lng": 13.050953100000001
+      },
+      "google": {
+        "lat": 52.4177469,
+        "lng": 13.0510179,
+        "place_id": "ChIJGTktfdf3qEcRhtnGMtrl1gk",
+        "address": "Bornstedt, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_stadtbad_park_babelsberg",
+      "name": "Stadtbad Park Babelsberg",
+      "before": {
+        "lat": 52.40214668,
+        "lng": 13.08174812
+      },
+      "google": {
+        "lat": 52.4021862,
+        "lng": 13.0818129,
+        "place_id": "ChIJh4MWvOP1qEcRyuQpGOHcxow",
+        "address": "Park Babelsberg 2, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_schwimmbad_im_werner_alfred_bad",
+      "name": "Schwimmbad im Werner-Alfred-Bad",
+      "before": {
+        "lat": 52.40206068,
+        "lng": 13.04830352
+      },
+      "google": {
+        "lat": 52.4021002,
+        "lng": 13.0483683,
+        "place_id": "ChIJfcXc1dP1qEcRmjSzbv2_efE",
+        "address": "Hegelallee 23, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_sportplatz_sandscholle",
+      "name": "Sportplatz Sandscholle",
+      "before": {
+        "lat": 52.38821878,
+        "lng": 13.111996440000002
+      },
+      "google": {
+        "lat": 52.3882583,
+        "lng": 13.1120612,
+        "place_id": "ChIJAfED7O9fqEcRLKa7OXUkch0",
+        "address": "Babelsberg Süd, 14482 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_potsdamer_sport_union_04_e_v",
+      "name": "Potsdamer Sport-Union 04 e.V.",
+      "before": {
+        "lat": 52.382664479999995,
+        "lng": 13.04679424
+      },
+      "google": {
+        "lat": 52.382704,
+        "lng": 13.046859,
+        "place_id": "ChIJw6hbqrD1qEcRrD28gB7qmCA",
+        "address": "Templiner Str. 24, 14473 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_sportforum_potsdam_waldstadt",
+      "name": "Sportforum Potsdam Waldstadt",
+      "before": {
+        "lat": 52.36524828,
+        "lng": 13.100565979999999
+      },
+      "google": {
+        "lat": 52.3652878,
+        "lng": 13.1006307,
+        "place_id": "ChIJy2vySHdfqEcRLbVkWGlSGew",
+        "address": "Drewitzer Str. 40a, 14478 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_cityfit_hochschulsport_potsdam",
+      "name": "cityFIT Hochschulsport Potsdam",
+      "before": {
+        "lat": 52.396177779999995,
+        "lng": 13.049942919999998
+      },
+      "google": {
+        "lat": 52.3962173,
+        "lng": 13.0500077,
+        "place_id": "ChIJe7Kzq8_1qEcROgrg2Mn_UkY",
+        "address": "Breite Str. 17, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_spielbank_potsdam",
+      "name": "Spielbank Potsdam",
+      "before": {
+        "lat": 52.39472888,
+        "lng": 13.056489820000001
+      },
+      "google": {
+        "lat": 52.3947684,
+        "lng": 13.0565546,
+        "place_id": "ChIJYcXcssX1qEcRywFt7aucXns",
+        "address": "Schloßstraße 14, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_rathaus_stadt_potsdam",
+      "name": "Rathaus Stadt Potsdam",
+      "before": {
+        "lat": 52.405479979999996,
+        "lng": 13.05753872
+      },
+      "google": {
+        "lat": 52.4055195,
+        "lng": 13.0576035,
+        "place_id": "ChIJa2d7bNf1qEcRizCEezaFcnc",
+        "address": "Friedrich-Ebert-Straße 79, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_burgerservicecenter_potsdam",
+      "name": "Bürgerservicecenter Potsdam",
+      "before": {
+        "lat": 52.39710498000001,
+        "lng": 13.05687452
+      },
+      "google": {
+        "lat": 52.3971445,
+        "lng": 13.0569393,
+        "place_id": "ChIJLSNs1dr1qEcRUvAWtBlSZak",
+        "address": "Yorckstraße 22, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_stadtverwaltung_der_landeshauptstadt_potsdam",
+      "name": "Stadtverwaltung der Landeshauptstadt Potsdam",
+      "before": {
+        "lat": 52.40710368,
+        "lng": 13.055834199999998
+      },
+      "google": {
+        "lat": 52.4071432,
+        "lng": 13.055899,
+        "place_id": "ChIJhznxF871qEcRvLTXkm6sY9Y",
+        "address": "Friedrich-Ebert-Straße 79 / 81, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_historischer_pegelstandsanzeiger",
+      "name": "Historischer Pegelstandsanzeiger",
+      "before": {
+        "lat": 52.39399728000001,
+        "lng": 13.061739919999999
+      },
+      "google": {
+        "lat": 52.39403679999999,
+        "lng": 13.0618047,
+        "place_id": "ChIJs6J4DIH1qEcRZ2k-HguX7FA",
+        "address": "Lange Brücke, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_stadtschloss",
+      "name": "Stadtschloss",
+      "before": {
+        "lat": 52.39458308,
+        "lng": 13.06030662
+      },
+      "google": {
+        "lat": 52.40420169999999,
+        "lng": 13.0384999,
+        "place_id": "ChIJUXWcySz0qEcRFgU6MTKjVdA",
+        "address": "Maulbeerallee, 14469 Potsdam"
+      },
+      "delta_m": 1826,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_kellertorwache",
+      "name": "Kellertorwache",
+      "before": {
+        "lat": 52.398968679999996,
+        "lng": 13.070483220000003
+      },
+      "google": {
+        "lat": 52.3990082,
+        "lng": 13.070548,
+        "place_id": "ChIJuWhwVIX1qEcROKnNGqsD5TQ",
+        "address": "Nördliche Innenstadt, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_neuer_markt",
+      "name": "Neuer Markt",
+      "before": {
+        "lat": 52.396421180000004,
+        "lng": 13.05721632
+      },
+      "google": {
+        "lat": 52.3964607,
+        "lng": 13.0572811,
+        "place_id": "ChIJ-_ccHsX1qEcRRaEram_W_Xk",
+        "address": "Am Neuen Markt 9, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_jagertor_potsdam",
+      "name": "Jägertor Potsdam",
+      "before": {
+        "lat": 52.40250587999999,
+        "lng": 13.052678120000001
+      },
+      "google": {
+        "lat": 52.4025454,
+        "lng": 13.0527429,
+        "place_id": "ChIJAQBQ4ND1qEcR64apJFehXhM",
+        "address": "Jägertor, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_alte_wache",
+      "name": "Alte Wache",
+      "before": {
+        "lat": 52.39862788000001,
+        "lng": 13.05155412
+      },
+      "google": {
+        "lat": 52.3986674,
+        "lng": 13.0516189,
+        "place_id": "ChIJdzQpKND1qEcR03EfF0UAgc0",
+        "address": "Lindenstraße 45, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_nauener_tor",
+      "name": "Nauener Tor",
+      "before": {
+        "lat": 52.40346308000001,
+        "lng": 13.05787012
+      },
+      "google": {
+        "lat": 52.4035026,
+        "lng": 13.0579349,
+        "place_id": "ChIJW2C-Kdj1qEcRpas6a_uU57Y",
+        "address": "Friedrich-Ebert-Straße, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_alter_stadtkanal",
+      "name": "Alter Stadtkanal",
+      "before": {
+        "lat": 52.397552180000005,
+        "lng": 13.055547620000002
+      },
+      "google": {
+        "lat": 52.3975917,
+        "lng": 13.0556124,
+        "place_id": "ChIJ43wmRsX1qEcRbcRsvVjgsKA",
+        "address": "Yorckstraße 6, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_altes_sud_und_kesselhaus",
+      "name": "Altes Sud-und Kesselhaus",
+      "before": {
+        "lat": 52.38937098,
+        "lng": 13.065637839999999
+      },
+      "google": {
+        "lat": 52.3894105,
+        "lng": 13.0657026,
+        "place_id": "ChIJwbkH23z1qEcRkvP_UP7-YV4",
+        "address": "Südliche Innenstadt, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_reste_der_potsdamer_stadtmauer",
+      "name": "Reste der Potsdamer Stadtmauer",
+      "before": {
+        "lat": 52.39833998,
+        "lng": 13.07062272
+      },
+      "google": {
+        "lat": 52.3983795,
+        "lng": 13.0706875,
+        "place_id": "ChIJUevfkef1qEcR8kYCuXIlsqA",
+        "address": "Große Fischerstraße 11, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_potsdams_neue_mitte",
+      "name": "Potsdams Neue Mitte",
+      "before": {
+        "lat": 52.39598568,
+        "lng": 13.05899872
+      },
+      "google": {
+        "lat": 52.3960252,
+        "lng": 13.0590635,
+        "place_id": "ChIJubA45Sf1qEcROqyD-qRzmQ0",
+        "address": "Friedrich-Ebert-Straße, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_alter_markt_5",
+      "name": "Alter Markt 5",
+      "before": {
+        "lat": 52.396697180000004,
+        "lng": 13.061591519999999
+      },
+      "google": {
+        "lat": 52.39622439999999,
+        "lng": 13.0602394,
+        "place_id": "ChIJCQKymcT1qEcRMTgNJvVliY0",
+        "address": "Alter Markt 5, 14467 Potsdam"
+      },
+      "delta_m": 106,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "potsdam_",
+      "name": "Памятник погибшим советским воинам с Мемориалом",
+      "before": {
+        "lat": 52.40115978,
+        "lng": 13.06095172
+      },
+      "google": {
+        "lat": 52.40119929999999,
+        "lng": 13.0610165,
+        "place_id": "ChIJt72CvNv1qEcRk2fbNMyDfxE",
+        "address": "Gutenbergstraße 76, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_altstadt_hotel_potsdam",
+      "name": "Altstadt Hotel Potsdam",
+      "before": {
+        "lat": 52.401433180000005,
+        "lng": 13.05344652
+      },
+      "google": {
+        "lat": 52.4014727,
+        "lng": 13.0535113,
+        "place_id": "ChIJdWr59dD1qEcRGPrPYtEENbk",
+        "address": "Dortustraße 9-10, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_aussichtspunkt_auf_der_freundschaftsinsel",
+      "name": "Aussichtspunkt auf der Freundschaftsinsel",
+      "before": {
+        "lat": 52.39621038,
+        "lng": 13.06980562
+      },
+      "google": {
+        "lat": 52.3962499,
+        "lng": 13.0698704,
+        "place_id": "ChIJPzfM-p71qEcRVF74i1nJUeM",
+        "address": "Burgstraße 31, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_kleiner_aussichtspunkt",
+      "name": "Kleiner Aussichtspunkt",
+      "before": {
+        "lat": 52.392850280000005,
+        "lng": 13.04487112
+      },
+      "google": {
+        "lat": 52.3928898,
+        "lng": 13.0449359,
+        "place_id": "ChIJe75x7FT1qEcRVxc8-QuORHo",
+        "address": "u. Planitz 1, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_aussichtspunkt_havel",
+      "name": "Aussichtspunkt Havel",
+      "before": {
+        "lat": 52.39749568,
+        "lng": 13.073860119999997
+      },
+      "google": {
+        "lat": 52.3975352,
+        "lng": 13.0739249,
+        "place_id": "ChIJVd9zYAD1qEcRYgv-xIAoLhs",
+        "address": "Havelstraße 8, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_aussichtspunkt_am_griebnitzsee_philosophenwiese",
+      "name": "Aussichtspunkt am Griebnitzsee \"Philosophenwiese\"",
+      "before": {
+        "lat": 52.39806277999999,
+        "lng": 13.12080522
+      },
+      "google": {
+        "lat": 52.3981023,
+        "lng": 13.12087,
+        "place_id": "ChIJxU4GDgBfqEcRpc9Jn5D8Bxg",
+        "address": "Virchowstraße 5, 14482 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_aussichtspunkt_heiliger_see",
+      "name": "Aussichtspunkt Heiliger See",
+      "before": {
+        "lat": 52.41647738,
+        "lng": 13.0712098
+      },
+      "google": {
+        "lat": 52.4165169,
+        "lng": 13.0712746,
+        "place_id": "ChIJ0-E2DAD3qEcRwgEqw2xPrCQ",
+        "address": "Im Neuen Garten 13, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_aussichtspunkt_griebnitzsee",
+      "name": "Aussichtspunkt Griebnitzsee",
+      "before": {
+        "lat": 52.40172498,
+        "lng": 13.11649692
+      },
+      "google": {
+        "lat": 52.40176450000001,
+        "lng": 13.1165617,
+        "place_id": "ChIJo2KqRQBfqEcRXSG0qo7H7-A",
+        "address": "Virchowstraße 35, 14482 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_havelblick",
+      "name": "Havelblick",
+      "before": {
+        "lat": 52.38774298,
+        "lng": 13.060521840000002
+      },
+      "google": {
+        "lat": 52.3872823,
+        "lng": 13.0634946,
+        "place_id": "ChIJ23NYbcD1qEcR7-FubTtJPGc",
+        "address": "Am Havelblick, 14473 Potsdam"
+      },
+      "delta_m": 208,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_aussichtspunkt_neuer_garten",
+      "name": "Aussichtspunkt Neuer Garten",
+      "before": {
+        "lat": 52.41764678,
+        "lng": 13.0733555
+      },
+      "google": {
+        "lat": 52.4176863,
+        "lng": 13.0734203,
+        "place_id": "ChIJtS1ffQD3qEcREf-eKx5pgPU",
+        "address": "Im Neuen Garten 12A, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_aussichtspunkt_1_templiner_see",
+      "name": "Aussichtspunkt 1 Templiner See",
+      "before": {
+        "lat": 52.37594568000001,
+        "lng": 13.01761326
+      },
+      "google": {
+        "lat": 52.3759852,
+        "lng": 13.017678,
+        "place_id": "ChIJEV97CwD1qEcRRc1vF8PDIrM",
+        "address": "Am Luftschiffhafen 1, 14471 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_belvedere_pfingstberg",
+      "name": "Belvedere Pfingstberg",
+      "before": {
+        "lat": 52.41887268000001,
+        "lng": 13.0587937
+      },
+      "google": {
+        "lat": 52.4189122,
+        "lng": 13.0588585,
+        "place_id": "ChIJD_0aS2P2qEcR925VvVXI0rI",
+        "address": "Pfingstberg, Neuer Garten, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_hans_otto_theater",
+      "name": "Hans Otto Theater",
+      "before": {
+        "lat": 52.40307928,
+        "lng": 13.075572319999997
+      },
+      "google": {
+        "lat": 52.40311879999999,
+        "lng": 13.0756371,
+        "place_id": "ChIJgyksCXv1qEcRaWTbCcA2ehs",
+        "address": "Schiffbauergasse 11, 14467 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_schlosstheater_im_neuen_palais",
+      "name": "Schlosstheater im Neuen Palais",
+      "before": {
+        "lat": 52.40052398,
+        "lng": 13.01584272
+      },
+      "google": {
+        "lat": 52.4005635,
+        "lng": 13.0159075,
+        "place_id": "ChIJo2NZjjz0qEcRoBrEA-LyU5Y",
+        "address": "Hauptallee, 14469 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_theaterschiff_potsdam",
+      "name": "Theaterschiff Potsdam",
+      "before": {
+        "lat": 52.40243008,
+        "lng": 13.075763720000001
+      },
+      "google": {
+        "lat": 52.4024696,
+        "lng": 13.0758285,
+        "place_id": "ChIJvz_GoMP1qEcRS3gjOU4L2DI",
+        "address": "Schiffbauergasse 9b, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_fabrik_potsdam",
+      "name": "fabrik Potsdam",
+      "before": {
+        "lat": 52.402688579999996,
+        "lng": 13.074658820000002
+      },
+      "google": {
+        "lat": 52.4027281,
+        "lng": 13.0747236,
+        "place_id": "ChIJGQXKwuD1qEcRmgAr9dI3xVM",
+        "address": "Schiffbauergasse 10, 14467 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_reithalle",
+      "name": "Reithalle",
+      "before": {
+        "lat": 52.40395638,
+        "lng": 13.072846219999999
+      },
+      "google": {
+        "lat": 52.4039959,
+        "lng": 13.072911,
+        "place_id": "ChIJMbI55l71qEcRrMuwg33b5Wo",
+        "address": "Schiffbauergasse 16, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_theater_poetenpack",
+      "name": "Theater Poetenpack",
+      "before": {
+        "lat": 52.398861679999996,
+        "lng": 13.044330519999999
+      },
+      "google": {
+        "lat": 52.3989012,
+        "lng": 13.0443953,
+        "place_id": "ChIJ7fjDzzP0qEcRHQc-kA-PiZU",
+        "address": "Theaterbüro, Zimmerstraße 12c, 14471 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_heckentheater_am_neuen_palais",
+      "name": "Heckentheater am Neuen Palais",
+      "before": {
+        "lat": 52.403013980000004,
+        "lng": 13.01543522
+      },
+      "google": {
+        "lat": 52.4030535,
+        "lng": 13.0155,
+        "place_id": "ChIJncH1LSP0qEcR293ht19rzQM",
+        "address": "Heckentheater Am Neuen Palais, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_neues_globe_theater",
+      "name": "Neues Globe Theater",
+      "before": {
+        "lat": 52.40142568,
+        "lng": 13.054574219999997
+      },
+      "google": {
+        "lat": 52.4014652,
+        "lng": 13.054639,
+        "place_id": "ChIJVVXRjtD1qEcR0x9qlTM9m7M",
+        "address": "Geschäftsstelle, Gutenbergstraße 97, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_kabarett_obelisk_e_v",
+      "name": "Kabarett Obelisk e.V.",
+      "before": {
+        "lat": 52.39930538,
+        "lng": 13.05543452
+      },
+      "google": {
+        "lat": 52.3993449,
+        "lng": 13.0554993,
+        "place_id": "ChIJl6CTo9r1qEcRxpsdFQfH3bk",
+        "address": "Charlottenstraße 31, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_lieder_spiel_theater_pampelmuse",
+      "name": "Lieder-Spiel-Theater Pampelmuse",
+      "before": {
+        "lat": 52.404972380000004,
+        "lng": 13.04901002
+      },
+      "google": {
+        "lat": 52.4050119,
+        "lng": 13.0490748,
+        "place_id": "ChIJV7-kBdT1qEcRHfanKbJVFEc",
+        "address": "Gregor-Mendel-Straße 38, 14469 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_open_air_kinosommer_am_waschhaus",
+      "name": "Open Air Kinosommer am Waschhaus",
+      "before": {
+        "lat": 52.402860079999996,
+        "lng": 13.073807219999997
+      },
+      "google": {
+        "lat": 52.4028996,
+        "lng": 13.073872,
+        "place_id": "ChIJPa4Zg-D1qEcRHThKr5ZWlFw",
+        "address": "Schiffbauergasse 1, 14467 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_nikolaisaal_potsdam",
+      "name": "Nikolaisaal Potsdam",
+      "before": {
+        "lat": 52.398195779999995,
+        "lng": 13.05521972
+      },
+      "google": {
+        "lat": 52.3982353,
+        "lng": 13.0552845,
+        "place_id": "ChIJeWPDS8X1qEcRopEG7N4ZALE",
+        "address": "Wilhelm-Staab-Straße 10-11, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_probebuhne",
+      "name": "Probebühne",
+      "before": {
+        "lat": 52.40426558,
+        "lng": 13.07360942
+      },
+      "google": {
+        "lat": 52.40430509999999,
+        "lng": 13.0736742,
+        "place_id": "ChIJZ12UdQD1qEcR_LIl8PZ0_rw",
+        "address": "Schiffbauergasse 17, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_musicalminds_potsdam",
+      "name": "MusicalMinds Potsdam",
+      "before": {
+        "lat": 52.40671048,
+        "lng": 13.0543384
+      },
+      "google": {
+        "lat": 52.40675,
+        "lng": 13.0544032,
+        "place_id": "ChIJwdtEj0_1qEcRaF3q4JLWOAc",
+        "address": "Jägerallee 15, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_erholungswald_ravensberge",
+      "name": "Erholungswald Ravensberge",
+      "before": {
+        "lat": 52.37024228,
+        "lng": 13.06033416
+      },
+      "google": {
+        "lat": 52.3702818,
+        "lng": 13.0603989,
+        "place_id": "ChIJiYbvLQD1qEcR5QpJxwvh7hs",
+        "address": "93C6+45, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_uferpromenade_an_der_neustadter_bucht",
+      "name": "Uferpromenade an der Neustädter Bucht",
+      "before": {
+        "lat": 52.395868480000004,
+        "lng": 13.045722419999999
+      },
+      "google": {
+        "lat": 52.395908,
+        "lng": 13.0457872,
+        "place_id": "ChIJwRFkzGP1qEcRXIMr7rqYTkc",
+        "address": "Brandenburger Vorstadt, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_uferweg",
+      "name": "Uferweg",
+      "before": {
+        "lat": 52.38678348,
+        "lng": 13.056114639999999
+      },
+      "google": {
+        "lat": 52.3860344,
+        "lng": 13.0439585,
+        "place_id": "ChIJQUujCrf1qEcRHsBNoolgEj8",
+        "address": "Uferweg, Potsdam"
+      },
+      "delta_m": 829,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_arado_rundgang",
+      "name": "Arado Rundgang",
+      "before": {
+        "lat": 52.389378279999995,
+        "lng": 13.07699864
+      },
+      "google": {
+        "lat": 52.3894178,
+        "lng": 13.0770634,
+        "place_id": "ChIJDZVt97f1qEcRxCGvDXAznqY",
+        "address": "Friedrich-Engels-Straße 22, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_wanderkonzepte",
+      "name": "Wanderkonzepte",
+      "before": {
+        "lat": 52.37462198000001,
+        "lng": 13.013188259999998
+      },
+      "google": {
+        "lat": 52.37466149999999,
+        "lng": 13.013253,
+        "place_id": "ChIJ32kNXNr1qEcRlKFSCP5gD2A",
+        "address": "c/o Maklerkonzepte, Am Luftschiffhafen, 14471 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_wasserturm_hermannswerder",
+      "name": "Wasserturm Hermannswerder",
+      "before": {
+        "lat": 52.38594988,
+        "lng": 13.035959540000002
+      },
+      "google": {
+        "lat": 52.3859894,
+        "lng": 13.0360243,
+        "place_id": "ChIJu6rm8bT1qEcR1fJA-t5ZZj8",
+        "address": "Hermannswerder 4A, 14473 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_berliner_mauerweg_altes_sperrkreuz",
+      "name": "Berliner Mauerweg - \"Altes Sperrkreuz\"",
+      "before": {
+        "lat": 52.426162180000006,
+        "lng": 13.08610008
+      },
+      "google": {
+        "lat": 52.4262017,
+        "lng": 13.0861649,
+        "place_id": "ChIJ_2yzdQD3qEcRnXQ9IG8tsVQ",
+        "address": "C3GP+FF, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_uferradweg",
+      "name": "Uferradweg",
+      "before": {
+        "lat": 52.37910868,
+        "lng": 13.02108384
+      },
+      "google": {
+        "lat": 52.4839865,
+        "lng": 13.0647708,
+        "place_id": "ChIJP8XHdXT3qEcRYFrGU2kZpok",
+        "address": "Krampnitzer Str., 14476 Potsdam"
+      },
+      "delta_m": 12032,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_pmsg_potsdam_marketing_und_service_gmbh",
+      "name": "PMSG Potsdam Marketing und Service GmbH",
+      "before": {
+        "lat": 52.392428280000004,
+        "lng": 13.07033654
+      },
+      "google": {
+        "lat": 52.3924678,
+        "lng": 13.0704013,
+        "place_id": "ChIJJ_8oncP1qEcRXiy6n2NU9pI",
+        "address": "Babelsberger Str. 26, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_allgemeiner_deutscher_fahrrad_club_ortsgruppe_potsdam",
+      "name": "Allgemeiner Deutscher Fahrrad-Club Ortsgruppe Potsdam",
+      "before": {
+        "lat": 52.40213718,
+        "lng": 13.060307319999998
+      },
+      "google": {
+        "lat": 52.4021767,
+        "lng": 13.0603721,
+        "place_id": "ChIJ4zoys0D1qEcRWNsObqawNoU",
+        "address": "Gutenbergstraße 76, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_helmuts_fahrrad_center_potsdam",
+      "name": "Helmuts Fahrrad Center Potsdam",
+      "before": {
+        "lat": 52.39492797999999,
+        "lng": 13.055379919999998
+      },
+      "google": {
+        "lat": 52.3949675,
+        "lng": 13.0554447,
+        "place_id": "ChIJ8eFmGs_1qEcRB_s_kIJwjQs",
+        "address": "Breite Str. 2D, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_alter_fritz_stadttourismus_schlosserrundfahrten_susanne_lang",
+      "name": "Alter Fritz\" Stadttourismus Schlösserrundfahrten Susanne Lang",
+      "before": {
+        "lat": 52.40003838,
+        "lng": 13.04673512
+      },
+      "google": {
+        "lat": 52.4000779,
+        "lng": 13.0467999,
+        "place_id": "ChIJJynBozP0qEcR6lLfaU50AK0",
+        "address": "Luisenpl. 2, 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_pedales_radstation",
+      "name": "Pedales Radstation",
+      "before": {
+        "lat": 52.39248458000001,
+        "lng": 13.06545844
+      },
+      "google": {
+        "lat": 52.3925241,
+        "lng": 13.0655232,
+        "place_id": "ChIJdduG_-n1qEcRvQZOMeq-cxk",
+        "address": "Babelsberger Str. 10, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_fahrrad_eickhoff_gbr",
+      "name": "Fahrrad Eickhoff GbR",
+      "before": {
+        "lat": 52.40672818,
+        "lng": 13.058472599999998
+      },
+      "google": {
+        "lat": 52.4067677,
+        "lng": 13.0585374,
+        "place_id": "ChIJL1fHuM31qEcRA8TU2LnJsOQ",
+        "address": "Friedrich-Ebert-Straße 53, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_brucke_am_hasengraben",
+      "name": "Brücke am Hasengraben",
+      "before": {
+        "lat": 52.41460888,
+        "lng": 13.0764893
+      },
+      "google": {
+        "lat": 52.4146484,
+        "lng": 13.0765541,
+        "place_id": "ChIJWY3MU1T3qEcRxJvNv0Im96g",
+        "address": "14467, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_raderei_am_kanal",
+      "name": "räderei am kanal",
+      "before": {
+        "lat": 52.39868908,
+        "lng": 13.06541522
+      },
+      "google": {
+        "lat": 52.3987286,
+        "lng": 13.06548,
+        "place_id": "ChIJm0eb5tz1qEcR-BXDa7d76AQ",
+        "address": "Am Kanal 7, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_filmpark_babelsberg",
+      "name": "Filmpark Babelsberg",
+      "before": {
+        "lat": 52.385524180000004,
+        "lng": 13.116982740000001
+      },
+      "google": {
+        "lat": 52.3855637,
+        "lng": 13.1170475,
+        "place_id": "ChIJd5a6BURfqEcRwIaWkKTojDk",
+        "address": "Großbeerenstraße 200, 14482 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_biosphare_potsdam",
+      "name": "Biosphäre Potsdam",
+      "before": {
+        "lat": 52.418810480000005,
+        "lng": 13.0493652
+      },
+      "google": {
+        "lat": 52.41885,
+        "lng": 13.04943,
+        "place_id": "ChIJ82PKZH32qEcRS8by81tKcqw",
+        "address": "Georg-Hermann-Allee 99, 14469 Potsdam Nord"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_wald_jagd_naturerlebnis_e_v",
+      "name": "Wald-Jagd-Naturerlebnis e.V.",
+      "before": {
+        "lat": 52.362663780000005,
+        "lng": 13.075015779999998
+      },
+      "google": {
+        "lat": 52.3627033,
+        "lng": 13.0750805,
+        "place_id": "ChIJ__totHj1qEcRrXoxxwckw2U",
+        "address": "Ravensberggestell 2, 14478 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_museumsshop_neues_palais",
+      "name": "Museumsshop - Neues Palais",
+      "before": {
+        "lat": 52.39927748,
+        "lng": 13.013682219999998
+      },
+      "google": {
+        "lat": 52.399317,
+        "lng": 13.013747,
+        "place_id": "ChIJqx_Mjjz0qEcRmKyr8HgJqOc",
+        "address": "Park Sanssouci, Am Neuen Palais 3, 14414 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_museumsshop_schloss_sanssouci",
+      "name": "Museumsshop - Schloss Sanssouci",
+      "before": {
+        "lat": 52.404223879999996,
+        "lng": 13.037647620000001
+      },
+      "google": {
+        "lat": 52.4042634,
+        "lng": 13.0377124,
+        "place_id": "ChIJAyxHXiz0qEcRB5CbDsbgbUY",
+        "address": "Maulbeerallee, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_wisteria_s_room",
+      "name": "Wisteria's Room",
+      "before": {
+        "lat": 52.40122728,
+        "lng": 13.051886119999997
+      },
+      "google": {
+        "lat": 52.40126679999999,
+        "lng": 13.0519509,
+        "place_id": "ChIJF_osVdD1qEcRdYzyHDdAVfo",
+        "address": "Lindenstraße 8, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_le_doux_souvenir_potsdam_a_tribute_portfolio_hotel",
+      "name": "Le doux Souvenir, Potsdam, a Tribute Portfolio Hotel",
+      "before": {
+        "lat": 52.40239798,
+        "lng": 13.057640319999999
+      },
+      "google": {
+        "lat": 52.4024375,
+        "lng": 13.0577051,
+        "place_id": "ChIJLyAdFNr1qEcRTSoi3CYEZTU",
+        "address": "Friedrich-Ebert-Straße 88, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_feentraum_gmbh",
+      "name": "Feentraum GmbH",
+      "before": {
+        "lat": 52.40281798000001,
+        "lng": 13.060274620000001
+      },
+      "google": {
+        "lat": 52.4028575,
+        "lng": 13.0603394,
+        "place_id": "ChIJc6OYztv1qEcRQwqR8kQR50o",
+        "address": "Benkertstraße 6, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_uckerose_rosenboutique",
+      "name": "Uckerose Rosenboutique",
+      "before": {
+        "lat": 52.40148568000001,
+        "lng": 13.057059220000003
+      },
+      "google": {
+        "lat": 52.40152519999999,
+        "lng": 13.057124,
+        "place_id": "ChIJb4OBA531qEcRHxb-54W3q4w",
+        "address": "Gutenbergstraße 31, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_handwerksstube_dregeno_fachgeschaft",
+      "name": "Handwerksstube | DREGENO Fachgeschäft",
+      "before": {
+        "lat": 52.39994128000001,
+        "lng": 13.05044792
+      },
+      "google": {
+        "lat": 52.39998079999999,
+        "lng": 13.0505127,
+        "place_id": "ChIJ5WoNNdD1qEcR2XObU4FWcgY",
+        "address": "Brandenburger Str. 64, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_butlers_home24_potsdam_brandenburger_strasse",
+      "name": "BUTLERS@home24 Potsdam Brandenburger Straße",
+      "before": {
+        "lat": 52.39964737999999,
+        "lng": 13.049786220000001
+      },
+      "google": {
+        "lat": 52.3996869,
+        "lng": 13.049851,
+        "place_id": "ChIJURFviRXymUcRm1H4DGx21NQ",
+        "address": "Brandenburger Str. 5, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_rotholz",
+      "name": "ROTHOLZ",
+      "before": {
+        "lat": 52.39449218,
+        "lng": 13.03817052
+      },
+      "google": {
+        "lat": 52.3945317,
+        "lng": 13.0382353,
+        "place_id": "ChIJsV8y-9r1qEcRZnQN7I3DfEs",
+        "address": "Geschwister-Scholl-Straße 94, 14471 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_galerie_waldbach_what_the_artist_made",
+      "name": "Galerie Waldbach - What The Artist Made",
+      "before": {
+        "lat": 52.40067878,
+        "lng": 13.053289420000002
+      },
+      "google": {
+        "lat": 52.40071829999999,
+        "lng": 13.0533542,
+        "place_id": "ChIJs6ZExdf1qEcRZQI3BXTsFQY",
+        "address": "Dortustraße 14, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_zeiteinander_das_onlineportal_fur_nachhaltige_erlebnisse_geschenke",
+      "name": "zeiteinander - das Onlineportal für nachhaltige Erlebnisse & Geschenke",
+      "before": {
+        "lat": 52.40720478000001,
+        "lng": 13.047032299999998
+      },
+      "google": {
+        "lat": 52.4072443,
+        "lng": 13.0470971,
+        "place_id": "ChIJLbcj3az1qEcR60Hw5-ZHW7Y",
+        "address": "Voltaireweg, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_klinikum_ernst_von_bergmann",
+      "name": "Klinikum Ernst von Bergmann",
+      "before": {
+        "lat": 52.40123428,
+        "lng": 13.06586142
+      },
+      "google": {
+        "lat": 52.4012738,
+        "lng": 13.0659262,
+        "place_id": "ChIJxfaOBTtfqEcRialRsvQLTYI",
+        "address": "Charlottenstraße 72, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_klinikum_ernst_von_bergmann_potsdam_zentrale_notaufnahme",
+      "name": "Klinikum Ernst von Bergmann Potsdam - Zentrale Notaufnahme",
+      "before": {
+        "lat": 52.39986768,
+        "lng": 13.065524020000002
+      },
+      "google": {
+        "lat": 52.39990719999999,
+        "lng": 13.0655888,
+        "place_id": "ChIJgUcjWNz1qEcR47ljldCoUX4",
+        "address": "Charlottenstraße 72, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_st_josefs_krankenhaus_potsdam_klinik_fur_frauenheilkunde_und_geburtshilf",
+      "name": "St. Josefs-Krankenhaus Potsdam - Klinik für Frauenheilkunde und Geburtshilfe",
+      "before": {
+        "lat": 52.39934998,
+        "lng": 13.04404542
+      },
+      "google": {
+        "lat": 52.3993895,
+        "lng": 13.0441102,
+        "place_id": "ChIJsZYThM31qEcRT7K9UmEKEfk",
+        "address": "Zimmerstraße 6, 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_evangelisches_zentrum_fur_altersmedizin_geriatrische_fachklinik_und_tage",
+      "name": "Evangelisches Zentrum für Altersmedizin | Geriatrische Fachklinik und Tageskliniken",
+      "before": {
+        "lat": 52.403620880000005,
+        "lng": 13.04570412
+      },
+      "google": {
+        "lat": 52.4036604,
+        "lng": 13.0457689,
+        "place_id": "ChIJh_dOmNP1qEcRd07xStp6fhQ",
+        "address": "Weinbergstraße 18-19, 14469 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_apo_rot_horus_apotheke",
+      "name": "apo-rot Horus-Apotheke",
+      "before": {
+        "lat": 52.401397280000005,
+        "lng": 13.064257619999998
+      },
+      "google": {
+        "lat": 52.4014368,
+        "lng": 13.0643224,
+        "place_id": "ChIJ97Zxitv1qEcRSaRxPxkUuoY",
+        "address": "Hebbelstraße 1 a, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_dr_med_jens_dirk_thiess_dr_andra_stubbe_dr_benedikt_streicher",
+      "name": "Dr. med. Jens Dirk Thieß, Dr. Andra Stubbe, Dr. Benedikt Streicher",
+      "before": {
+        "lat": 52.39937248,
+        "lng": 13.05890042
+      },
+      "google": {
+        "lat": 52.399412,
+        "lng": 13.0589652,
+        "place_id": "ChIJkaGFxdv1qEcR_w9gaI2IPqQ",
+        "address": "Platz d. Einheit 14, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_ost_apotheke",
+      "name": "Ost Apotheke",
+      "before": {
+        "lat": 52.39459658,
+        "lng": 13.077153819999998
+      },
+      "google": {
+        "lat": 52.3946361,
+        "lng": 13.0772186,
+        "place_id": "ChIJn0NLuuj1qEcRw8rDDzFZ-58",
+        "address": "Lotte-Pulewka-Straße 8, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_klinikum_westbrandenburg_gmbh_klinik_fur_kinder_und_jugendmedizin",
+      "name": "Klinikum Westbrandenburg GmbH : Klinik für Kinder- und Jugendmedizin",
+      "before": {
+        "lat": 52.400243679999996,
+        "lng": 13.06493242
+      },
+      "google": {
+        "lat": 52.4002832,
+        "lng": 13.0649972,
+        "place_id": "ChIJMdTPPdz1qEcREhPkGpTPuOw",
+        "address": "Charlottenstraße 72, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_hausarztpraxis_am_telegrafenberg_dr_med_marion_schmitz_dr_med_beate_susa",
+      "name": "Hausarztpraxis am Telegrafenberg / Dr. med. Marion Schmitz & Dr.med. Beate-Susanne Sprenger",
+      "before": {
+        "lat": 52.38812688,
+        "lng": 13.067898439999999
+      },
+      "google": {
+        "lat": 52.3881664,
+        "lng": 13.0679632,
+        "place_id": "ChIJlw5P--r1qEcRR5ZywX9z3Xk",
+        "address": "Heinrich-Mann-Allee 13, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_dipl_med_simone_muller_dr_med_petra_hager_allgemeinarztpraxis",
+      "name": "Dipl. med. Simone Müller / Dr. med. Petra Hager / Allgemeinarztpraxis",
+      "before": {
+        "lat": 52.39888988,
+        "lng": 13.056053519999997
+      },
+      "google": {
+        "lat": 52.3989294,
+        "lng": 13.0561183,
+        "place_id": "ChIJGdGMudr1qEcR2XeeesrRu_k",
+        "address": "Wilhelm-Staab-Straße 4, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_schloss_charlottenhof",
+      "name": "Schloss Charlottenhof",
+      "before": {
+        "lat": 52.39552257999999,
+        "lng": 13.02548432
+      },
+      "google": {
+        "lat": 52.3955621,
+        "lng": 13.0255491,
+        "place_id": "ChIJj4sjhDb0qEcRnS8E-oNLbr4",
+        "address": "Geschwister-Scholl-Straße 34A, 14471 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_marmorpalais",
+      "name": "Marmorpalais",
+      "before": {
+        "lat": 52.41263908,
+        "lng": 13.0697406
+      },
+      "google": {
+        "lat": 52.4126786,
+        "lng": 13.0698054,
+        "place_id": "ChIJ387nPm72qEcRN_VgWycqfXw",
+        "address": "Im Neuen Garten 10, 14469 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_blick_auf_die_freundschaftsinsel",
+      "name": "Blick auf die Freundschaftsinsel",
+      "before": {
+        "lat": 52.39369268,
+        "lng": 13.06469132
+      },
+      "google": {
+        "lat": 52.3937322,
+        "lng": 13.0647561,
+        "place_id": "ChIJi9p7eAD1qEcR3jyKo4rHc98",
+        "address": "14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_neues_palais",
+      "name": "Neues Palais",
+      "before": {
+        "lat": 52.401261479999995,
+        "lng": 13.015965220000002
+      },
+      "google": {
+        "lat": 52.401301,
+        "lng": 13.01603,
+        "place_id": "ChIJtY4fwDz0qEcR7nwz1YIQZcw",
+        "address": "Am Neuen Palais, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_dampfmaschinenhaus",
+      "name": "Dampfmaschinenhaus",
+      "before": {
+        "lat": 52.40862328000001,
+        "lng": 13.0962596
+      },
+      "google": {
+        "lat": 52.3962301,
+        "lng": 13.0444075,
+        "place_id": "ChIJhXCUMMz1qEcRVjb4pKzfS_o",
+        "address": "Breite Str. 28, 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 3778,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_neptungrotte",
+      "name": "Neptungrotte",
+      "before": {
+        "lat": 52.40332718,
+        "lng": 13.04231302
+      },
+      "google": {
+        "lat": 52.40336670000001,
+        "lng": 13.0423778,
+        "place_id": "ChIJZ9eAMNP1qEcRQyumF9lgf28",
+        "address": "Schopenhauerstraße, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_chinesisches_haus_im_park_sanssouci",
+      "name": "Chinesisches Haus im Park Sanssouci",
+      "before": {
+        "lat": 52.400238779999995,
+        "lng": 13.032048719999997
+      },
+      "google": {
+        "lat": 52.4002783,
+        "lng": 13.0321135,
+        "place_id": "ChIJbYhw-DH0qEcREv6vR8dY444",
+        "address": "Am Grünen Gitter, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_die_statue_der_flora",
+      "name": "Die Statue der Flora",
+      "before": {
+        "lat": 52.40067268,
+        "lng": 13.042184420000002
+      },
+      "google": {
+        "lat": 52.4007122,
+        "lng": 13.0422492,
+        "place_id": "ChIJMW9CltL1qEcRhXdna3KvSf8",
+        "address": "Am Grünen Gitter 4, 14469 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_siegessaule",
+      "name": "Siegessäule",
+      "before": {
+        "lat": 52.40314568,
+        "lng": 13.093428820000003
+      },
+      "google": {
+        "lat": 52.4031852,
+        "lng": 13.0934936,
+        "place_id": "ChIJbY5Kwf31qEcRAwD21LDYGbs",
+        "address": "Babelsberg Nord, 14482 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_denkmal_der_heldenjungfrau_eleonore_prochaska",
+      "name": "Denkmal der Heldenjungfrau Eleonore Prochaska",
+      "before": {
+        "lat": 52.38771107999999,
+        "lng": 13.072780940000001
+      },
+      "google": {
+        "lat": 52.3877506,
+        "lng": 13.0728457,
+        "place_id": "ChIJBYRvhOz1qEcRjWgd_konr_A",
+        "address": "Friedhofsgasse 6, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_obelisk_der_nachhaltigkeit",
+      "name": "Obelisk der Nachhaltigkeit",
+      "before": {
+        "lat": 52.38223148000001,
+        "lng": 13.032519440000002
+      },
+      "google": {
+        "lat": 52.382271,
+        "lng": 13.0325842,
+        "place_id": "ChIJc1EMNwD1qEcRL9WTBxrMSq8",
+        "address": "Hermannswerder 18, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_kunstraum_potsdam",
+      "name": "Kunstraum Potsdam",
+      "before": {
+        "lat": 52.40241178,
+        "lng": 13.071916820000002
+      },
+      "google": {
+        "lat": 52.4024513,
+        "lng": 13.0719816,
+        "place_id": "ChIJN3jtqOD1qEcRIqXTs26DYAQ",
+        "address": "Schiffbauergasse 4D, 14467 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_kunstverein_kunsthaus_potsdam_e_v",
+      "name": "Kunstverein KunstHaus Potsdam e. V.",
+      "before": {
+        "lat": 52.406085080000004,
+        "lng": 13.051091020000001
+      },
+      "google": {
+        "lat": 52.4061246,
+        "lng": 13.0511558,
+        "place_id": "ChIJ3-6RJ9T1qEcRWDbG9RO4Ves",
+        "address": "Ulanenweg 9, 14469 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_kunsthaus_sans_titre",
+      "name": "Kunsthaus sans titre",
+      "before": {
+        "lat": 52.39870678,
+        "lng": 13.062242520000002
+      },
+      "google": {
+        "lat": 52.3987463,
+        "lng": 13.0623073,
+        "place_id": "ChIJK2zxoNz1qEcR2b6jbe54ZsA",
+        "address": "Franz. Str. 18, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_galerie_kunst_kontor",
+      "name": "Galerie KUNST-KONTOR",
+      "before": {
+        "lat": 52.42652588,
+        "lng": 13.06614998
+      },
+      "google": {
+        "lat": 52.42656539999999,
+        "lng": 13.0662148,
+        "place_id": "ChIJf8i-LWb2qEcRUWY-bPc7NoA",
+        "address": "Bertiniweg 1 A, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_galerie_schindler",
+      "name": "Galerie Schindler",
+      "before": {
+        "lat": 52.39999818,
+        "lng": 13.05854252
+      },
+      "google": {
+        "lat": 52.4000377,
+        "lng": 13.0586073,
+        "place_id": "ChIJP152wln1qEcRLgP-87C91os",
+        "address": "Charlottenstraße 86, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_galeria_potsdam_stadtpalais",
+      "name": "GALERIA Potsdam Stadtpalais",
+      "before": {
+        "lat": 52.400793580000006,
+        "lng": 13.05498992
+      },
+      "google": {
+        "lat": 52.4008331,
+        "lng": 13.0550547,
+        "place_id": "ChIJ7-qEeND1qEcR2aEE6r82ljU",
+        "address": "Brandenburger Str. 49/52, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_gedenkstatte_leistikowstrasse_potsdam",
+      "name": "Gedenkstätte Leistikowstraße Potsdam",
+      "before": {
+        "lat": 52.41654097999999,
+        "lng": 13.0639185
+      },
+      "google": {
+        "lat": 52.41658049999999,
+        "lng": 13.0639833,
+        "place_id": "ChIJ98C-fHD2qEcRHB-f8ddIOhs",
+        "address": "Leistikowstraße 1, 14469 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_a2_galerie",
+      "name": "A2 Galerie",
+      "before": {
+        "lat": 52.400297779999995,
+        "lng": 13.052176320000001
+      },
+      "google": {
+        "lat": 52.4003373,
+        "lng": 13.0522411,
+        "place_id": "ChIJ90zOWa_1qEcRFdkmivqb2vc",
+        "address": "Lindenstraße 53, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_katholische_kirchengemeinde_st_antonius",
+      "name": "Katholische Kirchengemeinde St. Antonius",
+      "before": {
+        "lat": 52.39600488,
+        "lng": 13.10070082
+      },
+      "google": {
+        "lat": 52.3960444,
+        "lng": 13.1007656,
+        "place_id": "ChIJQ2LSNFZfqEcRoRnoUuAeLgo",
+        "address": "Plantagenstraße 23/24, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": null
+    },
+    {
+      "id": "potsdam_schloss_babelsberg",
+      "name": "Schloss Babelsberg",
+      "before": {
+        "lat": 52.40760447999999,
+        "lng": 13.093296200000001
+      },
+      "google": {
+        "lat": 52.407644,
+        "lng": 13.093361,
+        "place_id": "ChIJo_57VQb2qEcRPxIAlhuMPys",
+        "address": "Park Babelsberg 10, 14482 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_berliner_tor_seitenflugel",
+      "name": "Berliner Tor Seitenflügel",
+      "before": {
+        "lat": 52.39959328,
+        "lng": 13.06735042
+      },
+      "google": {
+        "lat": 52.3996328,
+        "lng": 13.0674152,
+        "place_id": "ChIJx5kRffv1qEcRhZDl9Tv6N88",
+        "address": "Berliner Str. 14, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_schloss_lindstedt",
+      "name": "Schloss Lindstedt",
+      "before": {
+        "lat": 52.40997118,
+        "lng": 13.0106988
+      },
+      "google": {
+        "lat": 52.4100107,
+        "lng": 13.0107636,
+        "place_id": "ChIJOQPqpyj1qEcRNF5bj-_j2ck",
+        "address": "Lindstedter Ch 1, 14469 Potsdam Nord"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_potsdam_schloss_babelsberg",
+      "name": "Potsdam, Schloss Babelsberg",
+      "before": {
+        "lat": 52.40670048,
+        "lng": 13.1009852
+      },
+      "google": {
+        "lat": 52.407644,
+        "lng": 13.093361,
+        "place_id": "ChIJo_57VQb2qEcRPxIAlhuMPys",
+        "address": "Park Babelsberg 10, 14482 Potsdam"
+      },
+      "delta_m": 528,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_potsdam_schloss_sanssouci",
+      "name": "Potsdam, Schloss Sanssouci",
+      "before": {
+        "lat": 52.40458048000001,
+        "lng": 13.03692522
+      },
+      "google": {
+        "lat": 52.40420169999999,
+        "lng": 13.0384999,
+        "place_id": "ChIJUXWcySz0qEcRFgU6MTKjVdA",
+        "address": "Maulbeerallee, 14469 Potsdam"
+      },
+      "delta_m": 115,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "potsdam_stiftung_preussische_schlosser_und_garten_berlin_brandenburg",
+      "name": "Stiftung Preußische Schlösser und Gärten Berlin-Brandenburg",
+      "before": {
+        "lat": 52.40047878,
+        "lng": 13.04417392
+      },
+      "google": {
+        "lat": 52.40051829999999,
+        "lng": 13.0442387,
+        "place_id": "ChIJM82gZdL1qEcRvpDAsaGyvWg",
+        "address": "Allee nach Sanssouci 6, 14471 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_schlosskuche_sanssouci",
+      "name": "Schlossküche Sanssouci",
+      "before": {
+        "lat": 52.40432548,
+        "lng": 13.039382219999998
+      },
+      "google": {
+        "lat": 52.404365,
+        "lng": 13.039447,
+        "place_id": "ChIJBZPCjCz0qEcRiCps9SD7pGE",
+        "address": "Maulbeerallee, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_botanischer_garten_der_universitat_potsdam",
+      "name": "Botanischer Garten der Universität Potsdam",
+      "before": {
+        "lat": 52.404066279999995,
+        "lng": 13.025895420000001
+      },
+      "google": {
+        "lat": 52.4041058,
+        "lng": 13.0259602,
+        "place_id": "ChIJ7cnhbSX0qEcR8ANu0dSGcy0",
+        "address": "Paradiesgarten, Maulbeerallee 2, 14469 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_kaskade",
+      "name": "Kaskade",
+      "before": {
+        "lat": 52.40479348,
+        "lng": 13.02655192
+      },
+      "google": {
+        "lat": 52.404833,
+        "lng": 13.0266167,
+        "place_id": "ChIJm8dNB6D1qEcRqt8lhKsS1HA",
+        "address": "Brandenburger Vorstadt, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_campusgarten_potsdam",
+      "name": "Campusgarten Potsdam",
+      "before": {
+        "lat": 52.412307780000006,
+        "lng": 13.050331599999998
+      },
+      "google": {
+        "lat": 52.4123473,
+        "lng": 13.0503964,
+        "place_id": "ChIJo_w8_n72qEcRWhf66IZd5ew",
+        "address": "Kiepenheuerallee, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_sizilianischer_garten",
+      "name": "Sizilianischer Garten",
+      "before": {
+        "lat": 52.40330928000001,
+        "lng": 13.03347952
+      },
+      "google": {
+        "lat": 52.4033488,
+        "lng": 13.0335443,
+        "place_id": "ChIJk0cVeS70qEcRfo3xyTR4FHs",
+        "address": "Unnamed Road, 14469, Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_teich",
+      "name": "Teich",
+      "before": {
+        "lat": 52.40456798,
+        "lng": 13.025736319999998
+      },
+      "google": {
+        "lat": 52.3620798,
+        "lng": 13.1319529,
+        "place_id": "ChIJ8ezAhgZfqEcR2UF3wa7OiG8",
+        "address": "Zum Teich, 14480 Potsdam Südost"
+      },
+      "delta_m": 8619,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_potsdamer_speicherstadt",
+      "name": "Potsdamer Speicherstadt",
+      "before": {
+        "lat": 52.388904079999996,
+        "lng": 13.05946304
+      },
+      "google": {
+        "lat": 52.3889436,
+        "lng": 13.0595278,
+        "place_id": "ChIJWzH5sAX1qEcRGlubtauQ10k",
+        "address": "Leipziger Str. 9, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_fussgangerbrucke_uferweg",
+      "name": "Fußgängerbrücke Uferweg",
+      "before": {
+        "lat": 52.385047480000004,
+        "lng": 13.04437264
+      },
+      "google": {
+        "lat": 52.385087,
+        "lng": 13.0444374,
+        "place_id": "ChIJmZxs3wX1qEcRoqc8k5qM40Q",
+        "address": "Alter Tornow 1, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_schiffbauergasse_uferweg",
+      "name": "Schiffbauergasse/Uferweg",
+      "before": {
+        "lat": 52.40134998,
+        "lng": 13.071779519999998
+      },
+      "google": {
+        "lat": 52.4013895,
+        "lng": 13.0718443,
+        "place_id": "ChIJC_dMUef1qEcRZDuUpeIqIKM",
+        "address": "14467 Potsdam, Deutschland"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_templiner_see",
+      "name": "Templiner See",
+      "before": {
+        "lat": 52.37214858,
+        "lng": 13.022622160000001
+      },
+      "google": {
+        "lat": 52.3721881,
+        "lng": 13.0226869,
+        "place_id": "ChIJT_HKe_n0qEcRtuxuyNDCq5A",
+        "address": "Templiner See"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_velo_west_fahrrader",
+      "name": "Velo-West Fahrräder",
+      "before": {
+        "lat": 52.39393648,
+        "lng": 13.036638920000001
+      },
+      "google": {
+        "lat": 52.39397599999999,
+        "lng": 13.0367037,
+        "place_id": "ChIJx0MV9DT0qEcRwJqNYHQ4vvE",
+        "address": "Geschwister-Scholl-Straße 88, 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_puppenbuhne_burattino",
+      "name": "Puppenbühne Burattino",
+      "before": {
+        "lat": 52.389893380000004,
+        "lng": 13.110371140000002
+      },
+      "google": {
+        "lat": 52.3899329,
+        "lng": 13.1104359,
+        "place_id": "ChIJO0QK21pfqEcRO_RZ0JQOKHw",
+        "address": "Rosenstraße 35, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_das_theater_der_sprachen_potsdam",
+      "name": "Das Theater der Sprachen Potsdam",
+      "before": {
+        "lat": 52.39624848,
+        "lng": 13.03990942
+      },
+      "google": {
+        "lat": 52.396288,
+        "lng": 13.0399742,
+        "place_id": "ChIJXYZIvGj1qEcRZgI3ss0A9gQ",
+        "address": "AWO Haus „Alte Druckerei, Sellostraße 6A, 14471 Potsdam-West"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_improvisationstheater_potsdam_e_v",
+      "name": "Improvisationstheater Potsdam e.V.",
+      "before": {
+        "lat": 52.404072279999994,
+        "lng": 13.04935292
+      },
+      "google": {
+        "lat": 52.4041118,
+        "lng": 13.0494177,
+        "place_id": "ChIJPddK3J5G2E4RJKTjKDoQXW4",
+        "address": "Weinbergstraße 32, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_yachthafen_nymphaea",
+      "name": "Yachthafen Nymphaea",
+      "before": {
+        "lat": 52.41042818,
+        "lng": 13.0818501
+      },
+      "google": {
+        "lat": 52.4104677,
+        "lng": 13.0819149,
+        "place_id": "ChIJ6WLf6wv2qEcRnfcjweWe0l8",
+        "address": "Berliner Str. 61, 14467 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_neuer_steg_an_der_havel",
+      "name": "Neuer Steg an der Havel",
+      "before": {
+        "lat": 52.388016979999996,
+        "lng": 13.031914140000001
+      },
+      "google": {
+        "lat": 52.3880565,
+        "lng": 13.0319789,
+        "place_id": "ChIJA238bIf1qEcRusHPjAU85F0",
+        "address": "14471, Georg-Klingenberg-Ufer, 14471, 14471 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_potsdam_bootscharter",
+      "name": "Potsdam Bootscharter",
+      "before": {
+        "lat": 52.39502628,
+        "lng": 13.048427320000002
+      },
+      "google": {
+        "lat": 52.3950658,
+        "lng": 13.0484921,
+        "place_id": "ChIJWyvc3M71qEcRnoiqpr7-aso",
+        "address": "Steganlage, Wall am Kiez 1, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_bootsvermietung_moisl_templiner_see",
+      "name": "Bootsvermietung Moisl - Templiner See",
+      "before": {
+        "lat": 52.36201818000001,
+        "lng": 13.02267108
+      },
+      "google": {
+        "lat": 52.3620577,
+        "lng": 13.0227358,
+        "place_id": "ChIJJxTQzgL1qEcRXyAT4v7QmRk",
+        "address": "Templiner Str. 110, 14473 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_private_bootsausfluge_potsdam",
+      "name": "Private Bootsausflüge Potsdam",
+      "before": {
+        "lat": 52.39287888,
+        "lng": 13.04391392
+      },
+      "google": {
+        "lat": 52.3929184,
+        "lng": 13.0439787,
+        "place_id": "ChIJT8pUt8v1qEcRdpszSTc77Ac",
+        "address": "Auf dem Kiewitt 33, 14471 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_fritz_peter_stadtfuhrungen_in_potsdam",
+      "name": "Fritz & Peter | Stadtführungen in Potsdam",
+      "before": {
+        "lat": 52.38685178000001,
+        "lng": 13.04339524
+      },
+      "google": {
+        "lat": 52.38689129999999,
+        "lng": 13.04346,
+        "place_id": "ChIJZXkc10n0qEcRVeTXdkrUrmw",
+        "address": "Tornowstraße 31, 14473 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_bella_potsdam",
+      "name": "Bella Potsdam",
+      "before": {
+        "lat": 52.40648168,
+        "lng": 13.0622722
+      },
+      "google": {
+        "lat": 52.4065212,
+        "lng": 13.062337,
+        "place_id": "ChIJA7Lx9tj1qEcRHJLHmbiS5zA",
+        "address": "Behlertstraße 8, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_tagesfahrten_grossy_tours",
+      "name": "Tagesfahrten - Großy Tours",
+      "before": {
+        "lat": 52.39241228000001,
+        "lng": 13.073596939999998
+      },
+      "google": {
+        "lat": 52.3924518,
+        "lng": 13.0736617,
+        "place_id": "ChIJ4WDz-ZL1qEcR920Lnsy5qBA",
+        "address": "Eva-Laube-Weg 5, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_stadtrundgang_potsdam_zum_kennenlernen",
+      "name": "Stadtrundgang - Potsdam zum Kennenlernen",
+      "before": {
+        "lat": 52.39453988,
+        "lng": 13.061629720000003
+      },
+      "google": {
+        "lat": 52.3945794,
+        "lng": 13.0616945,
+        "place_id": "ChIJ1-KrnsP1qEcRQ1JmSCPf41M",
+        "address": "Humboldtstraße 1-2, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_berlins_taiga_stadtfuhrung_potsdam",
+      "name": "Berlins Taiga - Stadtführung Potsdam",
+      "before": {
+        "lat": 52.39467578,
+        "lng": 13.095725719999999
+      },
+      "google": {
+        "lat": 52.39471529999999,
+        "lng": 13.0957905,
+        "place_id": "ChIJX-IKOvj1qEcRwR9Dp5csrb0",
+        "address": "Weberpl. 6, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_confiserie_felicitas_gmbh_potsdam",
+      "name": "Confiserie Felicitas GmbH Potsdam",
+      "before": {
+        "lat": 52.40135988000001,
+        "lng": 13.05617442
+      },
+      "google": {
+        "lat": 52.4013994,
+        "lng": 13.0562392,
+        "place_id": "ChIJn7ckndD1qEcR7_2RZkzxW80",
+        "address": "Gutenbergstraße 26, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_menuett_musik_kunst_salon_geschenkeladen",
+      "name": "Menuett - Musik & Kunst Salon - Geschenkeladen",
+      "before": {
+        "lat": 52.40396048,
+        "lng": 13.06216142
+      },
+      "google": {
+        "lat": 52.404,
+        "lng": 13.0622262,
+        "place_id": "ChIJmc045rv1qEcR58wz13U4rH4",
+        "address": "Hebbelstraße 43, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_petermann_potsdam_burobedarf_geschenkartikel_schreibwaren",
+      "name": "Petermann Potsdam Bürobedarf Geschenkartikel Schreibwaren",
+      "before": {
+        "lat": 52.391426079999995,
+        "lng": 13.091277739999999
+      },
+      "google": {
+        "lat": 52.3914656,
+        "lng": 13.0913425,
+        "place_id": "ChIJY2qsB_f1qEcRM8jK-IljPk0",
+        "address": "Karl-Liebknecht-Straße 4, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_lakritzkontor_potsdam",
+      "name": "Lakritzkontor Potsdam",
+      "before": {
+        "lat": 52.39981008000001,
+        "lng": 13.056092420000002
+      },
+      "google": {
+        "lat": 52.3998496,
+        "lng": 13.0561572,
+        "place_id": "ChIJO-OpkNr1qEcRGAsw3ANsZio",
+        "address": "Jägerstraße 21, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_notfallsets",
+      "name": "Notfallsets",
+      "before": {
+        "lat": 52.36813678,
+        "lng": 13.088364160000001
+      },
+      "google": {
+        "lat": 52.36817629999999,
+        "lng": 13.0884289,
+        "place_id": "ChIJbT844olfqEcRuc_Qf_ekKkw",
+        "address": "Zum Jagenstein 3, 14478 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_wochenmarkt_potsdam_am_bassinplatz",
+      "name": "Wochenmarkt Potsdam am Bassinplatz",
+      "before": {
+        "lat": 52.40144558000001,
+        "lng": 13.05919922
+      },
+      "google": {
+        "lat": 52.4014851,
+        "lng": 13.059264,
+        "place_id": "ChIJeQ5nTdr1qEcRzA2c1dYcEIA",
+        "address": "Am Bassin 6, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_floh_und_bauernmarkt_auf_dem_weberplatz",
+      "name": "Floh- und Bauernmarkt auf dem Weberplatz",
+      "before": {
+        "lat": 52.39342718,
+        "lng": 13.095064220000001
+      },
+      "google": {
+        "lat": 52.3934667,
+        "lng": 13.095129,
+        "place_id": "ChIJ2yB472H1qEcRZ1cBcKmA8o8",
+        "address": "Weberpl., 14482 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_kaufland_potsdam_west",
+      "name": "Kaufland Potsdam-West",
+      "before": {
+        "lat": 52.389244559999995,
+        "lng": 13.0298981
+      },
+      "google": {
+        "lat": 52.3892733,
+        "lng": 13.0299452,
+        "place_id": "ChIJAzFRQkr0qEcRhrk6frhvgI0",
+        "address": "Zeppelinstraße 132, 14471 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_rewe_to_go_bei_aral",
+      "name": "REWE To Go bei Aral",
+      "before": {
+        "lat": 52.419730359999996,
+        "lng": 13.012694760000002
+      },
+      "google": {
+        "lat": 52.374111,
+        "lng": 13.0880812,
+        "place_id": "ChIJqcEqzJv1qEcR9q5vmQ8FaB0",
+        "address": "Drewitzer Str. 20 A, 14478 Potsdam"
+      },
+      "delta_m": 7204,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_kaufland_potsdam_waldstadt",
+      "name": "Kaufland Potsdam-Waldstadt",
+      "before": {
+        "lat": 52.36363446,
+        "lng": 13.09427602
+      },
+      "google": {
+        "lat": 52.3636632,
+        "lng": 13.0943231,
+        "place_id": "ChIJU_An5XhfqEcR5hmzdTjlWt0",
+        "address": "Am Moosfenn 1, 14478 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_edeka_schlender",
+      "name": "EDEKA Schlender",
+      "before": {
+        "lat": 52.39814496,
+        "lng": 13.062350480000001
+      },
+      "google": {
+        "lat": 52.3981737,
+        "lng": 13.0623976,
+        "place_id": "ChIJE4Ase3n1qEcRrOdsdVrPTUA",
+        "address": "Am Kanal 14, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_ledo_supermarkt_potsdam_am_kanal",
+      "name": "LEDO Supermarkt | Potsdam (Am Kanal)",
+      "before": {
+        "lat": 52.39742106,
+        "lng": 13.06173168
+      },
+      "google": {
+        "lat": 52.3974498,
+        "lng": 13.0617788,
+        "place_id": "ChIJ_4Vd0sg7ZUERnoJIrRwXLRY",
+        "address": "Am Kanal 50, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_edeka_klausner",
+      "name": "EDEKA Klausner",
+      "before": {
+        "lat": 52.40041026,
+        "lng": 13.05663518
+      },
+      "google": {
+        "lat": 52.400439,
+        "lng": 13.0566823,
+        "place_id": "ChIJ_7pRkNr1qEcRBw_8htppJBA",
+        "address": "Brandenburger Str. 30-31, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_parkplatz_rewe",
+      "name": "Parkplatz REWE",
+      "before": {
+        "lat": 52.38142886000001,
+        "lng": 13.0895734
+      },
+      "google": {
+        "lat": 52.3814576,
+        "lng": 13.0896205,
+        "place_id": "ChIJD1pVp471qEcRJtxOldL809g",
+        "address": "Potsdam, Falkenhorst, An d. Alten Zauche, 14478 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_maske_gesund_masken_kaufen_online",
+      "name": "Maske Gesund - Masken Kaufen Online",
+      "before": {
+        "lat": 52.41585015999999,
+        "lng": 13.02262146
+      },
+      "google": {
+        "lat": 52.4158789,
+        "lng": 13.0226686,
+        "place_id": "ChIJxwXsNpr3qEcRQAj1ANKaErg",
+        "address": "Maske Gesund, M. Vetter, Potsdamer Str. 175, 14469 Potsdam Nord"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_apotheke_im_markt_center",
+      "name": "Apotheke im Markt-Center",
+      "before": {
+        "lat": 52.39712766,
+        "lng": 13.04588388
+      },
+      "google": {
+        "lat": 52.3971564,
+        "lng": 13.045931,
+        "place_id": "ChIJbQAEgc71qEcRu5OUgf_orxs",
+        "address": "Breite Str. 25-27, 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_lowen_apotheke",
+      "name": "Löwen-Apotheke",
+      "before": {
+        "lat": 52.400147860000004,
+        "lng": 13.057425779999999
+      },
+      "google": {
+        "lat": 52.40017659999999,
+        "lng": 13.0574729,
+        "place_id": "ChIJ2cAR8tr1qEcRp7Zq67JhalA",
+        "address": "Friedrich-Ebert-Straße 102, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_bun_des_po_li_zei_re_vier_pots_dam",
+      "name": "Bun­des­po­li­zei­re­vier Pots­dam",
+      "before": {
+        "lat": 52.39122636,
+        "lng": 13.065659299999998
+      },
+      "google": {
+        "lat": 52.3912551,
+        "lng": 13.0657064,
+        "place_id": "ChIJCaV5_MH1qEcRt2y3EEZ8iAg",
+        "address": "Friedrich-Engels-Straße 101, 14473 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_polizeihauptwache_potsdam_stadt",
+      "name": "Polizeihauptwache Potsdam-Stadt",
+      "before": {
+        "lat": 52.39443136,
+        "lng": 13.0557131
+      },
+      "google": {
+        "lat": 52.3945181,
+        "lng": 13.0560718,
+        "place_id": "ChIJ0acLMsT1qEcRVbv1JPxP5kE",
+        "address": "Henning-von-Tresckow-Straße 9-13, 14467 Potsdam"
+      },
+      "delta_m": 26,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "potsdam_bundespolizei_zentrale",
+      "name": "Bundespolizei - Zentrale",
+      "before": {
+        "lat": 52.38094156,
+        "lng": 13.078337300000001
+      },
+      "google": {
+        "lat": 52.3809703,
+        "lng": 13.0783844,
+        "place_id": "ChIJX32jwoE5ZUERdKDRlvW-ASQ",
+        "address": "Heinrich-Mann-Allee 103, 14473 Potsdam Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_polizeiprasidium_land_brandenburg",
+      "name": "Polizeipräsidium Land Brandenburg",
+      "before": {
+        "lat": 52.40624546,
+        "lng": 13.00377008
+      },
+      "google": {
+        "lat": 52.4062742,
+        "lng": 13.0038172,
+        "place_id": "ChIJTRXmihn0qEcRYoWrF3zthHo",
+        "address": "Kaiser-Friedrich-Straße 143, 14469 Potsdam Nord"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_spielplatz_freundschaftsinsel",
+      "name": "Spielplatz Freundschaftsinsel",
+      "before": {
+        "lat": 52.39577946000001,
+        "lng": 13.067099900000002
+      },
+      "google": {
+        "lat": 52.3958082,
+        "lng": 13.067147,
+        "place_id": "ChIJh4ANvcL1qEcRPGWdL6Ogb_s",
+        "address": "Nördliche Innenstadt, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_dino_spielplatz_zentrum_ost",
+      "name": "Dino-Spielplatz Zentrum Ost",
+      "before": {
+        "lat": 52.394941859999996,
+        "lng": 13.073470499999999
+      },
+      "google": {
+        "lat": 52.3949706,
+        "lng": 13.0735176,
+        "place_id": "ChIJd5HFlOj1qEcRHn1i9CzSDZo",
+        "address": "Humboldtring 77, 14473 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_spielplatz_plantage_potsdam",
+      "name": "Spielplatz \"Plantage\" Potsdam",
+      "before": {
+        "lat": 52.397052259999995,
+        "lng": 13.05378418
+      },
+      "google": {
+        "lat": 52.397081,
+        "lng": 13.0538313,
+        "place_id": "ChIJGTsdqUn1qEcRc1qAn7A97cI",
+        "address": "Nördliche Innenstadt, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_spielplatz_speicherstadt",
+      "name": "Spielplatz Speicherstadt",
+      "before": {
+        "lat": 52.38901406,
+        "lng": 13.058541
+      },
+      "google": {
+        "lat": 52.3890428,
+        "lng": 13.0585881,
+        "place_id": "ChIJ5UaubJn1qEcRMCCQSmvOWRU",
+        "address": "Zur Königlichen Hofbrauerei 4, 14473 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_spielplatz",
+      "name": "Spielplatz",
+      "before": {
+        "lat": 52.383895859999996,
+        "lng": 13.027357899999998
+      },
+      "google": {
+        "lat": 52.3958082,
+        "lng": 13.067147,
+        "place_id": "ChIJh4ANvcL1qEcRPGWdL6Ogb_s",
+        "address": "Nördliche Innenstadt, 14467 Potsdam"
+      },
+      "delta_m": 3008,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_abenteuerspielplatz",
+      "name": "Abenteuerspielplatz",
+      "before": {
+        "lat": 52.36553196,
+        "lng": 13.087712820000002
+      },
+      "google": {
+        "lat": 52.3655607,
+        "lng": 13.0877599,
+        "place_id": "ChIJD5CBUH5fqEcR8DC4huiLx00",
+        "address": "Kiefernring 22, 14478 Potsdam Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_spielplatz_mausefalle",
+      "name": "Spielplatz Mausefalle",
+      "before": {
+        "lat": 52.403529660000004,
+        "lng": 13.04997228
+      },
+      "google": {
+        "lat": 52.40355839999999,
+        "lng": 13.0500194,
+        "place_id": "ChIJQfPrWtH1qEcRSTvhHz9jJQw",
+        "address": "Jägerallee 40, 14469 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_spielplatz_am_nuthe_park",
+      "name": "Spielplatz am Nuthe Park",
+      "before": {
+        "lat": 52.39407466,
+        "lng": 13.066637200000002
+      },
+      "google": {
+        "lat": 52.3941034,
+        "lng": 13.0666843,
+        "place_id": "ChIJKd0iMdr1qEcRqh1AoURuIKU",
+        "address": "Unnamed Road, 14473 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_thalia_das_programmkino",
+      "name": "Thalia - Das Programmkino",
+      "before": {
+        "lat": 52.39190996,
+        "lng": 13.095240899999999
+      },
+      "google": {
+        "lat": 52.3919387,
+        "lng": 13.095288,
+        "place_id": "ChIJPR5FuPf1qEcR-SBgqTb3rrU",
+        "address": "Rudolf-Breitscheid-Straße 50, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_7aplus_boulderhalle_potsdam",
+      "name": "7aplus Boulderhalle Potsdam",
+      "before": {
+        "lat": 52.384589760000004,
+        "lng": 13.104018400000001
+      },
+      "google": {
+        "lat": 52.38461849999999,
+        "lng": 13.1040655,
+        "place_id": "ChIJd_YJ07dfqEcRxVOVxmEj-yk",
+        "address": "Gartenstraße 2, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_abenteuerpark_potsdam_kletterwald",
+      "name": "AbenteuerPark Potsdam Kletterwald",
+      "before": {
+        "lat": 52.384332959999995,
+        "lng": 13.0671085
+      },
+      "google": {
+        "lat": 52.3843617,
+        "lng": 13.0671556,
+        "place_id": "ChIJHyP0NpX1qEcRHlcbeoXAumU",
+        "address": "Albert-Einstein-Straße 49, 14473 Potsdam Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_kletterturm_kahleberg_in_potsdam",
+      "name": "Kletterturm Kahleberg in Potsdam",
+      "before": {
+        "lat": 52.36409686,
+        "lng": 13.085121320000002
+      },
+      "google": {
+        "lat": 52.36412559999999,
+        "lng": 13.0851684,
+        "place_id": "ChIJcWFPw39fqEcR6ShY1oPtLhc",
+        "address": "Zum Kahleberg, 14478 Potsdam Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_dustere_teiche",
+      "name": "Düstere Teiche",
+      "before": {
+        "lat": 52.411872159999994,
+        "lng": 13.00607828
+      },
+      "google": {
+        "lat": 52.41190090000001,
+        "lng": 13.0061254,
+        "place_id": "ChIJL3S4Mhz0qEcR2fgOsK62gKU",
+        "address": "Bornim, 14469 Potsdam Nord"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_wanderparkplatz_unterer_krampnitzsee",
+      "name": "Wanderparkplatz Unterer Krampnitzsee",
+      "before": {
+        "lat": 52.44441756,
+        "lng": 13.07146644
+      },
+      "google": {
+        "lat": 52.4444463,
+        "lng": 13.0715136,
+        "place_id": "ChIJ6Zu2EAD3qEcRyiQaMTRY3wk",
+        "address": "C3VC+QJ, 14469 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_parkplatz_am_lustgarten_potsdam",
+      "name": "Parkplatz Am Lustgarten, Potsdam",
+      "before": {
+        "lat": 52.392375560000005,
+        "lng": 13.057983100000001
+      },
+      "google": {
+        "lat": 52.3924043,
+        "lng": 13.0580302,
+        "place_id": "ChIJ8dibV8H1qEcRIpru8G_oZFI",
+        "address": "Am Lustgartenwall, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_berliner_mauerweg_alter_grenzerparkplatz",
+      "name": "Berliner Mauerweg - Alter Grenzerparkplatz",
+      "before": {
+        "lat": 52.44306346,
+        "lng": 13.11845034
+      },
+      "google": {
+        "lat": 52.4430922,
+        "lng": 13.1184975,
+        "place_id": "ChIJ_UQPjdX3qEcRws1LtFihGi0",
+        "address": "Kladower Str., 14469 Berlin"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_parkplatz_voltaireweg",
+      "name": "Parkplatz Voltaireweg",
+      "before": {
+        "lat": 52.40683616,
+        "lng": 13.045700579999998
+      },
+      "google": {
+        "lat": 52.4068649,
+        "lng": 13.0457477,
+        "place_id": "ChIJg2-k_dT1qEcRI29Ny-2zQVc",
+        "address": "An d. Einsiedelei 3, 14469 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_patienten_parkplatz",
+      "name": "Patienten Parkplatz",
+      "before": {
+        "lat": 52.40188166,
+        "lng": 13.06572228
+      },
+      "google": {
+        "lat": 52.4019104,
+        "lng": 13.0657694,
+        "place_id": "ChIJHYdrVAD1qEcRj4smwwC7I-4",
+        "address": "Nördliche Innenstadt, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_moosfenn_hochmoor",
+      "name": "Moosfenn Hochmoor",
+      "before": {
+        "lat": 52.354433760000006,
+        "lng": 13.06149004
+      },
+      "google": {
+        "lat": 52.3544625,
+        "lng": 13.0615371,
+        "place_id": "ChIJu9v5H631qEcRkCmGPtyl-LA",
+        "address": "Unnamed Road, 14558 Nuthetal"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_potsdamer_tennisclub_rot_weiss_e_v",
+      "name": "Potsdamer Tennisclub Rot-Weiss e.V.",
+      "before": {
+        "lat": 52.36101526,
+        "lng": 13.098611920000002
+      },
+      "google": {
+        "lat": 52.361044,
+        "lng": 13.098659,
+        "place_id": "ChIJ16-69Iv1qEcR0p2FifDIXl0",
+        "address": "Sophie-Alberti-Straße 2, 14478 Potsdam Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_karl_liebknecht_stadion",
+      "name": "Karl-Liebknecht-Stadion",
+      "before": {
+        "lat": 52.39901536,
+        "lng": 13.09465638
+      },
+      "google": {
+        "lat": 52.3990441,
+        "lng": 13.0947035,
+        "place_id": "ChIJd9sMtv71qEcRVIu1QjuYR6w",
+        "address": "Karl-Liebknecht-Straße 90, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_usv_potsdam_abteilung_tennis",
+      "name": "USV Potsdam Abteilung Tennis",
+      "before": {
+        "lat": 52.40054626,
+        "lng": 12.97533578
+      },
+      "google": {
+        "lat": 52.400575,
+        "lng": 12.9753829,
+        "place_id": "ChIJ1S_MY-TzqEcRUx6TNrk5Cxw",
+        "address": "Kuhfortdamm 6, 14476 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_potsdamer_tennisclub_obelisk_e_v",
+      "name": "Potsdamer Tennisclub Obelisk e.V.",
+      "before": {
+        "lat": 52.404556060000004,
+        "lng": 13.044331080000001
+      },
+      "google": {
+        "lat": 52.40458479999999,
+        "lng": 13.0443782,
+        "place_id": "ChIJlysoyTX1qEcRFE0Yc5g0ejs",
+        "address": "Gregor-Mendel-Straße 25, 14469 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_baderlandschaft_potsdam_kiezbad_am_stern",
+      "name": "Bäderlandschaft Potsdam - Kiezbad Am Stern",
+      "before": {
+        "lat": 52.37681026,
+        "lng": 13.132225620000003
+      },
+      "google": {
+        "lat": 52.376839,
+        "lng": 13.1322727,
+        "place_id": "ChIJcwauUhZfqEcRYtjFTHF_DOs",
+        "address": "Newtonstraße 12, 14480 Potsdam Südost"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_waldbad_templin",
+      "name": "Waldbad Templin",
+      "before": {
+        "lat": 52.361135360000006,
+        "lng": 13.02238452
+      },
+      "google": {
+        "lat": 52.3611641,
+        "lng": 13.0224316,
+        "place_id": "ChIJD0FakwL1qEcReGFsqlOSci4",
+        "address": "Templiner Str. 101, 14473 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_schwimmschule_kugelfisch",
+      "name": "Schwimmschule Kugelfisch",
+      "before": {
+        "lat": 52.385512059999996,
+        "lng": 13.097462400000001
+      },
+      "google": {
+        "lat": 52.3855408,
+        "lng": 13.0975095,
+        "place_id": "ChIJw6tNGF9fqEcRR8dV8a4Rmhs",
+        "address": "Heinrich-von-Kleist-Straße 39, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_pinguin_schwimmschule_sc_potsdam_e_v",
+      "name": "Pinguin Schwimmschule SC Potsdam e.V.",
+      "before": {
+        "lat": 52.420675960000004,
+        "lng": 13.04565156
+      },
+      "google": {
+        "lat": 52.42070469999999,
+        "lng": 13.0456987,
+        "place_id": "ChIJiUd4LIb2qEcR-EJdZ81You4",
+        "address": "Erich-Mendelsohn-Allee 87, 14469 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_babyschwimmen_potsdam_babelsberg",
+      "name": "Babyschwimmen Potsdam-Babelsberg",
+      "before": {
+        "lat": 52.387768560000005,
+        "lng": 13.140149
+      },
+      "google": {
+        "lat": 52.3855408,
+        "lng": 13.0975095,
+        "place_id": "ChIJw6tNGF9fqEcRR8dV8a4Rmhs",
+        "address": "Heinrich-von-Kleist-Straße 39, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 2904,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_ehemaliger_trinkwasser_hochbehalter",
+      "name": "ehemaliger Trinkwasser-Hochbehälter",
+      "before": {
+        "lat": 52.42085476,
+        "lng": 13.062368359999999
+      },
+      "google": {
+        "lat": 52.4208835,
+        "lng": 13.0624155,
+        "place_id": "ChIJo31Wy0_3qEcRshPYuL6zP3s",
+        "address": "Nauener Vorstadt, 14469 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_hem_tankstelle",
+      "name": "HEM Tankstelle",
+      "before": {
+        "lat": 52.39228426,
+        "lng": 13.0844949
+      },
+      "google": {
+        "lat": 52.39231299999999,
+        "lng": 13.084542,
+        "place_id": "ChIJ_W_jtvH1qEcROU8Wodim5Lw",
+        "address": "Friedrich-List-Straße 11, 14482 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_totalenergies_tankstelle",
+      "name": "TotalEnergies Tankstelle",
+      "before": {
+        "lat": 52.38209246,
+        "lng": 13.0883038
+      },
+      "google": {
+        "lat": 52.3821212,
+        "lng": 13.0883509,
+        "place_id": "ChIJW7xY54r1qEcRInkLfgpBHFU",
+        "address": "Horstweg 53c, 14478 Potsdam Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_jet_tankstelle",
+      "name": "JET Tankstelle",
+      "before": {
+        "lat": 52.42287126,
+        "lng": 13.054452860000001
+      },
+      "google": {
+        "lat": 52.4229,
+        "lng": 13.0545,
+        "place_id": "ChIJ_VncAWP2qEcRMOmfEKxfjvQ",
+        "address": "Nedlitzer Str. 20, 14469 Potsdam Nord"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_star_tankstelle",
+      "name": "star Tankstelle",
+      "before": {
+        "lat": 52.35482426000001,
+        "lng": 13.134961839999999
+      },
+      "google": {
+        "lat": 52.354853,
+        "lng": 13.1350089,
+        "place_id": "ChIJGfHn-jRfqEcR-Hqp67u5Dn8",
+        "address": "Am Silbergraben 30, 14480 Potsdam Südost"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_aral_tankstelle_waldstadt",
+      "name": "Aral Tankstelle Waldstadt",
+      "before": {
+        "lat": 52.37396926,
+        "lng": 13.088184320000002
+      },
+      "google": {
+        "lat": 52.373998,
+        "lng": 13.0882314,
+        "place_id": "ChIJBdcdGYj1qEcRL3KztYuLLw4",
+        "address": "Drewitzer Str. 20A, 14478 Potsdam Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_aral_tankstelle",
+      "name": "Aral Tankstelle",
+      "before": {
+        "lat": 52.367887859999996,
+        "lng": 13.128529219999999
+      },
+      "google": {
+        "lat": 52.373998,
+        "lng": 13.0882314,
+        "place_id": "ChIJBdcdGYj1qEcRL3KztYuLLw4",
+        "address": "Drewitzer Str. 20A, 14478 Potsdam Süd"
+      },
+      "delta_m": 2819,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_backerei_konditorei_fahland",
+      "name": "Bäckerei & Konditorei Fahland",
+      "before": {
+        "lat": 52.40080286,
+        "lng": 13.05722338
+      },
+      "google": {
+        "lat": 52.395756,
+        "lng": 13.0597195,
+        "place_id": "ChIJrzKwdM_1qEcRy09ue6jQODA",
+        "address": "Anna-Zielenziger-Straße 4, 14467 Potsdam"
+      },
+      "delta_m": 586,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_matthias_andreas_schroter_gbr_backerei_konditorei",
+      "name": "Matthias + Andreas Schröter GbR Bäckerei/Konditorei",
+      "before": {
+        "lat": 52.39903126,
+        "lng": 13.053462880000001
+      },
+      "google": {
+        "lat": 52.39906,
+        "lng": 13.05351,
+        "place_id": "ChIJL4EPG9D1qEcRZMnox3PtfFs",
+        "address": "Dortustraße 51, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_backerei_exner",
+      "name": "Bäckerei Exner",
+      "before": {
+        "lat": 52.389807559999994,
+        "lng": 13.071439000000002
+      },
+      "google": {
+        "lat": 52.3898363,
+        "lng": 13.0714861,
+        "place_id": "ChIJs8qpQO_1qEcRO8yaE5Pzhxk",
+        "address": "Altes Bahnwerk 8, 14473 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_dm_drogerie_markt",
+      "name": "dm-drogerie markt",
+      "before": {
+        "lat": 52.39247055999999,
+        "lng": 13.064184299999999
+      },
+      "google": {
+        "lat": 52.3924993,
+        "lng": 13.0642314,
+        "place_id": "ChIJD1JZbKb1qEcRW6BJPU5jlS4",
+        "address": "Babelsberger Straße, im Hauptbahnhof 16, 14473 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_rossmann_drogeriemarkt",
+      "name": "ROSSMANN Drogeriemarkt",
+      "before": {
+        "lat": 52.39545406,
+        "lng": 13.0914086
+      },
+      "google": {
+        "lat": 52.3998449,
+        "lng": 13.0591366,
+        "place_id": "ChIJfXlJ5tr1qEcRYdGkTxzAV-U",
+        "address": "Charlottenstraße 42, 14467 Potsdam"
+      },
+      "delta_m": 2243,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_deutsches_rotes_kreuz_regionalzentrum_potsdam",
+      "name": "Deutsches Rotes Kreuz -Regionalzentrum Potsdam",
+      "before": {
+        "lat": 52.40915126,
+        "lng": 13.061442879999998
+      },
+      "google": {
+        "lat": 52.40918,
+        "lng": 13.06149,
+        "place_id": "ChIJdxCownf2qEcRfG7Jr67KA2Q",
+        "address": "Alleestraße 5, 14469 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_deutsches_rotes_kreuz_drk_kreisverband_potsdam_zauch_belzig",
+      "name": "Deutsches Rotes Kreuz (DRK) Kreisverband Potsdam/Zauch-Belzig",
+      "before": {
+        "lat": 52.35832196,
+        "lng": 13.10004434
+      },
+      "google": {
+        "lat": 52.3583507,
+        "lng": 13.1000914,
+        "place_id": "ChIJH8WeTmuZqEcRApdJIDnt0ww",
+        "address": "Arthur-Scheunert-Allee 2/Haus 1, 1. Etage, 14558 Nuthetal"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_potsdam_rote_kreuz_str",
+      "name": "Potsdam, Rote-Kreuz-Str.",
+      "before": {
+        "lat": 52.39162126,
+        "lng": 13.128462900000002
+      },
+      "google": {
+        "lat": 52.40918,
+        "lng": 13.06149,
+        "place_id": "ChIJdxCownf2qEcRfG7Jr67KA2Q",
+        "address": "Alleestraße 5, 14469 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 4945,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_deutsches_rotes_kreuz_drk_katastrophenschutz_zentrum",
+      "name": "Deutsches Rotes Kreuz (DRK) Katastrophenschutz Zentrum",
+      "before": {
+        "lat": 52.38268206,
+        "lng": 13.144451800000002
+      },
+      "google": {
+        "lat": 52.3827108,
+        "lng": 13.1444989,
+        "place_id": "ChIJ0-hCgHdfqEcR91Ov-psVzjw",
+        "address": "Steinstrasse 104-106, 14480 Potsdam Südost"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_potsdam_kreuzstr",
+      "name": "Potsdam, Kreuzstr.",
+      "before": {
+        "lat": 52.39551126,
+        "lng": 13.0979929
+      },
+      "google": {
+        "lat": 52.39554,
+        "lng": 13.09804,
+        "place_id": "ChIJQwWkevj1qEcR2SXgHKUNTCo",
+        "address": "14482 Potsdam, Deutschland"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_evangelische_erloserkirchengemeinde_potsdam_heilig_kreuz_haus",
+      "name": "Evangelische Erlöserkirchengemeinde Potsdam | Heilig-Kreuz-Haus",
+      "before": {
+        "lat": 52.39434086,
+        "lng": 13.050121899999999
+      },
+      "google": {
+        "lat": 52.3943696,
+        "lng": 13.050169,
+        "place_id": "ChIJu9PdRs_1qEcRGDXpxlqKRWU",
+        "address": "Kiezstraße 10, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_deutsches_rotes_kreuz_drk_heimatstern_potsdam",
+      "name": "Deutsches Rotes Kreuz (DRK) Heimatstern Potsdam",
+      "before": {
+        "lat": 52.37756655999999,
+        "lng": 13.12484742
+      },
+      "google": {
+        "lat": 52.3775953,
+        "lng": 13.1248945,
+        "place_id": "ChIJ1fWiqBVfqEcRHJ7ZpFUkzKo",
+        "address": "Pietschkerstraße 42, 14480 Potsdam Südost"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_toilette_offentlich",
+      "name": "Toilette öffentlich",
+      "before": {
+        "lat": 52.395789060000006,
+        "lng": 13.065974699999998
+      },
+      "google": {
+        "lat": 52.3958178,
+        "lng": 13.0660218,
+        "place_id": "ChIJFeOKCBv1qEcRomtHQgDPY4o",
+        "address": "Burgstraße 6A, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_city_toilette",
+      "name": "City Toilette",
+      "before": {
+        "lat": 52.40321406,
+        "lng": 13.056531580000001
+      },
+      "google": {
+        "lat": 52.3923908,
+        "lng": 13.0639082,
+        "place_id": "ChIJK3lGOQD1qEcRdWh2YhX42Ek",
+        "address": "Südliche Innenstadt, 14473 Potsdam"
+      },
+      "delta_m": 1303,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_offentliche_toilette_staudengarten",
+      "name": "Öffentliche Toilette Staudengarten",
+      "before": {
+        "lat": 52.39445976,
+        "lng": 13.064700199999999
+      },
+      "google": {
+        "lat": 52.3944885,
+        "lng": 13.0647473,
+        "place_id": "ChIJTduip931qEcREVw6nnS-yBI",
+        "address": "93V7+QW, 14473 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_wc",
+      "name": "WC",
+      "before": {
+        "lat": 52.39950026,
+        "lng": 13.038630280000001
+      },
+      "google": {
+        "lat": 52.3924988,
+        "lng": 13.0668295,
+        "place_id": "ChIJ47kQ9gr1qEcRMVGjWeyUAkM",
+        "address": "Babelsberger Str., 14473 Potsdam"
+      },
+      "delta_m": 2066,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_offentliche_toilette",
+      "name": "Öffentliche Toilette",
+      "before": {
+        "lat": 52.398695759999995,
+        "lng": 13.029651179999998
+      },
+      "google": {
+        "lat": 52.3937179,
+        "lng": 13.060962,
+        "place_id": "ChIJZyvedQD1qEcRndWsmRwJLfQ",
+        "address": "Lange Brücke 6, 14467 Potsdam"
+      },
+      "delta_m": 2195,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_myplace_selfstorage_potsdam_innenstadt",
+      "name": "MyPlace - SelfStorage | Potsdam Innenstadt",
+      "before": {
+        "lat": 52.38970046000001,
+        "lng": 13.0737834
+      },
+      "google": {
+        "lat": 52.3897292,
+        "lng": 13.0738305,
+        "place_id": "ChIJpdnjdHH1qEcR5kAwQwHwkKo",
+        "address": "Friedrich-Engels-Straße 80, 14473 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_stasher_luggage_storage_gerlachstrasse_31_33_potsdam",
+      "name": "Stasher Luggage Storage - Gerlachstraße 31-33 - Potsdam",
+      "before": {
+        "lat": 52.369054659999996,
+        "lng": 13.13430972
+      },
+      "google": {
+        "lat": 52.3690834,
+        "lng": 13.1343568,
+        "place_id": "ChIJeT-IMUpfqEcRYhUDYsB0cFY",
+        "address": "Gerlachstraße 31-33, 14480 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_stasher_luggage_storage_grossbeerenstrasse_open_24_7",
+      "name": "Stasher Luggage Storage - Großbeerenstrasse - Open 24-7",
+      "before": {
+        "lat": 52.38049126000001,
+        "lng": 13.1312029
+      },
+      "google": {
+        "lat": 52.38052,
+        "lng": 13.13125,
+        "place_id": "ChIJS-fltJ5fqEcRNcQpLGz1Bc4",
+        "address": "Großbeerenstraße 265, 14480 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_stasher_luggage_storage_potsdamer_strasse_open_24_7",
+      "name": "Stasher Luggage Storage - Potsdamer Straße - Open 24-7",
+      "before": {
+        "lat": 52.41606686,
+        "lng": 13.02456276
+      },
+      "google": {
+        "lat": 52.4160956,
+        "lng": 13.0246099,
+        "place_id": "ChIJgSA7WS33qEcRkLsgJJbFesY",
+        "address": "Potsdamer Str. 20, 14469 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_storemore_self_storage_potsdam",
+      "name": "storemore Self Storage Potsdam",
+      "before": {
+        "lat": 52.36074666,
+        "lng": 13.11204802
+      },
+      "google": {
+        "lat": 52.36077539999999,
+        "lng": 13.1120951,
+        "place_id": "ChIJ88QrKRBfqEcRi_CFKVfEpDU",
+        "address": "Drewitzer Str. 50a, 14478 Potsdam Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_zanotto",
+      "name": "Zanotto",
+      "before": {
+        "lat": 52.39962946000001,
+        "lng": 13.05365368
+      },
+      "google": {
+        "lat": 52.3996582,
+        "lng": 13.0537008,
+        "place_id": "ChIJFbCjE9D1qEcRORWMttFcjo4",
+        "address": "Dortustraße 53, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_cafe_zum_kanzler_eck",
+      "name": "Café zum Kanzler Eck",
+      "before": {
+        "lat": 52.38935696000001,
+        "lng": 13.0604239
+      },
+      "google": {
+        "lat": 52.3893857,
+        "lng": 13.060471,
+        "place_id": "ChIJf_57LQD1qEcRg6BG7QLmSpI",
+        "address": "Leipziger Str. 63A, 14473 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_cafe_barista_friends_potsdam",
+      "name": "Café Barista & Friends / Potsdam",
+      "before": {
+        "lat": 52.39294516,
+        "lng": 13.091695099999999
+      },
+      "google": {
+        "lat": 52.3929739,
+        "lng": 13.0917422,
+        "place_id": "ChIJTzAsu9D1qEcR5DRAUDvGuZE",
+        "address": "Karl-Liebknecht-Straße 133, 14482 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_cafe_franz_fruhstuck_lunch",
+      "name": "Café Franz – Frühstück & Lunch",
+      "before": {
+        "lat": 52.39576676,
+        "lng": 13.0601704
+      },
+      "google": {
+        "lat": 52.3957955,
+        "lng": 13.0602175,
+        "place_id": "ChIJD_IsKUX1qEcR65644URVQfI",
+        "address": "Anna-Zielenziger-Straße 1, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_buena_vida_coffee_roasters",
+      "name": "Buena Vida Coffee Roasters",
+      "before": {
+        "lat": 52.40074795999999,
+        "lng": 13.05886418
+      },
+      "google": {
+        "lat": 52.40077669999999,
+        "lng": 13.0589113,
+        "place_id": "ChIJ_STUVdr1qEcRfNl7yWM07V0",
+        "address": "Am Bassin 7, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_pp_pension_fabich",
+      "name": "PP Pension Fabich",
+      "before": {
+        "lat": 52.40597656,
+        "lng": 13.04741298
+      },
+      "google": {
+        "lat": 52.4060053,
+        "lng": 13.0474601,
+        "place_id": "ChIJObo7XdT1qEcRRtjyOkVuAlE",
+        "address": "Tieckstraße 4, 14469 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_pension_sanssouci",
+      "name": "Pension Sanssouci",
+      "before": {
+        "lat": 52.395076859999996,
+        "lng": 13.040760800000001
+      },
+      "google": {
+        "lat": 52.3951056,
+        "lng": 13.0408079,
+        "place_id": "ChIJxT05hsz1qEcRC9BrJduLETc",
+        "address": "Zeppelinstraße 164A, 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_pension_mark_brandenburg_gabriele_albrecht",
+      "name": "Pension \"Mark Brandenburg\" - Gabriele Albrecht",
+      "before": {
+        "lat": 52.37646196000001,
+        "lng": 13.083739220000002
+      },
+      "google": {
+        "lat": 52.3764907,
+        "lng": 13.0837863,
+        "place_id": "ChIJAc-3I4n1qEcRSj4eljCNhGo",
+        "address": "Heinrich-Mann-Allee 71, 14478 Potsdam Süd"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_pension_am_tiefen_see",
+      "name": "Pension Am Tiefen See",
+      "before": {
+        "lat": 52.410138960000005,
+        "lng": 13.08094558
+      },
+      "google": {
+        "lat": 52.4101677,
+        "lng": 13.0809927,
+        "place_id": "ChIJNVSnvwv2qEcR7rK8KqWx2s8",
+        "address": "Berliner Str. 58, 14467 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_b_b_hotel_potsdam",
+      "name": "B&B HOTEL Potsdam",
+      "before": {
+        "lat": 52.39225126,
+        "lng": 13.0695269
+      },
+      "google": {
+        "lat": 52.39228,
+        "lng": 13.069574,
+        "place_id": "ChIJIxRv6On1qEcRGveETXGNT0w",
+        "address": "Babelsberger Str. 24, 14473 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_apartmentpension_am_stadtschloss",
+      "name": "Apartmentpension am Stadtschloß",
+      "before": {
+        "lat": 52.39900316000001,
+        "lng": 13.063521779999999
+      },
+      "google": {
+        "lat": 52.3990319,
+        "lng": 13.0635689,
+        "place_id": "ChIJdQhgjcg7ZUERVJ1gSIK1oao",
+        "address": "Posthofstraße 9, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_pension_zeitlos",
+      "name": "Pension Zeitlos",
+      "before": {
+        "lat": 52.39214896000001,
+        "lng": 13.098505
+      },
+      "google": {
+        "lat": 52.3921777,
+        "lng": 13.0985521,
+        "place_id": "ChIJMQ1CE1hfqEcReB7HpBl_hDU",
+        "address": "Rudolf-Breitscheid-Straße 63, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_pension_am_hollandischen_viertel",
+      "name": "Pension am Holländischen Viertel",
+      "before": {
+        "lat": 52.403650160000005,
+        "lng": 13.06594758
+      },
+      "google": {
+        "lat": 52.4036789,
+        "lng": 13.0659947,
+        "place_id": "ChIJeW4kld71qEcR2yvH2ldJOLY",
+        "address": "Leiblstraße 12, 14467 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_greet_hotel_potsdam_at_sanssouci_park",
+      "name": "greet Hotel Potsdam at Sanssouci Park",
+      "before": {
+        "lat": 52.39393286000001,
+        "lng": 13.0118787
+      },
+      "google": {
+        "lat": 52.3939616,
+        "lng": 13.0119258,
+        "place_id": "ChIJ6x1fKwD1qEcRvHEsJ0k_F3Q",
+        "address": "Forststraße 80, 14471 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_galerie_sperl",
+      "name": "Galerie Sperl",
+      "before": {
+        "lat": 52.39743745999999,
+        "lng": 13.091441119999999
+      },
+      "google": {
+        "lat": 52.3974734,
+        "lng": 13.0915,
+        "place_id": "ChIJlcAzSsX1qEcRX7wjel0DrL8",
+        "address": "Alt Nowawes 89, 14482 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_schloss_sacrow",
+      "name": "Schloss Sacrow",
+      "before": {
+        "lat": 52.42759405999999,
+        "lng": 13.094621080000001
+      },
+      "google": {
+        "lat": 52.42763,
+        "lng": 13.09468,
+        "place_id": "ChIJX-1slT32qEcR6J_wEoKEz80",
+        "address": "Krampnitzer Str. 33, 14469 Potsdam Nord"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_aussichtspunkt_fahrlander_see",
+      "name": "Aussichtspunkt Fahrlander See",
+      "before": {
+        "lat": 52.44382766,
+        "lng": 13.024627540000001
+      },
+      "google": {
+        "lat": 52.4438636,
+        "lng": 13.0246865,
+        "place_id": "ChIJH4Pa8dr3qEcRYjUZ62qIAEc",
+        "address": "Neu Fahrland, 14476 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_kirchberg",
+      "name": "Kirchberg",
+      "before": {
+        "lat": 52.44841936,
+        "lng": 13.03804304
+      },
+      "google": {
+        "lat": 52.4458084,
+        "lng": 13.0384929,
+        "place_id": "ChIJC3ltf-b2qEcRN7lnMR2Wllc",
+        "address": "Am Kirchberg, 14476 Potsdam-Nördliche Ortsteile"
+      },
+      "delta_m": 292,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_reiherberg",
+      "name": "Reiherberg",
+      "before": {
+        "lat": 52.40577836,
+        "lng": 12.962284599999998
+      },
+      "google": {
+        "lat": 52.4058143,
+        "lng": 12.9623435,
+        "place_id": "ChIJ3S6mVe7zqEcRGDn13h6mBLs",
+        "address": "Golm, 14476 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_berliner_mauerweg_und_waldstrand_sudlicher_krampnitzsee",
+      "name": "Berliner Mauerweg und Waldstrand Südlicher Krampnitzsee",
+      "before": {
+        "lat": 52.44216646000001,
+        "lng": 13.065752460000002
+      },
+      "google": {
+        "lat": 52.4422024,
+        "lng": 13.0658114,
+        "place_id": "ChIJJ_IpWAD3qEcRZypoXznqnVw",
+        "address": "Sacrow, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_wanderweg_krampnitzer_weg",
+      "name": "Wanderweg Krampnitzer Weg",
+      "before": {
+        "lat": 52.45469135999999,
+        "lng": 13.06291454
+      },
+      "google": {
+        "lat": 52.45472729999999,
+        "lng": 13.0629735,
+        "place_id": "ChIJF27ibwD3qEcRL0QYey4eCfQ",
+        "address": "Str. nach Sacrow 1, 14476 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_wanderweg_krampnitzsee",
+      "name": "Wanderweg Krampnitzsee",
+      "before": {
+        "lat": 52.45916416,
+        "lng": 13.05260712
+      },
+      "google": {
+        "lat": 52.4592001,
+        "lng": 13.0526661,
+        "place_id": "ChIJ0R1jcwD3qEcRtZ04obUOo1I",
+        "address": "Rotkehlchenweg 2, 14476 Potsdam-Fahrland"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_berliner_mauerweg_potsdamer_route_alter_grenzerpfad",
+      "name": "Berliner Mauerweg - Potsdamer Route, Alter Grenzerpfad",
+      "before": {
+        "lat": 52.43005676,
+        "lng": 13.06492556
+      },
+      "google": {
+        "lat": 52.4300927,
+        "lng": 13.0649845,
+        "place_id": "ChIJr-tgLAD3qEcRxWC4IZ3J34o",
+        "address": "Bertiniweg 2, 14469 Potsdam Nord"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_speckdammbrucke_zugang_zu_sielmanns_naturlandschaft_doberitzer_heide",
+      "name": "Speckdammbrücke Zugang zu Sielmanns Naturlandschaft Döberitzer heide",
+      "before": {
+        "lat": 52.47524396,
+        "lng": 13.0398223
+      },
+      "google": {
+        "lat": 52.4752799,
+        "lng": 13.0398813,
+        "place_id": "ChIJOd3pWiL3qEcRw5Dc6WxkEgo",
+        "address": "Speckdammweg, 14476 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_sacrower_see",
+      "name": "Sacrower See",
+      "before": {
+        "lat": 52.44303016,
+        "lng": 13.098931859999999
+      },
+      "google": {
+        "lat": 52.4458964,
+        "lng": 13.102172,
+        "place_id": "ChIJRStxxTb2qEcRsFEgXu6cvoE",
+        "address": "Sacrower See, 14469 Potsdam"
+      },
+      "delta_m": 387,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_konigswald_mit_havelseen_und_seeburger_agrarlandschaft",
+      "name": "Königswald mit Havelseen und Seeburger Agrarlandschaft",
+      "before": {
+        "lat": 52.483950560000004,
+        "lng": 13.064711799999998
+      },
+      "google": {
+        "lat": 52.4839865,
+        "lng": 13.0647708,
+        "place_id": "ChIJP8XHdXT3qEcRYFrGU2kZpok",
+        "address": "Krampnitzer Str., 14476 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_persiusturm",
+      "name": "Persiusturm",
+      "before": {
+        "lat": 52.439511360000004,
+        "lng": 13.01344826
+      },
+      "google": {
+        "lat": 52.4395473,
+        "lng": 13.0135072,
+        "place_id": "ChIJU0EY58_3qEcRM-V49cZRxSk",
+        "address": "Max-Eyth-Allee, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_potsdam_per_pedales",
+      "name": "Potsdam per Pedales",
+      "before": {
+        "lat": 52.39487056,
+        "lng": 13.12853752
+      },
+      "google": {
+        "lat": 52.3949065,
+        "lng": 13.1285964,
+        "place_id": "ChIJdduG_-n1qEcRNVZnd2Zne9Q",
+        "address": "Rudolf-Breitscheid-Straße 201, 14482 Potsdam-Babelsberg"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_park_sacrow",
+      "name": "Park Sacrow",
+      "before": {
+        "lat": 52.426825459999996,
+        "lng": 13.094569680000001
+      },
+      "google": {
+        "lat": 52.4268614,
+        "lng": 13.0946286,
+        "place_id": "ChIJ3za0oj32qEcRRyFvbcrHP1o",
+        "address": "Krampnitzer Str. 34, 14470 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_petzinseebrucke",
+      "name": "Petzinseebrücke",
+      "before": {
+        "lat": 52.35766976,
+        "lng": 12.995650559999998
+      },
+      "google": {
+        "lat": 52.3577057,
+        "lng": 12.9957094,
+        "place_id": "ChIJ4U3n_Lj1qEcRFCvCStQhLHg",
+        "address": "Am Petzinsee, 14548 Schwielowsee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_marina_am_jungfernsee",
+      "name": "Marina am Jungfernsee",
+      "before": {
+        "lat": 52.43275375999999,
+        "lng": 13.060266560000002
+      },
+      "google": {
+        "lat": 52.4327897,
+        "lng": 13.0603255,
+        "place_id": "ChIJAQhxKNH3qEcRPfYjcl7MLJ4",
+        "address": "Am Jungfernsee 46, 14469 Potsdam Nord"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_pier_1_bistro_cafe_schifffahrt_in_potsdam_anleger_caputher_gemunde",
+      "name": "Pier 1, Bistro & Café / SCHIFFFAHRT in POTSDAM - Anleger Caputher Gemünde",
+      "before": {
+        "lat": 52.34530866,
+        "lng": 12.98473358
+      },
+      "google": {
+        "lat": 52.3453446,
+        "lng": 12.9847924,
+        "place_id": "ChIJrY7RQcf0qEcR6ZqEGOzS7T8",
+        "address": "Weinbergstraße 28, 14548 Schwielowsee-Caputh"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_wassersportclub_potsdam_int_e_v_marina_potsd_nf",
+      "name": "Wassersportclub Potsdam Int.e.V., Marina Potsd.NF",
+      "before": {
+        "lat": 52.439565259999995,
+        "lng": 13.050190660000002
+      },
+      "google": {
+        "lat": 52.4396012,
+        "lng": 13.0502496,
+        "place_id": "ChIJMUt-JvH2qEcRcTuEjJkfbyc",
+        "address": "Tschudistraße 9, 14476 Potsdam-Nördliche Ortsteile"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_waldhaus_grosser_ravensberg",
+      "name": "Waldhaus Großer Ravensberg",
+      "before": {
+        "lat": 52.35042786,
+        "lng": 13.066676079999999
+      },
+      "google": {
+        "lat": 52.3504638,
+        "lng": 13.0667349,
+        "place_id": "ChIJIVuhUGT1qEcRnGBSrj24pNY",
+        "address": "Ravensberggestell 2, 14478 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_tiergarten_teltow",
+      "name": "Tiergarten Teltow",
+      "before": {
+        "lat": 52.398075760000005,
+        "lng": 13.28662592
+      },
+      "google": {
+        "lat": 52.3981117,
+        "lng": 13.2866848,
+        "place_id": "ChIJlUzBRHZbqEcRlhKph-YHnCA",
+        "address": "Kastanienstraße 13-19, 14513 Teltow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_wegestern_im_wildpark",
+      "name": "Wegestern im Wildpark",
+      "before": {
+        "lat": 52.38832666,
+        "lng": 12.99977332
+      },
+      "google": {
+        "lat": 52.3883626,
+        "lng": 12.9998322,
+        "place_id": "ChIJGSu2Kmr0qEcRo_S3fRy1DOI",
+        "address": "14471, Birkenallee, 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_pfauengehege",
+      "name": "Pfauengehege",
+      "before": {
+        "lat": 52.43249775999999,
+        "lng": 13.129459459999998
+      },
+      "google": {
+        "lat": 52.4325337,
+        "lng": 13.1295184,
+        "place_id": "ChIJ9Wg6zNJZqEcRj9SBCDrOk-A",
+        "address": "Unnamed Road, 14109 Berlin"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_voliere_auf_der_pfaueninsel",
+      "name": "Volière auf der Pfaueninsel",
+      "before": {
+        "lat": 52.43335366,
+        "lng": 13.12936286
+      },
+      "google": {
+        "lat": 52.4333896,
+        "lng": 13.1294218,
+        "place_id": "ChIJ00DGLIVYqEcRM8cVOIboFRA",
+        "address": "Wannsee, 14109 Berlin"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_wassersport_potsdam",
+      "name": "Wassersport Potsdam",
+      "before": {
+        "lat": 52.36155976,
+        "lng": 13.007810760000002
+      },
+      "google": {
+        "lat": 52.3615957,
+        "lng": 13.0078696,
+        "place_id": "ChIJFbN4vvr0qEcR0ZF_qKwK8oM",
+        "address": "beim Campingpark Sanssouci, An d. Pirschheide 41, 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_kaiser_tour_potsdam",
+      "name": "Kaiser-Tour Potsdam",
+      "before": {
+        "lat": 52.36380546,
+        "lng": 13.114009959999999
+      },
+      "google": {
+        "lat": 52.3638414,
+        "lng": 13.1140688,
+        "place_id": "ChIJw_92lT5fqEcRTEcscieilhU",
+        "address": "Möbelhof 11, 14478 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_nanu_nana",
+      "name": "NANU-NANA",
+      "before": {
+        "lat": 52.37142576,
+        "lng": 13.133689440000001
+      },
+      "google": {
+        "lat": 52.3923286,
+        "lng": 13.0659775,
+        "place_id": "ChIJ1-0iBcL1qEcRER_TJjum8GA",
+        "address": "Bahnhofspassagen, Babelsberger Str. 16, 14473 Potsdam"
+      },
+      "delta_m": 5150,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_offentliche_toiletten_am_bassinplatz",
+      "name": "Öffentliche Toiletten am Bassinplatz",
+      "before": {
+        "lat": 52.40028694,
+        "lng": 13.059844379999998
+      },
+      "google": {
+        "lat": 52.4003121,
+        "lng": 13.0598856,
+        "place_id": "ChIJUaI9te31qEcRN7RNgt7iJps",
+        "address": "Parkplatz, 14467 Potsdam"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "potsdam_platz_der_einheit",
+      "name": "Platz der Einheit",
+      "before": {
+        "lat": 52.39837444,
+        "lng": 13.058848280000001
+      },
+      "google": {
+        "lat": 52.3983996,
+        "lng": 13.0588895,
+        "place_id": "ChIJ9zWWBE_1qEcRl_dINfpGhuo",
+        "address": "Nördliche, 14467 Potsdam"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "potsdam_toilette",
+      "name": "Toilette",
+      "before": {
+        "lat": 52.403990639999996,
+        "lng": 13.055274579999999
+      },
+      "google": {
+        "lat": 52.3937179,
+        "lng": 13.060962,
+        "place_id": "ChIJZyvedQD1qEcRndWsmRwJLfQ",
+        "address": "Lange Brücke 6, 14467 Potsdam"
+      },
+      "delta_m": 1206,
+      "status": "BAD",
+      "streetview": "OK"
+    }
+  ]
+}

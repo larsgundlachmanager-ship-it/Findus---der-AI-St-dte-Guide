@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Pressable, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 import { colors, spacing } from '../constants/theme';
 import {
+  ALLERGY_INTOLERANCE_OPTIONS,
   ANSWER_STYLE_OPTIONS,
   BUDGET_OPTIONS,
   DIETARY_OPTIONS,
   ENERGY_OPTIONS,
   MOBILITY_OPTIONS,
-  TOURIST_MODE_OPTIONS,
+  MUST_HAVE_STYLE_OPTIONS,
+  patchFromMustHaveStyles,
   TRAVEL_PARTY_OPTIONS,
 } from '../constants/conciergePrefs';
 import type {
@@ -15,10 +17,11 @@ import type {
   BudgetCategory,
   EnergyLevel,
   MobilityMode,
-  TouristVsInsider,
+  MustHaveStyleId,
   TravelParty,
   UserProfile,
 } from '../types/userProfile';
+import { TravelModeSelector } from './TravelModeSelector';
 
 type Props = {
   draft: UserProfile;
@@ -54,16 +57,36 @@ function ChipRow<T extends string>({
 }
 
 /**
- * Concierge-Prefs: Gruppe, Mobilität, Energie, Budget, Essen, Stil, Benachrichtigungen.
+ * Concierge-Prefs: Gruppe, Mobilität, Energie, Budget, Essen, Allergien, Stil.
  */
 export function ConciergePrefsEditor({ draft, onChange }: Props) {
   const dietary = draft.dietaryTags ?? [];
+  const allergyTags = draft.allergyTags ?? [];
+  const mustHaves = draft.mustHaveStyles ?? [];
+  const [allergyOpen, setAllergyOpen] = useState(() =>
+    (draft.allergyTags ?? []).some((t) => t !== 'keine'),
+  );
 
   const toggleDiet = (id: string) => {
     const next = dietary.includes(id)
       ? dietary.filter((x) => x !== id)
       : [...dietary, id];
     onChange({ dietaryTags: next });
+  };
+
+  const toggleAllergy = (id: string) => {
+    const withoutKeine = allergyTags.filter((x) => x !== 'keine');
+    const next = withoutKeine.includes(id)
+      ? withoutKeine.filter((x) => x !== id)
+      : [...withoutKeine, id];
+    onChange({ allergyTags: next });
+  };
+
+  const toggleMustHave = (id: MustHaveStyleId) => {
+    const next = mustHaves.includes(id)
+      ? mustHaves.filter((x) => x !== id)
+      : [...mustHaves, id];
+    onChange(patchFromMustHaveStyles(next, draft));
   };
 
   return (
@@ -81,6 +104,10 @@ export function ConciergePrefsEditor({ draft, onChange }: Props) {
         value={draft.mobilityMode}
         onSelect={(mobilityMode: MobilityMode) => onChange({ mobilityMode })}
       />
+      <Text style={[styles.label, { marginTop: spacing.sm }]}>
+        Jetzt unterwegs mit
+      </Text>
+      <TravelModeSelector />
 
       <Text style={styles.label}>Energielevel</Text>
       <ChipRow
@@ -109,17 +136,30 @@ export function ConciergePrefsEditor({ draft, onChange }: Props) {
         }}
       />
 
-      <Text style={styles.label}>Must-sees oder Geheimtipps?</Text>
-      <ChipRow
-        options={TOURIST_MODE_OPTIONS}
-        value={draft.touristMode}
-        onSelect={(touristMode: TouristVsInsider) => onChange({ touristMode })}
-      />
+      <Text style={styles.label}>Must-haves</Text>
+      <Text style={styles.fieldHint}>
+        Mehrfachauswahl — Findus mixt Tipps (Touri, ruhig, versteckt, Nachtleben).
+      </Text>
+      <View style={styles.chipRow}>
+        {MUST_HAVE_STYLE_OPTIONS.map((o) => {
+          const on = mustHaves.includes(o.id);
+          return (
+            <Pressable
+              key={o.id}
+              onPress={() => toggleMustHave(o.id)}
+              style={[styles.chip, on && styles.chipOn]}
+            >
+              <Text style={styles.chipLabel}>{o.label}</Text>
+              {o.hint ? <Text style={styles.chipHint}>{o.hint}</Text> : null}
+            </Pressable>
+          );
+        })}
+      </View>
 
       <Text style={styles.label}>Antwortstil</Text>
       <ChipRow
         options={ANSWER_STYLE_OPTIONS}
-        value={draft.answerStyle}
+        value={draft.answerStyle ?? 'short'}
         onSelect={(answerStyle: AnswerStyle) => onChange({ answerStyle })}
       />
 
@@ -139,10 +179,56 @@ export function ConciergePrefsEditor({ draft, onChange }: Props) {
         })}
       </View>
 
-      <Text style={styles.label}>Allergien (optional)</Text>
+      <Text style={styles.label}>Allergien & Unverträglichkeiten</Text>
+      <Text style={styles.fieldHint}>
+        Tippen — Findus meidet unpassende Essenstipps.
+      </Text>
+      <View style={styles.chipRow}>
+        {(
+          [
+            { id: false, label: 'Keine' },
+            { id: true, label: 'Ja' },
+          ] as const
+        ).map((o) => {
+          const on = allergyOpen === o.id;
+          return (
+            <Pressable
+              key={String(o.id)}
+              onPress={() => {
+                setAllergyOpen(o.id);
+                if (!o.id) onChange({ allergyTags: ['keine'] });
+                else {
+                  onChange({
+                    allergyTags: allergyTags.filter((x) => x !== 'keine'),
+                  });
+                }
+              }}
+              style={[styles.chipSmall, on && styles.chipOn]}
+            >
+              <Text style={styles.chipLabel}>{o.label}</Text>
+            </Pressable>
+          );
+        })}
+      </View>
+      {allergyOpen ? (
+        <View style={styles.chipRow}>
+          {ALLERGY_INTOLERANCE_OPTIONS.map((o) => {
+            const on = allergyTags.includes(o.id);
+            return (
+              <Pressable
+                key={o.id}
+                onPress={() => toggleAllergy(o.id)}
+                style={[styles.chipSmall, on && styles.chipOn]}
+              >
+                <Text style={styles.chipLabel}>{o.label}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+      ) : null}
       <TextInput
         style={styles.input}
-        placeholder="z. B. Nüsse, Laktose…"
+        placeholder="Sonstiges Freitext (z. B. Kiwi, Penicillin…)"
         placeholderTextColor={colors.textMuted}
         value={draft.allergies ?? ''}
         onChangeText={(allergies) => onChange({ allergies })}
@@ -150,9 +236,10 @@ export function ConciergePrefsEditor({ draft, onChange }: Props) {
 
       <View style={styles.switchRow}>
         <View style={styles.switchCopy}>
-          <Text style={styles.switchTitle}>Hinweise zu Orten</Text>
+          <Text style={styles.switchTitle}>Hinweise & Erinnerungen</Text>
           <Text style={styles.switchHint}>
-            Findus darf dich auf nahe Sehenswürdigkeiten hinweisen.
+            Orte in der Nähe plus Push-Erinnerungen vor Bus/Bahn und Flug
+            (auch bei gesperrtem Bildschirm).
           </Text>
         </View>
         <Switch
@@ -183,16 +270,16 @@ const styles = StyleSheet.create({
   chip: {
     minWidth: '46%',
     flexGrow: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
     borderRadius: 12,
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.12)',
     backgroundColor: 'rgba(0,0,0,0.18)',
   },
   chipSmall: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
     borderRadius: 20,
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.12)',
@@ -201,8 +288,9 @@ const styles = StyleSheet.create({
     borderColor: colors.accent,
     backgroundColor: 'rgba(196, 163, 90, 0.15)',
   },
-  chipLabel: { color: colors.text, fontWeight: '700', fontSize: 13 },
-  chipHint: { color: colors.textMuted, fontSize: 11, marginTop: 2 },
+  chipLabel: { color: colors.text, fontWeight: '700', fontSize: 12 },
+  chipHint: { color: colors.textMuted, fontSize: 10, marginTop: 2 },
+  fieldHint: { color: colors.textMuted, fontSize: 12, marginTop: -2 },
   input: {
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.15)',
@@ -214,12 +302,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.2)',
   },
   switchRow: {
+    marginTop: spacing.md,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
-    marginTop: spacing.sm,
+    gap: spacing.md,
   },
   switchCopy: { flex: 1 },
-  switchTitle: { color: colors.text, fontWeight: '700', fontSize: 14 },
-  switchHint: { color: colors.textMuted, fontSize: 12, marginTop: 2 },
+  switchTitle: { color: colors.text, fontWeight: '700', fontSize: 13 },
+  switchHint: { color: colors.textMuted, fontSize: 11, marginTop: 2 },
 });

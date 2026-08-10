@@ -1,0 +1,147 @@
+{
+  "city_id": "wangerooge",
+  "name": "Wangerooge",
+  "symbol": "🏝️",
+  "lat": 53.7902,
+  "lng": 7.8995,
+  "places": [
+    {
+      "id": "wangerooge_anleger",
+      "name": "Fähranleger Wangerooge",
+      "category": "transport",
+      "district": "Hafen",
+      "tags": ["transport", "faehre"],
+      "general_info": "Hier kommst du an — der Anleger ist die Schwelle zwischen Festland-Hektik und Inselzeit."
+    },
+    {
+      "id": "wangerooge_inselbahnhof",
+      "name": "Inselbahnhof Wangerooge",
+      "category": "bahnhof",
+      "district": "Dorf",
+      "tags": ["bahnhof", "transport", "inselbahn"]
+    },
+    {
+      "id": "wangerooge_leuchtturm",
+      "name": "Alter Leuchtturm Wangerooge",
+      "category": "architektur",
+      "district": "West",
+      "tags": ["architektur", "leuchtturm", "aussicht"]
+    },
+    {
+      "id": "wangerooge_westturm",
+      "name": "Westturm Wangerooge",
+      "category": "kirche",
+      "district": "West",
+      "tags": ["kirche", "must_have", "aussicht"],
+      "famousPersonConnected": "Historische Lotsen und Küstenwachen nutzten den Turm als Seezeichen — ein Personen- und Pflicht-Stopp der Insel."
+    },
+    {
+      "id": "wangerooge_neue_kirche",
+      "name": "Neue Kirche Wangerooge",
+      "category": "kirche",
+      "district": "Dorf",
+      "tags": ["kirche"]
+    },
+    {
+      "id": "wangerooge_hauptstrand",
+      "name": "Hauptstrand Wangerooge",
+      "category": "strand",
+      "district": "Nord",
+      "tags": ["strand", "natur", "must_have"],
+      "boxHalfM": 80
+    },
+    {
+      "id": "wangerooge_weststrand",
+      "name": "Weststrand Wangerooge",
+      "category": "strand",
+      "district": "West",
+      "tags": ["strand", "natur"],
+      "boxHalfM": 70
+    },
+    {
+      "id": "wangerooge_duenen",
+      "name": "Dünenlandschaft Wangerooge",
+      "category": "natur",
+      "district": "Nord",
+      "tags": ["natur", "duenen"],
+      "boxHalfM": 60
+    },
+    {
+      "id": "wangerooge_nationalparkhaus",
+      "name": "Nationalpark-Haus Wangerooge",
+      "category": "museum",
+      "district": "Dorf",
+      "tags": ["museum", "natur", "wissen"]
+    },
+    {
+      "id": "wangerooge_kurplatz",
+      "name": "Kurplatz Wangerooge",
+      "category": "platz",
+      "district": "Dorf",
+      "tags": ["platz", "must_have"],
+      "boxHalfM": 40
+    },
+    {
+      "id": "wangerooge_promenade",
+      "name": "Promenade Wangerooge",
+      "category": "promenade",
+      "district": "Nord",
+      "tags": ["promenade", "spazieren"],
+      "boxHalfM": 50
+    },
+    {
+      "id": "wangerooge_jugendbad",
+      "name": "Jugendbad Wangerooge",
+      "category": "freizeit",
+      "district": "Dorf",
+      "tags": ["freizeit", "familie"]
+    },
+    {
+      "id": "wangerooge_cafe_pavillon",
+      "name": "Café am Kurplatz Wangerooge",
+      "category": "cafe",
+      "district": "Dorf",
+      "tags": ["cafe", "kaffee", "gastronomie"],
+      "query": "Café Wangerooge Kurplatz"
+    },
+    {
+      "id": "wangerooge_fischrestaurant",
+      "name": "Fischrestaurant Wangerooge",
+      "category": "fischrestaurant",
+      "district": "Dorf",
+      "tags": ["fischrestaurant", "fisch", "abendessen", "gastronomie"],
+      "query": "Restaurant Fisch Wangerooge"
+    },
+    {
+      "id": "wangerooge_strandimbiss",
+      "name": "Strandimbiss Wangerooge",
+      "category": "streetfood",
+      "district": "Nord",
+      "tags": ["streetfood", "mittag", "gastronomie"],
+      "query": "Imbiss Strand Wangerooge"
+    },
+    {
+      "id": "wangerooge_buchladen",
+      "name": "Bücherstube Wangerooge",
+      "category": "kultur",
+      "district": "Dorf",
+      "tags": ["literatur", "kultur", "versteckt"],
+      "query": "Buchhandlung Wangerooge"
+    },
+    {
+      "id": "wangerooge_salzmuseum",
+      "name": "Museum und Heimatstube Wangerooge",
+      "category": "museum",
+      "district": "Dorf",
+      "tags": ["museum", "geschichte"],
+      "query": "Heimatmuseum Wangerooge"
+    },
+    {
+      "id": "wangerooge_friedhof",
+      "name": "Inselfriedhof Wangerooge",
+      "category": "kirche",
+      "district": "Dorf",
+      "tags": ["kirche", "geschichte"]
+    }
+  ]
+}

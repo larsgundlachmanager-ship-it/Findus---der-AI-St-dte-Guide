@@ -1,0 +1,1502 @@
+{
+  "city_id": "hamburg",
+  "story": 249,
+  "minStory": 80,
+  "thin": [
+    {
+      "id": "hamburg_bahnhof_hamburg_landungsbrucken",
+      "name": "Bahnhof Hamburg Landungsbrücken",
+      "tier": 1,
+      "category": "bahnhof"
+    },
+    {
+      "id": "hamburg_ballinstadt_auswanderermuseum_hamburg",
+      "name": "BallinStadt - Auswanderermuseum Hamburg",
+      "tier": 1,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_binnenalster",
+      "name": "Binnenalster",
+      "tier": 1,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_bismarck_denkmal",
+      "name": "Bismarck-Denkmal",
+      "tier": 1,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_cap_san_diego",
+      "name": "Cap San Diego",
+      "tier": 1,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_dammtorpark_planten_un_blomen",
+      "name": "Dammtorpark, Planten un Blomen",
+      "tier": 1,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_deichtorhallen_hamburg",
+      "name": "Deichtorhallen Hamburg",
+      "tier": 1,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_elbphilharmonie",
+      "name": "Elbphilharmonie",
+      "tier": 1,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_elbphilharmonie_hamburg",
+      "name": "Elbphilharmonie Hamburg",
+      "tier": 1,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_hamburg_hauptbahnhof",
+      "name": "Hamburg Hauptbahnhof",
+      "tier": 1,
+      "category": "bahnhof"
+    },
+    {
+      "id": "hamburg_hamburg_landungsbrucken",
+      "name": "Hamburg Landungsbrücken",
+      "tier": 1,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_hamburger_kunsthalle",
+      "name": "Hamburger Kunsthalle",
+      "tier": 1,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_hamburger_rathaus",
+      "name": "Hamburger Rathaus",
+      "tier": 1,
+      "category": "geschichte"
+    },
+    {
+      "id": "hamburg_hauptkirche_st_michaelis",
+      "name": "Hauptkirche St. Michaelis",
+      "tier": 1,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_jungfernstieg",
+      "name": "Jungfernstieg",
+      "tier": 1,
+      "category": "bahnhof"
+    },
+    {
+      "id": "hamburg_mahnmal_st_nikolai",
+      "name": "Mahnmal St. Nikolai",
+      "tier": 1,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_miniatur_wunderland",
+      "name": "Miniatur Wunderland",
+      "tier": 1,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_planten_un_blomen",
+      "name": "Planten un Blomen",
+      "tier": 1,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_rathaus",
+      "name": "Rathaus",
+      "tier": 1,
+      "category": "bahnhof"
+    },
+    {
+      "id": "hamburg_speicherstadt",
+      "name": "Speicherstadt",
+      "tier": 1,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_speicherstadtmuseum",
+      "name": "Speicherstadtmuseum",
+      "tier": 1,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_st_pauli_landungsbrucken",
+      "name": "St. Pauli Landungsbrücken",
+      "tier": 1,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_tierpark_hagenbeck",
+      "name": "Tierpark Hagenbeck",
+      "tier": 1,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_allee_theater_hamburg",
+      "name": "Allee Theater Hamburg",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_alsterfontane",
+      "name": "Alsterfontäne",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_alstermundung",
+      "name": "Alstermündung",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_alsterpark",
+      "name": "Alsterpark",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_alter_botanischer_garten",
+      "name": "Alter Botanischer Garten",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_altonaer_balkon",
+      "name": "Altonaer Balkon",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_altonaer_theater",
+      "name": "Altonaer Theater",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_anleger_jungfernstieg",
+      "name": "Anleger Jungfernstieg",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_apothekergarten",
+      "name": "Apothekergarten",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_aussichts_plattform_bismarckstein",
+      "name": "Aussichts-Plattform Bismarckstein",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_aussichtspunkt_bei_der_erholung",
+      "name": "Aussichtspunkt \"Bei der Erholung\"",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_aussichtspunkt_1_moorburger_elbdeich",
+      "name": "Aussichtspunkt 1 Moorburger Elbdeich",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_aussichtspunkt_billhafen",
+      "name": "Aussichtspunkt Billhafen",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_automuseum_prototyp",
+      "name": "Automuseum Prototyp",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_baakenpark",
+      "name": "Baakenpark",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_bergedorf_museum",
+      "name": "Bergedorf Museum",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_berliner_tor",
+      "name": "Berliner Tor",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_binnenalster_panorama",
+      "name": "Binnenalster Panorama",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_bleichensteg",
+      "name": "Bleichensteg",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_blue_port_hamburg_hamburger_art_ensemble",
+      "name": "Blue Port Hamburg (Hamburger Art Ensemble)",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_boberger_dunenhaus",
+      "name": "Boberger Dünenhaus",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_boberger_niederung",
+      "name": "Boberger Niederung",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_boberger_strand",
+      "name": "Boberger Strand",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_botanischer_garten_der_universitat_hamburg_loki_schmidt_garten",
+      "name": "Botanischer Garten der Universität Hamburg - Loki-Schmidt-Garten",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_botanischer_sondergarten",
+      "name": "Botanischer Sondergarten",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_chocoversum_hamburgs_schokoladenmuseum",
+      "name": "CHOCOVERSUM - Hamburgs Schokoladenmuseum",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_city_sporthafen_hamburg_e_v",
+      "name": "City Sporthafen Hamburg e.V.",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_dahliengarten_hamburg",
+      "name": "Dahliengarten Hamburg",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_dammtor",
+      "name": "Dammtor",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "hamburg_denkmal_burgermeister_carl_friedrich_petersen",
+      "name": "Denkmal Bürgermeister Carl Friedrich Petersen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_denkmal_fur_die_gefallenen_beider_weltkriege",
+      "name": "Denkmal für die Gefallenen beider Weltkriege",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_denkmal_kaiser_wilhelm_i",
+      "name": "Denkmal Kaiser Wilhelm I",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_der_garten_der_sinne",
+      "name": "Der Garten der Sinne",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_deutsches_rotes_kreuz_hamburg_ambulante_soziale_dienste_gmbh",
+      "name": "Deutsches Rotes Kreuz Hamburg Ambulante Soziale Dienste GmbH",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_deutsches_rotes_kreuz_hamburg_ambulante_soziale_dienste_gmbh_ambulante_p",
+      "name": "Deutsches Rotes Kreuz Hamburg Ambulante Soziale Dienste GmbH Ambulante Psychiatrische Hilfen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_deutsches_rotes_kreuz_hamburg_ambulante_soziale_dienste_gmbh_service_woh",
+      "name": "Deutsches Rotes KReuz Hamburg Ambulante Soziale Dienste GmbH Service Wohnen Altona",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_deutsches_rotes_kreuz_kreisverband_hamburg_city",
+      "name": "Deutsches Rotes Kreuz Kreisverband Hamburg-City",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_deutsches_rotes_kreuz_kreisverband_hamburg_nordost_e_v",
+      "name": "Deutsches Rotes Kreuz Kreisverband Hamburg-Nordost e.V.",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_deutsches_rotes_kreuz_landesverband_hamburg_studentenwohnheim",
+      "name": "Deutsches Rotes Kreuz Landesverband Hamburg Studentenwohnheim",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_deutsches_rotes_kreuz_sozialstation",
+      "name": "Deutsches Rotes Kreuz Sozialstation",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_deutsches_schauspielhaus_hamburg",
+      "name": "Deutsches SchauSpielHaus Hamburg",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_deutsches_zollmuseum",
+      "name": "Deutsches Zollmuseum",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_dm_drogerie_markt",
+      "name": "dm-drogerie markt",
+      "tier": 2,
+      "category": "geschichte"
+    },
+    {
+      "id": "hamburg_dock_1_kirche",
+      "name": "DOCK 1 Kirche",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_domplatz",
+      "name": "Domplatz",
+      "tier": 2,
+      "category": "altstadt"
+    },
+    {
+      "id": "hamburg_drk_kreisverband_hamburg_eimsbuttel_e_v",
+      "name": "DRK-Kreisverband Hamburg Eimsbüttel e.V.",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_eismeer",
+      "name": "Eismeer",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_elbhohenweg_aussichtspunkt_schopenhauerweg",
+      "name": "Elbhöhenweg Aussichtspunkt Schopenhauerweg",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_elblinien_fahre",
+      "name": "Elblinien Fähre",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_elbstrand",
+      "name": "Elbstrand",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_elefanten_freilaufhalle",
+      "name": "Elefanten-Freilaufhalle",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_englische_kirche_anglican_church_of_st_thomas_becket",
+      "name": "Englische Kirche / Anglican Church of St Thomas Becket",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_etv_golf_city_golf_hamburg",
+      "name": "ETV Golf - City Golf Hamburg",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_evangelisch_reformierte_kirche_in_hamburg",
+      "name": "Evangelisch-reformierte Kirche in Hamburg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_experience_hamburg_tours",
+      "name": "Experience Hamburg Tours",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "hamburg_f_feuer_hamburg",
+      "name": "F-Feuer Hamburg",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_fahrradtaxi_pedalotours_gmbh_stadtrundfahrten_rikscha_hamburg",
+      "name": "Fahrradtaxi Pedalotours GmbH - Stadtrundfahrten, Rikscha Hamburg",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "hamburg_first_stage_theater_musicals_in_hamburg",
+      "name": "FIRST STAGE Theater - Musicals in Hamburg",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_fischbeker_heide",
+      "name": "Fischbeker Heide",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_fitnessstudio_verein_aktive_freizeit_e_v_vaf",
+      "name": "Fitnessstudio Verein Aktive Freizeit e.V. - VAF",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_flachsland_hamburger_puppentheater",
+      "name": "Flachsland - Hamburger Puppentheater",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_flashh_gmbh",
+      "name": "FLASHH GmbH",
+      "tier": 2,
+      "category": "activity"
+    },
+    {
+      "id": "hamburg_flussschifferkirche_hamburg",
+      "name": "Flussschifferkirche Hamburg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_food_lovers_market_ottensen",
+      "name": "Food Lovers Market Ottensen",
+      "tier": 2,
+      "category": "markt"
+    },
+    {
+      "id": "hamburg_freimaurer_hamburg_johannisloge_zur_festen_burg_an_der_elbe",
+      "name": "Freimaurer Hamburg | Johannisloge | Zur festen Burg an der Elbe",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_freizeitpark_horner_rennbahn",
+      "name": "Freizeitpark Horner Rennbahn",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_gemeindehaus_st_johannis_harvestehude",
+      "name": "Gemeindehaus St. Johannis-Harvestehude",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_globus_brunnen",
+      "name": "Globus-Brunnen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_golf_country_club_hamburg_treudelberg",
+      "name": "Golf & Country Club Hamburg-Treudelberg",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_golf_am_reimersweg",
+      "name": "Golf am Reimersweg",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_golf_lounge_resort",
+      "name": "Golf Lounge Resort",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_golfrange_hamburg_oststeinbek",
+      "name": "GolfRange Hamburg-Oststeinbek",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_grosse_wallanlagen",
+      "name": "Große Wallanlagen",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_grossflottbeker_tennis_hockey_und_golf_club_e_v",
+      "name": "Grossflottbeker Tennis- Hockey- und Golf-Club e.V.",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_hadag_seetouristik_und_fahrdienst_ag",
+      "name": "HADAG Seetouristik und Fährdienst AG",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_hafen_hamburg_marketing_e_v_hhm",
+      "name": "Hafen Hamburg Marketing e.V. (HHM)",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_hafenwirtschaft_hamburg",
+      "name": "Hafenwirtschaft Hamburg",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_hamburg_bunker",
+      "name": "Hamburg BUNKER",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_hamburg_port_authority_aor",
+      "name": "Hamburg Port Authority AöR",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_hamburg_stadtrundfahrten_die_rot_gelben_doppeldecker",
+      "name": "Hamburg Stadtrundfahrten - Die Rot-Gelben Doppeldecker",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "hamburg_hamburg_altona",
+      "name": "Hamburg-Altona",
+      "tier": 2,
+      "category": "bahnhof"
+    },
+    {
+      "id": "hamburg_hamburg_altstadt",
+      "name": "Hamburg-Altstadt",
+      "tier": 2,
+      "category": "altstadt"
+    },
+    {
+      "id": "hamburg_hamburg_stadtfuhrung",
+      "name": "Hamburg-Stadtführung",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "hamburg_hamburger_golf_club_e_v",
+      "name": "Hamburger Golf-Club e. V.",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_hamburger_hafen",
+      "name": "Hamburger Hafen",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_hamburger_kammerspiele",
+      "name": "Hamburger Kammerspiele",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_hamburger_opernsalon",
+      "name": "Hamburger Opernsalon",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_hamburger_stadtrundfahrt_die_roten_doppeldecker_gmbh",
+      "name": "Hamburger Stadtrundfahrt - Die Roten Doppeldecker GmbH",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "hamburg_hamburgische_staatsoper",
+      "name": "Hamburgische Staatsoper",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_hansa_theatersaal",
+      "name": "Hansa-Theatersaal",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_hansabrunnen",
+      "name": "Hansabrunnen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_harburger_berge",
+      "name": "Harburger Berge",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_harburger_berge_mit_heide_und_wald",
+      "name": "Harburger Berge mit Heide und Wald",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_harburger_schloss_park_und_spielplatz",
+      "name": "Harburger Schloss - Park und Spielplatz",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_hauptkirche_st_jacobi_hauptkirche_st_jacobi",
+      "name": "Hauptkirche St. Jacobi - Hauptkirche St. Jacobi",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_hauptkirche_st_katharinen_hauptkirche_st_katharinen",
+      "name": "Hauptkirche St. Katharinen - Hauptkirche St. Katharinen",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+      "name": "Hauptkirche St. Petri - Hauptkirche St. Petri",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_heinrich_heine_denkmal",
+      "name": "Heinrich-Heine-Denkmal",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_heinrich_hertz_turm",
+      "name": "Heinrich-Hertz-Turm",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_hennebergpark",
+      "name": "Hennebergpark",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_hl_dreieinigkeits_kirche_st_georg",
+      "name": "Hl. Dreieinigkeits-Kirche St. Georg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_hummel_denkmal",
+      "name": "Hummel-Denkmal",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_hydraulischer_brunnen",
+      "name": "Hydraulischer Brunnen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_hygieia_brunnen",
+      "name": "Hygieia-Brunnen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_icf_hamburg",
+      "name": "ICF Hamburg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_interaktives_museum_hamburg",
+      "name": "Interaktives Museum Hamburg",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_internationales_maritimes_museum_hamburg",
+      "name": "Internationales Maritimes Museum Hamburg",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_isemarkt",
+      "name": "Isemarkt",
+      "tier": 2,
+      "category": "markt"
+    },
+    {
+      "id": "hamburg_japanischer_garten",
+      "name": "Japanischer Garten",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_jumicar_hamburg_fahrspass_mit_lerneffekt",
+      "name": "jumicar Hamburg - Fahrspaß mit Lerneffekt",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_kaffeemuseum_burg",
+      "name": "Kaffeemuseum Burg",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_kaffeerosterei_burg",
+      "name": "Kaffeerösterei Burg",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_kaifu_lodge",
+      "name": "KAIFU-LODGE",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_kapitan_schroder_park",
+      "name": "Kapitän-Schröder-Park",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_kapt_n_schwarz_hafenrundfahrt_hamburg",
+      "name": "Käpt'n Schwarz Hafenrundfahrt Hamburg",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_kehrwiederspitze",
+      "name": "Kehrwiederspitze",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_kellertheater_hamburg",
+      "name": "Kellertheater Hamburg",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_kesselhaus_hamburg",
+      "name": "Kesselhaus Hamburg",
+      "tier": 2,
+      "category": "altstadt"
+    },
+    {
+      "id": "hamburg_kinderbauernhof_kirchdorf_e_v",
+      "name": "Kinderbauernhof Kirchdorf e.V.",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_kindertierwiese_e_v",
+      "name": "Kindertierwiese e.V.",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_kleine_wallanlagen",
+      "name": "Kleine Wallanlagen",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_kleines_leuchtfeuer",
+      "name": "Kleines Leuchtfeuer",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_kletteorit",
+      "name": "Kletteorit",
+      "tier": 2,
+      "category": "activity"
+    },
+    {
+      "id": "hamburg_krautergarten",
+      "name": "Kräutergarten",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_kriegerdenkmal_am_dammtordamm",
+      "name": "Kriegerdenkmal am Dammtordamm",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_kunst_der_gegenwart",
+      "name": "KUNST DER GEGENWART",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_lessing_denkmal",
+      "name": "Lessing-Denkmal",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_leuchtfeuer_bunthaus",
+      "name": "Leuchtfeuer Bunthaus",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_leuchtturm_blankenese",
+      "name": "Leuchtturm Blankenese",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_leuchtturm_estemundung",
+      "name": "Leuchtturm Estemündung",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_leuchtturm_hamburg_e_v",
+      "name": "LEUCHTTURM HAMBURG e.V.",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_leuchtturm_muhlenberg_hamburg",
+      "name": "Leuchtturm Mühlenberg Hamburg",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_leuchtturm_rissen_oberfeuer",
+      "name": "Leuchtturm Rissen (Oberfeuer)",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_leuchtturm_rissen_unterfeuer",
+      "name": "Leuchtturm Rissen, Unterfeuer",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_liebesinsel_stadtparksee_hamburg",
+      "name": "Liebesinsel Stadtparksee Hamburg",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_lieger_besucher_und_informationszentrum_museumshafen_oevelgonne_e_v",
+      "name": "Lieger Besucher- und Informationszentrum Museumshafen Oevelgönne e.V.",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_lighthouse_zero",
+      "name": "Lighthouse Zero",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_lohsepark",
+      "name": "Lohsepark",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_marina_rusch_gmbh",
+      "name": "Marina Rüsch GmbH",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_markk_museum_am_rothenbaum",
+      "name": "MARKK Museum am Rothenbaum",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_mensa_berliner_tor_studierendenwerk_hamburg",
+      "name": "Mensa Berliner Tor - Studierendenwerk Hamburg",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_messe_hamburg_tor_b6",
+      "name": "Messe Hamburg Tor B6",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_minerva_brunnen",
+      "name": "Minerva-Brunnen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_minigolf_by_cafe_blomen",
+      "name": "Minigolf by Café Blomen",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_monckebergbrunnen",
+      "name": "Mönckebergbrunnen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_moorfleeter_yachthafen",
+      "name": "Moorfleeter Yachthafen",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_movie_golf_hamburg",
+      "name": "Movie Golf Hamburg",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_museum_der_illusionen_hamburg",
+      "name": "Museum der Illusionen Hamburg",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_museum_der_natur_hamburg_zoologie",
+      "name": "Museum der Natur Hamburg - Zoologie",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_museum_fur_kunst_und_gewerbe_hamburg_mk_g",
+      "name": "Museum für Kunst und Gewerbe Hamburg (MK&G)",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_naturerholungsgebiet_eidelstedter_feldmark",
+      "name": "Naturerholungsgebiet Eidelstedter Feldmark",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_naturschutzgebiet_heuckenlock",
+      "name": "Naturschutzgebiet Heuckenlock",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_naturschutzgebiet_raakmoor",
+      "name": "Naturschutzgebiet Raakmoor",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_nordwandhalle",
+      "name": "Nordwandhalle",
+      "tier": 2,
+      "category": "activity"
+    },
+    {
+      "id": "hamburg_norwegische_seemannskirche",
+      "name": "Norwegische Seemannskirche",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_nsg_eppendorfer_moor",
+      "name": "NSG Eppendorfer Moor",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_ohnsorg_theater_hamburg",
+      "name": "Ohnsorg-Theater Hamburg",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_opera_stabile_werk_wirkbuhne_der_staatsoper",
+      "name": "Opera Stabile Werk/Wirkbühne der Staatsoper",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_opernloft_im_alten_fahrterminal_altona",
+      "name": "Opernloft im Alten Fährterminal Altona",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_panoptikum",
+      "name": "Panoptikum",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_panorama_view_hamburg",
+      "name": "Panorama View Hamburg",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_paradox_museum_hamburg",
+      "name": "Paradox Museum Hamburg",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_park_am_mittelkanal",
+      "name": "Park am Mittelkanal",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_parkbanke_mit_alsterblick",
+      "name": "Parkbänke mit Alsterblick",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_parkplatz_boberger_dune",
+      "name": "Parkplatz Boberger Düne",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_pflanzen_system",
+      "name": "Pflanzen-System",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_platz_der_deutschen_einheit",
+      "name": "Platz der Deutschen Einheit",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_polnische_katholische_mission_in_hamburg",
+      "name": "Polnische Katholische Mission in Hamburg",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_premier_inn_hamburg_city_berliner_tor_hotel",
+      "name": "Premier Inn Hamburg City Berliner Tor Hotel",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_restaurant_leuchtturm_frank_wiechern",
+      "name": "Restaurant Leuchtturm - Frank Wiechern",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_rib_piraten_hamburg_gmbh",
+      "name": "RIB Piraten Hamburg GmbH",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "hamburg_robot_city_segway_tour_hamburg",
+      "name": "Robot City Segway Tour Hamburg",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "hamburg_romischer_garten",
+      "name": "Römischer Garten",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_rosengarten",
+      "name": "Rosengarten",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_rundwanderweg",
+      "name": "Rundwanderweg",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_russische_orthodoxe_kirche_des_hl_johannes_von_kronstadt",
+      "name": "Russische Orthodoxe Kirche des Hl. Johannes von Kronstadt",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_salon_du_bloc",
+      "name": "Salon du Bloc",
+      "tier": 2,
+      "category": "activity"
+    },
+    {
+      "id": "hamburg_sandtorpark",
+      "name": "Sandtorpark",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_savoy_filmtheater",
+      "name": "Savoy Filmtheater",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_schanzenturm",
+      "name": "Schanzenturm",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_schillerdenkmal",
+      "name": "Schillerdenkmal",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_schloss_altenhausen_gmbh",
+      "name": "Schloß Altenhausen GmbH",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_schloss_burger_gmbh",
+      "name": "SCHLOSS BURGER GmbH",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_schloss_mentin_verwaltungs_gmbh",
+      "name": "Schloss Mentin Verwaltungs GmbH",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_schwedische_gustaf_adolfs_kirche",
+      "name": "Schwedische Gustaf-Adolfs-Kirche",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_seitenpfad",
+      "name": "Seitenpfad",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_skulptur_liegende",
+      "name": "Skulptur Liegende",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_space_adventure_powered_by_action_arena",
+      "name": "Space Adventure powered by Action Arena",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_sportpark_dulsberg",
+      "name": "Sportpark Dulsberg",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_sportpark_hamburg_ojendorf",
+      "name": "Sportpark Hamburg Öjendorf",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_sprung_raum_trampolinpark_hamburg",
+      "name": "SPRUNG RAUM Trampolinpark Hamburg",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_srh_stadtrundfahrt_in_hamburg_gmbh",
+      "name": "SRH Stadtrundfahrt in Hamburg GmbH",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "hamburg_st_ansgar_kapelle",
+      "name": "St. Ansgar-Kapelle",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_st_marien_dom",
+      "name": "St. Marien-Dom",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_st_annenhof",
+      "name": "St.Annenhof",
+      "tier": 2,
+      "category": "kirche"
+    },
+    {
+      "id": "hamburg_stadtrundfahrt_hamburg_die_gelben_doppeldecker_gmbh",
+      "name": "Stadtrundfahrt Hamburg - Die Gelben Doppeldecker GmbH",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "hamburg_stadtrundfahrt_com_hamburg",
+      "name": "STADTRUNDFAHRT.com | Hamburg",
+      "tier": 2,
+      "category": "tour"
+    },
+    {
+      "id": "hamburg_start_etappe_1_heidschnuckenweg",
+      "name": "Start Etappe 1 Heidschnuckenweg",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_streichelgehege",
+      "name": "Streichelgehege",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_stuhlmannbrunnen",
+      "name": "Stuhlmannbrunnen",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_swingolf_hamburg",
+      "name": "Swingolf Hamburg",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_tarpenbek_wanderweg",
+      "name": "Tarpenbek Wanderweg",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_teetzpark_wanderweg",
+      "name": "Teetzpark Wanderweg",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_thalia_theater",
+      "name": "Thalia Theater",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_the_english_theatre_of_hamburg_e_v",
+      "name": "The English Theatre of Hamburg e.V.",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_theaterschiff_hamburg",
+      "name": "Theaterschiff Hamburg",
+      "tier": 2,
+      "category": "theater"
+    },
+    {
+      "id": "hamburg_tiefbunker_am_parkhotel_berliner_tor",
+      "name": "Tiefbunker am Parkhotel Berliner Tor",
+      "tier": 2,
+      "category": "denkmal"
+    },
+    {
+      "id": "hamburg_trackme_gmbh",
+      "name": "TrackMe GmbH",
+      "tier": 2,
+      "category": "freizeit"
+    },
+    {
+      "id": "hamburg_u_bootmuseum_hamburg_gmbh",
+      "name": "U-Bootmuseum Hamburg GmbH",
+      "tier": 2,
+      "category": "museum"
+    },
+    {
+      "id": "hamburg_uferweg_an_der_este",
+      "name": "Uferweg an der Este",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_urban_apes_hamburg_ost",
+      "name": "urban apes Hamburg Ost",
+      "tier": 2,
+      "category": "activity"
+    },
+    {
+      "id": "hamburg_viewpoint_europe_gesellschaft_fur_marketing_und_meinungsumfragen_mbh",
+      "name": "Viewpoint Europe Gesellschaft für Marketing- und Meinungsumfragen mbH",
+      "tier": 2,
+      "category": "aussicht"
+    },
+    {
+      "id": "hamburg_vrlebnis_hamburg_im_schwarzlichtviertel",
+      "name": "VRlebnis Hamburg (im Schwarzlichtviertel)",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_waldpark_falkenstein",
+      "name": "Waldpark Falkenstein",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_wanderpfad_stellmoorer_quellfluss",
+      "name": "Wanderpfad Stellmoorer Quellfluss",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_wanderweg_an_der_seebek",
+      "name": "Wanderweg an der Seebek",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_wanderweg_naturschutzgebiet_heuckenlock",
+      "name": "Wanderweg Naturschutzgebiet Heuckenlock",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_wanderweg_wilhelmsburg_naturschutzgebiet",
+      "name": "Wanderweg Wilhelmsburg Naturschutzgebiet",
+      "tier": 2,
+      "category": "wanderung"
+    },
+    {
+      "id": "hamburg_wasserlichtkonzerte",
+      "name": "Wasserlichtkonzerte",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_wildgehege",
+      "name": "Wildgehege",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_wildpark_schwarze_berge",
+      "name": "Wildpark Schwarze Berge",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_wiwa_baggerplatz_ausflugsziele_erlebnispark_baggerpark_freizeitaktivitat",
+      "name": "WIWA - Baggerplatz Ausflugsziele Erlebnispark - Baggerpark - freizeitaktivität",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_wohlers_park_ehemaliger_norderfriedhof",
+      "name": "Wohlers Park (ehemaliger Norderfriedhof)",
+      "tier": 2,
+      "category": "natur"
+    },
+    {
+      "id": "hamburg_world_of_paintball_buro",
+      "name": "World of Paintball Büro",
+      "tier": 2,
+      "category": "freizeitpark"
+    },
+    {
+      "id": "hamburg_wsp62_grenzpolizei_hafen_hamburg",
+      "name": "WSP62 Grenzpolizei Hafen Hamburg",
+      "tier": 2,
+      "category": "hafen"
+    },
+    {
+      "id": "hamburg_zitronenjette",
+      "name": "Zitronenjette",
+      "tier": 2,
+      "category": "denkmal"
+    }
+  ],
+  "google_missing": []
+}

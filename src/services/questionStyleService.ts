@@ -1,10 +1,12 @@
 /**
  * Spiegelt Formulierungen/Wörter des Users (bro, Jugendsprache, Bayrisch, Beamten-Deutsch).
  * Antwortlänge bleibt unverändert — nur Ton & Wortwahl.
+ * Soft: Negationen („nenn mich nicht Bro“) spiegeln NICHT — kein erzwungenes Bro.
  */
 
 import { getCachedUserProfile } from './userProfileService';
 import { useUserProfileStore } from '../store/useUserProfileStore';
+import { extractPreferencesFast } from './memory/preferenceCaptureMiddleware';
 
 type VoiceFlavor =
   | 'neutral'
@@ -24,6 +26,11 @@ const hits: Record<VoiceFlavor, number> = {
 const APPLY_AFTER = 2;
 
 function detectFlavor(t: string): VoiceFlavor {
+  // Soft constraint: Negation der Anrede → kein bro-Mirroring
+  const prefs = extractPreferencesFast(t);
+  if (prefs.some((p) => p.kind === 'addressing' && p.negated)) {
+    return 'neutral';
+  }
   if (
     /\b(Sie|Ihnen|würden\s+Sie|könnten\s+Sie|hiermit|hiermit\s+möchte|sehr\s+geehrte)\b/u.test(
       t,
@@ -57,7 +64,10 @@ function detectFlavor(t: string): VoiceFlavor {
 function flavorFact(flavor: VoiceFlavor): string | null {
   switch (flavor) {
     case 'bro':
-      return 'Rede-Stil: bro/digga — spiegle Wörter wie bro, digga, locker street.';
+      return (
+        'Rede-Stil: locker street — Slang (bro/digga) nur extrem sparsam ' +
+        'und nur wenn 100% natürlich, nie erzwungen. Kumpel-Ton behalten.'
+      );
     case 'youth':
       return 'Rede-Stil: Jugendslang — spiegle Formulierungen (vibe, krass, nice), ohne Antwort länger zu machen.';
     case 'bavarian':
@@ -77,6 +87,11 @@ export async function observeUserQuestionStyle(text: string): Promise<void> {
   if (t.length < 3) return;
   if (/^(ja|nein|ok|okay|stopp|stop|weiter|danke)$/iu.test(t)) return;
 
+  // Explizite Anrede-Prefs: Middleware hat Vorrang, kein Style-Override
+  if (extractPreferencesFast(t).some((p) => p.kind === 'addressing')) {
+    return;
+  }
+
   const flavor = detectFlavor(t);
   if (flavor === 'neutral') return;
   hits[flavor] += 1;
@@ -93,7 +108,6 @@ export async function observeUserQuestionStyle(text: string): Promise<void> {
   );
   if (already) return;
 
-  // Alte Rede-Stil-Fakten ersetzen
   const cleaned = facts.filter((f) => !/^Rede-Stil:/i.test(f));
   try {
     await useUserProfileStore.getState().patchProfile({
@@ -104,15 +118,19 @@ export async function observeUserQuestionStyle(text: string): Promise<void> {
   }
 }
 
-/** Prompt: nur Formulierungen spiegeln — Länge nicht ändern. */
+/** Prompt: nur Formulierungen spiegeln — Länge nicht ändern. Soft Slang. */
 export function questionStylePromptHint(): string {
   const p = getCachedUserProfile();
-  const facts = (p?.learnedFacts ?? []).filter((f) => /^Rede-Stil:/i.test(f));
+  const facts = (p?.learnedFacts ?? []).filter(
+    (f) => /^Rede-Stil:/i.test(f) || /^Anrede:/i.test(f),
+  );
   const lines: string[] = [
-    '=== NUTZER-WORTWAHL (PFLICHT) ===',
-    '- Spiegle Formulierungen und Wörter des Users (bro→bro, bayrisch→leicht bayrisch, Jugendslang→Jugendslang, förmlich→Siezen).',
+    '=== NUTZER-WORTWAHL (SOFT) ===',
+    '- Spiegle Formulierungen natürlich (bayrisch→leicht bayrisch, förmlich→Siezen).',
+    '- Slang (Bro, Digga, Dicker) nur extrem sparsam, nie erzwungen, nur wenn 100% natürlich.',
+    '- KEINE harten Verbote („Sag niemals Bro“) — bleib Kumpel-Ton, sparsam mit Slang.',
+    '- Wenn unsicher zur Anrede: charmant fragen („Hey, wie soll ich dich eigentlich am liebsten nennen?“).',
     '- AntwortLÄNGE nicht ändern wegen Stil — gleich knackig wie sonst.',
-    '- Kein Mocking, kein Übertreiben; natürlich mitgehen.',
   ];
   for (const f of facts.slice(-3)) {
     lines.push(`- ${f}`);

@@ -2,6 +2,8 @@ import type { AppLanguage, BudgetCategory, VoiceId } from '../types/userProfile'
 import { getVoice } from '../constants/voices';
 import { budgetSpeechFromProfile } from '../constants/budgetHints';
 
+export type { AppLanguage };
+
 type Dict = Record<string, string>;
 
 const de: Dict = {
@@ -9,7 +11,7 @@ const de: Dict = {
   langSubtitle: '',
   deutsch: 'Deutsch',
   continue: 'Weiter',
-  skipIntro: 'Weiter',
+  skipIntro: 'Intro überspringen',
   skipExplanation: 'Erklärung überspringen',
   voiceTitle: 'Was soll ich für eine Stimme haben?',
   voiceMartinHint: 'Standard',
@@ -23,14 +25,15 @@ const de: Dict = {
   email: 'E-Mail',
   aboutMe: 'Erzähl kurz etwas über dich',
   aboutMeHint:
-    'Hobbies, Stimmung, was dir wichtig ist — Findus merkt sich das für Tipps.',
+    'Hobbies, Beruf, Familie oder Solo — plus Telefon & Geschlecht, was Findus wissen soll…',
   age: 'Alter',
   characterTitle: 'Wie soll ich sein?',
   characterHint:
-    'Wähle Persönlichkeit, Ton, Reisezweck und mit wem du unterwegs bist. Bei Barrierefreiheit darfst du auch nichts auswählen. Tippe auf das i für Erklärungen.',
+    'Persönlichkeit und Tonalität: Mehrfachauswahl, jeweils max. 3. Findus mixt den Stil. Reisezweck und Begleitung dazu. Barrierefreiheit ist optional. Tippe auf das i für Erklärungen.',
   cityTitle: 'Wohin soll die Reise gehen?',
   nearby: 'In der Nähe',
   otherCities: 'Weitere Städte',
+  citySearchTitle: 'Städtesuche:',
   zones: 'Zonen',
   places: 'Orte',
   triggers: 'Trigger',
@@ -58,8 +61,9 @@ const de: Dict = {
   settingsInterests: 'Interessen',
   settingsCity: 'Stadt',
   settingsCityCurrent: 'Aktuelle Stadt',
-  settingsCityLinks: 'Stadtinfo & Karten',
-  settingsCityLinkOpen: 'Im Browser öffnen',
+  citySearchPlaceholder: 'Stadt, Land, Bundesland, Insel…',
+  citySearchHits: 'Treffer',
+  citySearchNoHits: 'Keine Treffer',
   settingsDeveloper: 'Entwicklungseinstellungen',
   settingsLegal: 'Datenschutz & Impressum',
   settingsHelp: 'So funktioniert Findus',
@@ -67,7 +71,7 @@ const de: Dict = {
   legalImprintTitle: 'Impressum & Transparenz',
   legalPrivacyTitle: 'Datenschutz',
   affiliateDisclosure:
-    'Hinweis: Einige Links in Findus sind sogenannte Affiliate-Links. Wenn du darüber buchst, erhalten wir eine kleine Provision – für dich ändert sich am Preis nichts.',
+    'Sternchen (★) an Links: Partner-Links. Wenn du darüber buchst, erhält Findus eine kleine Provision — Preis für dich gleich. Details in den Einstellungen.',
   cityInstallFailed: 'Stadt konnte nicht installiert werden',
   resetApp: 'App zurücksetzen',
   resetConfirm:
@@ -76,29 +80,40 @@ const de: Dict = {
   save: 'Speichern',
   close: 'Schließen',
   years: 'Jahre',
-  kmAway: 'km entfernt',
+  kmAway: 'km',
   setupDone: 'Einrichtung abgeschlossen',
   gpsSimulation: 'GPS-Simulation',
   gpsSimulationHint:
-    'Statt echtem GPS Orte manuell auswählen – praktisch zum Testen.',
+    'Echtes GPS aus. Neben dem Mikrofon erscheint „Ort“ — tippen, Modul 1 dort auslösen (als wärst du da).',
   ttsProvider: 'TTS-Engine',
   ttsProviderHint:
-    'OpenAI = Cloud-Stimme „nova“. Lokal = Kokoro/Piper auf dem Gerät.',
-  ttsProviderOpenAi: 'OpenAI (nova)',
-  ttsProviderKokoro: 'Lokal (Kokoro)',
+    'Cartesia sonic-3.5 ist die primäre Stimme. Offline: native Systemstimme (expo-speech).',
+  ttsProviderOpenAi: 'Cartesia (Cloud)',
+  ttsProviderSystemLabel: 'System (expo-speech)',
+  ttsProviderCartesia: 'Cartesia sonic-3.5',
+  ttsProviderSystem: 'System-Fallback',
   simOn: 'Simulation an',
   simOff: 'Simulation aus',
   gpsStatusTitle: 'GPS-Status',
   gpsStatusHint: 'Live-Diagnose: Dienste, Berechtigung, letzter Fix.',
   gpsProbe: 'Standort jetzt prüfen',
   gpsProbing: 'Prüfe…',
-  voice_standard_m: 'Standard männlich',
-  voice_standard_w: 'Standard weiblich',
-  voice_prinzessin: 'Prinzessin',
-  voice_erzaehler: 'Erzähler',
-  voice_dorfaeltester: 'Dorfältester',
-  voice_historiker: 'Historiker',
-  voice_gen_z: 'Gen Z',
+  voice_alina: 'Alina',
+  voice_sebastian: 'Sebastian',
+  voice_klaus: 'Klaus',
+  voice_leander: 'Leander',
+  voice_lukas: 'Lukas',
+  voice_varson: 'Varson',
+  voice_alexander: 'Alexander',
+  voice_daniel: 'Daniel',
+  voice_jaqcline: 'Jaqcline',
+  voice_lea: 'Lea',
+  voice_rena: 'Rena',
+  voice_katie: 'Katie',
+  voice_skylar: 'Skylar',
+  voice_verini: 'Verini',
+  voice_viktoria: 'Viktoria',
+  voice_marlene: 'Marlene',
 };
 
 export function t(_lang: AppLanguage, key: string): string {
@@ -110,13 +125,27 @@ export function voiceLabel(_lang: AppLanguage, id: VoiceId): string {
 }
 
 export const INTRO_WELCOME_DE =
-  'Hallo und herzlich willkommen. Ich bin Findus. Ich bin kein normaler Audioguide, der einfach nur Texte vorliest. Ich bin das, was du aus mir machst. Gleich darfst du entscheiden, wie ich klingen soll, ob als weiser Historiker, als lockerer Kumpel oder als die gute Seele des Ortes. Lass uns gemeinsam dein Profil anlegen, damit ich dir die Stadt genauso erklären kann, wie es perfekt zu dir passt. Ich freue mich auf dich.';
+  'Kennst du das? Du willst eine Stadt erleben — und landest trotzdem die ganze Zeit am Handy. Google Maps bleibt offen, und wenn du essen willst, scrollst du zwanzig Minuten. Vor einem Gebäude schaust du es an — und fragst dich: was soll das sein? Und wenn du mal dein Handy in der Hose lässt? Dann erfährst du nichts. Genau das werde ich ändern! Hey — ich bin Findus. Ich recherchiere für dich, was sich lohnt — vom Restaurant bis zur Unterkunft. Ich navigiere dich nur mit der Stimme. Und wenn du irgendwo ankommst, erzähl ich dir, was das ist und was du erleben kannst. Wie dein Concierge. Ich freu mich riesig — aber zuerst will ich dich kennenlernen.';
 
-/** Kurzer Opener – sofort hörbar. */
-export const ONBOARDING_INTRO_HEAD_DE =
-  'Hallo und herzlich willkommen. Ich bin Findus.';
+/** Kurzer Opener – sofort hörbar (kalter Start). */
+export const ONBOARDING_INTRO_HEAD_DE = 'Kennst du das?';
 
-export type ExplanationHint = 'none' | 'mic' | 'settings';
+export type ExplanationHint =
+  | 'none'
+  | 'module1'
+  | 'bullets'
+  | 'actions'
+  | 'mic'
+  | 'settings'
+  | 'settings_panel'
+  | 'settings_voice'
+  | 'live_hud'
+  | 'passport'
+  | 'nav_queue'
+  | 'timeline'
+  | 'help_prompt'
+  | 'swipe'
+  | 'location';
 
 export type ExplanationSegment = {
   text: string;
@@ -167,8 +196,8 @@ function summaryContext(profile: SummaryProfile) {
       ? 'neugieriger Historiker'
       : profile.characters.includes('fuersorglich')
         ? 'fürsorglicher Begleiter'
-        : voice.id === 'gen_z'
-          ? 'Gen-Z Guide'
+        : voice.id === 'daniel' || voice.id === 'varson'
+          ? 'dynamischer Guide'
           : 'dein persönlicher Guide';
 
   const introTail = historyHate
@@ -331,23 +360,27 @@ function coreExplanation(
     segments: [
       {
         hint: 'none',
-        text: `Ich halte mein Radar nach ${likeHint} aus, ${budgetHint} sind notiert${introTail}.`,
+        text: `Kurz zusammengefasst: Ich halte Ausschau nach ${likeHint}, ${budgetHint} sind notiert${introTail}.`,
       },
       {
         hint: 'none',
-        text: `So funktioniert's: Du läufst einfach durch ${city}. Oben links siehst du, wo du bist und was gerade läuft. Immer wenn ich etwas Spannendes entdecke, berichte ich dir davon — live, wie ein Concierge neben dir.`,
+        text: `Du läufst einfach durch ${city}. Oben links siehst du Ort und Status. Entdeck ich etwas Spannendes, erzähl ich dir live davon.`,
+      },
+      {
+        hint: 'none',
+        text: `Unter dem Zahnrad öffnet das Karten-Icon die Stempelkarte: Fog-of-War, besuchte Orte und deine Route. Die Live-Zeile oben links tippst du für Tipps.`,
       },
       {
         hint: 'mic',
-        text: `Das Beste: Du musst nur einsprechen, was du willst. Tippe aufs Mikrofon oder halte es und sprich — zum Beispiel „Nächster Bus zum Dom“, „Tisch für zwei um acht“, „Hotel in der Nähe“ oder „Buch mir eine Tour“.`,
+        text: `Einsprechen reicht: Mikro tippen zum Schreiben, oder halten und sprechen — Bus, Tisch, Hotel, Tour.`,
       },
       {
         hint: 'settings',
-        text: `Über das Zahnrad oben links öffnest du Einrichtung, Hilfe und Datenschutz. Dort passt du mich an und siehst den Tour-Verlauf — also wo du schon warst.`,
+        text: `Das Zahnrad oben rechts öffnet die Einstellungen — Stimme, Persönlichkeit, Interessen und Datenschutz. Schau einmal rein, dann kennst du alles.`,
       },
       {
         hint: 'none',
-        text: `Findus checkt Bus- und Bahnverbindungen, sagt dir wo was liegt, hilft bei Tischreservierungen, sucht Hotels und kann Touren anbahnen — die neueste Reise-App, die wirklich mitdenkt. Viel Spaß beim Erkunden!`,
+        text: `Ich checke Verbindungen, sage wo was liegt, helfe bei Reservierungen und Unterkünften. Viel Spaß beim Erkunden!`,
       },
     ],
   };
@@ -356,11 +389,13 @@ function coreExplanation(
 function explanationTone(
   voiceId: VoiceId,
 ): 'standard' | 'genz' | 'prinzessin' | 'dorf' | 'historiker' | 'erzaehler' {
-  if (voiceId === 'prinzessin') return 'prinzessin';
-  if (voiceId === 'gen_z') return 'genz';
-  if (voiceId === 'dorfaeltester') return 'dorf';
-  if (voiceId === 'historiker') return 'historiker';
-  if (voiceId === 'erzaehler') return 'erzaehler';
+  if (voiceId === 'alina' || voiceId === 'lea' || voiceId === 'viktoria') {
+    return 'prinzessin';
+  }
+  if (voiceId === 'daniel' || voiceId === 'varson') return 'genz';
+  if (voiceId === 'lukas') return 'erzaehler';
+  if (voiceId === 'marlene') return 'historiker';
+  if (voiceId === 'klaus') return 'dorf';
   return 'standard';
 }
 

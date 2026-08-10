@@ -1,0 +1,2554 @@
+{
+  "city_history": "München: 1158 urkundlich; seit 1506 bayerische Hauptstadt. Wittelsbacher Residenzstadt zwischen Alpen und Isar (Wikipedia).",
+  "notes": [
+    "Wave A — Wikipedia DE + manual visuell; LIVE ephemeral; no dialog scripts."
+  ],
+  "offline_qa": [
+    {
+      "q": "Wann wurde München Hauptstadt Bayerns?",
+      "a": "1506 unter Kurfürst Albrecht IV. (Wikipedia).",
+      "tags": [
+        "muenchen"
+      ]
+    }
+  ],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "muenchen_marienplatz",
+      "name": "Marienplatz",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Zentraler Platz der Altstadt mit Neues Rathaus (Glockenspiel), Marien­säule und S-Bahn-Knoten Marienplatz.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Neugotischer Rathausturm mit Glockenspiel dominiert; Marien­säule goldene Figur in der Mitte; Fußgängerzonen strahlen ab.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Wegweiser: Von der Kaufingerstraße kommend siehst du den Turm frontal; U-Bahn-Ausgang unter dem Platz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Glockenspiel-Zeiten: offizielle Angaben muenchen.de / Rathaus.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Marienplatz ist der zentrale Platz der Münchner Innenstadt und Teil der Fußgängerzone.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Lage Der Marienplatz liegt in der Altstadt am Kreuzungspunkt der beiden Hauptachsen, der Ost-West-Achse zwischen Isartor und Karlstor, die Teil der Salzstraße von Salzburg bzw.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Reichenhall über Landsberg am Lech in die Schweiz war, und der Süd-Nord-Achse zwischen Sendlinger Tor und dem im 19.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert abgebrochenen Schwabinger Tor an der Stelle des heutigen Odeonsplatzes.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Norden wird er vom Neuen Rathaus begrenzt, im Osten vom Alten Rathaus, die Süd- und Westseite bilden Kaufhäuser und sonstige Geschäftshäuser, oft mit Gastronomie.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er ist gut 100 Meter lang und etwa 50 Meter breit.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Seit der Gründung Münchens 1158 durch Heinrich den Löwen ist der Marienplatz Zentrum und Herz der Stadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Hier trafen sich die beiden Hauptstraßen, so dass er über alle Jahrhunderte hinweg bestimmend für die Stadtentwicklung und das Leben war und ist.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bis heute ist der Marienplatz Münchens urbane Mitte. 1315 verlieh der spätere Kaiser Ludwig der Bayer München die Marktfreiheit mit der Auflage, dass der damals Marktplatz genannte Marienplatz „auf ewige Zeiten“ hin unbebaut bleibe.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "So waren hier von Anfang an verschiedene Märkte für Eier, Getreide, Wein und Fisch, so dass der Marienplatz über Jahrhunderte hinweg einfach nur „Markt“ oder „Platz“ hieß.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als auf dem Marktplatz vor allem Getreide verkauft wurde, nannte man ihn auch Schrannenplatz, wobei in der Nordostecke am heutigen Fischbrunnen traditionell der Fischmarkt gehalten wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Platz war auch Hinrichtungsstätte und diente sowohl Ritterturnieren als auch als festlicher Empfangsraum der Stadt, beispielsweise bei den Kaiserbesuchen im 15. und 16.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Erst 1481 wurden die sich auf dem Platz befindenden Gebäude (darunter eine Kapelle) abgerissen, es entstand somit ein rechteckiger freier Platz. 1566 wurde der Marienplatz durch den Bau der Landschaftshäuser, in denen die Vertreter der Stände und Landschaften beim bayerischen Herzog ihren Sitz hatten, zu einem politischen Wirkungsort, der er bis heute geblieben ist.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die politische Bedeutung des Marienplatzes wurde auch intensiv mit religiösen Motiven verknüpft. 1638 ließ Kurfürst Maximilian I. zum Dank für die Schonung der Stadt während der schwedischen Besatzung im Dreißigjährigen Krieg die Mariensäule auf dem damals Marktplatz genannten Marienplatz errichten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Was heute ein Wahrzeichen Münchens ist, war damals für die Münchner Bürger ein Affront, denn aufgrund des königlichen Gunstbriefs von 1315 war der Marienplatz zur „Freiung“ erklärt worden und damit als stadteigenes Territorium verstanden worden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Durch dieses regelmäßig erneuerte Privileg war nur die Stadt München berechtigt, den Platz zu bebauen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_deutsches_museum",
+      "name": "Deutsches Museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Größtes naturwissenschaftlich-technisches Museum der Welt auf der Museumsinsel — gegründet 1903 von Oskar von Miller.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Kalksteinfassade auf der Isar-Insel; Kuppeln und Hallen von Brücken sichtbar.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Wegweiser: Von der Corneliusbrücke aus erkennst du die Inselbebauung mit Kuppelsaal.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Tickets und Öffnungszeiten: deutsches-museum.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Deutsche Museum von Meisterwerken der Naturwissenschaft und Technik (meist nur Deutsches Museum genannt) in München ist nach Ausstellungsfläche eines der größten Wissenschafts- und Technikmuseen der Welt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Es betreibt als Anstalt des öffentlichen Rechts neben dem Stammhaus auf der Münchner Museumsinsel vier Außenstellen in Bonn (Deutsches Museum Bonn), München (Verkehrszentrum), Nürnberg (Deutsches Museum Nürnberg – Das Zukunftsmuseum) und Oberschleißheim (Flugwerft Schleißheim).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Erklärtes Ziel ist es, dem interessierten Laien in verständlicher Weise naturwissenschaftliche und technische Erkenntnisse möglichst lebendig nahezubringen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dazu zeigt es die geschichtliche Entwicklung der Naturwissenschaften und der Technik sowie deren Bedeutung für die technische und die gesellschaftliche Entwicklung anhand ausgewählter Beispiele.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Deutsche Museum ist eines der acht Forschungsmuseen der Leibniz-Gemeinschaft, die sich als Forschungseinrichtungen zu Erdgeschichte und Artenvielfalt, zur Kultur- und Technikgeschichte verstehen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das dem Deutschen Museum angegliederte Forschungsinstitut, welches sich mit Technik- und Wissenschaftsgeschichte sowie -kommunikation beschäftigt, arbeitet mit der Ludwig-Maximilians-Universität sowie der Technischen Universität München zusammen und ist unter anderem am Exzellenzcluster Munich Center for Quantum Science and Technology beteiligt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Deutsche Museum betreibt eine Spezialbibliothek für die Geschichte der Naturwissenschaften und Technik, die seit 2016 gefördert durch die Deutsche Forschungsgemeinschaft die Subdisziplin Geschichte der Technik, Naturwissenschaften und Umwelt innerhalb des Fachinformationsdienstes Geschichtswissenschaft betreut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das nach dem Schulreformer Georg Kerschensteiner benannte Kerschensteiner-Kolleg veranstaltet Fortbildungskurse für Lehrer und Studierende.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Standorte Stammhaus Das Museumsgebäude liegt auf der Münchner Museumsinsel.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Diese ist eine ehemalige Kiesbank in der Isar.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Insel wurde seit dem Mittelalter als Floßlände und Materiallager genutzt, daher rührt auch ihr alter Name Kohleninsel.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Aufgrund der ständigen Hochwassergefahr wurde die Insel zunächst nicht bebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Erst 1772 entstand mit der Isarkaserne für die Bayerische Armee ein festes Bauwerk auf der Insel.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach dem Hochwasser von 1899 wurde die Insel befestigt und flutsicher ausgebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nachdem mehrere Pläne zur Nutzung der alten Kohleninsel vorlagen, unter anderem für den Bau eines Bahnhofs, erklärte sich der Münchner Stadtrat 1903 bereit, das Gelände für den Neubau des Deutschen Museums durch Erbbaurecht zur Verfügung zu stellen: 1906 wurde der Grundstein für den Museumsbau gelegt, Baubeginn war jedoch erst 1909.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Unterbrochen durch den Ersten Weltkrieg zog sich der Bau nach Entwürfen des Architekten Gabriel von Seidl knapp zwanzig Jahre hin.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mai 1925 waren die Bauarbeiten noch nicht abgeschlossen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit Mitte der 1930er Jahre besteht das Museum hauptsächlich aus drei Bauten, die nacheinander fertiggestellt wurden: Der Sammlungsbau befindet sich auf dem isaraufwärts gelegenen Teil der Museumsinsel zwischen Bosch- und Zenneckbrücke im Norden sowie der Corneliusbrücke im Süden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Sammlungsbau war eines der ersten größeren Gebäude, die aus Stahlbeton errichtet wurden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Verwendung dieses damals noch neuen und fortschrittlichen Baumaterials wurde bewusst gewählt, um den Stand der Technik aufzuzeigen und somit auch das Gebäude selbst quasi zu einem Teil der Ausstellung zu machen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Sammlungsbau wurde im südwestlichen Bereich der Museumsinsel um die in zwei Schritten 1937 und 1938 eröffnete Kraftfahrzeughalle (später Eisenbahnhalle, dann Zentrum Neue Technologien) erweitert. 1984 wurde der Sammlungsbau im südöstlichen Teil der Museumsinsel um die von Sep Ruf entworfene Halle für Luft- und Raumfahrt erweitert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Juli 2022 eröffnete an deren Dachterrasse das Restaurant Frau im Mond; es kann auch unabhängig vom Museum besucht werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nördlich des Sammlungsbaus und von diesem durch den Museumshof getrennt schließt sich der 1932 fertiggestellte Bibliotheksbau an, in dem sich unter anderem Bibliothek und Archiv des Deutschen Museums sowie Verwaltung und museumseigene Werkstätten befinden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zwischen dem Bibliotheksbau und der Ludwigsbrücke wurde 1935 der Kongressbau fertiggestellt, nachdem 1928 in Anwesenheit des Reichspräsidenten Paul von Hindenburg die Grundsteinlegung erfolgt war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der im Kongressbau befindliche Kongresssaal war bis zur Fertigstellung des nahe gelegenen Kulturzentrums am Gasteig im Jahre 1985 Münchens größter Konzertsaal.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach dem Verkauf des Kongressbaus durch das Deutsche Museum im Jahr 1989 wurden dort unter anderem das erste IMAX-Kino Deutschlands und ein Großplanetarium betrieben.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach dem 2010 erfolgten Rückkauf des Kongressbaus durch das Deutsche Museum stand das Gebäude jahrelang leer.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In der Folge war das Grundstück, auf dem sich der Kongressbau befindet, als Standort für ein neues Konzerthaus im Gespräch. 2016 wurde bekanntgegeben, dass Teile des Gebäudes ab 2017 für zunächst fünf Jahre als Veranstaltungsort mit Gastronomie genutzt werden sollen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Danach sollte über die weitere Nutzung entschieden werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit 2017 befand sich der Blitz Club im Kongressbau.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Anfang 2026 wurde bekannt, dass dieser im September 2026 den Kongressbau aufgrund von Umbaumaßnahmen verlasse.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zweigmuseen Neben dem Stammhaus auf der Museumsinsel betreibt das Deutsche Museum vier Zweigmuseen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_residenz_museum",
+      "name": "Residenz Museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Wittelsbacher Stadtresidenz mit Antiquarium und Prunkräumen — einer der größten Palastkomplexe Europas.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Palastfassaden am Hofgarten; Antiquarium-Säulenhalle innen Renaissance-Ikonenmotiv.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Führungen Residenz und Schatzkammer: residenz-muenchen.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Münchner Residenz ist ein Baudenkmal im Bezirk Altstadt-Lehel der bayerischen Landeshauptstadt München.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie war von 1508 bis 1918 Sitz der Herzöge, Kurfürsten und Könige von Bayern aus dem Haus Wittelsbach.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In vier Jahrhunderten wurde sie von den Architekten Friedrich Sustris, Joseph Effner, François de Cuvilliés d.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ä. und Leo von Klenze in den Stilen Renaissance, Barock, Rokoko und Klassizismus von der kleinen Wehrburg zur monumentalen Vierflügelanlage ausgebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie besteht aus dem Festsaalbau an der Hofgartenstraße, dem Apothekenbau am Marstallplatz, dem Königsbau am Max-Joseph-Platz und dem Maximiliansbau an der Residenzstraße.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Neben dem Cuvilliés-Theater und der Allerheiligen-Hofkirche gehören auch der Hofgarten und der Marstall zum Bauensemble, das im Zweiten Weltkrieg zerstört und danach unter der Leitung von Otto Meitinger wiederaufgebaut wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Münchner Residenz ist mit mehr als 40.000 Quadratmetern Grundfläche das größte Stadtschloss Deutschlands und mit mehr als 150 Schauräumen eines der bedeutendsten Schlossmuseen Europas.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte und Architektur Gotische Neuveste Der Ort der Residenz wurde schon vor Jahrtausenden von Menschen benutzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahr 2014 fanden Archäologen direkt unterhalb des Apothekenhofes der Residenz ein fast unversehrtes, spätbronzezeitliches Grab. 1336 ist erstmals ein Burgstall erwähnt, der im westlichen Bereich der späteren Residenz lag. 1363 wurde die Abtragung dieses Burgstalls in Auftrag gegeben.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Januar dieses Jahres war mit dem Tode von Herzog Meinhard das Herzogtum Oberbayern an seinen Landshuter Onkel Stephan II. gefallen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert entstand in der Nordostecke der heutigen Residenz die Neuveste.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das in der Literatur oft genannte Jahr 1385 ist urkundlich nicht belegt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Es geht auf den Augsburger Chronisten Burkhard Zingg (1396–1474/75) zurück, der berichtete, dass Stephans Söhne, die Herzöge Johann II., Stephan III. und Friedrich, als Sühne für den gescheiterten Bürgeraufstand von 1385 von der Stadt die Erlaubnis erhalten hatten, „ein vest in die statt ze pawen und ein aigen tor … das sy aus und ein reitten“.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Allerdings kann der Bau der Neuveste auch schon früher erfolgt sein.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "So berichtet der Prior Veit von Ebersberg in seiner bayerischen Chronik, dass der Bau der Neuveste die Unruhen erst ausgelöst habe.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Möglicherweise stand auch die Abtragung des alten Burgstalls bereits im Zusammenhang mit der geplanten oder begonnenen Errichtung der Neuveste.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Urkundlich erwähnt wurde die „newe veste“ erstmals am 7.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Neuveste war eine gotische Wasserburg, die von der Stadt her nur über eine befestigte Brücke zu erreichen war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bezeichnenderweise lag der größte Turm, der Silberturm, nicht an der Außenseite, sondern verstärkte die Innenfront gegen die Stadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nördlich des Silberturms, der auch als Bergfried diente, lag durch eine Wehrmauer getrennt an der Nordwestseite der Palas.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Östlich schlossen sich im Norden des Innenhofes die Hofhalle und die Dürnitz an.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Rahmen des Baus der Neuveste wurde Ende des 14.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhunderts in der Nordostecke des zweiten Mauerrings auch das Neuvesttor errichtet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Neuveste wurde im Laufe der Jahrhunderte verändert und erweitert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Um 1470 wurden unter Herzog Johanns Urenkel Albrecht IV.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "(reg. 1465–1508) die Zwingermauern und der Torbau im Norden errichtet, 1460–1500 folgte der Bau von zwei Geschütztürmen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Noch 1466 hatte jedoch die Münchener Bürgerschaft die Kraft gehabt den Zugang von Herzog Siegmund und seines jüngeren Bruders Albrecht zur Burg zu begrenzen, wonach der erstere die Neuveste nur mit sechs, der andere mit vier Dienern betreten sollte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Albrecht drängte in der Folge das Bürgertum immer weiter zurück, seit Beginn der Neuzeit bestimmte dann der Hof die Geschicke der Stadt. 1470/71 war Albrechts Bruder Christoph der Starke in der Neuveste interniert. 1476 wurde die Neuveste nach endgültiger Aussöhnung des Herzogs mit der Bürgerschaft in die bis dahin offene Flanke der Stadtbefestigung mit einbezogen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Neuer Wohnraum wurde unter Albrecht noch nicht geschaffen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit der Zeit verlor die Burg allmählich ihren fortifikatorischen Charakter, der durch das verstärkte Aufkommen von Kanonen, welche die Mauern durchschlagen konnten, hinfällig geworden war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als herzoglichen Sitz löste die Neuveste den Alten Hof allerdings erst unter Albrechts Sohn Wilhelm IV. ab.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Um 1620 erfolgte dann der Abbruch aller Gebäude an der Westseite, 1750 wurden Gebäudeteile nach einem Brand notdürftig instand gesetzt, bevor erst nach 1800 die letzten Reste abgebrochen wurden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_residenz_munchen",
+      "name": "Residenz München",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Gesamtanlage der Wittelsbacher Residenz mit Innenhöfen, Grottenhof und Zugang zum Museum.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Grottenhof mit Muschel-Dekor und Perseus-Brunnen; mehrere Innenhöfe.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Münchner Residenz war ab dem 16. Jahrhundert Sitz der Wittelsbacher in der Hauptstadt (Wikipedia Münchner Residenz).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Grottenhof entstand unter Albrecht V. im 16. Jahrhundert mit Muschel-Dekor (Residenz München).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Max-Joseph-Platz und der Hofgarten grenzen an die Anlage; der Residenzstraße-Trakt verbindet zum Odeonsplatz (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Münchner Residenz ist ein Baudenkmal im Bezirk Altstadt-Lehel der bayerischen Landeshauptstadt München.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie war von 1508 bis 1918 Sitz der Herzöge, Kurfürsten und Könige von Bayern aus dem Haus Wittelsbach.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In vier Jahrhunderten wurde sie von den Architekten Friedrich Sustris, Joseph Effner, François de Cuvilliés d.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ä. und Leo von Klenze in den Stilen Renaissance, Barock, Rokoko und Klassizismus von der kleinen Wehrburg zur monumentalen Vierflügelanlage ausgebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie besteht aus dem Festsaalbau an der Hofgartenstraße, dem Apothekenbau am Marstallplatz, dem Königsbau am Max-Joseph-Platz und dem Maximiliansbau an der Residenzstraße.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Neben dem Cuvilliés-Theater und der Allerheiligen-Hofkirche gehören auch der Hofgarten und der Marstall zum Bauensemble, das im Zweiten Weltkrieg zerstört und danach unter der Leitung von Otto Meitinger wiederaufgebaut wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Münchner Residenz ist mit mehr als 40.000 Quadratmetern Grundfläche das größte Stadtschloss Deutschlands und mit mehr als 150 Schauräumen eines der bedeutendsten Schlossmuseen Europas.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte und Architektur Gotische Neuveste Der Ort der Residenz wurde schon vor Jahrtausenden von Menschen benutzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahr 2014 fanden Archäologen direkt unterhalb des Apothekenhofes der Residenz ein fast unversehrtes, spätbronzezeitliches Grab. 1336 ist erstmals ein Burgstall erwähnt, der im westlichen Bereich der späteren Residenz lag. 1363 wurde die Abtragung dieses Burgstalls in Auftrag gegeben.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Januar dieses Jahres war mit dem Tode von Herzog Meinhard das Herzogtum Oberbayern an seinen Landshuter Onkel Stephan II. gefallen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_englischer_garten",
+      "name": "Englischer Garten",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Ca. 375 ha Landschaftspark ab 1789 — Isar, Monopteros, Chinesischer Turm, Eisbachwelle.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Weite Wiesen, Isararm, Biergärten; Monopteros-Hügel mit Stadtblick.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Englische Garten befindet sich im Münchner Nordosten am Westufer der Isar.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit seiner 3,75 km² großen Grünanlage gehört er zu den größten städtischen Parkanlagen der Welt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Bezeichnung Englischer Garten wurde von den englischen Landschaftsgärten übernommen, die Friedrich Ludwig von Sckell bei der Gestaltung des Geländes zum Vorbild genommen hatte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Münchner Englische Garten zählt zu den ersten großen kontinentaleuropäischen Parkanlagen, die von jedermann betreten werden durften.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als eine der weiträumigsten innerstädtischen Parkanlagen der Welt ist der Englische Garten sowohl bei Münchnern als auch bei Touristen mit jährlich rund 5 Millionen Besuchern sehr beliebt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In den 1940er-Jahren entstand eine „Lastenstraße“, deren Bau mit Kriegszwecken begründet wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach dem Zweiten Weltkrieg wurde die Verbindung zum Isarring, einer vierstreifigen Hauptverkehrsstraße, erweitert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Diese teilt seitdem die Grünanlage in einen Süd- (den ursprünglichen „Englischen Garten“) und einen Nordteil (die Hirschau).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der südliche, zur Innenstadt gelegene Bereich mit einer Länge von zwei Kilometern umfasst etwa 130 Hektar, der nördliche, weniger stark besuchte, etwa 245 Hektar und erstreckt sich über drei Kilometer parallel zur Isar.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Als 1777 der bayerische Kurfürst Maximilian III. kinderlos starb, fiel das Land an den pfälzischen Kurfürsten Karl Theodor.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach dessen gescheitertem Versuch, das ungeliebte Erbe gegen die österreichischen Niederlande (ungefähr das heutige Belgien) einzutauschen, widmete er sich der Umgestaltung Münchens.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Unter anderem ließ er im Hofgarten eine Gemäldegalerie eröffnen und machte Hofgarten und Galerie der Öffentlichkeit zugänglich.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Februar 1789 verfügte Karl Theodor, in jeder Garnisonsstadt der bayerischen Armee Militärgärten anzulegen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Diese sollten die Soldaten in Friedenszeiten sinnvoll beschäftigen und ihnen landwirtschaftliche Fähigkeiten vermitteln, aber sie sollten auch der Allgemeinheit zugänglich sein.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Anregung dazu stammte von dem in Massachusetts geborenen bayerischen Kriegsminister Benjamin Thompson (seit 1792 Reichsgraf von Rumford).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als Standort für die Münchner Gärten war das westliche „Hirschangergebiet“, die heutige Schönfeldwiese im Südwesten des Englischen Gartens vorgesehen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_schloss_nymphenburg",
+      "name": "Schloss Nymphenburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Barockes Sommerschloss der Wittelsbacher (1664 ff.), Geburtsort Ludwigs II., mit Schlosspark.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Breite barocke Fassade mit Wasserachse; Kuppel mittig.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Schloss und Park: schloesser.bayern.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schloss Nymphenburg ist ein Baudenkmal im Bezirk Neuhausen-Nymphenburg der bayerischen Landeshauptstadt München.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Es war von 1715 bis 1918 Sommersitz der Kurfürsten und Könige von Bayern aus dem Haus Wittelsbach.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In zwei Jahrhunderten wurde es von den Architekten Enrico Zuccalli und Joseph Effner in den Stilen Barock und Rokoko vom kleinen Landhaus zur monumentalen Dreiflügelanlage ausgebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Schloss bildet zusammen mit dem ostseitigen Rondell, dem westseitigen Park, vier Burgen und zahlreichen Kanälen ein einzigartiges Bauensemble.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nymphenburg gehört zu den größten Schlössern Deutschlands und zu den bedeutendsten Europas.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Wegen umstrittener Pläne, den Schlosstrakt an der Maria-Ward-Straße 1a für das Museum Biotopia abzureißen, wurde Schloss Nymphenburg Anfang 2021 auf die Rote Liste des Verbandes Deutscher Kunsthistoriker gesetzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als Reaktion darauf gründeten Bürger, Experten und Vereine im April 2021 den „Aktionskreis für Schloss Nymphenburg“.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Außerdem starteten sie eine Online-Petition für die Verlegung von Biotopia und für die Erhaltung des Schlosstraktes.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Gründung als Landhaus Im Jahr 1663 schenkte der bayerische Kurfürst Ferdinand Maria (reg. 1651–1679) anlässlich der Geburt seines lange ersehnten Thronerben, Kurprinz Max Emanuel, seiner Gemahlin Henriette Adelheid von Savoyen die Hofmark Menzing.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im selben Jahr kaufte der Kurfürst für 10.000 fl. die östlich davon und näher an München gelegene Schwaige Kemnat. 1664 gab er den Bau eines Landschlosses in Auftrag, als weiteres Geschenk für seine Frau.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie gab dem Schloss, zu dem sich in der Folge die Aktivitäten des Hofes verlagerten, den Namen „Nymphenburg“.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die italienisierende Bezeichnung „Borgo delle Ninfe“ ist, entgegen einem weit verbreiteten Irrtum, erst eine Schöpfung des 19.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zunächst als Lustschloss nach Art italienischer Landvillen konzipiert, wurde die Anlage eine Generation später unter Max Emanuel zur barocken Schlossanlage ausgebaut, die als Sommerpalast und Alternative zur Münchner Residenz dienen konnte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dennoch verlagerten sich damals die Lustbarkeiten des Hofes zeitweise nach Schloss Schleißheim, in dessen Park mittlerweile auch Schloss Lustheim erbaut worden war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ausbau zum Sommerschloss Erst 1701 wurde auf Wunsch Max II.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Emanuels (reg. 1679–1726) der Grundstein der Erweiterung gelegt und schon 1704 blieb das Vorhaben im Rohbau liegen, nachdem der Spanische Erbfolgekrieg bis 1714 zum Exil des Kurfürsten und zur Besetzung Bayerns durch die Österreicher geführt hatte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach der Rückkehr des Kurfürsten wurden die Arbeiten in größerem Umfang ab 1716 wiederaufgenommen, nun entstanden auch die ersten Parkburgen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Klemens geweihte Konvent im Nordtrakt wurde 1730 gegründet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Kloster diente als Augustinerchorfrauenstift.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Nymphenburger Vertrag von 1741 verbündeten sich Frankreich, Spanien, Bayern und Sachsen mit Preußen gegen Österreich.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Kurfürst Karl Albrecht (reg. 1726–1745) bevorzugte gegenüber den anderen Lustschlössern Nymphenburg und lebte auch nach seiner Rückkehr nach München in seiner Zeit als Kaiser ab Oktober 1744 meist in Nymphenburg.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bis 1745 schloss sich an das Schloss der Hirschjagdpark an.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahre 1747 gründete Karl Albrechts Sohn Kurfürst Max III.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Joseph (reg. 1745–1777) die Nymphenburger Porzellanmanufaktur.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Zuge der Säkularisation in Bayern wurden Anfang 1817 die letzten Augustiner-Chorfrauen zu den Servitinnen versetzt. 1835 erhielten dann jedoch die Englischen Fräulein die Gebäude durch König Ludwig I. mit dem Auftrag der Mädchenerziehung übergeben.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von 1890 bis 1916 befand sich 200 Meter östlich des Schlosses am Romanplatz der Volksgarten Nymphenburg, der zur damaligen Zeit größte Freizeitpark Deutschlands.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Durch die Revolution 1918 kam Nymphenburg unter Krongutverwaltung, dann in Staatseigentum (Bayerische Verwaltung der staatlichen Schlösser, Gärten und Seen).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Wittelsbacher behielten in einem kleinen Teil des Schlosses Wohnrecht, das vom jeweiligen Oberhaupt des Hauses Wittelsbach genutzt wird (derzeit Herzog Franz von Bayern).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Prinz Ludwig Ferdinand wohnte mit seiner Familie bis zu seinem Tod im Jahr 1949 kontinuierlich im Schloss.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "NS-Zeit und Jagdmuseum Mit dem Ende der Weimarer Republik bemächtigten sich die Nationalsozialisten der Schlossanlage.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Ortsgruppenleitung der NSDAP erhielt 1933 den ehemaligen „Küchenbau“ des dritten südlichen Pavillons mit 550 m² Grundfläche als Niederlassung.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Direkt darüber wohnte unerkannt im ersten Stock der Widerstandskämpfer Heinrich Weiß.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_schlosspark_nymphenburg",
+      "name": "Schlosspark Nymphenburg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Park mit Kanälen, Amalienburg, Badenburg und Pagodenburg hinter Schloss Nymphenburg.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Symmetrische Wasserachse, Jagdschlösschen in Grünflächen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Nymphenburger Schlosspark ist eines der größten und bedeutendsten Gartenkunstwerke Deutschlands.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er bildet mit dem Schloss Nymphenburg und den Parkburgen eine Einheit.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Anlage liegt im Westen Münchens im nach dem Schloss benannten Stadtbezirk Neuhausen-Nymphenburg an der Grenze zu Pasing-Obermenzing.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Park steht als Gartenkunstwerk unter Denkmalschutz und ist Landschaftsschutzgebiet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Fast sein gesamtes Gebiet ist darüber hinaus auch als Natura2000-Gebiet gemeldet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die kunstvolle Verknüpfung von formalem Garten und Landschaftspark gilt als Meisterwerk der Gartenkunst und macht die Gesamtanlage aus Schloss und Park zu einer vielbesuchten Attraktion.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie wird an ihrer östlichen, der Stadt zugewandten Seite vom Nymphenburger Schloss mit dem vorgelagerten Schlossrondell begrenzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von allen anderen Seiten ist sie weitgehend von der historischen Gartenmauer umschlossen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach Norden schließt sich der Botanische Garten an und dahinter, jenseits der Menzinger Straße, das Kapuzinerhölzl.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Vorbilder für den ursprünglichen Barockgarten waren die französischen Gärten von Schloss Vaux-le-Vicomte und Schloss Versailles.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die heutige Gestalt ist das Ergebnis der grundlegenden Umgestaltung durch Friedrich Ludwig Sckell ab 1799.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Park innerhalb der Gartenmauer hat eine Größe von 180 Hektar, die Fläche der gesamten Anlage beträgt 229 Hektar.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Übersicht Der Garten besteht aus dem großen landschaftlichen Teil im Westen und dem regelmäßig gestalteten Bereich in Schlossnähe.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Mittelkanal teilt die Parklandschaft in einen nördlichen und einen südlichen Bereich.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Wasserzufuhr erfolgt von Westen aus der Würm über den Pasing-Nymphenburger Kanal.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Wasser wird über zwei Kanäle nach Osten und Nordosten sowie über den Hartmannshofer Bach nach Norden abgeleitet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im nördlichen Teil befindet sich der kleinere Pagodenburger See mit der Pagodenburg, im südlichen Teil der größere Badenburger See mit Apollotempel und der Badenburg.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Grüne Brunnhaus mit den Wasserrädern und Druckpumpen für die Gartenfontäne steht im Dörfchen des südlichen Parkteils.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Amalienburg bestimmt den südöstlichen Parkteil.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Osten grenzt der Schlosspark an das gegliederte Schlossgebäude.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Auf der Gartenseite des Schlosses schließt sich das große Gartenparterre an, das den Mittelteil des von Kanälen eingegrenzten Rechtecks einnimmt und in Verlängerung der Mittelachse des Kanals liegt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Auf der Stadtseite des Schlosses liegt das Schlossrondell.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Die ersten Planungen Die Geburt des Kurprinzen Max Emanuel von Bayern aus dem Adelsgeschlecht der Wittelsbacher im Jahr 1662 war der Anlass, ein Schloss mit einem Garten im Gebiet zwischen den Dörfern Neuhausen und Obermenzing als Geschenk für die junge Mutter, die Kurfürstin Henriette Adelaide von Savoyen, zu errichten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Grundsteinlegung für den „Schwaigbau zu Nymphenburg“ erfolgte 1664.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Entgegen einem weit verbreiteten Irrtum ist die italienisierende Bezeichnung „Borgo delle Ninfe“ erst eine Schöpfung des 19.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Anlage war als Lustschloss nach Art italienischer Landvillen konzipiert; zur barocken Schlossanlage, die als Sommerresidenz und Alternative zum Regierungssitz, der Münchner Residenz, dienen konnte, wurde sie erst eine Generation später unter Max Emanuel ausgebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Vorbild war das piemontesische Jagdschloss La Venaria, dessen Architekt Amedeo Castellamonte (1613–1683) die ersten Entwürfe für Nymphenburg lieferte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als erster Architekt wurde Agostino Barelli, als Bauleiter der Hofbaumeister Marx (Markus) Schinnagl beschäftigt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_olympiapark_munchen",
+      "name": "Olympiapark München",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Erbe der Olympischen Spiele 1972 — Zeltdach, Olympiasee, Stadion und Olympiaturm.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Zeltdachkonstruktion Frei Otto über Stadion und Halle; See im Vordergrund.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Events, Turm, Stadionführungen: olympiapark.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Olympiapark in München ist ein Stadtpark im Stadtviertel Oberwiesenfeld des Münchner Stadtbezirk 11 Milbertshofen-Am Hart und war der Austragungsort der XX.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er ist einer der größten Parks der Stadt und bis heute finden sportliche, kulturelle, gesellschaftliche oder religiöse/weltanschauliche Veranstaltungen beziehungsweise Gottesdienste auf dem Gelände statt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Betrieben wird das Olympische Gelände im Norden Münchens von der Olympiapark München GmbH (OMG), einer hundertprozentigen Beteiligungsgesellschaft der Landeshauptstadt München.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bis zum November 2015 fanden im 85 Hektar großen Park über 11.500 Veranstaltungen mit mehr als 200 Millionen Besuchern statt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit den Sommerspielen 1972 waren die Bauten des Olympiaparks Austragungsort von 31 Weltmeisterschaften, 12 Europameisterschaften und fast 100 deutschen Meisterschaften.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Hinzu kommen zahlreiche weitere Events wie Konzerte, Messen, Ausstellungen etc.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Lage und Gliederung Das Gesamtgebiet wird im Osten durch die Lerchenauer Straße, im Norden durch die Moosacher Straße begrenzt, im Westen bilden die Landshuter Allee bis zum Willi-Gebhardt-Ufer die Grenze.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von dort verläuft die Grenze auf der Rückseite des Bundeswehrverwaltungszentrums bis zur Tusnelda-Lang-Brumann-Straße und mit dieser zur Ackermannstraße.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Südgrenze des Gebietes verläuft erst die Ackermannstraße entlang und anschließend um eine Kleingartenanlage und eine Gated Community herum zur Winzererstraße.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Schließlich schließt die Winzererstraße bis zur Lerchenauer Straße das letzte Stück der Ostgrenze.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Mittlere Ring/Georg-Brauchle-Ring teilt das Gelände in zwei Hälften: Olympisches Dorf nördlich, Olympiagelände und Olympiapark südlich des Georg-Brauchle-Ringes.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Außerhalb dieses Umgriffs liegen die Olympia-Pressestadt und das Olympia-Einkaufszentrum westlich der Landshuter Allee und der ehemaligen Bahnlinie zum stillgelegten Bahnhof München Olympiastadion.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Überörtliche Beziehungen bestehen sowohl in Nord-Süd-Richtung als auch radial.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In Nord-Süd-Richtung bildet das Olympiagelände den südlichen Endpunkt einer keilförmigen Grün- und Kaltluftschneise, die sich nach Norden über die Eggarten-Siedlung, und den Lerchenauer See der Dreiseenplatte, den Feldmochinger Anger bis Panzerwiese, Hartelholz und Korbinianiholz bis zur Stadtgrenze und Schleißheim fortsetzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In radialer Ost-West-Richtung verläuft der Grüngürtel zwischen dem Schlosspark Nymphenburg und dem Englischen Garten entlang dem Nymphenburg-Biedersteiner Kanal.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Eine offizielle Gliederung innerhalb dieses Geländes existiert nicht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_chinesischer_turm",
+      "name": "Chinesischer Turm",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Pagodenturm (1789–1790) im Englischen Garten mit großem Biergarten.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Grün lackierter Pagodenturm über Biergarten-Bänken.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Chinesische Turm, auch als Chinaturm und zu Beginn als Große Pagode bekannt, ist ein 25 Meter hoher Holzbau im Stile einer Pagode, der im Englischen Garten in München steht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Bauwerk wurde in den Jahren 1789 bis 1790 erbaut und 1792 mit der Eröffnung des Englischen Gartens als Aussichtsplattform der Öffentlichkeit zugänglich gemacht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bei einem der Luftangriffe auf München während des Zweiten Weltkriegs brannte der Chinesische Turm ab, wurde jedoch 1952 nach der Rekonstruktion wiedereröffnet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Turm gilt heute als ein Wahrzeichen des Englischen Gartens.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In den 1970er Jahren wurde das Bauwerk aus Sicherheitsgründen geschlossen und darf seither nur noch von den dort regelmäßig spielenden Blaskapellen betreten werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Am Chinesischen Turm stehen ein ebenfalls inzwischen rekonstruiertes Karussell aus dem Biedermeier sowie zahlreiche Gastronomien.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "An jedem dritten Juli-Sonntag wird der sogenannte Kocherlball, eine 1989 wiederbelebte Veranstaltung, am Chinesischen Turm gefeiert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Lage und Anbindung Der Chinesische Turm befindet sich im südlichen Teil des Englischen Gartens im Stadtteil Lehel.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Bauwerk liegt nördlich des Monopteros und der Ökonomiegebäude und wenige Meter östlich des Oberstjägermeisterbachs.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In östlicher Richtung der Turmkonstruktion befindet sich das Rumfordhaus.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Chinesische Turm kann mit den öffentlichen Verkehrsmitteln der Münchner Verkehrsgesellschaft erreicht werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In unmittelbarer Nähe halten Linienbusse an der Haltestelle Chinesischer Turm, dessen Haltebereich lediglich von öffentlichen Verkehrsmitteln sowie Fahrradfahrern befahren werden darf.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ebenfalls kann der Turm durch eine Straßenbahnlinie von der Haltestelle Tivolistraße erreicht werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von dort aus gibt es auch Anschluss zu den Buslinien, die weiter zur Haltestelle Chinesischer Turm fahren.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der nächste U-Bahnhof ist Giselastraße, ein Bahnhof, auf dem zwei Linien der Stammstrecke 1 verkehren.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von dort aus wird zusätzlich ein Fußweg von zehn Minuten durch den Englischen Garten benötigt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_eisbachwelle",
+      "name": "Eisbachwelle",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Stationäre Surfwelle im Eisbach am Englischen Garten — Münchner Spektakel.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Surfer auf stehender Welle; Zuschauer an Ufer under Brücken.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Eisbach als linke Ableitung der Isar ist der stärkste Bach im Englischen Garten in München (Bayern).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Verlauf Der Eisbach ist Teil der Münchner Stadtbäche, die sämtlich aus der Isar gespeist werden und heute größtenteils unterirdisch die Isarvorstadt, die Münchner Altstadt und das Lehel durchfließen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Englischen Garten ist er Teil eines Bachsystems, zu dem auch der Schwabinger Bach und der Oberstjägermeisterbach gehören, die beide länger als der Eisbach sind.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Eisbach entsteht durch die Zusammenführung des Stadtmühlbachs und des Stadtsägmühlbachs an der Eisbachbrücke und tritt am südlichen Rand des Englischen Gartens in unmittelbarer Nähe des Hauses der Kunst zutage.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Gut 2 km weit fließt er im Osten der Parkanlage parallel zur Isar und mündet nach Unterfahren des Isarrings etwa 500 m unterhalb der John-F.-Kennedy-Brücke in den Fluss ().",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Kurz vor der Mündung zweigt ein Teil des Bachs nach links ab, wird unterirdisch weitergeführt und erst 700 m weiter, unterhalb des Stauwehrs Oberföhring, in die Isar zurückgeleitet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Das Bachsystem im Englischen Garten wurde in seinen Grundzügen um 1789 durch den Gartenbaumeister Friedrich Ludwig von Sckell konzipiert, der Überschwemmungs­räume der Isar als natürliche Gegebenheiten nutzte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sport und Freizeit Eisbachwelle Eine Steinstufe bei der Prinzregentenstraße erzeugt seit dem Anbringen eines Anbaus eine künstliche Stromschnelle und eine etwa halbmeterhohe stehende Welle, die von Flusssurfern genutzt wird und bei Wellenreitern international bekannt wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bei Letztgenannten ist sie aber auch gefürchtet, weil hinter der Welle Steinquader unter Wasser Verletzungen bewirken können.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Laut Süddeutscher Zeitung wurde die Eisbachwelle zunächst durch künstliche Hilfsmittel erzeugt: Sie war in den 1970er Jahren ansatzweise entstanden, als die Stadt München Betonblöcke installierte, um die schnelle Strömung im Flussverlauf zu beruhigen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Es entstand je nach Strömung eine Welle, die an 20 bis 30 Tagen jährlich surfbar gewesen sei.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Walter Strasser, dem „Vater der Eisbachwelle“, gelang es in tagelanger Experimentierarbeit, sie durch Installation einer Metall-Schiene zu stabilisieren.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Über Jahrzehnte wurde die Welle auch durch Holzbretter künstlich erzeugt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahr 2005 hatte sich durch die Hilfsmittel so viel Sediment abgelagert, dass sie nicht mehr notwendig waren – die Welle war „natürlich“ geworden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im April 2010 wurde bekannt, dass die Stadt München das Gelände im Tausch gegen ein Grundstück im Englischen Garten an der Königinstraße vom Freistaat Bayern übernommen hat, um das Wellenreiten nach 35 Jahren auf eine legale Grundlage zu stellen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Gleichzeitig startete in den Kinos der Dokumentarfilm Keep Surfing, der die Situation am Eisbach und die Wellenreiter, die zum Teil aus der ganzen Welt anreisen, porträtiert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_spielzeugmuseum_im_alten_rathausturm",
+      "name": "Spielzeugmuseum im Alten Rathausturm",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Spielzeugsammlung im Turm des Alten Rathauses am Marienplatz.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Gotischer Rathausturm am Marienplatz — Museum im Turm.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten: spielzeugmuseum-muenchen.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Alte Rathaus ist ein Baudenkmal am Marienplatz im Bezirk Altstadt-Lehel der bayerischen Landeshauptstadt München.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der gotische Profanbau wurde 1470 bis 1475 von Jörg von Halsbach errichtet und diente bis 1874 als Sitz des Münchner Magistrats.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ältere Geschichte Das Alte Rathaus schließt den Marienplatz nach Osten ab und trennt ihn vom Tal am ehemaligen Graben der sogenannten leonischen Stadtbefestigung Heinrichs des Löwen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Es ist ein Nachfolgebau des 1310 erstmals urkundlich erwähnten Münchner Rathauses, das wegen der Stadtbefestigung, die damals noch am Marienplatz endete, weiter westlich stand, aber bereits den östlichen Abschluss des zentralen Stadtplatzes bildete.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Untergebracht wurde dabei im Keller das Stadtgefängnis (Fronhaus) und im Erdgeschoss das Brothaus.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Giebel zum Markt bestand auch vor dem frühbarocken Umbau aus wenigen großen Stufen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der erste Stock wurde als zentraler Raum ausgebaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Kernstück des Gebäudes ist der weitläufige Rats- bzw.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Festsaal (Jörg von Halsbach, 1470–1480) mit den Schnitzarbeiten der Holztonnendecke (Hans Wenger, 1476/77), dem Wappenfries (99 Stadtwappen) in der Kämpferzone des Gewölbes (Ulrich Fuetrer).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Saalbau, dessen spätgotischer Raum mit einem Tonnengewölbe von Hans Wengler von 1476 zu den architektonischen Meisterleistungen der Münchner Gotik gehörte, wurde von Erasmus Grasser mit Wappen des Hauses Wittelsbach geschmückt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Zentrum erscheint dabei der doppelköpfige Reichsadler.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der umgebende Strahlenkranz stand in kosmischem Bezug zu Sonne und Mond, jeweils am Saalende.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ein gemalter Wappenfries an der Nord- und Südseite des Saales stellte „die Ordnungs- und Herrschaftsmächte der Welt“ zu dieser Zeit dar.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Besonders erwähnenswert sind jedoch die von Grasser geschaffenen Holzskulpturen der Moriskentänzer, welche den im 15.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Diese Figuren wurden ursprünglich um 1480 für den Ratssaal von Erasmus Grasser geschaffen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Heute befinden sich nur noch Kopien im Festsaal, die Originale sind im Besitz des Münchner Stadtmuseums.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Genutzt wurde der Ratssaal neben den bürgerschaftlichen Ereignissen auch als Repräsentationsort der Landesherrschaft. 1677 tagte dort der Bayerische Landtag.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Laufe der Jahrhunderte erfuhr das Gebäude mehrere Umgestaltungen, die dem jeweiligen Zeitgeschmack entsprangen: Um 1625 wurde die Fassade barockisiert, der Rathausturm erhielt eine Zwiebelkuppel. 1778/79 veränderte Augustin Demmel die Westfassade im Stil des Spätbarock. 1848 wurden im Alten Rathaus die Münchner Abgeordneten für die Frankfurter Nationalversammlung gewählt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jüngere Geschichte 1861 bis 1864 wurde das Alte Rathaus von Arnold Zenetti regotisiert, also im neugotischen Stil des Historismus umgestaltet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der damals entstandene Zinnengiebel mit vielen Stufen entspricht nicht der Darstellung des ursprünglichen gotischen Giebels im Volckmer-Plan von 1613.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Saal Ganghofers blieb unverändert erhalten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Neben den zwei Herrscherstatuen Ludwigs des Bayern (Westfassade) und Heinrichs des Löwen (Ostfassade) von Konrad Knoll befinden sich seit Zenettis Regotisierung die Wappen Schwabens, Bayerns, der Pfalz und Frankens, „der vier Regierungsbezirke des 19.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhunderts“ (westlich) und der Wittelsbacher, Andechser, des Heiliggeistspitals und das älteste Stadtwappen Münchens (östlich).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Julius Fekete kritisierte die Inkonsequenz der Regotisierung des Fassadenschmucks, da sowohl die zwei Herrscherstatuen als auch die Wappen der Regierungsbezirke aus dem 19.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert nicht in die Epoche der Gotik passen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ihm zufolge hätte man im Sinne einer architektonischen Einheit als Statuen eher Albrecht IV. und Ludwig IX. präsentieren müssen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nachdem die Stadtverwaltung 1874 in den ersten Bauabschnitt des Neuen Rathauses umgezogen war, wurde im Erdgeschoss eine Durchfahrt zum Tal mit einer separaten Fußgängerpassage durchgebrochen. 1934/35 wurde die heutige Durchfahrt in angepassten gotischen Formen über das ganze Erdgeschoss hin ausgedehnt, womit die Parterrezone endgültig verloren ging.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "November 1938 hielt Joseph Goebbels in dem Gebäude eine Rede, die als Auftakt der Reichspogromnacht gilt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "April 1944 wurde das Alte Rathaus schwer beschädigt; der Turm musste wegen Einsturzgefahr im Dezember 1944 gesprengt werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zu den Kriegsverlusten gehörte auch das sogenannte Kleine Rathaus, ein aus dem Mittelalter stammender verwinkelter Anbau südlich an den Turm, der ebenfalls neugotisch umgestaltet worden war und verzierte Giebel und Kamine aufwies.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Wiederaufbau des Alten Rathauses erfolgte in zwei Phasen: 1953 bis 1958 wurde der Saalbau rekonstruiert, wobei der Ganghofersche Saal das Kernstück der Arbeiten war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In der Fassadengestaltung orientierten sich die Denkmalschützer am gotischen Original; so wurde das Hauptfenster wieder höher; die neugotischen Elemente, vor allem die beiden Herrscherstatuen und die Giebelgestaltung blieben erhalten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_frauenkirche",
+      "name": "Frauenkirche (Dom zu Unserer Lieben Frau)",
+      "place_tier": 1,
+      "pack_role": "story",
+      "lat": 48.138781,
+      "lng": 11.573664,
+      "category": "kirche",
+      "general_info": "Gotische Kathedrale mit zwei Domtürmen (99 m) — Wahrzeichen Münchens.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Zwei Backsteintürme mit „Welschen Hauben“ prägen die Skyline.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Frauenkirche, offiziell der Dom zu Unserer Lieben Frau, kurz auch der Münchner Dom, ist ein spätgotisches Kirchengebäude in der Münchner Altstadt und zählt zu den Wahrzeichen der bayerischen Landeshauptstadt München.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit 1821 dient das Bauwerk als Kathedralkirche des Erzbischofs von München und Freising.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der dreischiffige Backsteinbau mit umlaufendem Kapellenkranz wurde 1468 von Jörg von Halspach begonnen und 1494 geweiht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er ist 109 m lang und 40 m breit, das Mauerwerk des Kirchenschiffs etwa 37 m hoch.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Entgegen einer weit verbreiteten Legende, die besagt, dass die beiden Türme mit ihren charakteristischen Hauben sich um genau einen Meter in der Höhe unterscheiden, sind diese fast gleich hoch: Der Nordturm misst 98,57 Meter, der Südturm 98,45 Meter.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Da die Stadtverwaltung im Stadtzentrum innerhalb des Mittleren Rings keine Gebäude mit einer Höhe von über 100 Metern erlaubt und auch außerhalb dieses Rings seit einem entsprechenden Bürgerentscheid im November 2004 vorläufig keine höheren Gebäude im Stadtgebiet mehr gebaut werden dürfen, sind die Türme weithin sichtbar.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Turmstube des Südturms kann per Aufzug besucht werden, wobei allerdings zunächst 86 Stufen über eine Wendeltreppe zu bewältigen sind.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Nordturm ist nicht öffentlich zugänglich.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Kirche ist eine der beiden größten Hallenkirchen überhaupt und eine der drei größten Backsteinkirchen nördlich der Alpen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Grundfläche von Langhaus und Chor beträgt 3.548 m².",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Vom Hauptportal aus erscheinen die Säulenreihen wie durchlichtete Wände.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie stützen die Sterngewölbe des Kirchenschiffs.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zur Raumwirkung der Kirche gibt es eine Legende, die mit einem „Fußabdruck“ in einer quadratischen Bodenplatte im Eingangsbereich des Kirchenschiffs verbunden ist, dem sogenannten Teufelstritt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von der einst reichen Ausstattung des Innenraums zeugt noch das bedeutende Grabmal Ludwigs des Bayern von Hans Krumpper.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert errichteten die Wittelsbacher an der Stelle der heutigen Frauenkirche, damals am Rand der ummauerten Stadt, eine Marienkapelle.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "November 1271 durch den Freisinger Bischof Konrad II. das Pfarrrecht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Damit bestätigte Konrad aber eigentlich nur noch formal die von den Wittelsbachern geschaffenen Tatsachen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die spätromanische, dreischiffige Basilika hatte im Westen eine Doppelturmfassade mit Vorhalle und im Osten einen Chor.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ludwig der Bayer ließ den Chor im Stil der Gotik erneuern und stiftete dort ein Hochgrab für seine 1322 verstorbene Frau Beatrix von Schlesien-Schweidnitz, in dem 1347 auch er beigesetzt wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seither diente die Kirche als Grablege der Münchner Linie der Wittelsbacher.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In den etwa 200 Jahren ihres Bestehens wurde die Kirche durch die wohlhabenden Patrizierfamilien der Pfarrei reich mit Altären, Glasgemälden und Pfründen ausgestattet, die später auch auf die neue Kirche übertragen wurden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bau der spätgotischen Kirche Zum Grund des Neubaus gibt es mehrere Sagen, so, dass etwa Herzog Sigismund auf einer Jagd auf München sah und meinte, die Stadt brauche eine Kirche, die von weitem von ihr künde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Eine andere Erzählung spricht davon, dass während einer Messe in der alten Kirche ein Mädchen zusammengebrochen und gestorben sei, da man sie nicht aus der vollen Kirche schaffen konnte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Daraufhin habe der Herzog geschworen, eine neue und geräumigere Kirche zu bauen, damit so etwas nicht mehr passieren könnte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Eine ausführlichere Erzählung berichtet ähnliches: Im voll besetzten Vorgängerbau gab es eines Tages einen blinden Feueralarm.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das schönste Mädchen Münchens wurde in der Panik der aus der Kirche fliehenden Menschen zu Tode getreten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Herzog Sigismund war in seiner Jugend in ein Mädchen niederen Standes verliebt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie lehnte eine Ehe aber aus Angst ab, wie Agnes Bernauer behandelt zu werden, die wegen ihres niedrigen Standes von ihrem Schwiegervater Herzog Ernst grausam getötet worden war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Weil das in der Kirche verunglückte Mädchen Herzog Sigismund an seine unglückliche Liebe erinnerte und nicht sinnlos gestorben sein sollte, stiftete er in Gedenken an das Mädchen die Frauenkirche.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Tatsächlich aber gaben wahrscheinlich das Bevölkerungswachstum und das gestiegene Selbstbewusstsein der Münchner Bürger sowie ihr Repräsentationswille den Ausschlag zum Neubau.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dieser wurde von Jörg von Halsbach (auch Jörg Halspach oder Jörg Ganghofer) ausgeführt, der gleichzeitig (1470) das alte Münchner Rathaus erbaute.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er entschied sich für einen schlichten Bau mit einfachem Bildprogramm.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_viktualienmarkt",
+      "name": "Viktualienmarkt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "lat": 48.135125,
+      "lng": 11.576319,
+      "category": "markt",
+      "general_info": "Dauerhafter Markt seit 1807 — Delikatessen, Maibaum, Biergärten in der Altstadt.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Stände, Maibaum mit Zunftfiguren, kleine Biergärten.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Viktualienmarkt (Aussprache: Fiktualienmarkt) ist ein ständiger Markt für Lebensmittel (veraltet auch Viktualien) in der Altstadt von München.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er findet seit 1807 täglich, außer an Sonn- und Feiertagen, statt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Erscheinungsbild des über zwei Hektar großen Geländes wird durch fest errichtete Buden mit zum Teil großen Auslagen geprägt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dazu kommen einige saisonal unterschiedliche fliegende Stände.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Marktstände sind in mehreren Abteilungen um einen Biergarten angeordnet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Gelände wird außerdem durch Münchens zentralen Maibaum und mehrere Brunnen geprägt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Daneben findet im Münchner Stadtteil Pasing seit 1907 der kleinere Pasinger Viktualienmarkt mit 400 m2 Verkaufsfläche statt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Name Das Wort Viktualienmarkt leitet sich von Viktualien (Lebensmittel) ab.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ursprünglich hieß der Markt „grüner Markt“, oder einfach Marktplatz.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert auf, als es im Bildungsbürgertum modern war, deutsche Begriffe zu latinisieren.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Der Viktualienmarkt am heutigen Ort entstand aus der Verlegung des alten Münchner Stadtmarktes am Schrannenplatz, dem heutigen Marienplatz, der als Handelsort für Getreide und andere Agrarerzeugnisse zu klein geworden war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mai 1807, einen Teil des Marktes in das Gebiet zwischen Heilig-Geist-Kirche und Frauenstraße zu verlegen und trug dem Magistrat auf, die von der Stadt erworbenen Benefizhäuser von Heiliggeist abzubrechen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In den Jahren 1823 bis 1829 musste dieser zentrale Markt wesentlich erweitert werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahre 1885 wurden das alte Heilig-Geist-Spital abgebrochen und die Heilig-Geist-Kirche in westlicher Richtung verlängert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dadurch erhielten Markt und Stadt ein neues Gesicht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Am Südende an der Blumenstraße war 1852, unmittelbar an der einstigen Stadtmauer, die langgestreckte Schrannenhalle, die Vorläuferin der heutigen Großmarkthalle, entstanden, die 1932 teilweise abbrannte und seit 2005 wieder in Betrieb ist. 1855 wurde der Fischmarkt an die Westenriederstraße verlegt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muenchen_olympiaturm",
+      "name": "Olympiaturm München",
+      "place_tier": 2,
+      "pack_role": "story",
+      "lat": 48.174082,
+      "lng": 11.553606,
+      "category": "aussicht",
+      "general_info": "291 m Fernmeldeturm (1968) mit Aussichtsplattform im Olympiapark.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Schlanker Turm mit Antennenkranz über Zeltdach.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Olympiaturm München ist 291 Meter hoch und wurde 1968 fertiggestellt (Wikipedia Olympiaturm).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Er steht im Olympiapark neben dem Zeltdach-Stadion der Spiele 1972 (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Aussichtsplattform und Restaurant bieten Panorama über Stadt und Alpenrand bei Föhn (Olympiapark München).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Aussichtsplattform wetterabhängig — olympiapark.de.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Olympiaturm ist ein Fernsehturm in München und eines der Wahrzeichen der Landeshauptstadt und des namensgebenden Olympiaparks, in dessen östlichen Teil er steht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit 291 Metern ist er nach dem Nürnberger Fernsehturm Bayerns zweithöchstes Bauwerk.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er wurde Ende der 1960er Jahre erbaut und dient Besuchern als Aussichtsturm.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Darüber hinaus beherbergt der Olympiaturm ein Turmrestaurant.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bis Mai 2024 hatte der Turm seit der Eröffnung 1968 rund 45 Millionen Besucher.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Juni 2024 ist der Olympiaturm wegen Sanierungsarbeiten bis voraussichtlich 2027 für Besucher geschlossen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Neben der Brandschutzanlage werden auch beide Personenaufzüge ersetzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Vorgeschichte und Planung Für die sendetechnische Versorgung Münchens wurde 1957 von der Deutschen Post an der Blutenburgstraße ein 50 Meter hoher Antennenträger, der Fernmeldeturm der Oberpostdirektion München, errichtet, der später um 50 Meter erhöht wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der fortschreitende Ausbau des Fernmeldenetzes in München sowie die verbesserungswürdige Sendeleistung der Rundfunk- und Fernsehprogramme machten den Bau eines Fernmeldeturmes notwendig.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Daher entschied man, einen Turm zu errichten, der den gestiegenen Anforderungen gerecht werden sollte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zu Beginn der Überlegungen stand schon fest, den Fernsehturm auch für die Öffentlichkeit über eine Besucherplattform zugänglich zu machen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Olympiaturm ist neben dem Olympia-Eissportzentrum das zweite vorolympische Gebäude im Olympiapark.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Als Standort wurde das Oberwiesenfeld ausgewählt, da die Nähe zum Zentrum gut war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Januar 1964 beschloss der Stadtrat von München mit der Deutschen Bundespost, den Fernmeldeturm zu errichten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zu diesem Zweck wurde die Münchner Sportpark GmbH als Bauträgergesellschaft gegründet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zu diesem Zeitpunkt stand noch nicht fest, dass die XX.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_places": []
+}

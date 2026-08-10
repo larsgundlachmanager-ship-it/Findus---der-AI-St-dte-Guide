@@ -29,13 +29,43 @@ import {
 } from './promptBuilder';
 import type { SessionMemory } from './sessionMemory';
 import { evaluatePoiForProfile } from '../poiFilterService';
+import { isPoiTeaserLocked } from '../poi/poiTeaserLocks';
+import { evaluatePoiRelevance } from '../../interests/relevanceBridge';
+import { promptWeightForInterest, INTEREST_DIMENSIONS } from '../../interests/interestTaxonomy';
+import { areSiblingApproachesSoftLocked } from '../interestPatternDetector';
+import {
+  extractPlaceOffers,
+  formatPlaceOffersForPrompt,
+} from '../poi/placeOffers';
+import {
+  formatLiveResearchForPrompt,
+  getLiveResearchPrompts,
+} from '../research/liveResearchRegistry';
+import { isApproachFireLocked } from '../poi/approachFireTracker';
+import {
+  bakeryTimeAllows,
+  findInterestOverrideHook,
+  hotelProactiveOk,
+  isAmenitySkipPoi,
+  isMustHavePoi,
+  nightSupplyAllows,
+  resolvePlaceTiers,
+  userWantsHiddenLocal,
+  userWantsTouristic,
+} from '../../interests/placeTiers';
 
 export type FindusTriggerPlan =
   | { action: 'skip'; reason: string }
   | { action: 'soft_pitch'; reason: string; pitchText: string }
   | { action: 'approach_hook'; reason: string }
   | { action: 'redirect_sub'; reason: string; subPoiId: number }
-  | { action: 'full_story'; reason: string };
+  | { action: 'full_story'; reason: string }
+  | {
+      action: 'interest_override';
+      reason: string;
+      hookText: string;
+      matched: string;
+    };
 
 export type FindusBeatFacts = {
   /** Was war damals / Anfang (Jahreszahl wenn erlaubt) */
@@ -66,9 +96,9 @@ const STORY_RE =
 const NOW_RE =
   /(heute|aktuell|derzeit|jetzt|gilt|dient|nutzen|geworden|seit\s+\d{4}|restauriert|umgebaut|genutzt)/i;
 const FUN_RE =
-  /(kurios|einzig|besonder|witzig|kaum|wenige|älteste|größte|meter|fußball|schüler|jahrgang|form|rauschen|name|benannt)/i;
+  /(kurios|einzig|besonder|witzig|kaum|wenige|älteste|größte|meter|fußball|schüler|jahrgang|form|rauschen|name|benannt|wandmalerei|malerei|street.?art)/i;
 const ACTION_RE =
-  /(schau|blick|eingang|fassade|brücke|ufer|weg|allee|umrunden|entdeck|erleben|siehe|sichtbar)/i;
+  /(schau|blick|eingang|fassade|brücke|ufer|weg|allee|umrunden|entdeck|erleben|siehe|sichtbar|after\s*work|afterwork|karaoke|party|studenten|sommerfest|open\s*mic|reserv|buch|spiel|golf|tennis|hotel|tisch|event|montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|als\s+gast|mitmachen|wasserski|wakeboard|cable|surfen|klettern|baden|schwimmen|eintritt|€|euro|pro\s*person|halbe\s*stunde|badehose|mitbringen)/i;
 
 /**
  * Schritt 1–3: Trigger planen (Visit-Gates + Prefs + Sub-Redirect).
@@ -95,8 +125,16 @@ export async function planFindusTrigger(input: {
         ? input.spokenSubIds
         : input.spokenAreaIds;
 
+  // Simulation / Manual-Force: immer erzählen — Prefs, Locks, Spoken nur für Auto-Geofence
+  if (input.force) {
+    if (kind === 'approach') {
+      return { action: 'approach_hook', reason: 'force' };
+    }
+    return { action: 'full_story', reason: 'force' };
+  }
+
   // 1.2 Schon gesprochen?
-  if (!input.force && spoken.has(poi.id)) {
+  if (spoken.has(poi.id)) {
     // Area-Hauptfokus fertig → vergessenen Sub ansteuern
     if (
       (kind === 'area' || kind === 'legacy') &&
@@ -120,17 +158,131 @@ export async function planFindusTrigger(input: {
     return { action: 'skip', reason: 'already_spoken' };
   }
 
-  // Pref / Tide / Food-Gates
-  // Simulation/Manual-Force: immer erzählen — Prefs gelten nur für Auto-Geofence
-  if (input.force) {
-    if (kind === 'approach') {
-      return { action: 'approach_hook', reason: 'force' };
+  // Durable LOCK — never fire Wegweiser/teaser again after full story / visit
+  if (
+    kind === 'approach' &&
+    isPoiTeaserLocked({ spotKey: poi.spot_key, poiId: poi.id })
+  ) {
+    return { action: 'skip', reason: 'teaser_locked' };
+  }
+  // Soft-lock: Geschwister-Wegweiser desselben Ortes ~10 Min
+  if (
+    kind === 'approach' &&
+    (areSiblingApproachesSoftLocked(poi.parent_poi_id) ||
+      areSiblingApproachesSoftLocked(poi.id))
+  ) {
+    return { action: 'skip', reason: 'sibling_approach_soft_lock' };
+  }
+  // Also lock approach if parent area is locked
+  if (
+    kind === 'approach' &&
+    poi.parent_poi_id != null &&
+    isPoiTeaserLocked({ poiId: poi.parent_poi_id })
+  ) {
+    return { action: 'skip', reason: 'parent_teaser_locked' };
+  }
+  // Haupt schon erzählt → alle Wegpunkte skip
+  if (
+    kind === 'approach' &&
+    poi.parent_poi_id != null &&
+    input.spokenAreaIds.has(poi.parent_poi_id)
+  ) {
+    return { action: 'skip', reason: 'main_already_spoken' };
+  }
+  // 2× Approach / ≥1 h / nie am Haupt → dauerhaft skip
+  if (kind === 'approach') {
+    const fireLocked = await isApproachFireLocked(poi.spot_key, poi.id);
+    if (fireLocked) {
+      return { action: 'skip', reason: 'approach_fire_locked_2x' };
     }
-    return { action: 'full_story', reason: 'force' };
+  }
+
+  const mustHave = isMustHavePoi(poi);
+
+  // Pref-Pyramide (must_have/yes immer · neutral ≥3 min · no skip)
+  try {
+    const { evaluateModule1PrefGate } = await import(
+      '../../runtime/module1TriggerPolicy'
+    );
+    const prefGate = evaluateModule1PrefGate({
+      poi,
+      profile: input.profile,
+      force: input.force,
+    });
+    if (!prefGate.ok) {
+      if (prefGate.strength === 'no') {
+        const hook = findInterestOverrideHook(
+          poi,
+          poi.facts ?? [],
+          input.profile,
+        );
+        if (hook && !mustHave) {
+          return {
+            action: 'interest_override',
+            reason: `pref_no_override:${prefGate.reason}`,
+            hookText: hook.hookText,
+            matched: hook.matched,
+          };
+        }
+      }
+      return { action: 'skip', reason: prefGate.reason };
+    }
+  } catch {
+    /* soft — Pref-Gate optional */
+  }
+
+  // Place-Tiers (amenity / Zeit / Touri)
+  if (!mustHave) {
+    if (isAmenitySkipPoi(poi)) {
+      const overrideAmenity = findInterestOverrideHook(
+        poi,
+        poi.facts ?? [],
+        input.profile,
+      );
+      if (!overrideAmenity) {
+        return { action: 'skip', reason: 'place_tier:amenity_skip' };
+      }
+    }
+    if (!bakeryTimeAllows(poi)) {
+      return { action: 'skip', reason: 'place_tier:bakery_off_hours' };
+    }
+    if (!hotelProactiveOk(poi, input.profile)) {
+      return { action: 'skip', reason: 'place_tier:hotel_generic' };
+    }
+    if (!nightSupplyAllows(poi, input.profile)) {
+      return { action: 'skip', reason: 'place_tier:night_supply_off' };
+    }
+    const tiers = resolvePlaceTiers(poi);
+    if (tiers.includes('touristic') && !userWantsTouristic(input.profile)) {
+      const hook = findInterestOverrideHook(
+        poi,
+        poi.facts ?? [],
+        input.profile,
+      );
+      if (!hook) {
+        return { action: 'skip', reason: 'place_tier:touristic_no_interest' };
+      }
+    }
+    if (
+      (tiers.includes('hidden') || tiers.includes('local')) &&
+      !userWantsHiddenLocal(input.profile) &&
+      !userWantsTouristic(input.profile)
+    ) {
+      // Hidden nur skippen wenn User weder Insider noch Touri — neutrale User dürfen lokale Orte
+    }
   }
 
   const policy = evaluateTriggerPolicy(poi, input.policyCtx);
   if (policy.action === 'skip') {
+    const hook = findInterestOverrideHook(poi, poi.facts ?? [], input.profile);
+    if (hook && !mustHave) {
+      return {
+        action: 'interest_override',
+        reason: `policy_override:${policy.reason}`,
+        hookText: hook.hookText,
+        matched: hook.matched,
+      };
+    }
     return { action: 'skip', reason: policy.reason };
   }
   if (policy.action === 'soft_pitch') {
@@ -141,19 +293,42 @@ export async function planFindusTrigger(input: {
     };
   }
 
-  // Persona-Engine: Barrierefreiheit, Ernährung, Distanz, Kirchen
+  // Relevance-Engine (Schema-Matching, keine Hardcoded-Kirchen/Steakhouse-If/Else)
+  const relevance = evaluatePoiRelevance(poi, input.profile, {
+    lastMealAtMs: input.policyCtx.lastMealHintAtMs ?? null,
+  });
+  if (relevance.verdict === 'skip' && !mustHave) {
+    const hook = findInterestOverrideHook(poi, poi.facts ?? [], input.profile);
+    if (hook) {
+      return {
+        action: 'interest_override',
+        reason: `relevance_override:${relevance.reasonCode}`,
+        hookText: hook.hookText,
+        matched: hook.matched,
+      };
+    }
+    return {
+      action: 'skip',
+      reason: `relevance:${relevance.reasonCode}`,
+    };
+  }
+
+  // Persona-Engine: Barrierefreiheit, Ernährung, Distanz
   const profileFilter = evaluatePoiForProfile(poi, input.profile, {
     userLat: input.userLat,
     userLng: input.userLng,
   });
-  if (!profileFilter.allowed) {
+  if (!profileFilter.allowed && !mustHave) {
+    const hook = findInterestOverrideHook(poi, poi.facts ?? [], input.profile);
+    if (hook) {
+      return {
+        action: 'interest_override',
+        reason: `persona_override:${profileFilter.reason}`,
+        hookText: hook.hookText,
+        matched: hook.matched,
+      };
+    }
     return { action: 'skip', reason: `persona_filter:${profileFilter.reason}` };
-  }
-
-  // Zusätzliches Interessen-Gate: spezialisierte Orte ohne Yes-Match
-  const interestGate = evaluateInterestRelevance(poi, input.profile);
-  if (interestGate === 'skip') {
-    return { action: 'skip', reason: 'not_interesting_for_user' };
   }
 
   if (kind === 'approach') {
@@ -164,7 +339,7 @@ export async function planFindusTrigger(input: {
     return { action: 'full_story', reason: 'approach_already_heard' };
   }
 
-  return { action: 'full_story', reason: 'ok' };
+  return { action: 'full_story', reason: mustHave ? 'must_have' : 'ok' };
 }
 
 /**
@@ -187,62 +362,6 @@ export async function findForgottenSubPoiId(input: {
     .sort((a, b) => a.d - b.d);
 
   return candidates[0]?.c.id ?? null;
-}
-
-/**
- * Spezial-POIs nur auslösen, wenn User sie mag oder keine klare Pref hat.
- * Explizites „no“ liegt schon in evaluateTriggerPolicy.
- */
-function evaluateInterestRelevance(
-  poi: Poi,
-  profile?: UserProfile | null,
-): 'ok' | 'skip' {
-  const p = profile ?? getCachedUserProfile();
-  const prefs = p?.experiencePrefs ?? {};
-  const yesKeys = new Set(
-    Object.entries(prefs)
-      .filter(([, v]) => v === 'yes')
-      .map(([k]) => k),
-  );
-  if (yesKeys.size === 0) return 'ok';
-
-  const tags = parseTagsJson(poi.tags_json);
-  const cat = (poi.category ?? '').toLowerCase();
-  const specialized: Array<{ test: boolean; key: string }> = [
-    {
-      test:
-        cat === 'kirche' ||
-        tags.some((t) => /kirche|kapelle|dom|sakral/.test(t)),
-      key: 'kirchen',
-    },
-    {
-      test: cat === 'museum' || tags.some((t) => /museum|galerie/.test(t)),
-      key: 'museen',
-    },
-    {
-      test: tags.some((t) => /golf|fairway/.test(t)) || /golf/i.test(poi.name),
-      key: 'sport',
-    },
-    {
-      test: tags.some((t) => /streetart|graffiti/.test(t)),
-      key: 'streetart',
-    },
-  ];
-
-  for (const s of specialized) {
-    if (!s.test) continue;
-    if (prefs[s.key] === 'no') return 'skip';
-    // Klare Likes gesetzt, aber dieses Spezialthema nie geliked → nicht auslösen
-    if (
-      yesKeys.size >= 2 &&
-      !yesKeys.has(s.key) &&
-      prefs[s.key] !== 'yes' &&
-      prefs[s.key] !== 'neutral'
-    ) {
-      return 'skip';
-    }
-  }
-  return 'ok';
 }
 
 /**
@@ -276,23 +395,41 @@ export function buildFindusStoryBrief(input: {
   };
 
   const origin = take((t) => ORIGIN_RE.test(t), 2);
-  const story = take((t) => STORY_RE.test(t) || ORIGIN_RE.test(t), 2);
+  const visual = take(
+    (t) => /wandmalerei|malerei|fassade|street.?art|unterführung/i.test(t),
+    2,
+  );
+  const storyCore = take((t) => STORY_RE.test(t) || ORIGIN_RE.test(t), 2);
+  const story = [...visual, ...storyCore].slice(0, 4);
   const now = take((t) => NOW_RE.test(t), 2);
   const fun = take((t) => FUN_RE.test(t), 1);
-  const action = take((t) => ACTION_RE.test(t) || FUN_RE.test(t), 1);
+  const action = take((t) => ACTION_RE.test(t) || FUN_RE.test(t), 3);
 
-  // Rest auffüllen, damit Beats nicht leer sind
-  const fill = (bucket: string[], n: number) => {
-    while (bucket.length < n) {
-      const next = ranked.find((f) => !used.has(f.text));
-      if (!next) break;
-      used.add(next.text);
-      bucket.push(next.text);
-    }
-  };
-  fill(origin, 1);
-  fill(story, 1);
-  fill(now, 1);
+  // Generische Offers (Events/Buchung) aus Pack — profil-geboostet, jede Stadt
+  const placeOffers = extractPlaceOffers(input.poi, profile);
+  for (const o of placeOffers.slice(0, 3)) {
+    if (used.has(o.text)) continue;
+    used.add(o.text);
+    action.push(o.text);
+    if (action.length >= 4) break;
+  }
+
+  // Rest auffüllen nur wenn genug echte Fakten — sonst leere Beats = ehrlich kurz
+  const thinPack =
+    origin.length + story.length + now.length + fun.length < 2;
+  if (!thinPack) {
+    const fill = (bucket: string[], n: number) => {
+      while (bucket.length < n) {
+        const next = ranked.find((f) => !used.has(f.text));
+        if (!next) break;
+        used.add(next.text);
+        bucket.push(next.text);
+      }
+    };
+    fill(origin, 1);
+    fill(story, 1);
+    fill(now, 1);
+  }
 
   const interestMatch = interestIds.filter((id) =>
     ranked.some((f) =>
@@ -303,7 +440,27 @@ export function buildFindusStoryBrief(input: {
   );
 
   const beats: FindusBeatFacts = { origin, story, now, fun, action };
-  const promptBlock = formatBriefForPrompt(input.poi.name, beats, interestIds);
+  const liveBlock = formatLiveResearchForPrompt(getLiveResearchPrompts());
+  const cityWeaveHints = ranked
+    .filter((f) =>
+      /stadtgeschichte|dorfgeschichte|ortschronik|entstehung der (stadt|ortschaft)|gründung|eisenbahn|güterbahn|gueterbahn|brücke|bruecke/i.test(
+        f.text,
+      ),
+    )
+    .slice(0, 2)
+    .map((f) => f.text);
+  const cityWeaveBlock =
+    cityWeaveHints.length > 0
+      ? `Stadt-/Dorfgeschichte (nur einweben wenn thematisch zum Ort passend und noch nicht gesagt):\n${cityWeaveHints.map((t) => `- ${t}`).join('\n')}`
+      : 'Stadt-/Dorfgeschichte: nur einweben wenn im Datensatz ein klarer Link zum Ort steht — sonst weglassen.';
+  const promptBlock = [
+    formatBriefForPrompt(input.poi.name, beats, interestIds),
+    formatPlaceOffersForPrompt(placeOffers),
+    cityWeaveBlock,
+    liveBlock,
+  ]
+    .filter(Boolean)
+    .join('\n\n');
 
   return {
     poiId: input.poi.id,
@@ -326,31 +483,11 @@ function rankFactsForUser(
       let score = 1;
       const lower = f.text.toLowerCase();
       for (const id of interestIds) {
-        if (lower.includes(id.slice(0, 5))) score += 2;
-        if (
-          (id === 'architektur' || id === 'museen') &&
-          /(fassade|stil|backstein|portal|architekt)/i.test(lower)
-        ) {
-          score += 4;
-        }
-        if (
-          id === 'geschichte' &&
-          /(jahrhundert|krieg|früher|geschichte|gegründet)/i.test(lower)
-        ) {
-          score += 4;
-        }
-        if (
-          id === 'personen' &&
-          /(person|familie|geboren|berühm|baumeister)/i.test(lower)
-        ) {
-          score += 4;
-        }
-        if (
-          (id === 'natur' || id === 'wandern') &&
-          /(fluss|bach|natur|ufer|wiese|wald)/i.test(lower)
-        ) {
-          score += 4;
-        }
+        const w = promptWeightForInterest(id);
+        score += w;
+        if (lower.includes(id.slice(0, 5))) score += w * 2;
+        const dim = INTEREST_DIMENSIONS.find((d) => d.prefKey === id);
+        if (dim?.tagMatchers.some((m) => lower.includes(m))) score += w * 2;
       }
       for (const tag of tags) {
         if (themeTagToInterestIds(tag).some((i) => interestIds.includes(i))) {
@@ -390,8 +527,12 @@ ${line('ACTION/QUIZ — Neu, schätzbar, noch nicht oben', beats.action)}
 
 Regie: Daraus EINEN fließenden Audioguide-Text bauen — wie ein Freund neben dem User.
 Keine Labels vorlesen. Keine Rubriken. Jeder Fakt nur einmal.
-Struktur intern: visueller Anker → Hook → Geschichte → Heute → sanfter Abschluss/Sub-Tipp.
-Abschluss: offen weitergehen oder Sub-POI — NIE „später erzähl ich mehr“ wenn der User schon da ist.`;
+Struktur intern: sinnlicher Hook (ohne Nutzername) → visueller Anker (Besonderheit zuerst wenn belegt) → Geschichte/Heute → was man hier machen kann.
+Wenn Ort-Angebote/Events belegt: gegen Ende natürlich erwähnen (Recurring-Abend, buchen, mitmachen) — NIE erfinden.
+Aktivitäts-Orte (Sport, Wasserski, Freizeit…): Historie kurz — Schwerpunkt LEBEN JETZT: Aktivität, was besonders ist, Preise/Dauer/Tipps NUR wenn belegt, Abschluss = Charakter-angepasste Motivation zum Mitmachen (ohne Meta-„frag mich“).
+Abschluss: kurze lebendige Einladung ok — NIE Meta „frag mich“ / „was macht besonders?“.
+NIE Telefon/Adresse/GPS/Koordinaten/Öffnungszeiten-Liste vorlesen. NIE steifes „Willkommen bei …“.
+NIE Mystik/Aura/„man munkelt“/Geheimnis erfinden, wenn ORIGIN/STORY/NOW leer oder nur LIVE-Platzhalter sind — dann kurz und ehrlich bleiben.`;
 }
 
 /**

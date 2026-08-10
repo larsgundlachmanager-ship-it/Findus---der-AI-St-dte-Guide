@@ -9,14 +9,17 @@ import {
   View,
 } from 'react-native';
 import { colors, spacing } from '../constants/theme';
+import {
+  ONBOARDING_METRICS,
+  onboardingDensityForAge,
+} from './onboardingDensity';
 
 const MIN_AGE = 6;
 const MAX_AGE = 100;
 const AGE_SPAN = MAX_AGE - MIN_AGE;
 /** Seitenluft: Platz für Badge-Hälfte links/rechts vom Track */
 const SIDE_PAD = 40;
-const BADGE = 56;
-const THUMB_R = 14;
+const THUMB_R = 12;
 
 type LifeStage =
   | 'baby'
@@ -61,20 +64,47 @@ function stageIndex(age: number) {
 }
 
 /** Soft circular life-stage pictogram (no stick figures) */
-function StageBadge({ age }: { age: number }) {
+function StageBadge({
+  age,
+  badgeSize,
+  iconSize,
+}: {
+  age: number;
+  badgeSize: number;
+  iconSize: number;
+}) {
   const idx = Math.max(0, stageIndex(age));
   const stage = STAGES[idx];
 
   return (
-    <View style={styles.badge}>
-      <View style={styles.badgeRing} />
-      <Text style={styles.badgeIcon}>{stage.icon}</Text>
+    <View
+      style={[
+        styles.badge,
+        {
+          width: badgeSize,
+          height: badgeSize,
+          borderRadius: badgeSize / 2,
+        },
+      ]}
+    >
+      <View
+        style={[
+          styles.badgeRing,
+          { borderRadius: badgeSize / 2 },
+        ]}
+      />
+      <Text style={[styles.badgeIcon, { fontSize: iconSize }]}>
+        {stage.icon}
+      </Text>
     </View>
   );
 }
 
 export function AgeLifeSlider({ age, yearsLabel, onChange }: Props) {
   const clamped = clampAge(age);
+  // Größe folgt dem gewählten Alter: ab 55 größer, sonst kompakt
+  const metrics = ONBOARDING_METRICS[onboardingDensityForAge(clamped)];
+  const BADGE = metrics.ageBadge;
   const idx = Math.max(0, stageIndex(clamped));
   const [trackWidth, setTrackWidth] = useState(0);
   const ageRef = useRef(clamped);
@@ -187,25 +217,33 @@ export function AgeLifeSlider({ age, yearsLabel, onChange }: Props) {
   return (
     <View style={styles.root}>
       <Animated.Text
-        style={[styles.ageDisplay, { transform: [{ scale: bounce }] }]}
+        style={[
+          styles.ageDisplay,
+          { fontSize: metrics.ageDisplay, transform: [{ scale: bounce }] },
+        ]}
       >
         {clamped} {yearsLabel}
       </Animated.Text>
 
       <View style={styles.sliderStack}>
-        <View style={styles.badgeRail} pointerEvents="none">
+        <View style={[styles.badgeRail, { height: BADGE + 12 }]} pointerEvents="none">
           {trackWidth > 0 ? (
             <Animated.View
               style={[
                 styles.badgeSlot,
                 {
+                  width: BADGE,
                   left: badgeLeft,
                   opacity: fade,
                   transform: [{ translateY: bobY }],
                 },
               ]}
             >
-              <StageBadge age={clamped} />
+              <StageBadge
+                age={clamped}
+                badgeSize={BADGE}
+                iconSize={metrics.ageBadgeIcon}
+              />
               <View style={styles.stem} />
             </Animated.View>
           ) : null}
@@ -252,7 +290,6 @@ const styles = StyleSheet.create({
   },
   ageDisplay: {
     color: colors.text,
-    fontSize: 28,
     fontWeight: '700',
     textAlign: 'center',
     letterSpacing: 0.3,
@@ -263,20 +300,15 @@ const styles = StyleSheet.create({
     overflow: 'visible',
   },
   badgeRail: {
-    height: BADGE + 14,
     marginBottom: 2,
     overflow: 'visible',
   },
   badgeSlot: {
     position: 'absolute',
     bottom: 0,
-    width: BADGE,
     alignItems: 'center',
   },
   badge: {
-    width: BADGE,
-    height: BADGE,
-    borderRadius: BADGE / 2,
     backgroundColor: colors.bgElevated,
     borderWidth: 2,
     borderColor: colors.accent,
@@ -290,12 +322,10 @@ const styles = StyleSheet.create({
   },
   badgeRing: {
     ...StyleSheet.absoluteFillObject,
-    borderRadius: BADGE / 2,
     borderWidth: 3,
     borderColor: colors.accentSoft,
   },
   badgeIcon: {
-    fontSize: 28,
     textAlign: 'center',
   },
   stem: {

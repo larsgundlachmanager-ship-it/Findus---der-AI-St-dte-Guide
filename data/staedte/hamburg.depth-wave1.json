@@ -1,0 +1,430 @@
+{
+  "notes": [
+    "Depth-balance wave 1: thin Hamburg cores filled from Wikipedia/official sources.",
+    "Preise/Zeiten nur LIVE. Keine Dialog-Skripte. Prisdorf nie."
+  ],
+  "spots": [
+    {
+      "id": "hamburg_alsterfontane",
+      "name": "Alsterfontäne",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Wahrzeichen auf der Binnenalster: seit 18. April 1987 in Betrieb. Idee von Moderator Carlheinz Hollmann nach dem Vorbild des Genfer Jet d’eau; Sponsoren u. a. Blohm + Voss. Betriebshöhe typisch um 50–60 m (wetter-/windabhängig); Finanzierung über Sponsoren/Stiftung, koordiniert u. a. mit Hamburg Wasser. Saison Frühjahr–Herbst, im Winter oft Alstertanne an derselben Stelle.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: hoher Wasserstrahl mittig auf der Binnenalster, von Jungfernstieg und Lombardsbrücke gut zu sehen; abends oft angestrahlt, bei Sonne manchmal Regenbogen in der Gischt.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Idee 1986: Carlheinz Hollmann sah den Jet d’eau in Genf aus dem Flugzeug und brachte den Vorschlag über Bausenator Eugen Wagner und Oberbaudirektor Egbert Kossak in die Baubehörde.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Erster Betrieb 18. April 1987 um 12 Uhr; Höhe durch Hamburger Wind begrenzt — Quellen nennen Betriebswerte um ca. 40–60 m, nicht die Kapazität des Genfer Vorbilds (~140 m).",
+          "tags": ["geschichte", "technik"]
+        },
+        {
+          "text": "Technik (berichtete Größenordnung): Pumpe im zweistelligen kW-Bereich, hunderttausende Liter Wasser pro Stunde; 2021 energieeffizientere Pumpe. LIVE Saisonzeiten/Höhe.",
+          "tags": ["technik", "live_hint"]
+        },
+        {
+          "text": "Heute: Frühjahrseinschalten als Stadtritual; November Abbau; Winter oft Alstertanne. Quer: Binnenalster-Panorama, Jungfernstieg, Lombardsbrücke.",
+          "tags": ["leben_jetzt", "quer"]
+        },
+        {
+          "text": "LIVE: Betriebszeiten und Saisonstart/ende jährlich prüfen — nicht aus dem Pack vorlesen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Alsterfontäne?",
+          "a": "Am hohen Wasserstrahl mitten auf der Binnenalster, besonders klar vom Jungfernstieg oder der Lombardsbrücke."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_hamburg_bunker",
+      "name": "Hamburg BUNKER",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Flakturm IV / Grüner Bunker an der Feldstraße am Heiligengeistfeld (St. Pauli): 1942 in ~300 Tagen mit Zwangsarbeitern errichtet; Grundfläche ca. 75×75 m, ursprüngliche Höhe ca. 38 m, Wände bis ~3,5 m, Decke bis ~5 m. Schutzraum für zehntausende Menschen bei Luftangriffen. Nach Krieg Wohnnutzung, Sprengung verhindert; später Medien-/Kulturort. 2019–2024 Aufstockung und Begrünung mit öffentlichem Bergpfad und Dachgarten.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: massiver Betonwürfel am Heiligengeistfeld zwischen Millerntor und Karoviertel; oben begrünt mit umlaufendem „Bergpfad“ und Dachgarten — weithin sichtbar.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1942 als Flakturm IV gebaut: Flugabwehr und Zivilschutz; bei schweren Angriffen (u. a. 1943) Schutz für bis zu ~25.000–30.000 Menschen berichtet.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Nach 1945: Wohnungsnot, britische Sprengpläne scheiterten an Massivbau und Gefahr für Nachbarschaft; später Medienbunker/Kultur, Club Uebel & Gefährlich berichtet.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Seit Umbau „Grüner Bunker“: Aufstockung ~20 m, ~550–560 m Bergpfad, Dachgarten ca. 1.400 m² öffentlich zugänglich berichtet; Erinnerungsort zum NS-Zwangsarbeit-/Kriegskontext.",
+          "tags": ["architektur", "leben_jetzt"]
+        },
+        {
+          "text": "Quer: zweiter erhaltener Hamburger Flakturm = Energiebunker Wilhelmsburg (Flakturm VI). Nähe Millerntor-Stadion / Hamburger Dom-Gelände.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Dachgarten-/Pfad-Öffnung, Hotel/Gastronomie und Tickets ephemer — vor Ort oder Website prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Bunker?",
+          "a": "Am riesigen Betonwürfel auf dem Heiligengeistfeld — oben begrünt, mit sichtbarem Weg um die Fassade zum Dachgarten."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_fischbeker_heide",
+      "name": "Fischbeker Heide",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Naturschutzgebiet im Südwesten Hamburgs (Neugraben-Fischbek/Hausbruch, Bezirk Harburg): ca. 773 ha Heide- und Waldlandschaft; nach der Lüneburger Heide eine der größten Heide-Kulturlandschaften Deutschlands. NSG seit 1958 (Landschaftsschutz früher). Hasselbrack (~116 m) als höchste Erhebung Hamburgs im Süden. Pflege durch Entkusseln und Heidschnucken-Beweidung; archäologischer Wanderpfad zu Bodendenkmälern.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: offene Besenheide-Flächen, Sandwege, Magerrasen und Waldsäume; August/Anfang September oft lilafarbene Heideblüte.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Kulturlandschaft: ab Jungsteinzeit Waldrodung auf sandigen Böden der Harburger Berge; Heide entstand durch Überweidung und historischen Holzbedarf (u. a. Salzsiederei-Kontext der Region).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Schutz: Landschaftsschutz berichtet ab 1948, Naturschutzgebiet 1958, später Erweiterung; FFH-Gebiet. Ziel: offene Heide gegen Wiederbewaldung halten.",
+          "tags": ["geschichte", "natur"]
+        },
+        {
+          "text": "Leben jetzt: Wandern, Heideblüte beobachten, Chance auf Heidschnucken-Herde; Archäologischer Wanderpfad (Helms-Museum) zu Grab-/Megalithanlagen. Regeln des NSG beachten.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Neugrabener Heide als Teil des Schutzgebiets; Harburger Berge / Hasselbrack; Anbindung südlich der B73.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Wegeführung, Sperrungen und Führungen ephemer — vor Wanderung prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Fischbeker Heide?",
+          "a": "An weiten offenen Heideflächen mit Besenheide und Sandwegen im Harburger Süden — im Spätsommer oft lila Blütenteppiche."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_dammtor",
+      "name": "Dammtor",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Bahnhof Hamburg Dammtor (Haltepunkt mit Fern-/S-Bahn): heutige Anlage 1903 eröffnet („Kaiserbahnhof“, Eröffnung mit Wilhelm II.). Architekt Ernst Moeller; Halle ca. 112×25 m, Höhe ca. 23,5 m; Historismus mit Jugendstil-Anklängen, Sandstein. Ersetzt den ebenerdigen Vorgänger von 1866 (Standort etwa heutiges Cinemaxx). Name nach dem früheren Dammtor der Stadtbefestigung; Lage Rotherbaum/Nähe Messe.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: erhöhte Sandstein-Empfangshalle mit großer Glas-/Hallenkonstruktion über vier Gleisen an zwei Mittelbahnsteigen — oft als einer der schönsten Bahnhöfe der Stadt wahrgenommen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Vorgänger 1866 an der Hamburg-Altonaer Verbindungsbahn; Neubau nach Hochlegung der Strecke, Betrieb ab 7. Juni 1903 in Anwesenheit Kaiser Wilhelms II.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Parade-/Staatsempfangsfunktion: Sondergleis und Fürstenräume im Kontext des Kaiserbesuchs berichtet; Name Dammtor vom historischen Stadttor.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Fern- und S-Bahn, starker Messe-/Kongress-Zugang; denkmalgeschützt, umfassende Sanierung um 1999–2002 berichtet.",
+          "tags": ["leben_jetzt", "architektur"]
+        },
+        {
+          "text": "Quer: Nähe Congress Center/Messe, Planten un Blomen, Binnenalster-Richtung Jungfernstieg.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Abfahrten und Baustellen ephemer — HVV/DB prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Dammtor?",
+          "a": "An der erhöhten, sandsteinverkleideten Bahnhofshalle direkt an der Messe — vier Gleise unter einer großen, lichtdurchfluteten Halle."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_botanischer_garten_der_universitat_hamburg_loki_schmidt_garten",
+      "name": "Botanischer Garten der Universität Hamburg - Loki-Schmidt-Garten",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Botanischer Garten der Universität Hamburg in Klein Flottbek/Osdorf (~24–25 ha). Ursprung 1821 (Johann Georg Christian Lehmann) in den Wallanlagen (heute Planten un Blomen); nach Krieg und IGAs Verlegung, Freigelände eröffnet 5. Juli 1979. Seit 23. Oktober 2012 Loki-Schmidt-Garten. Schaugewächshäuser verblieben am alten Dammtor-Standort. Themenbereiche u. a. Nutzpflanzen, Rose, Wüste, Mittelmeer, Rhododendron, japanischer Garten (Yoshikuni Araki, 1979).",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: weitläufiges Freigelände am S-Bahnhof Klein Flottbek mit Themenflächen und großen Bäumen; Eingangsbereich mit Mammutbäumen und Loki-Schmidt-Denkmal berichtet.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "1821 gegründet; 1857 Staatsinstitut; seit Uni-Gründung 1919 Teil des Botanischen Instituts. Standort Wallanlagen bis Verlegung in die 1970er.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "IGA 1953/63/73 prägte Wiederaufbau; Tropengewächshäuser 1963 (Hermkes/Apel) blieben am Dammtor; Neuer Garten Klein Flottbek 1979 eröffnet.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "2012 Umbenennung zu Ehren Hannelore „Loki“ Schmidt; Loki-Schmidt-Haus als Nutzpflanzen-Museum berichtet. Leben jetzt: Spaziergänge durch Klimazonen-Themen, Rosengarten, japanischer Garten.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Alter Botanischer Garten / Planten un Blomen (historischer Standort); Schaugewächshäuser Dammtor separat beachten.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Gewächshaus-Sanierung und Eintritt ephemer prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Loki-Schmidt-Garten?",
+          "a": "Am großen Botanischen Freigelände bei Klein Flottbek mit Themenbereichen und Mammutbäumen am Eingang — nicht zu verwechseln mit den alten Gewächshäusern am Dammtor."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_alter_botanischer_garten",
+      "name": "Alter Botanischer Garten",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Historischer Standort des Hamburger Botanischen Gartens in den Wallanlagen (heute Planten un Blomen / Dammtor-Bereich). Ab 1821 Botanischer Garten; Kriegszerstörung; IGA-Neugestaltungen; Reste ab 1986 öffentlicher Park. Tropengewächshäuser von 1963 verblieben hier, während das Freigelände 1979 nach Klein Flottbek (Loki-Schmidt-Garten) zog.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: parkartige Wallanlagen-Fläche bei Dammtor/Planten un Blomen mit historischen Gewächshaus-Silhouetten — grüner Kontrast zur Innenstadt.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Ursprung Botanischer Garten 1821 hier; nach WWII und IGAs 1953/63/73 Umgestaltung; 1986 verbliebene Reste als öffentlicher Park.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Trennung der Standorte: Freigelände → Loki-Schmidt-Garten Klein Flottbek (1979); Schaugewächshäuser blieben am Dammtor.",
+          "tags": ["geschichte", "quer"]
+        },
+        {
+          "text": "Leben jetzt: Spazieren im Parkkontext Planten un Blomen; Gewächshaus-Besuch LIVE prüfen (Sanierung berichtet).",
+          "tags": ["leben_jetzt", "live_hint"]
+        },
+        {
+          "text": "LIVE: Zugang Gewächshäuser und Bauzustand ephemer.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_baakenpark",
+      "name": "Baakenpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "1,6 ha Park als künstliche Halbinsel im Baakenhafenbecken (östliche HafenCity). Wettbewerb 2012 gewonnen von Atelier Loidl (Berlin); Eröffnung Mai 2018. Baakenhafenbecken historisch 1887 für Seeschiffe; heute Grünzentrum mit Spiel-/Sportflächen und ca. 15 m hohem „Himmelsberg“ mit Blick Richtung Elbphilharmonie/Elbbrücken.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: grüne Halbinsel im Hafenbecken mit versetzter Topografie, Bäumen und markantem Hügel (Himmelsberg) — Park „im Wasser“ zwischen Baakenallee und Kaimauern.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Baakenhafen 1887 als Seeschiffshafen mit Bahnanschluss; Container-Ära verlagerte Umschlag westwärts, Hafenbetrieb endete — Fläche wurde HafenCity-Quartier.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "2012 Freiraumwettbewerb Atelier Loidl; Halbinsel aufgeschüttet; Eröffnung 5./6. Mai 2018. Deutscher Landschaftsarchitektur Preis 2019 berichtet.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Leben jetzt: Spielen, Ballsport, Liegewiese, Aussicht vom Himmelsberg; Brückenanbindung ins Quartier ohne Straßenquerung berichtet.",
+          "tags": ["leben_jetzt"]
+        },
+        {
+          "text": "Quer: Lohsepark, HafenCity Universität, Baakenhöft, Elbbrückenquartier; Blickbezug Elbphilharmonie.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Veranstaltungen und Baustellen im Quartier ephemer.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Baakenpark?",
+          "a": "An der begrünten Halbinsel mitten im Baakenhafen — mit Spielhügeln und dem hohen Himmelsberg am Ostende."
+        }
+      ]
+    },
+    {
+      "id": "hamburg_boberger_niederung",
+      "name": "Boberger Niederung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Naturschutzgebiet im Osten Hamburgs (Bergedorf/Billwerder-Kontext): Dünen-, Heide-, Feucht- und Auenlandschaft an der Bille. Bekannt für Boberger Dünen und das Boberger Dünenhaus als Info-/Umweltbildungsstation. Wandern und Naturbeobachtung; Schutzregeln beachten.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: offene Sanddünen und Heideflächen neben Feuchtwiesen und Bille-Aue — ungewöhnlicher Kontrast so nah an der Großstadt.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Landschaft aus eiszeitlichen Sanden und historischer Nutzung; heute NSG mit Dünen- und Feuchtbiotopen.",
+          "tags": ["geschichte", "natur"]
+        },
+        {
+          "text": "Leben jetzt: Wanderwege, Dünenhaus als Anlaufpunkt; Quer zu Boberger Dünenhaus und Boberger Strand als benachbarte Pack-Punkte.",
+          "tags": ["leben_jetzt", "quer"]
+        },
+        {
+          "text": "LIVE: Wegezustand, Dünenhaus-Öffnung und Führungen ephemer prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_boberger_dunenhaus",
+      "name": "Boberger Dünenhaus",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Umweltbildungs- und Infohaus am Rand der Boberger Niederung: Einstieg in Dünen-/Heidelandschaft, Ausstellungen und Ausgangspunkt für Wege ins Naturschutzgebiet. Kein Themenpark — Fokus Naturverständnis und Orientierung vor Ort.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: kleines Info-/Bildungsgebäude am Zugang zu offenen Dünenflächen der Boberger Niederung.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Funktion: Umweltbildung und Orientierung für das NSG Boberger Niederung; Quer zu Dünen, Strand- und Wanderpunkten im Pack.",
+          "tags": ["leben_jetzt", "quer"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten und Programm ephemer — vor Besuch prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_berliner_tor",
+      "name": "Berliner Tor",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Verkehrs- und Stadtraum-Knoten in Hamburg-St. Georg/Borgfelde: Name vom historischen Stadttor Richtung Berlin. Heute vor allem Bahnhof Berliner Tor (S-/U-Bahn) und umgebendes Ensemble — Orientierungspunkt zwischen Innenstadt und Hammerbrook/Borgfelde.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: stark frequentierter Schnellbahn-Knoten mit umgebender Verkehrs-/Stadtstruktur — Name erinnert an das frühere Stadttor der Berliner Straße.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historisch: Tor der Stadtbefestigung an der Ausfallstraße nach Berlin; heute Name für Bahnhof und Quartiersbereich.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Umstieg S-/U-Bahn, Zugang St. Georg und Richtung Hammerbrook; LIVE Fahrplan.",
+          "tags": ["leben_jetzt", "live_hint"]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_heinrich_heine_denkmal",
+      "name": "Heinrich-Heine-Denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Denkmal für den Dichter Heinrich Heine in Hamburg — erinnert an den in Düsseldorf geborenen, mit Hamburg biografisch verbundenen Schriftsteller. Standort im öffentlichen Raum als Blickfang; Kontext Literaturgeschichte und jüdisch-deutsche Kulturgeschichte des 19. Jahrhunderts.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: freistehende Denkmalplastik/Ensemble im öffentlichen Grün- oder Platzraum — vor dem Namen zuerst die Figur/Form beschreiben.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Heinrich Heine (1797–1856): Dichter und Publizist; Hamburg-Bezug über Familie und Aufenthalte; Denkmal setzt literarische Erinnerungskultur im Stadtraum.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: kurzer Stopp zum Betrachten; Quer zu anderen Literatur-/Persönlichkeitsdenkmälern der Innenstadt.",
+          "tags": ["leben_jetzt", "quer"]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_alsterpark",
+      "name": "Alsterpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Parkband entlang der Außenalster (Harvestehude/Rotherbaum-Kontext): Promenaden, Wiesen und Sichtachsen auf das Alsterwasser. Entstanden und gepflegt als Teil der Alster-Ufergestaltung; typischer Hamburger Naherholungsraum für Spazieren, Joggen, Picknick mit Skyline-Blick.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: grüne Uferwiesen und Wege direkt an der Außenalster mit weitem Wasserblick und Innenstadt-Silhouette in der Ferne.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Teil der historischen Alster-Ufer- und Villenviertel-Landschaft; öffentliche Grünzüge halten den Seeuferraum zugänglich.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Spazieren, Joggen, Picknick, Schwanen-/Bootblick; Quer zu Alsterfontäne (Binnenalster), Jungfernstieg und Alstermündung.",
+          "tags": ["leben_jetzt", "quer"]
+        },
+        {
+          "text": "LIVE: Veranstaltungen und Sperrungen am Ufer ephemer.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_grosse_wallanlagen",
+      "name": "Große Wallanlagen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Teil des historischen Wallanlagen-Grünzugs (Planten un Blomen / Dammtor-Achse): ehemalige Festungsanlagen der Stadt, später in Parklandschaft umgewandelt. Heute Wege, Grün und Anbindung an Messe/Dammtor und den Botanik-Standort.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: parkartige Wall- und Grabenstrukturen mit Wegen und Bäumen — Stadtgrün auf ehemaliger Festungslinie.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Geschichte: Teil der Hamburger Stadtbefestigung; Entfestigung und Umwandlung zu Parks im 19./20. Jahrhundert; IGA-Phasen prägten heutige Planten-un-Blomen-Landschaft.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Spazieren zwischen Dammtor, Messe und Planten un Blomen; Quer Alter Botanischer Garten / Tropengewächshäuser.",
+          "tags": ["leben_jetzt", "quer"]
+        }
+      ]
+    },
+    {
+      "id": "hamburg_harburger_berge",
+      "name": "Harburger Berge",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Höhenzug südlich der Elbe (Hamburg-Harburg und angrenzendes Niedersachsen): Wald, Heideausläufer und Aussichten. Höchste Erhebung Hamburgs: Hasselbrack (~116 m). Wichtiger Naherholungsraum; Quer zur Fischbeker Heide.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: bewaldete Höhen und Heidekanten über dem Harburger Süden — spürbar „über der Stadt“.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Geologie/Landschaft der Schwarzen Berge / Harburger Berge; Hasselbrack als Hamburgs höchster Punkt berichtet.",
+          "tags": ["geschichte", "natur"]
+        },
+        {
+          "text": "Leben jetzt: Wandern und Rad; Quer Fischbeker Heide und Neugrabener Heide.",
+          "tags": ["leben_jetzt", "quer"]
+        },
+        {
+          "text": "LIVE: Wege und Sperrungen ephemer prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    }
+  ]
+}

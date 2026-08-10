@@ -1,0 +1,700 @@
+{
+  "city_id": "wangerooge",
+  "baked_at": "2026-07-24T12:03:52.256Z",
+  "bbox": {
+    "south": 53.705964207833276,
+    "north": 53.79639967793747,
+    "west": 7.806536875211738,
+    "east": 7.973862779616912
+  },
+  "walk_graph": {
+    "node_count": 0,
+    "edge_count": 0,
+    "nodes": [],
+    "edges": []
+  },
+  "spot_waypoints": {
+    "wangerooge_cafe_pudding": [
+      {
+        "lat": 53.792675574102766,
+        "lng": 7.900046582904552
+      },
+      {
+        "lat": 53.792961848205536,
+        "lng": 7.900024265809104
+      }
+    ],
+    "wangerooge_db_bahnhof_wangerooge": [
+      {
+        "lat": 53.78815383,
+        "lng": 7.89864221
+      }
+    ],
+    "wangerooge_inselmuseum_alter_leuchtturm": [
+      {
+        "lat": 53.787739869999996,
+        "lng": 7.899186705
+      },
+      {
+        "lat": 53.788076739999994,
+        "lng": 7.89918671
+      },
+      {
+        "lat": 53.78841361,
+        "lng": 7.899186715
+      }
+    ],
+    "wangerooge_westturm": [
+      {
+        "lat": 53.784669196,
+        "lng": 7.859887024
+      },
+      {
+        "lat": 53.784669192,
+        "lng": 7.859278848
+      },
+      {
+        "lat": 53.784669187999995,
+        "lng": 7.858670672
+      },
+      {
+        "lat": 53.784669183999995,
+        "lng": 7.858062496
+      }
+    ],
+    "wangerooge_fahranleger_wangerooge": [
+      {
+        "lat": 53.77481319,
+        "lng": 7.86723628
+      }
+    ],
+    "wangerooge_nationalpark_haus_wangerooge": [
+      {
+        "lat": 53.790608289999994,
+        "lng": 7.90127495
+      }
+    ],
+    "wangerooge_bistro_am_strand_wangerooge": [
+      {
+        "lat": 53.793265579999996,
+        "lng": 7.8994488
+      }
+    ],
+    "wangerooge_neuer_leuchtturm_wangerooge": [
+      {
+        "lat": 53.79021209,
+        "lng": 7.85723105
+      }
+    ],
+    "wangerooge_nikolai_kirche_evangelisch_lutherische_kirchenge": [
+      {
+        "lat": 53.78888289,
+        "lng": 7.900253059999999
+      }
+    ],
+    "wangerooge_djh_bistro_westturm": [
+      {
+        "lat": 53.78464368,
+        "lng": 7.85795832
+      }
+    ],
+    "wangerooge_haus_am_alten_leuchtturm": [
+      {
+        "lat": 53.78929119,
+        "lng": 7.89788776
+      }
+    ],
+    "wangerooge_dorfplatz": [
+      {
+        "lat": 53.789697190000005,
+        "lng": 7.90011771
+      }
+    ],
+    "wangerooge_obere_strandpromenade": [
+      {
+        "lat": 53.793409780000005,
+        "lng": 7.9006356
+      }
+    ],
+    "wangerooge_restaurant_friesenjung": [
+      {
+        "lat": 53.793386780000006,
+        "lng": 7.89831762
+      }
+    ],
+    "wangerooge_digger_s_strandbar": [
+      {
+        "lat": 53.79359428,
+        "lng": 7.8964796
+      }
+    ],
+    "wangerooge_restaurant_unser_boot": [
+      {
+        "lat": 53.790522280000005,
+        "lng": 7.89913722
+      }
+    ],
+    "wangerooge_griechisches_restaurant_kreta": [
+      {
+        "lat": 53.792193080000004,
+        "lng": 7.893016919999999
+      }
+    ],
+    "wangerooge_italian_love_story": [
+      {
+        "lat": 53.79238228,
+        "lng": 7.90014712
+      }
+    ],
+    "wangerooge_restaurant_buhne_35": [
+      {
+        "lat": 53.79185448,
+        "lng": 7.89998922
+      }
+    ],
+    "wangerooge_gaststatte_dune_17": [
+      {
+        "lat": 53.79230217999999,
+        "lng": 7.90006822
+      }
+    ],
+    "wangerooge_strandhotel_gerken": [
+      {
+        "lat": 53.79323158,
+        "lng": 7.9008388
+      }
+    ],
+    "wangerooge_restaurant_kruse": [
+      {
+        "lat": 53.79213528,
+        "lng": 7.89853582
+      }
+    ],
+    "wangerooge_eiscafe_pizzeria_ristorante_venezia": [
+      {
+        "lat": 53.79055957999999,
+        "lng": 7.89878692
+      }
+    ],
+    "wangerooge_cafe_neudeich": [
+      {
+        "lat": 53.786219380000006,
+        "lng": 7.93146092
+      }
+    ],
+    "wangerooge_inselbackerei_kruse_ohg": [
+      {
+        "lat": 53.79035668,
+        "lng": 7.89866552
+      }
+    ],
+    "wangerooge_der_pirat": [
+      {
+        "lat": 53.79286828,
+        "lng": 7.90014112
+      }
+    ],
+    "wangerooge_inselmarkt_wangerooge_lammers_e_k": [
+      {
+        "lat": 53.79157257999999,
+        "lng": 7.90103052
+      }
+    ],
+    "wangerooge_frischemarkt_wangerooge": [
+      {
+        "lat": 53.79167858,
+        "lng": 7.90037922
+      }
+    ],
+    "wangerooge_cafe_treibsand": [
+      {
+        "lat": 53.79187268,
+        "lng": 7.89967972
+      }
+    ],
+    "wangerooge_parkhotel_wangerooge": [
+      {
+        "lat": 53.79046159000001,
+        "lng": 7.900198099999999
+      }
+    ],
+    "wangerooge_teestube_wangerooge_ug_haftungsbeschrankt": [
+      {
+        "lat": 53.79076318,
+        "lng": 7.89842812
+      }
+    ],
+    "wangerooge_hotel_hanken": [
+      {
+        "lat": 53.79264999,
+        "lng": 7.89966979
+      }
+    ],
+    "wangerooge_wfv_gmbh_wangerooge": [
+      {
+        "lat": 53.791434190000004,
+        "lng": 7.89939609
+      }
+    ],
+    "wangerooge_backerei_bolte": [
+      {
+        "lat": 53.79128858,
+        "lng": 7.899429920000001
+      }
+    ],
+    "wangerooge_meerwasser_erlebnisbad_oase": [
+      {
+        "lat": 53.793779189999995,
+        "lng": 7.89477625
+      }
+    ],
+    "wangerooge_kaffee_kontor_wangerooge": [
+      {
+        "lat": 53.792683679999996,
+        "lng": 7.90060042
+      }
+    ],
+    "wangerooge_restaurant_krusch": [
+      {
+        "lat": 53.79292538,
+        "lng": 7.90253802
+      }
+    ],
+    "wangerooge_jan_seedorf": [
+      {
+        "lat": 53.793081380000004,
+        "lng": 7.875618319999999
+      }
+    ],
+    "wangerooge_surfcafe_wangerooge": [
+      {
+        "lat": 53.79379568,
+        "lng": 7.89298892
+      }
+    ],
+    "wangerooge_lazarettbunker_wangerooge": [
+      {
+        "lat": 53.791902889999996,
+        "lng": 7.90579775
+      }
+    ],
+    "wangerooge_die_fischbar": [
+      {
+        "lat": 53.79218718,
+        "lng": 7.90005462
+      }
+    ],
+    "wangerooge_westkap_wangerooge": [
+      {
+        "lat": 53.78725559,
+        "lng": 7.8501768
+      }
+    ],
+    "wangerooge_cafe_klonschnack": [
+      {
+        "lat": 53.78897137999999,
+        "lng": 7.8984969199999995
+      }
+    ],
+    "wangerooge_fischerstube": [
+      {
+        "lat": 53.79318218,
+        "lng": 7.9005008199999995
+      }
+    ],
+    "wangerooge_restaurant_asterias": [
+      {
+        "lat": 53.79308988,
+        "lng": 7.89974642
+      }
+    ],
+    "wangerooge_snabbelkraam": [
+      {
+        "lat": 53.792634379999996,
+        "lng": 7.900253320000001
+      }
+    ],
+    "wangerooge_fischgeschaft_kruse": [
+      {
+        "lat": 53.792120579999995,
+        "lng": 7.89888852
+      }
+    ],
+    "wangerooge_atlantic_hotel_garni_albrecht": [
+      {
+        "lat": 53.79275599,
+        "lng": 7.89812779
+      }
+    ],
+    "wangerooge_cafe_famoos": [
+      {
+        "lat": 53.78983167999999,
+        "lng": 7.899398919999999
+      }
+    ],
+    "wangerooge_haus_am_meer_wangerooge": [
+      {
+        "lat": 53.789273689999995,
+        "lng": 7.8507511999999995
+      }
+    ],
+    "wangerooge_der_kuchenladen": [
+      {
+        "lat": 53.79297958,
+        "lng": 7.900315820000001
+      }
+    ],
+    "wangerooge_inselverein_des_gutenbergheims_wangerooge_e_v": [
+      {
+        "lat": 53.785159990000004,
+        "lng": 7.8538555
+      }
+    ],
+    "wangerooge_strandburg": [
+      {
+        "lat": 53.790879079999996,
+        "lng": 7.8971259
+      }
+    ],
+    "wangerooge_delis_strandreich": [
+      {
+        "lat": 53.79217708,
+        "lng": 7.8980342
+      }
+    ],
+    "wangerooge_hauptstrand": [
+      {
+        "lat": 53.793693468217754,
+        "lng": 7.900113545398936
+      }
+    ],
+    "wangerooge_hartmannstand_gedenken": [
+      {
+        "lat": 53.793573037154154,
+        "lng": 7.892105442988032
+      }
+    ],
+    "wangerooge_st_willehad": [
+      {
+        "lat": 53.79084274222063,
+        "lng": 7.910530483140409
+      }
+    ],
+    "wangerooge_golfclub": [
+      {
+        "lat": 53.78898057599712,
+        "lng": 7.912377372917452
+      }
+    ],
+    "wangerooge_diggers_aussenposten": [
+      {
+        "lat": 53.7933975270212,
+        "lng": 7.89701796775865
+      }
+    ],
+    "wangerooge_fundamente_alter_westturm": [
+      {
+        "lat": 53.790601650664755,
+        "lng": 7.85061933019676
+      }
+    ],
+    "harlesiel_faehrhafen": [
+      {
+        "lat": 53.70978949762846,
+        "lng": 7.810474075804775
+      },
+      {
+        "lat": 53.70947359525692,
+        "lng": 7.81044625160955
+      },
+      {
+        "lat": 53.70915769288538,
+        "lng": 7.810418427414325
+      },
+      {
+        "lat": 53.70884179051384,
+        "lng": 7.8103906032191
+      },
+      {
+        "lat": 53.70852588814229,
+        "lng": 7.810362779023875
+      }
+    ],
+    "wangerooge_polizei": [
+      {
+        "lat": 53.791296730398855,
+        "lng": 7.897405127598253
+      }
+    ],
+    "wangerooge_praxis_kortenhorn": [
+      {
+        "lat": 53.78998283039885,
+        "lng": 7.899444628455595
+      }
+    ],
+    "wangerooge_insel_apotheke": [
+      {
+        "lat": 53.791184130398854,
+        "lng": 7.89985332767173
+      }
+    ],
+    "wangerooge_lzo_geldautomat": [
+      {
+        "lat": 53.79176793039885,
+        "lng": 7.899485627290771
+      }
+    ],
+    "wangerooge_aussichtsplatz_wangerooge": [
+      {
+        "lat": 53.793423770000004,
+        "lng": 7.88993287
+      }
+    ],
+    "wangerooge_deckwerk_wangerooge": [
+      {
+        "lat": 53.78609877,
+        "lng": 7.849032279999999
+      }
+    ],
+    "wangerooge_westlagune_wangerooge": [
+      {
+        "lat": 53.78792857,
+        "lng": 7.87042188
+      }
+    ],
+    "wangerooge_hafeneinfahrt_backbord_wangerooge": [
+      {
+        "lat": 53.77211124,
+        "lng": 7.86556356
+      }
+    ],
+    "wangerooge_flugplatz_wangerooge_edwg": [
+      {
+        "lat": 53.788143840000004,
+        "lng": 7.90887955
+      }
+    ],
+    "wangerooge_bunkerreste_jade_ost_batterie": [
+      {
+        "lat": 53.78890602999999,
+        "lng": 7.9230208300000005
+      }
+    ],
+    "wangerooge_jever_aussichtsplattform": [
+      {
+        "lat": 53.78367197,
+        "lng": 7.945669179999999
+      }
+    ],
+    "wangerooge_tuunpad": [
+      {
+        "lat": 53.79056527,
+        "lng": 7.89114657
+      }
+    ],
+    "wangerooge_lokschuppen_wangerooge": [
+      {
+        "lat": 53.78725274,
+        "lng": 7.89891085
+      }
+    ],
+    "wangerooge_altes_wiegehauschen": [
+      {
+        "lat": 53.78818602999999,
+        "lng": 7.89987313
+      }
+    ],
+    "wangerooge_plattform_westende_wangerooge": [
+      {
+        "lat": 53.78722447,
+        "lng": 7.84697268
+      }
+    ],
+    "wangerooge_denk_mal_nach": [
+      {
+        "lat": 53.79313674,
+        "lng": 7.902004740000001
+      }
+    ],
+    "wangerooge_kriegerdenkmal": [
+      {
+        "lat": 53.789004629999994,
+        "lng": 7.900096430000001
+      }
+    ],
+    "wangerooge_dunenlandschaft_seelen_pfad": [
+      {
+        "lat": 53.78660977,
+        "lng": 7.93308328
+      }
+    ],
+    "wangerooge_ehemaliger_ostlicher_anleger_wangerooge": [
+      {
+        "lat": 53.774236540000004,
+        "lng": 7.970031260000001
+      }
+    ],
+    "wangerooge_dunenlandschaft_westlagune": [
+      {
+        "lat": 53.79183957,
+        "lng": 7.87276207
+      }
+    ],
+    "wangerooge_kurpark_teichgarten": [
+      {
+        "lat": 53.79119387,
+        "lng": 7.89433107
+      }
+    ],
+    "wangerooge_mellumrat_e_v_wangerooge_oststation": [
+      {
+        "lat": 53.78615814,
+        "lng": 7.933249550000001
+      }
+    ],
+    "wangerooge_petra_losch_wattwandern_wangerooge": [
+      {
+        "lat": 53.79258627,
+        "lng": 7.9042819699999995
+      }
+    ],
+    "wangerooge_hundestrand": [
+      {
+        "lat": 53.79274667,
+        "lng": 7.90702967
+      }
+    ],
+    "wangerooge_musik_pavillion_im_rosengarten": [
+      {
+        "lat": 53.79047806999999,
+        "lng": 7.90084317
+      }
+    ],
+    "wangerooge_memorial_luftwaffen_geschwader_71": [
+      {
+        "lat": 53.788469570000004,
+        "lng": 7.90880428
+      }
+    ],
+    "wangerooge_kurpark_rosengarten": [
+      {
+        "lat": 53.79053077,
+        "lng": 7.900261069999999
+      }
+    ],
+    "wangerooge_kurpark_steingarten": [
+      {
+        "lat": 53.79106827,
+        "lng": 7.89605137
+      }
+    ],
+    "wangerooge_modular_pumptrack_skateanlage": [
+      {
+        "lat": 53.79314544,
+        "lng": 7.89330834
+      }
+    ],
+    "wangerooge_kath_pfarrgemeinde_st_willehad_gemeindeburo": [
+      {
+        "lat": 53.791703940000005,
+        "lng": 7.90273684
+      }
+    ],
+    "wangerooge_klockhaus": [
+      {
+        "lat": 53.78839184,
+        "lng": 7.90070255
+      }
+    ],
+    "wangerooge_sport_und_surfstrand_wangerooge": [
+      {
+        "lat": 53.79391587,
+        "lng": 7.89476387
+      }
+    ],
+    "wangerooge_kampfbahn_siedlerstrasse": [
+      {
+        "lat": 53.78863484,
+        "lng": 7.91132105
+      }
+    ],
+    "wangerooge_dunen_spielplatz": [
+      {
+        "lat": 53.79275727,
+        "lng": 7.89183977
+      }
+    ],
+    "wangerooge_spielplatz_am_westlichen_strand": [
+      {
+        "lat": 53.79375207,
+        "lng": 7.89627097
+      }
+    ],
+    "wangerooge_spielplatz_am_ostlichen_strand": [
+      {
+        "lat": 53.79311067,
+        "lng": 7.90450407
+      }
+    ],
+    "wangerooge_kinderspielhaus_sockenland": [
+      {
+        "lat": 53.791985440000005,
+        "lng": 7.89213864
+      }
+    ],
+    "wangerooge_hafenmeister_wangerooge": [
+      {
+        "lat": 53.77589634,
+        "lng": 7.86755886
+      }
+    ],
+    "wangerooge_schiffsmeldestelle_wangerooge": [
+      {
+        "lat": 53.77638254,
+        "lng": 7.86823376
+      }
+    ],
+    "wangerooge_friedhofskapelle": [
+      {
+        "lat": 53.790810640000004,
+        "lng": 7.888447749999999
+      }
+    ],
+    "wangerooge_helmer_und_christine_janssen_haus_klippersteven_wohn": [
+      {
+        "lat": 53.79223197,
+        "lng": 7.90113917
+      }
+    ],
+    "wangerooge_dunenhaus": [
+      {
+        "lat": 53.78946657,
+        "lng": 7.89576307
+      }
+    ],
+    "wangerooge_collage_galerie_am_damenpfad": [
+      {
+        "lat": 53.790892840000005,
+        "lng": 7.9023334499999995
+      }
+    ],
+    "wangerooge_historische_uhr_pudding_uhr": [
+      {
+        "lat": 53.79327287999999,
+        "lng": 7.9000454300000005
+      }
+    ],
+    "wangerooge_wangerooger_tennis_club_e_v": [
+      {
+        "lat": 53.7917152,
+        "lng": 7.8936656
+      }
+    ],
+    "wangerooge_wangerooge_erholung_ist_eine_insel_kurverwaltung": [
+      {
+        "lat": 53.79328359,
+        "lng": 7.89673761
+      }
+    ]
+  }
+}

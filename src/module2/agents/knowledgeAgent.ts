@@ -28,8 +28,10 @@ import {
 import { assessPlaceVisibility } from '../../services/navigation/placeVisibility';
 import { searchPlacesByText } from '../../services/navigation/googleMapsNav';
 import {
+  detectCinemaPhase,
   isCinemaMovieQuery,
   researchCinemaAndShowtimes,
+  venueCharacterHint,
 } from '../../services/research/cinemaShowtimeResearch';
 import {
   isSupermarketOfferQuery,
@@ -273,7 +275,7 @@ export const knowledgeAgent: Module2Agent = {
       }
     }
 
-    // Kino/Film: Just-Do-It — Kinos + Spielzeiten, keine Timeline / kein See-Nav
+    // Kino/Film: Orient (Kinos+Filme) → Zeiten erst nach Film-/Kino-Wahl
     if (isCinemaMovieQuery(task.rewrittenText)) {
       const a = anchorCoords(rucksack);
       const place = resolveWorkingPlace(
@@ -282,25 +284,36 @@ export const knowledgeAgent: Module2Agent = {
         task.city,
       );
       try {
-        // Kinos sofort; Spielzeiten max ~6s — Rest als Buttons nachreichen
+        const phase = detectCinemaPhase(task.rewrittenText);
         const research = await researchCinemaAndShowtimes({
           userText: task.rewrittenText,
           lat: a.lat,
           lng: a.lng,
           signal,
           venuesOnly: false,
-          showtimeBudgetMs: 6_000,
+          phase,
+          // Orient: Programm-Picks; Showtimes: konkrete Zeiten
+          showtimeBudgetMs: phase === 'orient' ? 8_000 : 6_000,
         });
 
         const bullets: string[] = [];
         for (const v of research.venues.slice(0, 2)) {
           bullets.push(`${v.name} · ${formatCinemaDist(v.distanceM)}`);
         }
-        for (const s of research.showtimes.slice(0, 2)) {
-          if (bullets.length >= 3) break;
-          const price =
-            s.priceEur != null ? ` · ${s.priceEur}€` : '';
-          bullets.push(`${s.cinemaName}: ${s.whenLabel}${price}`);
+        if (research.phase === 'orient') {
+          for (const f of research.filmPicks.slice(0, 2)) {
+            if (bullets.length >= 3) break;
+            bullets.push(
+              f.genreHint ? `${f.title} · ${f.genreHint}` : f.title,
+            );
+          }
+        } else {
+          for (const s of research.showtimes.slice(0, 2)) {
+            if (bullets.length >= 3) break;
+            const price =
+              s.priceEur != null ? ` · ${s.priceEur}€` : '';
+            bullets.push(`${s.cinemaName}: ${s.whenLabel}${price}`);
+          }
         }
         if (!bullets.length) {
           bullets.push('Kinos in der Umgebung werden geprüft');
@@ -318,60 +331,87 @@ export const knowledgeAgent: Module2Agent = {
         const film =
           research.filmHint ||
           research.showtimes[0]?.filmTitle ||
-          'der Film';
+          research.filmPicks[0]?.title ||
+          'Kino';
         const needsDefer =
-          research.showtimesPending ||
-          (research.showtimes.length === 0 && research.venues.length > 0);
+          research.phase === 'showtimes' &&
+          (research.showtimesPending ||
+            (research.showtimes.length === 0 && research.venues.length > 0));
 
-        const optionBits = research.venues.slice(0, 2).map((v) => {
-          const far =
-            v.distanceM >= 8_000
-              ? ` — circa ${formatCinemaDist(v.distanceM)}`
-              : ` (${formatCinemaDist(v.distanceM)})`;
-          return `${v.name}${far}`;
-        });
-        const timeBits = research.showtimes.slice(0, 2).map(
-          (s) => `${s.cinemaName}: ${s.whenLabel}`,
-        );
-
-        // Sprechbarer Draft (keine Prompt-Meta-Labels)
         const spokenParts: string[] = [];
-        if (optionBits.length) {
+        if (research.phase === 'orient') {
+          const venueBits = research.venues.slice(0, 2).map((v) => {
+            const vibe = venueCharacterHint(v.name);
+            const far =
+              v.distanceM >= 8_000
+                ? ` — circa ${formatCinemaDist(v.distanceM)}`
+                : ` (${formatCinemaDist(v.distanceM)})`;
+            return `${v.name}${far} — ${vibe}`;
+          });
+          if (venueBits.length) {
+            spokenParts.push(
+              `In Reichweite: ${venueBits.join('; ')}.`,
+            );
+          } else {
+            spokenParts.push(
+              'Gerade kein Kino in Reichweite — ich erweitere die Suche ehrlich.',
+            );
+          }
+          if (research.filmPicks.length) {
+            const picks = research.filmPicks.slice(0, 3).map((f) => {
+              const g = f.genreHint ? ` (${f.genreHint})` : '';
+              const line = f.oneLiner ? `: ${f.oneLiner}` : '';
+              return `${f.title}${g}${line}`;
+            });
+            spokenParts.push(`Aktuell spannend: ${picks.join(' · ')}.`);
+          } else {
+            spokenParts.push(
+              'Im Angebot typisch: Komödie, Action, Drama — sag Genre oder Kino-Vibe, dann hole ich konkrete Zeiten.',
+            );
+          }
           spokenParts.push(
-            `${film}: am nächsten ${
-              optionBits.length > 1 ? 'liegen' : 'liegt'
-            } ${optionBits.join(' und ')}.`,
+            'Welches Kino oder Genre soll es werden? Zeiten und Tickets kommen danach — nicht vorher die ganze Uhrzeiten-Liste.',
           );
+          // Struktur-Hints für Synthese (nicht wörtlich)
+          spokenParts.push(`\n${research.promptBlock}`);
         } else {
-          spokenParts.push(
-            `Zum Film „${film}“ finde ich gerade kein Kino in Reichweite — ich prüfe die Region weiter.`,
+          const optionBits = research.venues.slice(0, 2).map((v) => {
+            const far =
+              v.distanceM >= 8_000
+                ? ` — circa ${formatCinemaDist(v.distanceM)}`
+                : ` (${formatCinemaDist(v.distanceM)})`;
+            return `${v.name}${far}`;
+          });
+          if (optionBits.length) {
+            spokenParts.push(
+              `${film}: passende Kinos — ${optionBits.join(' und ')}.`,
+            );
+          }
+          const timeBits = research.showtimes.slice(0, 2).map(
+            (s) => `${s.cinemaName}: ${s.whenLabel}`,
           );
+          if (timeBits.length) {
+            spokenParts.push(`Nächste Zeiten: ${timeBits.join('; ')}.`);
+          } else if (needsDefer) {
+            spokenParts.push(
+              'Zeiten und Ticket-Links leg ich dir auf die Buttons nach.',
+            );
+          }
+          spokenParts.push(`\n${research.promptBlock}`);
         }
-        if (timeBits.length) {
-          spokenParts.push(`Spielzeiten: ${timeBits.join('; ')}.`);
-        } else if (needsDefer) {
-          spokenParts.push(
-            'Zeiten und Ticket-Links leg ich dir gleich auf die Buttons nach.',
-          );
-        } else {
-          spokenParts.push(
-            'Belegte Startzeiten hab ich gerade nicht — Programm-Links liegen bereit, sobald da.',
-          );
-        }
-        spokenParts.push(
-          'Route zu den Kinos ist bereit — Programm und Tickets über die Buttons.',
-        );
 
         const draft = spokenParts.join(' ');
 
         return {
           agent: 'knowledge',
           ok: true,
-          draftText: draft.slice(0, 1200),
+          draftText: draft.slice(0, 1600),
           bullets: bullets.slice(0, 3),
           buttons: buttons.slice(0, 4),
           meta: {
             cinema: true,
+            cinemaPhase: research.phase,
+            filmPicks: research.filmPicks,
             deferCinemaLinks: needsDefer,
             cinemaUserText: task.rewrittenText,
             cinemaLat: a.lat,

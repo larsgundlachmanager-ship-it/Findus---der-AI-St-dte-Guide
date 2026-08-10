@@ -1,0 +1,3138 @@
+{
+  "city_id": "koeln",
+  "center": {
+    "lat": 50.937531,
+    "lng": 6.9602786
+  },
+  "added": [
+    "koeln_heumarkt",
+    "koeln_koln_messe_deutz",
+    "koeln_messe_deutz_bahnhof_koln",
+    "koeln_bf_deutz_messeplatz",
+    "koeln_rheinauhafen",
+    "koeln_hiroshima_nagasaki_park",
+    "koeln_trude_herr_park",
+    "koeln_rheinauhafen",
+    "koeln_wiener_platz"
+  ],
+  "skipped": [
+    {
+      "name": "Köln Hauptbahnhof",
+      "near": "koeln_koln_hauptbahnhof"
+    },
+    {
+      "name": "Köln Dom/Hauptbahnhof",
+      "near": "koeln_koln_dom_hauptbahnhof"
+    },
+    {
+      "name": "Hansaring",
+      "near": "koeln_hansaring"
+    },
+    {
+      "name": "Breslauer Platz/Hauptbahnhof",
+      "near": "koeln_breslauer_platz_hauptbahnhof"
+    },
+    {
+      "name": "Severinstraße",
+      "near": "koeln_severinstrasse"
+    },
+    {
+      "name": "Deutz/Lanxess Arena",
+      "near": "koeln_deutz_lanxess_arena"
+    },
+    {
+      "name": "Köln Süd",
+      "near": "koeln_koln_sud"
+    },
+    {
+      "name": "Köln Nippes S-Bahn",
+      "near": "koeln_koln_nippes_s_bahn"
+    },
+    {
+      "name": "Bahnhofsvorplatz Köln",
+      "near": "koeln_bahnhofsvorplatz_koln"
+    },
+    {
+      "name": "Einkaufsbahnhof Köln Hbf",
+      "near": "koeln_koln_hauptbahnhof"
+    },
+    {
+      "name": "Köln Messe/Deutz",
+      "near": "koeln_koln_messe_deutz"
+    },
+    {
+      "name": "Messe/Deutz Bahnhof, Köln",
+      "near": "koeln_messe_deutz_bahnhof_koln"
+    },
+    {
+      "name": "Trimbornstr",
+      "near": "koeln_trimbornstr"
+    },
+    {
+      "name": "Breslauer Platz/Hbf Bussteig C",
+      "near": "koeln_breslauer_platz_hbf_bussteig_c"
+    },
+    {
+      "name": "CONTIPARK Tiefgarage Hauptbahnhof",
+      "near": "koeln_contipark_tiefgarage_hauptbahnhof"
+    },
+    {
+      "name": "Ehrenfeld",
+      "near": "koeln_ehrenfeld"
+    },
+    {
+      "name": "KD Anleger Nr. 5",
+      "near": "koeln_kd_anleger_nr_5"
+    },
+    {
+      "name": "KD Anleger Köln",
+      "near": "koeln_kd_anleger_koln"
+    },
+    {
+      "name": "KD Anleger Nr. 2",
+      "near": "koeln_kd_anleger_nr_2"
+    },
+    {
+      "name": "KD-Anleger Nr. 1",
+      "near": "koeln_kd_anleger_nr_1"
+    },
+    {
+      "name": "STROLCH Personenfähre - Anlegesteg 9, Köln „Dom-Seite“ - WEISBARTH Fahrgastschiff",
+      "near": "koeln_strolch_personenfahre_anlegesteg_9_koln_dom_seite_weisbarth_fahrgastschiff"
+    },
+    {
+      "name": "Köln, Anleger 6",
+      "near": "koeln_koln_anleger_6"
+    },
+    {
+      "name": "Schiffsanlegestelle Rhein River Company",
+      "near": "koeln_schiffsanlegestelle_rhein_river_company"
+    },
+    {
+      "name": "KD Anleger 3",
+      "near": "koeln_kd_anleger_3"
+    },
+    {
+      "name": "Anleger 10",
+      "near": "koeln_strolch_personenfahre_anlegesteg_9_koln_dom_seite_weisbarth_fahrgastschiff"
+    },
+    {
+      "name": "Köln, Anleger 7",
+      "near": "koeln_koln_anleger_7"
+    },
+    {
+      "name": "KD Ticket Office Köln Hohenzollernbrücke",
+      "near": "koeln_koln_anleger_7"
+    },
+    {
+      "name": "Köln \"feenstra rijn lijn\" Anleger",
+      "near": "koeln_koln_feenstra_rijn_lijn_anleger"
+    },
+    {
+      "name": "Viking River Cruises Anleger Deutz",
+      "near": "koeln_viking_river_cruises_anleger_deutz"
+    },
+    {
+      "name": "KölnTourist Anleger 13, Bastei",
+      "near": "koeln_kolntourist_anleger_13_bastei"
+    },
+    {
+      "name": "KölnTourist Personenschiffahrt am Dom GmbH",
+      "near": "koeln_strolch_personenfahre_anlegesteg_9_koln_dom_seite_weisbarth_fahrgastschiff"
+    },
+    {
+      "name": "Schiffsanlegestelle Deutzer Vorhafen",
+      "near": "koeln_schiffsanlegestelle_deutzer_vorhafen"
+    },
+    {
+      "name": "RheinCargo 5 Landebrücke",
+      "near": "koeln_rheincargo_5_landebrucke"
+    },
+    {
+      "name": "Konrad-Adenauer-Ufer Köln",
+      "near": "koeln_koln_feenstra_rijn_lijn_anleger"
+    },
+    {
+      "name": "Rhein Cargo Liegeplatz Adenauer 9",
+      "near": "koeln_rhein_cargo_liegeplatz_adenauer_9"
+    },
+    {
+      "name": "Bastei Köln",
+      "near": "koeln_bastei_koln"
+    },
+    {
+      "name": "Museum Ludwig",
+      "near": "koeln_museum_ludwig"
+    },
+    {
+      "name": "Schokoladenmuseum Köln",
+      "near": "koeln_schokoladenmuseum_koln"
+    },
+    {
+      "name": "Rautenstrauch-Joest-Museum",
+      "near": "koeln_rautenstrauch_joest_museum"
+    },
+    {
+      "name": "Kolumba",
+      "near": "koeln_kolumba"
+    },
+    {
+      "name": "Das Museum des Schmerzes und der Liebe",
+      "near": "koeln_das_museum_des_schmerzes_und_der_liebe"
+    },
+    {
+      "name": "Museum für Angewandte Kunst Köln",
+      "near": "koeln_museum_fur_angewandte_kunst_koln"
+    },
+    {
+      "name": "Kölnisches Stadtmuseum",
+      "near": "koeln_kolumba"
+    },
+    {
+      "name": "Kollwitz Museum Köln",
+      "near": "koeln_kollwitz_museum_koln"
+    },
+    {
+      "name": "Farina Duftmuseum",
+      "near": "koeln_farina_duftmuseum"
+    },
+    {
+      "name": "Museum Schnütgen",
+      "near": "koeln_rautenstrauch_joest_museum"
+    },
+    {
+      "name": "Deutsches Sport & Olympia Museum",
+      "near": "koeln_deutsches_sport_olympia_museum"
+    },
+    {
+      "name": "Museum für Ostasiatische Kunst",
+      "near": "koeln_museum_fur_ostasiatische_kunst"
+    },
+    {
+      "name": "Supercandy Pop-Up Museum",
+      "near": "koeln_supercandy_pop_up_museum"
+    },
+    {
+      "name": "Römisch-Germanisches Museum im Belgischen Haus",
+      "near": "koeln_romisch_germanisches_museum_im_belgischen_haus"
+    },
+    {
+      "name": "Nationalsozialismus-Dokumentationszentrum der Stadt Köln - im EL-DE-Haus",
+      "near": "koeln_nationalsozialismus_dokumentationszentrum_der_stadt_koln_im_el_de_haus"
+    },
+    {
+      "name": "SERIENKILLER – Die True Crime Ausstellung",
+      "near": "koeln_serienkiller_die_true_crime_ausstellung"
+    },
+    {
+      "name": "Römisch-Germanisches-Museum",
+      "near": "koeln_romisch_germanisches_museum"
+    },
+    {
+      "name": "artothek Köln",
+      "near": "koeln_artothek_koln"
+    },
+    {
+      "name": "Alter Markt",
+      "near": "koeln_alter_markt"
+    },
+    {
+      "name": "MiQua.LVR-Jüdisches Museum im Archäologischen Quartier Köln",
+      "near": "koeln_alter_markt"
+    },
+    {
+      "name": "Basilika St. Maria im Kapitol",
+      "near": "koeln_basilika_st_maria_im_kapitol"
+    },
+    {
+      "name": "St. Peter",
+      "near": "koeln_st_peter"
+    },
+    {
+      "name": "Wallfahrtskirche St. Maria in der Kupfergasse",
+      "near": "koeln_wallfahrtskirche_st_maria_in_der_kupfergasse"
+    },
+    {
+      "name": "St. Pantaleon",
+      "near": "koeln_st_pantaleon"
+    },
+    {
+      "name": "St. Maria in Lyskirchen",
+      "near": "koeln_st_maria_in_lyskirchen"
+    },
+    {
+      "name": "Kapelle Hll. Drei Könige",
+      "near": "koeln_kapelle_hll_drei_konige"
+    },
+    {
+      "name": "Groß St. Martin",
+      "near": "koeln_gross_st_martin"
+    },
+    {
+      "name": "Minoritenkirche St. Mariä Empfängnis",
+      "near": "koeln_minoritenkirche_st_maria_empfangnis"
+    },
+    {
+      "name": "St. Mariä Himmelfahrt",
+      "near": "koeln_st_maria_himmelfahrt"
+    },
+    {
+      "name": "Antoniterkirche",
+      "near": "koeln_antoniterkirche"
+    },
+    {
+      "name": "Marktkapelle St. Mariä Himmelfahrt",
+      "near": "koeln_marktkapelle_st_maria_himmelfahrt"
+    },
+    {
+      "name": "Madonna in den Trümmern",
+      "near": "koeln_kolumba"
+    },
+    {
+      "name": "Basilika St. Aposteln",
+      "near": "koeln_basilika_st_aposteln"
+    },
+    {
+      "name": "Kalk Kapelle",
+      "near": "koeln_kalk_kapelle"
+    },
+    {
+      "name": "Dominikanerkirche St. Andreas",
+      "near": "koeln_dominikanerkirche_st_andreas"
+    },
+    {
+      "name": "Kapelle St. Maria und Maternus",
+      "near": "koeln_kapelle_st_maria_und_maternus"
+    },
+    {
+      "name": "Kapelle St. Maria ad Ortum",
+      "near": "koeln_kapelle_st_maria_ad_ortum"
+    },
+    {
+      "name": "St. Cäcilien",
+      "near": "koeln_st_peter"
+    },
+    {
+      "name": "Basilika St. Ursula",
+      "near": "koeln_basilika_st_ursula"
+    },
+    {
+      "name": "Generalvikariat Erzbistum Köln",
+      "near": "koeln_generalvikariat_erzbistum_koln"
+    },
+    {
+      "name": "Jan von Werth-Brunnen (Wilhelm Albermann 1884)",
+      "near": "koeln_alter_markt"
+    },
+    {
+      "name": "Heinzelmännchenbrunnen",
+      "near": "koeln_heinzelmannchenbrunnen"
+    },
+    {
+      "name": "Karl-Berbuer-Brunnen (Bonifatius Stirnberg, 1987)",
+      "near": "koeln_karl_berbuer_brunnen_bonifatius_stirnberg_1987"
+    },
+    {
+      "name": "Ostermannbrunnen (Willi Klein 1938)",
+      "near": "koeln_ostermannbrunnen_willi_klein_1938"
+    },
+    {
+      "name": "Theo-Burauen-Brunnen, Klaus Albert (1971)",
+      "near": "koeln_theo_burauen_brunnen_klaus_albert_1971"
+    },
+    {
+      "name": "Dionysos-Brunnen (Karl Burgeff, 1973)",
+      "near": "koeln_dionysos_brunnen_karl_burgeff_1973"
+    },
+    {
+      "name": "Römerbrunnen (Franz Brantzky, 1914–15)",
+      "near": "koeln_romerbrunnen_franz_brantzky_1914_15"
+    },
+    {
+      "name": "Willy-Millowitsch-Denkmal",
+      "near": "koeln_willy_millowitsch_denkmal"
+    },
+    {
+      "name": "Petrusbrunnen (Richard Voigtel, 1870)",
+      "near": "koeln_petrusbrunnen_richard_voigtel_1870"
+    },
+    {
+      "name": "Paolozzibrunnen – Wasserspielplatz (1986)",
+      "near": "koeln_kd_anleger_nr_5"
+    },
+    {
+      "name": "DuMont-Brunnen, Köln - Theo Heiermann (1986)",
+      "near": "koeln_dumont_brunnen_koln_theo_heiermann_1986"
+    },
+    {
+      "name": "Brunnen Marsplatz",
+      "near": "koeln_brunnen_marsplatz"
+    },
+    {
+      "name": "Brunnen",
+      "near": "koeln_romisch_germanisches_museum"
+    },
+    {
+      "name": "Brunnen, Kaiser-Wilhelm-Ring, Köln",
+      "near": "koeln_brunnen_kaiser_wilhelm_ring_koln"
+    },
+    {
+      "name": "Taubenbrunnen, Ewald Mataré (1952)",
+      "near": "koeln_taubenbrunnen_ewald_matare_1952"
+    },
+    {
+      "name": "Brunnentempel, Köln - Fritz Encke (ca. 1920)",
+      "near": "koeln_brunnentempel_koln_fritz_encke_ca_1920"
+    },
+    {
+      "name": "Fastnachtsbrunnen (Georg Grasegger, 1913)",
+      "near": "koeln_farina_duftmuseum"
+    },
+    {
+      "name": "Edith-Stein-Denkmal",
+      "near": "koeln_edith_stein_denkmal"
+    },
+    {
+      "name": "Bierbrunnen",
+      "near": "koeln_bierbrunnen"
+    },
+    {
+      "name": "Fischweiber-Brunnen (Rainer Walk, 1986)",
+      "near": "koeln_kd_anleger_koln"
+    },
+    {
+      "name": "Der Strand im Rheinpark",
+      "near": "koeln_der_strand_im_rheinpark"
+    },
+    {
+      "name": "Niehler Strand",
+      "near": "koeln_niehler_strand"
+    },
+    {
+      "name": "Rheingarten Köln",
+      "near": "koeln_rheingarten_koln"
+    },
+    {
+      "name": "Rheinpark",
+      "near": "koeln_rheinpark"
+    },
+    {
+      "name": "Wildpark Dünnwald",
+      "near": "koeln_wildpark_dunnwald"
+    },
+    {
+      "name": "Stadtpark in Deutz",
+      "near": "koeln_stadtpark_in_deutz"
+    },
+    {
+      "name": "Strand am von-Diergardt-See",
+      "near": "koeln_strand_am_von_diergardt_see"
+    },
+    {
+      "name": "Theodor-Heuss-Park",
+      "near": "koeln_theodor_heuss_park"
+    },
+    {
+      "name": "Max-Dietlein-Park",
+      "near": "koeln_max_dietlein_park"
+    },
+    {
+      "name": "Pionierpark",
+      "near": "koeln_pionierpark"
+    },
+    {
+      "name": "Humboldtpark",
+      "near": "koeln_humboldtpark"
+    },
+    {
+      "name": "Klingelpützpark",
+      "near": "koeln_klingelputzpark"
+    },
+    {
+      "name": "Belvedere Ausblick",
+      "near": "koeln_belvedere_ausblick"
+    },
+    {
+      "name": "Zündorfer Groov",
+      "near": "koeln_zundorfer_groov"
+    },
+    {
+      "name": "Kalscheurer Weiher",
+      "near": "koeln_kalscheurer_weiher"
+    },
+    {
+      "name": "Lohsepark",
+      "near": "koeln_lohsepark"
+    },
+    {
+      "name": "Stadtgarten",
+      "near": "koeln_stadtgarten"
+    },
+    {
+      "name": "Von-Stein-Park",
+      "near": "koeln_von_stein_park"
+    },
+    {
+      "name": "Blumenhof im Rheinpark",
+      "near": "koeln_blumenhof_im_rheinpark"
+    },
+    {
+      "name": "SonnenscheinEtage – Die höchste Beachbar Kölns",
+      "near": "koeln_sonnenscheinetage_die_hochste_beachbar_kolns"
+    },
+    {
+      "name": "Im Leuchtturm",
+      "near": "koeln_im_leuchtturm"
+    },
+    {
+      "name": "KölnTriangle - Hochhaus",
+      "near": "koeln_kolntriangle_hochhaus"
+    },
+    {
+      "name": "Helios Leuchtturm Ehrenfeld",
+      "near": "koeln_helios_leuchtturm_ehrenfeld"
+    },
+    {
+      "name": "Malakoffturm",
+      "near": "koeln_malakoffturm"
+    },
+    {
+      "name": "Turmbesteigung",
+      "near": "koeln_petrusbrunnen_richard_voigtel_1870"
+    },
+    {
+      "name": "\"Der Leuchtturm\"",
+      "near": "koeln_der_leuchtturm"
+    },
+    {
+      "name": "Alter Messeturm",
+      "near": "koeln_alter_messeturm"
+    },
+    {
+      "name": "Blaue-Funken-Turm (Sachsenturm); Eventlocation",
+      "near": "koeln_blaue_funken_turm_sachsenturm_eventlocation"
+    },
+    {
+      "name": "Blau-Gold-Turm",
+      "near": "koeln_blau_gold_turm"
+    },
+    {
+      "name": "Helenenturm",
+      "near": "koeln_helenenturm"
+    },
+    {
+      "name": "Zwei Pferdeköpfe am Turm des Richmodis-Hauses",
+      "near": "koeln_zwei_pferdekopfe_am_turm_des_richmodis_hauses"
+    },
+    {
+      "name": "Turm der Prinzen Garde",
+      "near": "koeln_turm_der_prinzen_garde"
+    },
+    {
+      "name": "Kunibertsturm",
+      "near": "koeln_kunibertsturm"
+    },
+    {
+      "name": "Kölnturm",
+      "near": "koeln_kolnturm"
+    },
+    {
+      "name": "Belvedere Blickfang",
+      "near": "koeln_belvedere_blickfang"
+    },
+    {
+      "name": "KölnTurm",
+      "near": "koeln_kolnturm"
+    },
+    {
+      "name": "Belvedere Felderblick",
+      "near": "koeln_belvedere_felderblick"
+    },
+    {
+      "name": "Bismarckturm Köln",
+      "near": "koeln_bismarckturm_koln"
+    },
+    {
+      "name": "Aussichtsturm",
+      "near": "koeln_aussichtsturm"
+    },
+    {
+      "name": "Cologne Sportspark",
+      "near": "koeln_cologne_sportspark"
+    },
+    {
+      "name": "Stadionbad Köln-Müngersdorf",
+      "near": "koeln_stadionbad_koln_mungersdorf"
+    },
+    {
+      "name": "Minigolf & Eisstockschießen Köln Müngersdorf",
+      "near": "koeln_minigolf_eisstockschiessen_koln_mungersdorf"
+    },
+    {
+      "name": "GolfCity Köln Pulheim",
+      "near": "koeln_golfcity_koln_pulheim"
+    },
+    {
+      "name": "KölnGolf",
+      "near": "koeln_kolngolf"
+    },
+    {
+      "name": "Agrippabad",
+      "near": "koeln_agrippabad"
+    },
+    {
+      "name": "Lentpark - Hallenbad",
+      "near": "koeln_lentpark_hallenbad"
+    },
+    {
+      "name": "V-Golf Sankt Urbanus",
+      "near": "koeln_v_golf_sankt_urbanus"
+    },
+    {
+      "name": "3D Schwarzlicht Minigolf Köln",
+      "near": "koeln_3d_schwarzlicht_minigolf_koln"
+    },
+    {
+      "name": "SportCity Köln",
+      "near": "koeln_sportcity_koln"
+    },
+    {
+      "name": "KMC e.V. - Minigolfanlage am Fernsehturm",
+      "near": "koeln_kmc_e_v_minigolfanlage_am_fernsehturm"
+    },
+    {
+      "name": "Golf House Filiale Köln",
+      "near": "koeln_golf_house_filiale_koln"
+    },
+    {
+      "name": "Köln golft",
+      "near": "koeln_golfcity_koln_pulheim"
+    },
+    {
+      "name": "Kölnbäder GmbH",
+      "near": "koeln_agrippabad"
+    },
+    {
+      "name": "Schwimmbad Rhein-Sommergarten GbR",
+      "near": "koeln_schwimmbad_rhein_sommergarten_gbr"
+    },
+    {
+      "name": "Fun+Sport Arena Köln",
+      "near": "koeln_fun_sport_arena_koln"
+    },
+    {
+      "name": "Fühlinger See, Sport- und Erholungsanlage",
+      "near": "koeln_fuhlinger_see_sport_und_erholungsanlage"
+    },
+    {
+      "name": "Holmes Place Köln - Am Gürzenich",
+      "near": "koeln_holmes_place_koln_am_gurzenich"
+    },
+    {
+      "name": "Golfclub Wahn",
+      "near": "koeln_golfclub_wahn"
+    },
+    {
+      "name": "Marienburger Golf-Club e.V.",
+      "near": "koeln_marienburger_golf_club_e_v"
+    },
+    {
+      "name": "Historisches Rathaus der Stadt Köln",
+      "near": "koeln_alter_markt"
+    },
+    {
+      "name": "Historische Altstadt",
+      "near": "koeln_kd_anleger_nr_1"
+    },
+    {
+      "name": "Aussichtspunkt Hohenzollernbrücke",
+      "near": "koeln_aussichtspunkt_hohenzollernbrucke"
+    },
+    {
+      "name": "Aussichtspunkt Pionierbecken 2",
+      "near": "koeln_aussichtspunkt_pionierbecken_2"
+    },
+    {
+      "name": "Panoramabänke",
+      "near": "koeln_panoramabanke"
+    },
+    {
+      "name": "Rhine River Viewpoint – Rheinpark",
+      "near": "koeln_rhine_river_viewpoint_rheinpark"
+    },
+    {
+      "name": "City Panorama",
+      "near": "koeln_city_panorama"
+    },
+    {
+      "name": "Mission 360 und 3D Panorama Tours Köln",
+      "near": "koeln_mission_360_und_3d_panorama_tours_koln"
+    },
+    {
+      "name": "Oper Köln",
+      "near": "koeln_oper_koln"
+    },
+    {
+      "name": "Kölnpfad - Etappe 01",
+      "near": "koeln_kolnpfad_etappe_01"
+    },
+    {
+      "name": "Kölnpfad - Etappe 02",
+      "near": "koeln_kolnpfad_etappe_02"
+    },
+    {
+      "name": "Kölnpfad - Etappe 06",
+      "near": "koeln_kolnpfad_etappe_06"
+    },
+    {
+      "name": "Kölnpfad - Etappe 07",
+      "near": "koeln_kolnpfad_etappe_07"
+    },
+    {
+      "name": "Waldlehrpfad im Stadtwald",
+      "near": "koeln_waldlehrpfad_im_stadtwald"
+    },
+    {
+      "name": "Longericher Wäldchen",
+      "near": "koeln_longericher_waldchen"
+    },
+    {
+      "name": "Königsforst",
+      "near": "koeln_konigsforst"
+    },
+    {
+      "name": "Kölnpfad - Etappe 05",
+      "near": "koeln_kolnpfad_etappe_05"
+    },
+    {
+      "name": "Kölnpfad - Etappe 04",
+      "near": "koeln_kolnpfad_etappe_04"
+    },
+    {
+      "name": "Kölnpfad - Etappe 08",
+      "near": "koeln_kolnpfad_etappe_08"
+    },
+    {
+      "name": "Kölnpfad - Etappe 03",
+      "near": "koeln_kolnpfad_etappe_03"
+    },
+    {
+      "name": "Dellbrücker Heide",
+      "near": "koeln_dellbrucker_heide"
+    },
+    {
+      "name": "Wandern mit Diabetes",
+      "near": "koeln_wandern_mit_diabetes"
+    },
+    {
+      "name": "Erker Mühlen Weiher",
+      "near": "koeln_erker_muhlen_weiher"
+    },
+    {
+      "name": "Flehbach Sandfang",
+      "near": "koeln_flehbach_sandfang"
+    },
+    {
+      "name": "Erholungsgebiet Dünnwald",
+      "near": "koeln_erholungsgebiet_dunnwald"
+    },
+    {
+      "name": "Harry Ufer",
+      "near": "koeln_harry_ufer"
+    },
+    {
+      "name": "Forstbotanischergarten Köln",
+      "near": "koeln_forstbotanischergarten_koln"
+    },
+    {
+      "name": "Fußpfad Frankenforstbach",
+      "near": "koeln_fusspfad_frankenforstbach"
+    },
+    {
+      "name": "Rheinradweg",
+      "near": "koeln_rheinradweg"
+    },
+    {
+      "name": "ADFC Köln e.V.",
+      "near": "koeln_adfc_koln_e_v"
+    },
+    {
+      "name": "Radtouren - Das Radreise-Magazin",
+      "near": "koeln_radtouren_das_radreise_magazin"
+    },
+    {
+      "name": "Schaltwerk-Koeln",
+      "near": "koeln_schaltwerk_koeln"
+    },
+    {
+      "name": "Radfieber Fahrrad-Meisterwerkstatt",
+      "near": "koeln_radfieber_fahrrad_meisterwerkstatt"
+    },
+    {
+      "name": "Schneider Radsport Köln Fahrradwerkstatt",
+      "near": "koeln_schneider_radsport_koln_fahrradwerkstatt"
+    },
+    {
+      "name": "Classica Colonia Fahrrad und Roller Reparatur, Werkstatt & Handel Köln",
+      "near": "koeln_classica_colonia_fahrrad_und_roller_reparatur_werkstatt_handel_koln"
+    },
+    {
+      "name": "Radstation Köln am Hauptbahnhof",
+      "near": "koeln_breslauer_platz_hbf_bussteig_c"
+    },
+    {
+      "name": "B.O.C. - BIKE & OUTDOOR COMPANY GmbH & Co. KG",
+      "near": "koeln_b_o_c_bike_outdoor_company_gmbh_co_kg"
+    },
+    {
+      "name": "Geobikes GmbH",
+      "near": "koeln_geobikes_gmbh"
+    },
+    {
+      "name": "Radhaus K - Cube Bikes im Kölner Zentrum",
+      "near": "koeln_radhaus_k_cube_bikes_im_kolner_zentrum"
+    },
+    {
+      "name": "Stadtrad Werkstatt",
+      "near": "koeln_stadtrad_werkstatt"
+    },
+    {
+      "name": "Rad-Garage Köln-Sülz",
+      "near": "koeln_rad_garage_koln_sulz"
+    },
+    {
+      "name": "Bikestation Köln-Sülz",
+      "near": "koeln_bikestation_koln_sulz"
+    },
+    {
+      "name": "BOBIKES GmbH - Fahrradgeschäft & Fahrradwerkstatt",
+      "near": "koeln_bobikes_gmbh_fahrradgeschaft_fahrradwerkstatt"
+    },
+    {
+      "name": "Colonia Aktiv Bike Tours",
+      "near": "koeln_colonia_aktiv_bike_tours"
+    },
+    {
+      "name": "Fahrrad-Fairteiler \"Finkenbike\" Köln Vogelsang",
+      "near": "koeln_fahrrad_fairteiler_finkenbike_koln_vogelsang"
+    },
+    {
+      "name": "Radfieber Fahrradgeschäft",
+      "near": "koeln_radfieber_fahrradgeschaft"
+    },
+    {
+      "name": "ROSE Bikes Köln",
+      "near": "koeln_rose_bikes_koln"
+    },
+    {
+      "name": "Veloküche Werkstatt & Verkauf",
+      "near": "koeln_velokuche_werkstatt_verkauf"
+    },
+    {
+      "name": "Adrenalinpark Köln",
+      "near": "koeln_adrenalinpark_koln"
+    },
+    {
+      "name": "Lindenthaler Tierpark",
+      "near": "koeln_lindenthaler_tierpark"
+    },
+    {
+      "name": "Rolfs Streichelzoo",
+      "near": "koeln_rolfs_streichelzoo"
+    },
+    {
+      "name": "Kölner Zoo",
+      "near": "koeln_kolner_zoo"
+    },
+    {
+      "name": "Urwaldhaus",
+      "near": "koeln_urwaldhaus"
+    },
+    {
+      "name": "Elefantenpark",
+      "near": "koeln_elefantenpark"
+    },
+    {
+      "name": "7th Space Köln - Virtual Reality & more!",
+      "near": "koeln_7th_space_koln_virtual_reality_more"
+    },
+    {
+      "name": "Erlebnisbauernhof Gertrudenhof",
+      "near": "koeln_erlebnisbauernhof_gertrudenhof"
+    },
+    {
+      "name": "Wildgehege Leidenhausen",
+      "near": "koeln_wildgehege_leidenhausen"
+    },
+    {
+      "name": "Erdmännchen & Co.",
+      "near": "koeln_erdmannchen_co"
+    },
+    {
+      "name": "BERO’s Kinderwelten Köln",
+      "near": "koeln_bero_s_kinderwelten_koln"
+    },
+    {
+      "name": "Pavianfelsen",
+      "near": "koeln_pavianfelsen"
+    },
+    {
+      "name": "Skatepark unter der Zoobrücke",
+      "near": "koeln_skatepark_unter_der_zoobrucke"
+    },
+    {
+      "name": "Terrarium & Insektarium",
+      "near": "koeln_kolner_zoo"
+    },
+    {
+      "name": "Ameisenbären",
+      "near": "koeln_ameisenbaren"
+    },
+    {
+      "name": "Kölner Domshop",
+      "near": "koeln_petrusbrunnen_richard_voigtel_1870"
+    },
+    {
+      "name": "Souvenir Point - Luggage Storage",
+      "near": "koeln_souvenir_point_luggage_storage"
+    },
+    {
+      "name": "Linke Souvenirs",
+      "near": "koeln_linke_souvenirs"
+    },
+    {
+      "name": "Dom Souvenir",
+      "near": "koeln_taubenbrunnen_ewald_matare_1952"
+    },
+    {
+      "name": "Sumerica Socks Souvenirs Köln",
+      "near": "koeln_sumerica_socks_souvenirs_koln"
+    },
+    {
+      "name": "Cologne Shop - Love Locks",
+      "near": "koeln_sumerica_socks_souvenirs_koln"
+    },
+    {
+      "name": "Am Malzbüchel Supermarkt - Kiosk",
+      "near": "koeln_am_malzbuchel_supermarkt_kiosk"
+    },
+    {
+      "name": "TausendSee Kiosk Souvenir",
+      "near": "koeln_am_malzbuchel_supermarkt_kiosk"
+    },
+    {
+      "name": "Souvenirgeschäft Kalinka",
+      "near": "koeln_artothek_koln"
+    },
+    {
+      "name": "Kölsche Geschenkartikel - Elke Kruse",
+      "near": "koeln_kolsche_geschenkartikel_elke_kruse"
+    },
+    {
+      "name": "Köln Souvenirs Store",
+      "near": "koeln_taubenbrunnen_ewald_matare_1952"
+    },
+    {
+      "name": "Dom van Keulen",
+      "near": "koeln_heinzelmannchenbrunnen"
+    },
+    {
+      "name": "German Souvenirs",
+      "near": "koeln_souvenir_point_luggage_storage"
+    },
+    {
+      "name": "Kölsche Lebensart",
+      "near": "koeln_kd_anleger_nr_1"
+    },
+    {
+      "name": "Sumerica socks",
+      "near": "koeln_taubenbrunnen_ewald_matare_1952"
+    },
+    {
+      "name": "4Köln GmbH & Co. KG",
+      "near": "koeln_4koln_gmbh_co_kg"
+    },
+    {
+      "name": "Pylones",
+      "near": "koeln_pylones"
+    },
+    {
+      "name": "kölnknipse - schöne fotos im quadrat",
+      "near": "koeln_kolnknipse_schone_fotos_im_quadrat"
+    },
+    {
+      "name": "Elbenwald",
+      "near": "koeln_pylones"
+    },
+    {
+      "name": "Postkartenladen",
+      "near": "koeln_postkartenladen"
+    },
+    {
+      "name": "Cellitinnen-Krankenhaus St. Marien",
+      "near": "koeln_cellitinnen_krankenhaus_st_marien"
+    },
+    {
+      "name": "Eduardus-Krankenhaus",
+      "near": "koeln_eduardus_krankenhaus"
+    },
+    {
+      "name": "Dom Apotheke Köln",
+      "near": "koeln_koln_dom_hauptbahnhof"
+    },
+    {
+      "name": "Krankenhaus Severinsklösterchen",
+      "near": "koeln_krankenhaus_severinsklosterchen"
+    },
+    {
+      "name": "Dr. med. Lucia Bachner - Hausarzt Köln Innenstadt",
+      "near": "koeln_dr_med_lucia_bachner_hausarzt_koln_innenstadt"
+    },
+    {
+      "name": "St. Elisabeth-Krankenhaus Köln-Hohenlind",
+      "near": "koeln_st_elisabeth_krankenhaus_koln_hohenlind"
+    },
+    {
+      "name": "Apotheke im Hauptbahnhof",
+      "near": "koeln_apotheke_im_hauptbahnhof"
+    },
+    {
+      "name": "Augustiner-Apotheke",
+      "near": "koeln_augustiner_apotheke"
+    },
+    {
+      "name": "Evangelisches Klinikum Köln Weyertal",
+      "near": "koeln_evangelisches_klinikum_koln_weyertal"
+    },
+    {
+      "name": "Uniklinik Köln",
+      "near": "koeln_uniklinik_koln"
+    },
+    {
+      "name": "St. Antonius Krankenhaus Köln",
+      "near": "koeln_st_antonius_krankenhaus_koln"
+    },
+    {
+      "name": "Cellitinnen-Krankenhaus St. Franziskus",
+      "near": "koeln_cellitinnen_krankenhaus_st_franziskus"
+    },
+    {
+      "name": "Schwanen Apotheke - Köln",
+      "near": "koeln_schwanen_apotheke_koln"
+    },
+    {
+      "name": "Evangelisches Krankenhaus Kalk gGmbH",
+      "near": "koeln_evangelisches_krankenhaus_kalk_ggmbh"
+    },
+    {
+      "name": "Gürzenich Apotheke",
+      "near": "koeln_holmes_place_koln_am_gurzenich"
+    },
+    {
+      "name": "Löwen Apotheke Köln (Deutz)",
+      "near": "koeln_lowen_apotheke_koln_deutz"
+    },
+    {
+      "name": "Hausärztliche Gemeinschaftspraxis Köln-Deutz",
+      "near": "koeln_hausarztliche_gemeinschaftspraxis_koln_deutz"
+    },
+    {
+      "name": "Kosmas Apotheke am Neumarkt - Köln",
+      "near": "koeln_kosmas_apotheke_am_neumarkt_koln"
+    },
+    {
+      "name": "PAN - Klinik am Neumarkt Köln",
+      "near": "koeln_pan_klinik_am_neumarkt_koln"
+    },
+    {
+      "name": "Praxis am Ring | Dr. med. Nino Ochana",
+      "near": "koeln_praxis_am_ring_dr_med_nino_ochana"
+    },
+    {
+      "name": "Kölner Dom",
+      "near": "koeln_petrusbrunnen_richard_voigtel_1870"
+    },
+    {
+      "name": "Hahnentor",
+      "near": "koeln_hahnentor"
+    },
+    {
+      "name": "Alter Messeturm",
+      "near": "koeln_alter_messeturm"
+    },
+    {
+      "name": "Rheinboulevard",
+      "near": "koeln_rheinboulevard"
+    },
+    {
+      "name": "Der Pegelturm",
+      "near": "koeln_der_pegelturm"
+    },
+    {
+      "name": "Cologne View",
+      "near": "koeln_kolntriangle_hochhaus"
+    },
+    {
+      "name": "Flora und Botanischer Garten",
+      "near": "koeln_flora_und_botanischer_garten"
+    },
+    {
+      "name": "TimeRide Köln",
+      "near": "koeln_alter_markt"
+    },
+    {
+      "name": "Frankenwerft Köln",
+      "near": "koeln_kd_anleger_koln"
+    },
+    {
+      "name": "Kölner Kulturkapelle",
+      "near": "koeln_kolner_kulturkapelle"
+    },
+    {
+      "name": "Freitreppe an Domplatte",
+      "near": "koeln_bahnhofsvorplatz_koln"
+    },
+    {
+      "name": "Kaskaden",
+      "near": "koeln_kaskaden"
+    },
+    {
+      "name": "Domfontäne (1973)",
+      "near": "koeln_petrusbrunnen_richard_voigtel_1870"
+    },
+    {
+      "name": "Die Maus (Statue)",
+      "near": "koeln_die_maus_statue"
+    },
+    {
+      "name": "Reiterdenkmal für König Friedrich Wilhelm III von Preußen",
+      "near": "koeln_reiterdenkmal_fur_konig_friedrich_wilhelm_iii_von_preussen"
+    },
+    {
+      "name": "Reiterstandbild Kaiser Wilhelm II.",
+      "near": "koeln_koln_anleger_6"
+    },
+    {
+      "name": "Kunsthalle Lindenthal",
+      "near": "koeln_kunsthalle_lindenthal"
+    },
+    {
+      "name": "Art Galerie 7",
+      "near": "koeln_art_galerie_7"
+    },
+    {
+      "name": "30works Galerie",
+      "near": "koeln_30works_galerie"
+    },
+    {
+      "name": "Iliev Galerie-ART IN COLOGNE",
+      "near": "koeln_iliev_galerie_art_in_cologne"
+    },
+    {
+      "name": "Galerie Karsten Greve",
+      "near": "koeln_galerie_karsten_greve"
+    },
+    {
+      "name": "Kölnischer Kunstverein",
+      "near": "koeln_kolnischer_kunstverein"
+    },
+    {
+      "name": "GALERIE ANJA KNOESS",
+      "near": "koeln_galerie_anja_knoess"
+    },
+    {
+      "name": "Van der Grinten Galerie",
+      "near": "koeln_willy_millowitsch_denkmal"
+    },
+    {
+      "name": "Galerie Boisserée",
+      "near": "koeln_galerie_karsten_greve"
+    },
+    {
+      "name": "LUMAS Galerie Köln",
+      "near": "koeln_7th_space_koln_virtual_reality_more"
+    },
+    {
+      "name": "Galerie Mensing",
+      "near": "koeln_schwanen_apotheke_koln"
+    },
+    {
+      "name": "Galerie Buchholz",
+      "near": "koeln_nationalsozialismus_dokumentationszentrum_der_stadt_koln_im_el_de_haus"
+    },
+    {
+      "name": "Dombauhütte Köln",
+      "near": "koeln_romisch_germanisches_museum"
+    },
+    {
+      "name": "Katholisches Stadtdekanat Köln",
+      "near": "koeln_taubenbrunnen_ewald_matare_1952"
+    },
+    {
+      "name": "Domschatzkammer",
+      "near": "koeln_freitreppe_an_domplatte"
+    },
+    {
+      "name": "CONTIPARK Tiefgarage Am Dom",
+      "near": "koeln_contipark_tiefgarage_am_dom"
+    },
+    {
+      "name": "Monastische Gemeinschaften von Jerusalem",
+      "near": "koeln_gross_st_martin"
+    },
+    {
+      "name": "City Hall Cologne",
+      "near": "koeln_alter_markt"
+    },
+    {
+      "name": "Kundenzentrum Innenstadt - Stadt Köln",
+      "near": "koeln_kundenzentrum_innenstadt_stadt_koln"
+    },
+    {
+      "name": "Rathaus",
+      "near": "koeln_alter_markt"
+    },
+    {
+      "name": "Bürgeramt Innenstadt - Stadt Köln",
+      "near": "koeln_burgeramt_innenstadt_stadt_koln"
+    },
+    {
+      "name": "Glockenspiel des Ratsturms",
+      "near": "koeln_alter_markt"
+    },
+    {
+      "name": "Spanischer Bau",
+      "near": "koeln_spanischer_bau"
+    },
+    {
+      "name": "Rathausplatz",
+      "near": "koeln_spanischer_bau"
+    },
+    {
+      "name": "Kölner Festungsmuseum",
+      "near": "koeln_kolner_festungsmuseum"
+    },
+    {
+      "name": "Fort X",
+      "near": "koeln_fort_x"
+    },
+    {
+      "name": "Severinstorburg",
+      "near": "koeln_severinstorburg"
+    },
+    {
+      "name": "Eigelsteintorburg",
+      "near": "koeln_eigelsteintorburg"
+    },
+    {
+      "name": "Herler Burg",
+      "near": "koeln_herler_burg"
+    },
+    {
+      "name": "Schlösser Brühl - UNESCO-Welterbe Schloss Augustusburg und Falkenlust",
+      "near": "koeln_schlosser_bruhl_unesco_welterbe_schloss_augustusburg_und_falkenlust"
+    },
+    {
+      "name": "Kapelle Burg Rath",
+      "near": "koeln_kapelle_burg_rath"
+    },
+    {
+      "name": "SchlossBild",
+      "near": "koeln_kd_anleger_koln"
+    },
+    {
+      "name": "Schlosspark Stammheim",
+      "near": "koeln_schlosspark_stammheim"
+    },
+    {
+      "name": "Tag der Forts",
+      "near": "koeln_tag_der_forts"
+    },
+    {
+      "name": "Weißhaus (Wasserschloss)",
+      "near": "koeln_weisshaus_wasserschloss"
+    },
+    {
+      "name": "Tor 28",
+      "near": "koeln_tor_28"
+    },
+    {
+      "name": "Lüchbaum",
+      "near": "koeln_luchbaum"
+    },
+    {
+      "name": "Türöffnung & Schlüsseldienst in Köln 24H | ProfiNotdienst",
+      "near": "koeln_turoffnung_schlusseldienst_in_koln_24h_profinotdienst"
+    },
+    {
+      "name": "Römisches Nordtor",
+      "near": "koeln_koln_dom_hauptbahnhof"
+    },
+    {
+      "name": "Zwischenwerk VIIIb",
+      "near": "koeln_kolner_festungsmuseum"
+    },
+    {
+      "name": "Fort V des ehemaligen inneren Festungsgürtels",
+      "near": "koeln_fort_v_des_ehemaligen_inneren_festungsgurtels"
+    },
+    {
+      "name": "Römische Stadtmauer",
+      "near": "koeln_romische_stadtmauer"
+    },
+    {
+      "name": "GPS Geodätischer Referenzpunkt",
+      "near": "koeln_aussichtspunkt_hohenzollernbrucke"
+    },
+    {
+      "name": "Aussichtspunkt Elefanten",
+      "near": "koeln_elefantenpark"
+    },
+    {
+      "name": "Aussichtspunkt Pulheimer See",
+      "near": "koeln_aussichtspunkt_pulheimer_see"
+    },
+    {
+      "name": "Kölner Baumwipfelpfad",
+      "near": "koeln_kolner_baumwipfelpfad"
+    },
+    {
+      "name": "Aussichtspunkt Pionierbecken 3",
+      "near": "koeln_aussichtspunkt_pionierbecken_3"
+    },
+    {
+      "name": "Aussichtspunkt Rheinhalbinsel",
+      "near": "koeln_aussichtspunkt_rheinhalbinsel"
+    },
+    {
+      "name": "Forstbotanischer Garten und Friedenswald",
+      "near": "koeln_forstbotanischer_garten_und_friedenswald"
+    },
+    {
+      "name": "Flora Köln - Palais im Park",
+      "near": "koeln_flora_koln_palais_im_park"
+    },
+    {
+      "name": "Subtropenhaus mit Kamelienschau",
+      "near": "koeln_subtropenhaus_mit_kamelienschau"
+    },
+    {
+      "name": "Volksgarten",
+      "near": "koeln_volksgarten"
+    },
+    {
+      "name": "Skulpturenpark Köln",
+      "near": "koeln_skulpturenpark_koln"
+    },
+    {
+      "name": "Mülheimer Stadtgarten",
+      "near": "koeln_mulheimer_stadtgarten"
+    },
+    {
+      "name": "Stadtgarten Kalk",
+      "near": "koeln_stadtgarten_kalk"
+    },
+    {
+      "name": "Parkplatz Flora Köln",
+      "near": "koeln_parkplatz_flora_koln"
+    },
+    {
+      "name": "Japanischer Garten im Rheinpark",
+      "near": "koeln_japanischer_garten_im_rheinpark"
+    },
+    {
+      "name": "Gartenlokal Dank Augusta",
+      "near": "koeln_flora_koln_palais_im_park"
+    },
+    {
+      "name": "Brunnengarten",
+      "near": "koeln_brunnengarten"
+    },
+    {
+      "name": "Mammutbaumwald",
+      "near": "koeln_mammutbaumwald"
+    },
+    {
+      "name": "Frauenrosenhof, Grüne Schule Flora",
+      "near": "koeln_frauenrosenhof_grune_schule_flora"
+    },
+    {
+      "name": "Widdersdorfer Felder",
+      "near": "koeln_widdersdorfer_felder"
+    },
+    {
+      "name": "Decksteiner Hügel",
+      "near": "koeln_decksteiner_hugel"
+    },
+    {
+      "name": "FORT WALL COLOGNE",
+      "near": "koeln_sudkurve_1_fc_koln_e_v"
+    },
+    {
+      "name": "Cycle WERX oHG",
+      "near": "koeln_cycle_werx_ohg"
+    },
+    {
+      "name": "CUBE Store Köln Süd",
+      "near": "koeln_cube_store_koln_sud"
+    },
+    {
+      "name": "Figurentheater Köln Puppentheater Puppenbühne nur Tournee Theater",
+      "near": "koeln_figurentheater_koln_puppentheater_puppenbuhne_nur_tournee_theater"
+    },
+    {
+      "name": "Theater am Dom",
+      "near": "koeln_theater_am_dom"
+    },
+    {
+      "name": "Schauspiel Köln",
+      "near": "koeln_schauspiel_koln"
+    },
+    {
+      "name": "Hänneschen Theater",
+      "near": "koeln_hanneschen_theater"
+    },
+    {
+      "name": "KKT. Kölner Künstler:innen Theater",
+      "near": "koeln_kkt_kolner_kunstler_innen_theater"
+    },
+    {
+      "name": "metropol Theater Koeln",
+      "near": "koeln_metropol_theater_koeln"
+    },
+    {
+      "name": "GLORIA",
+      "near": "koeln_kosmas_apotheke_am_neumarkt_koln"
+    },
+    {
+      "name": "Theater im Bauturm - Freies Schauspiel Köln e.V.",
+      "near": "koeln_theater_im_bauturm_freies_schauspiel_koln_e_v"
+    },
+    {
+      "name": "Studiobühne Köln",
+      "near": "koeln_studiobuhne_koln"
+    },
+    {
+      "name": "Theater in Köln | Spielplan",
+      "near": "koeln_theater_in_koln_spielplan"
+    },
+    {
+      "name": "Senftöpfchen-Theater",
+      "near": "koeln_senftopfchen_theater"
+    },
+    {
+      "name": "Horizont Theater",
+      "near": "koeln_horizont_theater"
+    },
+    {
+      "name": "nö theater",
+      "near": "koeln_no_theater"
+    },
+    {
+      "name": "Klüngelpütz",
+      "near": "koeln_willy_millowitsch_denkmal"
+    },
+    {
+      "name": "Theater Tiefrot",
+      "near": "koeln_theater_tiefrot"
+    },
+    {
+      "name": "LATIBUL Theaterhaus - Theater- & Zirkuspädagogisches Zentrum Köln",
+      "near": "koeln_latibul_theaterhaus_theater_zirkuspadagogisches_zentrum_koln"
+    },
+    {
+      "name": "COMEDIA Theater",
+      "near": "koeln_comedia_theater"
+    },
+    {
+      "name": "Kammeroper Köln",
+      "near": "koeln_kammeroper_koln"
+    },
+    {
+      "name": "Theatergemeinde KÖLN",
+      "near": "koeln_theatergemeinde_koln"
+    },
+    {
+      "name": "Rheinau-Sporthafen Köln",
+      "near": "koeln_rheinau_sporthafen_koln"
+    },
+    {
+      "name": "Kölner Autbord- und Motoryacht-Club e.V.",
+      "near": "koeln_kolner_autbord_und_motoryacht_club_e_v"
+    },
+    {
+      "name": "Rheinau- hafen",
+      "near": "koeln_rheinauhafen"
+    },
+    {
+      "name": "Musiker Hafen Köln (Proberaum&Tonstudio Vermietung)",
+      "near": "koeln_musiker_hafen_koln_proberaum_tonstudio_vermietung"
+    },
+    {
+      "name": "Marina Leva - Pianistin Sängerin Köln - Musik für Event, Messe, Präsentation - Geburtstag - Hochzeit",
+      "near": "koeln_marina_leva_pianistin_sangerin_koln_musik_fur_event_messe_prasentation_geb"
+    },
+    {
+      "name": "Quartier am Hafen Q18",
+      "near": "koeln_quartier_am_hafen_q18"
+    },
+    {
+      "name": "Wildgehege Brück",
+      "near": "koeln_wildgehege_bruck"
+    },
+    {
+      "name": "Aquarium",
+      "near": "koeln_kolner_zoo"
+    },
+    {
+      "name": "Tierzeit",
+      "near": "koeln_rolfs_streichelzoo"
+    },
+    {
+      "name": "Sailcademy - Motorbootverleih Köln / Segeln in Valencia",
+      "near": "koeln_rheinau_sporthafen_koln"
+    },
+    {
+      "name": "STADTRUNDFAHRT.com | Köln",
+      "near": "koeln_zwei_pferdekopfe_am_turm_des_richmodis_hauses"
+    },
+    {
+      "name": "Hop on Hop off Sightseeing",
+      "near": "koeln_hop_on_hop_off_sightseeing"
+    },
+    {
+      "name": "Bootsverleih am Kahnweiher",
+      "near": "koeln_bootsverleih_am_kahnweiher"
+    },
+    {
+      "name": "Liebe Deine Stadt - Touren",
+      "near": "koeln_liebe_deine_stadt_touren"
+    },
+    {
+      "name": "ROXYBOOT Köln | Dein Bootscharter",
+      "near": "koeln_roxyboot_koln_dein_bootscharter"
+    },
+    {
+      "name": "Kahnstation Decksteiner Weiher - Bootsverleih",
+      "near": "koeln_kahnstation_decksteiner_weiher_bootsverleih"
+    },
+    {
+      "name": "HVT Boating - everything is better on water",
+      "near": "koeln_hvt_boating_everything_is_better_on_water"
+    },
+    {
+      "name": "Ming Rikscha Köln",
+      "near": "koeln_ming_rikscha_koln"
+    },
+    {
+      "name": "Erlebnistouren Köln & Region – Tour-Agentur",
+      "near": "koeln_schneider_radsport_koln_fahrradwerkstatt"
+    },
+    {
+      "name": "Fork & Walk - Food Tours Cologne",
+      "near": "koeln_taubenbrunnen_ewald_matare_1952"
+    },
+    {
+      "name": "The Walkings - Free Tour Cologne",
+      "near": "koeln_bahnhofsvorplatz_koln"
+    },
+    {
+      "name": "CityTour",
+      "near": "koeln_taubenbrunnen_ewald_matare_1952"
+    },
+    {
+      "name": "Kölner Kompass - Brauhaustouren",
+      "near": "koeln_taubenbrunnen_ewald_matare_1952"
+    },
+    {
+      "name": "Kölngeflüster - Stadtführungen und Brauhaustouren für Business & Privat",
+      "near": "koeln_kolngefluster_stadtfuhrungen_und_brauhaustouren_fur_business_privat"
+    },
+    {
+      "name": "Kiosk & Bootsvermietung Kalscheurer Weiher",
+      "near": "koeln_kiosk_bootsvermietung_kalscheurer_weiher"
+    },
+    {
+      "name": "Nautigo Bootsschule & Boots-/Jetskiverleih Köln",
+      "near": "koeln_nautigo_bootsschule_boots_jetskiverleih_koln"
+    },
+    {
+      "name": "Rikscha 4U",
+      "near": "koeln_rikscha_4u"
+    },
+    {
+      "name": "Köln-Düsseldorfer Deutsche Rheinschiffahrt GmbH",
+      "near": "koeln_kd_anleger_koln"
+    },
+    {
+      "name": "Kölner Schatzkästchen Mehr als Geschenke",
+      "near": "koeln_kolner_schatzkastchen_mehr_als_geschenke"
+    },
+    {
+      "name": "Konditorei Klüppelberg (Törtchen)",
+      "near": "koeln_konditorei_kluppelberg_tortchen"
+    },
+    {
+      "name": "SCHEE Köln",
+      "near": "koeln_schee_koln"
+    },
+    {
+      "name": "Uniqz® personalisierte Geschenke",
+      "near": "koeln_uniqz_personalisierte_geschenke"
+    },
+    {
+      "name": "Adventsome",
+      "near": "koeln_theater_im_bauturm_freies_schauspiel_koln_e_v"
+    },
+    {
+      "name": "Apostelnmarkt",
+      "near": "koeln_basilika_st_aposteln"
+    },
+    {
+      "name": "Wochenmarkt Sudermanplatz",
+      "near": "koeln_wochenmarkt_sudermanplatz"
+    },
+    {
+      "name": "Bio-Wochenmarkt - Südstadt",
+      "near": "koeln_bio_wochenmarkt_sudstadt"
+    },
+    {
+      "name": "Ökomarkt Agnesviertel - Bio Wochenmarkt",
+      "near": "koeln_okomarkt_agnesviertel_bio_wochenmarkt"
+    },
+    {
+      "name": "Wochenmarkt im Stadtwald",
+      "near": "koeln_wochenmarkt_im_stadtwald"
+    },
+    {
+      "name": "Wochenmarkt Klettenberg",
+      "near": "koeln_wochenmarkt_klettenberg"
+    },
+    {
+      "name": "Marktschwärmer Köln Südstadt",
+      "near": "koeln_marktschwarmer_koln_sudstadt"
+    },
+    {
+      "name": "Wochenmarkt Köln Ehrenfeld - Neptunplatz",
+      "near": "koeln_wochenmarkt_koln_ehrenfeld_neptunplatz"
+    },
+    {
+      "name": "Wochenmarkt Auerbachplatz",
+      "near": "koeln_wochenmarkt_auerbachplatz"
+    },
+    {
+      "name": "Wochenmarkt Köln Buchforst",
+      "near": "koeln_wochenmarkt_koln_buchforst"
+    },
+    {
+      "name": "Wochenmarkt Köln Niehl",
+      "near": "koeln_wochenmarkt_koln_niehl"
+    },
+    {
+      "name": "Wochenmarkt Bickendorf",
+      "near": "koeln_wochenmarkt_bickendorf"
+    },
+    {
+      "name": "Wochenmarkt Köln-Höhenhaus",
+      "near": "koeln_wochenmarkt_koln_hohenhaus"
+    },
+    {
+      "name": "Ökomarkt Innenstadt",
+      "near": "koeln_hahnentor"
+    },
+    {
+      "name": "Wochenmarkt Köln-Longerich – Gartenstadt Nord",
+      "near": "koeln_wochenmarkt_koln_longerich_gartenstadt_nord"
+    },
+    {
+      "name": "Wochenmarkt Alt-Brück",
+      "near": "koeln_wochenmarkt_alt_bruck"
+    },
+    {
+      "name": "Wochenmarkt Köln-Poll",
+      "near": "koeln_wochenmarkt_koln_poll"
+    },
+    {
+      "name": "Wochenmarkt, Mülheim Berliner Strasse",
+      "near": "koeln_wochenmarkt_mulheim_berliner_strasse"
+    },
+    {
+      "name": "Wochenmarkt Kalk",
+      "near": "koeln_wochenmarkt_kalk"
+    }
+  ],
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [
+      "koeln_koln_hauptbahnhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_koln_dom_hauptbahnhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_heumarkt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_hansaring: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_breslauer_platz_hauptbahnhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_severinstrasse: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_deutz_lanxess_arena: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_koln_sud: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_koln_nippes_s_bahn: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_bahnhofsvorplatz_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_koln_messe_deutz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_messe_deutz_bahnhof_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_trimbornstr: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_breslauer_platz_hbf_bussteig_c: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_contipark_tiefgarage_hauptbahnhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_ehrenfeld: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kd_anleger_nr_5: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kd_anleger_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kd_anleger_nr_2: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kd_anleger_nr_1: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_strolch_personenfahre_anlegesteg_9_koln_dom_seite_weisbarth_fahrgastschiff: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_koln_anleger_6: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_schiffsanlegestelle_rhein_river_company: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kd_anleger_3: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_koln_anleger_7: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_koln_feenstra_rijn_lijn_anleger: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_viking_river_cruises_anleger_deutz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolntourist_anleger_13_bastei: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_schiffsanlegestelle_deutzer_vorhafen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rheincargo_5_landebrucke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rhein_cargo_liegeplatz_adenauer_9: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_bastei_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_museum_ludwig: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_schokoladenmuseum_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rautenstrauch_joest_museum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolumba: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_das_museum_des_schmerzes_und_der_liebe: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_museum_fur_angewandte_kunst_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kollwitz_museum_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_farina_duftmuseum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_deutsches_sport_olympia_museum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_museum_fur_ostasiatische_kunst: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_supercandy_pop_up_museum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_romisch_germanisches_museum_im_belgischen_haus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_nationalsozialismus_dokumentationszentrum_der_stadt_koln_im_el_de_haus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_serienkiller_die_true_crime_ausstellung: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_romisch_germanisches_museum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_artothek_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_alter_markt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_basilika_st_maria_im_kapitol: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_st_peter: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wallfahrtskirche_st_maria_in_der_kupfergasse: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_st_pantaleon: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_st_maria_in_lyskirchen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kapelle_hll_drei_konige: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_gross_st_martin: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_minoritenkirche_st_maria_empfangnis: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_st_maria_himmelfahrt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_antoniterkirche: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_marktkapelle_st_maria_himmelfahrt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_basilika_st_aposteln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kalk_kapelle: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_dominikanerkirche_st_andreas: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kapelle_st_maria_und_maternus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kapelle_st_maria_ad_ortum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_basilika_st_ursula: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_generalvikariat_erzbistum_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_heinzelmannchenbrunnen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_karl_berbuer_brunnen_bonifatius_stirnberg_1987: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_dionysos_brunnen_karl_burgeff_1973: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_ostermannbrunnen_willi_klein_1938: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_theo_burauen_brunnen_klaus_albert_1971: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_romerbrunnen_franz_brantzky_1914_15: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_willy_millowitsch_denkmal: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_petrusbrunnen_richard_voigtel_1870: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_dumont_brunnen_koln_theo_heiermann_1986: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_brunnen_marsplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_brunnen_kaiser_wilhelm_ring_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_taubenbrunnen_ewald_matare_1952: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_brunnentempel_koln_fritz_encke_ca_1920: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_bierbrunnen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_edith_stein_denkmal: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_der_strand_im_rheinpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_niehler_strand: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rheingarten_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rheinpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wildpark_dunnwald: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_stadtpark_in_deutz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_strand_am_von_diergardt_see: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_theodor_heuss_park: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_max_dietlein_park: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_pionierpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_humboldtpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_klingelputzpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_belvedere_ausblick: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_zundorfer_groov: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kalscheurer_weiher: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_lohsepark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_stadtgarten: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_von_stein_park: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_blumenhof_im_rheinpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_sonnenscheinetage_die_hochste_beachbar_kolns: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_im_leuchtturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolntriangle_hochhaus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_helios_leuchtturm_ehrenfeld: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_malakoffturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_der_leuchtturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_alter_messeturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_blaue_funken_turm_sachsenturm_eventlocation: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_blau_gold_turm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_helenenturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_zwei_pferdekopfe_am_turm_des_richmodis_hauses: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_turm_der_prinzen_garde: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kunibertsturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolnturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_belvedere_blickfang: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_belvedere_felderblick: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_bismarckturm_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_aussichtsturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_cologne_sportspark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_stadionbad_koln_mungersdorf: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_minigolf_eisstockschiessen_koln_mungersdorf: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolngolf: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_golfcity_koln_pulheim: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_agrippabad: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_lentpark_hallenbad: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_v_golf_sankt_urbanus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_3d_schwarzlicht_minigolf_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kmc_e_v_minigolfanlage_am_fernsehturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_golf_house_filiale_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_fun_sport_arena_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_schwimmbad_rhein_sommergarten_gbr: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_sportcity_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_holmes_place_koln_am_gurzenich: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_fuhlinger_see_sport_und_erholungsanlage: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_golfclub_wahn: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_marienburger_golf_club_e_v: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_aussichtspunkt_hohenzollernbrucke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_aussichtspunkt_pionierbecken_2: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_panoramabanke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rhine_river_viewpoint_rheinpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_city_panorama: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_mission_360_und_3d_panorama_tours_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_oper_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolnpfad_etappe_01: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolnpfad_etappe_02: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolnpfad_etappe_06: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolnpfad_etappe_07: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_waldlehrpfad_im_stadtwald: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_longericher_waldchen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_konigsforst: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolnpfad_etappe_05: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolnpfad_etappe_04: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolnpfad_etappe_08: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolnpfad_etappe_03: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_dellbrucker_heide: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wandern_mit_diabetes: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_erker_muhlen_weiher: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_flehbach_sandfang: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_erholungsgebiet_dunnwald: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_harry_ufer: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_forstbotanischergarten_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_fusspfad_frankenforstbach: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rheinradweg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_adfc_koln_e_v: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_radtouren_das_radreise_magazin: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_schaltwerk_koeln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_radfieber_fahrrad_meisterwerkstatt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_schneider_radsport_koln_fahrradwerkstatt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_classica_colonia_fahrrad_und_roller_reparatur_werkstatt_handel_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_b_o_c_bike_outdoor_company_gmbh_co_kg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_geobikes_gmbh: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_radhaus_k_cube_bikes_im_kolner_zentrum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_stadtrad_werkstatt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rad_garage_koln_sulz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_bikestation_koln_sulz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_bobikes_gmbh_fahrradgeschaft_fahrradwerkstatt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_colonia_aktiv_bike_tours: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_fahrrad_fairteiler_finkenbike_koln_vogelsang: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_radfieber_fahrradgeschaft: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rose_bikes_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_velokuche_werkstatt_verkauf: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_adrenalinpark_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_7th_space_koln_virtual_reality_more: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_lindenthaler_tierpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rolfs_streichelzoo: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolner_zoo: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_urwaldhaus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_elefantenpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_erlebnisbauernhof_gertrudenhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_erdmannchen_co: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_bero_s_kinderwelten_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_pavianfelsen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_skatepark_unter_der_zoobrucke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_souvenir_point_luggage_storage: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_linke_souvenirs: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_sumerica_socks_souvenirs_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_am_malzbuchel_supermarkt_kiosk: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolsche_geschenkartikel_elke_kruse: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_4koln_gmbh_co_kg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_pylones: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolnknipse_schone_fotos_im_quadrat: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_postkartenladen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_cellitinnen_krankenhaus_st_marien: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_eduardus_krankenhaus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_krankenhaus_severinsklosterchen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_dr_med_lucia_bachner_hausarzt_koln_innenstadt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_st_elisabeth_krankenhaus_koln_hohenlind: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_apotheke_im_hauptbahnhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_augustiner_apotheke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_evangelisches_klinikum_koln_weyertal: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_uniklinik_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_st_antonius_krankenhaus_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_cellitinnen_krankenhaus_st_franziskus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_schwanen_apotheke_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_evangelisches_krankenhaus_kalk_ggmbh: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_lowen_apotheke_koln_deutz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_hausarztliche_gemeinschaftspraxis_koln_deutz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_pan_klinik_am_neumarkt_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kosmas_apotheke_am_neumarkt_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_praxis_am_ring_dr_med_nino_ochana: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rheinboulevard: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_der_pegelturm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rheinauhafen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_flora_und_botanischer_garten: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolner_kulturkapelle: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_freitreppe_an_domplatte: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kaskaden: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_hahnentor: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_die_maus_statue: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_reiterdenkmal_fur_konig_friedrich_wilhelm_iii_von_preussen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kunsthalle_lindenthal: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_art_galerie_7: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_iliev_galerie_art_in_cologne: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_galerie_karsten_greve: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolnischer_kunstverein: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_30works_galerie: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_galerie_anja_knoess: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_contipark_tiefgarage_am_dom: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kundenzentrum_innenstadt_stadt_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_burgeramt_innenstadt_stadt_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_spanischer_bau: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolner_festungsmuseum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_fort_x: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_severinstorburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_eigelsteintorburg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_herler_burg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_schlosser_bruhl_unesco_welterbe_schloss_augustusburg_und_falkenlust: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kapelle_burg_rath: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_schlosspark_stammheim: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_tag_der_forts: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_weisshaus_wasserschloss: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_tor_28: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_luchbaum: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_turoffnung_schlusseldienst_in_koln_24h_profinotdienst: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_fort_v_des_ehemaligen_inneren_festungsgurtels: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_romische_stadtmauer: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_aussichtspunkt_pulheimer_see: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolner_baumwipfelpfad: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_aussichtspunkt_pionierbecken_3: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_aussichtspunkt_rheinhalbinsel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_forstbotanischer_garten_und_friedenswald: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_flora_koln_palais_im_park: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_subtropenhaus_mit_kamelienschau: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_volksgarten: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_mulheimer_stadtgarten: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_innerer_grungurtel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_skulpturenpark_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_stadtgarten_kalk: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_japanischer_garten_im_rheinpark: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_parkplatz_flora_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_brunnengarten: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_mammutbaumwald: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_frauenrosenhof_grune_schule_flora: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_decksteiner_hugel: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_13_bensberger_schlossweg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_widdersdorfer_felder: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_cycle_werx_ohg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_cube_store_koln_sud: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_figurentheater_koln_puppentheater_puppenbuhne_nur_tournee_theater: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_theater_am_dom: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_schauspiel_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_hanneschen_theater: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kkt_kolner_kunstler_innen_theater: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_metropol_theater_koeln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_theater_im_bauturm_freies_schauspiel_koln_e_v: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_studiobuhne_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_theater_in_koln_spielplan: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_senftopfchen_theater: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_horizont_theater: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_no_theater: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_theater_tiefrot: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_latibul_theaterhaus_theater_zirkuspadagogisches_zentrum_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_comedia_theater: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kammeroper_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_theatergemeinde_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rheinau_sporthafen_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolner_autbord_und_motoryacht_club_e_v: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rheinau_hafen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_musiker_hafen_koln_proberaum_tonstudio_vermietung: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_marina_leva_pianistin_sangerin_koln_musik_fur_event_messe_prasentation_geb: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_quartier_am_hafen_q18: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wildgehege_leidenhausen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wildgehege_bruck: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_ameisenbaren: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_hop_on_hop_off_sightseeing: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_liebe_deine_stadt_touren: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_bootsverleih_am_kahnweiher: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_roxyboot_koln_dein_bootscharter: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_hvt_boating_everything_is_better_on_water: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_ming_rikscha_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kahnstation_decksteiner_weiher_bootsverleih: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolngefluster_stadtfuhrungen_und_brauhaustouren_fur_business_privat: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kiosk_bootsvermietung_kalscheurer_weiher: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_nautigo_bootsschule_boots_jetskiverleih_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_rikscha_4u: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_kolner_schatzkastchen_mehr_als_geschenke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_konditorei_kluppelberg_tortchen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_schee_koln: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_uniqz_personalisierte_geschenke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_sudermanplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_bio_wochenmarkt_sudstadt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_im_stadtwald: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_okomarkt_agnesviertel_bio_wochenmarkt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_klettenberg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_marktschwarmer_koln_sudstadt: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_koln_ehrenfeld_neptunplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_auerbachplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_koln_buchforst: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_koln_niehl: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_bickendorf: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wiener_platz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_koln_hohenhaus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_koln_longerich_gartenstadt_nord: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_alt_bruck: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_koln_poll: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_mulheim_berliner_strasse: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_wochenmarkt_kalk: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_bf_deutz_messeplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_hiroshima_nagasaki_park: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "koeln_trude_herr_park: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "centers almost identical: koeln_rheinauhafen & koeln_rheinau_hafen",
+      "koeln_koln_hauptbahnhof: general_info/Erzählung too short (0<80)",
+      "koeln_koln_hauptbahnhof: deep_data_pool thin (1<4)",
+      "koeln_koln_dom_hauptbahnhof: general_info/Erzählung too short (0<80)",
+      "koeln_koln_dom_hauptbahnhof: deep_data_pool thin (1<4)",
+      "koeln_heumarkt: general_info/Erzählung too short (0<80)",
+      "koeln_heumarkt: deep_data_pool thin (1<4)",
+      "koeln_hansaring: general_info/Erzählung too short (0<80)",
+      "koeln_hansaring: deep_data_pool thin (1<4)",
+      "koeln_breslauer_platz_hauptbahnhof: general_info/Erzählung too short (0<80)",
+      "koeln_breslauer_platz_hauptbahnhof: deep_data_pool thin (1<4)",
+      "koeln_severinstrasse: general_info/Erzählung too short (0<80)",
+      "koeln_severinstrasse: deep_data_pool thin (1<4)",
+      "koeln_deutz_lanxess_arena: general_info/Erzählung too short (0<80)",
+      "koeln_deutz_lanxess_arena: deep_data_pool thin (1<4)",
+      "koeln_koln_sud: general_info/Erzählung too short (0<80)",
+      "koeln_koln_sud: deep_data_pool thin (1<4)",
+      "koeln_koln_nippes_s_bahn: general_info/Erzählung too short (0<80)",
+      "koeln_koln_nippes_s_bahn: deep_data_pool thin (1<4)",
+      "koeln_bahnhofsvorplatz_koln: general_info/Erzählung too short (0<80)",
+      "koeln_bahnhofsvorplatz_koln: deep_data_pool thin (1<4)",
+      "koeln_koln_messe_deutz: general_info/Erzählung too short (0<80)",
+      "koeln_koln_messe_deutz: deep_data_pool thin (1<4)",
+      "koeln_messe_deutz_bahnhof_koln: general_info/Erzählung too short (0<80)",
+      "koeln_messe_deutz_bahnhof_koln: deep_data_pool thin (1<4)",
+      "koeln_trimbornstr: general_info/Erzählung too short (0<80)",
+      "koeln_trimbornstr: deep_data_pool thin (1<4)",
+      "koeln_breslauer_platz_hbf_bussteig_c: general_info/Erzählung too short (0<80)",
+      "koeln_breslauer_platz_hbf_bussteig_c: deep_data_pool thin (1<4)",
+      "koeln_contipark_tiefgarage_hauptbahnhof: general_info/Erzählung too short (0<80)",
+      "koeln_contipark_tiefgarage_hauptbahnhof: deep_data_pool thin (1<4)",
+      "koeln_ehrenfeld: general_info/Erzählung too short (0<80)",
+      "koeln_ehrenfeld: deep_data_pool thin (1<4)",
+      "koeln_kd_anleger_nr_5: general_info/Erzählung too short (0<80)",
+      "koeln_kd_anleger_nr_5: deep_data_pool thin (1<4)",
+      "koeln_kd_anleger_koln: general_info/Erzählung too short (0<80)",
+      "koeln_kd_anleger_koln: deep_data_pool thin (1<4)",
+      "koeln_kd_anleger_nr_2: general_info/Erzählung too short (0<80)",
+      "koeln_kd_anleger_nr_2: deep_data_pool thin (1<4)",
+      "koeln_kd_anleger_nr_1: general_info/Erzählung too short (0<80)",
+      "koeln_kd_anleger_nr_1: deep_data_pool thin (1<4)",
+      "koeln_strolch_personenfahre_anlegesteg_9_koln_dom_seite_weisbarth_fahrgastschiff: general_info/Erzählung too short (0<80)",
+      "koeln_strolch_personenfahre_anlegesteg_9_koln_dom_seite_weisbarth_fahrgastschiff: deep_data_pool thin (1<4)",
+      "koeln_koln_anleger_6: general_info/Erzählung too short (0<80)",
+      "koeln_koln_anleger_6: deep_data_pool thin (1<4)",
+      "koeln_schiffsanlegestelle_rhein_river_company: general_info/Erzählung too short (0<80)",
+      "koeln_schiffsanlegestelle_rhein_river_company: deep_data_pool thin (1<4)",
+      "koeln_kd_anleger_3: general_info/Erzählung too short (0<80)",
+      "koeln_kd_anleger_3: deep_data_pool thin (1<4)",
+      "koeln_koln_anleger_7: general_info/Erzählung too short (0<80)",
+      "koeln_koln_anleger_7: deep_data_pool thin (1<4)",
+      "koeln_koln_feenstra_rijn_lijn_anleger: general_info/Erzählung too short (0<80)",
+      "koeln_koln_feenstra_rijn_lijn_anleger: deep_data_pool thin (1<4)",
+      "koeln_viking_river_cruises_anleger_deutz: general_info/Erzählung too short (0<80)",
+      "koeln_viking_river_cruises_anleger_deutz: deep_data_pool thin (1<4)",
+      "koeln_kolntourist_anleger_13_bastei: general_info/Erzählung too short (0<80)",
+      "koeln_kolntourist_anleger_13_bastei: deep_data_pool thin (1<4)",
+      "koeln_schiffsanlegestelle_deutzer_vorhafen: general_info/Erzählung too short (0<80)",
+      "koeln_schiffsanlegestelle_deutzer_vorhafen: deep_data_pool thin (1<4)",
+      "koeln_rheincargo_5_landebrucke: general_info/Erzählung too short (0<80)",
+      "koeln_rheincargo_5_landebrucke: deep_data_pool thin (1<4)",
+      "koeln_rhein_cargo_liegeplatz_adenauer_9: general_info/Erzählung too short (0<80)",
+      "koeln_rhein_cargo_liegeplatz_adenauer_9: deep_data_pool thin (1<4)",
+      "koeln_bastei_koln: general_info/Erzählung too short (0<80)",
+      "koeln_bastei_koln: deep_data_pool thin (1<4)",
+      "koeln_museum_ludwig: general_info/Erzählung too short (0<80)",
+      "koeln_museum_ludwig: deep_data_pool thin (2<4)",
+      "koeln_schokoladenmuseum_koln: general_info/Erzählung too short (0<80)",
+      "koeln_schokoladenmuseum_koln: deep_data_pool thin (2<4)",
+      "koeln_rautenstrauch_joest_museum: general_info/Erzählung too short (0<80)",
+      "koeln_rautenstrauch_joest_museum: deep_data_pool thin (2<4)",
+      "koeln_kolumba: general_info/Erzählung too short (0<80)",
+      "koeln_kolumba: deep_data_pool thin (2<4)",
+      "koeln_das_museum_des_schmerzes_und_der_liebe: general_info/Erzählung too short (0<80)",
+      "koeln_das_museum_des_schmerzes_und_der_liebe: deep_data_pool thin (2<4)",
+      "koeln_museum_fur_angewandte_kunst_koln: general_info/Erzählung too short (0<80)",
+      "koeln_museum_fur_angewandte_kunst_koln: deep_data_pool thin (2<4)",
+      "koeln_kollwitz_museum_koln: general_info/Erzählung too short (0<80)",
+      "koeln_kollwitz_museum_koln: deep_data_pool thin (2<4)",
+      "koeln_farina_duftmuseum: general_info/Erzählung too short (0<80)",
+      "koeln_farina_duftmuseum: deep_data_pool thin (2<4)",
+      "koeln_deutsches_sport_olympia_museum: general_info/Erzählung too short (0<80)",
+      "koeln_deutsches_sport_olympia_museum: deep_data_pool thin (2<4)",
+      "koeln_museum_fur_ostasiatische_kunst: general_info/Erzählung too short (0<80)",
+      "koeln_museum_fur_ostasiatische_kunst: deep_data_pool thin (2<4)",
+      "koeln_supercandy_pop_up_museum: general_info/Erzählung too short (0<80)",
+      "koeln_supercandy_pop_up_museum: deep_data_pool thin (2<4)",
+      "koeln_romisch_germanisches_museum_im_belgischen_haus: general_info/Erzählung too short (0<80)",
+      "koeln_romisch_germanisches_museum_im_belgischen_haus: deep_data_pool thin (2<4)",
+      "koeln_nationalsozialismus_dokumentationszentrum_der_stadt_koln_im_el_de_haus: general_info/Erzählung too short (0<80)",
+      "koeln_nationalsozialismus_dokumentationszentrum_der_stadt_koln_im_el_de_haus: deep_data_pool thin (2<4)",
+      "koeln_serienkiller_die_true_crime_ausstellung: general_info/Erzählung too short (0<80)",
+      "koeln_serienkiller_die_true_crime_ausstellung: deep_data_pool thin (2<4)",
+      "koeln_romisch_germanisches_museum: general_info/Erzählung too short (0<80)",
+      "koeln_romisch_germanisches_museum: deep_data_pool thin (2<4)",
+      "koeln_artothek_koln: general_info/Erzählung too short (0<80)",
+      "koeln_artothek_koln: deep_data_pool thin (2<4)",
+      "koeln_alter_markt: general_info/Erzählung too short (0<80)",
+      "koeln_alter_markt: deep_data_pool thin (2<4)",
+      "koeln_basilika_st_maria_im_kapitol: general_info/Erzählung too short (0<80)",
+      "koeln_basilika_st_maria_im_kapitol: deep_data_pool thin (2<4)",
+      "koeln_st_peter: general_info/Erzählung too short (0<80)",
+      "koeln_st_peter: deep_data_pool thin (2<4)",
+      "koeln_wallfahrtskirche_st_maria_in_der_kupfergasse: general_info/Erzählung too short (0<80)",
+      "koeln_wallfahrtskirche_st_maria_in_der_kupfergasse: deep_data_pool thin (2<4)",
+      "koeln_st_pantaleon: general_info/Erzählung too short (0<80)",
+      "koeln_st_pantaleon: deep_data_pool thin (2<4)",
+      "koeln_st_maria_in_lyskirchen: general_info/Erzählung too short (0<80)",
+      "koeln_st_maria_in_lyskirchen: deep_data_pool thin (2<4)",
+      "koeln_kapelle_hll_drei_konige: general_info/Erzählung too short (0<80)",
+      "koeln_kapelle_hll_drei_konige: deep_data_pool thin (2<4)",
+      "koeln_gross_st_martin: general_info/Erzählung too short (0<80)",
+      "koeln_gross_st_martin: deep_data_pool thin (2<4)",
+      "koeln_minoritenkirche_st_maria_empfangnis: general_info/Erzählung too short (0<80)",
+      "koeln_minoritenkirche_st_maria_empfangnis: deep_data_pool thin (2<4)",
+      "koeln_st_maria_himmelfahrt: general_info/Erzählung too short (0<80)",
+      "koeln_st_maria_himmelfahrt: deep_data_pool thin (2<4)",
+      "koeln_antoniterkirche: general_info/Erzählung too short (0<80)",
+      "koeln_antoniterkirche: deep_data_pool thin (2<4)",
+      "koeln_marktkapelle_st_maria_himmelfahrt: general_info/Erzählung too short (0<80)",
+      "koeln_marktkapelle_st_maria_himmelfahrt: deep_data_pool thin (2<4)",
+      "koeln_basilika_st_aposteln: general_info/Erzählung too short (0<80)",
+      "koeln_basilika_st_aposteln: deep_data_pool thin (2<4)",
+      "koeln_kalk_kapelle: general_info/Erzählung too short (0<80)",
+      "koeln_kalk_kapelle: deep_data_pool thin (2<4)",
+      "koeln_dominikanerkirche_st_andreas: general_info/Erzählung too short (0<80)",
+      "koeln_dominikanerkirche_st_andreas: deep_data_pool thin (2<4)",
+      "koeln_kapelle_st_maria_und_maternus: general_info/Erzählung too short (0<80)",
+      "koeln_kapelle_st_maria_und_maternus: deep_data_pool thin (2<4)",
+      "koeln_kapelle_st_maria_ad_ortum: general_info/Erzählung too short (0<80)",
+      "koeln_kapelle_st_maria_ad_ortum: deep_data_pool thin (2<4)",
+      "koeln_basilika_st_ursula: general_info/Erzählung too short (0<80)",
+      "koeln_basilika_st_ursula: deep_data_pool thin (2<4)",
+      "koeln_generalvikariat_erzbistum_koln: general_info/Erzählung too short (0<80)",
+      "koeln_generalvikariat_erzbistum_koln: deep_data_pool thin (2<4)",
+      "koeln_heinzelmannchenbrunnen: general_info/Erzählung too short (0<80)",
+      "koeln_heinzelmannchenbrunnen: deep_data_pool thin (1<4)",
+      "koeln_karl_berbuer_brunnen_bonifatius_stirnberg_1987: general_info/Erzählung too short (0<80)",
+      "koeln_karl_berbuer_brunnen_bonifatius_stirnberg_1987: deep_data_pool thin (1<4)",
+      "koeln_dionysos_brunnen_karl_burgeff_1973: general_info/Erzählung too short (0<80)",
+      "koeln_dionysos_brunnen_karl_burgeff_1973: deep_data_pool thin (1<4)",
+      "koeln_ostermannbrunnen_willi_klein_1938: general_info/Erzählung too short (0<80)",
+      "koeln_ostermannbrunnen_willi_klein_1938: deep_data_pool thin (1<4)",
+      "koeln_theo_burauen_brunnen_klaus_albert_1971: general_info/Erzählung too short (0<80)",
+      "koeln_theo_burauen_brunnen_klaus_albert_1971: deep_data_pool thin (1<4)",
+      "koeln_romerbrunnen_franz_brantzky_1914_15: general_info/Erzählung too short (0<80)",
+      "koeln_romerbrunnen_franz_brantzky_1914_15: deep_data_pool thin (1<4)",
+      "koeln_willy_millowitsch_denkmal: general_info/Erzählung too short (0<80)",
+      "koeln_willy_millowitsch_denkmal: deep_data_pool thin (1<4)",
+      "koeln_petrusbrunnen_richard_voigtel_1870: general_info/Erzählung too short (0<80)",
+      "koeln_petrusbrunnen_richard_voigtel_1870: deep_data_pool thin (1<4)",
+      "koeln_dumont_brunnen_koln_theo_heiermann_1986: general_info/Erzählung too short (0<80)",
+      "koeln_dumont_brunnen_koln_theo_heiermann_1986: deep_data_pool thin (1<4)",
+      "koeln_brunnen_marsplatz: general_info/Erzählung too short (0<80)",
+      "koeln_brunnen_marsplatz: deep_data_pool thin (1<4)",
+      "koeln_brunnen_kaiser_wilhelm_ring_koln: general_info/Erzählung too short (0<80)",
+      "koeln_brunnen_kaiser_wilhelm_ring_koln: deep_data_pool thin (1<4)",
+      "koeln_taubenbrunnen_ewald_matare_1952: general_info/Erzählung too short (0<80)",
+      "koeln_taubenbrunnen_ewald_matare_1952: deep_data_pool thin (1<4)",
+      "koeln_brunnentempel_koln_fritz_encke_ca_1920: general_info/Erzählung too short (0<80)",
+      "koeln_brunnentempel_koln_fritz_encke_ca_1920: deep_data_pool thin (1<4)",
+      "koeln_bierbrunnen: general_info/Erzählung too short (0<80)",
+      "koeln_bierbrunnen: deep_data_pool thin (1<4)",
+      "koeln_edith_stein_denkmal: general_info/Erzählung too short (0<80)",
+      "koeln_edith_stein_denkmal: deep_data_pool thin (1<4)",
+      "koeln_der_strand_im_rheinpark: general_info/Erzählung too short (0<80)",
+      "koeln_der_strand_im_rheinpark: deep_data_pool thin (1<4)",
+      "koeln_niehler_strand: general_info/Erzählung too short (0<80)",
+      "koeln_niehler_strand: deep_data_pool thin (1<4)",
+      "koeln_rheingarten_koln: general_info/Erzählung too short (0<80)",
+      "koeln_rheingarten_koln: deep_data_pool thin (1<4)",
+      "koeln_rheinpark: general_info/Erzählung too short (0<80)",
+      "koeln_rheinpark: deep_data_pool thin (1<4)",
+      "koeln_stadtpark_in_deutz: general_info/Erzählung too short (0<80)",
+      "koeln_stadtpark_in_deutz: deep_data_pool thin (1<4)",
+      "koeln_strand_am_von_diergardt_see: general_info/Erzählung too short (0<80)",
+      "koeln_strand_am_von_diergardt_see: deep_data_pool thin (1<4)",
+      "koeln_theodor_heuss_park: general_info/Erzählung too short (0<80)",
+      "koeln_theodor_heuss_park: deep_data_pool thin (1<4)",
+      "koeln_max_dietlein_park: general_info/Erzählung too short (0<80)",
+      "koeln_max_dietlein_park: deep_data_pool thin (1<4)",
+      "koeln_pionierpark: general_info/Erzählung too short (0<80)",
+      "koeln_pionierpark: deep_data_pool thin (1<4)",
+      "koeln_humboldtpark: general_info/Erzählung too short (0<80)",
+      "koeln_humboldtpark: deep_data_pool thin (1<4)",
+      "koeln_klingelputzpark: general_info/Erzählung too short (0<80)",
+      "koeln_klingelputzpark: deep_data_pool thin (1<4)",
+      "koeln_kalscheurer_weiher: general_info/Erzählung too short (0<80)",
+      "koeln_kalscheurer_weiher: deep_data_pool thin (1<4)",
+      "koeln_lohsepark: general_info/Erzählung too short (0<80)",
+      "koeln_lohsepark: deep_data_pool thin (1<4)",
+      "koeln_stadtgarten: general_info/Erzählung too short (0<80)",
+      "koeln_stadtgarten: deep_data_pool thin (1<4)",
+      "koeln_von_stein_park: general_info/Erzählung too short (0<80)",
+      "koeln_von_stein_park: deep_data_pool thin (1<4)",
+      "koeln_blumenhof_im_rheinpark: general_info/Erzählung too short (0<80)",
+      "koeln_blumenhof_im_rheinpark: deep_data_pool thin (1<4)",
+      "koeln_sonnenscheinetage_die_hochste_beachbar_kolns: general_info/Erzählung too short (0<80)",
+      "koeln_sonnenscheinetage_die_hochste_beachbar_kolns: deep_data_pool thin (1<4)",
+      "koeln_im_leuchtturm: general_info/Erzählung too short (0<80)",
+      "koeln_im_leuchtturm: deep_data_pool thin (1<4)",
+      "koeln_kolntriangle_hochhaus: general_info/Erzählung too short (0<80)",
+      "koeln_kolntriangle_hochhaus: deep_data_pool thin (1<4)",
+      "koeln_helios_leuchtturm_ehrenfeld: general_info/Erzählung too short (0<80)",
+      "koeln_helios_leuchtturm_ehrenfeld: deep_data_pool thin (1<4)",
+      "koeln_malakoffturm: general_info/Erzählung too short (0<80)",
+      "koeln_malakoffturm: deep_data_pool thin (1<4)",
+      "koeln_der_leuchtturm: general_info/Erzählung too short (0<80)",
+      "koeln_der_leuchtturm: deep_data_pool thin (1<4)",
+      "koeln_alter_messeturm: general_info/Erzählung too short (0<80)",
+      "koeln_alter_messeturm: deep_data_pool thin (1<4)",
+      "koeln_blaue_funken_turm_sachsenturm_eventlocation: general_info/Erzählung too short (0<80)",
+      "koeln_blaue_funken_turm_sachsenturm_eventlocation: deep_data_pool thin (1<4)",
+      "koeln_blau_gold_turm: general_info/Erzählung too short (0<80)",
+      "koeln_blau_gold_turm: deep_data_pool thin (1<4)",
+      "koeln_helenenturm: general_info/Erzählung too short (0<80)",
+      "koeln_helenenturm: deep_data_pool thin (1<4)",
+      "koeln_zwei_pferdekopfe_am_turm_des_richmodis_hauses: general_info/Erzählung too short (0<80)",
+      "koeln_zwei_pferdekopfe_am_turm_des_richmodis_hauses: deep_data_pool thin (1<4)",
+      "koeln_turm_der_prinzen_garde: general_info/Erzählung too short (0<80)",
+      "koeln_turm_der_prinzen_garde: deep_data_pool thin (1<4)",
+      "koeln_kunibertsturm: general_info/Erzählung too short (0<80)",
+      "koeln_kunibertsturm: deep_data_pool thin (1<4)",
+      "koeln_kolnturm: general_info/Erzählung too short (0<80)",
+      "koeln_kolnturm: deep_data_pool thin (1<4)",
+      "koeln_belvedere_blickfang: general_info/Erzählung too short (0<80)",
+      "koeln_belvedere_blickfang: deep_data_pool thin (1<4)",
+      "koeln_belvedere_felderblick: general_info/Erzählung too short (0<80)",
+      "koeln_belvedere_felderblick: deep_data_pool thin (1<4)",
+      "koeln_bismarckturm_koln: general_info/Erzählung too short (0<80)",
+      "koeln_bismarckturm_koln: deep_data_pool thin (1<4)",
+      "koeln_aussichtsturm: general_info/Erzählung too short (0<80)",
+      "koeln_aussichtsturm: deep_data_pool thin (1<4)",
+      "koeln_cologne_sportspark: general_info/Erzählung too short (0<80)",
+      "koeln_cologne_sportspark: deep_data_pool thin (2<4)",
+      "koeln_agrippabad: general_info/Erzählung too short (0<80)",
+      "koeln_agrippabad: deep_data_pool thin (2<4)",
+      "koeln_lentpark_hallenbad: general_info/Erzählung too short (0<80)",
+      "koeln_lentpark_hallenbad: deep_data_pool thin (2<4)",
+      "koeln_3d_schwarzlicht_minigolf_koln: general_info/Erzählung too short (0<80)",
+      "koeln_3d_schwarzlicht_minigolf_koln: deep_data_pool thin (2<4)",
+      "koeln_kmc_e_v_minigolfanlage_am_fernsehturm: general_info/Erzählung too short (0<80)",
+      "koeln_kmc_e_v_minigolfanlage_am_fernsehturm: deep_data_pool thin (2<4)",
+      "koeln_golf_house_filiale_koln: general_info/Erzählung too short (0<80)",
+      "koeln_golf_house_filiale_koln: deep_data_pool thin (2<4)",
+      "koeln_fun_sport_arena_koln: general_info/Erzählung too short (0<80)",
+      "koeln_fun_sport_arena_koln: deep_data_pool thin (2<4)",
+      "koeln_schwimmbad_rhein_sommergarten_gbr: general_info/Erzählung too short (0<80)",
+      "koeln_schwimmbad_rhein_sommergarten_gbr: deep_data_pool thin (2<4)",
+      "koeln_holmes_place_koln_am_gurzenich: general_info/Erzählung too short (0<80)",
+      "koeln_holmes_place_koln_am_gurzenich: deep_data_pool thin (2<4)",
+      "koeln_marienburger_golf_club_e_v: general_info/Erzählung too short (0<80)",
+      "koeln_marienburger_golf_club_e_v: deep_data_pool thin (2<4)",
+      "koeln_aussichtspunkt_hohenzollernbrucke: general_info/Erzählung too short (0<80)",
+      "koeln_aussichtspunkt_hohenzollernbrucke: deep_data_pool thin (1<4)",
+      "koeln_aussichtspunkt_pionierbecken_2: general_info/Erzählung too short (0<80)",
+      "koeln_aussichtspunkt_pionierbecken_2: deep_data_pool thin (1<4)",
+      "koeln_panoramabanke: general_info/Erzählung too short (0<80)",
+      "koeln_panoramabanke: deep_data_pool thin (1<4)",
+      "koeln_rhine_river_viewpoint_rheinpark: general_info/Erzählung too short (0<80)",
+      "koeln_rhine_river_viewpoint_rheinpark: deep_data_pool thin (1<4)",
+      "koeln_city_panorama: general_info/Erzählung too short (0<80)",
+      "koeln_city_panorama: deep_data_pool thin (1<4)",
+      "koeln_mission_360_und_3d_panorama_tours_koln: general_info/Erzählung too short (0<80)",
+      "koeln_mission_360_und_3d_panorama_tours_koln: deep_data_pool thin (1<4)",
+      "koeln_kolnpfad_etappe_01: general_info/Erzählung too short (0<80)",
+      "koeln_kolnpfad_etappe_01: deep_data_pool thin (1<4)",
+      "koeln_kolnpfad_etappe_02: general_info/Erzählung too short (0<80)",
+      "koeln_kolnpfad_etappe_02: deep_data_pool thin (1<4)",
+      "koeln_kolnpfad_etappe_06: general_info/Erzählung too short (0<80)",
+      "koeln_kolnpfad_etappe_06: deep_data_pool thin (1<4)",
+      "koeln_waldlehrpfad_im_stadtwald: general_info/Erzählung too short (0<80)",
+      "koeln_waldlehrpfad_im_stadtwald: deep_data_pool thin (1<4)",
+      "koeln_wandern_mit_diabetes: general_info/Erzählung too short (0<80)",
+      "koeln_wandern_mit_diabetes: deep_data_pool thin (1<4)",
+      "koeln_erker_muhlen_weiher: general_info/Erzählung too short (0<80)",
+      "koeln_erker_muhlen_weiher: deep_data_pool thin (1<4)",
+      "koeln_harry_ufer: general_info/Erzählung too short (0<80)",
+      "koeln_harry_ufer: deep_data_pool thin (1<4)",
+      "koeln_adfc_koln_e_v: general_info/Erzählung too short (0<80)",
+      "koeln_adfc_koln_e_v: deep_data_pool thin (1<4)",
+      "koeln_schaltwerk_koeln: general_info/Erzählung too short (0<80)",
+      "koeln_schaltwerk_koeln: deep_data_pool thin (1<4)",
+      "koeln_radfieber_fahrrad_meisterwerkstatt: general_info/Erzählung too short (0<80)",
+      "koeln_radfieber_fahrrad_meisterwerkstatt: deep_data_pool thin (1<4)",
+      "koeln_schneider_radsport_koln_fahrradwerkstatt: general_info/Erzählung too short (0<80)",
+      "koeln_schneider_radsport_koln_fahrradwerkstatt: deep_data_pool thin (1<4)",
+      "koeln_classica_colonia_fahrrad_und_roller_reparatur_werkstatt_handel_koln: general_info/Erzählung too short (0<80)",
+      "koeln_classica_colonia_fahrrad_und_roller_reparatur_werkstatt_handel_koln: deep_data_pool thin (1<4)",
+      "koeln_b_o_c_bike_outdoor_company_gmbh_co_kg: general_info/Erzählung too short (0<80)",
+      "koeln_b_o_c_bike_outdoor_company_gmbh_co_kg: deep_data_pool thin (1<4)",
+      "koeln_geobikes_gmbh: general_info/Erzählung too short (0<80)",
+      "koeln_geobikes_gmbh: deep_data_pool thin (1<4)",
+      "koeln_stadtrad_werkstatt: general_info/Erzählung too short (0<80)",
+      "koeln_stadtrad_werkstatt: deep_data_pool thin (1<4)",
+      "koeln_rad_garage_koln_sulz: general_info/Erzählung too short (0<80)",
+      "koeln_rad_garage_koln_sulz: deep_data_pool thin (1<4)",
+      "koeln_bikestation_koln_sulz: general_info/Erzählung too short (0<80)",
+      "koeln_bikestation_koln_sulz: deep_data_pool thin (1<4)",
+      "koeln_bobikes_gmbh_fahrradgeschaft_fahrradwerkstatt: general_info/Erzählung too short (0<80)",
+      "koeln_bobikes_gmbh_fahrradgeschaft_fahrradwerkstatt: deep_data_pool thin (1<4)",
+      "koeln_colonia_aktiv_bike_tours: general_info/Erzählung too short (0<80)",
+      "koeln_colonia_aktiv_bike_tours: deep_data_pool thin (1<4)",
+      "koeln_radfieber_fahrradgeschaft: general_info/Erzählung too short (0<80)",
+      "koeln_radfieber_fahrradgeschaft: deep_data_pool thin (1<4)",
+      "koeln_velokuche_werkstatt_verkauf: general_info/Erzählung too short (0<80)",
+      "koeln_velokuche_werkstatt_verkauf: deep_data_pool thin (1<4)",
+      "koeln_7th_space_koln_virtual_reality_more: general_info/Erzählung too short (0<80)",
+      "koeln_7th_space_koln_virtual_reality_more: deep_data_pool thin (1<4)",
+      "koeln_lindenthaler_tierpark: general_info/Erzählung too short (0<80)",
+      "koeln_lindenthaler_tierpark: deep_data_pool thin (1<4)",
+      "koeln_kolner_zoo: general_info/Erzählung too short (0<80)",
+      "koeln_kolner_zoo: deep_data_pool thin (1<4)",
+      "koeln_urwaldhaus: general_info/Erzählung too short (0<80)",
+      "koeln_urwaldhaus: deep_data_pool thin (1<4)",
+      "koeln_elefantenpark: general_info/Erzählung too short (0<80)",
+      "koeln_elefantenpark: deep_data_pool thin (1<4)",
+      "koeln_erdmannchen_co: general_info/Erzählung too short (0<80)",
+      "koeln_erdmannchen_co: deep_data_pool thin (1<4)",
+      "koeln_pavianfelsen: general_info/Erzählung too short (0<80)",
+      "koeln_pavianfelsen: deep_data_pool thin (1<4)",
+      "koeln_skatepark_unter_der_zoobrucke: general_info/Erzählung too short (0<80)",
+      "koeln_skatepark_unter_der_zoobrucke: deep_data_pool thin (1<4)",
+      "koeln_souvenir_point_luggage_storage: general_info/Erzählung too short (0<80)",
+      "koeln_souvenir_point_luggage_storage: deep_data_pool thin (1<4)",
+      "koeln_linke_souvenirs: general_info/Erzählung too short (0<80)",
+      "koeln_linke_souvenirs: deep_data_pool thin (1<4)",
+      "koeln_sumerica_socks_souvenirs_koln: general_info/Erzählung too short (0<80)",
+      "koeln_sumerica_socks_souvenirs_koln: deep_data_pool thin (1<4)",
+      "koeln_kolsche_geschenkartikel_elke_kruse: general_info/Erzählung too short (0<80)",
+      "koeln_kolsche_geschenkartikel_elke_kruse: deep_data_pool thin (1<4)",
+      "koeln_4koln_gmbh_co_kg: general_info/Erzählung too short (0<80)",
+      "koeln_4koln_gmbh_co_kg: deep_data_pool thin (1<4)",
+      "koeln_pylones: general_info/Erzählung too short (0<80)",
+      "koeln_pylones: deep_data_pool thin (1<4)",
+      "koeln_kolnknipse_schone_fotos_im_quadrat: general_info/Erzählung too short (0<80)",
+      "koeln_kolnknipse_schone_fotos_im_quadrat: deep_data_pool thin (1<4)",
+      "koeln_postkartenladen: general_info/Erzählung too short (0<80)",
+      "koeln_postkartenladen: deep_data_pool thin (1<4)",
+      "koeln_rheinboulevard: general_info/Erzählung too short (0<80)",
+      "koeln_rheinboulevard: deep_data_pool thin (1<4)",
+      "koeln_der_pegelturm: general_info/Erzählung too short (0<80)",
+      "koeln_der_pegelturm: deep_data_pool thin (1<4)",
+      "koeln_rheinauhafen: general_info/Erzählung too short (0<80)",
+      "koeln_rheinauhafen: deep_data_pool thin (1<4)",
+      "koeln_flora_und_botanischer_garten: general_info/Erzählung too short (0<80)",
+      "koeln_flora_und_botanischer_garten: deep_data_pool thin (1<4)",
+      "koeln_kolner_kulturkapelle: general_info/Erzählung too short (0<80)",
+      "koeln_kolner_kulturkapelle: deep_data_pool thin (1<4)",
+      "koeln_freitreppe_an_domplatte: general_info/Erzählung too short (0<80)",
+      "koeln_freitreppe_an_domplatte: deep_data_pool thin (1<4)",
+      "koeln_kaskaden: general_info/Erzählung too short (0<80)",
+      "koeln_kaskaden: deep_data_pool thin (1<4)",
+      "koeln_hahnentor: general_info/Erzählung too short (0<80)",
+      "koeln_hahnentor: deep_data_pool thin (1<4)",
+      "koeln_die_maus_statue: general_info/Erzählung too short (0<80)",
+      "koeln_die_maus_statue: deep_data_pool thin (1<4)",
+      "koeln_reiterdenkmal_fur_konig_friedrich_wilhelm_iii_von_preussen: general_info/Erzählung too short (0<80)",
+      "koeln_reiterdenkmal_fur_konig_friedrich_wilhelm_iii_von_preussen: deep_data_pool thin (1<4)",
+      "koeln_kunsthalle_lindenthal: general_info/Erzählung too short (0<80)",
+      "koeln_kunsthalle_lindenthal: deep_data_pool thin (2<4)",
+      "koeln_art_galerie_7: general_info/Erzählung too short (0<80)",
+      "koeln_art_galerie_7: deep_data_pool thin (2<4)",
+      "koeln_iliev_galerie_art_in_cologne: general_info/Erzählung too short (0<80)",
+      "koeln_iliev_galerie_art_in_cologne: deep_data_pool thin (2<4)",
+      "koeln_galerie_karsten_greve: general_info/Erzählung too short (0<80)",
+      "koeln_galerie_karsten_greve: deep_data_pool thin (2<4)",
+      "koeln_kolnischer_kunstverein: general_info/Erzählung too short (0<80)",
+      "koeln_kolnischer_kunstverein: deep_data_pool thin (2<4)",
+      "koeln_30works_galerie: general_info/Erzählung too short (0<80)",
+      "koeln_30works_galerie: deep_data_pool thin (2<4)",
+      "koeln_galerie_anja_knoess: general_info/Erzählung too short (0<80)",
+      "koeln_galerie_anja_knoess: deep_data_pool thin (2<4)",
+      "koeln_contipark_tiefgarage_am_dom: general_info/Erzählung too short (0<80)",
+      "koeln_contipark_tiefgarage_am_dom: deep_data_pool thin (2<4)",
+      "koeln_kundenzentrum_innenstadt_stadt_koln: general_info/Erzählung too short (0<80)",
+      "koeln_kundenzentrum_innenstadt_stadt_koln: deep_data_pool thin (1<4)",
+      "koeln_burgeramt_innenstadt_stadt_koln: general_info/Erzählung too short (0<80)",
+      "koeln_burgeramt_innenstadt_stadt_koln: deep_data_pool thin (1<4)",
+      "koeln_spanischer_bau: general_info/Erzählung too short (0<80)",
+      "koeln_spanischer_bau: deep_data_pool thin (1<4)",
+      "koeln_kolner_festungsmuseum: general_info/Erzählung too short (0<80)",
+      "koeln_kolner_festungsmuseum: deep_data_pool thin (1<4)",
+      "koeln_fort_x: general_info/Erzählung too short (0<80)",
+      "koeln_fort_x: deep_data_pool thin (1<4)",
+      "koeln_severinstorburg: general_info/Erzählung too short (0<80)",
+      "koeln_severinstorburg: deep_data_pool thin (1<4)",
+      "koeln_eigelsteintorburg: general_info/Erzählung too short (0<80)",
+      "koeln_eigelsteintorburg: deep_data_pool thin (1<4)",
+      "koeln_herler_burg: general_info/Erzählung too short (0<80)",
+      "koeln_herler_burg: deep_data_pool thin (1<4)",
+      "koeln_schlosser_bruhl_unesco_welterbe_schloss_augustusburg_und_falkenlust: general_info/Erzählung too short (0<80)",
+      "koeln_schlosser_bruhl_unesco_welterbe_schloss_augustusburg_und_falkenlust: deep_data_pool thin (1<4)",
+      "koeln_kapelle_burg_rath: general_info/Erzählung too short (0<80)",
+      "koeln_kapelle_burg_rath: deep_data_pool thin (1<4)",
+      "koeln_schlosspark_stammheim: general_info/Erzählung too short (0<80)",
+      "koeln_schlosspark_stammheim: deep_data_pool thin (1<4)",
+      "koeln_tag_der_forts: general_info/Erzählung too short (0<80)",
+      "koeln_tag_der_forts: deep_data_pool thin (1<4)",
+      "koeln_weisshaus_wasserschloss: general_info/Erzählung too short (0<80)",
+      "koeln_weisshaus_wasserschloss: deep_data_pool thin (1<4)",
+      "koeln_tor_28: general_info/Erzählung too short (0<80)",
+      "koeln_tor_28: deep_data_pool thin (1<4)",
+      "koeln_luchbaum: general_info/Erzählung too short (0<80)",
+      "koeln_luchbaum: deep_data_pool thin (1<4)",
+      "koeln_turoffnung_schlusseldienst_in_koln_24h_profinotdienst: general_info/Erzählung too short (0<80)",
+      "koeln_turoffnung_schlusseldienst_in_koln_24h_profinotdienst: deep_data_pool thin (1<4)",
+      "koeln_fort_v_des_ehemaligen_inneren_festungsgurtels: general_info/Erzählung too short (0<80)",
+      "koeln_fort_v_des_ehemaligen_inneren_festungsgurtels: deep_data_pool thin (1<4)",
+      "koeln_romische_stadtmauer: general_info/Erzählung too short (0<80)",
+      "koeln_romische_stadtmauer: deep_data_pool thin (1<4)",
+      "koeln_aussichtspunkt_pulheimer_see: general_info/Erzählung too short (0<80)",
+      "koeln_aussichtspunkt_pulheimer_see: deep_data_pool thin (1<4)",
+      "koeln_kolner_baumwipfelpfad: general_info/Erzählung too short (0<80)",
+      "koeln_kolner_baumwipfelpfad: deep_data_pool thin (1<4)",
+      "koeln_aussichtspunkt_pionierbecken_3: general_info/Erzählung too short (0<80)",
+      "koeln_aussichtspunkt_pionierbecken_3: deep_data_pool thin (1<4)",
+      "koeln_aussichtspunkt_rheinhalbinsel: general_info/Erzählung too short (0<80)",
+      "koeln_aussichtspunkt_rheinhalbinsel: deep_data_pool thin (1<4)",
+      "koeln_flora_koln_palais_im_park: general_info/Erzählung too short (0<80)",
+      "koeln_flora_koln_palais_im_park: deep_data_pool thin (1<4)",
+      "koeln_subtropenhaus_mit_kamelienschau: general_info/Erzählung too short (0<80)",
+      "koeln_subtropenhaus_mit_kamelienschau: deep_data_pool thin (1<4)",
+      "koeln_volksgarten: general_info/Erzählung too short (0<80)",
+      "koeln_volksgarten: deep_data_pool thin (1<4)",
+      "koeln_mulheimer_stadtgarten: general_info/Erzählung too short (0<80)",
+      "koeln_mulheimer_stadtgarten: deep_data_pool thin (1<4)",
+      "koeln_innerer_grungurtel: general_info/Erzählung too short (0<80)",
+      "koeln_innerer_grungurtel: deep_data_pool thin (1<4)",
+      "koeln_skulpturenpark_koln: general_info/Erzählung too short (0<80)",
+      "koeln_skulpturenpark_koln: deep_data_pool thin (1<4)",
+      "koeln_stadtgarten_kalk: general_info/Erzählung too short (0<80)",
+      "koeln_stadtgarten_kalk: deep_data_pool thin (1<4)",
+      "koeln_japanischer_garten_im_rheinpark: general_info/Erzählung too short (0<80)",
+      "koeln_japanischer_garten_im_rheinpark: deep_data_pool thin (1<4)",
+      "koeln_parkplatz_flora_koln: general_info/Erzählung too short (0<80)",
+      "koeln_parkplatz_flora_koln: deep_data_pool thin (1<4)",
+      "koeln_brunnengarten: general_info/Erzählung too short (0<80)",
+      "koeln_brunnengarten: deep_data_pool thin (1<4)",
+      "koeln_frauenrosenhof_grune_schule_flora: general_info/Erzählung too short (0<80)",
+      "koeln_frauenrosenhof_grune_schule_flora: deep_data_pool thin (1<4)",
+      "koeln_13_bensberger_schlossweg: general_info/Erzählung too short (0<80)",
+      "koeln_13_bensberger_schlossweg: deep_data_pool thin (1<4)",
+      "koeln_cycle_werx_ohg: general_info/Erzählung too short (0<80)",
+      "koeln_cycle_werx_ohg: deep_data_pool thin (1<4)",
+      "koeln_cube_store_koln_sud: general_info/Erzählung too short (0<80)",
+      "koeln_cube_store_koln_sud: deep_data_pool thin (1<4)",
+      "koeln_rheinau_sporthafen_koln: general_info/Erzählung too short (0<80)",
+      "koeln_rheinau_sporthafen_koln: deep_data_pool thin (1<4)",
+      "koeln_kolner_autbord_und_motoryacht_club_e_v: general_info/Erzählung too short (0<80)",
+      "koeln_kolner_autbord_und_motoryacht_club_e_v: deep_data_pool thin (1<4)",
+      "koeln_rheinau_hafen: general_info/Erzählung too short (0<80)",
+      "koeln_rheinau_hafen: deep_data_pool thin (1<4)",
+      "koeln_musiker_hafen_koln_proberaum_tonstudio_vermietung: general_info/Erzählung too short (0<80)",
+      "koeln_musiker_hafen_koln_proberaum_tonstudio_vermietung: deep_data_pool thin (1<4)",
+      "koeln_marina_leva_pianistin_sangerin_koln_musik_fur_event_messe_prasentation_geb: general_info/Erzählung too short (0<80)",
+      "koeln_marina_leva_pianistin_sangerin_koln_musik_fur_event_messe_prasentation_geb: deep_data_pool thin (1<4)",
+      "koeln_quartier_am_hafen_q18: general_info/Erzählung too short (0<80)",
+      "koeln_quartier_am_hafen_q18: deep_data_pool thin (1<4)",
+      "koeln_ameisenbaren: general_info/Erzählung too short (0<80)",
+      "koeln_ameisenbaren: deep_data_pool thin (1<4)",
+      "koeln_hop_on_hop_off_sightseeing: general_info/Erzählung too short (0<80)",
+      "koeln_hop_on_hop_off_sightseeing: deep_data_pool thin (1<4)",
+      "koeln_liebe_deine_stadt_touren: general_info/Erzählung too short (0<80)",
+      "koeln_liebe_deine_stadt_touren: deep_data_pool thin (1<4)",
+      "koeln_bootsverleih_am_kahnweiher: general_info/Erzählung too short (0<80)",
+      "koeln_bootsverleih_am_kahnweiher: deep_data_pool thin (1<4)",
+      "koeln_roxyboot_koln_dein_bootscharter: general_info/Erzählung too short (0<80)",
+      "koeln_roxyboot_koln_dein_bootscharter: deep_data_pool thin (1<4)",
+      "koeln_hvt_boating_everything_is_better_on_water: general_info/Erzählung too short (0<80)",
+      "koeln_hvt_boating_everything_is_better_on_water: deep_data_pool thin (1<4)",
+      "koeln_ming_rikscha_koln: general_info/Erzählung too short (0<80)",
+      "koeln_ming_rikscha_koln: deep_data_pool thin (1<4)",
+      "koeln_kahnstation_decksteiner_weiher_bootsverleih: general_info/Erzählung too short (0<80)",
+      "koeln_kahnstation_decksteiner_weiher_bootsverleih: deep_data_pool thin (1<4)",
+      "koeln_kolngefluster_stadtfuhrungen_und_brauhaustouren_fur_business_privat: general_info/Erzählung too short (0<80)",
+      "koeln_kolngefluster_stadtfuhrungen_und_brauhaustouren_fur_business_privat: deep_data_pool thin (1<4)",
+      "koeln_nautigo_bootsschule_boots_jetskiverleih_koln: general_info/Erzählung too short (0<80)",
+      "koeln_nautigo_bootsschule_boots_jetskiverleih_koln: deep_data_pool thin (1<4)",
+      "koeln_rikscha_4u: general_info/Erzählung too short (0<80)",
+      "koeln_rikscha_4u: deep_data_pool thin (1<4)",
+      "koeln_kolner_schatzkastchen_mehr_als_geschenke: general_info/Erzählung too short (0<80)",
+      "koeln_kolner_schatzkastchen_mehr_als_geschenke: deep_data_pool thin (1<4)",
+      "koeln_konditorei_kluppelberg_tortchen: general_info/Erzählung too short (0<80)",
+      "koeln_konditorei_kluppelberg_tortchen: deep_data_pool thin (1<4)",
+      "koeln_schee_koln: general_info/Erzählung too short (0<80)",
+      "koeln_schee_koln: deep_data_pool thin (1<4)",
+      "koeln_uniqz_personalisierte_geschenke: general_info/Erzählung too short (0<80)",
+      "koeln_uniqz_personalisierte_geschenke: deep_data_pool thin (1<4)",
+      "koeln_wochenmarkt_sudermanplatz: general_info/Erzählung too short (0<80)",
+      "koeln_wochenmarkt_sudermanplatz: deep_data_pool thin (1<4)",
+      "koeln_bio_wochenmarkt_sudstadt: general_info/Erzählung too short (0<80)",
+      "koeln_bio_wochenmarkt_sudstadt: deep_data_pool thin (1<4)",
+      "koeln_wochenmarkt_im_stadtwald: general_info/Erzählung too short (0<80)",
+      "koeln_wochenmarkt_im_stadtwald: deep_data_pool thin (1<4)",
+      "koeln_okomarkt_agnesviertel_bio_wochenmarkt: general_info/Erzählung too short (0<80)",
+      "koeln_okomarkt_agnesviertel_bio_wochenmarkt: deep_data_pool thin (1<4)",
+      "koeln_wochenmarkt_klettenberg: general_info/Erzählung too short (0<80)",
+      "koeln_wochenmarkt_klettenberg: deep_data_pool thin (1<4)",
+      "koeln_marktschwarmer_koln_sudstadt: general_info/Erzählung too short (0<80)",
+      "koeln_marktschwarmer_koln_sudstadt: deep_data_pool thin (1<4)",
+      "koeln_wochenmarkt_koln_ehrenfeld_neptunplatz: general_info/Erzählung too short (0<80)",
+      "koeln_wochenmarkt_koln_ehrenfeld_neptunplatz: deep_data_pool thin (1<4)",
+      "koeln_wochenmarkt_auerbachplatz: general_info/Erzählung too short (0<80)",
+      "koeln_wochenmarkt_auerbachplatz: deep_data_pool thin (1<4)",
+      "koeln_wochenmarkt_koln_buchforst: general_info/Erzählung too short (0<80)",
+      "koeln_wochenmarkt_koln_buchforst: deep_data_pool thin (1<4)",
+      "koeln_wochenmarkt_koln_niehl: general_info/Erzählung too short (0<80)",
+      "koeln_wochenmarkt_koln_niehl: deep_data_pool thin (1<4)",
+      "koeln_wochenmarkt_bickendorf: general_info/Erzählung too short (0<80)",
+      "koeln_wochenmarkt_bickendorf: deep_data_pool thin (1<4)",
+      "koeln_wiener_platz: general_info/Erzählung too short (0<80)",
+      "koeln_wiener_platz: deep_data_pool thin (1<4)",
+      "koeln_wochenmarkt_koln_poll: general_info/Erzählung too short (0<80)",
+      "koeln_wochenmarkt_koln_poll: deep_data_pool thin (1<4)",
+      "koeln_wochenmarkt_mulheim_berliner_strasse: general_info/Erzählung too short (0<80)",
+      "koeln_wochenmarkt_mulheim_berliner_strasse: deep_data_pool thin (1<4)",
+      "koeln_wochenmarkt_kalk: general_info/Erzählung too short (0<80)",
+      "koeln_wochenmarkt_kalk: deep_data_pool thin (1<4)",
+      "koeln_bf_deutz_messeplatz: general_info/Erzählung too short (0<80)",
+      "koeln_bf_deutz_messeplatz: deep_data_pool thin (1<4)",
+      "koeln_hiroshima_nagasaki_park: general_info/Erzählung too short (0<80)",
+      "koeln_hiroshima_nagasaki_park: deep_data_pool thin (1<4)",
+      "koeln_trude_herr_park: general_info/Erzählung too short (0<80)",
+      "koeln_trude_herr_park: deep_data_pool thin (1<4)"
+    ],
+    "stats": {
+      "spots": 453,
+      "storySpots": 281,
+      "directorySpots": 172,
+      "triggers": 453,
+      "missingTrigger": 0,
+      "missingNarration": 262,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 262,
+      "orphanTriggers": 0,
+      "categories": [
+        "activity",
+        "altstadt",
+        "apotheke",
+        "aussicht",
+        "bahnhof",
+        "bakerei",
+        "cafe",
+        "denkmal",
+        "einkaufen",
+        "freizeit",
+        "freizeitpark",
+        "gepaeck",
+        "geschichte",
+        "gesundheit",
+        "golf",
+        "hafen",
+        "hotel",
+        "kino",
+        "kirche",
+        "markt",
+        "museum",
+        "natur",
+        "radweg",
+        "restaurant",
+        "service",
+        "souvenir",
+        "spielplatz",
+        "sport",
+        "supermarket",
+        "tankstelle",
+        "theater",
+        "toilette",
+        "tour",
+        "tourist_info",
+        "wanderung",
+        "wasser"
+      ],
+      "missingMustHave": [],
+      "nicePresent": [
+        "cafe",
+        "restaurant",
+        "hotel",
+        "einkaufen",
+        "service",
+        "gesundheit",
+        "sport",
+        "hafen",
+        "bahnhof"
+      ],
+      "liveResearch": 4,
+      "offlineQa": 119,
+      "hasCoverage": true,
+      "hasTransit": false,
+      "hasMobility": false,
+      "links": 0
+    },
+    "gaps": {
+      "needsNarration": [
+        "koeln_koln_hauptbahnhof",
+        "koeln_koln_dom_hauptbahnhof",
+        "koeln_heumarkt",
+        "koeln_hansaring",
+        "koeln_breslauer_platz_hauptbahnhof",
+        "koeln_severinstrasse",
+        "koeln_deutz_lanxess_arena",
+        "koeln_koln_sud",
+        "koeln_koln_nippes_s_bahn",
+        "koeln_bahnhofsvorplatz_koln",
+        "koeln_koln_messe_deutz",
+        "koeln_messe_deutz_bahnhof_koln",
+        "koeln_trimbornstr",
+        "koeln_breslauer_platz_hbf_bussteig_c",
+        "koeln_contipark_tiefgarage_hauptbahnhof",
+        "koeln_ehrenfeld",
+        "koeln_kd_anleger_nr_5",
+        "koeln_kd_anleger_koln",
+        "koeln_kd_anleger_nr_2",
+        "koeln_kd_anleger_nr_1",
+        "koeln_strolch_personenfahre_anlegesteg_9_koln_dom_seite_weisbarth_fahrgastschiff",
+        "koeln_koln_anleger_6",
+        "koeln_schiffsanlegestelle_rhein_river_company",
+        "koeln_kd_anleger_3",
+        "koeln_koln_anleger_7",
+        "koeln_koln_feenstra_rijn_lijn_anleger",
+        "koeln_viking_river_cruises_anleger_deutz",
+        "koeln_kolntourist_anleger_13_bastei",
+        "koeln_schiffsanlegestelle_deutzer_vorhafen",
+        "koeln_rheincargo_5_landebrucke",
+        "koeln_rhein_cargo_liegeplatz_adenauer_9",
+        "koeln_bastei_koln",
+        "koeln_museum_ludwig",
+        "koeln_schokoladenmuseum_koln",
+        "koeln_rautenstrauch_joest_museum",
+        "koeln_kolumba",
+        "koeln_das_museum_des_schmerzes_und_der_liebe",
+        "koeln_museum_fur_angewandte_kunst_koln",
+        "koeln_kollwitz_museum_koln",
+        "koeln_farina_duftmuseum",
+        "koeln_deutsches_sport_olympia_museum",
+        "koeln_museum_fur_ostasiatische_kunst",
+        "koeln_supercandy_pop_up_museum",
+        "koeln_romisch_germanisches_museum_im_belgischen_haus",
+        "koeln_nationalsozialismus_dokumentationszentrum_der_stadt_koln_im_el_de_haus",
+        "koeln_serienkiller_die_true_crime_ausstellung",
+        "koeln_romisch_germanisches_museum",
+        "koeln_artothek_koln",
+        "koeln_alter_markt",
+        "koeln_basilika_st_maria_im_kapitol",
+        "koeln_st_peter",
+        "koeln_wallfahrtskirche_st_maria_in_der_kupfergasse",
+        "koeln_st_pantaleon",
+        "koeln_st_maria_in_lyskirchen",
+        "koeln_kapelle_hll_drei_konige",
+        "koeln_gross_st_martin",
+        "koeln_minoritenkirche_st_maria_empfangnis",
+        "koeln_st_maria_himmelfahrt",
+        "koeln_antoniterkirche",
+        "koeln_marktkapelle_st_maria_himmelfahrt",
+        "koeln_basilika_st_aposteln",
+        "koeln_kalk_kapelle",
+        "koeln_dominikanerkirche_st_andreas",
+        "koeln_kapelle_st_maria_und_maternus",
+        "koeln_kapelle_st_maria_ad_ortum",
+        "koeln_basilika_st_ursula",
+        "koeln_generalvikariat_erzbistum_koln",
+        "koeln_heinzelmannchenbrunnen",
+        "koeln_karl_berbuer_brunnen_bonifatius_stirnberg_1987",
+        "koeln_dionysos_brunnen_karl_burgeff_1973",
+        "koeln_ostermannbrunnen_willi_klein_1938",
+        "koeln_theo_burauen_brunnen_klaus_albert_1971",
+        "koeln_romerbrunnen_franz_brantzky_1914_15",
+        "koeln_willy_millowitsch_denkmal",
+        "koeln_petrusbrunnen_richard_voigtel_1870",
+        "koeln_dumont_brunnen_koln_theo_heiermann_1986",
+        "koeln_brunnen_marsplatz",
+        "koeln_brunnen_kaiser_wilhelm_ring_koln",
+        "koeln_taubenbrunnen_ewald_matare_1952",
+        "koeln_brunnentempel_koln_fritz_encke_ca_1920",
+        "koeln_bierbrunnen",
+        "koeln_edith_stein_denkmal",
+        "koeln_der_strand_im_rheinpark",
+        "koeln_niehler_strand",
+        "koeln_rheingarten_koln",
+        "koeln_rheinpark",
+        "koeln_stadtpark_in_deutz",
+        "koeln_strand_am_von_diergardt_see",
+        "koeln_theodor_heuss_park",
+        "koeln_max_dietlein_park",
+        "koeln_pionierpark",
+        "koeln_humboldtpark",
+        "koeln_klingelputzpark",
+        "koeln_kalscheurer_weiher",
+        "koeln_lohsepark",
+        "koeln_stadtgarten",
+        "koeln_von_stein_park",
+        "koeln_blumenhof_im_rheinpark",
+        "koeln_sonnenscheinetage_die_hochste_beachbar_kolns",
+        "koeln_im_leuchtturm",
+        "koeln_kolntriangle_hochhaus",
+        "koeln_helios_leuchtturm_ehrenfeld",
+        "koeln_malakoffturm",
+        "koeln_der_leuchtturm",
+        "koeln_alter_messeturm",
+        "koeln_blaue_funken_turm_sachsenturm_eventlocation",
+        "koeln_blau_gold_turm",
+        "koeln_helenenturm",
+        "koeln_zwei_pferdekopfe_am_turm_des_richmodis_hauses",
+        "koeln_turm_der_prinzen_garde",
+        "koeln_kunibertsturm",
+        "koeln_kolnturm",
+        "koeln_belvedere_blickfang",
+        "koeln_belvedere_felderblick",
+        "koeln_bismarckturm_koln",
+        "koeln_aussichtsturm",
+        "koeln_cologne_sportspark",
+        "koeln_agrippabad",
+        "koeln_lentpark_hallenbad",
+        "koeln_3d_schwarzlicht_minigolf_koln",
+        "koeln_kmc_e_v_minigolfanlage_am_fernsehturm",
+        "koeln_golf_house_filiale_koln",
+        "koeln_fun_sport_arena_koln",
+        "koeln_schwimmbad_rhein_sommergarten_gbr",
+        "koeln_holmes_place_koln_am_gurzenich",
+        "koeln_marienburger_golf_club_e_v",
+        "koeln_aussichtspunkt_hohenzollernbrucke",
+        "koeln_aussichtspunkt_pionierbecken_2",
+        "koeln_panoramabanke",
+        "koeln_rhine_river_viewpoint_rheinpark",
+        "koeln_city_panorama",
+        "koeln_mission_360_und_3d_panorama_tours_koln",
+        "koeln_kolnpfad_etappe_01",
+        "koeln_kolnpfad_etappe_02",
+        "koeln_kolnpfad_etappe_06",
+        "koeln_waldlehrpfad_im_stadtwald",
+        "koeln_wandern_mit_diabetes",
+        "koeln_erker_muhlen_weiher",
+        "koeln_harry_ufer",
+        "koeln_adfc_koln_e_v",
+        "koeln_schaltwerk_koeln",
+        "koeln_radfieber_fahrrad_meisterwerkstatt",
+        "koeln_schneider_radsport_koln_fahrradwerkstatt",
+        "koeln_classica_colonia_fahrrad_und_roller_reparatur_werkstatt_handel_koln",
+        "koeln_b_o_c_bike_outdoor_company_gmbh_co_kg",
+        "koeln_geobikes_gmbh",
+        "koeln_stadtrad_werkstatt",
+        "koeln_rad_garage_koln_sulz",
+        "koeln_bikestation_koln_sulz",
+        "koeln_bobikes_gmbh_fahrradgeschaft_fahrradwerkstatt",
+        "koeln_colonia_aktiv_bike_tours",
+        "koeln_radfieber_fahrradgeschaft",
+        "koeln_velokuche_werkstatt_verkauf",
+        "koeln_7th_space_koln_virtual_reality_more",
+        "koeln_lindenthaler_tierpark",
+        "koeln_kolner_zoo",
+        "koeln_urwaldhaus",
+        "koeln_elefantenpark",
+        "koeln_erdmannchen_co",
+        "koeln_pavianfelsen",
+        "koeln_skatepark_unter_der_zoobrucke",
+        "koeln_souvenir_point_luggage_storage",
+        "koeln_linke_souvenirs",
+        "koeln_sumerica_socks_souvenirs_koln",
+        "koeln_kolsche_geschenkartikel_elke_kruse",
+        "koeln_4koln_gmbh_co_kg",
+        "koeln_pylones",
+        "koeln_kolnknipse_schone_fotos_im_quadrat",
+        "koeln_postkartenladen",
+        "koeln_rheinboulevard",
+        "koeln_der_pegelturm",
+        "koeln_rheinauhafen",
+        "koeln_flora_und_botanischer_garten",
+        "koeln_kolner_kulturkapelle",
+        "koeln_freitreppe_an_domplatte",
+        "koeln_kaskaden",
+        "koeln_hahnentor",
+        "koeln_die_maus_statue",
+        "koeln_reiterdenkmal_fur_konig_friedrich_wilhelm_iii_von_preussen",
+        "koeln_kunsthalle_lindenthal",
+        "koeln_art_galerie_7",
+        "koeln_iliev_galerie_art_in_cologne",
+        "koeln_galerie_karsten_greve",
+        "koeln_kolnischer_kunstverein",
+        "koeln_30works_galerie",
+        "koeln_galerie_anja_knoess",
+        "koeln_contipark_tiefgarage_am_dom",
+        "koeln_kundenzentrum_innenstadt_stadt_koln",
+        "koeln_burgeramt_innenstadt_stadt_koln",
+        "koeln_spanischer_bau",
+        "koeln_kolner_festungsmuseum",
+        "koeln_fort_x",
+        "koeln_severinstorburg",
+        "koeln_eigelsteintorburg",
+        "koeln_herler_burg",
+        "koeln_schlosser_bruhl_unesco_welterbe_schloss_augustusburg_und_falkenlust",
+        "koeln_kapelle_burg_rath",
+        "koeln_schlosspark_stammheim",
+        "koeln_tag_der_forts",
+        "koeln_weisshaus_wasserschloss",
+        "koeln_tor_28",
+        "koeln_luchbaum",
+        "koeln_turoffnung_schlusseldienst_in_koln_24h_profinotdienst",
+        "koeln_fort_v_des_ehemaligen_inneren_festungsgurtels",
+        "koeln_romische_stadtmauer",
+        "koeln_aussichtspunkt_pulheimer_see",
+        "koeln_kolner_baumwipfelpfad",
+        "koeln_aussichtspunkt_pionierbecken_3",
+        "koeln_aussichtspunkt_rheinhalbinsel",
+        "koeln_flora_koln_palais_im_park",
+        "koeln_subtropenhaus_mit_kamelienschau",
+        "koeln_volksgarten",
+        "koeln_mulheimer_stadtgarten",
+        "koeln_innerer_grungurtel",
+        "koeln_skulpturenpark_koln",
+        "koeln_stadtgarten_kalk",
+        "koeln_japanischer_garten_im_rheinpark",
+        "koeln_parkplatz_flora_koln",
+        "koeln_brunnengarten",
+        "koeln_frauenrosenhof_grune_schule_flora",
+        "koeln_13_bensberger_schlossweg",
+        "koeln_cycle_werx_ohg",
+        "koeln_cube_store_koln_sud",
+        "koeln_rheinau_sporthafen_koln",
+        "koeln_kolner_autbord_und_motoryacht_club_e_v",
+        "koeln_rheinau_hafen",
+        "koeln_musiker_hafen_koln_proberaum_tonstudio_vermietung",
+        "koeln_marina_leva_pianistin_sangerin_koln_musik_fur_event_messe_prasentation_geb",
+        "koeln_quartier_am_hafen_q18",
+        "koeln_ameisenbaren",
+        "koeln_hop_on_hop_off_sightseeing",
+        "koeln_liebe_deine_stadt_touren",
+        "koeln_bootsverleih_am_kahnweiher",
+        "koeln_roxyboot_koln_dein_bootscharter",
+        "koeln_hvt_boating_everything_is_better_on_water",
+        "koeln_ming_rikscha_koln",
+        "koeln_kahnstation_decksteiner_weiher_bootsverleih",
+        "koeln_kolngefluster_stadtfuhrungen_und_brauhaustouren_fur_business_privat",
+        "koeln_nautigo_bootsschule_boots_jetskiverleih_koln",
+        "koeln_rikscha_4u",
+        "koeln_kolner_schatzkastchen_mehr_als_geschenke",
+        "koeln_konditorei_kluppelberg_tortchen",
+        "koeln_schee_koln",
+        "koeln_uniqz_personalisierte_geschenke",
+        "koeln_wochenmarkt_sudermanplatz",
+        "koeln_bio_wochenmarkt_sudstadt",
+        "koeln_wochenmarkt_im_stadtwald",
+        "koeln_okomarkt_agnesviertel_bio_wochenmarkt",
+        "koeln_wochenmarkt_klettenberg",
+        "koeln_marktschwarmer_koln_sudstadt",
+        "koeln_wochenmarkt_koln_ehrenfeld_neptunplatz",
+        "koeln_wochenmarkt_auerbachplatz",
+        "koeln_wochenmarkt_koln_buchforst",
+        "koeln_wochenmarkt_koln_niehl",
+        "koeln_wochenmarkt_bickendorf",
+        "koeln_wiener_platz",
+        "koeln_wochenmarkt_koln_poll",
+        "koeln_wochenmarkt_mulheim_berliner_strasse",
+        "koeln_wochenmarkt_kalk",
+        "koeln_bf_deutz_messeplatz",
+        "koeln_hiroshima_nagasaki_park",
+        "koeln_trude_herr_park"
+      ],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [
+        "koeln_koln_hauptbahnhof",
+        "koeln_koln_dom_hauptbahnhof",
+        "koeln_heumarkt",
+        "koeln_hansaring",
+        "koeln_breslauer_platz_hauptbahnhof",
+        "koeln_severinstrasse",
+        "koeln_deutz_lanxess_arena",
+        "koeln_koln_sud",
+        "koeln_koln_nippes_s_bahn",
+        "koeln_bahnhofsvorplatz_koln",
+        "koeln_koln_messe_deutz",
+        "koeln_messe_deutz_bahnhof_koln",
+        "koeln_trimbornstr",
+        "koeln_breslauer_platz_hbf_bussteig_c",
+        "koeln_contipark_tiefgarage_hauptbahnhof",
+        "koeln_ehrenfeld",
+        "koeln_kd_anleger_nr_5",
+        "koeln_kd_anleger_koln",
+        "koeln_kd_anleger_nr_2",
+        "koeln_kd_anleger_nr_1",
+        "koeln_strolch_personenfahre_anlegesteg_9_koln_dom_seite_weisbarth_fahrgastschiff",
+        "koeln_koln_anleger_6",
+        "koeln_schiffsanlegestelle_rhein_river_company",
+        "koeln_kd_anleger_3",
+        "koeln_koln_anleger_7",
+        "koeln_koln_feenstra_rijn_lijn_anleger",
+        "koeln_viking_river_cruises_anleger_deutz",
+        "koeln_kolntourist_anleger_13_bastei",
+        "koeln_schiffsanlegestelle_deutzer_vorhafen",
+        "koeln_rheincargo_5_landebrucke",
+        "koeln_rhein_cargo_liegeplatz_adenauer_9",
+        "koeln_bastei_koln",
+        "koeln_museum_ludwig",
+        "koeln_schokoladenmuseum_koln",
+        "koeln_rautenstrauch_joest_museum",
+        "koeln_kolumba",
+        "koeln_das_museum_des_schmerzes_und_der_liebe",
+        "koeln_museum_fur_angewandte_kunst_koln",
+        "koeln_kollwitz_museum_koln",
+        "koeln_farina_duftmuseum",
+        "koeln_deutsches_sport_olympia_museum",
+        "koeln_museum_fur_ostasiatische_kunst",
+        "koeln_supercandy_pop_up_museum",
+        "koeln_romisch_germanisches_museum_im_belgischen_haus",
+        "koeln_nationalsozialismus_dokumentationszentrum_der_stadt_koln_im_el_de_haus",
+        "koeln_serienkiller_die_true_crime_ausstellung",
+        "koeln_romisch_germanisches_museum",
+        "koeln_artothek_koln",
+        "koeln_alter_markt",
+        "koeln_basilika_st_maria_im_kapitol",
+        "koeln_st_peter",
+        "koeln_wallfahrtskirche_st_maria_in_der_kupfergasse",
+        "koeln_st_pantaleon",
+        "koeln_st_maria_in_lyskirchen",
+        "koeln_kapelle_hll_drei_konige",
+        "koeln_gross_st_martin",
+        "koeln_minoritenkirche_st_maria_empfangnis",
+        "koeln_st_maria_himmelfahrt",
+        "koeln_antoniterkirche",
+        "koeln_marktkapelle_st_maria_himmelfahrt",
+        "koeln_basilika_st_aposteln",
+        "koeln_kalk_kapelle",
+        "koeln_dominikanerkirche_st_andreas",
+        "koeln_kapelle_st_maria_und_maternus",
+        "koeln_kapelle_st_maria_ad_ortum",
+        "koeln_basilika_st_ursula",
+        "koeln_generalvikariat_erzbistum_koln",
+        "koeln_heinzelmannchenbrunnen",
+        "koeln_karl_berbuer_brunnen_bonifatius_stirnberg_1987",
+        "koeln_dionysos_brunnen_karl_burgeff_1973",
+        "koeln_ostermannbrunnen_willi_klein_1938",
+        "koeln_theo_burauen_brunnen_klaus_albert_1971",
+        "koeln_romerbrunnen_franz_brantzky_1914_15",
+        "koeln_willy_millowitsch_denkmal",
+        "koeln_petrusbrunnen_richard_voigtel_1870",
+        "koeln_dumont_brunnen_koln_theo_heiermann_1986",
+        "koeln_brunnen_marsplatz",
+        "koeln_brunnen_kaiser_wilhelm_ring_koln",
+        "koeln_taubenbrunnen_ewald_matare_1952",
+        "koeln_brunnentempel_koln_fritz_encke_ca_1920",
+        "koeln_bierbrunnen",
+        "koeln_edith_stein_denkmal",
+        "koeln_der_strand_im_rheinpark",
+        "koeln_niehler_strand",
+        "koeln_rheingarten_koln",
+        "koeln_rheinpark",
+        "koeln_stadtpark_in_deutz",
+        "koeln_strand_am_von_diergardt_see",
+        "koeln_theodor_heuss_park",
+        "koeln_max_dietlein_park",
+        "koeln_pionierpark",
+        "koeln_humboldtpark",
+        "koeln_klingelputzpark",
+        "koeln_kalscheurer_weiher",
+        "koeln_lohsepark",
+        "koeln_stadtgarten",
+        "koeln_von_stein_park",
+        "koeln_blumenhof_im_rheinpark",
+        "koeln_sonnenscheinetage_die_hochste_beachbar_kolns",
+        "koeln_im_leuchtturm",
+        "koeln_kolntriangle_hochhaus",
+        "koeln_helios_leuchtturm_ehrenfeld",
+        "koeln_malakoffturm",
+        "koeln_der_leuchtturm",
+        "koeln_alter_messeturm",
+        "koeln_blaue_funken_turm_sachsenturm_eventlocation",
+        "koeln_blau_gold_turm",
+        "koeln_helenenturm",
+        "koeln_zwei_pferdekopfe_am_turm_des_richmodis_hauses",
+        "koeln_turm_der_prinzen_garde",
+        "koeln_kunibertsturm",
+        "koeln_kolnturm",
+        "koeln_belvedere_blickfang",
+        "koeln_belvedere_felderblick",
+        "koeln_bismarckturm_koln",
+        "koeln_aussichtsturm",
+        "koeln_cologne_sportspark",
+        "koeln_agrippabad",
+        "koeln_lentpark_hallenbad",
+        "koeln_3d_schwarzlicht_minigolf_koln",
+        "koeln_kmc_e_v_minigolfanlage_am_fernsehturm",
+        "koeln_golf_house_filiale_koln",
+        "koeln_fun_sport_arena_koln",
+        "koeln_schwimmbad_rhein_sommergarten_gbr",
+        "koeln_holmes_place_koln_am_gurzenich",
+        "koeln_marienburger_golf_club_e_v",
+        "koeln_aussichtspunkt_hohenzollernbrucke",
+        "koeln_aussichtspunkt_pionierbecken_2",
+        "koeln_panoramabanke",
+        "koeln_rhine_river_viewpoint_rheinpark",
+        "koeln_city_panorama",
+        "koeln_mission_360_und_3d_panorama_tours_koln",
+        "koeln_kolnpfad_etappe_01",
+        "koeln_kolnpfad_etappe_02",
+        "koeln_kolnpfad_etappe_06",
+        "koeln_waldlehrpfad_im_stadtwald",
+        "koeln_wandern_mit_diabetes",
+        "koeln_erker_muhlen_weiher",
+        "koeln_harry_ufer",
+        "koeln_adfc_koln_e_v",
+        "koeln_schaltwerk_koeln",
+        "koeln_radfieber_fahrrad_meisterwerkstatt",
+        "koeln_schneider_radsport_koln_fahrradwerkstatt",
+        "koeln_classica_colonia_fahrrad_und_roller_reparatur_werkstatt_handel_koln",
+        "koeln_b_o_c_bike_outdoor_company_gmbh_co_kg",
+        "koeln_geobikes_gmbh",
+        "koeln_stadtrad_werkstatt",
+        "koeln_rad_garage_koln_sulz",
+        "koeln_bikestation_koln_sulz",
+        "koeln_bobikes_gmbh_fahrradgeschaft_fahrradwerkstatt",
+        "koeln_colonia_aktiv_bike_tours",
+        "koeln_radfieber_fahrradgeschaft",
+        "koeln_velokuche_werkstatt_verkauf",
+        "koeln_7th_space_koln_virtual_reality_more",
+        "koeln_lindenthaler_tierpark",
+        "koeln_kolner_zoo",
+        "koeln_urwaldhaus",
+        "koeln_elefantenpark",
+        "koeln_erdmannchen_co",
+        "koeln_pavianfelsen",
+        "koeln_skatepark_unter_der_zoobrucke",
+        "koeln_souvenir_point_luggage_storage",
+        "koeln_linke_souvenirs",
+        "koeln_sumerica_socks_souvenirs_koln",
+        "koeln_kolsche_geschenkartikel_elke_kruse",
+        "koeln_4koln_gmbh_co_kg",
+        "koeln_pylones",
+        "koeln_kolnknipse_schone_fotos_im_quadrat",
+        "koeln_postkartenladen",
+        "koeln_rheinboulevard",
+        "koeln_der_pegelturm",
+        "koeln_rheinauhafen",
+        "koeln_flora_und_botanischer_garten",
+        "koeln_kolner_kulturkapelle",
+        "koeln_freitreppe_an_domplatte",
+        "koeln_kaskaden",
+        "koeln_hahnentor",
+        "koeln_die_maus_statue",
+        "koeln_reiterdenkmal_fur_konig_friedrich_wilhelm_iii_von_preussen",
+        "koeln_kunsthalle_lindenthal",
+        "koeln_art_galerie_7",
+        "koeln_iliev_galerie_art_in_cologne",
+        "koeln_galerie_karsten_greve",
+        "koeln_kolnischer_kunstverein",
+        "koeln_30works_galerie",
+        "koeln_galerie_anja_knoess",
+        "koeln_contipark_tiefgarage_am_dom",
+        "koeln_kundenzentrum_innenstadt_stadt_koln",
+        "koeln_burgeramt_innenstadt_stadt_koln",
+        "koeln_spanischer_bau",
+        "koeln_kolner_festungsmuseum",
+        "koeln_fort_x",
+        "koeln_severinstorburg",
+        "koeln_eigelsteintorburg",
+        "koeln_herler_burg",
+        "koeln_schlosser_bruhl_unesco_welterbe_schloss_augustusburg_und_falkenlust",
+        "koeln_kapelle_burg_rath",
+        "koeln_schlosspark_stammheim",
+        "koeln_tag_der_forts",
+        "koeln_weisshaus_wasserschloss",
+        "koeln_tor_28",
+        "koeln_luchbaum",
+        "koeln_turoffnung_schlusseldienst_in_koln_24h_profinotdienst",
+        "koeln_fort_v_des_ehemaligen_inneren_festungsgurtels",
+        "koeln_romische_stadtmauer",
+        "koeln_aussichtspunkt_pulheimer_see",
+        "koeln_kolner_baumwipfelpfad",
+        "koeln_aussichtspunkt_pionierbecken_3",
+        "koeln_aussichtspunkt_rheinhalbinsel",
+        "koeln_flora_koln_palais_im_park",
+        "koeln_subtropenhaus_mit_kamelienschau",
+        "koeln_volksgarten",
+        "koeln_mulheimer_stadtgarten",
+        "koeln_innerer_grungurtel",
+        "koeln_skulpturenpark_koln",
+        "koeln_stadtgarten_kalk",
+        "koeln_japanischer_garten_im_rheinpark",
+        "koeln_parkplatz_flora_koln",
+        "koeln_brunnengarten",
+        "koeln_frauenrosenhof_grune_schule_flora",
+        "koeln_13_bensberger_schlossweg",
+        "koeln_cycle_werx_ohg",
+        "koeln_cube_store_koln_sud",
+        "koeln_rheinau_sporthafen_koln",
+        "koeln_kolner_autbord_und_motoryacht_club_e_v",
+        "koeln_rheinau_hafen",
+        "koeln_musiker_hafen_koln_proberaum_tonstudio_vermietung",
+        "koeln_marina_leva_pianistin_sangerin_koln_musik_fur_event_messe_prasentation_geb",
+        "koeln_quartier_am_hafen_q18",
+        "koeln_ameisenbaren",
+        "koeln_hop_on_hop_off_sightseeing",
+        "koeln_liebe_deine_stadt_touren",
+        "koeln_bootsverleih_am_kahnweiher",
+        "koeln_roxyboot_koln_dein_bootscharter",
+        "koeln_hvt_boating_everything_is_better_on_water",
+        "koeln_ming_rikscha_koln",
+        "koeln_kahnstation_decksteiner_weiher_bootsverleih",
+        "koeln_kolngefluster_stadtfuhrungen_und_brauhaustouren_fur_business_privat",
+        "koeln_nautigo_bootsschule_boots_jetskiverleih_koln",
+        "koeln_rikscha_4u",
+        "koeln_kolner_schatzkastchen_mehr_als_geschenke",
+        "koeln_konditorei_kluppelberg_tortchen",
+        "koeln_schee_koln",
+        "koeln_uniqz_personalisierte_geschenke",
+        "koeln_wochenmarkt_sudermanplatz",
+        "koeln_bio_wochenmarkt_sudstadt",
+        "koeln_wochenmarkt_im_stadtwald",
+        "koeln_okomarkt_agnesviertel_bio_wochenmarkt",
+        "koeln_wochenmarkt_klettenberg",
+        "koeln_marktschwarmer_koln_sudstadt",
+        "koeln_wochenmarkt_koln_ehrenfeld_neptunplatz",
+        "koeln_wochenmarkt_auerbachplatz",
+        "koeln_wochenmarkt_koln_buchforst",
+        "koeln_wochenmarkt_koln_niehl",
+        "koeln_wochenmarkt_bickendorf",
+        "koeln_wiener_platz",
+        "koeln_wochenmarkt_koln_poll",
+        "koeln_wochenmarkt_mulheim_berliner_strasse",
+        "koeln_wochenmarkt_kalk",
+        "koeln_bf_deutz_messeplatz",
+        "koeln_hiroshima_nagasaki_park",
+        "koeln_trude_herr_park"
+      ],
+      "missingCategories": []
+    }
+  },
+  "file": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\koeln.json"
+}

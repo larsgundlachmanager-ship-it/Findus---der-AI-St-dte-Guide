@@ -81,10 +81,20 @@ function hasFact(key: JobFactKey, input: CompletenessInput): boolean {
         /\b(belegt|speisekarte|elbblick|pannfisch|pool|sauna)\b/u.test(blob)
       );
     case 'showtimes_future':
+      // Orient-Turn: noch keine Uhrzeiten nötig — Kinos/Filme reichen.
+      if (meta.cinemaPhase === 'orient') return true;
       return (
         Boolean(meta.cinema) ||
         (Array.isArray(meta.showtimes) && meta.showtimes.length > 0) ||
         /\b(\d{1,2}[:.]\d{2}|uhr|heute|vorstellung|spielt)\b/u.test(blob)
+      );
+    case 'film_or_genre_picks':
+      return (
+        meta.cinemaPhase === 'orient' ||
+        (Array.isArray(meta.filmPicks) && meta.filmPicks.length > 0) ||
+        (Array.isArray(meta.showtimes) && meta.showtimes.length > 0) ||
+        /\b(komödie|comedy|action|drama|thriller|film|streifen)\b/u.test(blob) ||
+        Boolean(meta.cinema)
       );
     case 'price_eur':
       return (

@@ -57,6 +57,14 @@ export function looksLikeSingleJustDoItRequest(text: string): boolean {
     }
   }
 
+  // Ein Abendziel (Grillen etc.) → Manager-Blaupause, nie Modul 5
+  if (
+    /\b(grill|grillen|bbq|picknick)\b/i.test(t) &&
+    !/\b(tagesplan|durchplanen|und\s+dann.{0,40}(theater|museum))\b/i.test(t)
+  ) {
+    return true;
+  }
+
   const hasMultiStop =
     /\b(und\s+dann|danach|zuerst).{0,50}\b(essen|café|cafe|museum|theater|hotel|spazier)\b/i.test(
       t,

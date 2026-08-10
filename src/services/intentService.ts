@@ -18,6 +18,71 @@ import {
 import { useUserProfileStore } from '../store/useUserProfileStore';
 import { parseTagsJson } from './geo/triggerPolicy';
 import { isNavAffirmation } from './navigation/pendingOffer';
+import {
+  detectMultiStopIntent,
+  planMultiStopTour,
+  startMultiStopTour,
+  clearMultiStopTour,
+  CIRCUIT_PROMPT,
+} from './navigation/multiStopTour';
+import {
+  detectDiscoveryIntent,
+  presentDiscoveryAsConcierge,
+  runContextualDiscovery,
+} from './navigation/contextualDiscovery';
+import {
+  detectChainedNavIntent,
+  planAndStartChainedNav,
+  takePendingChainedNav,
+} from './navigation/chainedNavIntent';
+import {
+  detectHardNavOverride,
+  hardOverrideNavigationTo,
+  isClearRouteIntent,
+  clearNavigationHard,
+} from './navigation/hardNavOverride';
+import {
+  isPoiInfoQuestion,
+  isExplicitNavIntent,
+  isNavCorrectionIntent,
+  extractCorrectedQuestion,
+} from './intent/poiInfoVsNav';
+import {
+  detectTravelModeVoiceOverride,
+  setPreferredTravelMode,
+} from './navigation/travelModeContext';
+import {
+  detectFollowUpBuyIntent,
+  detectHotelTaskIntent,
+  detectShoppingTaskDoneIntent,
+  detectShoppingTaskIntent,
+} from './shopping/shoppingTaskIntent';
+import { useShoppingTaskStore } from '../store/useShoppingTaskStore';
+import {
+  getDeviceHeadingDeg,
+  getMovementBearingDeg,
+} from './navigation/navigationService';
+import { useFinnusStore } from '../store/useFinnusStore';
+import {
+  parseCompoundPlanWithGemini,
+} from './planning/compoundPlanParser';
+import { activateCompoundSessionPlan } from './planning/activateSessionPlan';
+import { routeUserUtteranceWithLlm } from './planning/llmIntentRouter';
+import { hasGeminiApiKey } from './geminiService';
+import { isDeviceOffline } from './navigation/networkState';
+import type { GeminiConciergeResponse } from '../types/concierge';
+import {
+  detectEmergencyIntent,
+  handleEmergencyConcierge,
+} from './concierge/emergencyConcierge';
+import {
+  detectMenuTranslateIntent,
+  handleMenuTranslateIntent,
+} from './research/menuTranslateService';
+import {
+  detectTouristFrictionKind,
+  handleTouristFrictionIntent,
+} from './intent/touristFrictionIntent';
 
 export type IntentResult = {
   handled: boolean;
@@ -25,7 +90,26 @@ export type IntentResult = {
   startedNav?: boolean;
   /** Profil wurde live aktualisiert */
   profileUpdated?: boolean;
+  /** Rich card: speech + bullets + live action buttons */
+  concierge?: GeminiConciergeResponse;
 };
+
+/** Structural multi-goal gate (no product hardcodes) — used when LLM parse fails. */
+function looksLikeMultiGoalSpeech(text: string): boolean {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (t.length < 35) return false;
+  const hasTime =
+    /\b\d{1,2}[:.h]\d{2}\b/.test(t) ||
+    /\b(?:um\s+)?\d{1,2}\s*uhr\b/iu.test(t) ||
+    /\b(?:achtzehn|siebzehn|neunzehn|zwanzig|sechzehn)\b/iu.test(t) ||
+    /\b(?:pünktlich|puenktlich|verabredung|termin)\b/iu.test(t);
+  const multi =
+    /\b(außerdem|ausserdem|sowie|vorher|danach|zuerst|dann|und\s+noch|brauch|benötig|benoetig|möchte|moechte|spazier|herum|rumlauf|einkauf|hotel)\b/iu.test(
+      t,
+    );
+  const clauses = t.split(/[.!?]+/).filter((s) => s.trim().length > 10).length;
+  return (hasTime && multi) || (clauses >= 3 && multi);
+}
 
 const HOTEL_NAV =
   /\b(zum\s+hotel|ins\s+hotel|mein(em)?\s+hotel|zurück\s+zum\s+hotel|zurueck\s+zum\s+hotel|bring\s+mich\s+(zum\s+)?hotel|führ\s+mich\s+(zum\s+)?hotel|fuehr\s+mich\s+(zum\s+)?hotel|navigier(e|en)?\s+(mich\s+)?(zum\s+)?hotel|hotel\s+navig)/iu;
@@ -147,6 +231,8 @@ async function findCityPoiForNavQuery(query: string): Promise<Poi | null> {
 async function handleCityPoiNavigation(
   text: string,
 ): Promise<IntentResult | null> {
+  // Fact questions about a place must never become city-POI navigation
+  if (isPoiInfoQuestion(text)) return null;
   if (!CITY_POI_NAV.test(text) && !/\b(zum|zur|nach)\s+\w{3,}/iu.test(text)) {
     return null;
   }
@@ -292,6 +378,7 @@ type LearnedPreferenceHit = {
   dislike?: string;
   toneStyle?: 'ernst' | 'kumpelhaft' | 'sarkastisch' | 'maerchen';
   experiencePref?: { key: string; value: 'yes' | 'no' | 'neutral' };
+  storyDepth?: 'short' | 'normal' | 'long';
 };
 
 /**
@@ -385,6 +472,34 @@ export function detectLearnedPreference(
   }
 
   if (
+    /\b(weniger\s+geschichte|kürzer\s+erzähl|kuerzer\s+erzähl|weniger\s+details|kürzere\s+stories|mach\s+es\s+kürzer|story\s+kürzer)\b/iu.test(
+      t,
+    )
+  ) {
+    return {
+      learnedFact: 'Will kürzere Geschichten',
+      experiencePref: { key: 'geschichte_kurz', value: 'yes' },
+      storyDepth: 'short',
+      reply:
+        'Alles klar — ab jetzt halte ich die Stories kurz und knackig.',
+    };
+  }
+
+  if (
+    /\b(mehr\s+geschichte|ausführlicher|ausfuehrlicher|mehr\s+details|längere\s+stories|laengere\s+stories|erzähl\s+mehr|erzaehl\s+mehr|mehr\s+history)\b/iu.test(
+      t,
+    )
+  ) {
+    return {
+      learnedFact: 'Will längere Geschichten',
+      experiencePref: { key: 'geschichte_lang', value: 'yes' },
+      storyDepth: 'long',
+      reply:
+        'Passt — ich packe ab jetzt mehr Geschichte und Kontext rein.',
+    };
+  }
+
+  if (
     /\b(keine\s+jahreszahlen|ohne\s+jahreszahlen|jahreszahlen\s+(nerv|langweilig)|weniger\s+geschichte)\b/iu.test(
       t,
     )
@@ -398,17 +513,18 @@ export function detectLearnedPreference(
     };
   }
 
+  // Soft: „nicht Kumpel/Bro“ → Middleware (kein harter toneStyle='ernst')
+  // Hier nur Fallback wenn Middleware noch nicht lief — ohne steife Verbote
   if (
-    /\b(nenn\s+mich\s+nicht\s+(so\s+)?kumpel|nicht\s+(mehr\s+)?kumpel|kein\s+kumpel|ohne\s+kumpel|hör\s+auf.*kumpel|hoer\s+auf.*kumpel|kumpel\s+nennen|nicht\s+kumpelhaft|weniger\s+kumpelhaft|sei\s+nicht\s+so\s+kumpel|nicht\s+so\s+kumpelhaft)\b/iu.test(
+    /\b(nenn\s+mich\s+nicht\s+(so\s+)?(?:kumpel|bro)|nicht\s+(mehr\s+)?(?:kumpel|bro)|kein\s+(?:kumpel|bro)|ohne\s+(?:kumpel|bro))\b/iu.test(
       t,
     )
   ) {
     return {
-      learnedFact: 'Will nicht „Kumpel" genannt werden — sachlicher Ton',
-      dislike: 'Kumpel-Anrede',
-      toneStyle: 'ernst',
+      learnedFact:
+        'Anrede: Slang (Bro/Kumpel) nur extrem sparsam und nur wenn 100% natürlich — Kumpel-Tonality behalten. Wenn unsicher: „Hey, wie soll ich dich eigentlich am liebsten nennen?“',
       reply:
-        'Alles klar — ich bleibe sachlicher und nenne dich nicht mehr Kumpel.',
+        'Alles klar — ich bleib locker, halte mich mit Bro/Kumpel zurück und frag nach, wenn ich unsicher bin.',
     };
   }
 
@@ -458,6 +574,389 @@ export async function handleMemoryIntent(
   const text = rawText.replace(/\s+/g, ' ').trim();
   if (!text) return { handled: false };
 
+  const store = useFinnusStore.getState();
+  const lat = store.lastGpsLat;
+  const lng = store.lastGpsLng;
+
+  // ── Preference Middleware + Multi-Intent Fan-out (Prefs zuerst) ──
+  {
+    const { runMultiIntentPreferenceFanout } = await import(
+      './planning/multiIntentFanout'
+    );
+    const fan = await runMultiIntentPreferenceFanout(text);
+    if (fan.onlyPreferences) {
+      return {
+        handled: true,
+        profileUpdated: true,
+        reply:
+          fan.replyHint ??
+          'Alles klar — hab ich mir gemerkt.',
+      };
+    }
+    // Prefs gemerkt, aber weiterer Intent im Satz → mit Rest weiter
+    if (fan.prefs.length && fan.remainingText && fan.remainingText !== text) {
+      return handleMemoryIntent(fan.remainingText);
+    }
+  }
+
+  // Explicit travel mode: „Ich bin mit dem Fahrrad unterwegs“ → sticky + 10-min recheck
+  const modeOverride = detectTravelModeVoiceOverride(text);
+  if (modeOverride) {
+    setPreferredTravelMode(modeOverride);
+    const label = modeOverride === 'bike' ? 'Fahrrad' : 'zu Fuß';
+    // If the utterance is ONLY a mode claim, acknowledge; otherwise continue intents
+    if (
+      /^\s*(hey\s+)?(findus[,.]?\s+)?(ich\s+bin\s+)?(mit\s+dem\s+)?(fahrrad|rad|bike|e-?bike|e-?scooter|zu\s+fu[sß]|zu\s*fuss)\s*(unterwegs|unter\s*wegs)?[.!]?\s*$/iu.test(
+        text,
+      )
+    ) {
+      return {
+        handled: true,
+        reply:
+          modeOverride === 'bike'
+            ? 'Alles klar — ich navigiere dich per Rad. Nach zehn Minuten check ich kurz per GPS, ob du noch rollst.'
+            : 'Alles klar — wir gehen zu Fuß weiter.',
+      };
+    }
+    // Combined utterance (mode + destination): keep going with sticky mode set
+    void label;
+  }
+
+  // ── Early: Notfall / Speisekarte / Planungsmodus / Tourist-Friction ──
+  {
+    const origin =
+      lat != null && lng != null && Number.isFinite(lat) && Number.isFinite(lng)
+        ? { lat, lng }
+        : null;
+
+    if (detectEmergencyIntent(text)) {
+      const em = await handleEmergencyConcierge(text, origin);
+      if (em.handled) {
+        return {
+          handled: true,
+          reply: em.reply,
+          startedNav: em.startedNav,
+          concierge: em.concierge,
+        };
+      }
+    }
+
+    if (detectMenuTranslateIntent(text)) {
+      const menu = await handleMenuTranslateIntent(text);
+      if (menu.handled) {
+        return { handled: true, reply: menu.reply };
+      }
+    }
+
+    const frictionKind = detectTouristFrictionKind(text);
+    if (
+      frictionKind === 'right_way' ||
+      frictionKind === 'wifi' ||
+      frictionKind === 'water'
+    ) {
+      const friction = await handleTouristFrictionIntent(text, origin);
+      if (friction.handled) {
+        return { handled: true, reply: friction.reply };
+      }
+    }
+  }
+
+  // Clear / delete route (voice)
+  if (isClearRouteIntent(text)) {
+    await clearNavigationHard({ silent: true });
+    return {
+      handled: true,
+      reply: 'Alles klar — Route ist gelöscht. Navigation idle.',
+    };
+  }
+
+  // Nav-correction: „Nein, ich meinte wann das Frühstück ist“ — abort nav, fall through to answer
+  if (
+    isNavCorrectionIntent(text) &&
+    (store.navActive || store.multiStopTour)
+  ) {
+    await clearNavigationHard({ silent: true });
+    store.setPendingNavOffer(null);
+    store.setPendingNavAlternatives([]);
+    (globalThis as { __findusCorrectedQ?: string }).__findusCorrectedQ =
+      extractCorrectedQuestion(text);
+    return {
+      handled: false,
+      reply: undefined,
+    };
+  }
+
+  // Pending hotel Yes/No must stay deterministic (before LLM)
+  {
+    const memEarly = useUserMemoryStore.getState();
+    if (memEarly.pendingHotelConfirmId) {
+      const id = memEarly.pendingHotelConfirmId;
+      const candidate = memEarly.entities.find((e) => e.id === id);
+      if (NEGATION.test(text)) {
+        memEarly.setPendingHotelConfirm(null);
+        memEarly.setAwaitingHotelName(true);
+        takePendingChainedNav();
+        return {
+          handled: true,
+          reply:
+            'Alles gut — wie heißt dein Hotel? Dann merke ich mir das.',
+        };
+      }
+      if (
+        isNavAffirmation(text) ||
+        /^(ja|jo|jap|genau|stimmt|richtig)\b/iu.test(text)
+      ) {
+        if (candidate) {
+          memEarly.confirmEntity(id);
+          memEarly.setPendingHotelConfirm(null);
+          return {
+            handled: true,
+            reply: `Super — ${candidate.name} ist gespeichert.`,
+          };
+        }
+      }
+    }
+  }
+
+  // ── LLM ROUTER — übersprungen für Manager-Blaupausen (Kino/Grill/Essen/POI) ──
+  {
+    try {
+      const { shouldSkipLegacyIntentSteal } = require('../module2/router/hotPathGuard') as {
+        shouldSkipLegacyIntentSteal: (t: string) => boolean;
+      };
+      if (shouldSkipLegacyIntentSteal(text)) {
+        return { handled: false };
+      }
+    } catch {
+      /* soft */
+    }
+    let online = true;
+    try {
+      online = !(await isDeviceOffline());
+    } catch {
+      online = true;
+    }
+    if (online && hasGeminiApiKey() && text.length >= 4) {
+      const routed = await routeUserUtteranceWithLlm(text);
+      if (routed?.handled && routed.reply) {
+        return {
+          handled: true,
+          reply: routed.reply,
+          startedNav: routed.startedNav,
+          concierge: routed.concierge,
+        };
+      }
+      // question / clarify → Concierge (named go-to gets confirm + Route starten there)
+      if (routed?.fallThroughQuestion) {
+        return { handled: false };
+      } else if (routed == null && looksLikeMultiGoalSpeech(text)) {
+        // Retry compound parser directly once
+        const parsed = await parseCompoundPlanWithGemini(text, {
+          placeHint: store.currentLocationName ?? null,
+        });
+        if (parsed?.isCompound) {
+          const activated = activateCompoundSessionPlan(parsed);
+          if (activated) {
+            return { handled: true, reply: activated.reply };
+          }
+        }
+        // Do NOT fall into restaurant-keyword discovery
+        return { handled: false };
+      }
+    }
+  }
+
+  // POI_INFO: never start multi-stop / hard-nav / discovery-as-nav from fact questions
+  const infoOnly = isPoiInfoQuestion(text);
+
+  // Hotel-Errand: „Erinner mich, wenn ich im Hotel bin, Powerbank zu laden“
+  {
+    const mem = useUserMemoryStore.getState();
+    const hotel =
+      mem.getConfirmedHotel() ??
+      mem.getHotelCandidate() ??
+      mem.entities.find((e) => e.type === 'hotel');
+    const hasCoords =
+      hotel != null &&
+      typeof hotel.lat === 'number' &&
+      typeof hotel.lng === 'number' &&
+      Number.isFinite(hotel.lat) &&
+      Number.isFinite(hotel.lng);
+    const hotelIntent = detectHotelTaskIntent(text, {
+      hasHotelWithCoords: hasCoords,
+      hotelName: hotel?.name ?? null,
+    });
+    if (hotelIntent) {
+      const first = useShoppingTaskStore.getState().addTask({
+        itemLabel: hotelIntent.itemLabel,
+        placeTypes: hotelIntent.placeTypes,
+        anchor: 'hotel',
+        dueAtMs: hotelIntent.dueAtMs,
+      });
+      if (hotelIntent.needsHotel && !hotel) {
+        mem.setAwaitingHotelName(true);
+      }
+      const follow = detectFollowUpBuyIntent(text);
+      let reply = hotelIntent.reply;
+      if (follow) {
+        useShoppingTaskStore.getState().addTask({
+          itemLabel: follow.itemLabel,
+          placeTypes: follow.placeTypes,
+          anchor: 'store',
+          dueAtMs: follow.dueAtMs,
+          dependsOnTaskId: first.id,
+        });
+        reply += ` Danach ${follow.itemLabel} — aber erst wenn ${hotelIntent.itemLabel} erledigt ist.`;
+      }
+      return { handled: true, reply };
+    }
+  }
+
+  // Shopping / Errand: „Ich muss noch eine Zahnbürste kaufen“
+  const shopIntent = detectShoppingTaskIntent(text);
+  if (shopIntent) {
+    useShoppingTaskStore.getState().addTask({
+      itemLabel: shopIntent.itemLabel,
+      placeTypes: shopIntent.placeTypes,
+      anchor: shopIntent.anchor,
+      dueAtMs: shopIntent.dueAtMs,
+    });
+    return { handled: true, reply: shopIntent.reply };
+  }
+
+  // Shopping done: „Hab die Zahnbürste gekauft“ / „erledigt“
+  const shopDone = detectShoppingTaskDoneIntent(text);
+  if (shopDone) {
+    const open = useShoppingTaskStore.getState().getOpenTasks();
+    if (open.length > 0) {
+      let match = open[0];
+      if (shopDone.itemHint) {
+        const hint = shopDone.itemHint.toLowerCase();
+        match =
+          open.find((t) => t.itemLabel.toLowerCase().includes(hint)) ??
+          open.find((t) => hint.includes(t.itemLabel.toLowerCase())) ??
+          match;
+      }
+      if (match) {
+        useShoppingTaskStore.getState().completeTask(match.id);
+        useFinnusStore.getState().setActiveConciergeCard(null);
+        return {
+          handled: true,
+          reply: `Super — ${match.itemLabel} ist erledigt, Erinnerung weg.`,
+        };
+      }
+    }
+  }
+
+  // Hard override: explicit new destination wipes queue
+  const hardDest = infoOnly ? null : detectHardNavOverride(text);
+  if (hardDest && (store.navActive || store.multiStopTour)) {
+    const result = await hardOverrideNavigationTo(hardDest);
+    return {
+      handled: true,
+      startedNav: result.ok,
+      reply: result.reply,
+    };
+  }
+  // Hard override even without active nav (= direct start)
+  // Exception: named gastro → Concierge (confirm + Route starten + Tisch/Speisekarte)
+  if (hardDest && !detectChainedNavIntent(text)) {
+    const gastroNamed =
+      /\b(restaurant|café|cafe|bistro|imbiss)\b/iu.test(text) ||
+      /\b(tisch|reservier|speisekarte)\b/iu.test(text);
+    if (!gastroNamed) {
+      const result = await hardOverrideNavigationTo(hardDest);
+      return {
+        handled: true,
+        startedNav: result.ok,
+        reply: result.reply,
+      };
+    }
+    // fall through → Concierge path in voice input
+  }
+
+  // Multi-Stop-Kette: „zurück zum Hotel, vorher noch zu Aldi“
+  const chained = infoOnly ? null : detectChainedNavIntent(text);
+  if (chained) {
+    const result = await planAndStartChainedNav(chained);
+    return {
+      handled: true,
+      startedNav: result.ok,
+      reply: result.reply,
+    };
+  }
+
+  // Contextual POI discovery (free-roam or on-the-way with active route)
+  const discovery = infoOnly ? null : detectDiscoveryIntent(text);
+  if (discovery) {
+    if (lat == null || lng == null) {
+      return {
+        handled: true,
+        reply:
+          'Ich brauche kurz deinen Standort — GPS an, dann suche ich voraus.',
+      };
+    }
+    const result = await runContextualDiscovery({
+      placeType: discovery.type,
+      label: discovery.label,
+      origin: { lat, lng },
+      headingDeg: getDeviceHeadingDeg(),
+      movementBearingDeg: getMovementBearingDeg(),
+      emergency: discovery.emergency,
+    });
+    presentDiscoveryAsConcierge(result);
+    return {
+      handled: true,
+      reply: result.speech,
+      startedNav: result.autoInserted,
+    };
+  }
+
+  // Multistopp: Joggen / Erkunden / Frühstück-Route
+  const multiIntent = infoOnly ? null : detectMultiStopIntent(text);
+  if (multiIntent) {
+    if (lat == null || lng == null) {
+      return {
+        handled: true,
+        reply:
+          'Ich brauche kurz deinen Standort — GPS an, dann plane ich die Route.',
+      };
+    }
+    if (multiIntent.needsParams) {
+      return {
+        handled: true,
+        reply: CIRCUIT_PROMPT,
+      };
+    }
+    const tour = await planMultiStopTour(multiIntent, { lat, lng });
+    if (!tour) {
+      return {
+        handled: true,
+        reply:
+          'Ich finde gerade zu wenig passende Orte für so eine Tour. Versuch’s mit „Ort erkunden“ oder einem konkreten Ziel.',
+      };
+    }
+    const started = await startMultiStopTour(tour);
+    return {
+      handled: true,
+      startedNav: started.ok,
+      reply: started.reply,
+    };
+  }
+
+  // Tour abbrechen
+  if (
+    /\b(tour\s+(abbrechen|stopp|beenden)|stopp\s+die\s+tour|keine\s+tour\s+mehr)\b/iu.test(
+      text,
+    )
+  ) {
+    clearMultiStopTour();
+    return {
+      handled: true,
+      reply: 'Alles klar — Multistopp-Tour ist beendet.',
+    };
+  }
+
   // 0) Live-Präferenzen („Ich bin Vegetarier“ …)
   const learned = detectLearnedPreference(text);
   if (learned) {
@@ -477,6 +976,7 @@ export async function handleMemoryIntent(
       experiencePref: learned.experiencePref,
       toneStyle: learned.toneStyle,
       tonalities: learned.toneStyle ? tonalities : undefined,
+      storyDepth: learned.storyDepth,
     });
     // Rollstuhl / Schwanger auch in accessibility-Array spiegeln
     if (/rollstuhl/i.test(learned.learnedFact)) {
@@ -506,38 +1006,62 @@ export async function handleMemoryIntent(
 
   // 1) Warte auf Hotel-Namen nach "Nein"
   if (mem.awaitingHotelName) {
-    const named =
-      extractHotelName(text) ||
-      (/^[A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-' ]{1,40}$/u.test(text)
-        ? (/^hotel\b/i.test(text) ? text : `Hotel ${text}`)
-        : null);
-    if (!named) {
+    // Never trap shopping / multi-goal / fact questions as hotel names
+    const skipNameTrap =
+      (isPoiInfoQuestion(text) && !extractHotelName(text)) ||
+      looksLikeMultiGoalSpeech(text) ||
+      /\b(?:zahnbürste|zahnbuerste|cola|bier|wasser|einkauf|kaufen|supermarkt|brauch)\b/iu.test(
+        text,
+      );
+    if (!skipNameTrap) {
+      const named = extractHotelName(text);
+      // Only accept explicit hotel naming — never raw shopping fragments
+      if (!named) {
+        // Don't block — let LLM / Gemini answer
+        return { handled: false };
+      }
+      const poi = await findHotelPoiByName(named);
+      const entity = mem.addOrUpdateEntity({
+        type: 'hotel',
+        name: named,
+        isConfirmed: true,
+        poiId: poi?.id,
+        lat: poi?.lat,
+        lng: poi?.lng,
+        visitedAt: new Date().toISOString(),
+      });
+      mem.setAwaitingHotelName(false);
+      mem.setPendingHotelConfirm(null);
+      const pendingChain = takePendingChainedNav();
+      if (pendingChain && !isPoiInfoQuestion(text)) {
+        const chained = await planAndStartChainedNav({
+          ...pendingChain,
+          finalIsHotel: true,
+          finalLabel: 'Hotel',
+        });
+        return {
+          handled: true,
+          startedNav: chained.ok,
+          reply: chained.ok
+            ? chained.reply
+            : `Alles klar, ${entity.name} ist gespeichert. ${chained.reply}`,
+        };
+      }
+      // Fact question while naming hotel → save only, do NOT navigate
+      if (isPoiInfoQuestion(text) || !isExplicitNavIntent(text)) {
+        return {
+          handled: false,
+        };
+      }
+      const ok = await navigateToEntity(entity);
       return {
         handled: true,
-        reply:
-          'Sag mir einfach den Namen — zum Beispiel Hotel Bluezeit. Dann merk ich ihn mir direkt.',
+        startedNav: ok,
+        reply: ok
+          ? `Alles klar, ${entity.name} ist gespeichert — ich führ dich hin.`
+          : `Ich merk mir ${entity.name}. Die genaue Position hab ich noch nicht — sobald wir dort sind, fixiere ich sie.`,
       };
     }
-    const poi = await findHotelPoiByName(named);
-    const entity = mem.addOrUpdateEntity({
-      type: 'hotel',
-      name: named,
-      isConfirmed: true,
-      poiId: poi?.id,
-      lat: poi?.lat,
-      lng: poi?.lng,
-      visitedAt: new Date().toISOString(),
-    });
-    mem.setAwaitingHotelName(false);
-    mem.setPendingHotelConfirm(null);
-    const ok = await navigateToEntity(entity);
-    return {
-      handled: true,
-      startedNav: ok,
-      reply: ok
-        ? `Alles klar, ${entity.name} ist gespeichert — ich führ dich hin.`
-        : `Ich merk mir ${entity.name}. Die genaue Position hab ich noch nicht — sobald wir dort sind, fixiere ich sie.`,
-    };
   }
 
   // 2) Ja/Nein auf Hotel-Kandidaten-Frage
@@ -547,6 +1071,7 @@ export async function handleMemoryIntent(
     if (NEGATION.test(text)) {
       mem.setPendingHotelConfirm(null);
       mem.setAwaitingHotelName(true);
+      takePendingChainedNav(); // drop chain — user will restate
       return {
         handled: true,
         reply: 'Alles gut. Wie heißt dein Hotel? Dann merke ich mir das direkt!',
@@ -555,13 +1080,36 @@ export async function handleMemoryIntent(
     if (isNavAffirmation(text) || /^(ja|jo|jap|genau|stimmt|richtig)\b/iu.test(text)) {
       if (candidate) {
         mem.confirmEntity(id);
-        const ok = await navigateToEntity(candidate);
+        const pendingChain = takePendingChainedNav();
+        if (pendingChain) {
+          const chained = await planAndStartChainedNav({
+            ...pendingChain,
+            finalIsHotel: true,
+            finalLabel: 'Hotel',
+          });
+          return {
+            handled: true,
+            startedNav: chained.ok,
+            reply: chained.ok
+              ? chained.reply
+              : `Super — ${candidate.name} ist dein Hotel. ${chained.reply}`,
+          };
+        }
+        const wantsNav =
+          /\b(navigier|bring|führ|fuehr|zurück|zurueck|hin|los)\b/iu.test(text);
+        if (wantsNav) {
+          const ok = await navigateToEntity(candidate);
+          return {
+            handled: true,
+            startedNav: ok,
+            reply: ok
+              ? `Super — ${candidate.name} ist dein Hotel. Ich führ dich hin.`
+              : `${candidate.name} ist gespeichert. Route krieg ich gerade nicht hin.`,
+          };
+        }
         return {
           handled: true,
-          startedNav: ok,
-          reply: ok
-            ? `Super — ${candidate.name} ist dein Hotel. Ich führ dich zurück.`
-            : `${candidate.name} ist gespeichert. Route krieg ich gerade nicht hin.`,
+          reply: `Super — ${candidate.name} ist jetzt dein Hotel. Merk ich mir.`,
         };
       }
     }
@@ -604,7 +1152,7 @@ export async function handleMemoryIntent(
   }
 
   // 4) Generisches "Bring mich zum Hotel"
-  if (HOTEL_NAV.test(text)) {
+  if (HOTEL_NAV.test(text) && !looksLikeMultiGoalSpeech(text)) {
     const confirmed = mem.getConfirmedHotel();
     if (confirmed) {
       const ok = await navigateToEntity(confirmed);
@@ -613,7 +1161,7 @@ export async function handleMemoryIntent(
         startedNav: ok,
         reply: ok
           ? `Alles klar, ich führe dich zurück zum ${confirmed.name}.`
-          : `Dein Hotel ${confirmed.name} kenn ich — Route gerade nicht möglich.`,
+          : `${confirmed.name} hab ich — die Route baut gerade nicht. Wir versuchen’s gleich nochmal oder du nennst mir die Adresse.`,
       };
     }
 
@@ -624,7 +1172,7 @@ export async function handleMemoryIntent(
       mem.setPendingHotelConfirm(candidate.id);
       return {
         handled: true,
-        reply: `Ich habe das ${candidate.name} in deinem Speicher. Ist das dein Hotel?`,
+        reply: `Ich habe noch ${candidate.name} gespeichert — ist das dein Hotel?`,
       };
     }
 

@@ -7,7 +7,14 @@ alwaysApply: true
 
 ## Survival Mode (Battery)
 
-Akku unter 15%: proaktiv Audio-first vorschlagen + Café mit Steckdosen anbieten.
+Akku unter 15%: proaktiv Audio-first + **konkrete** Ladeoptionen suchen (stadt-agnostisch):
+
+1. Powerbank-Automat / Sharing (OSM + Nearby)
+2. Handy-Ladestation
+3. Café / Ort mit Steckdose
+
+Just-Do-It: Route-Buttons mitliefern — nicht nur „Brauchst du ein Café?“ fragen.
+SSOT: `survivalMode.ts` · `phoneChargeDiscovery.ts`
 
 ## Manual Mode Override & Auto-Recheck
 

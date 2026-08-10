@@ -1,0 +1,382 @@
+{
+  "atIso": "2026-08-08T00:29:21.724Z",
+  "title": "Findus Live-Qualität — echte User-Fragen",
+  "passThreshold": 0.85,
+  "passed": 20,
+  "total": 20,
+  "ratio": 1,
+  "gateOk": true,
+  "mustPassed": 10,
+  "mustTotal": 10,
+  "mustGateOk": true,
+  "playbook": [
+    "App starten, GPS an, Mikro bereit",
+    "Jede Frage laut stellen (oder tippen)",
+    "Bewerten: Bridge menschlich? Lead in 5s? Pflicht-Fakten? Richtige Buttons?",
+    "Fails hier notieren — Correction Learning / Bug"
+  ],
+  "gpsHint": "Ideal: Hamburg oder aktuelle Reise-Stadt mit GPS an",
+  "scenarios": [
+    {
+      "id": "lq_cinema_tonight",
+      "question": "Ich möchte heute Abend ins Kino, welche Filme laufen in der Nähe?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "tonight_live",
+      "gotJob": "tonight_live",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Nur zukünftige Spielzeiten",
+        "Preis wenn belegt genannt",
+        "Ticket- und/oder Trailer-Button"
+      ]
+    },
+    {
+      "id": "lq_cinema_spiderman",
+      "question": "Ich will Spider-Man heute im Kino sehen",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "tonight_live",
+      "gotJob": "tonight_live",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Nur Kinos mit Spider-Man heute/morgen",
+        "Ticket-Button wenn URL da"
+      ]
+    },
+    {
+      "id": "lq_pannfisch_elb",
+      "question": "Welches Restaurant bietet Hamburger Pannfisch mit direktem Elbblick?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "dining_hard_match",
+      "gotJob": "dining_hard_match",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Nur Orte mit belegtem Match",
+        "Speisekarte/Web-Button",
+        "Kein Fake-Preis"
+      ]
+    },
+    {
+      "id": "lq_hotel_weekend",
+      "question": "Hotel fürs Wochenende von Freitag bis Sonntag mit Pool und Sauna unter 500 Euro",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "stay_search",
+      "gotJob": "stay_search",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Zwei Hotel-Optionen",
+        "Stay22/Buchungs-Link mit Datum vorausgefüllt",
+        "Pool/Sauna nur wenn belegt"
+      ]
+    },
+    {
+      "id": "lq_foot_emergency",
+      "question": "Mein Freund hat den Fuß gebrochen, wo können wir hin?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "emergency_care",
+      "gotJob": "emergency_care",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Nicht zum Zahnarzt",
+        "Unfall/Notaufnahme/Orthopädie",
+        "Route + Anrufen"
+      ]
+    },
+    {
+      "id": "lq_tooth",
+      "question": "Ich habe akute Zahnschmerzen, welcher Zahnarzt hat jetzt Notdienst?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "emergency_care",
+      "gotJob": "emergency_care",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Zahnarzt/Notdienst",
+        "Website-Urlaub übersprungen wenn erkannt"
+      ]
+    },
+    {
+      "id": "lq_spikeball",
+      "question": "Wir wollen in Laboe Spikeball spielen, möglichst mit kostenlosem Parkplatz",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "activity_sport",
+      "gotJob": "activity_sport",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Strandfläche / Alternative wenn eng",
+        "Parken mitgedacht",
+        "Bridge motivierend, nicht doppeltes Intro"
+      ]
+    },
+    {
+      "id": "lq_transit_hbf",
+      "question": "Wie komme ich am schnellsten mit öffentlichen Verkehrsmitteln zum Hauptbahnhof?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "transit_live",
+      "gotJob": "transit_live",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Konkrete Verbindung oder ehrliche Störung",
+        "Alternative bei Bau/Ausfall"
+      ]
+    },
+    {
+      "id": "lq_rooftop_outfit",
+      "question": "Ich möchte heute Abend auf eine Rooftop-Party — welche gibt es und was soll ich anziehen?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "nightlife_vibe",
+      "gotJob": "nightlife_vibe",
+      "confidence": 0.9,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Party/Orte + Outfit in einer Antwort",
+        "Keine Permission-Frage ohne Ergebnis"
+      ]
+    },
+    {
+      "id": "lq_points_cheer",
+      "question": "Ich habe die erste Runde gewonnen, wie viele Punkte bekomme ich dann?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "fact_number",
+      "gotJob": "fact_number",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Bridge = Glückwunsch, nicht Recherche-Meta",
+        "Zahl/Regel zuerst in der Hauptantwort"
+      ]
+    },
+    {
+      "id": "lq_museum_trex",
+      "question": "Wo kann ich einen Tyrannosaurus Rex sehen und welches Museum lohnt sich mehr?",
+      "tier": "device_should",
+      "ok": true,
+      "score": 1,
+      "expectJob": "museum_theme",
+      "gotJob": "museum_theme",
+      "confidence": 0.8500000000000001,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Vergleich zweier Optionen",
+        "Preis/Ticket wenn belegt"
+      ]
+    },
+    {
+      "id": "lq_day_budget",
+      "question": "Mein Budget für heute ist 50 Euro — plane mir Mittagessen, eine Aktivität und einen Snack am Abend",
+      "tier": "device_should",
+      "ok": true,
+      "score": 1,
+      "expectJob": "day_plan_budget",
+      "gotJob": "day_plan_budget",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Drei Teile beantwortet",
+        "Buttons zu genannten Stops"
+      ]
+    },
+    {
+      "id": "lq_weather_outfit",
+      "question": "Was soll ich heute Abend anziehen, es wird windig am Wasser?",
+      "tier": "device_should",
+      "ok": true,
+      "score": 1,
+      "expectJob": "weather_outfit",
+      "gotJob": "weather_outfit",
+      "confidence": 0.9,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Konkrete Kleidung zuerst"
+      ]
+    },
+    {
+      "id": "lq_elbe_width",
+      "question": "Wie breit ist die Elbe hier ungefähr?",
+      "tier": "device_should",
+      "ok": true,
+      "score": 1,
+      "expectJob": "fact_number",
+      "gotJob": "fact_number",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Zahl zuerst",
+        "Stichpunkte mit Ziffern"
+      ]
+    },
+    {
+      "id": "lq_scooter",
+      "question": "Wo kann ich mir für heute einen E-Scooter leihen?",
+      "tier": "device_should",
+      "ok": true,
+      "score": 1,
+      "expectJob": "mobility_rent",
+      "gotJob": "mobility_rent",
+      "confidence": 0.8500000000000001,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Anbieter + Link/App-Hinweis"
+      ]
+    },
+    {
+      "id": "lq_pharmacy_night",
+      "question": "Wo ist die nächste Apotheke, die auch nachts geöffnet hat?",
+      "tier": "device_should",
+      "ok": true,
+      "score": 1,
+      "expectJob": "emergency_care",
+      "gotJob": "emergency_care",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Nacht/Notdienst bevorzugt"
+      ]
+    },
+    {
+      "id": "lq_pass_lost",
+      "question": "Ich habe meinen Reisepass verloren, wo ist mein Konsulat?",
+      "tier": "device_should",
+      "ok": true,
+      "score": 1,
+      "expectJob": "safety_lost",
+      "gotJob": "safety_lost",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Nächster Schritt klar",
+        "kein Gelaber"
+      ]
+    },
+    {
+      "id": "lq_toilet",
+      "question": "Wo gibt es hier saubere öffentliche Toiletten?",
+      "tier": "device_should",
+      "ok": true,
+      "score": 1,
+      "expectJob": "friction_now",
+      "gotJob": "friction_now",
+      "confidence": 0.9,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Kurz + Nav-Button"
+      ]
+    },
+    {
+      "id": "lq_poi_building",
+      "question": "Was ist das für ein großes Gebäude mit der goldenen Kuppel dort drüben?",
+      "tier": "device_should",
+      "ok": true,
+      "score": 1,
+      "expectJob": "poi_identify",
+      "gotJob": "poi_identify",
+      "confidence": 0.9,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Visuell vor Name wenn sinnvoll",
+        "dichte Fakten"
+      ]
+    },
+    {
+      "id": "lq_nav_fast",
+      "question": "Bring mich schnell zum Hauptbahnhof",
+      "tier": "device_should",
+      "ok": true,
+      "score": 1,
+      "expectJob": "nav_route",
+      "gotJob": "nav_route",
+      "confidence": 0.8,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Route startklar",
+        "wenig Geschwafel"
+      ]
+    }
+  ]
+}

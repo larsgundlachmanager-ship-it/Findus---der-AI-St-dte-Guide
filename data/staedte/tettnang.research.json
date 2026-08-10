@@ -1,0 +1,43 @@
+{
+  "stadt": "Tettnang",
+  "landkreis": "Bodenseekreis",
+  "bundesland": "Baden-Württemberg",
+  "zusatz": "Hopfenstadt (seit 2025)",
+  "city_history": "Tettnang (882 als Tettinanc / Tetinanc erstmals urkundlich, Übergabe von Ländereien durch den Großbauern Cunzo an das Kloster St. Gallen) liegt im Schussental nahe dem Bodensee. Fast 534 Jahre Residenz der Grafen von Montfort; Stadtrechte unter Hugo VI., 1298 durch König Albrecht I. bestätigt. Der prunkvolle Wiederaufbau des Neuen Schlosses nach dem Brand 1753 trieb die Verschuldung — 1779 Konkurs, 1780 Abtretung an Österreich; danach Bayern (1805–1810) und ab 1810 Württemberg. Im 19. Jahrhundert rettete der Hopfenanbau (Anstoß König Wilhelm I. 1819; Durchbruch 1844 durch Unteramtsarzt Johann Nepomuk Fidel Lentz) die Region und verdrängte den Weinbau. Seit 2025 führt die Stadt den Zusatz „Hopfenstadt“. Geologie: sandig-kalkreicher Niederterrassenschotter der Würmeiszeit; Bodensee als Klimapuffer.",
+  "nicht_ortsspezifische_fakten": [
+    "Kein eigener Bahnanschluss — ZOB Bärenplatz (BODO).",
+    "Fasnet: Hopfennarr, Rote Spinne, Gätterlet, Hopfensau (Narrenzunft).",
+    "Feste: Montfortfest, Bähnlesfest — Termine LIVE.",
+    "Hopfen: Premium-/Exportregion; aktuelle Flächen/Erträge immer LIVE prüfen.",
+    "Klinik Tettnang ohne stationäre Notaufnahme — FN/RV; 112."
+  ],
+  "infra": {
+    "transit": [
+      "ZOB Bärenplatz: BODO, u. a. Regiobus 900, Stadtbus 224/226.",
+      "Nächste Bahn: Meckenbeuren oder Friedrichshafen."
+    ],
+    "service": [
+      "Tourist-Info Montfortplatz 2.",
+      "Trinkwasser: Kronenbrunnen, Loretobrunnen, Grabenstraße; Refill.",
+      "Nette Toilette / barrierefreie WC Forsthaus-Nebengebäude."
+    ],
+    "live": [
+      "LIVE: Schloss-/Museumstickets und Öffnungen.",
+      "LIVE: BODO-Fahrpläne.",
+      "LIVE: Notaufnahme/Apotheken-Notdienst.",
+      "LIVE: Hopfenflächen, Erträge, Erntesaison."
+    ]
+  },
+  "source": "Master-Datenprofil und Historisch-Geografischer Strukturbericht (User, 2026-08)",
+  "orte": [],
+  "master_followup_merged_at": "2026-08-02T23:06:59.814Z",
+  "master_followup_notes": [
+    "Rappertsweiler Stele 2025 / Kehlhof",
+    "Schießhaus 1736 Schlosspark West",
+    "Hopfenpfad 7.7km 11 Stationen",
+    "Fliegerdenkmal Do 217 1938 Schäferhof",
+    "Wildpark Sonnenhalde Neukirch",
+    "Klinik closed May 2026 directory",
+    "Spectrum Kultur / Wochenmarkt 1379 / Refill toilets audit"
+  ]
+}

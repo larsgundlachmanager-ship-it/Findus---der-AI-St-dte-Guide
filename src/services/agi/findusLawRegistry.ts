@@ -1,5 +1,5 @@
 /**
- * Findus AGI Law Registry — vollständige 190-Gesetze-Registratur.
+ * Findus AGI Law Registry — vollständige 202-Gesetze-Registratur.
  * Top-20 Verfassung immer im Prompt; Kontext max. 10 per ruleRouter.
  * Quelle: .cursor/rules/findus-agi-rules.mdc
  */
@@ -133,7 +133,7 @@ export const FINDUS_ALL_LAWS: readonly FindusLaw[] = [
 
   // —— UI_ACTIONS / AFFILIATE / FOOD (051–068) ——
   L(51, 'AFFILIATE', 'Affiliate (Stay22, Bounce, GYG, Uber) priorisiert als Button.'),
-  L(52, 'UI_ACTIONS', 'visualBullets max 3 Stichpunkte, keine ganzen Sätze.', { hardGuardrail: true, constitution: true }),
+  L(52, 'UI_ACTIONS', 'visualBullets max 3 Stichpunkte, je max 1 Zeile, keine ganzen Absätze.', { hardGuardrail: true, constitution: true }),
   L(53, 'UI_ACTIONS', 'Keine Buttons die ins Leere führen; Buttons 1:1 zur Speech.', { hardGuardrail: true, constitution: true }),
   L(54, 'UI_ACTIONS', 'Deep-Links: Speisekarte/Warenkorb, nicht Startseite.'),
   L(55, 'UI_ACTIONS', 'Abbrechen → Bestätigungs-Button rendern.'),
@@ -146,7 +146,7 @@ export const FINDUS_ALL_LAWS: readonly FindusLaw[] = [
   L(62, 'UI_ACTIONS', 'Primary Button („Route starten“) farblich hervorheben.'),
   L(63, 'UI_ACTIONS', 'Cards nach 5 Min Inaktivität abräumen.'),
   L(64, 'UI_ACTIONS', 'Offline-Icon wenn rein lokal (SQLite).'),
-  L(65, 'UI_ACTIONS', 'Share: Ankunftszeit/Tagesplan WhatsApp anbieten.'),
+  L(65, 'UI_ACTIONS', 'Share: Ankunftszeit per WhatsApp anbieten.'),
   L(66, 'UI_ACTIONS', 'Foto-Spot → Kamera-öffnen Button.'),
   L(67, 'FOOD_EXP', 'Fremdsprachige Speisekarte → Übersetzen-Button.'),
   L(68, 'EVENT_CULTURE', '50m vor Einlass → Tickets/QR automatisch.'),
@@ -258,12 +258,12 @@ export const FINDUS_ALL_LAWS: readonly FindusLaw[] = [
   L(166, 'RESEARCH_FACTS', 'Alles zu → ehrlich + Alternativen (Sterne am Strand).'),
 
   // —— AFFILIATE (167–172) ——
-  L(167, 'AFFILIATE', 'Affiliate-Link hat Prio vor Normal-Link.'),
-  L(168, 'HOTEL_CHECKOUT', 'User schwärmt → Stay22-Verlängerung charmant anbieten.'),
-  L(169, 'AFFILIATE', 'GYG/Musement direkt zum Checkout.'),
-  L(170, 'AFFILIATE', 'Taxi → zuerst Uber prüfen wenn Affiliate aktiv.'),
-  L(171, 'LUGGAGE_GEAR', 'Koffer-Problem → Bounce-Affiliate-Check.'),
-  L(172, 'AFFILIATE', 'Festland/Roadtrip → EconomyBookings Mietwagen.'),
+  L(167, 'AFFILIATE', 'Hilfe zuerst: Partner-Button nur wenn er echtes Problem löst — User soll Dankbarkeit spüren, nicht Pitch.'),
+  L(168, 'HOTEL_CHECKOUT', 'Checkout vs. späteres Event → noch eine Nacht? Stay22/Verlängerung charmant anbieten.'),
+  L(169, 'AFFILIATE', 'GYG/Musement/Tiqets zum Kaufpfad wenn Tour/Museum im Plan oder gewünscht.'),
+  L(170, 'AFFILIATE', 'Flughafen-Anreise: Transfer und/oder Mietwagen als Hilfe anbieten.'),
+  L(171, 'LUGGAGE_GEAR', 'Koffer vor Flug/Früheinchecken → Bounce/Radical als Hilfe.'),
+  L(172, 'AFFILIATE', 'Roadtrip/Flughafen-Weiterfahrt → DiscoverCars Mietwagen.'),
 
   // —— SELF_CHECK (173–180) ——
   L(173, 'SELF_CHECK', 'Adressen/PLZ/Links aus Audio gelöscht?', { hardGuardrail: true }),
@@ -286,6 +286,20 @@ export const FINDUS_ALL_LAWS: readonly FindusLaw[] = [
   L(188, 'SYSTEM_GUARD', 'Keine Platzhalter/Dummy-Texte.', { constitution: true }),
   L(189, 'SYSTEM_GUARD', 'Offline → ehrlich kommunizieren + SQLite-Cache.', { constitution: true }),
   L(190, 'NAV_EXPLORE', 'Entdeckte Orte live in Stempelkarte.'),
+
+  // —— INTENT / MUTE / TODOS (191–202) ——
+  L(191, 'SYSTEM_GUARD', 'Anfrage in Infos/Fragen/Ziele/Absichten zerlegen und jedes Teil beantworten.'),
+  L(192, 'SYSTEM_GUARD', 'Infos bestätigen; Absicht am Ende prüfen.'),
+  L(193, 'LOGISTICS_TIME', '„Bescheid / nicht vergessen“ → immer Push/Trigger.', { constitution: true }),
+  L(194, 'LOGISTICS_TIME', '„Sag Bescheid wenn ich los muss“ → Leave-by-Trigger.'),
+  L(195, 'DAY_PLAN', 'Planung für später → Tour speichern (savedForLater).'),
+  L(196, 'FLIGHT_LOGISTICS', 'ÖPNV/Flug/Taxi/Rad/Fuß trennen — Flug nicht still auf Bahn.', { constitution: true }),
+  L(197, 'LOGISTICS_TIME', 'Aufenthalt/Früh-da Defaults + Leave-by rückwärts.'),
+  L(198, 'LOGISTICS_TIME', 'Abreise: offene Todos prüfen und nachfragen.'),
+  L(199, 'UI_ACTIONS', 'Wo-hin: Todo-Abhaken-Buttons anbieten.'),
+  L(200, 'DAY_PLAN', 'Empfehlung: Preis-Leistung, Zeit, Aufwand, Verfügbarkeit.'),
+  L(201, 'AUDIO_TONE', 'Museum: Mute + Wake (Zeit/Geofence) erklären.'),
+  L(202, 'SYSTEM_GUARD', 'Dicht am User-Wortlaut bleiben — nicht uminterpretieren.'),
 ] as const;
 
 /** Top-20 Verfassung — stabile C-IDs, referenzieren Kernprinzipien. */
@@ -300,7 +314,7 @@ export const FINDUS_CONSTITUTION: FindusLaw[] = [
   { id: 'C08', category: 'AUDIO_TONE', module: 'AUDIO_TONE', constitution: true, sourceNo: 5, rule: 'Max. 2 Rückfragen auf einmal; nur bei echter Blockade.' },
   { id: 'C09', category: 'FOOD_EXP', module: 'FOOD_EXP', constitution: true, sourceNo: 130, rule: 'Ernährung/Allergien immer ungefragt auf jeden Restaurant-Vorschlag anwenden.' },
   { id: 'C10', category: 'SAFETY_HEALTH', module: 'SAFETY_HEALTH', constitution: true, sourceNo: 95, rule: 'Arzt/Apotheke/Toilette: sofort schnellster Weg — alle anderen Regeln zurückstellen.' },
-  { id: 'C11', category: 'UI_ACTIONS', module: 'UI_ACTIONS', constitution: true, hardGuardrail: true, sourceNo: 52, rule: 'visualBullets max 3 Stichpunkte, keine ganzen Sätze.' },
+  { id: 'C11', category: 'UI_ACTIONS', module: 'UI_ACTIONS', constitution: true, hardGuardrail: true, sourceNo: 52, rule: 'visualBullets max 3 Stichpunkte, je max 1 Zeile.' },
   { id: 'C12', category: 'UI_ACTIONS', module: 'UI_ACTIONS', constitution: true, hardGuardrail: true, sourceNo: 59, rule: 'Button-Labels max 3–4 Worte.' },
   { id: 'C13', category: 'AUDIO_TONE', module: 'AUDIO_TONE', constitution: true, sourceNo: 6, rule: 'Keine Füllphrasen am Satzanfang; Bestätigungen extrem knapp („Check“, „Machen wir“).' },
   { id: 'C14', category: 'AUDIO_TONE', module: 'AUDIO_TONE', constitution: true, sourceNo: 9, rule: 'Themenwechsel: altes Thema im Audio sofort verwerfen.' },

@@ -1,0 +1,14 @@
+---
+description: Bei Store-Releases (Android/iOS) Änderungen zusammenfassen und Release Notes direkt mitliefern
+alwaysApply: true
+---
+
+# Findus — Release Notes mit Upload
+
+Bei **neuer Android-/iOS-Version**, Play-/App-Store-Upload oder „neue Version“:
+
+1. **Selbst erkennen**, was seit dem letzten Store-Build neu/geändert ist (Git-Log, Diff, Session).
+2. Kurze **nutzerverständliche** Release Notes auf Deutsch schreiben (Play: max. ~500 Zeichen; keine internen Tech-Details wie Keystore/BOM).
+3. Notes **sofort mitschicken** an den User (Copy-Paste-fertig) **und** unter `releases/<version>/whatsnew-de-DE-v<versionCode>.txt` speichern.
+4. Wenn technisch möglich: Notes **im selben Submit-Schritt** an Play/ASC mitgeben — nicht erst hinterher nachfragen.
+5. Nicht warten, bis der User extra nach Release Notes fragt.

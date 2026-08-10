@@ -37,6 +37,7 @@ type UserProfileState = {
     experiencePref?: { key: string; value: 'yes' | 'no' | 'neutral' };
     toneStyle?: FindusToneStyle;
     tonalities?: string[];
+    storyDepth?: 'short' | 'normal' | 'long';
   }) => Promise<UserProfile>;
   getEngine: () => PersonaEngineProfile;
 };
@@ -145,10 +146,29 @@ export const useUserProfileStore = create<UserProfileState>((set, get) => ({
     if (opts.experiencePref) {
       experiencePrefs[opts.experiencePref.key] = opts.experiencePref.value;
     }
+    if (opts.storyDepth === 'short') {
+      experiencePrefs.geschichte_kurz = 'yes';
+      experiencePrefs.geschichte_lang = 'no';
+      experiencePrefs.mehr_geschichte = 'no';
+    } else if (opts.storyDepth === 'long') {
+      experiencePrefs.geschichte_lang = 'yes';
+      experiencePrefs.geschichte_kurz = 'no';
+      experiencePrefs.weniger_geschichte = 'no';
+    }
 
     const tonalities = opts.tonalities ?? base.tonalities;
     const resolvedTone =
       opts.toneStyle ?? pe.toneStyle ?? base.personaEngine?.toneStyle;
+
+    const storytelling = {
+      ...(base.storytelling ?? {}),
+      ...(opts.storyDepth ? { storyDepth: opts.storyDepth } : {}),
+      ...(opts.storyDepth === 'short'
+        ? { anecdoteLevel: 'aus' as const }
+        : opts.storyDepth === 'long'
+          ? { anecdoteLevel: 'hoch' as const }
+          : {}),
+    };
 
     const saved = await saveUserProfile({
       ...base,
@@ -159,6 +179,7 @@ export const useUserProfileStore = create<UserProfileState>((set, get) => ({
         ...(resolvedTone ? { toneStyle: resolvedTone } : {}),
       },
       experiencePrefs,
+      storytelling,
     });
     set({ profile: saved });
     return saved;

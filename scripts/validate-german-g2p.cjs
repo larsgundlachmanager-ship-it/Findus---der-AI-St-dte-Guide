@@ -1,5 +1,5 @@
 /**
- * Smoke-Test: deutsches IPA-G2P für Kokoro (ohne RN-Runtime).
+ * Smoke-Test: deutsches IPA-G2P für IPA (ohne RN-Runtime).
  * Usage: node scripts/validate-german-g2p.cjs
  */
 const fs = require('fs');
@@ -95,7 +95,7 @@ function applyRules(word) {
   return out;
 }
 
-function toKokoro(phones) {
+function toIPA(phones) {
   const flat = [];
   for (const raw of phones) for (const ch of raw) flat.push(MAP[ch] || ch);
   for (let i = 0; i < flat.length; i++) {
@@ -136,7 +136,7 @@ function phonemize(text) {
     const base = EXCEPTIONS[core.toLowerCase()]
       ? EXCEPTIONS[core.toLowerCase()].slice()
       : applyRules(core);
-    phones.push(...toKokoro(base));
+    phones.push(...toIPA(base));
     for (const ch of trail) if ('.,!?;:'.includes(ch) || ch === '?') phones.push(ch);
   }
   return phones.join('');

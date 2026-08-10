@@ -3,6 +3,9 @@ import {
   createDefaultProfile,
   normalizeLanguage,
   normalizeVoiceId,
+  type AudioOutputMode,
+  type MobilityPrefs,
+  type MustHaveStyleId,
   type TtsProvider,
   type UserProfile,
 } from '../types/userProfile';
@@ -24,7 +27,53 @@ function notify(profile: UserProfile | null): void {
 }
 
 function normalizeTtsProvider(raw: unknown): TtsProvider {
-  return raw === 'kokoro' ? 'kokoro' : 'openai';
+  // Legacy openai/local → Cartesia; system only if explicitly forced
+  if (raw === 'system') return 'system';
+  return 'cartesia';
+}
+
+/** Auto/Taxi-Bundle + Legacy-Werte (own_use / own_avoid) normalisieren. */
+function normalizeMobilityPrefs(raw: MobilityPrefs | undefined): MobilityPrefs {
+  const mp: MobilityPrefs = { ...(raw ?? {}) };
+  if (mp.car === 'own_use') mp.car = 'own';
+  if (mp.car === 'own_avoid') mp.car = 'none';
+  if (
+    mp.car !== 'taxi_love' &&
+    mp.car !== 'taxi_saves_time' &&
+    mp.car !== 'own' &&
+    mp.car !== 'none'
+  ) {
+    mp.car = null;
+  }
+  // taxi aus car spiegeln, wenn car gesetzt
+  if (mp.car === 'taxi_love') mp.taxi = 'love';
+  else if (mp.car === 'taxi_saves_time') mp.taxi = 'if_saves_time';
+  else if (mp.car === 'own' || mp.car === 'none') mp.taxi = 'no';
+  if (
+    typeof mp.learnedWalkKmh === 'number' &&
+    Number.isFinite(mp.learnedWalkKmh)
+  ) {
+    mp.learnedWalkKmh = Math.min(12, Math.max(1, mp.learnedWalkKmh));
+  } else {
+    mp.learnedWalkKmh = mp.learnedWalkKmh ?? null;
+  }
+  if (
+    typeof mp.learnedBikeKmh === 'number' &&
+    Number.isFinite(mp.learnedBikeKmh)
+  ) {
+    mp.learnedBikeKmh = Math.min(35, Math.max(6, mp.learnedBikeKmh));
+  } else {
+    mp.learnedBikeKmh = mp.learnedBikeKmh ?? null;
+  }
+  if (
+    typeof mp.learnedPaceAtMs === 'number' &&
+    Number.isFinite(mp.learnedPaceAtMs)
+  ) {
+    /* keep */
+  } else {
+    mp.learnedPaceAtMs = mp.learnedPaceAtMs ?? null;
+  }
+  return mp;
 }
 
 function syncTtsProviderToStore(provider: TtsProvider): void {
@@ -32,6 +81,14 @@ function syncTtsProviderToStore(provider: TtsProvider): void {
     useFinnusStore.getState().setTtsProvider(provider);
   } catch {
     // Store ggf. noch nicht bereit
+  }
+}
+
+function syncPremiumToStore(premium: boolean): void {
+  try {
+    useFinnusStore.getState().setIsPremiumSubscriber(premium);
+  } catch {
+    /* ignore */
   }
 }
 
@@ -46,13 +103,47 @@ function normalizeProfile(parsed: Partial<UserProfile>): UserProfile {
     typeof parsed.phoneNumber === 'string'
       ? parsed.phoneNumber
       : base.phoneNumber ?? '';
+  merged.gender =
+    parsed.gender === 'female' ||
+    parsed.gender === 'male' ||
+    parsed.gender === 'diverse' ||
+    parsed.gender === 'unspecified'
+      ? parsed.gender
+      : base.gender ?? null;
   merged.storytelling = {
     ...(base.storytelling ?? {}),
     ...(parsed.storytelling ?? {}),
   };
+  // Legacy-Duplikat „Berühmte Personen“ → kanonische Pref `personen`
+  {
+    const prefs = { ...(merged.experiencePrefs ?? {}) } as Record<
+      string,
+      string
+    >;
+    const legacy = prefs.beruehmte_personen;
+    if (legacy === 'yes' || legacy === 'no' || legacy === 'neutral') {
+      if (prefs.personen == null || prefs.personen === 'neutral') {
+        prefs.personen = legacy;
+      }
+      delete prefs.beruehmte_personen;
+      merged.experiencePrefs = prefs as UserProfile['experiencePrefs'];
+    }
+  }
   merged.learnedFacts = Array.isArray(parsed.learnedFacts)
     ? parsed.learnedFacts.map(String).filter(Boolean).slice(-40)
     : base.learnedFacts ?? [];
+  try {
+    const { normalizeLearnedRules } = require('./memory/correctionLearning') as {
+      normalizeLearnedRules: (raw: unknown) => UserProfile['learnedRules'];
+    };
+    merged.learnedRules = normalizeLearnedRules(
+      parsed.learnedRules ?? base.learnedRules ?? [],
+    );
+  } catch {
+    merged.learnedRules = Array.isArray(parsed.learnedRules)
+      ? (parsed.learnedRules as UserProfile['learnedRules'])
+      : base.learnedRules ?? [];
+  }
   merged.personaEngine = {
     ...(base.personaEngine ?? {}),
     ...(parsed.personaEngine ?? {}),
@@ -111,6 +202,31 @@ function normalizeProfile(parsed: Partial<UserProfile>): UserProfile {
   merged.dietaryTags = Array.isArray(parsed.dietaryTags)
     ? parsed.dietaryTags.map(String).filter(Boolean)
     : base.dietaryTags ?? [];
+  merged.allergyTags = Array.isArray(parsed.allergyTags)
+    ? parsed.allergyTags.map(String).filter(Boolean)
+    : base.allergyTags ?? [];
+  // Legacy „Kein Fisch“ → Allergie „Fisch“; Chip heißt nur noch „Fisch“ (positiv).
+  if (merged.dietaryTags.includes('kein_fisch')) {
+    merged.dietaryTags = merged.dietaryTags.filter((t) => t !== 'kein_fisch');
+    const allergies = (merged.allergyTags ?? []).filter((t) => t !== 'keine');
+    if (!allergies.includes('fisch')) allergies.push('fisch');
+    merged.allergyTags = allergies;
+  }
+  const travelModeAllowed = new Set([
+    'auto',
+    'bahn',
+    'flieger',
+    'fahrrad',
+    'wandern',
+    'reisebus',
+  ]);
+  merged.travelModes = Array.isArray(parsed.travelModes)
+    ? parsed.travelModes
+        .map(String)
+        .filter((id): id is import('../constants/conciergePrefs').TravelModeId =>
+          travelModeAllowed.has(id),
+        )
+    : base.travelModes ?? [];
   merged.allergies =
     typeof parsed.allergies === 'string'
       ? parsed.allergies
@@ -122,15 +238,147 @@ function normalizeProfile(parsed: Partial<UserProfile>): UserProfile {
   merged.touristMode =
     parsed.touristMode === 'tourist' ||
     parsed.touristMode === 'insider' ||
-    parsed.touristMode === 'mix'
+    parsed.touristMode === 'mix' ||
+    parsed.touristMode === 'local_gems'
       ? parsed.touristMode
       : base.touristMode ?? null;
+  const mustRaw = Array.isArray(parsed.mustHaveStyles)
+    ? parsed.mustHaveStyles.map(String)
+    : null;
+  const mustAllowed = new Set([
+    'tourist',
+    'insider',
+    'local_gems',
+    'nightlife',
+  ]);
+  merged.mustHaveStyles = (mustRaw
+    ? mustRaw.filter((id) => mustAllowed.has(id))
+    : base.mustHaveStyles ?? []) as MustHaveStyleId[];
+  // Legacy: einzelner touristMode → Must-have-Chip
+  if (
+    (!merged.mustHaveStyles || merged.mustHaveStyles.length === 0) &&
+    merged.touristMode &&
+    merged.touristMode !== 'mix'
+  ) {
+    merged.mustHaveStyles = [merged.touristMode as MustHaveStyleId];
+  }
+  const navMode = parsed.navExploreMode;
+  merged.navExploreMode =
+    navMode === 'quiet' || navMode === 'mute_until_dest' || navMode === 'full'
+      ? navMode
+      : base.navExploreMode ?? 'quiet';
   merged.notificationsEnabled =
     parsed.notificationsEnabled === undefined
       ? true
       : !!parsed.notificationsEnabled;
   merged.dataSaverMode = !!parsed.dataSaverMode;
+  merged.audioOutputMode = normalizeAudioOutputMode(parsed.audioOutputMode);
+  merged.isPremiumSubscriber = !!parsed.isPremiumSubscriber;
+  merged.accountMode =
+    parsed.accountMode === 'guest' ||
+    parsed.accountMode === 'registered' ||
+    parsed.accountMode === null
+      ? parsed.accountMode
+      : base.accountMode ?? null;
+  merged.newsletterOptIn = !!parsed.newsletterOptIn;
+  merged.newsletterOptInAt =
+    typeof parsed.newsletterOptInAt === 'string'
+      ? parsed.newsletterOptInAt
+      : parsed.newsletterOptInAt === null
+        ? null
+        : base.newsletterOptInAt ?? null;
+
+  try {
+    const {
+      migrateLegacyPersonality,
+    } = require('../constants/personalityMatrix') as typeof import('../constants/personalityMatrix');
+    const hasMatrix =
+      typeof parsed.coreRole === 'string' ||
+      typeof parsed.vibeTone === 'string' ||
+      typeof parsed.knowledgeStyle === 'string';
+    if (hasMatrix) {
+      merged.coreRole =
+        (parsed.coreRole as UserProfile['coreRole']) ?? base.coreRole;
+      merged.vibeTone =
+        (parsed.vibeTone as UserProfile['vibeTone']) ?? base.vibeTone;
+      merged.knowledgeStyle =
+        (parsed.knowledgeStyle as UserProfile['knowledgeStyle']) ??
+        base.knowledgeStyle;
+      merged.spleens = Array.isArray(parsed.spleens)
+        ? (parsed.spleens as UserProfile['spleens'])
+        : base.spleens ?? [];
+    } else {
+      const migrated = migrateLegacyPersonality({
+        characters: merged.characters,
+        tonalities: merged.tonalities,
+      });
+      merged.coreRole = migrated.coreRole;
+      merged.vibeTone = migrated.vibeTone;
+      merged.knowledgeStyle = migrated.knowledgeStyle;
+      merged.spleens = migrated.spleens;
+    }
+  } catch {
+    /* soft */
+  }
+  merged.voicePinnedByUser = !!parsed.voicePinnedByUser;
+  merged.humorOk = !!parsed.humorOk;
+  merged.geekMode = !!parsed.geekMode;
+  merged.freeChatOk = !!parsed.freeChatOk;
+  merged.openThreads = Array.isArray(parsed.openThreads)
+    ? parsed.openThreads.map(String).filter(Boolean).slice(-20)
+    : base.openThreads ?? [];
+  merged.mobilityPrefs = normalizeMobilityPrefs(
+    parsed.mobilityPrefs && typeof parsed.mobilityPrefs === 'object'
+      ? (parsed.mobilityPrefs as UserProfile['mobilityPrefs'])
+      : base.mobilityPrefs ?? {},
+  );
+  merged.tourLengthPref =
+    parsed.tourLengthPref === 'more_stops' ||
+    parsed.tourLengthPref === 'balanced' ||
+    parsed.tourLengthPref === 'fewer_stops'
+      ? parsed.tourLengthPref
+      : base.tourLengthPref ?? null;
+  merged.diningLevel =
+    parsed.diningLevel === 'fast_cheap' ||
+    parsed.diningLevel === 'decent' ||
+    parsed.diningLevel === 'highlights'
+      ? parsed.diningLevel
+      : base.diningLevel ?? null;
+  merged.accessibilityCare = !!parsed.accessibilityCare;
+  merged.spotifyTopArtists = Array.isArray(parsed.spotifyTopArtists)
+    ? parsed.spotifyTopArtists.map(String).filter(Boolean).slice(0, 20)
+    : base.spotifyTopArtists ?? [];
+
   return merged;
+}
+
+function normalizeAudioOutputMode(raw: unknown): AudioOutputMode {
+  if (raw === 'mute' || raw === 'text_only' || raw === 'normal') return raw;
+  return 'normal';
+}
+
+/** Sparmodus aktiv (kürzere Antworten, weniger Maps/Research). */
+export function isDataSaverActive(): boolean {
+  return !!getCachedUserProfile()?.dataSaverMode;
+}
+
+/** Aktuelle Audio-Ausgabe aus dem Profil-Cache. */
+export function getAudioOutputMode(): AudioOutputMode {
+  return normalizeAudioOutputMode(getCachedUserProfile()?.audioOutputMode);
+}
+
+/** true = TTS darf laufen (nicht mute / text_only / aktive Stumm-Session). */
+export function wantsSpokenAudio(): boolean {
+  try {
+    // Lazy require avoids circular import with muteSessionService
+    const {
+      isTemporaryMuteActive,
+    } = require('./audio/muteSessionService') as typeof import('./audio/muteSessionService');
+    if (isTemporaryMuteActive()) return false;
+  } catch {
+    /* ignore */
+  }
+  return getAudioOutputMode() === 'normal';
 }
 
 async function syncVoiceSettingsToSqlite(profile: UserProfile): Promise<void> {
@@ -187,7 +435,8 @@ export async function loadUserProfile(): Promise<UserProfile | null> {
     const parsed = JSON.parse(raw) as Partial<UserProfile>;
     cached = normalizeProfile(parsed);
     void syncVoiceSettingsToSqlite(cached);
-    syncTtsProviderToStore(cached.ttsProvider ?? 'openai');
+    syncTtsProviderToStore(cached.ttsProvider ?? 'cartesia');
+    syncPremiumToStore(!!cached.isPremiumSubscriber);
     notify(cached);
     return cached;
   } catch (err) {
@@ -209,7 +458,8 @@ export async function saveUserProfile(
   );
   cached = next;
   await syncVoiceSettingsToSqlite(next);
-  syncTtsProviderToStore(next.ttsProvider ?? 'openai');
+  syncTtsProviderToStore(next.ttsProvider ?? 'cartesia');
+  syncPremiumToStore(!!next.isPremiumSubscriber);
   notify(next);
   return next;
 }
@@ -246,6 +496,13 @@ export async function getVoiceSettingsForTour(): Promise<{
   voiceId: UserProfile['voiceId'];
   speechRate: number;
 }> {
+  // In-Memory-Profil zuerst — frisch nach Stimmenwechsel, ohne stale SQLite
+  if (cached?.voiceId) {
+    return {
+      voiceId: normalizeVoiceId(cached.voiceId),
+      speechRate: 1,
+    };
+  }
   try {
     const db = await getDatabase();
     const settings = await loadUserVoiceSettings(db);
@@ -258,9 +515,9 @@ export async function getVoiceSettingsForTour(): Promise<{
   } catch {
     // fallback
   }
-  const profile = cached ?? (await loadUserProfile());
+  const profile = await loadUserProfile();
   return {
-    voiceId: profile?.voiceId ?? 'standard_m',
+    voiceId: profile?.voiceId ?? 'alina',
     speechRate: 1,
   };
 }

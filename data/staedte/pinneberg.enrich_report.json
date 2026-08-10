@@ -1,0 +1,226 @@
+{
+  "report": {
+    "updated": [
+      "pinneberg_die_drostei",
+      "pinneberg_stadtmuseum",
+      "pinneberg_bahnhof_pr"
+    ],
+    "created": [
+      "pinneberg_stadtgeschichte",
+      "pinneberg_samlandmuseum",
+      "pinneberg_wasserturm_pinneberg",
+      "pinneberg_torhaus_ilo_park",
+      "pinneberg_bader_pinneberg",
+      "pinneberg_vfl_pinneberg_stadion_fahltsweide",
+      "pinneberg_drosteipark",
+      "pinneberg_christuskirche_pinneberg",
+      "pinneberg_regio_klinikum_pinneberg",
+      "pinneberg_rathaus_pinneberg",
+      "pinneberg_waldgebiet_fahlt",
+      "pinneberg_rosengarten_pinneberg"
+    ],
+    "failed": [
+      {
+        "name": "S-Bahn Station Pinneberg-Thesdorf",
+        "error": "TOO_FAR 12026m",
+        "geo": {
+          "lat": 53.6443431,
+          "lng": 9.813916299999999,
+          "name": "Thesdorf",
+          "place_id": "ChIJtzgOCuSAsUcR2_ZDIX8tlvY",
+          "types": [
+            "establishment",
+            "point_of_interest",
+            "train_station",
+            "transit_station"
+          ],
+          "address": "25421 Pinneberg, Deutschland",
+          "website": null,
+          "rating": 3.9,
+          "user_ratings_total": 78,
+          "maps_url": null
+        }
+      }
+    ],
+    "google": [
+      {
+        "name": "Die Drostei",
+        "lat": 53.66095,
+        "lng": 9.796636,
+        "address": "Dingstätte 23, 25421 Pinneberg",
+        "place_id": "ChIJSQZUwF-AsUcRUhQsT2Ek1hI"
+      },
+      {
+        "name": "Stadtmuseum Pinneberg",
+        "lat": 53.6609783,
+        "lng": 9.7960839,
+        "address": "Dingstätte 25, 25421 Pinneberg",
+        "place_id": "ChIJd9V9yF-AsUcRrwTUOQiE4Kw"
+      },
+      {
+        "name": "Bahnhof Pinneberg & P+R Anlage",
+        "lat": 53.6549011,
+        "lng": 9.7989172,
+        "address": "Rockvillestraße, 25421 Pinneberg",
+        "place_id": "ChIJRVcfqFiAsUcRfDlbllL0rtE"
+      },
+      {
+        "name": "Samlandmuseum",
+        "lat": 53.6609783,
+        "lng": 9.7960839,
+        "address": "Dingstätte 25, 25421 Pinneberg",
+        "place_id": "ChIJd9V9yF-AsUcRrwTUOQiE4Kw"
+      },
+      {
+        "name": "Wasserturm Pinneberg",
+        "lat": 53.6648208,
+        "lng": 9.7847784,
+        "address": "Peinerweg 43, 25421 Pinneberg",
+        "place_id": "ChIJgXEsdGiAsUcRKagYWlLk7Qk"
+      },
+      {
+        "name": "Torhaus ILO Park",
+        "lat": 53.6547479,
+        "lng": 9.7967502,
+        "address": "An d. Mühlenau 12, 25421 Pinneberg",
+        "place_id": "ChIJXXBPJvaAsUcRXr6otvGJvTM"
+      },
+      {
+        "name": "Bäder Pinneberg",
+        "lat": 53.6512306,
+        "lng": 9.804351500000001,
+        "address": "Burmeisterallee 6, 25421 Pinneberg",
+        "place_id": "ChIJ4RCFM2iAsUcRwFaRjIurtto"
+      },
+      {
+        "name": "VfL Pinneberg Stadion Fahltsweide",
+        "lat": 53.6583179,
+        "lng": 9.8065452,
+        "address": "Fahltskamp 53, 25421 Pinneberg",
+        "place_id": "ChIJb3tunPOAsUcREbu3K5YzPns"
+      },
+      {
+        "name": "Drosteipark",
+        "lat": 53.6599396,
+        "lng": 9.7971032,
+        "address": "Am Drosteipark, 25421 Pinneberg",
+        "place_id": "ChIJC7fIm1-AsUcRNuELJRlsaHE"
+      },
+      {
+        "name": "Christuskirche Pinneberg",
+        "lat": 53.6573615,
+        "lng": 9.7992898,
+        "address": "Bahnhofstraße 2A, 25421 Pinneberg",
+        "place_id": "ChIJ574gvvWAsUcRcAd01FnUGq8"
+      },
+      {
+        "name": "Regio Klinikum Pinneberg",
+        "lat": 53.6546052,
+        "lng": 9.811282300000002,
+        "address": "Fahltskamp 74, 25421 Pinneberg",
+        "place_id": "ChIJMxgkGO6AsUcRPij5Orflc-4"
+      },
+      {
+        "name": "Rathaus Pinneberg",
+        "lat": 53.6623611,
+        "lng": 9.7971835,
+        "address": "Bismarckstr. 8, 25421 Pinneberg",
+        "place_id": "ChIJ56T7CWCAsUcRGEZBYG75PjY"
+      },
+      {
+        "name": "Waldgebiet Fahlt",
+        "lat": 53.6552775,
+        "lng": 9.8018415,
+        "address": "MR42+4P, 25421 Pinneberg",
+        "place_id": "ChIJGwy78TGBsUcRbzYqfQTLPn4"
+      },
+      {
+        "name": "Rosengarten Pinneberg",
+        "lat": 53.6524837,
+        "lng": 9.806955499999999,
+        "address": "Rehmen 34A, 25421 Pinneberg",
+        "place_id": "ChIJmRr_9_CAsUcRgHlzFxj_fk8"
+      }
+    ]
+  },
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [
+      "centers almost identical: pinneberg_stadtmuseum & pinneberg_samlandmuseum",
+      "pinneberg_samlandmuseum: deep_data_pool thin (3<4)",
+      "pinneberg_wasserturm_pinneberg: deep_data_pool thin (2<4)",
+      "pinneberg_torhaus_ilo_park: deep_data_pool thin (2<4)",
+      "pinneberg_bader_pinneberg: deep_data_pool thin (2<4)",
+      "pinneberg_vfl_pinneberg_stadion_fahltsweide: deep_data_pool thin (2<4)",
+      "pinneberg_drosteipark: deep_data_pool thin (1<4)",
+      "pinneberg_christuskirche_pinneberg: deep_data_pool thin (2<4)",
+      "pinneberg_regio_klinikum_pinneberg: deep_data_pool thin (2<4)",
+      "pinneberg_rathaus_pinneberg: deep_data_pool thin (2<4)",
+      "pinneberg_waldgebiet_fahlt: deep_data_pool thin (1<4)",
+      "pinneberg_rosengarten_pinneberg: deep_data_pool thin (1<4)",
+      "coverage: missing must-have category 'aussicht'",
+      "city center lat/lng outside _coverage BBox"
+    ],
+    "stats": {
+      "spots": 19,
+      "triggers": 19,
+      "missingTrigger": 0,
+      "missingNarration": 0,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 11,
+      "orphanTriggers": 0,
+      "categories": [
+        "bahnhof",
+        "denkmal",
+        "einkaufen",
+        "freizeit",
+        "geschichte",
+        "gesundheit",
+        "hotel",
+        "kirche",
+        "museum",
+        "natur",
+        "sport",
+        "verwaltung"
+      ],
+      "missingMustHave": [
+        "aussicht"
+      ],
+      "nicePresent": [
+        "hotel",
+        "einkaufen",
+        "gesundheit",
+        "sport",
+        "bahnhof"
+      ],
+      "liveResearch": 5,
+      "hasCoverage": true,
+      "hasTransit": true,
+      "hasMobility": false,
+      "links": 1
+    },
+    "gaps": {
+      "needsNarration": [],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [
+        "pinneberg_samlandmuseum",
+        "pinneberg_wasserturm_pinneberg",
+        "pinneberg_torhaus_ilo_park",
+        "pinneberg_bader_pinneberg",
+        "pinneberg_vfl_pinneberg_stadion_fahltsweide",
+        "pinneberg_drosteipark",
+        "pinneberg_christuskirche_pinneberg",
+        "pinneberg_regio_klinikum_pinneberg",
+        "pinneberg_rathaus_pinneberg",
+        "pinneberg_waldgebiet_fahlt",
+        "pinneberg_rosengarten_pinneberg"
+      ],
+      "missingCategories": [
+        "aussicht"
+      ]
+    }
+  }
+}

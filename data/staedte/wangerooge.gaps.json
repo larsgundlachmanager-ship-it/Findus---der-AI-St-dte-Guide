@@ -1,0 +1,65 @@
+{
+  "city_id": "wangerooge",
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+      "spots": 107,
+      "triggers": 107,
+      "missingTrigger": 0,
+      "missingNarration": 0,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 0,
+      "orphanTriggers": 0,
+      "categories": [
+        "aussicht",
+        "bahnhof",
+        "cafe",
+        "denkmal",
+        "einkaufen",
+        "fischrestaurant",
+        "freizeit",
+        "gesundheit",
+        "hafen",
+        "hotel",
+        "kirche",
+        "museum",
+        "natur",
+        "ort",
+        "restaurant",
+        "service",
+        "sicherheit",
+        "sport",
+        "transport",
+        "verwaltung"
+      ],
+      "missingMustHave": [],
+      "nicePresent": [
+        "cafe",
+        "restaurant",
+        "hotel",
+        "einkaufen",
+        "service",
+        "gesundheit",
+        "sport",
+        "hafen",
+        "bahnhof"
+      ],
+      "liveResearch": 4,
+      "hasCoverage": true,
+      "hasTransit": false,
+      "hasMobility": false,
+      "links": 1
+    },
+    "gaps": {
+      "needsNarration": [],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [],
+      "missingCategories": []
+    }
+  },
+  "generated_at": "2026-08-02T19:32:16.356Z"
+}

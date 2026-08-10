@@ -1,0 +1,271 @@
+{
+  "city_history": "Korbach ist Hessens einzige Hansestadt: über 1000 Jahre Stadtgeschichte, Schnittpunkt mittelalterlicher Fernhandelsstraßen. Im Mittelalter zwei Städte — Altstadt um St. Kilian und Neustadt um St. Nikolai — 1377 vereinigt mit gemeinsamem Rathaus auf der Grenze. Doppelter Stadtmauerring, gotische Hallenkirchen, Steinkammern und Roland zeugen vom hansischen Wohlstand. Außerhalb: Korbacher Spalte (~255 Mio. Jahre, Procynosuchus/„Korbacher Dackel“), Goldspur am Eisenberg mit Besucherbergwerk und Georg-Viktor-Turm.",
+  "notes": [
+    "Kleine Hansestadt: wenige Stories, tief. Pool ≥1200 je Story; Ikonen (Spalte, Kilian, Rathaus, Museum, Georg-Viktor) ≥3000 Zeichen Rohstoff.",
+    "Preise/Öffnung nur LIVE. Keine Dialog-Skripte. Prisdorf nie."
+  ],
+  "offline_qa": [
+    {
+      "q": "Was ist besonders an Korbach?",
+      "a": "Hessens einzige Hansestadt mit doppeltem mittelalterlichem Stadtkern (Alt- und Neustadt, 1377 vereint), plus Fossilfundstätte Korbacher Spalte und Goldgeschichte am Eisenberg.",
+      "tags": ["stadt", "hanse", "offline_qa"]
+    },
+    {
+      "q": "Wo ist die Tourist-Info?",
+      "a": "Über die Stadt / Korbach-Information recherchieren — LIVE aktuelle Adresse und Öffnung.",
+      "tags": ["tourist_info", "live"]
+    },
+    {
+      "q": "Was ist der Notruf?",
+      "a": "Europaweit 112 (Notruf) und 110 (Polizei).",
+      "tags": ["notfall"]
+    }
+  ],
+  "new_places": [
+    {
+      "id": "korbach_rathaus",
+      "name": "Rathaus Korbach",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "lat": 51.27235,
+      "lng": 8.87155,
+      "general_info": "Historisches Rathaus an der Stechbahn: Symbol der Vereinigung von Alt- und Neustadt am 6. Oktober 1377. Gotischer Treppengiebel (Südseite) mit Stadtwappen blieb nach dem Stadtbrand 1664 erhalten; Erneuerungen 1702–1706, Erweiterung 1970. Rolandfigur (Original 1450, Kopie außen) als Zeichen städtischer Gerichtsbarkeit — Original im Foyer berichtet.",
+      "deep_data_pool": [
+        { "text": "Visuell: steinernes Rathaus mit Treppengiebel und Roland-Nische an der Nordseite; zentral zwischen den historischen Stadtteilen.", "tags": ["visuell", "wegweiser"] },
+        { "text": "6.10.1377: Vertrag zur Vereinigung Alt- und Neustadt; gemeinsames Rathaus genau auf der Grenzlage als steinernes Einigungszeichen.", "tags": ["geschichte"] },
+        { "text": "Stadtbrand 1664: nahezu zerstört, Außenmauern und gotischer Süd-Treppengiebel mit Wappenrelief erhalten; Wiederaufbau/Erneuerung 1702–1706.", "tags": ["geschichte", "architektur"] },
+        { "text": "Roland von 1450: Symbol Marktrecht/Gerichtsbarkeit; lange in Kilianportal-Nische, 1930er an Rathaus-Nordseite; Original innen, Kopie außen berichtet.", "tags": ["geschichte"] },
+        { "text": "Leben jetzt: Rathausplatz mit Kump, Orientierungspunkt Altstadt; Quer Kilian, Museum, Stechbahn.", "tags": ["leben_jetzt", "quer"] },
+        { "text": "Hanse-Kontext: Kaufleute an Fernhandelsstraßen; Steinkammern und Kirchen als weitere Zeugen.", "tags": ["geschichte", "quer"] },
+        { "text": "LIVE: Innenbesichtigung/Führungen und Veranstaltungen am Platz ephemer prüfen.", "tags": ["live_hint", "ephemeral"] },
+        { "text": "Quer: Kilianskirche (Altstadt), St. Nikolai (Neustadt), Wolfgang-Bonhage-Museum, doppelter Stadtmauerring.", "tags": ["quer"] }
+      ],
+      "faqs": [{ "q": "Woran erkenne ich das Rathaus?", "a": "Am steinernen Bau mit Treppengiebel und Rolandfigur an der Stechbahn — zentral zwischen Alt- und Neustadt." }]
+    },
+    {
+      "id": "korbach_wolfgang_bonhage_museum",
+      "name": "Wolfgang-Bonhage-MUSEUM KORBACH",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "lat": 51.27134,
+      "lng": 8.87262,
+      "general_info": "Stadtmuseum Kirchplatz 2 / Stechbahn: Stadt- und Regionalgeschichte, Gold/Bergbau und Fossilien der Korbacher Spalte (u. a. Procynosuchus/„Korbacher Dackel“). Historische Häuser am Kirchplatz plus Neubau 1994–1997 von Berthold Penkhues. Benannt nach Bürgermeister Wolfgang Bonhage (1977–2001). GeoPark-Infostelle GrenzWelten.",
+      "deep_data_pool": [
+        { "text": "Visuell: Ensemble aus Fachwerk/Altstadt-Häusern am Kirchplatz und modernem Anbau an der Stechbahn — zwischen Kilian und Markt.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Erweiterung 1994–1997 Architekt Berthold Penkhues; preisgekrönte Architektur berichtet. Namensgeber Wolfgang Bonhage, Bürgermeister 1977–2001.", "tags": ["geschichte", "architektur"] },
+        { "text": "Ausstellung Korbacher Spalte: Skelett- und Lebendrekonstruktion Procynosuchus („Korbacher Dackel“), Dioramen oberpermischer Therapsiden; Stadtgeschichte und Bergbau in historischen Gewölben.", "tags": ["geschichte", "natur"] },
+        { "text": "Teilweise in hansischer Steinkammer-Struktur / historischen Bauten untergebracht — Quer zu Hanse und Altstadt.", "tags": ["geschichte", "quer"] },
+        { "text": "Leben jetzt: Dauer-/Sonderausstellungen, GeoPark-Info; Kombi mit Spalte/GeoFoyer Kalkturm möglich.", "tags": ["leben_jetzt"] },
+        { "text": "Quer: Korbacher Spalte (Fundort), Kilian, Rathaus, Goldhausen/Besucherbergwerk.", "tags": ["quer"] },
+        { "text": "LIVE: Öffnung, Tickets und Führungen ephemer — museum-korbach.de / Stadt prüfen.", "tags": ["live_hint", "ephemeral"] },
+        { "text": "Überregional bedeutsam durch Spalten-Fossilien und Architektur; Funde auch im Naturkundemuseum Karlsruhe berichtet.", "tags": ["geschichte"] }
+      ],
+      "faqs": [{ "q": "Woran erkenne ich das Museum?", "a": "Am Kirchplatz neben der Kilianskirche — historisches Ensemble mit modernem Anbau zur Stechbahn." }]
+    },
+    {
+      "id": "korbach_historische_altstadt",
+      "name": "Historische Altstadt Korbach",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "lat": 51.2728,
+      "lng": 8.8718,
+      "general_info": "Doppelter mittelalterlicher Stadtkern: Altstadt um Kilian, Neustadt um Nikolai, 1377 vereint. Doppelter Stadtmauerring, Steinkammern, Fachwerk, Rathaus mit Roland, Kump und Hansespuren. Rundweg „Zwischen den Mauern“ und Goldspur als Erlebnispfade.",
+      "deep_data_pool": [
+        { "text": "Visuell: verwinkelte Gassen, Fachwerk, gotische Kirchen und Reste der Stadtmauer — zwei historische Zentren in einer Stadt.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Mittelalter: Altstadt (Kilian) und Neustadt (Nikolai); Vereinigung 1377 mit gemeinsamem Rathaus.", "tags": ["geschichte"] },
+        { "text": "Hanse: Kaufleute an Fernhandelsstraßen; Steinkammern als feuersichere Lager; Spuren bis Niederlande/Baltikum berichtet.", "tags": ["geschichte"] },
+        { "text": "Leben jetzt: Bummeln, Führungen, Fachwerk-Touren; Quer Museum, Kirchen, Spalte außerhalb.", "tags": ["leben_jetzt", "quer"] },
+        { "text": "LIVE: Stadtführungen und Veranstaltungen ephemer.", "tags": ["live_hint", "ephemeral"] },
+        { "text": "Quer: Rathaus, Kilian, Nikolai, Kump, Stadtmauer/Landwehr.", "tags": ["quer"] }
+      ]
+    }
+  ],
+  "spots": [
+    {
+      "id": "korbach_st_nicolai",
+      "name": "St. Nicolai",
+      "lat": 51.27386,
+      "lng": 8.87053,
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Nikolaikirche — spätgotische Hallenkirche der historischen Neustadt (Kirchstraße). Westturm 1359, Schiff/Chor ~1460; schiefer Turm (baustatisch/Westwind berichtet). Barocker Flügelaltar, Grabmal Fürst Georg-Friedrich; Schlussstein mit Wappen des Hansekaufmanns Johannes Rinck.",
+      "deep_data_pool": [
+        { "text": "Visuell: große gotische Hallenkirche mit vorgebautem Westturm in der Neustadt — Turm sichtbar geneigt.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Turm 1359, Schiff und Chor um 1460 anstelle älterer Nikolauskapelle; Seitenschiffe halb so breit wie Mittelschiff.", "tags": ["geschichte", "architektur"] },
+        { "text": "Stilmix: Turm westfälisch-gotisch, Chor/Schiff eher hessisch-fränkisch; Emporen nach 1602.", "tags": ["architektur"] },
+        { "text": "Johannes Rinck (Köln/Hanse) stiftete u. a. für den Kirchenbau — Wappen im Schlussstein.", "tags": ["geschichte", "quer"] },
+        { "text": "Leben jetzt: Besichtigung außerhalb Gottesdienste; Quer Kilian (Altstadt), Rathaus-Vereinigung.", "tags": ["leben_jetzt", "quer"] },
+        { "text": "LIVE: Öffnungszeiten und Gottesdienste ephemer prüfen.", "tags": ["live_hint", "ephemeral"] },
+        { "text": "Innen: barocker Flügelaltar (Franziskanermaler-Kontext), Grabmal Georg-Friedrich von Waldeck (1620–1692).", "tags": ["geschichte", "kunst"] }
+      ]
+    },
+    {
+      "id": "korbach_kilianskirche",
+      "name": "Kilianskirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Ev. Pfarrkirche St. Kilian — älteste Kirche Korbachs, Hauptkirche der historischen Altstadt. Weiträumige spätgotische Hallenkirche (3:3), Formen nahe Soester Wiesenkirche; kräftiger Westturm mit barockem Dachreiter. Marienkapelle am Turm (~1340), später Münze, seit 1958 Kriegergedächtnisstätte. Älteste erhaltene Steinkanzel Hessens berichtet (14. Jh.).",
+      "deep_data_pool": [
+        { "text": "Visuell: breite gotische Hallenkirche mit massivem Westturm und Portal-Figurenschmuck in der Altstadt.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Spätgotische Hallenkirche; Chor mit Kreuzrippen auf Dienstbündeln; Langhausgewölbe auf Rundpfeilern; Maßwerkfenster.", "tags": ["architektur"] },
+        { "text": "Südportal Anfang 15. Jh. als Figurenportal mit reichem Programm; Westportal mit gemeinsamer Gewänderahmung von Tür und Fenster.", "tags": ["architektur", "kunst"] },
+        { "text": "Marienkapelle ~1340 an Südturm; zeitweise Münze; seit 1958 Gedenkstätte. Innenrestaurierung 1957/58.", "tags": ["geschichte"] },
+        { "text": "Steinkanzel 14. Jh. — als älteste erhaltene Steinkanzel Hessens beschrieben.", "tags": ["geschichte", "kunst"] },
+        { "text": "Leben jetzt: Gottesdienst/Besichtigung; Quer Museum Kirchplatz, Rathaus, Altstadtmauer.", "tags": ["leben_jetzt", "quer"] },
+        { "text": "LIVE: Öffnung und Führungen ephemer.", "tags": ["live_hint", "ephemeral"] },
+        { "text": "Quer: St. Nikolai als Neustadt-Pendant; Vereinigung 1377 am Rathaus.", "tags": ["quer"] }
+      ]
+    },
+    {
+      "id": "korbach_korbacher_spalte",
+      "name": "Korbacher Spalte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Bedeutende Fossillagerstätte am Südrand Korbachs (ehem. Kalksteinbruch): ~20 m tiefe, bis ~4 m breite verfüllte Spalte im Zechstein-Kalk, Gesamtlänge im Untergrund ~1 km. Oberperm ~255 Mio. Jahre. Fund von Procynosuchus („Korbacher Dackel“) — erstmals Nordhalbkugel, Nature 1988. Bodendenkmal; überdachte Spalte nur mit Führung; Info-Pavillon/Spielplatz frei. Quer Museum und GeoFoyer Kalkturm.",
+      "deep_data_pool": [
+        { "text": "Visuell: aufgelassener Steinbruch mit überdachter Spalte und Info-Pavillon — erdgeschichtlicher Kontrast zur Hansestadt.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Entstehung vermutlich Erdbeben im Oberperm; Spaltenfüllung nach Starkregen mit Landwirbeltier-Fossilien (Tetrapoden).", "tags": ["geschichte", "natur"] },
+        { "text": "Entdeckung 1964; systematische Grabungen u. a. mit National Geographic; Procynosuchus-Unterkiefer → Nature 1988; Spitzname „Korbacher Dackel“.", "tags": ["geschichte"] },
+        { "text": "Weitere Funde: Protorosaurier, Captorhiniden, Pareiasaurier, Dicynodontier berichtet. Älteste fossilführende Spalte Europas beschrieben; neben Messel Hessens wichtigstes paläontologisches Bodendenkmal.", "tags": ["natur", "geschichte"] },
+        { "text": "Stadt kaufte Fundstelle, Überdachung und Besucherplattform. Leben jetzt: Pavillon frei; Spalte nur Führung; Modelle im Museum.", "tags": ["leben_jetzt"] },
+        { "text": "Quer: Wolfgang-Bonhage-Museum, GeoFoyer Kalkturm, GeoPfad.", "tags": ["quer"] },
+        { "text": "LIVE: Führungszeiten und Zugang zur überdachten Spalte ephemer — Stadt/Geopark prüfen. Parkplatz separat (nicht Story).", "tags": ["live_hint", "ephemeral"] },
+        { "text": "Geologie: Randkalk/Werra-Formation (Zechstein); Spalte setzt sich SW und O im Untergrund fort.", "tags": ["natur"] }
+      ],
+      "faqs": [{ "q": "Woran erkenne ich die Korbacher Spalte?", "a": "Am Steinbruchgelände südlich der Stadt mit Info-Pavillon und überdachter Fossilspalte — nicht mit dem Innenstadt-Museum verwechseln." }]
+    },
+    {
+      "id": "korbach_georg_viktor_turm",
+      "name": "Georg-Viktor-Turm",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "22,5 m Aussichtsturm auf dem Eisenberg (~560 m) bei Goldhausen, eingeweiht 3. Juni 1905 zu Ehren Fürst Georg Viktors von Waldeck und Pyrmont. Neben Burgruine Eisenberg (Residenz Waldeck-Eisenberg, Ausbau zum Schloss 16. Jh., Ruine nach 30-jährigem Krieg). Panorama Korbach–Sauerland; AR-Rekonstruktion der Burg berichtet. Quer Gold-Besucherbergwerk und Lehrpfad Goldspur.",
+      "deep_data_pool": [
+        { "text": "Visuell: freistehender Aussichtsturm auf dem Hausberg über der Hochfläche — daneben freigelegte Burggrundmauern.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Turm 1905; Wappenstein 1520 von Philipp III./Anna von Cleve am Aufgang verbaut (aus der Burg).", "tags": ["geschichte"] },
+        { "text": "Burg Eisenberg: Ende 12./Anfang 13. Jh., urkundlich 1367 Waldeck; 1487–1692 Residenz Waldeck-Eisenberg; 1520 Schlossausbau; Plünderung 1621, danach Verfall; Freilegung 1974–82.", "tags": ["geschichte"] },
+        { "text": "Leben jetzt: Aufstieg, Rundblick, Panoramatafeln; AR „Georg-Viktor-Turm PANORAMA“ für Burg/Erdgeschichte berichtet.", "tags": ["leben_jetzt"] },
+        { "text": "Quer: Besucherbergwerk Goldhausen, Goldspur Eisenberg, Waldsportpfad.", "tags": ["quer"] },
+        { "text": "LIVE: Saisonöffnung Turm (oft März–Okt.) ephemer prüfen — Winter geschlossen berichtet.", "tags": ["live_hint", "ephemeral"] },
+        { "text": "Blickziele bei Klarheit: u. a. Richtung Habichtswald/Ederberge/Kellerwald/Sauerland berichtet.", "tags": ["leben_jetzt"] }
+      ]
+    },
+    {
+      "id": "korbach_besucherbergwerk_korbach_goldhausen",
+      "name": "Besucherbergwerk Korbach-Goldhausen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Gold-Besucherbergwerk am Eisenberg/Goldhausen: Einblick in historische Goldsuche und Bergbau der Region (Goldspur Eisenberg). Aktivitätsschwerpunkt „Leben jetzt“ — Stollenführung, Geschichte des Goldbergbaus. Quer Georg-Viktor-Turm und Burgruine.",
+      "deep_data_pool": [
+        { "text": "Visuell: Bergwerks-/Stollen-Eingangsbereich am Eisenberg bei Goldhausen — industriell-historischer Kontrast zum Aussichtsturm.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Region: bedeutende Goldlagerstätte Deutschlands im Kontext Eisenberg/Waldeck — Ausstellung auch im Stadtmuseum.", "tags": ["geschichte"] },
+        { "text": "Leben jetzt: geführte Besuche unter Tage (LIVE Zeiten); Lehrpfad Goldspur verbindet Turm und Bergwerk.", "tags": ["leben_jetzt"] },
+        { "text": "Quer: Georg-Viktor-Turm, Burgruine Eisenberg, Wolfgang-Bonhage-Museum (Gold/Bergbau).", "tags": ["quer"] },
+        { "text": "LIVE: Touren, Tickets, Mitbringen (feste Schuhe) ephemer prüfen — keine Preise aus dem Pack.", "tags": ["live_hint", "ephemeral"] },
+        { "text": "Verwandter Spot Untere-Tiefe-Tal-Stollen: gleicher Themenkomplex Goldbergwerk — nicht doppelte Vollstory nötig.", "tags": ["quer"] }
+      ]
+    },
+    {
+      "id": "korbach_kumpe_brunnen_am_alten_marktplatz",
+      "name": "Kümpe (Brunnen) am alten Marktplatz",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Historischer Brunnen (Kump) am Markt-/Rathausbereich — typisches Element nordhessischer Städte als Wasserstelle und Treffpunkt. Orientierungspunkt in der Altstadt nahe Rathaus und Kilian.",
+      "deep_data_pool": [
+        { "text": "Visuell: steinerner Brunnen/Kump auf dem Platz — Treffpunkt-Charakter in der Altstadt.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Kump = traditionelle Brunnenform; Marktplätze als Kreuzung mittelalterlicher Handelswege.", "tags": ["geschichte"] },
+        { "text": "Leben jetzt: Pause, Treffpunkt, Foto; Quer Rathaus, Kilian, Museum.", "tags": ["leben_jetzt", "quer"] },
+        { "text": "LIVE: Platzveranstaltungen ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "korbach_stadtpark_korbach",
+      "name": "Stadtpark Korbach",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Städtische Grünanlage zur Naherholung — Wege, Bäume und Ruhezonen nahe dem Zentrum. Typischer Alltags- und Spazierort neben der historischen Altstadt.",
+      "deep_data_pool": [
+        { "text": "Visuell: parkartige Grünflächen mit Wegen — Kontrast zu Fachwerk und Kirchen der Altstadt.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Städtische Parkpflege als Teil der modernen Stadt neben dem mittelalterlichen Kern.", "tags": ["geschichte"] },
+        { "text": "Leben jetzt: Spazieren, Pause; Quer Laaker Teich / Marbecktal als weitere Grünräume.", "tags": ["leben_jetzt", "quer"] },
+        { "text": "LIVE: Veranstaltungen im Park ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "korbach_naherholungsgebiet_marbecktal",
+      "name": "Naherholungsgebiet \"Marbecktal\"",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Naherholungsgebiet Marbecktal bei Korbach: Naturpfade, Schutzgebietskontext, Gewürz-/Pflanzenpfade und Bachlandschaft berichtet. Für Wandern und ruhige Natur neben der Stadt.",
+      "deep_data_pool": [
+        { "text": "Visuell: Talgrün mit Pfaden und Bach — Landschaft vor den Toren der Hansestadt.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Schutz-/Naherholungskonzept rund um Marbeck; Quer Schanzenberg.", "tags": ["natur", "quer"] },
+        { "text": "Leben jetzt: Wandern, Natur beobachten; Regeln der Schutzflächen beachten.", "tags": ["leben_jetzt"] },
+        { "text": "LIVE: Wegezustand ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "korbach_schanzenberg_bei_korbach",
+      "name": "Schanzenberg bei Korbach",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Erhebung/Schutzgebietskontext Schanzenberg — Naturpfade und Aussichten im Umfeld Korbachs, oft mit Marbecktal zusammen genannt.",
+      "deep_data_pool": [
+        { "text": "Visuell: bewaldeter/hügeliger Naturraum mit Pfaden.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Teil der Naherholungslandschaft um Korbach; Quer Marbecktal, Eisenberg.", "tags": ["quer", "natur"] },
+        { "text": "Leben jetzt: Wandern; LIVE Wege.", "tags": ["leben_jetzt", "live_hint"] }
+      ]
+    },
+    {
+      "id": "korbach_hexengarten",
+      "name": "Hexengarten",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Themen-/Kräutergarten „Hexengarten“ im Korbacher Umfeld — duftende Gewürzpflanzen und Naturpfad-Charakter (Stadt/Tourismus-Kontext).",
+      "deep_data_pool": [
+        { "text": "Visuell: angelegte Kräuter-/Themenbeete — sinnlicher Naturstopp.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Leben jetzt: Duftpflanzen entdecken; Quer Marbecktal-Pfade.", "tags": ["leben_jetzt", "quer"] },
+        { "text": "LIVE: Zugang/Saison ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "korbach_korbach_hauptbahnhof",
+      "name": "Korbach Hauptbahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Bahnhof Korbach — ÖPNV-/Bahn-Anschluss der Kreis- und Hansestadt. Orientierungspunkt für Anreise in die Altstadt (Fußweg Richtung Kilian/Rathaus).",
+      "deep_data_pool": [
+        { "text": "Visuell: Bahnhofsgebäude/Gleisanlage am Stadtrand — Startpunkt für Fußweg in die Altstadt.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Anbindung der Hansestadt an das Bahnnetz; Quer Altstadt-Sehenswürdigkeiten zu Fuß/Bus.", "tags": ["geschichte", "quer"] },
+        { "text": "Leben jetzt: Ankunft/Abfahrt; LIVE Fahrplan HLB/DB.", "tags": ["leben_jetzt", "live_hint"] }
+      ]
+    },
+    {
+      "id": "korbach_stadtpark_laaker_teich",
+      "name": "Stadtpark Laaker Teich",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Grünbereich am Laaker Teich — Wasser- und Parklandschaft zur Naherholung im Stadtgebiet.",
+      "deep_data_pool": [
+        { "text": "Visuell: Teich mit umgebendem Grün — ruhiger Kontrast zur Altstadt.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Leben jetzt: Spazieren, Pause; Quer Stadtpark.", "tags": ["leben_jetzt", "quer"] },
+        { "text": "LIVE: Wasserqualität/Sperren ephemer.", "tags": ["live_hint", "ephemeral"] }
+      ]
+    },
+    {
+      "id": "korbach_alte_landwehr_300_meter_langer_schutzwall_aus_dem_mittelalter",
+      "name": "Alte Landwehr. 300 Meter langer Schutzwall aus dem Mittelalter",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Mittelalterliche Landwehr/Schutzwall (~300 m) — Teil der historischen Befestigungs- und Grenzlandschaft um Korbach, ergänzend zum doppelten Stadtmauerring.",
+      "deep_data_pool": [
+        { "text": "Visuell: erdiger Wallverlauf in der Landschaft — eher zu erlaufen als als Gebäude zu erkennen.", "tags": ["visuell", "wegweiser"] },
+        { "text": "Landwehren schützten Feldmark und Zugänge; Quer Stadtmauer und Altstadt-Vereinigung 1377.", "tags": ["geschichte", "quer"] },
+        { "text": "Leben jetzt: Geschichtspfad/Wandern; LIVE Zugang.", "tags": ["leben_jetzt", "live_hint"] }
+      ]
+    }
+  ]
+}

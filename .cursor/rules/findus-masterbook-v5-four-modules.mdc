@@ -1,53 +1,66 @@
 ---
-description: Findus 4 Module — Gates, Priorität, Flows (Stand Spec Jul 2026)
-globs: ["src/runtime/**/*.ts", "src/services/module2/**/*.ts", "src/services/navigation/**/*.ts", "src/services/logistics/**/*.ts"]
+description: Findus Module — Gates, Priorität, Flows (Modul 2 Greenfield)
+globs: ["src/runtime/**/*.ts", "src/services/navigation/**/*.ts", "src/services/logistics/**/*.ts", "src/module2/**/*.ts"]
 ---
 
-# Findus — 4 Module (verbindlich)
+# Findus — Module (verbindlich)
 
-## Priorität nach Mic / Modul 2
+## Priorität nach Mic
 
 1. Mic → Modul 1 abbrechen, Modul 3/4 Pause
-2. Modul 2 fertig gesprochen → Modul 3 darf sofort (Ansagen)
+2. Nach Mic-Ende → Modul 3 darf Ansagen
 3. Modul 4 erst nach **30 s**
-4. Modul 1 erst nach **35 s**
-5. Während Modul 2 spricht: Modul 3 in Queue
+4. Modul 1 erst nach **30 s** (nach M2); nach Planung **60 s**; nach eigenem M1/Nav **10 s** Stille
+5. Cooldown = Defer + Recheck (+3 s im Radius), nicht permanentes Skip
 
-Policy: `modulePriorityPolicy.ts`
+Policy: `modulePriorityPolicy.ts` · Defer: `exploreDeferQueue.ts`
 
 ## Modul 1 Gates (vor Auslösen)
 
-1. Stempel / schon berichtet → **skip**
-2. Nav aktiv + Knoten ≤30 m Fuß / ≤70 m Rad → **skip**
-3. Modul 2/3 spricht → warten, dann neu prüfen
-4. Wegweiser: weg vom Hauptort → **skip**; Richtung Hauptort → fire
+1. Stempel / schon berichtet / teaser-locked → **skip**
+2. Haupt spoken → alle Approach-Wegpunkte des Parents → **skip**
+3. Approach 2× (≥1 h) ohne Main-Visit → Approach **dauerhaft skip**
+4. Nav aktiv + Knoten ≤30 m Fuß / ≤70 m Rad → **skip**
+5. Mic / Nav spricht → warten (Defer), dann neu prüfen
+6. Wegweiser: weg vom Hauptort → **skip**; Richtung Hauptort (`isAheadOfMovement` ~95°) → fire
+7. Relevanz / Place-Tiers / Prefs — außer `must_have` oder `interest_override`
+8. Tempo: Full unter **10 km/h**; Nav-Mode `navExploreMode` (Settings)
 
 ### Flows
 
-- **Wegweiser:** Richtung (GPS×3) → Anker → Hook (nur echte Hooks) → sanfte Einladung → Schweigen
-- **Haupt (mit Approach):** cool Historie → Heute → Nutzen → Nähe (Neben immer; Haupt ≤50 m)
-- **Haupt (ohne Approach):** Visuell (wie sieht's aus) → optional Hook → Historie…
+- **Wegweiser:** Richtung → Visuell erkennen → Motivation/Hook (Prefs, keine Fake-Versprechen) → Schweigen
+- **Haupt (mit Approach):** Kaltstart → Historie → Heute → Nutzen → Nähe ≤50 m
+- **Haupt (ohne Approach):** Visuell → Historie → Heute → Nutzen → Nähe
+- **Interest-Override:** Meta + Hook-fokussierte Story (einziger „alles anders“-Pfad)
 - **Neben:** wie Haupt, Visuell zuerst; Story-Kombis erlaubt
 
-## Modul 2
+## Modul 2 (Fragen / Concierge) — Greenfield
 
-- Chunk bei ≥4 Tasks; max 2–3 Vorschläge
-- „Wo bin ich?“: OSM→Google→Pack→OSM/Google weiter
-- Wetter: 30-Min-Memory, keine Wiederholung; präzise Uhrzeiten
-- GPS immer im TurnContext
-- Buttons: einfache Labels (`simplifyActionLabel`)
-- Nav-Befehl → sofort starten
+SSOT: `src/module2/` — **nur Main Board** (Mic außerhalb der Timeline).
 
-## Modul 3
+Pipeline: Rewriter → Rucksack `readSync` (0 ms) → Task Splitter → Bridging TTS → Orchestrator → Logik-Knoten → Synthese A/B/C.
 
-- Mute-Radii für M1: 30/70 m
-- Wrong-way Warn ab ~10 m
-- Announce-Lead: `navAnnounceDistance.ts` (speed-adaptive)
-- Fuß→Rad auto ab ~10 km/h
+- Alter Two-Pass / Dining-Orchestrator: `_legacy_quarantine/module2/` (nicht importieren).
+- Rucksack = lokaler JSON-State (GPS×3 roh + Vektor, Wetter-Cache, FuturePlan).
+- TTS: Draft bis 3000 (Wissen); Chunks ≤600; Barge-in flush Rest.
+- Offline + Hard-API-Fail First-Class.
+- Vereinbarte Stops können in `FuturePlan` landen (Timeline/UI) — **ohne** Planungs-Engine / planningAgent.
 
-## Modul 4
+### Pack-Unabhängigkeit (verbindlich)
 
-- Gruppen: live / geo / time / free (`module4TriggerGroups.ts`)
-- Geo-Radius 150 m
-- Leave-by Checks: 3h/1h/35/30/10/leave
-- Spricht nur wenn `canModule4Speak`
+- Modul 2 ist **völlig frei** von der ausgewählten Pack-/Profil-Stadt.
+- Nachbarstadt (einkaufen, ansehen, essen) → Findus arbeitet mit (GPS + genannter Ort).
+- Verlässt der User die Pack-Stadt: **nur Modul 1** fällt aus (kein Städtedatensatz). Navigation, Trigger, Rückfragen, Concierge laufen weiter.
+- Offline-Datensatz darf Modul 2 **optional** nutzen — muss es nicht.
+
+## Modul 5 — Planungsassistent (Masterplan)
+
+SSOT: `src/module2/planning/runPlanningModule.ts`
+
+- Ingest (`MASTER_INGEST_SYSTEM`, Prio 1–6) → Auto-Schleife (`runPlanSession`) + Override
+- Deep Research Pitch → Mobility (5/10) → Final (30/10/5 Trigger + Geo)
+- Timeline offen oder Tagesplan-Keyword → Modul 5; sonst Modul 2
+
+## Modul 3 — Navigation (Hands-Free)
+
+SSOT: `src/services/navigation/handsFreeNav/` — progressive OSRM-Route, zeitbasierte Cues, Gehweg-Kompass, Pace ab 1 km Userdaten, ÖPNV via Transitous/DB. Google nur Notfall.

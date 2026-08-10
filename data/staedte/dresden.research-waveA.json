@@ -1,0 +1,930 @@
+{
+  "city_history": "Dresden: sächsische Residenzstadt; barockes Stadtbild, Frauenkirche-Wiederaufbau, Elbe-Kultur (Wikipedia).",
+  "notes": [
+    "Wave A — Wikipedia DE + manual visuell; LIVE ephemeral; no dialog scripts."
+  ],
+  "offline_qa": [],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "dresden_frauenkirche_dresden",
+      "name": "Frauenkirche Dresden",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Barocke Kuppelkirche — Ruine bis 1994, Wiederaufbau bis 2005.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Große Sandsteinkuppel mit Kreuz; Neumarkt-Umfeld.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Frauenkirche (offiziell: Kirche Unserer Lieben Frauen) ist ein evangelischer Sakralbau am Neumarkt in Dresden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der 91 Meter hohe Kuppelbau wurde 1726 bis 1743 im Auftrag des Rates der Stadt von George Bähr geschaffen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach der Zerstörung 1945 blieb die Frauenkirche eine Ruine, bevor sie 1993 bis 2005 wiederaufgebaut wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie gehört zu den bekanntesten Sehenswürdigkeiten der Stadt und zu den bedeutendsten Bauwerken des Barock.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Übersicht Die Dresdner Frauenkirche, eigentlich Kirche Unserer Lieben Frauen – der Name bezieht sich auf die Heilige Maria –, ist das prägende Gebäude des Neumarkts.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie gilt als prachtvolles Zeugnis des protestantischen Sakralbaus, besitzt eine der größten steinernen Kirchenkuppeln nördlich der Alpen und zählt zu den größten Sandsteinbauten der Welt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der evangelisch-lutherische Kirchenbau wurde von 1726 bis 1743 nach einem Entwurf von George Bähr im Auftrag des Rates der Stadt errichtet und wurde zu einem Emblem sowohl des Dresdner Barocks wie auch der berühmten Stadtsilhouette.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von Anfang an war die Frauenkirche aber auch mit gravierenden statischen Mängeln behaftet, die nie richtig behoben werden konnten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Am Ende des Zweiten Weltkriegs wurden ihre wichtigsten tragenden Teile während der Luftangriffe auf Dresden in der Nacht vom 13. zum 14.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Februar 1945 durch die Hitze des in Dresden wütenden Feuersturms so geschwächt, dass sie am Vormittag des 15.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zu Zeiten der DDR blieb die Ruine erhalten und wurde als Mahnmal gegen Krieg und Zerstörung belassen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach der Friedlichen Revolution in der DDR begannen Anfang 1993 die Enttrümmerung und ab 1994 der Wiederaufbau des Kirchbaus.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die 2005 abgeschlossenen Arbeiten wurden überwiegend von Fördervereinen und Spendern aus aller Welt finanziert, darunter den US-amerikanischen „Friends of Dresden“.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Oktober 2005 fand in der Frauenkirche ein Weihegottesdienst und Festakt statt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Aus dem Mahnmal gegen Krieg und Gewalt wurde nun ein Symbol der Versöhnung.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Umfeld der Frauenkirche entsteht seitdem auf Initiative der Gesellschaft Historischer Neumarkt Dresden (GHND) der Neumarkt wieder, mit mehreren Rekonstruktionen von Bürgerhäusern, wodurch der Eindruck des ehemaligen, barocken Bauensemble wiedergewonnen werden soll.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dresden_dresdner_zwinger",
+      "name": "Dresdner Zwinger",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Barockes Festungs- und Gartenensemble — Mathematisch-Physikalischer Salon, Gemäldegalerie Alte Meister.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Sandsteinbögen, Kronentor und Nymphenbad.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: skd.museum Eintritt.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Der Zwinger ist ein höfischer Orangerie-, Fest- und Sammlungsbau in Dresden, der nach einem früheren Festungsteil benannt ist.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er wurde 1711 bis 1728 durch August den Starken von Matthäus Daniel Pöppelmann und Balthasar Permoser geschaffen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit dem Bau der Sempergalerie 1855 wandelte sich die offene Dreiflügelanlage zur geschlossenen Vierflügelanlage.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach der Zerstörung 1945 wurde der Zwinger bis 1963 wiederaufgebaut und ist seitdem Sitz des Mathematisch-Physikalischen Salons und der Porzellansammlung der Staatlichen Kunstsammlungen Dresden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er gehört zu den bekanntesten Sehenswürdigkeiten der Stadt und zu den bedeutendsten Bauwerken des Barock.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Lage Der Zwinger liegt unweit der Elbe und nimmt ein Areal am nordwestlichen Rand der Inneren Altstadt ein, das zum historischen Stadtkern Dresdens gehört.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Er befindet sich in unmittelbarer Nachbarschaft weiterer bekannter Sehenswürdigkeiten, darunter das Residenzschloss und die Semperoper.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Theaterplatz im Nordosten, die Sophienstraße im Südosten, der Postplatz im Süden, die Ostra-Allee im Südwesten sowie die Straße Am Zwingerteich im Nordwesten umgeben das Areal des Zwingers.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Benachbarte Gebäude sind das Haus der Dresdner Kaufmannschaft im Westen, das Schauspielhaus im Südwesten, das Haus am Zwinger im Süden, das Taschenbergpalais im Südosten, der Westflügel des Schlosses mit dem Grünen Gewölbe im Osten, die Altstädtische Hauptwache im Nordosten, die Semperoper im Norden und der ehemalige Marstall im Nordwesten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Vorgeschichte Begriff „Zwinger“ Der Name Zwinger geht auf die im Mittelalter übliche Bezeichnung für einen Festungsteil zwischen der äußeren und inneren Festungsmauer zurück.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Bau der ersten Stadtmauer lässt sich archäologisch für das letzte Viertel des 12.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Eine urkundliche Erwähnung als civitas im Jahre 1216 weist auf eine geschlossene Dresdner Befestigungsanlage zu dieser Zeit hin.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Anlässlich der Hussitenkriege wurde ab 1427 die Stadtbefestigung verstärkt und fast vollständig um eine zweite, äußere Mauer ergänzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Diese Umbauten begannen in der Nähe des Wilsdruffer Tors.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Stellenweise musste der alte Graben verfüllt und verlegt werden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die dabei entstandenen Mauerzwischenräume werden allgemein „Zwinger“ genannt und wurden in Schlossnähe durch den Dresdner Hof zu eigenen Zwecken gärtnerisch genutzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dresden_semperoper_dresden",
+      "name": "Semperoper Dresden",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Opernhaus Gottfried Semper an der Elbe — zweiter Wiederaufbau 1985.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Neorenaissance-Fassade am Theaterplatz mit Elbblick.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Die Semperoper in Dresden ist die Spielstätte der Staatsoper Dresden, die als ehemalige königliche Hofoper Sachsens eine lange geschichtliche Tradition hat.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Oper befindet sich am Theaterplatz im historischen Stadtkern von Dresden in der Nähe der Elbe.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie ist nach ihrem Architekten Gottfried Semper benannt, der sie im Auftrag von König Johann 1871 bis 1878 im Stil der Neurenaissance erbaute.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach der Zerstörung 1945 wurde die Semperoper 1977 bis 1985 rekonstruiert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Staatsoper Dresden bildet zusammen mit dem Staatsschauspiel Dresden, das über zwei eigene Häuser verfügt, den Staatsbetrieb Sächsische Staatstheater.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zur Staatsoper gehören als Sparten die traditionsreiche Sächsische Staatskapelle Dresden, das Semperoper Ballett und die Junge Szene sowie als Klangkörper der Sächsische Staatsopernchor Dresden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Seit der Spielzeit 2024/25 sind Nora Schmid Intendantin der Staatsoper Dresden und Daniele Gatti Chefdirigent der Sächsischen Staatskapelle Dresden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Joachim Clement ist seit 2017 Intendant des Staatsschauspiels Dresden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Alle drei sind zugleich Geschäftsführer der Sächsischen Staatstheater, ergänzt um Wolfgang Rothe als kaufmännischer Geschäftsführer.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In der Spielzeit 2017/2018 besuchten rund 290.000 Besucher die Symphoniekonzerte, Opern- und Ballettaufführungen in der Oper.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Mit gut 300 Veranstaltungen erzielte die Semperoper einen Umsatz von 17 Millionen Euro und erreichte damit einen Kostendeckungsgrad von fast 40 Prozent.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte des Gebäudes Vorgängerbau am Zwinger Frühester Vorläufer war das Opernhaus am Taschenberg, das 1667 eingeweiht, aber 1708 zur katholischen Hofkapelle umfunktioniert wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Opernhaus am Zwinger, welches von 1719 bis 1849 bestand, wird oftmals als „Vorgängerbau“ der Semperoper bezeichnet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das bis zu 2000 Besucher fassende Dreirangtheater unweit des heutigen Porzellanpavillons des Zwingers wurde jedoch nur bis 1763 als Oper genutzt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Danach hat man bis 1841 das sogenannte Morettische Opernhaus verwendet, während das Opernhaus am Zwinger zum Redouten- und Konzertsaal wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der erste Bau Von 1838 bis 1841 errichtete der Baumeister Gottfried Semper (1803–1879) ein neues königliches Hoftheater.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dresden_residenzschloss_dresden",
+      "name": "Residenzschloss Dresden",
+      "place_tier": 1,
+      "pack_role": "story",
+      "lat": 51.0525,
+      "lng": 13.7369,
+      "category": "schloss",
+      "general_info": "Renaissance-Residenz der Wettiner mit Grünem Gewölbe und Türckische Cammer.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Verschachtelte Schlossflügel am Taschenberg neben Zwinger.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: skd.museum Residenzschloss.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Residenzschloss Dresden ist die ehemalige Hauptresidenz der Kurfürsten und Könige von Sachsen in der Altstadt von Dresden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Vierflügelanlage wurde 1548 durch Kurfürst Moritz von Caspar Vogt von Wierandt im Renaissancestil begonnen und 1901 durch König Albert von Gustav Dunger und Gustav Frölich im Neurenaissancestil vollendet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Nach der Zerstörung 1945 wird das Residenzschloss seit 1986 für die Staatlichen Kunstsammlungen Dresden wiederaufgebaut und ist inzwischen eines der meistbesuchten Museen der Stadt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Hervorzuheben sind das Grüne Gewölbe, das Kupferstich-Kabinett, das Münzkabinett, die Rüstkammer und die Paraderäume Augusts des Starken.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Gründung und Ausbau Um 1220/30 errichtete der Burggraf von Dohna auf dem Gelände des heutigen großen Schlosshofes eine Burg.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert erbaute einfache Wohnhäuser, die 1220 bei einem Großbrand zerstört wurden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahre 1289 erfolgte eine erstmalige urkundliche Erwähnung der Burganlage als Castrum; der Innenhof der damaligen Burg maß 38 mal 36 Meter.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Um 1400 begann der Ausbau der Burg unter Wilhelm dem Einäugigen zu einer fürstlichen Residenz.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Damals wurden die unteren Teile des Hausmannsturms sowie der östlich damit verbundene zweigeschossige Palas von Grund auf errichtet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Vermutlich wurde das Erdgeschoss des Palas durch eine Hofstube und das Obergeschoss durch ein herrschaftliches Wohnappartement eingenommen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Hierdurch verlagerte sich der Schwerpunkt der Burganlage vom Süden mit der im 13.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert errichteten Kemenate auf die Nordseite des annähernd quadratischen Burghofes.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von 1468 bis 1480 wurde die Anlage zu einer geschlossenen Vierflügelanlage erweitert, die in einem um 1530 entstandenen und seit 1945 verschollenen Holzmodell dokumentiert war.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dabei wurde der zweigeschossige Palas von 1400 im Norden um ein Geschoss für die Räume des Frauenzimmers aufgestockt und in einer östlichen Erweiterung das Appartement des Kurfürsten untergebracht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Westen entstand damals der Flügel mit Schlosskapelle und Küchenbereich.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Osten entstand ein neuer dreigeschossiger Flügel, vermutlich mit Hofstube und Küche im Erdgeschoss, Wohnbereichen im ersten Obergeschoss und einem großen Festsaal im zweiten Obergeschoss.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Erschlossen wurde die Anlage durch ein aufwändiges Torhaus im Süden, dass um 1472 durch den Hofbaumeister Arnold von Westfalen errichtet wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der am Schlossplatz liegende Georgenbau mit dem Georgentor wurde unter Herzog Georg 1530–1535 erbaut.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der später weitgehend veränderte und nur noch in Fragmenten erhaltene Bau gehörte zu den bedeutendsten Bauten der Architektur der Renaissance in Deutschland.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Von großer Bedeutung war auch sein figürlicher Bauschmuck, der in der Werkstatt des Bildhauers Christoph Walther I angefertigt wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Herzog Georg ließ das alte stark befestigte Elbtor am linkselbischen Aufgang zur Brücke durch einen fast 30 Meter hohen Wohnbau ersetzen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Dabei wurden Teile des mittelalterlichen Elbtores, des damaligen Stadtausgangs zur Elbbrücke, integriert.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Unter dem Georgentor hat sich ein Bogen der alten Elbbrücke erhalten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die heutige äußere Gestalt des Georgenbaus geht auf einen Umbau im Jahr 1899 zurück.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Neorenaissance-Fassade mit hohem Schaugiebel verbindet die Nordostecke des Schlosses mit dem auf der anderen Seite der Schloßstraße gelegenen, 1565–1567 errichteten Kanzleihaus.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Diese Fassade und die integrierte Triumphpforte empfingen den Besucher bei seinem elbseitigen Eintritt in die Stadt Dresden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Kurfürstliches Schloss In den Jahren 1548–1556 wurde der Schlosshof nach Westen auf die doppelte Größe gebracht.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Unter Verwendung der älteren Bauteile im Osten entstand mit dem neuen Flügel auf der Westseite, den drei Treppentürmen in den Hofecken und dem Altan mit Säulenarkaden vor dem Hausmannsturm ein prachtvolles Schloss der Renaissance, das auf die Erwerbung der Kurwürde durch Moritz von Sachsen reagierte.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ihn nennt im Großen Schlosshof das umlaufende Fassaden-Schriftband mit der Inschrift MAURITIUS / DEI GRATIA DUX SAXONIÆ SACRI ROMANI IMPERII / ARCHI=MARSCHALCUS ET ELECTOR LANDGRAVIUS / THURINGÆ MARCHIO MISNIÆ BURGGRAVIUS / MAGDEBURGENSIS – Moritz, durch Gottes Gnade Herzog von Sachsen, des Heiligen Römischen Reiches Erzmarschall und Kurfürst, Landgraf von Thüringen, Markgraf von Meißen, Burggraf von Magdeburg.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Für den Umbau wurden auch renommierte Künstler von außerhalb an den Hof geholt, so die Gebrüder Gabriel und Benedetto Tola, die die Fassaden mit Szenen aus Bibel und römischer Geschichte mittels Sgraffitotechnik verzierten und in der Loggia die farbigen Fresken mit den Szenen der Königin von Saba bei König Salomon und der Drei Weisen aus dem Morgenland schufen (heute rekonstruiert).",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Moritz’ Bruder und Nachfolger Kurfürst August, der von 1553 bis 1586 regierte, vollendete den Bau, der zu einem Hauptwerk der Sächsischen Renaissance wurde.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Einige Jahrzehnte später, 1586–1591, wurde als Erweiterung des Schlosskomplexes nach Osten das Stallgebäude errichtet und der Stallhof unter Kurfürst Christian I. angelegt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dresden_bruhlsche_terrasse",
+      "name": "Brühlsche Terrasse",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "„Balcony of Europe“ — Promenade auf der Elbterrasse mit Panorama.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Sandstein-Stützmauer mit Balustrade über der Elbe.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Brühl-Terrasse ist ein architektonisches Ensemble und eine touristische Sehenswürdigkeit in Dresden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Sie liegt im Stadtzentrum in der Altstadt und erstreckt sich über etwa 500 Meter entlang der Elbe zwischen der Augustusbrücke und der Carolabrücke.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Brühlsche Terrasse wird auch als Balkon Europas bezeichnet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhunderts geprägt und später vielfach in der Literatur verwendet.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Als Teil der Dresdner Befestigungsanlagen wurde die Brühlsche Terrasse im 16.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Name geht zurück auf Heinrich von Brühl, welcher auf der Festungsanlage durch Johann Christoph Knöffel die sogenannten Brühlschen Herrlichkeiten (Galerie, Bibliothek, Belvedere, Palais und Gartenanlage mit Pavillon) errichten ließ.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Durch die Bebauung verlor die Terrasse ihre militärische Bedeutung.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahr 1814 erließ Fürst Nikolai Grigorjewitsch Repnin-Wolkonski, der nach der Niederlage Sachsens in der Völkerschlacht bei Leipzig Generalgouverneur über das besetzte Königreich Sachsen war, den Befehl, die Terrasse der Öffentlichkeit zugänglich zu machen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Architekt Gottlob Friedrich Thormeyer wurde mit dem Bau einer Freitreppe am westlichen Ende beauftragt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Christian Gottlieb Kühn schuf zwei Sandsteinlöwen, die am Fuße der Treppe aufgestellt wurden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahr 1843 wurde durch den Architekten Woldemar Hermann ein Zugang zur besseren Erreichbarkeit der Terrasse von der großen Fischergasse (ab 1849 Münzgasse) aus geschaffen und 1890/94 ein weiterer vom Georg-Treu-Platz nach einem Entwurf von Constantin Lipsius.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die unterhalb der Brühlschen Terrasse verlaufende Straße Terrassenufer wurde Anfang der 1860er Jahre angelegt.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Im Jahr 1873 erfolgten Durchbrüche zur Münzgasse und 1900 zur Brühlschen Gasse.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die ehemaligen Brühlschen Bauten mussten Ende des 19.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Historisch sind unter der Brühlschen Terrasse Teile der Dresdner Kasematten mit dem Ziegeltor erhalten und als Museum Festung Dresden öffentlich zugängig.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Erhalten ist ebenfalls der nahezu vergessene Salzausfall.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dresden_historisches_grunes_gewolbe",
+      "name": "Historisches Grünes Gewölbe",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Schatzkammer August des Starken im Residenzschloss — barocke Prunkstücke.",
+      "bullets": [],
+      "facts": {},
+      "faqs": [],
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Historische Gewölbe-Räume im Schloss.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: skd.museum Grünes Gewölbe Termin.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Grüne Gewölbe in Dresden ist die historische Museumssammlung der ehemaligen Schatzkammer der Wettiner Fürsten von der Renaissance bis zum Klassizismus.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Der Name der umfangreichsten Kleinodiensammlung Europas leitet sich von den ehemals malachitgrün gestrichenen Säulenbasen und -kapitellen in den ursprünglichen Gewölberäumen her.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Bereits seit 1724 sind die Sammlungsräume des Grünen Gewölbes öffentlich zugänglich.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Grüne Gewölbe gehört zu den Staatlichen Kunstsammlungen Dresden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Ausgestellt wird die Sammlung im Historischen Grünen Gewölbe und im Neuen Grünen Gewölbe, die sich beide im Westteil des Dresdner Residenzschlosses befinden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Geschichte Gründung Nach der Ernennung des Herzogs Moritz zum Kurfürsten im Jahr 1547 ließ dieser im Westen seines Residenzschlosses einen Flügel anbauen.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Zwei dabei geschaffene Räume und ein großer Saal mit angeschlossenem Turmzimmer erhielten prunkvolle Decken, wobei die Kapitelle wie Säulenbasen malachitgrün bemalt wurden.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Letzteres gab diesen vier Räumen im Erdgeschoss, offiziell ab dem späten 16.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Jahrhundert „Geheime Verwahrung“ genannt, den bis heute erhaltenen, gängigen Namen Grünes Gewölbe.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Das Gewölbe diente zu jener Zeit noch der sicheren Aufbewahrung kostbarer Gegenstände und Unterlagen und nicht deren Ausstellung für die Öffentlichkeit.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Steinerne Gewölbe wurden in Schlössern der Zeit öfter für die Lagerung von Wertgegenständen und Urkunden gewählt, da sie besonderen Schutz gegen Feuer boten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Diese vorausschauende Entscheidung ermöglichte eine weitgehende Erhaltung der Schätze bis heute.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Erweiterung unter August dem Starken Zwischen 1723 und 1730 richtete der sächsische Kurfürst und polnische König August der Starke eine aus neun Räumen bestehende Wunderkammer ein, in der Besucher in einer barocken Repräsentationsarchitektur die von ihm und seinen dynastischen Vorgängern gesammelten Kunstobjekte und Raritäten besichtigen konnten.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "In einer ersten Bauphase wurden bis 1725 der Pretiosensaal und das Eck-Kabinett in ihren heutigen Formen geschaffen; 1727 veranlasste August eine Erweiterung des ursprünglichen Grünen Gewölbes mit Wanddurchbrüchen um acht weitere Gewölbe.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Architektur der Schatzkammern gestaltete Matthäus Daniel Pöppelmann, der Architekt des Dresdner Zwingers.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        },
+        {
+          "text": "Die Innenausstattung schuf Raymond Leplat. 20.",
+          "tags": [
+            "master_report",
+            "wikipedia"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_places": []
+}

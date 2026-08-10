@@ -133,9 +133,9 @@ export function formatFerryReply(advice: FerryAdvice): string {
   }
 
   return (
-    `Für ${advice.ferryName} gibt es keinen klassischen Live-Fahrplan mit Verspätungsanzeige. ` +
+    `Für ${advice.ferryName} gibt’s leider keine Verspätungsanzeige wie bei der Bahn. ` +
     `${tideClause} ` +
-    `Ich kann dir aber sagen, dass du von hier etwa ${advice.walkMinutes} Minuten brauchst.`
+    `Von hier brauchst du etwa ${advice.walkMinutes} Minuten.`
   );
 }
 
@@ -150,15 +150,15 @@ export function ferryAdviceToConcierge(
     bullets.push('Hauptsaison: ca. 6 Abfahrten/Tag');
     if (advice.tideStatus === 'low') {
       bullets.push('Niedrigwasser — Abfahrt evtl. verzögert');
-    } else if (advice.tideStatus === 'high') {
+    } else     if (advice.tideStatus === 'high') {
       bullets.push('Hochwasser — gute Abfahrtsbedingungen');
     }
-    bullets.push('Kein Live-Verspätungsfeed verfügbar');
+    bullets.push('Abfahrten: wangerooge.de / Schalter');
   } else {
     bullets.push(`${advice.ferryName}`);
-    bullets.push('Kein Live-Fahrplan verfügbar');
+    bullets.push('Tideabhängig · kein Verspätungs-Feed');
     if (advice.walkMinutes > 1) {
-      bullets.push(`Fußweg ca. ${advice.walkMinutes} Min`);
+      bullets.push(`Fußweg circa ${advice.walkMinutes} Minuten`);
     }
   }
 

@@ -18,6 +18,10 @@ const MAP_URL_HINT =
 
 export function isCityMapUrl(url: string | undefined | null): boolean {
   if (!url?.trim()) return false;
+  // Nie Google-Maps-Links als Inselkarte missbrauchen
+  if (/google\.[^/]*\/maps|maps\.google|maps\.app\.goo\.gl/i.test(url)) {
+    return false;
+  }
   return MAP_URL_HINT.test(url.trim());
 }
 

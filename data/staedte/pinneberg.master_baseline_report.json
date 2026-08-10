@@ -1,0 +1,20 @@
+{
+  "city_id": "pinneberg",
+  "demoted": 0,
+  "history_source": "research",
+  "pack_index": {
+    "total": 145,
+    "story": 51,
+    "directory": 94,
+    "offline_qa": 192,
+    "note": "UI: Gesamtzahl; Trigger Story Tier 1–2 (+ Interesse)."
+  },
+  "gemini_prompt": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\pinneberg.gemini-master.md",
+  "thin_story": 35,
+  "gate": {
+    "ok": true,
+    "errors": 0,
+    "warnings": 1
+  },
+  "applied": true
+}

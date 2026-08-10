@@ -1,0 +1,289 @@
+{
+  "city_history": "Bad Saarow am Scharmützelsee: Kurbetrieb, Strandpromenade und Therme im Barnim — zweitgrößter See Brandenburgs.",
+  "notes": [
+    "Wave A — verified facts, LIVE ephemeral, no dialog scripts."
+  ],
+  "offline_qa": [],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "bad_saarow_scharmutzelsee",
+      "name": "Scharmützelsee",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Scharmützelsee: zweitgrößter Natursee Brandenburgs — Kern des Kurorts Bad Saarow mit Strand, Promenade und Wassersport.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: weite Wasserfläche, Schilfgürtel, Strandbäder und Segelboote — flache Ufer in Barnim.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Entstanden in der Eiszeit als Gletschertalsee; Fläche ca. 12 km² (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Bad Saarow am Westufer entwickelte sich im 20. Jahrhundert zum Kurbetrieb und Tourismus.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Scharmützelsee ist beliebt für Schwimmen, Segeln, SUP und Radwege rund um den See.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Kurpark, aja Resort und Bad Saarow Strand entlang der Uferpromenade.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Strandbäder mit Saisonbetrieb; Schifffahrt und Bootsverleih an mehreren Anlegern.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Ufergemeinden wie Bad Saarow, Diensdorf und Wendisch Rietz teilen das Seeufer — verschiedene Strandcharaktere.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schilfgürtel schützt Brutvögel; Naturschutz und Badebetrieb werden abgestimmt (Naturschutzbehörde).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Der See ist beliebt für Triathlon und Regatten — Vereine an mehreren Ufern.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schilfgürtel und Laichgebiete — Badezonen von Naturschutz abgestimmt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Uferorte: Bad Saarow, Diensdorf, Wendisch Rietz — unterschiedliche Infrastruktur.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Eiszeitliche Entstehung erklärt flache Ufer und Sandstrände am Westufer.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schifffahrt und Ausflugsboote verbinden Uferorte — Fahrplan saisonal.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Angelregeln und Schonzeiten beachten — Befischung reguliert.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "bad_saarow_kurpark",
+      "name": "Kurpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Kurpark Bad Saarow: Parkanlage mit Kolonnaden und Seeblick — klassisches Kurort-Ambiente am Scharmützelsee.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Alleen, Kolonnaden, Blick auf See — gepflegte Kurpark-Architektur.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Entstand im Zuge des Kurbetriebs Bad Saarow; Erholung und Spaziergänge.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Seebalkon und Strand Bad Saarow; aja Therme in der Nähe.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Kolonnaden und Kurpark-Architektur erinnern an frühe Kurbäder des 20. Jahrhunderts.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Verbindung zum Seebalkon und Strandpromenade — Spazierweg am Wasser.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Kurpromenade verbindet Park mit Seebalkon — Abendspaziergänge üblich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Kolonnaden als wettergeschützter Aufenthaltsort — typisch frühe Kurbäder.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "bad_saarow_aja_bad_saarow",
+      "name": "aja Bad Saarow",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "aja Bad Saarow: Resort mit Therme und Wellness am Scharmützelsee — modernes Kur- und Freizeitangebot.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Resort-Architektur am Seeufer, große Therme-Halle sichtbar von der Promenade.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Therme und Hotelbetrieb am Scharmützelsee — Sauna, Pools und Wellness (Betreiber aja).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Kurpark und öffentliche Strandbereiche in Gehdistanz.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Therme mit Sauna-Landschaft und Außenpools — Hotelgäste und Tagesgäste (Tarife LIVE).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Resort-Anlage mit Gastronomie und Wellness — zentrales Modernisierungsprojekt am See.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Tagesgäste-Tickets für Therme getrennt von Hotel — Sauna und Pools (LIVE-Tarife).",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "bad_saarow_bad_saarow_strand",
+      "name": "Bad Saarow Strand",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Bad Saarow Strand: Badestelle und Promenade am Scharmützelsee — Sommer-Haupttreffpunkt am Westufer.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Sandstrand, Stege, Liegewiesen und Blick über den See.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Saisonaler Badebetrieb; Wasserqualität wird überwacht (offizielle Badegewässer-Daten).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Anlegestellen für Scharmützelsee-Rundfahrten.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Strandbad mit Liegewiesen und Steg — Badeaufsicht in Saison.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Anbindung an Seepromenade und Radweg rund um den Scharmützelsee.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Liegen und Schattenplätze am Westufer — Hauptbadestelle Bad Saarow.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    }
+  ],
+  "new_places": []
+}

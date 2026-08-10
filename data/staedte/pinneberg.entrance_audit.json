@@ -1,0 +1,133 @@
+{
+  "city_id": "pinneberg",
+  "apply": true,
+  "maxDelta": 80,
+  "summary": {
+    "ok": 7,
+    "check": 0,
+    "bad": 0,
+    "errors": 0,
+    "applied": 0
+  },
+  "rows": [
+    {
+      "id": "pinneberg_bahnhof_pr",
+      "name": "Bahnhof Pinneberg & P+R Anlage",
+      "before": {
+        "lat": 53.65480228,
+        "lng": 9.798750459999999
+      },
+      "google": {
+        "lat": 53.6549011,
+        "lng": 9.7989172,
+        "place_id": "ChIJRVcfqFiAsUcRfDlbllL0rtE",
+        "address": "Rockvillestraße, 25421 Pinneberg"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "pinneberg_hotel_cap_polonio",
+      "name": "Hotel Cap Polonio",
+      "before": {
+        "lat": 53.65791409999999,
+        "lng": 9.806662919999999
+      },
+      "google": {
+        "lat": 53.6579644,
+        "lng": 9.8067478,
+        "place_id": "ChIJ1S5lkfOAsUcRUZlMd7BOnzA",
+        "address": "Fahltskamp 48, 25421 Pinneberg"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "pinneberg_die_drostei",
+      "name": "Die Drostei (Kreiskulturzentrum)",
+      "before": {
+        "lat": 53.6608997,
+        "lng": 9.796551099999999
+      },
+      "google": {
+        "lat": 53.66095,
+        "lng": 9.796636,
+        "place_id": "ChIJSQZUwF-AsUcRUhQsT2Ek1hI",
+        "address": "Dingstätte 23, 25421 Pinneberg"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "pinneberg_stadtmuseum",
+      "name": "Stadtmuseum Pinneberg",
+      "before": {
+        "lat": 53.660928,
+        "lng": 9.795998999999998
+      },
+      "google": {
+        "lat": 53.6609783,
+        "lng": 9.7960839,
+        "place_id": "ChIJd9V9yF-AsUcRrwTUOQiE4Kw",
+        "address": "Dingstätte 25, 25421 Pinneberg"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "pinneberg_rathauspassage",
+      "name": "Rathauspassage Pinneberg & Wochenmarkt",
+      "before": {
+        "lat": 53.662425080000006,
+        "lng": 9.79862254
+      },
+      "google": {
+        "lat": 53.6625239,
+        "lng": 9.7987893,
+        "place_id": "ChIJhTofDGCAsUcRHjFa_hlN4EI",
+        "address": "Friedrich-Ebert-Straße 31, 25421 Pinneberg"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "pinneberg_kriegerdenkmal_bahnhofvorplatz",
+      "name": "Kriegerdenkmal Bahnhofsvorplatz",
+      "before": {
+        "lat": 53.65573807999999,
+        "lng": 9.79767526
+      },
+      "google": {
+        "lat": 53.6558369,
+        "lng": 9.797842000000001,
+        "place_id": "ChIJtzFvJA-BsUcRvuY7woCXRC8",
+        "address": "Rockvillestraße, 25421 Pinneberg"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "pinneberg_deutsches_baumschulmuseum",
+      "name": "Deutsches Baumschulmuseum (Ortsteil Thesdorf)",
+      "before": {
+        "lat": 53.6415109,
+        "lng": 9.820492840000002
+      },
+      "google": {
+        "lat": 53.6415612,
+        "lng": 9.8205777,
+        "place_id": "ChIJ3Q8WiOCAsUcRnUS79o3cURY",
+        "address": "Halstenbeker Str. 29, 25421 Pinneberg"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    }
+  ]
+}

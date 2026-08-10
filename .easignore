@@ -1,0 +1,57 @@
+# EAS upload ignore — keep archive small (was 1.6 GB)
+# https://expo.fyi/eas-build-archive
+
+# deps / tooling (reinstalled on EAS)
+node_modules/
+.expo/
+.tools/
+.git/
+
+# local build outputs
+dist/
+releases/
+android/app/build/
+android/.gradle/
+android/build/
+**/.cxx/
+**/build/
+**/.gradle/
+
+# large local-only / not needed for cloud build
+website/
+docs/
+/data/
+.cursor/
+.tmp-espeak/
+.tmp-subtitle-frames/
+agent-transcripts/
+
+# Stadt-Cover nur für Upload-Pipelines — App lädt HTTPS-Cover (nicht bundeln)
+assets/onboarding/remote-covers/
+assets/onboarding/*-soft.png
+assets/onboarding/city-*.png
+!assets/onboarding/city-card-hero.jpg
+
+# packages / binaries
+*.aab
+*.apk
+*.gguf
+*.onnx
+!native-assets/kokoro/*.onnx
+
+# secrets / signing (EAS credentials server-side)
+android/keystore.properties
+*.keystore
+!android/app/debug.keystore
+*.jks
+.env
+.env.*
+*.p8
+*.p12
+*.mobileprovision
+
+credentials.json
+*service-account*.json
+google-play-*.json
+pc-api-*.json
+

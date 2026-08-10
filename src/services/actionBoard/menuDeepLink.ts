@@ -168,17 +168,28 @@ export function looksLikeRealMenu(text: string): boolean {
   return priceHits >= 2 && dishHints >= 1;
 }
 
+/**
+ * Speisekarten-URL nur freigeben wenn belegt (Fail-closed).
+ * PDF mit Speisekarte-Pfad/Label ok; HTML muss Menü-Signale haben.
+ */
 export async function validateMenuUrl(
   url: string,
   signal?: AbortSignal,
 ): Promise<boolean> {
-  if (/\.pdf(\?|$)/i.test(url)) return true; // PDF mit Speisekarte-Label akzeptieren
   if (signal?.aborted) return false;
+  if (/\.pdf(\?|$)/i.test(url)) {
+    return FOOD_PATH_RE.test(url) || FOOD_LABEL_RE.test(url) || DRINKS_PATH_RE.test(url);
+  }
   try {
     const doc = await fetchPublicDocument(url);
-    if (!doc.ok || !doc.text) return true; // Link existiert — soft pass
-    return looksLikeRealMenu(doc.text) || FOOD_LABEL_RE.test(doc.text) || DRINKS_LABEL_RE.test(doc.text);
+    if (!doc.ok || !doc.text) return false;
+    if (looksLikeRealMenu(doc.text)) return true;
+    if (FOOD_LABEL_RE.test(doc.text) || DRINKS_LABEL_RE.test(doc.text)) {
+      // Label allein reicht nur mit mind. einem Preis-Hinweis
+      return /(?:€|eur|\d+[,\.]\d{2})/i.test(doc.text.slice(0, 8000));
+    }
+    return false;
   } catch {
-    return true;
+    return false;
   }
 }

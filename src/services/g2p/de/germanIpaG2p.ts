@@ -1,15 +1,15 @@
 /**
- * Vollwertiges deutsches G2P (de-DE → IPA) für Kokoro.
+ * Vollwertiges deutsches G2P (de-DE → IPA) für TTS.
  *
  * Regelwerk/Engine: Port von @dittli/tts-de (Apache-2.0), angepasst für
- * React Native + Kokoro-Vocab (kein espeak-WASM, kein Metro-Worker).
+ * React Native + TTS-Vocab (kein espeak-WASM, kein Metro-Worker).
  *
- * Pipeline: Orthografie → Regelscanner → Auslautverhärtung → Kokoro-IPA-Map.
+ * Pipeline: Orthografie → Regelscanner → Auslautverhärtung → TTS-IPA-Map.
  */
 
-import { filterPhonemesToVocab } from '../../../constants/kokoroVocab';
+import { filterPhonemesToVocab } from '../../../constants/phonemeSanitize';
 import type { GermanG2PProvider } from '../types';
-import { normalizeGermanTtsText, spellGermanLetters } from '../germanTextNormalize';
+import { normalizeGermanTtsText } from '../germanTextNormalize';
 import rulesData from './g2p_de_rules.json';
 
 type RuleAction = string[] | { callback: string };
@@ -44,8 +44,8 @@ const FINAL_DEVOICE: Record<string, string> = {
   ʒ: 'ʃ',
 };
 
-/** Kokoro-Vocab: ASCII g fehlt — immer IPA ɡ (\u0261). ʏ→y. */
-const KOKORO_PHONE_MAP: Record<string, string> = {
+/** TTS-Vocab: ASCII g fehlt — immer IPA ɡ (\u0261). ʏ→y. */
+const TTS_PHONE_MAP: Record<string, string> = {
   ʏ: 'y',
   ã: 'a',
   ẽ: 'e',
@@ -225,8 +225,21 @@ function expandAbbreviations(text: string): string {
 
 function expandInitialisms(text: string): string {
   return text.replace(/[A-ZÄÖÜ]{2,}/g, (run) => {
-    const spelled = spellGermanLetters(run);
-    return ` ${spelled} `;
+    const lower = run.toLowerCase();
+    // Mit Vokal = Wort (TSV, Hof, …) — nie T-S-V buchstabieren
+    if (run.length <= 4 && /[AEIOUÄÖÜ]/i.test(run)) {
+      return ` ${run.charAt(0)}${run.slice(1).toLowerCase()} `;
+    }
+    // Bekannte DE-Codes als Wort belassen
+    if (
+      /^(tsv|fc|sc|sv|bv|tv|ev|kg|ag|ug|ohg|eg|vfl|vfb|bvb|dfb|ard|zdf|ndr|wdr|br|hr|swr|rbb|mdr|dw|bmw|db|ice|ic|re|rb|s|u|öpnv|öpnv)$/i.test(
+        lower,
+      )
+    ) {
+      return ` ${run.charAt(0)}${run.slice(1).toLowerCase()} `;
+    }
+    // Sonst: als Wort (Title Case), nicht Buchstabe für Buchstabe
+    return ` ${run.charAt(0)}${run.slice(1).toLowerCase()} `;
   });
 }
 
@@ -295,8 +308,8 @@ function applyFinalDevoicing(phones: string[]): string[] {
   return out;
 }
 
-/** Expandiert Mehrzeichen-Phones und mappt auf Kokoro-IPA. */
-function toKokoroPhones(phones: string[]): string[] {
+/** Expandiert Mehrzeichen-Phones und mappt auf TTS-IPA. */
+function toTtsPhones(phones: string[]): string[] {
   const out: string[] = [];
   for (const raw of phones) {
     if (!raw || raw === '_' || raw === 'UNK') continue;
@@ -306,7 +319,7 @@ function toKokoroPhones(phones: string[]): string[] {
         out.push(' ');
         continue;
       }
-      out.push(KOKORO_PHONE_MAP[ch] ?? ch);
+      out.push(TTS_PHONE_MAP[ch] ?? ch);
     }
   }
   return applyFinalDevoicing(out);
@@ -327,11 +340,11 @@ function phonemizeWord(core: string): string[] {
   const base = EXCEPTIONS[lower]
     ? EXCEPTIONS[lower].slice()
     : applyRules(lower);
-  return toKokoroPhones(base);
+  return toTtsPhones(base);
 }
 
 /**
- * Deutscher Text → Kokoro-IPA-Phonemstring (leerzeichengetrennt je Wort).
+ * Deutscher Text → TTS-IPA-Phonemstring (leerzeichengetrennt je Wort).
  */
 export function phonemizeGermanIpa(text: string): string {
   const normalized = normalizeForG2P(text);

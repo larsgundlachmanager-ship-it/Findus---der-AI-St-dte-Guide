@@ -3,8 +3,11 @@ import {
   StyleSheet,
   Text,
   View,
+  AppState,
+  Linking,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import * as Notifications from 'expo-notifications';
 import { getNetworkStateAsync } from 'expo-network';
 import {
   SafeAreaProvider,
@@ -29,6 +32,7 @@ import {
 import { bootstrapCartesiaCostTracker } from './src/services/cartesiaCostTracker';
 import { startResourceUsageMonitor } from './src/services/diagnostics/resourceUsageTracker';
 import { bootstrapApiCostLedger } from './src/services/diagnostics/apiCostLedger';
+import { initSentryIfConfigured } from './src/services/diagnostics/sentryBootstrap';
 import { initFeedbackTelemetry } from './src/services/feedback/telemetryBuffer';
 import {
   createDefaultProfile,
@@ -50,11 +54,19 @@ import { startFindusHealthMonitor } from './src/services/findusHealthService';
 import { startWeatherMonitor } from './src/services/weatherService';
 import { startSurvivalModeMonitor } from './src/services/battery/survivalMode';
 import { startGrowthMonitor } from './src/runtime/growthModule';
+import {
+  startRucksackWriters,
+  stopRucksackWriters,
+  startBackgroundTriggerEngine,
+  stopBackgroundTriggerEngine,
+} from './src/module2';
 import { loadPoiTeaserLocks } from './src/services/poi/poiTeaserLocks';
 import { loadWalkTrack } from './src/services/discovery/walkTrackService';
 import { loadStampPassport } from './src/services/navigation/stampPassportPersistence';
 import { loadMicHintPrefs } from './src/services/ui/micHintPrefs';
 import { loadHudHintPrefs } from './src/services/ui/hudHintPrefs';
+import { loadConversationThreads } from './src/services/memory/conversationThreads';
+import { startUiScaleSync } from './src/services/ui/uiScale';
 import { useOpenQuestionStore } from './src/store/useOpenQuestionStore';
 import { loadNavSearchHistory } from './src/services/navigation/navSearchHistory';
 import {
@@ -65,6 +77,8 @@ import {
   SplashScreenController,
   SPLASH_BG,
 } from './src/components/SplashScreenController';
+import { LocationProminentDisclosureHost } from './src/components/LocationProminentDisclosureModal';
+import { CitySwitchPromptHost } from './src/components/CitySwitchPrompt';
 import {
   maybeSpeakWelcomeBack,
   touchActiveDay,
@@ -109,7 +123,9 @@ class AppErrorBoundary extends Component<
         </View>
       );
     }
-    return this.props.children;
+    return this.props.children ? (
+      <View style={styles.boundaryRoot}>{this.props.children}</View>
+    ) : null;
   }
 }
 
@@ -130,8 +146,11 @@ export default function App() {
   const setPois = useFinnusStore((s) => s.setPois);
 
   useEffect(() => {
+    initSentryIfConfigured();
     void purgeLegacyVoiceAssets().catch(() => undefined);
   }, []);
+
+  useEffect(() => startUiScaleSync(), []);
 
   const boot = useCallback(async () => {
     setBootReady(false);
@@ -145,14 +164,23 @@ export default function App() {
       await useSessionPlanStore.getState().hydrate();
       await useLogisticsTriggerStore.getState().hydrate();
       try {
-        const { useDayPlanStore } = await import('./src/store/useDayPlanStore');
-        await useDayPlanStore.getState().hydrate();
-        const mod5 = await import('./src/services/module5');
-        await mod5.hydratePaceProfile();
-        mod5.setPaceChangeListener((mode, kmh) => {
-          mod5.refreshDayPlanTravelTimes(mode, kmh);
+        const { hydratePaceProfile, setPaceChangeListener } = await import(
+          './src/services/mobility/paceProfile'
+        );
+        await hydratePaceProfile();
+        setPaceChangeListener((mode, kmh) => {
+          void import('./src/services/userProfileService')
+            .then(({ getCachedUserProfile, saveUserProfile }) => {
+              const p = getCachedUserProfile();
+              if (!p) return;
+              const mp = { ...(p.mobilityPrefs ?? {}) };
+              if (mode === 'walk') mp.learnedWalkKmh = kmh;
+              else mp.learnedBikeKmh = kmh;
+              mp.learnedPaceAtMs = Date.now();
+              void saveUserProfile({ ...p, mobilityPrefs: mp });
+            })
+            .catch(() => undefined);
         });
-        mod5.bootstrapModule5Today();
       } catch {
         /* soft */
       }
@@ -169,7 +197,22 @@ export default function App() {
           './src/services/timeline/visitLog'
         );
         await hydrateVisitLog();
-        importStampsIntoVisitLog(stampEntries, () => null);
+        importStampsIntoVisitLog(stampEntries, (poiId) => {
+          const p = useFinnusStore.getState().pois.find((x) => x.id === poiId);
+          return p && Number.isFinite(p.lat) && Number.isFinite(p.lng)
+            ? { lat: p.lat, lng: p.lng }
+            : null;
+        });
+      } catch {
+        /* soft */
+      }
+      try {
+        const {
+          hydratePlanTimeline,
+          startPlanTimelinePersistWatchers,
+        } = await import('./src/module2/timeline/planPersistence');
+        await hydratePlanTimeline();
+        startPlanTimelinePersistWatchers();
       } catch {
         /* soft */
       }
@@ -239,6 +282,15 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    startRucksackWriters();
+    startBackgroundTriggerEngine();
+    return () => {
+      stopRucksackWriters();
+      stopBackgroundTriggerEngine();
+    };
+  }, []);
+
+  useEffect(() => {
     return startSurvivalModeMonitor();
   }, []);
 
@@ -252,6 +304,7 @@ export default function App() {
     void loadHudHintPrefs();
     void loadNavSearchHistory();
     void loadPoiTeaserLocks();
+    void loadConversationThreads();
     void useOpenQuestionStore.getState().hydrate();
   }, []);
 
@@ -272,16 +325,174 @@ export default function App() {
   }, [bootReady, splashDone, targetPhase]);
 
   useEffect(() => {
+    let stopWatchers: (() => void) | undefined;
+    let unsubAuth: (() => void) | undefined;
+
+    void (async () => {
+      try {
+        const { refreshAuthSession } = await import(
+          './src/services/account/findusAuth'
+        );
+        const {
+          pullUserCloudOnLogin,
+          scheduleUserCloudPush,
+          startUserCloudSyncWatchers,
+        } = await import('./src/services/account/userCloudSync');
+        const { getSupabase } = await import('./src/services/supabase');
+
+        stopWatchers = startUserCloudSyncWatchers();
+        const user = await refreshAuthSession();
+        if (user) void pullUserCloudOnLogin();
+
+        const sb = getSupabase();
+        if (sb) {
+          const { data } = sb.auth.onAuthStateChange((_event, session) => {
+            if (session?.user) void pullUserCloudOnLogin();
+          });
+          unsubAuth = () => data.subscription.unsubscribe();
+        }
+      } catch {
+        /* soft */
+      }
+    })();
+
+    const appSub = AppState.addEventListener('change', (next) => {
+      if (next !== 'active') return;
+      void (async () => {
+        try {
+          const { refreshAuthSession } = await import(
+            './src/services/account/findusAuth'
+          );
+          const {
+            pullUserCloudOnLogin,
+            scheduleUserCloudPush,
+          } = await import('./src/services/account/userCloudSync');
+          const user = await refreshAuthSession();
+          if (user) await pullUserCloudOnLogin();
+          scheduleUserCloudPush();
+        } catch {
+          /* soft */
+        }
+      })();
+    });
+
+    return () => {
+      stopWatchers?.();
+      unsubAuth?.();
+      appSub.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (phase !== 'ready' || !profile?.setupComplete) return;
+    void (async () => {
+      try {
+        const { loadHandsFreePrefs } = await import(
+          './src/services/handsFree/handsFreePrefs'
+        );
+        const { syncHandsFreeListenNotification } = await import(
+          './src/services/handsFree/handsFreeNotification'
+        );
+        await loadHandsFreePrefs();
+        await syncHandsFreeListenNotification();
+        const { syncHeadsetButtonControls } = await import(
+          './src/services/handsFree/headsetButtonService'
+        );
+        await syncHeadsetButtonControls();
+        const { loadModule1BackgroundSpeechPrefs } = await import(
+          './src/services/speech/module1BackgroundSpeechPrefs'
+        );
+        await loadModule1BackgroundSpeechPrefs();
+      } catch {
+        /* soft */
+      }
+    })();
+  }, [phase, profile?.setupComplete]);
+
+  useEffect(() => {
+    const onUrl = ({ url }: { url: string }) => {
+      void import('./src/services/handsFree/handsFreeLinking').then((m) => {
+        m.handleIncomingHandsFreeUrl(url);
+      });
+    };
+    const sub = Linking.addEventListener('url', onUrl);
+    void Linking.getInitialURL().then((url) => {
+      if (url) onUrl({ url });
+    });
+
+    let lastHandsFreeNotifKey: string | null = null;
+    const handleNotifResponse = (
+      response: Notifications.NotificationResponse | null,
+      opts?: { clear?: boolean },
+    ) => {
+      if (!response) return;
+      const key = `${response.notification.request.identifier}:${response.actionIdentifier}`;
+      if (key === lastHandsFreeNotifKey) return;
+      void import('./src/services/handsFree/handsFreeNotification').then(
+        (m) => {
+          if (!m.isHandsFreeSpeakResponse(response)) return;
+          lastHandsFreeNotifKey = key;
+          void import('./src/services/handsFree/handsFreeBus').then((b) => {
+            b.requestHandsFreeListen('notification');
+          });
+          if (opts?.clear) {
+            void Notifications.clearLastNotificationResponseAsync().catch(
+              () => undefined,
+            );
+          }
+        },
+      );
+    };
+
+    const notifSub = Notifications.addNotificationResponseReceivedListener(
+      (response) => handleNotifResponse(response, { clear: true }),
+    );
+    void Notifications.getLastNotificationResponseAsync().then((response) => {
+      // Nach Handle clearen — sonst würde jeder spätere App-Start erneut lauschen
+      handleNotifResponse(response, { clear: true });
+    });
+
+    return () => {
+      sub.remove();
+      notifSub.remove();
+    };
+  }, []);
+
+  useEffect(() => {
     if (phase !== 'ready' || !profile?.setupComplete) return;
     bootstrapWelcomeBackAppState();
     void (async () => {
+      try {
+        const { bootstrapSessionResume } = await import(
+          './src/services/session/sessionResumeService'
+        );
+        await bootstrapSessionResume();
+      } catch {
+        /* soft */
+      }
       await touchActiveDay();
+      const { peekPostTourQuestion } = await import(
+        './src/services/onboarding/pendingPostTourQuestion'
+      );
+      // Hilfe-Chip nach Erklärung: echte Recherche statt Welcome-Rede
+      if (peekPostTourQuestion()) return;
+
       const { maybeSpeakFirstMapWelcome } = await import(
         './src/services/onboarding/firstMapWelcomeService'
       );
       const didFirst = await maybeSpeakFirstMapWelcome(profile);
       if (!didFirst) {
         await maybeSpeakWelcomeBack();
+      }
+      if (profile.cityId) {
+        const { speakCityWelcomeForCity } = await import(
+          './src/services/cityWelcomeService'
+        );
+        await speakCityWelcomeForCity({
+          id: profile.cityId,
+          name: profile.cityName ?? profile.cityId,
+          symbol: '',
+        });
       }
     })();
   }, [phase, profile]);
@@ -377,7 +588,12 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <AppErrorBoundary>
-        <View style={styles.root}>{content}</View>
+        <View style={styles.root}>
+          {content}
+          {/* Overlays im selben Root — kein RN-Modal (Android-Fragmente) */}
+          <LocationProminentDisclosureHost />
+          <CitySwitchPromptHost />
+        </View>
       </AppErrorBoundary>
     </SafeAreaProvider>
   );
@@ -387,6 +603,9 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: SPLASH_BG,
+  },
+  boundaryRoot: {
+    flex: 1,
   },
   bootFallback: {
     flex: 1,

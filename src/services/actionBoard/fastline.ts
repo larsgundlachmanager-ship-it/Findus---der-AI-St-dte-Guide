@@ -277,6 +277,31 @@ export function buildFastline(opts: {
     if (PRESERVED_ACTION_TYPES.has(s.type)) push(s);
   }
 
+  // Research-Hotel-Deeplinks zuerst — nie durch generische Suche ersetzen
+  for (const s of filterSeed(input.seedActions ?? [], {
+    speechText: input.speechText,
+    userText: input.userText,
+  })) {
+    if (
+      s.type === 'OPEN_URL' &&
+      s.payload.url &&
+      /expedia|stay22|booking\.com|hotels\.com|vrbo|affiliate/i.test(
+        s.payload.url,
+      )
+    ) {
+      push({
+        ...s,
+        payload: {
+          ...s.payload,
+          actionBoardId:
+            s.payload.actionBoardId ??
+            `hotel-seed:${s.payload.entityRank ?? 0}:${s.label}`,
+        },
+      });
+    }
+    if (s.type === 'BOOK_STAY22') push(s);
+  }
+
   for (const opp of opportunities) {
     if (actions.length >= max) break;
     const key = `${opp.kind}:${opp.entity?.rank ?? 0}`;
@@ -319,7 +344,71 @@ export function buildFastline(opts: {
       }
       case 'hotel_book': {
         if (!opp.entity || !partnerSupportsIntent('hotel_book')) break;
-        push(buildHotelBookAction(opp.entity, { multiChoice: multi }));
+        const ent = opp.entity;
+        const alreadyBooked = actions.some(
+          (a) =>
+            (a.type === 'OPEN_URL' || a.type === 'BOOK_STAY22') &&
+            Boolean(a.payload.url) &&
+            /expedia|stay22|booking\.com|hotels\.com|vrbo|affiliate/i.test(
+              a.payload.url ?? '',
+            ) &&
+            entityMatchesAction(
+              ent.name,
+              a.label,
+              a.payload.entityName || a.payload.destName || a.payload.destination,
+            ),
+        );
+        if (alreadyBooked) {
+          usedKinds.add(key);
+          break;
+        }
+        // Seed-URL für dieses Hotel bevorzugen
+        const seedHit = filterSeed(input.seedActions ?? [], {
+          speechText: input.speechText,
+          userText: input.userText,
+        }).find(
+          (a) =>
+            a.type === 'OPEN_URL' &&
+            a.payload.url &&
+            /expedia|stay22|booking\.com|hotels\.com|vrbo|affiliate/i.test(
+              a.payload.url,
+            ) &&
+            entityMatchesAction(
+              ent.name,
+              a.label,
+              a.payload.entityName || a.payload.destName,
+            ),
+        );
+        if (seedHit) {
+          push({
+            ...seedHit,
+            label: labelForOpportunity('hotel_book', ent, {
+              multiChoice: multi,
+              affiliate: true,
+            }),
+            payload: {
+              ...seedHit.payload,
+              destName: ent.name,
+              entityName: ent.name,
+              entityRank: ent.rank,
+              affiliateMarked: true,
+              actionBoardId: `hotel:${ent.rank}:${ent.name}`,
+              ...(ent.checkin ? { checkin: ent.checkin } : {}),
+              ...(ent.checkout ? { checkout: ent.checkout } : {}),
+              ...(ent.adults != null ? { adults: ent.adults } : {}),
+            },
+          });
+        } else {
+          push(
+            buildHotelBookAction(
+              {
+                ...ent,
+                bookUrl: ent.bookUrl || ent.websiteUrl,
+              },
+              { multiChoice: multi },
+            ),
+          );
+        }
         usedKinds.add(key);
         break;
       }

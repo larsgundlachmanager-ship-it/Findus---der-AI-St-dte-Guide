@@ -9,8 +9,12 @@ import type {
   QuickAction,
   QuickActionType,
 } from '../../types/concierge';
+import {
+  ACTION_LABEL_MAX_CHARS,
+  shortenActionLabel,
+} from '../concierge/actionLabelShorten';
 
-export const ACTION_LABEL_MAX_CHARS = 30;
+export { ACTION_LABEL_MAX_CHARS };
 
 const VALID_TYPES = new Set<QuickActionType>([
   'START_NAVIGATION',
@@ -29,7 +33,9 @@ const VALID_TYPES = new Set<QuickActionType>([
   'COMPLETE_SHOPPING_TASK',
   'SNOOZE_SHOPPING_TASK',
   'SET_WAKE_ALARM',
+  'SET_TIMER',
   'SET_DEPARTURE_REMINDER',
+  'SHOW_STREET_VIEW',
 ]);
 
 const PLACEHOLDER_RE =
@@ -50,18 +56,29 @@ function looksLikeUrl(u: string): boolean {
 }
 
 function clampLabel(label: string, fallback: string): string {
-  let t = (label || fallback).trim().replace(/\s+/g, ' ');
-  if (t.length > ACTION_LABEL_MAX_CHARS) {
-    t = t.slice(0, ACTION_LABEL_MAX_CHARS).replace(/\s+\S*$/, '').trim();
-  }
-  return t || fallback.slice(0, ACTION_LABEL_MAX_CHARS);
+  const t = shortenActionLabel(label || fallback);
+  return t || shortenActionLabel(fallback);
 }
 
 /** User will Navigation / Route. */
 export function userWantsNavigation(userText: string): boolean {
-  return /\b(bring\s+mich|navigier|führ\s+mich|fuehr\s+mich|route\s+(?:zu|nach|starten)|lass\s+uns\s+(?:zum|zur|nach)|zeig\s+mir\s+den\s+weg|wie\s+komme\s+ich|geh(?:en)?\s+(?:wir\s+)?(?:zum|zur|nach))\b/iu.test(
-    userText,
-  );
+  if (
+    /\b(bring\s+mich|navigier|führ\s+mich|fuehr\s+mich|route\s+(?:zu|nach|starten)|lass\s+uns\s+(?:zum|zur|nach)|zeig\s+mir\s+den\s+weg|wie\s+komme\s+ich|geh(?:en)?\s+(?:wir\s+)?(?:zum|zur|nach))\b/iu.test(
+      userText,
+    )
+  ) {
+    return true;
+  }
+  // Wander-/Fahrradweg-Vorschlag = Bewegung zum Einstieg
+  try {
+    const { isTrailPathQuery } = require('../research/trailPathResearch') as {
+      isTrailPathQuery: (t: string) => boolean;
+    };
+    if (isTrailPathQuery(userText)) return true;
+  } catch {
+    /* soft */
+  }
+  return false;
 }
 
 /** Reine Wissens-/Info-Frage ohne Bewegungswunsch. */
@@ -84,7 +101,7 @@ function speechMentionsNavTarget(speech: string, destName: string): boolean {
 }
 
 function speechCommitsNavigation(speech: string): boolean {
-  return /\b(ich\s+(führ|fuehr|bring)|kompass\s+(?:ist\s+)?(?:an|aktiv)|navigation\s+startet|route\s+startet|folge(?:\s+\w+){0,3}\s+dem\s+pfeil)\b/iu.test(
+  return /\b(ich\s+starte\s+(?:direkt\s+)?die\s+navigation|ich\s+(führ|fuehr|bring|navigier)|kompass\s+(?:ist\s+)?(?:an|aktiv)|navigation\s+(?:startet|läuft|laeuft)|route\s+startet|folge(?:\s+\w+){0,3}\s+dem\s+pfeil)\b/iu.test(
     speech,
   );
 }
@@ -193,8 +210,23 @@ export function judgeActionButtons(
           removeReason = 'dial_empty_phone';
           break;
         }
-        const digits = String(payload.phoneNumber).replace(/[^\d+]/g, '');
-        if (digits.replace(/\D/g, '').length < 8) {
+        const digitsOnly = String(payload.phoneNumber).replace(/\D/g, '');
+        // Dynamische Notruf-Kurzwahlen (112/911/999/000/116117/…)
+        let isEmergencyShort = false;
+        try {
+          const {
+            isKnownEmergencyShort,
+          } = require('../concierge/emergencyNumbersByCountry') as {
+            isKnownEmergencyShort: (d: string) => boolean;
+          };
+          isEmergencyShort = isKnownEmergencyShort(digitsOnly);
+        } catch {
+          isEmergencyShort =
+            /^(112|110|911|999|000|116117)$/.test(digitsOnly) ||
+            /^116\d{3}$/.test(digitsOnly);
+        }
+        // Notruf-Kurzwahlen sind gültig; sonst mind. 6 Ziffern
+        if (!isEmergencyShort && digitsOnly.length < 6) {
           removeReason = 'dial_invalid_phone';
         }
         break;
@@ -257,14 +289,31 @@ export function judgeActionButtons(
         break;
       }
       case 'SET_WAKE_ALARM':
+      case 'SET_TIMER':
       case 'SET_DEPARTURE_REMINDER': {
         // timeLabel oder textPrompt als Anker
         if (
           isBlank(payload.timeLabel) &&
           isBlank(payload.textPrompt) &&
-          isBlank(payload.dateIso)
+          isBlank(payload.dateIso) &&
+          !(
+            typeof payload.durationMs === 'number' &&
+            Number.isFinite(payload.durationMs) &&
+            payload.durationMs >= 1000
+          )
         ) {
           removeReason = 'reminder_empty_when';
+        }
+        break;
+      }
+      case 'SHOW_STREET_VIEW': {
+        if (
+          typeof payload.destLat !== 'number' ||
+          typeof payload.destLng !== 'number' ||
+          !Number.isFinite(payload.destLat) ||
+          !Number.isFinite(payload.destLng)
+        ) {
+          removeReason = 'street_view_no_coords';
         }
         break;
       }

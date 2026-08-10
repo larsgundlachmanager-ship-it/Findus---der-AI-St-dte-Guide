@@ -11,8 +11,10 @@ import {
 } from 'react-native';
 import type { Poi } from '../db/types';
 import { colors, spacing } from '../constants/theme';
-import { triggerPoiArrival } from '../services/poiTriggerService';
-import { startNavigation } from '../services/navigation';
+import { UI_LAYER } from '../constants/uiLayers';
+import { noteUserPosition } from '../runtime/triggerEngine';
+import { triggerPoiArrival } from '../runtime/exploreModule';
+import { setSimulatedNavCoords, startNavigation } from '../services/navigation';
 import { useFinnusStore } from '../store/useFinnusStore';
 import { stopSpeaking } from '../services/ttsService';
 
@@ -20,6 +22,11 @@ interface Props {
   pois: Poi[];
   visible: boolean;
   disabled?: boolean;
+  /**
+   * `micFab` — kleiner Button links neben dem Mikrofon.
+   * `stack` — klassische Vollbreite-Buttons (Debug).
+   */
+  layout?: 'micFab' | 'stack';
 }
 
 type PickMode = 'arrive' | 'navigate';
@@ -36,7 +43,25 @@ function displayName(poi: Poi): string {
   return poi.name.replace(/\s*[·•|]\s*Wegweiser\s*$/i, '').trim();
 }
 
-export function SimulationPicker({ pois, visible, disabled }: Props) {
+/** Teleport: App glaubt, User steht am POI (Modul-1-Test ohne echtes GPS). */
+function injectSimulatedPresence(poi: Poi): void {
+  noteUserPosition(poi.lat, poi.lng);
+  useFinnusStore.getState().reportGpsFix({
+    lat: poi.lat,
+    lng: poi.lng,
+    accuracy: 5,
+  });
+  setSimulatedNavCoords({ lat: poi.lat, lng: poi.lng });
+  useFinnusStore.getState().setCurrentLocationName(displayName(poi));
+  useFinnusStore.getState().setCurrentPoiId(poi.id);
+}
+
+export function SimulationPicker({
+  pois,
+  visible,
+  disabled,
+  layout = 'micFab',
+}: Props) {
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [mode, setMode] = useState<PickMode>('arrive');
@@ -57,7 +82,6 @@ export function SimulationPicker({ pois, visible, disabled }: Props) {
 
   const openPicker = useCallback((next: PickMode) => {
     setMode(next);
-    // Modal sofort öffnen — nicht hinter Story/TTS warten
     setOpen(true);
   }, []);
 
@@ -69,10 +93,10 @@ export function SimulationPicker({ pois, visible, disabled }: Props) {
       const pickMode = mode;
       void (async () => {
         try {
-          // Sofort stoppen — sonst hängt die alte Story und blockiert die nächste Simulation
           await stopSpeaking();
           useFinnusStore.getState().setLastVisitedPoiId(null);
           useFinnusStore.getState().setIsGenerating(false);
+          injectSimulatedPresence(poi);
           if (pickMode === 'navigate') {
             await startNavigation(runId);
             return;
@@ -82,7 +106,7 @@ export function SimulationPicker({ pois, visible, disabled }: Props) {
           console.warn('[sim] POI-Auswahl fehlgeschlagen:', err);
           useFinnusStore.getState().setIsGenerating(false);
           useFinnusStore.getState().setIsPlayingAudio(false);
-          useFinnusStore.getState().setSubtitleText(null);
+          useFinnusStore.getState().setIsAudiblySpeaking(false);
         } finally {
           setBusy(false);
         }
@@ -111,7 +135,82 @@ export function SimulationPicker({ pois, visible, disabled }: Props) {
     [selectPoi],
   );
 
+  const sheet = (
+    <Modal
+      visible={open}
+      transparent
+      animationType="fade"
+      statusBarTranslucent={Platform.OS === 'android'}
+      onRequestClose={() => setOpen(false)}
+    >
+      <View style={styles.modalRoot}>
+        <Pressable
+          style={styles.backdropHit}
+          onPress={() => setOpen(false)}
+          accessibilityLabel="Schließen"
+        />
+        <View style={styles.sheet} pointerEvents="box-none">
+          <View style={styles.sheetInner}>
+            <Text style={styles.sheetTitle}>
+              {mode === 'navigate' ? 'Navigiere zu' : 'Modul 1 auslösen'}
+            </Text>
+            <Text style={styles.sheetHint}>
+              {mode === 'navigate'
+                ? 'Live-Kompass ohne Story — Position wird an den Ort gesetzt.'
+                : 'Tipp = du stehst virtuell dort → Findus erzählt Modul 1.'}
+            </Text>
+            {sortedPois.length === 0 ? (
+              <Text style={styles.emptyHint}>
+                Keine POIs geladen. Stadt-Pack zuerst laden, dann erneut öffnen.
+              </Text>
+            ) : (
+              <FlatList
+                data={sortedPois}
+                keyExtractor={(p) => String(p.id)}
+                renderItem={renderItem}
+                keyboardShouldPersistTaps="handled"
+                initialNumToRender={12}
+                maxToRenderPerBatch={16}
+                windowSize={7}
+                removeClippedSubviews={Platform.OS === 'android'}
+                style={styles.list}
+              />
+            )}
+            <Pressable
+              style={styles.closeBtn}
+              onPress={() => setOpen(false)}
+            >
+              <Text style={styles.closeBtnText}>Schließen</Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+
   if (!visible) return null;
+
+  if (layout === 'micFab') {
+    return (
+      <View style={styles.fabSlot}>
+        <Pressable
+          style={[styles.fab, disabled && styles.triggerDisabled]}
+          onPress={() => openPicker('arrive')}
+          onLongPress={() => openPicker('navigate')}
+          delayLongPress={420}
+          disabled={disabled}
+          accessibilityLabel="GPS-Simulation: Ort für Modul 1 wählen"
+          accessibilityHint="Kurz tippen: Modul 1 am Ort. Lange halten: nur Navigation."
+        >
+          <Text style={styles.fabGlyph}>⊕</Text>
+          <Text style={styles.fabLabel} numberOfLines={1}>
+            {busy ? '…' : 'Ort'}
+          </Text>
+        </Pressable>
+        {sheet}
+      </View>
+    );
+  }
 
   return (
     <View style={styles.wrap}>
@@ -122,7 +221,9 @@ export function SimulationPicker({ pois, visible, disabled }: Props) {
       >
         <Text style={styles.triggerLabel}>Ort wechseln (GPS-Simulation)</Text>
         <Text style={styles.triggerHint}>
-          {busy ? 'Findus erzählt… (Liste trotzdem öffnen)' : `${pois.length} POIs`}
+          {busy
+            ? 'Findus erzählt… (Liste trotzdem öffnen)'
+            : `${pois.length} POIs · Modul 1 manuell`}
         </Text>
       </Pressable>
 
@@ -139,52 +240,7 @@ export function SimulationPicker({ pois, visible, disabled }: Props) {
         <Text style={styles.triggerHint}>Live-Kompass (ohne Story-Start)</Text>
       </Pressable>
 
-      <Modal
-        visible={open}
-        transparent
-        animationType="fade"
-        statusBarTranslucent={Platform.OS === 'android'}
-        onRequestClose={() => setOpen(false)}
-      >
-        {/*
-          Wichtig: dunkler Root-View (nicht Pressable als Wrapper).
-          Sonst blitzt Android beim Öffnen/Schließen hellweiß.
-        */}
-        <View style={styles.modalRoot}>
-          <Pressable
-            style={styles.backdropHit}
-            onPress={() => setOpen(false)}
-            accessibilityLabel="Schließen"
-          />
-          <View style={styles.sheet} pointerEvents="box-none">
-            <View style={styles.sheetInner}>
-              <Text style={styles.sheetTitle}>
-                {mode === 'navigate' ? 'Navigiere zu' : 'Ort wählen'}
-              </Text>
-              <Text style={styles.sheetHint}>
-                Hauptorte zuerst — tippe einen Eintrag, Findus startet dort.
-              </Text>
-              <FlatList
-                data={sortedPois}
-                keyExtractor={(p) => String(p.id)}
-                renderItem={renderItem}
-                keyboardShouldPersistTaps="handled"
-                initialNumToRender={12}
-                maxToRenderPerBatch={16}
-                windowSize={7}
-                removeClippedSubviews={Platform.OS === 'android'}
-                style={styles.list}
-              />
-              <Pressable
-                style={styles.closeBtn}
-                onPress={() => setOpen(false)}
-              >
-                <Text style={styles.closeBtnText}>Schließen</Text>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      {sheet}
     </View>
   );
 }
@@ -194,6 +250,35 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     marginBottom: spacing.sm,
     gap: spacing.sm,
+  },
+  fabSlot: {
+    width: 64,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    // Vertikal an Mic-Kreis (84) ausrichten: sm + (84-56)/2
+    paddingTop: spacing.sm + 14,
+    zIndex: UI_LAYER.mic,
+    elevation: UI_LAYER.mic,
+  },
+  fab: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: colors.surface,
+    borderWidth: 1.5,
+    borderColor: colors.accent,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 1,
+  },
+  fabGlyph: {
+    fontSize: 18,
+    lineHeight: 20,
+  },
+  fabLabel: {
+    color: colors.accent,
+    fontSize: 11,
+    fontWeight: '700',
   },
   trigger: {
     backgroundColor: colors.surface,
@@ -219,9 +304,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 2,
   },
-  /** Undurchsichtiger Dunkelton — deckt Android-Modal-Weiß komplett ab */
   modalRoot: {
-    flex: 1,
+    ...StyleSheet.absoluteFillObject,
     backgroundColor: '#0A1A15',
     justifyContent: 'flex-end',
   },
@@ -256,6 +340,12 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 12,
     marginBottom: spacing.sm,
+  },
+  emptyHint: {
+    color: colors.textMuted,
+    fontSize: 14,
+    paddingVertical: spacing.lg,
+    textAlign: 'center',
   },
   item: {
     paddingVertical: 14,

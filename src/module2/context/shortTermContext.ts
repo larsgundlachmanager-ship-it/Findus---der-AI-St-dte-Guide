@@ -174,6 +174,24 @@ export const LOCAL_PLACE_ANCHORS: Record<
     lng: 9.7607,
     city: 'Prisdorf',
   },
+  tennisclub: {
+    name: 'Tennis-Club Prisdorf TCP',
+    lat: 53.6829229,
+    lng: 9.7515229,
+    city: 'Prisdorf',
+  },
+  'tennis-club': {
+    name: 'Tennis-Club Prisdorf TCP',
+    lat: 53.6829229,
+    lng: 9.7515229,
+    city: 'Prisdorf',
+  },
+  tcp: {
+    name: 'Tennis-Club Prisdorf TCP',
+    lat: 53.6829229,
+    lng: 9.7515229,
+    city: 'Prisdorf',
+  },
 };
 
 export function resolveLocalAnchor(
@@ -189,6 +207,13 @@ export function resolveLocalAnchor(
   }
   if (/gold/.test(t) && /schatz|jatze|jätze|saetze/.test(t)) {
     return LOCAL_PLACE_ANCHORS.goldschatz!;
+  }
+  // STT: Priesdorf / Tennisclub / „Tennis Club“
+  if (
+    /\btennis\b/.test(t) &&
+    /\b(club|tcp|halle|prisdorf|priesdorf)\b/.test(t)
+  ) {
+    return LOCAL_PLACE_ANCHORS.tennisclub!;
   }
   return null;
 }

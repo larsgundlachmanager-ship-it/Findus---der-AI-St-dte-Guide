@@ -1,0 +1,27 @@
+---
+description: Findus V5 — Modul 5 Planungsassistent (Masterplan Reboot)
+globs: ["src/module2/planning/**/*.ts", "src/components/PlanCalendarModal.tsx"]
+---
+
+# Findus V5 — Modul 5 (Masterplan)
+
+SSOT-Einstieg: `runPlanningModule.ts` → Ingest → `runPlanSession`.
+
+## Dateien
+
+1. `planningLlmIngestion.ts` — `MASTER_INGEST_SYSTEM`, Prio 1–6, GPS/Hotel-Anker, `estimatedTime` HH:mm, Geocode nach Ingest
+2. `planSessionOrchestrator.ts` — Start-Anker + Fixes/Wishes auto-insert, Confirm (Ändern|Bestätigen), Gap-Fill, Explore 3/8/12
+3. `planPlacesResearch.ts` — `DEEP_RESEARCH_SYSTEM`, 2 Optionen als `choice_*` Stops, je Ort `speechPitch` ~300, Top Maps/Speisekarte, Bottom nur „Neu suchen“
+4. `planMobilityEngine.ts` — Walk/Bike/Transit/Taxi (5/10-Min-Regeln), Round-5 + 10 Puffer
+5. `planConflictResolve.ts` — Drop Prio 6→4, Geo-Injection, Trigger 30/10/5; Final Tisch/Taxi/Tickets = OPEN_URL (kein Re-Ingest)
+
+## UX-Regeln
+
+- Timeline-Achse: auch bei alleinigem „Jetzt“ vertikale Connectoren
+- Auswahl nur per Timeline-Tap auf `choice_*`; Short-Answer Reject = Re-Research
+- „Tisch reservieren“ / „Taxi vorbestellen“ / „Tickets“ → Actions, nie `runPlanningModule` Ingest
+
+## Routing
+
+- Timeline offen oder Tagesplan-Utterance → Modul 5
+- Mic sonst → Modul 2

@@ -1,0 +1,126 @@
+{
+  "spots": [
+    {
+      "id": "laboe_windmuehle",
+      "name": "Windmühle Laboe",
+      "lat": 54.40127,
+      "lng": 10.22161,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Wahrzeichen auf dem Mühlenberg — Holländer-Mühle mit Brand-/Wiederaufbaugeschichte; heute zum Pflegeheim gehörig und u. a. als Außentraustelle des Standesamtes Laboe genutzt.",
+      "deep_data_pool": [
+        {
+          "text": "LIVE: Innere Besichtigung in der Regel eingeschränkt (Pflegeheim). Als Außentraustelle des Standesamtes Laboe berichtet (Kapazität ca. 45–50 Personen inkl. Sektempfang) — Termine und Zugang nur über Standesamt/Gemeinde prüfen. Gelegentliche Sonderöffnungen/Flohmärkte möglich.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Trauungen verbinden die Mühle mit dem Freya-Frahm-Haus als weiterem standesamtlichen Ort in Laboe.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "laboe_minigolf_laboe_getranke_snacks_und_grillmoglichkeit",
+      "name": "Minigolf Laboe",
+      "lat": 54.4078,
+      "lng": 10.2254,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "18-Bahn-Minigolf am Kurpark-Eingang Katzbek 6 — familiärer Spot mit Kiosk, Getränken und Eis in der Grünkulisse des alten Kurparks.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Anlage am nordöstlichen Kurpark-Eingang, Adresse Katzbek 6; Bahnen im Parkgrün mit Sitzplätzen und Kassen-/Kioskbereich.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Eintrittspreise und Öffnung tagesaktuell prüfen (Betreiber Tel. über Tourist-Info/minigolf-laboe.de). Hunde auf der Anlage willkommen laut Betreiberhinweis; Getränke und Eis vor Ort. Events/Grill nach Absprache.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "laboe_meerwasser_hallenbad",
+      "name": "Meerwasser-Hallenbad Laboe",
+      "lat": 54.4085,
+      "lng": 10.2235,
+      "place_tier": 4,
+      "pack_role": "directory",
+      "general_info": "Ehemalige Meerwasser-Schwimmhalle an der Strandstraße 25 / Promenade — früher mit temperiertem Ostseewasser betrieben, seit 30.03.2021 dauerhaft geschlossen.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Halle an der Promenade, historisch mit großer Menge temperiertem Ostseewasser betrieben (Bau Ende 1960er). Gemeindevertretung beschloss die dauerhafte Schließung zum 30. März 2021.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "LIVE: DAUERHAFT GESCHLOSSEN — kein Badebetrieb. Veraltete Öffnungszeiten im Web ignorieren; Stand zu Sanierung/Neubau bei der Gemeinde prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "laboe_moltenort_u_boat_memorial",
+      "name": "U-Boot-Ehrenmal Möltenort",
+      "lat": 54.37917,
+      "lng": 10.19472,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Gedenkstätte in Heikendorf (Möltenorter Schanze) — Pfeiler mit Seeadler und Namen-Tafeln; thematischer Querbezug zum Marine-Ehrenmal Laboe, erreichbar u. a. über Förde/F1-Umfeld.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Ca. 15,30 m hoher Steinpfeiler mit rund 4,60 m hoher Seeadler-Bronzeplastik; halbkreisförmiger Umgang mit zahlreichen Bronzetafeln (über 100 Namen-Tafeln).",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Besuch in der Regel kostenfrei. Saisonale Öffnungsfenster der Anlage/Infopoint (oft April–Sept. länger, Okt.–März kürzer) tagesaktuell prüfen. Anfahrt aus Laboe über Förde/Küste nach Heikendorf-Möltenort.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "laboe_marine_ehrenmal",
+      "name": "Marine-Ehrenmal Laboe",
+      "lat": 54.412,
+      "lng": 10.23,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "LIVE: Sommer- und Winteröffnungszeiten unterscheiden sich; Kombi mit U 995 möglich. Hunde nicht gestattet; Plattform nur eingeschränkt barrierefrei (hohe Brüstung). Preise und aktuelle Zeiten vor Ort/online prüfen — nie aus dem Pack vorlesen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "laboe_fischkueche_laboe",
+      "name": "Fischküche Laboe",
+      "lat": 54.40395,
+      "lng": 10.21893,
+      "place_tier": 3,
+      "pack_role": "directory",
+      "deep_data_pool": [
+        {
+          "text": "LIVE: Spezialitäten regionaler Fischküche (u. a. Dorsch, Scholle, Laboer Fischsuppe); SB-Bereich für Fischbrötchen. Reservierung in der Hochsaison sinnvoll. Speisekarte und Öffnung tagesaktuell prüfen.",
+          "tags": ["live_hint", "ephemeral", "gastro"]
+        }
+      ],
+      "faqs": []
+    }
+  ],
+  "offline_qa": [
+    {
+      "q": "Trauung in der Laboer Mühle?",
+      "a": "Die Mühle wird u. a. als Außentraustelle des Standesamtes Laboe genutzt (Kapazität nach Angaben rund 45–50 Personen). LIVE: Termine und Zugang ausschließlich über Standesamt/Gemeinde klären — kein freier Museumsbetrieb.",
+      "tags": ["standesamt", "muehle"]
+    },
+    {
+      "q": "Minigolf Laboe Adresse?",
+      "a": "Am Kurpark, Katzbek 6. LIVE: Preise, Öffnung und ob Hunde willkommen sind beim Betreiber prüfen.",
+      "tags": ["freizeit", "familie"]
+    }
+  ]
+}

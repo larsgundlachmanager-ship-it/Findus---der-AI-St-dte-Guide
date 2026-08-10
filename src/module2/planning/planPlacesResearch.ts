@@ -1396,13 +1396,13 @@ function publishChoiceUi(
 
 /**
  * Deep Research + Pitch für einen offenen Wunsch.
- * Speech = beide Orts-Pitches hintereinander.
+ * Nur noch Pitch-Modul (v4) — kein Legacy-Gemini-2er-Pfad.
+ * Hotels: Stay22 Spezialpfad wenn 2 Treffer.
  */
 export async function executeDeepResearchAndPitch(
   wish: IngestOpenWish,
   opts?: { signal?: AbortSignal },
 ): Promise<DeepResearchPitchResult & { spokenText: string }> {
-  // Hotels: Stay22 Live mit immer 2 Optionen (bei günstigste = zwei günstigste)
   if (isHotelWishText(`${wish.title} ${wish.context}`)) {
     const hotelPitch = await pitchHotelWishFromStay22(wish, opts);
     if (hotelPitch && hotelPitch.uiCards.length >= 2) {
@@ -1410,170 +1410,56 @@ export async function executeDeepResearchAndPitch(
     }
   }
 
-  const prev = resolveDistanceRef(wish);
-  const bag = readRucksackSync();
-  const gps = anchorCoords(bag);
-  const walk = isWalkWish(wish);
-  const anchor = {
-    lat: prev.lat,
-    lng: prev.lng,
-    hint: prev.title === 'hier' ? bag.cityHint || 'GPS' : prev.title,
-  };
-  const places = await discoverCandidates(wish, anchor);
-
-  const catalog = places
-    .slice(0, 20)
-    .map((p, i) => {
-      const dist = formatDistFromPrev(p.lat, p.lng, prev);
-      return `${i + 1}. ${p.name} | rating=${p.rating ?? 'n/a'} | ${dist ?? 'dist?'} | ${p.mapsUrl}`;
-    })
-    .join('\n');
+  const { buildPitchRequestFromWish } = await import('../pitch/buildPitchRequest');
+  const { runPitchModule } = await import('../pitch/runPitchModule');
+  const { request, bridge } = buildPitchRequestFromWish(wish, {
+    signal: opts?.signal,
+    uiLayout: 'timeline_stack',
+  });
+  if (bridge) {
+    try {
+      const { enqueueSpeech } = await import('../speech/speechQueue');
+      enqueueSpeech({
+        kind: 'bridging',
+        text: bridge,
+        turnId: `pitch_bridge_${request.requestId}`,
+      });
+    } catch {
+      /* soft */
+    }
+  }
 
   try {
-    const raw = await generateGeminiText(
-      [
-        `WUNSCH: ${wish.title}`,
-        `KONTEXT: ${wish.context}`,
-        `ART: ${walk ? 'SPAZIERGANG/OUTDOOR — keine Restaurants' : 'normal'}`,
-        `ZEITFENSTER: ${wish.estimatedTime ?? 'flexibel'}`,
-        `DISTANZ_VON: ${prev.title} (${prev.lat},${prev.lng})`,
-        `SUCHANKER: ${anchor.hint} (${anchor.lat},${anchor.lng})`,
-        `Distanz-Stichpunkte IMMER als „X km/m von ${prev.title}“ — nie 0 m, nie GPS-Meta.`,
-        `KANDIDATEN (nur diese Namen/Koordinaten):\n${catalog || '(keine)'}`,
-      ].join('\n'),
-      {
-        systemInstruction: DEEP_RESEARCH_SYSTEM,
-        useFindusSystem: false,
-        responseJson: true,
-        jsonMimeOnly: true,
-        temperature: 0.45,
-        maxTokens: 2200,
-        signal: opts?.signal,
-        task: 'itinerary',
+    const result = await runPitchModule(request);
+    const uiCards = result.options.map((o) => ({
+      name: o.name,
+      lat: o.lat,
+      lng: o.lng,
+      placeId: o.placeId ?? null,
+      speechPitch: o.speechPitch,
+      bulletPoints: o.bullets,
+      address: null as string | null,
+      actions: {
+        mapsUrl: o.mapsUrl,
+        menuStatus: (o.menuUrl ? 'READY' : 'SEARCHING') as
+          | 'SEARCHING'
+          | 'READY'
+          | 'NONE',
+        menuUrl: o.menuUrl ?? null,
+        ticketUrl: o.ticketUrl ?? null,
+        reserveUrl: null as string | null,
       },
-    );
-    void gps;
-    const parsed = parseJsonObject(raw);
-    if (!parsed) {
-      const fb = fallbackPitch(wish, places, anchor);
-      publishChoiceUi(wish, fb);
-      void enrichMenuUrlsAsync(wish, fb.uiCards);
-      return {
-        ...fb,
-        spokenText: combineSpeech(fb.uiCards, fb.summary, wish),
-      };
-    }
-
-    const summary = sanitizePlanSpeech(
-      String(parsed.summary ?? '').trim(),
-    ).slice(0, 120);
-    const uiRaw = Array.isArray(parsed.uiCards) ? parsed.uiCards : [];
-    const uiCards: DeepResearchUiCard[] = [];
-    for (let i = 0; i < uiRaw.length && uiCards.length < 2; i++) {
-      const row = uiRaw[i];
-      if (!row || typeof row !== 'object') continue;
-      const o = row as Record<string, unknown>;
-      const name = String(o.name ?? '').trim();
-      if (!name) continue;
-      const match =
-        places.find((p) => p.name.toLowerCase() === name.toLowerCase()) ??
-        places.find((p) =>
-          p.name.toLowerCase().includes(name.toLowerCase().slice(0, 12)),
-        );
-      // Ohne Match keine Fake-Koordinaten vom GPS-Anker (= „0 m“)
-      if (!match) continue;
-      if (match.openNow === false && !walk) continue;
-      const actions =
-        o.actions && typeof o.actions === 'object'
-          ? (o.actions as Record<string, unknown>)
-          : {};
-      const lat = match.lat;
-      const lng = match.lng;
-      const dist = formatDistFromPrev(lat, lng, prev);
-      let speechPitch = sanitizePlanSpeech(
-        String(o.speechPitch ?? '').trim(),
-      ).slice(0, 520);
-      if (!speechPitch) {
-        speechPitch = sanitizePlanSpeech(
-          [
-            ratingLabel(match.rating) + '.',
-            dist ? `Liegt ${dist}.` : null,
-            walk ? 'Schön zum Spazieren.' : null,
-          ]
-            .filter(Boolean)
-            .join(' '),
-        ).slice(0, 520);
-      }
-      const address =
-        typeof o.address === 'string'
-          ? o.address
-          : match.address ?? null;
-      const bulletsRaw = Array.isArray(o.bulletPoints)
-        ? o.bulletPoints.map((x) => String(x))
-        : [];
-      const bulletPoints = buildUsefulBullets({
-        rating: match.rating,
-        dist,
-        llmBullets: bulletsRaw,
-        speechPitch,
-        walk,
-      });
-
-      uiCards.push({
-        name: match.name,
-        lat,
-        lng,
-        placeId: match.placeId ?? null,
-        speechPitch,
-        address,
-        bulletPoints,
-        actions: {
-          mapsUrl:
-            String(actions.mapsUrl ?? '').trim() ||
-            match.mapsUrl ||
-            mapsUrlFor(match.name, lat, lng, match.placeId),
-          menuStatus:
-            actions.menuStatus === 'READY'
-              ? 'READY'
-              : actions.menuStatus === 'NONE'
-                ? 'NONE'
-                : 'SEARCHING',
-          menuUrl:
-            typeof actions.menuUrl === 'string' ? actions.menuUrl : null,
-          ticketUrl:
-            typeof actions.ticketUrl === 'string'
-              ? actions.ticketUrl
-              : null,
-          reserveUrl:
-            typeof actions.reserveUrl === 'string'
-              ? actions.reserveUrl
-              : null,
-        },
-      });
-    }
-
-    const result: DeepResearchPitchResult = {
-      summary: summary || undefined,
-      uiCards:
-        uiCards.length >= 1
-          ? uiCards
-          : fallbackPitch(wish, places, anchor).uiCards,
-    };
-    publishChoiceUi(wish, result);
-    void enrichMenuUrlsAsync(wish, result.uiCards);
+    }));
     return {
-      ...result,
-      spokenText: combineSpeech(result.uiCards, result.summary, wish),
+      summary: result.summary,
+      uiCards,
+      spokenText: result.spokenText,
     };
   } catch (err) {
-    console.warn('[module5] deep research failed', err);
-    const fb = fallbackPitch(wish, places, anchor);
-    publishChoiceUi(wish, fb);
-    void enrichMenuUrlsAsync(wish, fb.uiCards);
-    return {
-      ...fb,
-      spokenText: combineSpeech(fb.uiCards, fb.summary, wish),
-    };
+    console.warn('[module5] pitch module failed', err);
+    const spokenText =
+      'Gerade finde ich keine saubere Auswahl — sag mir Ort oder Küche nochmal genauer.';
+    return { summary: undefined, uiCards: [], spokenText };
   }
 }
 

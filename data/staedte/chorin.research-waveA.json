@@ -1,0 +1,213 @@
+{
+  "city_history": "Chorin in der Schorfheide: Zisterzienserkloster Chorin und Biosphärenreservat Schorfheide-Chorin — Backsteingotik im Wald.",
+  "notes": [
+    "Wave A — verified facts, LIVE ephemeral, no dialog scripts."
+  ],
+  "offline_qa": [],
+  "city_facts_non_place": [
+    "Biosphärenreservat Schorfheide-Chorin schützt Wald- und Seelandschaft zwischen Chorin, Brodowin und Schorfheide (UNESCO-MAB, Wikipedia)."
+  ],
+  "spots": [
+    {
+      "id": "chorin_kloster_chorin",
+      "name": "Kloster Chorin",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Kloster Chorin: ehemaliges Zisterzienserkloster — Backsteingotik in der Schorfheide, heute Konzert- und Ausstellungsort.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: rote Backsteinfassaden, offene Ruinen und restaurierte Kirche — spiegeln sich im Klosterteich.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Gegründet 1273 als Zisterzienserkloster; bedeutendes Backsteinbauwerk der Mark (Wikipedia).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Aufgelöst in der Reformation; danach Verfall und beginnende Restaurierung im 19./20. Jahrhundert.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Heute: Brandenburgisches Kloster Chorin — Konzerte (Choriner Musiksommer), Ausstellungen, Klosterladen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Klosterteich und Park umgeben die Anlage; Fahrradwege durch die Schorfheide.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Biosphärenreservat Schorfheide-Chorin umschließt die Region — Wald- und Seelandschaft.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Architektur: frühe Backsteingotik mit charakteristischen Formen Zisterzienser-Bauhütte.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Grimnitzsee und Schorfheide-Wald in der Umgebung; Bahnhof Angermünde/Chorin erreichbar.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Führungen durch Klosterführer; Veranstaltungskalender auf klosterchorin.de.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Choriner Musiksommer bringt klassische Konzerte in die Klosterkirche — Akustik und Atmosphäre bekannt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Restaurierung der Backsteingewölbe läuft seit dem 19. Jahrhundert — fortlaufende Denkmalpflege.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Zisterzienser-Ordensregeln prägten ursprüngliche Wirtschaft: Fischteiche, Mühle, Landwirtschaft.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Die Zisterzienser-Ordensregeln prägten Wirtschaft: Fischteiche, Mühle, Landwirtschaft im Klosterumfeld.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Backsteinbauweise der „Brandenburgischen Backsteingotik“ — Chorin als Musterbau.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Nach der Reformation Verfall; romantische Ruinenzeichnungen im 19. Jahrhundert.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Restaurierung der Dachkonstruktion und Fenster in den 1990er/2000er Jahren — heute wetterfest.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Choriner Musiksommer bringt klassische Konzerte in die Kirche — Tickets online.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Klosterladen und Café im Besucherzentrum — kombinierte Eintrittskarten.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Klostergarten und Teichanlage zeigen zisterziensische Gartenkultur — rekonstruierte Beete.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Ausstellungen zu Klosterleben und Backsteinbau in Besucherzentrum.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Verbindung zum Biosphärenreservat: Waldwanderwege ab Parkplatz Kloster.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Fahrradroute Berlin–Usedom führt nahe am Kloster vorbei — Rastplatz am Teich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Kloster ist einer der bedeutendsten Backsteinbauten der Mark — Zisterzienser-Ordensarchitektur.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Konzertreihe Choriner Musiksommer nutzt Akustik der Kirche — internationale Künstler.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Klosterteich spiegelt die Fassade — beliebtes Motiv für Fotografie bei Sonnenaufgang.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Besucherzentrum mit Shop, Café und Ausstellung zum Klosterleben.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Brandenburgisches Kloster Chorin betreibt Ticketverkauf, Shop und Veranstaltungskalender online unter klosterchorin.de.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Das Kloster liegt im Biosphärenreservat Schorfheide-Chorin — Wald- und Seelandschaft ergänzen den Kulturbesuch.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Ruinencharakter und restaurierte Kirche stehen nebeneinander — eindrucksvolle Mischung aus Verfall und Erhalt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Parkplatz und Radwege erschließen das Kloster aus Richtung Angermünde und Brodowin.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    }
+  ],
+  "new_places": []
+}

@@ -1,0 +1,329 @@
+{
+  "city_history": "Rheinsberg: friderizianisches Schloss am Grienecksee — Kronprinzenzeit Friedrichs des Großen und Kulturort in der Ruppiner Seenlandschaft.",
+  "notes": [
+    "Wave A — verified facts, LIVE ephemeral, no dialog scripts."
+  ],
+  "offline_qa": [],
+  "city_facts_non_place": [],
+  "spots": [
+    {
+      "id": "rheinsberg_kasse_schloss",
+      "name": "Kasse Schloss",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Schloss Rheinsberg: friderizianisches Schloss am Grienecksee — Jugendresidenz Friedrichs des Großen, heute Museum und Konzerte.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: orangefarbener Schlossbau mit Türmen, Terrasse zum Grienecksee und Schlosspark.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Friedrich II. verbrachte als Kronprinz Jahre auf Schloss Rheinsberg (1736–1740) — prägende Zeit (Wikipedia, SPSG).",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Kurt Tucholsky schrieb „Rheinsberg“ über Friedrichs Aufenthalt — literarische Berühmtheit.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schloss und Park gehören zur Stiftung Preußische Schlösser und Gärten; Museum und Konzerte.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schlosstheater Rheinsberg im Park — klassische Konzerte und Veranstaltungen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Grienecksee und Rheinsberger Gewässer — Bootsfahrten und Uferpromenade.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Architektur: barock mit friderizianischen Ergänzungen; Innenräume mit Portraits und Möbeln.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Schlosspark, Gartenportal, Sphinxtreppe und Feldsteingrotte als Park-Stationen.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "Stadt Rheinsberg mit Hafen und Gastronomie am Wasser.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Leben jetzt: Schlossführungen SPSG; Konzertsaison Schlosstheater.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Kronprinz Friedrich komponierte hier Flötenstücke und debattierte Aufklärung — biografische Wendepunkte.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schlosskapelle und Bibliothek zeigen frühe Interessen des späteren Königs — museale Räume.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Rheinsberger Schlossliteratur: Tucholsky-Roman popularisierte den Ort deutschlandweit.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Friedrichs Jahre in Rheinsberg prägten Musik, Philosophie und Distanz zum Vater — biografisch zentral.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schlosskapelle und Bibliothek zeigen frühe Interessen — museale Räume der SPSG.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Grienecksee und Schlosspark bilden romantische Kulisse — Fontane- und Tucholsky-Rezeption.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schlosstheater im Park mit Sommerkonzerten — eigenes Programm neben Schlossmuseum.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "SPSG-Tickets kombinierbar mit anderen Schlössern — Jahreskarten für Vielbesucher.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Barocke Fassadenfarben und Turmhelm — weithin sichtbar vom Seeufer.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Museum zeigt friderizianische Möbel, Portraits und Alltagsgegenstände Friedrichs als Kronprinz.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Terrasse zum Grienecksee für Veranstaltungen — Blick auf Schlosspark.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "SPSG-AudioGuide in mehreren Sprachen — im Ticket enthalten oder optional.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Verbindung zur Literatur: Tucholskys „Rheinsberg“ als Einstieg in die Epoche.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schloss Rheinsberg gehört zur Stiftung Preußische Schlösser und Gärten — Ticket online oder an der Kasse.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Friderizianische Zimmer und Portraits erklären Kronprinzenzeit Friedrichs II. vor seiner Thronbesteigung.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schlosspark mit Schlosstheater, Grotte und Sphinxtreppe — Park frei, Museum entgeltlich.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Grienecksee und Hafenstadt Rheinsberg bieten Bootstouren — Anleger nahe Schloss.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Literarische Rezeption durch Kurt Tucholsky machte Rheinsberg zum Synonym für Friedrichs frühe Jahre.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Schloss Rheinsberg und Schlosspark sind UNESCO-Welterbe-Kandidaten im Kontext preußischer Schlösser — SPSG-Pflege.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Konzerte im Schlosstheater im Park — eigenes Programm neben Museumsbetrieb am Schloss.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "rheinsberg_schlosspark_rheinsberg",
+      "name": "Schlosspark Rheinsberg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Schlosspark Rheinsberg: barocker Landschaftspark mit Skulpturen, Grotte und Seeblick — Rahmen des Schlosses.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Alleen, Sphinxtreppe, Grotte und Blick auf Grienecksee — romantischer Park.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Gestaltung im 18. Jahrhundert; Erweiterungen für Konzert- und Spaziergäste.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Quer: Schloss Rheinsberg und Schlosstheater im Park.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Sphinxtreppe, Grotte und Salon im Park — einzeln beschilderte Stationen.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Feldsteingrotte und Gartenportal als fotogene Punkte — Park frei begehbar.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Park ist ganzjährig geöffnet — Eintritt Park frei, Schlossmuseum separat.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Skulpturenweg und Sphinxtreppe — separate Wege durch den Park.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    },
+    {
+      "id": "rheinsberg_aussichtspunkt_schloss_rheinsberg",
+      "name": "Aussichtspunkt Schloss Rheinsberg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Aussichtspunkt Schloss Rheinsberg: erhöhte Sicht auf Schloss, See und Park — beliebtes Fotomotiv.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Schloss-Silhouette über Grienecksee vom Aussichtspunkt — Postkartenmotiv.",
+          "tags": [
+            "master_report",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Quer: wenige Minuten zum Schloss-Eingang und Park.",
+          "tags": [
+            "master_report",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen und Tarife ephemer auf offiziellen Tourismus- oder Betreiber-Websites prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        },
+        {
+          "text": "Blickachse über Grienecksee zum Schloss — Sonnenuntergang beliebt.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Wenige Gehminuten zum Schloss-Eingang und Kasse.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Ideal für Fotos mit See-Spiegelung bei windstillem Wetter.",
+          "tags": [
+            "master_report"
+          ]
+        },
+        {
+          "text": "Parkbank und Infotafel am Aussichtspunkt — kurzer Stopp vor Schlossbesuch.",
+          "tags": [
+            "master_report"
+          ]
+        }
+      ],
+      "faqs": [],
+      "bullets": []
+    }
+  ],
+  "new_places": []
+}

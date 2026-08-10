@@ -8,6 +8,7 @@ import { parseAndCacheCityPronunciations } from './tts/cityPronunciationParser';
 import { scanCityDatasetSafe } from './scanner/cityScanner';
 import { scanPoiDatasetSafe } from './ai/poiDatasetScanner';
 import { syncDictionaryAfterCityDownload } from './sync/dictionarySyncService';
+import { prefetchCityCovers } from '../constants/cityCovers';
 
 const STAEDTE_BUCKET = 'staedte';
 const DOC_DIR = FileSystem.documentDirectory;
@@ -21,6 +22,8 @@ export type CityIndexEntry = {
   lat?: number;
   lng?: number;
   district?: string;
+  /** Hero-Cover (HTTPS) — aus Pack `cover_url` / `_meta.cover_url` */
+  coverUrl?: string | null;
 };
 
 export type CityCatalogItem = CityIndexEntry & {
@@ -35,6 +38,10 @@ export type CityCatalogItem = CityIndexEntry & {
   subCount: number;
   /** Anzahl Fakten (Bullets + Erzählungen + Deep-Data) */
   factCount: number;
+  /** Story-Orte (Trigger/Narration) */
+  storyCount?: number;
+  /** Directory / Offline-Katalog */
+  directoryCount?: number;
   /** Alle GPS-Trigger mit Typ (für Auflistung in der Städteauswahl) */
   triggers: Array<{
     name: string;
@@ -164,12 +171,18 @@ function parseJsonStrict<T>(text: string, label: string): T {
   return parsed as T;
 }
 
-async function fetchPublicJson<T>(path: string): Promise<T> {
+async function fetchPublicJson<T>(
+  path: string,
+  opts?: { bustCache?: boolean },
+): Promise<T> {
   const base = resolveSupabaseBase();
-  const publicUrl = `${base}/storage/v1/object/public/${STAEDTE_BUCKET}/${path
+  let publicUrl = `${base}/storage/v1/object/public/${STAEDTE_BUCKET}/${path
     .split('/')
     .map(encodeURIComponent)
     .join('/')}`;
+  if (opts?.bustCache) {
+    publicUrl += `${publicUrl.includes('?') ? '&' : '?'}t=${Date.now()}`;
+  }
 
   const errors: string[] = [];
 
@@ -177,7 +190,11 @@ async function fetchPublicJson<T>(path: string): Promise<T> {
   try {
     const response = await fetch(publicUrl, {
       method: 'GET',
-      headers: { Accept: 'application/json' },
+      headers: {
+        Accept: 'application/json',
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache',
+      },
     });
     if (response.ok) {
       const text = await response.text();
@@ -284,43 +301,151 @@ async function listCityIdsFromBucket(): Promise<string[]> {
   }
 }
 
+/** Offline-/Dev-Fallback wenn Bucket/Index leer oder Supabase fehlt. */
+const HARDCODED_CITY_INDEX: CityIndexEntry[] = [
+  {
+    id: 'prisdorf',
+    name: 'Prisdorf',
+    lat: 53.6799982,
+    lng: 9.7606944,
+    symbol: '🌳',
+  },
+  {
+    id: 'pinneberg',
+    name: 'Pinneberg',
+    lat: 53.7278939,
+    lng: 9.6979598,
+    symbol: '🌳',
+  },
+  {
+    id: 'tornesch',
+    name: 'Tornesch',
+    lat: 53.6973396,
+    lng: 9.7123761,
+    symbol: '🌳',
+  },
+  {
+    id: 'hamburg',
+    name: 'Hamburg',
+    lat: 53.5511,
+    lng: 9.9937,
+    symbol: '⚓',
+  },
+  {
+    id: 'luebeck',
+    name: 'Lübeck',
+    lat: 53.8654673,
+    lng: 10.6865593,
+    symbol: '🏛️',
+  },
+  {
+    id: 'hechingen',
+    name: 'Hechingen',
+    lat: 48.3538888,
+    lng: 8.9613627,
+    symbol: '🏰',
+  },
+  {
+    id: 'tettnang',
+    name: 'Tettnang',
+    lat: 47.6681722,
+    lng: 9.5916036,
+    symbol: '🏰',
+  },
+  {
+    id: 'wangerooge',
+    name: 'Wangerooge',
+    lat: 53.7902,
+    lng: 7.8995,
+    symbol: '🏝️',
+  },
+];
+
+/** Veraltete Duplikat-IDs — nie in der Stadtauswahl anzeigen (auch wenn noch im Bucket). */
+const OBSOLETE_CITY_IDS = new Set([
+  'berlin',
+  'berlin_umland',
+  'frankfurt',
+  'hochheim',
+]);
+
+/** Wenn mehrere IDs denselben Anzeigenamen haben, behalte diese. */
+const PREFERRED_CITY_ID_BY_NAME: Record<string, string> = {
+  'berlin zentral': 'berlin-zentral',
+  'berlin umland': 'berlin-umland',
+  'frankfurt am main': 'frankfurt_am_main',
+  'hochheim am main': 'hochheim_am_main',
+};
+
+function normalizeCityName(name: string): string {
+  return String(name || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/ä/g, 'ae')
+    .replace(/ö/g, 'oe')
+    .replace(/ü/g, 'ue')
+    .replace(/ß/g, 'ss')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+function dedupeCityIndex(entries: CityIndexEntry[]): CityIndexEntry[] {
+  const byId = new Map<string, CityIndexEntry>();
+  for (const e of entries) {
+    if (!e?.id || OBSOLETE_CITY_IDS.has(e.id)) continue;
+    byId.set(e.id, e);
+  }
+  const byName = new Map<string, CityIndexEntry[]>();
+  for (const e of byId.values()) {
+    const key = normalizeCityName(e.name || e.id);
+    if (!byName.has(key)) byName.set(key, []);
+    byName.get(key)!.push(e);
+  }
+  const out: CityIndexEntry[] = [];
+  for (const [key, group] of byName) {
+    if (group.length === 1) {
+      out.push(group[0]!);
+      continue;
+    }
+    const preferred = PREFERRED_CITY_ID_BY_NAME[key];
+    const pick =
+      (preferred && group.find((g) => g.id === preferred)) ||
+      group.sort((a, b) => (b.data_version ?? 0) - (a.data_version ?? 0))[0]!;
+    out.push(pick);
+  }
+  return out.sort((a, b) =>
+    String(a.name || a.id).localeCompare(String(b.name || b.id), 'de'),
+  );
+}
+
 /**
  * Vereinigt index.json + Bucket-Listing.
  * So erscheinen alle hochgeladenen Städte, auch wenn index.json veraltet ist.
+ * `bustCache` umgeht HTTP-/CDN-Caches für index.json (UI soll immer aktuell sein).
  */
-export async function fetchCityIndex(): Promise<CityIndexEntry[]> {
+export async function fetchCityIndex(opts?: {
+  bustCache?: boolean;
+}): Promise<CityIndexEntry[]> {
   const byId = new Map<string, CityIndexEntry>();
+  const bustCache = opts?.bustCache !== false;
 
   if (!isSupabaseConfigured()) {
-    return [
-      {
-        id: 'prisdorf',
-        name: 'Prisdorf',
-        lat: 53.6799982,
-        lng: 9.7606944,
-        symbol: '🌳',
-      },
-      {
-        id: 'pinneberg',
-        name: 'Pinneberg',
-        lat: 53.7278939,
-        lng: 9.6979598,
-        symbol: '🌳',
-      },
-      {
-        id: 'wangerooge',
-        name: 'Wangerooge',
-        lat: 53.7902,
-        lng: 7.8995,
-        symbol: '🏝️',
-      },
-    ];
+    return [...HARDCODED_CITY_INDEX];
   }
 
   try {
-    const index = await fetchPublicJson<CityIndexFile>('index.json');
+    const index = await fetchPublicJson<CityIndexFile>('index.json', {
+      bustCache,
+    });
     for (const city of index.available_cities ?? []) {
-      if (city?.id) byId.set(city.id, city);
+      if (!city?.id || OBSOLETE_CITY_IDS.has(city.id)) continue;
+      const raw = city as CityIndexEntry & { cover_url?: string };
+      const coverUrl =
+        (typeof raw.coverUrl === 'string' && raw.coverUrl.trim()) ||
+        (typeof raw.cover_url === 'string' && raw.cover_url.trim()) ||
+        null;
+      byId.set(city.id, { ...raw, coverUrl });
     }
   } catch (err) {
     console.warn('[cityCatalog] index.json fehlgeschlagen:', err);
@@ -328,6 +453,7 @@ export async function fetchCityIndex(): Promise<CityIndexEntry[]> {
 
   const listed = await listCityIdsFromBucket();
   for (const id of listed) {
+    if (OBSOLETE_CITY_IDS.has(id)) continue;
     if (!byId.has(id)) {
       byId.set(id, { id, name: titleCaseId(id), symbol: '📍' });
     }
@@ -335,32 +461,10 @@ export async function fetchCityIndex(): Promise<CityIndexEntry[]> {
 
   if (byId.size === 0) {
     console.warn('[cityCatalog] Keine Städte – Hardcoded Fallback');
-    return [
-      {
-        id: 'prisdorf',
-        name: 'Prisdorf',
-        lat: 53.6799982,
-        lng: 9.7606944,
-        symbol: '🌳',
-      },
-      {
-        id: 'pinneberg',
-        name: 'Pinneberg',
-        lat: 53.7278939,
-        lng: 9.6979598,
-        symbol: '🌳',
-      },
-      {
-        id: 'wangerooge',
-        name: 'Wangerooge',
-        lat: 53.7902,
-        lng: 7.8995,
-        symbol: '🏝️',
-      },
-    ];
+    return [...HARDCODED_CITY_INDEX];
   }
 
-  return Array.from(byId.values());
+  return dedupeCityIndex(Array.from(byId.values()));
 }
 
 async function cachePackLocally(cityId: string, pack: CityPack): Promise<void> {
@@ -419,6 +523,8 @@ export type PackTriggerSummary = {
   /** Sub-POI-Unterpunkte */
   subCount: number;
   factCount: number;
+  storyCount?: number;
+  directoryCount?: number;
   /** Einzelne Trigger für die Städteauswahl */
   triggers: Array<{
     name: string;
@@ -455,6 +561,15 @@ export function summarizePack(pack: CityPack): PackTriggerSummary {
   }
 
   const triggerCount = mapped.pois.length;
+  const idx = pack._pack_index;
+  const storyCount =
+    typeof idx?.story === 'number'
+      ? idx.story
+      : (pack.spots ?? []).filter((s) => s.pack_role !== 'directory').length;
+  const directoryCount =
+    typeof idx?.directory === 'number'
+      ? idx.directory
+      : (pack.spots ?? []).filter((s) => s.pack_role === 'directory').length;
 
   return {
     triggerCount,
@@ -465,21 +580,28 @@ export function summarizePack(pack: CityPack): PackTriggerSummary {
     triggers,
     gpsCount: zoneCount,
     placeCount: triggerCount,
+    storyCount,
+    directoryCount,
   };
 }
 
-/** Einzeiler: „162 Trigger · 56 Orte · 320 Fakten“ */
+/** Einzeiler: „111 Orte · 38 Stories · 73 Katalog · 320 Fakten“ */
 export function formatTriggerStats(stats: {
   triggerCount: number;
   zoneCount: number;
   approachCount?: number;
   subCount?: number;
   factCount?: number;
+  storyCount?: number;
+  directoryCount?: number;
 }): string {
-  const parts = [
-    `${stats.triggerCount} Trigger`,
-    `${stats.zoneCount} Orte`,
-  ];
+  const parts = [`${stats.zoneCount} Orte`];
+  if (typeof stats.storyCount === 'number' && typeof stats.directoryCount === 'number') {
+    parts.push(`${stats.storyCount} Stories`);
+    parts.push(`${stats.directoryCount} Katalog`);
+  } else {
+    parts.unshift(`${stats.triggerCount} Trigger`);
+  }
   if (typeof stats.factCount === 'number') {
     parts.push(`${stats.factCount} Fakten`);
   }
@@ -488,6 +610,8 @@ export function formatTriggerStats(stats: {
 
 /**
  * Lädt Stadt-Pack herunter, mappt POIs/Fakten und schreibt sie in SQLite.
+ * Nur bei expliziter Auswahl / bestätigtem Stadtwechsel — kein Auto-Prefetch
+ * benachbarter Städte (Paywall: jede Stadt einzeln).
  */
 export async function installCityPack(cityId: string): Promise<{
   poiCount: number;
@@ -495,7 +619,20 @@ export async function installCityPack(cityId: string): Promise<{
   cityName: string;
   gpsCount: number;
 }> {
-  console.log(`[cityCatalog] Installiere Stadt-Pack: ${cityId}`);
+  if (__DEV__) console.log(`[cityCatalog] Installiere Stadt-Pack: ${cityId}`);
+  // UI zuerst atmen lassen (CityStep/Settings bleiben flüssig)
+  await new Promise<void>((resolve) => {
+    try {
+      const { InteractionManager } = require('react-native') as {
+        InteractionManager: {
+          runAfterInteractions: (cb: () => void) => { cancel?: () => void };
+        };
+      };
+      InteractionManager.runAfterInteractions(() => resolve());
+    } catch {
+      setTimeout(() => resolve(), 0);
+    }
+  });
   const pack = await loadCityPackCachedOrRemote(cityId);
   const mapped = mapCityPackToRemote(pack);
 
@@ -509,22 +646,24 @@ export async function installCityPack(cityId: string): Promise<{
   try {
     await parseAndCacheCityPronunciations(pack);
   } catch (err) {
-    console.warn('[cityCatalog] Aussprache-Parser:', err);
+    if (__DEV__) console.warn('[cityCatalog] Aussprache-Parser:', err);
   }
   try {
     await scanCityDatasetSafe(pack);
     await scanPoiDatasetSafe(pack);
     void syncDictionaryAfterCityDownload().catch(() => undefined);
   } catch (err) {
-    console.warn('[cityCatalog] Dictionary-Scanner:', err);
+    if (__DEV__) console.warn('[cityCatalog] Dictionary-Scanner:', err);
   }
   const localPois = await getAllPois();
   useFinnusStore.getState().setPois(localPois);
 
   const stats = summarizePack(pack);
-  console.log(
-    `[cityCatalog] Install OK: ${mapped.pois.length} Orte, ${mapped.facts.length} Fakten (${cityId})`,
-  );
+  if (__DEV__) {
+    console.log(
+      `[cityCatalog] Install OK: ${mapped.pois.length} Orte, ${mapped.facts.length} Fakten (${cityId})`,
+    );
+  }
 
   return {
     poiCount: mapped.pois.length,
@@ -548,12 +687,18 @@ function sortByDistance(items: CityCatalogItem[]): CityCatalogItem[] {
 /**
  * Lädt alle verfügbaren Städte (index + Bucket).
  * Speichert kein volles Pack im State (nur Stats) – Download bei Auswahl.
+ * Index wird standardmäßig cache-bust geladen, damit neue Städte sofort erscheinen.
  */
-export async function loadCityCatalog(userCoords: {
-  lat: number;
-  lng: number;
-} | null): Promise<CityCatalogItem[]> {
-  const entries = await fetchCityIndex();
+export async function loadCityCatalog(
+  userCoords: {
+    lat: number;
+    lng: number;
+  } | null,
+  opts?: { bustCache?: boolean },
+): Promise<CityCatalogItem[]> {
+  const entries = await fetchCityIndex({
+    bustCache: opts?.bustCache !== false,
+  });
   console.log(
     `[cityCatalog] ${entries.length} Städte gefunden:`,
     entries.map((e) => e.id).join(', '),
@@ -566,11 +711,15 @@ export async function loadCityCatalog(userCoords: {
       let approachCount = 0;
       let subCount = 0;
       let factCount = 0;
+      let storyCount: number | undefined;
+      let directoryCount: number | undefined;
       let triggers: CityCatalogItem['triggers'] = [];
       let lat = entry.lat;
       let lng = entry.lng;
       let name = entry.name || titleCaseId(entry.id);
       let symbol = entry.symbol ?? '📍';
+      let coverUrl: string | null =
+        typeof entry.coverUrl === 'string' ? entry.coverUrl : null;
 
       try {
         const pack = await fetchCityPackById(entry.id);
@@ -580,11 +729,19 @@ export async function loadCityCatalog(userCoords: {
         approachCount = stats.approachCount;
         subCount = stats.subCount;
         factCount = stats.factCount;
+        storyCount = stats.storyCount;
+        directoryCount = stats.directoryCount;
         triggers = stats.triggers;
         if (typeof pack.lat === 'number') lat = pack.lat;
         if (typeof pack.lng === 'number') lng = pack.lng;
         if (pack.name) name = pack.name;
         if (pack.symbol) symbol = pack.symbol;
+        const fromPack =
+          (typeof pack.cover_url === 'string' && pack.cover_url.trim()) ||
+          (typeof pack._meta?.cover_url === 'string' &&
+            String(pack._meta.cover_url).trim()) ||
+          '';
+        if (fromPack) coverUrl = fromPack;
         console.log(
           `[cityCatalog] ${entry.id}: ${formatTriggerStats(stats)}`,
         );
@@ -603,12 +760,15 @@ export async function loadCityCatalog(userCoords: {
         symbol,
         lat,
         lng,
+        coverUrl,
         distanceKm,
         triggerCount,
         zoneCount,
         approachCount,
         subCount,
         factCount,
+        storyCount,
+        directoryCount,
         triggers,
         gpsCount: zoneCount,
         placeCount: triggerCount,
@@ -621,7 +781,74 @@ export async function loadCityCatalog(userCoords: {
     if (result.status === 'fulfilled') items.push(result.value);
   }
 
-  return sortByDistance(items);
+  const sorted = sortByDistance(items);
+  // Nur nahe/vorgeschlagene Städte vorwärmen — nicht die ganze Welt
+  prefetchCityCovers(sorted.slice(0, 24));
+  return sorted;
+}
+
+/** Onboarding-Warmup: Katalog + GPS schon laden, bevor der City-Screen sichtbar ist. */
+let warmCatalogPromise: Promise<CityCatalogItem[]> | null = null;
+let warmCatalogCache: CityCatalogItem[] | null = null;
+let warmGpsStatus: 'pending' | 'ready' | 'unavailable' = 'pending';
+
+export function getWarmCityCatalogGpsStatus():
+  | 'pending'
+  | 'ready'
+  | 'unavailable' {
+  return warmGpsStatus;
+}
+
+export function peekWarmCityCatalog(): CityCatalogItem[] | null {
+  return warmCatalogCache;
+}
+
+/** Verwirft Warm-Cache, damit der nächste Warmup frisch von Remote lädt. */
+export function invalidateWarmCityCatalog(): void {
+  warmCatalogPromise = null;
+  warmCatalogCache = null;
+  warmGpsStatus = 'pending';
+}
+
+/**
+ * Startet Katalog+GPS im Hintergrund.
+ * Ohne `force` idempotent (paralleles Warten ok).
+ * Mit `force` immer frischer Index — Einrichtung und Settings bleiben synchron.
+ */
+export function warmCityCatalogForOnboarding(opts?: {
+  force?: boolean;
+}): Promise<CityCatalogItem[]> {
+  if (opts?.force) {
+    warmCatalogPromise = null;
+  } else if (warmCatalogPromise) {
+    return warmCatalogPromise;
+  }
+
+  warmGpsStatus = 'pending';
+  warmCatalogPromise = (async () => {
+    try {
+      // Erst ohne GPS, damit Pack-Stats schnell da sind; Index immer cache-bust
+      const base = await loadCityCatalog(null, { bustCache: true });
+      warmCatalogCache = base;
+
+      const { getCurrentCoords } = await import('./locationService');
+      const coords = await getCurrentCoords({ timeoutMs: 8000 });
+      if (coords) {
+        const sorted = resortCatalogByCoords(base, coords);
+        warmCatalogCache = sorted;
+        warmGpsStatus = 'ready';
+        return sorted;
+      }
+      warmGpsStatus = 'unavailable';
+      return base;
+    } catch (err) {
+      warmGpsStatus = 'unavailable';
+      warmCatalogPromise = null;
+      throw err;
+    }
+  })();
+
+  return warmCatalogPromise;
 }
 
 /** Entfernungen neu berechnen / sortieren (nach spätem GPS-Fix). */
@@ -707,6 +934,31 @@ export async function getCityPackLinks(
   try {
     const pack = await loadCityPackCachedOrRemote(id);
     links = normalizePackLinks(pack._links);
+    // _meta.sources → synthetische Links (Website/Events), wenn kein _links-Eintrag
+    const sources = Array.isArray(pack._meta?.sources)
+      ? pack._meta!.sources!.filter((u): u is string => typeof u === 'string')
+      : [];
+    const seen = new Set(links.map((l) => l.url.toLowerCase()));
+    for (const raw of sources) {
+      const url = raw.trim();
+      if (!/^https?:\/\//i.test(url)) continue;
+      if (seen.has(url.toLowerCase())) continue;
+      seen.add(url.toLowerCase());
+      let host = '';
+      try {
+        host = new URL(url).hostname.replace(/^www\./i, '');
+      } catch {
+        continue;
+      }
+      links.push({
+        id: `source_${host}`,
+        title: host,
+        url,
+        tags: [/event|vergnueg|vergnüg|kalender|fest/i.test(url + host)
+          ? 'events'
+          : 'website'],
+      });
+    }
   } catch (err) {
     console.warn('[cityCatalog] Links laden fehlgeschlagen:', err);
   }

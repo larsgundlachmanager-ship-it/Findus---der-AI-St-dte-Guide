@@ -42,7 +42,7 @@ config.resolver.blockList = new RegExp(
     '/\\.cxx/',
     '/\\.gradle/',
     '/__tests__/',
-    // Piper-ONNX liegt unter src/assets/piper — nur nativ bundeln, nicht Metro
+    // Legacy ONNX under src/assets/piper — native only, not Metro
     '/src/assets/piper/.*\\.onnx$',
   ].join('|'),
 );

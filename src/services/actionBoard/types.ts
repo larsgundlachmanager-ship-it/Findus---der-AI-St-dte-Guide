@@ -34,6 +34,11 @@ export type ActionEntity = {
   lng?: number;
   placeId?: string | null;
   websiteUrl?: string | null;
+  /** Live-Buchungs-Deeplink (Stay22/Expedia/…) — vor generischer Suche */
+  bookUrl?: string | null;
+  checkin?: string;
+  checkout?: string;
+  adults?: number;
   /** hotel | restaurant | bar | museum | attraction | shop | other */
   category?: string | null;
   poiId?: number | string | null;

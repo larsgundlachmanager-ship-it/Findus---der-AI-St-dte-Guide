@@ -1,0 +1,3892 @@
+{
+  "city_id": "werder",
+  "apply": true,
+  "maxDelta": 80,
+  "summary": {
+    "ok": 205,
+    "check": 1,
+    "bad": 22,
+    "errors": 0,
+    "applied": 2
+  },
+  "rows": [
+    {
+      "id": "werder_werder_havel",
+      "name": "Werder (Havel)",
+      "before": {
+        "lat": 52.39274964,
+        "lng": 12.92610694
+      },
+      "google": {
+        "lat": 52.3764709,
+        "lng": 12.9341448,
+        "place_id": "ChIJ4aoNSw3zqEcR8tnQ57Ud528",
+        "address": "14542 Werder (Havel)"
+      },
+      "delta_m": 1891,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_fahrradbrucke_zum_bahnhof_werder",
+      "name": "Fahrradbrücke zum Bahnhof Werder",
+      "before": {
+        "lat": 52.39248884,
+        "lng": 12.93569894
+      },
+      "google": {
+        "lat": 52.3925607,
+        "lng": 12.9358167,
+        "place_id": "ChIJebHh0c3zqEcReTHLhCJKoFU",
+        "address": "Radbrücke, 14542 Werder (Havel)"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_werder_havel_markt",
+      "name": "Werder (Havel), Markt",
+      "before": {
+        "lat": 52.37899314,
+        "lng": 12.94048528
+      },
+      "google": {
+        "lat": 52.379065,
+        "lng": 12.940603,
+        "place_id": "ChIJhR5L2p_zqEcRKyDJMFCO5yA",
+        "address": "14542 Werder (Havel), Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_werder_havel_bahnhof",
+      "name": "Werder (Havel), Bahnhof",
+      "before": {
+        "lat": 52.39316814,
+        "lng": 12.92557224
+      },
+      "google": {
+        "lat": 52.3928215,
+        "lng": 12.9262247,
+        "place_id": "ChIJe8nBSLDzqEcRw3Z6n4lTZ70",
+        "address": "14542 Werder (Havel), Deutschland"
+      },
+      "delta_m": 59,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "werder_parkhaus",
+      "name": "Parkhaus",
+      "before": {
+        "lat": 52.392228239999994,
+        "lng": 12.928264039999998
+      },
+      "google": {
+        "lat": 52.3778406,
+        "lng": 12.9364899,
+        "place_id": "ChIJQT9L4rXzqEcRCDqpoFpplKs",
+        "address": "Bernhard-Kellermann-Straße 15, 14542 Werder (Havel)"
+      },
+      "delta_m": 1694,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_werder_havel_gluckstr",
+      "name": "Werder (Havel), Gluckstr.",
+      "before": {
+        "lat": 52.37972014,
+        "lng": 12.92237828
+      },
+      "google": {
+        "lat": 52.37979199999999,
+        "lng": 12.922496,
+        "place_id": "ChIJn5x95AfzqEcREck4F0bBpko",
+        "address": "14542 Werder (Havel), Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_werder_havel_post",
+      "name": "Werder (Havel), Post",
+      "before": {
+        "lat": 52.37716814,
+        "lng": 12.93302228
+      },
+      "google": {
+        "lat": 52.37724,
+        "lng": 12.93314,
+        "place_id": "ChIJsRNX_wrzqEcRqFiaIk_NqfM",
+        "address": "14542 Werder (Havel), Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_anlegestelle_werder_insel",
+      "name": "Anlegestelle Werder (Insel)",
+      "before": {
+        "lat": 52.37677068000001,
+        "lng": 12.942101159999998
+      },
+      "google": {
+        "lat": 52.37681019999999,
+        "lng": 12.9421659,
+        "place_id": "ChIJncjiJ3LzqEcRyxk-Ax1iRdI",
+        "address": "Am Mühlenberg 14, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_schiffsanleger_werder_insel",
+      "name": "Schiffsanleger Werder Insel",
+      "before": {
+        "lat": 52.37986547999999,
+        "lng": 12.945216239999999
+      },
+      "google": {
+        "lat": 52.37990500000001,
+        "lng": 12.945281,
+        "place_id": "ChIJCRrVnQHzqEcRhEcMorQ2JeM",
+        "address": "Havelblick, Uferpromenade, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_ms_bismarckhohe",
+      "name": "MS Bismarckhöhe",
+      "before": {
+        "lat": 52.377633079999995,
+        "lng": 12.93979766
+      },
+      "google": {
+        "lat": 52.3776726,
+        "lng": 12.9398624,
+        "place_id": "ChIJF1JmaXXzqEcRtP1xdtDlkC4",
+        "address": "Am Mühlenberg, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_fahre_petzow",
+      "name": "Fähre Petzow",
+      "before": {
+        "lat": 52.34282408,
+        "lng": 12.9492257
+      },
+      "google": {
+        "lat": 52.34286360000001,
+        "lng": 12.9492904,
+        "place_id": "ChIJ0U4nfw3zqEcRkFoRh2UjftM",
+        "address": "Zelterstraße 5, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_wasserwanderrastplatz_werder_havel",
+      "name": "Wasserwanderrastplatz Werder (Havel)",
+      "before": {
+        "lat": 52.37907488,
+        "lng": 12.936540840000001
+      },
+      "google": {
+        "lat": 52.3791144,
+        "lng": 12.9366056,
+        "place_id": "ChIJWTC0CqDzqEcRzVkUD198OFU",
+        "address": "Bernhard-Kellermann-Straße 13, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_yachthafen_scheunhornweg",
+      "name": "Yachthafen Scheunhornweg",
+      "before": {
+        "lat": 52.373731680000006,
+        "lng": 12.93984156
+      },
+      "google": {
+        "lat": 52.3737712,
+        "lng": 12.9399063,
+        "place_id": "ChIJcVZRiHTzqEcR_q2Z-ph9Xjc",
+        "address": "Adolf-Kärger-Straße 7, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_ziegeleimuseum_glindow",
+      "name": "Ziegeleimuseum Glindow",
+      "before": {
+        "lat": 52.354990480000005,
+        "lng": 12.921135279999998
+      },
+      "google": {
+        "lat": 52.35503,
+        "lng": 12.9212,
+        "place_id": "ChIJ76L5omIgoUcR6uYbeVqxHOc",
+        "address": "Alpenstraße 44, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_christian_morgenstern_literaturmuseum",
+      "name": "Christian Morgenstern Literaturmuseum",
+      "before": {
+        "lat": 52.38045708,
+        "lng": 12.929319340000001
+      },
+      "google": {
+        "lat": 52.3804966,
+        "lng": 12.9293841,
+        "place_id": "ChIJ_TCPIG3zqEcRV_vEF0JJBRk",
+        "address": "Hoher Weg 150, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_museum_bockwindmuhle",
+      "name": "Museum Bockwindmühle",
+      "before": {
+        "lat": 52.37732058,
+        "lng": 12.94318456
+      },
+      "google": {
+        "lat": 52.3773601,
+        "lng": 12.9432493,
+        "place_id": "ChIJvUwN7HXzqEcR0en5takiIwA",
+        "address": "Kirchstraße 6/7, 14542 Werder (Havel)-Geltow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_stadtgalerie_kunst_geschoss",
+      "name": "Stadtgalerie KUNST-GESCHOSS",
+      "before": {
+        "lat": 52.38078378,
+        "lng": 12.939442940000001
+      },
+      "google": {
+        "lat": 52.3808233,
+        "lng": 12.9395077,
+        "place_id": "ChIJu86ChZ_zqEcRIfYuQUJ_sb8",
+        "address": "Uferstraße 10, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_heimatverein_glindow_e_v_im_heimatmuseum",
+      "name": "Heimatverein Glindow e.V. im Heimatmuseum",
+      "before": {
+        "lat": 52.36578748000001,
+        "lng": 12.91205866
+      },
+      "google": {
+        "lat": 52.365827,
+        "lng": 12.9121234,
+        "place_id": "ChIJL1Iie5g5ZUERQI5M6WYedXI",
+        "address": "Heimatmuseum, Kietz 3, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_insel_werder",
+      "name": "Insel Werder",
+      "before": {
+        "lat": 52.379304579999996,
+        "lng": 12.941402640000002
+      },
+      "google": {
+        "lat": 52.3793441,
+        "lng": 12.9414674,
+        "place_id": "ChIJJeRk1ejzqEcRuLbJlat3Btc",
+        "address": "Am Markt 12A, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_waschhaus_petzow",
+      "name": "Waschhaus Petzow",
+      "before": {
+        "lat": 52.34383487999999,
+        "lng": 12.944654499999999
+      },
+      "google": {
+        "lat": 52.3438744,
+        "lng": 12.9447192,
+        "place_id": "ChIJ59Avu-rzqEcR9FTIOWEFu5w",
+        "address": "Zelterstraße 10, 14542 Werder (Havel)-Petzow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_glindower_alpen",
+      "name": "Glindower Alpen",
+      "before": {
+        "lat": 52.34993178,
+        "lng": 12.918357400000001
+      },
+      "google": {
+        "lat": 52.3499713,
+        "lng": 12.9184221,
+        "place_id": "ChIJ6V7pWzjzqEcRNl1wmCaIooo",
+        "address": "14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_heilig_geist_kirche",
+      "name": "Heilig-Geist-Kirche",
+      "before": {
+        "lat": 52.37721918,
+        "lng": 12.944113859999998
+      },
+      "google": {
+        "lat": 52.3772587,
+        "lng": 12.9441786,
+        "place_id": "ChIJ70sT8HXzqEcRiSLquVP3SsU",
+        "address": "Kirchstraße 9, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_maria_meeresstern_katholische_kirche",
+      "name": "\"Maria Meeresstern\" Katholische Kirche",
+      "before": {
+        "lat": 52.38023598000001,
+        "lng": 12.939455839999999
+      },
+      "google": {
+        "lat": 52.3802755,
+        "lng": 12.9395206,
+        "place_id": "ChIJzRt-kp_zqEcRSDS3Yd8cvQs",
+        "address": "14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_ev_heilig_geist_kirchengemeinde_werder_gemeindeburo",
+      "name": "Ev. Heilig-Geist- Kirchengemeinde Werder Gemeindebüro",
+      "before": {
+        "lat": 52.38414968000001,
+        "lng": 12.93256164
+      },
+      "google": {
+        "lat": 52.38418919999999,
+        "lng": 12.9326264,
+        "place_id": "ChIJ7y0EsqbzqEcRpEHagFaUWaE",
+        "address": "Adolf-Damaschke-Straße 9, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_neuapostolische_kirche_werder_havel",
+      "name": "Neuapostolische Kirche Werder (Havel)",
+      "before": {
+        "lat": 52.37033568,
+        "lng": 12.91995316
+      },
+      "google": {
+        "lat": 52.37037520000001,
+        "lng": 12.9200179,
+        "place_id": "ChIJwy8fLXvzqEcRGda_gezobBY",
+        "address": "Berliner Str. 109, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_kirche_petzow",
+      "name": "Kirche Petzow",
+      "before": {
+        "lat": 52.34554428,
+        "lng": 12.941989900000001
+      },
+      "google": {
+        "lat": 52.3455838,
+        "lng": 12.9420546,
+        "place_id": "ChIJF7a5hFDzqEcRAAVF3uzejK8",
+        "address": "Fercher Str. 52, 14542 Werder (Havel)-Petzow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_alter_friedhof_inselstadt_werder",
+      "name": "Alter Friedhof Inselstadt Werder",
+      "before": {
+        "lat": 52.37670628000001,
+        "lng": 12.94412036
+      },
+      "google": {
+        "lat": 52.3767458,
+        "lng": 12.9441851,
+        "place_id": "ChIJDap_53XzqEcRhU2qpwaFb_w",
+        "address": "Kirchstraße 6, 14542 Werder (Havel)-Geltow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_dorfkirche_glindow",
+      "name": "Dorfkirche Glindow",
+      "before": {
+        "lat": 52.36569908,
+        "lng": 12.91041596
+      },
+      "google": {
+        "lat": 52.36573860000001,
+        "lng": 12.9104807,
+        "place_id": "ChIJc5Ig4BvzqEcRJpZ7yuyltGs",
+        "address": "Friedenspl. 3, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_c_k_p_p_dienstleistungen",
+      "name": "C.K.P.P. Dienstleistungen",
+      "before": {
+        "lat": 52.37874468,
+        "lng": 12.93370606
+      },
+      "google": {
+        "lat": 52.3787842,
+        "lng": 12.9337708,
+        "place_id": "ChIJUz0zYwrzqEcR-We27sgfkMo",
+        "address": "Eisenbahnstraße 11, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_ev_heilig_geist_kirchengemeinde_werder_havel_buro_glindow",
+      "name": "Ev. Heilig-Geist-Kirchengemeinde Werder/Havel Büro Glindow",
+      "before": {
+        "lat": 52.36455398,
+        "lng": 12.908881779999998
+      },
+      "google": {
+        "lat": 52.36459350000001,
+        "lng": 12.9089465,
+        "place_id": "ChIJj44iSBnzqEcR8OU_gIT1Yjs",
+        "address": "Glindower Dorfstraße 45, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_dorfkirche_plessow",
+      "name": "Dorfkirche Plessow",
+      "before": {
+        "lat": 52.38667878,
+        "lng": 12.876596740000002
+      },
+      "google": {
+        "lat": 52.3867183,
+        "lng": 12.8766615,
+        "place_id": "ChIJ0dGv0mHyqEcRID2j-fdtfls",
+        "address": "14542, Plessower Hauptstraße, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_adventgemeinde_werder",
+      "name": "Adventgemeinde Werder",
+      "before": {
+        "lat": 52.37133388000001,
+        "lng": 12.933114559999998
+      },
+      "google": {
+        "lat": 52.3713734,
+        "lng": 12.9331793,
+        "place_id": "ChIJJ3dmJw3zqEcRPOk4FSK5A-w",
+        "address": "Potsdamer Str. 35, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_alte_bergamotte_werder",
+      "name": "Alte Bergamotte Werder",
+      "before": {
+        "lat": 52.37745418000001,
+        "lng": 12.94495086
+      },
+      "google": {
+        "lat": 52.3774937,
+        "lng": 12.9450156,
+        "place_id": "ChIJ0XVZdt7zqEcRN3rbBWhMUFY",
+        "address": "Fischerstraße 29, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_kriegerdenkmal_geltow",
+      "name": "Kriegerdenkmal Geltow",
+      "before": {
+        "lat": 52.36373338,
+        "lng": 12.961472780000003
+      },
+      "google": {
+        "lat": 52.3637729,
+        "lng": 12.9615375,
+        "place_id": "ChIJMRN3s-b1qEcRsHt1WSSMuNE",
+        "address": "14548 Schwielowsee-Geltow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_bronzeskulptur_fischotter",
+      "name": "Bronzeskulptur Fischotter",
+      "before": {
+        "lat": 52.35885168,
+        "lng": 12.963292579999997
+      },
+      "google": {
+        "lat": 52.3588912,
+        "lng": 12.9633573,
+        "place_id": "ChIJeytUrAP1qEcRC0Rp8S68agg",
+        "address": "Baumgartenbrück 5, 14548 Schwielowsee-Geltow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_atelier_werderkeramik",
+      "name": "Atelier Werderkeramik",
+      "before": {
+        "lat": 52.364333779999995,
+        "lng": 12.93293008
+      },
+      "google": {
+        "lat": 52.3643733,
+        "lng": 12.9329948,
+        "place_id": "ChIJl6oE6w_zqEcR5eUGDQAaJg4",
+        "address": "Birnenweg 5a, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_strandbad_werder",
+      "name": "Strandbad Werder",
+      "before": {
+        "lat": 52.378711179999996,
+        "lng": 12.90829286
+      },
+      "google": {
+        "lat": 52.3787507,
+        "lng": 12.9083576,
+        "place_id": "ChIJ1x2WBwDzqEcRwuO4vFSvmtk",
+        "address": "Am Plessower See 56, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_strand_am_glindower_see",
+      "name": "Strand am Glindower See",
+      "before": {
+        "lat": 52.349672080000005,
+        "lng": 12.9345678
+      },
+      "google": {
+        "lat": 52.34971160000001,
+        "lng": 12.9346325,
+        "place_id": "ChIJmX7LNGfzqEcRZlNWG2baEVk",
+        "address": "14542 Werder (Havel)-Petzow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_stadtpark",
+      "name": "Stadtpark",
+      "before": {
+        "lat": 52.37648008,
+        "lng": 12.92138386
+      },
+      "google": {
+        "lat": 52.374734,
+        "lng": 12.9158856,
+        "place_id": "ChIJ1UFvNATzqEcRYblHa_IAQbM",
+        "address": "Am Stadtpark, 14542 Werder (Havel)"
+      },
+      "delta_m": 421,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_aussichtsturm_wachtelberg",
+      "name": "Aussichtsturm Wachtelberg",
+      "before": {
+        "lat": 52.369808479999996,
+        "lng": 12.93412306
+      },
+      "google": {
+        "lat": 52.4241353,
+        "lng": 12.8844798,
+        "place_id": "ChIJn71wwBzyqEcRIfUV2Z_A7AM",
+        "address": "Am Phöbener Wachtelberg 1, 14542 Werder (Havel)-Phöben"
+      },
+      "delta_m": 6916,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_wiese_an_der_regattastrecke_werder",
+      "name": "Wiese an der Regattastrecke Werder",
+      "before": {
+        "lat": 52.37984338,
+        "lng": 12.938900140000001
+      },
+      "google": {
+        "lat": 52.3798829,
+        "lng": 12.9389649,
+        "place_id": "ChIJtRNUunHzqEcRTMuxyJGTLMM",
+        "address": "Uferstraße 7A, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_werder_parkplatz_historische_altstadt",
+      "name": "Werder Parkplatz Historische Altstadt",
+      "before": {
+        "lat": 52.37780108,
+        "lng": 12.936425160000002
+      },
+      "google": {
+        "lat": 52.3778406,
+        "lng": 12.9364899,
+        "place_id": "ChIJQT9L4rXzqEcRCDqpoFpplKs",
+        "address": "Bernhard-Kellermann-Straße 15, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_inselsteg_werder",
+      "name": "Inselsteg Werder",
+      "before": {
+        "lat": 52.376721380000006,
+        "lng": 12.94643246
+      },
+      "google": {
+        "lat": 52.3767609,
+        "lng": 12.9464972,
+        "place_id": "ChIJ-wmTJ5vzqEcRXsJuNvLTDDc",
+        "address": "Fischerstraße 25, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_strandbad_glindow",
+      "name": "Strandbad Glindow",
+      "before": {
+        "lat": 52.361244680000006,
+        "lng": 12.916916780000003
+      },
+      "google": {
+        "lat": 52.3612842,
+        "lng": 12.9169815,
+        "place_id": "ChIJeey1uBfzqEcRQg-DV0gcnK0",
+        "address": "Strandbad Glindow Jahnufer 18 Werder (Havel) / OT, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_prinz_albert_gedachtniswiese",
+      "name": "Prinz Albert Gedächtniswiese",
+      "before": {
+        "lat": 52.37749118000001,
+        "lng": 12.914630859999999
+      },
+      "google": {
+        "lat": 52.37753069999999,
+        "lng": 12.9146956,
+        "place_id": "ChIJzfT6SSDzqEcR9OvPyagqT2M",
+        "address": "Am Stadtpark 20, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_heiliger_zen_teich",
+      "name": "Heiliger Zen-Teich",
+      "before": {
+        "lat": 52.378377979999996,
+        "lng": 12.91837886
+      },
+      "google": {
+        "lat": 52.3784175,
+        "lng": 12.9184436,
+        "place_id": "ChIJbaMZAAfzqEcRsAJXov65PSM",
+        "address": "Erdebergweg, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_werderaner_rentner_umsonst",
+      "name": "Werderaner Rentner umsonst",
+      "before": {
+        "lat": 52.37638148,
+        "lng": 12.93544076
+      },
+      "google": {
+        "lat": 52.376421,
+        "lng": 12.9355055,
+        "place_id": "ChIJdwuXHDHzqEcR_PRDoBxYbdo",
+        "address": "Unter den Linden 11, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_schwielowsee_havelpromenade",
+      "name": "Schwielowsee Havelpromenade",
+      "before": {
+        "lat": 52.385434579999995,
+        "lng": 12.95443684
+      },
+      "google": {
+        "lat": 52.3854741,
+        "lng": 12.9545016,
+        "place_id": "ChIJk7_GFpvzqEcRrIK6ymERr3c",
+        "address": "Havelpromenade, 14548 Schwielowsee-Geltow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_petzow_schlosspark",
+      "name": "Petzow, Schloßpark",
+      "before": {
+        "lat": 52.344120180000004,
+        "lng": 12.9402073
+      },
+      "google": {
+        "lat": 52.342695,
+        "lng": 12.946353,
+        "place_id": "ChIJu-D7XWrzqEcRCXJdeUUuK8I",
+        "address": "14542, Zelterstraße, 14542 Werder (Havel)"
+      },
+      "delta_m": 447,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_werder_havel_werderpark",
+      "name": "Werder (Havel), Werderpark",
+      "before": {
+        "lat": 52.36371048000001,
+        "lng": 12.934415280000001
+      },
+      "google": {
+        "lat": 52.36300860000001,
+        "lng": 12.9333381,
+        "place_id": "ChIJpfbtnW7zqEcRUS8KoIoWjb8",
+        "address": "Auf dem Strengfeld 6, 14542 Werder (Havel)"
+      },
+      "delta_m": 107,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "werder_schlosspark_schloss_petzow",
+      "name": "Schlosspark Schloss Petzow",
+      "before": {
+        "lat": 52.34265548,
+        "lng": 12.9462883
+      },
+      "google": {
+        "lat": 52.342695,
+        "lng": 12.946353,
+        "place_id": "ChIJu-D7XWrzqEcRCXJdeUUuK8I",
+        "address": "14542, Zelterstraße, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_werderaner_fc_viktoria_1920",
+      "name": "Werderaner FC Viktoria 1920",
+      "before": {
+        "lat": 52.381121179999994,
+        "lng": 12.94013314
+      },
+      "google": {
+        "lat": 52.3811607,
+        "lng": 12.9401979,
+        "place_id": "ChIJbXb7ZZ_zqEcRWhyG44jYSM0",
+        "address": "Werderwiesen 16, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_regattastrecke_werder",
+      "name": "Regattastrecke Werder",
+      "before": {
+        "lat": 52.37920918,
+        "lng": 12.939053340000001
+      },
+      "google": {
+        "lat": 52.3792487,
+        "lng": 12.9391181,
+        "place_id": "ChIJk0KzkIrzqEcRI2kfECHTe74",
+        "address": "14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_stadtverwaltung_burgerservice",
+      "name": "Stadtverwaltung Bürgerservice",
+      "before": {
+        "lat": 52.37744048,
+        "lng": 12.930965259999999
+      },
+      "google": {
+        "lat": 52.37748000000001,
+        "lng": 12.93103,
+        "place_id": "ChIJR0o_hZ_zqEcRIQZAsAy0ql8",
+        "address": "Plantagenpl. 9, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_landkreis_potsdam_mittelmark",
+      "name": "Landkreis Potsdam-Mittelmark",
+      "before": {
+        "lat": 52.37542848,
+        "lng": 12.93725846
+      },
+      "google": {
+        "lat": 52.3764709,
+        "lng": 12.9341448,
+        "place_id": "ChIJ4aoNSw3zqEcR8tnQ57Ud528",
+        "address": "14542 Werder (Havel)"
+      },
+      "delta_m": 241,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_stadtarchiv_werder",
+      "name": "Stadtarchiv Werder",
+      "before": {
+        "lat": 52.39656018000001,
+        "lng": 12.92381882
+      },
+      "google": {
+        "lat": 52.3965997,
+        "lng": 12.9238836,
+        "place_id": "ChIJp6d6U7HzqEcRrLpqOXT67Oc",
+        "address": "Elsastraße 21, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_ekz_werderpark",
+      "name": "EKZ Werderpark",
+      "before": {
+        "lat": 52.362969080000006,
+        "lng": 12.93327338
+      },
+      "google": {
+        "lat": 52.36300860000001,
+        "lng": 12.9333381,
+        "place_id": "ChIJpfbtnW7zqEcRUS8KoIoWjb8",
+        "address": "Auf dem Strengfeld 6, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_unter_den_linden_werder_havel",
+      "name": "Unter den Linden Werder (Havel)",
+      "before": {
+        "lat": 52.37722678,
+        "lng": 12.937167059999998
+      },
+      "google": {
+        "lat": 52.3771959,
+        "lng": 12.936967,
+        "place_id": "ChIJW2PsNnXzqEcRQ35bGVGNsNE",
+        "address": "Unter den Linden, 14542 Werder (Havel)"
+      },
+      "delta_m": 14,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_jahnufer",
+      "name": "Jahnufer",
+      "before": {
+        "lat": 52.36442708,
+        "lng": 12.912852679999997
+      },
+      "google": {
+        "lat": 52.3601016,
+        "lng": 12.9168896,
+        "place_id": "ChIJR4cKMxbzqEcRrIPfe7IzJ6c",
+        "address": "Jahnufer, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 554,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_belvedere_glindower_alpen",
+      "name": "Belvedere Glindower Alpen",
+      "before": {
+        "lat": 52.35512418,
+        "lng": 12.91575368
+      },
+      "google": {
+        "lat": 52.3551637,
+        "lng": 12.9158184,
+        "place_id": "ChIJfXB7QmzzqEcRQFDNaemjeog",
+        "address": "Alpenstraße 30, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "before": {
+        "lat": 52.38377618,
+        "lng": 12.93803474
+      },
+      "google": {
+        "lat": 52.4241353,
+        "lng": 12.8844798,
+        "place_id": "ChIJn71wwBzyqEcRIfUV2Z_A7AM",
+        "address": "Am Phöbener Wachtelberg 1, 14542 Werder (Havel)-Phöben"
+      },
+      "delta_m": 5774,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_holzfiguren",
+      "name": "Holzfiguren",
+      "before": {
+        "lat": 52.35842788,
+        "lng": 12.965093579999998
+      },
+      "google": {
+        "lat": 52.35846739999999,
+        "lng": 12.9651583,
+        "place_id": "ChIJGx0sldL1qEcRdCAM43BT0dw",
+        "address": "Baumgartenbrück 5, 14548 Schwielowsee-Geltow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_scala_kulturpalast",
+      "name": "Scala Kulturpalast",
+      "before": {
+        "lat": 52.38190658,
+        "lng": 12.932920339999999
+      },
+      "google": {
+        "lat": 52.3819461,
+        "lng": 12.9329851,
+        "place_id": "ChIJbzTA2KDzqEcRt-8ZJxk8WNQ",
+        "address": "Eisenbahnstraße 182, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_ton_kirschen_theater_e_v",
+      "name": "Ton & Kirschen Theater e.V.",
+      "before": {
+        "lat": 52.36967048,
+        "lng": 12.91140526
+      },
+      "google": {
+        "lat": 52.36971,
+        "lng": 12.91147,
+        "place_id": "ChIJIcpbXRvzqEcR9CoZsLAMeh0",
+        "address": "Doktor-Külz-Straße 116, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_wanderweg_rund_um_geltow",
+      "name": "Wanderweg rund um Geltow",
+      "before": {
+        "lat": 52.37897298,
+        "lng": 12.99046964
+      },
+      "google": {
+        "lat": 52.37901249999999,
+        "lng": 12.9905344,
+        "place_id": "ChIJF4BLQwD1qEcRGUIfsqT9FTg",
+        "address": "Wildpark West, 14471 Schwielowsee-Geltow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_fuchsberg_bei_glindow",
+      "name": "Fuchsberg bei Glindow",
+      "before": {
+        "lat": 52.36672498,
+        "lng": 12.885547359999999
+      },
+      "google": {
+        "lat": 52.3667645,
+        "lng": 12.8856121,
+        "place_id": "ChIJgRPwmejyqEcRJZVbx5xGL5A",
+        "address": "14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_wilde_badestelle_im_plessower_see",
+      "name": "Wilde Badestelle im Plessower See",
+      "before": {
+        "lat": 52.39297818,
+        "lng": 12.882969019999999
+      },
+      "google": {
+        "lat": 52.3930177,
+        "lng": 12.8830338,
+        "place_id": "ChIJ_-iLAADzqEcRBfG_e8KXuoA",
+        "address": "9VVM+66, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_schloss_petzow",
+      "name": "Schloss Petzow",
+      "before": {
+        "lat": 52.343944879999995,
+        "lng": 12.9467203
+      },
+      "google": {
+        "lat": 52.3439844,
+        "lng": 12.946785,
+        "place_id": "ChIJI8EPE1fzqEcRmGuLWJkMZBo",
+        "address": "Zelterstraße 5, 14542 Werder (Havel)-Petzow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_heimatverein_petzow_e_v",
+      "name": "Heimatverein Petzow e.V",
+      "before": {
+        "lat": 52.34835048,
+        "lng": 12.946335300000001
+      },
+      "google": {
+        "lat": 52.34838999999999,
+        "lng": 12.9464,
+        "place_id": "ChIJX5qTf1nzqEcRh5CSOXHpLXM",
+        "address": "Fercher Str. 50b, 14542 Werder (Havel)-Petzow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_das_radhaus_werder_an_der_havel",
+      "name": "Das Radhaus Werder an der Havel",
+      "before": {
+        "lat": 52.36399978000001,
+        "lng": 12.942380080000001
+      },
+      "google": {
+        "lat": 52.36403929999999,
+        "lng": 12.9424448,
+        "place_id": "ChIJsUNd4m7zqEcRzQ1HibqsUfA",
+        "address": "Berliner Str. 6, 14542 Werder (Havel)-Geltow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_bootsvermietung_kruger_till_werder_havel",
+      "name": "Bootsvermietung Krüger & Till Werder Havel",
+      "before": {
+        "lat": 52.37788068,
+        "lng": 12.93773976
+      },
+      "google": {
+        "lat": 52.3779202,
+        "lng": 12.9378045,
+        "place_id": "ChIJJ96R1H7zqEcRsJjgaadqwTs",
+        "address": "Unter den Linden 1, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_e_motion_e_bike_welt_dreirad_lastenfahrrad_zentrum_werder",
+      "name": "e-motion e-Bike Welt, Dreirad- & Lastenfahrrad-Zentrum Werder",
+      "before": {
+        "lat": 52.39166238,
+        "lng": 12.931234739999999
+      },
+      "google": {
+        "lat": 52.3917019,
+        "lng": 12.9312995,
+        "place_id": "ChIJ_91nTB_zqEcRWc4dF94pIR8",
+        "address": "Adolf-Damaschke-Straße 56-58, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_christine_berger_gmbh_co_kg",
+      "name": "Christine Berger GmbH & Co. KG",
+      "before": {
+        "lat": 52.347060479999996,
+        "lng": 12.943931500000001
+      },
+      "google": {
+        "lat": 52.3471,
+        "lng": 12.9439962,
+        "place_id": "ChIJrbefpVDzqEcR-cIPermakJQ",
+        "address": "Sanddorn-Garten, Fercher Str. 60, 14542 Werder (Havel)-Petzow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_weintiene",
+      "name": "Weintiene",
+      "before": {
+        "lat": 52.36978748,
+        "lng": 12.93313926
+      },
+      "google": {
+        "lat": 52.369827,
+        "lng": 12.933204,
+        "place_id": "ChIJ7biRSw3zqEcRIRGSXwXjQF0",
+        "address": "Wachtelwinkel 30, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_gahejuwele",
+      "name": "GaheJuwele",
+      "before": {
+        "lat": 52.39952498,
+        "lng": 12.919211019999997
+      },
+      "google": {
+        "lat": 52.3995645,
+        "lng": 12.9192758,
+        "place_id": "ChIJTYw757TzqEcRkoMgrlITZmo",
+        "address": "Zum Großen Zernsee 6F, 14542 Werder (Havel)-Potsdam Nord"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_atelier_werderkeramik_im_andenkenhaus_petzow_am_schlosspark",
+      "name": "Atelier Werderkeramik im Andenkenhaus Petzow am Schlosspark",
+      "before": {
+        "lat": 52.344555979999996,
+        "lng": 12.9410405
+      },
+      "google": {
+        "lat": 52.3445955,
+        "lng": 12.9411052,
+        "place_id": "ChIJd6_F3qPzqEcRRar-jOLAbio",
+        "address": "Fercher Str. 160, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_linden_apotheke",
+      "name": "Linden-Apotheke",
+      "before": {
+        "lat": 52.37782948,
+        "lng": 12.93525166
+      },
+      "google": {
+        "lat": 52.377869,
+        "lng": 12.9353164,
+        "place_id": "ChIJ-yjD6grzqEcRoxSUYK6aVgw",
+        "address": "Bernhard-Kellermann-Straße 17, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_gordon_rosch_linden_apotheke",
+      "name": "Gordon Rosch Linden-Apotheke",
+      "before": {
+        "lat": 52.37668208,
+        "lng": 12.93435916
+      },
+      "google": {
+        "lat": 52.3767216,
+        "lng": 12.9344239,
+        "place_id": "ChIJ4w2bjNnzqEcR5W1eooq-Vqo",
+        "address": "Unter den Linden 10, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_allgemeinmedizin_dr_med_oliver_simsch_werder_a_d_havel",
+      "name": "Allgemeinmedizin Dr. med. Oliver Simsch - Werder (a.d. Havel)",
+      "before": {
+        "lat": 52.36621048000001,
+        "lng": 12.94056526
+      },
+      "google": {
+        "lat": 52.36625,
+        "lng": 12.94063,
+        "place_id": "ChIJWXCkbW7zqEcRNBxWW2TIPRA",
+        "address": "Potsdamer Str. 97, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_kinderarzt_werder_hausarztpraxis_dr_berlin_in_werder",
+      "name": "Kinderarzt Werder & Hausarztpraxis Dr. Berlin in Werder",
+      "before": {
+        "lat": 52.372610179999995,
+        "lng": 12.932418959999998
+      },
+      "google": {
+        "lat": 52.3726497,
+        "lng": 12.9324837,
+        "place_id": "ChIJlXswF3nzqEcR9cOE1y0ysVI",
+        "address": "Eingang vom Wachtelwinkel aus, Hamburger Ring 25, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_armin_heinrich_bluten_apotheke",
+      "name": "Armin Heinrich Blüten-Apotheke",
+      "before": {
+        "lat": 52.39777908,
+        "lng": 12.91839192
+      },
+      "google": {
+        "lat": 52.3978186,
+        "lng": 12.9184567,
+        "place_id": "ChIJAamdWLPzqEcRP048gAzDRQc",
+        "address": "Zum Großen Zernsee 3, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_dr_med_steffen_lach",
+      "name": "Dr. med. Steffen Lach",
+      "before": {
+        "lat": 52.38735128,
+        "lng": 12.92724054
+      },
+      "google": {
+        "lat": 52.3873908,
+        "lng": 12.9273053,
+        "place_id": "ChIJW7imjqXzqEcR46cxDj6JELc",
+        "address": "Eisenbahnstraße 140, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_frauenarztpraxis_werder",
+      "name": "Frauenarztpraxis Werder",
+      "before": {
+        "lat": 52.37553758,
+        "lng": 12.935854760000002
+      },
+      "google": {
+        "lat": 52.3755771,
+        "lng": 12.9359195,
+        "place_id": "ChIJ_36whl_zqEcRYwUdVdktE50",
+        "address": "Potsdamer Str. 165, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_caren_roller_hausarztpraxis_fur_allgemeinmedizin",
+      "name": "Caren Roller Hausarztpraxis für Allgemeinmedizin",
+      "before": {
+        "lat": 52.39891188,
+        "lng": 12.917802420000001
+      },
+      "google": {
+        "lat": 52.39895139999999,
+        "lng": 12.9178672,
+        "place_id": "ChIJfbgN7SDzqEcRgVjPdrnbmE8",
+        "address": "Zum Großen Zernsee 4b, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_erdeberg",
+      "name": "Erdeberg",
+      "before": {
+        "lat": 52.359096980000004,
+        "lng": 12.896220379999999
+      },
+      "google": {
+        "lat": 52.3591365,
+        "lng": 12.8962851,
+        "place_id": "ChIJTT-pdO7zqEcRu7G31WxwRzI",
+        "address": "Bliesendorfer Str. 56, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_ankerplatz_vor_halbinsel_werder_havel",
+      "name": "Ankerplatz vor Halbinsel Werder (Havel)",
+      "before": {
+        "lat": 52.38183368,
+        "lng": 12.95395004
+      },
+      "google": {
+        "lat": 52.3818732,
+        "lng": 12.9540148,
+        "place_id": "ChIJ9-OuKQDzqEcRCBSv76F4AvE",
+        "address": "9XJ3+PJ, 14548 Schwielowsee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_lauschpunkte_am_schwielowsee_und_in_werder_per_app",
+      "name": "Lauschpunkte am Schwielowsee und in Werder per App",
+      "before": {
+        "lat": 52.377563380000005,
+        "lng": 12.93878786
+      },
+      "google": {
+        "lat": 52.3776029,
+        "lng": 12.9388526,
+        "place_id": "ChIJl2HjRQDzqEcRYaLsIj3bUFI",
+        "address": "14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_obelisk",
+      "name": "Obelisk",
+      "before": {
+        "lat": 52.343503680000005,
+        "lng": 12.945718399999999
+      },
+      "google": {
+        "lat": 52.3435432,
+        "lng": 12.9457831,
+        "place_id": "ChIJKWZ5_TPzqEcRqJwBP4qEtsY",
+        "address": "Zelterstraße 9, 14542 Werder (Havel)-Petzow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_wasserturm",
+      "name": "Wasserturm",
+      "before": {
+        "lat": 52.39308768000001,
+        "lng": 12.927170219999999
+      },
+      "google": {
+        "lat": 52.3931272,
+        "lng": 12.927235,
+        "place_id": "ChIJE5alBeLzqEcREJ5iK2r_IHk",
+        "address": "Am Zernsee 25, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_staffelgiebelturme",
+      "name": "Staffelgiebeltürme",
+      "before": {
+        "lat": 52.345151279999996,
+        "lng": 12.943759199999999
+      },
+      "google": {
+        "lat": 52.3451908,
+        "lng": 12.9438239,
+        "place_id": "ChIJhc3-35jzqEcRokiRwDxzYrQ",
+        "address": "Fercher Str. 60, 14542 Werder (Havel)-Petzow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_mia_gallery",
+      "name": "MIA Gallery",
+      "before": {
+        "lat": 52.378571879999996,
+        "lng": 12.94115156
+      },
+      "google": {
+        "lat": 52.3786114,
+        "lng": 12.9412163,
+        "place_id": "ChIJ9UHMsqDzqEcRQNlZxINqabQ",
+        "address": "Mühlenstraße 14A, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_galerie_geltow",
+      "name": "Galerie - Geltow",
+      "before": {
+        "lat": 52.36376988000001,
+        "lng": 12.91271378
+      },
+      "google": {
+        "lat": 52.3638094,
+        "lng": 12.9127785,
+        "place_id": "ChIJAQCEvBnzqEcRgK8uOuVLYLo",
+        "address": "Luise-Jahn-Straße 6, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_christian_morgenstern",
+      "name": "Christian Morgenstern",
+      "before": {
+        "lat": 52.37211378000001,
+        "lng": 12.92291376
+      },
+      "google": {
+        "lat": 52.39658,
+        "lng": 12.9246159,
+        "place_id": "ChIJp6d6U7HzqEcR7m3PB4ovhCs",
+        "address": "Elsastraße 14-16, 14542 Werder (Havel)"
+      },
+      "delta_m": 2723,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_wachtelburg_christliches_jugendzentrum_und_begegnungsstatte",
+      "name": "Wachtelburg - Christliches Jugendzentrum und Begegnungsstätte",
+      "before": {
+        "lat": 52.37074938000001,
+        "lng": 12.93318506
+      },
+      "google": {
+        "lat": 52.3707889,
+        "lng": 12.9332498,
+        "place_id": "ChIJdzLRLg3zqEcRgcn3Rrdyda8",
+        "address": "Potsdamer Str. 35, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_schlossgarten_petzow",
+      "name": "Schlossgarten Petzow",
+      "before": {
+        "lat": 52.34509178,
+        "lng": 12.946513300000001
+      },
+      "google": {
+        "lat": 52.3451313,
+        "lng": 12.946578,
+        "place_id": "ChIJYS8n-XvzqEcRFJSJ2zyYogk",
+        "address": "Zelterstraße 4 C, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_badestelle_schwielowsee_petzow",
+      "name": "Badestelle Schwielowsee Petzow",
+      "before": {
+        "lat": 52.341770180000005,
+        "lng": 12.944594899999998
+      },
+      "google": {
+        "lat": 52.3418097,
+        "lng": 12.9446596,
+        "place_id": "ChIJvwEHOEvzqEcRCPeJ264tJMY",
+        "address": "Zelterstraße 10, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_parkplatz",
+      "name": "Parkplatz",
+      "before": {
+        "lat": 52.34467938,
+        "lng": 12.940088399999999
+      },
+      "google": {
+        "lat": 52.3778406,
+        "lng": 12.9364899,
+        "place_id": "ChIJQT9L4rXzqEcRCDqpoFpplKs",
+        "address": "Bernhard-Kellermann-Straße 15, 14542 Werder (Havel)"
+      },
+      "delta_m": 3695,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_zelterhaus",
+      "name": "Zelterhaus",
+      "before": {
+        "lat": 52.34249878000001,
+        "lng": 12.9362371
+      },
+      "google": {
+        "lat": 52.34253830000001,
+        "lng": 12.9363018,
+        "place_id": "ChIJMXS2IjDzqEcRwKFU4yJXXE0",
+        "address": "Grelle 7, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_drei_kaehne",
+      "name": "Drei Kaehne",
+      "before": {
+        "lat": 52.34424948000001,
+        "lng": 12.945261299999999
+      },
+      "google": {
+        "lat": 52.344289,
+        "lng": 12.945326,
+        "place_id": "ChIJuZQSR1fzqEcReQB9VAh2jQA",
+        "address": "Zelterstraße 10, 14542 Werder (Havel)-Petzow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_gut_schloss_golm",
+      "name": "Gut Schloß Golm",
+      "before": {
+        "lat": 52.40595037999999,
+        "lng": 12.946812920000003
+      },
+      "google": {
+        "lat": 52.40598989999999,
+        "lng": 12.9468777,
+        "place_id": "ChIJrbfuN8LzqEcRiC18gCRNNBQ",
+        "address": "Am Zernsee 1, 14476 Potsdam Nord"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_plettenbergs_garten",
+      "name": "Plettenbergs Gärten",
+      "before": {
+        "lat": 52.383010479999996,
+        "lng": 12.93155524
+      },
+      "google": {
+        "lat": 52.38305,
+        "lng": 12.93162,
+        "place_id": "ChIJ7RUYzqbzqEcRKveYn4Lmc54",
+        "address": "Eisenbahnstraße 174-175, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_kleingartenverein_an_der_dahlienstrasse_e_v",
+      "name": "Kleingartenverein an der Dahlienstrasse e.V.",
+      "before": {
+        "lat": 52.39909298,
+        "lng": 12.89717902
+      },
+      "google": {
+        "lat": 52.3991325,
+        "lng": 12.8972438,
+        "place_id": "ChIJGZTvRPDzqEcRomjg1L9j1kI",
+        "address": "14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_kleingartenverein_asternstrasse_1981e_v",
+      "name": "Kleingartenverein Asternstraße 1981e.V.",
+      "before": {
+        "lat": 52.397992480000006,
+        "lng": 12.900652220000001
+      },
+      "google": {
+        "lat": 52.398032,
+        "lng": 12.900717,
+        "place_id": "ChIJPUSV9EXyqEcReN9rDrmF8DM",
+        "address": "Asternstraße, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_pgg_potsdamer_gartengestaltung_wo_grun_begeistert",
+      "name": "PGG Potsdamer Gartengestaltung. Wo Grün begeistert",
+      "before": {
+        "lat": 52.39812158000001,
+        "lng": 12.91422072
+      },
+      "google": {
+        "lat": 52.3981611,
+        "lng": 12.9142855,
+        "place_id": "ChIJNXJkrZz0qEcRomMsAQ2B9iQ",
+        "address": "Otto-Lilienthal-Straße 35, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_marina_havelauen_in_werder_havel_pro_marin_maintenance_service",
+      "name": "Marina Havelauen in Werder (Havel) // PRO marin (Maintenance & Service)",
+      "before": {
+        "lat": 52.39910828000001,
+        "lng": 12.91307642
+      },
+      "google": {
+        "lat": 52.3991478,
+        "lng": 12.9131412,
+        "place_id": "ChIJ-W0cnkvyqEcRQSacBH8dNxA",
+        "address": "Otto-Lilienthal-Straße 16/18, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_marina_zernsee",
+      "name": "Marina Zernsee",
+      "before": {
+        "lat": 52.40772887999999,
+        "lng": 12.912896899999998
+      },
+      "google": {
+        "lat": 52.4077684,
+        "lng": 12.9129617,
+        "place_id": "ChIJdZfx7jfyqEcRtwdeWrFf4Vw",
+        "address": "Zur Uferaue 13-14, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_bootshaus_ditze",
+      "name": "Bootshaus Ditze",
+      "before": {
+        "lat": 52.393593380000006,
+        "lng": 12.92778762
+      },
+      "google": {
+        "lat": 52.3936329,
+        "lng": 12.9278524,
+        "place_id": "ChIJ9QiMirDzqEcRsIAsC69Ihsk",
+        "address": "Am Zernsee 3, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_marina_vulkan_werft",
+      "name": "Marina Vulkan Werft",
+      "before": {
+        "lat": 52.39073708000001,
+        "lng": 12.930496640000001
+      },
+      "google": {
+        "lat": 52.3907766,
+        "lng": 12.9305614,
+        "place_id": "ChIJh2aqtLrzqEcRjftJyiW0TdI",
+        "address": "Adolf-Damaschke-Straße 56/58, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_marina_inselblick",
+      "name": "Marina Inselblick",
+      "before": {
+        "lat": 52.37976318,
+        "lng": 12.935205139999999
+      },
+      "google": {
+        "lat": 52.3798027,
+        "lng": 12.9352699,
+        "place_id": "ChIJCQECJfTzqEcRibWy1X0gebo",
+        "address": "Eisenbahnstraße 17, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_unruh_marine",
+      "name": "Unruh Marine",
+      "before": {
+        "lat": 52.389612979999995,
+        "lng": 12.931890540000001
+      },
+      "google": {
+        "lat": 52.3896525,
+        "lng": 12.9319553,
+        "place_id": "ChIJ6avX26TzqEcRTw0bCURWJMI",
+        "address": "Adolf-Damaschke-Straße 36, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_yachtcharter_werder_in_berlin_brandenburg",
+      "name": "Yachtcharter Werder in Berlin/Brandenburg",
+      "before": {
+        "lat": 52.389636780000004,
+        "lng": 12.93283954
+      },
+      "google": {
+        "lat": 52.3896763,
+        "lng": 12.9329043,
+        "place_id": "ChIJh2aqtLrzqEcRK1SpFqdRiIA",
+        "address": "Adolf-Damaschke-Straße 35, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_flossvermietung_werder",
+      "name": "Floßvermietung Werder",
+      "before": {
+        "lat": 52.37975748,
+        "lng": 12.934035840000002
+      },
+      "google": {
+        "lat": 52.379797,
+        "lng": 12.9341006,
+        "place_id": "ChIJ5U6TngPzqEcRCYUXK5PsWCM",
+        "address": "Eisenbahnstraße 17, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_glamping_und_floss_vermietung_werder_havel",
+      "name": "Glamping und Floß Vermietung Werder (Havel)",
+      "before": {
+        "lat": 52.39924308,
+        "lng": 12.92224112
+      },
+      "google": {
+        "lat": 52.3992826,
+        "lng": 12.9223059,
+        "place_id": "ChIJ19uTokvzqEcReCeih7YW3eg",
+        "address": "Zum Großen Zernsee 14, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_kajakverleih_am_glindower_see",
+      "name": "Kajakverleih am Glindower See",
+      "before": {
+        "lat": 52.34741088,
+        "lng": 12.937543
+      },
+      "google": {
+        "lat": 52.3474504,
+        "lng": 12.9376077,
+        "place_id": "ChIJgW21qzjzqEcRnULmayHqB1k",
+        "address": "Zum Inselparadies 9-12, 14542, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_reederei_bernd_kuhl_gmbh_hier_keine_abfahrt",
+      "name": "Reederei Bernd Kuhl Gmbh(Hier keine Abfahrt)",
+      "before": {
+        "lat": 52.385772180000004,
+        "lng": 12.956859739999999
+      },
+      "google": {
+        "lat": 52.3858117,
+        "lng": 12.9569245,
+        "place_id": "ChIJEZs-MYXzqEcRq7k6pfDlOlA",
+        "address": "Fuchsweg 19, 14548 Schwielowsee-Geltow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_perlenfischerei_on_tour_ug",
+      "name": "Perlenfischerei On Tour UG",
+      "before": {
+        "lat": 52.35677688,
+        "lng": 12.959530280000001
+      },
+      "google": {
+        "lat": 52.35681640000001,
+        "lng": 12.959595,
+        "place_id": "ChIJWWtIAMH1qEcRaLonL0oiIXs",
+        "address": "Berliner Ch 65, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_kaim_bringt_s_werder_havel",
+      "name": "Kaim bringt's - Werder Havel",
+      "before": {
+        "lat": 52.37631377999999,
+        "lng": 12.932932560000001
+      },
+      "google": {
+        "lat": 52.3763533,
+        "lng": 12.9329973,
+        "place_id": "ChIJcXJPCAFPqEcRpZZHrdMBCbE",
+        "address": "Brandenburger Str. 1a, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_my_rebella",
+      "name": "My Rebella",
+      "before": {
+        "lat": 52.377113179999995,
+        "lng": 12.935998860000002
+      },
+      "google": {
+        "lat": 52.3771527,
+        "lng": 12.9360636,
+        "place_id": "ChIJwT9axQrzqEcReGURZO0iZtU",
+        "address": "Unter den Linden 4, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_werder_feinkost_gmbh",
+      "name": "Werder Feinkost GmbH",
+      "before": {
+        "lat": 52.39163638,
+        "lng": 12.923681539999999
+      },
+      "google": {
+        "lat": 52.3916759,
+        "lng": 12.9237463,
+        "place_id": "ChIJQ8ax2bHzqEcRaTYOyg7IPj4",
+        "address": "Kein Werksverkauf!, Phöbener Str. 1, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_landbackerei_kirstein",
+      "name": "Landbäckerei Kirstein",
+      "before": {
+        "lat": 52.37823958,
+        "lng": 12.939429659999998
+      },
+      "google": {
+        "lat": 52.36937709999999,
+        "lng": 12.9244041,
+        "place_id": "ChIJWSH54xHzqEcRmC2KR-Hh6S4",
+        "address": "Berliner Str. 126, 14542 Werder (Havel)"
+      },
+      "delta_m": 1418,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_kiosk_werder",
+      "name": "Kiosk Werder",
+      "before": {
+        "lat": 52.37599128000001,
+        "lng": 12.93176926
+      },
+      "google": {
+        "lat": 52.3760308,
+        "lng": 12.931834,
+        "place_id": "ChIJDYQsoxfzqEcRDoT1Km6nAgc",
+        "address": "Brandenburger Str. 2, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_denns_biomarkt_werder",
+      "name": "Denns BioMarkt Werder",
+      "before": {
+        "lat": 52.363446980000006,
+        "lng": 12.93355798
+      },
+      "google": {
+        "lat": 52.3634865,
+        "lng": 12.9336227,
+        "place_id": "ChIJP1DnfGvzqEcRVzUWsNpGMc4",
+        "address": "Auf dem Strengfeld 6, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_vs_mode_werder_havel",
+      "name": "VS-Mode Werder/ Havel",
+      "before": {
+        "lat": 52.36384048,
+        "lng": 12.936155280000003
+      },
+      "google": {
+        "lat": 52.36388,
+        "lng": 12.93622,
+        "place_id": "ChIJvzA9cmzzqEcRIFJufe1eSUw",
+        "address": "Marktstraße 1f, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_aldi_werder",
+      "name": "ALDI Werder",
+      "before": {
+        "lat": 52.363660259999996,
+        "lng": 12.93915392
+      },
+      "google": {
+        "lat": 52.363689,
+        "lng": 12.939201,
+        "place_id": "ChIJ7_q0p27zqEcRMNcX0qP_prg",
+        "address": "Apfelweg 4, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_edeka_schneider",
+      "name": "EDEKA Schneider",
+      "before": {
+        "lat": 52.37494566,
+        "lng": 12.932894620000003
+      },
+      "google": {
+        "lat": 52.3749744,
+        "lng": 12.9329417,
+        "place_id": "ChIJTZsbbgvzqEcRkCT-7XTJ_3Q",
+        "address": "Brandenburger Str. 151, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_obstland_apotheke",
+      "name": "Obstland-Apotheke",
+      "before": {
+        "lat": 52.36447106000001,
+        "lng": 12.910307620000001
+      },
+      "google": {
+        "lat": 52.3644998,
+        "lng": 12.9103547,
+        "place_id": "ChIJJyLinhnzqEcRVmuZsBEJzl4",
+        "address": "Luise-Jahn-Straße 1, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_alexianer_st_josefs_krankenhaus_potsdam",
+      "name": "Alexianer St. Josefs-Krankenhaus Potsdam",
+      "before": {
+        "lat": 52.398844159999996,
+        "lng": 13.043601480000001
+      },
+      "google": {
+        "lat": 52.3988729,
+        "lng": 13.0436486,
+        "place_id": "ChIJA4-Hqwn1qEcR_rJF74r3wZ0",
+        "address": "Zimmerstraße 6, 14471 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_evangelisches_zentrum_fur_altersmedizin_geriatrische_fachklinik_und_tages",
+      "name": "Evangelisches Zentrum für Altersmedizin | Geriatrische Fachklinik und Tageskliniken",
+      "before": {
+        "lat": 52.403631659999995,
+        "lng": 13.04572178
+      },
+      "google": {
+        "lat": 52.4036604,
+        "lng": 13.0457689,
+        "place_id": "ChIJh_dOmNP1qEcRd07xStp6fhQ",
+        "address": "Weinbergstraße 18-19, 14469 Potsdam-Nördliche Vorstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_spielplatz",
+      "name": "Spielplatz",
+      "before": {
+        "lat": 52.37851716,
+        "lng": 12.9363539
+      },
+      "google": {
+        "lat": 52.3785459,
+        "lng": 12.936401,
+        "place_id": "ChIJHa-SpArzqEcRtSgynt2pWlA",
+        "address": "Bernhard-Kellermann-Straße 15, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_spielplatz_kletter_baum",
+      "name": "Spielplatz Kletter-Baum",
+      "before": {
+        "lat": 52.40320266,
+        "lng": 12.92289058
+      },
+      "google": {
+        "lat": 52.4032314,
+        "lng": 12.9229377,
+        "place_id": "ChIJt1FJbnHzqEcRFitmsnk1IhE",
+        "address": "Libellenweg, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_spielplatz_an_der_bockwindmuhle",
+      "name": "Spielplatz \"An der Bockwindmühle\"",
+      "before": {
+        "lat": 52.37671236,
+        "lng": 12.943002819999998
+      },
+      "google": {
+        "lat": 52.3767411,
+        "lng": 12.9430499,
+        "place_id": "ChIJYaCgMADzqEcRmB8ZRZ_mT1g",
+        "address": "Am Mühlenberg 15, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_spielplatz_phoben",
+      "name": "Spielplatz Phöben",
+      "before": {
+        "lat": 52.42646466,
+        "lng": 12.87622576
+      },
+      "google": {
+        "lat": 52.4264934,
+        "lng": 12.8762729,
+        "place_id": "ChIJ12z4KgLyqEcRzkNx25v_Cxk",
+        "address": "14542 Werder (Havel)-Phöben"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_markischer_golfclub_potsdam",
+      "name": "Märkischer Golfclub Potsdam",
+      "before": {
+        "lat": 52.41282066,
+        "lng": 12.87353278
+      },
+      "google": {
+        "lat": 52.4128494,
+        "lng": 12.8735799,
+        "place_id": "ChIJ_X4Dsg7yqEcRdbgyj1-IT1A",
+        "address": "Kemnitzer Schmiedeweg 1, 14542 Werder (Havel)-Kemnitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_kleiner_plessower_see",
+      "name": "Kleiner Plessower See",
+      "before": {
+        "lat": 52.39100456,
+        "lng": 12.8652356
+      },
+      "google": {
+        "lat": 52.3910333,
+        "lng": 12.8652827,
+        "place_id": "ChIJVb5wPHzyqEcRHuuHoHnvNMA",
+        "address": "14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_toplitzer_wiesen",
+      "name": "Töplitzer Wiesen",
+      "before": {
+        "lat": 52.43519996,
+        "lng": 12.884738440000001
+      },
+      "google": {
+        "lat": 52.4352287,
+        "lng": 12.8847856,
+        "place_id": "ChIJ_eA0XNrxqEcRwTf2p10olak",
+        "address": "Alt, 14542 Werder (Havel)-Töplitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_parkplatz_an_der_ziegelei",
+      "name": "Parkplatz an der Ziegelei",
+      "before": {
+        "lat": 52.35459476,
+        "lng": 12.92174194
+      },
+      "google": {
+        "lat": 52.3546235,
+        "lng": 12.921789,
+        "place_id": "ChIJXe6IMvrzqEcRAfnLyS4U79g",
+        "address": "Alpenstraße 60, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_tennisclub_werder_havelblick_e_v",
+      "name": "Tennisclub Werder Havelblick e.V.",
+      "before": {
+        "lat": 52.38887726,
+        "lng": 12.9314289
+      },
+      "google": {
+        "lat": 52.388906,
+        "lng": 12.931476,
+        "place_id": "ChIJN3EQ4aTzqEcRkFjjbJ5CkJA",
+        "address": "Adolf-Damaschke-Straße 35-37, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_sg_toplitz_1922_fussballplatz",
+      "name": "SG Töplitz 1922 Fußballplatz",
+      "before": {
+        "lat": 52.435056259999996,
+        "lng": 12.905143840000003
+      },
+      "google": {
+        "lat": 52.435085,
+        "lng": 12.905191,
+        "place_id": "ChIJW6kQPo3xqEcRhwu4V6G1hDM",
+        "address": "Neu-Töplitzer Str. 17, 14542 Werder (Havel)-Töplitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_havel_therme",
+      "name": "Havel-Therme",
+      "before": {
+        "lat": 52.399378160000005,
+        "lng": 12.923991280000001
+      },
+      "google": {
+        "lat": 52.3994069,
+        "lng": 12.9240384,
+        "place_id": "ChIJwZMESQDzqEcRKQ5fA5-1-Ag",
+        "address": "Zum Großen Zernsee 15, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_klaranlage_werder",
+      "name": "Kläranlage Werder",
+      "before": {
+        "lat": 52.41393756,
+        "lng": 12.90278628
+      },
+      "google": {
+        "lat": 52.4139663,
+        "lng": 12.9028334,
+        "place_id": "ChIJK0_5acHzqEcRVppqP4kbaaI",
+        "address": "14542 Werder (Havel)-Kemnitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_brunnenbau_phoben_gmbh_bernd_zander",
+      "name": "Brunnenbau Phöben GmbH Bernd Zander",
+      "before": {
+        "lat": 52.42660355999999,
+        "lng": 12.87888406
+      },
+      "google": {
+        "lat": 52.42663229999999,
+        "lng": 12.8789312,
+        "place_id": "ChIJlVm9KwLyqEcRBgm8424kGC8",
+        "address": "Hauptstraße, 14542 Werder (Havel) OT Phöben"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_shell",
+      "name": "Shell",
+      "before": {
+        "lat": 52.36451126000001,
+        "lng": 12.938278919999998
+      },
+      "google": {
+        "lat": 52.36454,
+        "lng": 12.938326,
+        "place_id": "ChIJ0e6-gm7zqEcRIwajX12j98k",
+        "address": "Auf dem Strengfeld 1, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_sprint_tankstelle",
+      "name": "SPRINT TANKSTELLE",
+      "before": {
+        "lat": 52.39733296000001,
+        "lng": 12.91600498
+      },
+      "google": {
+        "lat": 52.3973617,
+        "lng": 12.9160521,
+        "place_id": "ChIJjQyrq0zyqEcRfQdyNxeqSY4",
+        "address": "Otto-Lilienthal-Straße 22, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_aral",
+      "name": "Aral",
+      "before": {
+        "lat": 52.364588059999996,
+        "lng": 12.940374319999998
+      },
+      "google": {
+        "lat": 52.3646168,
+        "lng": 12.9404214,
+        "place_id": "ChIJrWRVim7zqEcRZOxL20ng8mU",
+        "address": "Aral-Tankstelle, Potsdamer Str. 82, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_star_tankstelle",
+      "name": "star Tankstelle",
+      "before": {
+        "lat": 52.347607159999995,
+        "lng": 12.90194874
+      },
+      "google": {
+        "lat": 52.3476359,
+        "lng": 12.9019958,
+        "place_id": "ChIJi0YtfybzqEcR1oli27DRK8c",
+        "address": "Klaistower Str. 38, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_totalenergies_autohof",
+      "name": "TotalEnergies Autohof",
+      "before": {
+        "lat": 52.39100586000001,
+        "lng": 12.8447943
+      },
+      "google": {
+        "lat": 52.3910346,
+        "lng": 12.8448414,
+        "place_id": "ChIJH0Sp_wanpUcRWhX1ysJza-E",
+        "address": "Am Magna Park 14, 14542 Werder (Havel)-Plötzin"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_tankstelle_fur_boote",
+      "name": "Tankstelle für Boote",
+      "before": {
+        "lat": 52.41801256,
+        "lng": 12.91747956
+      },
+      "google": {
+        "lat": 52.4180413,
+        "lng": 12.9175267,
+        "place_id": "ChIJqfhcL1jzqEcRehtsMqn8AJM",
+        "address": "An der Havel 38 14542 Werder (Havel) OT, 14542 Werder (Havel)-Töplitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_jet_tankstelle",
+      "name": "JET Tankstelle",
+      "before": {
+        "lat": 52.387571259999994,
+        "lng": 13.0273529
+      },
+      "google": {
+        "lat": 52.36454,
+        "lng": 12.938326,
+        "place_id": "ChIJ0e6-gm7zqEcRIwajX12j98k",
+        "address": "Auf dem Strengfeld 1, 14542 Werder (Havel)"
+      },
+      "delta_m": 6564,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_landbackerei_cafe_kirstein",
+      "name": "Landbäckerei & Café Kirstein",
+      "before": {
+        "lat": 52.369348360000004,
+        "lng": 12.924357019999999
+      },
+      "google": {
+        "lat": 52.36937709999999,
+        "lng": 12.9244041,
+        "place_id": "ChIJWSH54xHzqEcRmC2KR-Hh6S4",
+        "address": "Berliner Str. 126, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_backerei_kirstein",
+      "name": "Bäckerei Kirstein",
+      "before": {
+        "lat": 52.398702060000005,
+        "lng": 12.91930508
+      },
+      "google": {
+        "lat": 52.36937709999999,
+        "lng": 12.9244041,
+        "place_id": "ChIJWSH54xHzqEcRmC2KR-Hh6S4",
+        "address": "Berliner Str. 126, 14542 Werder (Havel)"
+      },
+      "delta_m": 3279,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_ihr_landbacker",
+      "name": "Ihr Landbäcker",
+      "before": {
+        "lat": 52.36970976,
+        "lng": 12.92020442
+      },
+      "google": {
+        "lat": 52.3697385,
+        "lng": 12.9202515,
+        "place_id": "ChIJdZAWHxDzqEcRJGTJpNkIfsE",
+        "address": "Berliner Str. 111-112, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_backerei_konditorei_zillmann",
+      "name": "Bäckerei & Konditorei Zillmann",
+      "before": {
+        "lat": 52.364916359999995,
+        "lng": 12.909831919999998
+      },
+      "google": {
+        "lat": 52.364059,
+        "lng": 12.9366299,
+        "place_id": "ChIJew5flaI5ZUER0bV05Icz0f8",
+        "address": "Marktstraße 2c, 14542 Werder (Havel)"
+      },
+      "delta_m": 1822,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_saltwater_s_gmbh",
+      "name": "SALTWATER‘s GmbH",
+      "before": {
+        "lat": 52.39129955999999,
+        "lng": 12.930057999999999
+      },
+      "google": {
+        "lat": 52.3913283,
+        "lng": 12.9301051,
+        "place_id": "ChIJX_mz-C3zqEcR1ymIzjTzrzs",
+        "address": "Adolf-Damaschke-Straße 56/58, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_evangelische_kirchengemeinde",
+      "name": "Evangelische Kirchengemeinde",
+      "before": {
+        "lat": 52.33919976000001,
+        "lng": 12.854554259999997
+      },
+      "google": {
+        "lat": 52.38418919999999,
+        "lng": 12.9326264,
+        "place_id": "ChIJ7y0EsqbzqEcRpEHagFaUWaE",
+        "address": "Adolf-Damaschke-Straße 9, 14542 Werder (Havel)"
+      },
+      "delta_m": 7289,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_immobilienburo_vehlow",
+      "name": "Immobilienbüro Vehlow",
+      "before": {
+        "lat": 52.365343859999996,
+        "lng": 12.90027262
+      },
+      "google": {
+        "lat": 52.3653726,
+        "lng": 12.9003197,
+        "place_id": "ChIJiZJ_3eHyqEcRplkTk1S5FZM",
+        "address": "Kreuzdornweg 5, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_wc_toilette",
+      "name": "WC / Toilette",
+      "before": {
+        "lat": 52.39712006,
+        "lng": 12.91922698
+      },
+      "google": {
+        "lat": 52.3787886,
+        "lng": 12.9359984,
+        "place_id": "ChIJz5O34lXzqEcR7H-obyt3TW8",
+        "address": "Bernhard-Kellermann-Straße 13, 14542 Werder (Havel)"
+      },
+      "delta_m": 2335,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_gieske_containerdienst_gmbh",
+      "name": "Gieske Containerdienst GmbH",
+      "before": {
+        "lat": 52.37714566,
+        "lng": 12.938108219999998
+      },
+      "google": {
+        "lat": 52.37717439999999,
+        "lng": 12.9381553,
+        "place_id": "ChIJQ0GzO3XzqEcR-mjBYYHcO6E",
+        "address": "Unter den Linden 23, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_winterwunderland",
+      "name": "Winterwunderland",
+      "before": {
+        "lat": 52.378798960000005,
+        "lng": 12.864467600000001
+      },
+      "google": {
+        "lat": 52.3788277,
+        "lng": 12.8645147,
+        "place_id": "ChIJCw4itfvzqEcR6tn2hw0VLkA",
+        "address": "Lehniner Ch 19, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_museumsshop_schloss_sanssouci",
+      "name": "Museumsshop - Schloss Sanssouci",
+      "before": {
+        "lat": 52.40423466000001,
+        "lng": 13.037665279999999
+      },
+      "google": {
+        "lat": 52.4042634,
+        "lng": 13.0377124,
+        "place_id": "ChIJAyxHXiz0qEcRB5CbDsbgbUY",
+        "address": "Maulbeerallee, 14469 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_inselterrassen_arielle",
+      "name": "Inselterrassen Arielle",
+      "before": {
+        "lat": 52.37791076,
+        "lng": 12.945536620000002
+      },
+      "google": {
+        "lat": 52.3779395,
+        "lng": 12.9455837,
+        "place_id": "ChIJEUV5_3XzqEcRq16K4x-EB34",
+        "address": "Fischerstraße 33, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_cafe_und_brasserie_hagemeister",
+      "name": "Café und Brasserie Hagemeister",
+      "before": {
+        "lat": 52.379371260000006,
+        "lng": 12.942897299999998
+      },
+      "google": {
+        "lat": 52.3794,
+        "lng": 12.9429444,
+        "place_id": "ChIJl7ZsOp7zqEcRpQKR5XthQto",
+        "address": "Baderstraße 3, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_yves_s",
+      "name": "yves's",
+      "before": {
+        "lat": 52.377861259999996,
+        "lng": 12.94409292
+      },
+      "google": {
+        "lat": 52.37789,
+        "lng": 12.94414,
+        "place_id": "ChIJJ1IC-nXzqEcRDe0WQoaEpWY",
+        "address": "Michaelisstraße 13, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_duval",
+      "name": "Duval",
+      "before": {
+        "lat": 52.37795886,
+        "lng": 12.943062020000003
+      },
+      "google": {
+        "lat": 52.3779876,
+        "lng": 12.9431091,
+        "place_id": "ChIJR_tAEBjzqEcR6WM_cGk-Ce4",
+        "address": "Michaelisstraße 17/18, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_kaffeerosterei_werder_caffe_cafe_kaffee",
+      "name": "Kaffeerösterei Werder Caffe Cafe Kaffee",
+      "before": {
+        "lat": 52.37015586,
+        "lng": 12.905528319999998
+      },
+      "google": {
+        "lat": 52.37018459999999,
+        "lng": 12.9055754,
+        "place_id": "ChIJ1X14W4HzqEcRn2HUVLfQmx4",
+        "address": "Glindower Chausseestraße 11, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_fritze_s_klonstuv",
+      "name": "Fritze's Klönstuv",
+      "before": {
+        "lat": 52.379011160000005,
+        "lng": 12.945159
+      },
+      "google": {
+        "lat": 52.3790399,
+        "lng": 12.9452061,
+        "place_id": "ChIJl_F0PADzqEcRWpzJC_XG5l8",
+        "address": "Fischerstraße 42, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_pension_sanssouci",
+      "name": "Pension Sanssouci",
+      "before": {
+        "lat": 52.395076859999996,
+        "lng": 13.040760800000001
+      },
+      "google": {
+        "lat": 52.3951056,
+        "lng": 13.0408079,
+        "place_id": "ChIJxT05hsz1qEcRC9BrJduLETc",
+        "address": "Zeppelinstraße 164A, 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_remise_blumberg",
+      "name": "Remise Blumberg",
+      "before": {
+        "lat": 52.40344596,
+        "lng": 13.04691148
+      },
+      "google": {
+        "lat": 52.4034747,
+        "lng": 13.0469586,
+        "place_id": "ChIJxTLZvdP1qEcRok4TCwXPyv0",
+        "address": "Weinbergstraße 26, 14469 Potsdam"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_gutshof_ketzin_betreibergesellschaft_gutshof_ketzin_mbh",
+      "name": "Gutshof Ketzin - Betreibergesellschaft Gutshof Ketzin mbH",
+      "before": {
+        "lat": 52.47856836,
+        "lng": 12.843760400000003
+      },
+      "google": {
+        "lat": 52.47859709999999,
+        "lng": 12.8438076,
+        "place_id": "ChIJzaDYAK3vqEcR9RSf94pg9_Y",
+        "address": "Rathausstraße 3, 14669 Ketzin/Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_landhotel_potsdam",
+      "name": "Landhotel Potsdam",
+      "before": {
+        "lat": 52.406357359999994,
+        "lng": 12.966758480000001
+      },
+      "google": {
+        "lat": 52.4063861,
+        "lng": 12.9668056,
+        "place_id": "ChIJ59VOJPDzqEcR1_PN_RRfLJA",
+        "address": "Reiherbergstraße 33, 14476 Potsdam Nord"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_zum_rittmeister_hotel_und_gastronomie_gmbh",
+      "name": "\"Zum Rittmeister\" Hotel und Gastronomie GmbH",
+      "before": {
+        "lat": 52.40869386000001,
+        "lng": 12.867352879999999
+      },
+      "google": {
+        "lat": 52.4087226,
+        "lng": 12.8674,
+        "place_id": "ChIJH6AqpHTyqEcRaIeOck6b4hw",
+        "address": "Seestraße 9, 14542 Werder (Havel)-Kemnitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_garni_hotel_kranich",
+      "name": "Garni-Hotel Kranich",
+      "before": {
+        "lat": 52.42459646,
+        "lng": 13.041854360000002
+      },
+      "google": {
+        "lat": 52.42462519999999,
+        "lng": 13.0419015,
+        "place_id": "ChIJsWdRhoX2qEcRnMdJLx6SUbk",
+        "address": "Kirschallee 57, 14469 Potsdam Nord"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_pension_glindower_alpen_jurij_ross",
+      "name": "Pension Glindower Alpen - Jurij Roß",
+      "before": {
+        "lat": 52.357869660000006,
+        "lng": 12.908684340000002
+      },
+      "google": {
+        "lat": 52.3578984,
+        "lng": 12.9087314,
+        "place_id": "ChIJvbx8CxTzqEcRqtEPwGASDmk",
+        "address": "Klaistower Str. 1, 14542 Werder (Havel)"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_pension_caputh",
+      "name": "Pension Caputh",
+      "before": {
+        "lat": 52.352507360000004,
+        "lng": 12.988747039999998
+      },
+      "google": {
+        "lat": 52.35253609999999,
+        "lng": 12.9887941,
+        "place_id": "ChIJw4nYour0qEcRTa775HqsXmM",
+        "address": "Wentorf-Insel 1, 14548 Schwielowsee"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_bed_breakfast_hotel_mullerhof",
+      "name": "Bed & Breakfast Hotel Müllerhof",
+      "before": {
+        "lat": 52.34892956000001,
+        "lng": 12.99227794
+      },
+      "google": {
+        "lat": 52.3489583,
+        "lng": 12.992325,
+        "place_id": "ChIJeQ2ah8H0qEcRYPieAipAGn8",
+        "address": "Weberstraße 49, 14548 Schwielowsee-Caputh"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_loch",
+      "name": "LOCH",
+      "before": {
+        "lat": 52.38975306,
+        "lng": 12.874159119999998
+      },
+      "google": {
+        "lat": 52.389789,
+        "lng": 12.874218,
+        "place_id": "ChIJPVDafADzqEcRZuE_riLGqq4",
+        "address": "9VQF+WM, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_aussichtspunkt_wachtelberg_phoben",
+      "name": "Aussichtspunkt Wachtelberg Phöben",
+      "before": {
+        "lat": 52.42409936,
+        "lng": 12.884420879999999
+      },
+      "google": {
+        "lat": 52.4241353,
+        "lng": 12.8844798,
+        "place_id": "ChIJn71wwBzyqEcRIfUV2Z_A7AM",
+        "address": "Am Phöbener Wachtelberg 1, 14542 Werder (Havel)-Phöben"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_historischer_fahranleger_phoben",
+      "name": "Historischer Fähranleger Phöben",
+      "before": {
+        "lat": 52.429671860000006,
+        "lng": 12.882748859999998
+      },
+      "google": {
+        "lat": 52.4297078,
+        "lng": 12.8828078,
+        "place_id": "ChIJx2pyIwDxqEcR7WSuysGaXb8",
+        "address": "Fährstraße 1, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_denkmal_otto_lilienthal_erste_fluge",
+      "name": "Denkmal Otto Lilienthal \"Erste Flüge\"",
+      "before": {
+        "lat": 52.412533859999996,
+        "lng": 12.8201304
+      },
+      "google": {
+        "lat": 52.4125698,
+        "lng": 12.8201893,
+        "place_id": "ChIJN3XiYbjtqEcRMGv0MxGX9bk",
+        "address": "14550 Groß Kreutz (Havel)-Derwitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_geo_concept_brunnenbau",
+      "name": "GEO Concept Brunnenbau",
+      "before": {
+        "lat": 52.43166406,
+        "lng": 12.90327096
+      },
+      "google": {
+        "lat": 52.4317,
+        "lng": 12.9033299,
+        "place_id": "ChIJH5gboYzxqEcR0vkEdEKmhc8",
+        "address": "Mühlenbergstraße 23, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_statuenrondell_ohne_namen",
+      "name": "Statuenrondell ohne Namen",
+      "before": {
+        "lat": 52.401312659999995,
+        "lng": 13.0332604
+      },
+      "google": {
+        "lat": 52.4013486,
+        "lng": 13.0333193,
+        "place_id": "ChIJf4A8OAD1qEcRqm-_LuLbdMo",
+        "address": "Brandenburger Vorstadt, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_die_statue_der_flora",
+      "name": "Die Statue der Flora",
+      "before": {
+        "lat": 52.40067626,
+        "lng": 13.042190299999998
+      },
+      "google": {
+        "lat": 52.4007122,
+        "lng": 13.0422492,
+        "place_id": "ChIJMW9CltL1qEcRhXdna3KvSf8",
+        "address": "Am Grünen Gitter 4, 14469 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_kriegerdenkmal",
+      "name": "Kriegerdenkmal",
+      "before": {
+        "lat": 52.36359186,
+        "lng": 12.82901456
+      },
+      "google": {
+        "lat": 52.3636278,
+        "lng": 12.8290734,
+        "place_id": "ChIJoUxcI13tqEcRMClBOWm5uL4",
+        "address": "14542 Werder (Havel)-Plötzin"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_freundschaftsbrunnen_gorch_wenske_heinz_dubel_eberhard_bachmann",
+      "name": "Freundschaftsbrunnen - Gorch Wenske, Heinz Dübel, Eberhard Bachmann",
+      "before": {
+        "lat": 52.39578105999999,
+        "lng": 13.068296819999997
+      },
+      "google": {
+        "lat": 52.395817,
+        "lng": 13.0683557,
+        "place_id": "ChIJ7QKzd6T1qEcRv61Epb3I3FI",
+        "address": "Freundschaftsinsel, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_rossbrunnen",
+      "name": "Roßbrunnen",
+      "before": {
+        "lat": 52.40508996,
+        "lng": 13.0382767
+      },
+      "google": {
+        "lat": 52.40512589999999,
+        "lng": 13.0383356,
+        "place_id": "ChIJK4-gfSz0qEcRWHEL8KfcpkE",
+        "address": "14469 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_obelisk_der_nachhaltigkeit",
+      "name": "Obelisk der Nachhaltigkeit",
+      "before": {
+        "lat": 52.38223505999999,
+        "lng": 13.032525340000001
+      },
+      "google": {
+        "lat": 52.382271,
+        "lng": 13.0325842,
+        "place_id": "ChIJc1EMNwD1qEcRL9WTBxrMSq8",
+        "address": "Hermannswerder 18, 14473 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_gedenkstele_jurgen_von_woyski",
+      "name": "Gedenkstele - Jürgen von Woyski",
+      "before": {
+        "lat": 52.40966106,
+        "lng": 13.062657699999999
+      },
+      "google": {
+        "lat": 52.40969699999999,
+        "lng": 13.0627166,
+        "place_id": "ChIJBzxRmzv3qEcR9l5dgkrffoU",
+        "address": "Nauener Vorstadt, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_bastian_dressler_michael_geist_brunnenbau_gbr",
+      "name": "Bastian Dreßler & Michael Geist Brunnenbau GbR",
+      "before": {
+        "lat": 52.428113759999995,
+        "lng": 12.908738880000001
+      },
+      "google": {
+        "lat": 52.42814970000001,
+        "lng": 12.9087978,
+        "place_id": "ChIJX0cQOevxqEcRKjUz-9dUnYQ",
+        "address": "An d. Havel 59, 14542 Werder (Havel)-Töplitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_museum_der_havellandischen_malerkolonie",
+      "name": "Museum der Havelländischen Malerkolonie",
+      "before": {
+        "lat": 52.31127936,
+        "lng": 12.92962742
+      },
+      "google": {
+        "lat": 52.3113153,
+        "lng": 12.9296862,
+        "place_id": "ChIJmem02p6MqEcRyt8N-g4I3IU",
+        "address": "Beelitzer Str. 1, 14548 Schwielowsee-Ferch"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_lillienthal_gedenkhaus_derwitz",
+      "name": "Lillienthal-Gedenkhaus Derwitz",
+      "before": {
+        "lat": 52.40340736,
+        "lng": 12.825016699999997
+      },
+      "google": {
+        "lat": 52.4034433,
+        "lng": 12.8250756,
+        "place_id": "ChIJSX3RAHvtqEcRmA0X3VodTfQ",
+        "address": "Derwitzer Dorfstraße 19, 14542 Werder (Havel)-Derwitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_potsdam_museum_forum_fur_kunst_und_geschichte",
+      "name": "Potsdam Museum – Forum für Kunst und Geschichte",
+      "before": {
+        "lat": 52.39588596000001,
+        "lng": 13.062031020000001
+      },
+      "google": {
+        "lat": 52.3959219,
+        "lng": 13.0620899,
+        "place_id": "ChIJ6zdcZc_1qEcR2nzYY6kozR8",
+        "address": "Am Alten Markt 9, 14467 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_atelier_ralf_wilhelm_schmidt",
+      "name": "Atelier Ralf Wilhelm Schmidt",
+      "before": {
+        "lat": 52.34699145999999,
+        "lng": 12.98737008
+      },
+      "google": {
+        "lat": 52.3470274,
+        "lng": 12.9874289,
+        "place_id": "ChIJG9cF2MD0qEcRNTTiRKCY7H8",
+        "address": "Str. der Einheit 91, 14548 Schwielowsee-Caputh"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_wald_galerie_ferch",
+      "name": "WALD GALERIE FERCH",
+      "before": {
+        "lat": 52.30902146,
+        "lng": 12.92420142
+      },
+      "google": {
+        "lat": 52.3090574,
+        "lng": 12.9242602,
+        "place_id": "ChIJAQD7y5uMqEcRoX3kAskSBHQ",
+        "address": "Mühlengrund 1a, 14548 Schwielowsee-Ferch"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_kirche_phoben",
+      "name": "Kirche Phöben",
+      "before": {
+        "lat": 52.42686646,
+        "lng": 12.88018908
+      },
+      "google": {
+        "lat": 52.4269024,
+        "lng": 12.880248,
+        "place_id": "ChIJD4Mn9ALyqEcRqA5MMOVTCPM",
+        "address": "Hauptstraße 15, 14542 Werder (Havel)-Phöben"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_burgruine_zolchow",
+      "name": "Burgruine Zolchow",
+      "before": {
+        "lat": 52.40307025999999,
+        "lng": 12.8697835
+      },
+      "google": {
+        "lat": 52.4031062,
+        "lng": 12.8698424,
+        "place_id": "ChIJA4wLGwDzqEcRuFP1fWsE00A",
+        "address": "CV39+6W, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_schloss_paretz",
+      "name": "Schloss Paretz",
+      "before": {
+        "lat": 52.46834046,
+        "lng": 12.87681812
+      },
+      "google": {
+        "lat": 52.4683764,
+        "lng": 12.8768771,
+        "place_id": "ChIJX44hTizuqEcRO7F0jEmY-7s",
+        "address": "Parkring 1, 14669 Ketzin/Havel-Paretz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_schloss_caputh",
+      "name": "Schloss Caputh",
+      "before": {
+        "lat": 52.34914006,
+        "lng": 13.00006118
+      },
+      "google": {
+        "lat": 52.349176,
+        "lng": 13.00012,
+        "place_id": "ChIJgWTTMd30qEcRWf8kX8s_XLQ",
+        "address": "Str. der Einheit 2, 14548 Schwielowsee-Caputh"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_toplitzer_spitze",
+      "name": "Töplitzer Spitze",
+      "before": {
+        "lat": 52.46082206,
+        "lng": 12.87758962
+      },
+      "google": {
+        "lat": 52.46085799999999,
+        "lng": 12.8776486,
+        "place_id": "ChIJNT_J7cXvqEcRXHUlsbescTs",
+        "address": "FV6H+83, 14669 Ketzin/Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_aussichtsturm_wietkiekenberg",
+      "name": "Aussichtsturm Wietkiekenberg",
+      "before": {
+        "lat": 52.30747365999999,
+        "lng": 12.95014354
+      },
+      "google": {
+        "lat": 52.3075096,
+        "lng": 12.9502023,
+        "place_id": "ChIJXQzvq2iLqEcRIP2l7SQP8ZQ",
+        "address": "14548 Schwielowsee-Ferch"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_aussichtspunkt_havel",
+      "name": "Aussichtspunkt Havel",
+      "before": {
+        "lat": 52.39535216,
+        "lng": 13.07063092
+      },
+      "google": {
+        "lat": 52.4241353,
+        "lng": 12.8844798,
+        "place_id": "ChIJn71wwBzyqEcRIfUV2Z_A7AM",
+        "address": "Am Phöbener Wachtelberg 1, 14542 Werder (Havel)-Phöben"
+      },
+      "delta_m": 13026,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_aussichtsplattform_caputher_gemunde",
+      "name": "Aussichtsplattform Caputher Gemünde",
+      "before": {
+        "lat": 52.34272376,
+        "lng": 12.97889988
+      },
+      "google": {
+        "lat": 52.3427597,
+        "lng": 12.9789587,
+        "place_id": "ChIJFYA1H6j1qEcRyXHL0I6EM28",
+        "address": "Schwielowseestraße, 14548 Schwielowsee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_aussichtspunkt_wublitz",
+      "name": "Aussichtspunkt Wublitz",
+      "before": {
+        "lat": 52.42563846,
+        "lng": 12.93291758
+      },
+      "google": {
+        "lat": 52.4241353,
+        "lng": 12.8844798,
+        "place_id": "ChIJn71wwBzyqEcRIfUV2Z_A7AM",
+        "address": "Am Phöbener Wachtelberg 1, 14542 Werder (Havel)-Phöben"
+      },
+      "delta_m": 3289,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_aussichtsplattform_schwielowsee",
+      "name": "Aussichtsplattform Schwielowsee",
+      "before": {
+        "lat": 52.338553160000004,
+        "lng": 12.9832344
+      },
+      "google": {
+        "lat": 52.3385891,
+        "lng": 12.9832932,
+        "place_id": "ChIJAajTRNT1qEcRV7SvOEdSQd4",
+        "address": "Geschwister-Scholl-Straße, 14548 Schwielowsee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_japanischer_bonsaigarten",
+      "name": "Japanischer Bonsaigarten",
+      "before": {
+        "lat": 52.32539406000001,
+        "lng": 12.9267012
+      },
+      "google": {
+        "lat": 52.32543,
+        "lng": 12.92676,
+        "place_id": "ChIJS2I3HbCMqEcRJAHBNlUIDpo",
+        "address": "Fercher Str. 61 OT, 14548 Schwielowsee-Ferch"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_botanischer_garten_der_universitat_potsdam",
+      "name": "Botanischer Garten der Universität Potsdam",
+      "before": {
+        "lat": 52.40406985999999,
+        "lng": 13.025901300000001
+      },
+      "google": {
+        "lat": 52.4041058,
+        "lng": 13.0259602,
+        "place_id": "ChIJ7cnhbSX0qEcR8ANu0dSGcy0",
+        "address": "Paradiesgarten, Maulbeerallee 2, 14469 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_kleingartenkolonie_berliner_bar",
+      "name": "Kleingartenkolonie Berliner Bär",
+      "before": {
+        "lat": 52.41013636,
+        "lng": 12.882447199999998
+      },
+      "google": {
+        "lat": 52.4101723,
+        "lng": 12.8825061,
+        "place_id": "ChIJJXrPshXyqEcRSocL6R4Ay2c",
+        "address": "Fuchsberg, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_stibadium",
+      "name": "Stibadium",
+      "before": {
+        "lat": 52.40471745999999,
+        "lng": 13.026283999999999
+      },
+      "google": {
+        "lat": 52.4047534,
+        "lng": 13.0263429,
+        "place_id": "ChIJTbOFhiX0qEcROOImDAs6Izk",
+        "address": "Brandenburger Vorstadt, 14469 Potsdam"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_garten_in_glindow",
+      "name": "Garten in Glindow",
+      "before": {
+        "lat": 52.355722060000005,
+        "lng": 12.91764416
+      },
+      "google": {
+        "lat": 52.35575799999999,
+        "lng": 12.917703,
+        "place_id": "ChIJf4VQP5HzqEcRcTPq-S5sh-c",
+        "address": "Alpenstraße 33, 14542 Werder (Havel)-Glindow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_fercher_uferweg",
+      "name": "Fercher Uferweg",
+      "before": {
+        "lat": 52.31314146,
+        "lng": 12.92743532
+      },
+      "google": {
+        "lat": 52.3162221,
+        "lng": 12.9272069,
+        "place_id": "ChIJRSFrfaKMqEcRi9KoQ4CVW28",
+        "address": "Fercher Uferweg, 14548 Schwielowsee-Ferch"
+      },
+      "delta_m": 343,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_kirschgarten_werder",
+      "name": "Kirschgarten Werder",
+      "before": {
+        "lat": 52.38057495999999,
+        "lng": 12.86233004
+      },
+      "google": {
+        "lat": 52.3806109,
+        "lng": 12.8623889,
+        "place_id": "ChIJwfJXioXyqEcRN1oB6uqq1iY",
+        "address": "14542 Werder (Havel)-Plötzin"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_kleiner_badestrand_von_alt_toplitz",
+      "name": "Kleiner Badestrand von Alt Töplitz",
+      "before": {
+        "lat": 52.43070425999999,
+        "lng": 12.885693559999998
+      },
+      "google": {
+        "lat": 52.4307402,
+        "lng": 12.8857525,
+        "place_id": "ChIJI6x2WY7xqEcRaGd4keqWQJw",
+        "address": "Alt, 14542 Werder (Havel)-Töplitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_uferradweg",
+      "name": "Uferradweg",
+      "before": {
+        "lat": 52.37911226,
+        "lng": 13.021089739999999
+      },
+      "google": {
+        "lat": 52.3499713,
+        "lng": 12.9184221,
+        "place_id": "ChIJ6V7pWzjzqEcRNl1wmCaIooo",
+        "address": "14542 Werder (Havel)"
+      },
+      "delta_m": 7687,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_offentliche_badestelle_phoben",
+      "name": "Öffentliche Badestelle Phöben",
+      "before": {
+        "lat": 52.42512816000001,
+        "lng": 12.89247258
+      },
+      "google": {
+        "lat": 52.4251641,
+        "lng": 12.8925315,
+        "place_id": "ChIJl7dqZh7yqEcRuRC--sEhAoo",
+        "address": "Phöbener Seestraße 22, 14542 Werder (Havel)-Phöben"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_yachthafen_ringel",
+      "name": "Yachthafen Ringel",
+      "before": {
+        "lat": 52.41698386,
+        "lng": 12.91851518
+      },
+      "google": {
+        "lat": 52.4170198,
+        "lng": 12.9185741,
+        "place_id": "ChIJWXtAESzyqEcREL9NLvI4XCo",
+        "address": "An d. Havel 38, 14542 Werder (Havel)-Töplitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_marina_ferch",
+      "name": "Marina Ferch",
+      "before": {
+        "lat": 52.31356406,
+        "lng": 12.93206122
+      },
+      "google": {
+        "lat": 52.3136,
+        "lng": 12.93212,
+        "place_id": "ChIJg7Dka5-MqEcRe3ZF_KrDU-Y",
+        "address": "Seeweg 10, 14548 Schwielowsee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_streichelzoo",
+      "name": "Streichelzoo",
+      "before": {
+        "lat": 52.29741096,
+        "lng": 12.85879554
+      },
+      "google": {
+        "lat": 52.74731749999999,
+        "lng": 13.1564484,
+        "place_id": "ChIJTegttVIBqUcRtHbryPOyvKw",
+        "address": "An den Waldseen 1A, 16515 Oranienburg-Germendorf"
+      },
+      "delta_m": 53928,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_tiergehege",
+      "name": "Tiergehege",
+      "before": {
+        "lat": 52.29749115999999,
+        "lng": 12.85581234
+      },
+      "google": {
+        "lat": 52.2975271,
+        "lng": 12.8558711,
+        "place_id": "ChIJwyEzV--NqEcRTU7ZoeCKI8c",
+        "address": "14547 Beelitz-Busendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_kletterwald_tiergehege",
+      "name": "Kletterwald + Tiergehege",
+      "before": {
+        "lat": 52.29809496,
+        "lng": 12.85793864
+      },
+      "google": {
+        "lat": 52.2981309,
+        "lng": 12.8579974,
+        "place_id": "ChIJ8YTlTfCNqEcRvd8ccvJkGNc",
+        "address": "14547 Beelitz-Busendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_wald_jagd_naturerlebnis_e_v",
+      "name": "Wald-Jagd-Naturerlebnis e.V.",
+      "before": {
+        "lat": 52.36266736,
+        "lng": 13.075021659999999
+      },
+      "google": {
+        "lat": 52.3627033,
+        "lng": 13.0750805,
+        "place_id": "ChIJ__totHj1qEcRrXoxxwckw2U",
+        "address": "Ravensberggestell 2, 14478 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_waldhaus_grosser_ravensberg",
+      "name": "Waldhaus Großer Ravensberg",
+      "before": {
+        "lat": 52.35042786,
+        "lng": 13.066676079999999
+      },
+      "google": {
+        "lat": 52.3504638,
+        "lng": 13.0667349,
+        "place_id": "ChIJIVuhUGT1qEcRnGBSrj24pNY",
+        "address": "Ravensberggestell 2, 14478 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_wegestern_im_wildpark",
+      "name": "Wegestern im Wildpark",
+      "before": {
+        "lat": 52.38832666,
+        "lng": 12.99977332
+      },
+      "google": {
+        "lat": 52.3883626,
+        "lng": 12.9998322,
+        "place_id": "ChIJGSu2Kmr0qEcRo_S3fRy1DOI",
+        "address": "14471, Birkenallee, 14471 Potsdam-Westliche Vorstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_spargel_und_erlebnishof_klaistow",
+      "name": "Spargel- und Erlebnishof Klaistow",
+      "before": {
+        "lat": 52.29655286,
+        "lng": 12.859969139999999
+      },
+      "google": {
+        "lat": 52.29658879999999,
+        "lng": 12.8600279,
+        "place_id": "ChIJa7H0_7CNqEcRQdMo5n4i3HY",
+        "address": "Glindower Str. 28, 14547 Beelitz-Busendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_hausbootvermietung_werder_gbr",
+      "name": "Hausbootvermietung Werder GbR",
+      "before": {
+        "lat": 52.41257786,
+        "lng": 12.910447299999998
+      },
+      "google": {
+        "lat": 52.4126138,
+        "lng": 12.9105062,
+        "place_id": "ChIJm4V-UDDyqEcROYYhBBJp6iM",
+        "address": "Havelweg 16, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_huckleberrys_tour_flossstation_werder",
+      "name": "Huckleberrys® Tour - Floßstation Werder",
+      "before": {
+        "lat": 52.426065660000006,
+        "lng": 12.88569748
+      },
+      "google": {
+        "lat": 52.4261016,
+        "lng": 12.8857564,
+        "place_id": "ChIJ18EeqMrzqEcR2NEcwAgDC6k",
+        "address": "Hauptstraße 58, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_bootscharter_keser",
+      "name": "Bootscharter Keser",
+      "before": {
+        "lat": 52.41778536,
+        "lng": 12.91829488
+      },
+      "google": {
+        "lat": 52.4178213,
+        "lng": 12.9183538,
+        "place_id": "ChIJbd5MIT7zqEcRGSR2ttxcrn4",
+        "address": "An d. Havel 38, 14542 Werder (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_bootsvermietung_moisl_templiner_see",
+      "name": "Bootsvermietung Moisl - Templiner See",
+      "before": {
+        "lat": 52.362021760000005,
+        "lng": 13.022676960000002
+      },
+      "google": {
+        "lat": 52.3620577,
+        "lng": 13.0227358,
+        "place_id": "ChIJJxTQzgL1qEcRXyAT4v7QmRk",
+        "address": "Templiner Str. 110, 14473 Potsdam Süd"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "werder_bootsvermietung_ferienwohnung_tanz_reiner",
+      "name": "Bootsvermietung & Ferienwohnung Tanz Reiner",
+      "before": {
+        "lat": 52.42638096,
+        "lng": 12.884813880000001
+      },
+      "google": {
+        "lat": 52.42641690000001,
+        "lng": 12.8848728,
+        "place_id": "ChIJoeeoUQLyqEcRUvXRdlLDzCc",
+        "address": "Hauptstraße 37, 14542 Werder (Havel)-Phöben"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_wc_toiletten_a10_sud",
+      "name": "WC / Toiletten, A10-Süd",
+      "before": {
+        "lat": 52.32030944,
+        "lng": 12.85145626
+      },
+      "google": {
+        "lat": 52.3203346,
+        "lng": 12.8514974,
+        "place_id": "ChIJtQFgR_ONqEcRy6HO6gatadU",
+        "address": "14542 Werder (Havel)-Bliesendorf"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "werder_kuhl_und_lagerhallen_plotzin_gbr_meier_t",
+      "name": "Kühl- und Lagerhallen Plötzin GbR, Meier & T.",
+      "before": {
+        "lat": 52.36440204,
+        "lng": 12.8231495
+      },
+      "google": {
+        "lat": 52.36442719999999,
+        "lng": 12.8231907,
+        "place_id": "ChIJm-Omq0TtqEcRGJLIpsNpYos",
+        "address": "Alte Dorfstraße 28, 14542 Werder (Havel)-Plötzin"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    }
+  ]
+}

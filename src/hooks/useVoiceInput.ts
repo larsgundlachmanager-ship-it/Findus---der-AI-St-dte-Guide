@@ -22,19 +22,7 @@ import {
 } from '../services/navigation';
 import { handleMemoryIntent } from '../services/intentService';
 import { useUserMemoryStore } from '../store/useUserMemoryStore';
-import {
-  isTransitQueryWithLocation,
-  prepareTransitFollowUp,
-} from '../services/transit/transitAdvisor';
-import {
-  isFerryQueryWithLocation,
-  prepareFerryFollowUp,
-  ferryAdviceToConcierge,
-} from '../services/transit/ferryAdvisor';
-import {
-  presentConciergeResponse,
-  transitAdviceToConcierge,
-} from '../services/concierge/presentConcierge';
+import { presentConciergeResponse } from '../services/concierge/presentConcierge';
 import { shouldAcceptPendingAffiliateOffer } from '../services/affiliate/pendingAffiliateOffer';
 import {
   alertActionError,
@@ -61,46 +49,31 @@ import {
   appendSideChannelAsk,
   captureSideChannelHints,
 } from '../services/memory/sideChannelMemory';
-import {
-  extractFlightCode,
-  isFlightQuery,
-  prepareFlightFollowUp,
-} from '../services/flights/flightAdvisor';
-import { isInselfliegerQuery } from '../services/flights/inselfliegerAdvisor';
-import {
-  isStepStatsQuery,
-  prepareStepStatsFollowUp,
-  wantsDisableStepStats,
-  wantsEnableStepStats,
-} from '../services/battery/stepStatsService';
+import { extractFlightCode, prepareFlightFollowUp } from '../services/flights/flightAdvisor';
 import {
   rememberFlightPlanForAlarm,
   wakeOfferForFlightPlan,
 } from '../services/alarms/wakeAlarmAdvisor';
-import {
-  isClockIntent,
-  prepareClockIntentFollowUp,
-} from '../services/alarms/clockIntents';
 import { recordUserSpeechExact } from '../services/feedback/executionTracking';
 import { runPreferenceCaptureMiddleware } from '../services/memory/preferenceCaptureMiddleware';
 import { noteUserTextForSituation } from '../services/persona/situationGate';
 
-/** Kurz nach Loslassen weiterhören — fängt End-Silben ab, ohne spürbar zu warten. */
-const STT_TAIL_MS = 450;
-/** Ab hier gilt Long-Press: Voice an + Findus sofort soft-unterbrechen. */
-const HOLD_THRESHOLD_MS = 450;
-/** Hold ≥ 2 s → Frage gilt; darunter = nie passiert (Resume, kein Denken). */
+/** Kurz tippen (< Tap) → Tippfeld; darüber → Sprache. */
+const TAP_MAX_MS = 180;
+/** Kurz nach Loslassen weiterhören — Ziel ~100–150ms. */
+const STT_TAIL_MS = 120;
+/** Hold ≥ 2 s → Frage gilt; darunter während Findus spricht = Abbruch (Resume). */
 const MIN_VOICE_MS = 2_000;
-const STT_FINALIZE_MS = 1_300;
+const STT_FINALIZE_MS = 450;
 
 export type VoiceFallbackReason = 'unavailable' | 'permission' | 'error';
 
 type PressMode = 'idle' | 'pending' | 'voice' | 'locked';
 
 /**
- * Kurz tippen (< Hold-Schwelle) → Tippfeld (wenn onShortPress); Findus redet weiter.
- * Long-Press (≥ Hold-Schwelle) → Findus soft-stumm; STT an.
- * Nach rechts wischen während Hold → Mikro fixieren (Hände frei, weiter aufnehmen).
+ * Kurz tippen (< TAP_MAX_MS) → Tippfeld (wenn onShortPress); Findus redet weiter.
+ * Press ≥ Tap → Mikro sofort an; Loslassen finalisiert (außer Fixierung).
+ * Nach rechts wischen während Hold → Mikro fixieren (Hände frei).
  * Tippen bei Fixierung → senden.
  * Loslassen < 2 s während Findus spricht → Abbruch (Resume), außer Timeline.
  * Timeline / Findus still: nach Aufnahme-Start auch bei kürzerem Hold senden.
@@ -298,20 +271,21 @@ export function useVoiceInput(options?: {
       m.onUserUsedMicHold(),
     );
 
-    // Sofort soft-unterbrechen (kein Denken) — Commit erst nach MIN_VOICE_MS
-    await softMuteFindusForMic();
-    if (
-      pressModeRef.current !== 'voice' &&
-      pressModeRef.current !== 'locked'
-    ) {
-      await abortProvisionalMic();
-      return;
-    }
-
+    // Soft-Mute parallel zu STT — Mikro wird schneller blau
+    const muteP = softMuteFindusForMic();
     const result = await startListening((partial) => {
       partialTextRef.current = partial;
       setPartialText(partial);
+      try {
+        const { notePartialForManagerWarmup } = require('../module2/router/managerWarmup') as {
+          notePartialForManagerWarmup: (t: string) => void;
+        };
+        notePartialForManagerWarmup(partial);
+      } catch {
+        /* soft */
+      }
     }, { keepAlive: true });
+    await muteP.catch(() => undefined);
 
     if (
       pressModeRef.current !== 'voice' &&
@@ -385,6 +359,40 @@ export function useVoiceInput(options?: {
       void runPreferenceCaptureMiddleware(spokenUserText).catch(() => {});
       noteUserTextForSituation(text);
       void observeUserQuestionStyle(spokenUserText);
+
+      // 3× gleiche Rückfrage-Kategorie → Crowd-Signal (proaktiv für alle)
+      try {
+        const {
+          detectFollowUpSlots,
+          detectFollowUpTopic,
+          contributeFollowUpSignal,
+        } = await import('../services/memory/collectiveLearning');
+        const {
+          inferIntentFamily,
+          getRecentTurnPair,
+        } = await import('../services/memory/correctionLearning');
+        const slots = detectFollowUpSlots(spokenUserText);
+        if (slots.length) {
+          const { lastUser, lastAssistant } = getRecentTurnPair();
+          const family = inferIntentFamily(
+            spokenUserText,
+            lastUser,
+            lastAssistant,
+          );
+          const topic = detectFollowUpTopic(spokenUserText);
+          for (const slot of slots) {
+            void contributeFollowUpSignal({
+              intentFamily: family,
+              slot,
+              topic,
+              userText: spokenUserText,
+            });
+          }
+        }
+      } catch {
+        /* soft */
+      }
+
       if (useFinnusStore.getState().currentPoiId != null) {
         void markFeatureTipCompleted('ask_followups');
       }
@@ -395,15 +403,8 @@ export function useVoiceInput(options?: {
       await onUserInputStart('user_text');
       const sideAsk = await captureSideChannelHints(text).catch(() => null);
 
-      // Sofort-Ack bei langer Recherche — bevor Modul5/Intent/Modul2 denken
-      try {
-        const { speakLatencyFloskelFireAndForget } = require('../services/speech/floskelEngine') as {
-          speakLatencyFloskelFireAndForget: (t: string) => void;
-        };
-        speakLatencyFloskelFireAndForget(text);
-      } catch {
-        /* soft */
-      }
+  // Bridge nur vom Concierge-Manager (runConciergeTurn) — kein frühes Mic-Bridge mehr.
+  // Legacy speakContextualBridgeFireAndForget ist No-Op.
 
       const withSide = (reply: string) =>
         appendSideChannelAsk(reply, sideAsk ?? undefined);
@@ -425,87 +426,44 @@ export function useVoiceInput(options?: {
 
         const state = useFinnusStore.getState();
 
-        if (isStopNavigationIntent(text) && state.navActive) {
-          setIsGenerating(true);
-          try {
-            const { clearNavigationHard } = await import(
-              '../services/navigation'
-            );
-            await clearNavigationHard({ silent: true });
-            await stopNavigation({ silent: true, reason: 'manual' });
-            useFinnusStore.getState().patchNavigation({
-              navActive: false,
-              navVisible: false,
-              navMode: null,
-              navTargetName: null,
-            });
-            if (!stillCurrent(epoch)) return;
-            await speakPlain(withSide('Navigation ist gestoppt.'), epoch);
-          } finally {
-            if (stillCurrent(epoch)) setIsGenerating(false);
-          }
-          return;
-        }
-
-        // Auch wenn Store noch „aktiv“ klebt: Stop-Intent hart räumen
-        if (isStopNavigationIntent(text)) {
-          setIsGenerating(true);
-          try {
-            const { clearNavigationHard } = await import(
-              '../services/navigation'
-            );
-            await clearNavigationHard({ silent: true });
-            await stopNavigation({ silent: true, reason: 'manual' }).catch(
-              () => undefined,
-            );
-            useFinnusStore.getState().patchNavigation({
-              navActive: false,
-              navVisible: false,
-              navMode: null,
-              navTargetName: null,
-            });
-            if (!stillCurrent(epoch)) return;
-            await speakPlain(withSide('Navigation ist gestoppt.'), epoch);
-          } finally {
-            if (stillCurrent(epoch)) setIsGenerating(false);
-          }
-          return;
-        }
-
-        // Falscher Auto-Start: „Nein / nicht mein Wille / ich wollte wissen…“
-        {
+        // Nav-Stop: still räumen (kein Early-Return) — Manager hört Compound
+        // („stopp und bring mich zum Tennisclub“) und startet ggf. neu.
+        if (isStopNavigationIntent(text) || state.navActive) {
           const { isNavCorrectionIntent, extractCorrectedQuestion } =
             await import('../services/intent/poiInfoVsNav');
-          if (
-            state.navActive &&
-            (isNavCorrectionIntent(text) ||
-              /^(nein|nö|noe|doch\s+nicht|falsch)\b/iu.test(text.trim()))
-          ) {
-            const { clearNavigationHard } = await import(
-              '../services/navigation'
-            );
-            await clearNavigationHard({ silent: true });
-            useFinnusStore.getState().setPendingNavOffer(null);
-            useFinnusStore.getState().setPendingNavAlternatives([]);
-            if (isNavCorrectionIntent(text)) {
-              text = extractCorrectedQuestion(text);
-            } else if (/^(nein|nö|noe|doch\s+nicht|falsch)\b/iu.test(text.trim())) {
-              // Bare nein während Nav → stoppen und kurz bestätigen
-              setIsGenerating(true);
-              try {
-                await speakPlain(
-                  withSide('Okay — Navigation gestoppt.'),
-                  epoch,
-                );
-              } finally {
-                if (stillCurrent(epoch)) setIsGenerating(false);
-              }
-              return;
+          const stopOrCorrect =
+            isStopNavigationIntent(text) ||
+            (state.navActive &&
+              (isNavCorrectionIntent(text) ||
+                /^(nein|nö|noe|doch\s+nicht|falsch)\b/iu.test(text.trim())));
+          if (stopOrCorrect) {
+            try {
+              const { clearNavigationHard } = await import(
+                '../services/navigation'
+              );
+              await clearNavigationHard({ silent: true });
+              await stopNavigation({ silent: true, reason: 'manual' }).catch(
+                () => undefined,
+              );
+              useFinnusStore.getState().patchNavigation({
+                navActive: false,
+                navVisible: false,
+                navMode: null,
+                navTargetName: null,
+              });
+              useFinnusStore.getState().setPendingNavOffer(null);
+              useFinnusStore.getState().setPendingNavAlternatives([]);
+            } catch {
+              /* soft */
             }
+            if (isNavCorrectionIntent(text)) {
+              text = extractCorrectedQuestion(text) || text;
+            }
+            // Kein return — Manager entscheidet Speech + ggf. neue Route
           }
         }
 
-        // Pending hotel Yes/No / name has priority (also covered in intent, but keep snappy)
+        // Pending hotel Yes/No / name has priority (Dialog-Zustand)
         {
           const s = useUserMemoryStore.getState();
           const prioritizeMemory =
@@ -651,253 +609,63 @@ export function useVoiceInput(options?: {
           }
         }
 
-        // Schritt-Statistik (auf Wunsch)
-        if (
-          isStepStatsQuery(text) ||
-          wantsEnableStepStats(text) ||
-          wantsDisableStepStats(text)
-        ) {
-          setIsGenerating(true);
-          try {
-            const steps = await prepareStepStatsFollowUp(text);
-            if (!stillCurrent(epoch)) return;
-            if (steps) {
-              // „Schritte aus“: HUD/ActiveCard sofort bereinigen.
-              if (wantsDisableStepStats(text)) {
-                const store = useFinnusStore.getState();
-                store.setActiveConciergeCard(null);
-                store.setPendingAffiliateOffer(null);
-              }
-              addChatMessage({ role: 'assistant', content: steps.reply });
-              await presentConciergeResponse(
-                wrapPlainAsConcierge(withSide(steps.reply), {
-                  cardTitle: 'Schritte',
-                  visualBullets: [],
-                  quickActions: [],
-                }),
-                { userText: text },
-              );
-              return;
-            }
-          } finally {
-            if (stillCurrent(epoch), { userText: text }) setIsGenerating(false);
-          }
-        }
-
-        // Inselflieger — Live-Zeiten/Preise ohne Flugnummer
-        if (isInselfliegerQuery(text) || (isFlightQuery(text) && isInselfliegerQuery(text))) {
-          setIsGenerating(true);
-          try {
-            const flight = await prepareFlightFollowUp(text);
-            if (!stillCurrent(epoch)) return;
-            if (flight) {
-              addChatMessage({ role: 'assistant', content: flight.reply });
-              await presentConciergeResponse(
-                {
-                  ...(flight.concierge ??
-                    wrapPlainAsConcierge(flight.reply, {
-                      cardTitle: 'Inselflieger',
-                      visualBullets: [],
-                      quickActions: [],
-                    })),
-                  speechText: withSide(flight.reply),
-                },
-                { userText: text },
-              );
-              return;
-            }
-          } finally {
-            if (stillCurrent(epoch)) setIsGenerating(false);
-          }
-        }
-
-        // Wecker + Timer (Just-Do-It)
-        if (isClockIntent(text)) {
-          const clock = await prepareClockIntentFollowUp(text);
-          if (!stillCurrent(epoch)) return;
-          if (clock) {
-            setIsGenerating(true);
-            try {
-              const card = wrapPlainAsConcierge(clock.speech, {
-                cardTitle: clock.cardTitle,
-                visualBullets: clock.bullets ?? [],
-                quickActions: clock.quickActions ?? [],
-              });
-              addChatMessage({ role: 'assistant', content: clock.speech });
-              await presentConciergeResponse({
-                ...card,
-                speechText: withSide(clock.speech),
-              }, { userText: text });
-            } finally {
-              if (stillCurrent(epoch)) setIsGenerating(false);
-            }
-            return;
-          }
-        }
+        // Content-Vorschalter zu — alles zum Manager (auch Timeline)
+        // Plan-Kalender = FLAG im Manager, kein eigener Vorschalter.
 
         if (!stillCurrent(epoch)) return;
 
-        // Modul 5 ZUERST — bevor Memory/LLM-Intent den Tagesplan stiehlt
-        try {
-          const {
-            isPlanningModuleActive,
-            runPlanningModule,
-          } = require('../module2/planning/runPlanningModule') as {
-            isPlanningModuleActive: () => boolean;
-            runPlanningModule: (o: {
-              userText: string;
-              turnId?: string;
-            }) => Promise<{ ok: boolean }>;
-          };
-          const { looksLikeModul5PlanUtterance, looksLikeOutfitOrWeatherUtterance, looksLikeSingleJustDoItRequest } = require('../module2/planning/planUtteranceGate') as {
-            looksLikeModul5PlanUtterance: (t: string) => boolean;
-            looksLikeOutfitOrWeatherUtterance: (t: string) => boolean;
-            looksLikeSingleJustDoItRequest: (t: string) => boolean;
-          };
-          const {
-            usePlanCalendarUiStore,
-          } = require('../module2/timeline/planCalendarUiStore') as {
-            usePlanCalendarUiStore: {
-              getState: () => { calendarVisible: boolean };
-            };
-          };
-          const calOpen =
-            usePlanCalendarUiStore.getState().calendarVisible ||
-            isPlanningModuleActive();
-          // Outfit/Wetter nie in Modul 5 — auch wenn Kalender schon offen
-          const forceUmwelt =
-            looksLikeOutfitOrWeatherUtterance(text) && !isPlanningModuleActive();
-          // Einzelauftrag (Hotel/Restaurant/…) → Just-Do-It, auch bei offenem Kalender
-          const forceJustDoIt =
-            looksLikeSingleJustDoItRequest(text) &&
-            !looksLikeModul5PlanUtterance(text);
-          if (
-            !forceUmwelt &&
-            !forceJustDoIt &&
-            (calOpen || looksLikeModul5PlanUtterance(text))
-          ) {
-            setIsGenerating(true);
-            try {
-              const result = await runPlanningModule({
-                userText: text,
-                turnId: `m5_${epoch}_${Date.now()}`,
-              });
-              if (!result?.ok && stillCurrent(epoch)) {
-                try {
-                  const { enqueueSpeech } = require('../module2/speech/speechQueue') as {
-                    enqueueSpeech: (o: {
-                      kind: string;
-                      text: string;
-                      turnId: string;
-                    }) => void;
-                  };
-                  enqueueSpeech({
-                    kind: 'main',
-                    text: 'Das hab ich gehört — einen Moment, ich sortier den Plan.',
-                    turnId: `m5_retry_${Date.now()}`,
-                  });
-                } catch {
-                  /* soft */
-                }
-              }
-            } finally {
-              if (stillCurrent(epoch)) setIsGenerating(false);
-            }
-            return;
-          }
-        } catch (err) {
-          console.warn('[module5] gate failed, fallback module2', err);
-        }
-
-        // LLM / memory / multi-intent router (intentService)
         {
-          const intent = await handleMemoryIntent(text);
-          if (!stillCurrent(epoch)) return;
-          if (intent.handled && (intent.reply || intent.concierge)) {
-            setIsGenerating(true);
-            try {
-              if (intent.concierge) {
-                addChatMessage({
-                  role: 'assistant',
-                  content: intent.concierge.speechText,
-                });
-                if (!stillCurrent(epoch)) return;
-                await presentConciergeResponse({
-                  ...intent.concierge,
-                  speechText: withSide(intent.concierge.speechText),
-                }, { userText: text });
-              } else if (intent.reply) {
-                if (intent.startedNav) {
-                  useFinnusStore.getState().patchNavigation({
-                    navActive: true,
-                    navVisible: true,
+          const memStore = useUserMemoryStore.getState();
+          const pendingMemory =
+            Boolean(memStore.pendingHotelConfirmId) ||
+            Boolean(memStore.awaitingHotelName);
+          if (pendingMemory) {
+            const intent = await handleMemoryIntent(text);
+            if (!stillCurrent(epoch)) return;
+            if (intent.handled && (intent.reply || intent.concierge)) {
+              setIsGenerating(true);
+              try {
+                if (intent.concierge) {
+                  addChatMessage({
+                    role: 'assistant',
+                    content: intent.concierge.speechText,
                   });
-                  await speakPlain(withSide(intent.reply), epoch);
-                } else {
+                  if (!stillCurrent(epoch)) return;
                   await presentConciergeResponse(
-                    wrapPlainAsConcierge(withSide(intent.reply), {
-                      cardTitle: 'Findus',
-                      visualBullets: [],
-                      quickActions: [],
-                    }),
+                    {
+                      ...intent.concierge,
+                      speechText: withSide(intent.concierge.speechText),
+                    },
                     { userText: text },
                   );
+                } else if (intent.reply) {
+                  if (intent.startedNav) {
+                    useFinnusStore.getState().patchNavigation({
+                      navActive: true,
+                      navVisible: true,
+                    });
+                    await speakPlain(withSide(intent.reply), epoch);
+                  } else {
+                    await presentConciergeResponse(
+                      wrapPlainAsConcierge(withSide(intent.reply), {
+                        cardTitle: 'Findus',
+                        visualBullets: [],
+                        quickActions: [],
+                      }),
+                      { userText: text },
+                    );
+                  }
                 }
+              } finally {
+                if (stillCurrent(epoch)) setIsGenerating(false);
               }
-            } finally {
-              if (stillCurrent(epoch), { userText: text }) setIsGenerating(false);
+              return;
             }
-            return;
-          }
-        }
-
-        // Fähre
-        if (await isFerryQueryWithLocation(text)) {
-          const ferry = await prepareFerryFollowUp(text);
-          if (!stillCurrent(epoch)) return;
-          if (ferry) {
-            setIsGenerating(true);
-            try {
-              const structured = ferryAdviceToConcierge(ferry.advice, ferry.reply);
-              addChatMessage({ role: 'assistant', content: ferry.reply });
-              await presentConciergeResponse({
-                ...structured,
-                speechText: withSide(ferry.reply),
-              }, { userText: text });
-            } finally {
-              if (stillCurrent(epoch)) setIsGenerating(false);
-            }
-            return;
-          }
-        }
-
-        // ÖPNV
-        if (await isTransitQueryWithLocation(text)) {
-          const transit = await prepareTransitFollowUp(text);
-          if (!stillCurrent(epoch)) return;
-          if (transit) {
-            setIsGenerating(true);
-            try {
-              const structured = transitAdviceToConcierge(
-                transit.advice,
-                transit.reply,
-                transit.offerNavigation,
-              );
-              addChatMessage({ role: 'assistant', content: transit.reply });
-              await presentConciergeResponse({
-                ...structured,
-                speechText: withSide(transit.reply),
-              }, { userText: text });
-            } finally {
-              if (stillCurrent(epoch)) setIsGenerating(false);
-            }
-            return;
           }
         }
 
         if (!stillCurrent(epoch)) return;
-
-        // Modul 2 Greenfield Pipeline (nur Main Board)
+        // Modul 2 — Chef entscheidet (Bahn/Nav/Kino/Timeline/…)
         setIsGenerating(true);
         try {
           const turnId = `m2_${epoch}_${Date.now()}`;
@@ -1084,33 +852,25 @@ export function useVoiceInput(options?: {
     provisionalPausedRef.current = false;
     interruptCommittedRef.current = false;
     pressStartedAtRef.current = Date.now();
-    pressModeRef.current = 'pending';
+    // Sofort Voice — kein 450ms-Warten mehr; Tippen bricht bei Loslassen < TAP_MAX ab
+    pressModeRef.current = 'voice';
     setIsMicLocked(false);
     setPartialText('');
 
     clearHoldTimer();
     clearCommitTimer();
-    holdTimerRef.current = setTimeout(() => {
-      holdTimerRef.current = null;
-      if (pressModeRef.current !== 'pending') return;
-      pressModeRef.current = 'voice';
-      void beginVoiceSession();
-      // Nach 2 s Hold: Interrupt fest committen (Denken/Pipeline ok)
-      const remaining = Math.max(
-        0,
-        MIN_VOICE_MS - (Date.now() - pressStartedAtRef.current),
-      );
-      commitTimerRef.current = setTimeout(() => {
-        commitTimerRef.current = null;
-        if (
-          pressModeRef.current !== 'voice' &&
-          pressModeRef.current !== 'locked'
-        ) {
-          return;
-        }
-        void interruptFindusForMic();
-      }, remaining);
-    }, HOLD_THRESHOLD_MS);
+    void beginVoiceSession();
+    // Nach 2 s Hold: Interrupt fest committen (Denken/Pipeline ok)
+    commitTimerRef.current = setTimeout(() => {
+      commitTimerRef.current = null;
+      if (
+        pressModeRef.current !== 'voice' &&
+        pressModeRef.current !== 'locked'
+      ) {
+        return;
+      }
+      void interruptFindusForMic();
+    }, MIN_VOICE_MS);
   }, [
     beginVoiceSession,
     clearCommitTimer,
@@ -1124,7 +884,7 @@ export function useVoiceInput(options?: {
   const onSwipeLock = useCallback(() => {
     const mode = pressModeRef.current;
     if (mode !== 'voice' && mode !== 'pending') return;
-    // Falls Hold-Timer noch nicht gefeuert: sofort Voice starten
+    // Falls noch pending (Legacy): sofort Voice starten
     if (mode === 'pending') {
       clearHoldTimer();
       pressModeRef.current = 'voice';
@@ -1207,14 +967,10 @@ export function useVoiceInput(options?: {
     }
 
     void (async () => {
-      try {
-        const { playMicStartCue } = await import(
-          '../services/handsFree/micStartCue'
-        );
-        await playMicStartCue();
-      } catch {
-        /* soft */
-      }
+      // Cue nicht blockieren — Mikro sofort
+      void import('../services/handsFree/micStartCue')
+        .then((m) => m.playMicStartCue())
+        .catch(() => undefined);
       try {
         const { warmupAiOnMicPress } = require('../services/speech/micWarmup') as {
           warmupAiOnMicPress: () => void;
@@ -1283,10 +1039,10 @@ export function useVoiceInput(options?: {
         },
         onWakeOnly: () => {
           try {
-            const { playMicStartCue } = require('../services/handsFree/micStartCue') as {
-              playMicStartCue: () => Promise<void>;
+            const { playLiveChatStartCue } = require('../services/handsFree/micStartCue') as {
+              playLiveChatStartCue: () => Promise<void>;
             };
-            void playMicStartCue();
+            void playLiveChatStartCue();
           } catch {
             /* soft */
           }
@@ -1341,11 +1097,29 @@ export function useVoiceInput(options?: {
     const findusBusy =
       store.isAudiblySpeaking || store.isPlayingAudio || store.isGenerating;
 
-    // Unter 2 s: Kurz-Tipp / Abbruch — außer Aufnahme läuft schon und
-    // (Timeline offen ODER Findus war still) → dann trotzdem finalisieren.
+    // Ganz kurzer Tipp → Mikro sofort abbrechen, Tippfeld öffnen
+    if (totalHeldMs < TAP_MAX_MS) {
+      pressModeRef.current = 'idle';
+      pressStartedAtRef.current = 0;
+      setIsListening(false);
+      setPartialText('');
+      partialTextRef.current = '';
+      void (async () => {
+        try {
+          await stopListening({ tailMs: 0, finalizeMs: 0 });
+        } catch {
+          /* soft */
+        }
+        await abortProvisionalMic();
+      })();
+      void markMicTapUsed();
+      onShortPress?.();
+      return;
+    }
+
+    // Unter 2 s: Abbruch wenn Findus spricht — außer Timeline / Findus still
     if (totalHeldMs < MIN_VOICE_MS) {
       if (mode === 'pending') {
-        // Kurz-Tipp — Findus wurde nie unterbrochen
         pressModeRef.current = 'idle';
         pressStartedAtRef.current = 0;
         void markMicTapUsed();
@@ -1356,7 +1130,6 @@ export function useVoiceInput(options?: {
         mode === 'voice' || isCurrentlyListening() || isListening;
       const allowEarlySubmit = voiceReady && (calendarOpen || !findusBusy);
       if (!allowEarlySubmit) {
-        // Halblanger Press während Findus spricht: soft-Mute rückgängig
         void abortProvisionalMic();
         return;
       }
@@ -1364,7 +1137,6 @@ export function useVoiceInput(options?: {
     }
 
     if (mode === 'pending') {
-      // Theoretisch ≥2 s aber noch pending (Timer lag) — als Kurz-Tipp
       pressModeRef.current = 'idle';
       void markMicTapUsed();
       onShortPress?.();

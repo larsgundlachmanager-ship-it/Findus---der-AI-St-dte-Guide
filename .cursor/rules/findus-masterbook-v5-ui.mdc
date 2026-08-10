@@ -2,7 +2,7 @@
 
 ## Chat UI
 
-- Max 3 Bullet Points, max 2 Zeilen pro Punkt.
+- Max 3 Bullet Points, max 1 Zeile pro Punkt.
 - Währung immer als **Euro (€)**.
 
 ## Top-Left Live HUD
@@ -12,13 +12,22 @@
 - **Tab A:** Fog of War (20–30 m) + Stempelkarte + Kategorie-Stats (≥1 Besuch) + **Nerd Facts**.
 - **Tab B:** Multi-Stop Drag & Drop + Top-2 Quick Search + Suchhistorie.
 
-## Strict LiveStage Layering (document flow, no absolute overlays)
+## Strict LiveStage Layering
 
-1. PresenceCluster (Avatar)  
-2. BulletsSlot (max 3 Stichpunkte)  
-3. ActionsSlot (Quick Actions)  
-4. SubtitlesSlot (1–2 Zeilen, freigestellter Text — keine Box)  
-5. MicButton (fixer Anker unter der Stage)
+1. PresenceCluster (Avatar) — obere Pane, `overflow:hidden`; Mood ändert nur Inhalt, nicht den Dock  
+2. Bottom-Dock **fix** am unteren Stage-Rand:  
+   - BulletsSlot (max 3 Stichpunkte)  
+   - ActionsSlot (Quick Actions)  
+   - SubtitlesSlot (genau 1 Zeile)  
+3. MicButton (fixer Anker unter der Stage, feste Hint-Slot-Höhe)
+
+Kein Layout-Spring zwischen Presence und Dock — Untertitel/Stichpunkte springen nicht mit Thinking/Speaking.
+
+## Live-Untertitel (SSOT: `subtitleWholeWords` + `SubtitlesSlot`)
+
+- Wort für Wort, linksbündig, fester Gap, immer vom linken Rand.
+- **Genau 1 Zeile** — voll oder Satzende → ausfaden, neu von links.
+- Nach **5s** ohne neues Wort: langsam ausblenden.
 
 ## Action Buttons & Audio Multitasking
 
@@ -29,7 +38,22 @@
 
 „Tippen zum Schreiben, Halten zum Sprechen“ permanent ausblenden, sobald Tap **und** Hold je einmal genutzt wurden.
 
-## Stempelkarte
+## Stempelkarte / Zeitachse
 
-- Orte auto-add nach Besuch / Verweilen ≥ 30 Min.
+- Orte auto-add nur nach Verweilen ≥ **2 Minuten** am Ort (klarer POI).
+- Vorbeilaufen oder kürzerer Blick (z. B. 1:30) → **kein** Eintrag.
+- Ausnahme: Modul 1 startet die Erzählung → Ort sofort in Stempelkarte + Zeitachse.
 - Dynamische Fließtext-Summary — **keine** Bullet Points.
+
+## Nachtruhe (SSOT: `nachtruhePolicy.ts`)
+
+- **10:30–19:30:** proaktiv nur Vorschläge „was man machen könnte“ (HUD Soft-Tips, Presence, Activity-Trigger).
+- **Außerhalb:** Nachtruhe — keine Soft-Tips / keine Presence / keine proaktive Stimme.
+- Ausnahmen: User-Initiiertes, Wecker-Nudge, Bus-Leave-imminent, kritische Deadlines (Score ≥ 88).
+
+## Speech — nie gleichzeitig
+
+- **Eine Stimme zur Zeit** (SSOT: `speechJobQueue` + `AudioVoiceService`).
+- Navi-Cues laufen über dieselbe Queue; bei laufender Rede → anstellen, nicht darüberlegen.
+- Explore darf für Navi unterbrochen werden; Resume erst nach dem Cue.
+- Kein paralleles Cartesia + expo-speech / Streaming + playWav.

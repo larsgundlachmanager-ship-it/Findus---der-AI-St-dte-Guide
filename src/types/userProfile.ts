@@ -1,25 +1,39 @@
+import type { LearnedRule } from './learnedRules';
+
 /** Aktuell nur Deutsch. */
 export type AppLanguage = 'de';
 
 export type SwipePreference = 'no' | 'neutral' | 'yes';
 
 /**
- * 7 Rollen-Profile → 7 native deutsche Piper-Stimmen.
- * Tempo systemweit fest 1.0. Timbre nur über Piper-Modell.
+ * 16 Cartesia sonic-3.5 Personas (Settings / Onboarding).
+ * Tempo systemweit fest 1.0.
  */
 export type VoiceId =
-  | 'standard_m'
-  | 'standard_w'
-  | 'prinzessin'
-  | 'erzaehler'
-  | 'dorfaeltester'
-  | 'historiker'
-  | 'gen_z';
+  | 'alina'
+  | 'sebastian'
+  | 'klaus'
+  | 'leander'
+  | 'lukas'
+  | 'varson'
+  | 'alexander'
+  | 'daniel'
+  | 'jaqcline'
+  | 'lea'
+  | 'rena'
+  | 'katie'
+  | 'skylar'
+  | 'verini'
+  | 'viktoria'
+  | 'marlene';
 
 export type ExperienceKey = string;
 
 /** Charakter-Engine: visuelle Vergleiche, Anekdoten, Fun Facts, Quiz. */
 export type AnecdoteLevel = 'hoch' | 'mittel' | 'aus';
+
+/** Live story length — Masterbook „more/less history“. */
+export type StoryDepth = 'short' | 'normal' | 'long';
 
 export type StorytellingSettings = {
   /** „Kino im Kopf“: Zahlen bildlich (Elefanten, Busse, …). */
@@ -30,10 +44,12 @@ export type StorytellingSettings = {
   funFactsEnabled?: boolean;
   /** Rätselfrage am Stationsende. */
   quizMode?: boolean;
+  /** Erzähl-Länge: kurz / normal / lang. */
+  storyDepth?: StoryDepth;
 };
 
-/** TTS-Backend: lokal (Kokoro/Piper) oder OpenAI Speech (nova). */
-export type TtsProvider = 'kokoro' | 'openai';
+/** TTS-Backend: Cartesia sonic-3.5 (primär). System = expo-speech nur als Dev-Force. */
+export type TtsProvider = 'cartesia' | 'system';
 
 /** 4 Säulen — Persona & Ton. */
 export type FindusPersona =
@@ -47,6 +63,9 @@ export type FindusPersona =
 
 export type FindusToneStyle =
   | 'kumpelhaft'
+  | 'umgangssprachlich'
+  | 'erzaehlerisch'
+  | 'faktisch'
   | 'sarkastisch'
   | 'ernst'
   | 'maerchen'
@@ -65,7 +84,14 @@ export type MobilityMode = 'foot' | 'bike' | 'public_transit' | 'car';
 
 export type PaceMode = 'relaxed' | 'fast_explore';
 
-export type TouristVsInsider = 'tourist' | 'insider' | 'mix';
+export type TouristVsInsider = 'tourist' | 'insider' | 'mix' | 'local_gems';
+
+/** Must-have Reise-Stil (Mehrfachauswahl in Einrichtung). */
+export type MustHaveStyleId =
+  | 'tourist'
+  | 'insider'
+  | 'local_gems'
+  | 'nightlife';
 
 /** Onboarding-Pfad. */
 export type OnboardingMode = 'express' | 'standard';
@@ -88,6 +114,23 @@ export type EnergyLevel = 'low' | 'medium' | 'high';
 
 /** Antwortlänge der KI. */
 export type AnswerStyle = 'short' | 'detailed';
+
+/**
+ * Modul-1-Verhalten während aktiver Navigation (Settings).
+ * quiet = Teaser unterwegs, Full unter 10 km/h (Default).
+ */
+export type NavExploreMode = 'quiet' | 'mute_until_dest' | 'full';
+
+/** Geschlecht — für Ansprache / Reservierungen (optional). */
+export type UserGender = 'female' | 'male' | 'diverse' | 'unspecified';
+
+/**
+ * Audio-Ausgabe:
+ * - normal: TTS + Untertitel
+ * - mute: kein TTS; Untertitel dürfen trotzdem erscheinen
+ * - text_only: kein TTS; Untertitel/Text statt Stimme
+ */
+export type AudioOutputMode = 'normal' | 'mute' | 'text_only';
 
 /**
  * Die 4 Säulen des Findus-Profils — konsolidiert für jeden Gemini-Request.
@@ -156,6 +199,10 @@ export type MasterPromptContext = {
   featureTipsBlock?: string;
   /** Verwandter Ort → Wahl-Outro (mehr Geschichte vs. hin). */
   relatedBridgeBlock?: string;
+  /** Modul-1 Ankunfts-/Deep-Dive-Story → ausführlich, nicht Chat-Kurzmodus */
+  module1Narration?: boolean;
+  /** UI „Mehr Historie“ */
+  module1DeepDive?: boolean;
 };
 
 /** Optionale Overrides / Persistenz der Engine-Felder. */
@@ -171,6 +218,45 @@ export type PersonaEngineOverrides = Partial<{
   preferences: Partial<PersonaEngineProfile['preferences']>;
 }>;
 
+/** Detaillierte Mobilität (Was willst du erleben?). */
+export type MobilityPrefs = {
+  /** Zu Fuß: primary | rather_not */
+  walk?: 'primary' | 'rather_not' | null;
+  /** ÖPNV: love | if_needed | avoid */
+  transit?: 'love' | 'if_needed' | 'avoid' | null;
+  /** Fahrrad: own | rent | no */
+  bike?: 'own' | 'rent' | 'no' | null;
+  /** E-Scooter: own | rent | no (wie Fahrrad) */
+  scooter?: 'own' | 'rent' | 'no' | null;
+  /**
+   * Gelerntes Fuß-Tempo (km/h) aus GPS-Segmenten — von paceProfile gepflegt.
+   * Fallback wenn lokale Pace-Datei fehlt.
+   */
+  learnedWalkKmh?: number | null;
+  /** Gelerntes Rad-Tempo (km/h) */
+  learnedBikeKmh?: number | null;
+  /** Wann zuletzt Tempo gelernt/gesynct */
+  learnedPaceAtMs?: number | null;
+  /**
+   * Auto/Taxi-Bundle (Legacy car + Taxi-Spiegel):
+   * taxi_love | taxi_saves_time | own | none
+   * Settings: Taxi = love | if_saves_time | no
+   */
+  car?:
+    | 'taxi_love'
+    | 'taxi_saves_time'
+    | 'own'
+    | 'none'
+    | 'own_use'
+    | 'own_avoid'
+    | null;
+  /**
+   * Taxi: Ja | nur notfalls | Nein
+   * love | if_saves_time | no
+   */
+  taxi?: 'love' | 'if_saves_time' | 'no' | null;
+};
+
 export interface UserProfile {
   version: 1;
   setupComplete: boolean;
@@ -178,7 +264,7 @@ export interface UserProfile {
   voiceId: VoiceId;
   /** Fest 1.0 — Sprechtempo-Slider entfernt. */
   speechRate: number;
-  /** Cloud vs. lokale TTS — Default openai. */
+  /** Cloud vs. lokale TTS — Default Cartesia, Systemstimme nur Fallback/Dev. */
   ttsProvider?: TtsProvider;
   firstName: string;
   lastName: string;
@@ -193,7 +279,18 @@ export interface UserProfile {
    * Einmalig in den Einstellungen hinterlegen.
    */
   phoneNumber?: string;
+  /** Geschlecht (optional) — Über dich / Ansprache. */
+  gender?: UserGender | null;
   age: number;
+  /**
+   * Schriftgröße: auto = ab 55 groß, sonst normal.
+   * Override in Einstellungen oder per Sprache.
+   */
+  uiTextScale?: 'auto' | 'normal' | 'large';
+  /**
+   * Button-Größe: auto = ab 55 groß, sonst normal.
+   */
+  uiButtonScale?: 'auto' | 'normal' | 'large';
   characters: string[];
   tonalities: string[];
   motives: string[];
@@ -209,10 +306,19 @@ export interface UserProfile {
   avoidExperience: string;
   completedAt: string | null;
   /**
+   * Einmaliges personalisiertes Map-Welcome + UI-Tutorial nach Setup schon gehört.
+   */
+  firstMapWelcomeDone?: boolean;
+  /**
    * Dynamisch gelernte Fakten aus dem Gespräch
    * („Ich bin Vegetarier“, „Hotel Bluezeit“, …).
    */
   learnedFacts?: string[];
+  /**
+   * Strukturierte Antwort-Regeln aus Korrekturen
+   * (Situation → expect/avoid — kein Script-Wortlaut).
+   */
+  learnedRules?: LearnedRule[];
   /** Explizite Overrides für die Persona-Engine (optional). */
   personaEngine?: PersonaEngineOverrides;
 
@@ -235,20 +341,79 @@ export interface UserProfile {
   travelParty?: TravelParty | null;
   /** Primäre Mobilität (First-Class, überschreibt Experience-Swipes). */
   mobilityMode?: MobilityMode | null;
+  /**
+   * Wie reist du? (Mehrfach: Auto, Bahn, Flieger, Fahrrad, Wandern, Reisebus).
+   */
+  travelModes?: import('../constants/conciergePrefs').TravelModeId[];
   /** Energielevel. */
   energyLevel?: EnergyLevel | null;
   /** Explizite Ernährungs-Tags. */
   dietaryTags?: string[];
-  /** Freitext Allergien. */
+  /**
+   * Allergie-/Unverträglichkeits-Chips (IDs aus ALLERGY_INTOLERANCE_OPTIONS).
+   * `keine` = explizit keine.
+   */
+  allergyTags?: string[];
+  /** Freitext Allergien (Zusatz zu Chips). */
   allergies?: string;
   /** Antwortstil der KI. */
   answerStyle?: AnswerStyle | null;
-  /** Must-see vs. Insider. */
+  /** Must-see vs. Insider (abgeleitet / Legacy-Single). */
   touristMode?: TouristVsInsider | null;
+  /**
+   * Must-haves Mehrfachauswahl (Touri / Trubel / versteckt / Nachtleben).
+   * Bei mehreren → Mix in touristMode + Prefs.
+   */
+  mustHaveStyles?: MustHaveStyleId[];
+  /**
+   * Modul 1 während Navigation (nur Settings, nicht Onboarding).
+   * quiet = Default: Teaser unterwegs, Full unter 10 km/h.
+   * mute_until_dest = stumm bis Ziel.
+   * full = keine Nav-Kürzung.
+   */
+  navExploreMode?: NavExploreMode;
   /** POI-/Tour-Hinweise erwünscht. */
   notificationsEnabled?: boolean;
   /** Daten sparsam (kürzere Antworten, weniger Prefetch). */
   dataSaverMode?: boolean;
+  /**
+   * Audio-Ausgabe: Normal / Stumm / Nur Text.
+   * Default: normal.
+   */
+  audioOutputMode?: AudioOutputMode;
+  /**
+   * Authentifizierter Premium-Subscriber → Gemini Pro erlaubt.
+   * Ohne Flag bleibt Flash-Lite Primary.
+   */
+  isPremiumSubscriber?: boolean;
+
+  /** Persönlichkeits-Matrix (Kat. 1–4). */
+  coreRole?: import('../constants/personalityMatrix').CoreRoleId | null;
+  vibeTone?: import('../constants/personalityMatrix').VibeToneId | null;
+  knowledgeStyle?: import('../constants/personalityMatrix').KnowledgeStyleId | null;
+  spleens?: import('../constants/personalityMatrix').SpleenId[];
+  /** User hat Stimme manuell gewählt — Auto-Map nicht überschreiben. */
+  voicePinnedByUser?: boolean;
+  /** Account-Modus: Gast vs. registriert. */
+  accountMode?: 'guest' | 'registered' | null;
+  /** Newsletter Opt-in. */
+  newsletterOptIn?: boolean;
+  newsletterOptInAt?: string | null;
+  /** Relationship / Companion soft flags. */
+  humorOk?: boolean;
+  geekMode?: boolean;
+  freeChatOk?: boolean;
+  openThreads?: string[];
+  /** Detaillierte Mobilitäts-Prefs (Onboarding Erleben). */
+  mobilityPrefs?: MobilityPrefs;
+  /** Tourlänge: Stops, nicht Gehgeschwindigkeit. */
+  tourLengthPref?: 'more_stops' | 'balanced' | 'fewer_stops' | null;
+  /** Restaurant-Niveau. */
+  diningLevel?: 'fast_cheap' | 'decent' | 'highlights' | null;
+  /** Accessibility-Detail gewünscht (öffnet Accessibility-Chips). */
+  accessibilityCare?: boolean;
+  /** Spotify Connect: Top-Artist-Namen. */
+  spotifyTopArtists?: string[];
 }
 
 /** Kontaktblock für Concierge-Reservierungen. */
@@ -261,6 +426,17 @@ export type ReservationContact = {
   /** true wenn Telefon für KI-Anruf / Dial hinterlegt */
   canCall: boolean;
 };
+
+/** Gast: E-Mail + Telefon einmal nachziehen vor erster Reservierung. */
+export function needsGuestReservationContact(
+  profile: UserProfile | null | undefined,
+): boolean {
+  if (!profile) return true;
+  if (profile.accountMode !== 'guest') return false;
+  const email = (profile.email ?? '').trim();
+  const phone = (profile.phoneNumber ?? '').replace(/\D/g, '');
+  return !/@/.test(email) || phone.length < 6;
+}
 
 export function getReservationContact(
   profile: UserProfile | null | undefined,
@@ -286,15 +462,18 @@ export function createDefaultProfile(): UserProfile {
     version: 1,
     setupComplete: false,
     language: 'de',
-    voiceId: 'standard_m',
+    voiceId: 'alina',
     speechRate: 1,
-    ttsProvider: 'openai',
+    ttsProvider: 'cartesia',
     firstName: '',
     lastName: '',
     email: '',
     aboutMe: '',
     phoneNumber: '',
+    gender: null,
     age: 30,
+    uiTextScale: 'auto',
+    uiButtonScale: 'auto',
     characters: [],
     tonalities: [],
     motives: [],
@@ -308,7 +487,9 @@ export function createDefaultProfile(): UserProfile {
     wantToExperience: '',
     avoidExperience: '',
     completedAt: null,
+    firstMapWelcomeDone: false,
     learnedFacts: [],
+    learnedRules: [],
     personaEngine: {},
     onboardingMode: null,
     travelPeriod: '',
@@ -320,13 +501,36 @@ export function createDefaultProfile(): UserProfile {
     audioConsentAt: null,
     travelParty: null,
     mobilityMode: null,
+    travelModes: [],
     energyLevel: null,
     dietaryTags: [],
+    allergyTags: [],
     allergies: '',
-    answerStyle: null,
+    answerStyle: 'short',
     touristMode: null,
+    mustHaveStyles: [],
+    navExploreMode: 'quiet',
     notificationsEnabled: true,
     dataSaverMode: false,
+    audioOutputMode: 'normal',
+    isPremiumSubscriber: false,
+    coreRole: null,
+    vibeTone: null,
+    knowledgeStyle: null,
+    spleens: [],
+    voicePinnedByUser: false,
+    accountMode: null,
+    newsletterOptIn: false,
+    newsletterOptInAt: null,
+    humorOk: false,
+    geekMode: false,
+    freeChatOk: false,
+    openThreads: [],
+    mobilityPrefs: {},
+    tourLengthPref: null,
+    diningLevel: null,
+    accessibilityCare: false,
+    spotifyTopArtists: [],
   };
 }
 
@@ -345,31 +549,49 @@ export function normalizeLanguage(_raw?: string | null): AppLanguage {
 }
 
 const VALID_VOICES: ReadonlySet<string> = new Set([
-  'standard_m',
-  'standard_w',
-  'prinzessin',
-  'erzaehler',
-  'dorfaeltester',
-  'historiker',
-  'gen_z',
+  'alina',
+  'sebastian',
+  'klaus',
+  'leander',
+  'lukas',
+  'varson',
+  'alexander',
+  'daniel',
+  'jaqcline',
+  'lea',
+  'rena',
+  'katie',
+  'skylar',
+  'verini',
+  'viktoria',
+  'marlene',
 ]);
 
-/** Alte Voice-IDs aus früheren Builds. */
+/** Alte Voice-IDs aus früheren Builds → 16 Cartesia-Personas. */
 const LEGACY_VOICE_MAP: Record<string, VoiceId> = {
-  martin: 'standard_m',
-  maennlich: 'standard_m',
-  neutral: 'standard_m',
-  weiblich: 'standard_w',
-  genz: 'gen_z',
-  aufgedreht: 'gen_z',
-  energy: 'gen_z',
-  energisch: 'gen_z',
-  ruhig: 'standard_m',
-  dorfaelteste: 'dorfaeltester',
+  standard_m: 'sebastian',
+  standard_w: 'alina',
+  erzaehler: 'lukas',
+  dynamisch: 'daniel',
+  martin: 'sebastian',
+  maennlich: 'sebastian',
+  neutral: 'sebastian',
+  weiblich: 'alina',
+  prinzessin: 'alina',
+  genz: 'varson',
+  gen_z: 'varson',
+  aufgedreht: 'daniel',
+  energy: 'daniel',
+  energisch: 'daniel',
+  ruhig: 'sebastian',
+  dorfaelteste: 'klaus',
+  dorfaeltester: 'klaus',
+  historiker: 'marlene',
+  jacqueline: 'jaqcline',
 };
 
 export function normalizeVoiceId(raw: string | undefined | null): VoiceId {
-  if (!raw) return 'standard_m';
+  if (!raw) return 'alina';
   if (VALID_VOICES.has(raw)) return raw as VoiceId;
-  return LEGACY_VOICE_MAP[raw] ?? 'standard_m';
+  return LEGACY_VOICE_MAP[raw] ?? 'alina';
 }

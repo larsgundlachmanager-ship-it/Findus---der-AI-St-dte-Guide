@@ -1,0 +1,20 @@
+{
+  "city_id": "prisdorf",
+  "demoted": 0,
+  "history_source": "kept",
+  "pack_index": {
+    "total": 139,
+    "story": 45,
+    "directory": 94,
+    "offline_qa": 625,
+    "note": "UI: Gesamtzahl; Trigger Story Tier 1–2 (+ Interesse)."
+  },
+  "gemini_prompt": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\prisdorf.gemini-master.md",
+  "thin_story": 29,
+  "gate": {
+    "ok": true,
+    "errors": 0,
+    "warnings": 0
+  },
+  "applied": true
+}

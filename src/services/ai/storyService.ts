@@ -1,6 +1,6 @@
-/**
- * Story-Engine: Single-Shot Gemini (Master-Prompt) → TTS-Sätze.
- * Legacy chain-v1 / FastHook-Stitching entfernt.
+﻿/**
+ * Story-Engine: leitet auf Modul-1-POI-Chat um (Reboot).
+ * Kein Legacy-Single-Shot mehr im Live-Pfad.
  */
 
 import type { PoiWithFacts } from '../../db/types';
@@ -15,10 +15,11 @@ import {
   streamFindusStorySentences,
 } from './singleShotStory';
 import { classifyPoiHookKind } from './fastHook';
+import { shortPoiDisplayName } from '../../utils/poiDisplayName';
 
 export type StoryStreamInput = {
   poi: PoiWithFacts;
-  /** @deprecated Ignoriert — Single-Shot schreibt die ganze Story. */
+  /** @deprecated Ignoriert â€” Single-Shot schreibt die ganze Story. */
   fastHook?: string;
   profile?: UserProfile | null;
   sessionMemory?: SessionMemory | null;
@@ -31,7 +32,7 @@ export type HookThenStoryResult = {
 };
 
 /**
- * Primärer Einstieg für POI-Trigger / speakTwoPhase.
+ * PrimÃ¤rer Einstieg fÃ¼r POI-Trigger / speakTwoPhase.
  * Ein Gemini-Call; Satz 1 = Hook, Rest = Body. Offline = general_info.
  */
 export async function beginHookResolvingStream(
@@ -58,7 +59,8 @@ export async function beginHookResolvingStream(
     sessionMemory: input.sessionMemory,
     mode: 'arrival',
     approachAlreadyHeard: input.approachAlreadyHeard,
-    // Ein Call braucht Luft — keine 2.5s-Kette mehr
+    storyBriefBlock: input.tourBrief?.promptBlock ?? null,
+    // Ein Call braucht Luft â€” keine 2.5s-Kette mehr
     timeoutMs: 22000,
   });
 
@@ -66,7 +68,7 @@ export async function beginHookResolvingStream(
     hook: started.hook,
     bodySentenceStream: started.bodySentenceStream,
     usedLlmHook: started.usedLlm,
-    pipeline: 'single-shot-v1',
+    pipeline: 'module1-poi-chat-v1' as 'single-shot-v1',
   };
 }
 
@@ -81,6 +83,7 @@ export async function* streamDeepStory(
     profile,
     sessionMemory: input.sessionMemory,
     mode: 'arrival',
+    storyBriefBlock: input.tourBrief?.promptBlock ?? null,
     timeoutMs: 22000,
   });
 }
@@ -98,7 +101,7 @@ export async function* streamHookResolvingNarration(input: {
   }
 }
 
-/** Offline-Notiz: nur general_info / Erzählung. */
+/** Offline-Notiz: nur general_info / ErzÃ¤hlung. */
 export function buildOfflineDeepStory(
   input: StoryStreamInput,
   _filteredPoi?: PoiWithFacts,
@@ -106,7 +109,7 @@ export function buildOfflineDeepStory(
 ): string {
   return (
     extractOfflineGeneralInfo(input.poi) ||
-    'Offline liegt für diesen Ort keine fertige Erzählung vor.'
+    'Offline liegt fÃ¼r diesen Ort keine fertige ErzÃ¤hlung vor.'
   );
 }
 
@@ -120,23 +123,30 @@ export function toStampBullets(texts: string[], max = 3): string[] {
 export function buildVisitedMemoryEntry(
   poi: PoiWithFacts,
   keyFacts: string[],
+  opts?: { onTimeline?: boolean },
 ): {
   poiId: number;
   name: string;
   kind: ReturnType<typeof classifyPoiHookKind>;
   keyFacts: string[];
   visitedAt: number;
+  onTimeline?: boolean;
+  lat?: number | null;
+  lng?: number | null;
 } {
   return {
     poiId: poi.id,
-    name: poi.name,
+    name: shortPoiDisplayName(poi.name),
     kind: classifyPoiHookKind(poi),
     keyFacts,
     visitedAt: Date.now(),
+    onTimeline: opts?.onTimeline ?? true,
+    lat: Number.isFinite(poi.lat) ? poi.lat : null,
+    lng: Number.isFinite(poi.lng) ? poi.lng : null,
   };
 }
 
-/** @deprecated Alias — Single-Shot. */
+/** @deprecated Alias â€” Single-Shot. */
 export const beginChainedStoryStream = beginHookResolvingStream;
 
 export {
@@ -144,3 +154,4 @@ export {
   streamFindusStorySentences,
   beginSingleShotStoryStream,
 };
+

@@ -3,6 +3,8 @@
  * Wichtig: KEINE Splits an Initialen (C. Jensen), Abkürzungen (Dr., z.B.) oder Dezimalzahlen.
  */
 
+import { splitTextToStreamingChunks } from '../audio/punctuationChunker';
+
 const SENTENCE_END_CHAR = /[.!?]/;
 
 /** Bekannte DE/EN-Kürzel vor dem Punkt. */
@@ -185,31 +187,15 @@ export function splitForFastTts(text: string): string[] {
 export async function* sentencesFromFullText(
   text: string,
 ): AsyncGenerator<string, void, unknown> {
-  const parts = splitForFastTts(text);
-  const seeds = parts.length > 0 ? parts : text.replace(/\s+/g, ' ').trim()
-    ? [text.replace(/\s+/g, ' ').trim()]
-    : [];
-
-  for (const seed of seeds) {
-    // Längere Chunks für OpenAI-TTS: weniger Roundtrips, weniger Pausen
-    if (seed.length <= 320) {
-      yield seed;
-      continue;
+  const parts = splitTextToStreamingChunks(text);
+  if (parts.length > 0) {
+    for (const p of parts) {
+      if (p.trim()) yield p.trim();
     }
-    // Nur an echten Satzgrenzen schon gesplittet — hier Wortfenster ohne Komma-Split
-    // (Kommas erzeugen sonst künstliche Pausen mitten im Namen/Satz)
-    const words = seed.split(/\s+/);
-    let buf = '';
-    for (const w of words) {
-      if (buf && `${buf} ${w}`.length > 280) {
-        yield buf;
-        buf = w;
-      } else {
-        buf = buf ? `${buf} ${w}` : w;
-      }
-    }
-    if (buf) yield buf;
+    return;
   }
+  const fallback = text.replace(/\s+/g, ' ').trim();
+  if (fallback) yield fallback;
 }
 
 /**

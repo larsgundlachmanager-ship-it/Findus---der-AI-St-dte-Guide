@@ -4,8 +4,10 @@ import { anchorCoords } from '../rucksack/rucksackStore';
 import { resolveWorkingPlace } from '../context/placeContext';
 import {
   getBounceLuggageUrl,
+  getExpediaAccommodationUrl,
   getStay22AccommodationUrl,
   isBounceAvailableForCity,
+  normalizeAffiliateUrl,
 } from '../../services/affiliate/affiliateService';
 import {
   hasExplicitStayDates,
@@ -62,6 +64,25 @@ function amenityHighlights(amenities: string[] | undefined): string | null {
   const hits = amenities.filter((a) => want.test(a)).slice(0, 6);
   if (!hits.length) return amenities.slice(0, 3).join(', ');
   return hits.join(', ');
+}
+
+/** Live-Book-URL oder Hotel-Suche mit Daten — immer klickfertig. */
+function resolveHotelBookUrl(
+  stay: HotelLiveStay,
+  city: string,
+  checkin: string,
+  checkout: string,
+  adults: number,
+): string {
+  const raw = (stay.bookUrl || '').trim();
+  if (raw && /^https?:\/\//i.test(raw)) {
+    return normalizeAffiliateUrl(raw);
+  }
+  return getExpediaAccommodationUrl(`${stay.name}, ${city}`.trim(), {
+    checkin,
+    checkout,
+    adults,
+  });
 }
 
 function describeStayFacts(
@@ -443,6 +464,7 @@ export const bookingAgent: Module2Agent = {
     for (let i = 0; i < picks.length; i++) {
       const s = picks[i]!;
       const shortName = s.name.split(/[|,]/)[0]!.trim();
+      const bookUrl = resolveHotelBookUrl(s, city, checkin, checkout, adults);
       buttons.push({
         id: `book_hotel_${i}`,
         label: shortenActionLabel(
@@ -452,9 +474,15 @@ export const bookingAgent: Module2Agent = {
         ),
         payload: {
           kind: 'deep_link',
-          url: s.bookUrl,
+          url: bookUrl,
+          destName: shortName,
         },
       });
+    }
+    // Maps nach den Buchungs-Deeplinks (Produkt zuerst)
+    for (let i = 0; i < picks.length; i++) {
+      const s = picks[i]!;
+      const shortName = s.name.split(/[|,]/)[0]!.trim();
       const maps = mapsUrlForStay(s);
       if (maps) {
         buttons.push({
@@ -483,14 +511,7 @@ export const bookingAgent: Module2Agent = {
       },
     });
     try {
-      const {
-        getExpediaAccommodationUrl,
-        getExpediaCamref,
-      } = require('../../services/affiliate/affiliateService') as {
-        getExpediaAccommodationUrl: (
-          d: string,
-          o?: { checkin?: string; checkout?: string; adults?: number },
-        ) => string;
+      const { getExpediaCamref } = require('../../services/affiliate/affiliateService') as {
         getExpediaCamref: () => string;
       };
       if (getExpediaCamref()) {
@@ -583,7 +604,7 @@ export const bookingAgent: Module2Agent = {
           name: s.name,
           lat: s.lat,
           lng: s.lng,
-          bookUrl: s.bookUrl,
+          bookUrl: resolveHotelBookUrl(s, city, checkin, checkout, adults),
           stay: s,
         })),
       },

@@ -1,0 +1,4437 @@
+{
+  "city_id": "brandenburg_havel",
+  "apply": true,
+  "maxDelta": 80,
+  "summary": {
+    "ok": 234,
+    "check": 2,
+    "bad": 24,
+    "errors": 0,
+    "applied": 3
+  },
+  "rows": [
+    {
+      "id": "brandenburg_havel_brandenburg_hauptbahnhof",
+      "name": "Brandenburg Hauptbahnhof",
+      "before": {
+        "lat": 52.400891939999994,
+        "lng": 12.56602852
+      },
+      "google": {
+        "lat": 52.40096380000001,
+        "lng": 12.5661463,
+        "place_id": "ChIJAYW811zAqEcRbDB4JNjRGyc",
+        "address": "14776 Brandenburg an der Havel, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_brandenburg_altstadt",
+      "name": "Brandenburg-Altstadt",
+      "before": {
+        "lat": 52.41203474,
+        "lng": 12.530131279999999
+      },
+      "google": {
+        "lat": 52.41210659999999,
+        "lng": 12.5302491,
+        "place_id": "ChIJCXRK1ufAqEcRAmWy25Z3XDI",
+        "address": "14770 Brandenburg an der Havel, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_parkplatz_am_hauptbahnhof",
+      "name": "Parkplatz am Hauptbahnhof",
+      "before": {
+        "lat": 52.40030094,
+        "lng": 12.563678119999999
+      },
+      "google": {
+        "lat": 52.4003728,
+        "lng": 12.5637959,
+        "place_id": "ChIJFVVAwCbBqEcRvANm25fRYbA",
+        "address": "14776 Brandenburg an der Havel"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_schotterparkplatz_1",
+      "name": "Schotterparkplatz 1",
+      "before": {
+        "lat": 52.40015014000001,
+        "lng": 12.56024242
+      },
+      "google": {
+        "lat": 52.400222,
+        "lng": 12.5603602,
+        "place_id": "ChIJX7BAmfHBqEcRlo6jncSMB_w",
+        "address": "14776 Brandenburg an der Havel"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_gesundheitszentrum_brandenburg_an_der_havel_gmbh",
+      "name": "Gesundheitszentrum Brandenburg an der Havel GmbH",
+      "before": {
+        "lat": 52.40148343999999,
+        "lng": 12.56481662
+      },
+      "google": {
+        "lat": 52.4015553,
+        "lng": 12.5649344,
+        "place_id": "ChIJTwxtIiPBqEcRrSKMpPPu4Z0",
+        "address": "Johann-Carl-Sybel-Straße 1, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_brandenburg_hohenstucken_nord",
+      "name": "Brandenburg, Hohenstücken Nord",
+      "before": {
+        "lat": 52.43695114,
+        "lng": 12.51840212
+      },
+      "google": {
+        "lat": 52.437023,
+        "lng": 12.51852,
+        "place_id": "ChIJqxa4tTHBqEcRteTmCfDqpRw",
+        "address": "14772 Brandenburg an der Havel, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_brandenburg_nicolaiplatz",
+      "name": "Brandenburg, Nicolaiplatz",
+      "before": {
+        "lat": 52.41106413999999,
+        "lng": 12.54929718
+      },
+      "google": {
+        "lat": 52.4111307,
+        "lng": 12.5487252,
+        "place_id": "ChIJT_4g9vnAqEcRNsSjF2xQPN8",
+        "address": "Nicolaipl., 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 39,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "brandenburg_havel_fouquestr_fachhochschule",
+      "name": "Fouquéstr./Fachhochschule",
+      "before": {
+        "lat": 52.41215734,
+        "lng": 12.538900680000001
+      },
+      "google": {
+        "lat": 52.4122292,
+        "lng": 12.5390185,
+        "place_id": "ChIJkQnCeeXAqEcRzxx0xW872FI",
+        "address": "Magdeburger Str., 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_gordenbrucke",
+      "name": "Gördenbrücke",
+      "before": {
+        "lat": 52.42381934,
+        "lng": 12.53112886
+      },
+      "google": {
+        "lat": 52.4238912,
+        "lng": 12.5312467,
+        "place_id": "ChIJ-S-LBCDBqEcRa1vr8HRWbx4",
+        "address": "Silokanal, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_brandenburg_fontanestr",
+      "name": "Brandenburg, Fontanestr.",
+      "before": {
+        "lat": 52.418080440000004,
+        "lng": 12.535991860000001
+      },
+      "google": {
+        "lat": 52.4181523,
+        "lng": 12.5361097,
+        "place_id": "ChIJQTNuQeHAqEcRQzfcBwk5sSo",
+        "address": "14770 Brandenburg an der Havel, Deutschland"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_gorden",
+      "name": "Görden",
+      "before": {
+        "lat": 52.42780814,
+        "lng": 12.503802140000001
+      },
+      "google": {
+        "lat": 52.42533599999999,
+        "lng": 12.5131557,
+        "place_id": "ChIJCc4trSnBqEcRpOAKn2TbfAQ",
+        "address": "14772 Brandenburg an der Havel-Görden"
+      },
+      "delta_m": 691,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_schiffsanleger_am_wiesenweg",
+      "name": "Schiffsanleger Am Wiesenweg",
+      "before": {
+        "lat": 52.406259180000006,
+        "lng": 12.5463333
+      },
+      "google": {
+        "lat": 52.4062987,
+        "lng": 12.5463981,
+        "place_id": "ChIJ4_BaoErBqEcRRn6zt5n0gck",
+        "address": "14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_seilfahre_neuendorf",
+      "name": "Seilfähre Neuendorf",
+      "before": {
+        "lat": 52.38923738,
+        "lng": 12.498221939999999
+      },
+      "google": {
+        "lat": 52.3892769,
+        "lng": 12.4982867,
+        "place_id": "ChIJU7OUM6_AqEcR93IoDuETfLM",
+        "address": "Windmühlenweg 57A, 14770 Brandenburg an der Havel-Neuendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_rewe_anleger_fur_sportboote",
+      "name": "Rewe Anleger für Sportboote",
+      "before": {
+        "lat": 52.40741498,
+        "lng": 12.5481056
+      },
+      "google": {
+        "lat": 52.4074545,
+        "lng": 12.5481704,
+        "place_id": "ChIJN5bF6BLBqEcR8I839oTYlYc",
+        "address": "Neuendorfer Str. 77b, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_historischer_hafen_brandenburg_an_der_havel_e_v",
+      "name": "Historischer Hafen Brandenburg an der Havel e.V.",
+      "before": {
+        "lat": 52.41258908,
+        "lng": 12.558059400000001
+      },
+      "google": {
+        "lat": 52.4126286,
+        "lng": 12.5581242,
+        "place_id": "ChIJ1fWZ3lfAqEcRE-B8z4thA74",
+        "address": "Hauptstraße 77, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_anleger_alfred_messelplatz",
+      "name": "Anleger Alfred Messelplatz",
+      "before": {
+        "lat": 52.40838468,
+        "lng": 12.551757499999999
+      },
+      "google": {
+        "lat": 52.4084242,
+        "lng": 12.5518223,
+        "place_id": "ChIJlenyod_BqEcREtEt8hwlfM4",
+        "address": "Alfred-Messel-Platz 1, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_anleger_buhnenhaus",
+      "name": "Anleger Buhnenhaus",
+      "before": {
+        "lat": 52.38857538,
+        "lng": 12.497087340000002
+      },
+      "google": {
+        "lat": 52.3886149,
+        "lng": 12.4971521,
+        "place_id": "ChIJfwJr_KPBqEcRE_ujWWKpoPg",
+        "address": "Windmühlenweg 61, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_nordstern_reederei_e_k_buro",
+      "name": "Nordstern Reederei e. K. (Büro)",
+      "before": {
+        "lat": 52.41257528,
+        "lng": 12.552647699999998
+      },
+      "google": {
+        "lat": 52.41261480000001,
+        "lng": 12.5527125,
+        "place_id": "ChIJp1VjDfHAqEcRhzdL1rHEm1U",
+        "address": "Plauer Str. 7, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_havel_marin_gmbh",
+      "name": "HAVEL MARIN GmbH",
+      "before": {
+        "lat": 52.42168668000001,
+        "lng": 12.581742279999999
+      },
+      "google": {
+        "lat": 52.42172619999999,
+        "lng": 12.5818071,
+        "place_id": "ChIJoSQOHvrBqEcRZecE_lduiD8",
+        "address": "Krakauer Landstraße 32, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_wasserwanderrastplatz_salzhofufer",
+      "name": "Wasserwanderrastplatz Salzhofufer",
+      "before": {
+        "lat": 52.41085468,
+        "lng": 12.554799399999998
+      },
+      "google": {
+        "lat": 52.41089419999999,
+        "lng": 12.5548642,
+        "place_id": "ChIJlYGZZNPBqEcRpuzxaehenY0",
+        "address": "Johanniskirchpl. 1, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_stadtmarina_brandenburg_boote_camping",
+      "name": "Stadtmarina Brandenburg Boote & Camping",
+      "before": {
+        "lat": 52.424343580000006,
+        "lng": 12.55374908
+      },
+      "google": {
+        "lat": 52.4243831,
+        "lng": 12.5538139,
+        "place_id": "ChIJL3-hxQPBqEcRoA3KywQCyGw",
+        "address": "Am Hafen 7, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_wasserwanderrastplatz_am_slawendorf",
+      "name": "Wasserwanderrastplatz am Slawendorf",
+      "before": {
+        "lat": 52.40940938,
+        "lng": 12.5520156
+      },
+      "google": {
+        "lat": 52.4094489,
+        "lng": 12.5520804,
+        "place_id": "ChIJTym8rG_BqEcRKJ-nEEeADY4",
+        "address": "Am Salzhof, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_bootshaus_radicke",
+      "name": "Bootshaus Radicke",
+      "before": {
+        "lat": 52.40923048,
+        "lng": 12.5680552
+      },
+      "google": {
+        "lat": 52.40927,
+        "lng": 12.56812,
+        "place_id": "ChIJO6DTb1DAqEcRK3XT7KUY8pk",
+        "address": "Neustädtische Wassertorstraße 15, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_slawendorf_brandenburg_an_der_havel",
+      "name": "Slawendorf Brandenburg an der Havel",
+      "before": {
+        "lat": 52.40961678,
+        "lng": 12.551047999999998
+      },
+      "google": {
+        "lat": 52.40965629999999,
+        "lng": 12.5511128,
+        "place_id": "ChIJm1dpcPfAqEcRukZ4MZu8Jg8",
+        "address": "Neuendorfer Str. 89, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_hausfloss_hafen_caasmann",
+      "name": "Hausfloss-Hafen CAASMANN",
+      "before": {
+        "lat": 52.40387028,
+        "lng": 12.53392602
+      },
+      "google": {
+        "lat": 52.4039098,
+        "lng": 12.5339908,
+        "place_id": "ChIJoU30oKPBqEcRkaK-CTjN6Pw",
+        "address": "Caasmannstraße 2, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_anleger_am_regattaring",
+      "name": "Anleger am Regattaring",
+      "before": {
+        "lat": 52.424825479999996,
+        "lng": 12.561364180000002
+      },
+      "google": {
+        "lat": 52.424865,
+        "lng": 12.561429,
+        "place_id": "ChIJqZfzFQDBqEcRtGkQrJEzCSs",
+        "address": "Fritze Bollmann Weg 10, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_yachtcharter_marina_schoners_wehr",
+      "name": "Yachtcharter Marina Schoners Wehr",
+      "before": {
+        "lat": 52.42037578000001,
+        "lng": 12.57645338
+      },
+      "google": {
+        "lat": 52.42041529999999,
+        "lng": 12.5765182,
+        "place_id": "ChIJASuVmrLBqEcR5PuNpfIBixA",
+        "address": "Krakauer Str. 29A, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_nordstern_reederei",
+      "name": "Nordstern Reederei",
+      "before": {
+        "lat": 52.41168528000001,
+        "lng": 12.5552886
+      },
+      "google": {
+        "lat": 52.41261480000001,
+        "lng": 12.5527125,
+        "place_id": "ChIJp1VjDfHAqEcRhzdL1rHEm1U",
+        "address": "Plauer Str. 7, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 203,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_marina_niederhavel",
+      "name": "Marina Niederhavel",
+      "before": {
+        "lat": 52.405099480000004,
+        "lng": 12.54304832
+      },
+      "google": {
+        "lat": 52.405139,
+        "lng": 12.5431131,
+        "place_id": "ChIJFfUgT_LAqEcRvdJljAZHGMw",
+        "address": "Wiesenweg 13, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_brandenburger_hafen",
+      "name": "Brandenburger Hafen",
+      "before": {
+        "lat": 52.408845279999994,
+        "lng": 12.5524941
+      },
+      "google": {
+        "lat": 52.4088848,
+        "lng": 12.5525589,
+        "place_id": "ChIJkwlpmRfBqEcRD4npAMAF2R0",
+        "address": "Alfred-Messel-Platz 1, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_archaologisches_landesmuseum_brandenburg",
+      "name": "Archäologisches Landesmuseum Brandenburg",
+      "before": {
+        "lat": 52.406314280000004,
+        "lng": 12.562301
+      },
+      "google": {
+        "lat": 52.4063538,
+        "lng": 12.5623658,
+        "place_id": "ChIJdTgtxVvAqEcRsuvvlILK3nM",
+        "address": "im Paulikloster, Neustädtische Heidestraße 28, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_industriemuseum_brandenburg_an_der_havel",
+      "name": "Industriemuseum Brandenburg an der Havel",
+      "before": {
+        "lat": 52.41646178,
+        "lng": 12.5055487
+      },
+      "google": {
+        "lat": 52.4165013,
+        "lng": 12.5056135,
+        "place_id": "ChIJm686i9HAqEcRLsESLiz-CHQ",
+        "address": "August-Sonntag-Straße 5, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_stadtmuseum_im_frey_haus",
+      "name": "Stadtmuseum im Frey-Haus",
+      "before": {
+        "lat": 52.41246048000001,
+        "lng": 12.5538241
+      },
+      "google": {
+        "lat": 52.41249999999999,
+        "lng": 12.5538889,
+        "place_id": "ChIJM9e-VvjAqEcRefjlAnV1MsQ",
+        "address": "Ritterstraße 96, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_psychiatriemuseum",
+      "name": "Psychiatriemuseum",
+      "before": {
+        "lat": 52.41917117999999,
+        "lng": 12.4806457
+      },
+      "google": {
+        "lat": 52.4192107,
+        "lng": 12.4807105,
+        "place_id": "ChIJL-WZJCHHqEcRxPqxQQ57_Ek",
+        "address": "Anton-Saefkow-Allee 2, 14772 Brandenburg an der Havel-Görden"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_fahrradmuseum_brandenburg",
+      "name": "Fahrradmuseum Brandenburg",
+      "before": {
+        "lat": 52.41528038,
+        "lng": 12.5553433
+      },
+      "google": {
+        "lat": 52.4153199,
+        "lng": 12.5554081,
+        "place_id": "ChIJTb7BIQDBqEcRIi-N1bjlTNU",
+        "address": "Rathenower Str. 8, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_museum_steintorturm",
+      "name": "Museum Steintorturm",
+      "before": {
+        "lat": 52.40570418,
+        "lng": 12.55829282
+      },
+      "google": {
+        "lat": 52.4057352,
+        "lng": 12.5582498,
+        "place_id": "ChIJIZNIl1nAqEcRTBE1Q1i3TnE",
+        "address": "Steinstraße, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_brennabor_kunsthalle",
+      "name": "Brennabor Kunsthalle",
+      "before": {
+        "lat": 52.40445598,
+        "lng": 12.566724820000001
+      },
+      "google": {
+        "lat": 52.4044955,
+        "lng": 12.5667896,
+        "place_id": "ChIJRRSIfFvAqEcRMI5DcBwhIFU",
+        "address": "Geschwister-Scholl-Straße 12, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_strassenbahnmuseum",
+      "name": "Straßenbahnmuseum",
+      "before": {
+        "lat": 52.40692228,
+        "lng": 12.550354099999998
+      },
+      "google": {
+        "lat": 52.4069618,
+        "lng": 12.5504189,
+        "place_id": "ChIJ84x71MDBqEcR1ziXe-TcbFw",
+        "address": "Bauhofstraße, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_gedenkstatte_fur_die_opfer_der_euthanasie_morde",
+      "name": "Gedenkstätte für die Opfer der Euthanasie-Morde",
+      "before": {
+        "lat": 52.41096278,
+        "lng": 12.5506472
+      },
+      "google": {
+        "lat": 52.4110023,
+        "lng": 12.550712,
+        "place_id": "ChIJlS8d3PnAqEcRZOxZP27nDHk",
+        "address": "Nicolaipl. 28/30, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_gotisches_haus",
+      "name": "Gotisches Haus",
+      "before": {
+        "lat": 52.412127680000005,
+        "lng": 12.554794699999999
+      },
+      "google": {
+        "lat": 52.4121672,
+        "lng": 12.5548595,
+        "place_id": "ChIJkUBzXfjAqEcRJubLZ7YpuCw",
+        "address": "Ritterstraße 86, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_jakobskapelle_brandenburg_an_der_havel",
+      "name": "Jakobskapelle (Brandenburg an der Havel)",
+      "before": {
+        "lat": 52.40263768,
+        "lng": 12.554422720000002
+      },
+      "google": {
+        "lat": 52.4026772,
+        "lng": 12.5544875,
+        "place_id": "ChIJg7q4El_AqEcRXUzuNKRcKAA",
+        "address": "Jacobstraße 19, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_st_katharinen_kirche_zu_brandenburg_an_der_havel",
+      "name": "St.-Katharinen-Kirche zu Brandenburg an der Havel",
+      "before": {
+        "lat": 52.40892838,
+        "lng": 12.5613295
+      },
+      "google": {
+        "lat": 52.4089679,
+        "lng": 12.5613943,
+        "place_id": "ChIJ-4AH5FnAqEcRsz0dGrK5VQo",
+        "address": "Katharinenkirchpl. 13, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_petrikapelle",
+      "name": "Petrikapelle",
+      "before": {
+        "lat": 52.41448348,
+        "lng": 12.566990999999998
+      },
+      "google": {
+        "lat": 52.414523,
+        "lng": 12.5670558,
+        "place_id": "ChIJGy_Dp0LAqEcRunuhJdJlrN0",
+        "address": "Burgweg, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_st_johannis",
+      "name": "St. Johannis",
+      "before": {
+        "lat": 52.41143838000001,
+        "lng": 12.554365899999999
+      },
+      "google": {
+        "lat": 52.41147789999999,
+        "lng": 12.5544307,
+        "place_id": "ChIJpYOFavjAqEcRT12oKTHmpUU",
+        "address": "Johanniskirchpl., 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_st_gotthardt",
+      "name": "St. Gotthardt",
+      "before": {
+        "lat": 52.41605648000001,
+        "lng": 12.556732499999999
+      },
+      "google": {
+        "lat": 52.416096,
+        "lng": 12.5567973,
+        "place_id": "ChIJV5D4O__AqEcRV3TgUx9QGkY",
+        "address": "Gotthardtkirchpl. 8, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_heilige_dreifaltigkeit",
+      "name": "Heilige Dreifaltigkeit",
+      "before": {
+        "lat": 52.40557448,
+        "lng": 12.562170120000001
+      },
+      "google": {
+        "lat": 52.405614,
+        "lng": 12.5622349,
+        "place_id": "ChIJM8Ya21vAqEcRWyfgRH5XuvM",
+        "address": "Neustädtische Heidestraße 25, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_hofkirche_am_jakobsgraben",
+      "name": "Hofkirche am Jakobsgraben",
+      "before": {
+        "lat": 52.40226778,
+        "lng": 12.553148519999999
+      },
+      "google": {
+        "lat": 52.4023073,
+        "lng": 12.5532133,
+        "place_id": "ChIJ6QXve1_AqEcReMVQDwGb4Ho",
+        "address": "Jahnstraße 1, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_st_nikolai",
+      "name": "St. Nikolai",
+      "before": {
+        "lat": 52.41006628,
+        "lng": 12.5487717
+      },
+      "google": {
+        "lat": 52.4101058,
+        "lng": 12.5488365,
+        "place_id": "ChIJm4nHUffAqEcRi03wXFM2tWI",
+        "address": "Nicolaipl., 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_neuapostolische_kirche_brandenburg",
+      "name": "Neuapostolische Kirche Brandenburg",
+      "before": {
+        "lat": 52.40676748,
+        "lng": 12.552022499999998
+      },
+      "google": {
+        "lat": 52.406807,
+        "lng": 12.5520873,
+        "place_id": "ChIJY3rLLanBqEcRZsonfRN-YQk",
+        "address": "Am Mühlengraben 30, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_dom_st_peter_und_paul",
+      "name": "Dom St. Peter und Paul",
+      "before": {
+        "lat": 52.41529158000001,
+        "lng": 12.5668507
+      },
+      "google": {
+        "lat": 52.4153311,
+        "lng": 12.5669155,
+        "place_id": "ChIJV3JG9FPAqEcROaMJdxOnjN4",
+        "address": "Burghof 9, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_st_bernhard_gemeinschaftskirche",
+      "name": "St. Bernhard Gemeinschaftskirche",
+      "before": {
+        "lat": 52.41129288,
+        "lng": 12.511075899999998
+      },
+      "google": {
+        "lat": 52.4113324,
+        "lng": 12.5111407,
+        "place_id": "ChIJgamVhsXAqEcRfnfEb5CtCwk",
+        "address": "Hannoversche Str. 43, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_auferstehungskirche_auferstehungskirchengemeinde_brandenburg",
+      "name": "Auferstehungskirche - Auferstehungskirchengemeinde Brandenburg",
+      "before": {
+        "lat": 52.42871717999999,
+        "lng": 12.514355179999999
+      },
+      "google": {
+        "lat": 52.4287567,
+        "lng": 12.51442,
+        "place_id": "ChIJf6gH-FXBqEcR8FnCfphsO9I",
+        "address": "Brahmsstraße 12 a, 14772 Brandenburg an der Havel-Görden"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_hope_brandenburg_gemeinsam_gott_erleben",
+      "name": "Hope Brandenburg - Gemeinsam Gott erleben.",
+      "before": {
+        "lat": 52.42502068,
+        "lng": 12.56285668
+      },
+      "google": {
+        "lat": 52.4250602,
+        "lng": 12.5629215,
+        "place_id": "ChIJHRbJAKrBqEcR83TEcLcStUA",
+        "address": "Fritze Bollmann Weg 2, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_kirche_jesu_christi_der_heiligen_der_letzten_tage",
+      "name": "Kirche Jesu Christi der Heiligen der Letzten Tage",
+      "before": {
+        "lat": 52.413247479999995,
+        "lng": 12.5548912
+      },
+      "google": {
+        "lat": 52.413287,
+        "lng": 12.554956,
+        "place_id": "ChIJZV4W7vjAqEcRKabEffjfMKY",
+        "address": "Bäckerstraße 16, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_kirche",
+      "name": "Kirche",
+      "before": {
+        "lat": 52.394449480000006,
+        "lng": 12.50883542
+      },
+      "google": {
+        "lat": 52.416096,
+        "lng": 12.5567973,
+        "place_id": "ChIJV5D4O__AqEcRV3TgUx9QGkY",
+        "address": "Gotthardtkirchpl. 8, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 4047,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_christ_embassy_brandenburg_an_der_havel",
+      "name": "Christ Embassy Brandenburg an der Havel",
+      "before": {
+        "lat": 52.41058088,
+        "lng": 12.5569184
+      },
+      "google": {
+        "lat": 52.4106204,
+        "lng": 12.5569832,
+        "place_id": "ChIJo-tKNADBqEcR6rB1nj2pkhg",
+        "address": "Hauptstraße 66, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_fritze_bollmann_brunnen",
+      "name": "Fritze Bollmann Brunnen",
+      "before": {
+        "lat": 52.40960328,
+        "lng": 12.5609373
+      },
+      "google": {
+        "lat": 52.4096428,
+        "lng": 12.5610021,
+        "place_id": "ChIJIyB9ZFfAqEcRMNEUBaeOvNQ",
+        "address": "Hauptstraße 22, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_bernini_skulpturen_vom_galateabrunnen",
+      "name": "Bernini-Skulpturen vom Galateabrunnen",
+      "before": {
+        "lat": 52.413836079999996,
+        "lng": 12.5662464
+      },
+      "google": {
+        "lat": 52.4138756,
+        "lng": 12.5663112,
+        "place_id": "ChIJEctttVzBqEcRP2S7y661rK8",
+        "address": "St. Petri 2, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_brunnen",
+      "name": "Brunnen",
+      "before": {
+        "lat": 52.412705779999996,
+        "lng": 12.5498929
+      },
+      "google": {
+        "lat": 52.4127453,
+        "lng": 12.5499577,
+        "place_id": "ChIJjRIw_VjBqEcRjWFDThr92EE",
+        "address": "Am Rosenhag 3, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_springbrunnen_marienberg",
+      "name": "Springbrunnen Marienberg",
+      "before": {
+        "lat": 52.41377347999999,
+        "lng": 12.5493236
+      },
+      "google": {
+        "lat": 52.413813,
+        "lng": 12.5493884,
+        "place_id": "ChIJqa6mmpzBqEcRs_LY-S_ra94",
+        "address": "Bergstraße 19, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_waldmops_denkmal",
+      "name": "Waldmops (Denkmal)",
+      "before": {
+        "lat": 52.40695158,
+        "lng": 12.5631923
+      },
+      "google": {
+        "lat": 52.4089913,
+        "lng": 12.5640289,
+        "place_id": "ChIJGx9dL3DBqEcRBb_Z-SUJM8I",
+        "address": "Neustädtischer Markt 7-8, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 234,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_waldmops_denkmal_homage_an_loriot",
+      "name": "Waldmops (Denkmal) - Homage an Loriot",
+      "before": {
+        "lat": 52.41191478,
+        "lng": 12.5627776
+      },
+      "google": {
+        "lat": 52.4119543,
+        "lng": 12.5628424,
+        "place_id": "ChIJKxFk2XfBqEcRWZNFArt9r7M",
+        "address": "Hauptstraße 80, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_waldmops_denkmal_erinnerung_an_loriot",
+      "name": "Waldmops (Denkmal) - Erinnerung an Loriot",
+      "before": {
+        "lat": 52.408951779999995,
+        "lng": 12.563964099999998
+      },
+      "google": {
+        "lat": 52.4089913,
+        "lng": 12.5640289,
+        "place_id": "ChIJGx9dL3DBqEcRBb_Z-SUJM8I",
+        "address": "Neustädtischer Markt 7-8, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_waldmops_am_brunnen",
+      "name": "Waldmops am Brunnen",
+      "before": {
+        "lat": 52.413887980000005,
+        "lng": 12.553682899999998
+      },
+      "google": {
+        "lat": 52.4139275,
+        "lng": 12.5537477,
+        "place_id": "ChIJ_eUe_MzBqEcRZwWoA7FoA0M",
+        "address": "14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_alexander_von_humboldt_denkmal",
+      "name": "Alexander von Humboldt-Denkmal",
+      "before": {
+        "lat": 52.410528680000006,
+        "lng": 12.5530124
+      },
+      "google": {
+        "lat": 52.4105682,
+        "lng": 12.5530772,
+        "place_id": "ChIJ8QCvEn7BqEcRgENouLfeD0Y",
+        "address": "Humboldthain, Klosterstraße 27, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_sitzender_waldmops",
+      "name": "Sitzender Waldmops",
+      "before": {
+        "lat": 52.411132480000006,
+        "lng": 12.5520266
+      },
+      "google": {
+        "lat": 52.41175759999999,
+        "lng": 12.5548992,
+        "place_id": "ChIJSRUZVADBqEcRz_fG_8lmo1I",
+        "address": "Johanniskirchgasse 2, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 207,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_friedrich_schiller_denkmal",
+      "name": "Friedrich-Schiller-Denkmal",
+      "before": {
+        "lat": 52.40875468,
+        "lng": 12.5566226
+      },
+      "google": {
+        "lat": 52.4087942,
+        "lng": 12.5566874,
+        "place_id": "ChIJVSoMs8zBqEcR0DCXw9wcoVs",
+        "address": "Havelstraße, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_strand_an_der_regattastrecke",
+      "name": "Strand An der Regattastrecke",
+      "before": {
+        "lat": 52.42731748,
+        "lng": 12.56295628
+      },
+      "google": {
+        "lat": 52.427357,
+        "lng": 12.5630211,
+        "place_id": "ChIJBXEacAfBqEcRxNhWPq3Xv1o",
+        "address": "14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_strand_am_grillendamm",
+      "name": "Strand am Grillendamm",
+      "before": {
+        "lat": 52.418680280000004,
+        "lng": 12.564976999999999
+      },
+      "google": {
+        "lat": 52.4187198,
+        "lng": 12.5650418,
+        "place_id": "ChIJX26pxVTAqEcREbu64DlvAfw",
+        "address": "14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_theaterpark",
+      "name": "Theaterpark",
+      "before": {
+        "lat": 52.407066480000005,
+        "lng": 12.5563946
+      },
+      "google": {
+        "lat": 52.407106,
+        "lng": 12.5564594,
+        "place_id": "ChIJWzfKGljAqEcRx3oDcMsOOWA",
+        "address": "14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_packhofgelande_park",
+      "name": "Packhofgelände Park",
+      "before": {
+        "lat": 52.41294527999999,
+        "lng": 12.558755999999999
+      },
+      "google": {
+        "lat": 52.4129848,
+        "lng": 12.5588208,
+        "place_id": "ChIJ6Y_cOVbAqEcR8-e5AmspG6M",
+        "address": "Eichamtstraße, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_uferpromenade",
+      "name": "Uferpromenade",
+      "before": {
+        "lat": 52.41125718000001,
+        "lng": 12.556529699999999
+      },
+      "google": {
+        "lat": 52.4112967,
+        "lng": 12.5565945,
+        "place_id": "ChIJxy2bksDBqEcRlgoCJEAofWI",
+        "address": "Heinrich-Heine-Ufer, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_burgerpark_und_gartendenkmal_marienberg",
+      "name": "Bürgerpark und Gartendenkmal Marienberg",
+      "before": {
+        "lat": 52.415020479999995,
+        "lng": 12.5486252
+      },
+      "google": {
+        "lat": 52.41506,
+        "lng": 12.54869,
+        "place_id": "ChIJoXcrr2LBqEcR7pwtHptXJAI",
+        "address": "Marienberg 3, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_brandenburg_an_der_havel",
+      "name": "Brandenburg an der Havel",
+      "before": {
+        "lat": 52.41728088,
+        "lng": 12.532409900000001
+      },
+      "google": {
+        "lat": 52.4125287,
+        "lng": 12.5316444,
+        "place_id": "ChIJN8I30-XAqEcRhUxEEOyL_kg",
+        "address": "Brandenburg an der Havel"
+      },
+      "delta_m": 531,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_marienberg",
+      "name": "Marienberg",
+      "before": {
+        "lat": 52.41578208,
+        "lng": 12.5477368
+      },
+      "google": {
+        "lat": 52.41666670000001,
+        "lng": 12.55,
+        "place_id": "ChIJ9a_uEfzAqEcR10Tz1flMlZI",
+        "address": "Marienberg, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 182,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_aussichtsplattform_stadtkanal",
+      "name": "Aussichtsplattform Stadtkanal",
+      "before": {
+        "lat": 52.40641918,
+        "lng": 12.547309299999998
+      },
+      "google": {
+        "lat": 52.40645869999999,
+        "lng": 12.5473741,
+        "place_id": "ChIJP4O4_PbAqEcRqxmjqaBsV8E",
+        "address": "Kanalstraße 2, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_heinrich_heine_ufer",
+      "name": "Heinrich-Heine-Ufer",
+      "before": {
+        "lat": 52.41026577999999,
+        "lng": 12.555244599999998
+      },
+      "google": {
+        "lat": 52.4103053,
+        "lng": 12.5553094,
+        "place_id": "ChIJQdEEHfjAqEcRiXzDBvgxavA",
+        "address": "Heinrich-Heine-Ufer, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_yachtanleger_am_jungfernsteig",
+      "name": "Yachtanleger Am Jungfernsteig",
+      "before": {
+        "lat": 52.40605388,
+        "lng": 12.567163019999999
+      },
+      "google": {
+        "lat": 52.4060934,
+        "lng": 12.5672278,
+        "place_id": "ChIJzf_A1sbBqEcRnZFaR3og0MQ",
+        "address": "Jungfernsteig 5, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_parkplatz_grillendamm_4_14776_brandenburg_an_der_havel",
+      "name": "Parkplatz Grillendamm 4, 14776 Brandenburg an der Havel",
+      "before": {
+        "lat": 52.41698968000001,
+        "lng": 12.566419299999998
+      },
+      "google": {
+        "lat": 52.41702919999999,
+        "lng": 12.5664841,
+        "place_id": "ChIJlwS8gVTAqEcRBZoP1f-sgA0",
+        "address": "Parkplatz, Grillendamm 4, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_kanal_am_kleinen_beetzsee",
+      "name": "Kanal am kleinen Beetzsee",
+      "before": {
+        "lat": 52.41984678,
+        "lng": 12.57085938
+      },
+      "google": {
+        "lat": 52.41988629999999,
+        "lng": 12.5709242,
+        "place_id": "ChIJtx_fRSLBqEcRe36cOnAAH_Q",
+        "address": "Krakauer Str. 16, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_wallpromenade",
+      "name": "Wallpromenade",
+      "before": {
+        "lat": 52.41347948,
+        "lng": 12.5511041
+      },
+      "google": {
+        "lat": 52.4144137,
+        "lng": 12.5520042,
+        "place_id": "ChIJeWTTFfnAqEcR01Ats3KAmYw",
+        "address": "Wallpromenade, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 120,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "brandenburg_havel_leuchtturm_breitlingsee",
+      "name": "Leuchtturm Breitlingsee",
+      "before": {
+        "lat": 52.389041080000005,
+        "lng": 12.488295339999999
+      },
+      "google": {
+        "lat": 52.3890806,
+        "lng": 12.4883601,
+        "place_id": "ChIJo8lASYnBqEcR4viKwoqD5Fw",
+        "address": "14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_plauer_torturm",
+      "name": "Plauer Torturm",
+      "before": {
+        "lat": 52.41219568,
+        "lng": 12.5513816
+      },
+      "google": {
+        "lat": 52.4122352,
+        "lng": 12.5514464,
+        "place_id": "ChIJj5rjvPnAqEcRqbs0Zk0QCow",
+        "address": "Plauer Str., 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_rathenower_torturm",
+      "name": "Rathenower Torturm",
+      "before": {
+        "lat": 52.41595328,
+        "lng": 12.5545536
+      },
+      "google": {
+        "lat": 52.4159928,
+        "lng": 12.5546184,
+        "place_id": "ChIJ74qm1_7AqEcRxpQFb0GNyAw",
+        "address": "Rathenower Str., 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_neustadtischer_muhlentorturm",
+      "name": "Neustädtischer Mühlentorturm",
+      "before": {
+        "lat": 52.41091098,
+        "lng": 12.564845299999998
+      },
+      "google": {
+        "lat": 52.41095050000001,
+        "lng": 12.5649101,
+        "place_id": "ChIJZfCs2lDAqEcReH8VE6RrfEI",
+        "address": "Mühlendamm, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_marienbad_brandenburg",
+      "name": "Marienbad Brandenburg",
+      "before": {
+        "lat": 52.41532588,
+        "lng": 12.541359499999999
+      },
+      "google": {
+        "lat": 52.4153654,
+        "lng": 12.5414243,
+        "place_id": "ChIJWbhEo-TAqEcRUmG7arwraXE",
+        "address": "Sprengelstraße 1, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_dreifelderhalle_marienberg",
+      "name": "Dreifelderhalle Marienberg",
+      "before": {
+        "lat": 52.41846118000001,
+        "lng": 12.5378146
+      },
+      "google": {
+        "lat": 52.4185007,
+        "lng": 12.5378794,
+        "place_id": "ChIJcT-2YeHAqEcRoAekzjySDPM",
+        "address": "Willi-Sänger-Straße 77, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_dreifelderhalle_am_wiesenweg",
+      "name": "Dreifelderhalle Am Wiesenweg",
+      "before": {
+        "lat": 52.40366368,
+        "lng": 12.546547620000002
+      },
+      "google": {
+        "lat": 52.4037032,
+        "lng": 12.5466124,
+        "place_id": "ChIJ62uNbvTAqEcR4IpI1w9a20M",
+        "address": "Franz-Ziegler-Straße 29, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_asc_brandenburg_03_e_v",
+      "name": "ASC Brandenburg 03 e.V.",
+      "before": {
+        "lat": 52.41462798,
+        "lng": 12.540595
+      },
+      "google": {
+        "lat": 52.4146675,
+        "lng": 12.5406598,
+        "place_id": "ChIJI5fR5uTAqEcRtXl6Ycs-LhQ",
+        "address": "Triglafweg 8, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_wassersportzentrum_alte_feuerwache",
+      "name": "Wassersportzentrum Alte Feuerwache",
+      "before": {
+        "lat": 52.405453179999995,
+        "lng": 12.548225219999997
+      },
+      "google": {
+        "lat": 52.4054927,
+        "lng": 12.54829,
+        "place_id": "ChIJqXUTOFjAqEcRfLchhJcixcI",
+        "address": "Franz-Ziegler-Straße 28, Wredowstraße 9, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_regattastrecke_brandenburg_an_der_havel",
+      "name": "Regattastrecke Brandenburg an der Havel",
+      "before": {
+        "lat": 52.43154078,
+        "lng": 12.563260679999999
+      },
+      "google": {
+        "lat": 52.4315803,
+        "lng": 12.5633255,
+        "place_id": "ChIJ8VjYbgjBqEcR87oSg0QN_bo",
+        "address": "An d. Regattastrecke 6, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_sportplatz",
+      "name": "Sportplatz",
+      "before": {
+        "lat": 52.433777680000006,
+        "lng": 12.52508276
+      },
+      "google": {
+        "lat": 52.4195258,
+        "lng": 12.552593,
+        "place_id": "ChIJK9l9dv7AqEcRGI1VcfcLcGQ",
+        "address": "Brielower Str. 7, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 2448,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_sportplatz_am_packhof",
+      "name": "Sportplatz am Packhof",
+      "before": {
+        "lat": 52.41128318,
+        "lng": 12.563212100000001
+      },
+      "google": {
+        "lat": 52.4113227,
+        "lng": 12.5632769,
+        "place_id": "ChIJk97bXWDBqEcRaR-IEMtyWZ0",
+        "address": "Große Münzenstraße 2, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_brandenburger_stadtbefestigung",
+      "name": "Brandenburger Stadtbefestigung",
+      "before": {
+        "lat": 52.40816048000001,
+        "lng": 12.557635199999998
+      },
+      "google": {
+        "lat": 52.4082,
+        "lng": 12.5577,
+        "place_id": "ChIJHx2vR1jAqEcRr2hWMoSXNDk",
+        "address": "Wollenweberstraße 27, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_die_altstadter_e_v",
+      "name": "Die Altstädter e.V.",
+      "before": {
+        "lat": 52.42111108,
+        "lng": 12.57511268
+      },
+      "google": {
+        "lat": 52.4211506,
+        "lng": 12.5751775,
+        "place_id": "ChIJbci97vjAqEcRVTznjgBR9Nw",
+        "address": "c/o Reno Schröder, Krakauer Weg 2, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_panorama_service_gmbh",
+      "name": "Panorama Service GmbH",
+      "before": {
+        "lat": 52.413834480000006,
+        "lng": 12.521372199999998
+      },
+      "google": {
+        "lat": 52.41387400000001,
+        "lng": 12.521437,
+        "place_id": "ChIJ7U_vtdzAqEcRXwmINxobkG0",
+        "address": "Magdeburger Landstraße 7, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_steg_am_muhlendamm",
+      "name": "Steg am Mühlendamm",
+      "before": {
+        "lat": 52.41131758,
+        "lng": 12.566834400000001
+      },
+      "google": {
+        "lat": 52.4113571,
+        "lng": 12.5668992,
+        "place_id": "ChIJm-sFD2rBqEcR_MR6aI0xAPE",
+        "address": "14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_brandenburger_theater_gmbh",
+      "name": "Brandenburger Theater GmbH",
+      "before": {
+        "lat": 52.40778008000001,
+        "lng": 12.556099899999998
+      },
+      "google": {
+        "lat": 52.4078196,
+        "lng": 12.5561647,
+        "place_id": "ChIJS-LP9lfAqEcR3toFPhOFqmw",
+        "address": "Grabenstraße 14, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_postalisch_freilichtbuhne",
+      "name": "Postalisch Freilichtbühne",
+      "before": {
+        "lat": 52.412373779999996,
+        "lng": 12.548845700000001
+      },
+      "google": {
+        "lat": 52.4124133,
+        "lng": 12.5489105,
+        "place_id": "ChIJFyUOMfzAqEcR0aD0iJ-icMQ",
+        "address": "Am Marienberg, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_concerthaus_kino_brandenburg",
+      "name": "Concerthaus Kino Brandenburg",
+      "before": {
+        "lat": 52.40731168,
+        "lng": 12.5602837
+      },
+      "google": {
+        "lat": 52.4073512,
+        "lng": 12.5603485,
+        "place_id": "ChIJ8ZGpolnAqEcRT1UNL8Jr5XI",
+        "address": "Steinstraße 19, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_badestelle_gordensee",
+      "name": "Badestelle Gördensee",
+      "before": {
+        "lat": 52.43354098,
+        "lng": 12.489925060000001
+      },
+      "google": {
+        "lat": 52.4335805,
+        "lng": 12.4899899,
+        "place_id": "ChIJkRpc-yDHqEcRlybPNOgauq8",
+        "address": "Am Gördensee 13B, 14772 Brandenburg an der Havel-Görden"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_ziegelei_am_quenzsee",
+      "name": "ZIEGELEI AM QUENZSEE",
+      "before": {
+        "lat": 52.410100379999996,
+        "lng": 12.4906921
+      },
+      "google": {
+        "lat": 52.4101399,
+        "lng": 12.4907569,
+        "place_id": "ChIJ_1oAegDHqEcR3ACSDWzUjS8",
+        "address": "14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_alte_silobrucke",
+      "name": "ALTE SILOBRÜCKE",
+      "before": {
+        "lat": 52.41899647999999,
+        "lng": 12.496323899999998
+      },
+      "google": {
+        "lat": 52.419036,
+        "lng": 12.4963887,
+        "place_id": "ChIJ12YzegDHqEcREiBNWrdm2II",
+        "address": "Quenzweg, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_nanu_nana",
+      "name": "NANU-NANA",
+      "before": {
+        "lat": 52.40821348000001,
+        "lng": 12.5648674
+      },
+      "google": {
+        "lat": 52.40825299999999,
+        "lng": 12.5649322,
+        "place_id": "ChIJX5OXplHBqEcR7-HEFhc0WHE",
+        "address": "Sankt-Annen-Straße 23, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_durerhaus_hans_peter_zahn",
+      "name": "Dürerhaus Hans-Peter Zahn",
+      "before": {
+        "lat": 52.410553379999996,
+        "lng": 12.558278699999999
+      },
+      "google": {
+        "lat": 52.4105929,
+        "lng": 12.5583435,
+        "place_id": "ChIJKSVCk1fAqEcRmq1KBfu5PeQ",
+        "address": "Hauptstraße 54, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_weltladen_brandenburg_an_der_havel",
+      "name": "Weltladen Brandenburg an der Havel",
+      "before": {
+        "lat": 52.41099007999999,
+        "lng": 12.557381699999999
+      },
+      "google": {
+        "lat": 52.4110296,
+        "lng": 12.5574465,
+        "place_id": "ChIJqfXZbtjAqEcRoF6k-Yhu5LI",
+        "address": "Hauptstraße 66, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_waldmops_am_pfaffeufer",
+      "name": "Waldmops am Pfaffeufer",
+      "before": {
+        "lat": 52.41093938,
+        "lng": 12.566100899999999
+      },
+      "google": {
+        "lat": 52.4109789,
+        "lng": 12.5661657,
+        "place_id": "ChIJY2RKGtrBqEcRU1O2UiP5ugc",
+        "address": "Neustädtische Wassertorstraße, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_universitatsklinikum_brandenburg_an_der_havel",
+      "name": "Universitätsklinikum Brandenburg an der Havel",
+      "before": {
+        "lat": 52.41385838,
+        "lng": 12.5462571
+      },
+      "google": {
+        "lat": 52.4138979,
+        "lng": 12.5463219,
+        "place_id": "ChIJ-WkHU_rAqEcR8dT9dZ5gBwA",
+        "address": "Hochstraße 29, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_caritas_klinik_st_marien_brandenburg",
+      "name": "Caritas-Klinik St. Marien Brandenburg",
+      "before": {
+        "lat": 52.41500108,
+        "lng": 12.5516303
+      },
+      "google": {
+        "lat": 52.4150406,
+        "lng": 12.5516951,
+        "place_id": "ChIJC9K0XPnAqEcRYGFhVja3tII",
+        "address": "Bergstraße 1-3, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_universitatsklinikum_brandenburg_an_der_havel_gmbh_hno",
+      "name": "Universitätsklinikum Brandenburg an der Havel GmbH - HNO",
+      "before": {
+        "lat": 52.41385648000001,
+        "lng": 12.545117199999998
+      },
+      "google": {
+        "lat": 52.413896,
+        "lng": 12.545182,
+        "place_id": "ChIJDxcfHfvAqEcRifESv6II4Ao",
+        "address": "Hochstraße 29, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_apotheke_am_stahlwerk",
+      "name": "Apotheke am Stahlwerk",
+      "before": {
+        "lat": 52.413595380000004,
+        "lng": 12.522717799999999
+      },
+      "google": {
+        "lat": 52.41363490000001,
+        "lng": 12.5227826,
+        "place_id": "ChIJWa-bKsPAqEcRfWvlP47WpWY",
+        "address": "Magdeburger Landstraße 5, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_easyapotheke_brandenburg",
+      "name": "easyApotheke Brandenburg",
+      "before": {
+        "lat": 52.40915928,
+        "lng": 12.562583799999999
+      },
+      "google": {
+        "lat": 52.4091988,
+        "lng": 12.5626486,
+        "place_id": "ChIJzeuFVVfAqEcR13DboeXGA74",
+        "address": "Hauptstraße 7, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_fontane_apotheke_inh_sibylle_schroder",
+      "name": "Fontane Apotheke Inh. Sibylle Schröder",
+      "before": {
+        "lat": 52.40272828,
+        "lng": 12.55730662
+      },
+      "google": {
+        "lat": 52.4027678,
+        "lng": 12.5573714,
+        "place_id": "ChIJESHSAV_AqEcR2czAbAyPa8g",
+        "address": "Trauerberg 27, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_dr_zerbaum_kollegen_mvz",
+      "name": "Dr. Zerbaum & Kollegen MVZ",
+      "before": {
+        "lat": 52.41023008,
+        "lng": 12.559674999999999
+      },
+      "google": {
+        "lat": 52.4102696,
+        "lng": 12.5597398,
+        "place_id": "ChIJGRi2VVfAqEcRWdvAjGn5300",
+        "address": "Petersilienstraße 12, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_asklepios_fachklinikum_brandenburg",
+      "name": "Asklepios Fachklinikum Brandenburg",
+      "before": {
+        "lat": 52.42575418,
+        "lng": 12.478077680000002
+      },
+      "google": {
+        "lat": 52.4257937,
+        "lng": 12.4781425,
+        "place_id": "ChIJM2shjZjHqEcRDHza2Jw_ZR4",
+        "address": "Anton-Saefkow-Allee 2, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_hausarztin_dr_mariana_stojanova",
+      "name": "Hausärztin Dr. Mariana Stojanova",
+      "before": {
+        "lat": 52.41268838,
+        "lng": 12.518752899999999
+      },
+      "google": {
+        "lat": 52.4127279,
+        "lng": 12.5188177,
+        "place_id": "ChIJO3ATocTAqEcRMLXfDiQIHgo",
+        "address": "Gustav-Nachtigal-Straße 3, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_nord_apotheke",
+      "name": "Nord Apotheke",
+      "before": {
+        "lat": 52.420817680000006,
+        "lng": 12.54990848
+      },
+      "google": {
+        "lat": 52.4208572,
+        "lng": 12.5499733,
+        "place_id": "ChIJ_eyxjv3AqEcRmBBL5cgnjrQ",
+        "address": "Lilli-Friesicke-Straße 2, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_praxis_dr_med_anne_mantke",
+      "name": "Praxis Dr. med. Anne Mantke",
+      "before": {
+        "lat": 52.41212728000001,
+        "lng": 12.546203
+      },
+      "google": {
+        "lat": 52.41216679999999,
+        "lng": 12.5462678,
+        "place_id": "ChIJ9V-9k63BqEcRZOGQWqO9tMk",
+        "address": "Gertrud-Piter-Platz 3, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_apotheke_im_beetzsee_center",
+      "name": "Apotheke im Beetzsee Center",
+      "before": {
+        "lat": 52.43240608,
+        "lng": 12.54869118
+      },
+      "google": {
+        "lat": 52.43244559999999,
+        "lng": 12.548756,
+        "place_id": "ChIJednfQxDBqEcRUdHmiNt-JL4",
+        "address": "Brielower Landstraße 19, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_vitrea_klinik_brandenburg_an_der_havel",
+      "name": "VITREA Klinik Brandenburg an der Havel",
+      "before": {
+        "lat": 52.43335048,
+        "lng": 12.51252518
+      },
+      "google": {
+        "lat": 52.43339,
+        "lng": 12.51259,
+        "place_id": "ChIJu_IVLSzBqEcRejGXbGa8830",
+        "address": "Brahmsstraße 38, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_marchen_wandbild",
+      "name": "Märchen Wandbild",
+      "before": {
+        "lat": 52.43836748,
+        "lng": 12.520044259999999
+      },
+      "google": {
+        "lat": 52.438407,
+        "lng": 12.5201091,
+        "place_id": "ChIJhcDYE_rBqEcRIUFof-p804Y",
+        "address": "Gertraudenstraße 48, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_waldmops_am_salzhof",
+      "name": "Waldmops am Salzhof",
+      "before": {
+        "lat": 52.41048558,
+        "lng": 12.553974299999998
+      },
+      "google": {
+        "lat": 52.4105251,
+        "lng": 12.5540391,
+        "place_id": "ChIJPVqTVADBqEcRviml2Oq43nU",
+        "address": "Am Salzhof, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_havelpegel",
+      "name": "Havelpegel",
+      "before": {
+        "lat": 52.41219747999999,
+        "lng": 12.565543199999999
+      },
+      "google": {
+        "lat": 52.412237,
+        "lng": 12.565608,
+        "place_id": "ChIJRcOPcJXBqEcRVXOARXexyPI",
+        "address": "Mühlendamm 2, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_havelgarten",
+      "name": "Havelgarten",
+      "before": {
+        "lat": 52.42471588000001,
+        "lng": 12.54424658
+      },
+      "google": {
+        "lat": 52.4247554,
+        "lng": 12.5443114,
+        "place_id": "ChIJgy6j_RzBqEcRl48-PNogzoo",
+        "address": "Flämingstraße 17, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_dl_garten_landschaftsbewasserung",
+      "name": "DL Garten - & Landschaftsbewässerung",
+      "before": {
+        "lat": 52.37664878,
+        "lng": 12.53017986
+      },
+      "google": {
+        "lat": 52.3766883,
+        "lng": 12.5302446,
+        "place_id": "ChIJE7Hywpy_qEcRMq-BeDmjpcg",
+        "address": "Birkenweg 83b, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_garten_landheim",
+      "name": "Garten Landheim",
+      "before": {
+        "lat": 52.391610379999996,
+        "lng": 12.53650974
+      },
+      "google": {
+        "lat": 52.3916499,
+        "lng": 12.5365745,
+        "place_id": "ChIJWU8adNLBqEcRA6TvrLIEP_k",
+        "address": "14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_gartensparte_buchenweg_e_v",
+      "name": "Gartensparte Buchenweg e.V.",
+      "before": {
+        "lat": 52.382066980000005,
+        "lng": 12.532719940000002
+      },
+      "google": {
+        "lat": 52.3821065,
+        "lng": 12.5327847,
+        "place_id": "ChIJgWDtl9fBqEcRb4HD0uHnWU0",
+        "address": "Buchenweg 77, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_marchengarten",
+      "name": "Märchengarten",
+      "before": {
+        "lat": 52.44020838,
+        "lng": 12.51954876
+      },
+      "google": {
+        "lat": 52.4402479,
+        "lng": 12.5196136,
+        "place_id": "ChIJ76gRZgDBqEcRUM5X7_UFGkQ",
+        "address": "Gertraudenstraße 72, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_kleingartenverein_am_jakobsgraben_e_v",
+      "name": "Kleingartenverein \"Am Jakobsgraben\"e.V",
+      "before": {
+        "lat": 52.39987758000001,
+        "lng": 12.555585420000003
+      },
+      "google": {
+        "lat": 52.3999171,
+        "lng": 12.5556502,
+        "place_id": "ChIJbwxwo_nBqEcR0UuUvAh_HAM",
+        "address": "Otto-Gartz-Straße 10 A, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_kleingartensparte_helgoland",
+      "name": "Kleingartensparte Helgoland",
+      "before": {
+        "lat": 52.401744179999994,
+        "lng": 12.54437502
+      },
+      "google": {
+        "lat": 52.4017837,
+        "lng": 12.5444398,
+        "place_id": "ChIJwaCSPc_BqEcRYppbZvtzRgU",
+        "address": "14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_kgv_einheit_e_v",
+      "name": "KGV Einheit e.V.",
+      "before": {
+        "lat": 52.40986358,
+        "lng": 12.517306999999999
+      },
+      "google": {
+        "lat": 52.4099031,
+        "lng": 12.5173718,
+        "place_id": "ChIJ__9bC8TAqEcR5h-sCtqJqKc",
+        "address": "Thüringer Str. 18, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_festplatz_wiesenweg",
+      "name": "Festplatz Wiesenweg",
+      "before": {
+        "lat": 52.40419748000001,
+        "lng": 12.544441619999999
+      },
+      "google": {
+        "lat": 52.40423699999999,
+        "lng": 12.5445064,
+        "place_id": "ChIJy-3Can7BqEcRWXzMJRu2-XE",
+        "address": "Wiesenweg, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_brandenburger_karnevals_club_bkc_1964_e_v",
+      "name": "Brandenburger Karnevals-Club BKC 1964 e.V.",
+      "before": {
+        "lat": 52.40592048,
+        "lng": 12.545505219999999
+      },
+      "google": {
+        "lat": 52.40596,
+        "lng": 12.54557,
+        "place_id": "ChIJjY0gT_LAqEcRaT2AhgwVqao",
+        "address": "Wiesenweg 23, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_freilichtbuhne_marienberg",
+      "name": "Freilichtbühne Marienberg",
+      "before": {
+        "lat": 52.41714068,
+        "lng": 12.547968699999998
+      },
+      "google": {
+        "lat": 52.4124133,
+        "lng": 12.5489105,
+        "place_id": "ChIJFyUOMfzAqEcR0aD0iJ-icMQ",
+        "address": "Am Marienberg, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 530,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_marina_quenzsee",
+      "name": "Marina Quenzsee",
+      "before": {
+        "lat": 52.41535288,
+        "lng": 12.4886613
+      },
+      "google": {
+        "lat": 52.4153924,
+        "lng": 12.4887261,
+        "place_id": "ChIJcSVc0jHHqEcRpBOOJdfaupg",
+        "address": "Plauer Landstraße 8, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_boot_mieten_brandenburg",
+      "name": "Boot Mieten Brandenburg",
+      "before": {
+        "lat": 52.41185418,
+        "lng": 12.5635935
+      },
+      "google": {
+        "lat": 52.4118937,
+        "lng": 12.5636583,
+        "place_id": "ChIJV3c0JRLBqEcR3GUdEq0YClY",
+        "address": "Hammerstraße, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_charterpoint_havelland",
+      "name": "Charterpoint Havelland",
+      "before": {
+        "lat": 52.42511228000001,
+        "lng": 12.55170148
+      },
+      "google": {
+        "lat": 52.42515179999999,
+        "lng": 12.5517663,
+        "place_id": "ChIJL3-hxQPBqEcRpvA8KR9E6zU",
+        "address": "Am Hafen 7, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_altes_bootshaus",
+      "name": "Altes Bootshaus",
+      "before": {
+        "lat": 52.41611888,
+        "lng": 12.566785499999998
+      },
+      "google": {
+        "lat": 52.4161584,
+        "lng": 12.5668503,
+        "place_id": "ChIJ6Q2_30HBqEcRogXgKRoto2A",
+        "address": "14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_flossverleih_treibgut",
+      "name": "Floßverleih TreibGuT",
+      "before": {
+        "lat": 52.40555648000001,
+        "lng": 12.54914622
+      },
+      "google": {
+        "lat": 52.405596,
+        "lng": 12.549211,
+        "place_id": "ChIJmQO-hPbAqEcRIjknEIQzkrE",
+        "address": "Franz-Ziegler-Straße 28, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_wassersport_geisler_gmbh",
+      "name": "Wassersport Geisler Gmbh",
+      "before": {
+        "lat": 52.40482568,
+        "lng": 12.535012220000002
+      },
+      "google": {
+        "lat": 52.4113627,
+        "lng": 12.5652402,
+        "place_id": "ChIJ9VDeW_XAqEcRmiznBMSirk0",
+        "address": "Mühlendamm 1, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 2175,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_happy_hausboot",
+      "name": "Happy Hausboot",
+      "before": {
+        "lat": 52.42408138,
+        "lng": 12.55533408
+      },
+      "google": {
+        "lat": 52.42412090000001,
+        "lng": 12.5553989,
+        "place_id": "ChIJQbU2oaFDhowRAztplX31ruc",
+        "address": "Am Hafen 7, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_action_brandenburg_an_havel",
+      "name": "Action Brandenburg an Havel",
+      "before": {
+        "lat": 52.43202248,
+        "lng": 12.53451308
+      },
+      "google": {
+        "lat": 52.43206199999999,
+        "lng": 12.5345779,
+        "place_id": "ChIJ43fXmiLBqEcRve4SVxLR4cA",
+        "address": "Upstallstraße 15, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_wedekind_angel_sport_spiel_u_schreibwaren_freie_waffen",
+      "name": "Wedekind Angel, Sport-, Spiel- u. Schreibwaren & freie Waffen",
+      "before": {
+        "lat": 52.41134308000001,
+        "lng": 12.5483056
+      },
+      "google": {
+        "lat": 52.4113826,
+        "lng": 12.5483704,
+        "place_id": "ChIJP4UyG_rAqEcRcHZJHNAdwQg",
+        "address": "Nicolaipl. 11, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_shirt_instyle",
+      "name": "Shirt Instyle",
+      "before": {
+        "lat": 52.412261879999996,
+        "lng": 12.5415071
+      },
+      "google": {
+        "lat": 52.4123014,
+        "lng": 12.5415719,
+        "place_id": "ChIJezPkTOXAqEcRCBh-PHjds1c",
+        "address": "ShirtInStyle, Magdeburger Str. 7, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_cardcastle_brandenburg",
+      "name": "CardCastle-Brandenburg",
+      "before": {
+        "lat": 52.412167679999996,
+        "lng": 12.543294799999998
+      },
+      "google": {
+        "lat": 52.4122072,
+        "lng": 12.5433596,
+        "place_id": "ChIJI4sPJwDBqEcRxOtwpSy1AaQ",
+        "address": "Harlungerstraße 1, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_thomas_philipps_brandenburg_an_der_havel",
+      "name": "Thomas Philipps Brandenburg an der Havel",
+      "before": {
+        "lat": 52.40777898,
+        "lng": 12.5433795
+      },
+      "google": {
+        "lat": 52.4078185,
+        "lng": 12.5434443,
+        "place_id": "ChIJjZTJpfHAqEcR4ecdCQ7I610",
+        "address": "Neuendorfer Str. 69 B, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_nobunto_deutschland_ug_haftungsbeschrankt",
+      "name": "Nobunto Deutschland UG (haftungsbeschränkt)",
+      "before": {
+        "lat": 52.403564180000004,
+        "lng": 12.55903242
+      },
+      "google": {
+        "lat": 52.4036037,
+        "lng": 12.5590972,
+        "place_id": "ChIJhdc0tl7AqEcR-8hbDTqj-Ds",
+        "address": "Trauerberg 36, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_mac_geiz",
+      "name": "MÄC-GEIZ",
+      "before": {
+        "lat": 52.40734288,
+        "lng": 12.547124399999998
+      },
+      "google": {
+        "lat": 52.4073824,
+        "lng": 12.5471892,
+        "place_id": "ChIJX7RdzfbAqEcR3mDQRJUqdpw",
+        "address": "Neuendorfer Str. 74-76, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_lidl",
+      "name": "Lidl",
+      "before": {
+        "lat": 52.413697479999996,
+        "lng": 12.523688199999999
+      },
+      "google": {
+        "lat": 52.413737,
+        "lng": 12.523753,
+        "place_id": "ChIJWeWnKN3AqEcRcSIbLqTJmn8",
+        "address": "Friedrich-Franz-Straße 4, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_kaufland_brandenburg",
+      "name": "Kaufland Brandenburg",
+      "before": {
+        "lat": 52.40901856000001,
+        "lng": 12.60872258
+      },
+      "google": {
+        "lat": 52.4329298,
+        "lng": 12.5478595,
+        "place_id": "ChIJ9d-xk2XBqEcRvyVIyXNGmp4",
+        "address": "Brielower Landstraße 19, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 4910,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_parkplatz_rewe",
+      "name": "Parkplatz REWE",
+      "before": {
+        "lat": 52.408079459999996,
+        "lng": 12.54718278
+      },
+      "google": {
+        "lat": 52.40810820000001,
+        "lng": 12.5472299,
+        "place_id": "ChIJZbGmMuzBqEcRy3Pp1LmfOlw",
+        "address": "Neuendorfer Str. 79, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_kaufland_ladestation",
+      "name": "Kaufland-Ladestation",
+      "before": {
+        "lat": 52.43298576000001,
+        "lng": 12.547871760000001
+      },
+      "google": {
+        "lat": 52.4330145,
+        "lng": 12.5479189,
+        "place_id": "ChIJn-u6RRDBqEcRC78LznjUC0s",
+        "address": "Brielower Landstraße 19, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_rewe_center_karen_laute",
+      "name": "REWE Center Karen Laute",
+      "before": {
+        "lat": 52.406311460000005,
+        "lng": 12.53844138
+      },
+      "google": {
+        "lat": 52.4063402,
+        "lng": 12.5384885,
+        "place_id": "ChIJYR3G-pbBqEcR5gPZiZf68dk",
+        "address": "Neuendorfer Str. 52, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_edeka_markt_ab_2026",
+      "name": "Edeka Markt ab 2026",
+      "before": {
+        "lat": 52.384085260000006,
+        "lng": 12.5272999
+      },
+      "google": {
+        "lat": 52.384114,
+        "lng": 12.527347,
+        "place_id": "ChIJIfo_TwDBqEcRrTNI_abcpKE",
+        "address": "Ziesarer Landstraße 64, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_delphin_apotheke",
+      "name": "Delphin Apotheke",
+      "before": {
+        "lat": 52.41118166,
+        "lng": 12.51774698
+      },
+      "google": {
+        "lat": 52.41121039999999,
+        "lng": 12.5177941,
+        "place_id": "ChIJUcAIVqM7ZUER1QF-jj0dIoc",
+        "address": "Thüringer Str. 10, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_bremers_apotheke_hohenstucken",
+      "name": "Bremers Apotheke Hohenstücken",
+      "before": {
+        "lat": 52.43511046,
+        "lng": 12.52270324
+      },
+      "google": {
+        "lat": 52.43513919999999,
+        "lng": 12.5227504,
+        "place_id": "ChIJ7RgXsjrBqEcRjaz30Qrmfbw",
+        "address": "Walther-Ausländer-Straße 2, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_klinikum_westbrandenburg",
+      "name": "Klinikum Westbrandenburg",
+      "before": {
+        "lat": 52.41336116,
+        "lng": 12.54722948
+      },
+      "google": {
+        "lat": 52.4133899,
+        "lng": 12.5472766,
+        "place_id": "ChIJVVUFqvvAqEcRJTMR3p3KcqI",
+        "address": "Hochstraße 29, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_polizeiinspektion_brandenburg",
+      "name": "Polizeiinspektion Brandenburg",
+      "before": {
+        "lat": 52.41189776000001,
+        "lng": 12.54249198
+      },
+      "google": {
+        "lat": 52.4119265,
+        "lng": 12.5425391,
+        "place_id": "ChIJdSrDr_rAqEcRNuayzc56kbQ",
+        "address": "Magdeburger Str. 52, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_kriminalpolizei_in_der_polizeidirektion_west",
+      "name": "Kriminalpolizei in der Polizeidirektion West",
+      "before": {
+        "lat": 52.431601060000006,
+        "lng": 12.53151936
+      },
+      "google": {
+        "lat": 52.4118818,
+        "lng": 12.5429954,
+        "place_id": "ChIJu5LLrNzAqEcRrgL-7jh0x90",
+        "address": "Magdeburger Str. 52, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 2327,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_drachenspielplatz",
+      "name": "Drachenspielplatz",
+      "before": {
+        "lat": 52.415790560000005,
+        "lng": 12.544589060000002
+      },
+      "google": {
+        "lat": 52.4158193,
+        "lng": 12.5446362,
+        "place_id": "ChIJsSDeU_vAqEcR9yisaX-CmRc",
+        "address": "Marienberg 1A, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_spielplatz_am_brandenburger_niederhavel_ufer",
+      "name": "Spielplatz am Brandenburger Niederhavel-Ufer",
+      "before": {
+        "lat": 52.40562566,
+        "lng": 12.538943080000001
+      },
+      "google": {
+        "lat": 52.4056544,
+        "lng": 12.5389902,
+        "place_id": "ChIJo6R0I9zBqEcRnhBFsUGKlJs",
+        "address": "Ferdinand-Lassalle-Straße, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_spielplatz_silokanal",
+      "name": "Spielplatz Silokanal",
+      "before": {
+        "lat": 52.423850359999996,
+        "lng": 12.561447760000002
+      },
+      "google": {
+        "lat": 52.4238791,
+        "lng": 12.5614949,
+        "place_id": "ChIJ5Qhqzk_BqEcR0mSi1qlk2Sc",
+        "address": "Schifferring 35, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_piratenspielplatz",
+      "name": "Piratenspielplatz",
+      "before": {
+        "lat": 52.41065406,
+        "lng": 12.55602878
+      },
+      "google": {
+        "lat": 52.4106828,
+        "lng": 12.5560759,
+        "place_id": "ChIJQ2GrIyTBqEcRAUbWCsf_Nfk",
+        "address": "14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_spielplatz_am_packhof",
+      "name": "Spielplatz am Packhof",
+      "before": {
+        "lat": 52.41400556,
+        "lng": 12.558833680000001
+      },
+      "google": {
+        "lat": 52.4140343,
+        "lng": 12.5588808,
+        "place_id": "ChIJ2eJbLJfBqEcRaGWg2rZDsw4",
+        "address": "14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_spielplatz_technische_hochschule_brandenburg",
+      "name": "Spielplatz Technische Hochschule Brandenburg",
+      "before": {
+        "lat": 52.41036116,
+        "lng": 12.538222880000001
+      },
+      "google": {
+        "lat": 52.4103899,
+        "lng": 12.53827,
+        "place_id": "ChIJFcCEve_AqEcRL2-OMyaXmWk",
+        "address": "14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_spielplatz",
+      "name": "Spielplatz",
+      "before": {
+        "lat": 52.41860536,
+        "lng": 12.54808436
+      },
+      "google": {
+        "lat": 52.4158193,
+        "lng": 12.5446362,
+        "place_id": "ChIJsSDeU_vAqEcR9yisaX-CmRc",
+        "address": "Marienberg 1A, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 388,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_stefan_s_garden",
+      "name": "Stefan's Garden",
+      "before": {
+        "lat": 52.42216296,
+        "lng": 12.51813246
+      },
+      "google": {
+        "lat": 52.4221917,
+        "lng": 12.5181796,
+        "place_id": "ChIJ6ZrhQgDBqEcROHFthcxWv2M",
+        "address": "Rosenweg 31, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_movietown",
+      "name": "Movietown",
+      "before": {
+        "lat": 52.40886736,
+        "lng": 12.61379878
+      },
+      "google": {
+        "lat": 52.4088961,
+        "lng": 12.6138459,
+        "place_id": "ChIJP8ED84HqqEcRIKA0tGkEDjI",
+        "address": "An d. Bundesstraße 1, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_stahlpalast",
+      "name": "Stahlpalast",
+      "before": {
+        "lat": 52.41346076,
+        "lng": 12.502929680000001
+      },
+      "google": {
+        "lat": 52.4134895,
+        "lng": 12.5029768,
+        "place_id": "ChIJibRoyc3AqEcRp4ktSbEewZY",
+        "address": "Magdeburger Landstraße 226, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_mittlere_havel",
+      "name": "Mittlere Havel",
+      "before": {
+        "lat": 52.42282086,
+        "lng": 12.61122816
+      },
+      "google": {
+        "lat": 52.4228496,
+        "lng": 12.6112753,
+        "place_id": "ChIJgwQj39HBqEcRirpuMViyyDo",
+        "address": "Havelufer, 14776 Brandenburg an der Havel-Gollwitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_fontaneweg_plaue",
+      "name": "Fontaneweg Plaue",
+      "before": {
+        "lat": 52.409428760000004,
+        "lng": 12.42187068
+      },
+      "google": {
+        "lat": 52.40945749999999,
+        "lng": 12.4219178,
+        "place_id": "ChIJ22gzM1rHqEcRt6_22BYVKyA",
+        "address": "Schloßstraße, 14774 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_parkplatz",
+      "name": "Parkplatz",
+      "before": {
+        "lat": 52.40437916,
+        "lng": 12.546225979999999
+      },
+      "google": {
+        "lat": 52.4044079,
+        "lng": 12.5462731,
+        "place_id": "ChIJTSp8SbvBqEcR6cBhJ5vIB08",
+        "address": "Franz-Ziegler-Straße 29, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_parkplatz_norma",
+      "name": "Parkplatz Norma",
+      "before": {
+        "lat": 52.40212666,
+        "lng": 12.55154478
+      },
+      "google": {
+        "lat": 52.4021554,
+        "lng": 12.5515919,
+        "place_id": "ChIJrz942SfBqEcRjw76f3MgM0Q",
+        "address": "Wilhelmsdorfer Str. 6, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_parkplatz_ziegelstrasse",
+      "name": "Parkplatz Ziegelstraße",
+      "before": {
+        "lat": 52.416835760000005,
+        "lng": 12.55892716
+      },
+      "google": {
+        "lat": 52.4168645,
+        "lng": 12.5589743,
+        "place_id": "ChIJXdlwiFXAqEcRYEDou9XUtpo",
+        "address": "Ziegelstraße, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_bsrk_tennis",
+      "name": "BSRK - Tennis",
+      "before": {
+        "lat": 52.41808006,
+        "lng": 12.567216860000002
+      },
+      "google": {
+        "lat": 52.4181088,
+        "lng": 12.567264,
+        "place_id": "ChIJM8tZ81TAqEcRw3s28rH4gKQ",
+        "address": "Grillendamm, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_werner_seelenbinder_sportplatz",
+      "name": "Werner-Seelenbinder-Sportplatz",
+      "before": {
+        "lat": 52.419497060000005,
+        "lng": 12.552545859999999
+      },
+      "google": {
+        "lat": 52.4195258,
+        "lng": 12.552593,
+        "place_id": "ChIJK9l9dv7AqEcRGI1VcfcLcGQ",
+        "address": "Brielower Str. 7, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_stadion_am_quenz",
+      "name": "Stadion am Quenz",
+      "before": {
+        "lat": 52.41319936,
+        "lng": 12.50090898
+      },
+      "google": {
+        "lat": 52.4132281,
+        "lng": 12.5009561,
+        "place_id": "ChIJTSTprs3AqEcR37pt8BnTmyc",
+        "address": "Magdeburger Landstraße 228, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_tennisclub_bsc_sud_05",
+      "name": "Tennisclub BSC Süd 05",
+      "before": {
+        "lat": 52.37637966,
+        "lng": 12.523841319999999
+      },
+      "google": {
+        "lat": 52.3764084,
+        "lng": 12.5238884,
+        "place_id": "ChIJeQ8URGO_qEcRgVh4Cd1uglQ",
+        "address": "Am Turnerheim 17A, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_sportplatz_sg_stahl_brandenburg",
+      "name": "Sportplatz SG Stahl Brandenburg",
+      "before": {
+        "lat": 52.418460759999995,
+        "lng": 12.485038460000002
+      },
+      "google": {
+        "lat": 52.4184895,
+        "lng": 12.4850856,
+        "place_id": "ChIJWeOg7i_HqEcRc4boqJ0-PGs",
+        "address": "Klinikallee, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_fc_borussia_brandenburg_e_v",
+      "name": "FC Borussia Brandenburg e.V.",
+      "before": {
+        "lat": 52.428191059999996,
+        "lng": 12.557148960000001
+      },
+      "google": {
+        "lat": 52.4282198,
+        "lng": 12.5571961,
+        "place_id": "ChIJR279pPbAqEcRUC5QXpJWsJA",
+        "address": "Massowburg 1, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_sport_in",
+      "name": "SPORT-IN",
+      "before": {
+        "lat": 52.409251960000006,
+        "lng": 12.61657578
+      },
+      "google": {
+        "lat": 52.4092807,
+        "lng": 12.6166229,
+        "place_id": "ChIJv5DuByrAqEcRLALQqMrreWs",
+        "address": "An der Bundesstraße, Gewerbepark 1, 14776 Brandenburg an der Havel-Wust"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_stwb_stadtwerke_brandenburg_an_der_havel_gmbh_co_kg",
+      "name": "StWB Stadtwerke Brandenburg an der Havel GmbH & Co. KG",
+      "before": {
+        "lat": 52.41211586000001,
+        "lng": 12.55776778
+      },
+      "google": {
+        "lat": 52.4121446,
+        "lng": 12.5578149,
+        "place_id": "ChIJhxg_uFfAqEcRry-covi0hGw",
+        "address": "Packhofstraße 31, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_totalenergies_tankstelle",
+      "name": "TotalEnergies Tankstelle",
+      "before": {
+        "lat": 52.39520426,
+        "lng": 12.540314500000001
+      },
+      "google": {
+        "lat": 52.395233,
+        "lng": 12.5403616,
+        "place_id": "ChIJZ2niVInAqEcRM3w_bfWthsg",
+        "address": "Total Tankstelle, Wilhelmsdorfer Landstraße 36, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_aral",
+      "name": "Aral",
+      "before": {
+        "lat": 52.43025626,
+        "lng": 12.553048660000002
+      },
+      "google": {
+        "lat": 52.40599899999999,
+        "lng": 12.575481,
+        "place_id": "ChIJA5jGxEXAqEcRFdXPv-wbzLw",
+        "address": "Potsdamer Str. 22, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 3097,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_hem_tankstelle",
+      "name": "HEM Tankstelle",
+      "before": {
+        "lat": 52.42995896,
+        "lng": 12.532338460000002
+      },
+      "google": {
+        "lat": 52.4299877,
+        "lng": 12.5323856,
+        "place_id": "ChIJ5TLbPiLBqEcRMYZ6vHKmHQg",
+        "address": "Rathenower Landstraße 1, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_aral_tankstelle",
+      "name": "Aral Tankstelle",
+      "before": {
+        "lat": 52.405970260000004,
+        "lng": 12.57543388
+      },
+      "google": {
+        "lat": 52.430285,
+        "lng": 12.5530958,
+        "place_id": "ChIJFVWYVgXBqEcRtd_deU4nlng",
+        "address": "Brielower Landstraße 17, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 3099,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_shell",
+      "name": "Shell",
+      "before": {
+        "lat": 52.40537105999999,
+        "lng": 12.57697948
+      },
+      "google": {
+        "lat": 52.4053998,
+        "lng": 12.5770266,
+        "place_id": "ChIJvelu10XAqEcRAFqKzz474Lg",
+        "address": "Potsdamer Str. 29, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_freie_tankstelle_bf",
+      "name": "Freie Tankstelle BF",
+      "before": {
+        "lat": 52.41732466,
+        "lng": 12.53126756
+      },
+      "google": {
+        "lat": 52.4173534,
+        "lng": 12.5313147,
+        "place_id": "ChIJUw8zSwDBqEcR5oM_jSi53uA",
+        "address": "Fontanestraße 1, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_leo_tankstelle_brandenburg",
+      "name": "LEO Tankstelle Brandenburg",
+      "before": {
+        "lat": 52.43050796,
+        "lng": 12.53087696
+      },
+      "google": {
+        "lat": 52.4305367,
+        "lng": 12.5309241,
+        "place_id": "ChIJ4ZCO4s_BqEcRmx6edm15zW4",
+        "address": "Warschauer Str. 23, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_backerei_rohe",
+      "name": "Bäckerei Röhe",
+      "before": {
+        "lat": 52.41286806000001,
+        "lng": 12.54664868
+      },
+      "google": {
+        "lat": 52.4128968,
+        "lng": 12.5466958,
+        "place_id": "ChIJq3OoWvrAqEcRjYBMb3swM6E",
+        "address": "Hochstraße 11, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_backer_thonke_brandenburg_penny_markt_w_sanger_str",
+      "name": "Bäcker Thonke Brandenburg, PENNY-Markt, W.-Sänger-Str.",
+      "before": {
+        "lat": 52.419973660000004,
+        "lng": 12.547065660000001
+      },
+      "google": {
+        "lat": 52.42000239999999,
+        "lng": 12.5471128,
+        "place_id": "ChIJFcxyFv3AqEcRjIRMYcm7tSg",
+        "address": "Willi-Sänger-Straße 46a, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_backer_thonke_brandenburg_einkaufspassage_am_wochenmarkt",
+      "name": "Bäcker Thonke Brandenburg Einkaufspassage am Wochenmarkt",
+      "before": {
+        "lat": 52.42237996,
+        "lng": 12.54844186
+      },
+      "google": {
+        "lat": 52.4224087,
+        "lng": 12.548489,
+        "place_id": "ChIJ6yDyogLBqEcR_GQXga2Y45A",
+        "address": "Werner-Seelenbinder-Straße 53, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_ihr_landbacker",
+      "name": "Ihr Landbäcker",
+      "before": {
+        "lat": 52.41539206,
+        "lng": 12.537813879999998
+      },
+      "google": {
+        "lat": 52.4154208,
+        "lng": 12.537861,
+        "place_id": "ChIJHY4XROTAqEcRZj_CcHUIwrg",
+        "address": "Karl-Marx-Straße 10, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_rossmann_drogeriemarkt",
+      "name": "ROSSMANN Drogeriemarkt",
+      "before": {
+        "lat": 52.434367359999996,
+        "lng": 12.522671339999999
+      },
+      "google": {
+        "lat": 52.40950429999999,
+        "lng": 12.561878,
+        "place_id": "ChIJR4YVXFfAqEcRpFkgYnkVJGs",
+        "address": "Hauptstraße 1-7, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 3836,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_drk_kreisverband_brandenburg_e_v",
+      "name": "DRK Kreisverband Brandenburg e.V.",
+      "before": {
+        "lat": 52.399161760000005,
+        "lng": 12.54633018
+      },
+      "google": {
+        "lat": 52.3991905,
+        "lng": 12.5463773,
+        "place_id": "ChIJDR0AJovAqEcREmLfW2coag8",
+        "address": "Grüne Aue 6, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_drk_kita_haus_6",
+      "name": "DRK Kita Haus 6",
+      "before": {
+        "lat": 52.413237460000005,
+        "lng": 12.52648898
+      },
+      "google": {
+        "lat": 52.4132662,
+        "lng": 12.5265361,
+        "place_id": "ChIJ5fNjQN3AqEcRVTUOS2WMAXM",
+        "address": "Magdeburger Landstraße 1-3, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_topferei_am_weinberg",
+      "name": "Töpferei am Weinberg",
+      "before": {
+        "lat": 52.440366960000006,
+        "lng": 12.630712740000002
+      },
+      "google": {
+        "lat": 52.4403957,
+        "lng": 12.6307599,
+        "place_id": "ChIJFUWSMYnBqEcR5PZgRq7jyfM",
+        "address": "Töpferei am Weinberg, Klein Kreutzer Dorfstraße 89, 14776 Brandenburg an der Havel-Klein Kreutz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_klein_kreutz",
+      "name": "Klein Kreutz",
+      "before": {
+        "lat": 52.438899459999995,
+        "lng": 12.637726840000001
+      },
+      "google": {
+        "lat": 52.4389282,
+        "lng": 12.637774,
+        "place_id": "ChIJxymU1AjqqEcRBmQCCKnoaaM",
+        "address": "14776 Brandenburg an der Havel-Klein Kreutz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_ws",
+      "name": "WS",
+      "before": {
+        "lat": 52.40683206,
+        "lng": 12.56237218
+      },
+      "google": {
+        "lat": 52.4258,
+        "lng": 12.55685,
+        "place_id": "ChIJM7lCTAHBqEcROpqgcpHYSTw",
+        "address": "Brielower Landstraße 1, 14772 Brandenburg an der Havel-Hohenstücken"
+      },
+      "delta_m": 2142,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_toiletten",
+      "name": "Toiletten",
+      "before": {
+        "lat": 52.34240596000001,
+        "lng": 12.51540374
+      },
+      "google": {
+        "lat": 52.4111536,
+        "lng": 12.5501364,
+        "place_id": "ChIJocGCfS7BqEcRyDF-5sSrAnw",
+        "address": "Neuendorfer Str. 91, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 8000,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_m3_selfstorage",
+      "name": "m3-selfstorage",
+      "before": {
+        "lat": 52.41871506,
+        "lng": 12.513979160000002
+      },
+      "google": {
+        "lat": 52.41874379999999,
+        "lng": 12.5140263,
+        "place_id": "ChIJMec370JTqEcRmm9OnacDgqE",
+        "address": "Spittastraße 2, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_ouzo_vino_taverna_trattoria_mediterrane_spezialitaten",
+      "name": "Ouzo & Vino – Taverna • Trattoria • Mediterrane Spezialitäten",
+      "before": {
+        "lat": 52.42054636,
+        "lng": 12.56172206
+      },
+      "google": {
+        "lat": 52.4205751,
+        "lng": 12.5617692,
+        "place_id": "ChIJtfbW-kTBqEcRBerlc03v1HE",
+        "address": "Beetzseeufer 8, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_papa_s_reis",
+      "name": "Papa’s Reis",
+      "before": {
+        "lat": 52.38941426,
+        "lng": 12.5336465
+      },
+      "google": {
+        "lat": 52.389443,
+        "lng": 12.5336936,
+        "place_id": "ChIJy85UQADBqEcRWLV3GBrlpiE",
+        "address": "Wilhelmsdorfer Landstraße 111, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_la_taberna",
+      "name": "La Taberna",
+      "before": {
+        "lat": 52.40612926,
+        "lng": 12.55208638
+      },
+      "google": {
+        "lat": 52.406158,
+        "lng": 12.5521335,
+        "place_id": "ChIJpzCzzurBqEcRAHQesAxZpyg",
+        "address": "Bauhofstraße 12, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_ristorante_il_capo_werft",
+      "name": "Ristorante IL Capo - Werft",
+      "before": {
+        "lat": 52.41170006000001,
+        "lng": 12.55729378
+      },
+      "google": {
+        "lat": 52.4117288,
+        "lng": 12.5573409,
+        "place_id": "ChIJRa6WOTzBqEcRhfk_r3Z6u1E",
+        "address": "Hauptstraße 77, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_tbui_asia_kuche",
+      "name": "TBui Asia Küche",
+      "before": {
+        "lat": 52.40759466000001,
+        "lng": 12.54169378
+      },
+      "google": {
+        "lat": 52.4076234,
+        "lng": 12.5417409,
+        "place_id": "ChIJf29y_djBqEcRSLq6-xvuitY",
+        "address": "Neuendorfer Str. 34, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_zemlin_essen_bei_freunden",
+      "name": "Zemlin – Essen bei Freunden",
+      "before": {
+        "lat": 52.409742259999994,
+        "lng": 12.56385478
+      },
+      "google": {
+        "lat": 52.409771,
+        "lng": 12.5639019,
+        "place_id": "ChIJGbr9fAvBqEcRm8sl0M76vUQ",
+        "address": "Molkenmarkt 34, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_herzschlag_brandenburg",
+      "name": "Herzschlag Brandenburg",
+      "before": {
+        "lat": 52.409863660000006,
+        "lng": 12.56174728
+      },
+      "google": {
+        "lat": 52.4098924,
+        "lng": 12.5617944,
+        "place_id": "ChIJAwpsXVfAqEcRFhT3sq3Nxcg",
+        "address": "Große Münzenstraße 17, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_trattoria_isola_di_capri",
+      "name": "Trattoria Isola di Capri",
+      "before": {
+        "lat": 52.404915560000006,
+        "lng": 12.54102228
+      },
+      "google": {
+        "lat": 52.4049443,
+        "lng": 12.5410694,
+        "place_id": "ChIJ_5tpiGLBqEcRkHS2LfxDm8Y",
+        "address": "Wiesenweg 5, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_bacari_restaurant",
+      "name": "Bacari Restaurant",
+      "before": {
+        "lat": 52.40639956,
+        "lng": 12.558813879999999
+      },
+      "google": {
+        "lat": 52.40642829999999,
+        "lng": 12.558861,
+        "place_id": "ChIJM7WTbpnBqEcR3S5OgKM1fy8",
+        "address": "Steinstraße 31, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_cafe_junah",
+      "name": "Café Junah",
+      "before": {
+        "lat": 52.42170116,
+        "lng": 12.55597056
+      },
+      "google": {
+        "lat": 52.4217299,
+        "lng": 12.5560177,
+        "place_id": "ChIJW-74RgDBqEcR1uNYCbSMk0E",
+        "address": "Werner-Seelenbinder-Straße 1, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_hofcafe_wust",
+      "name": "Hofcafé Wust",
+      "before": {
+        "lat": 52.41476776,
+        "lng": 12.60925568
+      },
+      "google": {
+        "lat": 52.41479649999999,
+        "lng": 12.6093028,
+        "place_id": "ChIJG-ukgVzBqEcRBKJBNF-vCdU",
+        "address": "Wuster Str. 83, 14776 Brandenburg an der Havel-Wust"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_coffee_corner",
+      "name": "Coffee Corner",
+      "before": {
+        "lat": 52.408540560000006,
+        "lng": 12.56223538
+      },
+      "google": {
+        "lat": 52.4085693,
+        "lng": 12.5622825,
+        "place_id": "ChIJmyYClvrAqEcRg82rv5NnNuI",
+        "address": "Katharinenkirchpl. 11, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_cafe_clara",
+      "name": "Café Clara",
+      "before": {
+        "lat": 52.430179859999996,
+        "lng": 12.492276960000002
+      },
+      "google": {
+        "lat": 52.4302086,
+        "lng": 12.4923241,
+        "place_id": "ChIJCbFcqNfGqEcRW1EcU_PERDs",
+        "address": "Anton-Saefkow-Allee 1, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_havelpause",
+      "name": "HavelPause",
+      "before": {
+        "lat": 52.41280336,
+        "lng": 12.55637958
+      },
+      "google": {
+        "lat": 52.4128321,
+        "lng": 12.5564267,
+        "place_id": "ChIJH29NyffBqEcR-WUSMOq9dBA",
+        "address": "Kommunikation 2, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_restaurant_weidelounge_teeladen_brandenburg",
+      "name": "Restaurant Weidelounge / Teeladen Brandenburg",
+      "before": {
+        "lat": 52.41146456,
+        "lng": 12.565042979999998
+      },
+      "google": {
+        "lat": 52.4114933,
+        "lng": 12.5650901,
+        "place_id": "ChIJzQpLouLBqEcRGleeGVuQItA",
+        "address": "Mühlendamm 20, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_pension_la_rose",
+      "name": "Pension La Rose",
+      "before": {
+        "lat": 52.41625146,
+        "lng": 12.558612060000002
+      },
+      "google": {
+        "lat": 52.4162802,
+        "lng": 12.5586592,
+        "place_id": "ChIJhe7pX__AqEcR5vNJwo0qsu8",
+        "address": "Mühlentorstraße 17, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_city_hotel_pension_brandenburg",
+      "name": "City Hotel Pension Brandenburg",
+      "before": {
+        "lat": 52.40425296000001,
+        "lng": 12.55822518
+      },
+      "google": {
+        "lat": 52.4042817,
+        "lng": 12.5582723,
+        "place_id": "ChIJdyUcM1nAqEcR0HFi1OAtZBM",
+        "address": "Große Gartenstraße 2, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_neue_muhle_hotel_restaurant",
+      "name": "Neue Mühle - Hotel & Restaurant",
+      "before": {
+        "lat": 52.34823806000001,
+        "lng": 12.48441554
+      },
+      "google": {
+        "lat": 52.3482668,
+        "lng": 12.4844626,
+        "place_id": "ChIJJ8YJvSO_qEcRmjjeEjx3ioI",
+        "address": "Neue Mühle 2, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_havelhotel",
+      "name": "Havelhotel",
+      "before": {
+        "lat": 52.41931606000001,
+        "lng": 12.569401160000002
+      },
+      "google": {
+        "lat": 52.4193448,
+        "lng": 12.5694483,
+        "place_id": "ChIJsUEA4UrBqEcRkmK6K2tr8dk",
+        "address": "Krakauer Str. 21-23, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_hotel_pension_gerono",
+      "name": "Hotel Pension Gerono",
+      "before": {
+        "lat": 52.412290559999995,
+        "lng": 12.540513479999998
+      },
+      "google": {
+        "lat": 52.4123193,
+        "lng": 12.5405606,
+        "place_id": "ChIJ_SqXaOXAqEcRbRt-jGOOvlU",
+        "address": "Magdeburger Str. 12, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_axxon_hotel",
+      "name": "Axxon Hotel",
+      "before": {
+        "lat": 52.41415746,
+        "lng": 12.502097280000001
+      },
+      "google": {
+        "lat": 52.4141862,
+        "lng": 12.5021444,
+        "place_id": "ChIJW_tchOXAqEcR5OWnWS3Ogm0",
+        "address": "Magdeburger Landstraße 228, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_pension_zur_regatta",
+      "name": "Pension Zur Regatta",
+      "before": {
+        "lat": 52.42639616,
+        "lng": 12.562031260000001
+      },
+      "google": {
+        "lat": 52.4264249,
+        "lng": 12.5620784,
+        "place_id": "ChIJL4f7QwfBqEcRjIQCIsdO3yw",
+        "address": "Schienenweg 48, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_pilgerpfad_brandenburg",
+      "name": "Pilgerpfad Brandenburg",
+      "before": {
+        "lat": 52.409153360000005,
+        "lng": 12.629090600000001
+      },
+      "google": {
+        "lat": 52.4091187,
+        "lng": 12.6282289,
+        "place_id": "ChIJWa0IToHqqEcRrm8-AZjwS3A",
+        "address": "Pilgerpfad, 14776 Brandenburg an der Havel-Wust"
+      },
+      "delta_m": 59,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "brandenburg_havel_pavillion",
+      "name": "Pavillion",
+      "before": {
+        "lat": 52.45919076,
+        "lng": 12.49920902
+      },
+      "google": {
+        "lat": 52.45922669999999,
+        "lng": 12.499268,
+        "place_id": "ChIJD0l6spjHqEcR_LxjapNitUw",
+        "address": "Unnamed Road, 14772, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_mit_fontane_zu_tisch_plastik_von_jessica_dorhofer_und_klasse_f",
+      "name": "Mit Fontane zu Tisch (Plastik von Jessica Dörhöfer und klasse Fotomotiv)",
+      "before": {
+        "lat": 52.40884686,
+        "lng": 12.421800999999999
+      },
+      "google": {
+        "lat": 52.4088828,
+        "lng": 12.4218599,
+        "place_id": "ChIJF8HrBGTHqEcRWlh3fhBiZIE",
+        "address": "14774 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_plauer_schleuse",
+      "name": "Plauer Schleuse",
+      "before": {
+        "lat": 52.40291816,
+        "lng": 12.393359100000001
+      },
+      "google": {
+        "lat": 52.4029541,
+        "lng": 12.393418,
+        "place_id": "ChIJUds-4AjHqEcRVd1dOnkA-J0",
+        "address": "Schleusenweg 3A, 14774 Brandenburg an der Havel-Kirchmöser"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_krieger_denkmal",
+      "name": "Krieger-Denkmal",
+      "before": {
+        "lat": 52.398476159999994,
+        "lng": 12.411459619999999
+      },
+      "google": {
+        "lat": 52.3985121,
+        "lng": 12.4115185,
+        "place_id": "ChIJc4vCj_bHqEcRqA7FNnRwXpg",
+        "address": "Am Seegarten, 14774 Brandenburg an der Havel-Kirchmöser"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_ehrendenkmal_befreiung_des_faschistischen_zuchthaus_brandenbur",
+      "name": "Ehrendenkmal Befreiung des faschistischen Zuchthaus Brandenburg-Görden",
+      "before": {
+        "lat": 52.42418686,
+        "lng": 12.46983358
+      },
+      "google": {
+        "lat": 52.4242228,
+        "lng": 12.4698925,
+        "place_id": "ChIJE9PYJQDHqEcROsfQccHd0yw",
+        "address": "Anton-Saefkow-Allee 23, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_schloss_gollwitz",
+      "name": "Schloss Gollwitz",
+      "before": {
+        "lat": 52.42193906,
+        "lng": 12.646515079999999
+      },
+      "google": {
+        "lat": 52.421975,
+        "lng": 12.646574,
+        "place_id": "ChIJJzkWhhHrqEcRPl22L_i7mn0",
+        "address": "Schlossallee 101, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_tontaubenschiessstand_im_schlosspark",
+      "name": "Tontaubenschießstand im Schloßpark",
+      "before": {
+        "lat": 52.40477766,
+        "lng": 12.416485900000001
+      },
+      "google": {
+        "lat": 52.4048136,
+        "lng": 12.4165448,
+        "place_id": "ChIJaQgTK2THqEcRt6W0-xIkKCI",
+        "address": "Koenigsmarckstraße 24, 14774 Brandenburg an der Havel-Plaue"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_sudsport_marketing_branden_burg_havel_gmbh",
+      "name": "Südsport-Marketing-Branden- burg/Havel GmbH",
+      "before": {
+        "lat": 52.41980696,
+        "lng": 12.55472138
+      },
+      "google": {
+        "lat": 52.4198429,
+        "lng": 12.5547803,
+        "place_id": "ChIJF0XXUP7AqEcRrQZVaPoP_5g",
+        "address": "Brielower Str. 7, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_muhlenberg",
+      "name": "Mühlenberg",
+      "before": {
+        "lat": 52.37111176,
+        "lng": 12.42040974
+      },
+      "google": {
+        "lat": 52.3666667,
+        "lng": 12.4166667,
+        "place_id": "ChIJs8GGv_W4qEcRAwSuqXjMc-s",
+        "address": "Mühlenberg, 14774 Brandenburg an der Havel"
+      },
+      "delta_m": 556,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "before": {
+        "lat": 52.50064026,
+        "lng": 12.45367678
+      },
+      "google": {
+        "lat": 52.413813,
+        "lng": 12.5493884,
+        "place_id": "ChIJqa6mmpzBqEcRs_LY-S_ra94",
+        "address": "Bergstraße 19, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 11631,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_kleingartensparte_immergrun",
+      "name": "Kleingartensparte Immergrün",
+      "before": {
+        "lat": 52.42435296,
+        "lng": 12.529689780000002
+      },
+      "google": {
+        "lat": 52.4243889,
+        "lng": 12.5297487,
+        "place_id": "ChIJJ22WIyPBqEcRYrK8K04j8h8",
+        "address": "14772 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_silberquelle",
+      "name": "Silberquelle",
+      "before": {
+        "lat": 52.34587296000001,
+        "lng": 12.449378080000002
+      },
+      "google": {
+        "lat": 52.3459089,
+        "lng": 12.4494369,
+        "place_id": "ChIJl5qfTei5qEcRJ0XRzkWdF0U",
+        "address": "14776 Brandenburg an der Havel-Kirchmöser"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_rochow_wanderweg",
+      "name": "Rochow Wanderweg",
+      "before": {
+        "lat": 52.336143160000006,
+        "lng": 12.5392898
+      },
+      "google": {
+        "lat": 52.3361791,
+        "lng": 12.5393486,
+        "place_id": "ChIJf4fHNDi_qEcRYT6DCUolYeE",
+        "address": "Reckahner Dorfstraße 43, 14797 Kloster Lehnin"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_diebesgrund",
+      "name": "Diebesgrund",
+      "before": {
+        "lat": 52.34615916,
+        "lng": 12.44714338
+      },
+      "google": {
+        "lat": 52.3461951,
+        "lng": 12.4472022,
+        "place_id": "ChIJN2j4UWe5qEcRh5TVQkBScic",
+        "address": "14774 Brandenburg an der Havel-Mahlenzien"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_fauler_see_im_naturschutzgebiet_granert",
+      "name": "Fauler See im Naturschutzgebiet \"Gränert\"",
+      "before": {
+        "lat": 52.35771566,
+        "lng": 12.441471459999999
+      },
+      "google": {
+        "lat": 52.3577516,
+        "lng": 12.4415303,
+        "place_id": "ChIJwd08hb65qEcRiNEZnPbHBJw",
+        "address": "Fauler See, 14774 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_",
+      "name": "Озеро купання",
+      "before": {
+        "lat": 52.371783060000006,
+        "lng": 12.48010524
+      },
+      "google": {
+        "lat": 52.371819,
+        "lng": 12.4801641,
+        "place_id": "ChIJCfJKXgC_qEcR_Xx8pf0BBtc",
+        "address": "9FCJ+P3, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_havelradweg_bei_gollwitz",
+      "name": "Havelradweg bei Gollwitz",
+      "before": {
+        "lat": 52.42673795999999,
+        "lng": 12.64453958
+      },
+      "google": {
+        "lat": 52.4267739,
+        "lng": 12.6445985,
+        "place_id": "ChIJQyNAPsLrqEcRHpuTpCUkzgY",
+        "address": "Havelradweg, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_marina_brandenburg",
+      "name": "Marina Brandenburg",
+      "before": {
+        "lat": 52.41325656,
+        "lng": 12.4230637
+      },
+      "google": {
+        "lat": 52.4132925,
+        "lng": 12.4231226,
+        "place_id": "ChIJ74tBdZjHqEcRXspKGU_ubkw",
+        "address": "Große Mühlenstraße 10, 14774 Brandenburg an der Havel-Plaue"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_may_marina_plaue",
+      "name": "May Marina-Plaue",
+      "before": {
+        "lat": 52.412745859999994,
+        "lng": 12.4243298
+      },
+      "google": {
+        "lat": 52.4127818,
+        "lng": 12.4243887,
+        "place_id": "ChIJaZPmodPHqEcRxNfQzIBWpq0",
+        "address": "Große Mühlenstraße 7, 14774 Brandenburg an der Havel-Plaue"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_marina_beetzsee_marina_caravan_ferienhaus",
+      "name": "Marina Beetzsee - Marina, Caravan, Ferienhaus",
+      "before": {
+        "lat": 52.46796635999999,
+        "lng": 12.56550612
+      },
+      "google": {
+        "lat": 52.46800229999999,
+        "lng": 12.5655651,
+        "place_id": "ChIJVy5L1NvDqEcRIYW1fKNSag8",
+        "address": "Seestraße 2, 14778 Beetzsee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_wohnmobil_und_caravanstellplatz_marina_beetzsee",
+      "name": "Wohnmobil- und Caravanstellplatz Marina Beetzsee",
+      "before": {
+        "lat": 52.46870925999999,
+        "lng": 12.56612662
+      },
+      "google": {
+        "lat": 52.4687452,
+        "lng": 12.5661856,
+        "place_id": "ChIJB_hPhNnDqEcRijeZVhfwo74",
+        "address": "14778 Brandenburg an der Havel-Brielow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_gattner_marina_plaue_gmbh",
+      "name": "Gattner Marina Plaue GmbH",
+      "before": {
+        "lat": 52.41352896000001,
+        "lng": 12.424217899999999
+      },
+      "google": {
+        "lat": 52.4135649,
+        "lng": 12.4242768,
+        "place_id": "ChIJfQVGdAjHqEcRp-ZD2FuJXBs",
+        "address": "Große Mühlenstraße 9, 14774 Brandenburg an der Havel"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_bunbo_das_bungalowboot_aquare_charter_gmbh",
+      "name": "BunBo das Bungalowboot - Aquare Charter GmbH",
+      "before": {
+        "lat": 52.41524306,
+        "lng": 12.423831680000001
+      },
+      "google": {
+        "lat": 52.415279,
+        "lng": 12.4238906,
+        "place_id": "ChIJjd3HpqLHqEcRsO3VuzhXlEU",
+        "address": "Große Mühlenstraße 24 F, 14774 Brandenburg an der Havel-Plaue"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_hausboot_vermietung_bolle",
+      "name": "Hausboot Vermietung Bolle",
+      "before": {
+        "lat": 52.47989455999999,
+        "lng": 12.5820808
+      },
+      "google": {
+        "lat": 52.47993049999999,
+        "lng": 12.5821398,
+        "place_id": "ChIJp9rxSTlfr0cRfacnULLmzMc",
+        "address": "Zur Ablage 9, 14778 Brandenburg an der Havel-Radewege"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_bootsverleih_m_rogge",
+      "name": "Bootsverleih M.Rogge",
+      "before": {
+        "lat": 52.37252896,
+        "lng": 12.428638240000002
+      },
+      "google": {
+        "lat": 52.3725649,
+        "lng": 12.4286971,
+        "place_id": "ChIJxQuJrYi5qEcRJX4GWaZolTg",
+        "address": "Gränertstraße 16c, 14774 Brandenburg an der Havel-Kirchmöser"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_bootvermietung_marko_wunderlich",
+      "name": "Bootvermietung Marko Wunderlich",
+      "before": {
+        "lat": 52.41335626,
+        "lng": 12.422199600000003
+      },
+      "google": {
+        "lat": 52.4133922,
+        "lng": 12.4222585,
+        "place_id": "ChIJ358ElDHHqEcRTK_10vvXPIw",
+        "address": "Große Mühlenstraße 10, 14774 Brandenburg an der Havel-Plaue"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_action_brandenburg_an_der_havel",
+      "name": "Action Brandenburg an der Havel",
+      "before": {
+        "lat": 52.40861885999999,
+        "lng": 12.6094708
+      },
+      "google": {
+        "lat": 52.43206199999999,
+        "lng": 12.5345779,
+        "place_id": "ChIJ43fXmiLBqEcRve4SVxLR4cA",
+        "address": "Upstallstraße 15, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 5709,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_wc_hauschen",
+      "name": "WC-Häuschen",
+      "before": {
+        "lat": 52.39729814,
+        "lng": 12.40322838
+      },
+      "google": {
+        "lat": 52.3973233,
+        "lng": 12.4032696,
+        "place_id": "ChIJv8l-IwDHqEcRNpzwAWZxlHE",
+        "address": "14774 Brandenburg an der Havel-Kirchmöser"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_offentliche_toilette",
+      "name": "Öffentliche Toilette",
+      "before": {
+        "lat": 52.434647940000005,
+        "lng": 12.52174964
+      },
+      "google": {
+        "lat": 52.4111536,
+        "lng": 12.5501364,
+        "place_id": "ChIJocGCfS7BqEcRyDF-5sSrAnw",
+        "address": "Neuendorfer Str. 91, 14770 Brandenburg an der Havel"
+      },
+      "delta_m": 3245,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_verkehrsbetriebe_brandenburg_an_der_havel",
+      "name": "Verkehrsbetriebe Brandenburg an der Havel",
+      "before": {
+        "lat": 52.42868824,
+        "lng": 12.535300340000001
+      },
+      "google": {
+        "lat": 52.4287601,
+        "lng": 12.5354182,
+        "place_id": "ChIJzT06EEvBqEcRNMrf44JLiQ4",
+        "address": "Upstallstraße 18, 14772 Brandenburg an der Havel"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_frau_dr_med_birgit_didczuneit_sandhop",
+      "name": "Frau Dr. med. Birgit Didczuneit-Sandhop",
+      "before": {
+        "lat": 52.41281758,
+        "lng": 12.5480808
+      },
+      "google": {
+        "lat": 52.4128571,
+        "lng": 12.5481456,
+        "place_id": "ChIJjYKvcaM7ZUERYoMMsS45qpM",
+        "address": "Hochstraße 29, 14770 Brandenburg an der Havel-Altstadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_immobra_gmbh_immobilien_in_brandenburg",
+      "name": "IMMOBRA GmbH - Immobilien in Brandenburg",
+      "before": {
+        "lat": 52.420288459999995,
+        "lng": 12.573392960000001
+      },
+      "google": {
+        "lat": 52.4203172,
+        "lng": 12.5734401,
+        "place_id": "ChIJw3JsFq3BqEcRlqnW8fwsSc4",
+        "address": "Alte Krakauer Str. 29, 14776 Brandenburg an der Havel"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_havel_plaue_brandenburg",
+      "name": "Havel Plaue Brandenburg",
+      "before": {
+        "lat": 52.421323959999995,
+        "lng": 12.43055808
+      },
+      "google": {
+        "lat": 52.43132139999999,
+        "lng": 12.406084,
+        "place_id": "ChIJZ2gzbZHHqEcRGlHmwQXmFls",
+        "address": "Brandenburg an der Havel-Plaue"
+      },
+      "delta_m": 1997,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_aussichtsturm_gotzer_berg",
+      "name": "Aussichtsturm Götzer Berg",
+      "before": {
+        "lat": 52.43582246,
+        "lng": 12.72704266
+      },
+      "google": {
+        "lat": 52.4358584,
+        "lng": 12.7271016,
+        "place_id": "ChIJ8wgQDebrqEcR2KMKozmEjCQ",
+        "address": "14550 Groß Kreutz (Havel)"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "brandenburg_havel_brandenburger_osthavelniederung",
+      "name": "Brandenburger Osthavelniederung",
+      "before": {
+        "lat": 52.426245859999995,
+        "lng": 12.753873780000001
+      },
+      "google": {
+        "lat": 52.4262818,
+        "lng": 12.7539327,
+        "place_id": "ChIJvZvq3sLrqEcRYLq-8YhP2oM",
+        "address": "Deutschland"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "brandenburg_havel_krokodilstation_golzow",
+      "name": "Krokodilstation Golzow",
+      "before": {
+        "lat": 52.282540960000006,
+        "lng": 12.60306796
+      },
+      "google": {
+        "lat": 52.2825769,
+        "lng": 12.6031267,
+        "place_id": "ChIJT_Pb5iSXqEcRb9wYjrpJwzQ",
+        "address": "Brandenburger Str. 82E, 14778 Golzow"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    }
+  ]
+}

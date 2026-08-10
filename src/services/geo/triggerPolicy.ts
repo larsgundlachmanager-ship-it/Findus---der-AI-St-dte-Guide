@@ -10,6 +10,7 @@ import type {
 import type { UserProfile } from '../../types/userProfile';
 import type { TideState } from './tideService';
 import { resolvePersonaEngine } from '../personaEngine';
+import { INTEREST_DIMENSIONS } from '../../interests/interestTaxonomy';
 
 const FOOD_TAGS = new Set([
   'fischrestaurant',
@@ -51,6 +52,8 @@ const CATEGORY_TO_PREF: Record<string, string> = {
   church: 'kirchen',
   museum: 'museen',
   museen: 'museen',
+  denkmal: 'denkmaeler',
+  denkmaeler: 'denkmaeler',
   architektur: 'architektur',
   restaurant: 'abendessen',
   cafe: 'kaffee',
@@ -60,6 +63,12 @@ const CATEGORY_TO_PREF: Record<string, string> = {
   frühstück: 'fruehstueck',
   bahnhof: 'oepnv',
   transport: 'oepnv',
+  theater: 'theater_kultur',
+  konzert: 'theater_kultur',
+  kino: 'theater_kultur',
+  wanderung: 'wandern',
+  radweg: 'fahrrad',
+  fahrradweg: 'fahrrad',
 };
 
 export function parseTagsJson(raw: string | null | undefined): string[] {
@@ -162,6 +171,7 @@ export function evaluateTriggerPolicy(
   );
   const noFish =
     prefOf(profile, 'fisch') === 'no' ||
+    (profile?.allergyTags ?? []).includes('fisch') ||
     dietary.some((d) => /kein\s*fisch|vegetar|vegan/.test(d));
   const vegetarian =
     prefOf(profile, 'vegetarisch') === 'yes' ||
@@ -308,18 +318,14 @@ export function evaluateTriggerPolicy(
 export function themeTagToInterestIds(themeTag: string): string[] {
   const t = themeTag.toLowerCase();
   const out: string[] = [];
-  if (CELEB_TAGS.has(t) || t.includes('celeb') || t.includes('personen')) {
-    out.push('personen');
+  for (const dim of INTEREST_DIMENSIONS) {
+    const tagHit = dim.tagMatchers.some((m) => t.includes(m) || m.includes(t));
+    const catHit = dim.categoryMatchers.some((m) => t === m || t.includes(m));
+    if (tagHit || catHit) out.push(dim.prefKey);
   }
-  if (CHURCH_TAGS.has(t) || t.includes('kirche')) out.push('kirchen');
-  if (t.includes('histor') || t === 'historical_core' || t.includes('geschichte')) {
-    out.push('geschichte');
-  }
-  if (t.includes('architektur') || t.includes('fassade')) out.push('architektur');
   if (FOOD_TAGS.has(t) || t.includes('food') || t.includes('preis')) {
     out.push('abendessen', 'streetfood', 'kaffee');
   }
   if (t.includes('legende') || t.includes('sage')) out.push('legenden');
-  if (t.includes('museum')) out.push('museen');
-  return out;
+  return [...new Set(out)];
 }

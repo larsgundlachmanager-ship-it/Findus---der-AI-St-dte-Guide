@@ -1,0 +1,393 @@
+{
+  "city_id": "tettnang",
+  "center": {
+    "lat": 47.6681722,
+    "lng": 9.5916036
+  },
+  "added": [
+    "tettnang_tettnang_barenplatz",
+    "tettnang_st_anna_tettnang",
+    "tettnang_tettnang_bahnhofstrasse",
+    "tettnang_tettnang_kirche",
+    "tettnang_tettnang_seestrasse",
+    "tettnang_tettnang_kreiskrankenhaus",
+    "tettnang_tettnang_hochhaus",
+    "tettnang_sail_more_erlebnis_bodensee",
+    "tettnang_elektronikmuseum_tettnang",
+    "tettnang_hopfenmuseum_laden",
+    "tettnang_st_georgs_kapelle",
+    "tettnang_heilig_kreuz_kapelle_tettnang_an_der_hochstr",
+    "tettnang_st_anna_kapelle",
+    "tettnang_schlosskapelle",
+    "tettnang_loretokapelle",
+    "tettnang_st_gallus",
+    "tettnang_kronenbrunnen",
+    "tettnang_fliegerdenkmal",
+    "tettnang_refill_station_brunnen_loretostrasse",
+    "tettnang_brunnen_grabenstrasse",
+    "tettnang_ehemalige_wasserversorgung",
+    "tettnang_naturdenkmal_allee",
+    "tettnang_aussichtspunkt_am_hopfenpfad",
+    "tettnang_schlosspark_tettnang",
+    "tettnang_aussichtspunkt_liebenau",
+    "tettnang_parkplatz",
+    "tettnang_aussichtspunkt_grafenholz",
+    "tettnang_parkplatz",
+    "tettnang_freibad_ried",
+    "tettnang_ifm_riedstadion",
+    "tettnang_freibad_obereisenbach",
+    "tettnang_tsv_vereinsheim_tettnang",
+    "tettnang_carl_guhrer_halle",
+    "tettnang_waldspielplatz",
+    "tettnang_schlossgarten_schloss_tettnang",
+    "tettnang_baren_apotheke",
+    "tettnang_schloss_apotheke",
+    "tettnang_dr_schon_kollegen",
+    "tettnang_chocova_cafe_genuss_lieblingsstucke",
+    "tettnang_cafe_mittenand",
+    "tettnang_conditorei_am_oberhof",
+    "tettnang_knapps_landgasthof_kreuz",
+    "tettnang_gastehaus_schuhle",
+    "tettnang_gastehaus_albergo",
+    "tettnang_hotel_ritter"
+  ],
+  "skipped": [
+    {
+      "name": "Tettnang St. Anna",
+      "near": "tettnang_st_anna_tettnang"
+    },
+    {
+      "name": "Kath. Kirchengemeinde St. Gallus Tettnang",
+      "near": "tettnang_tettnang_kirche"
+    },
+    {
+      "name": "Heilig-Kreuz-Kapelle",
+      "near": "tettnang_elektronikmuseum_tettnang"
+    },
+    {
+      "name": "Denkmal des Krieges 1870-1871",
+      "near": "tettnang_st_georgs_kapelle"
+    },
+    {
+      "name": "Brunnen am Torschloss",
+      "near": "tettnang_elektronikmuseum_tettnang"
+    },
+    {
+      "name": "Hopfenpfad",
+      "near": "tettnang_parkplatz"
+    },
+    {
+      "name": "Tourist Information Tettnang",
+      "near": "tettnang_st_georgs_kapelle"
+    },
+    {
+      "name": "Stadt-Apotheke",
+      "near": "tettnang_tettnang_barenplatz"
+    },
+    {
+      "name": "Hausarztpraxis Tettnang",
+      "near": "tettnang_baren_apotheke"
+    },
+    {
+      "name": "Internistische Hausarztpraxis, Diabetologie Dr. Lauterwein",
+      "near": "tettnang_baren_apotheke"
+    },
+    {
+      "name": "Parkplatz Krankenhaus Tettnang P3",
+      "near": "tettnang_tettnang_kreiskrankenhaus"
+    },
+    {
+      "name": "Dr. med. Gerhard Hutter und Dr. med. Sandra van Waegeningh - Hausärztliche Gemeinschaftspraxis",
+      "near": "tettnang_schloss_apotheke"
+    },
+    {
+      "name": "Vincent Cafe Tettnang",
+      "near": "tettnang_elektronikmuseum_tettnang"
+    },
+    {
+      "name": "Kaffekännle",
+      "near": "tettnang_brunnen_grabenstrasse"
+    },
+    {
+      "name": "Eiscafé Dolomiti",
+      "near": "tettnang_elektronikmuseum_tettnang"
+    },
+    {
+      "name": "Naturbäckerei Simon Zeh UG",
+      "near": "tettnang_chocova_cafe_genuss_lieblingsstucke"
+    },
+    {
+      "name": "Montfort Bistro Tettnang",
+      "near": "tettnang_sail_more_erlebnis_bodensee"
+    },
+    {
+      "name": "Fachwerk",
+      "near": "tettnang_tettnang_barenplatz"
+    },
+    {
+      "name": "Chef´s Kitchen Restaurants",
+      "near": "tettnang_tettnang_barenplatz"
+    },
+    {
+      "name": "Torstuben",
+      "near": "tettnang_elektronikmuseum_tettnang"
+    },
+    {
+      "name": "Brauerei u. Hotel zur Krone",
+      "near": "tettnang_kronenbrunnen"
+    },
+    {
+      "name": "Gasthof Traube",
+      "near": "tettnang_tettnang_barenplatz"
+    },
+    {
+      "name": "Restaurant Brünnle",
+      "near": "tettnang_elektronikmuseum_tettnang"
+    },
+    {
+      "name": "Hotel Bären",
+      "near": "tettnang_tettnang_barenplatz"
+    }
+  ],
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [
+      "tettnang_tettnang_barenplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_st_anna_tettnang: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_tettnang_bahnhofstrasse: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_tettnang_kirche: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_tettnang_seestrasse: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_tettnang_kreiskrankenhaus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_tettnang_hochhaus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_sail_more_erlebnis_bodensee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_elektronikmuseum_tettnang: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_hopfenmuseum_laden: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_st_georgs_kapelle: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_heilig_kreuz_kapelle_tettnang_an_der_hochstr: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_st_anna_kapelle: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_schlosskapelle: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_loretokapelle: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_st_gallus: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_kronenbrunnen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_fliegerdenkmal: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_refill_station_brunnen_loretostrasse: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_brunnen_grabenstrasse: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_ehemalige_wasserversorgung: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_naturdenkmal_allee: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_aussichtspunkt_am_hopfenpfad: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_schlosspark_tettnang: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_aussichtspunkt_liebenau: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_parkplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_aussichtspunkt_grafenholz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_freibad_ried: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_ifm_riedstadion: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_freibad_obereisenbach: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_tsv_vereinsheim_tettnang: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_carl_guhrer_halle: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_waldspielplatz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_schlossgarten_schloss_tettnang: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_baren_apotheke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_schloss_apotheke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_dr_schon_kollegen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_chocova_cafe_genuss_lieblingsstucke: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_cafe_mittenand: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_conditorei_am_oberhof: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_knapps_landgasthof_kreuz: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_gastehaus_schuhle: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_gastehaus_albergo: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_hotel_ritter: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "tettnang_tettnang_barenplatz: general_info/Erzählung too short (0<80)",
+      "tettnang_tettnang_barenplatz: deep_data_pool thin (1<4)",
+      "tettnang_st_anna_tettnang: general_info/Erzählung too short (0<80)",
+      "tettnang_st_anna_tettnang: deep_data_pool thin (1<4)",
+      "tettnang_tettnang_bahnhofstrasse: general_info/Erzählung too short (0<80)",
+      "tettnang_tettnang_bahnhofstrasse: deep_data_pool thin (1<4)",
+      "tettnang_tettnang_kirche: general_info/Erzählung too short (0<80)",
+      "tettnang_tettnang_kirche: deep_data_pool thin (1<4)",
+      "tettnang_tettnang_seestrasse: general_info/Erzählung too short (0<80)",
+      "tettnang_tettnang_seestrasse: deep_data_pool thin (1<4)",
+      "tettnang_tettnang_kreiskrankenhaus: general_info/Erzählung too short (0<80)",
+      "tettnang_tettnang_kreiskrankenhaus: deep_data_pool thin (1<4)",
+      "tettnang_tettnang_hochhaus: general_info/Erzählung too short (0<80)",
+      "tettnang_tettnang_hochhaus: deep_data_pool thin (1<4)",
+      "tettnang_sail_more_erlebnis_bodensee: general_info/Erzählung too short (0<80)",
+      "tettnang_sail_more_erlebnis_bodensee: deep_data_pool thin (1<4)",
+      "tettnang_elektronikmuseum_tettnang: general_info/Erzählung too short (0<80)",
+      "tettnang_elektronikmuseum_tettnang: deep_data_pool thin (1<4)",
+      "tettnang_hopfenmuseum_laden: general_info/Erzählung too short (0<80)",
+      "tettnang_hopfenmuseum_laden: deep_data_pool thin (1<4)",
+      "tettnang_st_georgs_kapelle: general_info/Erzählung too short (0<80)",
+      "tettnang_st_georgs_kapelle: deep_data_pool thin (1<4)",
+      "tettnang_heilig_kreuz_kapelle_tettnang_an_der_hochstr: general_info/Erzählung too short (0<80)",
+      "tettnang_heilig_kreuz_kapelle_tettnang_an_der_hochstr: deep_data_pool thin (1<4)",
+      "tettnang_st_anna_kapelle: general_info/Erzählung too short (0<80)",
+      "tettnang_st_anna_kapelle: deep_data_pool thin (1<4)",
+      "tettnang_schlosskapelle: general_info/Erzählung too short (0<80)",
+      "tettnang_schlosskapelle: deep_data_pool thin (1<4)",
+      "tettnang_loretokapelle: general_info/Erzählung too short (0<80)",
+      "tettnang_loretokapelle: deep_data_pool thin (1<4)",
+      "tettnang_st_gallus: general_info/Erzählung too short (0<80)",
+      "tettnang_st_gallus: deep_data_pool thin (1<4)",
+      "tettnang_kronenbrunnen: general_info/Erzählung too short (0<80)",
+      "tettnang_kronenbrunnen: deep_data_pool thin (1<4)",
+      "tettnang_fliegerdenkmal: general_info/Erzählung too short (0<80)",
+      "tettnang_fliegerdenkmal: deep_data_pool thin (1<4)",
+      "tettnang_refill_station_brunnen_loretostrasse: general_info/Erzählung too short (0<80)",
+      "tettnang_refill_station_brunnen_loretostrasse: deep_data_pool thin (1<4)",
+      "tettnang_brunnen_grabenstrasse: general_info/Erzählung too short (0<80)",
+      "tettnang_brunnen_grabenstrasse: deep_data_pool thin (1<4)",
+      "tettnang_ehemalige_wasserversorgung: general_info/Erzählung too short (0<80)",
+      "tettnang_ehemalige_wasserversorgung: deep_data_pool thin (1<4)",
+      "tettnang_naturdenkmal_allee: general_info/Erzählung too short (0<80)",
+      "tettnang_naturdenkmal_allee: deep_data_pool thin (1<4)",
+      "tettnang_aussichtspunkt_am_hopfenpfad: general_info/Erzählung too short (0<80)",
+      "tettnang_aussichtspunkt_am_hopfenpfad: deep_data_pool thin (1<4)",
+      "tettnang_schlosspark_tettnang: general_info/Erzählung too short (0<80)",
+      "tettnang_schlosspark_tettnang: deep_data_pool thin (1<4)",
+      "tettnang_aussichtspunkt_liebenau: general_info/Erzählung too short (0<80)",
+      "tettnang_aussichtspunkt_liebenau: deep_data_pool thin (1<4)",
+      "tettnang_parkplatz: general_info/Erzählung too short (0<80)",
+      "tettnang_parkplatz: deep_data_pool thin (1<4)",
+      "tettnang_aussichtspunkt_grafenholz: general_info/Erzählung too short (0<80)",
+      "tettnang_aussichtspunkt_grafenholz: deep_data_pool thin (1<4)",
+      "tettnang_freibad_ried: general_info/Erzählung too short (0<80)",
+      "tettnang_freibad_ried: deep_data_pool thin (1<4)",
+      "tettnang_ifm_riedstadion: general_info/Erzählung too short (0<80)",
+      "tettnang_ifm_riedstadion: deep_data_pool thin (1<4)",
+      "tettnang_freibad_obereisenbach: general_info/Erzählung too short (0<80)",
+      "tettnang_freibad_obereisenbach: deep_data_pool thin (1<4)",
+      "tettnang_tsv_vereinsheim_tettnang: general_info/Erzählung too short (0<80)",
+      "tettnang_tsv_vereinsheim_tettnang: deep_data_pool thin (1<4)",
+      "tettnang_carl_guhrer_halle: general_info/Erzählung too short (0<80)",
+      "tettnang_carl_guhrer_halle: deep_data_pool thin (1<4)",
+      "tettnang_waldspielplatz: general_info/Erzählung too short (0<80)",
+      "tettnang_waldspielplatz: deep_data_pool thin (1<4)",
+      "tettnang_schlossgarten_schloss_tettnang: general_info/Erzählung too short (0<80)",
+      "tettnang_schlossgarten_schloss_tettnang: deep_data_pool thin (1<4)",
+      "coverage: missing must-have category 'aussicht'"
+    ],
+    "stats": {
+      "spots": 44,
+      "storySpots": 44,
+      "directorySpots": 0,
+      "triggers": 44,
+      "missingTrigger": 0,
+      "missingNarration": 34,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 34,
+      "orphanTriggers": 0,
+      "categories": [
+        "bahnhof",
+        "cafe",
+        "denkmal",
+        "freizeit",
+        "gesundheit",
+        "hafen",
+        "hotel",
+        "kirche",
+        "museum",
+        "natur",
+        "restaurant"
+      ],
+      "missingMustHave": [
+        "aussicht"
+      ],
+      "nicePresent": [
+        "cafe",
+        "restaurant",
+        "hotel",
+        "gesundheit",
+        "hafen",
+        "bahnhof"
+      ],
+      "liveResearch": 4,
+      "offlineQa": 0,
+      "hasCoverage": true,
+      "hasTransit": false,
+      "hasMobility": false,
+      "links": 0
+    },
+    "gaps": {
+      "needsNarration": [
+        "tettnang_tettnang_barenplatz",
+        "tettnang_st_anna_tettnang",
+        "tettnang_tettnang_bahnhofstrasse",
+        "tettnang_tettnang_kirche",
+        "tettnang_tettnang_seestrasse",
+        "tettnang_tettnang_kreiskrankenhaus",
+        "tettnang_tettnang_hochhaus",
+        "tettnang_sail_more_erlebnis_bodensee",
+        "tettnang_elektronikmuseum_tettnang",
+        "tettnang_hopfenmuseum_laden",
+        "tettnang_st_georgs_kapelle",
+        "tettnang_heilig_kreuz_kapelle_tettnang_an_der_hochstr",
+        "tettnang_st_anna_kapelle",
+        "tettnang_schlosskapelle",
+        "tettnang_loretokapelle",
+        "tettnang_st_gallus",
+        "tettnang_kronenbrunnen",
+        "tettnang_fliegerdenkmal",
+        "tettnang_refill_station_brunnen_loretostrasse",
+        "tettnang_brunnen_grabenstrasse",
+        "tettnang_ehemalige_wasserversorgung",
+        "tettnang_naturdenkmal_allee",
+        "tettnang_aussichtspunkt_am_hopfenpfad",
+        "tettnang_schlosspark_tettnang",
+        "tettnang_aussichtspunkt_liebenau",
+        "tettnang_parkplatz",
+        "tettnang_aussichtspunkt_grafenholz",
+        "tettnang_freibad_ried",
+        "tettnang_ifm_riedstadion",
+        "tettnang_freibad_obereisenbach",
+        "tettnang_tsv_vereinsheim_tettnang",
+        "tettnang_carl_guhrer_halle",
+        "tettnang_waldspielplatz",
+        "tettnang_schlossgarten_schloss_tettnang"
+      ],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [
+        "tettnang_tettnang_barenplatz",
+        "tettnang_st_anna_tettnang",
+        "tettnang_tettnang_bahnhofstrasse",
+        "tettnang_tettnang_kirche",
+        "tettnang_tettnang_seestrasse",
+        "tettnang_tettnang_kreiskrankenhaus",
+        "tettnang_tettnang_hochhaus",
+        "tettnang_sail_more_erlebnis_bodensee",
+        "tettnang_elektronikmuseum_tettnang",
+        "tettnang_hopfenmuseum_laden",
+        "tettnang_st_georgs_kapelle",
+        "tettnang_heilig_kreuz_kapelle_tettnang_an_der_hochstr",
+        "tettnang_st_anna_kapelle",
+        "tettnang_schlosskapelle",
+        "tettnang_loretokapelle",
+        "tettnang_st_gallus",
+        "tettnang_kronenbrunnen",
+        "tettnang_fliegerdenkmal",
+        "tettnang_refill_station_brunnen_loretostrasse",
+        "tettnang_brunnen_grabenstrasse",
+        "tettnang_ehemalige_wasserversorgung",
+        "tettnang_naturdenkmal_allee",
+        "tettnang_aussichtspunkt_am_hopfenpfad",
+        "tettnang_schlosspark_tettnang",
+        "tettnang_aussichtspunkt_liebenau",
+        "tettnang_parkplatz",
+        "tettnang_aussichtspunkt_grafenholz",
+        "tettnang_freibad_ried",
+        "tettnang_ifm_riedstadion",
+        "tettnang_freibad_obereisenbach",
+        "tettnang_tsv_vereinsheim_tettnang",
+        "tettnang_carl_guhrer_halle",
+        "tettnang_waldspielplatz",
+        "tettnang_schlossgarten_schloss_tettnang"
+      ],
+      "missingCategories": [
+        "aussicht"
+      ]
+    }
+  },
+  "file": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\tettnang.json"
+}

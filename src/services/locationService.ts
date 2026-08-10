@@ -14,13 +14,16 @@
 
 import * as Location from 'expo-location';
 import type { LocationObject, LocationSubscription } from 'expo-location';
-import { AppState, type AppStateStatus, Platform } from 'react-native';
+import { AppState, type AppStateStatus, Platform, Linking, Alert } from 'react-native';
 import {
   FINDUS_LOCATION_TASK,
   setBackgroundLocationHandler,
 } from './backgroundLocationTask';
 import { useFinnusStore } from '../store/useFinnusStore';
 import { showPermissionMissingAlert } from '../utils/permissionAlerts';
+import { pushGpsTrackFix, hydrateGpsTrackBuffer } from './navigation/gpsTrackBuffer';
+import { startPedometerSleepMonitor } from './battery/pedometerSleep';
+import { ensureLocationProminentDisclosure } from './location/locationProminentDisclosure';
 
 export type LocationUpdateHandler = (coords: {
   lat: number;
@@ -33,8 +36,14 @@ export type LocationUpdateHandler = (coords: {
 
 export { FINDUS_LOCATION_TASK };
 
-/** realtime = Nav/nah; economy = Fuß Free-Roam sparsam; throttled = während Audio */
-export type GpsStreamProfile = 'realtime' | 'economy' | 'throttled';
+/** realtime = <100m / Nav; far = >500m sparsam; economy = Mittel; sleep = Pedometer-Ruhe; throttled = Audio */
+export type GpsStreamProfile =
+  | 'realtime'
+  | 'realtime-bike'
+  | 'economy'
+  | 'far'
+  | 'sleep'
+  | 'throttled';
 
 let subscription: LocationSubscription | null = null;
 let updateHandler: LocationUpdateHandler | null = null;
@@ -62,10 +71,40 @@ function emitUpdate(coords: {
     lng: coords.lng,
     accuracy: coords.accuracy,
   });
+  // Last-3 GPS track for vector-aware discovery (Masterbook V5)
+  pushGpsTrackFix(coords.lat, coords.lng);
+  void import('./mobility/paceProfile')
+    .then(({ pushPaceSample, modeHintFromSessionTravel }) => {
+      pushPaceSample({
+        lat: coords.lat,
+        lng: coords.lng,
+        speedMs: coords.speedMs,
+        modeHint: modeHintFromSessionTravel(),
+      });
+    })
+    .catch(() => undefined);
   updateHandler?.(coords);
 }
 
 function watchOptionsForProfile(profile: GpsStreamProfile) {
+  if (profile === 'sleep') {
+    // Deep sleep: 2 min stillness → GPS max every 2 min; wake via pedometer
+    return {
+      accuracy: Location.Accuracy.Lowest,
+      timeInterval: 120_000,
+      distanceInterval: 40,
+      mayShowUserSettingsDialog: true,
+    };
+  }
+  if (profile === 'far') {
+    // >500 m from next waypoint — throttle to 15 s
+    return {
+      accuracy: Location.Accuracy.Balanced,
+      timeInterval: 15_000,
+      distanceInterval: 25,
+      mayShowUserSettingsDialog: true,
+    };
+  }
   if (profile === 'throttled') {
     return {
       accuracy: Location.Accuracy.Balanced,
@@ -75,7 +114,6 @@ function watchOptionsForProfile(profile: GpsStreamProfile) {
     };
   }
   if (profile === 'economy') {
-    // Fuß Free-Roam: ~3–5 s, größerer Abstand — Akku (#32A)
     return {
       accuracy: Location.Accuracy.Balanced,
       timeInterval: 4000,
@@ -83,10 +121,19 @@ function watchOptionsForProfile(profile: GpsStreamProfile) {
       mayShowUserSettingsDialog: true,
     };
   }
+  if (profile === 'realtime-bike') {
+    return {
+      accuracy: Location.Accuracy.BestForNavigation,
+      timeInterval: 1000,
+      distanceInterval: 1,
+      mayShowUserSettingsDialog: true,
+    };
+  }
+  // realtime: <100 m from next WP / Nav — 3-4 s (Walking Mode Throttling)
   return {
     accuracy: Location.Accuracy.BestForNavigation,
-    timeInterval: 1000,
-    distanceInterval: 1,
+    timeInterval: 3500,
+    distanceInterval: 2,
     mayShowUserSettingsDialog: true,
   };
 }
@@ -150,6 +197,22 @@ async function kickstartFix(opts?: { quiet?: boolean }): Promise<void> {
 }
 
 export async function requestLocationPermission(): Promise<boolean> {
+  try {
+    const { status: existing } =
+      await Location.getForegroundPermissionsAsync();
+    if (existing === 'granted') return true;
+  } catch {
+    /* weiter mit Disclosure + Request */
+  }
+
+  // Google Play: eigener Hinweis VOR dem Systemdialog
+  const disclosed = await ensureLocationProminentDisclosure('foreground');
+  if (!disclosed) {
+    useFinnusStore.getState().setGpsStatus('denied', null);
+    useFinnusStore.getState().setGpsWatching(false);
+    return false;
+  }
+
   const { status: fg } = await Location.requestForegroundPermissionsAsync();
   if (fg !== 'granted') {
     useFinnusStore.getState().setGpsStatus('denied', null);
@@ -160,12 +223,63 @@ export async function requestLocationPermission(): Promise<boolean> {
   return true;
 }
 
-/** Background erst nach laufendem Watcher — Dialog blockiert sonst den Start. */
+/** Background: App-Hinweis → System-Popup („Immer zulassen“), Settings nur als Fallback. */
 async function requestBackgroundPermissionLater(): Promise<void> {
   try {
-    const { status } = await Location.getBackgroundPermissionsAsync();
+    const { status: current } = await Location.getBackgroundPermissionsAsync();
+    if (current === 'granted') return;
+
+    const { status: fg } = await Location.getForegroundPermissionsAsync();
+    if (fg !== 'granted') return;
+
+    // Pflicht: Prominent Disclosure unmittelbar vor Background-Systemdialog
+    const disclosed = await ensureLocationProminentDisclosure('background');
+    if (!disclosed) return;
+
+    const { status } = await Location.requestBackgroundPermissionsAsync();
     if (status === 'granted') return;
-    await Location.requestBackgroundPermissionsAsync();
+
+    if (Platform.OS !== 'android') return;
+
+    Alert.alert(
+      'Standort immer erlauben',
+      'Damit Findus mit gesperrtem Bildschirm weiter navigieren und Orte erkennen kann, tippe bitte auf „Immer zulassen“.\n\nIch öffne dir jetzt den passenden System-Dialog — dort reicht ein Tipp, ohne durch mehrere Einstellungs-Seiten zu klicken.',
+      [
+        { text: 'Später', style: 'cancel' },
+        {
+          text: 'Immer zulassen',
+          onPress: () => {
+            void (async () => {
+              try {
+                const againDisclosed =
+                  await ensureLocationProminentDisclosure('background', {
+                    force: true,
+                  });
+                if (!againDisclosed) return;
+                const again =
+                  await Location.requestBackgroundPermissionsAsync();
+                if (again.status === 'granted') return;
+              } catch {
+                /* fall through */
+              }
+              try {
+                await Linking.sendIntent(
+                  'android.settings.APPLICATION_DETAILS_SETTINGS',
+                  [
+                    {
+                      key: 'android.provider.extra.APP_PACKAGE',
+                      value: 'de.findus.app',
+                    },
+                  ],
+                );
+              } catch {
+                void Linking.openSettings();
+              }
+            })();
+          },
+        },
+      ],
+    );
   } catch (err) {
     console.warn('[location] Background permission request failed:', err);
   }
@@ -283,6 +397,18 @@ export async function startWatchingLocation(
   await kickstartFix();
 
   try {
+    await hydrateGpsTrackBuffer();
+  } catch {
+    /* optional */
+  }
+
+  try {
+    startPedometerSleepMonitor();
+  } catch {
+    /* pedometer optional */
+  }
+
+  try {
     subscription = await Location.watchPositionAsync(
       watchOptionsForProfile(streamProfile),
       (location: LocationObject) => {
@@ -329,8 +455,9 @@ export async function startWatchingLocation(
 
 async function startBackgroundUpdatesIfPossible(): Promise<void> {
   try {
-    const { status: bg } = await Location.getBackgroundPermissionsAsync();
-    if (bg !== 'granted') return;
+    // FGS-Benachrichtigung schon mit Vordergrund-Recht (Play-Video / „Bei Nutzung“).
+    const { status: fg } = await Location.getForegroundPermissionsAsync();
+    if (fg !== 'granted') return;
 
     const started = await Location.hasStartedLocationUpdatesAsync(
       FINDUS_LOCATION_TASK,
@@ -352,10 +479,10 @@ async function startBackgroundUpdatesIfPossible(): Promise<void> {
       pausesUpdatesAutomatically: false,
       activityType: Location.ActivityType.Fitness,
       foregroundService: {
-        notificationTitle: 'Findus Tour aktiv',
+        notificationTitle: 'Findus greift auf deinen Standort zu',
         notificationBody:
-          'Standort läuft weiter — Navigation und Orte auch bei gesperrtem Display.',
-        notificationColor: '#F59E0B',
+          'Tour aktiv — automatische Audio-Hinweise an Orten entlang der Route.',
+        notificationColor: '#C4A35A',
       },
     });
     backgroundStarted = true;

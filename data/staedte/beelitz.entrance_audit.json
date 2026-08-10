@@ -1,0 +1,2690 @@
+{
+  "city_id": "beelitz",
+  "apply": true,
+  "maxDelta": 80,
+  "summary": {
+    "ok": 142,
+    "check": 2,
+    "bad": 13,
+    "errors": 1,
+    "applied": 2
+  },
+  "rows": [
+    {
+      "id": "beelitz_beelitz_stadt",
+      "name": "Beelitz Stadt",
+      "before": {
+        "lat": 52.23937094,
+        "lng": 12.966971640000002
+      },
+      "google": {
+        "lat": 52.2353295,
+        "lng": 12.9784788,
+        "place_id": "ChIJvfFd3g2JqEcRQHReW0YgIQQ",
+        "address": "14547 Beelitz"
+      },
+      "delta_m": 903,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_beelitz_zum_bahnhof",
+      "name": "Beelitz, Zum Bahnhof",
+      "before": {
+        "lat": 52.237438139999995,
+        "lng": 12.966952639999999
+      },
+      "google": {
+        "lat": 52.2394428,
+        "lng": 12.967089,
+        "place_id": "ChIJa6dXNIKJqEcRxcaUHfR0u7Q",
+        "address": "14547 Beelitz, Deutschland"
+      },
+      "delta_m": 223,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_alte_posthalterei_beelitz",
+      "name": "Alte Posthalterei Beelitz",
+      "before": {
+        "lat": 52.23217108,
+        "lng": 12.977699860000001
+      },
+      "google": {
+        "lat": 52.23221059999999,
+        "lng": 12.9777644,
+        "place_id": "ChIJP7jXCy2NqEcRLgGn9bwxBoM",
+        "address": "Poststr. 16, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_wassermuhle_ernst_vogel",
+      "name": "Wassermühle Ernst Vogel",
+      "before": {
+        "lat": 52.23142048,
+        "lng": 12.97465546
+      },
+      "google": {
+        "lat": 52.23146,
+        "lng": 12.97472,
+        "place_id": "ChIJpZbFYB-JqEcRBKMGlcLNuHc",
+        "address": "Mühlenstraße 35, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+      "name": "Stadtpfarrkirche St. Marien - St. Nikolai zu Beelitz",
+      "before": {
+        "lat": 52.23292058,
+        "lng": 12.97720806
+      },
+      "google": {
+        "lat": 52.2329601,
+        "lng": 12.9772726,
+        "place_id": "ChIJO_V4FpCJqEcRY6_JbGnael0",
+        "address": "Kirchpl. 6, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_kirchenpavillon",
+      "name": "Kirchenpavillon",
+      "before": {
+        "lat": 52.23200208000001,
+        "lng": 12.97979896
+      },
+      "google": {
+        "lat": 52.2320416,
+        "lng": 12.9798635,
+        "place_id": "ChIJG4aDxVuJqEcRxps_fp6VysI",
+        "address": "Mauerstraße 21, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+      "name": "Grabhalle /Friedhof der Ev. Kirchengemeinde St. Marien - St. Nikolai zu Beelitz",
+      "before": {
+        "lat": 52.23588378000001,
+        "lng": 12.982446060000001
+      },
+      "google": {
+        "lat": 52.2359233,
+        "lng": 12.9825106,
+        "place_id": "ChIJ4a1wYI6JqEcRRZKzz27-lyk",
+        "address": "Trebbiner Str. 6-7, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_forderverein_stadtpfarrkirche_beelitz_e_v",
+      "name": "Förderverein Stadtpfarrkirche Beelitz e.V.",
+      "before": {
+        "lat": 52.231948779999996,
+        "lng": 12.975511059999999
+      },
+      "google": {
+        "lat": 52.2319883,
+        "lng": 12.9755756,
+        "place_id": "ChIJTw7AepCJqEcR95mj1r8rvZk",
+        "address": "Poststr. 5, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_feldsteinkirche_schonefeld",
+      "name": "Feldsteinkirche Schönefeld",
+      "before": {
+        "lat": 52.22129218,
+        "lng": 13.00171938
+      },
+      "google": {
+        "lat": 52.2213317,
+        "lng": 13.0017839,
+        "place_id": "ChIJCe-3JSGJqEcRINPkMUlEq94",
+        "address": "Schönefeld, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_dorfkirche_reesdorf",
+      "name": "Dorfkirche Reesdorf",
+      "before": {
+        "lat": 52.21975238,
+        "lng": 12.92159498
+      },
+      "google": {
+        "lat": 52.2197919,
+        "lng": 12.9216595,
+        "place_id": "ChIJqdY-QD2JqEcRf8ktFyr0FEE",
+        "address": "Dorfstraße 9, 14547 Beelitz-Reesdorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_dorfkirche_elsholz",
+      "name": "Dorfkirche Elsholz",
+      "before": {
+        "lat": 52.19855958000001,
+        "lng": 12.963420619999999
+      },
+      "google": {
+        "lat": 52.1985991,
+        "lng": 12.9634851,
+        "place_id": "ChIJ2wUjMUyIqEcRRqe1UIR7k2Q",
+        "address": "Dorfstraße 47, 14547 Beelitz-Elsholz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_dorfkirche_schlunkendorf",
+      "name": "Dorfkirche Schlunkendorf",
+      "before": {
+        "lat": 52.242673679999996,
+        "lng": 13.01805714
+      },
+      "google": {
+        "lat": 52.2427132,
+        "lng": 13.0181217,
+        "place_id": "ChIJM5B_gAGKqEcRtssn3itr3rY",
+        "address": "Schlunkendorfer Dorfstraße 18, 14547 Beelitz-Schlunkendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_carl_friedrich_wilhelm_herrmann_denkmal",
+      "name": "Carl Friedrich Wilhelm Herrmann-Denkmal",
+      "before": {
+        "lat": 52.235163979999996,
+        "lng": 12.978078960000001
+      },
+      "google": {
+        "lat": 52.2352035,
+        "lng": 12.9781435,
+        "place_id": "ChIJ5SdPdvmJqEcRoopxdp0hBfQ",
+        "address": "Clara-Zetkin-Straße 200, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_denkmal_der_sowjetischen_sanitater",
+      "name": "Denkmal der sowjetischen Sanitäter",
+      "before": {
+        "lat": 52.258835180000005,
+        "lng": 12.92874402
+      },
+      "google": {
+        "lat": 52.2588747,
+        "lng": 12.9288086,
+        "place_id": "ChIJTRWxCtGLqEcRTLdy5RO7lOM",
+        "address": "Beelitz-Heilstätten, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_die_drehende_kugel",
+      "name": "Die drehende Kugel",
+      "before": {
+        "lat": 52.235697779999995,
+        "lng": 12.97551516
+      },
+      "google": {
+        "lat": 52.2357373,
+        "lng": 12.9755797,
+        "place_id": "ChIJRQXpM3WJqEcRZ5XW4-fsMQ8",
+        "address": "Clara-Zetkin-Straße 197A, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_stadtpark_beelitz",
+      "name": "Stadtpark Beelitz",
+      "before": {
+        "lat": 52.23246288,
+        "lng": 12.984072059999999
+      },
+      "google": {
+        "lat": 52.23250239999999,
+        "lng": 12.9841366,
+        "place_id": "ChIJR0wSE7CJqEcRbGCGqQwt97I",
+        "address": "Trebbiner Str. 21, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_laga_beelitz",
+      "name": "LAGA Beelitz",
+      "before": {
+        "lat": 52.23127848,
+        "lng": 12.97772296
+      },
+      "google": {
+        "lat": 52.23131799999999,
+        "lng": 12.9777875,
+        "place_id": "ChIJ-a2NQ5CJqEcRbwNAnSuW9to",
+        "address": "Berliner Str. 202, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_grosse_liegewiese",
+      "name": "Große Liegewiese",
+      "before": {
+        "lat": 52.23127068,
+        "lng": 12.98067206
+      },
+      "google": {
+        "lat": 52.2313102,
+        "lng": 12.9807366,
+        "place_id": "ChIJ_XUzyl2JqEcRXd4CBauS9BU",
+        "address": "Mauerstraße 20, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_vogelbeobachtungsturm_bei_beelitz",
+      "name": "Vogelbeobachtungsturm bei Beelitz",
+      "before": {
+        "lat": 52.22219728,
+        "lng": 12.94416358
+      },
+      "google": {
+        "lat": 52.2222368,
+        "lng": 12.9442281,
+        "place_id": "ChIJkdG4ON2JqEcRTR7WkJyJi3A",
+        "address": "Grenzelweg, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_gelande_der_brandenburgischen_landesgartenschau_2022",
+      "name": "Gelände der Brandenburgischen Landesgartenschau 2022",
+      "before": {
+        "lat": 52.22944878,
+        "lng": 12.97870086
+      },
+      "google": {
+        "lat": 52.2294883,
+        "lng": 12.9787654,
+        "place_id": "ChIJBfnn0naJqEcRMYIvRIUphp8",
+        "address": "Trebbiner Str. 21A, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_laga_beelitz_parkplatz",
+      "name": "Laga Beelitz Parkplatz",
+      "before": {
+        "lat": 52.23467628000001,
+        "lng": 12.984517060000002
+      },
+      "google": {
+        "lat": 52.2347158,
+        "lng": 12.9845816,
+        "place_id": "ChIJpzTx-UaJqEcRp3cYJzcSa2s",
+        "address": "Trebbiner Str. 20, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_freibad_beelitz_eingang",
+      "name": "Freibad Beelitz Eingang",
+      "before": {
+        "lat": 52.23766648000001,
+        "lng": 12.96581626
+      },
+      "google": {
+        "lat": 52.237706,
+        "lng": 12.9658808,
+        "place_id": "ChIJg7w1CWeJqEcROQfSSoCvenY",
+        "address": "Brücker Str., 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_muhlenteich_mit_fontane",
+      "name": "Mühlenteich mit Fontäne",
+      "before": {
+        "lat": 52.23086918,
+        "lng": 12.973676859999998
+      },
+      "google": {
+        "lat": 52.2309087,
+        "lng": 12.9737414,
+        "place_id": "ChIJmYIkhe6JqEcRmD5urpNIjvA",
+        "address": "Treuenbrietzener Str. 35, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_parkplatz_stadtpark_und_freilichtbuhne_beelitz",
+      "name": "Parkplatz Stadtpark und Freilichtbühne Beelitz",
+      "before": {
+        "lat": 52.23297888,
+        "lng": 12.98493896
+      },
+      "google": {
+        "lat": 52.2330184,
+        "lng": 12.9850035,
+        "place_id": "ChIJ4zdoJwCJqEcRDTO5zvQ8SLY",
+        "address": "Trebbiner Str. 21a, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_teufelsee_feuchtgebietskette_ffh",
+      "name": "Teufelsee-Feuchtgebietskette (FFH)",
+      "before": {
+        "lat": 52.26892498000001,
+        "lng": 12.97385052
+      },
+      "google": {
+        "lat": 52.2689645,
+        "lng": 12.9739151,
+        "place_id": "ChIJn_kzVk6LqEcRAQ9eBRx_cvo",
+        "address": "Unnamed Road 14554, 14554 Seddiner See"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_wasserturm_sternwarte",
+      "name": "Wasserturm / Sternwarte",
+      "before": {
+        "lat": 52.23996038,
+        "lng": 12.96450476
+      },
+      "google": {
+        "lat": 52.2399999,
+        "lng": 12.9645693,
+        "place_id": "ChIJUTcwZoKJqEcRnfbzFjJjekg",
+        "address": "Karl-Liebknecht-Straße 4, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_baum_in_tur",
+      "name": "Baum in Tür",
+      "before": {
+        "lat": 52.25708178,
+        "lng": 12.932995120000001
+      },
+      "google": {
+        "lat": 52.25712129999999,
+        "lng": 12.9330597,
+        "place_id": "ChIJ8chMk0-LqEcRuezjJ4840_8",
+        "address": "Finnenhaus 6, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_freibad_im_wasserturmpark_beelitz",
+      "name": "Freibad im Wasserturmpark Beelitz",
+      "before": {
+        "lat": 52.239398879999996,
+        "lng": 12.965594359999997
+      },
+      "google": {
+        "lat": 52.2394384,
+        "lng": 12.9656589,
+        "place_id": "ChIJXd0WKwCJqEcR6RGtKN9tC10",
+        "address": "Brücker Str. 40, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_stadion_des_friedens",
+      "name": "Stadion des Friedens",
+      "before": {
+        "lat": 52.24623928,
+        "lng": 12.964623739999999
+      },
+      "google": {
+        "lat": 52.2462788,
+        "lng": 12.9646883,
+        "place_id": "ChIJQ82Ww3-JqEcRixeMkmcNNNo",
+        "address": "Bergstraße 1, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_skatepark_trendsportanlage_beelitz",
+      "name": "Skatepark Trendsportanlage Beelitz",
+      "before": {
+        "lat": 52.24031248,
+        "lng": 12.96601816
+      },
+      "google": {
+        "lat": 52.24035199999999,
+        "lng": 12.9660827,
+        "place_id": "ChIJtTRVSL-JqEcRQ9IpQEzj01M",
+        "address": "14547 Beelitz-Stadt"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_spielgarten_abenteuerland",
+      "name": "Spielgarten AbenteuerLand",
+      "before": {
+        "lat": 52.22986818,
+        "lng": 12.97686736
+      },
+      "google": {
+        "lat": 52.2299077,
+        "lng": 12.9769319,
+        "place_id": "ChIJ07naXIKJqEcRcNU3a6h9nCw",
+        "address": "Mühlenstraße 53, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_sportplatz_beelitz",
+      "name": "Sportplatz Beelitz",
+      "before": {
+        "lat": 52.24616718,
+        "lng": 12.966598540000001
+      },
+      "google": {
+        "lat": 52.24620669999999,
+        "lng": 12.9666631,
+        "place_id": "ChIJVVVVUdWLqEcRXOKNCcvNRUU",
+        "address": "Karl-Liebknecht-Straße, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_waldspielplatz_beelitz",
+      "name": "Waldspielplatz Beelitz",
+      "before": {
+        "lat": 52.24429928000001,
+        "lng": 12.941401539999998
+      },
+      "google": {
+        "lat": 52.24433879999999,
+        "lng": 12.9414661,
+        "place_id": "ChIJdQIQvsiJqEcRAhOW_qs3cj8",
+        "address": "14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_sportplatz_bundeswehr",
+      "name": "Sportplatz Bundeswehr",
+      "before": {
+        "lat": 52.24954398,
+        "lng": 12.94150444
+      },
+      "google": {
+        "lat": 52.2495835,
+        "lng": 12.941569,
+        "place_id": "ChIJVWosMwCLqEcR3-HZUm2EEAE",
+        "address": "14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_reisemobilstellplatz_am_stadtpark_beelitz",
+      "name": "Reisemobilstellplatz am Stadtpark Beelitz",
+      "before": {
+        "lat": 52.23343998,
+        "lng": 12.984453459999997
+      },
+      "google": {
+        "lat": 52.23347949999999,
+        "lng": 12.984518,
+        "place_id": "ChIJBbLpDOyJqEcRiHBKarQxsyo",
+        "address": "Trebbiner Str. 21a, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_tvg_sally_bein_beelitz_e_v",
+      "name": "TVG „Sally Bein“ Beelitz e.V.",
+      "before": {
+        "lat": 52.24574898000001,
+        "lng": 12.966014139999999
+      },
+      "google": {
+        "lat": 52.2457885,
+        "lng": 12.9660787,
+        "place_id": "ChIJMc0AtyqKqEcRbKe9vc8bkoQ",
+        "address": "Bergstraße 1, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_parkplatz_freibad_beelitz",
+      "name": "Parkplatz Freibad Beelitz",
+      "before": {
+        "lat": 52.23813658,
+        "lng": 12.963462059999998
+      },
+      "google": {
+        "lat": 52.2381761,
+        "lng": 12.9635266,
+        "place_id": "ChIJpSRLCQCJqEcRf7Tnlpmo1Tk",
+        "address": "14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_spielplatz_beelitz",
+      "name": "Spielplatz Beelitz",
+      "before": {
+        "lat": 52.240431279999996,
+        "lng": 12.961667360000002
+      },
+      "google": {
+        "lat": 52.2404708,
+        "lng": 12.9617319,
+        "place_id": "ChIJp6W_nr-JqEcRnX5iNND5hFI",
+        "address": "14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_einwohnermeldeamt_beelitz",
+      "name": "Einwohnermeldeamt Beelitz",
+      "before": {
+        "lat": 52.23210768,
+        "lng": 12.976358259999998
+      },
+      "google": {
+        "lat": 52.2321472,
+        "lng": 12.9764228,
+        "place_id": "ChIJQ0anIACJqEcRiaQdV8u65Uw",
+        "address": "Poststr. 10-11, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_hotel_stadt_beelitz",
+      "name": "Hotel Stadt Beelitz",
+      "before": {
+        "lat": 52.23406028000001,
+        "lng": 12.977919159999999
+      },
+      "google": {
+        "lat": 52.2340998,
+        "lng": 12.9779837,
+        "place_id": "ChIJv6SO3o-JqEcRxzaVLrf8JPE",
+        "address": "Berliner Str. 195, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_neues_lichtspielhaus_beelitz",
+      "name": "Neues Lichtspielhaus Beelitz",
+      "before": {
+        "lat": 52.236128480000005,
+        "lng": 12.973422659999997
+      },
+      "google": {
+        "lat": 52.236168,
+        "lng": 12.9734872,
+        "place_id": "ChIJ03yYXKKJqEcRAzZaH2aANFg",
+        "address": "Clara-Zetkin-Straße 194, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_alpakahof_elsholz",
+      "name": "Alpakahof Elsholz",
+      "before": {
+        "lat": 52.20069928,
+        "lng": 12.96322272
+      },
+      "google": {
+        "lat": 52.2007388,
+        "lng": 12.9632872,
+        "place_id": "ChIJd2FrRyKJqEcRdqTvYNaTzZk",
+        "address": "Am Dorfpl. 5, 14547 Beelitz-Elsholz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_jakobs_hof_beelitz",
+      "name": "Jakobs-Hof Beelitz",
+      "before": {
+        "lat": 52.251959080000006,
+        "lng": 12.987592639999999
+      },
+      "google": {
+        "lat": 52.2519986,
+        "lng": 12.9876572,
+        "place_id": "ChIJpV-42ySKqEcR184duLOPAL0",
+        "address": "Kähnsdorfer Weg 1a, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_family_moden",
+      "name": "Family Moden",
+      "before": {
+        "lat": 52.23292048,
+        "lng": 12.97818546
+      },
+      "google": {
+        "lat": 52.23296,
+        "lng": 12.97825,
+        "place_id": "ChIJ_Rw2OpCJqEcRrcgjnFmmpsw",
+        "address": "Berliner Str. 4, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_arztpraxis_christin_schelter",
+      "name": "Arztpraxis Christin Schelter",
+      "before": {
+        "lat": 52.24037648000001,
+        "lng": 12.979148559999999
+      },
+      "google": {
+        "lat": 52.240416,
+        "lng": 12.9792131,
+        "place_id": "ChIJ5S_eoO2JqEcRg-HQ-NhViUM",
+        "address": "Berliner Str. 55, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_praxis_salitter_dr_bianka_reinkensmeier_hagen_salitter",
+      "name": "Praxis Salitter - Dr. Bianka Reinkensmeier & Hagen Salitter",
+      "before": {
+        "lat": 52.23923688,
+        "lng": 12.969345259999997
+      },
+      "google": {
+        "lat": 52.23927639999999,
+        "lng": 12.9694098,
+        "place_id": "ChIJw-vt7oOJqEcRta-m81rvDVg",
+        "address": "Virchowstraße 37, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_frau_dipl_med_ramona_wendland",
+      "name": "Frau Dipl.-Med. Ramona Wendland",
+      "before": {
+        "lat": 52.23561798000001,
+        "lng": 12.98556246
+      },
+      "google": {
+        "lat": 52.23565749999999,
+        "lng": 12.985627,
+        "place_id": "ChIJrS85zI2JqEcROM67zIc8OZw",
+        "address": "Trebbiner Str. 22, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_neurokliniken_beelitz_klinik_fur_bewegungsstorungen_parkinson",
+      "name": "Neurokliniken Beelitz - Klinik für Bewegungsstörungen / Parkinson",
+      "before": {
+        "lat": 52.25595708000001,
+        "lng": 12.92868132
+      },
+      "google": {
+        "lat": 52.2559966,
+        "lng": 12.9287459,
+        "place_id": "ChIJf0TBAY1IZUERva6P0i44ncI",
+        "address": "Str. nach Fichtenwalde 16, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_parkplatz_arztehaus",
+      "name": "Parkplatz Ärztehaus",
+      "before": {
+        "lat": 52.23525668,
+        "lng": 12.984748359999998
+      },
+      "google": {
+        "lat": 52.2352962,
+        "lng": 12.9848129,
+        "place_id": "ChIJHQMOnVSJqEcRzQEfmVAQS98",
+        "address": "Trebbiner Str. 94, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_bockwindmuhle_beelitz",
+      "name": "Bockwindmühle Beelitz",
+      "before": {
+        "lat": 52.23384318000001,
+        "lng": 12.99060696
+      },
+      "google": {
+        "lat": 52.2338827,
+        "lng": 12.9906715,
+        "place_id": "ChIJJfzBNY2JqEcR2ahPZVN1XiI",
+        "address": "Trebbiner Str. 79, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_fontane_im_ehemaligen_klarbecken",
+      "name": "Fontäne im ehemaligen Klärbecken",
+      "before": {
+        "lat": 52.230088480000006,
+        "lng": 12.97957906
+      },
+      "google": {
+        "lat": 52.230128,
+        "lng": 12.9796436,
+        "place_id": "ChIJoTekCtWJqEcRmNZTu7xlSBs",
+        "address": "14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_wasserkanal_laga_beelitz",
+      "name": "Wasserkanal Laga Beelitz",
+      "before": {
+        "lat": 52.23138727999999,
+        "lng": 12.97615756
+      },
+      "google": {
+        "lat": 52.23142679999999,
+        "lng": 12.9762221,
+        "place_id": "ChIJhRzeOMeJqEcResV5w83wtTw",
+        "address": "Mauerstraße 4, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_kga_an_der_nieplitz_e_v",
+      "name": "KGA ,,An der Nieplitz\" e.V.",
+      "before": {
+        "lat": 52.22896108,
+        "lng": 12.973761059999998
+      },
+      "google": {
+        "lat": 52.2290006,
+        "lng": 12.9738256,
+        "place_id": "ChIJZ7cvHACJqEcRbbBduKUMHEM",
+        "address": "14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_ballonfahrten_schafer_brandenburg",
+      "name": "Ballonfahrten Schäfer BRANDENBURG",
+      "before": {
+        "lat": 52.209862480000005,
+        "lng": 12.9628005
+      },
+      "google": {
+        "lat": 52.20990200000001,
+        "lng": 12.962865,
+        "place_id": "ChIJW_sQp62JqEcR-WZ0MLY1W7Y",
+        "address": "Treuenbrietzener Str. 31, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_malraus_das_reiseburo_dippe",
+      "name": "malraus - Das Reisebüro Dippe",
+      "before": {
+        "lat": 52.23800928000001,
+        "lng": 12.970383459999999
+      },
+      "google": {
+        "lat": 52.23804879999999,
+        "lng": 12.970448,
+        "place_id": "ChIJ70I-fISJqEcRKFkuK6Uz2Jw",
+        "address": "Am Ende des Parkplatzes, zwischen ALDI und KIK, Clara-Zetkin-Straße 35, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_regionales_spezialitaten",
+      "name": "Regionales & Spezialitäten",
+      "before": {
+        "lat": 52.23343398000001,
+        "lng": 12.97764236
+      },
+      "google": {
+        "lat": 52.2334735,
+        "lng": 12.9777069,
+        "place_id": "ChIJFZA2IpCJqEcRd5HBSJP9oCQ",
+        "address": "Berliner Str. 200, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_lotto_toto_ina_muller_jahn",
+      "name": "Lotto-Toto Ina Müller-Jahn",
+      "before": {
+        "lat": 52.23425528,
+        "lng": 12.978806160000001
+      },
+      "google": {
+        "lat": 52.23429480000001,
+        "lng": 12.9788707,
+        "place_id": "ChIJR9l30I-JqEcR0f3p6h_MmnM",
+        "address": "Mauerstraße 36, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_nah_gut_piesik",
+      "name": "nah & gut Piesik",
+      "before": {
+        "lat": 52.23941258,
+        "lng": 12.959865660000002
+      },
+      "google": {
+        "lat": 52.2394521,
+        "lng": 12.9599302,
+        "place_id": "ChIJM67HHmiJqEcRyfzOTauej5M",
+        "address": "Karl-Marx-Straße 4, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+      "name": "Beelitzer Kaninchenspezialitäten GmbH",
+      "before": {
+        "lat": 52.236018279999996,
+        "lng": 12.949084760000002
+      },
+      "google": {
+        "lat": 52.2360578,
+        "lng": 12.9491493,
+        "place_id": "ChIJd7ywZXCJqEcRihpuzHy3Rq0",
+        "address": "89, Brücker Str., 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_kollektiv_lost",
+      "name": "KOLLEKTIV LOST",
+      "before": {
+        "lat": 52.26064678,
+        "lng": 12.931638520000002
+      },
+      "google": {
+        "lat": 52.2606863,
+        "lng": 12.9317031,
+        "place_id": "ChIJPW8cur-LqEcRm88BNe08aTA",
+        "address": "Waldseeallee 11, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_groschen_markt",
+      "name": "Groschen-Markt",
+      "before": {
+        "lat": 52.238220479999995,
+        "lng": 12.97245366
+      },
+      "google": {
+        "lat": 52.23826,
+        "lng": 12.9725182,
+        "place_id": "ChIJ5wOIeaOJqEcRCtFRuIRH2uo",
+        "address": "Virchowstraße 46, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+      "name": "Café-Bäckerei-Konditorei Neuendorff Patrick Kasten",
+      "before": {
+        "lat": 52.23649168000001,
+        "lng": 12.971224359999999
+      },
+      "google": {
+        "lat": 52.23653119999999,
+        "lng": 12.9712889,
+        "place_id": "ChIJac0u7YSJqEcRE3_L26Vdxrw",
+        "address": "Clara-Zetkin-Straße 185, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_fsh_landmarkt_geratetechnik",
+      "name": "FSH Landmarkt & Gerätetechnik",
+      "before": {
+        "lat": 52.238113780000006,
+        "lng": 12.96091476
+      },
+      "google": {
+        "lat": 52.2381533,
+        "lng": 12.9609793,
+        "place_id": "ChIJxR_1_YSJqEcRmxmsPxo_vMc",
+        "address": "Brücker Str. 130, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh",
+      "name": "A. Kamphenkel - Getränkefachgroßhandel West GmbH",
+      "before": {
+        "lat": 52.22518798,
+        "lng": 12.972519780000002
+      },
+      "google": {
+        "lat": 52.2252275,
+        "lng": 12.9725843,
+        "place_id": "ChIJ80XN4peJqEcRqulUKVGF_fs",
+        "address": "Treuenbrietzener Str. 45, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_lidl",
+      "name": "Lidl",
+      "error": "fetch failed"
+    },
+    {
+      "id": "beelitz_parkplatz_lidl",
+      "name": "Parkplatz Lidl",
+      "before": {
+        "lat": 52.237899660000004,
+        "lng": 12.96930016
+      },
+      "google": {
+        "lat": 52.23792839999999,
+        "lng": 12.9693471,
+        "place_id": "ChIJJYuMhIOJqEcRWSgJfA8FcaQ",
+        "address": "Clara-Zetkin-Straße 39, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_rewe",
+      "name": "REWE",
+      "before": {
+        "lat": 52.23502076,
+        "lng": 12.980369759999999
+      },
+      "google": {
+        "lat": 52.2350495,
+        "lng": 12.9804167,
+        "place_id": "ChIJ1XPpR4SJqEcRdLyVTQqOy0Q",
+        "address": "Trebbiner Str. 3-9, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_circle_k_beelitz",
+      "name": "Circle K Beelitz",
+      "before": {
+        "lat": 52.25239626,
+        "lng": 12.985882039999998
+      },
+      "google": {
+        "lat": 52.252425,
+        "lng": 12.985929,
+        "place_id": "ChIJOzJl0KqLqEcRR7wpoAyKF4A",
+        "address": "Berliner Str. 107, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_max_p_24_7_snack_getranke_automat",
+      "name": "Max P. 24/7 Snack & Getränke Automat",
+      "before": {
+        "lat": 52.26326296,
+        "lng": 12.924784340000002
+      },
+      "google": {
+        "lat": 52.2632917,
+        "lng": 12.9248313,
+        "place_id": "ChIJ9-TZxP-LqEcRmi54t-_u21c",
+        "address": "Gegenüber von der Feuerwehr, Str. nach Fichtenwalde 10, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_norma_filiale",
+      "name": "NORMA Filiale",
+      "before": {
+        "lat": 52.23587576,
+        "lng": 12.98077246
+      },
+      "google": {
+        "lat": 52.2359045,
+        "lng": 12.9808194,
+        "place_id": "ChIJT14-U46JqEcR3ga6CRGoz8M",
+        "address": "Ratinger Str. 1, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_foodsharing_fairteiler_edda",
+      "name": "Foodsharing Fairteiler „Edda“",
+      "before": {
+        "lat": 52.23255826,
+        "lng": 12.975730559999999
+      },
+      "google": {
+        "lat": 52.232587,
+        "lng": 12.9757775,
+        "place_id": "ChIJv_O0MACJqEcRT4-kPgTh9VM",
+        "address": "Küstergasse, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_heide_apotheke",
+      "name": "Heide Apotheke",
+      "before": {
+        "lat": 52.26162876000001,
+        "lng": 12.926795040000002
+      },
+      "google": {
+        "lat": 52.2616575,
+        "lng": 12.926842,
+        "place_id": "ChIJcRssHgCLqEcRvyDIIvyfCfQ",
+        "address": "Str. am bhf 4, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_kliniken_beelitz_gmbh",
+      "name": "Kliniken Beelitz GmbH",
+      "before": {
+        "lat": 52.267051259999995,
+        "lng": 12.925723020000001
+      },
+      "google": {
+        "lat": 52.26708,
+        "lng": 12.92577,
+        "place_id": "ChIJK58R2vOLqEcRLWM6ftGnnRY",
+        "address": "Paracelsusring 6a, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_neurokliniken_beelitz_klinik_fur_neurologische_fruhrehabilitation_klinik",
+      "name": "Neurokliniken Beelitz - Klinik für neurologische Frührehabilitation / Klinik für neurologische Rehabilitation",
+      "before": {
+        "lat": 52.26730056,
+        "lng": 12.924215720000001
+      },
+      "google": {
+        "lat": 52.26732930000001,
+        "lng": 12.9242627,
+        "place_id": "ChIJf0TBAY1IZUERV9Sv3m8sm3Q",
+        "address": "Paracelsusring 6A, 14547 Beelitz-Heilstätten"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_recura",
+      "name": "Recura",
+      "before": {
+        "lat": 52.266266859999995,
+        "lng": 12.926554820000002
+      },
+      "google": {
+        "lat": 52.2662956,
+        "lng": 12.9266018,
+        "place_id": "ChIJK58R2vOLqEcRVOOFQVj9T2I",
+        "address": "Paracelsusring 8, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_reha_kliniken",
+      "name": "Beelitz-Heilstätten, Reha-Kliniken",
+      "before": {
+        "lat": 52.26553126000001,
+        "lng": 12.921643020000001
+      },
+      "google": {
+        "lat": 52.26732930000001,
+        "lng": 12.9242627,
+        "place_id": "ChIJf0TBAY1IZUERV9Sv3m8sm3Q",
+        "address": "Paracelsusring 6A, 14547 Beelitz-Heilstätten"
+      },
+      "delta_m": 268,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_parkinsonklinik",
+      "name": "Beelitz-Heilstätten, Parkinsonklinik",
+      "before": {
+        "lat": 52.25633126,
+        "lng": 12.929763040000001
+      },
+      "google": {
+        "lat": 52.2559966,
+        "lng": 12.9287459,
+        "place_id": "ChIJf0TBAY1IZUERva6P0i44ncI",
+        "address": "Str. nach Fichtenwalde 16, 14547 Beelitz"
+      },
+      "delta_m": 79,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "beelitz_spielplatz_am_jakobshof",
+      "name": "Spielplatz Am Jakobshof",
+      "before": {
+        "lat": 52.210340259999995,
+        "lng": 12.89888068
+      },
+      "google": {
+        "lat": 52.210369,
+        "lng": 12.8989276,
+        "place_id": "ChIJf98v2CmJqEcRnBSYok90jd4",
+        "address": "Schäpe 21, 14547 Beelitz-Schäpe"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_spielplatz_beelitz_heilstatten",
+      "name": "Spielplatz Beelitz Heilstätten",
+      "before": {
+        "lat": 52.263408260000006,
+        "lng": 12.917340940000003
+      },
+      "google": {
+        "lat": 52.263437,
+        "lng": 12.9173879,
+        "place_id": "ChIJIfzNkROLqEcRNvMruliydKQ",
+        "address": "14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_spielplatz_im_stadtpark",
+      "name": "Spielplatz im Stadtpark",
+      "before": {
+        "lat": 52.229365660000006,
+        "lng": 12.97673106
+      },
+      "google": {
+        "lat": 52.2293944,
+        "lng": 12.976778,
+        "place_id": "ChIJyyZVJwCJqEcR3Gs4iSaszpw",
+        "address": "Mauerstraße 20, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_golf_und_country_club_seddiner_see_e_v",
+      "name": "Golf- und Country Club Seddiner See e. V.",
+      "before": {
+        "lat": 52.28379926,
+        "lng": 13.02940302
+      },
+      "google": {
+        "lat": 52.283828,
+        "lng": 13.02945,
+        "place_id": "ChIJEb6YDPNaqEcRciommF66XSs",
+        "address": "Zum Weiher 44, 14552 Michendorf-Wildenbruch"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_golf_und_country_club_seddiner_see_betriebshof",
+      "name": "Golf- und Country Club Seddiner See - Betriebshof",
+      "before": {
+        "lat": 52.288979960000006,
+        "lng": 13.026530400000002
+      },
+      "google": {
+        "lat": 52.2890087,
+        "lng": 13.0265774,
+        "place_id": "ChIJpZB_OYeKqEcRB4DsibLF9Po",
+        "address": "Fercher Weg 6, 14552 Michendorf-Wildenbruch"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_golfplatz",
+      "name": "Golfplatz",
+      "before": {
+        "lat": 52.282278559999995,
+        "lng": 13.038961319999999
+      },
+      "google": {
+        "lat": 52.283828,
+        "lng": 13.02945,
+        "place_id": "ChIJEb6YDPNaqEcRciommF66XSs",
+        "address": "Zum Weiher 44, 14552 Michendorf-Wildenbruch"
+      },
+      "delta_m": 670,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_doppeihaushalfte_am_golfplatz_seddin",
+      "name": "Doppeihaushälfte am Golfplatz Seddin",
+      "before": {
+        "lat": 52.28273186,
+        "lng": 13.035233219999999
+      },
+      "google": {
+        "lat": 52.283828,
+        "lng": 13.02945,
+        "place_id": "ChIJEb6YDPNaqEcRciommF66XSs",
+        "address": "Zum Weiher 44, 14552 Michendorf-Wildenbruch"
+      },
+      "delta_m": 412,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_p_r_parkplatz_bahnhof_beelitz_heilstatten",
+      "name": "P+R-Parkplatz Bahnhof Beelitz-Heilstätten",
+      "before": {
+        "lat": 52.262558760000005,
+        "lng": 12.92725274
+      },
+      "google": {
+        "lat": 52.2625875,
+        "lng": 12.9272997,
+        "place_id": "ChIJbYAcPfCLqEcR_U2yjcYL2do",
+        "address": "Str. am bhf, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_baum_zeit_parkplatz_barfusspark_baumwipfelpfad",
+      "name": "Baum & Zeit — Parkplatz - Barfußpark & Baumwipfelpfad",
+      "before": {
+        "lat": 52.26793576,
+        "lng": 12.91529552
+      },
+      "google": {
+        "lat": 52.2679645,
+        "lng": 12.9153425,
+        "place_id": "ChIJvUWPAQqMqEcRAUNbQfauIdM",
+        "address": "14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_parkplatz_barfusspark_beelitz",
+      "name": "Parkplatz Barfußpark Beelitz",
+      "before": {
+        "lat": 52.26872976000001,
+        "lng": 12.914276419999998
+      },
+      "google": {
+        "lat": 52.2687585,
+        "lng": 12.9143234,
+        "place_id": "ChIJA7OCh46NqEcRAnT5LLHbr1o",
+        "address": "7W97+GP, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_riebener_see",
+      "name": "Riebener See",
+      "before": {
+        "lat": 52.188963460000004,
+        "lng": 13.05944002
+      },
+      "google": {
+        "lat": 52.1922531,
+        "lng": 13.0540236,
+        "place_id": "ChIJ_ZA8jfhiqEcRzio7WyUEOEQ",
+        "address": "Riebener See, 14547 Beelitz"
+      },
+      "delta_m": 520,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_insel_der_vielfalt_treffpunkt_fur_touren_nach_vereinbarung",
+      "name": "Insel der Vielfalt, Treffpunkt für Touren nach Vereinbarung",
+      "before": {
+        "lat": 52.261791859999995,
+        "lng": 12.92542234
+      },
+      "google": {
+        "lat": 52.2618206,
+        "lng": 12.9254693,
+        "place_id": "ChIJT_kAsKyJqEcR9bqAkL1tAis",
+        "address": "Treffpunkt nach Anmeldung, Bahnhof, an den Fahrradboxen, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_tennisplatze",
+      "name": "Tennisplätze",
+      "before": {
+        "lat": 52.24698716,
+        "lng": 12.96751064
+      },
+      "google": {
+        "lat": 52.2457885,
+        "lng": 12.9660787,
+        "place_id": "ChIJMc0AtyqKqEcRbKe9vc8bkoQ",
+        "address": "Bergstraße 1, 14547 Beelitz"
+      },
+      "delta_m": 165,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_sportplatz_platanenring",
+      "name": "Sportplatz Platanenring",
+      "before": {
+        "lat": 52.240466760000004,
+        "lng": 12.975588060000002
+      },
+      "google": {
+        "lat": 52.24049549999999,
+        "lng": 12.975635,
+        "place_id": "ChIJx0lNYYaJqEcRIBDqc7Qfftc",
+        "address": "14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_sportplatz_fichtenwalde",
+      "name": "Sportplatz Fichtenwalde",
+      "before": {
+        "lat": 52.28063796,
+        "lng": 12.892736320000001
+      },
+      "google": {
+        "lat": 52.2806667,
+        "lng": 12.8927833,
+        "place_id": "ChIJvY2BTRGNqEcRDvZVV_oKVvY",
+        "address": "Friedrich-Engels-Straße 92, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_schwimmschule_tintenfisch",
+      "name": "Schwimmschule Tintenfisch",
+      "before": {
+        "lat": 52.261679660000006,
+        "lng": 12.92766334
+      },
+      "google": {
+        "lat": 52.2617084,
+        "lng": 12.9277103,
+        "place_id": "ChIJ22Ruw9-LqEcRTXp6eL_za6Y",
+        "address": "Str. am bhf 1, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_wasser_und_abwasserzweck_verband_nieplitz",
+      "name": "Wasser- und Abwasserzweck- verband 'Nieplitz'",
+      "before": {
+        "lat": 52.23624546,
+        "lng": 12.975514859999999
+      },
+      "google": {
+        "lat": 52.2362742,
+        "lng": 12.9755618,
+        "place_id": "ChIJD9ATzfeJqEcRyLFR6HE8Cx8",
+        "address": "Clara-Zetkin-Straße 16, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_bwi_bestwater_gmbh",
+      "name": "BWI BestWater GmbH",
+      "before": {
+        "lat": 52.24712726,
+        "lng": 12.96876564
+      },
+      "google": {
+        "lat": 52.247156,
+        "lng": 12.9688126,
+        "place_id": "ChIJe8MJD5iJqEcRWBx2KSHLuFo",
+        "address": "Hermann-Löns-Straße 17, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_brot_zeit",
+      "name": "Brot & Zeit",
+      "before": {
+        "lat": 52.26095256,
+        "lng": 12.927359240000001
+      },
+      "google": {
+        "lat": 52.2609813,
+        "lng": 12.9274062,
+        "place_id": "ChIJ9Y-jAZeLqEcRg3VrEdeulnc",
+        "address": "Am Heizkraftwerk 1, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_backerei_exner",
+      "name": "Bäckerei Exner",
+      "before": {
+        "lat": 52.22397355999999,
+        "lng": 12.966054079999997
+      },
+      "google": {
+        "lat": 52.2240023,
+        "lng": 12.966101,
+        "place_id": "ChIJQ2R7caKJqEcRbltJoIWGk6s",
+        "address": "Im Schäwe 9, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_cafe_backerei_konditorei_neuendorff_thekla_kasten",
+      "name": "Cafe-Bäckerei-Konditorei Neuendorff Thekla Kasten",
+      "before": {
+        "lat": 52.28287276,
+        "lng": 12.888013019999999
+      },
+      "google": {
+        "lat": 52.28290149999999,
+        "lng": 12.88806,
+        "place_id": "ChIJ11NjyUOMqEcRS7Hlnk3GJTM",
+        "address": "Berliner Allee 135, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_offentliche_toilette",
+      "name": "Öffentliche Toilette",
+      "before": {
+        "lat": 52.230400259999996,
+        "lng": 12.976660659999999
+      },
+      "google": {
+        "lat": 52.230429,
+        "lng": 12.9767076,
+        "place_id": "ChIJG8Kxg46JqEcRTD9Xg4HuPNw",
+        "address": "Treuenbrietzener Str. 61, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_wc_toiletten_a9_ost",
+      "name": "WC / Toiletten, A9-Ost",
+      "before": {
+        "lat": 52.200303559999995,
+        "lng": 12.884673700000002
+      },
+      "google": {
+        "lat": 52.2003323,
+        "lng": 12.8847206,
+        "place_id": "ChIJfUA0k6qJqEcRhuiUMsexoHY",
+        "address": "14547 Beelitz-Schäpe"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_toilette",
+      "name": "Toilette",
+      "before": {
+        "lat": 52.26594896,
+        "lng": 12.919658619999998
+      },
+      "google": {
+        "lat": 52.2316878,
+        "lng": 12.9774509,
+        "place_id": "ChIJA2954euJqEcRWqISolpH7V8",
+        "address": "Mauerstraße 12, 14547 Beelitz"
+      },
+      "delta_m": 5477,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_wc_toiletten_a9_west",
+      "name": "WC / Toiletten, A9-West",
+      "before": {
+        "lat": 52.20212256,
+        "lng": 12.883464499999999
+      },
+      "google": {
+        "lat": 52.2021513,
+        "lng": 12.8835114,
+        "place_id": "ChIJqc_JTHqPqEcRoVK9-dNCOw0",
+        "address": "Schäpe, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_business_storage_park_beelitz",
+      "name": "Business & Storage Park Beelitz",
+      "before": {
+        "lat": 52.21998026,
+        "lng": 12.96555048
+      },
+      "google": {
+        "lat": 52.220009,
+        "lng": 12.9655974,
+        "place_id": "ChIJAdo0TqOJqEcRM7vnG99jgJ4",
+        "address": "Im Schäwe 23, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_lokal_genial",
+      "name": "lokal genial",
+      "before": {
+        "lat": 52.246643459999994,
+        "lng": 12.97575864
+      },
+      "google": {
+        "lat": 52.2466722,
+        "lng": 12.9758056,
+        "place_id": "ChIJ4_5VkSmKqEcRqgajtupJ7AY",
+        "address": "Hermann-Löns-Straße 4B, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_landgasthaus_beelitz",
+      "name": "Landgasthaus Beelitz",
+      "before": {
+        "lat": 52.22335396,
+        "lng": 12.97129938
+      },
+      "google": {
+        "lat": 52.22338269999999,
+        "lng": 12.9713463,
+        "place_id": "ChIJh6d2Tr2JqEcRsAHm7fLKSzI",
+        "address": "Treuenbrietzener Str. 44, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_gasthaus_am_schutzenplatz",
+      "name": "Gasthaus am Schützenplatz",
+      "before": {
+        "lat": 52.23737156000001,
+        "lng": 12.96967416
+      },
+      "google": {
+        "lat": 52.2374003,
+        "lng": 12.9697211,
+        "place_id": "ChIJx5Noi4OJqEcRnSZgmsawrAw",
+        "address": "Clara-Zetkin-Straße 36, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_aparthotel_und_restaurant_kornkammer",
+      "name": "Aparthotel und Restaurant Kornkammer",
+      "before": {
+        "lat": 52.17828866,
+        "lng": 12.969635120000001
+      },
+      "google": {
+        "lat": 52.1783174,
+        "lng": 12.969682,
+        "place_id": "ChIJY6anT62JqEcREr7SVK4ENVk",
+        "address": "Buchholzer Str. 23, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_balkan",
+      "name": "Balkan",
+      "before": {
+        "lat": 52.23664266000001,
+        "lng": 12.97790886
+      },
+      "google": {
+        "lat": 52.2366714,
+        "lng": 12.9779558,
+        "place_id": "ChIJCVeFOZCJqEcRX7vchzjAX58",
+        "address": "Berliner Str. 180, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_el_grano_de_cafe",
+      "name": "El grano de Café",
+      "before": {
+        "lat": 52.26031166,
+        "lng": 12.929322340000002
+      },
+      "google": {
+        "lat": 52.2603404,
+        "lng": 12.9293693,
+        "place_id": "ChIJJ0MrG2OLqEcRw7St5gfUtl0",
+        "address": "Waldseeallee 2, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_barfuss_cafe",
+      "name": "Barfuß Café",
+      "before": {
+        "lat": 52.262934259999994,
+        "lng": 12.91644844
+      },
+      "google": {
+        "lat": 52.262963,
+        "lng": 12.9164954,
+        "place_id": "ChIJrTLOnPeLqEcRf2AXpuCUhXk",
+        "address": "Str. nach Fichtenwalde 13, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_cafe_zum_kirschbaum",
+      "name": "Café \"Zum Kirschbaum\"",
+      "before": {
+        "lat": 52.21859006,
+        "lng": 13.091383780000001
+      },
+      "google": {
+        "lat": 52.21861879999999,
+        "lng": 13.0914307,
+        "place_id": "ChIJYcHWecVjqEcRLIZh6kvpycQ",
+        "address": "Dorfstraße (Körzin) 20, 14547 Beelitz-Zauchwitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_cafe_mobil",
+      "name": "Café mobil",
+      "before": {
+        "lat": 52.26388866,
+        "lng": 12.919824640000002
+      },
+      "google": {
+        "lat": 52.2639174,
+        "lng": 12.9198716,
+        "place_id": "ChIJA9WLNQCLqEcR_t7fxXVS-9Q",
+        "address": "7W79+G4, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_pension_pauline",
+      "name": "Pension Pauline",
+      "before": {
+        "lat": 52.23465066,
+        "lng": 12.97241756
+      },
+      "google": {
+        "lat": 52.2346794,
+        "lng": 12.9724645,
+        "place_id": "ChIJlSrJ8ISJqEcRJXLGVKrQ_u0",
+        "address": "Nürnbergstraße 37, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_landhotel_gustav",
+      "name": "Landhotel Gustav",
+      "before": {
+        "lat": 52.26719346,
+        "lng": 12.92134192
+      },
+      "google": {
+        "lat": 52.26722220000001,
+        "lng": 12.9213889,
+        "place_id": "ChIJ_fsNH_SLqEcRyvi_JkYlmww",
+        "address": "Paracelsusring 2, 14547 Beelitz-Heilstätten"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_pension_zum_weinberg",
+      "name": "Pension Zum Weinberg",
+      "before": {
+        "lat": 52.24105926000001,
+        "lng": 12.962059759999999
+      },
+      "google": {
+        "lat": 52.241088,
+        "lng": 12.9621067,
+        "place_id": "ChIJq6qmSn-JqEcR5LguIYXRzoQ",
+        "address": "Carl-von-Ossietzky-Straße 1, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_reiterhof_gaststatte_am_muhlenberg",
+      "name": "Reiterhof & Gaststätte \"Am Mühlenberg\"",
+      "before": {
+        "lat": 52.24655505999999,
+        "lng": 13.022721539999997
+      },
+      "google": {
+        "lat": 52.2465838,
+        "lng": 13.0227685,
+        "place_id": "ChIJ9aw-lM9IZUER538Q6CNpvRg",
+        "address": "Kietz 30A, 14547 Beelitz-Schlunkendorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_landgasthof_rieben",
+      "name": "Landgasthof Rieben",
+      "before": {
+        "lat": 52.19095326,
+        "lng": 13.0399091
+      },
+      "google": {
+        "lat": 52.190982,
+        "lng": 13.039956,
+        "place_id": "ChIJ2zUIkPZiqEcRv6yKMkg6rsk",
+        "address": "Riebener Dorfstraße 9, 14547 Beelitz-Rieben"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_pension_das_landei",
+      "name": "Pension Das Landei",
+      "before": {
+        "lat": 52.21011496,
+        "lng": 12.90284838
+      },
+      "google": {
+        "lat": 52.2101437,
+        "lng": 12.9028953,
+        "place_id": "ChIJE4dTD62JqEcRRz_ceQ4GILE",
+        "address": "Schäpe 4, 14547 Beelitz OT Schäpe"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_hotel_am_wald_wildenbruch",
+      "name": "Hotel \"Am Wald\" Wildenbruch",
+      "before": {
+        "lat": 52.29371626,
+        "lng": 13.049341000000002
+      },
+      "google": {
+        "lat": 52.29374499999999,
+        "lng": 13.049388,
+        "place_id": "ChIJuRtOfp2KqEcR5QrRLhG_978",
+        "address": "Hotel \"Am Wald, Luckenwalder Str. 118, 14552 Michendorf"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_hotel_zur_linde_self_check_in",
+      "name": "Hotel Zur Linde Self Check In",
+      "before": {
+        "lat": 52.28363246,
+        "lng": 13.06140572
+      },
+      "google": {
+        "lat": 52.2836612,
+        "lng": 13.0614527,
+        "place_id": "ChIJl-t_AzJgqEcRvFNRrPhXr1Q",
+        "address": "Kunersdorfer Str. 1, 14552 Michendorf-Wildenbruch"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_pension_zum_stellmacher",
+      "name": "Pension Zum Stellmacher",
+      "before": {
+        "lat": 52.28770906,
+        "lng": 12.838068000000002
+      },
+      "google": {
+        "lat": 52.2877378,
+        "lng": 12.838115,
+        "place_id": "ChIJYeLtakGNqEcR4cNJ2FqPxfc",
+        "address": "OT Kanin, Dorfpl. 3, 14547 Beelitz"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_hotel_fliegerheim",
+      "name": "Hotel Fliegerheim",
+      "before": {
+        "lat": 52.230303060000004,
+        "lng": 12.85571826
+      },
+      "google": {
+        "lat": 52.23033179999999,
+        "lng": 12.8557652,
+        "place_id": "ChIJWaeVY-6OqEcRdAdA0-erI7c",
+        "address": "Friedrich-Engels-Straße 9, 14822 Borkheide"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_haus_am_see",
+      "name": "Haus am See",
+      "before": {
+        "lat": 52.31800986,
+        "lng": 12.92921388
+      },
+      "google": {
+        "lat": 52.31803859999999,
+        "lng": 12.9292609,
+        "place_id": "ChIJT9edEKOMqEcRxx2HVIa1lAQ",
+        "address": "Neue Scheune 19, 14548 Schwielowsee-Ferch"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_mannersanatorium_beelitz_heilstatten",
+      "name": "Männersanatorium Beelitz-Heilstätten",
+      "before": {
+        "lat": 52.2588047,
+        "lng": 12.92751054
+      },
+      "google": {
+        "lat": 52.2588586,
+        "lng": 12.9275986,
+        "place_id": "ChIJ9apwL-WLqEcRCEbBqHdZBKk",
+        "address": "Str. nach Fichtenwalde 6, 14547 Beelitz"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_fasziation_beelitz_heilstatten",
+      "name": "Fasziation Beelitz-Heilstätten",
+      "before": {
+        "lat": 52.26694925999999,
+        "lng": 12.923252779999999
+      },
+      "google": {
+        "lat": 52.2669852,
+        "lng": 12.9233115,
+        "place_id": "ChIJW0-tbACLqEcReCgOUyJgvYs",
+        "address": "Paracelsusring 6a, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten",
+      "name": "Beelitz Heilstätten",
+      "before": {
+        "lat": 52.26547376,
+        "lng": 12.915685980000001
+      },
+      "google": {
+        "lat": 52.2609198,
+        "lng": 12.922922,
+        "place_id": "ChIJQ10g8vqLqEcRgLKC1kggIQo",
+        "address": "Beelitz-Heilstätten, 14547 Beelitz"
+      },
+      "delta_m": 706,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_beelitzer_heilstatten",
+      "name": "Beelitzer Heilstätten",
+      "before": {
+        "lat": 52.266137560000004,
+        "lng": 12.92050018
+      },
+      "google": {
+        "lat": 52.2609198,
+        "lng": 12.922922,
+        "place_id": "ChIJQ10g8vqLqEcRgLKC1kggIQo",
+        "address": "Beelitz-Heilstätten, 14547 Beelitz"
+      },
+      "delta_m": 603,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_labor",
+      "name": "Beelitz-Heilstätten - Labor",
+      "before": {
+        "lat": 52.26553885999999,
+        "lng": 12.918795979999999
+      },
+      "google": {
+        "lat": 52.2655748,
+        "lng": 12.9188547,
+        "place_id": "ChIJG2_vOsiLqEcRB8qH7UeNbO0",
+        "address": "Beelitz-Heilstätten, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_wasserspiel_auf_dem_spargelhof_klaistow",
+      "name": "Wasserspiel auf dem Spargelhof Klaistow",
+      "before": {
+        "lat": 52.29670456,
+        "lng": 12.86059634
+      },
+      "google": {
+        "lat": 52.2967405,
+        "lng": 12.8606551,
+        "place_id": "ChIJQ7R1puSNqEcRYpHswoFUFN8",
+        "address": "Glindower Str. 28, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_frauenpavillon",
+      "name": "Beelitz-Heilstätten - Frauenpavillon",
+      "before": {
+        "lat": 52.26487636,
+        "lng": 12.919711979999999
+      },
+      "google": {
+        "lat": 52.2649123,
+        "lng": 12.9197707,
+        "place_id": "ChIJSRrZwImLqEcR-gKr8j2fprU",
+        "address": "Beelitz-Heilstätten, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_kochkuche",
+      "name": "Beelitz-Heilstätten - Kochküche",
+      "before": {
+        "lat": 52.26555026,
+        "lng": 12.92063798
+      },
+      "google": {
+        "lat": 52.26558619999999,
+        "lng": 12.9206967,
+        "place_id": "ChIJxfMb0PqLqEcRX9eUkDCSWOc",
+        "address": "Barfußpark, Str. nach Fichtenwalde 13, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_das_alpenhaus",
+      "name": "Beelitz Heilstätten „Das Alpenhaus“",
+      "before": {
+        "lat": 52.26293716,
+        "lng": 12.9196077
+      },
+      "google": {
+        "lat": 52.2629731,
+        "lng": 12.9196664,
+        "place_id": "ChIJedmhM_aLqEcRNie__9I8OyE",
+        "address": "Unnamed Road, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_dorfkirche_wittbrietzen",
+      "name": "Dorfkirche Wittbrietzen",
+      "before": {
+        "lat": 52.17861096,
+        "lng": 12.973530599999998
+      },
+      "google": {
+        "lat": 52.1786469,
+        "lng": 12.9735892,
+        "place_id": "ChIJ7wz1GPCJqEcRaBHaRn8kqiI",
+        "address": "14547 Beelitz-Wittbrietzen"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_dorfkirche_salzbrunn",
+      "name": "Dorfkirche Salzbrunn",
+      "before": {
+        "lat": 52.18475696,
+        "lng": 12.925943899999998
+      },
+      "google": {
+        "lat": 52.1847929,
+        "lng": 12.9260025,
+        "place_id": "ChIJjZBY2IyIqEcRt_DG7Wj4pdY",
+        "address": "Salzbrunn, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_dorfkirche_schape",
+      "name": "Dorfkirche Schäpe",
+      "before": {
+        "lat": 52.20989506000001,
+        "lng": 12.899355759999997
+      },
+      "google": {
+        "lat": 52.209931,
+        "lng": 12.8994144,
+        "place_id": "ChIJreaYK9aIqEcRhsUEGF8VpGo",
+        "address": "14547 Beelitz-Schäpe"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_bohlensteg_blankensee",
+      "name": "Bohlensteg Blankensee",
+      "before": {
+        "lat": 52.23343596000001,
+        "lng": 13.13031632
+      },
+      "google": {
+        "lat": 52.2334719,
+        "lng": 13.130375,
+        "place_id": "ChIJ-S07_UxhqEcRh6G7PsmSWhw",
+        "address": "Blankenseer Dorfstraße 4, 14959 Trebbin"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_schloss_blankensee",
+      "name": "Schloss Blankensee",
+      "before": {
+        "lat": 52.24000476,
+        "lng": 13.129107719999999
+      },
+      "google": {
+        "lat": 52.2398721,
+        "lng": 13.1325656,
+        "place_id": "ChIJR8UEkk9hqEcR05K06LHF4JE",
+        "address": "Zum Schloß, 14959 Trebbin-Blankensee"
+      },
+      "delta_m": 236,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_aussichtsturm_wietkiekenberg",
+      "name": "Aussichtsturm Wietkiekenberg",
+      "before": {
+        "lat": 52.30747365999999,
+        "lng": 12.95014354
+      },
+      "google": {
+        "lat": 52.3075096,
+        "lng": 12.9502023,
+        "place_id": "ChIJXQzvq2iLqEcRIP2l7SQP8ZQ",
+        "address": "14548 Schwielowsee-Ferch"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_beobachtungsturm_ungeheuerwiesen",
+      "name": "Beobachtungsturm Ungeheuerwiesen",
+      "before": {
+        "lat": 52.24536116,
+        "lng": 13.115882019999997
+      },
+      "google": {
+        "lat": 52.2453971,
+        "lng": 13.1159407,
+        "place_id": "ChIJtZ9LnTJhqEcRxpJZ5Gde8wc",
+        "address": "Am Seechen, 14959 Trebbin"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_barfusspark_beelitz",
+      "name": "Barfußpark Beelitz",
+      "before": {
+        "lat": 52.26353666,
+        "lng": 12.916543279999999
+      },
+      "google": {
+        "lat": 52.2635726,
+        "lng": 12.916602,
+        "place_id": "ChIJwVEFeBWLqEcREvzlGdCjLjU",
+        "address": "Str. nach Fichtenwalde 13, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_natur_park",
+      "name": "Beelitz Heilstätten Natur Park",
+      "before": {
+        "lat": 52.26725926,
+        "lng": 12.91825418
+      },
+      "google": {
+        "lat": 52.265977,
+        "lng": 12.9201564,
+        "place_id": "ChIJK6RIDjaLqEcR4x24OUY19Dg",
+        "address": "Beelitz-Heilstätten, 14547 Beelitz"
+      },
+      "delta_m": 193,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_japanischer_bonsaigarten",
+      "name": "Japanischer Bonsaigarten",
+      "before": {
+        "lat": 52.32539406000001,
+        "lng": 12.9267012
+      },
+      "google": {
+        "lat": 52.32543,
+        "lng": 12.92676,
+        "place_id": "ChIJS2I3HbCMqEcRJAHBNlUIDpo",
+        "address": "Fercher Str. 61 OT, 14548 Schwielowsee-Ferch"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_kletterwald_tiergehege",
+      "name": "Kletterwald + Tiergehege",
+      "before": {
+        "lat": 52.29809496,
+        "lng": 12.85793864
+      },
+      "google": {
+        "lat": 52.2981309,
+        "lng": 12.8579974,
+        "place_id": "ChIJ8YTlTfCNqEcRvd8ccvJkGNc",
+        "address": "14547 Beelitz-Busendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_findlingsgarten_am_seddiner_see",
+      "name": "Findlingsgarten am Seddiner See",
+      "before": {
+        "lat": 52.26814796,
+        "lng": 13.037572879999999
+      },
+      "google": {
+        "lat": 52.2681839,
+        "lng": 13.0376316,
+        "place_id": "ChIJl19aABOKqEcRPgimhRyoAAg",
+        "address": "Dorfstraße, 14554 Seddiner See"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_koiteich_auf_dem_spargelhof_klaistow",
+      "name": "Koiteich auf dem Spargelhof Klaistow",
+      "before": {
+        "lat": 52.29508326,
+        "lng": 12.859194539999999
+      },
+      "google": {
+        "lat": 52.29511919999999,
+        "lng": 12.8592533,
+        "place_id": "ChIJYV1rYtWNqEcRiQkrKz_F9s4",
+        "address": "Glindower Str. 28, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_obstplantage",
+      "name": "Obstplantage",
+      "before": {
+        "lat": 52.26131786,
+        "lng": 12.930750900000001
+      },
+      "google": {
+        "lat": 52.2610719,
+        "lng": 12.9306046,
+        "place_id": "ChIJI2y3XuWLqEcRZ5nyGTVTWzs",
+        "address": "Obstplantage, 14547 Beelitz"
+      },
+      "delta_m": 29,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "beelitz_marina_ferch",
+      "name": "Marina Ferch",
+      "before": {
+        "lat": 52.31356406,
+        "lng": 12.93206122
+      },
+      "google": {
+        "lat": 52.3136,
+        "lng": 12.93212,
+        "place_id": "ChIJg7Dka5-MqEcRe3ZF_KrDU-Y",
+        "address": "Seeweg 10, 14548 Schwielowsee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_spielplatz_an_der_marina",
+      "name": "Spielplatz an der Marina",
+      "before": {
+        "lat": 52.31343826,
+        "lng": 12.931195220000001
+      },
+      "google": {
+        "lat": 52.31347419999999,
+        "lng": 12.931254,
+        "place_id": "ChIJ04jGKWmNqEcRSoJw3eudfLg",
+        "address": "Seeweg 10, 14548 Schwielowsee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_streichelzoo",
+      "name": "Streichelzoo",
+      "before": {
+        "lat": 52.29741096,
+        "lng": 12.85879554
+      },
+      "google": {
+        "lat": 52.2974469,
+        "lng": 12.8588543,
+        "place_id": "ChIJVYogZmONqEcRuIKKkoAKJ3w",
+        "address": "Klaistow, Spargelhof, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_tiergehege",
+      "name": "Tiergehege",
+      "before": {
+        "lat": 52.29749115999999,
+        "lng": 12.85581234
+      },
+      "google": {
+        "lat": 52.2981309,
+        "lng": 12.8579974,
+        "place_id": "ChIJ8YTlTfCNqEcRvd8ccvJkGNc",
+        "address": "14547 Beelitz-Busendorf"
+      },
+      "delta_m": 165,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_winkelmanns_hof_klaistow_gmbh_spargelhof_klaistow",
+      "name": "Winkelmanns Hof Klaistow GmbH - Spargelhof Klaistow",
+      "before": {
+        "lat": 52.29637216,
+        "lng": 12.85893944
+      },
+      "google": {
+        "lat": 52.2964081,
+        "lng": 12.8589982,
+        "place_id": "ChIJnUhq0auNqEcRInv6RPUGutE",
+        "address": "Glindower Str. 28, 14547 Beelitz-Busendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_klaistower_maislabyrinth",
+      "name": "Klaistower Maislabyrinth",
+      "before": {
+        "lat": 52.29500605999999,
+        "lng": 12.85661734
+      },
+      "google": {
+        "lat": 52.295042,
+        "lng": 12.8566761,
+        "place_id": "ChIJ8ZbfYACNqEcRdQ6v2SOz1j8",
+        "address": "14547 Beelitz-Busendorf"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_der_bootsverleih_wohlfuhlen_am_seddiner_see",
+      "name": "Der Bootsverleih - Wohlfühlen am Seddiner See",
+      "before": {
+        "lat": 52.270694060000004,
+        "lng": 13.025168279999999
+      },
+      "google": {
+        "lat": 52.27073000000001,
+        "lng": 13.025227,
+        "place_id": "ChIJ5Vu9FnCKqEcRa5JXw5Q4hjk",
+        "address": "Seddiner Str. 108, 14554 Seddiner See"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_sommer_tours_gbr",
+      "name": "Sommer Tours GbR",
+      "before": {
+        "lat": 52.16107796,
+        "lng": 12.923637320000001
+      },
+      "google": {
+        "lat": 52.1611139,
+        "lng": 12.9236959,
+        "place_id": "ChIJPb-ZECuGqEcRV7AG8Hj_KHU",
+        "address": "Bahnhofstraße 66, 14547 Beelitz-Buchholz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_bootsverleih_burgemeister",
+      "name": "Bootsverleih Burgemeister",
+      "before": {
+        "lat": 52.31402226,
+        "lng": 12.938750619999999
+      },
+      "google": {
+        "lat": 52.3140582,
+        "lng": 12.9388094,
+        "place_id": "ChIJaQVe4l-LqEcRv1JKmq3UCE0",
+        "address": "Dorfstraße 39, 14548 Schwielowsee"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "beelitz_irene_krause",
+      "name": "Irene Krause",
+      "before": {
+        "lat": 52.25991405999999,
+        "lng": 12.923531300000002
+      },
+      "google": {
+        "lat": 52.25995,
+        "lng": 12.92359,
+        "place_id": "ChIJx4W69fqLqEcRdYMudnH0ipU",
+        "address": "Am Buchensteg 12, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_weidelandfarm_am_riebener_see",
+      "name": "Weidelandfarm am Riebener See",
+      "before": {
+        "lat": 52.18744996,
+        "lng": 13.043579
+      },
+      "google": {
+        "lat": 52.1874859,
+        "lng": 13.0436376,
+        "place_id": "ChIJFXxru55jqEcRRi-qaAdd_go",
+        "address": "Hennickendorfer Str. 35C, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "beelitz_snackstation_24_7_beelitz_snacks_getranke_zigaretten",
+      "name": "SnackStation 24/7 Beelitz – Snacks, Getränke & Zigaretten",
+      "before": {
+        "lat": 52.26027906,
+        "lng": 12.920580000000001
+      },
+      "google": {
+        "lat": 52.260315,
+        "lng": 12.9206387,
+        "place_id": "ChIJsTr_sBqLqEcRn-1YQbKq5-Y",
+        "address": "Ahornweg 11, 14547 Beelitz"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    }
+  ]
+}
