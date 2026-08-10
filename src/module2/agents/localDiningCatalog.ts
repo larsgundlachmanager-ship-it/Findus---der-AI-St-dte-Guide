@@ -950,40 +950,6 @@ function dishesFromName(
   };
 }
 
-function formatOnePick(medal: string, pick: DiningPick): string {
-  const ratingLabel =
-    pick.rating != null &&
-    (pick.ratingCount ?? 0) >= MIN_RATING_COUNT_FOR_SPEECH
-      ? pick.rating >= 4.5
-        ? 'super bewertet'
-        : pick.rating >= 4.0
-          ? 'gut bewertet'
-          : null
-      : null;
-  const price =
-    pick.priceEurMain != null
-      ? `BELEGTER Preis: „${pick.priceExampleDish}" ${pick.priceEurMain} € (aus Speisekarte/Recherche)`
-      : 'Preis: unbekannt — NICHT schätzen/erfinden; auf Speisekarte-Button verweisen; Deep-Research kann nachliefern';
-  const dishes = `${pick.topDishes[0]} · ${pick.topDishes[1]}`;
-  const bits = [
-    `${medal} ${pick.name}`,
-    `Art: ${pick.venueKind}`,
-    ratingLabel,
-    pick.vibe,
-    price,
-    `Passt zu: ${pick.mealFit}`,
-    `Küche-Hinweis (nur Typ, KEINE Gerichts-/Preis-Erfindung): ${dishes}`,
-    `Lage: ${pick.distanceHint}`,
-    pick.openNow ? 'offen jetzt' : null,
-    pick.phoneNumber ? `Tel: ${pick.phoneNumber}` : null,
-    pick.websiteUrl ? `Web: ${pick.websiteUrl}` : null,
-    pick.hoursFitHint && !/geschlossen|zu knapp/i.test(pick.hoursFitHint)
-      ? pick.hoursFitHint
-      : null,
-  ].filter(Boolean);
-  return bits.join(' | ');
-}
-
 /** Ketten / Fast-Food — bei „typisch / lokal“ meiden. */
 export function isDiningChainName(name: string): boolean {
   return /\b(jim\s*block|mcdonald|burger\s*king|kfc|subway|nordsee\b|vapiano|block\s*house|pizza\s*hut|dominos|five\s*guys|dean\s*&\s*david)\b/i.test(
@@ -1121,88 +1087,28 @@ export function extractNamedVenueMealIntent(
 }
 
 /**
- * Fakten-Pack für Synthese — FLOW universell:
- * Anliegen/Tageszeit spiegeln → 2 Optionen → Buttons.
- * Named-Venue: Einschätzung + 2 Alternativen.
+ * @deprecated Legacy Dual-Guide — offene Auswahl läuft über `src/module2/pitch`.
+ * Bleibt nur als No-Op-Stub, falls alte Imports greifen.
  */
 export function formatDiningGuideSpeech(
-  primary: DiningPick,
-  alts: DiningPick[],
-  city: string,
-  mealSlot?: MealSlot,
-  opts?: {
+  _primary: DiningPick,
+  _alts: DiningPick[],
+  _city: string,
+  _mealSlot?: MealSlot,
+  _opts?: {
     namedVenue?: string | null;
     namedVenueFit?: 'good' | 'weak' | 'closed' | 'unknown' | null;
     companions?: string | null;
-    /** z. B. Geburtstag — merken für spätere Reservierungs-Notiz */
     occasion?: string | null;
     suggestOvernight?: boolean;
     distanceFromUserKm?: number;
   },
 ): string {
-  const slot = mealSlot ?? primary.mealFit;
-  const openRanked = [primary, ...alts].filter((p) => p.openNow).slice(0, 2);
-  const named = opts?.namedVenue?.trim() || null;
-  const companions = opts?.companions?.trim() || null;
-  const occasion = opts?.occasion?.trim() || null;
-  const occasionLine = occasion
-    ? `Anlass/Notiz: ${occasion} — anerkennen; bei späterer Reservierung/Timeline als Hinweis mitnehmen (nicht Allergien ins Formular).`
-    : null;
-
-  if (named) {
-    const fit = opts?.namedVenueFit ?? 'unknown';
-    const altParts = openRanked.map((p, i) =>
-      formatOnePick(MEDALS[i] ?? '•', p),
-    );
-    return [
-      'FAKTEN Gastro Named-Venue (nicht wörtlich vorlesen):',
-      `Ort-Kontext: ${city}`,
-      companions ? `Begleitung/Notiz: ${companions}` : null,
-      occasionLine,
-      `Mahlzeit-Slot: ${slot}`,
-      `Genannter Ort: ${named}`,
-      `Einschätzung: ${fit}`,
-      'FLOW: kurze Einschätzung zum genannten Ort → wenn unpassend/geschlossen 2 Alternativen positiv vorschlagen → Buttons auf die Alternativen. Kein langer Negativ-Katalog.',
-      ...altParts,
-    ]
-      .filter(Boolean)
-      .join('\n');
-  }
-
-  if (openRanked.length === 0) {
-    return [
-      'FAKTEN Gastro (nicht wörtlich vorlesen):',
-      `Ort-Kontext: ${city}`,
-      companions ? `Begleitung/Notiz: ${companions}` : null,
-      occasionLine,
-      `Mahlzeit-Slot: ${slot}`,
-      'FLOW: POSITIV bleiben — keine „geht nicht“-Rede. Radius still erweitern / nächste brauchbare Optionen; wenn wirklich leer: eine knappe Lücke + was du als Nächstes prüfst, ohne Orte schlechtzureden.',
-    ]
-      .filter(Boolean)
-      .join('\n');
-  }
-
-  const parts = openRanked.map((p, i) => formatOnePick(MEDALS[i] ?? '•', p));
   return [
     'FAKTEN Gastro (nicht wörtlich vorlesen):',
-    `Ort-Kontext: ${city} — diesen Ort in der Speech spiegeln (z. B. „in ${city}“), nicht den GPS-Wohnort wenn anders.`,
-    companions
-      ? `Begleitung/Notiz: ${companions} — speichern/anerkennen; ggf. kurz Präferenz fragen (z. B. asiatisch vs. Burger), dann Top-2.`
-      : null,
-    occasionLine,
-    `Mahlzeit-Slot: ${slot}`,
-    opts?.suggestOvernight && (opts.distanceFromUserKm ?? 0) >= 100
-      ? `Distanz vom User ≈ ${Math.round(opts.distanceFromUserKm!)} km — einmal kurz fragen ob Übernachtung sinnvoll (Stay22 nur wenn ja), nicht aufdrängen.`
-      : null,
-    'FLOW: Anliegen + Tageszeit spiegeln → genau 2 Optionen mit Unterschied → Distanz → Buttons. NICHT sagen was nicht geht.',
-    'PREIS: Nur nennen wenn in Fakten als BELEGT markiert. Sonst keinen Euro-Betrag (auch nicht „0 €“) — Speisekarte-Button.',
-    `STERNE: Nie als Zahl vorlesen. Stattdessen: ≥4,5 = „super bewertet“, ≥4,0 = „gut bewertet“ (nur wenn ≥${MIN_RATING_COUNT_FOR_SPEECH} Bewertungen). Unter 4 weglassen.`,
-    'BUTTONS: Ort wählen mit vollem Namen (max 30) + Speisekarte als „🍽 Speisekarte“ (nie nur „Karte“).',
-    'TYPISCH HAMBURG/lokal: Fisch, Fischbrötchen, Pannfisch, Backfisch, deutsche Hausmannskost — KEINE Burger-Ketten (Jim Block etc.). Immer 2 echte Optionen, schmackhaft pitchen (Lage, Flair, Spezialität).',
-    ...parts,
-  ]
-    .filter(Boolean)
-    .join('\n');
+    'Legacy Dual-Guide deaktiviert — Auswahl-Pitch-Modul nutzen.',
+    'FLOW: keine Medaillen-Optionen improvisieren.',
+  ].join('\n');
 }
 
 export function medalForRank(index: number): string {
