@@ -2,7 +2,6 @@
  * Modul 5 — Deep Research + Pitch (Masterplan).
  */
 
-import { generateGeminiText } from '../../services/geminiService';
 import {
   geocodePlaceName,
   searchPlacesByText,
@@ -29,7 +28,6 @@ import {
   sanitizePlanSpeech,
   starBullet,
 } from './planSpeechSanitize';
-import { FINDUS_FEW_SHOT_DISCLAIMER } from '../../services/concierge/findusResponsePolicy';
 import { extractCityFromText, wantsLocalCityStay } from '../context/shortTermContext';
 import { getCachedUserProfile } from '../../services/userProfileService';
 import {
@@ -48,63 +46,14 @@ import {
 import { todayDateKey } from '../../utils/dateKeys';
 import { clampToFutureMs, isPastMs } from '../timeline/planNowGuard';
 
-export const DEEP_RESEARCH_SYSTEM = `Du bist der Deep-Research Pitcher für Findus.
-Wähle genau die besten 2 Orte und pitche jeden einzeln.
-Bei Hotel/„günstigste“: IMMER zwei unterschiedliche Hotels (die zwei günstigsten), nie nur eines.
-
-RECHERCHE:
-- Anker = vorheriger Termin / hier — Distanz IMMER davon, ehrlich (nie „0 m“).
-- Nur Orte aus KANDIDATEN mit echten Koordinaten — nichts erfinden, keine geschlossenen Venues.
-- Deep Match Pflicht: Elbblick/Gericht/Spaziergang = muss zum Wunsch passen.
-- Sterne ab 4.0; 4.5 nur Tie-Breaker.
-- WALK/Spaziergang-Wunsch: Parks, Ufer, Aussicht, Wege — KEINE Restaurants.
-
-STICHPUNKTE (genau 3 — aus dem Pitch, entscheidbar ohne Audio):
-1) Sterne NUR: "4.3★ Gut" / "4.6★ Top" — NIEMALS extra „gut bewertet“.
-2) Echte Distanz: "1,2 km von hier" / "800 m vom Hotel" — NIE „0 m“, NIE „Aktuelle GPS-Position“.
-3) Nutzen: Gericht+Preis wenn belegt, oder Spazier-Highlight (Ufer, Aussicht, Ruhe) — kein Fluff.
-
-PITCH speechPitch (~180–260 Zeichen):
-- Motivierend, konkret. Keine Adresse/Tel/Mail.
-- Namen NICHT am Satzanfang wiederholen (Client sagt „Erstens Name:“ schon).
-- Zweite Option: mit „Dort …“ / „Der …“ anschließen — Namen nicht nochmal buchstabieren.
-- Kein Abschluss-Frage (Client macht das). Kein Plan-Vorlesen.
-
-${FINDUS_FEW_SHOT_DISCLAIMER}
-
-GIB JSON:
-{
-  "summary": "Zwei Optionen für …",
-  "uiCards": [
-    {
-      "name": "Ort",
-      "speechPitch": "…",
-      "bulletPoints": ["4.3★ Gut", "1,2 km von hier", "Pizza ~18 €"],
-      "address": "nur UI",
-      "actions": { "mapsUrl": "...", "menuStatus": "SEARCHING", "menuUrl": null }
-    }
-  ]
-}`;
+/** @deprecated Legacy Gemini-Pitch entfernt — SSOT ist `src/module2/pitch`. */
+export const DEEP_RESEARCH_SYSTEM =
+  'Auswahl-Pitch läuft über src/module2/pitch (runPitchModule). Kein Legacy-Gemini-Pitch.';
 
 const NEAR_M = 800;
 
 function ratingLabel(rating: number | null | undefined): string {
   return starBullet(rating) ?? 'Bewertung offen';
-}
-
-function parseJsonObject(raw: string): Record<string, unknown> | null {
-  const t = (raw ?? '').trim();
-  if (!t) return null;
-  const fence = t.match(/```(?:json)?\s*([\s\S]*?)```/i);
-  const body = fence?.[1]?.trim() || t;
-  const start = body.indexOf('{');
-  const end = body.lastIndexOf('}');
-  if (start < 0 || end <= start) return null;
-  try {
-    return JSON.parse(body.slice(start, end + 1)) as Record<string, unknown>;
-  } catch {
-    return null;
-  }
 }
 
 function mapsUrlFor(
@@ -894,77 +843,6 @@ function buildUsefulBullets(opts: {
   );
 }
 
-function fallbackPitch(
-  wish: IngestOpenWish,
-  places: Array<{
-    name: string;
-    lat: number;
-    lng: number;
-    placeId: string | null;
-    rating: number | null;
-    mapsUrl: string;
-    address?: string | null;
-  }>,
-  anchor: { lat: number; lng: number },
-): DeepResearchPitchResult {
-  const a = places[0];
-  const b = places[1] ?? places[0];
-  if (!a) {
-    return {
-      summary: `Für „${wish.title}“ nichts Greifbares in der Nähe.`,
-      uiCards: [],
-    };
-  }
-  const prev = resolveDistanceRef(wish);
-  const walk = isWalkWish(wish);
-  const makeCard = (
-    p: typeof a,
-  ): DeepResearchUiCard => {
-    const dist = formatDistFromPrev(p.lat, p.lng, prev);
-    const pitch = sanitizePlanSpeech(
-      [
-        walk
-          ? `Schön zum Spazieren — ${ratingLabel(p.rating)}.`
-          : `Passt gut zu „${wish.title}“ — ${ratingLabel(p.rating)}.`,
-        dist ? `Liegt ${dist}.` : null,
-      ]
-        .filter(Boolean)
-        .join(' '),
-    ).slice(0, 520);
-    return {
-      name: p.name,
-      lat: p.lat,
-      lng: p.lng,
-      placeId: p.placeId,
-      speechPitch: pitch,
-      address: p.address ?? null,
-      bulletPoints: buildUsefulBullets({
-        rating: p.rating,
-        dist,
-        llmBullets: [],
-        speechPitch: pitch,
-        walk,
-      }),
-      actions: {
-        mapsUrl: p.mapsUrl,
-        menuStatus: 'SEARCHING',
-        menuUrl: null,
-        ticketUrl: null,
-      },
-    };
-  };
-
-  const uiCards = [a, b]
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((p) => makeCard(p!));
-
-  return {
-    summary: sanitizePlanSpeech(`Kurz: zwei Optionen für ${wish.title}.`),
-    uiCards,
-  };
-}
-
 function clearAllChoiceStops(): void {
   const stops = [...useFuturePlanStore.getState().plan.stops];
   for (const s of stops) {
@@ -1460,113 +1338,6 @@ export async function executeDeepResearchAndPitch(
     const spokenText =
       'Gerade finde ich keine saubere Auswahl — sag mir Ort oder Küche nochmal genauer.';
     return { summary: undefined, uiCards: [], spokenText };
-  }
-}
-
-/** Speisekarte / Getränke / Tickets async nachreichen — kontextsicher, dedupliziert. */
-async function enrichMenuUrlsAsync(
-  wish: IngestOpenWish,
-  cards: DeepResearchUiCard[],
-): Promise<void> {
-  if (cards.length < 1) return;
-  if (isWalkWish(wish) || isExploreWish(wish)) return;
-  // Pro Karte: Restaurant-Name reicht für Speisekarte, auch wenn Wunsch nur „Abend raus“ heißt
-  const kinds = cards.map((c) => wishOfferKind(wish, c.name));
-  let kind =
-    kinds.find((k) => k === 'menu' || k === 'drinks') ??
-    wishOfferKind(wish);
-  if (kind !== 'menu' && kind !== 'drinks') {
-    const anyGastro = cards.some((c) =>
-      /\b(restaurant|pizzeria|bistro|café|cafe|trattoria|osteria|imbiss)\b/i.test(
-        c.name,
-      ),
-    );
-    if (!anyGastro) return;
-    kind = 'menu';
-  }
-  try {
-    const { runGastroMenuDeepResearch } = await import(
-      '../agents/gastroMenuDeepResearch'
-    );
-    const queryHint =
-      kind === 'drinks' ? 'Getränkekarte Drinks' : 'Speisekarte Menu';
-    const res = await runGastroMenuDeepResearch({
-      userText: `${wish.title} ${wish.context} ${queryHint}`,
-      venues: cards.map((c) => ({
-        name: c.name,
-        websiteUrl: null,
-        menuUrl: c.actions.menuUrl ?? null,
-      })),
-      alreadySaid: '',
-    });
-    const buttons = res.buttons ?? [];
-    const mirrored = [
-      ...usePlanCalendarUiStore.getState().mirroredActions,
-    ].filter((a) => {
-      const url =
-        a.payload && typeof a.payload === 'object' && 'url' in a.payload
-          ? String((a.payload as { url?: string }).url ?? '')
-          : '';
-      return !url || isSafeOfferUrl(url);
-    });
-    const seen = new Set(
-      mirrored
-        .map((a) =>
-          a.payload && typeof a.payload === 'object' && 'url' in a.payload
-            ? String((a.payload as { url?: string }).url ?? '')
-            : '',
-        )
-        .filter(Boolean),
-    );
-    const offerUrls: string[] = [];
-    for (const b of buttons) {
-      const url =
-        b.payload &&
-        typeof b.payload === 'object' &&
-        'url' in b.payload &&
-        typeof (b.payload as { url?: unknown }).url === 'string'
-          ? (b.payload as { url: string }).url.trim()
-          : '';
-      if (!url || !isSafeOfferUrl(url)) continue;
-      const hit = resolveContextualOffer(
-        `${wish.title} ${wish.context} ${b.label}`,
-        url,
-      );
-      if (!hit || (hit.kind !== kind && hit.kind !== 'web')) continue;
-      if (seen.has(url) || offerUrls.includes(url)) continue;
-      offerUrls.push(url);
-    }
-    const labels = offerLabel(kind);
-    for (let i = 0; i < cards.length; i++) {
-      const medal = i === 0 ? '🥇' : '🥈';
-      const url = offerUrls[i] ?? offerUrls[0];
-      if (!url || seen.has(url)) continue;
-      seen.add(url);
-
-      const stepKey = wish.id ?? wish.title;
-      const side = i === 0 ? 'left' : 'right';
-      const stopId = `choice_${stepKey}_${side}`;
-      const stop = useFuturePlanStore
-        .getState()
-        .plan.stops.find((s) => s.id === stopId);
-      if (stop) {
-        useFuturePlanStore.getState().upsertStop({
-          ...stop,
-          menuUrl: url,
-        });
-      }
-      const labelKey = `${medal} ${labels.shortLabel}`;
-      if (!mirrored.some((a) => a.label === labelKey)) {
-        mirrored.push({
-          type: 'OPEN_URL',
-          label: labelKey,
-          payload: { url },
-        });
-      }
-    }
-    usePlanCalendarUiStore.getState().setMirroredActions(mirrored.slice(0, 6));
-  } catch (err) {
-    console.warn('[module5] menu enrich failed', err);
   }
 }
 

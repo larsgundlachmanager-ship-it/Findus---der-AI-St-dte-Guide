@@ -41,6 +41,7 @@ export type FactLaneId =
   | 'pack_match'
   | 'parking_care'
   | 'hour_tour'
+  | 'pitch_choice'
   | 'agent_fallback'
   | 'system_control';
 
@@ -202,6 +203,50 @@ async function runOneFactLane(opts: {
         cityHint: opts.city,
       }),
     };
+  }
+
+  // Auswahl-Pitch v4 — nie Legacy-Gastro-2er / Dual-Option
+  if (
+    !opts.secondary &&
+    (opts.jobId === 'dining_open' ||
+      opts.jobId === 'dining_hard_match' ||
+      opts.jobId === 'sight_recommend')
+  ) {
+    const nonChoiceGastro =
+      /\b(reservier|tisch\s+(?:anfrag|buch)|anrufen|telefon(?:nummer)?)\b/i.test(
+        text,
+      ) ||
+      (/\b(speisekarte|getränkekarte|menü|menu)\b/i.test(text) &&
+        !/\b(wo\s+|empfehl|restaurant\s+für|hunger|zwei\s+option)\b/i.test(
+          text,
+        ));
+    if (!nonChoiceGastro) {
+      const { shouldHandoffToPitchModule } = await import(
+        '../pitch/shouldHandoffPitch'
+      );
+      const forceOpenDining = opts.jobId === 'dining_open';
+      const hardDiningOk =
+        opts.jobId === 'dining_hard_match' &&
+        (shouldHandoffToPitchModule(text) ||
+          /\b(restaurant|essen|hunger|pizza|sushi|burger|italiener|grieche)\b/i.test(
+            text,
+          ));
+      const sightOk =
+        opts.jobId === 'sight_recommend' && shouldHandoffToPitchModule(text);
+      if (forceOpenDining || hardDiningOk || sightOk) {
+        const { researchPitchAsAgentResult } = await import(
+          '../pitch/pitchFactLane'
+        );
+        return {
+          lane: 'pitch_choice',
+          result: await researchPitchAsAgentResult({
+            userText: text,
+            requestId: `lane_${opts.jobId}_${Date.now()}`,
+            signal: opts.signal,
+          }),
+        };
+      }
+    }
   }
 
   const intent = intentForJob(opts.jobId);

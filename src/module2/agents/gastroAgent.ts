@@ -2,18 +2,12 @@ import type { Module2Agent } from './types';
 import type { Module2ActionButton } from '../types';
 import { agentPromptLaws } from '../laws/lawLayers';
 import { anchorCoords } from '../rucksack/rucksackStore';
-import { withHardApiFail, agentResultFromApiFail } from '../safety/hardApiFail';
 import { getShortTerm, setLastPlaceName } from '../context/shortTermContext';
 import { resolveWorkingPlace } from '../context/placeContext';
 import {
   detectMealSlot,
   extractNamedVenueMealIntent,
-  findDiningPicks,
-  formatDiningGuideSpeech,
   isFoodDiningPlace,
-  medalForRank,
-  parseDiningHardNeeds,
-  type DiningPick,
 } from './localDiningCatalog';
 import { searchPlacesByText } from '../../services/navigation/googleMapsNav';
 import { shortenActionLabel } from '../../services/concierge/actionLabelShorten';
@@ -29,12 +23,13 @@ import {
 } from '../../services/reservation/reservationPrefill';
 import { getCachedUserProfile } from '../../services/userProfileService';
 import { getReservationContact } from '../../types/userProfile';
-import { buildStay22AccommodationAction } from '../../services/affiliate/affiliateService';
 import {
   detectOfferKind,
   isSafeOfferUrl,
   offerLabel,
 } from '../planning/offerActionUtils';
+import { shouldHandoffToPitchModule } from '../pitch/shouldHandoffPitch';
+import { researchPitchAsAgentResult } from '../pitch/pitchFactLane';
 
 function assessNamedVenueFit(
   name: string,
