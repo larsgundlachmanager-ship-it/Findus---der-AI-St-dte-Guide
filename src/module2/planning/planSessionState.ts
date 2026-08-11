@@ -146,7 +146,11 @@ export const usePlanSessionStore = create<Store>((set, get) => ({
     });
     r?.(ok);
   },
-  reset: () =>
+  reset: () => {
+    const s = get();
+    const confirm = s.confirmResolver;
+    const loc = s.locationResolver;
+    const conflict = s.conflictResolver;
     set({
       active: false,
       phase: 'idle',
@@ -160,7 +164,24 @@ export const usePlanSessionStore = create<Store>((set, get) => ({
       confirmResolver: null,
       locationResolver: null,
       conflictResolver: null,
-    }),
+    });
+    // Wartende Schleifen freigeben (User-Cancel)
+    try {
+      confirm?.(false);
+    } catch {
+      /* soft */
+    }
+    try {
+      loc?.('');
+    } catch {
+      /* soft */
+    }
+    try {
+      conflict?.(false);
+    } catch {
+      /* soft */
+    }
+  },
 }));
 
 export function getActiveTaskOverride(): IngestOpenWish | null {

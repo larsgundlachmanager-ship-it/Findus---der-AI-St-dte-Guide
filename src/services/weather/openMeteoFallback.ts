@@ -22,6 +22,7 @@ export type OpenMeteoFallback = {
   nextRainAtMs: number | null;
   nextRainProb: number | null;
   rainWindows: Array<{ startMs: number; endMs: number; pop: number }>;
+  dayHighC: number | null;
 };
 
 function wmoLabel(code: number | null): string {
@@ -68,6 +69,7 @@ export async function fetchOpenMeteoFallback(opts: {
       };
       hourly?: {
         time?: string[];
+        temperature_2m?: number[];
         precipitation_probability?: number[];
         precipitation?: number[];
       };
@@ -92,6 +94,7 @@ export async function fetchOpenMeteoFallback(opts: {
     const times = data.hourly?.time ?? [];
     const pops = data.hourly?.precipitation_probability ?? [];
     const precips = data.hourly?.precipitation ?? [];
+    const temps = data.hourly?.temperature_2m ?? [];
     const now = Date.now();
     const hours = times.map((iso, i) => ({
       atMs: Date.parse(iso ?? ''),
@@ -136,13 +139,36 @@ export async function fetchOpenMeteoFallback(opts: {
       nextRainProb = outlook.nextRainPopPct;
     }
 
+    const evening = eveningCutoffMs(now);
+    let dayHigh: number | null = null;
+    for (let i = 0; i < times.length; i++) {
+      const t = Date.parse(times[i] ?? '');
+      if (!Number.isFinite(t) || t < now - 30 * 60_000 || t > evening) continue;
+      const ht = Number(temps[i]);
+      if (Number.isFinite(ht)) {
+        dayHigh = dayHigh == null ? ht : Math.max(dayHigh, ht);
+      }
+    }
+
+    const forecastBit =
+      outlook.kind === 'dry' && dayHigh != null
+        ? `heute bis ${Math.round(dayHigh)}°`
+        : outlook.kind === 'rain_timed' && outlook.nextRainAtMs
+          ? `Regen ab ${new Date(outlook.nextRainAtMs).toLocaleTimeString('de-DE', {
+              hour: '2-digit',
+              minute: '2-digit',
+            })}`
+          : outlook.shortLabel;
+
     const tempBit =
-      temp != null ? `${Math.round(temp)} Grad` : 'Temperatur unklar';
-    const summaryLine = `Aktuell ${tempBit}, ${label}.${outlook.speechSuffix}`;
+      temp != null ? `${Math.round(temp)}°` : 'Temperatur unklar';
+    const summaryLine = `Aktuell ${tempBit} · ${label} · ${forecastBit}`;
     const promptBlock = [
       '=== WETTER (Open-Meteo Fallback) ===',
       summaryLine,
+      outlook.speechSuffix.trim(),
       precip != null ? `Niederschlag jetzt: ${precip} mm` : null,
+      dayHigh != null ? `Tageshoch bis Abend ca. ${Math.round(dayHigh)}°.` : null,
     ]
       .filter(Boolean)
       .join('\n');
@@ -159,6 +185,7 @@ export async function fetchOpenMeteoFallback(opts: {
       nextRainAtMs,
       nextRainProb,
       rainWindows,
+      dayHighC: dayHigh,
     };
   } catch {
     return null;

@@ -29,10 +29,19 @@ export function buildPitchActions(opts: {
   if (opts.kind === 'hotel' && opts.bookingUrl) {
     actions.push({
       type: 'OPEN_URL',
-      label: label(`${medal} ${opts.name}`),
+      label: label('🏨 Zimmer buchen'),
       payload: { url: opts.bookingUrl, destName: opts.name },
     });
-    return actions;
+    actions.push({
+      type: 'START_NAVIGATION',
+      label: label(`📍 ${opts.name}`),
+      payload: {
+        destName: opts.name,
+        destLat: opts.lat,
+        destLng: opts.lng,
+      },
+    });
+    return actions.slice(0, 3);
   }
 
   if (opts.kind === 'tour' && opts.ticketUrl) {
@@ -43,8 +52,17 @@ export function buildPitchActions(opts: {
     });
   }
 
-  // Maps immer für Gastro/Sight/Kino (Bilder) — außer Hotel mit Affiliate-only
+  // In-App-Route zuerst (Say–Do), Maps als Fallback — außer Hotel mit Affiliate-only
   if (!(opts.kind === 'hotel' && opts.bookingUrl)) {
+    actions.push({
+      type: 'START_NAVIGATION',
+      label: label(`📍 ${opts.name}`),
+      payload: {
+        destName: opts.name,
+        destLat: opts.lat,
+        destLng: opts.lng,
+      },
+    });
     actions.push({
       type: 'OPEN_URL',
       label: label(`🗺️ ${opts.name}`),

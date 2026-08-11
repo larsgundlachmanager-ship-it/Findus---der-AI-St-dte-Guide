@@ -27,6 +27,10 @@ export type MorningBriefingFacts = {
   todos: string[];
   travelHint: 'heimreise' | 'weiterreise' | null;
   pendingWake: { wakeAtMs: number; clock: string } | null;
+  /** Touristen-Trip: „Tag 2 von 4 in München“ */
+  tripLine: string | null;
+  /** Offene Tisch-/Ticket-Anfragen */
+  reservationHint: string | null;
 };
 
 function clockOf(ms: number | null | undefined): string | null {
@@ -39,19 +43,43 @@ function clockOf(ms: number | null | undefined): string | null {
 
 function clothingFromWeather(opts: {
   tempC: number | null;
+  dayHighC?: number | null;
   precip: number | null;
   windy?: boolean;
 }): string | null {
-  const parts: string[] = [];
-  if (opts.tempC != null) {
-    if (opts.tempC <= 5) parts.push('warme Jacke');
-    else if (opts.tempC <= 12) parts.push('Übergangsjacke');
-    else if (opts.tempC <= 18) parts.push('leichte Schicht');
-    else if (opts.tempC >= 26) parts.push('luftige Kleidung');
+  try {
+    const {
+      buildOutfitAdviceFromWeather,
+    } = require('../weather/outfitFromWeather') as {
+      buildOutfitAdviceFromWeather: (o: {
+        nowTempC: number | null;
+        dayHighC: number | null;
+        precipProbPct: number | null;
+        windy?: boolean;
+      }) => { clothingBits: string[] };
+    };
+    const advice = buildOutfitAdviceFromWeather({
+      nowTempC: opts.tempC,
+      dayHighC: opts.dayHighC ?? null,
+      precipProbPct: opts.precip,
+      windy: opts.windy,
+    });
+    return advice.clothingBits.length
+      ? advice.clothingBits.slice(0, 2).join(', ')
+      : null;
+  } catch {
+    const parts: string[] = [];
+    const dress = opts.dayHighC ?? opts.tempC;
+    if (dress != null) {
+      if (dress <= 5) parts.push('warme Jacke');
+      else if (dress <= 12) parts.push('Übergangsjacke');
+      else if (dress <= 18) parts.push('leichte Schicht');
+      else if (dress >= 22) parts.push('luftige Kleidung');
+    }
+    if (opts.precip != null && opts.precip >= 40) parts.push('Regenjacke');
+    if (opts.windy) parts.push('Windschutz');
+    return parts.length ? parts.join(', ') : null;
   }
-  if (opts.precip != null && opts.precip >= 40) parts.push('Regenjacke');
-  if (opts.windy) parts.push('Windschutz');
-  return parts.length ? parts.join(', ') : null;
 }
 
 function detectTravelHint(): 'heimreise' | 'weiterreise' | null {
@@ -169,10 +197,30 @@ export function collectMorningBriefingFacts(opts?: {
 
   const snap = getCachedWeatherSnapshot();
   let tempC: number | null = null;
+  let dayHighC: number | null = null;
   let precip: number | null = null;
-  if (snap?.summaryLine) {
-    const m = snap.summaryLine.match(/(-?\d+(?:[.,]\d+)?)\s*°?\s*C/i);
-    if (m) tempC = Number(m[1]!.replace(',', '.'));
+  try {
+    const { extractTempsFromWeatherText } = require('../weather/outfitFromWeather') as {
+      extractTempsFromWeatherText: (o: {
+        summaryLine?: string | null;
+        promptBlock?: string | null;
+        currentTempC?: number | null;
+        dayHighC?: number | null;
+      }) => { nowTempC: number | null; dayHighC: number | null };
+    };
+    const t = extractTempsFromWeatherText({
+      summaryLine: snap?.summaryLine,
+      promptBlock: snap?.promptBlock,
+      currentTempC: snap?.currentTempC ?? null,
+      dayHighC: snap?.dayHighC ?? null,
+    });
+    tempC = t.nowTempC;
+    dayHighC = t.dayHighC;
+  } catch {
+    if (snap?.summaryLine) {
+      const m = snap.summaryLine.match(/Aktuell\s+(-?\d+(?:[.,]\d+)?)\s*°/i);
+      if (m) tempC = Number(m[1]!.replace(',', '.'));
+    }
   }
   if (snap?.nextRainProb != null) {
     precip =
@@ -219,6 +267,7 @@ export function collectMorningBriefingFacts(opts?: {
     weatherLine: snap?.summaryLine?.trim() || null,
     clothingHint: clothingFromWeather({
       tempC,
+      dayHighC,
       precip,
       windy: /\bwind|böen|boeen\b/i.test(snap?.summaryLine ?? ''),
     }),
@@ -227,12 +276,49 @@ export function collectMorningBriefingFacts(opts?: {
     todos,
     travelHint: detectTravelHint(),
     pendingWake,
+    tripLine: (() => {
+      try {
+        const { useTripModeStore } = require('../../store/useTripModeStore') as {
+          useTripModeStore: {
+            getState: () => {
+              active: boolean;
+              cityName: string | null;
+              dayCount: number;
+              getTripDayIndex: (k?: string) => number | null;
+            };
+          };
+        };
+        const trip = useTripModeStore.getState();
+        if (!trip.active) return null;
+        const idx = trip.getTripDayIndex(dayKey);
+        if (idx == null) return null;
+        const where = trip.cityName ? ` in ${trip.cityName}` : '';
+        return `Tag ${idx} von ${trip.dayCount}${where}`;
+      } catch {
+        return null;
+      }
+    })(),
+    reservationHint: (() => {
+      try {
+        const {
+          formatOpenReservationsHint,
+        } = require('../../store/useReservationMemoryStore') as {
+          formatOpenReservationsHint: () => string | null;
+        };
+        return formatOpenReservationsHint();
+      } catch {
+        return null;
+      }
+    })(),
   };
 }
 
 /** Kompakter Kontextblock für LLM — leere Slots weglassen. */
 export function formatMorningBriefingContext(facts: MorningBriefingFacts): string {
   const lines: string[] = [];
+  if (facts.tripLine) {
+    lines.push(`Trip: ${facts.tripLine}`);
+  }
   if (facts.yesterdayHighlights.length) {
     lines.push(`Gestern Highlights: ${facts.yesterdayHighlights.join(', ')}`);
   }
@@ -252,6 +338,9 @@ export function formatMorningBriefingContext(facts: MorningBriefingFacts): strin
         )
         .join(' · ')}`,
     );
+  }
+  if (facts.reservationHint) {
+    lines.push(`Offene Reservierungen: ${facts.reservationHint}`);
   }
   if (facts.pressure === 'tight') {
     lines.push(

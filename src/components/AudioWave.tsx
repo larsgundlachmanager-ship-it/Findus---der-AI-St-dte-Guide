@@ -27,8 +27,8 @@ export type FindusMood = 'idle' | 'followup' | 'listening' | 'thinking' | 'speak
 
 const MOOD_LINE: Record<Exclude<FindusMood, 'idle' | 'followup'>, string> = {
   listening: 'Ich höre zu…',
-  thinking: 'Einen Moment…',
-  speaking: 'Ich erzähle…',
+  thinking: 'Einen Moment… · 2× tippen stoppt',
+  speaking: 'Ich erzähle… · 2× tippen stoppt',
 };
 
 const PRESENCE_LINE: Record<FindusPresence, string> = {
@@ -79,8 +79,8 @@ const CompassArrow = React.memo(function CompassArrow() {
     else if (attentionCue === 'behind') deg = 180;
     const unwrapped = unwrapToward(rotationAbsRef.current, deg);
     rotationAbsRef.current = unwrapped;
-    // Short blend — long timings stacked on EMA and felt laggy.
-    rotation.value = withTiming(unwrapped, { duration: 110 });
+    // Short blend — keep under ~50ms so EMA + filter don't stack into sticky lag.
+    rotation.value = withTiming(unwrapped, { duration: 48 });
   }, [navBearingRel, attentionCue, rotation]);
 
   const arrowStyle = useAnimatedStyle(() => ({
@@ -137,19 +137,30 @@ const NavStatusLine = React.memo(function NavStatusLine() {
 export const AudioWave = React.memo(function AudioWave({
   mood,
   compact,
+  onAbortBusy,
 }: {
   mood: FindusMood;
   compact?: boolean;
+  /** Doppel-Tipp während Denken/Sprechen → Abbruch */
+  onAbortBusy?: () => void;
 }) {
-  return <LivingPresence mood={mood} compact={compact} />;
+  return (
+    <LivingPresence
+      mood={mood}
+      compact={compact}
+      onAbortBusy={onAbortBusy}
+    />
+  );
 });
 
 function LivingPresence({
   mood,
   compact,
+  onAbortBusy,
 }: {
   mood: FindusMood;
   compact?: boolean;
+  onAbortBusy?: () => void;
 }) {
   const navActive = useFinnusStore((s) => s.navActive);
   const navVisible = useFinnusStore((s) => s.navVisible);
@@ -449,19 +460,49 @@ function LivingPresence({
     return PRESENCE_LINE[findusPresence];
   }, [findusPresence, listening, navRouteLoading, navigating, speaking, thinking]);
 
-  const canTapPresence =
+  const canTapHealth =
     standby &&
     (findusPresence === 'degraded' || findusPresence === 'offline');
+  const canAbortBusy =
+    Boolean(onAbortBusy) && (thinking || speaking) && !navigating;
+
+  const busyTapTimesRef = useRef<number[]>([]);
+  const handlePresencePress = useCallback(() => {
+    if (canTapHealth) {
+      void onPresenceTap();
+      return;
+    }
+    if (!canAbortBusy || !onAbortBusy) return;
+    const now = Date.now();
+    const windowMs = 520;
+    busyTapTimesRef.current = [
+      ...busyTapTimesRef.current.filter((t) => now - t < windowMs),
+      now,
+    ];
+    if (busyTapTimesRef.current.length >= 2) {
+      busyTapTimesRef.current = [];
+      onAbortBusy();
+    }
+  }, [canAbortBusy, canTapHealth, onAbortBusy, onPresenceTap]);
 
   return (
     <Pressable
-      onPress={canTapPresence ? () => void onPresenceTap() : undefined}
-      disabled={!canTapPresence}
+      onPress={
+        canTapHealth || canAbortBusy ? handlePresencePress : undefined
+      }
+      disabled={!canTapHealth && !canAbortBusy}
       style={[styles.wrap, compact ? styles.wrapCompact : null]}
       accessibilityLabel={
         navigating ? 'Kompass – Navigation aktiv' : `Findus – ${statusLine}`
       }
-      accessibilityRole={canTapPresence ? 'button' : undefined}
+      accessibilityHint={
+        canAbortBusy
+          ? 'Zweimal tippen zum Abbrechen'
+          : canTapHealth
+            ? 'Tippen für Status'
+            : undefined
+      }
+      accessibilityRole={canTapHealth || canAbortBusy ? 'button' : undefined}
     >
       <Animated.View
         style={[styles.presenceBlock, { transform: [{ translateY }] }]}

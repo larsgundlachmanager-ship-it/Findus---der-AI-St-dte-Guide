@@ -41,6 +41,8 @@ export type OwmOneCallResult = {
   rawHourly: OwmHourly[];
   /** Sonnenuntergang heute (ms), aus current.sunset */
   sunsetMs: number | null;
+  /** Tageshoch bis Abend */
+  dayHighC: number | null;
 };
 
 const FETCH_MS = 10_000;
@@ -216,11 +218,31 @@ export async function fetchOpenWeatherOneCall(opts: {
       nextRainProb = null;
     }
 
-    const summaryLine = `Wetter: ${Math.round(temp ?? 0)}° · ${desc} · ${outlook.shortLabel}`;
+    const summaryLine = `Aktuell ${Math.round(temp ?? 0)}° · ${desc} · ${outlook.shortLabel}`;
+
+    // Tageshoch aus Hourly (bis Abend) — sinnvollere HUD-Prognose
+    let dayHigh: number | null = null;
+    const evening = eveningCutoffMs(now);
+    for (const h of hourly.slice(0, 24)) {
+      if (h.dt * 1000 > evening) break;
+      if (typeof h.temp === 'number' && Number.isFinite(h.temp)) {
+        dayHigh = dayHigh == null ? h.temp : Math.max(dayHigh, h.temp);
+      }
+    }
+    const forecastBit =
+      outlook.kind === 'dry' && dayHigh != null
+        ? `heute bis ${Math.round(dayHigh)}°`
+        : outlook.kind === 'rain_timed' && outlook.nextRainAtMs
+          ? `Regen ab ${clockLabel(outlook.nextRainAtMs)}`
+          : outlook.shortLabel;
+    const hudSummary =
+      temp != null
+        ? `Aktuell ${Math.round(temp)}° · ${desc} · ${forecastBit}`
+        : summaryLine;
 
     const promptBlock = [
       '=== OPENWEATHER ONE CALL 3.0 ===',
-      summaryLine,
+      hudSummary,
       outlook.speechSuffix.trim(),
       rainStartsInMin != null
         ? `Minutely: Regen startet in ca. ${rainStartsInMin} Minuten.`
@@ -237,6 +259,7 @@ export async function fetchOpenWeatherOneCall(opts: {
       dayStableDry
         ? 'Tageslage: gleichbleibend trocken → seltener rechecken.'
         : '',
+      dayHigh != null ? `Tageshoch bis Abend ca. ${Math.round(dayHigh)}°.` : '',
     ]
       .filter(Boolean)
       .join('\n');
@@ -251,7 +274,7 @@ export async function fetchOpenWeatherOneCall(opts: {
       nextRainAtMs,
       nextRainProb,
       rainStartsInMin,
-      summaryLine,
+      summaryLine: hudSummary,
       promptBlock,
       dayStableDry,
       rainWindows,
@@ -259,6 +282,7 @@ export async function fetchOpenWeatherOneCall(opts: {
       sunsetMs: data.current?.sunset
         ? data.current.sunset * 1000
         : null,
+      dayHighC: dayHigh,
     };
   } catch (err) {
     console.warn('[owm] fetch failed', err);

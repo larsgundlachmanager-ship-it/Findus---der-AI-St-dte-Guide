@@ -99,6 +99,10 @@ export type PitchCandidate = {
   detourMinApprox?: number;
   sideM?: number;
   distFromAnchorM?: number;
+  /** Places websiteUri — Speisekarte-Seed / Deep-Append */
+  websiteUrl?: string | null;
+  /** Hotel Stay22/Expedia Deep-Link wenn bekannt */
+  bookingUrl?: string | null;
 };
 
 export type PitchOptionCard = {

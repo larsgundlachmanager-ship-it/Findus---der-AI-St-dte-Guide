@@ -4,6 +4,7 @@
 
 import { closingTimeAllowsStay } from '../../services/concierge/closingHours';
 import type { PitchCandidate, PitchRequest, PitchWish } from './types';
+import { isWegweiserOrApproachName } from './candidatePool';
 
 function minutesOfDay(ms: number): number {
   const d = new Date(ms);
@@ -21,7 +22,10 @@ function defaultStayMin(req: PitchRequest): number {
 function fitsVisit(c: PitchCandidate, req: PitchRequest): boolean {
   const stayMin = defaultStayMin(req);
   const arrivalMin = minutesOfDay(req.visitAtMs);
-  const nearNow = Math.abs(req.visitAtMs - Date.now()) < 20 * 60_000;
+  const deltaMs = Math.abs(req.visitAtMs - Date.now());
+  // Bis ~3h: „jetzt / heute Abend noch“ — geschlossen raus
+  const nearNow =
+    deltaMs < 3 * 60 * 60_000 || req.searchMode === 'here_now';
   if (c.openNow === false && nearNow) return false;
   if (c.closesAtMin != null) {
     return closingTimeAllowsStay(arrivalMin, c.closesAtMin, stayMin);
@@ -35,8 +39,11 @@ function softMatchWish(c: PitchCandidate, w: PitchWish): number {
   if (blob.includes(wt)) return w.hardness === 'must' ? 3 : 2;
   // cuisine heuristics
   if (w.kind === 'cuisine') {
-    if (/italien|pizza|pasta|trattoria|osteria/.test(wt) && /pizza|pasta|italia|trattoria|osteria/.test(blob)) {
-      return 2;
+    if (
+      /italien|pizza|pasta|trattoria|osteria/.test(wt) &&
+      /pizza|pasta|italia|trattoria|osteria|restaurant|\bfood\b/.test(blob)
+    ) {
+      return /pizza|pizzeria|italia|trattoria|osteria/.test(blob) ? 3 : 2;
     }
     if (/griech/.test(wt) && /griech|gyro|souvlaki|hellas/.test(blob)) return 2;
   }
@@ -48,9 +55,82 @@ function softMatchWish(c: PitchCandidate, w: PitchWish): number {
 }
 
 function prefsOk(c: PitchCandidate, req: PitchRequest): boolean {
-  const blob = `${c.name}`.toLowerCase();
+  if (isWegweiserOrApproachName(c.name, (c.softTags ?? []).join(' '))) {
+    return false;
+  }
+  const blob = `${c.name} ${(c.softTags ?? []).join(' ')}`.toLowerCase();
   for (const a of req.prefs.avoidCategories ?? []) {
     if (blob.includes(a.toLowerCase())) return false;
+  }
+  return kindFitsCandidate(c, req);
+}
+
+/** Hard: Pizza-Pitch nie mit Friseur etc. füllen */
+function kindFitsCandidate(c: PitchCandidate, req: PitchRequest): boolean {
+  const blob = `${c.name} ${(c.softTags ?? []).join(' ')} ${c.address ?? ''}`.toLowerCase();
+  if (
+    /coiffeur|friseur|frisör|frisoer|hair|nagelstudio|physiother|zahnarzt|apotheke|büro|buero|verwaltung|supermarkt|aldi|lidl/.test(
+      blob,
+    )
+  ) {
+    return req.kind !== 'food' && req.kind !== 'bar' && req.kind !== 'hotel';
+  }
+  if (req.kind === 'food' || req.kind === 'bar') {
+    const wishBlob = `${req.title} ${req.context} ${req.wishes.map((w) => w.text).join(' ')}`.toLowerCase();
+    // Event-Locations / reine Veranstaltungsorte sind kein Frühstück/Snack
+    if (
+      /event\s*location|eventlocation|veranstaltungsort|hochzeitssaal|konferenzzentrum|tagungszentrum/.test(
+        blob,
+      ) &&
+      !/restaurant|café|cafe|bistro|frühstück|fruehstueck|imbiss/.test(blob)
+    ) {
+      return false;
+    }
+    // Pizza-Wunsch: Bäcker reicht nicht; Places-Hits tragen oft nur softTag „food“
+    if (/pizza/.test(wishBlob)) {
+      if (/bäck|baeck|bakery|brot/.test(blob) && !/pizza|pizzeria/.test(blob)) {
+        return false;
+      }
+      return /pizza|pizzeria|trattoria|osteria|italia|restaurant|\bfood\b/.test(
+        blob,
+      );
+    }
+    // Spät-Snacks: Bäckerei/Café tagsüber oft zu — Imbiss/Döner/Spätkauf bevorzugen
+    if (
+      /\b(snack|snacks|spät|spaet|döner|doener|kebab|imbiss)\b/.test(wishBlob) ||
+      (req.searchMode === 'here_now' &&
+        new Date(req.visitAtMs).getHours() >= 20)
+    ) {
+      if (
+        /bäck|baeck|bakery|brotchen|brötchen|konditor/.test(blob) &&
+        !/imbiss|döner|doener|kebab|spät|spaet|24\s*h|open\s*late|nacht/.test(
+          blob,
+        )
+      ) {
+        // nur behalten wenn openNow explizit true
+        if (c.openNow !== true) return false;
+      }
+    }
+    // Frühstück: reine Biergärten/Bars ohne Café-Signal raus
+    if (/frühstück|fruehstueck|breakfast/.test(wishBlob)) {
+      if (
+        /biergarten|weinbar|cocktailbar|nachtclub|disco/.test(blob) &&
+        !/café|cafe|frühstück|fruehstueck|breakfast|bistro|restaurant|bäck|baeck/.test(
+          blob,
+        )
+      ) {
+        return false;
+      }
+    }
+    return /food|restaurant|pizza|pasta|café|cafe|imbiss|trattoria|osteria|bistro|gastro|bar|pub|biergarten|grill|burger|sushi|griech|döner|doener|kebab|snack/.test(
+      blob,
+    );
+  }
+  if (req.kind === 'hotel') {
+    return /hotel|pension|hostel|airbnb|unterkunft/.test(blob);
+  }
+  if (req.kind === 'cinema') {
+    return /kino|cinema|filmtheater/.test(blob);
   }
   return true;
 }
@@ -105,10 +185,19 @@ export function filterAndRank(
   open = [...open].sort((a, b) => rankKey(a) - rankKey(b));
 
   if (open.length === 0) {
-    // Soft-fail: nimm beste aus Roh-Pool die visit passen (locker Wünsche)
+    // Soft-fail: nur kind-passende Alternativen — nie Friseur für Pizza
     const fallback = [...pool]
       .filter((p) => fitsVisit(p, req) && prefsOk(p, req))
       .sort((a, b) => rankKey(a) - rankKey(b));
+    if (fallback.length === 0) {
+      return {
+        top: [],
+        softFail: true,
+        outOfBox: null,
+        reason:
+          'In der Nähe nichts Passendes gefunden — sag Ort/Stadtteil oder wir suchen weiter.',
+      };
+    }
     const alt = fallback.slice(0, 2);
     const oob = fallback[2] ?? null;
     return {
@@ -123,20 +212,43 @@ export function filterAndRank(
     const rest = pool
       .filter((p) => p.name !== open[0]!.name && fitsVisit(p, req) && prefsOk(p, req))
       .sort((a, b) => rankKey(a) - rankKey(b));
-    const alt = rest[0];
+    const alt = rest.find((p) => !sameBrandFamily(open[0]!.name, p.name)) ?? rest[0];
     return {
       top: alt ? [open[0]!, alt] : [open[0]!],
       softFail: !alt,
-      outOfBox: rest[1] ?? null,
+      outOfBox: rest.find((p) => p !== alt) ?? null,
       reason: alt
         ? undefined
         : 'Nur eine klare Option — Alternative unsicher.',
     };
   }
 
+  const first = open[0]!;
+  const second =
+    open.slice(1).find((c) => !sameBrandFamily(first.name, c.name)) ?? open[1]!;
   return {
-    top: open.slice(0, 2),
+    top: [first, second].filter(Boolean).slice(0, 2),
     softFail: false,
-    outOfBox: open[2] ?? null,
+    outOfBox: open.find((c) => c !== first && c !== second) ?? null,
   };
+}
+
+/** „Goldhütchen Event“ + „Goldhütchen Biergarten“ = dieselbe Marke → zweite Option diversifizieren */
+function sameBrandFamily(a: string, b: string): boolean {
+  const norm = (s: string) =>
+    s
+      .toLowerCase()
+      .replace(/[^a-zäöüß0-9\s]/gi, ' ')
+      .replace(/\b(event|location|wein|biergarten|restaurant|café|cafe|bar|hotel)\b/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  const na = norm(a);
+  const nb = norm(b);
+  if (!na || !nb) return false;
+  if (na === nb) return true;
+  const tokA = na.split(' ').filter((t) => t.length >= 4);
+  const tokB = new Set(nb.split(' ').filter((t) => t.length >= 4));
+  if (tokA.length === 0) return false;
+  const hit = tokA.filter((t) => tokB.has(t)).length;
+  return hit >= 1 && hit >= Math.min(tokA.length, 2);
 }

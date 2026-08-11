@@ -56,6 +56,10 @@ export type WeatherSnapshot = {
   rainWindows?: Array<{ startMs: number; endMs: number; pop: number }>;
   /** Sonnenuntergang (ms), wenn von OWM bekannt */
   sunsetMs?: number | null;
+  /** Aktuelle Temperatur °C (SSOT, nicht aus Summary parsen) */
+  currentTempC?: number | null;
+  /** Tageshoch bis Abend °C */
+  dayHighC?: number | null;
 };
 
 let cache: WeatherSnapshot | null = null;
@@ -300,6 +304,7 @@ export async function ensureWeatherFresh(
             summaryLine: meteo.summaryLine,
             promptBlock: meteo.promptBlock,
             rainWindows: meteo.rainWindows,
+            dayHighC: meteo.dayHighC ?? null,
           },
           prev,
         );
@@ -342,6 +347,7 @@ export async function ensureWeatherFresh(
             summaryLine: meteo.summaryLine,
             promptBlock: meteo.promptBlock,
             rainWindows: meteo.rainWindows,
+            dayHighC: meteo.dayHighC ?? null,
           },
           prev,
         );
@@ -374,6 +380,7 @@ export async function ensureWeatherFreshFromOwm(
     promptBlock: string;
     rainWindows: Array<{ startMs: number; endMs: number; pop: number }>;
     sunsetMs?: number | null;
+    dayHighC?: number | null;
   },
   prev?: WeatherSnapshot | null,
 ): Promise<WeatherSnapshot> {
@@ -383,6 +390,14 @@ export async function ensureWeatherFreshFromOwm(
     (owm.currentWeatherId != null &&
       owm.currentWeatherId >= 200 &&
       owm.currentWeatherId < 600);
+  const dayHigh =
+    owm.dayHighC ??
+    (() => {
+      const m = owm.promptBlock.match(
+        /Tageshoch[^\d-]{0,24}(-?\d+(?:[.,]\d+)?)\s*°/i,
+      );
+      return m ? Number(m[1]!.replace(',', '.')) : null;
+    })();
   const snap: WeatherSnapshot = {
     fetchedAtMs: owm.fetchedAtMs,
     lat: owm.lat,
@@ -412,6 +427,9 @@ export async function ensureWeatherFreshFromOwm(
     rainStartsInMin: owm.rainStartsInMin,
     rainWindows: owm.rainWindows,
     sunsetMs: owm.sunsetMs ?? prior?.sunsetMs ?? null,
+    currentTempC: owm.currentTemp,
+    dayHighC:
+      dayHigh != null && Number.isFinite(dayHigh) ? dayHigh : prior?.dayHighC ?? null,
   };
   await saveCache(snap);
 

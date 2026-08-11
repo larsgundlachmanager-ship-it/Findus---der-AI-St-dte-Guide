@@ -8,9 +8,13 @@ import type { PitchCandidate, PitchRequest } from './types';
 
 const PITCH_SYSTEM = `Du bist Findus Pitcher. Schreibe für genau zwei Orte je einen motivierenden Pitch.
 Länge je speechPitch: 180–200 Zeichen. Warum hingehen — konkret, Du-Form, Deutsch.
+Die beiden Pitches MÜSSEN sich inhaltlich unterscheiden (andere Fakten/Vorteile), nie denselben Text umschreiben.
 Keine Adresse, kein Telefon, keine Meta („Option A“). Namen nicht am Satzanfang wiederholen.
+NIE WiFi/WLAN, „gut zum Telefonieren/Callen/Meetings“ erwähnen — das ist Standard-Fluff.
+Hotel: Preis/Nacht oder Sterne nennen wenn in den Daten; Nähe zum genannten Anker (z. B. Tennis) wenn Distanz da.
+Food/Frühstück: Küche/Gerichte/Speisekarte andeuten wenn bekannt — keine Event-Location als Café verkaufen.
 Empfehlung nur wenn einer klar besser ist (in summary), sonst neutral.
-Stichpunkte: max 3 je Ort, je max 2 kurze Zeilen — Sterne/Distanz/Nutzen.
+Stichpunkte: max 3 je Ort, je max 2 kurze Zeilen — Sterne/Distanz/Nutzen/Preis. Kein „perfekt vor dem Termin“ wenn der Termin zur gleichen Zeit ist.
 
 ${FINDUS_FEW_SHOT_DISCLAIMER}
 

@@ -4,7 +4,7 @@
  */
 
 const CITY_RE =
-  /\b(Wedel|Pinneberg|Hamburg|Uetersen|Tornesch|Prisdorf|Elmshorn|Quickborn|Schenefeld|Halstenbek|Rellingen|Wangerooge|Berlin|München|Muenchen|Köln|Koeln|Bremen|Hannover|Kiel|Lübeck|Luebeck|Flensburg|Norderstedt|Ahrensburg|Stade|Itzehoe|Glückstadt|Glueckstadt|Scharbeutz|Laboe|Travemünde|Travemuende|Timmendorfer\s+Strand|Heiligenhafen|Eckernförde|Eckernfoerde|Schönberg|Schoenberg)\b/gi;
+  /\b(Wedel|Pinneberg|Hamburg|Uetersen|Tornesch|Prisdorf|Priestewitz|Elmshorn|Quickborn|Schenefeld|Halstenbek|Rellingen|Wangerooge|Berlin|München|Muenchen|Köln|Koeln|Bremen|Hannover|Kiel|Lübeck|Luebeck|Flensburg|Norderstedt|Ahrensburg|Stade|Itzehoe|Glückstadt|Glueckstadt|Scharbeutz|Laboe|Travemünde|Travemuende|Timmendorfer\s+Strand|Heiligenhafen|Eckernförde|Eckernfoerde|Schönberg|Schoenberg|Eimsbüttel|Eimsbuettel|Altona|Ottensen|St\.?\s*Pauli|Winterhude|Eppendorf|Harburg|Wandsbek|Bergedorf|Blankenese|Harvestehude|Rotherbaum|Sternschanze|Schanze)\b/gi;
 
 let lastMentionedCity: string | null = null;
 let lastTopic: string | null = null;

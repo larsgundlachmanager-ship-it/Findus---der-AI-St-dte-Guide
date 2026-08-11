@@ -12,6 +12,7 @@ import {
 } from './pitchDeepAppend';
 import { publishPitchResult, useLivePitchStore } from './publishPitchUi';
 import { enqueueSpeech } from '../speech/speechQueue';
+import { buildPitchHotelBookingUrl } from './pitchBookingUrl';
 import type {
   PitchDeepAppend,
   PitchOptionCard,
@@ -44,12 +45,28 @@ export async function runPitchModule(
     const c = card.candidate;
     const role = roleFor(i, ranked.softFail);
     const mapsUrl = c.mapsUrl;
+    const websiteUrl = c.websiteUrl ?? null;
+    // Speisekarte sofort mit Website-Seed; Deep-Append ersetzt ggf. durch echte Menü-URL
+    const menuSeed =
+      req.kind === 'food' || req.kind === 'bar' ? websiteUrl : null;
+    const bookingUrl =
+      req.kind === 'hotel'
+        ? c.bookingUrl ??
+          buildPitchHotelBookingUrl(
+            c.name,
+            `${req.title} ${req.context}`,
+            req.cityHint,
+          )
+        : null;
     const actions = buildPitchActions({
       kind: req.kind,
       name: c.name,
       lat: c.lat,
       lng: c.lng,
       mapsUrl,
+      menuUrl: menuSeed,
+      bookingUrl,
+      websiteUrl,
       role: role === 'out_of_box' ? 'alternative' : role,
     });
     return {
@@ -63,6 +80,9 @@ export async function runPitchModule(
       bullets: card.bullets,
       mapsUrl,
       rating: c.rating,
+      websiteUrl,
+      menuUrl: menuSeed,
+      bookingUrl,
       actions,
     };
   });

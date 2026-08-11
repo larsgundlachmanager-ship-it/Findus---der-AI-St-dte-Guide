@@ -96,7 +96,7 @@ export function hasExplicitStayDates(text: string | undefined | null): boolean {
     return false;
   }
   if (
-    /\b(heute|heut\s*nacht|heute\s*nacht|heute\s*abend|noch\s*heute|diese\s*nacht|naechste\s*nacht|nächste\s*nacht|morgen|übermorgen|uebermorgen|wochenende|freitag|samstag|sonntag)\b/.test(
+    /\b(heute|heut\s*nacht|heute\s*nacht|heute\s*abend|noch\s*heute|diese\s*nacht|naechste\s*nacht|nächste\s*nacht|morgen|übermorgen|uebermorgen|wochenende|montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag)\b/.test(
       t,
     )
   ) {
@@ -227,6 +227,21 @@ export function parseHotelStayDates(text: string | undefined | null): {
     const checkin = nextWeekdayIso(new Date(), 5); // Freitag
     const checkout = addDays(checkin, 2); // Sonntag
     return { checkin, checkout };
+  }
+
+  // Einzelner Wochentag („Donnerstag in Lübeck“) → Check-in an dem Tag, 1 Nacht
+  const loneWd = t.match(
+    /\b(mo|di|mi|do|fr|sa|so|montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag)\w*\b/,
+  );
+  if (loneWd) {
+    const key =
+      Object.keys(WEEKDAYS_DE).find((k) => loneWd[1]!.startsWith(k)) ??
+      loneWd[1]!;
+    const d = WEEKDAYS_DE[key];
+    if (d != null) {
+      const checkin = nextWeekdayIso(new Date(), d);
+      return { checkin, checkout: addDays(checkin, 1) };
+    }
   }
 
   return base;

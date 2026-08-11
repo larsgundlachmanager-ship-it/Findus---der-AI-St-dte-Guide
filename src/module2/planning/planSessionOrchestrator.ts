@@ -43,13 +43,21 @@ import { calculateNavigation } from './planMobilityEngine';
 import { runFinalTimelineOptimization } from './planConflictResolve';
 import { sanitizePlanSpeech } from './planSpeechSanitize';
 import {
+  canMergeBreakfastIntoCafe,
+  enrichWishWithPrefs,
+  isVaguePartyWish,
+  mergeBreakfastShortAnswers,
+  partyClarifyShortAnswers,
+} from './planClarify';
+import {
   clampToFutureMs,
   isPastMs,
 } from '../timeline/planNowGuard';
-import { todayDateKey } from '../../utils/dateKeys';
+import { todayDateKey, offsetDateKey } from '../../utils/dateKeys';
 import { getCachedUserProfile } from '../../services/userProfileService';
 
 function speak(text: string): void {
+  if (usePlanSessionStore.getState().phase === 'idle') return;
   const t = sanitizePlanSpeech((text ?? '').replace(/\s+/g, ' ').trim());
   if (!t) return;
   enqueueSpeech({
@@ -60,10 +68,21 @@ function speak(text: string): void {
 }
 
 function openPlanCalendarModal(targetDate: string): void {
+  // Immer sichtbar — nie headless „Zusammenfassung ohne Timeline“
   usePlanCalendarUiStore.getState().setHeadlessPlanning(false);
   usePlanCalendarUiStore.getState().requestDayKey(targetDate);
   requestOpenPlanCalendar();
   useFuturePlanStore.getState().ensureDay(targetDate);
+  setTimeout(() => {
+    try {
+      if (!usePlanCalendarUiStore.getState().calendarVisible) {
+        usePlanCalendarUiStore.getState().setHeadlessPlanning(false);
+        requestOpenPlanCalendar();
+      }
+    } catch {
+      /* soft */
+    }
+  }, 120);
 }
 
 export function parseTimeToMs(dayKey: string, time: string | null | undefined): number | null {
@@ -198,6 +217,15 @@ function insertOpenBands(wishes: IngestOpenWish[], dayKey: string): void {
   wishes.forEach((w, i) => {
     const id = w.id ?? `wish_${dayKey}_${i}`;
     let startMs = parseTimeToMs(dayKey, w.estimatedTime ?? null);
+    // Hotel/Übernachtung ohne Zeit → Check-in auf der Achse (nicht nur Basis-Banner)
+    if (
+      startMs == null &&
+      /\b(hotel|übernacht|uebernacht|pension|unterkunft|hostel)\b/i.test(
+        `${w.title} ${w.context}`,
+      )
+    ) {
+      startMs = parseTimeToMs(dayKey, '15:00');
+    }
     if (isToday && startMs != null && isPastMs(startMs, nowMs)) {
       startMs = clampToFutureMs(startMs, { nowMs, minAheadMs: 25 * 60_000 });
     }
@@ -223,8 +251,16 @@ function insertOpenBands(wishes: IngestOpenWish[], dayKey: string): void {
   });
 }
 
+function dayHintFromBlob(blob: string): 'today' | 'tomorrow' | 'overmorrow' {
+  if (/\b(übermorgen|uebermorgen)\b/i.test(blob)) return 'overmorrow';
+  if (/\b(morgen|tomorrow)\b/i.test(blob)) return 'tomorrow';
+  return 'today';
+}
+
 function applyMasterTimeline(plan: IngestedPlan): void {
   const dayKey = plan.targetDate;
+  const tomorrowKey = offsetDateKey(1);
+  const overKey = offsetDateKey(2);
   clearPlanningArtifactsOnDay(dayKey, plan.lageMode);
   // Transport-Default aus Onboarding (Fahrrad/Fuß/ÖPNV/Auto)
   try {
@@ -242,8 +278,38 @@ function applyMasterTimeline(plan: IngestedPlan): void {
     /* soft */
   }
   insertGeoAnchor(plan.geoAnchor, dayKey);
-  insertTimeline(plan.fixedNodes, dayKey);
-  insertOpenBands(plan.openWishesQueue, dayKey);
+
+  const fixedToday: IngestFixedNode[] = [];
+  const fixedTomorrow: IngestFixedNode[] = [];
+  const fixedOver: IngestFixedNode[] = [];
+  for (const n of plan.fixedNodes) {
+    const hint = dayHintFromBlob(`${n.title} ${n.location ?? ''}`);
+    if (hint === 'overmorrow') fixedOver.push(n);
+    else if (hint === 'tomorrow') fixedTomorrow.push(n);
+    else fixedToday.push(n);
+  }
+  const wishToday: IngestOpenWish[] = [];
+  const wishTomorrow: IngestOpenWish[] = [];
+  const wishOver: IngestOpenWish[] = [];
+  for (const w of plan.openWishesQueue) {
+    const hint = dayHintFromBlob(`${w.title} ${w.context}`);
+    if (hint === 'overmorrow') wishOver.push(w);
+    else if (hint === 'tomorrow') wishTomorrow.push(w);
+    else wishToday.push(w);
+  }
+
+  insertTimeline(fixedToday, dayKey);
+  insertOpenBands(wishToday, dayKey);
+  if (fixedTomorrow.length || wishTomorrow.length) {
+    useFuturePlanStore.getState().ensureDay(tomorrowKey);
+    insertTimeline(fixedTomorrow, tomorrowKey);
+    insertOpenBands(wishTomorrow, tomorrowKey);
+  }
+  if (fixedOver.length || wishOver.length) {
+    useFuturePlanStore.getState().ensureDay(overKey);
+    insertTimeline(fixedOver, overKey);
+    insertOpenBands(wishOver, overKey);
+  }
   try {
     applyGapFillTravelLegs();
   } catch {
@@ -514,22 +580,76 @@ export async function runPlanSession(ingestedPlan: IngestedPlan): Promise<void> 
   // Nur den Zieldatum-Tag öffnen — kein Tag-Sprung
   openPlanCalendarModal(ingestedPlan.targetDate);
 
+  // Mehr-Tage-Hinweis im Text: weitere Tage vorbereiten
+  try {
+    const { scoreFromUtterance } = await import('./planProScore');
+    const hints = scoreFromUtterance(
+      `${ingestedPlan.bridgeSpeech} ${ingestedPlan.openWishesQueue.map((w) => w.title).join(' ')}`,
+    );
+    if (hints.multiDay) {
+      const { offsetDateKey } = await import('../../utils/dateKeys');
+      useFuturePlanStore.getState().ensureDay(offsetDateKey(1));
+      useFuturePlanStore.getState().ensureDay(offsetDateKey(2));
+    }
+  } catch {
+    /* soft */
+  }
+
   if (
     ingestedPlan.geoAnchor.needsClarification ||
     ingestedPlan.fixedNodes.some((n) => n.needsClarification && !n.time)
   ) {
-    speak('Kurze Frage: Wo startest du — oder wo ist der erste Termin?');
-    const loc = await waitForUserLocationInput();
-    if (loc.trim()) {
-      ingestedPlan = {
-        ...ingestedPlan,
-        geoAnchor: {
-          ...ingestedPlan.geoAnchor,
-          name: loc.trim(),
-          needsClarification: false,
-        },
-      };
-      store.setPlan(ingestedPlan);
+    // GPS + genannter Zielort → keine „Bist du in …?“-Rückfrage
+    let skipClarify = false;
+    try {
+      const { anchorCoords, readRucksackSync } = await import(
+        '../rucksack/rucksackStore'
+      );
+      const { extractCityFromText } = await import(
+        '../context/shortTermContext'
+      );
+      const gps = anchorCoords(readRucksackSync());
+      const gpsOk =
+        Number.isFinite(gps.lat) &&
+        Number.isFinite(gps.lng) &&
+        Math.abs(gps.lat) > 0.1;
+      const blob = [
+        ingestedPlan.bridgeSpeech,
+        ...ingestedPlan.fixedNodes.map((n) => `${n.title} ${n.location ?? ''}`),
+        ...ingestedPlan.openWishesQueue.map((w) => `${w.title} ${w.context}`),
+      ].join(' ');
+      const named = extractCityFromText(blob);
+      if (gpsOk && named) {
+        skipClarify = true;
+        ingestedPlan = {
+          ...ingestedPlan,
+          geoAnchor: {
+            ...ingestedPlan.geoAnchor,
+            lat: gps.lat,
+            lng: gps.lng,
+            name: ingestedPlan.geoAnchor.name || 'hier',
+            needsClarification: false,
+          },
+        };
+        store.setPlan(ingestedPlan);
+      }
+    } catch {
+      /* soft */
+    }
+    if (!skipClarify) {
+      speak('Kurze Frage: Wo startest du — oder wo ist der erste Termin?');
+      const loc = await waitForUserLocationInput();
+      if (loc.trim()) {
+        ingestedPlan = {
+          ...ingestedPlan,
+          geoAnchor: {
+            ...ingestedPlan.geoAnchor,
+            name: loc.trim(),
+            needsClarification: false,
+          },
+        };
+        store.setPlan(ingestedPlan);
+      }
     }
   }
 
@@ -562,9 +682,11 @@ export async function runPlanSession(ingestedPlan: IngestedPlan): Promise<void> 
     }
   }
 
-  // Prefetch erste konkrete Auswahl (kein Explore)
+  // Prefetch erste konkrete Auswahl (kein Explore) — bis zu 3 vorladen
   const queue0 = selectionQueue(ingestedPlan).filter((w) => !isExploreWish(w));
   triggerAsyncDeepResearch(queue0[0]);
+  if (queue0[1]) triggerAsyncDeepResearch(queue0[1]);
+  if (queue0[2]) triggerAsyncDeepResearch(queue0[2]);
 
   speakBridge(ingestedPlan);
 
@@ -628,12 +750,90 @@ export async function runPlanSession(ingestedPlan: IngestedPlan): Promise<void> 
     if (nextWish) triggerAsyncDeepResearch(nextWish);
 
     store.setPhase('select_mode');
-    const pitch = await executeDeepResearchAndPitch(activeTask);
+    let activeForPitch = enrichWishWithPrefs(activeTask);
+
+    // Clarify: Party zu breit
+    if (isVaguePartyWish(activeForPitch)) {
+      partyClarifyShortAnswers();
+      speak(
+        sanitizePlanSpeech(
+          `Kurz zu „${activeForPitch.title}“: Bar, Club, beides — oder hast du eine Musikrichtung?`,
+        ),
+      );
+      const clarifyText = await waitForUserLocationInput();
+      if (clarifyText.trim()) {
+        activeForPitch = {
+          ...activeForPitch,
+          context: `${activeForPitch.context} | ${clarifyText.trim()}`.slice(
+            0,
+            400,
+          ),
+        };
+        try {
+          const { inferTripPrefsFromText, savePlanTripPrefs } = await import(
+            './planTripPrefs'
+          );
+          const patch = inferTripPrefsFromText(clarifyText);
+          if (Object.keys(patch).length) void savePlanTripPrefs(patch);
+        } catch {
+          /* soft */
+        }
+      }
+      usePlanCalendarUiStore.getState().clearShortAnswers();
+    }
+
+    // Merge-Frage: Frühstück + Café-Meeting
+    const cafeLike = concreteQueue.find(
+      (w) =>
+        w !== activeTask &&
+        /\b(café|cafe|meeting|laptop)\b/i.test(`${w.title} ${w.context}`),
+    );
+    if (
+      cafeLike &&
+      canMergeBreakfastIntoCafe(activeForPitch, cafeLike) &&
+      /\b(frühstück|fruehstueck)\b/i.test(
+        `${activeForPitch.title} ${activeForPitch.context}`,
+      )
+    ) {
+      mergeBreakfastShortAnswers();
+      speak(
+        sanitizePlanSpeech(
+          'Möchtest du vorher im Meeting-Café frühstücken — oder getrennt suchen?',
+        ),
+      );
+      const mergeAns = await waitForUserLocationInput();
+      usePlanCalendarUiStore.getState().clearShortAnswers();
+      if (/café|cafe|direkt|früher|frueher|verbind|im\s+meeting/i.test(mergeAns)) {
+        const ci = concreteQueue.findIndex(
+          (w) => w.id === cafeLike.id || w.title === cafeLike.title,
+        );
+        if (ci >= 0) {
+          concreteQueue[ci] = {
+            ...concreteQueue[ci]!,
+            context: `${cafeLike.context} | inkl. Frühstück, früher da`.slice(
+              0,
+              400,
+            ),
+          };
+        }
+        // Frühstück überspringen — Café deckt es
+        if (!getActiveTaskOverride()) {
+          currentTaskIndex += 1;
+        } else {
+          usePlanSessionStore.getState().clearOverride();
+        }
+        continue;
+      }
+    }
+
+    const pitch = await executeDeepResearchAndPitch(activeForPitch);
+    if (usePlanSessionStore.getState().phase === 'idle') break;
     speak(
       pitch.spokenText ||
-        `Als Nächstes: ${activeTask.title}. Zwei Optionen — was ist dein Favorit?`,
+        `Als Nächstes: ${activeForPitch.title}. Zwei Optionen — was ist dein Favorit?`,
     );
     await waitForPickOrAdvance();
+    if (usePlanSessionStore.getState().phase === 'idle') break;
     store.setPhase('step_loop');
 
     if (!usePlanCalendarUiStore.getState().pendingChoice) {
@@ -695,19 +895,33 @@ export async function runPlanSession(ingestedPlan: IngestedPlan): Promise<void> 
   }
 
   // Noch offene Wish-Stops auf der Timeline? Nur Zukunft — keine Vergangenheit
-  const leftoverWishes = useFuturePlanStore
-    .getState()
-    .plan.stops.filter(
-      (s) =>
-        s.kind === 'wish' &&
-        s.status !== 'done' &&
-        (s.plannedStartMs == null || !isPastMs(s.plannedStartMs, Date.now())) &&
-        !isExploreWish({
-          title: s.title,
-          priority: 6,
-          context: s.notes ?? s.title,
-        }),
-    );
+  let leftoverMuted = false;
+  try {
+    const {
+      isPlanOpenPointNudgeMuted,
+    } = require('../../services/navigation/modulePriorityPolicy') as {
+      isPlanOpenPointNudgeMuted: () => boolean;
+    };
+    leftoverMuted = isPlanOpenPointNudgeMuted();
+  } catch {
+    leftoverMuted = false;
+  }
+  const leftoverWishes = leftoverMuted
+    ? []
+    : useFuturePlanStore
+        .getState()
+        .plan.stops.filter(
+          (s) =>
+            s.kind === 'wish' &&
+            s.status !== 'done' &&
+            (s.plannedStartMs == null ||
+              !isPastMs(s.plannedStartMs, Date.now())) &&
+            !isExploreWish({
+              title: s.title,
+              priority: 6,
+              context: s.notes ?? s.title,
+            }),
+        );
   for (const s of leftoverWishes) {
     const wish: IngestOpenWish = {
       id: s.id,
@@ -804,7 +1018,20 @@ export async function runPlanSession(ingestedPlan: IngestedPlan): Promise<void> 
     .getState()
     .plan.stops.some((s) => s.kind === 'wish' && s.status !== 'done');
   if (stillOpen) {
-    speak('Es sind noch offene Punkte auf der Timeline — tipp einen an.');
+    let muted = false;
+    try {
+      const {
+        isPlanOpenPointNudgeMuted,
+      } = require('../../services/navigation/modulePriorityPolicy') as {
+        isPlanOpenPointNudgeMuted: () => boolean;
+      };
+      muted = isPlanOpenPointNudgeMuted();
+    } catch {
+      muted = false;
+    }
+    if (!muted) {
+      speak('Es sind noch offene Punkte auf der Timeline — tipp einen an.');
+    }
     store.setPhase('step_loop');
     return;
   }

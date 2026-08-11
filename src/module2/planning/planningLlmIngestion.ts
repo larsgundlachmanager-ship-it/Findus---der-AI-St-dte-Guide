@@ -5,7 +5,7 @@
 
 import { generateGeminiText } from '../../services/geminiService';
 import { geocodePlaceName } from '../../services/navigation/googleMapsNav';
-import { todayDateKey, offsetDateKey } from '../../utils/dateKeys';
+import { todayDateKey, offsetDateKey, tryResolveDateKeyFromUserText, planningClockContextBlock } from '../../utils/dateKeys';
 import { readRucksackSync, anchorCoords } from '../rucksack/rucksackStore';
 import { useUserMemoryStore } from '../../store/useUserMemoryStore';
 import { useFuturePlanStore } from '../timeline/futurePlanState';
@@ -15,6 +15,8 @@ import {
   FINDUS_HELP_FIRST_MONETIZATION_BLOCK,
 } from '../../services/concierge/findusResponsePolicy';
 import { sanitizePlanSpeech } from './planSpeechSanitize';
+import { geminiOptsForPlanIngest, tryConsumePlanProSlot } from './planProScore';
+import { prefsBlockForPrompt, loadPlanTripPrefs } from './planTripPrefs';
 import type {
   IngestedPlan,
   IngestFixedNode,
@@ -341,38 +343,37 @@ function normalizeLageMode(raw: unknown, utterance: string): PlanLageMode {
   return 'new';
 }
 
-function normalizeTargetDate(raw: unknown, utterance: string): string {
+/** Ziel-Tag aus Rohwert / Utterance (Wochentag, morgen, …). */
+export function normalizeTargetDate(raw: unknown, utterance: string): string {
+  const t = utterance.replace(/\s+/g, ' ').trim();
+  const hasMorgen =
+    /\bmorgen\b/i.test(t) &&
+    !/\bguten\s+morgen\b/i.test(t) &&
+    !/\bheut(?:e)?\s+morgen\b/i.test(t);
+  const hasUebermorgen = /\bübermorgen\b|\buebermorgen\b/i.test(t);
+  const hasHeute = /\bheute\b/i.test(t);
+  const hasWeekday =
+    /\b(montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag)\b/i.test(t);
+  // Nur bei echtem Mehr-Tage-Mix („heute … und morgen …“) Primärtag = heute.
+  // „Morgen um 11 Termin“ darf NIEMALS auf heute fallen.
+  const mixedHeuteMorgen = hasMorgen && hasHeute && !hasUebermorgen;
+  const fromUtterance = mixedHeuteMorgen
+    ? todayDateKey()
+    : tryResolveDateKeyFromUserText(t);
+
   if (typeof raw === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+    // LLM-Datum nur übernehmen wenn Utterance keinen klaren anderen Tag nennt
+    if (
+      fromUtterance &&
+      fromUtterance !== raw &&
+      (hasMorgen || hasUebermorgen || hasWeekday) &&
+      !mixedHeuteMorgen
+    ) {
+      return fromUtterance;
+    }
     return raw;
   }
-  if (/\bmorgen\b/i.test(utterance)) return offsetDateKey(1);
-  if (/\bübermorgen\b|\buebermorgen\b/i.test(utterance)) {
-    return offsetDateKey(2);
-  }
-  // Wochentage grob: nächster Montag etc.
-  const wd = utterance.match(
-    /\b(nächste[rn]?\s+)?(montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag)\b/i,
-  );
-  if (wd) {
-    const map: Record<string, number> = {
-      sonntag: 0,
-      montag: 1,
-      dienstag: 2,
-      mittwoch: 3,
-      donnerstag: 4,
-      freitag: 5,
-      samstag: 6,
-    };
-    const target = map[wd[2]!.toLowerCase()]!;
-    const now = new Date();
-    const cur = now.getDay();
-    let delta = (target - cur + 7) % 7;
-    if (delta === 0 || /nächste/i.test(wd[1] ?? '')) {
-      if (delta === 0) delta = 7;
-    }
-    return offsetDateKey(delta);
-  }
-  return todayDateKey();
+  return fromUtterance ?? todayDateKey();
 }
 
 function defaultBridge(mode: PlanLageMode, date: string): string {
@@ -625,24 +626,29 @@ export async function runPlanningIngestion(
   const text = utterance.replace(/\s+/g, ' ').trim();
   if (!text) return geocodeIngestedPlan(heuristicFallback(''));
 
+  void loadPlanTripPrefs();
   const geoDefault = resolveDefaultAnchor();
   const bag = readRucksackSync();
   const guessedDate = normalizeTargetDate(opts?.dayKeyHint, text);
   const timelineSnap = snapshotTimelineForDay(guessedDate);
 
   const userPrompt = [
-    `JETZT: ${new Date().toISOString()}`,
-    `HEUTE: ${todayDateKey()}`,
-    `STADT-HINT: ${bag.cityHint || 'unbekannt'}`,
+    planningClockContextBlock(),
+    `STADT-HINT (GPS-Pack, oft NICHT der Zielort): ${bag.cityHint || 'unbekannt'}`,
     `DEFAULT_GEO: ${geoDefault.name} (${geoDefault.type}) lat=${geoDefault.lat} lng=${geoDefault.lng}`,
-    `GEGUESSTER_TAG: ${guessedDate}`,
+    `GEGUESSTER_TAG (verbindlich wenn User morgen/Wochentag nennt): ${guessedDate}`,
+    `BEKANNTE_PREFS: ${prefsBlockForPrompt()}`,
+    `LIVE_CHAT: an | idle_timeout_s: 60`,
     timelineSnap,
-    `USER: ${text}`,
-    'Baue den kompletten Masterplan für genau diesen Tag. Behalte bestehende Fix-Termine. Kein Tag-Sprung ohne klaren User-Hinweis.',
+    `USER_ROHTEXT (unverändert):`,
+    text,
+    'Baue den kompletten Masterplan für GEGUESSTER_TAG. targetDate MUSS zu morgen/Wochentag im User-Text passen — nie heute erzwingen nur weil Uhrzeiten genannt werden. Feste Termine (Termin, Tennis) = Fix mit Uhrzeit. Keine Rückfrage nach aktueller Stadt wenn GPS klar und Zielort im Text steht. Titel kurz und userfreundlich.',
   ].join('\n');
 
+  const geminiOpts = geminiOptsForPlanIngest(text);
+
   try {
-    const raw = await generateGeminiText(userPrompt, {
+    let raw = await generateGeminiText(userPrompt, {
       systemInstruction: MASTER_INGEST_SYSTEM,
       useFindusSystem: false,
       responseJson: true,
@@ -650,9 +656,25 @@ export async function runPlanningIngestion(
       temperature: 0.25,
       maxTokens: 4096,
       signal: opts?.signal,
-      task: 'itinerary',
+      ...geminiOpts,
     });
-    const parsed = parseJsonObject(raw);
+    let parsed = parseJsonObject(raw);
+    // Flash murkst → 1× Pro escalate (zählt gegen Deckel)
+    if (!parsed && tryConsumePlanProSlot('flash_failed')) {
+      raw = await generateGeminiText(userPrompt, {
+        systemInstruction: MASTER_INGEST_SYSTEM,
+        useFindusSystem: false,
+        responseJson: true,
+        jsonMimeOnly: true,
+        temperature: 0.25,
+        maxTokens: 4096,
+        signal: opts?.signal,
+        task: 'itinerary',
+        forcePro: true,
+        tier: 'pro',
+      });
+      parsed = parseJsonObject(raw);
+    }
     if (!parsed) return geocodeIngestedPlan(heuristicFallback(text));
 
     const geoRaw =

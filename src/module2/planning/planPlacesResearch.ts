@@ -46,9 +46,9 @@ import {
 import { todayDateKey } from '../../utils/dateKeys';
 import { clampToFutureMs, isPastMs } from '../timeline/planNowGuard';
 
-/** @deprecated Legacy Gemini-Pitch entfernt — SSOT ist `src/module2/pitch`. */
+/** @deprecated Legacy Gemini-Pitch entfernt — SSOT ist `src/module2/pitch` (runPitchModule). Nicht mehr aufrufen. */
 export const DEEP_RESEARCH_SYSTEM =
-  'Auswahl-Pitch läuft über src/module2/pitch (runPitchModule). Kein Legacy-Gemini-Pitch.';
+  'DEPRECATED: use src/module2/pitch/runPitchModule. Legacy deep-research prompt removed.';
 
 const NEAR_M = 800;
 
@@ -235,6 +235,9 @@ async function discoverCandidates(
       for (const p of trailFirst) {
         if (p.kind && p.kind !== 'area' && p.kind !== 'legacy') continue;
         const cat = `${p.category ?? ''} ${p.name}`.toLowerCase();
+        if (/\bwegweiser\b/i.test(cat) || /[·•|]\s*wegweiser\s*$/i.test(p.name)) {
+          continue;
+        }
         if (
           /\b(hotel|restaurant|imbiss|supermarkt|apotheke|tankstelle|laden)\b/i.test(
             cat,
@@ -503,23 +506,58 @@ async function pitchHotelWishFromStay22(
     }
 
     const filtered = filterHotelsByAmenityNeeds(stays, amenityNeeds);
-    const pool =
-      filtered.matched.length > 0
-        ? filtered.matched
-        : filtered.partial.length > 0
-          ? filtered.partial
-          : stays;
-    const usedPartial =
-      amenityNeeds.length > 0 && filtered.matched.length === 0;
+    // Hard-Reject: nie Partial/ungefilterte Stays als Hotel-Pitch
+    if (amenityNeeds.length > 0 && filtered.matched.length === 0) {
+      return null;
+    }
+    const pool = amenityNeeds.length > 0 ? filtered.matched : stays;
     const picks = pickTwoHotelStays(pool, {
       wantCheap,
       wantQuality: false,
     });
     if (picks.length < 1) return null;
 
-    const prev = resolveDistanceRef(wish);
+    // Distanz zum genannten Anker (Tennis/Stadt) — nie GPS in einer anderen Stadt
+    let prev = resolveDistanceRef(wish);
+    try {
+      const nearHint = (() => {
+        if (/\btennis/i.test(blob)) return `Tennisplatz ${city}`;
+        const m = blob.match(
+          /\b(?:nahe|nähe|neben|in\s+der\s+nähe\s+(?:von|vom|der|des))\s+([A-Za-zÄÖÜäöüß0-9\s-]{3,40})/i,
+        );
+        if (m?.[1]) return `${m[1].trim()} ${city}`;
+        return city;
+      })();
+      const geo = await geocodePlaceName(nearHint, { cityHint: city });
+      if (geo && Number.isFinite(geo.lat) && Number.isFinite(geo.lng)) {
+        prev = {
+          lat: geo.lat,
+          lng: geo.lng,
+          title: nearHint.replace(new RegExp(`\\s*${city}\\s*$`, 'i'), '').trim().slice(0, 28) || city,
+        };
+      }
+    } catch {
+      /* soft */
+    }
+
+    // Bei „nahe X“: näher zum Anker bevorzugen
+    let ordered = picks;
+    if (/\b(nahe|nähe|tennis)\b/i.test(blob)) {
+      ordered = [...picks].sort((a, b) => {
+        const da =
+          a.lat != null && a.lng != null
+            ? haversineMeters(prev.lat, prev.lng, a.lat, a.lng)
+            : 99_000;
+        const db =
+          b.lat != null && b.lng != null
+            ? haversineMeters(prev.lat, prev.lng, b.lat, b.lng)
+            : 99_000;
+        return da - db;
+      });
+    }
+
     const needLabel = amenityNeeds.map((n) => n.label).join(' + ');
-    const uiCards: DeepResearchUiCard[] = picks.slice(0, 2).map((s, i) => {
+    const uiCards: DeepResearchUiCard[] = ordered.slice(0, 2).map((s, i) => {
       const dist =
         s.lat != null && s.lng != null
           ? formatDistFromPrev(s.lat, s.lng, prev)
@@ -531,19 +569,20 @@ async function pitchHotelWishFromStay22(
             (per != null ? ` (~${Math.round(per)} €/Nacht)` : '')
           : null;
       const am = (s.amenities ?? [])
-        .filter((x) =>
-          /pool|sauna|spa|jacuzzi|frühstück|fruehstueck|breakfast|wellness|dampf/i.test(
-            x,
-          ),
+        .filter(
+          (x) =>
+            /pool|sauna|spa|jacuzzi|frühstück|fruehstueck|breakfast|wellness|dampf/i.test(
+              x,
+            ) && !/wlan|wifi|wi-fi|internet|telefon|call|meeting/i.test(x),
         )
-        .slice(0, 4)
+        .slice(0, 3)
         .join(', ');
       const speechPitch = sanitizePlanSpeech(
         [
           i === 0 ? 'Erstens' : 'Oder',
           s.name,
-          am || null,
           price,
+          am || null,
           s.stars != null ? `${s.stars} Sterne` : null,
           dist,
           wantCheap && i === 0 ? 'günstigste passende Live-Option' : null,
@@ -581,13 +620,11 @@ async function pitchHotelWishFromStay22(
     });
 
     const result: DeepResearchPitchResult = {
-      summary: usedPartial
-        ? `Kein voller Match${needLabel ? ` (${needLabel})` : ''} — beste Teil-Treffer`
-        : wantCheap
-          ? 'Zwei günstigste passende Hotels live'
-          : needLabel
-            ? `Zwei Hotels mit ${needLabel}`
-            : 'Zwei Hotels live',
+      summary: wantCheap
+        ? 'Zwei günstigste passende Hotels live'
+        : needLabel
+          ? `Zwei Hotels mit ${needLabel}`
+          : 'Zwei Hotels live',
       uiCards,
     };
     publishChoiceUi(wish, result);
@@ -843,8 +880,10 @@ function buildUsefulBullets(opts: {
   );
 }
 
-function clearAllChoiceStops(): void {
-  const stops = [...useFuturePlanStore.getState().plan.stops];
+function clearAllChoiceStops(dayKey?: string): void {
+  const key = dayKey ?? useFuturePlanStore.getState().plan.dayKey;
+  useFuturePlanStore.getState().ensureDay(key);
+  const stops = [...useFuturePlanStore.getState().getPlanForDay(key).stops];
   for (const s of stops) {
     if (s.id.startsWith('choice_')) {
       useFuturePlanStore.getState().removeStop(s.id);
@@ -852,9 +891,13 @@ function clearAllChoiceStops(): void {
   }
 }
 
-function clearPreviousChoices(_stepKey: string): void {
+function clearPreviousChoices(_stepKey: string, dayKey?: string): void {
   // Immer alle alten Vorschläge weg — sonst 4 Karten / Müll vom letzten Schritt
-  clearAllChoiceStops();
+  clearAllChoiceStops(
+    dayKey ??
+      usePlanCalendarUiStore.getState().requestedDayKey ??
+      useFuturePlanStore.getState().plan.dayKey,
+  );
 }
 
 function wishOfferKind(wish: IngestOpenWish, placeName = ''): OfferKind {
@@ -1008,9 +1051,29 @@ function publishChoiceUi(
   }
   if (unique.length < 1) return;
 
-  const dayKey = useFuturePlanStore.getState().plan.dayKey;
+  const dayKey =
+    usePlanCalendarUiStore.getState().requestedDayKey &&
+    /^\d{4}-\d{2}-\d{2}$/.test(
+      usePlanCalendarUiStore.getState().requestedDayKey!,
+    )
+      ? usePlanCalendarUiStore.getState().requestedDayKey!
+      : useFuturePlanStore.getState().plan.dayKey;
+  useFuturePlanStore.getState().ensureDay(dayKey);
+  try {
+    usePlanCalendarUiStore.getState().requestDayKey(dayKey);
+    usePlanCalendarUiStore.getState().requestOpen();
+  } catch {
+    /* soft */
+  }
   const stepKey = wish.id ?? wish.title;
   let startMs = parseTimeToMs(dayKey, wish.estimatedTime ?? null);
+  // Hotel ohne Slot → Check-in-Band, sonst unsichtbar / nur Basis
+  if (
+    startMs == null &&
+    isHotelWishText(`${wish.title} ${wish.context}`)
+  ) {
+    startMs = parseTimeToMs(dayKey, '15:00');
+  }
   const nowMs = Date.now();
   if (dayKey === todayDateKey() && startMs != null && isPastMs(startMs, nowMs)) {
     startMs = clampToFutureMs(startMs, { nowMs, minAheadMs: 25 * 60_000 });
@@ -1032,7 +1095,7 @@ function publishChoiceUi(
           : eve;
     }
   }
-  clearPreviousChoices(stepKey);
+  clearPreviousChoices(stepKey, dayKey);
   usePlanCalendarUiStore.getState().clearPendingChoice();
   usePlanCalendarUiStore.getState().clearMirroredActions();
 
@@ -1270,6 +1333,14 @@ function publishChoiceUi(
     /* soft */
   }
   usePlanCalendarUiStore.getState().setMirroredActions(mirrored.slice(0, 6));
+  try {
+    const { requestPlanScroll } = require('../timeline/planCalendarUiStore') as {
+      requestPlanScroll: (t: { kind: 'choice'; stepKey: string }) => void;
+    };
+    requestPlanScroll({ kind: 'choice', stepKey });
+  } catch {
+    /* soft */
+  }
 }
 
 /**
@@ -1347,22 +1418,6 @@ export function triggerAsyncDeepResearch(wish: IngestOpenWish | undefined): void
   void discoverCandidates(wish, resolveResearchAnchor()).catch(() => undefined);
 }
 
-/** Explore/Sightseeing: wie viele Stops je nach Tagesdichte. */
-export function exploreStopCount(opts: {
-  fixedCount: number;
-  freeHoursHint?: number | null;
-}): 3 | 8 | 12 {
-  const free = opts.freeHoursHint;
-  if (free != null && Number.isFinite(free)) {
-    if (free <= 3) return 3;
-    if (free <= 6) return 8;
-    return 12;
-  }
-  if (opts.fixedCount >= 3) return 3;
-  if (opts.fixedCount >= 1) return 8;
-  return 12;
-}
-
 export function isExploreWish(wish: IngestOpenWish): boolean {
   const t = `${wish.title} ${wish.context}`.toLowerCase();
   // Explizit Gastro → kein Explore (auch wenn „Abend“ vorkommt)
@@ -1391,32 +1446,6 @@ export function isWalkWish(wish: IngestOpenWish): boolean {
   return /spazier|bummel|rundgang|wanderung|wanderweg|lehrpfad|radweg|fahrradweg|radroute|radtour|abendspaziergang|ufer|strand\s*lauf|park\s*lauf/i.test(
     t,
   );
-}
-
-/** Typische Aufenthaltsdauer in Minuten — Recherche-Heuristik. */
-function estimateDwellMin(name: string, context: string, tourMode = false): number {
-  const t = `${name} ${context}`.toLowerCase();
-  // Highlight-Route: kürzere Stops, damit 6–9 Orte in einen Tag passen
-  if (tourMode) {
-    if (/miniatur.?wunderland|wunderland/.test(t)) return 90;
-    if (/museum|galerie|kunsthalle/.test(t)) return 55;
-    if (/zoo|tierpark/.test(t)) return 75;
-    if (/kirche|dom|cathedral/.test(t)) return 20;
-    if (/elbphilharmonie|elbphi|aussicht|panorama|turm|michel/.test(t)) return 35;
-    if (/park|garten|wiese|strand|hafen|speicherstadt|landungs|alster|rathaus|kontorhaus/.test(t)) {
-      return 35;
-    }
-    return 40;
-  }
-  if (/miniatur.?wunderland|wunderland/.test(t)) return 180;
-  if (/museum|galerie|kunsthalle/.test(t)) return 90;
-  if (/kirche|dom|cathedral/.test(t)) return 25;
-  if (/elbphilharmonie|elbphi|aussicht|panorama|turm|michel/.test(t)) return 45;
-  if (/park|garten|wiese|strand|hafen|speicherstadt|elbbrücken|elbbruecken/.test(t)) {
-    return 40;
-  }
-  if (/zoo|tierpark/.test(t)) return 150;
-  return 50;
 }
 
 /** Dauer aus Wunsch („zwei Stunden“, „2h“, „90 Min“) — Stunden. */
@@ -1518,36 +1547,6 @@ function extractExploreCityHint(wish: IngestOpenWish): string | null {
   return profileCity || bagCity;
 }
 
-/** Walking-Tour-Reihenfolge: Nearest-Neighbor ab Stadtzentrum. */
-function orderAsWalkingTour<T extends { lat: number; lng: number; name: string }>(
-  places: T[],
-  start: { lat: number; lng: number },
-  max: number,
-  maxLegM = 12_000,
-): T[] {
-  const remaining = [...places];
-  const ordered: T[] = [];
-  let cur = { ...start };
-  while (remaining.length > 0 && ordered.length < max) {
-    remaining.sort(
-      (a, b) =>
-        haversineMeters(cur.lat, cur.lng, a.lat, a.lng) -
-        haversineMeters(cur.lat, cur.lng, b.lat, b.lng),
-    );
-    const next = remaining.shift()!;
-    // Ausreißer vom aktuellen Cluster skippen
-    if (
-      ordered.length > 0 &&
-      haversineMeters(cur.lat, cur.lng, next.lat, next.lng) > maxLegM
-    ) {
-      continue;
-    }
-    ordered.push(next);
-    cur = { lat: next.lat, lng: next.lng };
-  }
-  return ordered;
-}
-
 function estimateExploreFreeHours(
   wish: IngestOpenWish,
   dayKey: string,
@@ -1562,8 +1561,7 @@ function estimateExploreFreeHours(
 }
 
 /**
- * Explore: volle Highlight-Route in sinnvoller Lauf-Reihenfolge — kein Pitch, keine 2er-Auswahl.
- * User bestätigt oder sagt was nicht passt.
+ * Explore → Tour-Modul (SSOT). Kein eigener Explore-Planner mehr.
  */
 export async function executeExploreWishInsert(
   wish: IngestOpenWish,
@@ -1575,212 +1573,60 @@ export async function executeExploreWishInsert(
   },
 ): Promise<{ spokenText: string; inserted: number }> {
   const dayKey = opts.dayKey;
-  const homeRef = resolveDistanceRef(wish);
-  const walk = isWalkWish(wish);
+  void opts.fixedCount;
   const parsedHours = parseWishFreeHours(wish);
   const freeHours =
     parsedHours ??
     opts.freeHoursHint ??
     estimateExploreFreeHours(wish, dayKey);
-  const maxStops = exploreStopCount({
-    fixedCount: opts.fixedCount,
-    freeHoursHint: freeHours,
+  const forceDurationMin = Math.round(freeHours * 60);
+
+  const { buildTourRequestFromWish, runTourModule } = await import('../tour');
+  const { request, bridge } = buildTourRequestFromWish(wish, {
+    signal: opts.signal,
+    uiLayout: 'timeline_stack',
+    forceDurationMin,
   });
+  request.needsDurationAsk = false;
+  request.timeBudgetMin = forceDurationMin;
+  request.softDurationMin = forceDurationMin;
+  const ref = resolveDistanceRef(wish);
+  request.anchor = { lat: ref.lat, lng: ref.lng };
 
-  // Suche im Zielort — Default: aktuelle Stadt (Lock), Distanz-Label = Home-GPS
-  let searchAnchor = {
-    lat: homeRef.lat,
-    lng: homeRef.lng,
-    hint: homeRef.title === 'hier' ? 'GPS' : homeRef.title,
-  };
-  const cityHint = extractExploreCityHint(wish);
-  const explicitOtherCity = extractCityFromText(`${wish.title} ${wish.context}`);
-  const profileCityLower = (() => {
+  if (bridge) {
     try {
-      const p = getCachedUserProfile();
-      return (p?.cityName || p?.cityId || '').toLowerCase();
-    } catch {
-      return '';
-    }
-  })();
-  const cityMatchesProfile =
-    !!cityHint &&
-    !!profileCityLower &&
-    (cityHint.toLowerCase().includes(profileCityLower.split(/\s/)[0]!) ||
-      profileCityLower.includes(cityHint.toLowerCase().split(/\s/)[0]!));
-  const localOnly =
-    wantsLocalCityStay(`${wish.title} ${wish.context}`) ||
-    walk ||
-    (!explicitOtherCity && !!cityHint) ||
-    cityMatchesProfile;
-  if (cityHint) {
-    try {
-      const geo = await geocodePlaceName(cityHint, { cityHint });
-      if (geo?.lat != null && geo?.lng != null) {
-        searchAnchor = { lat: geo.lat, lng: geo.lng, hint: cityHint };
-      }
-    } catch {
-      /* soft — GPS bleibt Anker */
-    }
-  }
-
-  const placesRaw = await discoverCandidates(
-    {
-      ...wish,
-      title: wish.title || (walk ? 'Abendspaziergang' : 'Must-see Highlights'),
-      context: walk
-        ? `${wish.context} Parks Aussicht Spazierweg — keine Restaurants`
-        : `${wish.context || ''} ${cityHint || ''} Must-sees Sehenswürdigkeiten Aussicht — kompakte Fußroute, keine Restaurants`,
-    },
-    { lat: searchAnchor.lat, lng: searchAnchor.lng },
-    {
-      localOnly,
-      cityName: cityHint,
-      cityBoundM: localOnly ? 6_000 : undefined,
-    },
-  );
-
-  const places = orderAsWalkingTour(
-    placesRaw,
-    { lat: searchAnchor.lat, lng: searchAnchor.lng },
-    Math.min(maxStops + 2, 14),
-    localOnly ? 5_000 : 12_000,
-  );
-
-  const fixed = useFuturePlanStore
-    .getState()
-    .getPlanForDay(dayKey)
-    .stops.filter(
-      (s) =>
-        s.kind !== 'wish' &&
-        s.kind !== 'nav_leg' &&
-        !s.id.startsWith('choice_') &&
-        !s.id.startsWith('explore_') &&
-        s.plannedStartMs != null,
-    )
-    .sort((a, b) => (a.plannedStartMs ?? 0) - (b.plannedStartMs ?? 0));
-
-  // Zeitfenster: Lücken zwischen Fixterminen, sonst freies Fenster ab estimatedTime
-  const gaps: Array<{ startMs: number; endMs: number }> = [];
-  for (let i = 0; i < fixed.length - 1; i++) {
-    const a = fixed[i]!;
-    const b = fixed[i + 1]!;
-    const aEnd = a.plannedEndMs ?? a.plannedStartMs! + 45 * 60_000;
-    const bStart = b.plannedStartMs!;
-    if (bStart - aEnd >= 50 * 60_000) {
-      gaps.push({
-        startMs: aEnd + 10 * 60_000,
-        endMs: bStart - 10 * 60_000,
+      const { enqueueSpeech } = await import('../speech/speechQueue');
+      enqueueSpeech({
+        kind: 'bridging',
+        text: bridge,
+        turnId: `explore_${wish.id ?? 'x'}`,
+        alreadySpoken: false,
       });
-    }
-  }
-  if (fixed.length > 0) {
-    const last = fixed[fixed.length - 1]!;
-    const lastEnd = last.plannedEndMs ?? last.plannedStartMs! + 45 * 60_000;
-    gaps.push({
-      startMs: lastEnd + 15 * 60_000,
-      endMs: lastEnd + Math.round(freeHours * 60 * 60_000),
-    });
-  }
-  if (gaps.length === 0) {
-    const [y, mo, d] = dayKey.split('-').map(Number);
-    const startH = (() => {
-      const m = wish.estimatedTime?.match(/^(\d{1,2}):(\d{2})$/);
-      return m ? Number(m[1]) : 10;
-    })();
-    const startMin = (() => {
-      const m = wish.estimatedTime?.match(/^(\d{1,2}):(\d{2})$/);
-      return m ? Number(m[2]) : 0;
-    })();
-    const endH = Math.min(19, Math.max(startH + Math.round(freeHours), 17));
-    gaps.push({
-      startMs: new Date(y!, mo! - 1, d!, startH, startMin, 0, 0).getTime(),
-      endMs: new Date(y!, mo! - 1, d!, endH, 0, 0, 0).getTime(),
-    });
-  }
-
-  for (const s of [...useFuturePlanStore.getState().getPlanForDay(dayKey).stops]) {
-    if (s.id.startsWith(`explore_${wish.id ?? 'x'}`)) {
-      useFuturePlanStore.getState().removeStop(s.id);
-    }
-  }
-
-  let inserted = 0;
-  const names: string[] = [];
-  let prev = {
-    lat: homeRef.lat,
-    lng: homeRef.lng,
-    title: 'hier' as string,
-  };
-  let pi = 0;
-  const walkMPerMin = getPlanWalkMPerMin();
-
-  for (const gap of gaps) {
-    if (pi >= places.length || inserted >= maxStops) break;
-    let cursor = gap.startMs;
-    while (pi < places.length && inserted < maxStops) {
-      const p = places[pi++]!;
-      const distM = haversineMeters(prev.lat, prev.lng, p.lat, p.lng);
-      const walkMin = Math.max(3, Math.ceil(distM / walkMPerMin));
-      // Lokale Fußroute: nie als Fern-ÖPNV skalieren
-      const longHaul = !localOnly && inserted === 0 && distM > 5000;
-      const travelMin = longHaul
-        ? Math.min(90, Math.max(35, Math.round(distM / 450)))
-        : walkMin > 20
-          ? Math.max(12, Math.round(walkMin * 0.55))
-          : walkMin;
-      cursor += travelMin * 60_000;
-      const dwell = estimateDwellMin(p.name, wish.context, true);
-      const end = cursor + dwell * 60_000;
-      if (end > gap.endMs + 20 * 60_000) {
-        // passt nicht mehr — nächsten Kandidaten versuchen wenn kürzer
-        if (dwell > 50) continue;
-        break;
-      }
-      const distBullet =
-        inserted === 0
-          ? formatDistFromPrev(p.lat, p.lng, {
-              lat: homeRef.lat,
-              lng: homeRef.lng,
-              title: 'hier',
-            })
-          : formatDistFromPrev(p.lat, p.lng, prev);
-
-      useFuturePlanStore.getState().upsertStopOnDay(dayKey, {
-        id: `explore_${wish.id ?? 'x'}_${inserted}_${p.placeId ?? p.name.slice(0, 10)}`,
-        title: p.name,
-        lat: p.lat,
-        lng: p.lng,
-        plannedStartMs: cursor,
-        plannedEndMs: end,
-        bufferMin: 8,
-        transport: localOnly || (!longHaul && walkMin <= 25) ? 'walk' : longHaul || walkMin > 20 ? 'transit' : 'walk',
-        kind: 'stop',
-        status: 'pending_change',
-        planPriority: 6,
-        planTaskId: wish.id ?? wish.title,
-        notes: normalizePlanBullets([
-          ratingLabel(p.rating),
-          `~${dwell} Min`,
-          distBullet,
-        ]).join('\n'),
-        mapsUrl: p.mapsUrl,
-        emoji: '✨',
-        userFixedTime: false,
-      });
-      names.push(p.name);
-      inserted += 1;
-      prev = { lat: p.lat, lng: p.lng, title: p.name };
-      cursor = end;
-    }
-  }
-
-  if (wish.id) {
-    try {
-      useFuturePlanStore.getState().removeStop(wish.id);
     } catch {
       /* soft */
     }
+  }
+
+  const result = await runTourModule(request);
+  let inserted = 0;
+  const now = Date.now();
+  let t = now + 5 * 60_000;
+  for (const s of result.stops) {
+    useFuturePlanStore.getState().upsertStop({
+      id: `tour_${result.requestId}_${s.poiId}`,
+      title: s.name,
+      lat: s.lat,
+      lng: s.lng,
+      plannedStartMs: t,
+      plannedEndMs: t + Math.max(1, s.dwellMin) * 60_000,
+      kind: 'stop',
+      bufferMin: 10,
+      transport: request.mobility === 'bike' ? 'bike' : 'walk',
+      status: 'planned',
+      planPriority: 6,
+    });
+    t += (s.dwellMin + 8) * 60_000;
+    inserted += 1;
   }
 
   try {
@@ -1788,24 +1634,6 @@ export async function executeExploreWishInsert(
   } catch {
     /* soft */
   }
-
-  const spokenText = sanitizePlanSpeech(
-    inserted > 0
-      ? [
-          cityHint
-            ? `Hab eine ${walk ? 'Spazier' : 'Highlight'}-Route mit ${inserted} Stopps in ${cityHint} gelegt:`
-            : `Hab eine ${walk ? 'Spazier' : 'Highlight'}-Route mit ${inserted} Stopps in Laufreihenfolge gelegt:`,
-          names.slice(0, 6).join(', '),
-          names.length > 6 ? `und ${names.length - 6} mehr.` : null,
-          freeHours <= 3
-            ? `Passt in etwa ${Math.round(freeHours * 60)} Minuten.`
-            : null,
-          'Timeline ist gefüllt — Tour starten, oder soll ich neu suchen?',
-        ]
-          .filter(Boolean)
-          .join(' ')
-      : 'Keine sinnvolle lokale Route gefunden — sag mir ein Zeitfenster oder andere Orte.',
-  ).slice(0, 420);
 
   try {
     usePlanCalendarUiStore.getState().setHeadlessPlanning(false);
@@ -1815,48 +1643,14 @@ export async function executeExploreWishInsert(
     /* soft */
   }
 
-  const exploreStops = useFuturePlanStore
-    .getState()
-    .getPlanForDay(dayKey)
-    .stops.filter(
-      (s) =>
-        s.id.startsWith('explore_') &&
-        typeof s.lat === 'number' &&
-        typeof s.lng === 'number',
-    )
-    .sort((a, b) => (a.plannedStartMs ?? 0) - (b.plannedStartMs ?? 0));
-
-  const mirrored: QuickAction[] = [];
-  if (exploreStops.length >= 2) {
-    mirrored.push({
-      type: 'START_NAVIGATION',
-      label: 'Tour starten',
-      payload: {
-        destName: exploreStops[0]!.title,
-        destLat: exploreStops[0]!.lat!,
-        destLng: exploreStops[0]!.lng!,
-        multiStop: exploreStops.map((s) => ({
-          name: s.title,
-          lat: s.lat!,
-          lng: s.lng!,
-        })),
-      },
-    });
-  } else if (exploreStops[0]) {
-    mirrored.push({
-      type: 'START_NAVIGATION',
-      label: `Zu ${exploreStops[0].title}`.slice(0, 20),
-      payload: {
-        destName: exploreStops[0].title,
-        destLat: exploreStops[0].lat!,
-        destLng: exploreStops[0].lng!,
-      },
-    });
-  }
+  const mirrored: QuickAction[] = result.actions.slice(0, 4);
   usePlanCalendarUiStore.getState().clearPendingChoice();
-  usePlanCalendarUiStore.getState().setMirroredActions(mirrored.slice(0, 4));
+  usePlanCalendarUiStore.getState().setMirroredActions(mirrored);
 
-  return { spokenText, inserted };
+  return {
+    spokenText: sanitizePlanSpeech(result.spokenText).slice(0, 420),
+    inserted,
+  };
 }
 
 /**

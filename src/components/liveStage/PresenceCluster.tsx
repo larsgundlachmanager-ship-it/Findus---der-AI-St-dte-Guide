@@ -7,6 +7,7 @@ type Props = {
   mood: FindusMood;
   /** Shrink avatar when bullets/actions claim vertical space. */
   compact?: boolean;
+  onAbortBusy?: () => void;
 };
 
 /**
@@ -16,11 +17,16 @@ type Props = {
 export const PresenceCluster = React.memo(function PresenceCluster({
   mood,
   compact,
+  onAbortBusy,
 }: Props) {
   return (
     <View style={styles.wrap} pointerEvents="box-none">
       <View style={styles.inner} pointerEvents="box-none">
-        <AudioWave mood={mood} compact={compact} />
+        <AudioWave
+          mood={mood}
+          compact={compact}
+          onAbortBusy={onAbortBusy}
+        />
       </View>
     </View>
   );

@@ -122,7 +122,17 @@ export function useConciergeActions(
   const onAction = useCallback(
     async (action: QuickAction, index = 0) => {
       if (busyKey) return;
-      if (action.payload?.pending) return;
+      if (action.payload?.pending) {
+        try {
+          const { speakAssistantText } = require('../../services/AudioVoiceService') as {
+            speakAssistantText: (t: string) => Promise<unknown>;
+          };
+          void speakAssistantText('Die Speisekarte lade ich noch nach — einen Moment.');
+        } catch {
+          /* soft */
+        }
+        return;
+      }
       const key = actionKey(action, index);
       setBusyKey(key);
       try {

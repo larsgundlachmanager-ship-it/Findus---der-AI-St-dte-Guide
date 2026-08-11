@@ -25,6 +25,8 @@ type Props = {
   subtitleText: string | null;
   isPlayingAudio: boolean;
   onFollowUp?: (prompt: string) => void;
+  /** Doppel-Tipp auf Findus während Denken/Sprechen */
+  onAbortBusy?: () => void;
 };
 
 export const LiveStage = React.memo(function LiveStage({
@@ -33,16 +35,23 @@ export const LiveStage = React.memo(function LiveStage({
   subtitleText,
   isPlayingAudio: _isPlayingAudio,
   onFollowUp,
+  onAbortBusy,
 }: Props) {
   const { hasBullets, hasActions } = inspectConciergeCard(card);
-  const hasPitch = useLivePitchStore((s) => Boolean(s.requestId && s.options.length));
+  const hasPitch = useLivePitchStore((s) =>
+    Boolean(s.requestId && (s.options.length > 0 || s.loading)),
+  );
   const compact = hasBullets || hasActions || hasPitch;
   const showSubtitles = Boolean(subtitleText?.trim());
 
   return (
     <View style={styles.stage}>
       <View style={styles.presencePane} pointerEvents="box-none">
-        <PresenceCluster mood={mood} compact={compact} />
+        <PresenceCluster
+          mood={mood}
+          compact={compact}
+          onAbortBusy={onAbortBusy}
+        />
       </View>
 
       <View style={styles.bottomDock} pointerEvents="box-none">

@@ -41,7 +41,7 @@ import { markFeatureTipCompleted } from '../services/ai/featureTips';
 import { useUserMemoryStore } from '../store/useUserMemoryStore';
 import { derivePhinnosMood } from '../utils/phinnosMood';
 
-const TYPING_SUBTITLE = 'Schreiben ist möglich — freie Fragen sind aktuell aus.';
+const TYPING_SUBTITLE = 'Schreib deine Frage an Findus.';
 
 const FALLBACK_SUBTITLES: Record<VoiceFallbackReason, string> = {
   unavailable:
@@ -283,6 +283,7 @@ export function HomeScreen({
     isFinalizing,
     isGenerating,
     submitUserQuestion,
+    cancelFindusBusy,
   } = useVoiceInput({
     // Timeline: Kurz-Tipp bleibt stumm (kein Tippfeld); Hold startet Voice —
     // Early-Release nach Aufnahme-Start wird in useVoiceInput finalisiert.
@@ -441,6 +442,9 @@ export function HomeScreen({
         subtitleText={subtitleText}
         isPlayingAudio={isAudiblySpeaking}
         onFollowUp={onConciergeFollowUp}
+        onAbortBusy={() => {
+          void cancelFindusBusy();
+        }}
       />
 
       <GetYourGuideWidget

@@ -51,7 +51,17 @@ function OptionColumn({
         </Text>
       </Pressable>
       <View style={styles.bullets}>
-        {(option.bullets ?? []).slice(0, 3).map((b, i) => (
+        {(option.bullets?.length
+          ? option.bullets
+          : [
+              option.rating != null
+                ? `${option.rating.toFixed(1).replace('.', ',')}★`
+                : null,
+              'Tippe → Route oder Buchen',
+            ].filter(Boolean) as string[]
+        )
+          .slice(0, 3)
+          .map((b, i) => (
           <Text
             key={`${option.id}_b_${i}`}
             style={styles.bullet}
@@ -70,6 +80,7 @@ export const PitchChoiceSlot = React.memo(function PitchChoiceSlot() {
   const options = useLivePitchStore((s) => s.options);
   const selected = useLivePitchStore((s) => s.selectedOptionId);
   const softFail = useLivePitchStore((s) => s.softFail);
+  const loading = useLivePitchStore((s) => s.loading);
   const headline = useLivePitchStore((s) => s.headline);
   const selectOption = useLivePitchStore((s) => s.selectOption);
   const clear = useLivePitchStore((s) => s.clear);
@@ -77,12 +88,71 @@ export const PitchChoiceSlot = React.memo(function PitchChoiceSlot() {
   const onPick = useCallback(
     (id: string) => {
       selectOption(id);
+      const opt = useLivePitchStore.getState().options.find((o) => o.id === id);
+      if (!opt) return;
+
+      // Hotel: Buchungs-Link zuerst (nicht stillschweigend nur Nav)
+      const book =
+        opt.actions.find(
+          (a) =>
+            a.type === 'OPEN_URL' &&
+            typeof a.payload?.url === 'string' &&
+            /expedia|stay22|booking\.com|hotels\.com|vrbo|affiliate|camref|zimmer\s*buch/i.test(
+              `${a.payload.url} ${a.label}`,
+            ),
+        ) ||
+        (opt.bookingUrl
+          ? {
+              type: 'OPEN_URL' as const,
+              label: '🏨 Zimmer buchen',
+              payload: { url: opt.bookingUrl, destName: opt.name },
+            }
+          : null);
+      if (book) {
+        void handleQuickAction(book).finally(() => {
+          setTimeout(() => {
+            try {
+              useLivePitchStore.getState().clear();
+            } catch {
+              /* soft */
+            }
+          }, 800);
+        });
+        return;
+      }
+
+      const nav =
+        opt.actions.find((a) => a.type === 'START_NAVIGATION') ||
+        (Number.isFinite(opt.lat) && Number.isFinite(opt.lng)
+          ? {
+              type: 'START_NAVIGATION' as const,
+              label: `📍 ${opt.name}`,
+              payload: {
+                destName: opt.name,
+                destLat: opt.lat,
+                destLng: opt.lng,
+              },
+            }
+          : null);
+      if (nav) {
+        void handleQuickAction(nav).finally(() => {
+          // Karte kurz stehen lassen, dann schließen — Say–Do
+          setTimeout(() => {
+            try {
+              useLivePitchStore.getState().clear();
+            } catch {
+              /* soft */
+            }
+          }, 800);
+        });
+      }
     },
     [selectOption],
   );
 
-  if (!requestId || options.length < 1) return null;
-  const a = options[0]!;
+  if (!requestId) return null;
+  if (options.length < 1 && !loading) return null;
+  const a = options[0];
   const b = options[1];
 
   return (
@@ -95,41 +165,85 @@ export const PitchChoiceSlot = React.memo(function PitchChoiceSlot() {
       <View style={styles.card}>
         <View style={styles.headerRow}>
           <Text style={styles.title} numberOfLines={1}>
-            {softFail ? 'Alternativen' : headline || 'Zwei Optionen'}
+            {loading && options.length < 1
+              ? 'Suche Optionen…'
+              : softFail
+                ? 'Alternativen'
+                : headline || 'Zwei Optionen'}
           </Text>
           <Pressable onPress={clear} hitSlop={10} accessibilityLabel="Schließen">
             <Text style={styles.close}>✕</Text>
           </Pressable>
         </View>
-        <View style={styles.row}>
-          <OptionColumn
-            option={a}
-            selected={selected === a.id}
-            onSelect={() => onPick(a.id)}
-          />
-          {b ? (
-            <OptionColumn
-              option={b}
-              selected={selected === b.id}
-              onSelect={() => onPick(b.id)}
-            />
-          ) : null}
-        </View>
-        <View style={styles.actions}>
-          {options.flatMap((o) =>
-            o.actions.slice(0, 2).map((act, i) => (
-              <Pressable
-                key={`${o.id}_act_${i}`}
-                style={styles.actionBtn}
-                onPress={() => void handleQuickAction(act)}
-              >
-                <Text style={styles.actionLabel} numberOfLines={1}>
-                  {act.label}
-                </Text>
-              </Pressable>
-            )),
-          )}
-        </View>
+        {loading && options.length < 1 ? (
+          <Text style={styles.loadingHint}>
+            Zwei passende Orte kommen gleich — Karten bleiben danach stehen.
+          </Text>
+        ) : (
+          <>
+            <View style={styles.row}>
+              {a ? (
+                <OptionColumn
+                  option={a}
+                  selected={selected === a.id}
+                  onSelect={() => onPick(a.id)}
+                />
+              ) : null}
+              {b ? (
+                <OptionColumn
+                  option={b}
+                  selected={selected === b.id}
+                  onSelect={() => onPick(b.id)}
+                />
+              ) : null}
+            </View>
+            <View style={styles.actions}>
+              {options.flatMap((o) => {
+                const raw = o.actions?.length
+                  ? [...o.actions]
+                  : [
+                      {
+                        type: 'START_NAVIGATION' as const,
+                        label: `📍 ${o.name}`,
+                        payload: {
+                          destName: o.name,
+                          destLat: o.lat,
+                          destLng: o.lng,
+                        },
+                      },
+                    ];
+                // Buchen / Speisekarte sichtbar halten (nicht hinter Maps verstecken)
+                raw.sort((a, b) => {
+                  const rank = (x: (typeof raw)[number]) => {
+                    const lab = `${x.label} ${x.type === 'OPEN_URL' ? x.payload?.url ?? '' : ''}`;
+                    if (
+                      /zimmer\s*buch|speisekarte|getränkekarte|🍹|🍽|🏨/i.test(
+                        lab,
+                      ) ||
+                      /expedia|stay22|booking\.com/i.test(lab)
+                    ) {
+                      return 0;
+                    }
+                    if (x.type === 'START_NAVIGATION') return 1;
+                    return 2;
+                  };
+                  return rank(a) - rank(b);
+                });
+                return raw.slice(0, 2).map((act, i) => (
+                  <Pressable
+                    key={`${o.id}_act_${i}`}
+                    style={styles.actionBtn}
+                    onPress={() => void handleQuickAction(act)}
+                  >
+                    <Text style={styles.actionLabel} numberOfLines={1}>
+                      {act.label}
+                    </Text>
+                  </Pressable>
+                ));
+              })}
+            </View>
+          </>
+        )}
       </View>
     </Animated.View>
   );
@@ -165,6 +279,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   close: { color: 'rgba(255,255,255,0.55)', fontSize: 16, paddingLeft: 8 },
+  loadingHint: {
+    color: colors.textMuted,
+    fontSize: 12,
+    lineHeight: 16,
+    paddingVertical: spacing.sm,
+  },
   row: { flexDirection: 'row', gap: spacing.sm },
   col: {
     flex: 1,

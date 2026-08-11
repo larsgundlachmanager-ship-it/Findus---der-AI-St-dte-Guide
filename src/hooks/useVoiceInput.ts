@@ -201,6 +201,96 @@ export function useVoiceInput(options?: {
     }
   }, [setIsGenerating]);
 
+  /**
+   * Nur abbrechen → Idle (kein neues „Nachdenken“).
+   * Orb-Doppel-Tipp / Mic-Tipp während busy.
+   */
+  const cancelFindusBusy = useCallback(async () => {
+    interruptCommittedRef.current = true;
+    provisionalPausedRef.current = false;
+    questionEpochRef.current += 1;
+    setIsGenerating(false);
+    setIsFinalizing(false);
+    setIsListening(false);
+    try {
+      const { abortActiveModule2Turn } = await import(
+        '../module2/pipeline/turnAbort'
+      );
+      abortActiveModule2Turn('user_cancel_busy');
+    } catch {
+      /* soft */
+    }
+    // Laufende Modul-5-Auswahl darf nicht weiterquatschen
+    try {
+      const { usePlanSessionStore } = await import(
+        '../module2/planning/planSessionState'
+      );
+      usePlanSessionStore.getState().reset();
+    } catch {
+      /* soft */
+    }
+    try {
+      const { usePlanCalendarUiStore } = await import(
+        '../module2/timeline/planCalendarUiStore'
+      );
+      usePlanCalendarUiStore.getState().clearPendingChoice();
+      usePlanCalendarUiStore.getState().setMirroredActions([]);
+    } catch {
+      /* soft */
+    }
+    try {
+      const { useLivePitchStore } = await import(
+        '../module2/pitch/publishPitchUi'
+      );
+      useLivePitchStore.getState().clear();
+    } catch {
+      /* soft */
+    }
+    try {
+      const { discardPausedSpeaking } = await import(
+        '../services/AudioVoiceService'
+      );
+      await discardPausedSpeaking();
+    } catch {
+      /* soft */
+    }
+    try {
+      const { interruptNarrationForForce } = await import(
+        '../runtime/narrationPipeline'
+      );
+      await interruptNarrationForForce();
+    } catch {
+      /* soft */
+    }
+    try {
+      const { forceClearSpeakingUi } = await import(
+        '../services/AudioVoiceService'
+      );
+      forceClearSpeakingUi();
+    } catch {
+      useFinnusStore.getState().setIsPlayingAudio(false);
+    }
+    try {
+      await bargeInFlush();
+    } catch {
+      try {
+        await interruptAudioPipeline();
+      } catch {
+        try {
+          await stopSpeaking();
+        } catch {
+          /* ignore */
+        }
+      }
+    }
+    try {
+      const { onUserInputEnd } = await import('../runtime/orchestrator');
+      onUserInputEnd();
+    } catch {
+      /* soft */
+    }
+  }, [setIsGenerating, setIsFinalizing, setIsListening]);
+
   /** Unter 2 s Loslassen: STT weg, Findus weiter — als nie passiert. */
   const abortProvisionalMic = useCallback(async () => {
     clearCommitTimer();
@@ -399,12 +489,41 @@ export function useVoiceInput(options?: {
 
       // Neuer Turn mit echtem Text → alte Karte erst jetzt tauschen
       useFinnusStore.getState().setActiveConciergeCard(null);
+      try {
+        const { useLivePitchStore } = require('../module2/pitch/publishPitchUi') as {
+          useLivePitchStore: { getState: () => { clear: () => void } };
+        };
+        useLivePitchStore.getState().clear();
+      } catch {
+        /* soft */
+      }
 
       await onUserInputStart('user_text');
       const sideAsk = await captureSideChannelHints(text).catch(() => null);
 
-  // Bridge nur vom Concierge-Manager (runConciergeTurn) — kein frühes Mic-Bridge mehr.
-  // Legacy speakContextualBridgeFireAndForget ist No-Op.
+      // Vorherigen Concierge-Turn hart stoppen (Barge-in / neue Frage)
+      try {
+        const { abortActiveModule2Turn } = await import(
+          '../module2/pipeline/turnAbort'
+        );
+        abortActiveModule2Turn('new_question');
+        const { bargeInFlush } = await import('../module2/speech/speechQueue');
+        await bargeInFlush();
+      } catch {
+        /* soft */
+      }
+
+      // Sofort-Ack (lokal) — vor Manager/Recherche, weniger Stille
+      try {
+        const { speakLatencyFloskelFireAndForget } = require('../services/speech/floskelEngine') as {
+          speakLatencyFloskelFireAndForget: (t: string) => void;
+        };
+        speakLatencyFloskelFireAndForget(text);
+      } catch {
+        /* soft */
+      }
+
+  // Bridge: Sofort-Ack (Live) + Manager-Bridge — kein Legacy Mic-Bridge.
 
       const withSide = (reply: string) =>
         appendSideChannelAsk(reply, sideAsk ?? undefined);
@@ -458,9 +577,51 @@ export function useVoiceInput(options?: {
             }
             if (isNavCorrectionIntent(text)) {
               text = extractCorrectedQuestion(text) || text;
+            } else if (isStopNavigationIntent(text)) {
+              // Reiner Stopp — fertig, kein Concierge-Nachlauf
+              try {
+                await speakPlain('Navigation beendet.', epoch);
+              } catch {
+                /* soft */
+              }
+              return;
             }
             // Kein return — Manager entscheidet Speech + ggf. neue Route
           }
+        }
+
+        // Street View auf Wunsch (nach Look-Ahead-Angebot)
+        try {
+          const {
+            isStreetViewVoiceAsk,
+            fulfillStreetViewVoiceAsk,
+          } = await import('../services/navigation/lookAheadBuffer');
+          if (isStreetViewVoiceAsk(text)) {
+            const r = await fulfillStreetViewVoiceAsk();
+            if (r.ok) {
+              try {
+                await speakPlain(
+                  r.message?.trim() || 'Street View ist offen.',
+                  epoch,
+                );
+              } catch {
+                /* soft */
+              }
+              return;
+            }
+            try {
+              await speakPlain(
+                r.message ||
+                  'Street View finde ich gerade nicht — nutz den Button auf der Karte, wenn er da ist.',
+                epoch,
+              );
+            } catch {
+              /* soft */
+            }
+            return;
+          }
+        } catch {
+          /* soft */
         }
 
         // Pending hotel Yes/No / name has priority (Dialog-Zustand)
@@ -614,6 +775,44 @@ export function useVoiceInput(options?: {
 
         if (!stillCurrent(epoch)) return;
 
+        // Say–Do: Wecker/Timer ZUERST echt stellen, Speech nur aus Ergebnis
+        {
+          try {
+            const { isClockIntent, prepareClockIntentFollowUp } = await import(
+              '../services/alarms/clockIntents'
+            );
+            if (isClockIntent(text)) {
+              setIsGenerating(true);
+              try {
+                const clock = await prepareClockIntentFollowUp(text);
+                if (!stillCurrent(epoch)) return;
+                if (clock) {
+                  addChatMessage({
+                    role: 'assistant',
+                    content: clock.speech,
+                  });
+                  await presentConciergeResponse(
+                    {
+                      speechText: withSide(clock.speech),
+                      visualBullets: clock.bullets.slice(0, 3),
+                      quickActions: clock.quickActions.slice(0, 4),
+                      cardTitle: clock.cardTitle,
+                    },
+                    { userText: text, skipAutoNav: true },
+                  );
+                  return;
+                }
+              } finally {
+                if (stillCurrent(epoch)) setIsGenerating(false);
+              }
+            }
+          } catch (err) {
+            console.warn('[voice] clock intent failed', err);
+          }
+        }
+
+        if (!stillCurrent(epoch)) return;
+
         {
           const memStore = useUserMemoryStore.getState();
           const pendingMemory =
@@ -669,14 +868,20 @@ export function useVoiceInput(options?: {
         setIsGenerating(true);
         try {
           const turnId = `m2_${epoch}_${Date.now()}`;
-          const ac = new AbortController();
+          const { beginModule2TurnAbort } = await import(
+            '../module2/pipeline/turnAbort'
+          );
+          const signal = beginModule2TurnAbort();
           const result = await runModule2Pipeline({
             userText: text,
             turnId,
-            signal: ac.signal,
+            signal,
           });
           if (!stillCurrent(epoch)) {
-            ac.abort();
+            const { abortActiveModule2Turn } = await import(
+              '../module2/pipeline/turnAbort'
+            );
+            abortActiveModule2Turn('stale_epoch');
             return;
           }
           if (result.logic.spokenDraft) {
@@ -839,6 +1044,18 @@ export function useVoiceInput(options?: {
       return;
     }
 
+    // Busy (denkt/redet): einmal tippen = Soft-Stop, ohne Mikro zu starten
+    const finnus = useFinnusStore.getState();
+    if (
+      finnus.isGenerating ||
+      finnus.isPlayingAudio ||
+      isFinalizing
+    ) {
+      skipNextPressOutRef.current = true;
+      void cancelFindusBusy();
+      return;
+    }
+
     // Warmup schon beim Tippen (TTS/Aussprache) — auch bei Kurz-Tipp ok
     try {
       const { warmupAiOnMicPress } = require('../services/speech/micWarmup') as {
@@ -873,10 +1090,12 @@ export function useVoiceInput(options?: {
     }, MIN_VOICE_MS);
   }, [
     beginVoiceSession,
+    cancelFindusBusy,
     clearCommitTimer,
     clearHoldTimer,
     finalizeVoiceCapture,
     interruptFindusForMic,
+    isFinalizing,
     onShortPress,
   ]);
 
@@ -1015,12 +1234,28 @@ export function useVoiceInput(options?: {
           startHandsFreeListen();
         })();
       });
-      unsubBus = () => m.registerHandsFreeListenHandler(null);
+      m.registerTypedAskHandler((text) => {
+        void submitUserQuestion(text);
+      });
+      unsubBus = () => {
+        m.registerHandsFreeListenHandler(null);
+        m.registerTypedAskHandler(null);
+      };
     });
+    if (__DEV__) {
+      void import('../services/handsFree/devAskPoller').then((m) => {
+        m.startDevAskPoller();
+      });
+    }
     return () => {
       unsubBus?.();
+      if (__DEV__) {
+        void import('../services/handsFree/devAskPoller').then((m) => {
+          m.stopDevAskPoller();
+        });
+      }
     };
-  }, [startHandsFreeListen]);
+  }, [startHandsFreeListen, submitUserQuestion]);
 
   // Live-Chat: Submit-Handler + Phase → Mic-Lock UI
   useEffect(() => {
@@ -1171,5 +1406,7 @@ export function useVoiceInput(options?: {
     isFinalizing,
     isGenerating,
     submitUserQuestion,
+    /** Doppel-Tipp Orb / Mic-Tipp: Denken + Sprache hart stoppen → Idle. */
+    cancelFindusBusy,
   };
 }

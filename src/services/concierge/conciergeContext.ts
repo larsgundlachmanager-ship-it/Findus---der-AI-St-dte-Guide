@@ -1185,7 +1185,7 @@ export async function prepareConciergeContext(
       }
     }
     parts.push(
-      'Bei Regen: aktive Empfehlung (jetzt los ODER Indoor). Bei Outfit-Fragen: Wetter kurz erklären + begründete Kleidungstipps in visualBullets. Action-Outro nur wenn sinnvoll.',
+      'Bei Regen: aktive Empfehlung (jetzt los ODER Indoor). Bei Outfit-Fragen: Wetter kurz erklären (Jetzt + Tageshoch/Trend) + Kleidung am Tagesverlauf — nicht nur Morgenkühle; begründete Tipps in visualBullets. Action-Outro nur wenn sinnvoll.',
     );
     wantsLiveSearch = true;
   }

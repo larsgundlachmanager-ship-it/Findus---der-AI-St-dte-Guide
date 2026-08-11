@@ -84,7 +84,8 @@ export function startPitchDeepAppend(opts: {
       const priceBits: string[] = [];
 
       const buttons = res.buttons ?? [];
-      const urls: string[] = [];
+      type NamedUrl = { url: string; label: string };
+      const namedUrls: NamedUrl[] = [];
       for (const b of buttons) {
         const url =
           b.payload &&
@@ -93,13 +94,29 @@ export function startPitchDeepAppend(opts: {
           typeof (b.payload as { url?: unknown }).url === 'string'
             ? (b.payload as { url: string }).url.trim()
             : '';
-        if (url && isSafeOfferUrl(url) && !urls.includes(url)) urls.push(url);
+        if (!url || !isSafeOfferUrl(url)) continue;
+        if (namedUrls.some((u) => u.url === url)) continue;
+        namedUrls.push({
+          url,
+          label: String((b as { label?: string }).label ?? ''),
+        });
       }
+
+      const pickUrlForVenue = (optName: string, index: number): string | null => {
+        const needle = optName.toLowerCase().slice(0, 18);
+        const byName = namedUrls.find((u) =>
+          u.label.toLowerCase().includes(needle),
+        );
+        if (byName) return byName.url;
+        // Seed behalten wenn Deep nichts Besseres hat
+        const seed = live.options[index]?.menuUrl || live.options[index]?.websiteUrl;
+        return namedUrls[index]?.url ?? namedUrls[0]?.url ?? seed ?? null;
+      };
 
       const facts = String(res.draftText ?? '');
       for (let i = 0; i < live.options.length; i++) {
         const opt = live.options[i]!;
-        const url = urls[i] ?? urls[0] ?? null;
+        const url = pickUrlForVenue(opt.name, i);
         menuUrls[opt.id] = url;
         if (url) {
           actionUpdates[opt.id] = buildPitchActions({
@@ -137,7 +154,7 @@ export function startPitchDeepAppend(opts: {
         spokenAppend = dishWish
           ? `Kurz zu ${dishWish}: ${priceBits.join(' · ')}.`
           : `Noch zu den Preisen: ${priceBits.join(' · ')}.`;
-      } else if (urls.length) {
+      } else if (namedUrls.length || Object.values(menuUrls).some(Boolean)) {
         spokenAppend = 'Speisekarten habe ich unten verlinkt.';
       }
       if (!spokenAppend && !Object.keys(actionUpdates).length) return;

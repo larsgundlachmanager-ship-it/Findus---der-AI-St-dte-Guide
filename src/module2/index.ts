@@ -51,6 +51,13 @@ export {
   handlePlanCalendarDirect,
   overrideOpenWishFromStop,
 } from './planning/runPlanningModule';
+export {
+  looksLikeModul5PlanUtterance,
+  looksLikeSingleJustDoItRequest,
+  looksLikeOutfitOrWeatherUtterance,
+} from './planning/planUtteranceGate';
+export { shouldForceModul5Handoff } from './planning/planHandoffGuard';
+export { startNavigationToPlanStop } from './planning/planAgentTools';
 export { PRISDORF_FALLBACK } from './types';
 export type {
   PipelineTurnResult,
@@ -98,6 +105,14 @@ export {
   buildPitchRequestFromText,
   buildPitchRequestFromWish,
 } from './pitch/buildPitchRequest';
+export {
+  runTourModule,
+  shouldHandoffToTourModule,
+  buildTourRequestFromText,
+  buildTourRequestFromWish,
+  buildTourRequestFromSegment,
+  mergeDurationFollowUp,
+} from './tour';
 export type {
   ManagerModule,
   RebootRouterOut,

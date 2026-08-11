@@ -2,7 +2,7 @@
   "expo": {
     "name": "Findus",
     "slug": "findus",
-    "version": "2.0.0",
+    "version": "2.0.2",
     "owner": "findusai",
     "scheme": "findus",
     "orientation": "portrait",
@@ -40,7 +40,7 @@
         "backgroundColor": "#18181B"
       },
       "package": "de.findus.app",
-      "versionCode": 23,
+      "versionCode": 25,
       "intentFilters": [
         {
           "action": "VIEW",

@@ -206,7 +206,7 @@ export const MicButton = React.memo(function MicButton({
         : isFinalizing
           ? 'Letzte Wörter werden erkannt…'
           : busySpin
-            ? 'Drücken zum Unterbrechen'
+            ? 'Tippen stoppt — oder 2× auf Findus'
             : showCoachHint
               ? 'Tippen = schreiben · Halten = sprechen'
               : null;

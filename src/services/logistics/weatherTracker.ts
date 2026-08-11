@@ -332,6 +332,7 @@ export async function runWeatherTrackerCheck(opts?: {
           })),
           rawHourly: [],
           sunsetMs: null,
+          dayHighC: meteo.dayHighC ?? null,
         };
       }
     } catch {
