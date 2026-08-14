@@ -1,5 +1,6 @@
 /**
- * Combo-Cluster Fact-Lane: z. B. gratis Parken × Pizza Takeaway × Förde/Aussicht.
+ * Combo-Cluster Fact-Lane: z. B. gratis Parken × Pizza Takeaway × Förde/Aussicht
+ * oder Dual Pizza/Takeaway + Sunset/Aussicht (ohne Parkpflicht).
  *
  * Schicht 1: Stadt-Pack (lokal, 0 €, auch ohne Netz)
  * Schicht 2: OSM Overpass (Netz, meist 0 €)
@@ -13,6 +14,10 @@ import { parseTagsJson } from '../../services/geo/triggerPolicy';
 import { searchOsmPlacesNearby } from '../../services/navigation/overpassService';
 import { searchPlacesByText } from '../../services/navigation/googleMapsNav';
 import type { AgentResult, Module2ActionButton } from '../types';
+import {
+  isBeachLeisureWithoutPizza,
+  isCrediblePizzaVenue,
+} from '../pitch/pizzaVenueGate';
 
 type SpotSource = 'pack' | 'osm' | 'places';
 
@@ -34,6 +39,7 @@ function scoreBlob(blob: string, role: Spot['role']): number {
     return 0;
   }
   if (role === 'food') {
+    if (isBeachLeisureWithoutPizza(b)) return 0;
     if (/pizza|pizzeria|takeaway|imbiss/.test(b)) return 10;
     if (/restaurant|gastro/.test(b)) return 3;
     return 0;
@@ -43,6 +49,16 @@ function scoreBlob(blob: string, role: Spot['role']): number {
     return 10;
   if (/see|meer|küste|kueste/.test(b)) return 6;
   return 0;
+}
+
+function filterCredibleFood(spots: Spot[]): Spot[] {
+  return spots.filter((f) => {
+    if (isBeachLeisureWithoutPizza(f.name)) return false;
+    return (
+      isCrediblePizzaVenue(f.name) ||
+      /imbiss|takeaway|meal_takeaway/i.test(f.name)
+    );
+  });
 }
 
 async function packRole(
@@ -198,10 +214,16 @@ export function isComboClusterQuery(text: string): boolean {
   const park = /\b(parken|parkplatz|parkticket|kostenlos\s+parken|gratis\s+parken)\b/iu.test(
     t,
   );
-  const food = /\b(pizza|takeaway|imbiss|essen\s+mitnehmen)\b/iu.test(t);
+  const food =
+    /\b(pizza|pizzeria|takeaway|take[-\s]?away|imbiss|essen\s+mitnehmen|zum\s+mitnehmen|to[-\s]?go)\b/iu.test(
+      t,
+    );
   const view =
-    /\b(förde|foerde|sonnenuntergang|aussicht|strand|elbe|ufer)\b/iu.test(t);
-  return park && food && view;
+    /\b(förde|foerde|sonnenuntergang|sunset|aussicht|strand|elbe|ufer|hafen)\b/iu.test(
+      t,
+    );
+  // Park + Essen + Aussicht ODER Essen/Takeaway + Sunset/Aussicht (ohne Park)
+  return (park && food && view) || (food && view);
 }
 
 export async function researchComboCluster(opts: {
@@ -261,31 +283,58 @@ export async function researchComboCluster(opts: {
   }
 
   parks = dedupe(parks).slice(0, 6);
-  foods = dedupe(foods).slice(0, 6);
+  foods = filterCredibleFood(dedupe(foods)).slice(0, 6);
   views = dedupe(views).slice(0, 6);
 
-  type Cluster = { park: Spot; food: Spot; view: Spot | null; score: number };
+  const wantsPark =
+    /\b(parken|parkplatz|parkticket)\b/iu.test(opts.userText) && parks.length > 0;
+
+  type Cluster = {
+    park: Spot | null;
+    food: Spot;
+    view: Spot | null;
+    score: number;
+  };
   const clusters: Cluster[] = [];
-  for (const park of parks) {
+
+  if (wantsPark) {
+    for (const park of parks) {
+      for (const food of foods) {
+        const nearFood =
+          haversineMeters(park.lat, park.lng, food.lat, food.lng) < 2_500;
+        if (!nearFood) continue;
+        let bestView: Spot | null = null;
+        let bestPv = Infinity;
+        for (const v of views) {
+          const d = haversineMeters(park.lat, park.lng, v.lat, v.lng);
+          if (d < bestPv && d < 3_500) {
+            bestPv = d;
+            bestView = v;
+          }
+        }
+        clusters.push({
+          park,
+          food,
+          view: bestView,
+          score: clusterScore(park, food, bestView),
+        });
+      }
+    }
+  } else {
     for (const food of foods) {
-      const nearFood =
-        haversineMeters(park.lat, park.lng, food.lat, food.lng) < 2_500;
-      if (!nearFood) continue;
       let bestView: Spot | null = null;
-      let bestPv = Infinity;
+      let bestD = Infinity;
       for (const v of views) {
-        const d = haversineMeters(park.lat, park.lng, v.lat, v.lng);
-        if (d < bestPv && d < 3_500) {
-          bestPv = d;
+        const d = haversineMeters(food.lat, food.lng, v.lat, v.lng);
+        if (d < bestD && d < 5_000) {
+          bestD = d;
           bestView = v;
         }
       }
-      clusters.push({
-        park,
-        food,
-        view: bestView,
-        score: clusterScore(park, food, bestView),
-      });
+      const score =
+        food.distanceM +
+        (bestView ? bestD * 0.8 + bestView.distanceM * 0.2 : 2_000);
+      clusters.push({ park: null, food, view: bestView, score });
     }
   }
   clusters.sort((a, b) => a.score - b.score);
@@ -296,7 +345,7 @@ export async function researchComboCluster(opts: {
       agent: 'knowledge',
       ok: true,
       draftText:
-        'Für Parken + Pizza + Aussicht finde ich noch keine saubere Dreierkombination (Pack/OSM/Places). Nenn mir den Stadtteil genauer — dann cluster ich neu.',
+        'Für Pizza zum Mitnehmen plus Aussicht/Sonnenuntergang finde ich noch keine saubere Kombi. Nenn mir den Stadtteil genauer — dann cluster ich neu.',
       bullets: ['Kombi noch dünn befüllt'],
       buttons: [],
       meta: {
@@ -307,21 +356,52 @@ export async function researchComboCluster(opts: {
   }
 
   const c0 = top[0]!;
-  const viewBit = c0.view
-    ? `Aussicht/Förde-Nähe: ${c0.view.name}`
-    : 'Aussichtspunkt in der Nähe noch dünn belegt — Förde-Ufer als Ziel mitdenken';
-  const alt = top[1];
-  let draft =
-    `Beste Kombi: parke bei ${c0.park.name}, hol Pizza bei ${c0.food.name}` +
-    (c0.view ? `, dann rüber zu ${c0.view.name}` : '') +
-    `. Kurze Wege zwischen den dreien.`;
-  if (alt) {
-    draft += ` Alternative: ${alt.park.name} + ${alt.food.name}.`;
-  }
-  draft += ` ${viewBit}.`;
+  const c1 = top[1];
+  const wantsSunset =
+    /\b(sonnenuntergang|sunset|abendsonne)\b/iu.test(opts.userText);
 
-  const buttons: Module2ActionButton[] = [
-    {
+  let sunsetLeaveHint = '';
+  if (wantsSunset) {
+    try {
+      const { getCachedWeatherSnapshot } = require('../../services/weatherService') as {
+        getCachedWeatherSnapshot: () => { sunsetMs?: number | null } | null;
+      };
+      const sunsetMs = getCachedWeatherSnapshot()?.sunsetMs;
+      if (typeof sunsetMs === 'number' && sunsetMs > Date.now()) {
+        const leaveMs = sunsetMs - 30 * 60_000;
+        const fmt = (ms: number) => {
+          const d = new Date(ms);
+          return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+        };
+        sunsetLeaveHint = ` Sonnenuntergang ${fmt(sunsetMs)} — spätestens gegen ${fmt(leaveMs)} los, damit du ~30 Min vorher am Spot bist.`;
+      }
+    } catch {
+      /* soft */
+    }
+  }
+
+  const viewBit = c0.view
+    ? `Aussicht: ${c0.view.name}`
+    : 'Aussichtspunkt in der Nähe noch dünn belegt — Spot mit freiem Horizont mitdenken';
+  let draft = c0.park
+    ? `Beste Kombi: parke bei ${c0.park.name}, hol Pizza bei ${c0.food.name}` +
+      (c0.view ? `, dann rüber zu ${c0.view.name}` : '') +
+      `.`
+    : `Zwei Takeaway-Optionen zuerst, dann der Spot:` +
+      ` ① ${c0.food.name}` +
+      (c1 ? ` · ② ${c1.food.name}` : '') +
+      (c0.view ? ` → dann ${c0.view.name}` : '') +
+      `.`;
+  if (c0.park && c1) {
+    draft += ` Alternative: ${c1.park?.name ?? 'Park'} + ${c1.food.name}.`;
+  }
+  draft += ` ${viewBit}.${sunsetLeaveHint}`;
+  draft +=
+    ' Pizza-Sorten/Preise nur nennen wenn belegt; sonst ehrlich nachliefern.';
+
+  const buttons: Module2ActionButton[] = [];
+  if (c0.park) {
+    buttons.push({
       id: 'combo_park',
       label: shorten(`🅿️ ${c0.park.name}`),
       payload: {
@@ -330,18 +410,30 @@ export async function researchComboCluster(opts: {
         lng: c0.park.lng,
         label: c0.park.name,
       },
+    });
+  }
+  buttons.push({
+    id: 'combo_food',
+    label: shorten(`🍕 ${c0.food.name}`),
+    payload: {
+      kind: 'navigate',
+      lat: c0.food.lat,
+      lng: c0.food.lng,
+      label: c0.food.name,
     },
-    {
-      id: 'combo_food',
-      label: shorten(`🍕 ${c0.food.name}`),
+  });
+  if (c1 && c1.food.name !== c0.food.name) {
+    buttons.push({
+      id: 'combo_food_alt',
+      label: shorten(`🍕 ${c1.food.name}`),
       payload: {
         kind: 'navigate',
-        lat: c0.food.lat,
-        lng: c0.food.lng,
-        label: c0.food.name,
+        lat: c1.food.lat,
+        lng: c1.food.lng,
+        label: c1.food.name,
       },
-    },
-  ];
+    });
+  }
   if (c0.view) {
     buttons.push({
       id: 'combo_view',
@@ -360,16 +452,21 @@ export async function researchComboCluster(opts: {
     ok: true,
     draftText: draft,
     bullets: [
-      `Parken: ${c0.park.name}`,
+      c0.park ? `Parken: ${c0.park.name}` : null,
       `Pizza: ${c0.food.name}`,
-      c0.view ? `Aussicht: ${c0.view.name}` : 'Aussicht: Förde-Nähe prüfen',
-    ],
+      c1 && c1.food.name !== c0.food.name ? `Alt: ${c1.food.name}` : null,
+      c0.view ? `Aussicht: ${c0.view.name}` : 'Aussicht: Horizont-Spot prüfen',
+      sunsetLeaveHint ? sunsetLeaveHint.trim() : null,
+    ].filter(Boolean) as string[],
     buttons: buttons.slice(0, 4),
     meta: {
       comboCluster: true,
       concrete_place: true,
       venue_options: true,
-      hard_match_evidence: true,
+      hard_match_evidence: foods.some((f) =>
+        /\b(pizza|pizzeria)\b/i.test(f.name),
+      ),
+      dualFoodView: !wantsPark,
       sources: [...sourcesUsed],
     },
   };

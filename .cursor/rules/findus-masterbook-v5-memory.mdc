@@ -12,10 +12,11 @@ Herkunft, aktueller Ort, Variablen merken (z. B. „Freundin ist vegetarisch“,
 ## Welcome-Back Protocol
 
 - Volle Willkommensnachricht höchstens **1× / 72 h**.
-- Nach App-Schließen: **Guten Morgen / Tag / Abend** nur wenn der User die App **≥ 4,5 h** nicht benutzt hat.
+- Nach App-Schließen: **Guten Morgen / Tag / Abend** und **Vorschläge** nur wenn die App **≥ 3 h** geschlossen / Idle war.
 - Frühestens **2 h nach Einrichtung** — kein „Alles klar bei dir?“ / Presence-Ping direkt nach Setup.
 - Gesagtes merken — keine identische Begrüßung bei jedem Neustart.
 - Volle Begrüßung referenziert Kontext (Ort, Plan, Absicht).
+- SSOT: `welcomeBackService.ts` (`LIGHT_GREETING_IDLE_MS` / `PLAN_RECALL_IDLE_MS`).
 
 ## Morgen-Briefing (Guten Morgen)
 

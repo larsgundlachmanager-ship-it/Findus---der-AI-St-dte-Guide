@@ -9,7 +9,7 @@ import { getCachedUserProfile } from '../userProfileService';
 import { getVoiceSettingsForTour } from '../ttsService';
 import { speakRuntimeText } from '../../runtime/speechModule';
 import { latencyMark } from '../debug/latencyTiming';
-import { fallbackSpeech, noteFallback } from '../debug/fallbackLabel';
+import { noteFallback } from '../debug/fallbackLabel';
 import { formatUserMemoryForPrompt } from '../../store/useUserMemoryStore';
 import type { JobClassification } from '../../module2/jobs/types';
 
@@ -33,6 +33,15 @@ export function clearLastBridgeLine(): void {
   lastBridgeAtMs = 0;
 }
 
+/** Von Wait-Bridge/Manager: Mic-Fire-and-Forget soll nicht nachziehen. */
+export function rememberSpokenBridgeLine(line: string): void {
+  const t = line.replace(/\s+/g, ' ').trim();
+  if (!t) return;
+  lastSpokenBridge = t;
+  lastSpokenAtMs = Date.now();
+  rememberBridge(t);
+}
+
 export function isBridgeAlreadySpoken(line?: string | null): boolean {
   const t = (line ?? lastBridgeLine).replace(/\s+/g, ' ').trim();
   if (!t || !lastSpokenBridge) return false;
@@ -49,15 +58,46 @@ async function speakBridgeLineOnce(line: string): Promise<void> {
   const t = line.replace(/\s+/g, ' ').trim();
   if (!t) return;
   if (isBridgeAlreadySpoken(t)) return;
+  try {
+    const { hadRecentLatencyAck } = require('./floskelEngine') as {
+      hadRecentLatencyAck: (ms?: number) => boolean;
+    };
+    // Pitch/Manager-Wait hat schon gebridgt → Mic-Bridge nicht nochmal
+    if (hadRecentLatencyAck(12_000)) {
+      rememberBridge(t);
+      return;
+    }
+  } catch {
+    /* soft */
+  }
   if (speakGate) {
     await speakGate;
     return;
   }
   speakGate = (async () => {
     if (isBridgeAlreadySpoken(t)) return;
+    try {
+      const { hadRecentLatencyAck } = require('./floskelEngine') as {
+        hadRecentLatencyAck: (ms?: number) => boolean;
+      };
+      if (hadRecentLatencyAck(12_000)) {
+        rememberBridge(t);
+        return;
+      }
+    } catch {
+      /* soft */
+    }
     lastSpokenBridge = t;
     lastSpokenAtMs = Date.now();
     rememberBridge(t);
+    try {
+      const { noteLatencyAck } = require('./floskelEngine') as {
+        noteLatencyAck: (p?: string | null) => void;
+      };
+      noteLatencyAck(t);
+    } catch {
+      /* soft */
+    }
     try {
       const cached = getCachedUserProfile();
       const voice = cached
@@ -102,11 +142,34 @@ export async function generateContextualBridge(opts: {
   }
   const profile = getCachedUserProfile();
   const name = profile?.firstName?.trim() || null;
-  const city = profile?.cityName?.trim() || null;
+  let city: string | null = null;
+  try {
+    const { useFinnusStore } = require('../../store/useFinnusStore') as {
+      useFinnusStore: {
+        getState: () => { lastGpsLat: number | null; lastGpsLng: number | null };
+      };
+    };
+    const { nearestCityName, loadNearbyCitiesFromIndex } = require('../navigation/fuzzyCityResolve') as {
+      nearestCityName: (
+        lat: number | null,
+        lng: number | null,
+        cities: Array<{ name: string; lat: number; lng: number }>,
+      ) => string | null;
+      loadNearbyCitiesFromIndex: () => Array<{ name: string; lat: number; lng: number }>;
+    };
+    const gps = useFinnusStore.getState();
+    city = nearestCityName(
+      gps.lastGpsLat,
+      gps.lastGpsLng,
+      loadNearbyCitiesFromIndex(),
+    );
+  } catch {
+    city = profile?.cityName?.trim() || null;
+  }
 
   const prompt = [
     'Du bist Findus — warmer Reise-/Alltagsbegleiter auf Deutsch.',
-    'Schreib GENAU EINEN kurzen Bridge-Satz (max. 22 Wörter, 1 Satz).',
+    'Schreib 1–2 kurze Sätze (max. 42 Wörter). Das füllt die Recherche-Zeit — konkret auf den User, keine Meta-Suche.',
     'Das ist das EINZIGE Vorgeplänkel vor der echten Antwort.',
     '',
     'PFLICHT:',
@@ -121,8 +184,18 @@ export async function generateContextualBridge(opts: {
     '- Markdown, Emoji-Overkill, zweite Frage-Spirale.',
     '- Die eigentliche Lösung vorwegnehmen (keine Zahlen/Orte erfinden).',
     '',
+    'Richtung (nur Ablauf, Wortlaut nie übernehmen):',
+    '- Outfit/Kälte → Wir wollen nicht, dass du frierst.',
+    '- Hitze → Heute ist kein Tag zum Durchhalten in der falschen Schicht.',
+    '- Abend/Events → Heute Abend soll was Echtes laufen.',
+    '- Weg/Ankommen → Du willst ankommen, nicht erst raten.',
+    '- Tickets/Fähre → Die Überfahrt soll sitzen, nicht irgendwo versacken.',
+    'Dies sind nur abstrakte Beispiele für den logischen Ablauf. Übernimm niemals den genauen Wortlaut. Passe deine Antwort immer dynamisch und organisch an den aktuellen Kontext und die aktuelle Stadt an.',
+    '',
     name ? `User-Vorname: ${name}` : '',
-    city ? `Stadt: ${city}` : '',
+    city
+      ? `Stadt (nur Kontext, nicht als Home erzwingen): ${city}`
+      : '',
     opts.jobId ? `Interner Job (nur Ton-Hinweis): ${opts.jobId}` : '',
     opts.jobHint ? `Job-Hinweis: ${opts.jobHint}` : '',
     memory ? `Kontext/Memory:\n${memory}` : '',
@@ -138,7 +211,7 @@ export async function generateContextualBridge(opts: {
     const raw = await generateGeminiText(prompt, {
       task: 'generic',
       tier: 'lite',
-      maxTokens: 70,
+      maxTokens: 120,
       temperature: 0.85,
       useFindusSystem: false,
     });
@@ -147,8 +220,14 @@ export async function generateContextualBridge(opts: {
       .replace(/^["„]|["“]$/g, '')
       .trim();
     const cut = line.search(/[.!?…](?=\s|$)/);
-    if (cut > 8) line = line.slice(0, cut + 1).trim();
-    if (line.length < 6 || line.length > 160) {
+    const cut2 =
+      cut > 8 ? line.slice(cut + 1).search(/[.!?…](?=\s|$)/) : -1;
+    if (cut > 8 && cut2 > 8) {
+      line = line.slice(0, cut + 1 + cut2 + 1).trim();
+    } else if (cut > 8 && line.length > 220) {
+      line = line.slice(0, cut + 1).trim();
+    }
+    if (line.length < 6 || line.length > 280) {
       noteFallback('Bridge-LLM', 'Antwort zu kurz/lang');
       return null;
     }
@@ -172,28 +251,25 @@ export async function generateContextualBridge(opts: {
 
 function heuristicBridgeFallback(userText: string): string {
   const t = userText.toLowerCase();
+  if (/\b(eis|gelato|ice\s*cream|kugel)\b/u.test(t)) {
+    return 'Eis bei dem Wetter ist genau die richtige Idee — ich hol dir die nächsten guten Optionen.';
+  }
   if (/\b(gewonnen|gewinn|sieg|turnier|erste\s+runde)\b/u.test(t)) {
-    return fallbackSpeech(
-      'Bridge-Heuristik',
-      'Krass, Glückwunsch — und jetzt schauen wir, was als Nächstes Sinn ergibt.',
-    );
+    return 'Krass, Glückwunsch — und jetzt schauen wir, was als Nächstes Sinn ergibt.';
   }
   if (/\b(heiß|heiss|schwül|hitze|so\s+warm)\b/u.test(t)) {
-    return fallbackSpeech(
-      'Bridge-Heuristik',
-      'Stimmt, heute ist richtig heiß — lass uns das sinnvoll angehen.',
-    );
+    return 'Stimmt, heute ist richtig heiß — lass uns das sinnvoll angehen.';
   }
   if (/\b(zoo|tierpark)\b/u.test(t)) {
-    return fallbackSpeech(
-      'Bridge-Heuristik',
-      'Genau, Zoo geht in jedem Alter — ich pass dir das an.',
-    );
+    return 'Genau, Zoo geht in jedem Alter — ich pass dir das an.';
   }
-  return fallbackSpeech(
-    'Bridge-Heuristik',
-    'Verstehe dich — ich setz genau da an.',
-  );
+  if (/\b(café|cafe|kaffee|kuchen)\b/u.test(t)) {
+    return 'Café-Pause klingt richtig — ich mach dir klar, worauf du achten kannst.';
+  }
+  if (/\b(hotel|übernacht|günstigste)\b/u.test(t)) {
+    return 'Übernachtung, klar — ich zieh dir echte Preise und die beste Lage raus.';
+  }
+  return 'Verstehe dich — ich setz genau da an.';
 }
 
 async function ensureBridgeLine(
@@ -222,20 +298,114 @@ async function ensureBridgeLine(
   }
 }
 
+function isSilentFollowUp(userText: string): boolean {
+  const t = userText.replace(/\s+/g, ' ').trim();
+  if (t.length < 4) return true;
+  try {
+    const {
+      wantsLiveChatVoiceCommand,
+      wantsStopLiveChatVoiceCommand,
+    } = require('../handsFree/liveChatSession') as {
+      wantsLiveChatVoiceCommand: (s: string) => boolean;
+      wantsStopLiveChatVoiceCommand: (s: string) => boolean;
+    };
+    if (wantsLiveChatVoiceCommand(t) || wantsStopLiveChatVoiceCommand(t)) {
+      return true;
+    }
+  } catch {
+    /* soft */
+  }
+  if (
+    /\berzähl\s+mir\s+noch\s+mehr\s+zu\b/iu.test(t) ||
+    /\bmehr\s+(zur\s+)?(historie|geschichte)\b/iu.test(t)
+  ) {
+    return true;
+  }
+  if (
+    /^(ja|jo|jap|jep|yes|genau|stimmt|ok|okay|klar|gerne|los|mach)(?:\s+bitte)?[.!?]?$/iu.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  try {
+    const { isInventoryFollowUp } = require('../../module2/router/liveInventoryGate') as {
+      isInventoryFollowUp: (s: string) => boolean;
+    };
+    if (isInventoryFollowUp(t)) return true;
+  } catch {
+    /* soft */
+  }
+  return false;
+}
+
 /**
- * Fire-and-forget vom Mic — DEAKTIVIERT.
- * Bridge kommt ausschließlich aus dem Concierge-Manager (analyzeTurn / runConciergeTurn).
- * Doppel-Bridge / alte Floskeln vermeiden.
+ * Fire-and-forget vom Mic — menschliche Bridge während Recherche läuft.
+ * Follow-ups bleiben still; bei langer Recherche darf ein kurzes Wait-Ack.
+ * Manager spricht dieselbe Zeile nicht nochmal (alreadySpoken / getLastBridgeLine).
  */
 export function speakContextualBridgeFireAndForget(
-  _userText: string,
-  _opts?: { job?: JobClassification | null },
+  userText: string,
+  opts?: { job?: JobClassification | null },
 ): void {
-  if (__DEV__) {
-    console.log(
-      '[bridge] speakContextualBridgeFireAndForget ignored — Manager owns bridge',
-    );
+  const t = (userText || '').replace(/\s+/g, ' ').trim();
+  if (t.length < 4) return;
+  try {
+    const { isBesideConversationActive } = require('../handsFree/besideConversationMode') as {
+      isBesideConversationActive: () => boolean;
+    };
+    if (isBesideConversationActive()) return;
+  } catch {
+    /* soft */
   }
+  try {
+    const { isLiveChatTurnActive } = require('../handsFree/liveChatTurnContext') as {
+      isLiveChatTurnActive: () => boolean;
+    };
+    // Live-Chat Instant-Ack deckt Bridge ab — keine Doppel-Bridge
+    if (isLiveChatTurnActive()) return;
+  } catch {
+    /* soft */
+  }
+  if (isSilentFollowUp(t)) {
+    try {
+      const {
+        wantsLiveChatVoiceCommand,
+        wantsStopLiveChatVoiceCommand,
+      } = require('../handsFree/liveChatSession') as {
+        wantsLiveChatVoiceCommand: (s: string) => boolean;
+        wantsStopLiveChatVoiceCommand: (s: string) => boolean;
+      };
+      if (wantsLiveChatVoiceCommand(t) || wantsStopLiveChatVoiceCommand(t)) {
+        return;
+      }
+    } catch {
+      /* soft */
+    }
+    try {
+      const {
+        shouldSpeakLatencyFloskel,
+        speakLatencyFloskelFireAndForget,
+      } = require('./floskelEngine') as {
+        shouldSpeakLatencyFloskel: (s: string) => boolean;
+        speakLatencyFloskelFireAndForget: (s: string) => void;
+      };
+      if (shouldSpeakLatencyFloskel(t)) {
+        speakLatencyFloskelFireAndForget(t);
+      }
+    } catch {
+      /* still */
+    }
+    return;
+  }
+  void (async () => {
+    try {
+      const line = await ensureBridgeLine(t, opts?.job);
+      if (line?.trim()) await speakBridgeLineOnce(line);
+    } catch {
+      noteFallback('Bridge-TTS', 'contextual fire-and-forget');
+    }
+  })();
 }
 
 /**

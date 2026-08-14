@@ -1,7 +1,7 @@
 /**
  * Welcome-Back Protocol:
  * - Volle Willkommensnachricht höchstens 1× / 72 h
- * - Nach App-Schließen: Guten Morgen / Tag / Abend nur wenn ≥ 4,5 h Idle
+ * - Nach App-Schließen: Begrüßung + Vorschläge erst ab ≥ 3 h Idle
  * - Frühestens 2 h nach Einrichtung (kein „alles klar bei dir“ direkt nach Setup)
  * - Gesagtes merken → kein identischer Text bei jedem Neustart
  */
@@ -23,12 +23,15 @@ import {
 
 const STATE_PATH = `${FileSystem.documentDirectory}findus-welcome-back.json`;
 
-/** Mind. Pause bevor überhaupt begrüßt wird — darunter keine Begrüßung */
-export const LIGHT_GREETING_IDLE_MS = 30 * 60_000;
-/** Plan-/Erlebnis-Recall */
+/**
+ * Mind. Pause bevor begrüßt / Vorschläge gemacht werden.
+ * Darunter: still (kein „Hallo … Guten Abend“ + Ideen).
+ */
+export const LIGHT_GREETING_IDLE_MS = 3 * 60 * 60_000;
+/** Plan-/Erlebnis-Recall + Vorschläge (gleicher Floor wie Begrüßung) */
 export const PLAN_RECALL_IDLE_MS = 3 * 60 * 60_000;
-/** Mind. Pause für volle Willkommens-/Tageszeit-Begrüßung */
-export const WELCOME_IDLE_MS = 4.5 * 60 * 60_000;
+/** Alias / Fallback wenn lastActiveAtMs fehlt — gleiche 3h-Schwelle */
+export const WELCOME_IDLE_MS = LIGHT_GREETING_IDLE_MS;
 /** „Cool dass du wieder da bist“-Schwelle */
 export const LONG_AWAY_IDLE_MS = 6 * 60 * 60_000;
 /** Volle Welcome-Back-Nachricht max. alle 72 h */
@@ -392,7 +395,7 @@ function buildDaypartFallbacks(opts: {
     case 'evening':
       return [
         `${greet}${who}! Schöner Abend${place} — noch was vor?`,
-        `Hey${who}, abends wieder da${place}. Soll ich was vorschlagen?`,
+        `Hey${who}, abends wieder da${place}. Noch was vor?`,
         `${greet}${who}. Entspannen oder noch raus?`,
       ];
     default:
@@ -423,10 +426,8 @@ async function composeDaypartSpeech(opts: {
   const idle = opts.idleMs ?? 0;
   const intensity =
     idle >= LONG_AWAY_IDLE_MS
-      ? 'länger weg (≥6h): kurzes Wiedersehen + optional Plan-Recall'
-      : idle >= PLAN_RECALL_IDLE_MS
-        ? 'mittel (≥3h): Tageszeit-Begrüßung + optional was im Plan lag'
-        : 'leicht (≥30 Min): nur kurze Tageszeit-Begrüßung, kein langer Welcome';
+      ? 'länger weg (≥6h): kurzes Wiedersehen; Plan-Recall nur wenn unten Themen stehen'
+      : 'mittel (≥3h): kurze Tageszeit-Begrüßung; Vorschlag nur wenn unten Themen stehen';
 
   let threadRecall = '';
   if (idle >= PLAN_RECALL_IDLE_MS) {
@@ -455,7 +456,7 @@ async function composeDaypartSpeech(opts: {
       opts.cityName ? `Stadt: ${opts.cityName}` : '',
       threadRecall
         ? `Offene Gesprächsthemen (höchstens EINS kurz anbieten, nicht alle aufzählen):\n${threadRecall}`
-        : '',
+        : 'Keine Vorschläge, keine Plan-Ideen, keine „soll ich …?“-Angebote — nur Begrüßung.',
       opts.avoid.length
         ? `Vermeide diese früheren Formulierungen:\n${opts.avoid
             .slice(0, 4)
@@ -588,8 +589,8 @@ async function deliverSpeech(
 }
 
 /**
- * Nach Idle ≥ 4,5 h: Tageszeit-Gruß oder (alle 72 h) volle Welcome-Back-Nachricht.
- * Unter 4,5 h Idle: still.
+ * Nach Idle ≥ 3 h: Tageszeit-Gruß / Vorschläge oder (alle 72 h) volle Welcome-Back-Nachricht.
+ * Unter 3 h Idle: still.
  * Frühestens 2 h nach Einrichtung.
  */
 export async function maybeSpeakWelcomeBack(): Promise<boolean> {
@@ -623,7 +624,7 @@ export async function maybeSpeakWelcomeBack(): Promise<boolean> {
   const idleMs =
     state.lastActiveAtMs != null ? now - state.lastActiveAtMs : WELCOME_IDLE_MS;
 
-  // < 30 Min → keine Begrüßung
+  // < 3 h → keine Begrüßung, keine Vorschläge
   if (idleMs < LIGHT_GREETING_IDLE_MS) {
     await persist({
       ...state,

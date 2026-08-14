@@ -30,12 +30,29 @@ export function detectCityBestIntent(text: string): boolean {
 
 export function detectPitchKind(text: string): PitchKind {
   const t = text.toLowerCase();
-  if (/\b(hotel|übernacht|uebernacht|airbnb|pension)\b/.test(t)) return 'hotel';
+  // Parkplatz-Suche vor Tour/Hotel — sonst frisst „Tour zusammenstellen“ den Park-Pitch
+  try {
+    const { isParkingSearchIntent } = require('../../services/concierge/timeCareIntent') as {
+      isParkingSearchIntent: (s: string) => boolean;
+    };
+    if (isParkingSearchIntent(text)) return 'generic';
+  } catch {
+    /* soft */
+  }
+  if (/\b(hotel|übernacht|uebernacht|airbnb|pension|unterkunft)\b/.test(t)) {
+    return 'hotel';
+  }
+  if (
+    /\bbleiben\b/.test(t) &&
+    /\b(nacht|heute\s+bis\s+morgen|heute\s+auf\s+morgen|von\s+heute)\b/.test(t)
+  ) {
+    return 'hotel';
+  }
   if (/\b(kino|film|cinema)\b/.test(t)) return 'cinema';
   if (/\b(bar|pub|biergarten|cocktail)\b/.test(t)) return 'bar';
   if (/\b(tour|ausflug|ticket|führung|fuehrung)\b/.test(t)) return 'tour';
   if (
-    /\b(museum|kirche|denkmal|aussicht|sehenswürdigkeit|sehenswuerdigkeit)\b/.test(
+    /\b(museum|kirche|denkmal|aussicht|sehenswürdigkeit|sehenswuerdigkeit|strand|strände|straende|beach|baden|badestelle|freibad)\b/.test(
       t,
     )
   ) {
@@ -207,33 +224,97 @@ export function buildPrefSliceForPitch(text: string): PitchPrefSlice {
 export function parseWishesFromText(text: string): PitchWish[] {
   const t = text.replace(/\s+/g, ' ').trim();
   const wishes: PitchWish[] = [];
-  const dish = t.match(
-    /\b(pannfisch|pizza\s*hawaii|schnitzel|burger|sushi|döner|doener|pasta|ramen)\b/iu,
-  );
-  if (dish?.[1]) {
-    wishes.push({ text: dish[1], hardness: 'must', kind: 'dish' });
+  const pushMust = (w: PitchWish) => {
+    if (
+      wishes.some(
+        (x) =>
+          x.kind === w.kind &&
+          x.text.toLowerCase() === w.text.toLowerCase(),
+      )
+    ) {
+      return;
+    }
+    wishes.push(w);
+  };
+
+  // Spezifische Gerichte zuerst (Hard-Match)
+  for (const m of t.matchAll(
+    /\b(spaghetti[- ]?eis|eisbecher|pannfisch|pizza\s*hawaii|schnitzel|burger|sushi|döner|doener|ramen|pasta carbonara)\b/giu,
+  )) {
+    if (m[1]) pushMust({ text: m[1].replace(/\s+/g, ' ').trim(), hardness: 'must', kind: 'dish' });
   }
+  // Generisches „X-Eis“ / Eis als Produktwunsch
+  if (
+    !wishes.some((w) => w.kind === 'dish') &&
+    /\b([\wäöüß-]{3,20}[- ]?eis)\b/iu.test(t)
+  ) {
+    const m = t.match(/\b([\wäöüß-]{3,20}[- ]?eis)\b/iu);
+    if (m?.[1]) pushMust({ text: m[1], hardness: 'must', kind: 'dish' });
+  }
+  if (
+    !wishes.some((w) => w.kind === 'dish') &&
+    /\b(eis|gelato|ice\s*cream)\b/iu.test(t) &&
+    /\b(will|möcht|moecht|such|nehm|bitte|lust|bock)\b/iu.test(t)
+  ) {
+    pushMust({ text: 'Eis', hardness: 'must', kind: 'dish' });
+  }
+
   // Plain „Pizza“ = Cuisine (nicht nur pizza hawaii)
   if (/\bpizza\b/iu.test(t) && !wishes.some((w) => /pizza/i.test(w.text))) {
-    wishes.push({ text: 'pizza', hardness: 'must', kind: 'cuisine' });
+    pushMust({ text: 'pizza', hardness: 'must', kind: 'cuisine' });
+  }
+  // Mitnehmen / Take-away = hartes Amenity (kein Beach-Bar-Essen am Tisch)
+  if (
+    /\b(mitnehmen|take[-\s]?away|to[-\s]?go|zum\s+mitnehmen|abholen)\b/iu.test(
+      t,
+    ) &&
+    !wishes.some((w) => /takeaway|mitnehmen|to[-\s]?go/i.test(w.text))
+  ) {
+    pushMust({ text: 'takeaway', hardness: 'must', kind: 'amenity' });
   }
   const cuisine = t.match(
     /\b(italiener|italienisch|grieche|griechisch|japanisch|indisch|türkisch|tuerkisch|asian|asiatisch|steakhouse)\b/iu,
   );
   if (cuisine?.[1]) {
-    wishes.push({ text: cuisine[1], hardness: 'must', kind: 'cuisine' });
+    pushMust({ text: cuisine[1], hardness: 'must', kind: 'cuisine' });
   }
-  if (/\b(biergarten|terrasse|sonnenuntergang|elb[bv]lick|außen|aussen)\b/iu.test(t)) {
-    const m = t.match(/\b(biergarten|terrasse|sonnenuntergang|elb[bv]lick)\b/iu);
-    wishes.push({
+
+  // Alle Amenities (Pool + Sauna + …), nicht nur das erste
+  for (const m of t.matchAll(/\b(pool|sauna|spa|jacuzzi|whirlpool)\b/giu)) {
+    if (m[1]) pushMust({ text: m[1], hardness: 'must', kind: 'amenity' });
+  }
+  for (const m of t.matchAll(
+    /\b([A-Za-zÄÖÜäöüß]{2,16}blick|river\s*view|sea\s*view|lake\s*view)\b/giu,
+  )) {
+    if (m[1]) {
+      pushMust({
+        text: m[1].replace(/\s+/g, ' ').trim(),
+        hardness: 'must',
+        kind: 'vibe',
+      });
+    }
+  }
+  if (/\b(biergarten|terrasse|sonnenuntergang|außen|aussen)\b/iu.test(t)) {
+    const m = t.match(/\b(biergarten|terrasse|sonnenuntergang)\b/iu);
+    pushMust({
       text: m?.[1] ?? 'Outdoor',
       hardness: /\bsonnenuntergang\b/iu.test(t) ? 'nice' : 'must',
       kind: 'vibe',
     });
   }
-  if (/\b(pool|sauna|spa)\b/iu.test(t)) {
-    const m = t.match(/\b(pool|sauna|spa)\b/iu);
-    wishes.push({ text: m?.[1] ?? 'Amenity', hardness: 'must', kind: 'amenity' });
+  if (
+    /\b(toilette|klo|\bwc\b|apotheke|geldautomat|\batm\b|ladestation|powerbank)\b/iu.test(
+      t,
+    )
+  ) {
+    const m = t.match(
+      /\b(toilette|klo|wc|apotheke|geldautomat|atm|ladestation|powerbank)\b/iu,
+    );
+    pushMust({
+      text: m?.[1] ?? 'Amenity',
+      hardness: 'must',
+      kind: 'amenity',
+    });
   }
   if (!wishes.length) {
     wishes.push({ text: t.slice(0, 80), hardness: 'nice', kind: 'generic' });
@@ -254,12 +335,12 @@ export function buildPitchParentBridge(opts: {
     return 'Ich check kurz, was gut auf dem Weg liegt.';
   }
   if (opts.kind === 'hotel') {
-    return 'Ich such zwei passende Hotels für dich raus.';
+    return 'Ich prüfe Live-Hotels mit deinen Must-Haves — kurz Geduld, dafür die treffenden Optionen.';
   }
   if (opts.kind === 'cinema') {
     return 'Ich schau kurz, welche Kinos für dich passen.';
   }
-  return 'Ich such dir zwei starke Optionen in der Nähe.';
+  return 'Ich recherchiere genau nach deinem Wunsch — lieber gründlich, dann zwei klare Optionen.';
 }
 
 export function countWords(s: string): number {
@@ -269,16 +350,13 @@ export function countWords(s: string): number {
     .filter(Boolean).length;
 }
 
-/** Clamp Bridge auf 8–22 Wörter (Padding/Trim soft). */
+/** Clamp Bridge auf max. 22 Wörter — kein zweites Bridging-Pad (sonst Doppel-Bridge). */
 export function clampBridgeWords(text: string): string {
   const words = text
     .trim()
     .split(/\s+/)
     .filter(Boolean);
-  if (words.length < 8) {
-    const pad = 'Ich melde mich gleich mit zwei klaren Optionen.';
-    return `${text.trim()} ${pad}`.trim();
-  }
+  if (words.length === 0) return '';
   if (words.length > 22) return words.slice(0, 22).join(' ');
   return words.join(' ');
 }

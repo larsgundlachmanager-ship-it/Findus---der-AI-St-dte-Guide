@@ -30,23 +30,7 @@ export function shouldSuppressBridge(opts: {
   jobId: string;
   userText: string;
 }): boolean {
-  // Live-Chat: nie Bridge — direkte Antwort (Fast-Lane)
-  try {
-    const { isLiveChatTurnActive } = require('../../services/handsFree/liveChatTurnContext') as {
-      isLiveChatTurnActive: () => boolean;
-    };
-    if (isLiveChatTurnActive()) return true;
-  } catch {
-    /* soft */
-  }
-  try {
-    const { isLiveChatActive } = require('../../services/handsFree/liveChatSession') as {
-      isLiveChatActive: () => boolean;
-    };
-    if (isLiveChatActive()) return true;
-  } catch {
-    /* soft */
-  }
+  // Live-Chat: Bridge ERLAUBT (kurz) — menschliches Gespräch
   // App-Steuerung / Hands-free: kein Bridge-Vorgeplänkel
   if (
     /\b(shortcut|hands[-\s]?free|sprechen[- ]?notification|live[-\s]?chat|gesprächs?modus|taschenlampe|stimme\s+(?:von|ändern)|einstellung)\b/iu.test(
@@ -56,8 +40,17 @@ export function shouldSuppressBridge(opts: {
     return true;
   }
   const mode = opts.topicMode;
-  // Gleicher Blaupausen-Chat (Kino, Essen, …): keine neue Bridge — direkt Antwort.
-  if (mode === 'continue' || mode === 'resume') {
+  // Gleicher Blaupausen-Chat außerhalb Live-Chat: keine neue Bridge
+  let live = false;
+  try {
+    const { isLiveChatTurnActive } = require('../../services/handsFree/liveChatTurnContext') as {
+      isLiveChatTurnActive: () => boolean;
+    };
+    live = isLiveChatTurnActive();
+  } catch {
+    live = false;
+  }
+  if (!live && (mode === 'continue' || mode === 'resume')) {
     return true;
   }
   // Button „Mehr Historie“ immer ohne Bridge — auch wenn Topic-Router „new“ sagt
@@ -98,10 +91,15 @@ export function buildManagerTurn(opts: {
     /\b(parken|parkplatz).{0,40}\b(pizza|essen|takeaway).{0,40}\b(förde|foerde|sonnenuntergang|aussicht)\b/iu.test(
       opts.userText,
     ) ||
+    /\b(pizza|takeaway|mitnehmen|to[-\s]?go).{0,80}\b(sonnenuntergang|sunset|aussicht|strand|hafen)\b/iu.test(
+      opts.userText,
+    ) ||
     opts.jobClass.jobId === 'day_plan_budget'
   ) {
     if (
-      /\b(parken|pizza|förde|foerde)\b/iu.test(opts.userText) &&
+      /\b(parken|pizza|takeaway|mitnehmen|förde|foerde|sonnenuntergang|sunset|aussicht)\b/iu.test(
+        opts.userText,
+      ) &&
       !thinkAhead.includes('combo_cluster')
     ) {
       thinkAhead.push('combo_cluster');
