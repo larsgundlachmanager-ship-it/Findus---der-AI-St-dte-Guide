@@ -9,11 +9,17 @@ export const UI_LAYER = {
   actions: 30,
   subtitles: 40,
   mic: 50,
+  /**
+   * Ort-Popup auf der Karte — über Map-Inhalt, unter Chrome.
+   * Nie über Dock/Mic/Header: sonst frisst das absoluteFill alle Taps
+   * (Settings/Timeline/Mic tot, Karte „flüssig aber tot“).
+   */
+  placePopup: 120,
+  /** Dock, Header, Explore-Chip, Kompass — immer über Place-Popup */
   hud: 200,
+  /** Mic-Float / Sheets — über HUD */
   sheet: 1000,
-  /** Ort-Popup auf der Karte — unter Settings/Timeline */
-  placePopup: 9_000,
-  /** Settings / Timeline / Orte — immer über Map-Popups */
+  /** Settings / Timeline / Orte — immer über Map-Popups + Chrome */
   overlay: 10_000,
   /** Tippen-Frage — über Timeline/Settings-Overlays */
   askSheet: 11_000,

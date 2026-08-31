@@ -19,7 +19,7 @@ SSOT-Gate: `src/services/boot/interactiveBootGate.ts` (`mic > overlays > mapCore
 
 ## Pflicht
 
-- Settings/Timeline: Place-Popup **sofort schließen**; Chrome-zIndex **über** Map-Popup.
+- Settings/Timeline: Place-Popup **sofort schließen**; Chrome-zIndex **über** Map-Popup (`placePopup < hud < overlay`). Place-Popup nie `absoluteFill` über Dock/Mic.
 - Mic: `setIsListening(true)` sync im Press-In; Map-Polish/Hydrate erst danach.
 - Ambient/Live-Research: bei `isGenerating` / Mic / Speaking **keine** neue Recherche.
 - Map-Extract-Clip: chunked + Yields — nie 10k Buildings sync auf dem JS-Thread.

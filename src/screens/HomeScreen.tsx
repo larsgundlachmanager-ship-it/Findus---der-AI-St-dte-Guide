@@ -691,6 +691,24 @@ export function HomeScreen({
         onCloseInAppBrowser={closeInAppBrowser}
       />
 
+      {/* Overlays (Place-Popup unter Chrome-zIndex; Settings/Timeline darüber).
+          Chrome danach im Tree → Dock/Mic nie hinter Place-Popup-Touchsink. */}
+      <HomeOverlayHost
+        profile={profile}
+        onProfileChange={onProfileChange}
+        onResetSetup={onResetSetup}
+        submitUserQuestion={submitUserQuestion}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        onSwipeLock={onSwipeLock}
+        onSwipeLiveChat={onSwipeLiveChat}
+        isListening={isListening}
+        isMicLocked={isMicLocked}
+        isFinalizing={isFinalizing}
+        isGenerating={isGenerating}
+        isAudiblySpeaking={isAudiblySpeaking}
+      />
+
       <HomeChromeLayer
         safePadBottom={safePad.bottom}
         isListening={isListening}
@@ -706,22 +724,6 @@ export function HomeScreen({
         onOpenPlanCalendar={openPlanCalendar}
         onPlaces={openPlaceSeek}
         onSettings={openSettings}
-      />
-
-      <HomeOverlayHost
-        profile={profile}
-        onProfileChange={onProfileChange}
-        onResetSetup={onResetSetup}
-        submitUserQuestion={submitUserQuestion}
-        onPressIn={onPressIn}
-        onPressOut={onPressOut}
-        onSwipeLock={onSwipeLock}
-        onSwipeLiveChat={onSwipeLiveChat}
-        isListening={isListening}
-        isMicLocked={isMicLocked}
-        isFinalizing={isFinalizing}
-        isGenerating={isGenerating}
-        isAudiblySpeaking={isAudiblySpeaking}
       />
     </View>
   );

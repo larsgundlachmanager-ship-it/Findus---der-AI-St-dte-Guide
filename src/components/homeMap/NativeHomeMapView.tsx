@@ -284,8 +284,14 @@ function placesToGeojson(places: NativeMapPlace[]): {
       iconImg: amenityIconImageName(p.icon),
       kind: p.iconLod || homeMapIconLod(p.icon),
     };
+    // Haltepunkt/Bahnhof: nie Bahnsteig-Polygon als Riesen-Fläche
+    const skipFillForPoint =
+      !!p.keepDot || props.kind === 'transit' || !!p.amenityDot;
     const poly =
-      p.ring && p.ring.length >= 3 && !ringTooWideForFill(p.ring, !!p.story)
+      !skipFillForPoint &&
+      p.ring &&
+      p.ring.length >= 3 &&
+      !ringTooWideForFill(p.ring, !!p.story)
         ? ringToPolygon(p.ring)
         : null;
     if (poly) {
@@ -296,11 +302,11 @@ function placesToGeojson(places: NativeMapPlace[]): {
       properties: props,
       geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
     };
-    if (poly) {
-      /* Gebäudefläche statt Punkt */
-    } else if ((p.amenityDot || p.icon) && amenityIconImageName(p.icon)) {
+    const hasAmenityIcon =
+      (p.amenityDot || p.icon) && amenityIconImageName(p.icon);
+    if (hasAmenityIcon) {
       amenities.push(pt);
-    } else {
+    } else if (!poly) {
       dots.push(pt);
     }
   }
@@ -2653,18 +2659,19 @@ export const NativeHomeMapView = memo(
               filter={['==', ['get', 'kind'], 'transit']}
               style={{
                 iconImage: ['get', 'iconImg'],
+                // Zoom-skaliert, kompakt — nie „Riesen-Bahnhof“ bei Stadtzoom
                 iconSize: [
                   'interpolate',
                   ['linear'],
                   ['zoom'],
                   11,
-                  0.2,
+                  0.1,
                   14,
-                  0.28,
+                  0.14,
                   16,
-                  0.36,
+                  0.18,
                   18,
-                  0.44,
+                  0.22,
                 ],
                 iconAllowOverlap: true,
                 iconIgnorePlacement: true,

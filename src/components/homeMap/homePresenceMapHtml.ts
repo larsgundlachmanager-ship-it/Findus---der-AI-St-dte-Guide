@@ -2969,7 +2969,8 @@ ${jsTag}
       filter: ['in', ['get', 'icon'], ['literal', ${JSON.stringify(HOME_MAP_TRANSIT_ICONS)}]],
       layout: {
         'icon-image': ['concat', 'place-', ['get', 'icon']],
-        'icon-size': ['interpolate', ['linear'], ['zoom'], 12, 0.42, 16, 0.62, 18, 0.72],
+        // Zoom-skaliert, kompakt — nie „Riesen-Bahnhof“ bei Stadtzoom
+        'icon-size': ['interpolate', ['linear'], ['zoom'], 12, 0.18, 16, 0.26, 18, 0.32],
         'icon-allow-overlap': true,
         'icon-ignore-placement': true,
         'icon-anchor': 'center'

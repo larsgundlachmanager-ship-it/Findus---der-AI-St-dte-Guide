@@ -260,12 +260,18 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
     pushLink(a.label, listedPopupUrl(a.url));
   }
 
+  // Dock + Mic bleiben tippbar: Backdrop endet darüber (Chrome-Lane).
+  const chromeClearance =
+    HOME_DOCK_BAR_H +
+    Math.max(safePad.bottom, 8) +
+    homeMicClearancePx(buttonMul) +
+    8;
+
   return (
-    <View pointerEvents="auto" collapsable={false} style={styles.root}>
+    <View pointerEvents="box-none" collapsable={false} style={styles.root}>
       <Pressable
-        style={styles.backdrop}
+        style={[styles.backdrop, { bottom: chromeClearance }]}
         onPressIn={() => {
-          if (busyRef.current) return;
           dismissInstant();
         }}
         accessibilityLabel="Ort-Vorschau schließen"
@@ -274,11 +280,7 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
         style={[
           styles.card,
           {
-            marginBottom:
-              HOME_DOCK_BAR_H +
-              Math.max(safePad.bottom, 8) +
-              homeMicClearancePx(buttonMul) +
-              8,
+            marginBottom: chromeClearance,
           },
         ]}
         pointerEvents="auto"

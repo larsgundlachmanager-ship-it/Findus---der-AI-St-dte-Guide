@@ -411,7 +411,7 @@ export const HomeOverlayHost = React.memo(function HomeOverlayHost({
   return (
     <>
       <HomeBackHandler />
-      {/* Map-Popup unter Chrome — zIndex placePopup < overlay */}
+      {/* Map-Popup unter Chrome (placePopup < hud); Settings/Timeline darüber */}
       <HomePlacePopupLayer />
       <HomeSettingsLayer
         profile={profile}

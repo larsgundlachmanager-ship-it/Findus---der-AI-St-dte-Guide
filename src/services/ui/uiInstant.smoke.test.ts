@@ -138,7 +138,7 @@ assert(settings.includes('Tree bleibt mounted'), 'Settings Tree keep-alive');
   );
 }
 
-// Phase 0/1 — Overlay-Stack
+// Phase 0/1 — Overlay-Stack (Performance Lanes: Chrome > Place-Popup)
 assert(layers.includes('placePopup:'), 'UI_LAYER.placePopup');
 assert(layers.includes('overlay: 10_000'), 'UI_LAYER.overlay');
 assert(popup.includes('UI_LAYER.placePopup'), 'Place-Popup nutzt placePopup-Layer');
@@ -147,10 +147,43 @@ assert(
   'Place-Popup nicht mehr askSheet (über Settings)',
 );
 {
+  const placeMatch = layers.match(/placePopup:\s*([\d_]+)/);
+  const hudMatch = layers.match(/hud:\s*([\d_]+)/);
+  const overlayMatch = layers.match(/overlay:\s*([\d_]+)/);
+  assert(placeMatch && hudMatch && overlayMatch, 'Layer-Zahlen parsebar');
+  const placeZ = Number(placeMatch![1]!.replace(/_/g, ''));
+  const hudZ = Number(hudMatch![1]!.replace(/_/g, ''));
+  const overlayZ = Number(overlayMatch![1]!.replace(/_/g, ''));
+  assert(placeZ < hudZ, 'placePopup unter Chrome (hud)');
+  assert(hudZ < overlayZ, 'Chrome unter Settings/Timeline');
+  assert(placeZ < overlayZ, 'placePopup unter overlay');
+}
+assert(
+  popup.includes('pointerEvents="box-none"'),
+  'Place-Popup root lässt Chrome-Taps durch',
+);
+assert(
+  popup.includes('chromeClearance') || popup.includes('bottom: chromeClearance'),
+  'Backdrop endet über Dock/Mic',
+);
+assert(
+  !/onPressIn=\{\(\) => \{\s*if \(busyRef\.current\) return/.test(popup),
+  'Backdrop-Dismiss nicht hinter busyRef blockiert',
+);
+{
   const placeIdx = overlayHost.indexOf('<HomePlacePopupLayer');
   const settingsIdx = overlayHost.indexOf('<HomeSettingsLayer');
   assert(placeIdx >= 0 && settingsIdx >= 0, 'Place+Settings im OverlayHost');
   assert(placeIdx < settingsIdx, 'Place-Popup vor Settings gerendert');
+}
+{
+  const overlayIdx = home.indexOf('<HomeOverlayHost');
+  const chromeIdx = home.indexOf('<HomeChromeLayer');
+  assert(overlayIdx >= 0 && chromeIdx >= 0, 'Overlay+Chrome im HomeScreen');
+  assert(
+    overlayIdx < chromeIdx,
+    'Chrome nach OverlayHost — Dock/Mic über Place-Popup',
+  );
 }
 
 // Ambient pausiert bei Modul 2

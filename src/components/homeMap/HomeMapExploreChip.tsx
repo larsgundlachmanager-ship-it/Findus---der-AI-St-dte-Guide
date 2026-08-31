@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: spacing.md,
     right: spacing.md,
-    zIndex: UI_LAYER.hud - 1,
+    zIndex: UI_LAYER.hud,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
