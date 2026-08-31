@@ -16,15 +16,18 @@ import Animated, {
 import { startVoiceBuffer } from '../services/AudioVoiceService';
 import { enableCartesiaProductMode } from '../services/ttsService';
 import { voicePreloader } from '../services/tts/voicePreloader';
+import { APP_BRAND_NAME } from '../constants/brand';
+import { waitForSplashReveal } from '../services/homeMap/splashReadyGate';
 import type { VoiceId } from '../types/userProfile';
 
 export const SPLASH_BG = '#18181B';
 export const SPLASH_GOLD = '#FCC70A';
 export const SPLASH_GOLD_SOFT = 'rgba(252, 199, 10, 0.55)';
 
-const MIN_SPLASH_MS = 2200;
 const FADE_OUT_MS = 520;
 const ICON_SIZE = 132;
+const BRAND_TAGLINE = 'Kopfhörer rein. Die Stadt läuft mit.';
+const BRAND_SUBLINE = 'Städtetrip · Audio-Guide';
 
 type Props = {
   onFinish: () => void;
@@ -111,7 +114,7 @@ export function SplashScreenController({
   const ambient = useSharedValue(0);
   const containerOpacity = useSharedValue(1);
 
-  const letters = useMemo(() => 'Findus'.split(''), []);
+  const letters = useMemo(() => APP_BRAND_NAME.split(''), []);
 
   const finishOnce = () => {
     if (finishedRef.current) return;
@@ -204,33 +207,31 @@ export function SplashScreenController({
     );
 
     brandProgress.value = withDelay(
-      380,
-      withTiming(1, { duration: 900, easing: Easing.out(Easing.cubic) }),
+      320,
+      withTiming(1, { duration: 1100, easing: Easing.out(Easing.cubic) }),
     );
 
     taglineOpacity.value = withDelay(
-      980,
+      1080,
       withTiming(1, { duration: 560, easing: Easing.out(Easing.cubic) }),
     );
     taglineX.value = withDelay(
-      980,
+      1080,
       withTiming(0, { duration: 620, easing: Easing.out(Easing.cubic) }),
     );
 
-    const startedAt = Date.now();
     let cancelled = false;
 
+    // Voice-Warm parallel zum Reveal — Splash nicht hinter TTS-Warm klemmen.
+    void voicePreloader.warmActiveVoice(priorityVoiceId).catch((err) => {
+      console.warn('[splash] VoicePreloader-Warmup:', err);
+    });
     void (async () => {
       try {
-        await voicePreloader.warmActiveVoice(priorityVoiceId);
+        await waitForSplashReveal();
       } catch (err) {
-        console.warn('[splash] VoicePreloader-Warmup:', err);
+        console.warn('[splash] Ready-Gate:', err);
       }
-      if (cancelled) return;
-
-      const elapsed = Date.now() - startedAt;
-      const remaining = Math.max(0, MIN_SPLASH_MS - elapsed);
-      await new Promise((resolve) => setTimeout(resolve, remaining));
       if (cancelled) return;
 
       fadeOutAndFinish();
@@ -380,7 +381,7 @@ export function SplashScreenController({
           <Image
             source={require('../../assets/adaptive-icon.png')}
             style={styles.icon}
-            accessibilityLabel="Findus Logo"
+            accessibilityLabel={`${APP_BRAND_NAME} Logo`}
           />
         </Animated.View>
       </View>
@@ -399,8 +400,8 @@ export function SplashScreenController({
       </View>
 
       <Animated.View style={taglineStyle}>
-        <Text style={styles.tagline}>Dein intelligenter Guide</Text>
-        <Text style={styles.subline}>Stadt · Stimme · unterwegs</Text>
+        <Text style={styles.tagline}>{BRAND_TAGLINE}</Text>
+        <Text style={styles.subline}>{BRAND_SUBLINE}</Text>
       </Animated.View>
     </Animated.View>
   );

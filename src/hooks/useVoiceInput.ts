@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useFinnusStore } from '../store/useFinnusStore';
 import { getCachedUserProfile } from '../services/userProfileService';
-import { showPermissionMissingAlert } from '../utils/permissionAlerts';
+import { showAudioConsentMissingAlert } from '../utils/permissionAlerts';
 import {
   speakAssistantText,
   stopSpeaking,
@@ -15,20 +15,8 @@ import {
 } from '../services/sttService';
 import {
   isStopNavigationIntent,
-  resolveNavOfferFromReply,
-  shouldStartNavFromOffer,
-  startNavigation,
   stopNavigation,
 } from '../services/navigation';
-import { handleMemoryIntent } from '../services/intentService';
-import { useUserMemoryStore } from '../store/useUserMemoryStore';
-import { presentConciergeResponse } from '../services/concierge/presentConcierge';
-import { shouldAcceptPendingAffiliateOffer } from '../services/affiliate/pendingAffiliateOffer';
-import {
-  alertActionError,
-  handleQuickAction,
-} from '../services/actionHandlerService';
-import { wrapPlainAsConcierge } from '../services/concierge/parseConciergeResponse';
 import {
   markMicHoldUsed,
   markMicLockUsed,
@@ -49,34 +37,31 @@ import {
   appendSideChannelAsk,
   captureSideChannelHints,
 } from '../services/memory/sideChannelMemory';
-import { extractFlightCode, prepareFlightFollowUp } from '../services/flights/flightAdvisor';
-import {
-  rememberFlightPlanForAlarm,
-  wakeOfferForFlightPlan,
-} from '../services/alarms/wakeAlarmAdvisor';
 import { recordUserSpeechExact } from '../services/feedback/executionTracking';
 import { runPreferenceCaptureMiddleware } from '../services/memory/preferenceCaptureMiddleware';
 import { noteUserTextForSituation } from '../services/persona/situationGate';
 
 /** Kurz tippen (< Tap) → Tippfeld; darüber → Sprache. */
-const TAP_MAX_MS = 320;
+const TAP_MAX_MS = 220;
 /** Kurz nach Loslassen weiterhören — Ziel ~100–150ms. */
 const STT_TAIL_MS = 120;
-/** Hold ≥ 2 s → Frage gilt; darunter während Findus spricht = Abbruch (Resume). */
+/** Hold ≥ 2 s → Frage gilt; darunter während Yorro spricht = Abbruch (Resume). */
 const MIN_VOICE_MS = 2_000;
 const STT_FINALIZE_MS = 450;
+/** Nach Live-Chat-Stop kein Tippfeld (Nachschlag oft Beenden-Tipp). */
+const SUPPRESS_SHORT_PRESS_AFTER_LIVE_STOP_MS = 700;
 
 export type VoiceFallbackReason = 'unavailable' | 'permission' | 'error';
 
 type PressMode = 'idle' | 'pending' | 'voice' | 'locked';
 
 /**
- * Kurz tippen (< TAP_MAX_MS) → Tippfeld (wenn onShortPress); Findus redet weiter.
+ * Kurz tippen (< TAP_MAX_MS) → Tippfeld (wenn onShortPress); Yorro redet weiter.
  * Press ≥ Tap → Mikro sofort an; Loslassen finalisiert (außer Fixierung).
  * Nach rechts wischen während Hold → Mikro fixieren (Hände frei).
  * Tippen bei Fixierung → senden.
- * Loslassen < 2 s während Findus spricht → Abbruch (Resume), außer Timeline.
- * Timeline / Findus still: nach Aufnahme-Start auch bei kürzerem Hold senden.
+ * Loslassen < 2 s während Yorro spricht → Abbruch (Resume), außer Timeline.
+ * Timeline / Yorro still: nach Aufnahme-Start auch bei kürzerem Hold senden.
  * Loslassen ≥ 2 s (ohne Lock) → Frage abschicken (Interrupt committed).
  */
 export function useVoiceInput(options?: {
@@ -103,6 +88,7 @@ export function useVoiceInput(options?: {
   const interruptCommittedRef = useRef(false);
   /** Nach Tippen-auf-Fixiert: PressOut nicht als Kurz-Tipp werten. */
   const skipNextPressOutRef = useRef(false);
+  const suppressShortPressUntilRef = useRef(0);
 
   const addChatMessage = useFinnusStore((s) => s.addChatMessage);
   const setIsListening = useFinnusStore((s) => s.setIsListening);
@@ -205,13 +191,15 @@ export function useVoiceInput(options?: {
    * Nur abbrechen → Idle (kein neues „Nachdenken“).
    * Orb-Doppel-Tipp / Mic-Tipp während busy.
    */
-  const cancelFindusBusy = useCallback(async () => {
+  const cancelFindusBusy = useCallback(async (opts?: { keepMic?: boolean }) => {
     interruptCommittedRef.current = true;
     provisionalPausedRef.current = false;
     questionEpochRef.current += 1;
     setIsGenerating(false);
     setIsFinalizing(false);
-    setIsListening(false);
+    if (!opts?.keepMic) {
+      setIsListening(false);
+    }
     try {
       const { abortActiveModule2Turn } = await import(
         '../module2/pipeline/turnAbort'
@@ -291,7 +279,7 @@ export function useVoiceInput(options?: {
     }
   }, [setIsGenerating, setIsFinalizing, setIsListening]);
 
-  /** Unter 2 s Loslassen: STT weg, Findus weiter — als nie passiert. */
+  /** Unter 2 s Loslassen: STT weg, Yorro weiter — als nie passiert. */
   const abortProvisionalMic = useCallback(async () => {
     clearCommitTimer();
     pressModeRef.current = 'idle';
@@ -340,14 +328,38 @@ export function useVoiceInput(options?: {
     if (profile?.micListenMode === 'dont_hear') {
       pressModeRef.current = 'idle';
       setIsMicLocked(false);
+      setIsListening(false);
+      try {
+        const { noteMicActive } = require('../services/boot/interactiveBootGate') as {
+          noteMicActive: (active: boolean) => void;
+        };
+        noteMicActive(false);
+      } catch {
+        /* soft */
+      }
       onNeedTextFallback?.('permission');
       return;
     }
     if (!profile?.hasAcceptedAudioConsent || profile?.micListenMode !== 'hear') {
       pressModeRef.current = 'idle';
       setIsMicLocked(false);
-      showPermissionMissingAlert('audioConsent', { force: true });
-      onNeedTextFallback?.('permission');
+      setIsListening(false);
+      try {
+        const { noteMicActive } = require('../services/boot/interactiveBootGate') as {
+          noteMicActive: (active: boolean) => void;
+        };
+        noteMicActive(false);
+      } catch {
+        /* soft */
+      }
+      skipNextPressOutRef.current = true;
+      // Ein Popup mit CTA → Settings (kein paralleles QuestionModal)
+      showAudioConsentMissingAlert({
+        force: true,
+        onTypeAsk: () => {
+          onShortPress?.();
+        },
+      });
       return;
     }
 
@@ -361,7 +373,7 @@ export function useVoiceInput(options?: {
       m.onUserUsedMicHold(),
     );
 
-    // Soft-Mute parallel zu STT — Mikro wird schneller blau
+    // Soft-Mute parallel zu STT — Button sofort rot (Listening), nicht blau.
     const muteP = softMuteFindusForMic();
     const result = await startListening((partial) => {
       partialTextRef.current = partial;
@@ -381,6 +393,15 @@ export function useVoiceInput(options?: {
       pressModeRef.current !== 'voice' &&
       pressModeRef.current !== 'locked'
     ) {
+      // Hold -> Live-Chat: STT bewusst weiterlaufen lassen.
+      try {
+        const { isLiveChatActive } = require('../services/handsFree/liveChatSession') as {
+          isLiveChatActive: () => boolean;
+        };
+        if (isLiveChatActive()) return;
+      } catch {
+        /* soft */
+      }
       try {
         await stopListening({ tailMs: 0, finalizeMs: 0 });
       } catch {
@@ -388,6 +409,14 @@ export function useVoiceInput(options?: {
       }
       setIsListening(false);
       setPartialText('');
+      try {
+        const { noteMicActive } = require('../services/boot/interactiveBootGate') as {
+          noteMicActive: (active: boolean) => void;
+        };
+        noteMicActive(false);
+      } catch {
+        /* soft */
+      }
       return;
     }
 
@@ -395,12 +424,24 @@ export function useVoiceInput(options?: {
       pressModeRef.current = 'idle';
       setIsMicLocked(false);
       setIsListening(false);
+      try {
+        const { noteMicActive } = require('../services/boot/interactiveBootGate') as {
+          noteMicActive: (active: boolean) => void;
+        };
+        noteMicActive(false);
+      } catch {
+        /* soft */
+      }
       await abortProvisionalMic();
-      onNeedTextFallback?.(result.reason);
+      // permission/unavailable: Alert kommt aus sttService — kein zweites Tippfeld
+      if (result.reason === 'error') {
+        onNeedTextFallback?.(result.reason);
+      }
     }
   }, [
     abortProvisionalMic,
     onNeedTextFallback,
+    onShortPress,
     setIsListening,
     softMuteFindusForMic,
   ]);
@@ -453,64 +494,7 @@ export function useVoiceInput(options?: {
         /* soft */
       }
 
-      // Just-Do-It vor Plan-Gates: Wecker/Timer/Erinnerung/Lautstärke/Nahschauen
-      try {
-        const { tryEarlyJustDoIt } = await import(
-          '../services/concierge/earlyJustDoIt'
-        );
-        const early = await tryEarlyJustDoIt(text);
-        if (early) {
-          addChatMessage({ role: 'user', content: spokenUserText });
-          setIsGenerating(true);
-          try {
-            if (!stillCurrent(epoch)) return;
-            addChatMessage({
-              role: 'assistant',
-              content: early.speech,
-            });
-            await presentConciergeResponse(
-              {
-                speechText: early.speech,
-                visualBullets: early.bullets.slice(0, 3),
-                quickActions: early.quickActions.slice(0, 4),
-                cardTitle: early.cardTitle,
-              },
-              { userText: text, skipAutoNav: true },
-            );
-            return;
-          } finally {
-            if (stillCurrent(epoch)) setIsGenerating(false);
-          }
-        }
-      } catch (err) {
-        console.warn('[voice] early just-do-it failed', err);
-      }
-
-      // Planungs-Gates zuerst — nur echte Wartezustände, nicht select_mode
-      // (sonst wird „Hotel in Lübeck“ als Frühstücks-Änderung verschluckt)
-      try {
-        const { usePlanSessionStore } = await import(
-          '../module2/planning/planSessionState'
-        );
-        const s = usePlanSessionStore.getState();
-        if (
-          s.waitingLocation ||
-          s.waitingConfirm ||
-          s.waitingConflict ||
-          s.phase === 'clarify_location' ||
-          s.phase === 'await_confirm' ||
-          s.phase === 'await_conflict'
-        ) {
-          addChatMessage({ role: 'user', content: spokenUserText });
-          const { runPlanningModule } = await import(
-            '../module2/planning/runPlanningModule'
-          );
-          await runPlanningModule({ userText: text });
-          return;
-        }
-      } catch {
-        /* soft — Concierge-Pfad */
-      }
+      // Offene Plan-/Hotel-/Nav-Dialoge = Flags für Call-1, kein Early-Return.
 
       addChatMessage({ role: 'user', content: spokenUserText });
       void runPreferenceCaptureMiddleware(spokenUserText).catch(() => {});
@@ -578,16 +562,8 @@ export function useVoiceInput(options?: {
         void markFeatureTipCompleted('ask_followups');
       }
 
-      // Neuer Turn mit echtem Text → alte Karte erst jetzt tauschen
-      useFinnusStore.getState().setActiveConciergeCard(null);
-      try {
-        const { useLivePitchStore } = require('../module2/pitch/publishPitchUi') as {
-          useLivePitchStore: { getState: () => { clear: () => void } };
-        };
-        useLivePitchStore.getState().clear();
-      } catch {
-        /* soft */
-      }
+      // Stichpunkte / Pitch stehen lassen — neue Antwort ersetzt sie erst beim Present.
+      // (Früher Clear beim Mic-Start → UI flackerte leer während Denken.)
 
       await onUserInputStart('user_text');
       const sideAsk = await captureSideChannelHints(text).catch(() => null);
@@ -616,77 +592,50 @@ export function useVoiceInput(options?: {
         /* soft */
       }
 
-      // Menschliche Bridge sofort — nicht „ich check“
-      // Live-Chat hat ggf. schon Instant-Ack → keine zweite Bridge.
-      // Beside-/Side-Human: still, kein Turn.
+      // Explizites Tippen / PTT = an Yorro. Side-Chat gilt nur für Always-on.
+      // Keine Mic-Bridge: der Manager schreibt Beat 1 nach dem Masterplan.
       try {
-        const { isLiveChatTurnActive } = require('../services/handsFree/liveChatTurnContext') as {
-          isLiveChatTurnActive: () => boolean;
+        const { clearBesideConversation } = require('../services/handsFree/besideConversationMode') as {
+          clearBesideConversation: (r?: string) => void;
         };
-        if (isLiveChatTurnActive()) {
-          /* Live ack already covers bridge */
-        } else {
-          const { classifyLiveChatAddress } = require('../services/handsFree/liveChatAddress') as {
-            classifyLiveChatAddress: (
-              t: string,
-              o?: { openFloor?: boolean },
-            ) => { addressed: boolean; reason: string };
-          };
-          const addr = classifyLiveChatAddress(text, { openFloor: false });
-          if (!addr.addressed) {
-            if (__DEV__) {
-              console.log('[voice] skip turn (side/beside):', addr.reason);
-            }
-            return;
-          }
-          const { speakContextualBridgeFireAndForget } = require('../services/speech/contextualBridge') as {
-            speakContextualBridgeFireAndForget: (t: string) => void;
-          };
-          speakContextualBridgeFireAndForget(text);
-        }
+        clearBesideConversation('explicit_submit');
       } catch {
-        try {
-          const { speakLatencyFloskelFireAndForget } = require('../services/speech/floskelEngine') as {
-            speakLatencyFloskelFireAndForget: (t: string) => void;
-          };
-          speakLatencyFloskelFireAndForget(text);
-        } catch {
-          /* soft */
-        }
+        /* soft */
       }
-
-  // Bridge: Sofort-Ack (Live) + Manager-Bridge — kein Legacy Mic-Bridge.
 
       const withSide = (reply: string) =>
         appendSideChannelAsk(reply, sideAsk ?? undefined);
 
-      // Parkplatz speichern — Just-Do-It, kurze Bestätigung
-      if (sideAsk?.parkingAck) {
-        setIsGenerating(true);
-        try {
-          if (!stillCurrent(epoch)) return;
-          await speakPlain(sideAsk.parkingAck, epoch);
-        } finally {
-          if (stillCurrent(epoch)) setIsGenerating(false);
-        }
-        return;
-      }
+      // Parkplatz/Hotel-Side-Channel speichert still — Call-1 spricht den ganzen Satz
+      // (Ack hängt ggf. an der Haupt-Speech, kein Abbruch).
 
       try {
         if (!stillCurrent(epoch)) return;
 
         const state = useFinnusStore.getState();
 
-        // Nav-Stop: still räumen (kein Early-Return) — Manager hört Compound
+        // Nav-Stop: still räumen — Manager hört Compound
         // („stopp und bring mich zum Tennisclub“) und startet ggf. neu.
         if (isStopNavigationIntent(text) || state.navActive) {
           const { isNavCorrectionIntent, extractCorrectedQuestion } =
             await import('../services/intent/poiInfoVsNav');
+          const { resolveNavDestCorrection } = await import(
+            '../services/navigation/navDestCityCorrection'
+          );
+          const { peekLastStreetNavQuery } = await import(
+            '../services/navigation/streetAddressQuery'
+          );
+          const destCorr = resolveNavDestCorrection({
+            userText: text,
+            currentDestName: state.navTargetName,
+            lastStreetQuery: peekLastStreetNavQuery(),
+          });
           const stopOrCorrect =
-            isStopNavigationIntent(text) ||
-            (state.navActive &&
-              (isNavCorrectionIntent(text) ||
-                /^(nein|nö|noe|doch\s+nicht|falsch)\b/iu.test(text.trim())));
+            !destCorr &&
+            (isStopNavigationIntent(text) ||
+              (state.navActive &&
+                (isNavCorrectionIntent(text) ||
+                  /^(nein|nö|noe|doch\s+nicht|falsch)\b/iu.test(text.trim()))));
           if (stopOrCorrect) {
             try {
               const { clearNavigationHard } = await import(
@@ -709,310 +658,12 @@ export function useVoiceInput(options?: {
             }
             if (isNavCorrectionIntent(text)) {
               text = extractCorrectedQuestion(text) || text;
-            } else if (isStopNavigationIntent(text)) {
-              // Reiner Stopp — fertig, kein Concierge-Nachlauf
-              try {
-                await speakPlain('Navigation beendet.', epoch);
-              } catch {
-                /* soft */
-              }
-              return;
             }
-            // Kein return — Manager entscheidet Speech + ggf. neue Route
+            // Reiner Stopp: nicht hier sprechen — Call-1 formuliert / Compound läuft weiter
           }
         }
 
-        // Street View auf Wunsch (nach Look-Ahead-Angebot)
-        try {
-          const {
-            isStreetViewVoiceAsk,
-            fulfillStreetViewVoiceAsk,
-          } = await import('../services/navigation/lookAheadBuffer');
-          if (isStreetViewVoiceAsk(text)) {
-            const r = await fulfillStreetViewVoiceAsk();
-            if (r.ok) {
-              try {
-                await speakPlain(
-                  r.message?.trim() || 'Street View ist offen.',
-                  epoch,
-                );
-              } catch {
-                /* soft */
-              }
-              return;
-            }
-            try {
-              await speakPlain(
-                r.message ||
-                  'Street View finde ich gerade nicht — nutz den Button auf der Karte, wenn er da ist.',
-                epoch,
-              );
-            } catch {
-              /* soft */
-            }
-            return;
-          }
-        } catch {
-          /* soft */
-        }
-
-        // Pending hotel Yes/No / name has priority (Dialog-Zustand)
-        {
-          const s = useUserMemoryStore.getState();
-          const prioritizeMemory =
-            s.pendingHotelConfirmId != null || s.awaitingHotelName;
-          if (prioritizeMemory) {
-            const intent = await handleMemoryIntent(text);
-            if (!stillCurrent(epoch)) return;
-            if (intent.handled && (intent.reply || intent.concierge)) {
-              setIsGenerating(true);
-              try {
-                if (intent.concierge) {
-                  addChatMessage({
-                    role: 'assistant',
-                    content: intent.concierge.speechText,
-                  });
-                  if (!stillCurrent(epoch)) return;
-                  await presentConciergeResponse({
-                    ...intent.concierge,
-                    speechText: withSide(intent.concierge.speechText),
-                  }, { userText: text });
-                } else if (intent.reply) {
-                  await speakPlain(withSide(intent.reply), epoch);
-                }
-              } finally {
-                if (stillCurrent(epoch)) setIsGenerating(false);
-              }
-              return;
-            }
-          }
-        }
-
-        if (
-          shouldStartNavFromOffer(
-            text,
-            state.pendingNavOffer,
-            state.pendingNavAlternatives,
-          )
-        ) {
-          const offer = resolveNavOfferFromReply(
-            text,
-            state.pendingNavOffer,
-            state.pendingNavAlternatives,
-          )!;
-          setIsGenerating(true);
-          try {
-            const { startNavigationFromOffer } = await import(
-              '../services/navigation/resolveNavTarget'
-            );
-            let reply =
-              'Dazu krieg ich gerade keine Route hin — versuch es gleich nochmal.';
-            if (
-              typeof offer.lat === 'number' &&
-              typeof offer.lng === 'number' &&
-              Number.isFinite(offer.lat) &&
-              Number.isFinite(offer.lng)
-            ) {
-              const started = await startNavigationFromOffer(offer);
-              if (started.ok) {
-                reply =
-                  started.message?.trim() ||
-                  `Okay, ich führ dich zu ${offer.name}. Du musst nicht aufs Handy schauen — ich sag dir an Häusern und Abzweigungen, wo's langgeht.`;
-              } else if (started.message?.trim()) {
-                reply = started.message.trim();
-              }
-            } else {
-              const ok = await startNavigation(offer.poiId);
-              if (ok) {
-                reply = `Okay, ich führ dich zu ${offer.name}. Du musst nicht aufs Handy schauen — ich sag dir an Häusern und Abzweigungen, wo's langgeht.`;
-              }
-            }
-            if (!stillCurrent(epoch)) return;
-            useFinnusStore.getState().setActiveConciergeCard(null);
-            await speakPlain(withSide(reply), epoch);
-          } finally {
-            if (stillCurrent(epoch)) setIsGenerating(false);
-          }
-          return;
-        }
-
-        // Affiliate Voice-Follow-up
-        {
-          const aff = state.pendingAffiliateOffer;
-          const hasNav =
-            state.pendingNavOffer != null ||
-            (state.pendingNavAlternatives?.length ?? 0) > 0;
-          if (shouldAcceptPendingAffiliateOffer(text, aff, hasNav)) {
-            setIsGenerating(true);
-            try {
-              useFinnusStore.getState().setPendingAffiliateOffer(null);
-              const result = await handleQuickAction(aff!);
-              if (!stillCurrent(epoch)) return;
-              const reply = result.ok
-                ? result.message ||
-                  'Alles klar — ich öffne dir die Buchungsoption.'
-                : result.message ||
-                  'Das lässt sich gerade nicht öffnen — tipp einfach auf den Button.';
-              if (!result.ok) alertActionError(reply);
-              await speakPlain(withSide(reply), epoch);
-            } finally {
-              if (stillCurrent(epoch)) setIsGenerating(false);
-            }
-            return;
-          }
-        }
-
-        // Strict flight follow-up only while awaiting details (pure code e.g. LH400)
-        {
-          const mem = useUserMemoryStore.getState();
-          if (mem.awaitingFlightDetails) {
-            const code = extractFlightCode(text, { requireContext: false });
-            const pure =
-              /^[A-Za-z]{1,3}\s?\d{1,4}[A-Za-z]?$/i.test(text.trim()) && code;
-            if (pure) {
-              setIsGenerating(true);
-              try {
-                const flight = await prepareFlightFollowUp(text, {
-                  flightNumber: code,
-                });
-                if (!stillCurrent(epoch)) return;
-                mem.setAwaitingFlightDetails(false);
-                if (flight) {
-                  if (flight.plan) rememberFlightPlanForAlarm(flight.plan);
-                  let reply = flight.reply;
-                  let concierge = wrapPlainAsConcierge(reply, {
-                    cardTitle: `Flug ${code}`,
-                    visualBullets: flight.plan
-                      ? [
-                          flight.plan.flight.ident,
-                          flight.plan.speechPreFlight.slice(0, 80),
-                        ]
-                      : [],
-                    quickActions: [],
-                  });
-                  if (flight.plan && flight.offerReminder) {
-                    const wake = await wakeOfferForFlightPlan(flight.plan);
-                    if (wake?.speech) {
-                      reply = `${reply} ${wake.speech}`;
-                      concierge = {
-                        ...concierge,
-                        speechText: reply,
-                        visualBullets: [
-                          ...concierge.visualBullets,
-                          ...(wake.bullets ?? []),
-                        ].slice(0, 3),
-                        quickActions: [
-                          ...concierge.quickActions,
-                          ...(wake.quickActions ?? []),
-                        ].slice(0, 4),
-                      };
-                    }
-                  }
-                  addChatMessage({ role: 'assistant', content: reply });
-                  if (!stillCurrent(epoch)) return;
-                  await presentConciergeResponse({
-                    ...concierge,
-                    speechText: withSide(reply),
-                  }, { userText: text });
-                  return;
-                }
-              } finally {
-                if (stillCurrent(epoch)) setIsGenerating(false);
-              }
-            }
-          }
-        }
-
-        // Content-Vorschalter zu — alles zum Manager (auch Timeline)
-        // Plan-Kalender = FLAG im Manager, kein eigener Vorschalter.
-
-        if (!stillCurrent(epoch)) return;
-
-        // Say–Do: Wecker/Timer/Erinnerung/Lautstärke/Nahschauen ZUERST echt
-        {
-          try {
-            const { tryEarlyJustDoIt } = await import(
-              '../services/concierge/earlyJustDoIt'
-            );
-            const early = await tryEarlyJustDoIt(text);
-            if (early) {
-              setIsGenerating(true);
-              try {
-                if (!stillCurrent(epoch)) return;
-                addChatMessage({
-                  role: 'assistant',
-                  content: early.speech,
-                });
-                await presentConciergeResponse(
-                  {
-                    speechText: withSide(early.speech),
-                    visualBullets: early.bullets.slice(0, 3),
-                    quickActions: early.quickActions.slice(0, 4),
-                    cardTitle: early.cardTitle,
-                  },
-                  { userText: text, skipAutoNav: true },
-                );
-                return;
-              } finally {
-                if (stillCurrent(epoch)) setIsGenerating(false);
-              }
-            }
-          } catch (err) {
-            console.warn('[voice] just-do-it failed', err);
-          }
-        }
-
-        if (!stillCurrent(epoch)) return;
-
-        {
-          const memStore = useUserMemoryStore.getState();
-          const pendingMemory =
-            Boolean(memStore.pendingHotelConfirmId) ||
-            Boolean(memStore.awaitingHotelName);
-          if (pendingMemory) {
-            const intent = await handleMemoryIntent(text);
-            if (!stillCurrent(epoch)) return;
-            if (intent.handled && (intent.reply || intent.concierge)) {
-              setIsGenerating(true);
-              try {
-                if (intent.concierge) {
-                  addChatMessage({
-                    role: 'assistant',
-                    content: intent.concierge.speechText,
-                  });
-                  if (!stillCurrent(epoch)) return;
-                  await presentConciergeResponse(
-                    {
-                      ...intent.concierge,
-                      speechText: withSide(intent.concierge.speechText),
-                    },
-                    { userText: text },
-                  );
-                } else if (intent.reply) {
-                  if (intent.startedNav) {
-                    useFinnusStore.getState().patchNavigation({
-                      navActive: true,
-                      navVisible: true,
-                    });
-                    await speakPlain(withSide(intent.reply), epoch);
-                  } else {
-                    await presentConciergeResponse(
-                      wrapPlainAsConcierge(withSide(intent.reply), {
-                        cardTitle: 'Findus',
-                        visualBullets: [],
-                        quickActions: [],
-                      }),
-                      { userText: text },
-                    );
-                  }
-                }
-              } finally {
-                if (stillCurrent(epoch)) setIsGenerating(false);
-              }
-              return;
-            }
-          }
-        }
+        // Street View, Hotel-Ja, Nav-Offer, Affiliate, Flugcode: Call-1 + Flags.
 
         if (!stillCurrent(epoch)) return;
         // Modul 2 — Chef entscheidet (Bahn/Nav/Kino/Timeline/…)
@@ -1085,6 +736,15 @@ export function useVoiceInput(options?: {
     setIsMicLocked(false);
     setIsListening(false);
     setIsFinalizing(true);
+
+    try {
+      const { noteMicActive } = require('../services/boot/interactiveBootGate') as {
+        noteMicActive: (active: boolean) => void;
+      };
+      noteMicActive(false);
+    } catch {
+      /* soft */
+    }
 
     try {
       const { latencyStartTurn } = require('../services/debug/latencyTiming') as {
@@ -1176,9 +836,12 @@ export function useVoiceInput(options?: {
       };
       if (live.isLiveChatActive()) {
         skipNextPressOutRef.current = true;
+        suppressShortPressUntilRef.current =
+          Date.now() + SUPPRESS_SHORT_PRESS_AFTER_LIVE_STOP_MS;
         void live.stopLiveChatSession('mic_tap');
         setIsMicLocked(false);
         setIsListening(false);
+        pressModeRef.current = 'idle';
         return;
       }
     } catch {
@@ -1198,17 +861,33 @@ export function useVoiceInput(options?: {
       return;
     }
 
-    // Busy: Tippen = Soft-Stop UND Tippfeld (nicht nur abbrechen)
+    // Listening zuerst — Busy-Cancel erst danach (Mic sofort rot).
     const finnus = useFinnusStore.getState();
-    if (
-      finnus.isGenerating ||
-      finnus.isPlayingAudio ||
-      isFinalizing
-    ) {
-      skipNextPressOutRef.current = true;
-      void cancelFindusBusy();
-      onShortPress?.();
-      return;
+    const wasBusy =
+      finnus.isGenerating || finnus.isPlayingAudio || isFinalizing;
+
+    provisionalPausedRef.current = false;
+    interruptCommittedRef.current = false;
+    pressStartedAtRef.current = Date.now();
+    pressModeRef.current = 'voice';
+    setIsMicLocked(false);
+    setPartialText('');
+    setIsListening(true);
+    setIsGenerating(false);
+
+    try {
+      const { noteMicActive } = require('../services/boot/interactiveBootGate') as {
+        noteMicActive: (active: boolean) => void;
+      };
+      noteMicActive(true);
+    } catch {
+      /* soft */
+    }
+
+    if (wasBusy) {
+      queueMicrotask(() => {
+        void cancelFindusBusy({ keepMic: true });
+      });
     }
 
     // Warmup schon beim Tippen (TTS/Aussprache) — auch bei Kurz-Tipp ok
@@ -1221,22 +900,9 @@ export function useVoiceInput(options?: {
       /* soft */
     }
 
-    provisionalPausedRef.current = false;
-    interruptCommittedRef.current = false;
-    pressStartedAtRef.current = Date.now();
-    // Kurz-Tipp = Text; Voice erst nach TAP-Schwelle (sonst startet STT bei jedem Tippen)
-    pressModeRef.current = 'pending';
-    setIsMicLocked(false);
-    setPartialText('');
-
     clearHoldTimer();
     clearCommitTimer();
-    holdTimerRef.current = setTimeout(() => {
-      holdTimerRef.current = null;
-      if (pressModeRef.current !== 'pending') return;
-      pressModeRef.current = 'voice';
-      void beginVoiceSession();
-    }, TAP_MAX_MS + 40);
+    void beginVoiceSession();
     // Nach 2 s Hold: Interrupt fest committen (Denken/Pipeline ok)
     commitTimerRef.current = setTimeout(() => {
       commitTimerRef.current = null;
@@ -1257,13 +923,32 @@ export function useVoiceInput(options?: {
     interruptFindusForMic,
     isFinalizing,
     onShortPress,
+    setIsListening,
+    setIsGenerating,
   ]);
 
   /** Nach rechts wischen während Hold → Hände frei, Mikro bleibt an. */
   const onSwipeLock = useCallback(() => {
+    const profile = getCachedUserProfile();
+    if (profile?.micListenMode === 'dont_hear') return;
+    if (!profile?.hasAcceptedAudioConsent || profile?.micListenMode !== 'hear') {
+      clearHoldTimer();
+      clearCommitTimer();
+      pressModeRef.current = 'idle';
+      setIsMicLocked(false);
+      skipNextPressOutRef.current = true;
+      showAudioConsentMissingAlert({
+        force: true,
+        onTypeAsk: () => {
+          onShortPress?.();
+        },
+      });
+      return;
+    }
+
     const mode = pressModeRef.current;
     if (mode !== 'voice' && mode !== 'pending') return;
-    // Falls noch pending (Legacy): sofort Voice starten
+    skipNextPressOutRef.current = true;
     if (mode === 'pending') {
       clearHoldTimer();
       pressModeRef.current = 'voice';
@@ -1271,48 +956,87 @@ export function useVoiceInput(options?: {
     }
     pressModeRef.current = 'locked';
     setIsMicLocked(true);
+    setIsListening(true);
+    setIsGenerating(false);
     clearCommitTimer();
     void markMicLockUsed();
-    void interruptFindusForMic();
+    // Kein interruptFindusForMic — das setzt Generating und färbt den Button blau.
+    void (async () => {
+      try {
+        const { discardPausedSpeaking } = await import(
+          '../services/AudioVoiceService'
+        );
+        await discardPausedSpeaking();
+      } catch {
+        /* soft */
+      }
+    })();
   }, [
     beginVoiceSession,
     clearCommitTimer,
     clearHoldTimer,
-    interruptFindusForMic,
+    onShortPress,
+    setIsGenerating,
+    setIsListening,
   ]);
 
   /** Nach links wischen → Live-Chat (Mikro bleibt an, Gesprächsfenster). */
   const onSwipeLiveChat = useCallback(() => {
     const profile = getCachedUserProfile();
-    if (profile?.micListenMode === 'dont_hear') return;
+    if (profile?.micListenMode === 'dont_hear') {
+      onShortPress?.();
+      return;
+    }
+    if (!profile?.hasAcceptedAudioConsent || profile?.micListenMode !== 'hear') {
+      skipNextPressOutRef.current = true;
+      clearHoldTimer();
+      clearCommitTimer();
+      pressModeRef.current = 'idle';
+      setIsMicLocked(false);
+      showAudioConsentMissingAlert({
+        force: true,
+        onTypeAsk: () => {
+          onShortPress?.();
+        },
+      });
+      return;
+    }
 
     skipNextPressOutRef.current = true;
     clearHoldTimer();
     clearCommitTimer();
     pressModeRef.current = 'idle';
-    setIsMicLocked(false);
-    setIsListening(false);
     setPartialText('');
+    // Sofort Live-Optik — nicht erst nach Import/STT-Stop warten.
+    setIsMicLocked(true);
+    setIsListening(true);
 
+    // Gerade per Tap beendet: denselben Wisch nicht als Neustart werten.
+    if (Date.now() < suppressShortPressUntilRef.current) {
+      setIsMicLocked(false);
+      setIsListening(false);
+      return;
+    }
     void (async () => {
       try {
-        await stopListening({ tailMs: 0, finalizeMs: 200 });
-      } catch {
-        /* soft */
-      }
-      try {
-        const { startLiveChatSession } = await import(
-          '../services/handsFree/liveChatSession'
-        );
+        const { startLiveChatSession } = require('../services/handsFree/liveChatSession') as {
+          startLiveChatSession: (
+            reason?: string,
+          ) => Promise<{ ok: boolean; message?: string }>;
+        };
         const r = await startLiveChatSession('swipe_left');
-        if (!r.ok && __DEV__) {
-          console.warn('[liveChat] swipe start failed:', r.message);
+        if (!r.ok) {
+          setIsMicLocked(false);
+          setIsListening(false);
+          if (__DEV__) console.warn('[liveChat] swipe start failed:', r.message);
         }
       } catch (err) {
+        setIsMicLocked(false);
+        setIsListening(false);
         console.warn('[liveChat] swipe start error:', err);
       }
     })();
-  }, [clearCommitTimer, clearHoldTimer]);
+  }, [clearCommitTimer, clearHoldTimer, onShortPress]);
 
   /**
    * Hands-free: Notification / Deep-Link / Assistent → Mikro locked starten + Cue.
@@ -1397,25 +1121,32 @@ export function useVoiceInput(options?: {
       m.registerTypedAskHandler((text) => {
         void submitUserQuestion(text);
       });
+      // Chip/Quick-Reply: Locked-PTT ohne Finalisieren sofort idle
+      m.registerAbortHandsFreeUiHandler(() => {
+        pressModeRef.current = 'idle';
+        setIsMicLocked(false);
+        setIsListening(false);
+        setPartialText('');
+        partialTextRef.current = '';
+        clearHoldTimer();
+        clearCommitTimer();
+      });
       unsubBus = () => {
         m.registerHandsFreeListenHandler(null);
         m.registerTypedAskHandler(null);
+        m.registerAbortHandsFreeUiHandler(null);
       };
     });
-    if (__DEV__) {
-      void import('../services/handsFree/devAskPoller').then((m) => {
-        m.startDevAskPoller();
-      });
-    }
+    void import('../services/handsFree/devAskPoller').then((m) => {
+      m.startDevAskPoller();
+    });
     return () => {
       unsubBus?.();
-      if (__DEV__) {
-        void import('../services/handsFree/devAskPoller').then((m) => {
-          m.stopDevAskPoller();
-        });
-      }
+      void import('../services/handsFree/devAskPoller').then((m) => {
+        m.stopDevAskPoller();
+      });
     };
-  }, [startHandsFreeListen, submitUserQuestion]);
+  }, [clearCommitTimer, clearHoldTimer, startHandsFreeListen, submitUserQuestion]);
 
   // Live-Chat: Submit-Handler einmalig — Ref verhindert Race (null nach Re-Render)
   useEffect(() => {
@@ -1431,8 +1162,11 @@ export function useVoiceInput(options?: {
             setIsListening(false);
             return;
           }
-          setIsMicLocked(true);
-          setIsListening(phase === 'listening' || phase === 'processing');
+          // Nur echtes Zuhören ist rot. processing/answering = Nachdenken/Sprechen,
+          // sonst Mic rot + blauer Ring gleichzeitig.
+          const hearing = phase === 'listening';
+          setIsMicLocked(hearing);
+          setIsListening(hearing);
         },
         onWakeOnly: () => {
           try {
@@ -1500,7 +1234,7 @@ export function useVoiceInput(options?: {
     const findusBusy =
       store.isAudiblySpeaking || store.isPlayingAudio || store.isGenerating;
 
-    // Ganz kurzer Tipp → Mikro sofort abbrechen, Tippfeld öffnen
+    // Kurz-Tipp: Tippfeld — außer Barge-in während Yorro spricht/denkt.
     if (totalHeldMs < TAP_MAX_MS) {
       pressModeRef.current = 'idle';
       pressStartedAtRef.current = 0;
@@ -1516,11 +1250,17 @@ export function useVoiceInput(options?: {
         await abortProvisionalMic();
       })();
       void markMicTapUsed();
+      if (findusBusy || interruptCommittedRef.current) {
+        return;
+      }
+      if (Date.now() < suppressShortPressUntilRef.current) {
+        return;
+      }
       onShortPress?.();
       return;
     }
 
-    // Unter 2 s: Abbruch wenn Findus spricht — außer Timeline / Findus still
+    // Unter 2 s: früher senden wenn Barge-in (Yorro unterbrochen) oder Timeline offen
     if (totalHeldMs < MIN_VOICE_MS) {
       if (mode === 'pending') {
         pressModeRef.current = 'idle';
@@ -1531,7 +1271,9 @@ export function useVoiceInput(options?: {
       }
       const voiceReady =
         mode === 'voice' || isCurrentlyListening() || isListening;
-      const allowEarlySubmit = voiceReady && (calendarOpen || !findusBusy);
+      const allowEarlySubmit =
+        voiceReady &&
+        (calendarOpen || !findusBusy || interruptCommittedRef.current);
       if (!allowEarlySubmit) {
         void abortProvisionalMic();
         return;
@@ -1568,7 +1310,7 @@ export function useVoiceInput(options?: {
     onSwipeLiveChat,
     startHandsFreeListen,
     partialText,
-    /** Nur echte Aufnahme — Finalizing ist Blau (thinking), nicht Rot. */
+    /** Nur echte Aufnahme — Lock/Hold bleiben rot/orange, nicht blau. */
     isListening,
     isMicLocked,
     isFinalizing,

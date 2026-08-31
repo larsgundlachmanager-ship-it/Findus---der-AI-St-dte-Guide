@@ -13,7 +13,26 @@ import {
   type ExpoSpeechRecognitionErrorEvent,
 } from 'expo-speech-recognition';
 import { showPermissionMissingAlert } from '../utils/permissionAlerts';
-import { restoreAmbientAudioAfterSpeech } from './AudioVoiceService';
+import {
+  restoreAmbientAudioAfterSpeech,
+  prepareAudioForMicrophone,
+  warmAudioModeForMicrophone,
+} from './AudioVoiceService';
+import { joinSttSegments } from './sttJoin';
+import {
+  armMicVadWarmup,
+  noteMicVolume,
+  resetMicVad,
+  setMicVadEnabled,
+} from './handsFree/micVad';
+import {
+  noteMicPipelineReady,
+  isMicPipelineReady,
+} from './boot/interactiveBootGate';
+
+let permissionsWarmGranted: boolean | null = null;
+let recognitionWarmAvailable: boolean | null = null;
+let audioModeWarm = false;
 
 export type SttStartFailureReason = 'unavailable' | 'permission' | 'error';
 
@@ -24,9 +43,27 @@ export type SttStartResult =
 /** Max. Hold-Dauer für Spracherkennung (User-Anforderung). */
 export const STT_MAX_HOLD_MS = 10 * 60_000;
 /** Proaktiv neu starten, bevor Android das Segment killt. */
-const SEGMENT_ROTATE_MS = 22_000;
+const SEGMENT_ROTATE_MS = 18_000;
 const RESTART_BASE_DELAY_MS = 220;
 const RESTART_MAX_ATTEMPTS = 8;
+
+/**
+ * Bevorzugte Android-Engines — nur wenn wirklich installiert.
+ * Nie eine fehlende Package erzwingen (sonst: „No service found for package …“).
+ * Google-Engines vor OEM (Qualcomm VoiceAI oft sofort network/code 4 ohne Google-App).
+ */
+const ANDROID_PREFERRED_SPEECH_PACKAGES = [
+  'com.google.android.googlequicksearchbox',
+  'com.google.android.tts',
+  'com.google.android.as',
+] as const;
+/** Nur wenn nichts Google-artiges da ist. */
+const ANDROID_LAST_RESORT_SPEECH_PACKAGES = [
+  'com.qualcomm.qti.voiceai.speech',
+] as const;
+
+/** Packages die in dieser Session hart versagt haben (network / missing). */
+const failedAndroidPackages = new Set<string>();
 
 let isStarting = false;
 let isActive = false;
@@ -35,6 +72,8 @@ let committedTranscript = '';
 /** Aktuelles Android-Segment (Interim wächst hier). */
 let currentSegment = '';
 let partialHandler: ((text: string) => void) | null = null;
+/** Live-Chat Handoff: startListening soll Handler nicht ueberschreiben. */
+let partialHandlerLocked = false;
 let listenersWired = false;
 let stopWaiters: Array<(text: string) => void> = [];
 /** Hold-to-speak: bei end()/Timeout neu starten. */
@@ -44,6 +83,13 @@ let restartAttempts = 0;
 let holdStartedAtMs = 0;
 let rotateTimer: ReturnType<typeof setTimeout> | null = null;
 let maxHoldTimer: ReturnType<typeof setTimeout> | null = null;
+/** Gewählter Android Speech-Service (rotierend bei no-speech). */
+let androidServicePackage: string | null = null;
+let androidServiceIndex = 0;
+let lastVolumeSample = -99;
+let gotPartialThisSegment = false;
+/** no-speech + vol≈-2: Fokus, nicht Engine wechseln. */
+let quietNoSpeechTries = 0;
 
 function clearRotateTimer(): void {
   if (rotateTimer) {
@@ -65,8 +111,13 @@ function resolveStopWaiters(text: string): void {
   for (const resolve of waiters) resolve(text);
 }
 
+/**
+ * Keep-Alive-Segmente stapeln — SSOT `sttJoin.ts`.
+ */
+export { joinSttSegments } from './sttJoin';
+
 function fullTranscript(): string {
-  return pickBestTranscript(committedTranscript, currentSegment).trim();
+  return joinSttSegments(committedTranscript, currentSegment);
 }
 
 function commitCurrentSegment(): void {
@@ -75,19 +126,7 @@ function commitCurrentSegment(): void {
     currentSegment = '';
     return;
   }
-  if (!committedTranscript) {
-    committedTranscript = seg;
-  } else if (
-    committedTranscript.includes(seg) ||
-    seg.includes(committedTranscript)
-  ) {
-    committedTranscript =
-      seg.length >= committedTranscript.length ? seg : committedTranscript;
-  } else {
-    committedTranscript = `${committedTranscript} ${seg}`
-      .replace(/\s+/g, ' ')
-      .trim();
-  }
+  committedTranscript = joinSttSegments(committedTranscript, seg);
   currentSegment = '';
 }
 
@@ -101,25 +140,82 @@ function holdBudgetLeftMs(): number {
   return Math.max(0, STT_MAX_HOLD_MS - (Date.now() - holdStartedAtMs));
 }
 
+function pickAndroidRecognitionPackage(forceNext = false): string | undefined {
+  if (Platform.OS !== 'android') return undefined;
+  try {
+    const services: string[] =
+      ExpoSpeechRecognitionModule.getSpeechRecognitionServices?.() ?? [];
+    const available = new Set(services.map((s) => String(s)));
+    const skipEarly = (p: string) =>
+      p.toLowerCase().includes('bixby') || failedAndroidPackages.has(p);
+    const preferred = ANDROID_PREFERRED_SPEECH_PACKAGES.filter(
+      (p) => available.has(p) && !failedAndroidPackages.has(p),
+    );
+    const last = ANDROID_LAST_RESORT_SPEECH_PACKAGES.filter(
+      (p) => available.has(p) && !failedAndroidPackages.has(p),
+    );
+    const mid = services.filter(
+      (p) =>
+        !skipEarly(p) &&
+        !preferred.includes(p as never) &&
+        !last.includes(p as never),
+    );
+    // Nur installierte Packages — sonst lässt Android den Start mit „No service found“ sterben.
+    const order = [...preferred, ...mid, ...last].filter((p) => available.has(p));
+    if (!order.length) {
+      // System-Default (kein androidRecognitionServicePackage)
+      androidServicePackage = null;
+      return undefined;
+    }
+    if (forceNext || !androidServicePackage) {
+      androidServiceIndex = forceNext
+        ? (androidServiceIndex + 1) % order.length
+        : 0;
+      androidServicePackage = String(order[androidServiceIndex]);
+    } else if (!order.includes(androidServicePackage)) {
+      androidServicePackage = String(order[0]);
+      androidServiceIndex = 0;
+    }
+    return androidServicePackage ?? undefined;
+  } catch {
+    androidServicePackage = null;
+    return undefined;
+  }
+}
+
 function startNativeRecognition(): void {
+  gotPartialThisSegment = false;
+  const androidPkg = pickAndroidRecognitionPackage(false);
   const androidIntentOptions =
     Platform.OS === 'android'
       ? {
-          // Längere Pausen erlauben — aber nicht 8–12s (fühlt sich tot an)
-          EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS: 2_200,
-          EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS: 1_400,
+          // Längere Pausen erlauben — Live-Chat braucht Luft
+          EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS: 2_800,
+          EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS: 1_800,
+          EXTRA_LANGUAGE_MODEL: 'free_form' as const,
         }
       : undefined;
+
+  if (androidPkg) {
+    console.warn('[stt] androidRecognitionServicePackage:', androidPkg);
+  }
 
   ExpoSpeechRecognitionModule.start({
     lang: 'de-DE',
     interimResults: true,
-    continuous: true,
+    // continuous:true + System-Intelligence → oft no-speech ohne Partials.
+    // Keep-Alive restartet Segmente zuverlässiger.
+    continuous: Platform.OS === 'ios',
     maxAlternatives: 1,
     requiresOnDeviceRecognition: false,
-    ...(androidIntentOptions
-      ? { androidIntentOptions }
+    ...(androidPkg
+      ? { androidRecognitionServicePackage: androidPkg }
       : {}),
+    volumeChangeEventOptions: {
+      enabled: true,
+      intervalMillis: 120,
+    },
+    ...(androidIntentOptions ? { androidIntentOptions } : {}),
   });
 }
 
@@ -188,6 +284,7 @@ function wireListeners(): void {
       if (t.length > best.length) best = t;
     }
     if (!best) return;
+    gotPartialThisSegment = true;
     // Interim wächst im aktuellen Segment — nicht an committed anhängen
     if (
       !currentSegment ||
@@ -211,10 +308,46 @@ function wireListeners(): void {
   ExpoSpeechRecognitionModule.addListener(
     'error',
     (event: ExpoSpeechRecognitionErrorEvent) => {
-      console.warn('[stt] error:', event.error, event.message);
+      console.warn(
+        '[stt] error:',
+        event.error,
+        event.message,
+        `vol=${lastVolumeSample.toFixed(1)}`,
+        `partial=${gotPartialThisSegment}`,
+        `svc=${androidServicePackage ?? 'default'}`,
+      );
       isActive = false;
       isStarting = false;
       commitCurrentSegment();
+      const msg = String(event.message ?? '');
+      const svc = androidServicePackage;
+      // Fehlende Engine / OEM-Cloud tot → Package für Session sperren + rotieren.
+      const hardFail =
+        (event.error === 'audio-capture' &&
+          /no service found|not found|unknown/i.test(msg)) ||
+        (event.error === 'network' && !gotPartialThisSegment) ||
+        (event.error === 'server' && !gotPartialThisSegment);
+      if (hardFail && svc) {
+        failedAndroidPackages.add(svc);
+        console.warn('[stt] blacklist recognition package:', svc, event.error);
+        androidServicePackage = null;
+        androidServiceIndex = 0;
+        pickAndroidRecognitionPackage(false);
+      }
+      // Stille (vol<0) = Audiokanal, nicht falsche Engine.
+      if (
+        (event.error === 'no-speech' || event.error === 'speech-timeout') &&
+        !gotPartialThisSegment &&
+        keepAliveHold
+      ) {
+        if (lastVolumeSample < 0 && quietNoSpeechTries < 2) {
+          quietNoSpeechTries += 1;
+          void prepareAudioForMicrophone();
+        } else {
+          quietNoSpeechTries = 0;
+          pickAndroidRecognitionPackage(true);
+        }
+      }
       if (
         keepAliveHold &&
         stopWaiters.length === 0 &&
@@ -239,6 +372,19 @@ function wireListeners(): void {
     }
     resolveStopWaiters(fullTranscript());
   });
+
+  try {
+    ExpoSpeechRecognitionModule.addListener(
+      'volumechange',
+      (event: { value?: number }) => {
+        const v = typeof event?.value === 'number' ? event.value : NaN;
+        if (Number.isFinite(v)) lastVolumeSample = v;
+        noteMicVolume(v);
+      },
+    );
+  } catch (err) {
+    console.warn('[stt] volumechange listener unavailable:', err);
+  }
 }
 
 function queueKeepAliveRestart(reason: string): void {
@@ -255,6 +401,7 @@ function queueKeepAliveRestart(reason: string): void {
     RESTART_BASE_DELAY_MS * Math.pow(1.45, Math.min(attempt, 6)),
   );
   setTimeout(() => {
+    void (async () => {
     if (!keepAliveHold || stopWaiters.length > 0) {
       restartQueued = false;
       return;
@@ -264,6 +411,9 @@ function queueKeepAliveRestart(reason: string): void {
       return;
     }
     try {
+      if (lastVolumeSample < 0) {
+        await prepareAudioForMicrophone();
+      }
       isStarting = true;
       restartAttempts = attempt + 1;
       startNativeRecognition();
@@ -280,6 +430,7 @@ function queueKeepAliveRestart(reason: string): void {
         queueKeepAliveRestart('retry-after-fail');
       }
     }
+    })();
   }, delay);
 }
 
@@ -371,6 +522,50 @@ export async function isSttAvailable(): Promise<boolean> {
   }
 }
 
+/**
+ * Boot-Prewarm: Permissions (get only) + Audio-Mode + Recognition-Check.
+ * Kein Prompt, wenn noch nicht granted.
+ */
+export async function warmMicrophonePipeline(): Promise<void> {
+  if (isMicPipelineReady() && audioModeWarm && permissionsWarmGranted === true) {
+    return;
+  }
+  try {
+    const current = await ExpoSpeechRecognitionModule.getPermissionsAsync();
+    permissionsWarmGranted = !!current.granted;
+  } catch {
+    permissionsWarmGranted = null;
+  }
+  try {
+    recognitionWarmAvailable =
+      ExpoSpeechRecognitionModule.isRecognitionAvailable();
+  } catch {
+    recognitionWarmAvailable = null;
+  }
+  if (permissionsWarmGranted) {
+    try {
+      await warmAudioModeForMicrophone();
+      audioModeWarm = true;
+    } catch {
+      audioModeWarm = false;
+    }
+  }
+  noteMicPipelineReady();
+}
+
+/** Partial-Handler tauschen ohne STT-Neustart (Hold -> Live-Chat Handoff). */
+export function setListeningPartialHandler(
+  onPartial?: (text: string) => void,
+  opts?: { lock?: boolean },
+): void {
+  partialHandler = onPartial ?? null;
+  if (opts?.lock) partialHandlerLocked = true;
+}
+
+export function unlockListeningPartialHandler(): void {
+  partialHandlerLocked = false;
+}
+
 /** Permission → Voice.start('de-DE') mit Live-Partials (bis 10 Min Hold). */
 export async function startListening(
   onPartial?: (text: string) => void,
@@ -387,7 +582,11 @@ export async function startListening(
     }
   }
 
-  const granted = await requestSpeechPermissions();
+  const granted =
+    permissionsWarmGranted === true
+      ? true
+      : await requestSpeechPermissions();
+  permissionsWarmGranted = granted;
   if (!granted) {
     console.warn('[stt] microphone/speech permission denied');
     showPermissionMissingAlert('microphone');
@@ -396,7 +595,12 @@ export async function startListening(
 
   logRecognitionDiagnostics();
 
-  if (!ExpoSpeechRecognitionModule.isRecognitionAvailable()) {
+  const available =
+    recognitionWarmAvailable === true
+      ? true
+      : ExpoSpeechRecognitionModule.isRecognitionAvailable();
+  recognitionWarmAvailable = available;
+  if (!available) {
     console.warn(
       '[stt] recognition unavailable – Google App / Speech Services fehlen oder Package-Visibility',
     );
@@ -405,15 +609,15 @@ export async function startListening(
   }
 
   try {
-    await Audio.setAudioModeAsync({
-      allowsRecordingIOS: true,
-      playsInSilentModeIOS: true,
-    });
+    await prepareAudioForMicrophone();
+    audioModeWarm = true;
   } catch (err) {
-    console.warn('[stt] Audio.setAudioModeAsync failed:', err);
+    console.warn('[stt] prepareAudioForMicrophone failed:', err);
   }
 
-  partialHandler = onPartial ?? null;
+  if (!partialHandlerLocked) {
+    partialHandler = onPartial ?? null;
+  }
   committedTranscript = '';
   currentSegment = '';
   keepAliveHold = options?.keepAlive !== false;
@@ -421,7 +625,18 @@ export async function startListening(
   restartAttempts = 0;
   holdStartedAtMs = Date.now();
   isStarting = true;
+  lastVolumeSample = -99;
+  gotPartialThisSegment = false;
+  quietNoSpeechTries = 0;
+  // Frischen Service wählen (nicht as/System-Intelligence)
+  androidServicePackage = null;
+  androidServiceIndex = 0;
+  pickAndroidRecognitionPackage(false);
   scheduleMaxHoldCap();
+
+  setMicVadEnabled(true);
+  resetMicVad();
+  armMicVadWarmup(450);
 
   try {
     startNativeRecognition();
@@ -431,6 +646,7 @@ export async function startListening(
     isStarting = false;
     isActive = false;
     keepAliveHold = false;
+    setMicVadEnabled(false);
     clearMaxHoldTimer();
     clearRotateTimer();
     return { ok: false, reason: 'error' };
@@ -466,12 +682,14 @@ export async function stopListening(
   }
 
   partialHandler = null;
+  partialHandlerLocked = false;
 
   if (!isActive && !isStarting) {
     const text = partialSnapshot;
     committedTranscript = '';
     currentSegment = '';
     holdStartedAtMs = 0;
+    setMicVadEnabled(false);
     return text;
   }
 
@@ -504,12 +722,39 @@ export async function stopListening(
   committedTranscript = '';
   currentSegment = '';
   holdStartedAtMs = 0;
+  setMicVadEnabled(false);
   void restoreAmbientAudioAfterSpeech();
   return text;
 }
 
 export function isCurrentlyListening(): boolean {
   return isActive || isStarting || keepAliveHold;
+}
+
+/** Native Erkennung läuft wirklich — keepAlive-Hold zählt nicht. */
+export function isSttRecognitionLive(): boolean {
+  return isActive || isStarting;
+}
+
+/**
+ * Letzter volumechange-Rohwert (-2..10) von expo-speech-recognition.
+ * null wenn noch kein Sample seit Start.
+ */
+export function getLastMicVolume(): number | null {
+  if (lastVolumeSample <= -90) return null;
+  return lastVolumeSample;
+}
+
+/**
+ * Normalisierter Mic-Pegel 0..1 fuer UI-Ausschlaege (Listening-Bars).
+ * Quelle: STT volumechange (-2 still .. 10 laut).
+ */
+export function getLastMicLevel(): number {
+  const raw = getLastMicVolume();
+  if (raw == null) return 0;
+  const clamped = Math.min(10, Math.max(-2, raw));
+  const linear = (clamped + 2) / 12;
+  return Math.min(1, Math.max(0, Math.pow(linear, 0.85)));
 }
 
 /** Aktueller Partial inkl. Keep-Alive-Segmente — Fallback wenn stop() leer. */
@@ -533,6 +778,8 @@ export async function destroyStt(): Promise<void> {
   currentSegment = '';
   holdStartedAtMs = 0;
   partialHandler = null;
+  partialHandlerLocked = false;
+  setMicVadEnabled(false);
   resolveStopWaiters('');
   void restoreAmbientAudioAfterSpeech();
 }

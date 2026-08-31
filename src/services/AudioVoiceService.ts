@@ -36,8 +36,17 @@ import {
   stripLlmProsodyMarkers,
 } from './g2p/germanTtsProsodyRules';
 import { stripSpellTrapsAndMarkdownJunk } from './g2p/phoneticTransformer';
+import { applyGermanCartesiaProblemWords } from './tts/germanCartesiaProblemWords';
 import { sentencesFromFullText } from './ai/sentenceStream';
-import { scrubInventedVoiceNames } from './ai/spokenNameGuard';
+import { scrubInventedVoiceNames, applyUserNameSpeechPolicy } from './ai/spokenNameGuard';
+import {
+  applyFirstNameSpeechHint,
+  beginSkipUserNamePolicy,
+  endSkipUserNamePolicy,
+  isUserNamePolicySkipped,
+  previewSentenceForName,
+  sanitizeNameSpeechHint,
+} from './persona/userNameSpeechHint';
 import {
   clearSpeechJobQueue,
   enqueueSpeechJob,
@@ -49,6 +58,7 @@ import {
 } from './ai/speechJobQueue';
 import {
   flushStreamingAudioQueue,
+  isStreamingAudioQueueBusy,
   playStreamingAudioQueue,
 } from './audio/streamingAudioQueueService';
 import { streamingChunksFromTextStream } from './audio/punctuationChunker';
@@ -71,9 +81,12 @@ import {
 } from './expoSpeechFallback';
 import {
   createLiveSubtitleFeed,
+  estimateSpeechDurationMs,
   mergeSubtitleCarry,
   runEstimatedLiveSubtitles,
+  subtitleUpToCharIndex,
 } from '../utils/subtitleWholeWords';
+import { resolveWavDurationMs } from '../utils/wavDurationMs';
 import type { TtsProvider } from '../store/useFinnusStore';
 import { scrubSpeechForTts } from './agi/speechGuardrails';
 
@@ -129,6 +142,8 @@ export const INTRO_VOICE: SpeakVoiceOptions = {
 export const MARTIN_PURE = INTRO_VOICE;
 
 const AUDIO_QUEUE_LOOKAHEAD = 1;
+/** Wächst während des Sprechens: Satz 3 spielt → 4 bereit, 5+6 parallel. TTS_SENTENCE_PIPELINE_LOCK */
+const AUDIO_QUEUE_LOOKAHEAD_MAX = 6;
 const VOICE_SYSTEM_VERSION = 'de-hybrid-v5-personal-4thwall';
 const AUDIO_CACHE_DIR = `${FileSystem.cacheDirectory ?? FileSystem.documentDirectory}tts-audio/`;
 const SAMPLE_DIR = `${FileSystem.cacheDirectory ?? FileSystem.documentDirectory}tts/samples/`;
@@ -149,12 +164,13 @@ let playbackGeneration = 0;
 let activeTtsSessions = 0;
 /** True while a Sound / expo-speech is actually outputting audio. */
 let audiblePlaybackActive = false;
-/** True while a nav-only cue is playing (not Findus Q&A / story). */
+/** True while a nav-only cue is playing (not Yorro Q&A / story). */
 let navCueExclusiveActive = false;
-/** Latest turn cue waiting until Findus finishes speaking (questions only). */
+/** Latest turn cue waiting until Yorro finishes the current sentence. */
 let pendingNavCue: {
   text: string;
   voiceOptions?: SpeakVoiceOptions;
+  readyUri?: Promise<string | null>;
 } | null = null;
 
 /** Explore (Modul 1) bookmark for resume after nav interrupt. */
@@ -241,7 +257,7 @@ function enqueueExploreResume(bookmark: ExploreResumeBookmark): void {
   );
 }
 
-/** Irgendeine Findus-Stimme ist hörbar — für Nav-Defer (nicht Queue-Drain). */
+/** Irgendeine Yorro-Stimme ist hörbar — für Nav-Defer (nicht Queue-Drain). */
 function isAnySpeechBusy(): boolean {
   if (navCueExclusiveActive) return true;
   if (isAudiblyPlaying()) return true;
@@ -428,7 +444,7 @@ const tempAudioUris = new Set<string>();
 
 /**
  * Android: DoNotMix → AUDIOFOCUS_GAIN (pauses Spotify).
- * DuckOthers only ducks and would not pause — wrong for “pause while Findus talks”.
+ * DuckOthers only ducks and would not pause — wrong for “pause while Yorro talks”.
  * Resume needs an explicit focus abandon (setIsEnabledAsync false→true); MixWithOthers
  * does not exist on InterruptionModeAndroid (only DoNotMix | DuckOthers).
  */
@@ -461,10 +477,12 @@ const AMBIENT_AUDIO_MODE = {
 } as const;
 
 /**
- * Musik/Spotify wieder freigeben, wenn Findus fertig spricht.
+ * Musik/Spotify wieder freigeben, wenn Yorro fertig spricht.
  * Sound-Unload gibt Focus oft schon ab; setIsEnabledAsync(false) erzwingt
  * abandonAudioFocus auf Android, falls die Session noch hängt.
  */
+let recordingModeArmed = false;
+
 async function restoreAmbientAudioMode(): Promise<void> {
   if (activeTtsSessions > 0) return;
   if (restoreAmbientPromise) return restoreAmbientPromise;
@@ -491,6 +509,7 @@ async function restoreAmbientAudioMode(): Promise<void> {
       if (aborted()) return;
 
       await Audio.setAudioModeAsync({ ...AMBIENT_AUDIO_MODE });
+      recordingModeArmed = false;
       if (__DEV__) {
         console.log('[voice] ambient audio restored (Spotify darf weiter)');
       }
@@ -513,6 +532,49 @@ async function restoreAmbientAudioMode(): Promise<void> {
 export async function restoreAmbientAudioAfterSpeech(): Promise<void> {
   if (activeTtsSessions > 0) return;
   await restoreAmbientAudioMode();
+}
+
+async function setRecordingAudioMode(): Promise<void> {
+  await Audio.setAudioModeAsync({
+    allowsRecordingIOS: true,
+    playsInSilentModeIOS: true,
+    staysActiveInBackground: false,
+    shouldDuckAndroid: true,
+    playThroughEarpieceAndroid: false,
+    interruptionModeAndroid: InterruptionModeAndroid.DuckOthers,
+    interruptionModeIOS: InterruptionModeIOS.MixWithOthers,
+  });
+  recordingModeArmed = true;
+}
+
+/**
+ * Boot-Prewarm: Aufnahme-Modus ohne TTS-Stop (noch nichts spricht).
+ */
+export async function warmAudioModeForMicrophone(): Promise<void> {
+  try {
+    await setRecordingAudioMode();
+  } catch (err) {
+    console.warn('[voice] warmAudioModeForMicrophone failed:', err);
+  }
+}
+
+/**
+ * Vor STT: TTS-Exklusivfokus abgeben, dann Aufnahme-Modus.
+ * Sonst bekommt SpeechRecognizer Stille (vol=-2).
+ * Wenn Mode schon warm: nur TTS stoppen.
+ */
+export async function prepareAudioForMicrophone(): Promise<void> {
+  try {
+    await stopSpeakingInternal();
+  } catch {
+    /* Fokus trotzdem umstellen */
+  }
+  if (recordingModeArmed) return;
+  try {
+    await setRecordingAudioMode();
+  } catch (err) {
+    console.warn('[voice] prepareAudioForMicrophone failed:', err);
+  }
 }
 
 /** Stoppt aktuelles Sound-Objekt und invalidiert die Playback-Generation (ohne Restore). */
@@ -632,7 +694,7 @@ export async function discardPausedSpeaking(): Promise<void> {
 }
 
 
-/** Findus spricht Fragen / denkt / hört — Navi muss warten (nicht Explore). */
+/** Yorro spricht Fragen / denkt / hört — Navi muss warten (nicht Explore). */
 export function isFindusSpeechBusyForNav(): boolean {
   if (navCueExclusiveActive) return false;
   return isQuestionsBusyForNav();
@@ -644,38 +706,80 @@ export function enqueueNavSpeechCue(
 ): void {
   const trimmed = text.trim();
   if (!trimmed) return;
-  // Keep latest turn — older micro-cues are obsolete
-  pendingNavCue = { text: trimmed, voiceOptions };
+  const interrupting = isStreamingAudioQueueBusy();
+  const spoken = interrupting ? withNavYieldLead(trimmed) : trimmed;
+  let readyUri: Promise<string | null> | undefined;
+  if (hasCartesiaTtsKey()) {
+    readyUri = (async () => {
+      try {
+        const audioText = prepareAudioText(spoken, { navDirections: true });
+        return await synthesizeCartesiaSpeechWav(audioText, voiceOptions?.voiceId);
+      } catch (err) {
+        console.warn('[nav-queue] early synth failed:', err);
+        return null;
+      }
+    })();
+  }
+  pendingNavCue = { text: spoken, voiceOptions, readyUri };
   if (__DEV__) {
-    console.log('[nav-queue] queued cue (questions busy):', trimmed.slice(0, 60));
+    console.log('[nav-queue] queued cue:', spoken.slice(0, 72));
   }
 }
 
-function withUbrigensPrefix(text: string): string {
+function withNavYieldLead(text: string): string {
   const t = text.trim();
   if (!t) return t;
-  if (/^\s*übrigens\b/iu.test(t) || /^\s*uebrigens\b/iu.test(t)) return t;
-  if (/^\s*kurz\s+fürs\s+navi\b/iu.test(t)) {
-    return t.replace(/^\s*kurz\s+fürs\s+navi\s*[:\-–—]?\s*/iu, 'übrigens, ');
-  }
+  if (/unterbrech/i.test(t) || /^\s*sorry\b/i.test(t)) return t;
   const body = t.charAt(0).toLowerCase() + t.slice(1);
-  return `übrigens, ${body}`;
+  return `Sorry, dass ich kurz unterbreche — ${body}`;
+}
+
+export function hasPendingNavSpeechCue(): boolean {
+  return pendingNavCue != null;
 }
 
 /**
  * After questions finished — play queued turn cue once.
  * @param afterSpeechEnd skip isPlayingAudio (just ended; flag may still be true briefly)
+ * @param atChunkGap Satzgrenze in der Streaming-Queue — Cue direkt, ohne neuen Speech-Job
  */
 export async function flushQueuedNavSpeechCue(opts?: {
   afterSpeechEnd?: boolean;
+  atChunkGap?: boolean;
 }): Promise<boolean> {
   if (!pendingNavCue) return false;
   const store = useFinnusStore.getState();
-  if (store.isGenerating || store.isListening) return false;
-  if (!opts?.afterSpeechEnd && isQuestionsBusyForNav()) return false;
+  // Mic offen → nicht dazwischenquätschen
+  if (store.isListening) return false;
+  if (!opts?.afterSpeechEnd && !opts?.atChunkGap && isQuestionsBusyForNav()) {
+    return false;
+  }
   const next = pendingNavCue;
   pendingNavCue = null;
-  const line = withUbrigensPrefix(next.text);
+  const line = next.text;
+
+  // Mitten in einer laufenden Antwort/Story: Cue inline (sonst Deadlock in der Job-Queue)
+  if (opts?.atChunkGap) {
+    try {
+      let ready: string | null = null;
+      if (next.readyUri) {
+        try {
+          ready = await next.readyUri;
+        } catch {
+          ready = null;
+        }
+      }
+      await speakNavCueBody(line, next.voiceOptions, {
+        preserveStreamingQueue: true,
+        readyUri: ready,
+      });
+      return true;
+    } catch (err) {
+      console.warn('[nav-queue] chunk-gap insert failed:', err);
+      return false;
+    }
+  }
+
   try {
     await enqueueSpeechJob(
       async () => {
@@ -692,8 +796,9 @@ export async function flushQueuedNavSpeechCue(opts?: {
 
 /**
  * Navi-Cue-Priorität:
- * - Andere Stimme aktiv (Fragen/System/…) → hinten anstellen, nie überlappen
- * - Explore aktiv → unterbrechen, Cue in der Speech-Queue, Explore-Rest danach
+ * - Streaming-Queue aktiv → nach aktuellem Satz einklemmen, Rest läuft weiter
+ * - Explore ohne Stream → unterbrechen, Cue, Explore-Rest danach
+ * - Generating/Listening → hinten anstellen
  * - Idle → Cue über dieselbe globale Queue
  */
 export async function speakNavWithMultitask(
@@ -702,6 +807,15 @@ export async function speakNavWithMultitask(
 ): Promise<void> {
   const trimmed = text.trim();
   if (!trimmed) return;
+
+  // Satz-Warteschlange läuft: Cue merken, an der nächsten Satzgrenze einschieben
+  if (isStreamingAudioQueueBusy()) {
+    enqueueNavSpeechCue(trimmed, voiceOptions);
+    if (__DEV__) {
+      console.log('[nav-queue] wedge at next chunk:', trimmed.slice(0, 60));
+    }
+    return;
+  }
 
   const exploreActive =
     isExploreSpeechActive() || getCurrentSpeechPriority() === 'explore';
@@ -735,10 +849,11 @@ export async function speakNavWithMultitask(
   }
 }
 
-/** Nav-Cue-Körper — nur aus der globalen Speech-Job-Queue aufrufen. */
+/** Nav-Cue-Körper — nur aus der globalen Speech-Job-Queue aufrufen (oder Chunk-Gap). */
 async function speakNavCueBody(
   text: string,
   voiceOptions?: SpeakVoiceOptions,
+  opts?: { preserveStreamingQueue?: boolean; readyUri?: string | null },
 ): Promise<void> {
   const display = prepareDisplayText(text);
   if (!display) return;
@@ -764,12 +879,13 @@ async function speakNavCueBody(
     }
   }
 
-  // Harte Exklusivität: Streaming/Expo vor Nav-Clip killen
-  await stopExpoSpeech();
-  await flushStreamingAudioQueue();
+  // Harte Exklusivität: Streaming/Expo vor Nav-Clip killen — außer Chunk-Gap
+  if (!opts?.preserveStreamingQueue) {
+    await stopExpoSpeech();
+    await flushStreamingAudioQueue();
+  }
 
   const store = useFinnusStore.getState();
-  store.setSubtitleText(display);
   navCueExclusiveActive = true;
   activeTtsSessions += 1;
   let uri: string | null = null;
@@ -779,21 +895,28 @@ async function speakNavCueBody(
     await applyTtsExclusiveAudioMode();
     const forceSystem = resolveActiveTtsProvider() === 'system';
     if (!forceSystem && hasCartesiaTtsKey()) {
-      const audioText = prepareAudioText(display);
+      const audioText = prepareAudioText(display, { navDirections: true });
       recordFindusSpeechExact(audioText, Date.now());
-      uri = await synthesizeCartesiaSpeechWav(audioText, effective?.voiceId);
+      uri =
+        opts?.readyUri ??
+        (await synthesizeCartesiaSpeechWav(audioText, effective?.voiceId));
     } else {
       recordFindusSpeechExact(display, Date.now());
-      await speakWithExpoSpeech(display, { language: 'de-DE' });
+      await speakExpoWithLiveSubtitles(
+        display,
+        (tx) => store.setSubtitleText(tx),
+        () => true,
+      );
       cueOk = true;
       return;
     }
     if (uri) {
-      await playWav(uri, {
-        clearPlayingOnEnd: false,
-        playbackRate: 1,
-        deleteAfter: true,
-      });
+      await playWavWithLiveSubtitles(
+        uri,
+        display,
+        { clearPlayingOnEnd: false, playbackRate: 1, deleteAfter: true },
+        (tx) => store.setSubtitleText(tx),
+      );
       cueOk = true;
     } else {
       cueErrHint = 'cartesia_uri_null';
@@ -804,7 +927,11 @@ async function speakNavCueBody(
       const { fallbackSpeech } = await import('./debug/fallbackLabel');
       const fb = fallbackSpeech('Nav-Cue-Systemstimme', display.slice(0, 200));
       recordFindusSpeechExact(fb, Date.now());
-      await speakWithExpoSpeech(fb, { language: 'de-DE' });
+      await speakExpoWithLiveSubtitles(
+        fb,
+        (tx) => useFinnusStore.getState().setSubtitleText(tx),
+        () => true,
+      );
       cueOk = true;
     } catch (err2) {
       console.warn('[voice] nav cue failed:', err2);
@@ -859,18 +986,18 @@ export async function playCachedNavCueWav(
   await flushStreamingAudioQueue();
 
   const store = useFinnusStore.getState();
-  store.setSubtitleText(display);
   navCueExclusiveActive = true;
   activeTtsSessions += 1;
   let cueOk = false;
   try {
     await applyTtsExclusiveAudioMode();
     recordFindusSpeechExact(display, Date.now());
-    await playWav(uri, {
-      clearPlayingOnEnd: false,
-      playbackRate: 1,
-      deleteAfter: false,
-    });
+    await playWavWithLiveSubtitles(
+      uri,
+      display,
+      { clearPlayingOnEnd: false, playbackRate: 1, deleteAfter: false },
+      (tx) => store.setSubtitleText(tx),
+    );
     cueOk = true;
     return true;
   } catch (err) {
@@ -965,7 +1092,7 @@ function isModelUnavailableError(error: unknown): boolean {
  * Nur Whitespace + LLM-Regie-Marker entfernen.
  */
 export function prepareDisplayText(text: string): string {
-  return stripLlmProsodyMarkers(
+  let out = stripLlmProsodyMarkers(
     text
       .replace(/\s+/g, ' ')
       .replace(/\u00a0/g, ' ')
@@ -980,31 +1107,104 @@ export function prepareDisplayText(text: string): string {
       .replace(/\s{2,}/g, ' ')
       .trim(),
   );
+  try {
+    if (!isUserNamePolicySkipped()) {
+      const firstName = getCachedUserProfile()?.firstName?.trim() || null;
+      out = applyUserNameSpeechPolicy(out, firstName);
+    }
+  } catch {
+    out = scrubInventedVoiceNames(out, null);
+  }
+  return out;
 }
 
 /**
- * Aussprache-Hilfe aus — native DE-Cartesia (Alina/Sebastian) braucht
- * keinen Ortho-/IPA-Pfad. Text unverändert lassen.
+ * Native DE-Cartesia: Transcript nicht umschreiben.
+ * Ortho/IPA/Sounds-like (Tsihl, Ruute, <<IPA>>) erzeugen den US-Akzent.
  */
 export function applyVoicePronunciation(text: string): string {
-  return text.normalize('NFKC').trim();
+  return applyGermanCartesiaProblemWords(text.normalize('NFKC'));
 }
 
 /**
- * Audio für TTS — Hard-Reboot:
- * Nur Scrub (URLs/Markdown/Regie). Kein IPA, kein EN-Ortho, kein Lexikon-Hack.
- * Alina/Sebastian lesen normales Deutsch mit language: de.
+ * Audio für TTS: Scrub + Jahreszahlen. Kein IPA, keine Emotion-Tags,
+ * keine Sounds-like — gleicher Text-Stil wie die Offline-Hörproben.
+ *
+ * Adressen/PLZ/Hausnummern standardmäßig weg — außer User fragt explizit danach.
+ * Nav-Abbiegehinweise: `navDirections: true` behält Straßennamen.
  */
-export function prepareAudioText(text: string): string {
+export function prepareAudioText(
+  text: string,
+  opts?: { navDirections?: boolean; userAskedAddress?: boolean },
+): string {
   let t = prepareDisplayText(text);
   if (!t) return '';
-  t = scrubSpeechForTts(t, {
-    urlsAndEmailsOnly: true,
-    maxChars: 16_000,
-  }).text;
+  try {
+    const { lastUserAskedForAddressOrCoords } = require('../utils/addressPrivacy') as {
+      lastUserAskedForAddressOrCoords: () => boolean;
+    };
+    const userAsked =
+      opts?.userAskedAddress === true || lastUserAskedForAddressOrCoords();
+    if (opts?.navDirections === true) {
+      t = scrubSpeechForTts(t, {
+        urlsAndEmailsOnly: true,
+        maxChars: 16_000,
+      }).text;
+    } else {
+      t = scrubSpeechForTts(t, {
+        userAskedAddress: userAsked,
+        maxChars: 16_000,
+      }).text;
+    }
+  } catch {
+    t = scrubSpeechForTts(t, {
+      urlsAndEmailsOnly: true,
+      maxChars: 16_000,
+    }).text;
+  }
   if (!t) return '';
   t = stripSpellTrapsAndMarkdownJunk(t);
   t = t.replace(/[·•]/g, ' ');
+  // Jahreszahlen ausgeschrieben — Cartesia liest „1883“ sonst oft falsch
+  try {
+    const { numberToGermanWords } = require('./g2p/phoneticTransformer') as {
+      numberToGermanWords: (
+        n: number,
+        o?: { yearStyle?: boolean },
+      ) => string;
+    };
+    t = t.replace(/\b(1[0-9]{3}|20[0-9]{2})\s*[\/–-]\s*(\d{2}|20[0-9]{2})\b/g, (_m, a: string, b: string) => {
+      const y1 = Number(a);
+      const y2 = b.length === 2 ? Number(`${a.slice(0, 2)}${b}`) : Number(b);
+      const w1 = numberToGermanWords(y1, {
+        yearStyle: y1 >= 1100 && y1 <= 1999,
+      });
+      const w2 = numberToGermanWords(y2, {
+        yearStyle: y2 >= 1100 && y2 <= 1999,
+      });
+      return `${w1} bis ${w2}`;
+    });
+    t = t.replace(/\b(1[0-9]{3}|20[0-9]{2})\b/g, (raw) => {
+      const y = Number(raw);
+      return numberToGermanWords(y, { yearStyle: y >= 1100 && y <= 1999 });
+    });
+  } catch {
+    /* soft */
+  }
+  t = applyVoicePronunciation(t);
+  try {
+    if (!isUserNamePolicySkipped()) {
+      const profile = getCachedUserProfile();
+      t = applyFirstNameSpeechHint(
+        t,
+        profile?.firstName,
+        profile?.firstNameSpeechHint,
+        profile?.firstNameSpeechHintEnabled === true,
+      );
+    }
+  } catch {
+    /* soft */
+  }
   return t.replace(/\s+/g, ' ').trim();
 }
 
@@ -1416,6 +1616,8 @@ export async function playPrefetchedPcm(
             clearPlayingOnEnd: false,
             playbackRate: 1,
             deleteAfter: false,
+            fallbackDurationMs: durMs,
+            onProgress: (pr, actual) => feed.updateProgress(pr, actual ?? durMs),
           });
         } finally {
           clearInterval(iv);
@@ -1470,6 +1672,8 @@ async function playWav(
     clearPlayingOnEnd: boolean;
     playbackRate?: number;
     deleteAfter?: boolean;
+    onProgress?: (progress01: number, durationMs?: number) => void;
+    fallbackDurationMs?: number;
   },
 ): Promise<void> {
   const gen = playbackGeneration;
@@ -1485,7 +1689,12 @@ async function playWav(
     }
     const { sound: created } = await Audio.Sound.createAsync(
       { uri },
-      { shouldPlay: true, rate: options.playbackRate ?? 1, shouldCorrectPitch: true },
+      {
+        shouldPlay: true,
+        rate: options.playbackRate ?? 1,
+        shouldCorrectPitch: true,
+        progressUpdateIntervalMillis: 40,
+      },
     );
     sound = created;
     markAudiblePlayback(true);
@@ -1495,6 +1704,19 @@ async function playWav(
       const startedAt = Date.now();
       let lastPos = -1;
       let stalledSince: number | null = null;
+      const reportProgress = (pos: number, dur: number) => {
+        if (!options.onProgress) return;
+        if (dur > 0) {
+          options.onProgress(Math.min(1, Math.max(0, pos / dur)), dur);
+          return;
+        }
+        const fb = Math.max(400, options.fallbackDurationMs ?? 0);
+        if (fb <= 0) return;
+        options.onProgress(
+          Math.min(0.98, Math.max(0, (Date.now() - startedAt) / fb)),
+          fb,
+        );
+      };
       const clearUiOnEnd = () => {
         if (options.clearPlayingOnEnd && gen === playbackGeneration) {
           useFinnusStore.getState().setIsPlayingAudio(false);
@@ -1520,6 +1742,7 @@ async function playWav(
             if (settled || !status.isLoaded) return;
             const dur = status.durationMillis ?? 0;
             const pos = status.positionMillis ?? 0;
+            reportProgress(pos, dur);
             // Auch bei isPlaying=true am Dateiende beenden (Android-Zombie)
             if (dur > 0 && pos >= Math.max(0, dur - 50)) {
               clearUiOnEnd();
@@ -1557,7 +1780,7 @@ async function playWav(
             }
           })
           .catch(() => undefined);
-      }, 200);
+      }, 40);
       created.setOnPlaybackStatusUpdate((status) => {
         if (settled) return;
         if (!status.isLoaded) {
@@ -1577,6 +1800,7 @@ async function playWav(
         }
         const dur = status.durationMillis ?? 0;
         const pos = status.positionMillis ?? 0;
+        reportProgress(pos, dur);
         if (dur > 0 && pos >= Math.max(0, dur - 50)) {
           clearUiOnEnd();
           finish();
@@ -1588,6 +1812,61 @@ async function playWav(
     if (options.deleteAfter) {
       void cleanupTempAudio([uri]);
     }
+  }
+}
+
+
+async function playWavWithLiveSubtitles(
+  uri: string,
+  display: string,
+  playOpts: {
+    clearPlayingOnEnd: boolean;
+    playbackRate?: number;
+    deleteAfter?: boolean;
+  },
+  setSubtitle: (t: string | null) => void,
+): Promise<void> {
+  const dur =
+    (await resolveWavDurationMs(uri)) || estimateSpeechDurationMs(display);
+  const feed = createLiveSubtitleFeed(display, setSubtitle, dur);
+  feed.showInitial();
+  try {
+    await playWav(uri, {
+      ...playOpts,
+      fallbackDurationMs: dur,
+      onProgress: (p, actual) => feed.updateProgress(p, actual),
+    });
+  } finally {
+    feed.showFinal();
+  }
+}
+
+async function speakExpoWithLiveSubtitles(
+  display: string,
+  setSubtitle: (t: string | null) => void,
+  isActive: () => boolean,
+): Promise<void> {
+  const feed = createLiveSubtitleFeed(display, setSubtitle);
+  feed.showInitial();
+  let usedBoundary = false;
+  const t0 = Date.now();
+  const dur = estimateSpeechDurationMs(display);
+  const iv = setInterval(() => {
+    if (!isActive() || usedBoundary) return;
+    feed.updateProgress(Math.min(1, Math.max(0, (Date.now() - t0) / dur)));
+  }, 50);
+  try {
+    await speakWithExpoSpeech(display, {
+      language: 'de-DE',
+      onCharIndex: (charIndex) => {
+        usedBoundary = true;
+        const next = subtitleUpToCharIndex(display, charIndex);
+        if (next) setSubtitle(next);
+      },
+    });
+  } finally {
+    clearInterval(iv);
+    feed.showFinal();
   }
 }
 
@@ -1650,6 +1929,7 @@ async function speakChunkSource(
   source: AsyncIterable<string> | string[],
   voiceOptions?: SpeakVoiceOptions,
   priority: SpeechPriority = 'system',
+  extras?: { onChunkText?: (text: string) => void },
 ): Promise<void> {
   let effective = voiceOptions;
   if (!effective?.voiceId || effective.speechRate == null) {
@@ -1688,21 +1968,15 @@ async function speakChunkSource(
   try {
     await applyTtsExclusiveAudioMode();
 
-    const materialize =
-      priority === 'explore' || Array.isArray(source);
+    // Arrays dürfen vorab stehen (Bookmark). Live-Iterable NIE voll materialisieren —
+    // sonst startet der Fast-Hook erst, wenn Gemini fertig ist.
+    const materialize = Array.isArray(source);
     let chunks: string[] | null = null;
     if (materialize) {
       chunks = [];
-      if (Array.isArray(source)) {
-        for (const c of source) {
-          const d = prepareDisplayText(c);
-          if (d) chunks.push(d);
-        }
-      } else {
-        for await (const raw of streamingChunksFromTextStream(source)) {
-          const d = prepareDisplayText(raw);
-          if (d) chunks.push(d);
-        }
+      for (const c of source) {
+        const d = prepareDisplayText(c);
+        if (d) chunks.push(d);
       }
       if (chunks.length === 0) return;
     }
@@ -1742,13 +2016,17 @@ async function speakChunkSource(
           };
         }
         recordFindusSpeechExact(display, Date.now());
+        try {
+          extras?.onChunkText?.(display);
+        } catch {
+          /* ignore */
+        }
         markAudiblePlayback(true);
         const carry = subtitleCarry;
         try {
-          await runEstimatedLiveSubtitles(
+          await speakExpoWithLiveSubtitles(
             display,
-            (t) => store.setSubtitleText(mergeSubtitleCarry(carry, t)),
-            () => speakWithExpoSpeech(display, { language: 'de-DE' }),
+            (tx) => store.setSubtitleText(mergeSubtitleCarry(carry, tx)),
             () => gen === playbackGeneration && !isSoftAbortRequested(),
           );
         } finally {
@@ -1756,67 +2034,76 @@ async function speakChunkSource(
         }
         subtitleCarry = mergeSubtitleCarry(subtitleCarry, display);
         idx += 1;
+        if (hasPendingNavSpeechCue()) {
+          await flushQueuedNavSpeechCue({ atChunkGap: true });
+        }
       }
       if (priority === 'explore') explorePlaybackBookmark = null;
       return;
     }
 
-    if (priority === 'explore' && chunks) {
-      let exploreCarry: string | null = null;
-      for (let i = 0; i < chunks.length; i += 1) {
-        if (gen !== playbackGeneration || isSoftAbortRequested()) {
-          explorePlaybackBookmark = {
-            sentences: chunks,
-            nextIndex: i,
-            voiceOptions: effective,
-          };
-          return;
-        }
-        explorePlaybackBookmark = {
-          sentences: chunks,
-          nextIndex: i,
-          voiceOptions: effective,
-        };
-        await playStreamingAudioQueue([chunks[i]], {
-          voiceId: effective?.voiceId,
-          generationConfig: effective?.generationConfig,
-          resolveGenerationConfig: effective?.resolveGenerationConfig,
-          prefetchLookahead: 1,
-          prepareDisplayText,
-          prepareAudioText,
-          isGenerationActive: () =>
-            gen === playbackGeneration && !isSoftAbortRequested(),
-          priorSubtitle: exploreCarry,
-          onSubtitleCarry: (c) => {
-            exploreCarry = c;
-          },
-          onSubtitle: (t) => {
-            store.setSubtitleText(t);
-            if (t) {
-              recordFindusSpeechExact(prepareAudioText(t), Date.now());
-            }
-          },
-          onAudibleChange: markAudiblePlayback,
-          bindActiveSound: (s) => {
-            sound = s;
-          },
-        });
-      }
-      explorePlaybackBookmark = null;
-      return;
+    const navGapOpts = {
+      peekChunkGap: () => hasPendingNavSpeechCue(),
+      onChunkGap: () => flushQueuedNavSpeechCue({ atChunkGap: true }),
+    };
+
+    const exploreList: string[] = priority === 'explore' ? (chunks ? [...chunks] : []) : [];
+    let exploreIdx = 0;
+    if (priority === 'explore' && exploreList.length > 0) {
+      explorePlaybackBookmark = {
+        sentences: exploreList,
+        nextIndex: 0,
+        voiceOptions: effective,
+      };
     }
 
-    await playStreamingAudioQueue(chunks ?? source, {
+    const queueSource: AsyncIterable<string> | string[] =
+      chunks ??
+      (priority === 'explore'
+        ? (async function* () {
+            for await (const raw of streamingChunksFromTextStream(
+              source as AsyncIterable<string>,
+            )) {
+              const d = prepareDisplayText(raw);
+              if (!d) continue;
+              exploreList.push(d);
+              explorePlaybackBookmark = {
+                sentences: exploreList,
+                nextIndex: exploreIdx,
+                voiceOptions: effective,
+              };
+              yield d;
+            }
+          })()
+        : source);
+
+    await playStreamingAudioQueue(queueSource, {
       voiceId: effective?.voiceId,
       generationConfig: effective?.generationConfig,
       resolveGenerationConfig: effective?.resolveGenerationConfig,
-      prefetchLookahead: 2,
+      prefetchLookahead: AUDIO_QUEUE_LOOKAHEAD,
+      prefetchLookaheadMax: AUDIO_QUEUE_LOOKAHEAD_MAX,
+      // Explore-Live ist schon gehookt; Questions: Fast-Hook ≤100 im Queue-Splitter
+      skipPhraseResplit: priority === 'explore',
       prepareDisplayText,
       prepareAudioText,
-      // Modul-2 / Fragen: fertige Sätze nicht in Mini-Hooks zerlegen
-      // (sonst stirbt die Antwort oft nach dem ersten Cartesia-Fail mitten drin)
-      skipPhraseResplit: priority === 'question' && Array.isArray(chunks),
-      isGenerationActive: () => gen === playbackGeneration,
+      isGenerationActive: () =>
+        gen === playbackGeneration &&
+        (priority !== 'explore' || !isSoftAbortRequested()),
+      onChunkText: (text) => {
+        try {
+          extras?.onChunkText?.(text);
+        } catch {
+          /* ignore */
+        }
+        if (priority !== 'explore') return;
+        explorePlaybackBookmark = {
+          sentences: exploreList,
+          nextIndex: exploreIdx,
+          voiceOptions: effective,
+        };
+        exploreIdx += 1;
+      },
       onSubtitle: (t) => {
         store.setSubtitleText(t);
         if (t) {
@@ -1827,7 +2114,14 @@ async function speakChunkSource(
       bindActiveSound: (s) => {
         sound = s;
       },
+      ...navGapOpts,
     });
+    if (priority === 'explore') {
+      if (gen !== playbackGeneration || isSoftAbortRequested()) {
+        return;
+      }
+      explorePlaybackBookmark = null;
+    }
   } finally {
     if (priority === 'explore' && !isSoftAbortRequested()) {
       explorePlaybackBookmark = null;
@@ -1887,10 +2181,9 @@ export async function speakText(
             useFinnusStore.getState().setIsPlayingAudio(true);
             markAudiblePlayback(true);
             await applyTtsExclusiveAudioMode();
-            await runEstimatedLiveSubtitles(
+            await speakExpoWithLiveSubtitles(
               fb,
-              (t) => useFinnusStore.getState().setSubtitleText(t),
-              () => speakWithExpoSpeech(fb, { language: 'de-DE' }),
+              (tx) => useFinnusStore.getState().setSubtitleText(tx),
               () => true,
             );
           } catch (fbErr) {
@@ -1923,9 +2216,12 @@ export async function speakSentenceStream(
     bypassDeliveryPolicy?: boolean;
     deliveryKind?: SpeechDeliveryKind;
     priority?: SpeechPriority;
+    /** Fires when a chunk starts playing — Explanation-Visuals an die Stimme koppeln. */
+    onChunkText?: (text: string) => void;
   },
 ): Promise<void> {
   const priority = opts?.priority ?? 'system';
+  const onChunkText = opts?.onChunkText;
 
   if (!opts?.bypassDeliveryPolicy) {
     const { wantsSpokenAudio } = await import('./userProfileService');
@@ -1969,83 +2265,36 @@ export async function speakSentenceStream(
     }
   }
 
-  // Explore always buffers (bookmark/resume). Questions may stream when idle.
-  const { isSpeechJobQueueBusy } = await import('./ai/speechJobQueue');
-  const shouldBuffer =
-    priority === 'explore' || isSpeechJobQueueBusy();
-
-  if (!shouldBuffer) {
-    // Materialisieren für Fallback (wie buffered-Pfad) — sonst Stille nach Chunk-1-Fail
-    const streamed: string[] = [];
+  // Immer live in den Job: First-Hook startet TTS sofort, Rest + Prefetch parallel.
+  // Nie auf das LLM-Ende warten (früher: explore/busy hat den ganzen Stream gepuffert).
+  const collected: string[] = [];
+  const live = (async function* () {
     for await (const s of sentences) {
-      if (s?.trim()) streamed.push(s.trim());
+      const t = s?.trim();
+      if (!t) continue;
+      collected.push(t);
+      yield t;
     }
-    if (streamed.length === 0) return;
-    try {
-      await enqueueSpeechJob(
-        async () => {
-          try {
-            await speakChunkSource(streamed, voiceOptions, priority);
-          } catch (error) {
-            console.warn('[voice] Sentence-Stream fehlgeschlagen:', error);
-            markAudiblePlayback(false);
-            useFinnusStore.getState().setIsPlayingAudio(false);
-            useFinnusStore.getState().setIsAudiblySpeaking(false);
-            try {
-              useFinnusStore.getState().setIsPlayingAudio(true);
-              markAudiblePlayback(true);
-              await applyTtsExclusiveAudioMode();
-              const fb = streamed.join(' ');
-              await runEstimatedLiveSubtitles(
-                fb,
-                (t) => useFinnusStore.getState().setSubtitleText(t),
-                () => speakWithExpoSpeech(fb, { language: 'de-DE' }),
-                () => true,
-              );
-            } finally {
-              markAudiblePlayback(false);
-              useFinnusStore.getState().setIsPlayingAudio(false);
-              useFinnusStore.getState().setIsAudiblySpeaking(false);
-              if (activeTtsSessions === 0) {
-                await restoreAmbientAudioMode();
-              }
-            }
-          }
-        },
-        { priority },
-      );
-    } catch (err) {
-      if (err instanceof Error && err.message === 'speech_interrupted') return;
-      throw err;
-    }
-    return;
-  }
-
-  const buffered: string[] = [];
-  for await (const s of sentences) {
-    if (s?.trim()) buffered.push(s.trim());
-  }
-  if (buffered.length === 0) return;
-
+  })();
   try {
     await enqueueSpeechJob(
       async () => {
         try {
-          await speakChunkSource(buffered, voiceOptions, priority);
+          await speakChunkSource(live, voiceOptions, priority, onChunkText ? { onChunkText } : undefined);
         } catch (error) {
           console.warn('[voice] Sentence-Stream fehlgeschlagen:', error);
           markAudiblePlayback(false);
           useFinnusStore.getState().setIsPlayingAudio(false);
           useFinnusStore.getState().setIsAudiblySpeaking(false);
+          const fb = collected.join(' ').trim();
+          if (!fb) return;
           try {
             useFinnusStore.getState().setIsPlayingAudio(true);
             markAudiblePlayback(true);
             await applyTtsExclusiveAudioMode();
-            const fb = buffered.join(' ');
-            await runEstimatedLiveSubtitles(
+            await speakExpoWithLiveSubtitles(
               fb,
-              (t) => useFinnusStore.getState().setSubtitleText(t),
-              () => speakWithExpoSpeech(fb, { language: 'de-DE' }),
+              (tx) => useFinnusStore.getState().setSubtitleText(tx),
               () => true,
             );
           } finally {
@@ -2077,10 +2326,24 @@ export async function speakAssistantText(
     const { scrubSpeechForTts } = require('./agi/speechGuardrails') as {
       scrubSpeechForTts: (
         s: string,
-        o?: { maxChars?: number },
+        o?: { maxChars?: number; userAskedAddress?: boolean },
       ) => { text: string };
     };
-    trimmed = scrubSpeechForTts(trimmed, { maxChars: 2200 }).text.trim();
+    trimmed = scrubSpeechForTts(trimmed, {
+      maxChars: 2200,
+      userAskedAddress: (() => {
+        try {
+          const {
+            lastUserAskedForAddressOrCoords,
+          } = require('../utils/addressPrivacy') as {
+            lastUserAskedForAddressOrCoords: () => boolean;
+          };
+          return lastUserAskedForAddressOrCoords();
+        } catch {
+          return false;
+        }
+      })(),
+    }).text.trim();
   } catch {
     trimmed = trimmed
       .replace(/\bCheck\.?\b/giu, ' ')
@@ -2108,56 +2371,6 @@ export async function speakAssistantText(
   });
 }
 
-/**
- * Fast-Hook Two-Phase: Intro sofort via TTS, Body als Satz-Queue parallel.
- */
-export async function speakTwoPhase(options: {
-  introText: string;
-  bodyTextPromise?: Promise<string>;
-  bodySentenceStream?: AsyncIterable<string>;
-  voice?: SpeakVoiceOptions;
-}): Promise<void> {
-  let intro = options.introText.trim();
-  let genAfterIntro = playbackGeneration;
-
-  // Intro endet auf Initiale („… C.“) → ersten Body-Satz ankleben, sonst Name-Riss
-  let bodyStream = options.bodySentenceStream;
-  if (bodyStream && /(?:^|[\s(])[A-ZÄÖÜ]\.$/.test(intro)) {
-    const iter = bodyStream[Symbol.asyncIterator]();
-    const first = await iter.next();
-    if (!first.done && first.value) {
-      intro = `${intro} ${String(first.value).trim()}`.replace(/\s+/g, ' ');
-    }
-    async function* rest(): AsyncGenerator<string, void, unknown> {
-      while (true) {
-        const n = await iter.next();
-        if (n.done) break;
-        const t = String(n.value ?? '').trim();
-        if (t) yield t;
-      }
-    }
-    bodyStream = rest();
-  }
-
-  if (intro) {
-    await speakText(intro, options.voice);
-    genAfterIntro = playbackGeneration;
-  }
-
-  if (playbackGeneration !== genAfterIntro) return;
-
-  if (bodyStream) {
-    await speakSentenceStream(bodyStream, options.voice);
-    return;
-  }
-
-  if (options.bodyTextPromise) {
-    const body = (await options.bodyTextPromise).trim();
-    if (playbackGeneration !== genAfterIntro) return;
-    if (body) await speakText(body, options.voice);
-  }
-}
-
 export async function playVoiceSample(options: {
   voiceId: VoiceId;
   speechRate?: number;
@@ -2181,15 +2394,15 @@ export async function playVoiceSample(options: {
     const uri = await resolveBundledAssetUri(moduleId);
     if (uri && gen === playbackGeneration) {
       store.setIsPlayingAudio(true);
-      store.setSubtitleText(voice.sample);
       activeTtsSessions += 1;
       try {
         await applyTtsExclusiveAudioMode();
-        await playWav(uri, {
-          clearPlayingOnEnd: true,
-          playbackRate: 1,
-          deleteAfter: false,
-        });
+        await playWavWithLiveSubtitles(
+          uri,
+          voice.sample,
+          { clearPlayingOnEnd: true, playbackRate: 1, deleteAfter: false },
+          (tx) => store.setSubtitleText(tx),
+        );
       } finally {
         markAudiblePlayback(false);
         activeTtsSessions = Math.max(0, activeTtsSessions - 1);
@@ -2206,6 +2419,32 @@ export async function playVoiceSample(options: {
 
   // Live Cartesia Hörprobe (oder expo-speech Fallback)
   await speakText(voice.sample, { voiceId }, { bypassDeliveryPolicy: true });
+}
+
+/** Settings: Hörprobe der Aussprache-Schreibweise, ohne Namens-Throttle. */
+export async function previewUserNamePronunciation(options: {
+  firstName: string;
+  speechHint?: string | null;
+  voiceId?: VoiceId;
+}): Promise<void> {
+  const spoken =
+    sanitizeNameSpeechHint(options.speechHint) ||
+    sanitizeNameSpeechHint(options.firstName);
+  const sentence = previewSentenceForName(spoken);
+  if (!sentence) return;
+
+  clearSpeechJobQueue();
+  await haltCurrentPlayback();
+  beginSkipUserNamePolicy();
+  try {
+    await speakText(
+      sentence,
+      { voiceId: options.voiceId },
+      { bypassDeliveryPolicy: true, priority: 'question' },
+    );
+  } finally {
+    endSkipUserNamePolicy();
+  }
 }
 
 export async function speakOnboardingIntro(options: {
@@ -2371,6 +2610,19 @@ try {
     bootstrapBackgroundSpeechPolicy: () => void;
   };
   bootstrapBackgroundSpeechPolicy();
+} catch {
+  /* soft */
+}
+
+/** Metro Fast Refresh: Sounds unloaden bevor Module neu geladen werden. */
+try {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const hot = (typeof module !== 'undefined' ? (module as any).hot : null) as
+    | { dispose?: (cb: () => void) => void }
+    | null;
+  hot?.dispose?.(() => {
+    void stopSpeakingInternal();
+  });
 } catch {
   /* soft */
 }

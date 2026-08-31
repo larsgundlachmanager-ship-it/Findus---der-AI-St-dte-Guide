@@ -15,7 +15,8 @@ export type PlanShortAnswer = {
     | 'plan_confirm'
     | 'plan_accept'
     | 'plan_reject'
-    | 'prompt';
+    | 'prompt'
+    | 'plan_location';
   pick?: string;
   prompt?: string;
 };
@@ -78,6 +79,12 @@ type Store = {
   closeRequestAtMs: number | null;
   /** Timeline sichtbar (HomeScreen synced) — Mic → nur Modul 5 */
   calendarVisible: boolean;
+  /** Keep-alive nach erstem Open/Premount — kein Cold-Mount */
+  calendarMounted: boolean;
+  /** Wann zuletzt geschlossen (für 30-Min-Stale-Purge) */
+  calendarHiddenAtMs: number | null;
+  /** Letzte Interaktion im Planungsmodul (offene Wünsche verwerfen) */
+  lastPlanInteractionAtMs: number | null;
   /**
    * Einzel-Aufgabe/Termin: gleiche Planung, Timeline bleibt zu (Chat + Speech).
    * requestOpenPlanCalendar ist dann No-Op.
@@ -86,17 +93,22 @@ type Store = {
   shortAnswers: PlanShortAnswer[];
   mirroredActions: QuickAction[];
   pendingChoice: PlanPendingChoice | null;
-  /** Live-Anzeige: Timeline scrollt zu dem, was Findus gerade ändert */
+  /** Live-Anzeige: Timeline scrollt zu dem, was Yorro gerade ändert */
   scrollTarget: PlanScrollTarget;
   scrollTargetAtMs: number;
   /** Agent will sichtbaren Kalender-Tag wechseln (morgen / …) */
   requestedDayKey: string | null;
   requestedDayAtMs: number;
+  /** Nav-Leg wird neu geroutet — UI zeigt Spinner */
+  routeComputingIds: Record<string, true>;
   requestOpen: () => void;
   requestClose: () => void;
   clearOpenRequest: () => void;
   clearCloseRequest: () => void;
   setCalendarVisible: (visible: boolean) => void;
+  premountCalendar: () => void;
+  markCalendarHidden: () => void;
+  clearCalendarHidden: () => void;
   setHeadlessPlanning: (headless: boolean) => void;
   setShortAnswers: (answers: PlanShortAnswer[]) => void;
   clearShortAnswers: () => void;
@@ -108,12 +120,20 @@ type Store = {
   clearScrollTarget: () => void;
   requestDayKey: (dayKey: string) => void;
   clearRequestedDayKey: () => void;
+  /** Stop den der User gerade tippt/sieht — Agent-Fokus. */
+  focusedStopId: string | null;
+  setFocusedStopId: (id: string | null) => void;
+  touchPlanInteraction: () => void;
+  markRouteComputing: (id: string, on: boolean) => void;
 };
 
 export const usePlanCalendarUiStore = create<Store>((set) => ({
   openRequestAtMs: null,
   closeRequestAtMs: null,
   calendarVisible: false,
+  calendarMounted: false,
+  calendarHiddenAtMs: null,
+  lastPlanInteractionAtMs: null,
   headlessPlanning: false,
   shortAnswers: [],
   mirroredActions: [],
@@ -122,12 +142,50 @@ export const usePlanCalendarUiStore = create<Store>((set) => ({
   scrollTargetAtMs: 0,
   requestedDayKey: null,
   requestedDayAtMs: 0,
+  focusedStopId: null as string | null,
+  routeComputingIds: {},
   requestOpen: () =>
     set({ openRequestAtMs: Date.now(), closeRequestAtMs: null }),
   requestClose: () => set({ closeRequestAtMs: Date.now() }),
   clearOpenRequest: () => set({ openRequestAtMs: null }),
   clearCloseRequest: () => set({ closeRequestAtMs: null }),
-  setCalendarVisible: (calendarVisible) => set({ calendarVisible }),
+  setCalendarVisible: (calendarVisible) => {
+    try {
+      const {
+        noteOverlayBusy,
+      } = require('../../services/boot/interactiveBootGate') as {
+        noteOverlayBusy: (busy: boolean) => void;
+      };
+      if (calendarVisible) {
+        noteOverlayBusy(true);
+      } else {
+        // Settings kann parallel offen sein
+        try {
+          const {
+            useHomeOverlayStore,
+          } = require('../../store/useHomeOverlayStore') as {
+            useHomeOverlayStore: {
+              getState: () => { settingsVisible: boolean; seekVisible: boolean };
+            };
+          };
+          const o = useHomeOverlayStore.getState();
+          if (!o.settingsVisible && !o.seekVisible) noteOverlayBusy(false);
+        } catch {
+          noteOverlayBusy(false);
+        }
+      }
+    } catch {
+      /* soft */
+    }
+    set(
+      calendarVisible
+        ? { calendarVisible: true, calendarMounted: true }
+        : { calendarVisible: false },
+    );
+  },
+  premountCalendar: () => set({ calendarMounted: true }),
+  markCalendarHidden: () => set({ calendarHiddenAtMs: Date.now() }),
+  clearCalendarHidden: () => set({ calendarHiddenAtMs: null }),
   setHeadlessPlanning: (headlessPlanning) => set({ headlessPlanning }),
   setShortAnswers: (shortAnswers) => set({ shortAnswers }),
   clearShortAnswers: () => set({ shortAnswers: [] }),
@@ -141,6 +199,15 @@ export const usePlanCalendarUiStore = create<Store>((set) => ({
   requestDayKey: (dayKey) =>
     set({ requestedDayKey: dayKey, requestedDayAtMs: Date.now() }),
   clearRequestedDayKey: () => set({ requestedDayKey: null }),
+  setFocusedStopId: (focusedStopId: string | null) => set({ focusedStopId }),
+  touchPlanInteraction: () => set({ lastPlanInteractionAtMs: Date.now() }),
+  markRouteComputing: (id, on) =>
+    set((s) => {
+      const next = { ...s.routeComputingIds };
+      if (on) next[id] = true;
+      else delete next[id];
+      return { routeComputingIds: next };
+    }),
 }));
 
 export function requestPlanScroll(target: PlanScrollTarget): void {
@@ -159,6 +226,19 @@ export function isHeadlessPlanningSession(): boolean {
 export function requestOpenPlanCalendar(): void {
   if (usePlanCalendarUiStore.getState().headlessPlanning) return;
   usePlanCalendarUiStore.getState().requestOpen();
+}
+
+/** Kalender sichtbar machen und einen Frame für den Paint freigeben. */
+export async function revealPlanCalendarNow(
+  dayKey?: string | null,
+): Promise<void> {
+  const ui = usePlanCalendarUiStore.getState();
+  ui.setHeadlessPlanning(false);
+  if (dayKey && /^\d{4}-\d{2}-\d{2}$/.test(dayKey)) {
+    ui.requestDayKey(dayKey);
+  }
+  requestOpenPlanCalendar();
+  await new Promise<void>((resolve) => setTimeout(resolve, 48));
 }
 
 export function requestClosePlanCalendar(): void {
