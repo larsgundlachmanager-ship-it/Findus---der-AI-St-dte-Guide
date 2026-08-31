@@ -169,6 +169,10 @@ export function exclusiveHomeMapPlaces<T extends ExclusiveMapPlace>(
         } else {
           // Zwei Punkte: unterschiedliche Icons nie verschmelzen
           // (sonst landet das Bahn-Icon auf dem Nachbar-POI).
+          // Gleiche Transit-Icons (Doppel-Bahnhof) in ~90 m → einer.
+          const bothTransit =
+            (acc.icon === 'rail' || acc.icon === 'bus') &&
+            other.icon === acc.icon;
           if (
             acc.icon &&
             other.icon &&
@@ -176,6 +180,8 @@ export function exclusiveHomeMapPlaces<T extends ExclusiveMapPlace>(
             metersBetween(acc.lat, acc.lng, other.lat, other.lng) > 2
           ) {
             hit = false;
+          } else if (bothTransit) {
+            hit = metersBetween(acc.lat, acc.lng, other.lat, other.lng) < 90;
           } else {
             hit = metersBetween(acc.lat, acc.lng, other.lat, other.lng) < 12;
           }

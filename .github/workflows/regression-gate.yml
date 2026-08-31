@@ -7,6 +7,11 @@ on:
       - 'src/module2/**'
       - 'src/services/audio/**'
       - 'src/services/concierge/**'
+      - 'src/services/boot/**'
+      - 'src/services/ui/uiInstant.smoke.test.ts'
+      - 'src/components/homeMap/**'
+      - 'src/store/**'
+      - 'src/constants/uiLayers.ts'
       - 'scripts/run-regression-gate.ts'
       - 'package.json'
   pull_request:
@@ -14,6 +19,11 @@ on:
       - 'src/module2/**'
       - 'src/services/audio/**'
       - 'src/services/concierge/**'
+      - 'src/services/boot/**'
+      - 'src/services/ui/uiInstant.smoke.test.ts'
+      - 'src/components/homeMap/**'
+      - 'src/store/**'
+      - 'src/constants/uiLayers.ts'
       - 'scripts/run-regression-gate.ts'
       - 'package.json'
 

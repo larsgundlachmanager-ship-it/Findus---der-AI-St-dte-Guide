@@ -129,7 +129,11 @@ async function main(): Promise<void> {
   );
   assert(host.includes('placesBootCommittedRef'), 'atomic places commit');
   assert(host.includes('Nur aktive Stadt vorwärmen'), 'kein Parallel-Prefetch aller Packs');
-  assert(host.includes('runMapPolishWhenFree'), 'map polish lane');
+  assert(host.includes('runMapIdleWhenFree'), 'map idle lane für Prefetch/Fog');
+  assert(
+    !host.includes('prefetchNext') || !host.includes('others[i++]'),
+    'keine serielle Prefetch-Kette aller Offline-Städte',
+  );
 
   const view = readFileSync(
     join(process.cwd(), 'src/components/homeMap/NativeHomeMapView.tsx'),
@@ -143,6 +147,26 @@ async function main(): Promise<void> {
   );
   assert(gate.includes('drainOne'), 'Waiter einzeln drainen');
   assert(gate.includes('DEFERRED_JOB_GAP_MS'), 'Gap zwischen Jobs');
+  assert(gate.includes('mapIdle'), 'mapIdle Lane');
+  assert(gate.includes('runMapIdleWhenFree'), 'runMapIdleWhenFree export');
+  assert(gate.includes('OVERLAY_IDLE_BUSY_MAX_MS'), 'Overlay Idle Failsafe kurz');
+  assert(gate.includes('scheduleWakeWhileBlocked'), 'Timer-Wake wenn blocked');
+  assert(
+    gate.includes('park mapIdle/hydrate only') ||
+      gate.includes('nur Idle/Hydrate pausieren'),
+    'Overlay blockiert nicht Map-Paint',
+  );
+
+  // Overlay darf mapPolish nicht parken (Sofort-Feedback)
+  resetInteractiveBootGate();
+  markSplashInteractive(Date.now() - INTERACTIVE_WINDOW_MS - 10);
+  noteInteractiveSettled();
+  noteOverlayBusy(true);
+  assert(isLaneFree('mapPolish'), 'overlay → mapPolish frei (Paint)');
+  assert(isLaneFree('mapCore'), 'overlay → mapCore frei');
+  assert(!isLaneFree('mapIdle'), 'overlay → mapIdle geparkt');
+  assert(!isLaneFree('hydrate'), 'overlay → hydrate geparkt');
+  noteOverlayBusy(false);
 
   console.log('interactiveBootGate.smoke.test.ts OK');
 }

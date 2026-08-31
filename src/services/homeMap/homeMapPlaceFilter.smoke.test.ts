@@ -3,6 +3,8 @@
  */
 
 import type { Poi } from '../../db/types';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import {
   isAlwaysOnMapAmenity,
   isKeepDotMapPoi,
@@ -69,6 +71,33 @@ const museum = poi({
 assert(isTransitMapPoi(halt), 'Haltepunkt ist ÖPNV');
 assert(isTransitMapPoi(bus), 'Bushaltestelle ist ÖPNV');
 assert(!isTransitMapPoi(resto), 'Restaurant ist kein ÖPNV');
+assert(
+  !isTransitMapPoi(
+    poi({
+      id: 77,
+      name: 'Zahnarztpraxis Heilmann',
+      lat: 53.67,
+      lng: 9.76,
+      category: 'gesundheit',
+      tags_json: JSON.stringify(['bahnhof', 'gesundheit']),
+    }),
+  ),
+  'Zahnarzt mit District-Tag bahnhof ≠ ÖPNV',
+);
+{
+  const bulletsSrc = readFileSync(
+    join(process.cwd(), 'src/services/homeMap/homeMapPlaceBullets.ts'),
+    'utf8',
+  );
+  assert(
+    bulletsSrc.includes('Berufe/Orte vor Straßen-/Viertel-Tags'),
+    'categoryFromName: Beruf vor bahnhof-Tag',
+  );
+  assert(
+    bulletsSrc.includes('Nur echter Halt im Namen'),
+    'categoryFromName: kein Bahnhofstraße-False-Positive',
+  );
+}
 assert(isKeepDotMapPoi(halt), 'Haltepunkt bleibt Karten-Punkt');
 assert(isKeepDotMapPoi(bus), 'Bushaltestelle bleibt Karten-Punkt');
 assert(isKeepDotMapPoi(resto), 'Restaurant = Gabel-Messer-Icon');

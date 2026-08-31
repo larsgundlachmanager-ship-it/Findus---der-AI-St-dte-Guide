@@ -9,7 +9,7 @@
  *    sonst zittert der Rand beim Verschieben und verschwindet im Nahzoom.
  *
  * SSOT für Tests. Die Homescreen-WebView trägt denselben Algorithmus in
- * `homePresenceMapHtml.ts` (kein fill-rule — MapLibre 4.7).
+ * `NativeHomeMapView` Fog-Fill (kein fill-rule — MapLibre Native).
  */
 
 export const FOG_MERGE_GAP_M = 20;

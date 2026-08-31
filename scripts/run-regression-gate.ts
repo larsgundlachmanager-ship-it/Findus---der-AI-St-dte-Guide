@@ -39,6 +39,22 @@ const steps: Array<{ name: string; cmd: string }> = [
     name: 'owner-gold',
     cmd: 'npx --yes --package tsx@4.19.4 tsx src/module2/blueprints/ownerGold.smoke.test.ts',
   },
+  {
+    name: 'ui-instant',
+    cmd: 'npx --yes --package tsx@4.19.4 tsx src/services/ui/uiInstant.smoke.test.ts',
+  },
+  {
+    name: 'boot-gate',
+    cmd: 'npx --yes --package tsx@4.19.4 tsx src/services/boot/interactiveBootGate.smoke.test.ts',
+  },
+  {
+    name: 'boot-gate-queue',
+    cmd: 'npx --yes --package tsx@4.19.4 tsx src/services/boot/bootGate.queue.smoke.test.ts',
+  },
+  {
+    name: 'native-home-map',
+    cmd: 'npx --yes --package tsx@4.19.4 tsx src/components/homeMap/nativeHomeMap.smoke.test.ts',
+  },
 ];
 
 for (const step of steps) {

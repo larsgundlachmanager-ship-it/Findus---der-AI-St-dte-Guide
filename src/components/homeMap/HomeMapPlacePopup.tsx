@@ -161,6 +161,13 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
       }
       busyRef.current = true;
       setBusy(true);
+      // Sofort Busy-Kreis — noch bevor Popup weg und Route läuft.
+      try {
+        useFinnusStore.getState().setNavRouteLoading(true);
+        useFinnusStore.getState().setIsGenerating(true);
+      } catch {
+        /* soft */
+      }
       // Sofort weg — Mic wieder blau, kein klebendes Textfeld.
       dismissInstant();
 

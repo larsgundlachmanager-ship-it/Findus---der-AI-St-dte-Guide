@@ -31,6 +31,11 @@ import {
   selectNavRouteLoading,
   useFinnusStore,
 } from '../store/useFinnusStore';
+import { useVoiceSessionStore } from '../store/useVoiceSessionStore';
+import {
+  selectNavHudLoading,
+  useNavHudStore,
+} from '../store/useNavHudStore';
 import { usePlanCalendarUiStore } from '../module2/timeline/planCalendarUiStore';
 import {
   startTourWithLocationPermission,
@@ -231,7 +236,7 @@ const HomeLiveLayer = React.memo(function HomeLiveLayer({
   );
 });
 
-/** Mic + Dock — nur Voice-/Nav-Mood, kein POI/Card-Churn der Karte. */
+/** Mic + Dock — Voice-/Nav-Mood aus Session-Stores (kein Map-POI-Churn). */
 const HomeChromeLayer = React.memo(function HomeChromeLayer({
   safePadBottom,
   isListening,
@@ -248,10 +253,10 @@ const HomeChromeLayer = React.memo(function HomeChromeLayer({
   onPlaces,
   onSettings,
 }: HomeChromeLayerProps) {
-  const isPlayingAudio = useFinnusStore((s) => s.isPlayingAudio);
-  const isAudiblySpeaking = useFinnusStore((s) => s.isAudiblySpeaking);
-  const navRouteLoading = useFinnusStore(selectNavRouteLoading);
-  const navActive = useFinnusStore((s) => s.navActive);
+  const isPlayingAudio = useVoiceSessionStore((s) => s.isPlayingAudio);
+  const isAudiblySpeaking = useVoiceSessionStore((s) => s.isAudiblySpeaking);
+  const navRouteLoading = useNavHudStore(selectNavHudLoading);
+  const navActive = useNavHudStore((s) => s.navActive);
   const isSimulationMode = useFinnusStore((s) => s.isSimulationMode);
   const pois = useFinnusStore((s) => (s.isSimulationMode ? s.pois : EMPTY_POIS));
 

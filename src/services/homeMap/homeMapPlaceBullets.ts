@@ -398,11 +398,18 @@ export function categoryLabelForPoi(poi: {
 
 function categoryFromName(blob: string): string | null {
   const t = blob.toLowerCase();
+  // Berufe/Orte vor Straßen-/Viertel-Tags wie „bahnhof“ in tags_json
   if (/kindergarten|kita|krippe/.test(t)) return 'Kita';
+  if (/zahnarzt|zahnärztin|zahnaerztin|\barztpraxis\b|\barzt\b|ärztin|aerztin|praxis/.test(t)) {
+    return 'Gesundheit';
+  }
   if (/brücke|bruecke|unterführung/.test(t)) return 'Brücke';
   if (/kirche|kapelle|\bdom\b/.test(t)) return 'Kirche';
   if (/museum/.test(t)) return 'Museum';
-  if (/bahnhof/.test(t)) return 'Bahnhof';
+  // Nur echter Halt im Namen — nicht „Bahnhofstraße“ / District-Tag „bahnhof“
+  if (/\b(bahnhof|haltepunkt|hbf)\b/.test(t) && !/straße|strasse|str\./.test(t)) {
+    return 'Bahnhof';
+  }
   if (/feuerwehr/.test(t)) return 'Feuerwehr';
   if (/krieger|ehrenmal|denkmal/.test(t)) return 'Denkmal';
   if (/gasthof|restaurant/.test(t)) return 'Restaurant';

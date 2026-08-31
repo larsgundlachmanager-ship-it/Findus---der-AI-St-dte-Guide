@@ -1,6 +1,8 @@
 /**
  * Smart Compass — high-frequency navigation (1 Hz GPS).
  * Speed-aware thresholds for walk / bicycle / transit.
+ *
+ * Progressive Route / Hands-Free Start: siehe `./handsFreeNav/navigationFacade`.
  */
 
 import * as Location from 'expo-location';

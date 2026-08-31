@@ -136,7 +136,6 @@ import {
   hydrateDisplayExtract,
   peekCityMapExtract,
   peekDisplayExtract,
-  prepareExtractForDisplay,
   rememberDisplayExtract,
   scheduleIdleCityMapExtract,
   ensureCityMapExtract,
@@ -819,10 +818,10 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       }).then((extra) => {
         if (gen !== placesInjectGen.current || popupHoldRef.current) return;
         if (extra.length === 0) return;
-        const { runMapPolishWhenFree } = require('../../services/boot/interactiveBootGate') as {
-          runMapPolishWhenFree: (fn: () => void) => void;
+        const { runMapIdleWhenFree } = require('../../services/boot/interactiveBootGate') as {
+          runMapIdleWhenFree: (fn: () => void) => void;
         };
-        runMapPolishWhenFree(() => {
+        runMapIdleWhenFree(() => {
           if (gen !== placesInjectGen.current || popupHoldRef.current) return;
           const merged = [...visible];
           for (const p of extra) {
@@ -1823,7 +1822,8 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     setHeadingFollow(false);
     invalidateLocalMapIndex();
     void warmLocalMapIndex();
-    // Nur aktive Stadt vorwärmen — alle Packs parallel = JS-Freeze (Mic/Timeline tot).
+    // Nur aktive Stadt vorwärmen — keine serielle Prefetch-Kette aller Offline-Packs
+    // (Viewport-First: Tornesch/Kiel erst wenn Viewport sie braucht).
     const activeMapId = (cityId || env.cityId() || '').toLowerCase();
     if (activeMapId) {
       void prefetchCityMapExtract(activeMapId).catch(() => undefined);
@@ -1836,7 +1836,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
           .map((row) => row.id.toLowerCase())
           .filter((id) => id && !isRegionPackCityId(id));
         localOfflineCityIdsRef.current = offlineIds;
-        // Pack-_coverage für alle Offline-Städte (Tornesch etc.) — vor Fills.
+        // Pack-_coverage für Offline-Städte (Tornesch etc.) — vor Fills, ohne Map-Download.
         await registerCoverageFromLocalPacks({
           cityIds: offlineIds.filter((id) =>
             rows.some((r) => r.id === id && r.hasPack),
@@ -1845,26 +1845,46 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         invalidateLocalMapIndex();
         await warmLocalMapIndex();
         if (readyRef.current) injectCitiesRef.current();
-        const others = offlineIds.filter((id) => id && id !== activeMapId);
-        const { runMapPolishWhenFree } = require('../../services/boot/interactiveBootGate') as {
-          runMapPolishWhenFree: (fn: () => void) => void;
+        // Optional: genau EIN Nah-Nachbar idle vorwärmen — nie die ganze Offline-Liste.
+        const { runMapIdleWhenFree } = require('../../services/boot/interactiveBootGate') as {
+          runMapIdleWhenFree: (fn: () => void) => void;
         };
-        let i = 0;
-        const prefetchNext = () => {
-          if (i >= others.length) {
-            invalidateLocalMapIndex();
-            return;
+        const { resolveCityCoverageBoundsSync } = require('../../services/discovery/cityCoverageBounds') as {
+          resolveCityCoverageBoundsSync: (
+            id: string,
+          ) => { latMin: number; latMax: number; lngMin: number; lngMax: number } | null;
+        };
+        const originLat = bootLat ?? gpsLatRef.current;
+        const originLng = bootLng ?? gpsLngRef.current;
+        let near: string | null = null;
+        let nearDist = Number.POSITIVE_INFINITY;
+        if (
+          typeof originLat === 'number' &&
+          typeof originLng === 'number' &&
+          Number.isFinite(originLat) &&
+          Number.isFinite(originLng)
+        ) {
+          for (const id of offlineIds) {
+            if (!id || id === activeMapId) continue;
+            const b = resolveCityCoverageBoundsSync(id);
+            if (!b) continue;
+            const cLat = (b.latMin + b.latMax) / 2;
+            const cLng = (b.lngMin + b.lngMax) / 2;
+            const d =
+              Math.abs(cLat - originLat) + Math.abs(cLng - originLng);
+            if (d < nearDist) {
+              nearDist = d;
+              near = id;
+            }
           }
-          const id = others[i++];
-          runMapPolishWhenFree(() => {
-            void prefetchCityMapExtract(id)
-              .catch(() => undefined)
-              .finally(() => {
-                setTimeout(prefetchNext, 200);
-              });
-          });
-        };
-        setTimeout(prefetchNext, 2_500);
+        }
+        if (near) {
+          setTimeout(() => {
+            runMapIdleWhenFree(() => {
+              void prefetchCityMapExtract(near!).catch(() => undefined);
+            });
+          }, 4_000);
+        }
       } catch {
         /* soft */
       }
@@ -1881,31 +1901,31 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     );
     scheduleHeavyMapOverlays();
     injectNavRoute();
-    // Footprints / Ringe / Fog später — nur wenn Map-Polish-Lane frei (Mic/Timeline zuerst).
+    // Footprints / Ringe / Fog später — mapIdle (Settings blockiert Paint nicht).
     InteractionManager.runAfterInteractions(() => {
       setTimeout(() => {
-        const { runMapPolishWhenFree } = require('../../services/boot/interactiveBootGate') as {
-          runMapPolishWhenFree: (fn: () => void) => void;
+        const { runMapIdleWhenFree } = require('../../services/boot/interactiveBootGate') as {
+          runMapIdleWhenFree: (fn: () => void) => void;
         };
-        runMapPolishWhenFree(() => {
+        runMapIdleWhenFree(() => {
           if (bootLat != null && bootLng != null) {
             void runFootprintEnrich(500);
           }
         });
       }, HOME_MAP_FOOTPRINTS_AFTER_MS);
       setTimeout(() => {
-        const { runMapPolishWhenFree } = require('../../services/boot/interactiveBootGate') as {
-          runMapPolishWhenFree: (fn: () => void) => void;
+        const { runMapIdleWhenFree } = require('../../services/boot/interactiveBootGate') as {
+          runMapIdleWhenFree: (fn: () => void) => void;
         };
-        runMapPolishWhenFree(() => {
+        runMapIdleWhenFree(() => {
           runWarmupRings();
         });
       }, HOME_MAP_WARMUP_RINGS_AFTER_MS);
       setTimeout(() => {
-        const { runMapPolishWhenFree } = require('../../services/boot/interactiveBootGate') as {
-          runMapPolishWhenFree: (fn: () => void) => void;
+        const { runMapIdleWhenFree } = require('../../services/boot/interactiveBootGate') as {
+          runMapIdleWhenFree: (fn: () => void) => void;
         };
-        runMapPolishWhenFree(() => {
+        runMapIdleWhenFree(() => {
           injectCitiesRef.current();
           refreshCatalogBoundaries(12);
         });

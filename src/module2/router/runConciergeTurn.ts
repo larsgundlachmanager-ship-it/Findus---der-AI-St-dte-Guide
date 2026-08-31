@@ -26,6 +26,7 @@ import {
   createLiveSentencePump,
   remainingSpeechAfterLead,
 } from '../../services/audio/liveSentencePump';
+import { startLiveSpeechSession } from './runConciergeTurnSpeech';
 import {
   noteUserUtterance,
   getShortTerm,
@@ -372,49 +373,6 @@ async function fireEarlyFloskelBridge(
   } catch {
     return null;
   }
-}
-
-/**
- * Eine TTS-Session für den ganzen Turn: Fast-Hook + Prefetch (Satz 3 spricht,
- * 4 liegt bereit, 5+6 werden parallel fertig). Keine Satz-für-Satz-Jobs.
- * TTS_SENTENCE_PIPELINE_LOCK
- */
-async function startLiveSpeechSession(
-  pump: ReturnType<typeof createLiveSentencePump>,
-  turnId: string,
-  firstSentence: string,
-): Promise<void> {
-  // Dieselbe fused Session (Bridge = Satz 1) nicht ein zweites Mal öffnen.
-  if (pump.hasStarted()) return;
-  if (!pump.markStarted()) return;
-  // Eine Session: Fast-Hook = oft die Bridge. Kein Wait auf eine zweite Playback.
-  // TTS_SENTENCE_PIPELINE_LOCK
-  let pumpStarted = false;
-  try {
-    const { speakRuntimeSentences } = await import('../../runtime/speechModule');
-    const { getVoiceSettingsForTour } = await import(
-      '../../services/ttsService'
-    );
-    const { warmStreamingPhrases } = await import(
-      '../../services/audio/streamingAudioQueueService'
-    );
-    const voice = await getVoiceSettingsForTour();
-    warmStreamingPhrases(firstSentence, voice.voiceId);
-    void speakRuntimeSentences(
-      pump.sentences,
-      { voiceId: voice.voiceId, speechRate: voice.speechRate },
-      { priority: 'question', deliveryKind: 'assistant' },
-    );
-    pumpStarted = true;
-  } catch {
-    pumpStarted = false;
-  }
-  enqueueSpeech({
-    kind: 'main',
-    text: firstSentence,
-    turnId,
-    alreadySpoken: pumpStarted,
-  });
 }
 
 /** Haupt-Speech darf Wait-Bridge nicht wiederholen. */

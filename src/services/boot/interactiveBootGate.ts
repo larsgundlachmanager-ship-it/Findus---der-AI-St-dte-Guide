@@ -1,32 +1,43 @@
 /**
  * Cold-start Interactive Window + Prioritäts-Lanes.
- * mic > overlays > mapCore > mapPolish > hydrate
+ * mic > overlays > mapCore > mapPolish > mapIdle > hydrate
  *
- * Wichtig: Waiter werden EINzeln mit Yield drained — nie alle Hydrate/Polish
- * synchron hintereinander (sonst friert Mic/Timeline 30–60 s ein).
+ * Sofort-Feedback-Vertrag:
+ * - mic / overlays / mapCore laufen immer sofort (nie Queue).
+ * - Overlay blockiert nur mapIdle + hydrate (Prefetch/Fog) — nie Map-Paint.
+ * - Waiter einzeln mit Yield; bei Block Timer-Wake (kein stiller Tod).
  */
 
-export type BootLane = 'mic' | 'overlays' | 'mapCore' | 'mapPolish' | 'hydrate';
+export type BootLane =
+  | 'mic'
+  | 'overlays'
+  | 'mapCore'
+  | 'mapPolish'
+  | 'mapIdle'
+  | 'hydrate';
 
 const LANE_RANK: Record<BootLane, number> = {
   mic: 0,
   overlays: 1,
   mapCore: 2,
   mapPolish: 3,
-  hydrate: 4,
+  mapIdle: 4,
+  hydrate: 5,
 };
 
 /** Nach Splash: Mic/UI haben Vorfahrt. */
 export const INTERACTIVE_WINDOW_MS = 3_500;
 /** Abstand zwischen zwei deferred Jobs (JS-Thread atmen lassen). */
 export const DEFERRED_JOB_GAP_MS = 200;
-/** Mic-Active Safety: nie ewig Polish blockieren. */
+/** Wenn Lane busy: trotzdem wecken (sonst stirbt die Queue still). */
+export const BLOCKED_WAKE_MS = 500;
+/** Mic-Active Safety: nie ewig Polish/Idle blockieren. */
 const MIC_ACTIVE_MAX_MS = 45_000;
 /**
- * Overlay offen = Background pausiert die ganze Zeit.
- * Nur Failsafe falls Close verloren geht (nicht 2 s — sonst friert Settings ein).
+ * Overlay pausiert nur Idle/Hydrate.
+ * Kurz — Settings darf Map-Paint nicht minutenlang parken.
  */
-const OVERLAY_BUSY_MAX_MS = 10 * 60_000;
+export const OVERLAY_IDLE_BUSY_MAX_MS = 30_000;
 
 type GateState = {
   splashInteractiveAt: number;
@@ -34,6 +45,8 @@ type GateState = {
   micPipelineReady: boolean;
   micActive: boolean;
   overlayBusy: boolean;
+  overlayBusySince: number;
+  micActiveSince: number;
 };
 
 const state: GateState = {
@@ -42,19 +55,51 @@ const state: GateState = {
   micPipelineReady: false,
   micActive: false,
   overlayBusy: false,
+  overlayBusySince: 0,
+  micActiveSince: 0,
 };
 
 type Waiter = {
   lane: BootLane;
   resolve: () => void;
+  enqueuedAt: number;
 };
 
 const waiters: Waiter[] = [];
 let settleTimer: ReturnType<typeof setTimeout> | null = null;
 let drainTimer: ReturnType<typeof setTimeout> | null = null;
+let wakeTimer: ReturnType<typeof setTimeout> | null = null;
 let draining = false;
 let micSafetyTimer: ReturnType<typeof setTimeout> | null = null;
 let overlaySafetyTimer: ReturnType<typeof setTimeout> | null = null;
+
+function gateLog(msg: string, extra?: Record<string, unknown>): void {
+  if (typeof __DEV__ !== 'undefined' && __DEV__) {
+    console.log(`[boot-gate] ${msg}`, extra ?? '');
+  }
+}
+
+function clearWake(): void {
+  if (wakeTimer) {
+    clearTimeout(wakeTimer);
+    wakeTimer = null;
+  }
+}
+
+function scheduleWakeWhileBlocked(): void {
+  if (wakeTimer || waiters.length === 0) return;
+  wakeTimer = setTimeout(() => {
+    wakeTimer = null;
+    if (waiters.length === 0) return;
+    gateLog('wake while blocked', {
+      waiters: waiters.length,
+      lanes: waiters.map((w) => w.lane),
+      mic: state.micActive,
+      overlay: state.overlayBusy,
+    });
+    scheduleDrain();
+  }, BLOCKED_WAKE_MS);
+}
 
 function scheduleDrain(): void {
   if (draining || drainTimer) return;
@@ -67,15 +112,28 @@ function scheduleDrain(): void {
 function drainOne(): void {
   if (waiters.length === 0) {
     draining = false;
+    clearWake();
     return;
   }
   draining = true;
   const idx = waiters.findIndex((w) => isLaneFree(w.lane));
   if (idx < 0) {
     draining = false;
+    gateLog('drain blocked', {
+      waiters: waiters.length,
+      oldestMs: Date.now() - (waiters[0]?.enqueuedAt ?? Date.now()),
+      mic: state.micActive,
+      overlay: state.overlayBusy,
+    });
+    scheduleWakeWhileBlocked();
     return;
   }
+  clearWake();
   const [w] = waiters.splice(idx, 1);
+  const waited = Date.now() - w.enqueuedAt;
+  if (waited > 400) {
+    gateLog('drain job', { lane: w.lane, waitedMs: waited, left: waiters.length });
+  }
   try {
     w.resolve();
   } catch {
@@ -110,6 +168,8 @@ export function resetInteractiveBootGate(): void {
   state.micPipelineReady = false;
   state.micActive = false;
   state.overlayBusy = false;
+  state.overlayBusySince = 0;
+  state.micActiveSince = 0;
   if (settleTimer) {
     clearTimeout(settleTimer);
     settleTimer = null;
@@ -118,6 +178,7 @@ export function resetInteractiveBootGate(): void {
     clearTimeout(drainTimer);
     drainTimer = null;
   }
+  clearWake();
   if (micSafetyTimer) {
     clearTimeout(micSafetyTimer);
     micSafetyTimer = null;
@@ -154,6 +215,10 @@ export function peekInteractiveBootGate(): Readonly<GateState> {
   return { ...state };
 }
 
+export function peekBootGateWaiters(): number {
+  return waiters.length;
+}
+
 export function noteMicPipelineReady(): void {
   state.micPipelineReady = true;
 }
@@ -162,10 +227,11 @@ export function isMicPipelineReady(): boolean {
   return state.micPipelineReady;
 }
 
-/** Mic-Press / Listening aktiv — mapPolish + hydrate pausieren. Höchste Prio. */
+/** Mic-Press / Listening — mapPolish + mapIdle + hydrate pausieren. */
 export function noteMicActive(active: boolean): void {
   const was = state.micActive;
   state.micActive = active;
+  state.micActiveSince = active ? Date.now() : 0;
   if (micSafetyTimer) {
     clearTimeout(micSafetyTimer);
     micSafetyTimer = null;
@@ -176,40 +242,48 @@ export function noteMicActive(active: boolean): void {
       drainTimer = null;
     }
     draining = false;
+    gateLog('mic active — park idle/polish', { waiters: waiters.length });
     micSafetyTimer = setTimeout(() => {
       micSafetyTimer = null;
       if (state.micActive) {
         state.micActive = false;
+        state.micActiveSince = 0;
+        gateLog('mic failsafe clear');
         flushWaiters();
       }
     }, MIC_ACTIVE_MAX_MS);
+    scheduleWakeWhileBlocked();
   } else if (was) {
     flushWaiters();
   }
 }
 
-/** Timeline/Settings/Seek offen — Background komplett pausieren bis Close. */
+/**
+ * Timeline/Settings/Seek offen — nur Idle/Hydrate pausieren.
+ * Map-Paint (mapCore/mapPolish) läuft weiter → Sofort-Feedback-Vertrag.
+ */
 export function noteOverlayBusy(busy: boolean): void {
   const was = state.overlayBusy;
   state.overlayBusy = busy;
+  state.overlayBusySince = busy ? Date.now() : 0;
   if (overlaySafetyTimer) {
     clearTimeout(overlaySafetyTimer);
     overlaySafetyTimer = null;
   }
   if (busy) {
-    // Laufenden Drain abbrechen — UI zuerst.
-    if (drainTimer) {
-      clearTimeout(drainTimer);
-      drainTimer = null;
-    }
-    draining = false;
+    gateLog('overlay busy — park mapIdle/hydrate only', {
+      waiters: waiters.length,
+    });
     overlaySafetyTimer = setTimeout(() => {
       overlaySafetyTimer = null;
       if (state.overlayBusy) {
         state.overlayBusy = false;
+        state.overlayBusySince = 0;
+        gateLog('overlay failsafe clear');
         if (!state.micActive) flushWaiters();
       }
-    }, OVERLAY_BUSY_MAX_MS);
+    }, OVERLAY_IDLE_BUSY_MAX_MS);
+    scheduleWakeWhileBlocked();
   } else if (was && !state.micActive) {
     flushWaiters();
   }
@@ -218,6 +292,20 @@ export function noteOverlayBusy(busy: boolean): void {
 export function isLaneFree(lane: BootLane): boolean {
   if (lane === 'mic' || lane === 'overlays' || lane === 'mapCore') return true;
 
+  // Paint-Polish: nur Mic pausiert — Overlay nicht (Settings darf Karte nicht frieren).
+  if (lane === 'mapPolish') {
+    if (state.micActive) return false;
+    if (!state.interactiveSettled) {
+      if (!state.splashInteractiveAt) return false;
+      if (Date.now() - state.splashInteractiveAt < INTERACTIVE_WINDOW_MS) {
+        return false;
+      }
+      state.interactiveSettled = true;
+    }
+    return true;
+  }
+
+  // mapIdle + hydrate: Mic + Overlay
   if (state.micActive) return false;
   if (state.overlayBusy) return false;
 
@@ -234,7 +322,7 @@ export function isLaneFree(lane: BootLane): boolean {
 /**
  * Führt fn aus, sobald die Lane frei ist.
  * mapCore / mic / overlays laufen immer sofort.
- * mapPolish / hydrate immer über Drain-Queue (nie Burst).
+ * mapPolish / mapIdle / hydrate über Drain-Queue.
  */
 export function runWhenLaneFree(lane: BootLane, fn: () => void): void {
   if (lane === 'mic' || lane === 'overlays' || lane === 'mapCore') {
@@ -246,6 +334,7 @@ export function runWhenLaneFree(lane: BootLane, fn: () => void): void {
     resolve: () => {
       fn();
     },
+    enqueuedAt: Date.now(),
   });
   armSettleTimer();
   scheduleDrain();
@@ -257,6 +346,7 @@ export function waitUntilInteractiveSettled(): Promise<void> {
     waiters.push({
       lane: 'hydrate',
       resolve: () => resolve(),
+      enqueuedAt: Date.now(),
     });
     armSettleTimer();
     scheduleDrain();
@@ -265,6 +355,11 @@ export function waitUntilInteractiveSettled(): Promise<void> {
 
 export function runMapPolishWhenFree(fn: () => void): void {
   runWhenLaneFree('mapPolish', fn);
+}
+
+/** Prefetch / Fog / Footprints — nie Chrome, max hinter Mic/Overlay. */
+export function runMapIdleWhenFree(fn: () => void): void {
+  runWhenLaneFree('mapIdle', fn);
 }
 
 export function runHydrateWhenFree(fn: () => void): void {

@@ -112,7 +112,9 @@ async function commitImmediateNav(
   opts?: { skipMobilityAsk?: boolean },
 ): Promise<HomeMapNavResult> {
   try {
-    useFinnusStore.getState().setNavRouteLoading(true);
+    const st = useFinnusStore.getState();
+    st.setNavRouteLoading(true);
+    st.setIsGenerating(true);
   } catch {
     /* soft */
   }
@@ -229,6 +231,15 @@ export async function startHomeMapNavigation(
   const dest = resolveDest(target);
   if (!isUsableHomeMapNavCoord(dest.lat, dest.lng) || !dest.name.trim()) {
     return { ok: false, reason: 'bad_dest' };
+  }
+
+  // Sofort-Feedback: Mic/Busy-Kreis im selben Frame — vor GPS/Route-I/O.
+  try {
+    const st = useFinnusStore.getState();
+    st.setNavRouteLoading(true);
+    st.setIsGenerating(true);
+  } catch {
+    /* soft */
   }
 
   const origin = await resolveUserCoords();

@@ -210,6 +210,13 @@ function streetLabelsFromHousenumbers(
 /** core = Straßen/Wasser/Parks (erster Paint); full = +Gebäude/Hausnummern. */
 export type ExtractGeojsonPhase = 'core' | 'full';
 
+function yieldGeojson(): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, 0));
+}
+
+/**
+ * Sync-Konvertierung (klein / Boot-Core). Große full-Extracts → Async mit Yields.
+ */
 export function cityMapExtractToGeojson(
   extract: CityMapExtract | null | undefined,
   phase: ExtractGeojsonPhase = 'full',
@@ -269,6 +276,65 @@ export function cityMapExtractToGeojson(
   return {
     ...core,
     buildings: polygonsFromRings(extract.buildings),
+    housenumbers: { type: 'FeatureCollection', features: hnFeatures },
+    streets: streetFallbackFiltered,
+  };
+}
+
+/**
+ * Wie cityMapExtractToGeojson, aber mit Main-Thread-Yields zwischen Layern —
+ * Mic/Settings bleiben tippbar während Gebäude-GeoJSON gebaut wird.
+ */
+export async function cityMapExtractToGeojsonAsync(
+  extract: CityMapExtract | null | undefined,
+  phase: ExtractGeojsonPhase = 'full',
+): Promise<ExtractGeojsonBundle> {
+  if (!extract || phase === 'core') {
+    return cityMapExtractToGeojson(extract, phase);
+  }
+  await yieldGeojson();
+  const roads = linesFromExtract(extract.roads, true);
+  await yieldGeojson();
+  const core: ExtractGeojsonBundle = {
+    land: polygonsFromRings(extract.land),
+    woods: polygonsFromRings(extract.woods),
+    parks: polygonsFromRings(extract.parks),
+    water: polygonsFromRings(extract.water),
+    buildings: EMPTY,
+    rails: linesFromExtract(extract.rails),
+    roads,
+    housenumbers: EMPTY,
+    streets: EMPTY,
+    hasRoads: (extract.roads?.length ?? 0) > 0,
+  };
+  await yieldGeojson();
+  const buildings = polygonsFromRings(extract.buildings);
+  await yieldGeojson();
+  const hnFeatures: GeoJsonFeature[] = [];
+  for (const n of extract.housenumbers || []) {
+    if (typeof n.lat !== 'number' || typeof n.lng !== 'number') continue;
+    hnFeatures.push({
+      type: 'Feature',
+      properties: { n: String(n.n || ''), s: String(n.s || '') },
+      geometry: { type: 'Point', coordinates: [n.lng, n.lat] },
+    });
+  }
+  const namedRoadKeys = new Set(
+    (roads.features || [])
+      .map((f) => String(f.properties?.n || '').trim().toLowerCase())
+      .filter((n) => n.length >= 2),
+  );
+  const streetFallback = streetLabelsFromHousenumbers(extract.housenumbers);
+  const streetFallbackFiltered: GeoJsonFc = {
+    type: 'FeatureCollection',
+    features: (streetFallback.features || []).filter((f) => {
+      const key = String(f.properties?.n || '').trim().toLowerCase();
+      return key.length >= 2 && !namedRoadKeys.has(key);
+    }),
+  };
+  return {
+    ...core,
+    buildings,
     housenumbers: { type: 'FeatureCollection', features: hnFeatures },
     streets: streetFallbackFiltered,
   };

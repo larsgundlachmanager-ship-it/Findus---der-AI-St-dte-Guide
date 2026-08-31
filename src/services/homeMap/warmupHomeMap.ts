@@ -1,17 +1,11 @@
 /**
- * Karte + GPS während des Intros vorbereiten — nicht erst nach Splash-Ende.
- * Native-Pfad: nur Display-Extract + GPS (kein toter MapLibre-CDN-Warmup).
+ * Native-only Homescreen-Karte — MapLibre Native (kein WebView-HTML mehr).
+ * Warmup: Display-Extract + GPS. CDN/MapLibre-JS nur noch für Disk-Cache-Tools.
  */
 
 import { hydrateLastKnownMapGps, seedMapCameraGps } from '../location/lastKnownMapGps';
 import { getCachedUserProfile } from '../userProfileService';
 import { env } from '../../config/env';
-import {
-  ensureMapLibreDiskCache,
-  MAPLIBRE_CSS_URL,
-  MAPLIBRE_JS_URL,
-  peekMapLibreHtmlAssets,
-} from './mapLibreDiskCache';
 import {
   ensureCityMapExtract,
   hydrateDisplayExtract,
@@ -19,10 +13,8 @@ import {
   prepareExtractForDisplay,
   rememberDisplayExtract,
 } from './cityMapExtract';
-import { HOME_MAP_VECTOR_STYLE } from './homeMapStyle';
 import { noteSplashStarted } from './splashReadyGate';
 import { useMapExtractStore } from '../../store/useMapExtractStore';
-import { HOME_MAP_USE_NATIVE } from './homeMapNativeGate';
 import {
   markHomeMapBoot,
   markHomeMapBootStart,
@@ -39,18 +31,13 @@ export function canWarmupMapCamera(): boolean {
   return Date.now() < cameraWarmUntilMs;
 }
 
-function prefetchHomeMapAssets(): void {
-  if (peekMapLibreHtmlAssets()?.jsInline) return;
-  for (const url of [MAPLIBRE_JS_URL, MAPLIBRE_CSS_URL, HOME_MAP_VECTOR_STYLE]) {
-    void fetch(url, { method: 'GET', cache: 'force-cache' }).catch(
-      () => undefined,
-    );
-  }
-}
-
 function pushSnapToMapStore(
   cityId: string,
-  snap: { lat: number; lng: number; extract: NonNullable<ReturnType<typeof peekDisplayExtract>>['extract'] },
+  snap: {
+    lat: number;
+    lng: number;
+    extract: NonNullable<ReturnType<typeof peekDisplayExtract>>['extract'];
+  },
 ): void {
   useMapExtractStore.getState().setExtract(cityId, snap.extract, {
     lat: snap.lat,
@@ -100,34 +87,24 @@ export function warmupHomeMapDuringIntro(): Promise<void> {
     noteSplashMapWarmup(4_000);
     // Display-Snapshot sofort — Straßen sollen vor Places im RAM sein.
     const extractWarm = warmupCityExtract();
-    void extractWarm;
-    // Legacy WebView: CDN/Disk-Cache. Native: Skip — spart Splash-CPU/Netz.
-    if (!HOME_MAP_USE_NATIVE) {
-      prefetchHomeMapAssets();
-    }
     // Nur Last-Known GPS blockiert kurz — Extract läuft parallel.
     await Promise.race([
       hydrateLastKnownMapGps(),
       new Promise((resolve) => setTimeout(resolve, 350)),
     ]);
-    if (HOME_MAP_USE_NATIVE) {
-      // Native: Extract bis 2 s ausholen — kritisches Pfadstück für ≤5 s.
-      await Promise.race([
-        extractWarm,
-        new Promise((resolve) => setTimeout(resolve, 2_000)),
-      ]);
-    } else {
-      void Promise.race([
-        Promise.all([ensureMapLibreDiskCache(), extractWarm]),
-        new Promise((resolve) => setTimeout(resolve, 1_200)),
-      ]).catch(() => undefined);
-    }
+    // Native: Extract bis 2 s ausholen — kritisches Pfadstück für ≤5 s.
+    await Promise.race([
+      extractWarm,
+      new Promise((resolve) => setTimeout(resolve, 2_000)),
+    ]);
     try {
       const { warmupGpsDuringIntro } = await import('../locationService');
       void warmupGpsDuringIntro();
     } catch {
       /* Permission / GPS optional */
     }
-  })();
+  })().finally(() => {
+    inflight = null;
+  });
   return inflight;
 }

@@ -19,6 +19,8 @@ import type { NavPhase } from '../services/navigation/navigationTypes';
 import type { DiscoveryCandidate } from '../services/navigation/contextualDiscovery';
 import { recordWalkFix } from '../services/discovery/walkTrackService';
 import { useGpsStore } from './useGpsStore';
+import { useVoiceSessionStore } from './useVoiceSessionStore';
+import { useNavHudStore } from './useNavHudStore';
 import { upsertCachedDestination } from '../services/navigation/offlineNavCache';
 import { saveStampPassport } from '../services/navigation/stampPassportPersistence';
 
@@ -322,11 +324,26 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
   setCurrentLocationName: (name) => set({ currentLocationName: name }),
   setCurrentPoiId: (id) => set({ currentPoiId: id }),
   setSimulationMode: (enabled) => set({ isSimulationMode: enabled }),
-  setIsPlayingAudio: (playing) => set({ isPlayingAudio: playing }),
-  setIsAudiblySpeaking: (speaking) => set({ isAudiblySpeaking: speaking }),
-  setIsListening: (listening) => set({ isListening: listening }),
-  setIsGenerating: (generating) => set({ isGenerating: generating }),
-  setNavRouteLoading: (loading) => set({ navRouteLoading: loading }),
+  setIsPlayingAudio: (playing) => {
+    useVoiceSessionStore.getState().setIsPlayingAudio(playing);
+    set({ isPlayingAudio: playing });
+  },
+  setIsAudiblySpeaking: (speaking) => {
+    useVoiceSessionStore.getState().setIsAudiblySpeaking(speaking);
+    set({ isAudiblySpeaking: speaking });
+  },
+  setIsListening: (listening) => {
+    useVoiceSessionStore.getState().setIsListening(listening);
+    set({ isListening: listening });
+  },
+  setIsGenerating: (generating) => {
+    useVoiceSessionStore.getState().setIsGenerating(generating);
+    set({ isGenerating: generating });
+  },
+  setNavRouteLoading: (loading) => {
+    useNavHudStore.getState().setNavRouteLoading(loading);
+    set({ navRouteLoading: loading });
+  },
   setFindusPresence: (presence) => set({ findusPresence: presence }),
   setSubtitleText: (text) => {
     set({ subtitleText: text });
@@ -599,7 +616,10 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
       settingsOpenFocus: focus ?? null,
     }),
 
-  patchNavigation: (partial) =>
+  patchNavigation: (partial) => {
+    if (typeof partial.navActive === 'boolean') {
+      useNavHudStore.getState().setNavActive(partial.navActive);
+    }
     set((state) => {
       const next = { ...partial };
       // Skip micro bearing chatter; real turns clear this easily.
@@ -626,7 +646,8 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
       }
       if (Object.keys(next).length === 0) return state;
       return next;
-    }),
+    });
+  },
 
   resetTourContext: () =>
     set({

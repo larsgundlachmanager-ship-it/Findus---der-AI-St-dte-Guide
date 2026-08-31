@@ -118,13 +118,19 @@ assert(
   'Places verzögert nach Extract (Karte pan-bar)',
 );
 {
-  const boot = host.slice(
-    host.indexOf('const onNativeReady'),
-    host.indexOf('const onNativeReady') + 4_200,
-  );
+  const start = host.indexOf('const onNativeReady');
+  const boot = host.slice(start, start + 9_000);
   assert(boot.includes('injectOfflineMapExtract'), 'Boot: Extract zuerst');
   assert(boot.includes('scheduleHeavyMapOverlays'), 'Boot: Places über Delay');
-  assert(boot.includes('prefetchCityMapExtract'), 'Boot: alle lokalen Map-Packs');
+  assert(boot.includes('prefetchCityMapExtract'), 'Boot: aktive Stadt Extract');
+  assert(
+    boot.includes('EIN Nah-Nachbar') || boot.includes('genau EIN Nah-Nachbar'),
+    'Viewport-First: max 1 Nachbar idle',
+  );
+  assert(
+    !boot.includes('others[i++]') && !boot.includes('prefetchNext'),
+    'keine serielle Prefetch-Kette aller Packs',
+  );
   assert(
     !boot.includes('injectPlacesOnlyRef.current()'),
     'Boot: Places nicht synchron auf Ready',
@@ -246,13 +252,29 @@ assert(
   !view.includes('lastUserGestureAt.current < 12_000'),
   'kein 12s-recentExplore — Idle/Extract vergiftet User-View nicht',
 );
+assert(view.includes('followMode'), 'followMode gps|explore|nav');
+assert(view.includes('cityMapExtractToGeojsonAsync'), 'GeoJSON full mit Yields');
 assert(
-  view.includes('blocked idle/extract drift') ||
-    view.includes('restoreUserViewIfSnappedToGps({ force: true })'),
-  'Idle/Extract-Drift wird zurückgedrückt',
+  view.includes('blocked GPS snap') ||
+    view.includes('nur gegen echten MapLibre-GPS-Snap'),
+  'Restore nur GPS-Snap',
+);
+assert(view.includes('Extract nie an die Kamera'), 'kein Camera-Restore nach Extract');
+assert(
+  view.includes('regionDidChangeDebounceTime={80}') ||
+    view.includes('regionDidChangeDebounceTime={50}'),
+  'Region-Events debounced',
 );
 assert(view.includes('layerApplyQuietUntil'), 'Apply-Quiet gegen Kamera-Zack');
-assert(view.includes('Nur bei Finger/isUserInteraction') || view.includes('User-View NUR bei Finger'), 'User-View nur echte Geste');
+assert(view.includes('likelyUserExploreMotion'), 'Pan/Pinch ohne Flags erkannt');
+assert(view.includes('lastUserZoomAt'), 'Zoom-Fenster gegen Restore');
+assert(view.includes('onTouchStart'), 'Multi-Touch fingerDown');
+assert(view.includes('centerDelta > 0.00014'), 'Pan ohne Flags = User');
+assert(
+  !view.includes('blocked idle/extract drift') ||
+    view.includes('blocked GPS snap'),
+  'kein aggressives Idle-Restore mehr',
+);
 assert(view.includes('ohne reattach nie bewegen'), 'jumpTo hart geblockt');
 assert(host.includes('didBootJumpRef'), 'Boot-Jump nur 1× pro Session');
 assert(host.includes('Map-Remount darf nicht zurückreißen'), 'kein Ready-GPS-Snap');

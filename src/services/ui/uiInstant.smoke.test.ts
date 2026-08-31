@@ -216,6 +216,57 @@ assert(payload.includes('navRoutePayloadSig'), 'navRoutePayloadSig export');
 // Boot gate lanes
 assert(gate.includes("mic: 0"), 'Lane mic höchste Prio');
 assert(gate.includes("overlays: 1"), 'Lane overlays vor map');
+assert(gate.includes('mapIdle') || gate.includes("mapIdle:"), 'Lane mapIdle');
+assert(gate.includes('runMapIdleWhenFree'), 'Idle-Prefetch API');
+assert(
+  host.includes('EIN Nah-Nachbar') || host.includes('genau EIN Nah-Nachbar'),
+  'Viewport-First: max 1 Nachbar',
+);
+assert(
+  !host.includes('prefetchNext') || !/function prefetchNext/.test(host),
+  'keine Prefetch-Kette aller Offline-Städte',
+);
+
+const navStart = readFileSync(
+  join(root, 'src/services/homeMap/homeMapNavStart.ts'),
+  'utf8',
+);
+assert(
+  navStart.includes('setNavRouteLoading(true)') &&
+    navStart.includes('setIsGenerating(true)'),
+  'Nav Busy-Kreis sofort',
+);
+assert(
+  /setInstallingId\(city\.id\)[\s\S]{0,120}onInstalled\(/.test(settings),
+  'Stadtwechsel: UI-Haken vor Pack-I/O',
+);
+
+const voiceStore = readFileSync(
+  join(root, 'src/store/useVoiceSessionStore.ts'),
+  'utf8',
+);
+assert(voiceStore.includes('useVoiceSessionStore'), 'Voice-Session Store');
+assert(
+  home.includes('useVoiceSessionStore') ||
+    home.includes("from '../store/useVoiceSessionStore'"),
+  'Chrome nutzt Voice-Session Store',
+);
+
+assert(
+  extract.includes('DISPLAY_BOOT_RADIUS_M = 1_200') ||
+    extract.includes('DISPLAY_BOOT_RADIUS_M = 1200'),
+  'Boot-Clip ~1.2 km',
+);
+assert(
+  loader.includes('urgent?: boolean') && loader.includes('cityChanged'),
+  'Viewport urgent Stadtwechsel',
+);
+
+const geojson = readFileSync(
+  join(root, 'src/services/homeMap/cityMapExtractGeojson.ts'),
+  'utf8',
+);
+assert(geojson.includes('cityMapExtractToGeojsonAsync'), 'GeoJSON Async+Yields');
 
 assert(
   existsSync(join(root, '.cursor/rules/findus-performance-lanes.mdc')),

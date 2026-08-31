@@ -30,9 +30,11 @@ import {
   YorroHomeCamera,
   type YorroHomeCameraRef,
 } from './YorroHomeCamera';
+import type { HomeMapFollowMode } from './nativeHomeMapCamera';
 import type { CityMapExtract } from '../../services/homeMap/cityMapExtract';
 import {
   cityMapExtractToGeojson,
+  cityMapExtractToGeojsonAsync,
   emptyExtractGeojson,
 } from '../../services/homeMap/cityMapExtractGeojson';
 import type {
@@ -633,6 +635,8 @@ export const NativeHomeMapView = memo(
     const lastFingerUpAt = useRef(0);
     /** Freies Pan/Zoom — längeres Fenster für Trägheit + Region-Events ohne isUserInteraction. */
     const lastUserGestureAt = useRef(0);
+    /** Pinch/Zoom oft ohne isUserInteraction — nach Zoom-Commit Restore kurz aus. */
+    const lastUserZoomAt = useRef(0);
     /** Kamera beim Finger-down — Unlock erst bei echtem Verschieben/Zoomen, nicht bei Tippen. */
     const gestureOriginCam = useRef<{
       lat: number;
@@ -674,6 +678,7 @@ export const NativeHomeMapView = memo(
         return;
       }
       locationFollowRef.current = props.locationFollow;
+      if (props.locationFollow) followMode.current = 'gps';
     }, [props.locationFollow]);
 
     const postBearingUi = (bearing: number) => {
@@ -800,6 +805,8 @@ export const NativeHomeMapView = memo(
       zoom: props.initialZoom,
       heading: 0,
     });
+    /** gps = Follow-Puck · explore = freie User-View · nav = Route-Follow */
+    const followMode = useRef<HomeMapFollowMode>('gps');
     const bootCam = useRef({
       centerCoordinate: [props.initialLng, props.initialLat] as [number, number],
       zoomLevel: props.initialZoom,
@@ -990,6 +997,7 @@ export const NativeHomeMapView = memo(
       userViewCamRef.current = { ...c };
       camLiveRef.current = { ...c };
       anchorCamRef.current = { ...c };
+      followMode.current = 'explore';
       syncBootCamFrom(c);
     };
 
@@ -1032,30 +1040,47 @@ export const NativeHomeMapView = memo(
     };
 
     /**
-     * Safety: MapLibre-Drift/Snap (Extract, Regional, Idle) → zurück zur User-View.
-     * Bewegt NIE Richtung GPS — nur zurück zur letzten echten Geste.
-     * Nie Live als neuen Anker übernehmen (sonst schleicht die Kamera zum GPS).
+     * Safety: nur gegen echten MapLibre-GPS-Snap.
+     * Freies Pan/Zoom NIEMALS zurücksetzen — sonst „springt zurück“ im Live-Test.
+     * Zoom/Pan ohne Flags: Live als User-View übernehmen.
      */
     const restoreUserViewIfSnappedToGps = (opts?: { force?: boolean }) => {
       if (fingerDown.current) return;
+      if (userGesturing.current) return;
       if (locationFollowRef.current) return;
       if (!userDetached.current) return;
-      // Fling/Trägheit nach Finger-hoch kurz aushalten — danach hart halten.
-      // force=true: Extract/Layer-Apply (kein Fling).
+      if (followMode.current !== 'explore') return;
+      // Fling/Trägheit nach Finger-hoch kurz aushalten.
       if (!opts?.force && Date.now() - lastFingerUpAt.current < 2_800) return;
+      if (Date.now() - lastUserZoomAt.current < 3_200) return;
+      if (Date.now() - lastUserGestureAt.current < 2_400) return;
       const u = userViewCamRef.current;
       if (!Number.isFinite(u.lat) || !Number.isFinite(u.lng)) return;
       const live = camLiveRef.current;
-      const drifted =
+      const centerDrifted =
         Math.abs(live.lat - u.lat) > 0.00012 ||
-        Math.abs(live.lng - u.lng) > 0.00012 ||
-        Math.abs(live.zoom - u.zoom) > 0.06;
-      if (!drifted) return;
+        Math.abs(live.lng - u.lng) > 0.00012;
+      const zoomDrifted = Math.abs(live.zoom - u.zoom) > 0.06;
+      if (!centerDrifted && !zoomDrifted) return;
+
+      // Kein GPS-Snap → freie Erkundung akzeptieren (Pinch/Pan ohne Flags).
+      if (!looksLikeGpswardSnap(live.lat, live.lng)) {
+        if (zoomDrifted) lastUserZoomAt.current = Date.now();
+        lastUserGestureAt.current = Date.now();
+        commitUserView({
+          lat: live.lat,
+          lng: live.lng,
+          zoom: live.zoom,
+          heading: Number.isFinite(live.heading) ? live.heading : u.heading,
+        });
+        return;
+      }
+
       const now = Date.now();
       if (now - lastHoldAt.current < 120) return;
       lastHoldAt.current = now;
       if (__DEV__) {
-        console.log('[map-cam] restore user view (blocked idle/extract drift)');
+        console.log('[map-cam] restore user view (blocked GPS snap)');
       }
       syncBootCamFrom(u);
       applyCenterMove(u.lng, u.lat, {
@@ -1116,11 +1141,9 @@ export const NativeHomeMapView = memo(
             setLabels(getWorldLabels());
             markHomeMapBoot('world');
             syncBootOnly();
-            layerApplyQuietUntil.current = Date.now() + 900;
-            suppressRegionUntil.current = Date.now() + 900;
-            setTimeout(() => {
-              if (!cancelled) restoreUserViewIfSnappedToGps({ force: true });
-            }, 100);
+            // Kein Camera-Restore nach World-Apply — freie Erkundung bleibt.
+            layerApplyQuietUntil.current = Date.now() + 400;
+            suppressRegionUntil.current = Date.now() + 400;
           });
         });
       }, HOME_MAP_WORLD_AFTER_CORE_MS);
@@ -1144,39 +1167,35 @@ export const NativeHomeMapView = memo(
         if (cancelled) return;
         const cacheKey = `${sig}:${phase}`;
         const cached = geojsonCacheRef.current;
-        const bundle =
-          cached?.sig === cacheKey
-            ? cached.bundle
-            : cityMapExtractToGeojson(extract, phase);
-        if (phase === 'full') {
-          lastExtractSigRef.current = sig;
-          geojsonCacheRef.current = { sig: cacheKey, bundle };
-        }
-        setGeo(bundle);
-        syncBootOnly();
-        setTimeout(() => {
+        const finish = (bundle: ReturnType<typeof cityMapExtractToGeojson>) => {
           if (cancelled) return;
-          if (!userDetached.current || locationFollowRef.current) return;
-          const live = camLiveRef.current;
-          if (
-            !restoreExploreAnchorIfGpsSnap(
-              live.lat,
-              live.lng,
-              live.zoom,
-              live.heading,
-            )
-          ) {
-            restoreUserViewIfSnappedToGps({ force: true });
+          if (phase === 'full') {
+            lastExtractSigRef.current = sig;
+            geojsonCacheRef.current = { sig: cacheKey, bundle };
           }
+          setGeo(bundle);
           syncBootOnly();
-        }, 80);
-        const quietMs = phase === 'core' ? 2_200 : 1_200;
-        suppressRegionUntil.current = Date.now() + Math.max(700, quietMs);
-        layerApplyQuietUntil.current = Date.now() + quietMs;
-        if (bundle.hasRoads) markHomeMapBoot('roads');
-        if (phase === 'full' && (bundle.buildings.features?.length ?? 0) > 0) {
-          markHomeMapBoot('buildings');
+          // Extract nie an die Kamera fassen — sonst Zoom/Pan-Snap-Back.
+          const quietMs = phase === 'core' ? 900 : 500;
+          suppressRegionUntil.current = Date.now() + Math.max(400, quietMs);
+          layerApplyQuietUntil.current = Date.now() + quietMs;
+          if (bundle.hasRoads) markHomeMapBoot('roads');
+          if (phase === 'full' && (bundle.buildings.features?.length ?? 0) > 0) {
+            markHomeMapBoot('buildings');
+          }
+        };
+        if (cached?.sig === cacheKey) {
+          finish(cached.bundle);
+          return;
         }
+        if (phase === 'core') {
+          finish(cityMapExtractToGeojson(extract, phase));
+          return;
+        }
+        // full: Yields — Mic/Settings bleiben tippbar.
+        void cityMapExtractToGeojsonAsync(extract, phase).then((bundle) => {
+          finish(bundle);
+        });
       };
       // Viewport-Stadtwechsel: sofort volles Extract — nicht auf Geste-Ende warten.
       if (citySwitched) {
@@ -1347,6 +1366,37 @@ export const NativeHomeMapView = memo(
       props.onUserPan();
     };
 
+    /**
+     * Android/MapLibre: Pan/Pinch oft ohne isUserInteraction und ohne Parent-fingerDown
+     * (Native MapView schluckt Touches). Jede Bewegung weg vom GPS = User.
+     */
+    const likelyUserExploreMotion = (
+      lat: number,
+      lng: number,
+      zoom: number,
+      opts?: { userInteract?: boolean },
+    ) => {
+      if (locationFollowRef.current) return false;
+      if (Date.now() < suppressRegionUntil.current && !opts?.userInteract) {
+        return false;
+      }
+      if (looksLikeGpswardSnap(lat, lng)) return false;
+      const u = userViewCamRef.current;
+      const zoomDelta = Math.abs(zoom - u.zoom);
+      const centerDelta =
+        Math.abs(lat - u.lat) + Math.abs(lng - u.lng);
+      const moved =
+        gestureMovedEnough(lat, lng, zoom) ||
+        zoomDelta >= 0.05 ||
+        centerDelta > 0.00008;
+      if (!moved) return false;
+      if (opts?.userInteract || fingerDown.current || userGesturing.current) {
+        return true;
+      }
+      // Ohne Flags: Zoom ODER deutliches Pan = User (MapView frisst Touch-Events).
+      return zoomDelta >= 0.05 || centerDelta > 0.00014;
+    };
+
     /** Echtes Pan/Zoom vs. Tippen — Unlock nur bei aktiver Kartenbewegung. */
     const gestureMovedEnough = (lat: number, lng: number, zoom: number) => {
       const o = gestureOriginCam.current;
@@ -1501,6 +1551,16 @@ export const NativeHomeMapView = memo(
       <View
         style={styles.root}
         collapsable={false}
+        onTouchStart={() => {
+          // Multi-Touch/Pinch: Responder-Capture greift oft nicht — TouchStart schon.
+          fingerDown.current = true;
+          gestureOriginCam.current = {
+            lat: camLiveRef.current.lat,
+            lng: camLiveRef.current.lng,
+            zoom: camLiveRef.current.zoom,
+          };
+          props.onGestureStart?.();
+        }}
         onStartShouldSetResponderCapture={() => {
           // Finger down allein unlockt nicht — nur echtes Pan/Zoom (Region-Events).
           // Sonst würde ein Tippen den GPS-Fix sofort lösen.
@@ -1568,6 +1628,13 @@ export const NativeHomeMapView = memo(
           lastFingerUpAt.current = Date.now();
           props.onGestureEnd?.();
         }}
+        onTouchCancel={() => {
+          fingerDown.current = false;
+          userGesturing.current = false;
+          gestureOriginCam.current = null;
+          lastFingerUpAt.current = Date.now();
+          props.onGestureEnd?.();
+        }}
       >
         <MapView
           style={styles.map}
@@ -1579,8 +1646,8 @@ export const NativeHomeMapView = memo(
           pitchEnabled={false}
           scrollEnabled
           zoomEnabled
-          regionWillChangeDebounceTime={0}
-          regionDidChangeDebounceTime={0}
+          regionWillChangeDebounceTime={50}
+          regionDidChangeDebounceTime={80}
           onDidFinishLoadingMap={() => {
             if (readyOnce.current) return;
             readyOnce.current = true;
@@ -1604,8 +1671,13 @@ export const NativeHomeMapView = memo(
             const moved =
               gestureMovedEnough(midLat, midLng, zoom) || zoomDelta >= 0.06;
             // Tippen ohne Move → Follow bleibt. Pan/Zoom → sofort Unlock.
-            if ((userInteract || fingerDown.current) && moved) {
+            // Pinch oft ohne isUserInteraction → Zoom-Delta allein reicht.
+            if (
+              moved &&
+              likelyUserExploreMotion(midLat, midLng, zoom, { userInteract })
+            ) {
               noteUserGesture();
+              if (zoomDelta >= 0.05) lastUserZoomAt.current = Date.now();
             }
           }}
           onRegionIsChanging={(feature) => {
@@ -1614,7 +1686,7 @@ export const NativeHomeMapView = memo(
             const bearing = b?.heading;
             if (typeof bearing === 'number' && Number.isFinite(bearing)) {
               if (
-                (userInteract || fingerDown.current) &&
+                (userInteract || fingerDown.current || userGesturing.current) &&
                 !headingFollowRef.current
               ) {
                 displayBearingRef.current = bearing;
@@ -1635,15 +1707,20 @@ export const NativeHomeMapView = memo(
               midLat = (south + north) / 2;
               midLng = (west + east) / 2;
             }
-            const moved = gestureMovedEnough(midLat, midLng, zoom);
-            if (fingerDown.current && moved) {
+            const zoomDelta = Math.abs(zoom - userViewCamRef.current.zoom);
+            const moved = gestureMovedEnough(midLat, midLng, zoom) || zoomDelta >= 0.05;
+            const explore = likelyUserExploreMotion(midLat, midLng, zoom, {
+              userInteract,
+            });
+            if (explore) {
               noteUserGesture();
+              if (zoomDelta >= 0.05) lastUserZoomAt.current = Date.now();
             }
-            // User-View NUR bei Finger/isUserInteraction — nie nach Idle
-            // (sonst vergiften Extract/Regional-Resets den Anker Richtung GPS).
+            // User-View bei Finger / isUserInteraction / erkanntem Pinch-Zoom.
+            // Nie nach Idle (sonst vergiftet Extract den Anker Richtung GPS).
             if (
               moved &&
-              (fingerDown.current || userInteract) &&
+              explore &&
               !locationFollowRef.current &&
               vb?.[0] &&
               vb?.[1]
@@ -1664,9 +1741,10 @@ export const NativeHomeMapView = memo(
               !fingerDown.current &&
               Math.abs(zoom - camLiveRef.current.zoom) >= 0.08 &&
               !locationFollowRef.current &&
-              userInteract
+              (userInteract || explore)
             ) {
               noteUserGesture();
+              lastUserZoomAt.current = Date.now();
             }
           }}
           onRegionDidChange={(feature) => {
@@ -1676,6 +1754,9 @@ export const NativeHomeMapView = memo(
             // (Extract/Regional nach ~5–10s sonst als „User“ gespeichert).
             const recentFinger =
               Date.now() - lastFingerUpAt.current < 2_800;
+            const recentZoom = Date.now() - lastUserZoomAt.current < 3_200;
+            const recentGesture =
+              Date.now() - lastUserGestureAt.current < 2_800;
             const zoom = b?.zoomLevel ?? camLiveRef.current.zoom;
             const zoomDelta = Math.abs(zoom - userViewCamRef.current.zoom);
 
@@ -1701,11 +1782,17 @@ export const NativeHomeMapView = memo(
             const gpsward = looksLikeGpswardSnap(midLat, midLng);
             // Finales Gesture-Event oft ohne isUserInteraction — aber Snap ≠ Geste.
             // Tippen (finger ohne Move) unlockt den GPS-Fix nicht.
+            // Pinch-Zoom: Zoom-Delta / recentZoom zählen auch ohne Flags.
             const user =
               !gpsward &&
               (b?.isUserInteraction === true ||
                 (fingerDown.current && moved) ||
-                (recentFinger && moved));
+                (recentFinger && moved) ||
+                (recentZoom && moved) ||
+                (recentGesture && moved) ||
+                likelyUserExploreMotion(midLat, midLng, zoom, {
+                  userInteract: b?.isUserInteraction === true,
+                }));
 
             if (__DEV__ && userDetached.current && !locationFollowRef.current) {
               const gps = gpsPosRef.current;
@@ -1749,12 +1836,15 @@ export const NativeHomeMapView = memo(
             }
             if (user && moved) {
               noteUserGesture();
+              if (zoomDelta >= 0.05) lastUserZoomAt.current = Date.now();
             } else if (
               zoomDelta >= 0.08 &&
               !locationFollowRef.current &&
-              b?.isUserInteraction === true
+              !gpsward &&
+              (b?.isUserInteraction === true || recentZoom || recentGesture)
             ) {
               noteUserGesture();
+              lastUserZoomAt.current = Date.now();
             }
 
             if (user && !headingFollowRef.current && typeof b?.heading === 'number') {
@@ -1766,7 +1856,7 @@ export const NativeHomeMapView = memo(
               Math.abs(midLat - userViewCamRef.current.lat) > 0.00045 ||
               Math.abs(midLng - userViewCamRef.current.lng) > 0.00045 ||
               Math.abs(zoom - userViewCamRef.current.zoom) > 0.08;
-            // Nur echte Geste / kurze Fling-Trägheit schreibt den Anker.
+            // Nur echte Geste / kurze Fling-Trägheit / Pinch schreibt den Anker.
             if (
               movedFromAnchor &&
               user &&
@@ -1788,8 +1878,8 @@ export const NativeHomeMapView = memo(
             const west = vb[1][0]!;
             const south = vb[1][1]!;
 
-            // Idle/Extract ohne Finger: Drift zurück — Viewport NICHT mit Snap melden
-            // (sonst Places/Extract am GPS während die Kamera woanders steht).
+            // Idle/Extract: nur GPS-Snap zurückdrücken. Sonst View übernehmen
+            // (Pan ohne Flags — sonst springt die Karte zum GPS zurück).
             if (
               !user &&
               userDetached.current &&
@@ -1802,20 +1892,37 @@ export const NativeHomeMapView = memo(
                 zoom,
                 heading: bearing,
               };
-              if (
-                !restoreExploreAnchorIfGpsSnap(midLat, midLng, zoom, bearing)
-              ) {
-                restoreUserViewIfSnappedToGps();
+              if (gpsward) {
+                if (
+                  !restoreExploreAnchorIfGpsSnap(midLat, midLng, zoom, bearing)
+                ) {
+                  restoreUserViewIfSnappedToGps({ force: true });
+                }
+                rememberCamera(midLat, midLng, zoom, bearing, {
+                  fromUser: false,
+                });
+                return;
               }
-              rememberCamera(midLat, midLng, zoom, bearing, {
-                fromUser: false,
+              // Freie Erkundung ohne Touch-Flags → Anker nachziehen, nicht zurückspringen.
+              lastUserGestureAt.current = Date.now();
+              userDetached.current = true;
+              locationFollowRef.current = false;
+              if (zoomDelta >= 0.05) lastUserZoomAt.current = Date.now();
+              commitUserView({
+                lat: midLat,
+                lng: midLng,
+                zoom,
+                heading:
+                  typeof bearing === 'number' && Number.isFinite(bearing)
+                    ? bearing
+                    : userViewCamRef.current.heading,
               });
-              // Places bleiben am User-View — kein GPS-Inject.
-              return;
+              props.onUserPan();
+              // weiter mit normalem Viewport-Update unten
             }
 
             rememberCamera(midLat, midLng, zoom, bearing, {
-              fromUser: user,
+              fromUser: user || (!gpsward && drifted),
             });
             const padLat = (north - south) * 0.25;
             const padLng = (east - west) * 0.25;
